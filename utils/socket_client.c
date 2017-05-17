@@ -6,6 +6,6 @@
 #include "stdio.h"
 
 void start_socket_client () {
-  printf("start_client\n");
+  debug(1, "start_client", "start qqq");
 }
 

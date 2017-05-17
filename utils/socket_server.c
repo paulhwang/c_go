@@ -4,8 +4,9 @@
 */
 
 #include "stdio.h"
+#include "./logit.h"
 
 void start_socket_server () {
-  printf("start_server\n");
+  logit("start_server", "start");
 }
 
