@@ -11,5 +11,6 @@ void main (int argc, char** argv) {
   printf("hello world\n");
   start_socket_server();
   start_socket_client();
+  new socket_service_class;
 }
 
