@@ -4,8 +4,6 @@
 */
 
 #include "stdio.h"
-#include "./utils/socket_server.h"
-#include "./utils/socket_client.h"
 #include "./utils/socket_service_class.h"
 
 int main (int argc, char** argv) {

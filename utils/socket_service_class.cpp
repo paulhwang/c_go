@@ -7,10 +7,11 @@
 #include "./logit.h"
 #include "socket_service_class.h"
 
-socket_service_class::socket_service_class() {
+socket_service_class::socket_service_class () {
 
 }
-socket_service_class::~socket_service_class() {
+
+socket_service_class::~socket_service_class () {
 
 }
 
