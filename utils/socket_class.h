@@ -11,6 +11,6 @@ class socket_class {
     void start_client ();
 
   private:
-    void debug (int debug_val, char* str0_val, char* str1_val);
-    void logit (char* str0_val, char* str1_val);
+    void debug (int debug_val, char const* str0_val, char const* str1_val);
+    void logit (char const* str0_val, char const* str1_val);
 };

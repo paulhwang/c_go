@@ -3,5 +3,5 @@
   Written by Paul Hwang
 */
 
-void LOGIT (char * func_name, char *param);
-void ABEND (char * func_name, char *param);
+void LOGIT (char const* str0_val, char const* str1_val);
+void ABEND (char const* str0_val, char const* str1_val);

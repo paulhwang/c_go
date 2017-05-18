@@ -5,12 +5,12 @@
 
 #include "stdio.h"
 
-void LOGIT (char * func_name, char *param) {
-  printf("%s() %s\n", func_name, param);
+void LOGIT (char const* str0_val, char const* str1_val) {
+  printf("%s() %s\n", str0_val, str1_val);
 }
 
-void ABEND (char * func_name, char *param) {
-  LOGIT(func_name, param);
+void ABEND (char const* str0_val, char const* str1_val) {
+  LOGIT(str0_val, str1_val);
 }
 
 
