@@ -3,10 +3,10 @@
   Written by Paul Hwang
 */
 
-class socket_service_class {
+class socket_class {
   public:
-    socket_service_class();
-    ~socket_service_class();
+    socket_class();
+    ~socket_class();
 
   private:
     void logit ();
