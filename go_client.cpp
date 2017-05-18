@@ -7,7 +7,7 @@
 
 int main (int argc, char** argv) {
   transport_class *transport_object = new transport_class();
-  transport_object->start_server(8001);
+  transport_object->start_client(0, 8001);
 }
 
 

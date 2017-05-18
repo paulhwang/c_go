@@ -64,6 +64,7 @@ S
     return;
   }
 
+  this->debug(TRUE, "start_server", "listening");
   listen(s, BACKLOG);
 }
 
