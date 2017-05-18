@@ -1,3 +1,8 @@
+/*
+  Copyrights reserved
+  Written by Paul Hwang
+*/
+
 #include "stdio.h"
 
 void logit (char * func_name, char *param) {
