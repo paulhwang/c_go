@@ -11,5 +11,7 @@ int main (int argc, char** argv) {
   //start_socket_server();
   //start_socket_client();
   socket_class *socket_object = new socket_class();
+  socket_object->start_server();
+  socket_object->start_client();
 }
 
