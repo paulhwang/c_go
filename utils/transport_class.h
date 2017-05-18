@@ -10,7 +10,7 @@ class transport_class {
     transport_class();
     ~transport_class();
     void start_server(ushort port_val);
-    void start_client(unsigned long ip_addr_val, ushort port_val);
+    void start_client(ulong ip_addr_val, ushort port_val);
 
   private:
     void debug(int debug_val, char const* str0_val, char const* str1_val);
