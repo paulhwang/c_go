@@ -3,11 +3,13 @@
   Written by Paul Hwang
 */
 
-#include "./utils/socket_class.h"
+#include "./utils/transport_class.h"
 
 int main (int argc, char** argv) {
-  socket_class *socket_object = new socket_class();
-  socket_object->start_server(8001);
-  socket_object->start_client();
+  transport_class *transport_object = new transport_class();
+  transport_object->start_server(8001);
+  transport_object->start_client(0, 8001);
 }
+
+
 

@@ -3,12 +3,14 @@
   Written by Paul Hwang
 */
 
-class socket_class {
+#include "../includes/common.h"
+
+class transport_class {
   public:
-    socket_class();
-    ~socket_class();
-    void start_server(int port_val);
-    void start_client();
+    transport_class();
+    ~transport_class();
+    void start_server(ushort port_val);
+    void start_client(unsigned long ip_addr_val, ushort port_val);
 
   private:
     void debug(int debug_val, char const* str0_val, char const* str1_val);

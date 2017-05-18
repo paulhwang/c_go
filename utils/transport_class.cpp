@@ -9,22 +9,22 @@
 #include <netinet/in.h>
 #include <netdb.h>
 #include <pwd.h>
-#include "socket_class.h"
+#include "transport_class.h"
 #include "./logit.h"
 
 #define MAXHOSTNAME 32
 #define BACKLOG 5
 
-socket_class::socket_class () {
+transport_class::transport_class () {
 
 }
 
-socket_class::~socket_class () {
+transport_class::~transport_class () {
 
 
 }
 
-void socket_class::start_server (int port_val) {
+void transport_class::start_server (ushort port_val) {
   char localhost[MAXHOSTNAME + 1];
   struct servent *sp;
   int s;
@@ -67,17 +67,17 @@ S
   listen(s, BACKLOG);
 }
 
-void socket_class::start_client () {
+void transport_class::start_client (unsigned long ip_addr_val, ushort port_val) {
   this->logit("start_client", "start");
 }
 
-void debug (int debug_val, char const* str0_val, char const* str1_val) {
+void transport_class::debug (int debug_val, char const* str0_val, char const* str1_val) {
   if (debug_val) {
     LOGIT(str0_val, str1_val);
   }
 }
 
-void socket_class::logit (char const* str0_val, char const* str1_val) {
+void transport_class::logit (char const* str0_val, char const* str1_val) {
 	LOGIT(str0_val, str1_val);
 }
 

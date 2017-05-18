@@ -3,7 +3,7 @@
   Written by Paul Hwang
 */
 
-#include <stdio.h>
+#include "../includes/common.h"
 
 void LOGIT (char const* str0_val, char const* str1_val) {
   printf("%s() %s\n", str0_val, str1_val);
