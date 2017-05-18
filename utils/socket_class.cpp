@@ -3,9 +3,17 @@
   Written by Paul Hwang
 */
 
-#include "stdio.h"
-#include "./logit.h"
+#include <stdio.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <netdb.h>
+#include <pwd.h>
 #include "socket_class.h"
+#include "./logit.h"
+
+#define MAXHOSTNAME 32
+#define BACKLOG 5
 
 socket_class::socket_class () {
 
@@ -16,9 +24,47 @@ socket_class::~socket_class () {
 
 }
 
-void socket_class::start_server () {
-  this->logit("start_server", "start");
+void socket_class::start_server (int port_val) {
+  char localhost[MAXHOSTNAME + 1];
+  struct servent *sp;
+  int s;
+  struct hostent *hp;
+  int opt = 1;
+  struct sockaddr_in address;
 
+/*
+  if ((sp = getservbyname("whois", "tcp")) == NULL) {
+    this->logit("start_server", "No whois service on this host");
+    return;
+  }
+  printf("port=%d\n", sp->s_port);
+S
+  //gethostname(localhost, MAXHOSTNAME);
+  this->logit("start_server", localhost);
+
+  hp = gethostbyname("")
+*/
+
+  if ((s = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
+  	this->logit("start_server", "open socket error");
+  	return;
+  }
+
+  if (setsockopt(s, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &opt, sizeof(opt))) {
+  	this->logit("start_server", "setsockopt error");
+    return;
+  }
+
+  address.sin_family = AF_INET;
+  address.sin_addr.s_addr = INADDR_ANY;
+  address.sin_port = htons(port_val);
+
+  if (bind(s, (struct sockaddr *)&address, sizeof(address)) < 0) {
+  	this->logit("start_server", "bind error");
+    return;
+  }
+
+  listen(s, BACKLOG);
 }
 
 void socket_class::start_client () {
