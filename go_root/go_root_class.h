@@ -3,14 +3,12 @@
   Written by Paul Hwang
 */
 
-#include "../includes/common.h"
+#include "./go_root_common.h"
 
-class transport_class {
+class go_root_class {
   public:
-    transport_class();
-    ~transport_class();
-    void start_server(ushort port_val);
-    void start_client(ulong ip_addr_val, ushort port_val);
+    go_root_class();
+    ~go_root_class();
 
   private:
     void debug(int debug_val, char const* str0_val, char const* str1_val);
