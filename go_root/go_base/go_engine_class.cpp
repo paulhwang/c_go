@@ -30,7 +30,7 @@ GoBaseClass* GoEngineClass::baseObject () {
   return this->theBaseObject;
 }
 
-go_board_class* GoEngineClass::boardObject () {
+GoBoardClass* GoEngineClass::boardObject () {
   return this->baseObject()->boardObject();
 }
 

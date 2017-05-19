@@ -10,7 +10,7 @@
 
 class GoBaseClass;
 class GoGroupListClass;
-class go_board_class;
+class GoBoardClass;
 
 class GoEngineClass {
   public:
@@ -20,7 +20,7 @@ class GoEngineClass {
     char const* objectName();
     void resetEngineObjectData();
     GoBaseClass* baseObject();
-    go_board_class* boardObject();
+    GoBoardClass* boardObject();
 
   private:
     GoBaseClass *theBaseObject;

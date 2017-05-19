@@ -8,7 +8,7 @@
 
 class go_root_class;
 class GoEngineClass;
-class go_board_class;
+class GoBoardClass;
 class go_port_class;
 class go_config_class;
 class go_group_lst_class;
@@ -22,7 +22,7 @@ class GoBaseClass {
     char const* objectName();
     go_root_class* rootObject();
     GoEngineClass* engineObject();
-    go_board_class* boardObject();
+    GoBoardClass* boardObject();
     go_port_class* portObject();
     go_config_class* configObject();
     go_game_class* gameObject();
@@ -30,7 +30,7 @@ class GoBaseClass {
   private:
   	go_root_class* theRootObject;
   	GoEngineClass* theEngineObject;
-    go_board_class* theBoardObject;
+    GoBoardClass* theBoardObject;
     go_port_class* thePortObject;
     go_config_class* theConfigObject;
     go_game_class* theGameObject;

@@ -15,7 +15,7 @@
 GoBaseClass::GoBaseClass (go_root_class* root_object_val) {
   this->theRootObject = root_object_val;
   this->theEngineObject = new GoEngineClass(this);
-  this->theBoardObject = new go_board_class(this);
+  this->theBoardObject = new GoBoardClass(this);
   this->thePortObject = new go_port_class(this);
   this->theConfigObject = new go_config_class(this);
   this->theGameObject = new go_game_class(this);
@@ -40,7 +40,7 @@ GoEngineClass* GoBaseClass::engineObject () {
   return this->theEngineObject;
 }
 
-go_board_class* GoBaseClass::boardObject () {
+GoBoardClass* GoBaseClass::boardObject () {
   return this->theBoardObject;
 }
 
