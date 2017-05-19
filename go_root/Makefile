@@ -1,5 +1,6 @@
 include ../Makefile.inc
 
+DIRS	= go_base
 OBJLIBS	= ../lib_go_root.a ../lib_go_base.a
 OBJS =	go_root.o
 
@@ -10,6 +11,10 @@ all: $(OBJLIBS)
 
 ../lib_go_base.a:
 	$(ECHO) lib_go_base
+
+clean:
+	$(ECHO) cleaning up in go_root
+	-for d in $(DIRS); do (cd $$d; $(MAKE) clean); done
 
 force_look:
 	true

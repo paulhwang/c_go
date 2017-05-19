@@ -5,5 +5,8 @@ OBJS =	go_root.o
 
 all: $(OBJLIBS)
 
+clean:
+	$(ECHO) cleaning up in go_base
+
 force_look:
 	true

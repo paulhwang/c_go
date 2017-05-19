@@ -8,6 +8,9 @@ all: $(OBJLIBS)
 ../lib_utils.a:
 	$(ECHO) lib_utils
 
+clean:
+	$(ECHO) cleaning up in utils
+
 force_look:
 	true
 

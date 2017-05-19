@@ -1,5 +1,7 @@
 include Makefile.inc
 
+DIRS	= utils go_root
+
 SERVER = server
 SERVER_OBJS	= go_server.o
 
@@ -28,6 +30,7 @@ lib_go_root.a lib_go_base.a:	force_look
 clean:
 	$(ECHO) cleaning up in .
 	- $(RM) $(SERVER) $(CLIENT) $(SERVER_OBJS) $(CLIENT_OBJS) $(UTILS_OBJLIBS) $(GO_ROOT_OBJLIBS)
+	-for d in $(DIRS); do (cd $$d; $(MAKE) clean); done
 
 force_look:
 	true
