@@ -8,7 +8,7 @@
 #include "go_board_class.h"
 
 GoBoardClass::GoBoardClass (GoBaseClass* base_object_val) {
-  this->the_base_object = base_object_val;
+  this->theBaseObject = base_object_val;
 
   if (1) {
     this->logit("GoBoardClass", "init");
@@ -18,12 +18,12 @@ GoBoardClass::GoBoardClass (GoBaseClass* base_object_val) {
 GoBoardClass::~GoBoardClass () {
 }
 
-char const* GoBoardClass::object_name () {
+char const* GoBoardClass::objectName () {
   return "GoBoardClass";
 }
 
-GoBaseClass* GoBoardClass::base_object () {
-  return this->the_base_object;
+GoBaseClass* GoBoardClass::baseObject () {
+  return this->theBaseObject;
 }
 
 void GoBoardClass::resetMarkedBoardObjectData () {
