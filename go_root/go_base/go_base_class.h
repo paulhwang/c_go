@@ -18,19 +18,18 @@ class GoBaseClass {
   public:
     GoBaseClass(go_root_class* root_object_val);
     ~GoBaseClass();
-    go_root_class* root_object();
+    go_root_class* rootObject();
 
   private:
-  	go_root_class* the_root_object;
-  	GoEngineClass* the_engine_object;
-    go_board_class* the_board_object;
-    go_port_class* the_port_object;
-    go_config_class* the_config_object;
-    go_group_lst_class* the_group_lst_object;
-    go_game_class* the_game_object;
+  	go_root_class* theRootObject;
+  	GoEngineClass* theEngineObject;
+    go_board_class* theBoardObject;
+    go_port_class* thePortObject;
+    go_config_class* theConfigObject;
+    go_game_class* theGameObject;
 
-    char const* object_name();
-  	GoEngineClass* engine_object();
+    char const* objectName();
+  	GoEngineClass* engineObject();
 
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);

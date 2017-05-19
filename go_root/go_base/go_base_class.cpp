@@ -13,12 +13,12 @@
 #include "go_game_class.h"
 
 GoBaseClass::GoBaseClass (go_root_class* root_object_val) {
-  this->the_root_object = root_object_val;
-  this->the_engine_object = new GoEngineClass(this);
-  this->the_board_object = new go_board_class(this);
-  this->the_port_object = new go_port_class(this);
-  this->the_config_object = new go_config_class(this);
-  this->the_game_object = new go_game_class(this);
+  this->theRootObject = root_object_val;
+  this->theEngineObject = new GoEngineClass(this);
+  this->theBoardObject = new go_board_class(this);
+  this->thePortObject = new go_port_class(this);
+  this->theConfigObject = new go_config_class(this);
+  this->theGameObject = new go_game_class(this);
 
   if (1) {
     this->logit("GoBaseClass", "init");
@@ -28,16 +28,16 @@ GoBaseClass::GoBaseClass (go_root_class* root_object_val) {
 GoBaseClass::~GoBaseClass () {
 }
 
-char const* GoBaseClass::object_name () {
+char const* GoBaseClass::objectName () {
   return "GoBaseClass";
 }
 
-go_root_class* GoBaseClass::root_object () {
-  return this->the_root_object;
+go_root_class* GoBaseClass::rootObject () {
+  return this->theRootObject;
 }
 
-GoEngineClass* GoBaseClass::engine_object () {
-  return this->the_engine_object;
+GoEngineClass* GoBaseClass::engineObject () {
+  return this->theEngineObject;
 }
 
 void GoBaseClass::logit (char const* str0_val, char const* str1_val) {
