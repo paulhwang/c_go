@@ -15,7 +15,7 @@
 
 go_base_class::go_base_class (go_root_class* root_object_val) {
   this->the_root_object = root_object_val;
-  this->the_engine_object = new go_engine_class(this);
+  this->the_engine_object = new GoEngineClass(this);
   this->the_board_object = new go_board_class(this);
   this->the_port_object = new go_port_class(this);
   this->the_config_object = new go_config_class(this);
@@ -38,7 +38,7 @@ go_root_class* go_base_class::root_object () {
   return this->the_root_object;
 }
 
-go_engine_class* go_base_class::engine_object () {
+GoEngineClass* go_base_class::engine_object () {
   return this->the_engine_object;
 }
 

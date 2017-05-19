@@ -8,10 +8,12 @@
 
 class go_base_class;
 
-class go_engine_class {
+class GoEngineClass {
   public:
-    go_engine_class(go_base_class* the_base_object);
-    ~go_engine_class();
+    GoEngineClass(go_base_class* the_base_object);
+    ~GoEngineClass();
+
+    void resetEngineObjectData();
 
   private:
     go_base_class *the_base_object;
