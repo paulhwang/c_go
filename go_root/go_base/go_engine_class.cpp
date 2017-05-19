@@ -30,16 +30,32 @@ GoBaseClass* GoEngineClass::baseObject () {
   return this->theBaseObject;
 }
 
+go_board_class* GoEngineClass::boardObject () {
+  return this->baseObject()->boardObject();
+}
+
+void GoEngineClass::resetMarkedGroupLists () {
+  this->theGroupListArray[3] = new GoGroupListClass(this, 3, GO_BLACK_STONE, true, "black", "gray");
+  this->theGroupListArray[4] = new GoGroupListClass(this, 4, GO_WHITE_STONE, true, "white", "gray");
+  //this->boardObject()->resetMarkedBoardObjectData();
+}
+
+void GoEngineClass::resetEmptyGroupLists () {
+  this->theGroupListArray[0] = new GoGroupListClass(this, 0, GO_EMPTY_STONE, false, null, null);
+  this->theGroupListArray[5] = new GoGroupListClass(this, 5, GO_EMPTY_STONE, false, null, "black");
+  this->theGroupListArray[6] = new GoGroupListClass(this, 6, GO_EMPTY_STONE, false, null, "white");
+}
+
 void GoEngineClass::resetEngineObjectData () {
   this->theGroupListCount = GO_GROUP_LIST_ARRAY_SIZE;
-        //this.theGroupListArray = [this.groupListCount()];
+  //this.theGroupListArray = [this.groupListCount()];
   this->theGroupListArray[1] = new GoGroupListClass(this, 1, GO_BLACK_STONE, false, null, null);
   this->theGroupListArray[2] = new GoGroupListClass(this, 2, GO_WHITE_STONE, false, null, null);
-        //this.resetMarkedGroupLists();
-        //this.resetEmptyGroupLists();
+  this->resetMarkedGroupLists();
+  this->resetEmptyGroupLists();
 
-        //this.theCaptureCount = null;
-        //this.theLastDeadStone = null;
+  this->theCaptureCount = null;
+  this->theLastDeadStone = null;
 
   this->theBlackCaptureStones = 0;
   this->theWhiteCaptureStones = 0;

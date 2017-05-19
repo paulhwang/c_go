@@ -18,7 +18,14 @@ class GoBaseClass {
   public:
     GoBaseClass(go_root_class* root_object_val);
     ~GoBaseClass();
+
+    char const* objectName();
     go_root_class* rootObject();
+    GoEngineClass* engineObject();
+    go_board_class* boardObject();
+    go_port_class* portObject();
+    go_config_class* configObject();
+    go_game_class* gameObject();
 
   private:
   	go_root_class* theRootObject;
@@ -27,9 +34,6 @@ class GoBaseClass {
     go_port_class* thePortObject;
     go_config_class* theConfigObject;
     go_game_class* theGameObject;
-
-    char const* objectName();
-  	GoEngineClass* engineObject();
 
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);

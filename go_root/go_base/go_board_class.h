@@ -13,6 +13,8 @@ class go_board_class {
     go_board_class(GoBaseClass* the_base_object);
     ~go_board_class();
 
+    void resetMarkedBoardObjectData();
+
   private:
     GoBaseClass *the_base_object;
     char const* object_name();

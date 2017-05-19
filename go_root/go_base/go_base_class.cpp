@@ -40,6 +40,10 @@ GoEngineClass* GoBaseClass::engineObject () {
   return this->theEngineObject;
 }
 
+go_board_class* GoBaseClass::boardObject () {
+  return this->theBoardObject;
+}
+
 void GoBaseClass::logit (char const* str0_val, char const* str1_val) {
 	LOGIT(str0_val, str1_val);
 }

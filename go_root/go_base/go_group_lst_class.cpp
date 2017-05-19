@@ -11,8 +11,8 @@ GoGroupListClass::GoGroupListClass (GoEngineClass* engine_val,
                                     int index_val,
                                     int color_val,
                                     int dead_val,
-                                    char* big_stone_val,
-                                    char* small_stone_val) {
+                                    char const* big_stone_val,
+                                    char const* small_stone_val) {
   this->theEngineObject = engine_val;
 
   if (1) {

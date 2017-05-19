@@ -26,6 +26,10 @@ GoBaseClass* go_board_class::base_object () {
   return this->the_base_object;
 }
 
+void go_board_class::resetMarkedBoardObjectData () {
+
+}
+
 void go_board_class::logit (char const* str0_val, char const* str1_val) {
 	LOGIT(str0_val, str1_val);
 }

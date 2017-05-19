@@ -10,13 +10,17 @@
 
 class GoBaseClass;
 class GoGroupListClass;
+class go_board_class;
 
 class GoEngineClass {
   public:
     GoEngineClass(GoBaseClass* the_base_object);
     ~GoEngineClass();
 
+    char const* objectName();
     void resetEngineObjectData();
+    GoBaseClass* baseObject();
+    go_board_class* boardObject();
 
   private:
     GoBaseClass *theBaseObject;
@@ -24,9 +28,11 @@ class GoEngineClass {
     GoGroupListClass* theGroupListArray[GO_GROUP_LIST_ARRAY_SIZE];
     int theBlackCaptureStones;
     int theWhiteCaptureStones;
+    char* theCaptureCount;
+    char* theLastDeadStone;
 
-    char const* objectName();
-    GoBaseClass* baseObject();
+    void resetMarkedGroupLists();
+    void resetEmptyGroupLists();
 
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
