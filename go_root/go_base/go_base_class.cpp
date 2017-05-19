@@ -17,7 +17,7 @@ GoBaseClass::GoBaseClass (go_root_class* root_object_val) {
   this->theBoardObject = new GoBoardClass(this);
   this->theEngineObject = new GoEngineClass(this);
   this->thePortObject = new GoPortClass(this);
-  this->theConfigObject = new go_config_class(this);
+  this->theConfigObject = new GoConfigClass(this);
   this->theGameObject = new GoGameClass(this);
 
   if (1) {

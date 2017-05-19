@@ -8,15 +8,17 @@
 
 class GoBaseClass;
 
-class go_config_class {
+class GoConfigClass {
   public:
-    go_config_class(GoBaseClass* the_base_object);
-    ~go_config_class();
+    GoConfigClass(GoBaseClass* the_base_object);
+    ~GoConfigClass();
+
+    char const* objectName();
+    GoBaseClass* baseObject();
 
   private:
-    GoBaseClass *the_base_object;
-    char const* object_name();
-    GoBaseClass* base_object();
+    GoBaseClass *theBaseObject;
+
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
 };

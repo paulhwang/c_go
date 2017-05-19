@@ -10,7 +10,7 @@ class go_root_class;
 class GoEngineClass;
 class GoBoardClass;
 class GoPortClass;
-class go_config_class;
+class GoConfigClass;
 class GoGameClass;
 
 class GoBaseClass {
@@ -23,7 +23,7 @@ class GoBaseClass {
     GoEngineClass* engineObject();
     GoBoardClass* boardObject();
     GoPortClass* portObject();
-    go_config_class* configObject();
+    GoConfigClass* configObject();
     GoGameClass* gameObject();
 
   private:
@@ -31,7 +31,7 @@ class GoBaseClass {
   	GoEngineClass* theEngineObject;
     GoBoardClass* theBoardObject;
     GoPortClass* thePortObject;
-    go_config_class* theConfigObject;
+    GoConfigClass* theConfigObject;
     GoGameClass* theGameObject;
 
     void logit(char const* str0_val, char const* str1_val);
