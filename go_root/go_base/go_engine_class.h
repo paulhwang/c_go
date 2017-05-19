@@ -17,8 +17,13 @@ class GoEngineClass {
 
   private:
     GoBaseClass *theBaseObject;
+    int const theGroupListCount = 7;
+    int theBlackCaptureStones;
+    int theWhiteCaptureStones;
+
     char const* objectName();
     GoBaseClass* baseObject();
+
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
 };
