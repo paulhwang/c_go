@@ -5,10 +5,11 @@
 
 #include "../../utils/logit.h"
 #include "go_base_class.h"
+#include "go_group_lst_class.h"
 #include "go_group_class.h"
 
-GoGroupClass::GoGroupClass (GoBaseClass* base_object_val) {
-  this->theBaseObject = base_object_val;
+GoGroupClass::GoGroupClass (GoGroupListClass* group_list_object_var) {
+  this->theGroupListObject = group_list_object_var;
 
   if (1) {
     this->logit("GoGroupClass", "init");
@@ -22,12 +23,12 @@ char const* GoGroupClass::objectName () {
   return "GoGroupClass";
 }
 
-GoBaseClass* GoGroupClass::baseObject () {
-  return this->theBaseObject;
+GoGroupListClass* GoGroupClass::groupListObject () {
+  return this->theGroupListObject;
 }
 
-void GoGroupClass::resetMarkedBoardObjectData () {
-
+GoBaseClass* GoGroupClass::baseObject () {
+  return this->groupListObject()->baseObject();
 }
 
 void GoGroupClass::logit (char const* str0_val, char const* str1_val) {
