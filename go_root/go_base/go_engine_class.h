@@ -4,7 +4,7 @@
 */
 
 #ifndef __GO_ENGINE_CLASS_H__
-#define __GO_ENGINT_CLASS_H__
+#define __GO_ENGINE_CLASS_H__
 
 class go_base_class;
 
