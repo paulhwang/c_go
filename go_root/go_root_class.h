@@ -12,11 +12,13 @@ class goRootClass {
   public:
     goRootClass();
     ~goRootClass();
-    GoBaseClass* base_object();
+
+    char const* objectName();
+    GoBaseClass* baseObject();
 
   private:
-    GoBaseClass* the_base_object;
-    char const* object_name();
+    GoBaseClass* theBaseObject;
+
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
 };

@@ -8,7 +8,7 @@
 #include "./go_root_class.h"
 
 goRootClass::goRootClass () {
-  this->the_base_object = new GoBaseClass(this);
+  this->theBaseObject = new GoBaseClass(this);
 
   if (1) {
   	this->logit("goRootClass", "init");
@@ -18,11 +18,11 @@ goRootClass::goRootClass () {
 goRootClass::~goRootClass () {
 }
 
-GoBaseClass* goRootClass::base_object() {
-	return this->the_base_object;
+GoBaseClass* goRootClass::baseObject() {
+	return this->theBaseObject;
 }
 
-char const* goRootClass::object_name () {
+char const* goRootClass::objectName () {
   return "goRootClass";
 }
 
