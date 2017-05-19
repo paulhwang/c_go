@@ -8,10 +8,10 @@
 
 class GoBaseClass;
 
-class go_board_class {
+class GoBoardClass {
   public:
-    go_board_class(GoBaseClass* the_base_object);
-    ~go_board_class();
+    GoBoardClass(GoBaseClass* the_base_object);
+    ~GoBoardClass();
 
     void resetMarkedBoardObjectData();
 
