@@ -8,15 +8,17 @@
 
 class GoBaseClass;
 
-class go_game_class {
+class GoGameClass {
   public:
-    go_game_class(GoBaseClass* the_base_object);
-    ~go_game_class();
+    GoGameClass(GoBaseClass* the_base_object);
+    ~GoGameClass();
+
+    char const* objectName();
+    GoBaseClass* baseObject();
 
   private:
-    GoBaseClass *the_base_object;
-    char const* object_name();
-    GoBaseClass* base_object();
+    GoBaseClass *theBaseObject;
+
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
 };
