@@ -5,7 +5,7 @@
 
 #include "../utils/logit.h"
 #include "./go_base/go_base_class.h"
-#include "go_root_class.h"
+#include "./go_root_class.h"
 
 go_root_class::go_root_class () {
   this->the_base_object = new go_base_class(this);
