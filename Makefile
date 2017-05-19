@@ -13,11 +13,11 @@ GO_ROOT_OBJLIBS	= lib_go_root.a lib_go_base.a
 
 all:	$(SERVER) $(CLIENT)
 
-$(SERVER): $(SERVER_OBJS) $(UTILS_OBJLIBS) $(GO_ROOT_OBJLIBS) ./go_root/go_base/go_base_class.cpp ./go_root/go_base/go_move_class.cpp
-	$(CC) -o $(SERVER) $(SERVER_OBJS) $(UTILS_OBJLIBS) ./go_root/go_base/go_base_class.cpp ./go_root/go_base/go_move_class.cpp -lstdc++
+$(SERVER): $(SERVER_OBJS) $(UTILS_OBJLIBS) $(GO_ROOT_OBJLIBS)
+	$(CC) -o $(SERVER) $(SERVER_OBJS) $(UTILS_OBJLIBS) $(GO_ROOT_OBJLIBS) -lstdc++
 
-$(CLIENT): $(CLIENT_OBJS) $(UTILS_OBJLIBS) $(GO_ROOT_OBJLIBS) ./go_root/go_base/go_base_class.cpp ./go_root/go_base/go_move_class.cpp
-	$(CC) -o $(CLIENT) $(CLIENT_OBJS) $(UTILS_OBJLIBS) ./go_root/go_base/go_base_class.cpp ./go_root/go_base/go_move_class.cpp -lstdc++
+$(CLIENT): $(CLIENT_OBJS) $(UTILS_OBJLIBS) $(GO_ROOT_OBJLIBS)
+	$(CC) -o $(CLIENT) $(CLIENT_OBJS) $(UTILS_OBJLIBS) $(GO_ROOT_OBJLIBS) -lstdc++
 
 lib_utils.a:	force_look
 	$(ECHO) looking into utils : $(MAKE) $(MFLAGS)

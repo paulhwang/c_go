@@ -8,8 +8,8 @@ all: $(OBJLIBS)
 
 ../lib_go_root.a: $(OBJS)
 	$(ECHO) lib_go_root
-	$(AR) $(ARFLAGS) rv ../lib_utils.a $?
-	$(RANLIB) ../lib_utils.a
+	$(AR) $(ARFLAGS) rv ../lib_go_root.a $?
+	$(RANLIB) ../lib_go_root.a
 
 ../lib_go_base.a: force_look
 	cd go_base; $(MAKE) $(MFLAGS)
