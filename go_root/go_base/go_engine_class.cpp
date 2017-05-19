@@ -28,20 +28,18 @@ GoBaseClass* GoEngineClass::baseObject () {
 }
 
 void GoEngineClass::resetEngineObjectData () {
-  /*
-        this.theGroupListCount = 7;
-        this.theGroupListArray = [this.groupListCount()];
-        this.theGroupListArray[1] = this.mallocGroupList(this, 1, this.GO().BLACK_STONE(), false, null, null);
-        this.theGroupListArray[2] = this.mallocGroupList(this, 2, this.GO().WHITE_STONE(), false, null, null);
-        this.resetMarkedGroupLists();
-        this.resetEmptyGroupLists();
+  this->theGroupListCount = 7;
+        //this.theGroupListArray = [this.groupListCount()];
+        //this.theGroupListArray[1] = this.mallocGroupList(this, 1, this.GO().BLACK_STONE(), false, null, null);
+        //this.theGroupListArray[2] = this.mallocGroupList(this, 2, this.GO().WHITE_STONE(), false, null, null);
+        //this.resetMarkedGroupLists();
+        //this.resetEmptyGroupLists();
 
-        this.theCaptureCount = null;
-        this.theLastDeadStone = null;
+        //this.theCaptureCount = null;
+        //this.theLastDeadStone = null;
 
-        this.theBlackCaptureStones = 0;
-        this.theWhiteCaptureStones = 0;
-        */
+  this->theBlackCaptureStones = 0;
+  this->theWhiteCaptureStones = 0;
 }
 
 void GoEngineClass::logit (char const* str0_val, char const* str1_val) {

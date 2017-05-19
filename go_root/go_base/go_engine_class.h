@@ -17,7 +17,8 @@ class GoEngineClass {
 
   private:
     GoBaseClass *theBaseObject;
-    int const theGroupListCount = 7;
+    int theGroupListCount;
+    char* theGroupListArray[7];
     int theBlackCaptureStones;
     int theWhiteCaptureStones;
 
