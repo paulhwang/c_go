@@ -13,7 +13,7 @@ all: $(OBJLIBS)
 	cd go_base; $(MAKE) $(MFLAGS)
 
 clean:
-	$(ECHO) cleaning up in go_root
+	-$(RM) -f $(OBJS)
 	-for d in $(DIRS); do (cd $$d; $(MAKE) clean); done
 
 force_look:

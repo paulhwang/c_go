@@ -5,11 +5,12 @@ OBJS =	logit.o transport_class.o
 
 all: $(OBJLIBS)
 
-../lib_utils.a:
-	$(ECHO) lib_utils
+../lib_utils.a: $(OBJS)
+	$(AR) $(ARFLAGS) rv ../lib_utils.a $?
+	$(RANLIB) ../lib_utils.a
 
 clean:
-	$(ECHO) cleaning up in utils
+	-$(RM) -f $(OBJS)
 
 force_look:
 	true

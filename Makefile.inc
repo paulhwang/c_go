@@ -1,4 +1,9 @@
 CC		= gcc
+
 LD		= gcc
-ECHO	= echo
+LDFLAGS	=
+AR		= ar
+ARFLAGS	=
+RANLIB	= ranlib
 RM		= rm
+ECHO	= echo

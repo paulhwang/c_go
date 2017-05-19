@@ -9,7 +9,7 @@ $(OBJLIBS):
 	$(ECHO) lib_go_base
 
 clean:
-	$(ECHO) cleaning up in go_base
+	-$(RM) -f $(OBJS)
 
 force_look:
 	true
