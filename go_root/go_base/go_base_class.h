@@ -9,9 +9,8 @@
 class go_root_class;
 class GoEngineClass;
 class GoBoardClass;
-class go_port_class;
+class GoPortClass;
 class go_config_class;
-class go_group_lst_class;
 class go_game_class;
 
 class GoBaseClass {
@@ -23,7 +22,7 @@ class GoBaseClass {
     go_root_class* rootObject();
     GoEngineClass* engineObject();
     GoBoardClass* boardObject();
-    go_port_class* portObject();
+    GoPortClass* portObject();
     go_config_class* configObject();
     go_game_class* gameObject();
 
@@ -31,7 +30,7 @@ class GoBaseClass {
   	go_root_class* theRootObject;
   	GoEngineClass* theEngineObject;
     GoBoardClass* theBoardObject;
-    go_port_class* thePortObject;
+    GoPortClass* thePortObject;
     go_config_class* theConfigObject;
     go_game_class* theGameObject;
 

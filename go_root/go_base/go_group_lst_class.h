@@ -18,11 +18,13 @@ class GoGroupListClass {
                        char const* small_stone_val);
     ~GoGroupListClass();
 
-  private:
-    GoEngineClass *theEngineObject;
     char const* objectName();
     GoEngineClass* engineObject();
     GoBaseClass* baseObject();
+
+  private:
+    GoEngineClass *theEngineObject;
+
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
 };

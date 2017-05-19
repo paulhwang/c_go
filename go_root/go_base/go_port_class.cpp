@@ -7,30 +7,30 @@
 #include "go_base_class.h"
 #include "go_port_class.h"
 
-go_port_class::go_port_class (GoBaseClass* base_object_val) {
+GoPortClass::GoPortClass (GoBaseClass* base_object_val) {
   this->the_base_object = base_object_val;
 
   if (1) {
-    this->logit("go_port_class", "init");
+    this->logit("GoPortClass", "init");
   }
 }
 
-go_port_class::~go_port_class () {
+GoPortClass::~GoPortClass () {
 }
 
-char const* go_port_class::object_name () {
+char const* GoPortClass::object_name () {
   return "go_engine_class";
 }
 
-GoBaseClass* go_port_class::base_object () {
+GoBaseClass* GoPortClass::base_object () {
   return this->the_base_object;
 }
 
-void go_port_class::logit (char const* str0_val, char const* str1_val) {
+void GoPortClass::logit (char const* str0_val, char const* str1_val) {
 	LOGIT(str0_val, str1_val);
 }
 
-void go_port_class::abend (char const* str0_val, char const* str1_val) {
+void GoPortClass::abend (char const* str0_val, char const* str1_val) {
 	LOGIT(str0_val, str1_val);
 }
 

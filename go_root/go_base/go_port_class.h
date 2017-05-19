@@ -8,15 +8,16 @@
 
 class GoBaseClass;
 
-class go_port_class {
+class GoPortClass {
   public:
-    go_port_class(GoBaseClass* the_base_object);
-    ~go_port_class();
+    GoPortClass(GoBaseClass* the_base_object);
+    ~GoPortClass();
+
+    char const* object_name();
+    GoBaseClass* base_object();
 
   private:
     GoBaseClass *the_base_object;
-    char const* object_name();
-    GoBaseClass* base_object();
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
 };
