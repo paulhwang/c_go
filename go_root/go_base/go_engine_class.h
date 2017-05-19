@@ -6,7 +6,10 @@
 #ifndef __GO_ENGINE_CLASS_H__
 #define __GO_ENGINE_CLASS_H__
 
+#define GO_GROUP_LIST_ARRAY_SIZE 7
+
 class GoBaseClass;
+class GoGroupListClass;
 
 class GoEngineClass {
   public:
@@ -18,7 +21,7 @@ class GoEngineClass {
   private:
     GoBaseClass *theBaseObject;
     int theGroupListCount;
-    char* theGroupListArray[7];
+    GoGroupListClass* theGroupListArray[GO_GROUP_LIST_ARRAY_SIZE];
     int theBlackCaptureStones;
     int theWhiteCaptureStones;
 

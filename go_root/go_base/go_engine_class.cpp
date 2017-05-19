@@ -3,8 +3,11 @@
   Written by Paul Hwang
 */
 
+#include "../../includes/types.h"
 #include "../../utils/logit.h"
+#include "go_define.h"
 #include "go_base_class.h"
+#include "go_group_lst_class.h"
 #include "go_engine_class.h"
 
 GoEngineClass::GoEngineClass (GoBaseClass* base_object_val) {
@@ -28,10 +31,10 @@ GoBaseClass* GoEngineClass::baseObject () {
 }
 
 void GoEngineClass::resetEngineObjectData () {
-  this->theGroupListCount = 7;
+  this->theGroupListCount = GO_GROUP_LIST_ARRAY_SIZE;
         //this.theGroupListArray = [this.groupListCount()];
-        //this.theGroupListArray[1] = this.mallocGroupList(this, 1, this.GO().BLACK_STONE(), false, null, null);
-        //this.theGroupListArray[2] = this.mallocGroupList(this, 2, this.GO().WHITE_STONE(), false, null, null);
+  this->theGroupListArray[1] = new GoGroupListClass(this, 1, GO_BLACK_STONE, false, null, null);
+  this->theGroupListArray[2] = new GoGroupListClass(this, 2, GO_WHITE_STONE, false, null, null);
         //this.resetMarkedGroupLists();
         //this.resetEmptyGroupLists();
 

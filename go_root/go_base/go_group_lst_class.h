@@ -6,17 +6,23 @@
 #ifndef __GO_GROUP_LST_CLASS_H__
 #define __GO_GROUP_LST_CLASS_H__
 
-class go_base_class;
+class GoEngineClass;
 
-class go_group_lst_class {
+class GoGroupListClass {
   public:
-    go_group_lst_class(go_base_class* the_base_object);
-    ~go_group_lst_class();
+    GoGroupListClass(GoEngineClass* engine_val,
+                       int index_val,
+                       int color_val,
+                       int dead_val,
+                       char* big_stone_val,
+                       char* small_stone_val);
+    ~GoGroupListClass();
 
   private:
-    go_base_class *the_base_object;
-    char const* object_name();
-    go_base_class* base_object();
+    GoEngineClass *theEngineObject;
+    char const* objectName();
+    GoEngineClass* engineObject();
+    GoBaseClass* baseObject();
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
 };
