@@ -5,13 +5,13 @@
 
 #include "../../utils/logit.h"
 #include "../go_root_class.h"
-#include "./go_engine_class.h"
-#include "./go_board_class.h"
-#include "./go_port_class.h"
-#include "./go_config_class.h"
-#include "./go_group_lst_class.h"
-#include "./go_base_class.h"
-#include "./go_game_class.h"
+#include "go_engine_class.h"
+#include "go_board_class.h"
+#include "go_port_class.h"
+#include "go_config_class.h"
+#include "go_group_lst_class.h"
+#include "go_base_class.h"
+#include "go_game_class.h"
 
 go_base_class::go_base_class (go_root_class* root_object_val) {
   this->the_root_object = root_object_val;
