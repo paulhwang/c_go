@@ -11,10 +11,16 @@
 #include "./go_config_class.h"
 #include "./go_group_lst_class.h"
 #include "./go_base_class.h"
+#include "./go_game_class.h"
 
 go_base_class::go_base_class (go_root_class* root_object_val) {
   this->the_root_object = root_object_val;
   this->the_engine_object = new go_engine_class(this);
+  this->the_board_object = new go_board_class(this);
+  this->the_port_object = new go_port_class(this);
+  this->the_config_object = new go_config_class(this);
+  this->the_group_lst_object = new go_group_lst_class(this);
+  this->the_game_object = new go_game_class(this);
 
   if (1) {
     this->logit("go_base_class", "init");

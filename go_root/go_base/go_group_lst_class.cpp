@@ -3,22 +3,34 @@
   Written by Paul Hwang
 */
 
-#ifndef __GO_GROUP_LST_CLASS_H__
-#define __GO_GROUP_LST_CLASS_H__
+#include "../../utils/logit.h"
+#include "go_base_class.h"
+#include "go_group_lst_class.h"
 
-class go_base_class;
+go_group_lst_class::go_group_lst_class (go_base_class* base_object_val) {
+  this->the_base_object = base_object_val;
 
-class go_group_lst_class {
-  public:
-    go_group_lst_class(go_base_class* the_base_object);
-    ~go_group_lst_class();
+  if (1) {
+    this->logit("go_group_lst_class", "init");
+  }
+}
 
-  private:
-    go_base_class *the_base_object;
-    char const* object_name();
-    go_base_class* base_object();
-    void logit(char const* str0_val, char const* str1_val);
-    void abend(char const* str0_val, char const* str1_val);
-};
+go_group_lst_class::~go_group_lst_class () {
+}
 
-#endif
+char const* go_group_lst_class::object_name () {
+  return "go_group_lst_class";
+}
+
+go_base_class* go_group_lst_class::base_object () {
+  return this->the_base_object;
+}
+
+void go_group_lst_class::logit (char const* str0_val, char const* str1_val) {
+  LOGIT(str0_val, str1_val);
+}
+
+void go_group_lst_class::abend (char const* str0_val, char const* str1_val) {
+  LOGIT(str0_val, str1_val);
+}
+
