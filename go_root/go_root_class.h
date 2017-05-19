@@ -8,10 +8,10 @@
 
 class GoBaseClass;
 
-class go_root_class {
+class goRootClass {
   public:
-    go_root_class();
-    ~go_root_class();
+    goRootClass();
+    ~goRootClass();
     GoBaseClass* base_object();
 
   private:

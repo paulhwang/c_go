@@ -12,7 +12,7 @@
 #include "go_base_class.h"
 #include "go_game_class.h"
 
-GoBaseClass::GoBaseClass (go_root_class* root_object_val) {
+GoBaseClass::GoBaseClass (goRootClass* root_object_val) {
   this->theRootObject = root_object_val;
   this->theBoardObject = new GoBoardClass(this);
   this->theEngineObject = new GoEngineClass(this);
@@ -32,7 +32,7 @@ char const* GoBaseClass::objectName () {
   return "GoBaseClass";
 }
 
-go_root_class* GoBaseClass::rootObject () {
+goRootClass* GoBaseClass::rootObject () {
   return this->theRootObject;
 }
 
