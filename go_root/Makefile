@@ -9,8 +9,8 @@ all: $(OBJLIBS)
 ../lib_go_root.a:
 	$(ECHO) lib_go_root
 
-../lib_go_base.a:
-	$(ECHO) lib_go_base
+../lib_go_base.a: force_look
+	cd go_base; $(MAKE) $(MFLAGS)
 
 clean:
 	$(ECHO) cleaning up in go_root
