@@ -7,8 +7,8 @@
 #include "go_base_class.h"
 #include "go_engine_class.h"
 
-GoEngineClass::GoEngineClass (go_base_class* base_object_val) {
-  this->the_base_object = base_object_val;
+GoEngineClass::GoEngineClass (GoBaseClass* base_object_val) {
+  this->theBaseObject = base_object_val;
   this->resetEngineObjectData();
 
   if (1) {
@@ -19,12 +19,12 @@ GoEngineClass::GoEngineClass (go_base_class* base_object_val) {
 GoEngineClass::~GoEngineClass () {
 }
 
-char const* GoEngineClass::object_name () {
+char const* GoEngineClass::objectName () {
   return "GoEngineClass";
 }
 
-go_base_class* GoEngineClass::base_object () {
-  return this->the_base_object;
+GoBaseClass* GoEngineClass::baseObject () {
+  return this->theBaseObject;
 }
 
 void GoEngineClass::resetEngineObjectData () {

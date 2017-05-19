@@ -7,7 +7,7 @@
 #include "go_base_class.h"
 #include "go_config_class.h"
 
-go_config_class::go_config_class (go_base_class* base_object_val) {
+go_config_class::go_config_class (GoBaseClass* base_object_val) {
   this->the_base_object = base_object_val;
 
   if (1) {
@@ -22,7 +22,7 @@ char const* go_config_class::object_name () {
   return "go_config_class";
 }
 
-go_base_class* go_config_class::base_object () {
+GoBaseClass* go_config_class::base_object () {
   return this->the_base_object;
 }
 

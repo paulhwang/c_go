@@ -7,7 +7,7 @@
 #include "go_base_class.h"
 #include "go_board_class.h"
 
-go_board_class::go_board_class (go_base_class* base_object_val) {
+go_board_class::go_board_class (GoBaseClass* base_object_val) {
   this->the_base_object = base_object_val;
 
   if (1) {
@@ -22,7 +22,7 @@ char const* go_board_class::object_name () {
   return "go_board_class";
 }
 
-go_base_class* go_board_class::base_object () {
+GoBaseClass* go_board_class::base_object () {
   return this->the_base_object;
 }
 

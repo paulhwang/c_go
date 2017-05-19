@@ -14,10 +14,10 @@ class go_config_class;
 class go_group_lst_class;
 class go_game_class;
 
-class go_base_class {
+class GoBaseClass {
   public:
-    go_base_class(go_root_class* root_object_val);
-    ~go_base_class();
+    GoBaseClass(go_root_class* root_object_val);
+    ~GoBaseClass();
     go_root_class* root_object();
 
   private:
