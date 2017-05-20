@@ -6,7 +6,7 @@
 #include "../utils_dir/logit.h"
 #include "go_base_dir/go_base_class.h"
 #include "../utils_dir/transport_class.h"
-#include "go_root_class.h"
+#include "root_class.h"
 
 GoRootClass::GoRootClass () {
   this->theBaseObject = new GoBaseClass(this);

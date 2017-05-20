@@ -6,7 +6,7 @@
 #ifndef __GO_BASE_CLASS_H__
 #define __GO_BASE_CLASS_H__
 
-#include "../go_root_class.h"
+#include "../root_class.h"
 #include "go_define.h"
 #include "go_board_class.h"
 #include "go_engine_class.h"

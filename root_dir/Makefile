@@ -2,7 +2,7 @@ include ../Makefile.inc
 
 DIRS	= go_base_dir
 OBJLIBS	= ../lib_go_root.a ../lib_go_base.a
-OBJS =	go_root_class.o
+OBJS =	root_class.o
 
 all: $(OBJLIBS)
 
