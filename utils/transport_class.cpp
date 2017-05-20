@@ -12,6 +12,7 @@
 #include <netdb.h>
 #include <pwd.h>
 #include <arpa/inet.h>
+#include "../go_root/go_root_class.h"
 #include "transport_class.h"
 #include "./logit.h"
 

@@ -4,6 +4,7 @@
 */
 
 #include "../../utils/logit.h"
+#include "../go_root_class.h"
 #include "go_base_class.h"
 
 GoBaseClass::GoBaseClass (GoRootClass* root_object_val) {
