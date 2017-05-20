@@ -6,7 +6,7 @@
 #include "../../utils/logit.h"
 #include "go_base_class.h"
 
-GoBaseClass::GoBaseClass (goRootClass* root_object_val) {
+GoBaseClass::GoBaseClass (GoRootClass* root_object_val) {
   this->theRootObject = root_object_val;
   this->theBoardObject = new GoBoardClass(this);
   this->theEngineObject = new GoEngineClass(this);
@@ -27,7 +27,7 @@ char const* GoBaseClass::objectName () {
   return "GoBaseClass";
 }
 
-goRootClass* GoBaseClass::rootObject () {
+GoRootClass* GoBaseClass::rootObject () {
   return this->theRootObject;
 }
 

@@ -18,10 +18,19 @@
 #define MAXHOSTNAME 32
 #define BACKLOG 5
 
-TransportClass::TransportClass () {
+TransportClass::TransportClass (GoRootClass *root_object_val) {
+  this->theRootObject = root_object_val;
+
+  if (1) {
+    this->logit("TransportClass", "init");
+  }
 }
 
 TransportClass::~TransportClass () {
+}
+
+GoRootClass* TransportClass::rootObject () {
+  return this->theRootObject;
 }
 
 void TransportClass::startServer (ushort port_val) {
@@ -81,6 +90,7 @@ S
 
   int valread = read(data_socket , buffer, 1024);
   printf("valread=%i data=%s\n", valread, buffer);
+  //this->rootObject()->baseObject()->portObject()->receiveStringData(buffer);
 }
 
 void TransportClass::startClient (ulong ip_addr_val, ushort port_val) {
@@ -112,11 +122,14 @@ void TransportClass::startClient (ulong ip_addr_val, ushort port_val) {
 
   this->logit("startClient", "connected");
 
-  char const* data = "from client";
-  send(s , data , strlen(data) , 0);
+  char const* data1 = "Move   10302001";
+  send(s , data1 , strlen(data1) , 0);
 
   int valread = read(s, buffer, 1024);
   printf("valread=%i data=%s\n", valread, buffer);
+
+  char const* data2 = "SpecialBACKWORD";
+  send(s , data2 , strlen(data2) , 0);
 }
 
 void TransportClass::logit (char const* str0_val, char const* str1_val) {

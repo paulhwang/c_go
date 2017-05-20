@@ -7,10 +7,9 @@
 #include "./utils/transport_class.h"
 
 int main (int argc, char** argv) {
-  goRootClass* root_object = new goRootClass();
+  GoRootClass* root_object = new GoRootClass();
   
-  TransportClass *transport_object = new TransportClass();
-  transport_object->startServer(8001);
+  root_object->transportObject()->startServer(8001);
 }
 
 

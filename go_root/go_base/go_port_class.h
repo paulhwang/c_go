@@ -15,6 +15,7 @@ class GoPortClass {
 
     char const* objectName();
     GoBaseClass* baseObject();
+    void receiveStringData (char* str_val);
 
   private:
     GoBaseClass *theBaseObject;

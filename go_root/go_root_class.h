@@ -7,17 +7,20 @@
 #define __GO_ROOT_CLASS_H__
 
 class GoBaseClass;
+class TransportClass;
 
-class goRootClass {
+class GoRootClass {
   public:
-    goRootClass();
-    ~goRootClass();
+    GoRootClass();
+    ~GoRootClass();
 
     char const* objectName();
     GoBaseClass* baseObject();
+    TransportClass* transportObject();
 
   private:
     GoBaseClass* theBaseObject;
+    TransportClass* theTransportObject;
 
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);

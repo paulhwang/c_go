@@ -4,33 +4,39 @@
 */
 
 #include "../utils/logit.h"
-#include "./go_base/go_base_class.h"
-#include "./go_root_class.h"
+#include "go_base/go_base_class.h"
+#include "../utils/transport_class.h"
+#include "go_root_class.h"
 
-goRootClass::goRootClass () {
+GoRootClass::GoRootClass () {
   this->theBaseObject = new GoBaseClass(this);
+  this->theTransportObject = new TransportClass(this);
 
   if (1) {
-  	this->logit("goRootClass", "init");
+  	this->logit("GoRootClass", "init");
   }
 }
 
-goRootClass::~goRootClass () {
+GoRootClass::~GoRootClass () {
 }
 
-GoBaseClass* goRootClass::baseObject() {
-	return this->theBaseObject;
+GoBaseClass* GoRootClass::baseObject() {
+  return this->theBaseObject;
 }
 
-char const* goRootClass::objectName () {
-  return "goRootClass";
+TransportClass* GoRootClass::transportObject() {
+  return this->theTransportObject;
 }
 
-void goRootClass::logit (char const* str0_val, char const* str1_val) {
+char const* GoRootClass::objectName () {
+  return "GoRootClass";
+}
+
+void GoRootClass::logit (char const* str0_val, char const* str1_val) {
 	LOGIT(str0_val, str1_val);
 }
 
-void goRootClass::abend (char const* str0_val, char const* str1_val) {
+void GoRootClass::abend (char const* str0_val, char const* str1_val) {
 	ABEND(str0_val, str1_val);
 }
 
