@@ -4,8 +4,6 @@
 */
 
 #include "../../includes/types.h"
-#include "../../utils/logit.h"
-#include "go_define.h"
 #include "go_base_class.h"
 #include "go_engine_class.h"
 

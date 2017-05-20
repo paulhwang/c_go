@@ -7,11 +7,13 @@
 #define __GO_BASE_CLASS_H__
 
 #include "../go_root_class.h"
+#include "go_define.h"
 #include "go_board_class.h"
 #include "go_engine_class.h"
 #include "go_port_class.h"
 #include "go_config_class.h"
 #include "go_game_class.h"
+#include "go_group_class.h"
 #include "go_group_list_class.h"
 #include "go_move_class.h"
 

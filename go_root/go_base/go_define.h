@@ -3,6 +3,11 @@
   Written by Paul Hwang
 */
 
+#ifndef __GO_DEFINE_H__
+#define __GO_DEFINE_H__
+
 #define GO_EMPTY_STONE 0
 #define GO_BLACK_STONE 1
 #define GO_WHITE_STONE 2
+
+#endif

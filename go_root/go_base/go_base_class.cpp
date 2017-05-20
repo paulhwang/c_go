@@ -13,6 +13,7 @@ GoBaseClass::GoBaseClass (goRootClass* root_object_val) {
   this->thePortObject = new GoPortClass(this);
   this->theConfigObject = new GoConfigClass(this);
   this->theGameObject = new GoGameClass(this);
+  GoMoveClass* m = new GoMoveClass(this);
 
   if (1) {
     this->logit("GoBaseClass", "init");
