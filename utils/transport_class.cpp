@@ -18,16 +18,13 @@
 #define MAXHOSTNAME 32
 #define BACKLOG 5
 
-transport_class::transport_class () {
-
+TransportClass::TransportClass () {
 }
 
-transport_class::~transport_class () {
-
-
+TransportClass::~TransportClass () {
 }
 
-void transport_class::start_server (ushort port_val) {
+void TransportClass::startServer (ushort port_val) {
   char localhost[MAXHOSTNAME + 1];
   struct servent *sp;
   int s, data_socket;
@@ -50,12 +47,12 @@ S
 */
 
   if ((s = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
-  	this->logit("start_server", "open socket error");
+  	this->logit("startServer", "open socket error");
   	return;
   }
 
   if (setsockopt(s, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &opt, sizeof(opt))) {
-  	this->logit("start_server", "setsockopt error");
+  	this->logit("startServer", "setsockopt error");
     return;
   }
 
@@ -64,20 +61,20 @@ S
   address.sin_port = htons(port_val);
 
   if (bind(s, (struct sockaddr *)&address, sizeof(address)) < 0) {
-  	this->logit("start_server", "bind error");
+  	this->logit("startServer", "bind error");
     return;
   }
 
-  this->debug(TRUE, "start_server", "listening");
+  this->logit("startServer", "listening");
   listen(s, BACKLOG);
 
-  this->debug(TRUE, "start_server", "accepting");
+  this->logit("startServer", "accepting");
   if ((data_socket = accept(s, (struct sockaddr *)&address, (socklen_t*)&addrlen)) < 0) {
-    this->logit("start_server", "accept error");
+    this->logit("startServer", "accept error");
     return;
   }
 
-  this->debug(TRUE, "start_server", "accepted");
+  this->logit("startServer", "accepted");
 
   char const* data = "from server";
   send(data_socket , data , strlen(data) , 0);
@@ -86,14 +83,14 @@ S
   printf("valread=%i data=%s\n", valread, buffer);
 }
 
-void transport_class::start_client (ulong ip_addr_val, ushort port_val) {
+void TransportClass::startClient (ulong ip_addr_val, ushort port_val) {
   int s;
   struct sockaddr_in serv_addr;
   char buffer[1024] = {0};
-  this->logit("start_client", "start");
+  this->logit("startClient", "start");
 
   if ((s = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
-    this->logit("start_client", "open socket error");
+    this->logit("startClient", "open socket error");
     return;
   }
  
@@ -107,13 +104,13 @@ void transport_class::start_client (ulong ip_addr_val, ushort port_val) {
     return ;
   }
   
-  this->debug(TRUE, "start_client", "connecting");
+  this->logit("startClient", "connecting");
   if (connect(s, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0) {
     printf("\nConnection Failed \n");
     return;
   }
 
-  this->debug(TRUE, "start_client", "connected");
+  this->logit("startClient", "connected");
 
   char const* data = "from client";
   send(s , data , strlen(data) , 0);
@@ -122,13 +119,11 @@ void transport_class::start_client (ulong ip_addr_val, ushort port_val) {
   printf("valread=%i data=%s\n", valread, buffer);
 }
 
-void transport_class::debug (int debug_val, char const* str0_val, char const* str1_val) {
-  if (debug_val) {
-    LOGIT(str0_val, str1_val);
-  }
+void TransportClass::logit (char const* str0_val, char const* str1_val) {
+  LOGIT(str0_val, str1_val);
 }
 
-void transport_class::logit (char const* str0_val, char const* str1_val) {
-	LOGIT(str0_val, str1_val);
+void TransportClass::abend (char const* str0_val, char const* str1_val) {
+  ABEND(str0_val, str1_val);
 }
 
