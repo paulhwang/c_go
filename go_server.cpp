@@ -4,7 +4,7 @@
 */
 
 #include "./root_dir/go_root_class.h"
-#include "./utils/transport_class.h"
+#include "./utils_dir/transport_class.h"
 
 int main (int argc, char** argv) {
   GoRootClass* root_object = new GoRootClass();

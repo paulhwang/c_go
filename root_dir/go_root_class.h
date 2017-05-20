@@ -8,7 +8,7 @@
 
 //#include "go_base_dir/go_base_class.h"
 class GoBaseClass;
-//#include "../utils/transport_class.h"
+//#include "../utils_dir/transport_class.h"
 class TransportClass;
 
 class GoRootClass {

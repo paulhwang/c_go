@@ -3,7 +3,6 @@
   Written by Paul Hwang
 */
 
-#include "../../utils/logit.h"
 #include "go_base_class.h"
 #include "go_config_class.h"
 
@@ -27,10 +26,10 @@ GoBaseClass* GoConfigClass::baseObject () {
 }
 
 void GoConfigClass::logit (char const* str0_val, char const* str1_val) {
-	LOGIT(str0_val, str1_val);
+  this->baseObject()->logit(str0_val, str1_val);
 }
 
 void GoConfigClass::abend (char const* str0_val, char const* str1_val) {
-	LOGIT(str0_val, str1_val);
+  this->baseObject()->abend(str0_val, str1_val);
 }
 

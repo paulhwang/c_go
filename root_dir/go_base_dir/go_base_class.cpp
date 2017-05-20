@@ -3,7 +3,7 @@
   Written by Paul Hwang
 */
 
-#include "../../utils/logit.h"
+#include "../../utils_dir/logit.h"
 #include "../go_root_class.h"
 #include "go_base_class.h"
 
