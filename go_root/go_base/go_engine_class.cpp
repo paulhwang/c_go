@@ -7,7 +7,6 @@
 #include "../../utils/logit.h"
 #include "go_define.h"
 #include "go_base_class.h"
-#include "go_group_list_class.h"
 #include "go_engine_class.h"
 
 GoEngineClass::GoEngineClass (GoBaseClass* base_object_val) {
@@ -37,7 +36,7 @@ GoBoardClass* GoEngineClass::boardObject () {
 void GoEngineClass::resetMarkedGroupLists () {
   this->theGroupListArray[3] = new GoGroupListClass(this, 3, GO_BLACK_STONE, true, "black", "gray");
   this->theGroupListArray[4] = new GoGroupListClass(this, 4, GO_WHITE_STONE, true, "white", "gray");
-  //this->boardObject()->resetMarkedBoardObjectData();
+  this->boardObject()->resetMarkedBoardObjectData();
 }
 
 void GoEngineClass::resetEmptyGroupLists () {
@@ -62,10 +61,10 @@ void GoEngineClass::resetEngineObjectData () {
 }
 
 void GoEngineClass::logit (char const* str0_val, char const* str1_val) {
-	LOGIT(str0_val, str1_val);
+	this->baseObject()->logit(str0_val, str1_val);
 }
 
 void GoEngineClass::abend (char const* str0_val, char const* str1_val) {
-	LOGIT(str0_val, str1_val);
+	this->baseObject()->abend(str0_val, str1_val);
 }
 

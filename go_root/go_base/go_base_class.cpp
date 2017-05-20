@@ -4,13 +4,7 @@
 */
 
 #include "../../utils/logit.h"
-#include "../go_root_class.h"
-#include "go_engine_class.h"
-#include "go_board_class.h"
-#include "go_port_class.h"
-#include "go_config_class.h"
 #include "go_base_class.h"
-#include "go_game_class.h"
 
 GoBaseClass::GoBaseClass (goRootClass* root_object_val) {
   this->theRootObject = root_object_val;

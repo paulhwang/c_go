@@ -6,15 +6,14 @@
 #ifndef __GO_ENGINE_CLASS_H__
 #define __GO_ENGINE_CLASS_H__
 
-#define GO_GROUP_LIST_ARRAY_SIZE 7
-
-class GoBaseClass;
 class GoGroupListClass;
-class GoBoardClass;
+#include "go_base_class.h"
+
+#define GO_GROUP_LIST_ARRAY_SIZE 7
 
 class GoEngineClass {
   public:
-    GoEngineClass(GoBaseClass* the_base_object);
+    GoEngineClass(GoBaseClass* base_object_val);
     ~GoEngineClass();
 
     char const* objectName();
@@ -37,5 +36,4 @@ class GoEngineClass {
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
 };
-
 #endif

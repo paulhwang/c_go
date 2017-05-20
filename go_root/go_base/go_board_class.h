@@ -6,7 +6,7 @@
 #ifndef __GO_BOARD_CLASS_H__
 #define __GO_BOARD_CLASS_H__
 
-class GoBaseClass;
+#include "go_base_class.h"
 
 class GoBoardClass {
   public:
@@ -24,5 +24,4 @@ class GoBoardClass {
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
 };
-
 #endif

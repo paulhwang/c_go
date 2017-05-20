@@ -6,7 +6,7 @@
 #ifndef __GO_GROUP_LST_CLASS_H__
 #define __GO_GROUP_LST_CLASS_H__
 
-class GoEngineClass;
+#include "go_engine_class.h"
 
 class GoGroupListClass {
   public:
@@ -28,5 +28,4 @@ class GoGroupListClass {
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
 };
-
 #endif

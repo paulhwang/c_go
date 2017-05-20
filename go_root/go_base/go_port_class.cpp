@@ -3,12 +3,11 @@
   Written by Paul Hwang
 */
 
-#include "../../utils/logit.h"
 #include "go_base_class.h"
 #include "go_port_class.h"
 
 GoPortClass::GoPortClass (GoBaseClass* base_object_val) {
-  this->the_base_object = base_object_val;
+  this->theBaseObject = base_object_val;
 
   if (1) {
     this->logit("GoPortClass", "init");
@@ -18,19 +17,19 @@ GoPortClass::GoPortClass (GoBaseClass* base_object_val) {
 GoPortClass::~GoPortClass () {
 }
 
-char const* GoPortClass::object_name () {
-  return "go_engine_class";
+char const* GoPortClass::objectName () {
+  return "GoPortClass";
 }
 
-GoBaseClass* GoPortClass::base_object () {
-  return this->the_base_object;
+GoBaseClass* GoPortClass::baseObject () {
+  return this->theBaseObject;
 }
 
 void GoPortClass::logit (char const* str0_val, char const* str1_val) {
-	LOGIT(str0_val, str1_val);
+  this->baseObject()->logit(str0_val, str1_val);
 }
 
 void GoPortClass::abend (char const* str0_val, char const* str1_val) {
-	LOGIT(str0_val, str1_val);
+  this->baseObject()->abend(str0_val, str1_val);
 }
 

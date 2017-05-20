@@ -32,10 +32,10 @@ GoBaseClass* GoGroupClass::baseObject () {
 }
 
 void GoGroupClass::logit (char const* str0_val, char const* str1_val) {
-	LOGIT(str0_val, str1_val);
+  this->baseObject()->logit(str0_val, str1_val);
 }
 
 void GoGroupClass::abend (char const* str0_val, char const* str1_val) {
-	LOGIT(str0_val, str1_val);
+  this->baseObject()->abend(str0_val, str1_val);
 }
 

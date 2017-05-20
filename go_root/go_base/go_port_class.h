@@ -6,20 +6,20 @@
 #ifndef __GO_PORT_CLASS_H__
 #define __GO_PORT_CLASS_H__
 
-class GoBaseClass;
+#include "go_base_class.h"
 
 class GoPortClass {
   public:
-    GoPortClass(GoBaseClass* the_base_object);
+    GoPortClass(GoBaseClass* base_object_val);
     ~GoPortClass();
 
-    char const* object_name();
-    GoBaseClass* base_object();
+    char const* objectName();
+    GoBaseClass* baseObject();
 
   private:
-    GoBaseClass *the_base_object;
+    GoBaseClass *theBaseObject;
+
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
 };
-
 #endif

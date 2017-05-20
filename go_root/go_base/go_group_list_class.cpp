@@ -31,15 +31,15 @@ GoEngineClass* GoGroupListClass::engineObject () {
   return this->theEngineObject;
 }
 
-//GoBaseClass* GoGroupListClass::baseObject () {
-//  return this->engineObject()->baseObject();
-//}
+GoBaseClass* GoGroupListClass::baseObject () {
+  return this->engineObject()->baseObject();
+}
 
 void GoGroupListClass::logit (char const* str0_val, char const* str1_val) {
-  LOGIT(str0_val, str1_val);
+  this->baseObject()->logit(str0_val, str1_val);
 }
 
 void GoGroupListClass::abend (char const* str0_val, char const* str1_val) {
-  LOGIT(str0_val, str1_val);
+  this->baseObject()->abend(str0_val, str1_val);
 }
 

@@ -6,18 +6,23 @@
 #include "../../utils/logit.h"
 #include "./go_move_class.h"
 
-go_move_class::go_move_class () {
-
+GoMoveClass::GoMoveClass (GoBaseClass* base_object_val) {
 }
 
-go_move_class::~go_move_class () {
+GoMoveClass::~GoMoveClass () {
 }
 
-void go_move_class::logit (char const* str0_val, char const* str1_val) {
-  LOGIT(str0_val, str1_val);
+GoBaseClass* GoMoveClass::baseObject () {
+  return this->baseObject();
 }
 
-void go_move_class::abend (char const* str0_val, char const* str1_val) {
-  ABEND(str0_val, str1_val);
+void GoMoveClass::logit (char const* str0_val, char const* str1_val) {
+	this->baseObject()->logit(str0_val, str1_val);
 }
+
+void GoMoveClass::abend (char const* str0_val, char const* str1_val) {
+	this->baseObject()->abend(str0_val, str1_val);
+}
+
+
 

@@ -7,7 +7,7 @@
 #define __GO_GROUP_CLASS_H__
 
 class GoGroupListClass;
-class GoBaseClass;
+#include "go_base_class.h"
 
 class GoGroupClass {
   public:
@@ -26,5 +26,4 @@ class GoGroupClass {
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
 };
-
 #endif
