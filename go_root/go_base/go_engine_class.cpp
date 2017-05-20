@@ -7,7 +7,7 @@
 #include "../../utils/logit.h"
 #include "go_define.h"
 #include "go_base_class.h"
-#include "go_group_lst_class.h"
+#include "go_group_list_class.h"
 #include "go_engine_class.h"
 
 GoEngineClass::GoEngineClass (GoBaseClass* base_object_val) {

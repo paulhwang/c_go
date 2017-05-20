@@ -5,7 +5,7 @@
 
 #include "../../utils/logit.h"
 #include "go_base_class.h"
-#include "go_group_lst_class.h"
+#include "go_group_list_class.h"
 
 GoGroupListClass::GoGroupListClass (GoEngineClass* engine_val,
                                     int index_val,
