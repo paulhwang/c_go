@@ -1,6 +1,6 @@
 include ../Makefile.inc
 
-DIRS	= go_base
+DIRS	= go_base_dir
 OBJLIBS	= ../lib_go_root.a ../lib_go_base.a
 OBJS =	go_root_class.o
 
@@ -12,7 +12,7 @@ all: $(OBJLIBS)
 	$(RANLIB) ../lib_go_root.a
 
 ../lib_go_base.a: force_look
-	cd go_base; $(MAKE) $(MFLAGS)
+	cd go_base_dir; $(MAKE) $(MFLAGS)
 
 clean:
 	-$(RM) -f $(OBJS)

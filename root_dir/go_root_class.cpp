@@ -4,7 +4,7 @@
 */
 
 #include "../utils/logit.h"
-#include "go_base/go_base_class.h"
+#include "go_base_dir/go_base_class.h"
 #include "../utils/transport_class.h"
 #include "go_root_class.h"
 

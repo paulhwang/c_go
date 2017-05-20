@@ -6,7 +6,7 @@
 #ifndef __GO_ROOT_CLASS_H__
 #define __GO_ROOT_CLASS_H__
 
-//#include "go_base/go_base_class.h"
+//#include "go_base_dir/go_base_class.h"
 class GoBaseClass;
 //#include "../utils/transport_class.h"
 class TransportClass;
