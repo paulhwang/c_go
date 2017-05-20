@@ -8,7 +8,7 @@
 #ifndef __GO_TRANSPORT_CLASS_H__
 #define __GO_TRANSPORT_CLASS_H__
 
-#include "../go_root/go_root_class.h"
+#include "../root_dir/go_root_class.h"
 
 class TransportClass {
   public:

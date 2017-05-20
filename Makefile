@@ -1,6 +1,6 @@
 include Makefile.inc
 
-DIRS	= utils go_root
+DIRS	= utils root_dir
 
 SERVER = server
 SERVER_OBJS	= go_server.o
@@ -24,8 +24,8 @@ lib_utils.a:	force_look
 	cd utils; $(MAKE) $(MFLAGS)
 
 lib_go_root.a lib_go_base.a:	force_look
-	$(ECHO) looking into go_root : $(MAKE) $(MFLAGS)
-	cd go_root; $(MAKE) $(MFLAGS)
+	$(ECHO) looking into root_dir : $(MAKE) $(MFLAGS)
+	cd root_dir; $(MAKE) $(MFLAGS)
 
 clean:
 	$(ECHO) cleaning up in .
