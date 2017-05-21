@@ -4,6 +4,7 @@
   File name: go_base_class.cpp
 */
 
+#include <string.h>
 #include "../../utils_dir/logit.h"
 #include "../root_class.h"
 #include "go_base_class.h"
@@ -45,11 +46,28 @@ GoPortClass* GoBaseClass::portObject () {
   return this->thePortObject;
 }
 
-void GoBaseClass::logit (char const* str0_val, char const* str1_val) {
+void GoBaseClass::goBaseLogit (char const* str0_val, char const* str1_val) {
 	LOGIT(str0_val, str1_val);
 }
 
-void GoBaseClass::abend (char const* str0_val, char const* str1_val) {
-	LOGIT(str0_val, str1_val);
+void GoBaseClass::goBaseAbend (char const* str0_val, char const* str1_val) {
+	ABEND(str0_val, str1_val);
 }
+
+void GoBaseClass::logit (char const* str0_val, char const* str1_val) {
+  char s[80];
+  strcpy(s, this->objectName());
+  strcat(s, "::");
+  strcat(s, str0_val);
+  this->goBaseLogit(s, str1_val);
+}
+
+void GoBaseClass::abend (char const* str0_val, char const* str1_val) {
+  char s[80];
+  strcpy(s, this->objectName());
+  strcat(s, "::");
+  strcat(s, str0_val);
+  this->goBaseAbend(s, str1_val);
+}
+
 

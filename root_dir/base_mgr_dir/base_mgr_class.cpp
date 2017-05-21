@@ -52,7 +52,7 @@ void BaseMgrClass::baseMgrAbend (char const* str0_val, char const* str1_val) {
 
 void BaseMgrClass::logit (char const* str0_val, char const* str1_val) {
   char s[80];
-  strcat(s, this->objectName());
+  strcpy(s, this->objectName());
   strcat(s, "::");
   strcat(s, str0_val);
   this->baseMgrLogit(s, str1_val);
@@ -60,7 +60,7 @@ void BaseMgrClass::logit (char const* str0_val, char const* str1_val) {
 
 void BaseMgrClass::abend (char const* str0_val, char const* str1_val) {
   char s[80];
-  strcat(s, this->objectName());
+  strcpy(s, this->objectName());
   strcat(s, "::");
   strcat(s, str0_val);
   this->baseMgrAbend(s, str1_val);

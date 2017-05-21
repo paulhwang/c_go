@@ -30,6 +30,9 @@ class GoBaseClass {
     GoConfigClass* configObject();
     GoGameClass* gameObject();
 
+    void goBaseLogit(char const* str0_val, char const* str1_val);
+    void goBaseAbend(char const* str0_val, char const* str1_val);
+
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
 
