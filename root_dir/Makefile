@@ -1,7 +1,11 @@
+# Copyrights reserved
+# Written by Paul Hwang
+# Makefile in root_dir
+
 include ../Makefile.inc
 
 DIRS	= go_base_dir
-OBJLIBS	= ../lib_root.a ../lib_go_base.a
+OBJLIBS	= ../lib_root.a ../lib_base_mgr.a ../lib_go_base.a
 OBJS =	root_class.o
 
 all: $(OBJLIBS)
@@ -10,6 +14,9 @@ all: $(OBJLIBS)
 	$(ECHO) lib_root
 	$(AR) $(ARFLAGS) rv ../lib_root.a $?
 	$(RANLIB) ../lib_root.a
+
+../lib_base_mgr.a: force_look
+	cd base_mgr_dir; $(MAKE) $(MFLAGS)
 
 ../lib_go_base.a: force_look
 	cd go_base_dir; $(MAKE) $(MFLAGS)

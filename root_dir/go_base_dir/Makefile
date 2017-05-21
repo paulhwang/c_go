@@ -1,3 +1,7 @@
+# Copyrights reserved
+# Written by Paul Hwang
+# Makefile in go_base_dir
+
 include ../../Makefile.inc
 
 OBJLIBS	= ../../lib_go_base.a
