@@ -54,8 +54,7 @@ GoConfigClass* GoBoardClass::configObject (void) {
 }
 
 int GoBoardClass::boardSize (void) {
-  return 19;
-  //return this.configObject().boardSize();
+  return this->configObject()->boardSize();
 };
 
 void GoBoardClass::resetMarkedBoardObjectData (void) {

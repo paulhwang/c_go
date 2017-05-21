@@ -10,22 +10,27 @@
 
 GoConfigClass::GoConfigClass (GoBaseClass* base_object_val) {
   this->theBaseObject = base_object_val;
+  this->theBoardSize = 19;//////////////////////
 
   if (1) {
     this->logit("GoConfigClass", "init");
   }
 }
 
-GoConfigClass::~GoConfigClass () {
+GoConfigClass::~GoConfigClass (void) {
 }
 
-char const* GoConfigClass::objectName () {
+char const* GoConfigClass::objectName (void) {
   return "GoConfigClass";
 }
 
-GoBaseClass* GoConfigClass::baseObject () {
+GoBaseClass* GoConfigClass::baseObject (void) {
   return this->theBaseObject;
 }
+
+int GoConfigClass::boardSize (void) {
+  return this->theBoardSize;
+};
 
 void GoConfigClass::logit (char const* str0_val, char const* str1_val) {
   char s[LOGIT_BUF_SIZE];

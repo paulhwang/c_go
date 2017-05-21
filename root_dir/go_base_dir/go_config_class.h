@@ -11,13 +11,15 @@
 class GoConfigClass {
   public:
     GoConfigClass(GoBaseClass* the_base_object);
-    ~GoConfigClass();
+    ~GoConfigClass(void);
 
-    char const* objectName();
+    char const* objectName(void);
     GoBaseClass* baseObject();
+    int boardSize(void);
 
   private:
     GoBaseClass *theBaseObject;
+    int theBoardSize;
 
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);

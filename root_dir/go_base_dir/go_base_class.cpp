@@ -11,10 +11,10 @@
 
 GoBaseClass::GoBaseClass (RootClass* root_object_val) {
   this->theRootObject = root_object_val;
+  this->theConfigObject = new GoConfigClass(this);
   this->theBoardObject = new GoBoardClass(this);
   this->theEngineObject = new GoEngineClass(this);
   this->thePortObject = new GoPortClass(this);
-  this->theConfigObject = new GoConfigClass(this);
   this->theGameObject = new GoGameClass(this);
   GoMoveClass* m = new GoMoveClass(this);
 
