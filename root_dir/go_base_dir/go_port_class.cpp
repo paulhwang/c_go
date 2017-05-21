@@ -39,7 +39,11 @@ void GoPortClass::receiveStringData (char* str_val) {
   char code[GO_PROTOCOL_CODE_SIZE + 4];
   char data[32];
 
-  this->logit("receiveStringData", str_val);
+  if (1) {
+    char s[LOGIT_BUF_SIZE];
+    sprintf(s, "data=%s", str_val);
+    this->logit("receiveStringData", s);
+  }
 
   if (!str_val) {
     this->abend("receiveStringData", "null input");
