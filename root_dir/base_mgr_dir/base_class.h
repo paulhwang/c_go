@@ -17,6 +17,8 @@ class BaseClass {
     char const* objectName();
     BaseMgrClass* baseMgrObject();
 
+    void receiveData(char* data_val);
+
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
 

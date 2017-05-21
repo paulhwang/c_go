@@ -26,11 +26,16 @@ BaseMgrClass* BaseClass::baseMgrObject () {
   return this->theBaseMgrObject;
 }
 
+void BaseClass::receiveData (char* data_val) {
+  this->logit("receiveData", data_val);
+  //base->portObject()->receiveStringData(data_val);
+}
+
 void BaseClass::logit (char const* str0_val, char const* str1_val) {
-	this->baseMgrObject()->logit(str0_val, str1_val);
+	this->baseMgrObject()->baseMgrLogit(str0_val, str1_val);
 }
 
 void BaseClass::abend (char const* str0_val, char const* str1_val) {
-  this->baseMgrObject()->abend(str0_val, str1_val);
+  this->baseMgrObject()->baseMgrAbend(str0_val, str1_val);
 }
 
