@@ -1,15 +1,18 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
+  File name: root_class.cpp
 */
 
 #include "../utils_dir/logit.h"
+#include "base_mgr_dir/base_mgr_class.h"
 #include "go_base_dir/go_base_class.h"
 #include "../utils_dir/transport_class.h"
 #include "root_class.h"
 
 GoRootClass::GoRootClass () {
-  this->theBaseObject = new GoBaseClass(this);
+  this->theBaseMgrObject = new BaseMgrClass(this);
+  this->theGoBaseObject = new GoBaseClass(this);
   this->theTransportObject = new TransportClass(this);
 
   if (1) {
@@ -20,8 +23,12 @@ GoRootClass::GoRootClass () {
 GoRootClass::~GoRootClass () {
 }
 
-GoBaseClass* GoRootClass::baseObject() {
-  return this->theBaseObject;
+BaseMgrClass* GoRootClass::baseMgrObject() {
+  return this->theBaseMgrObject;
+}
+
+GoBaseClass* GoRootClass::goBaseObject() {
+  return this->theGoBaseObject;
 }
 
 TransportClass* GoRootClass::transportObject() {
