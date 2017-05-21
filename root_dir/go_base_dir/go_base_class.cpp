@@ -48,6 +48,14 @@ GoPortClass* GoBaseClass::portObject () {
   return this->thePortObject;
 }
 
+GoGameClass* GoBaseClass::gameObject () {
+  return this->theGameObject;
+}
+
+GoConfigClass* GoBaseClass::configObject () {
+  return this->theConfigObject;
+}
+
 void GoBaseClass::goBaseLogit (char const* str0_val, char const* str1_val) {
 	LOGIT(str0_val, str1_val);
 }

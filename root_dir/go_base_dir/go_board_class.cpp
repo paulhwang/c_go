@@ -10,6 +10,17 @@
 
 GoBoardClass::GoBoardClass (GoBaseClass* base_object_val) {
   this->theBaseObject = base_object_val;
+  /*
+  this->theBoardArray = [19];
+  this->theMarkedBoardArray = [19];
+  int i = 0;
+  while (i < 19) {
+    this->theBoardArray[i] = [19];
+    this->theMarkedBoardArray[i] = [19];
+    i += 1;
+  }
+  */
+  this->resetBoardObjectData();
 
   if (1) {
     this->logit("init", "");
@@ -27,12 +38,40 @@ GoBaseClass* GoBoardClass::baseObject (void) {
   return this->theBaseObject;
 }
 
+GoConfigClass* GoBoardClass::configObject (void) {
+  return this->baseObject()->configObject();
+}
+
+int GoBoardClass::boardSize (void) {
+  return 19;
+  //return this.configObject().boardSize();
+};
+
 void GoBoardClass::resetMarkedBoardObjectData (void) {
 
 }
 
-char const* GoBoardClass::encodeBoard (void) {
-  return "aaaaa";
+void GoBoardClass::encodeBoard (char* buf_ptr) {
+  int i = 0;
+  while (i < this->boardSize()) {
+    int j = 0;
+    while (j < this->boardSize()) {
+      //buf = buf + this->theBoardArray[i][j];
+      *buf_ptr++ = this->theBoardArray[i][j];
+      j += 1;
+    }
+    i += 1;
+  }
+
+  if (0) {
+    char s[LOGIT_BUF_SIZE];
+    sprintf(s, "data=%s", buf_ptr);
+    this->logit("encodeBoard", s);
+  }
+}
+
+void GoBoardClass::resetBoardObjectData (void) {
+
 }
 
 void GoBoardClass::logit (char const* str0_val, char const* str1_val) {

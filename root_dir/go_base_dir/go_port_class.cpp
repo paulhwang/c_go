@@ -40,9 +40,12 @@ GoBoardClass* GoPortClass::boardObject (void) {
 }
 
 void GoPortClass::transmitBoardData (void) {
+  char encode_board[400];
+  this->boardObject()->encodeBoard(encode_board);
+
   if (1) {
     char s[LOGIT_BUF_SIZE];
-    sprintf(s, "encodeBoard=%s", this->boardObject()->encodeBoard());
+    sprintf(s, "encode_board=%s", encode_board);
     this->logit("transmitBoardData", s);
   }
 
