@@ -35,13 +35,13 @@ GoBaseClass* GoPortClass::baseObject () {
   return this->theBaseObject;
 }
 
-void GoPortClass::receiveStringData (char* str_val) {
+void GoPortClass::receiveStringData (char const* str_val) {
   char code[GO_PROTOCOL_CODE_SIZE + 4];
   char data[32];
 
   if (1) {
     char s[LOGIT_BUF_SIZE];
-    sprintf(s, "data=%s", str_val);
+    sprintf(s, "str_val=%s", str_val);
     this->logit("receiveStringData", s);
   }
 
@@ -51,20 +51,39 @@ void GoPortClass::receiveStringData (char* str_val) {
   }
 
   memcpy(code, str_val, GO_PROTOCOL_CODE_SIZE);
-  memcpy(data, str_val + GO_PROTOCOL_CODE_SIZE, strlen(str_val) - GO_PROTOCOL_CODE_SIZE);
+  code[GO_PROTOCOL_CODE_SIZE] = 0;
+  strcpy(data, str_val + GO_PROTOCOL_CODE_SIZE);
   this->logit("receiveStringData", code);
   this->logit("receiveStringData", data);
 
-  if (strcmp(code, GO_PROTOCOL_CODE_MOVE_DATA)) {
-    //this->aMoveIsPlayed(data);
+  if (!strcmp(code, GO_PROTOCOL_CODE_MOVE_DATA)) {
+    this->aMoveIsPlayed(data);
     return;
   }
 
-  if (strcmp(code, GO_PROTOCOL_CODE_SPECIAL_MOVE)) {
-    //this->aSpecialMoveIsPlayed(data);
+  if (!strcmp(code, GO_PROTOCOL_CODE_SPECIAL_MOVE)) {
+    this->aSpecialMoveIsPlayed(data);
     return;
   }
 };
+
+void GoPortClass::aMoveIsPlayed (char const* str_val) {
+  if (1) {
+    char s[LOGIT_BUF_SIZE];
+    sprintf(s, "str_val=%s", str_val);
+    this->logit("aMoveIsPlayed", s);
+  }
+
+}
+
+void GoPortClass::aSpecialMoveIsPlayed (char const* str_val) {
+  if (1) {
+    char s[LOGIT_BUF_SIZE];
+    sprintf(s, "str_val=%s", str_val);
+    this->logit("aSpecialMoveIsPlayed", s);
+  }
+
+}
 
 void GoPortClass::logit (char const* str0_val, char const* str1_val) {
   char s[LOGIT_BUF_SIZE];

@@ -15,10 +15,13 @@ class GoPortClass {
 
     char const* objectName();
     GoBaseClass* baseObject();
-    void receiveStringData (char* str_val);
+    void receiveStringData (char const* str_val);
 
   private:
     GoBaseClass *theBaseObject;
+
+    void aMoveIsPlayed(char const* str_val);
+    void aSpecialMoveIsPlayed(char const* str_val);
 
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
