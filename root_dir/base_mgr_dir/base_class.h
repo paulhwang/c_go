@@ -15,12 +15,12 @@ class BaseClass {
     ~BaseClass();
 
     char const* objectName();
-    GoRootClass* rootObject();
+    BaseMgrClass* baseMgrObject();
 
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
 
   private:
-  	GoRootClass* theRootObject;
+  	BaseMgrClass* theBaseMgrObject;
 };
 #endif

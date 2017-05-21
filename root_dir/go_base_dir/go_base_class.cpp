@@ -1,6 +1,7 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
+  File name: go_base_class.cpp
 */
 
 #include "../../utils_dir/logit.h"

@@ -1,6 +1,7 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
+  File name: go_group_list_class.cpp
 */
 
 #include "go_base_class.h"
