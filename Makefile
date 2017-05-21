@@ -9,7 +9,7 @@ CLIENT = client
 CLIENT_OBJS	= go_client.o
 
 UTILS_OBJLIBS	= lib_utils.a
-GO_ROOT_OBJLIBS	= lib_go_root.a lib_go_base.a
+GO_ROOT_OBJLIBS	= lib_root.a lib_go_base.a 
 
 all:	$(SERVER) $(CLIENT)
 
@@ -23,7 +23,7 @@ lib_utils.a:	force_look
 	$(ECHO) looking into utils_dir : $(MAKE) $(MFLAGS)
 	cd utils_dir; $(MAKE) $(MFLAGS)
 
-lib_go_root.a lib_go_base.a:	force_look
+lib_root.a lib_base_mgr.a:	force_look
 	$(ECHO) looking into root_dir : $(MAKE) $(MFLAGS)
 	cd root_dir; $(MAKE) $(MFLAGS)
 

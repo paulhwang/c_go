@@ -1,15 +1,15 @@
 include ../Makefile.inc
 
 DIRS	= go_base_dir
-OBJLIBS	= ../lib_go_root.a ../lib_go_base.a
+OBJLIBS	= ../lib_root.a ../lib_go_base.a
 OBJS =	root_class.o
 
 all: $(OBJLIBS)
 
-../lib_go_root.a: $(OBJS)
-	$(ECHO) lib_go_root
-	$(AR) $(ARFLAGS) rv ../lib_go_root.a $?
-	$(RANLIB) ../lib_go_root.a
+../lib_root.a: $(OBJS)
+	$(ECHO) lib_root
+	$(AR) $(ARFLAGS) rv ../lib_root.a $?
+	$(RANLIB) ../lib_root.a
 
 ../lib_go_base.a: force_look
 	cd go_base_dir; $(MAKE) $(MFLAGS)
