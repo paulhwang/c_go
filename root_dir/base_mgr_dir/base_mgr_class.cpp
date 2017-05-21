@@ -4,7 +4,8 @@
   File name: base_mgr_class.cpp
 */
 
-#include <string.h>
+#include <stdio.h>
+#include "../root_common.h"
 #include "../../utils_dir/logit.h"
 #include "../root_class.h"
 #include "base_class.h"
@@ -14,7 +15,7 @@ BaseMgrClass::BaseMgrClass (RootClass* root_object_val) {
   this->theRootObject = root_object_val;
 
   if (1) {
-    this->logit("BaseMgrClass", "init");
+    this->logit("init", "");
   }
 }
 
@@ -51,18 +52,14 @@ void BaseMgrClass::baseMgrAbend (char const* str0_val, char const* str1_val) {
 }
 
 void BaseMgrClass::logit (char const* str0_val, char const* str1_val) {
-  char s[80];
-  strcpy(s, this->objectName());
-  strcat(s, "::");
-  strcat(s, str0_val);
+  char s[LOGIT_BUF_SIZE];
+  sprintf(s, "%s::%s", this->objectName(), str0_val);
   this->baseMgrLogit(s, str1_val);
 }
 
 void BaseMgrClass::abend (char const* str0_val, char const* str1_val) {
-  char s[80];
-  strcpy(s, this->objectName());
-  strcat(s, "::");
-  strcat(s, str0_val);
+  char s[LOGIT_BUF_SIZE];
+  sprintf(s, "%s::%s", this->objectName(), str0_val);
   this->baseMgrAbend(s, str1_val);
 }
 

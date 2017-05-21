@@ -4,7 +4,8 @@
   File name: go_base_class.cpp
 */
 
-#include <string.h>
+#include <stdio.h>
+#include "../root_common.h"
 #include "../../utils_dir/logit.h"
 #include "../root_class.h"
 #include "go_base_class.h"
@@ -55,18 +56,14 @@ void GoBaseClass::goBaseAbend (char const* str0_val, char const* str1_val) {
 }
 
 void GoBaseClass::logit (char const* str0_val, char const* str1_val) {
-  char s[80];
-  strcpy(s, this->objectName());
-  strcat(s, "::");
-  strcat(s, str0_val);
+  char s[LOGIT_BUF_SIZE];
+  sprintf(s, "%s::%s", this->objectName(), str0_val);
   this->goBaseLogit(s, str1_val);
 }
 
 void GoBaseClass::abend (char const* str0_val, char const* str1_val) {
-  char s[80];
-  strcpy(s, this->objectName());
-  strcat(s, "::");
-  strcat(s, str0_val);
+  char s[LOGIT_BUF_SIZE];
+  sprintf(s, "%s::%s", this->objectName(), str0_val);
   this->goBaseAbend(s, str1_val);
 }
 
