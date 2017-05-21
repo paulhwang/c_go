@@ -6,3 +6,5 @@
 
 #define LOGIT_BUF_SIZE 512
   
+#include <stdio.h>
+#include <string.h>

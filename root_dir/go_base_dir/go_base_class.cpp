@@ -4,7 +4,6 @@
   File name: go_base_class.cpp
 */
 
-#include <stdio.h>
 #include "../root_common.h"
 #include "../../utils_dir/logit.h"
 #include "../root_class.h"
