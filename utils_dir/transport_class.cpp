@@ -19,7 +19,7 @@
 #define MAXHOSTNAME 32
 #define BACKLOG 5
 
-TransportClass::TransportClass (GoRootClass *root_object_val) {
+TransportClass::TransportClass (RootClass *root_object_val) {
   this->theRootObject = root_object_val;
 
   if (1) {
@@ -30,7 +30,7 @@ TransportClass::TransportClass (GoRootClass *root_object_val) {
 TransportClass::~TransportClass () {
 }
 
-GoRootClass* TransportClass::rootObject () {
+RootClass* TransportClass::rootObject () {
   return this->theRootObject;
 }
 

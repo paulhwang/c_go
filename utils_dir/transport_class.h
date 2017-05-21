@@ -12,16 +12,16 @@
 
 class TransportClass {
   public:
-    TransportClass(GoRootClass *root_object_val);
+    TransportClass(RootClass *root_object_val);
     ~TransportClass();
 
-    GoRootClass* rootObject();
+    RootClass* rootObject();
 
     void startServer(ushort port_val);
     void startClient(ulong ip_addr_val, ushort port_val);
 
   private:
-    GoRootClass* theRootObject;
+    RootClass* theRootObject;
 
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);

@@ -11,16 +11,16 @@
 
 class BaseMgrClass {
   public:
-    BaseMgrClass(GoRootClass* root_object_val);
+    BaseMgrClass(RootClass* root_object_val);
     ~BaseMgrClass();
 
     char const* objectName();
-    GoRootClass* rootObject();
+    RootClass* rootObject();
 
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
 
   private:
-  	GoRootClass* theRootObject;
+  	RootClass* theRootObject;
 };
 #endif

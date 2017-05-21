@@ -13,10 +13,10 @@ class GoBaseClass;
 //#include "../utils_dir/transport_class.h"
 class TransportClass;
 
-class GoRootClass {
+class RootClass {
   public:
-    GoRootClass();
-    ~GoRootClass();
+    RootClass();
+    ~RootClass();
 
     char const* objectName();
     BaseMgrClass* baseMgrObject();

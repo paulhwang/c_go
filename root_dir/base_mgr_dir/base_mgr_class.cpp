@@ -8,7 +8,7 @@
 #include "../root_class.h"
 #include "base_mgr_class.h"
 
-BaseMgrClass::BaseMgrClass (GoRootClass* root_object_val) {
+BaseMgrClass::BaseMgrClass (RootClass* root_object_val) {
   this->theRootObject = root_object_val;
 
   if (1) {
@@ -23,7 +23,7 @@ char const* BaseMgrClass::objectName () {
   return "BaseMgrClass";
 }
 
-GoRootClass* BaseMgrClass::rootObject () {
+RootClass* BaseMgrClass::rootObject () {
   return this->theRootObject;
 }
 

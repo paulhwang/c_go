@@ -19,11 +19,11 @@
 
 class GoBaseClass {
   public:
-    GoBaseClass(GoRootClass* root_object_val);
+    GoBaseClass(RootClass* root_object_val);
     ~GoBaseClass();
 
     char const* objectName();
-    GoRootClass* rootObject();
+    RootClass* rootObject();
     GoEngineClass* engineObject();
     GoBoardClass* boardObject();
     GoPortClass* portObject();
@@ -34,7 +34,7 @@ class GoBaseClass {
     void abend(char const* str0_val, char const* str1_val);
 
   private:
-  	GoRootClass* theRootObject;
+  	RootClass* theRootObject;
   	GoEngineClass* theEngineObject;
     GoBoardClass* theBoardObject;
     GoPortClass* thePortObject;
