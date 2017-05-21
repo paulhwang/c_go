@@ -16,19 +16,23 @@ GoBoardClass::GoBoardClass (GoBaseClass* base_object_val) {
   }
 }
 
-GoBoardClass::~GoBoardClass () {
+GoBoardClass::~GoBoardClass (void) {
 }
 
-char const* GoBoardClass::objectName () {
+char const* GoBoardClass::objectName (void) {
   return "GoBoardClass";
 }
 
-GoBaseClass* GoBoardClass::baseObject () {
+GoBaseClass* GoBoardClass::baseObject (void) {
   return this->theBaseObject;
 }
 
-void GoBoardClass::resetMarkedBoardObjectData () {
+void GoBoardClass::resetMarkedBoardObjectData (void) {
 
+}
+
+char const* GoBoardClass::encodeBoard (void) {
+  return "aaaaa";
 }
 
 void GoBoardClass::logit (char const* str0_val, char const* str1_val) {

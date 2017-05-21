@@ -11,12 +11,13 @@
 class GoBoardClass {
   public:
     GoBoardClass(GoBaseClass* the_base_object);
-    ~GoBoardClass();
+    ~GoBoardClass(void);
 
-    char const* objectName();
-    GoBaseClass* baseObject();
+    char const* objectName(void);
+    GoBaseClass* baseObject(void);
 
-    void resetMarkedBoardObjectData();
+    void resetMarkedBoardObjectData(void);
+    char const* encodeBoard (void);
 
   private:
     GoBaseClass *theBaseObject;

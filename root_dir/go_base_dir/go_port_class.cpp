@@ -24,15 +24,28 @@ GoPortClass::GoPortClass (GoBaseClass* base_object_val) {
   }
 }
 
-GoPortClass::~GoPortClass () {
+GoPortClass::~GoPortClass (void) {
 }
 
-char const* GoPortClass::objectName () {
+char const* GoPortClass::objectName (void) {
   return "GoPortClass";
 }
 
-GoBaseClass* GoPortClass::baseObject () {
+GoBaseClass* GoPortClass::baseObject (void) {
   return this->theBaseObject;
+}
+
+GoBoardClass* GoPortClass::boardObject (void) {
+  return this->baseObject()->boardObject();
+}
+
+void GoPortClass::transmitBoardData (void) {
+  if (1) {
+    char s[LOGIT_BUF_SIZE];
+    sprintf(s, "encodeBoard=%s", this->boardObject()->encodeBoard());
+    this->logit("transmitBoardData", s);
+  }
+
 }
 
 void GoPortClass::receiveStringData (char const* str_val) {
@@ -74,6 +87,12 @@ void GoPortClass::aMoveIsPlayed (char const* str_val) {
     this->logit("aMoveIsPlayed", s);
   }
 
+  if (0) {
+
+  }
+  else {
+    this->transmitBoardData();
+  }
 }
 
 void GoPortClass::aSpecialMoveIsPlayed (char const* str_val) {

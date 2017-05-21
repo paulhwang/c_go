@@ -11,15 +11,18 @@
 class GoPortClass {
   public:
     GoPortClass(GoBaseClass* base_object_val);
-    ~GoPortClass();
+    ~GoPortClass(void);
 
-    char const* objectName();
-    GoBaseClass* baseObject();
+    char const* objectName(void);
+    GoBaseClass* baseObject(void);
+    GoBoardClass* boardObject(void);
+
     void receiveStringData (char const* str_val);
 
   private:
     GoBaseClass *theBaseObject;
 
+    void transmitBoardData (void);
     void aMoveIsPlayed(char const* str_val);
     void aSpecialMoveIsPlayed(char const* str_val);
 
