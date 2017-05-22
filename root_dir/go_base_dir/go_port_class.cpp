@@ -94,6 +94,7 @@ void GoPortClass::aMoveIsPlayed (char const* str_val) {
 
     }
     else {
+      GoMoveClass* move = new GoMoveClass(this->baseObject(), str_val, 0, 0, 0, 0);
       this->transmitBoardData();
     }
 }

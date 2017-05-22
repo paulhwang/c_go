@@ -1,6 +1,7 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
+  File name" go_move_class.h
 */
 
 #ifndef __GO_MOVE_CLASS_H__
@@ -9,15 +10,28 @@
 #include "go_base_class.h"
 
 class GoMoveClass {
-  public:
+public:
+    GoMoveClass(GoBaseClass* base_object_val, char const* str_val, int x_val, int y_val, char color_val, int turn_val);
     GoMoveClass(GoBaseClass* base_object_val);
-    ~GoMoveClass();
+    ~GoMoveClass(void);
 
-    char const* objectName();
-    GoBaseClass* baseObject();
+    char const* objectName(void);
+    GoBaseClass* baseObject(void);
 
-  private:
+private:
     GoBaseClass *theBaseObject;
+
+    int theX;
+    int theY;
+    char theMyColor;
+    int theTurnIndex;
+
+    int xX(void);
+    int yY(void);
+    char myColor(void);
+    int turnIndex(void);
+
+    void moveObjectDecode(char const* str_val);
 
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
