@@ -33,6 +33,8 @@ private:
     int thePassReceived;
     int theGameIsOver;
 
+    GoEngineClass* engineObject(void);
+
     GoMoveClass* movesArray(int index_val);
     void setMovesArray(int index_val, GoMoveClass* val);
     int maxMove (void);

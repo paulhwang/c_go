@@ -32,6 +32,11 @@ GoBaseClass* GoGameClass::baseObject (void)
     return this->theBaseObject;
 }
 
+GoEngineClass* GoGameClass::engineObject (void)
+{
+    return this->baseObject()->engineObject();
+}
+
 GoMoveClass* GoGameClass::movesArray (int index_val)
 {
     return this->theMovesArray[index_val];
@@ -137,7 +142,7 @@ void GoGameClass::addNewMoveAndFight (GoMoveClass *move_val)
 
     this->clearPassReceived();
     this->insertMoveToMoveList(move_val);
-    //this->engineObject().enterWar(move_val);
+    this->engineObject()->enterWar(move_val);
     this->setNextColor(this->getOppositeColor(move_val->myColor()));
 }
 
