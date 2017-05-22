@@ -16,6 +16,8 @@ class GoConfigClass {
     char const* objectName(void);
     GoBaseClass* baseObject();
     int boardSize(void);
+    int isValidCoordinates(int x_val, int y_val);
+    int isValidCoordinate(int coordinate_val);
 
   private:
     GoBaseClass *theBaseObject;

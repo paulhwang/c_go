@@ -29,8 +29,11 @@ public:
 private:
     GoEngineClass *theEngineObject;
     int theGroupCount;
+    GoGroupClass* theListArray[400];
 
     int groupCount(void);
+    GoGroupClass* listArray(int index_val);
+    void setListArray(int index_val, GoGroupClass* data_val);
 
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);

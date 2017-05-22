@@ -32,7 +32,7 @@ GoBaseClass* GoGroupClass::baseObject () {
   return this->groupListObject()->baseObject();
 }
 
-int isCandidateGroup (int x_val, int y_val)
+int GoGroupClass::isCandidateGroup (int x_val, int y_val)
 {
   /*
         this.debug(false, "isCandidateGroup", "(" + x_val + "," + y_val + ")");

@@ -32,6 +32,16 @@ int GoConfigClass::boardSize (void) {
   return this->theBoardSize;
 };
 
+int GoConfigClass::isValidCoordinates (int x_val, int y_val)
+{
+    return this->isValidCoordinate(x_val) && this->isValidCoordinate(y_val) ;
+}
+
+int GoConfigClass::isValidCoordinate (int coordinate_val)
+{
+    return (0 <= coordinate_val) && (coordinate_val < this->boardSize());
+}
+
 void GoConfigClass::logit (char const* str0_val, char const* str1_val) {
   char s[LOGIT_BUF_SIZE];
   sprintf(s, "%s::%s", this->objectName(), str0_val);

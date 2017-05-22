@@ -41,13 +41,23 @@ int GoGroupListClass::groupCount (void)
     return this->theGroupCount;
 }
 
+GoGroupClass* GoGroupListClass::listArray (int index_val)
+{
+    return this->theListArray[index_val];
+}
+
+void GoGroupListClass::setListArray (int index_val, GoGroupClass* data_val)
+{
+    this->theListArray[index_val] = data_val;
+}
+
 GoGroupClass* GoGroupListClass::findCandidateGroup (int x_val, int y_val)
 {
     int i = 0;
     while (i < this->groupCount()) {
-        //if (this->listArray(i)->isCandidateGroup(x_val, y_val)) {
+        if (this->listArray(i)->isCandidateGroup(x_val, y_val)) {
         //    return this.listArray(i);
-        //}
+        }
         i += 1;
     }
     return 0;
