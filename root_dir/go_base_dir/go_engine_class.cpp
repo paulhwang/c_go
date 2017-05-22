@@ -116,7 +116,7 @@ GoGroupClass* GoEngineClass::insertStoneToGroupList (GoMoveClass* move_val)
     if (!group) {
         group = new GoGroupClass(g_list);
         group->insertStoneToGroup(move_val->xX(), move_val->yY(), false);
-        //g_list.insertGroupToGroupList(group);
+        g_list->insertGroupToGroupList(group);
         //g_list.printGroupList();
         return group;
     }
