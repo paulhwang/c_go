@@ -35,6 +35,13 @@ class GoEngineClass {
     char* theCaptureCount;
     char* theLastDeadStone;
 
+    GoGroupListClass* emptyGroupList(void);
+    GoGroupListClass* blackGroupList(void);
+    GoGroupListClass* whiteGroupList(void);
+    GoGroupListClass* blackDeadGroupList(void);
+    GoGroupListClass* whiteDeadGroupList(void);
+    GoGroupListClass* blackEmptyGroupList(void);
+    GoGroupListClass* whiteEmptyGroupList(void);
     void clearLastDeadStone(void);
 
     GoGroupClass* insertStoneToGroupList(GoMoveClass* move_val);
