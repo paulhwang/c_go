@@ -94,11 +94,10 @@ void GoEngineClass::enterWar (GoMoveClass* move_val)
     this->boardObject()->addStoneToBoard(move_val->xX(), move_val->yY(), move_val->myColor());
     int dead_count = this->killOtherColorGroups(move_val, group);
 
-/*
-        if (!group.groupHasAir()) {
-            this.removeDeadGroup(group);
-        }
-*/
+    if (!group->groupHasAir()) {
+    //    this->removeDeadGroup(group);
+    }
+
     if (dead_count != 0) {
         if (move_val->myColor() == GO_BLACK_STONE) {
             //this->addBlackCaptureStones(dead_count);

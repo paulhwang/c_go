@@ -23,6 +23,7 @@ class GoGroupClass {
     void setIndexNumber(int val);
     void insertStoneToGroup(int x_val, int y_val, int dead_val);
     int isCandidateGroup(int x_val, int y_val);
+    int groupHasAir(void);
     void resetMarkedBoardObjectData();
 
   private:

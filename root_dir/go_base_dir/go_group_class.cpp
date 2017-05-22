@@ -114,6 +114,31 @@ int GoGroupClass::isCandidateGroup (int x_val, int y_val)
     return false;
 }
 
+int GoGroupClass::groupHasAir (void)
+{
+        //goDebug("GoGroupObject.groupHasAir", "color=" + this.myColor_() + " count=" + this.stoneCount_());
+    int i, j;
+    /*
+        i = this.minX();
+        while (i <= this.maxX()) {
+            j = this.minY();
+            while (j <= this.maxY()) {
+                //goDebug("GoGroupObject.groupHasAir", "(" + i + "," + j + ")");
+                if (this.existMatrix(i, j)) {
+                    //goDebug("GoGroupObject.groupHasAir", "(" + i + "," + j + ")");
+                    if (this.engineObject().stoneHasAir(i, j)) {
+                        //goDebug("GoGroupObject.groupHasAir", "(" + i + "," + j + ")");
+                        return true;
+                    }
+                }
+                j += 1;
+            }
+            i += 1;
+        }
+        */
+    return false;
+}
+
 void GoGroupClass::logit (char const* str0_val, char const* str1_val) {
   char s[LOGIT_BUF_SIZE];
   sprintf(s, "%s::%s", this->objectName(), str0_val);
