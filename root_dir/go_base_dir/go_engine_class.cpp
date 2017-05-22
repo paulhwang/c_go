@@ -106,7 +106,9 @@ GoGroupClass* GoEngineClass::insertStoneToGroupList (GoMoveClass* move_val)
     else if (move_val->myColor() == GO_WHITE_STONE) {
         g_list = this->whiteGroupList();
     } else {
-        //this.abend("insertStoneToGroupList", "color=" + move_val.myColor());
+        char s[LOGIT_BUF_SIZE];
+        sprintf(s, "move_val: (%i, %i, %i, %i)", move_val->xX(), move_val->yY(), move_val->myColor(), move_val->turnIndex());
+        this->abend("insertStoneToGroupList", s);
         return 0;
     }
 }
