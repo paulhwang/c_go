@@ -8,6 +8,8 @@
 #define __GO_GAME_CLASS_H__
 
 class GoMoveClass;
+
+#define GO_MAX_MOVES_ARRAY_SIZE 1024
 #include "go_base_class.h"
 
 class GoGameClass
@@ -26,10 +28,13 @@ private:
     GoBaseClass *theBaseObject;
     int theTotalMoves;
     int theMaxMove;
+    GoMoveClass* theMovesArray[GO_MAX_MOVES_ARRAY_SIZE];
     char theNextColor;
     int thePassReceived;
     int theGameIsOver;
 
+    GoMoveClass* movesArray(int index_val);
+    void setMovesArray(int index_val, GoMoveClass* val);
     int maxMove (void);
     void setMaxMove(int max_move_val);
     void setTotalMoves(int total_moves_val);

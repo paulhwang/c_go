@@ -32,6 +32,16 @@ GoBaseClass* GoGameClass::baseObject (void)
     return this->theBaseObject;
 }
 
+GoMoveClass* GoGameClass::movesArray (int index_val)
+{
+    return this->theMovesArray[index_val];
+}
+
+void GoGameClass::setMovesArray (int index_val, GoMoveClass* val)
+{
+    this->theMovesArray[index_val] = val;
+}
+
 int GoGameClass::maxMove (void)
 {
     return this->theMaxMove;
@@ -133,7 +143,7 @@ void GoGameClass::addNewMoveAndFight (GoMoveClass *move_val)
 
 void GoGameClass::insertMoveToMoveList (GoMoveClass* move_val)
 {
-    //this->setMovesArray(this->totalMoves(), move_val);
+    this->setMovesArray(this->totalMoves(), move_val);
     this->incrementTotalMoves();
     this->setMaxMove(this->totalMoves());
 }
