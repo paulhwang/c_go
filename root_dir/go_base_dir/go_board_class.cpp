@@ -14,8 +14,8 @@ GoBoardClass::GoBoardClass (GoBaseClass* base_object_val) {
     while (i < this->boardSize()) {
         int j = 0;
         while (j < this->boardSize()) {
-            this->theBoardArray[i][j] = '0';
-            this->theMarkedBoardArray[i][j] = '0';
+            this->theBoardArray[i][j] = GO_EMPTY_STONE;
+            this->theMarkedBoardArray[i][j] = GO_EMPTY_STONE;
             j += 1;
         }
         i += 1;
