@@ -24,6 +24,7 @@ public:
     GoEngineClass* engineObject(void);
     GoBaseClass* baseObject(void);
 
+    void insertGroupToGroupList(GoGroupClass* group_val);
     GoGroupClass* findCandidateGroup(int x_val, int y_val);
 
 private:

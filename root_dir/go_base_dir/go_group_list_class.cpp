@@ -52,6 +52,14 @@ void GoGroupListClass::setListArray (int index_val, GoGroupClass* data_val)
     this->theListArray[index_val] = data_val;
 }
 
+void GoGroupListClass::insertGroupToGroupList (GoGroupClass* group_val)
+{
+    //this.setListArray(this.groupCount(), group_val);
+    //group_val.setIndexNumber(this.groupCount());
+    //this.incrementGroupCount();
+    //group_val.setGroupListObject(this);
+}
+
 GoGroupClass* GoGroupListClass::findCandidateGroup (int x_val, int y_val)
 {
     int i = 0;
