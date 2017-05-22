@@ -32,12 +32,43 @@ GoConfigClass* GoBoardClass::configObject (void) {
     return this->baseObject()->configObject();
 }
 
-int GoBoardClass::boardSize (void) {
+int GoBoardClass::boardSize (void)
+{
     return this->configObject()->boardSize();
-};
+}
+
+char GoBoardClass::boardArray (int x_val, int y_val)
+{
+    return this->theBoardArray[x_val][y_val];
+}
+
+char GoBoardClass::markedBoardArray (int x_val, int y_val)
+{
+    return this->theMarkedBoardArray[x_val][y_val];
+}
+
+void GoBoardClass::setBoardArray (int x_val, int y_val, char data_val)
+{
+    this->theBoardArray[x_val][y_val] = data_val;
+}
+
+void GoBoardClass::setMarkedBoardArray (int x_val, int y_val, char data_val)
+{
+    this->theMarkedBoardArray[x_val][y_val] = data_val;
+}
 
 void GoBoardClass::resetMarkedBoardObjectData (void) {
 
+}
+
+void GoBoardClass::addStoneToBoard (int x_val, int y_val, char color_val)
+{
+//    if (!this.GO().isValidCoordinates(x_val, y_val, this.configObject().boardSize())) {
+//        this.goAbend("addStoneToBoard", "x=" + x_val + " y=" + y_val);
+//        return;
+//    }
+
+    this->setBoardArray(x_val, y_val, color_val);
 }
 
 void GoBoardClass::encodeBoard (char* buf_ptr) {
