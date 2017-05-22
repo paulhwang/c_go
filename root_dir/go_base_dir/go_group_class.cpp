@@ -32,6 +32,29 @@ GoBaseClass* GoGroupClass::baseObject () {
   return this->groupListObject()->baseObject();
 }
 
+int isCandidateGroup (int x_val, int y_val)
+{
+  /*
+        this.debug(false, "isCandidateGroup", "(" + x_val + "," + y_val + ")");
+        var i, j;
+        i = this.minX();
+        while (i <=  this.maxX()) {
+            j = this.minY();
+            while (j <=  this.maxY()) {
+                if (this.existMatrix(i, j)) {
+                    this.debug(false, "isCandidateGroup", "(" + x_val + "," + y_val + ") (" + i + "," + j + ")");
+                    if (this.GO().isNeighborStone(i, j, x_val, y_val)) {
+                        return true;
+                    }
+                }
+                j += 1;
+            }
+            i += 1;
+        }
+        */
+    return false;
+}
+
 void GoGroupClass::logit (char const* str0_val, char const* str1_val) {
   char s[LOGIT_BUF_SIZE];
   sprintf(s, "%s::%s", this->objectName(), str0_val);

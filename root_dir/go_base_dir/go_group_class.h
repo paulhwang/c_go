@@ -1,6 +1,7 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
+  File name" go_group_class.h
 */
 
 #ifndef __GO_GROUP_CLASS_H__
@@ -18,6 +19,7 @@ class GoGroupClass {
     GoGroupListClass* groupListObject();
     GoBaseClass* baseObject();
 
+    int isCandidateGroup(int x_val, int y_val);
     void resetMarkedBoardObjectData();
 
   private:
