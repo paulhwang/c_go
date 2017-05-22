@@ -17,105 +17,105 @@
 #define GO_PROTOCOL_CODE_BOARD_DATA   "Board  "
 
 GoPortClass::GoPortClass (GoBaseClass* base_object_val) {
-  this->theBaseObject = base_object_val;
+    this->theBaseObject = base_object_val;
 
-  if (1) {
-    this->logit("GoPortClass", "init");
-  }
+    if (1) {
+        this->logit("GoPortClass", "init");
+    }
 }
 
 GoPortClass::~GoPortClass (void) {
 }
 
 char const* GoPortClass::objectName (void) {
-  return "GoPortClass";
+    return "GoPortClass";
 }
 
 GoBaseClass* GoPortClass::baseObject (void) {
-  return this->theBaseObject;
+    return this->theBaseObject;
 }
 
 GoBoardClass* GoPortClass::boardObject (void) {
-  return this->baseObject()->boardObject();
+    return this->baseObject()->boardObject();
 }
 
 void GoPortClass::transmitBoardData (void) {
-  char encode_board[400];
-  this->boardObject()->encodeBoard(encode_board);
+    char encode_board[400];
+    this->boardObject()->encodeBoard(encode_board);
 
-  if (1) {
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "encode_board=%s", encode_board);
-    this->logit("transmitBoardData", s);
-  }
+    if (1) {
+        char s[LOGIT_BUF_SIZE];
+        sprintf(s, "encode_board=%s", encode_board);
+        this->logit("transmitBoardData", s);
+    }
 
 }
 
 void GoPortClass::receiveStringData (char const* str_val) {
-  char code[GO_PROTOCOL_CODE_SIZE + 4];
-  char data[32];
+    char code[GO_PROTOCOL_CODE_SIZE + 4];
+    char data[32];
 
-  if (1) {
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "str_val=%s", str_val);
-    this->logit("receiveStringData", s);
-  }
+    if (1) {
+        char s[LOGIT_BUF_SIZE];
+        sprintf(s, "str_val=%s", str_val);
+        this->logit("receiveStringData", s);
+    }
 
-  if (!str_val) {
-    this->abend("receiveStringData", "null input");
-    return;
-  }
+    if (!str_val) {
+        this->abend("receiveStringData", "null input");
+        return;
+    }
 
-  memcpy(code, str_val, GO_PROTOCOL_CODE_SIZE);
-  code[GO_PROTOCOL_CODE_SIZE] = 0;
-  strcpy(data, str_val + GO_PROTOCOL_CODE_SIZE);
-  this->logit("receiveStringData", code);
-  this->logit("receiveStringData", data);
+    memcpy(code, str_val, GO_PROTOCOL_CODE_SIZE);
+    code[GO_PROTOCOL_CODE_SIZE] = 0;
+    strcpy(data, str_val + GO_PROTOCOL_CODE_SIZE);
+    this->logit("receiveStringData", code);
+    this->logit("receiveStringData", data);
 
-  if (!strcmp(code, GO_PROTOCOL_CODE_MOVE_DATA)) {
-    this->aMoveIsPlayed(data);
-    return;
-  }
+    if (!strcmp(code, GO_PROTOCOL_CODE_MOVE_DATA)) {
+        this->aMoveIsPlayed(data);
+        return;
+    }
 
-  if (!strcmp(code, GO_PROTOCOL_CODE_SPECIAL_MOVE)) {
-    this->aSpecialMoveIsPlayed(data);
-    return;
-  }
+    if (!strcmp(code, GO_PROTOCOL_CODE_SPECIAL_MOVE)) {
+        this->aSpecialMoveIsPlayed(data);
+        return;
+    }
 };
 
 void GoPortClass::aMoveIsPlayed (char const* str_val) {
-  if (1) {
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "str_val=%s", str_val);
-    this->logit("aMoveIsPlayed", s);
-  }
+    if (1) {
+        char s[LOGIT_BUF_SIZE];
+        sprintf(s, "str_val=%s", str_val);
+        this->logit("aMoveIsPlayed", s);
+    }
 
-  if (0) {
+    if (0) {
 
-  }
-  else {
-    this->transmitBoardData();
-  }
+    }
+    else {
+      this->transmitBoardData();
+    }
 }
 
 void GoPortClass::aSpecialMoveIsPlayed (char const* str_val) {
-  if (1) {
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "str_val=%s", str_val);
-    this->logit("aSpecialMoveIsPlayed", s);
-  }
+    if (1) {
+        char s[LOGIT_BUF_SIZE];
+        sprintf(s, "str_val=%s", str_val);
+        this->logit("aSpecialMoveIsPlayed", s);
+    }
 
 }
 
 void GoPortClass::logit (char const* str0_val, char const* str1_val) {
-  char s[LOGIT_BUF_SIZE];
-  sprintf(s, "%s::%s", this->objectName(), str0_val);
-  this->baseObject()->goBaseLogit(s, str1_val);
+    char s[LOGIT_BUF_SIZE];
+    sprintf(s, "%s::%s", this->objectName(), str0_val);
+    this->baseObject()->goBaseLogit(s, str1_val);
 }
 
 void GoPortClass::abend (char const* str0_val, char const* str1_val) {
-  char s[LOGIT_BUF_SIZE];
-  sprintf(s, "%s::%s", this->objectName(), str0_val);
-  this->baseObject()->goBaseAbend(s, str1_val);
+    char s[LOGIT_BUF_SIZE];
+    sprintf(s, "%s::%s", this->objectName(), str0_val);
+    this->baseObject()->goBaseAbend(s, str1_val);
 }
 
