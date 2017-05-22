@@ -34,9 +34,15 @@ GoBaseClass* GoGroupClass::baseObject () {
 
 int GoGroupClass::isCandidateGroup (int x_val, int y_val)
 {
+    int i, j;
+
+    if (1) {
+        char s[LOGIT_BUF_SIZE];
+        sprintf(s, "(%i, %i)", x_val, y_val);
+        this->logit("isCandidateGroup", s);
+    }
+
   /*
-        this.debug(false, "isCandidateGroup", "(" + x_val + "," + y_val + ")");
-        var i, j;
         i = this.minX();
         while (i <=  this.maxX()) {
             j = this.minY();

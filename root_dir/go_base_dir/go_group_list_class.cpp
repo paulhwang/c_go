@@ -15,6 +15,7 @@ GoGroupListClass::GoGroupListClass (GoEngineClass* engine_val,
                                     char const* big_stone_val,
                                     char const* small_stone_val) {
   this->theEngineObject = engine_val;
+  this->theGroupCount = 0;
 
   if (1) {
     this->logit("GoGroupListClass", "init");
@@ -56,7 +57,7 @@ GoGroupClass* GoGroupListClass::findCandidateGroup (int x_val, int y_val)
     int i = 0;
     while (i < this->groupCount()) {
         if (this->listArray(i)->isCandidateGroup(x_val, y_val)) {
-        //    return this.listArray(i);
+            return this->listArray(i);
         }
         i += 1;
     }
