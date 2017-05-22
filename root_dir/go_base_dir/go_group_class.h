@@ -29,8 +29,20 @@ class GoGroupClass {
   private:
     GoGroupListClass *theGroupListObject;
     int theIndexNumber;
+    int theMaxX;
+    int theMinX;
+    int theMaxY;
+    int theMinY;
 
     int indexNumber(void);
+    int maxX (void);
+    int minX (void);
+    int maxY (void);
+    int minY (void);
+    void setMaxX(int val);
+    void setMinX(int val);
+    void setMaxY(int val);
+    void setMinY(int val);
 
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);

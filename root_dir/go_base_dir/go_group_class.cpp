@@ -26,6 +26,46 @@ char const* GoGroupClass::objectName (void)
   return "GoGroupClass";
 }
 
+int GoGroupClass::maxX (void)
+{
+    return this->theMaxX;
+}
+
+int GoGroupClass::minX (void)
+{
+    return this->theMinX;
+}
+
+int GoGroupClass::maxY (void)
+{
+    return this->theMaxY;
+}
+
+int GoGroupClass::minY (void)
+{
+    return this->theMinY;
+}
+
+void GoGroupClass::setMaxX (int val)
+{
+    this->theMaxX = val;
+}
+
+void GoGroupClass::setMinX (int val)
+{
+    this->theMinX = val;
+}
+
+void GoGroupClass::setMaxY (int val)
+{
+    this->theMaxY = val;
+}
+
+void GoGroupClass::setMinY (int val)
+{
+    this->theMinY = val;
+}
+
 GoGroupListClass* GoGroupClass::groupListObject (void)
 {
     return this->theGroupListObject;
