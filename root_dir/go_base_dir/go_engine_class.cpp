@@ -53,6 +53,8 @@ void GoEngineClass::enterWar (GoMoveClass* move_val)
     GoGroupClass* group = this->insertStoneToGroupList(move_val);
     //this->boardObject()->addStoneToBoard(move_val->xX(), move_val->yY(), move_val->myColor());
     int dead_count = this->killOtherColorGroups(move_val, group);
+
+     this->abendEngine();
 }
 
 GoGroupClass* GoEngineClass::insertStoneToGroupList (GoMoveClass* move_val)
@@ -103,6 +105,10 @@ void GoEngineClass::resetEngineObjectData (void)
 
     this->theBlackCaptureStones = 0;
     this->theWhiteCaptureStones = 0;
+}
+
+void GoEngineClass::abendEngine (void)
+{
 }
 
 void GoEngineClass::logit (char const* str0_val, char const* str1_val)

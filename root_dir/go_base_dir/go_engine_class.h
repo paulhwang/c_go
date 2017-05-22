@@ -1,6 +1,7 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
+  File name: go_engine_class.h
 */
 
 #ifndef __GO_ENGINE_CLASS_H__
@@ -41,6 +42,7 @@ class GoEngineClass {
     int killOtherColorGroup(GoGroupClass* group, int x_val, int y_val);
     void resetMarkedGroupLists(void);
     void resetEmptyGroupLists(void);
+    void abendEngine(void);
 
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
