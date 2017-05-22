@@ -25,7 +25,7 @@ GoMoveClass::GoMoveClass (GoBaseClass* base_object_val,
         this->moveObjectDecode(str_val);
     }
 
-    if (1) {
+    if (0) {
         char s[LOGIT_BUF_SIZE];
         sprintf(s, "new move created: (%i, %i, %i, %i)", this->xX(), this->yY(), this->myColor(), this->turnIndex());
         this->logit("init", s);
@@ -78,7 +78,7 @@ void GoMoveClass::moveObjectDecode (char const* str_val)
     this->theX += (*str_val++ - '0');
     this->theY = (*str_val++ - '0') * 10;
     this->theY += (*str_val++ - '0');
-    this->theMyColor = (*str_val++ - '0');
+    this->theMyColor = *str_val++;
     this->theTurnIndex = (*str_val++ - '0') * 100;
     this->theTurnIndex += (*str_val++ - '0') * 10;
     this->theTurnIndex += (*str_val - '0');
