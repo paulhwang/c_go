@@ -33,6 +33,8 @@ private:
     GoGroupClass* theListArray[400];
 
     int groupCount(void);
+    void incrementGroupCount(void);
+    void decrementGroupCount(void);
     GoGroupClass* listArray(int index_val);
     void setListArray(int index_val, GoGroupClass* data_val);
 

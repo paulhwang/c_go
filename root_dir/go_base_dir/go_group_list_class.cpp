@@ -42,6 +42,16 @@ int GoGroupListClass::groupCount (void)
     return this->theGroupCount;
 }
 
+void GoGroupListClass::incrementGroupCount (void)
+{
+    this->theGroupCount += 1;
+}
+
+void GoGroupListClass::decrementGroupCount (void)
+{
+    this->theGroupCount -= 1;
+}
+
 GoGroupClass* GoGroupListClass::listArray (int index_val)
 {
     return this->theListArray[index_val];
@@ -56,7 +66,7 @@ void GoGroupListClass::insertGroupToGroupList (GoGroupClass* group_val)
 {
     this->setListArray(this->groupCount(), group_val);
     group_val->setIndexNumber(this->groupCount());
-    //this->incrementGroupCount();
+    this->incrementGroupCount();
     //group_val->setGroupListObject(this);
 }
 
