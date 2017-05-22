@@ -10,26 +10,40 @@
 #include "go_group_class.h"
 
 GoGroupClass::GoGroupClass (GoGroupListClass* group_list_object_var) {
-  this->theGroupListObject = group_list_object_var;
+    this->theGroupListObject = group_list_object_var;
 
-  if (1) {
-    this->logit("GoGroupClass", "init");
-  }
+    if (1) {
+        this->logit("GoGroupClass", "init");
+   }
 }
 
-GoGroupClass::~GoGroupClass () {
+GoGroupClass::~GoGroupClass (void)
+{
 }
 
-char const* GoGroupClass::objectName () {
+char const* GoGroupClass::objectName (void)
+{
   return "GoGroupClass";
 }
 
-GoGroupListClass* GoGroupClass::groupListObject () {
-  return this->theGroupListObject;
+GoGroupListClass* GoGroupClass::groupListObject (void)
+{
+    return this->theGroupListObject;
 }
 
-GoBaseClass* GoGroupClass::baseObject () {
-  return this->groupListObject()->baseObject();
+GoBaseClass* GoGroupClass::baseObject (void)
+{
+    return this->groupListObject()->baseObject();
+}
+
+int GoGroupClass::indexNumber (void)
+{
+    return this->theIndexNumber;
+}
+
+void GoGroupClass::setIndexNumber (int val)
+{
+    this->theIndexNumber = val;
 }
 
 void GoGroupClass::insertStoneToGroup (int x_val, int y_val, int dead_val)

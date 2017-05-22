@@ -19,12 +19,16 @@ class GoGroupClass {
     GoGroupListClass* groupListObject();
     GoBaseClass* baseObject();
 
+    void setIndexNumber(int val);
     void insertStoneToGroup(int x_val, int y_val, int dead_val);
     int isCandidateGroup(int x_val, int y_val);
     void resetMarkedBoardObjectData();
 
   private:
     GoGroupListClass *theGroupListObject;
+    int theIndexNumber;
+
+    int indexNumber(void);
 
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
