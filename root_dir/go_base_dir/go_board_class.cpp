@@ -63,10 +63,10 @@ void GoBoardClass::resetMarkedBoardObjectData (void) {
 
 void GoBoardClass::addStoneToBoard (int x_val, int y_val, char color_val)
 {
-//    if (!this.GO().isValidCoordinates(x_val, y_val, this.configObject().boardSize())) {
-//        this.goAbend("addStoneToBoard", "x=" + x_val + " y=" + y_val);
-//        return;
-//    }
+    if (!this->configObject()->isValidCoordinates(x_val, y_val)) {
+        this->abend("addStoneToBoard", "bad coordinate");
+        return;
+    }
 
     this->setBoardArray(x_val, y_val, color_val);
 }
