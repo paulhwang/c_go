@@ -16,12 +16,12 @@ class GoMoveClass;
 class GoEngineClass {
   public:
     GoEngineClass(GoBaseClass* base_object_val);
-    ~GoEngineClass();
+    ~GoEngineClass(void);
 
-    char const* objectName();
-    void resetEngineObjectData();
-    GoBaseClass* baseObject();
-    GoBoardClass* boardObject();
+    char const* objectName(void);
+    void resetEngineObjectData(void);
+    GoBaseClass* baseObject(void);
+    GoBoardClass* boardObject(void);
 
     void enterWar(GoMoveClass* move_val);
 
@@ -34,11 +34,13 @@ class GoEngineClass {
     char* theCaptureCount;
     char* theLastDeadStone;
 
+    void clearLastDeadStone(void);
+
     GoGroupClass* insertStoneToGroupList(GoMoveClass* move_val);
     int killOtherColorGroups(GoMoveClass* move_val, GoGroupClass* group_val);
     int killOtherColorGroup(GoGroupClass* group, int x_val, int y_val);
-    void resetMarkedGroupLists();
-    void resetEmptyGroupLists();
+    void resetMarkedGroupLists(void);
+    void resetEmptyGroupLists(void);
 
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
