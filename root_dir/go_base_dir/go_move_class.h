@@ -17,6 +17,11 @@ public:
     char const* objectName(void);
     GoBaseClass* baseObject(void);
 
+    int xX(void);
+    int yY(void);
+    char myColor(void);
+    int turnIndex(void);
+
 private:
     GoBaseClass *theBaseObject;
 
@@ -24,11 +29,6 @@ private:
     int theY;
     char theMyColor;
     int theTurnIndex;
-
-    int xX(void);
-    int yY(void);
-    char myColor(void);
-    int turnIndex(void);
 
     void moveObjectDecode(char const* str_val);
 

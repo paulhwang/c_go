@@ -39,6 +39,10 @@ GoBoardClass* GoPortClass::boardObject (void) {
     return this->baseObject()->boardObject();
 }
 
+GoGameClass* GoPortClass::gameObject (void) {
+    return this->baseObject()->gameObject();
+}
+
 void GoPortClass::transmitBoardData (void) {
     char encode_board[400];
     this->boardObject()->encodeBoard(encode_board);
@@ -95,6 +99,12 @@ void GoPortClass::aMoveIsPlayed (char const* str_val) {
     }
     else {
       GoMoveClass* move = new GoMoveClass(this->baseObject(), str_val, 0, 0, 0, 0);
+      if (move->turnIndex() != this->gameObject()->totalMoves() + 1) {
+          this->logit("aMoveIsPlayed", "duplicated move received *****************");
+      }
+      else {
+          //this->gameObject()->addNewMoveAndFight(move);
+      }
       this->transmitBoardData();
     }
 }

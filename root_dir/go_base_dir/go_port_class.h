@@ -6,6 +6,7 @@
 #ifndef __GO_PORT_CLASS_H__
 #define __GO_PORT_CLASS_H__
 
+class GoGameClass;
 #include "go_base_class.h"
 
 class GoPortClass {
@@ -16,6 +17,7 @@ class GoPortClass {
     char const* objectName(void);
     GoBaseClass* baseObject(void);
     GoBoardClass* boardObject(void);
+    GoGameClass* gameObject(void);
 
     void receiveStringData (char const* str_val);
 

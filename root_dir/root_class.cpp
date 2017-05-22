@@ -15,8 +15,6 @@ RootClass::RootClass () {
   this->theGoBaseObject = new GoBaseClass(this);
   this->theTransportObject = new TransportClass(this);
 
-  this->baseMgrObject()->receiveData(1000, "MOVE   10303001");
-
   if (1) {
   	this->logit("RootClass", "init");
   }
