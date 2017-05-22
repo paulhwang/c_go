@@ -9,13 +9,14 @@
 #include "go_base_class.h"
 #include "go_engine_class.h"
 
-GoEngineClass::GoEngineClass (GoBaseClass* base_object_val) {
-  this->theBaseObject = base_object_val;
-  this->resetEngineObjectData();
+GoEngineClass::GoEngineClass (GoBaseClass* base_object_val)
+{
+    this->theBaseObject = base_object_val;
+    this->resetEngineObjectData();
 
-  if (1) {
-    this->logit("GoEngineClass", "init");
-  }
+    if (1) {
+        this->logit("GoEngineClass", "init");
+    }
 }
 
 GoEngineClass::~GoEngineClass (void)
@@ -90,7 +91,7 @@ void GoEngineClass::enterWar (GoMoveClass* move_val)
         return;
     }
 
-    //this->boardObject()->addStoneToBoard(move_val->xX(), move_val->yY(), move_val->myColor());
+    this->boardObject()->addStoneToBoard(move_val->xX(), move_val->yY(), move_val->myColor());
     int dead_count = this->killOtherColorGroups(move_val, group);
 
      this->abendEngine();
