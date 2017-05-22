@@ -32,6 +32,40 @@ GoBaseClass* GoGroupClass::baseObject () {
   return this->groupListObject()->baseObject();
 }
 
+void GoGroupClass::insertStoneToGroup (int x_val, int y_val, int dead_val)
+{
+  /*
+        this.debug(false, "insertStoneToGroup", "(" + x_val + "," + y_val + "," + this.myColor() + ")");
+        if (this.existMatrix(x_val, y_val)) {
+            this.abend("insertStoneToGroup", "stone (" + x_val + "," + y_val + "," + this.myColor() + ") already exists in group");
+        }
+
+        if (this.stoneCount() == 0) {
+            this.setMaxX(x_val);
+            this.setMinX(x_val);
+            this.setMaxY(y_val);
+            this.setMinY(y_val);
+        } else {
+            if (x_val > this.maxX()) {
+                this.setMaxX(x_val);
+            }
+            if (x_val < this.minX()) {
+                this.setMinX(x_val);
+            }
+            if (y_val > this.maxY()) {
+                this.setMaxY(y_val);
+            }
+            if (y_val < this.minY()) {
+                this.setMinY(y_val);
+            }
+        }
+
+        this.incrementStoneCount();
+        this.setExistMatrix(x_val, y_val, true);
+        this.setDeadMatrix(x_val, y_val, dead_val);
+        */
+}
+
 int GoGroupClass::isCandidateGroup (int x_val, int y_val)
 {
     int i, j;

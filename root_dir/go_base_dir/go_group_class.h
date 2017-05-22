@@ -19,6 +19,7 @@ class GoGroupClass {
     GoGroupListClass* groupListObject();
     GoBaseClass* baseObject();
 
+    void insertStoneToGroup(int x_val, int y_val, int dead_val);
     int isCandidateGroup(int x_val, int y_val);
     void resetMarkedBoardObjectData();
 
