@@ -16,9 +16,8 @@ GoBaseClass::GoBaseClass (RootClass* root_object_val) {
   this->theEngineObject = new GoEngineClass(this);
   this->thePortObject = new GoPortClass(this);
   this->theGameObject = new GoGameClass(this);
-  GoMoveClass* m = new GoMoveClass(this);
 
-  this->portObject()->receiveStringData("Move   10303001");
+  this->portObject()->receiveStringData("Move   03031001");
 
   if (1) {
     this->logit("GoBaseClass", "init");

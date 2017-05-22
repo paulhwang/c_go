@@ -27,17 +27,8 @@ GoMoveClass::GoMoveClass (GoBaseClass* base_object_val,
 
     if (1) {
         char s[LOGIT_BUF_SIZE];
-        sprintf(s, "new move created: (%i, %s, %i, %i)", this->xX(), this->yY(), this->myColor(), this->turnIndex());
+        sprintf(s, "new move created: (%i, %i, %i, %i)", this->xX(), this->yY(), this->myColor(), this->turnIndex());
         this->logit("init", s);
-    }
-}
-
-GoMoveClass::GoMoveClass (GoBaseClass* base_object_val)
-{
-    this->theBaseObject = base_object_val;
-
-    if (1) {
-      this->logit("init", "");
     }
 }
 
@@ -57,27 +48,40 @@ GoBaseClass* GoMoveClass::baseObject (void)
 
 int GoMoveClass::xX (void)
 {
-
+    return this->theX;
 }
 
 int GoMoveClass::yY (void)
 {
-
+    return this->theY;
 }
 
 char GoMoveClass::myColor (void)
 {
-
+    return this->theMyColor;
 }
 
 int GoMoveClass::turnIndex (void)
 {
-
+    return this->theTurnIndex;
 }
 
 void GoMoveClass::moveObjectDecode (char const* str_val)
 {
+    if (1) {
+        char s[LOGIT_BUF_SIZE];
+        sprintf(s, "input=%s", str_val);
+        this->logit("init", s);
+    }
 
+    this->theX = (*str_val++ - '0') * 10;
+    this->theX += (*str_val++ - '0');
+    this->theY = (*str_val++ - '0') * 10;
+    this->theY += (*str_val++ - '0');
+    this->theMyColor = (*str_val++ - '0');
+    this->theTurnIndex = (*str_val++ - '0') * 100;
+    this->theTurnIndex += (*str_val++ - '0') * 10;
+    this->theTurnIndex += (*str_val - '0');
 }
 
 void GoMoveClass::logit (char const* str0_val,
@@ -95,6 +99,3 @@ void GoMoveClass::abend (char const* str0_val,
     sprintf(s, "%s::%s", this->objectName(), str0_val);
     this->baseObject()->goBaseAbend(s, str1_val);
 }
-
-
-

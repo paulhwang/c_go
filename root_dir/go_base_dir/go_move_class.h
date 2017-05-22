@@ -12,7 +12,6 @@
 class GoMoveClass {
 public:
     GoMoveClass(GoBaseClass* base_object_val, char const* str_val, int x_val, int y_val, char color_val, int turn_val);
-    GoMoveClass(GoBaseClass* base_object_val);
     ~GoMoveClass(void);
 
     char const* objectName(void);
