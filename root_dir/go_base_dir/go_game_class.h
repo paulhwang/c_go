@@ -26,8 +26,26 @@ private:
     GoBaseClass *theBaseObject;
     int theTotalMoves;
     int theMaxMove;
+    char theNextColor;
+    int thePassReceived;
+    int theGameIsOver;
 
+    int maxMove (void);
+    void setMaxMove(int max_move_val);
+    void setTotalMoves(int total_moves_val);
+    void incrementTotalMoves(void);
+    void decrementTotalMoves(void);
+    char nextColor(void);
+    void setNextColor(char next_color_val);
+    char getOppositeColor(char color_val);
+    int passReceived(void);
+    void setPassReceived(void);
+    void clearPassReceived(void);
     int gameIsOver(void);
+    void setGameIsOver(void);
+    void clearGameIsOver(void);
+
+    void insertMoveToMoveList(GoMoveClass* move_val);
     void resetGameObjectData(void);
     void resetGameObjectPartialData(void);
 

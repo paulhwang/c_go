@@ -73,13 +73,15 @@ void GoBoardClass::resetBoardObjectData (void) {
     }
 }
 
-void GoBoardClass::logit (char const* str0_val, char const* str1_val) {
+void GoBoardClass::logit (char const* str0_val, char const* str1_val)
+{
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", this->objectName(), str0_val);
     this->baseObject()->goBaseLogit(s, str1_val);
 }
 
-void GoBoardClass::abend (char const* str0_val, char const* str1_val) {
+void GoBoardClass::abend (char const* str0_val, char const* str1_val)
+{
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", this->objectName(), str0_val);
     this->baseObject()->goBaseAbend(s, str1_val);

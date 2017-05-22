@@ -32,9 +32,84 @@ GoBaseClass* GoGameClass::baseObject (void)
     return this->theBaseObject;
 }
 
+int GoGameClass::maxMove (void)
+{
+    return this->theMaxMove;
+}
+
+void GoGameClass::setMaxMove (int max_move_val)
+{
+    this->theMaxMove = max_move_val;
+}
+
 int GoGameClass::totalMoves (void)
 {
     return this->theTotalMoves;
+}
+
+void GoGameClass::setTotalMoves (int total_moves_val)
+{
+    this->theTotalMoves = total_moves_val;
+}
+
+void GoGameClass::incrementTotalMoves (void)
+{
+    this->theTotalMoves += 1;
+}
+
+void GoGameClass::decrementTotalMoves (void)
+{
+    this->theTotalMoves -= 1;
+}
+
+char GoGameClass::nextColor (void)
+{
+    return this->theNextColor;
+}
+
+void GoGameClass::setNextColor (char next_color_val)
+{
+    this->theNextColor = next_color_val;
+}
+
+int GoGameClass::passReceived (void) {
+    return this->thePassReceived;
+}
+
+void GoGameClass::setPassReceived (void) {
+    this->thePassReceived = true;
+}
+
+void GoGameClass::clearPassReceived (void) {
+    this->thePassReceived = false;
+}
+
+int GoGameClass::gameIsOver (void)
+{
+    return this->theGameIsOver;
+}
+
+void GoGameClass::setGameIsOver (void) {
+    this->theGameIsOver = true;
+}
+
+void GoGameClass::clearGameIsOver (void) {
+    this->theGameIsOver = false;
+}
+
+char GoGameClass::getOppositeColor (char color_val)
+{
+    switch (color_val) {
+        case GO_BLACK_STONE:
+            return GO_WHITE_STONE;
+
+        case GO_WHITE_STONE:
+            return GO_BLACK_STONE;
+
+        default:
+            this->abend("getOppositeColor", "color=" + color_val);
+            return GO_EMPTY_STONE;
+    }
 }
 
 void GoGameClass::addNewMoveAndFight (GoMoveClass *move_val)
@@ -50,15 +125,17 @@ void GoGameClass::addNewMoveAndFight (GoMoveClass *move_val)
         return;
     }
 
-    //this->clearPassReceived();
-    //this->insertMoveToMoveList(move_val);
+    this->clearPassReceived();
+    this->insertMoveToMoveList(move_val);
     //this->engineObject().enterWar(move_val);
-    //this->setNextColor(this.GO().getOppositeColor(move_val.myColor()));
+    this->setNextColor(this->getOppositeColor(move_val->myColor()));
 }
 
-int GoGameClass::gameIsOver (void)
+void GoGameClass::insertMoveToMoveList (GoMoveClass* move_val)
 {
-    return 1;
+    //this->setMovesArray(this->totalMoves(), move_val);
+    this->incrementTotalMoves();
+    this->setMaxMove(this->totalMoves());
 }
 
 void GoGameClass::resetGameObjectData (void)
@@ -71,9 +148,9 @@ void GoGameClass::resetGameObjectData (void)
 
 void GoGameClass::resetGameObjectPartialData (void)
 {
-    //this.theNextColor = this.GO().BLACK_STONE();
-    //this.thePassReceived = false;
-    //this.theGameIsOver = false;
+    this->theNextColor = GO_BLACK_STONE;
+    this->thePassReceived = false;
+    this->theGameIsOver = false;
 }
 
 void GoGameClass::logit (char const* str0_val, char const* str1_val)
