@@ -17,6 +17,7 @@ class GoGroupClass {
 
     char const* objectName();
     GoGroupListClass* groupListObject();
+    void setGroupListObject(GoGroupListClass* group_list_val);
     GoBaseClass* baseObject();
 
     void setIndexNumber(int val);

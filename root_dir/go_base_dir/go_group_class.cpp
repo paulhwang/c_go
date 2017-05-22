@@ -31,6 +31,11 @@ GoGroupListClass* GoGroupClass::groupListObject (void)
     return this->theGroupListObject;
 }
 
+void GoGroupClass::setGroupListObject (GoGroupListClass* group_list_val)
+{
+    this->theGroupListObject = group_list_val;
+}
+
 GoBaseClass* GoGroupClass::baseObject (void)
 {
     return this->groupListObject()->baseObject();
