@@ -111,6 +111,9 @@ GoGroupClass* GoEngineClass::insertStoneToGroupList (GoMoveClass* move_val)
         this->abend("insertStoneToGroupList", s);
         return 0;
     }
+
+    GoGroupClass* group = g_list->findCandidateGroup(move_val->xX(), move_val->yY());
+
 }
 
 int GoEngineClass::killOtherColorGroups(GoMoveClass* move_val, GoGroupClass* group_val)

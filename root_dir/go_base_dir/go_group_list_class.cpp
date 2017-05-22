@@ -36,6 +36,18 @@ GoBaseClass* GoGroupListClass::baseObject () {
   return this->engineObject()->baseObject();
 }
 
+GoGroupClass* GoGroupListClass::findCandidateGroup (int x_val, int y_val)
+{
+    int i = 0;
+    //while (i < this->groupCount()) {
+        //if (this->listArray(i)->isCandidateGroup(x_val, y_val)) {
+        //    return this.listArray(i);
+        //}
+        i += 1;
+    //}
+    return 0;
+}
+
 void GoGroupListClass::logit (char const* str0_val, char const* str1_val) {
   char s[LOGIT_BUF_SIZE];
   sprintf(s, "%s::%s", this->objectName(), str0_val);
