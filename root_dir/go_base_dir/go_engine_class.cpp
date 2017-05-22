@@ -33,6 +33,39 @@ GoBoardClass* GoEngineClass::boardObject () {
   return this->baseObject()->boardObject();
 }
 
+void GoEngineClass::enterWar (GoMoveClass* move_val)
+{
+    if (1) {
+        char s[LOGIT_BUF_SIZE];
+        sprintf(s, "move_val: (%i, %i, %i, %i)", move_val->xX(), move_val->yY(), move_val->myColor(), move_val->turnIndex());
+        this->logit("enterWar", s);
+    }
+
+    GoGroupClass* group = this->insertStoneToGroupList(move_val);
+    //this->boardObject()->addStoneToBoard(move_val->xX(), move_val->yY(), move_val->myColor());
+    //var dead_count = this->killOtherColorGroups(move_val, group);
+}
+
+GoGroupClass* GoEngineClass::insertStoneToGroupList (GoMoveClass* move_val)
+{
+}
+
+int GoEngineClass::killOtherColorGroups(GoMoveClass* move_val, GoGroupClass* group_val)
+{
+    int count;
+    //this->clearLastDeadStone();
+    count = this->killOtherColorGroup(group_val, move_val->xX() - 1, move_val->yY());
+    count += this->killOtherColorGroup(group_val, move_val->xX() + 1, move_val->yY());
+    count += this->killOtherColorGroup(group_val, move_val->xX(), move_val->yY() - 1);
+    count += this->killOtherColorGroup(group_val, move_val->xX(), move_val->yY() + 1);
+    return count;
+}
+
+int GoEngineClass::killOtherColorGroup(GoGroupClass* group, int x_val, int y_val)
+{
+    return 0;
+}
+
 void GoEngineClass::resetMarkedGroupLists () {
   this->theGroupListArray[3] = new GoGroupListClass(this, 3, GO_BLACK_STONE, true, "black", "gray");
   this->theGroupListArray[4] = new GoGroupListClass(this, 4, GO_WHITE_STONE, true, "white", "gray");
