@@ -6,6 +6,7 @@
 
 #include <stdio.h>
 #include "utils_dir/logit.h"
+#include "root_dir/base_mgr_dir/base_mgr_class.h"
 #include "engine_class.h"
 #include "root_dir/root_class.h"
 #include "utils_dir/transport_class.h"
@@ -39,9 +40,11 @@ void EngineClass::setTransportObject (TransportClass* val)
     this->theTransportObject = val;
 }
 
-void* createGoRoot (void* ptr_val)
+void* createGoRoot (void* this_val)
 {
+    EngineClass* engine_object = (EngineClass *)this_val;
     printf("***************createGoRoot starts\n");
+    engine_object->theGoBaseMgrObject = new BaseMgrClass(engine_object->rootObject());
 }
 
 void* createTransport (void* this_val)

@@ -7,9 +7,10 @@
 #ifndef __ENGINE_CLASS_H__
 #define __ENGINE_CLASS_H__
 
+#include <pthread.h>
 class RootClass;
 class TransportClass;
-#include <pthread.h>
+class BaseMgrClass;
 
 class EngineClass {
   public:
@@ -24,6 +25,7 @@ class EngineClass {
     void setTransportObject(TransportClass* val);
     TransportClass* theTransportObject;
     RootClass* theRootObject;
+    BaseMgrClass *theGoBaseMgrObject;
 
   private:
 
