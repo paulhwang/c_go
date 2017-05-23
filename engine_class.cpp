@@ -34,25 +34,20 @@ void* createTransport (void* ptr_val) {
 
 void EngineClass::startEngine (void)
 {
-
-    pthread_t  go_thread, transport_thread;
-    int r;
-
-    r = pthread_create(&go_thread, NULL, createGoRoot, 0);
+    int r = pthread_create(&this->theGoThread, NULL, createGoRoot, 0);
     if (r) {
         printf("Error - pthread_create() return code: %d\n", r);
         return;
     }
 
-    r = pthread_create(&transport_thread, NULL, createTransport, 0);
+    r = pthread_create(&this->theTransportThread, NULL, createTransport, 0);
     if (r) {
         printf("Error - pthread_create() return code: %d\n", r);
         return;
     }
 
-    pthread_join(go_thread, NULL);
-    pthread_join(transport_thread, NULL);
-
+    pthread_join(this->goThread(), NULL);
+    pthread_join(this->transportThread(), NULL);
 }
 
 pthread_t EngineClass::goThread (void)
