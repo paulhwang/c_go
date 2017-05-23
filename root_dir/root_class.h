@@ -15,13 +15,14 @@ class TransportClass;
 
 class RootClass {
   public:
-    RootClass();
-    ~RootClass();
+    RootClass(void);
+    ~RootClass(void);
 
-    char const* objectName();
-    BaseMgrClass* baseMgrObject();
-    GoBaseClass* goBaseObject();
-    TransportClass* transportObject();
+    char const* objectName(void);
+    BaseMgrClass* baseMgrObject(void);
+    GoBaseClass* goBaseObject(void);
+    TransportClass* transportObject(void);
+    void startEngine(void);
 
   private:
     BaseMgrClass* theBaseMgrObject;
