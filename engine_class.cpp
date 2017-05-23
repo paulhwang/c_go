@@ -40,11 +40,16 @@ void EngineClass::setTransportObject (TransportClass* val)
     this->theTransportObject = val;
 }
 
+void EngineClass::setBaseMgrObject (BaseMgrClass* val)
+{
+    this->theGoBaseMgrObject = val;
+}
+
 void* createGoRoot (void* this_val)
 {
     EngineClass* engine_object = (EngineClass *)this_val;
     printf("***************createGoRoot starts\n");
-    engine_object->theGoBaseMgrObject = new BaseMgrClass(engine_object->rootObject());
+    engine_object->setBaseMgrObject(new BaseMgrClass(engine_object->rootObject()));
 }
 
 void* createTransport (void* this_val)
