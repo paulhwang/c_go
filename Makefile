@@ -6,7 +6,7 @@ include Makefile.inc
 DIRS	= utils_dir root_dir
 
 SERVER = server
-SERVER_OBJS	= go_server.o
+SERVER_OBJS	= go_server.o engine_class.o
 
 CLIENT = client
 CLIENT_OBJS	= go_client.o
@@ -17,10 +17,10 @@ GO_ROOT_OBJLIBS	= lib_root.a lib_go_base.a lib_base_mgr.a
 all:	$(SERVER) $(CLIENT)
 
 $(SERVER): $(SERVER_OBJS) $(UTILS_OBJLIBS) $(GO_ROOT_OBJLIBS)
-	$(CC) -o $(SERVER) $(SERVER_OBJS) $(UTILS_OBJLIBS) $(GO_ROOT_OBJLIBS) -lstdc++
+	$(CC) -o $(SERVER) $(SERVER_OBJS) $(UTILS_OBJLIBS) $(GO_ROOT_OBJLIBS) -lstdc++ -pthread
 
 $(CLIENT): $(CLIENT_OBJS) $(UTILS_OBJLIBS) $(GO_ROOT_OBJLIBS)
-	$(CC) -o $(CLIENT) $(CLIENT_OBJS) $(UTILS_OBJLIBS) $(GO_ROOT_OBJLIBS) -lstdc++
+	$(CC) -o $(CLIENT) $(CLIENT_OBJS) $(UTILS_OBJLIBS) $(GO_ROOT_OBJLIBS) -lstdc++ -pthread
 
 lib_utils.a:	force_look
 	$(ECHO) looking into utils_dir : $(MAKE) $(MFLAGS)
