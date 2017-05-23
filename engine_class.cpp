@@ -11,6 +11,16 @@
 #include "root_dir/root_class.h"
 #include "utils_dir/transport_class.h"
 
+void* createGoBaseMgrFunction (void* this_val)
+{
+    ((EngineClass *)this_val)->createGoBaseMgrObject();
+}
+
+void* createTransportFunction (void* this_val)
+{
+    ((EngineClass *)this_val)->createTransportObject();
+}
+
 EngineClass::EngineClass(void)
 {
 
@@ -50,21 +60,19 @@ void EngineClass::setGoBaseMgrObject (BaseMgrClass* val)
     this->theGoBaseMgrObject = val;
 }
 
-void* createGoRootFunction (void* this_val)
+void EngineClass::createGoBaseMgrObject (void)
 {
-    EngineClass* engine_object = (EngineClass *)this_val;
-    printf("***************createGoRoot starts\n");
-    engine_object->setGoBaseMgrObject(new BaseMgrClass(engine_object->rootObject()));
-    engine_object->goBaseMgrObject()->createGoBase();
+    printf("******===*********createGoRoot starts\n");
+    this->setGoBaseMgrObject(new BaseMgrClass(this->rootObject()));
+    this->goBaseMgrObject()->createGoBase();
+
 }
 
-void* createTransportFunction (void* this_val)
+void EngineClass::createTransportObject (void)
 {
-    EngineClass* engine_object = (EngineClass *)this_val;
-
     printf("***************createTransport starts\n");
-    engine_object->setTransportObject(new TransportClass(engine_object->rootObject()));
-    engine_object->transportObject()->startServer(8001);
+    this->setTransportObject(new TransportClass(this->rootObject()));
+    this->transportObject()->startServer(8001);
 }
 
 void EngineClass::startEngine (void)
@@ -72,7 +80,7 @@ void EngineClass::startEngine (void)
     this->theRootObject = new RootClass();
 
     this->logit("startEngine", "create theGoThread");
-    int r = pthread_create(&this->theGoThread, NULL, createGoRootFunction, this);
+    int r = pthread_create(&this->theGoThread, NULL, createGoBaseMgrFunction, this);
     if (r) {
         printf("Error - pthread_create() return code: %d\n", r);
         return;
@@ -108,5 +116,4 @@ void EngineClass::abend (char const* str0_val, char const* str1_val)
 {
     ABEND(str0_val, str1_val);
 }
-
 

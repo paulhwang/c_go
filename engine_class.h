@@ -26,6 +26,7 @@ class EngineClass {
     void setGoBaseMgrObject(BaseMgrClass* val);
 
     void createGoBaseMgrObject(void);
+    void createTransportObject(void);
 
     RootClass* rootObject();
     RootClass* theRootObject;
