@@ -18,8 +18,11 @@ class EngineClass {
     void startEngine(void);
 
   private:
-    pthread_t  theGoThread;
-    pthread_t  theTransportThread;
+    pthread_t theGoThread;
+    pthread_t theTransportThread;
+
+    pthread_t goThread(void);
+    pthread_t transportThread(void);
 
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);

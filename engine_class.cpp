@@ -24,6 +24,15 @@ void EngineClass::startEngine (void)
 {
 
 }
+pthread_t EngineClass::goThread (void)
+{
+    return this->theGoThread;
+}
+
+pthread_t EngineClass::transportThread (void)
+{
+    return this->theTransportThread;
+}
 
 void logit(char const* str0_val, char const* str1_val)
 {
