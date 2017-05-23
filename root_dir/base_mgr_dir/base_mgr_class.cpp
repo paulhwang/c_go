@@ -10,6 +10,7 @@
 #include "../root_class.h"
 #include "base_class.h"
 #include "base_mgr_class.h"
+#include "../go_base_dir/go_base_class.h"
 
 BaseMgrClass::BaseMgrClass (RootClass* root_object_val) {
   this->theRootObject = root_object_val;
@@ -30,8 +31,23 @@ RootClass* BaseMgrClass::rootObject () {
   return this->theRootObject;
 }
 
+GoBaseClass* BaseMgrClass::goBaseObject(void)
+{
+  return this->theGoBaseObject;
+}
+
 BaseClass* BaseMgrClass::getBase (int base_id_val) {
   return 0;
+}
+
+void BaseMgrClass::createBase (char const* base_name_val)
+{
+
+}
+
+void BaseMgrClass::createGoBase (void)
+{
+    this->theGoBaseObject = new GoBaseClass(this->rootObject());
 }
 
 void BaseMgrClass::receiveData (int base_id_val, char* data_val) {

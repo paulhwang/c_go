@@ -22,7 +22,10 @@ class EngineClass {
 
     TransportClass* transportObject(void);
     void setTransportObject(TransportClass* val);
-    void setBaseMgrObject(BaseMgrClass* val);
+    BaseMgrClass* goBaseMgrObject(void);
+    void setGoBaseMgrObject(BaseMgrClass* val);
+
+    void createGoBaseMgrObject(void);
 
     RootClass* rootObject();
     RootClass* theRootObject;

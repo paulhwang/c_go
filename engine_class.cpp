@@ -35,24 +35,30 @@ TransportClass* EngineClass::transportObject (void)
     return this->theTransportObject;
 }
 
+BaseMgrClass* EngineClass::goBaseMgrObject (void)
+{
+    return this->theGoBaseMgrObject;
+}
+
 void EngineClass::setTransportObject (TransportClass* val)
 {
     this->theTransportObject = val;
 }
 
-void EngineClass::setBaseMgrObject (BaseMgrClass* val)
+void EngineClass::setGoBaseMgrObject (BaseMgrClass* val)
 {
     this->theGoBaseMgrObject = val;
 }
 
-void* createGoRoot (void* this_val)
+void* createGoRootFunction (void* this_val)
 {
     EngineClass* engine_object = (EngineClass *)this_val;
     printf("***************createGoRoot starts\n");
-    engine_object->setBaseMgrObject(new BaseMgrClass(engine_object->rootObject()));
+    engine_object->setGoBaseMgrObject(new BaseMgrClass(engine_object->rootObject()));
+    engine_object->goBaseMgrObject()->createGoBase();
 }
 
-void* createTransport (void* this_val)
+void* createTransportFunction (void* this_val)
 {
     EngineClass* engine_object = (EngineClass *)this_val;
 
@@ -66,14 +72,14 @@ void EngineClass::startEngine (void)
     this->theRootObject = new RootClass();
 
     this->logit("startEngine", "create theGoThread");
-    int r = pthread_create(&this->theGoThread, NULL, createGoRoot, this);
+    int r = pthread_create(&this->theGoThread, NULL, createGoRootFunction, this);
     if (r) {
         printf("Error - pthread_create() return code: %d\n", r);
         return;
     }
 
     this->logit("startEngine", "create theTransportThread");
-    r = pthread_create(&this->theTransportThread, NULL, createTransport, this);
+    r = pthread_create(&this->theTransportThread, NULL, createTransportFunction, this);
     if (r) {
         printf("Error - pthread_create() return code: %d\n", r);
         return;

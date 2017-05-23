@@ -7,6 +7,7 @@
 #ifndef __GO_BOARD_CLASS_H__
 #define __GO_BOARD_CLASS_H__
 
+class GoBaseClass;
 class GoConfigClass;
 //#include "go_config_class.h"
 #include "go_base_class.h"
