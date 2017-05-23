@@ -12,7 +12,6 @@
 
 RootClass::RootClass (void)
 {
-  this->theBaseMgrObject = new BaseMgrClass(this);
   this->theGoBaseObject = new GoBaseClass(this);
 
   if (1) {
@@ -22,11 +21,6 @@ RootClass::RootClass (void)
 
 RootClass::~RootClass (void)
 {
-}
-
-BaseMgrClass* RootClass::baseMgrObject(void)
-{
-  return this->theBaseMgrObject;
 }
 
 GoBaseClass* RootClass::goBaseObject(void)
