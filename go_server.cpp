@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
-//#include "engine_class.h"
+#include "engine_class.h"
 #include "./root_dir/root_class.h"
 #include "./utils_dir/transport_class.h"
 
@@ -21,7 +21,11 @@ void* createTransport (void* ptr_val) {
 }
 
 int main (int argc, char** argv) {
-	//EngineClass* engine_object = new EngineClass();
+    EngineClass* engine_object = new EngineClass();
+    if (!engine_object) {
+        exit(EXIT_FAILURE);
+    }
+    engine_object->startEngine();
 
     pthread_t  go_thread, transport_thread;
     int r;

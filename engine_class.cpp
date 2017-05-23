@@ -20,6 +20,11 @@ char const* EngineClass::objectName (void)
     return "EngineClass";
 }
 
+void EngineClass::startEngine (void)
+{
+
+}
+
 void logit(char const* str0_val, char const* str1_val)
 {
 

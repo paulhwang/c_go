@@ -13,6 +13,7 @@ class EngineClass {
     ~EngineClass(void);
 
     char const* objectName(void);
+    void startEngine(void);
 
   private:
 
