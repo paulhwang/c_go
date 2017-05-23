@@ -6,15 +6,15 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "root_dir/root_class.h"
+#include "engine_class.h"
 
 int main (int argc, char** argv) {
-    RootClass* root_object = new RootClass();
-    if (!root_object) {
-    	fprintf(stderr, "Fail to start root_object");
+    EngineClass* engine_object = new EngineClass();
+    if (!engine_object) {
+    	fprintf(stderr, "Fail to start engine_object");
         exit(EXIT_FAILURE);
     }
-    root_object->startEngine();
+    engine_object->startEngine();
     exit(EXIT_SUCCESS);
 }
 

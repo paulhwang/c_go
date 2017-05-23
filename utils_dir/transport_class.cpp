@@ -23,7 +23,7 @@ TransportClass::TransportClass (RootClass *root_object_val) {
   this->theRootObject = root_object_val;
 
   if (1) {
-    this->logit("TransportClass", "init");
+    this->logit("TransportClass", "init****************************");
   }
 }
 
@@ -43,6 +43,8 @@ void TransportClass::startServer (ushort port_val) {
   struct sockaddr_in address;
   int addrlen = sizeof(address);
   char buffer[1024] = {0};
+
+  this->logit("startServer", "start");
 /*
   if ((sp = getservbyname("whois", "tcp")) == NULL) {
     this->logit("start_server", "No whois service on this host");

@@ -7,6 +7,8 @@
 #ifndef __ENGINE_CLASS_H__
 #define __ENGINE_CLASS_H__
 
+class RootClass;
+class TransportClass;
 #include <pthread.h>
 
 class EngineClass {
@@ -17,7 +19,14 @@ class EngineClass {
     char const* objectName(void);
     void startEngine(void);
 
+    RootClass* rootObject();
+    TransportClass* transportObject(void);
+    void setTransportObject(TransportClass* val);
+    TransportClass* theTransportObject;
+    RootClass* theRootObject;
+
   private:
+
     pthread_t theGoThread;
     pthread_t theTransportThread;
 

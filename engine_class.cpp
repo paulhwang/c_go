@@ -5,9 +5,10 @@
 */
 
 #include <stdio.h>
+#include "utils_dir/logit.h"
 #include "engine_class.h"
-#include "./root_dir/root_class.h"
-#include "./utils_dir/transport_class.h"
+#include "root_dir/root_class.h"
+#include "utils_dir/transport_class.h"
 
 EngineClass::EngineClass(void)
 {
@@ -23,24 +24,48 @@ char const* EngineClass::objectName (void)
     return "EngineClass";
 }
 
-void* createGoRoot (void* ptr_val) {
-    RootClass* root_object = new RootClass();
-  	root_object->transportObject()->startServer(8001);
+RootClass* EngineClass::rootObject (void)
+{
+    return this->theRootObject;
 }
 
-void* createTransport (void* ptr_val) {
+TransportClass* EngineClass::transportObject (void)
+{
+    return this->theTransportObject;
+}
+
+void EngineClass::setTransportObject (TransportClass* val)
+{
+    this->theTransportObject = val;
+}
+
+void* createGoRoot (void* ptr_val)
+{
+    printf("***************createGoRoot starts\n");
+}
+
+void* createTransport (void* this_val)
+{
+    EngineClass* engine_object = (EngineClass *)this_val;
+
     printf("***************createTransport starts\n");
+    engine_object->setTransportObject(new TransportClass(engine_object->rootObject()));
+    engine_object->transportObject()->startServer(8001);
 }
 
 void EngineClass::startEngine (void)
 {
-    int r = pthread_create(&this->theGoThread, NULL, createGoRoot, 0);
+    this->theRootObject = new RootClass();
+
+    this->logit("startEngine", "create theGoThread");
+    int r = pthread_create(&this->theGoThread, NULL, createGoRoot, this);
     if (r) {
         printf("Error - pthread_create() return code: %d\n", r);
         return;
     }
 
-    r = pthread_create(&this->theTransportThread, NULL, createTransport, 0);
+    this->logit("startEngine", "create theTransportThread");
+    r = pthread_create(&this->theTransportThread, NULL, createTransport, this);
     if (r) {
         printf("Error - pthread_create() return code: %d\n", r);
         return;
@@ -60,13 +85,14 @@ pthread_t EngineClass::transportThread (void)
     return this->theTransportThread;
 }
 
-void logit(char const* str0_val, char const* str1_val)
+void EngineClass::logit (char const* str0_val, char const* str1_val)
 {
-
+    LOGIT(str0_val, str1_val);
 }
 
-void abend(char const* str0_val, char const* str1_val)
+void EngineClass::abend (char const* str0_val, char const* str1_val)
 {
-
+    ABEND(str0_val, str1_val);
 }
+
 

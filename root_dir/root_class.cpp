@@ -14,7 +14,6 @@ RootClass::RootClass (void)
 {
   this->theBaseMgrObject = new BaseMgrClass(this);
   this->theGoBaseObject = new GoBaseClass(this);
-  this->theTransportObject = new TransportClass(this);
 
   if (1) {
   	this->logit("RootClass", "init");
@@ -33,11 +32,6 @@ BaseMgrClass* RootClass::baseMgrObject(void)
 GoBaseClass* RootClass::goBaseObject(void)
 {
   return this->theGoBaseObject;
-}
-
-TransportClass* RootClass::transportObject(void)
-{
-  return this->theTransportObject;
 }
 
 char const* RootClass::objectName (void)
