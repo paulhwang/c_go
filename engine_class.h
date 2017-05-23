@@ -7,6 +7,8 @@
 #ifndef __ENGINE_CLASS_H__
 #define __ENGINE_CLASS_H__
 
+#include <pthread.h>
+
 class EngineClass {
   public:
     EngineClass(void);
