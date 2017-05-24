@@ -7,7 +7,7 @@
 #ifndef __BASE_MGR_CLASS_H__
 #define __BASE_MGR_CLASS_H__
 
-//class EngineClass;
+class EngineClass;
 class BaseClass;
 class GoBaseClass;
 
@@ -15,7 +15,7 @@ class GoBaseClass;
 
 class BaseMgrClass {
   public:
-    BaseMgrClass();
+    BaseMgrClass(EngineClass *engine_object_val);
     ~BaseMgrClass();
 
     char const* objectName();

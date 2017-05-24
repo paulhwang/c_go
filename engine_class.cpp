@@ -57,7 +57,7 @@ void EngineClass::setGoBaseMgrObject (BaseMgrClass* val)
 void EngineClass::createGoBaseMgrObject (void)
 {
     printf("******===*********createGoRoot starts\n");
-    this->setGoBaseMgrObject(new BaseMgrClass());
+    this->setGoBaseMgrObject(new BaseMgrClass(this));
     this->goBaseMgrObject()->createGoBase();
 
 }

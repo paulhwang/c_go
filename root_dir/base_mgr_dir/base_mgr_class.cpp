@@ -12,8 +12,8 @@
 #include "base_mgr_class.h"
 #include "../go_base_dir/go_base_class.h"
 
-BaseMgrClass::BaseMgrClass () {
-  //this->theEngineObject = engine_object_val;
+BaseMgrClass::BaseMgrClass (EngineClass *engine_object_val) {
+  this->theEngineObject = engine_object_val;
 
   if (1) {
     this->logit("init", "");
