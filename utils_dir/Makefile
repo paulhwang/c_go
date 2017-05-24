@@ -1,7 +1,7 @@
 include ../Makefile.inc
 
 OBJLIBS	= ../lib_utils.a
-OBJS =	logit.o transport_class.o
+OBJS =	logit.o transport_class.o queue_entry_class.o queue_mgr_class.o
 
 all: $(OBJLIBS)
 
