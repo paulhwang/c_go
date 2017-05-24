@@ -10,6 +10,7 @@
 class EngineClass;
 class BaseClass;
 class GoBaseClass;
+#include "../go_base_dir/go_base_class.h"
 
 class BaseMgrClass {
   public:

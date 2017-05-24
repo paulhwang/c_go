@@ -7,6 +7,7 @@
 #ifndef __GO_BASE_CLASS_H__
 #define __GO_BASE_CLASS_H__
 
+class BaseMgrClass;
 #include "../base_mgr_dir/base_mgr_class.h"
 #include "go_define.h"
 #include "go_board_class.h"

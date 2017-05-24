@@ -10,6 +10,11 @@
 #include "root_dir/base_mgr_dir/base_mgr_class.h"
 #include "engine_class.h"
 
+void dummy ()
+{
+    new GoBaseClass(0);
+}
+
 EngineClass::EngineClass(void)
 {
 }
