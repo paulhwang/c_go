@@ -1,7 +1,7 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name:go_config_class.h
+  File name:go_board_class.h
 */
 
 #ifndef __GO_BOARD_CLASS_H__
@@ -9,7 +9,6 @@
 
 class GoBaseClass;
 class GoConfigClass;
-//#include "go_config_class.h"
 #include "go_base_class.h"
 
 class GoBoardClass {
