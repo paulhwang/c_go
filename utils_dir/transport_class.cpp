@@ -23,7 +23,7 @@ TransportClass::TransportClass (EngineClass *engine_object_val) {
   this->theEngineObject = engine_object_val;
 
   if (1) {
-    this->logit("TransportClass", "init****************************");
+    this->logit("TransportClass", "init");
   }
 }
 

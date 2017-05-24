@@ -6,13 +6,12 @@
 
 #include <stdio.h>
 #include "utils_dir/logit.h"
+#include "utils_dir/transport_class.h"
 #include "root_dir/base_mgr_dir/base_mgr_class.h"
 #include "engine_class.h"
-#include "utils_dir/transport_class.h"
 
 EngineClass::EngineClass(void)
 {
-
 }
 
 EngineClass::~EngineClass(void)
@@ -46,7 +45,9 @@ void EngineClass::setGoBaseMgrObject (BaseMgrClass* val)
 
 void EngineClass::createGoBaseMgrObject (void)
 {
-    printf("******===*********createGoRoot starts\n");
+    if (1) {
+        printf("BaseMgrThread starts\n");
+    }
     this->setGoBaseMgrObject(new BaseMgrClass(this));
     this->goBaseMgrObject()->createGoBase();
 
@@ -54,12 +55,14 @@ void EngineClass::createGoBaseMgrObject (void)
 
 void EngineClass::createTransportObject (void)
 {
-    printf("***************createTransport starts\n");
+    if (1) {
+        printf("TransportThread starts\n");
+    }
     this->setTransportObject(new TransportClass(this));
     this->transportObject()->startServer(8001);
 }
 
-void* createGoBaseMgrFunction (void* this_val)
+void* createBaseMgrFunction (void* this_val)
 {
     ((EngineClass *)this_val)->createGoBaseMgrObject();
 }
@@ -71,14 +74,18 @@ void* createTransportFunction (void* this_val)
 
 void EngineClass::startEngine (void)
 {
-    this->logit("startEngine", "create theGoThread");
-    int r = pthread_create(&this->theGoThread, NULL, createGoBaseMgrFunction, this);
+    if (0) {
+        this->logit("startEngine", "create theGoThread");
+    }
+    int r = pthread_create(&this->theGoThread, NULL, createBaseMgrFunction, this);
     if (r) {
         printf("Error - pthread_create() return code: %d\n", r);
         return;
     }
 
-    this->logit("startEngine", "create theTransportThread");
+    if (0) {
+        this->logit("startEngine", "create theTransportThread");
+    }
     r = pthread_create(&this->theTransportThread, NULL, createTransportFunction, this);
     if (r) {
         printf("Error - pthread_create() return code: %d\n", r);
