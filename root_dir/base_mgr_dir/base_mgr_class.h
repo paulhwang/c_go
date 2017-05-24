@@ -11,18 +11,15 @@ class EngineClass;
 class BaseClass;
 class GoBaseClass;
 
-#include "../../engine_class.h"
-
 class BaseMgrClass {
   public:
     BaseMgrClass(EngineClass *engine_object_val);
     ~BaseMgrClass();
 
-    char const* objectName();
-    EngineClass* engineObject();
+    char const* objectName(void);
+    EngineClass* engineObject(void);
 
-    void createBase(char const* base_name_val);
-    void createGoBase(void);
+    void createBase(void);
     void receiveData(int base_id_val, char* data_val);
 
     void baseMgrLogit(char const* str0_val, char const* str1_val);

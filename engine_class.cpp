@@ -49,7 +49,7 @@ void EngineClass::createGoBaseMgrObject (void)
         printf("BaseMgrThread starts\n");
     }
     this->setGoBaseMgrObject(new BaseMgrClass(this));
-    this->goBaseMgrObject()->createGoBase();
+    this->goBaseMgrObject()->createBase();
 
 }
 
@@ -62,7 +62,7 @@ void EngineClass::createTransportObject (void)
     this->transportObject()->startServer(8001);
 }
 
-void* createBaseMgrFunction (void* this_val)
+void* createGoBaseMgrFunction (void* this_val)
 {
     ((EngineClass *)this_val)->createGoBaseMgrObject();
 }
@@ -77,7 +77,7 @@ void EngineClass::startEngine (void)
     if (0) {
         this->logit("startEngine", "create theGoThread");
     }
-    int r = pthread_create(&this->theGoThread, NULL, createBaseMgrFunction, this);
+    int r = pthread_create(&this->theGoThread, NULL, createGoBaseMgrFunction, this);
     if (r) {
         printf("Error - pthread_create() return code: %d\n", r);
         return;

@@ -16,19 +16,19 @@ class EngineClass {
     EngineClass(void);
     ~EngineClass(void);
 
-    char const* objectName(void);
+    char const *objectName(void);
     void startEngine(void);
 
-    TransportClass* transportObject(void);
-    void setTransportObject(TransportClass* val);
+    TransportClass *transportObject(void);
+    void setTransportObject(TransportClass *val);
     BaseMgrClass* goBaseMgrObject(void);
-    void setGoBaseMgrObject(BaseMgrClass* val);
+    void setGoBaseMgrObject(BaseMgrClass *val);
 
     void createGoBaseMgrObject(void);
     void createTransportObject(void);
 
   private:
-    TransportClass* theTransportObject;
+    TransportClass *theTransportObject;
     BaseMgrClass *theGoBaseMgrObject;
 
     pthread_t theGoThread;
