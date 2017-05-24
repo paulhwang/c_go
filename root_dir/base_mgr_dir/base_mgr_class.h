@@ -7,18 +7,19 @@
 #ifndef __BASE_MGR_CLASS_H__
 #define __BASE_MGR_CLASS_H__
 
+//class EngineClass;
 class BaseClass;
 class GoBaseClass;
 
-#include "../root_class.h"
+#include "../../engine_class.h"
 
 class BaseMgrClass {
   public:
-    BaseMgrClass(RootClass* root_object_val);
+    BaseMgrClass();
     ~BaseMgrClass();
 
     char const* objectName();
-    RootClass* rootObject();
+    EngineClass* engineObject();
 
     void createBase(char const* base_name_val);
     void createGoBase(void);
@@ -31,7 +32,7 @@ class BaseMgrClass {
     GoBaseClass* theGoBaseObject;
 
   private:
-  	RootClass* theRootObject;
+  	EngineClass* theEngineObject;
 
     BaseClass* getBase(int base_id_val);
 

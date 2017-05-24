@@ -6,11 +6,11 @@
 
 #include "../root_common.h"
 #include "../../utils_dir/logit.h"
-#include "../root_class.h"
+#include "../base_mgr_dir/base_mgr_class.h"
 #include "go_base_class.h"
 
-GoBaseClass::GoBaseClass (RootClass* root_object_val) {
-  this->theRootObject = root_object_val;
+GoBaseClass::GoBaseClass () {
+  //this->theBaseMgrObject = base_mgr_object_val;
   this->theConfigObject = new GoConfigClass(this);
   this->theBoardObject = new GoBoardClass(this);
   this->theEngineObject = new GoEngineClass(this);
@@ -24,34 +24,34 @@ GoBaseClass::GoBaseClass (RootClass* root_object_val) {
   }
 }
 
-GoBaseClass::~GoBaseClass () {
+GoBaseClass::~GoBaseClass (void) {
 }
 
-char const* GoBaseClass::objectName () {
+char const* GoBaseClass::objectName (void) {
   return "GoBaseClass";
 }
 
-RootClass* GoBaseClass::rootObject () {
-  return this->theRootObject;
+BaseMgrClass* GoBaseClass::baseMgrObject (void) {
+  return this->theBaseMgrObject;
 }
 
-GoEngineClass* GoBaseClass::engineObject () {
+GoEngineClass* GoBaseClass::engineObject (void) {
   return this->theEngineObject;
 }
 
-GoBoardClass* GoBaseClass::boardObject () {
+GoBoardClass* GoBaseClass::boardObject (void) {
   return this->theBoardObject;
 }
 
-GoPortClass* GoBaseClass::portObject () {
+GoPortClass* GoBaseClass::portObject (void) {
   return this->thePortObject;
 }
 
-GoGameClass* GoBaseClass::gameObject () {
+GoGameClass* GoBaseClass::gameObject (void) {
   return this->theGameObject;
 }
 
-GoConfigClass* GoBaseClass::configObject () {
+GoConfigClass* GoBaseClass::configObject (void) {
   return this->theConfigObject;
 }
 

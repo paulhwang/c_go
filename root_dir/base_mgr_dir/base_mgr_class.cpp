@@ -7,13 +7,13 @@
 #include <stdio.h>
 #include "../root_common.h"
 #include "../../utils_dir/logit.h"
-#include "../root_class.h"
+#include "../../engine_class.h"
 #include "base_class.h"
 #include "base_mgr_class.h"
 #include "../go_base_dir/go_base_class.h"
 
-BaseMgrClass::BaseMgrClass (RootClass* root_object_val) {
-  this->theRootObject = root_object_val;
+BaseMgrClass::BaseMgrClass () {
+  //this->theEngineObject = engine_object_val;
 
   if (1) {
     this->logit("init", "");
@@ -27,8 +27,8 @@ char const* BaseMgrClass::objectName () {
   return "BaseMgrClass";
 }
 
-RootClass* BaseMgrClass::rootObject () {
-  return this->theRootObject;
+EngineClass* BaseMgrClass::engineObject () {
+  return this->theEngineObject;
 }
 
 GoBaseClass* BaseMgrClass::goBaseObject(void)
@@ -47,7 +47,7 @@ void BaseMgrClass::createBase (char const* base_name_val)
 
 void BaseMgrClass::createGoBase (void)
 {
-    this->theGoBaseObject = new GoBaseClass(this->rootObject());
+    //this->theGoBaseObject = new GoBaseClass();
 }
 
 void BaseMgrClass::receiveData (int base_id_val, char* data_val) {

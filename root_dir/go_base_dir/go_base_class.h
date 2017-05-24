@@ -1,12 +1,13 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
+  File name: go_base_class.h
 */
 
 #ifndef __GO_BASE_CLASS_H__
 #define __GO_BASE_CLASS_H__
 
-#include "../root_class.h"
+#include "../base_mgr_dir/base_mgr_class.h"
 #include "go_define.h"
 #include "go_board_class.h"
 #include "go_engine_class.h"
@@ -19,16 +20,16 @@
 
 class GoBaseClass {
   public:
-    GoBaseClass(RootClass* root_object_val);
-    ~GoBaseClass();
+    GoBaseClass();
+    ~GoBaseClass(void);
 
-    char const* objectName();
-    RootClass* rootObject();
-    GoEngineClass* engineObject();
-    GoBoardClass* boardObject();
-    GoPortClass* portObject();
-    GoConfigClass* configObject();
-    GoGameClass* gameObject();
+    char const* objectName(void);
+    BaseMgrClass* baseMgrObject(void);
+    GoEngineClass* engineObject(void);
+    GoBoardClass* boardObject(void);
+    GoPortClass* portObject(void);
+    GoConfigClass* configObject(void);
+    GoGameClass* gameObject(void);
 
     void goBaseLogit(char const* str0_val, char const* str1_val);
     void goBaseAbend(char const* str0_val, char const* str1_val);
@@ -37,7 +38,7 @@ class GoBaseClass {
     void abend(char const* str0_val, char const* str1_val);
 
   private:
-  	RootClass* theRootObject;
+  	BaseMgrClass* theBaseMgrObject;
   	GoEngineClass* theEngineObject;
     GoBoardClass* theBoardObject;
     GoPortClass* thePortObject;

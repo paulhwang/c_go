@@ -8,7 +8,6 @@
 #define __ENGINE_CLASS_H__
 
 #include <pthread.h>
-class RootClass;
 class TransportClass;
 class BaseMgrClass;
 
@@ -27,9 +26,6 @@ class EngineClass {
 
     void createGoBaseMgrObject(void);
     void createTransportObject(void);
-
-    RootClass* rootObject();
-    RootClass* theRootObject;
 
   private:
     TransportClass* theTransportObject;

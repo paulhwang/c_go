@@ -12,15 +12,15 @@
 #include <netdb.h>
 #include <pwd.h>
 #include <arpa/inet.h>
-#include "../root_dir/root_class.h"
+#include "../engine_class.h"
 #include "transport_class.h"
 #include "./logit.h"
 
 #define MAXHOSTNAME 32
 #define BACKLOG 5
 
-TransportClass::TransportClass (RootClass *root_object_val) {
-  this->theRootObject = root_object_val;
+TransportClass::TransportClass (EngineClass *engine_object_val) {
+  this->theEngineObject = engine_object_val;
 
   if (1) {
     this->logit("TransportClass", "init****************************");
@@ -30,8 +30,8 @@ TransportClass::TransportClass (RootClass *root_object_val) {
 TransportClass::~TransportClass () {
 }
 
-RootClass* TransportClass::rootObject () {
-  return this->theRootObject;
+EngineClass* TransportClass::engineObject () {
+  return this->theEngineObject;
 }
 
 void TransportClass::startServer (ushort port_val) {

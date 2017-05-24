@@ -6,7 +6,7 @@ include ../Makefile.inc
 
 DIRS	= go_base_dir
 OBJLIBS	= ../lib_root.a ../lib_base_mgr.a ../lib_go_base.a
-OBJS =	root_class.o
+OBJS =	
 
 all: $(OBJLIBS)
 
