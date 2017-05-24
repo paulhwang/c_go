@@ -20,7 +20,7 @@
 
 class GoBaseClass {
   public:
-    GoBaseClass();
+    GoBaseClass(BaseMgrClass* base_mgr_object_val);
     ~GoBaseClass(void);
 
     char const* objectName(void);

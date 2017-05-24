@@ -47,7 +47,7 @@ BaseClass* BaseMgrClass::getBase (int base_id_val) {
 void BaseMgrClass::createBase (void)
 {
     BaseClass *base = new BaseClass(this);
-    //this->theGoBaseObject = new GoBaseClass();
+    //this->theGoBaseObject = new GoBaseClass(this);
 }
 
 void BaseMgrClass::receiveData (int base_id_val, char* data_val) {
