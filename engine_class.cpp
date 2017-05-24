@@ -10,16 +10,6 @@
 #include "engine_class.h"
 #include "utils_dir/transport_class.h"
 
-void* createGoBaseMgrFunction (void* this_val)
-{
-    ((EngineClass *)this_val)->createGoBaseMgrObject();
-}
-
-void* createTransportFunction (void* this_val)
-{
-    ((EngineClass *)this_val)->createTransportObject();
-}
-
 EngineClass::EngineClass(void)
 {
 
@@ -69,6 +59,16 @@ void EngineClass::createTransportObject (void)
     this->transportObject()->startServer(8001);
 }
 
+void* createGoBaseMgrFunction (void* this_val)
+{
+    ((EngineClass *)this_val)->createGoBaseMgrObject();
+}
+
+void* createTransportFunction (void* this_val)
+{
+    ((EngineClass *)this_val)->createTransportObject();
+}
+
 void EngineClass::startEngine (void)
 {
     this->logit("startEngine", "create theGoThread");
@@ -108,4 +108,5 @@ void EngineClass::abend (char const* str0_val, char const* str1_val)
 {
     ABEND(str0_val, str1_val);
 }
+
 
