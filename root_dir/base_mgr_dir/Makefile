@@ -5,7 +5,7 @@
 include ../../Makefile.inc
 
 OBJLIBS	= ../../lib_base_mgr.a
-OBJS =	base_mgr_class.o base_class.o
+OBJS =	
 
 all: $(OBJLIBS)
 
