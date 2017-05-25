@@ -29,6 +29,14 @@ EngineClass::~EngineClass(void)
     this->transportTransmitQueue()->~QueueMgrClass();
 }
 
+void EngineClass::receiveDataFromTransport (void *data_val) {
+    this->goReceiveQueue()->enqueueData(data_val);
+}
+
+void receiveDataFromTransportFunc (void* engine_object_val, void *data_val) {
+    ((EngineClass *) engine_object_val)->goReceiveQueue()->enqueueData(data_val);
+}
+
 void EngineClass::goBaseMgrReceiveThreadLoop (void)
 {
     if (1) {
@@ -76,7 +84,7 @@ void EngineClass::startEngine (void)
         return;
     }
 
-    this->goReceiveQueue()->enqueueData((void *) "Move   03031001");
+    //receiveDataFromTransportFunc(this, (void *) "Move   03031001");
 
     pthread_join(this->goThread(), NULL);
     pthread_join(this->transportThread(), NULL);

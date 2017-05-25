@@ -32,6 +32,7 @@ class EngineClass {
     ~EngineClass(void);
 
     void startEngine(void);
+    void receiveDataFromTransport(void *data_val);
     void createTransportObject(void);
     void goBaseMgrReceiveThreadLoop(void);
 

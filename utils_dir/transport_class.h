@@ -13,16 +13,16 @@ class EngineClass;
 
 class TransportClass {
   public:
-    TransportClass(EngineClass *engine_object_val);
+    TransportClass(void *engine_object_val);
     ~TransportClass();
 
-    EngineClass* engineObject();
+    void *engineObject();
 
     void startServer(ushort port_val);
     void startClient(ulong ip_addr_val, ushort port_val);
 
   private:
-    EngineClass* theEngineObject;
+    void *theEngineObject;
 
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
