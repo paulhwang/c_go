@@ -4,8 +4,7 @@
   File name: go_engine_class.h
 */
 
-#ifndef __GO_ENGINE_CLASS_H__
-#define __GO_ENGINE_CLASS_H__
+#pragma once
 
 class GoGroupClass;
 class GoGroupListClass;
@@ -15,18 +14,6 @@ class GoMoveClass;
 #define GO_GROUP_LIST_ARRAY_SIZE 7
 
 class GoEngineClass {
-  public:
-    GoEngineClass(GoBaseClass* base_object_val);
-    ~GoEngineClass(void);
-
-    char const* objectName(void);
-    void resetEngineObjectData(void);
-    GoBaseClass* baseObject(void);
-    GoBoardClass* boardObject(void);
-
-    void enterWar(GoMoveClass* move_val);
-
-  private:
     GoBaseClass *theBaseObject;
     int theGroupListCount;
     GoGroupListClass* theGroupListArray[GO_GROUP_LIST_ARRAY_SIZE];
@@ -53,5 +40,15 @@ class GoEngineClass {
 
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
+
+public:
+    GoEngineClass(GoBaseClass* base_object_val);
+    ~GoEngineClass(void);
+
+    void enterWar(GoMoveClass* move_val);
+    void resetEngineObjectData(void);
+
+    GoBoardClass* boardObject(void);
+    GoBaseClass* baseObject(void) {return theBaseObject;}
+    char const* objectName(void) {return "GoEngineClass";}
 };
-#endif

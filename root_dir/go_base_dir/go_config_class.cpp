@@ -20,18 +20,6 @@ GoConfigClass::GoConfigClass (GoBaseClass* base_object_val) {
 GoConfigClass::~GoConfigClass (void) {
 }
 
-char const* GoConfigClass::objectName (void) {
-  return "GoConfigClass";
-}
-
-GoBaseClass* GoConfigClass::baseObject (void) {
-  return this->theBaseObject;
-}
-
-int GoConfigClass::boardSize (void) {
-  return this->theBoardSize;
-};
-
 int GoConfigClass::isValidCoordinates (int x_val, int y_val)
 {
     return this->isValidCoordinate(x_val) && this->isValidCoordinate(y_val) ;

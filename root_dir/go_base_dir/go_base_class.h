@@ -26,6 +26,9 @@ class GoBaseClass {
     GoConfigClass* theConfigObject;
     GoGameClass* theGameObject;
 
+    void logit(char const* str0_val, char const* str1_val);
+    void abend(char const* str0_val, char const* str1_val);
+
   public:
     GoBaseClass(BaseMgrClass* base_mgr_object_val);
     ~GoBaseClass(void);
@@ -34,9 +37,6 @@ class GoBaseClass {
 
     void goBaseLogit(char const* str0_val, char const* str1_val) {LOGIT(str0_val, str1_val);}
     void goBaseAbend(char const* str0_val, char const* str1_val) {ABEND(str0_val, str1_val);}
-
-    void logit(char const* str0_val, char const* str1_val);
-    void abend(char const* str0_val, char const* str1_val);
 
     GoEngineClass* engineObject(void) {return theEngineObject;}
     GoBoardClass* boardObject(void) {return theBoardObject;}

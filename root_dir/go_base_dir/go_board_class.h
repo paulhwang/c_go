@@ -4,26 +4,13 @@
   File name:go_board_class.h
 */
 
-#ifndef __GO_BOARD_CLASS_H__
-#define __GO_BOARD_CLASS_H__
+#pragma once
 
 class GoBaseClass;
 class GoConfigClass;
 #include "go_base_class.h"
 
 class GoBoardClass {
-public:
-    GoBoardClass(GoBaseClass* the_base_object);
-    ~GoBoardClass(void);
-
-    char const* objectName(void);
-    GoBaseClass* baseObject(void);
-
-    void resetMarkedBoardObjectData(void);
-    void addStoneToBoard(int x_val, int y_val, char color_val);
-    void encodeBoard(char* buf_ptr);
-
-private:
     GoBaseClass *theBaseObject;
     GoConfigClass* configObject(void);
 
@@ -40,5 +27,15 @@ private:
 
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
+
+public:
+    GoBoardClass(GoBaseClass* the_base_object);
+    ~GoBoardClass(void);
+
+    void resetMarkedBoardObjectData(void);
+    void addStoneToBoard(int x_val, int y_val, char color_val);
+    void encodeBoard(char* buf_ptr);
+
+    GoBaseClass* baseObject(void) {return theBaseObject;}
+    char const* objectName(void) {return "GoBoardClass";}
 };
-#endif

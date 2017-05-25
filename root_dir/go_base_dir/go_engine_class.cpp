@@ -23,16 +23,6 @@ GoEngineClass::~GoEngineClass (void)
 {
 }
 
-char const* GoEngineClass::objectName (void)
-{
-  return "GoEngineClass";
-}
-
-GoBaseClass* GoEngineClass::baseObject (void)
-{
-  return this->theBaseObject;
-}
-
 GoBoardClass* GoEngineClass::boardObject (void)
 {
   return this->baseObject()->boardObject();

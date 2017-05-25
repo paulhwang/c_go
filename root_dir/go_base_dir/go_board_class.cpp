@@ -20,14 +20,6 @@ GoBoardClass::GoBoardClass (GoBaseClass* base_object_val) {
 GoBoardClass::~GoBoardClass (void) {
 }
 
-char const* GoBoardClass::objectName (void) {
-    return "GoBoardClass";
-}
-
-GoBaseClass* GoBoardClass::baseObject (void) {
-    return this->theBaseObject;
-}
-
 GoConfigClass* GoBoardClass::configObject (void) {
     return this->baseObject()->configObject();
 }
