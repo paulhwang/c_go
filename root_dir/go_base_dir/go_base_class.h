@@ -4,8 +4,7 @@
   File name: go_base_class.h
 */
 
-#ifndef __GO_BASE_CLASS_H__
-#define __GO_BASE_CLASS_H__
+#pragma once
 
 class BaseMgrClass;
 #include "../base_mgr_dir/base_mgr_class.h"
@@ -20,30 +19,29 @@ class BaseMgrClass;
 #include "go_move_class.h"
 
 class GoBaseClass {
-  public:
-    GoBaseClass(BaseMgrClass* base_mgr_object_val);
-    ~GoBaseClass(void);
-
-    char const* objectName(void);
-    BaseMgrClass* baseMgrObject(void);
-    GoEngineClass* engineObject(void);
-    GoBoardClass* boardObject(void);
-    GoPortClass* portObject(void);
-    GoConfigClass* configObject(void);
-    GoGameClass* gameObject(void);
-
-    void goBaseLogit(char const* str0_val, char const* str1_val);
-    void goBaseAbend(char const* str0_val, char const* str1_val);
-
-    void logit(char const* str0_val, char const* str1_val);
-    void abend(char const* str0_val, char const* str1_val);
-
-  private:
-  	BaseMgrClass* theBaseMgrObject;
-  	GoEngineClass* theEngineObject;
+    BaseMgrClass* theBaseMgrObject;
+    GoEngineClass* theEngineObject;
     GoBoardClass* theBoardObject;
     GoPortClass* thePortObject;
     GoConfigClass* theConfigObject;
     GoGameClass* theGameObject;
+
+  public:
+    GoBaseClass(BaseMgrClass* base_mgr_object_val);
+    ~GoBaseClass(void);
+
+    BaseMgrClass* baseMgrObject(void);
+
+    void goBaseLogit(char const* str0_val, char const* str1_val) {LOGIT(str0_val, str1_val);}
+    void goBaseAbend(char const* str0_val, char const* str1_val) {ABEND(str0_val, str1_val);}
+
+    void logit(char const* str0_val, char const* str1_val);
+    void abend(char const* str0_val, char const* str1_val);
+
+    GoEngineClass* engineObject(void) {return theEngineObject;}
+    GoBoardClass* boardObject(void) {return theBoardObject;}
+    GoPortClass* portObject(void) {return thePortObject;}
+    GoConfigClass* configObject(void) {return theConfigObject;}
+    GoGameClass* gameObject(void) {return theGameObject;}
+    char const* objectName(void) {return "GoBaseClass";}
 };
-#endif

@@ -25,40 +25,8 @@ GoBaseClass::GoBaseClass (BaseMgrClass* base_mgr_object_val) {
 GoBaseClass::~GoBaseClass (void) {
 }
 
-char const* GoBaseClass::objectName (void) {
-  return "GoBaseClass";
-}
-
 BaseMgrClass* GoBaseClass::baseMgrObject (void) {
   return this->theBaseMgrObject;
-}
-
-GoEngineClass* GoBaseClass::engineObject (void) {
-  return this->theEngineObject;
-}
-
-GoBoardClass* GoBaseClass::boardObject (void) {
-  return this->theBoardObject;
-}
-
-GoPortClass* GoBaseClass::portObject (void) {
-  return this->thePortObject;
-}
-
-GoGameClass* GoBaseClass::gameObject (void) {
-  return this->theGameObject;
-}
-
-GoConfigClass* GoBaseClass::configObject (void) {
-  return this->theConfigObject;
-}
-
-void GoBaseClass::goBaseLogit (char const* str0_val, char const* str1_val) {
-	LOGIT(str0_val, str1_val);
-}
-
-void GoBaseClass::goBaseAbend (char const* str0_val, char const* str1_val) {
-	ABEND(str0_val, str1_val);
 }
 
 void GoBaseClass::logit (char const* str0_val, char const* str1_val) {
