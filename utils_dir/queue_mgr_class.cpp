@@ -32,7 +32,7 @@ void QueueMgrClass::init_queue(int max_queue_size_val)
   //InitializeCriticalSectionAndSpinCount(&cs_queue, 0);
 }
 
-void QueueMgrClass::enqueue_entry(getac_que_ent *entry)
+void QueueMgrClass::enqueue_entry(QueueEntryClass *entry)
 {
   if (!this) {
     //abend(GATEWAY_LOG_TYPE_RFID, MTC_ERR_MISC, __LINE__, __FUNCTION__);
@@ -71,9 +71,9 @@ void QueueMgrClass::enqueue_entry(getac_que_ent *entry)
   //LeaveCriticalSection(&cs_queue);
 }
 
-getac_que_ent *QueueMgrClass::dequeue_entry(void)
+QueueEntryClass *QueueMgrClass::dequeue_entry(void)
 {
-  getac_que_ent *entry;
+  QueueEntryClass *entry;
 
   if (!this->queue_head) {
     return 0;
@@ -103,7 +103,7 @@ getac_que_ent *QueueMgrClass::dequeue_entry(void)
 void QueueMgrClass::check_queue_error(void)
 {
 #if MITAC_RFID_DEBUG_HEAP
-  getac_que_ent *entry;
+  QueueEntryClass *entry;
   int length = 0;
  
   if (!this) {
@@ -127,7 +127,7 @@ void QueueMgrClass::check_queue_error(void)
 
 void QueueMgrClass::flush_queue(void)
 {
-  getac_que_ent *entry, *entry_next; 
+  QueueEntryClass *entry, *entry_next; 
  
   //EnterCriticalSection(&cs_queue);
   entry = queue_head;
@@ -146,7 +146,7 @@ void QueueMgrClass::flush_queue(void)
   //LeaveCriticalSection(&cs_queue);
 }
 
-void QueueMgrClass::delete_entry(getac_que_ent *del_entry)
+void QueueMgrClass::delete_entry(QueueEntryClass *del_entry)
 {
   delete del_entry;
 }

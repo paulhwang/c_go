@@ -11,17 +11,17 @@
 //#include "getac_def_component.h"
 //#include "getac_def_marker.h"
 
-getac_que_ent::getac_que_ent(void)
+QueueEntryClass::QueueEntryClass(void)
 {
   //this->marker_head = GETAC_MARKER_UTIL_QUE_MGR;
   this->data = 0;
 }
 
-getac_que_ent::~getac_que_ent(void)
+QueueEntryClass::~QueueEntryClass(void)
 {
 }
 
-void getac_que_ent::delete_queue_entry(void)
+void QueueEntryClass::delete_queue_entry(void)
 {
   if (!this) {
     //abend(GATEWAY_LOG_TYPE_RFID, MTC_ERR_MISC, __LINE__, __FUNCTION__);

@@ -6,7 +6,7 @@
 
 #pragma once
 
-class getac_que_ent
+class QueueEntryClass
 {
 /***************************************************************/
 /* DO NOT ADD FRIEND INTO THIS CLASS UNLESS YOU GET PERMISSION */
@@ -16,12 +16,12 @@ class getac_que_ent
 
   //enum GETAC_MARKER_DEFINE_ marker_head;
 
-  getac_que_ent *next;
-  getac_que_ent *prev;
+  QueueEntryClass *next;
+  QueueEntryClass *prev;
 
 public:
-  getac_que_ent(void);
-  ~getac_que_ent(void);
+  QueueEntryClass(void);
+  ~QueueEntryClass(void);
 
   void delete_queue_entry(void);
 
