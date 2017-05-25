@@ -21,7 +21,7 @@ QueueEntryClass::~QueueEntryClass(void)
 {
 }
 
-void QueueEntryClass::delete_queue_entry(void)
+void QueueEntryClass::deleteQueueEntry(void)
 {
   if (!this) {
     //abend(GATEWAY_LOG_TYPE_RFID, MTC_ERR_MISC, __LINE__, __FUNCTION__);

@@ -26,13 +26,13 @@ QueueMgrClass::~QueueMgrClass(void)
   }
 }
 
-void QueueMgrClass::init_queue(int max_queue_size_val)
+void QueueMgrClass::initQueue(int max_queue_size_val)
 {
   max_queue_size = max_queue_size_val;
   //InitializeCriticalSectionAndSpinCount(&cs_queue, 0);
 }
 
-void QueueMgrClass::enqueue_entry(QueueEntryClass *entry)
+void QueueMgrClass::enqueueEntry(QueueEntryClass *entry)
 {
   if (!this) {
     //abend(GATEWAY_LOG_TYPE_RFID, MTC_ERR_MISC, __LINE__, __FUNCTION__);
@@ -71,7 +71,7 @@ void QueueMgrClass::enqueue_entry(QueueEntryClass *entry)
   //LeaveCriticalSection(&cs_queue);
 }
 
-QueueEntryClass *QueueMgrClass::dequeue_entry(void)
+QueueEntryClass *QueueMgrClass::dequeueEntry(void)
 {
   QueueEntryClass *entry;
 

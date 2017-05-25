@@ -28,9 +28,9 @@ public:
   QueueMgrClass(void);
   ~QueueMgrClass(void);
 
-  void init_queue(int max_queue_size_val);
-  void enqueue_entry(QueueEntryClass *entry);
-  QueueEntryClass *dequeue_entry(void);
+  void initQueue(int max_queue_size_val);
+  void enqueueEntry(QueueEntryClass *entry);
+  QueueEntryClass *dequeueEntry(void);
   int queue_size_(void) {return queue_size;}
   int in_index_(void) {return in_index;}
   int out_index_(void) {return out_index;}

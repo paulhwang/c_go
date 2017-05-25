@@ -23,7 +23,7 @@ public:
   QueueEntryClass(void);
   ~QueueEntryClass(void);
 
-  void delete_queue_entry(void);
+  void deleteQueueEntry(void);
 
   void *data;
 };
