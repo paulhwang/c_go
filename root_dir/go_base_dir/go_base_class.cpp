@@ -17,8 +17,6 @@ GoBaseClass::GoBaseClass (BaseMgrClass* base_mgr_object_val) {
   this->thePortObject = new GoPortClass(this);
   this->theGameObject = new GoGameClass(this);
 
-  this->portObject()->receiveStringData("Move   03031001");
-
   if (1) {
     this->logit("GoBaseClass", "init");
   }

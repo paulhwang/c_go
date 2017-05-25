@@ -32,6 +32,36 @@ void QueueMgrClass::initQueue(int max_queue_size_val)
   //InitializeCriticalSectionAndSpinCount(&cs_queue, 0);
 }
 
+void QueueMgrClass::enqueueData (void *data_val)
+{
+	if (0) {
+		this->logit("enqueueData", (char *) data_val);
+	}
+
+	QueueEntryClass *entry = new QueueEntryClass();
+	if (!entry) {
+
+	}
+	else {
+		entry->data = data_val;
+	}
+	this->enqueueEntry(entry);
+}
+
+void *QueueMgrClass::dequeueData(void)
+{
+	QueueEntryClass *entry = this->dequeueEntry();
+	if (entry) {
+		if (0) {
+			this->logit("dequeueData", (char *) entry->data);
+		}
+		return entry->data;
+	}
+	else {
+		return 0;
+	}
+}
+
 void QueueMgrClass::enqueueEntry(QueueEntryClass *entry)
 {
   if (!this) {

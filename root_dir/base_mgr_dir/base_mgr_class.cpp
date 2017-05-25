@@ -5,8 +5,10 @@
 */
 
 #include <stdio.h>
+#include <unistd.h>
 #include "../root_common.h"
 #include "../../utils_dir/logit.h"
+#include "../../utils_dir/queue_mgr_class.h"
 #include "base_mgr_class.h"
 #include "base_class.h"
 #include "../../engine_class.h"
@@ -15,6 +17,8 @@
 BaseMgrClass::BaseMgrClass (EngineClass *engine_object_val)
 {
     this->theEngineObject = engine_object_val;
+
+    this->theTestGoBase = new GoBaseClass(this);
 
     if (1) {
         this->logit("init", "");
@@ -25,18 +29,19 @@ BaseMgrClass::~BaseMgrClass (void)
 {
 }
 
-char const* BaseMgrClass::objectName (void)
-{
-    return "BaseMgrClass";
+GoBaseClass* BaseMgrClass::getBaseByBaseId (int base_id_val) {
+    return this->theTestGoBase;
 }
 
-EngineClass* BaseMgrClass::engineObject (void)
+void BaseMgrClass::receiveThreadLoop (void)
 {
-    return this->theEngineObject;
-}
-
-BaseClass* BaseMgrClass::getBase (int base_id_val) {
-    return 0;
+    while (1) {
+        char* data = (char *) this->goReceiveQueue()->dequeueData();
+        if (data) {
+            this->receiveData(1, data);
+        }
+        sleep(1);
+    }
 }
 
 void BaseMgrClass::createBase (void)
@@ -44,13 +49,14 @@ void BaseMgrClass::createBase (void)
     BaseClass *base = new BaseClass(this);
     this->theGoBaseObject = new GoBaseClass(this);
 }
+
 void BaseMgrClass::receiveData (int base_id_val, char* data_val) {
     this->logit("receiveData", data_val);
-    BaseClass* base = this->getBase(base_id_val);
-    if (!base) {
+    GoBaseClass* go_base = this->getBaseByBaseId(base_id_val);
+    if (!go_base) {
         return;
     }
-    //base->portObject()->receiveStringData(data_val);
+    go_base->portObject()->receiveStringData(data_val);
 }
 
 void BaseMgrClass::baseMgrLogit (char const* str0_val, char const* str1_val) {

@@ -7,20 +7,23 @@
 #include <stdio.h>
 #include "utils_dir/logit.h"
 #include "utils_dir/transport_class.h"
+#include "utils_dir/queue_mgr_class.h"
 #include "root_dir/base_mgr_dir/base_mgr_class.h"
 #include "engine_class.h"
 
 EngineClass::EngineClass(void)
 {
+    this->theTransportTransmitQueue = new QueueMgrClass();
+    this->transportTransmitQueue()->initQueue(100);
+
+    this->theGoReceiveQueue = new QueueMgrClass();
+    this->goReceiveQueue()->initQueue(100);
 }
 
 EngineClass::~EngineClass(void)
 {
-}
-
-char const* EngineClass::objectName (void)
-{
-    return "EngineClass";
+    this->goReceiveQueue()->~QueueMgrClass();
+    this->transportTransmitQueue()->~QueueMgrClass();
 }
 
 TransportClass* EngineClass::transportObject (void)
@@ -50,6 +53,7 @@ void EngineClass::createGoBaseMgrObject (void)
     }
     this->setGoBaseMgrObject(new BaseMgrClass(this));
     this->goBaseMgrObject()->createBase();
+    this->goBaseMgrObject()->receiveThreadLoop();
 
 }
 
@@ -91,6 +95,8 @@ void EngineClass::startEngine (void)
         printf("Error - pthread_create() return code: %d\n", r);
         return;
     }
+
+    this->goReceiveQueue()->enqueueData((void *) "Move   03031001");
 
     pthread_join(this->goThread(), NULL);
     pthread_join(this->transportThread(), NULL);
