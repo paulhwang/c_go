@@ -4,46 +4,40 @@
   File name: engine_class.h
 */
 
-#ifndef __ENGINE_CLASS_H__
-#define __ENGINE_CLASS_H__
-
+#pragma once
 #include <pthread.h>
+#include "utils_dir/logit.h"
+
 class TransportClass;
 class BaseMgrClass;
 class QueueMgrClass;
 
 class EngineClass {
     TransportClass *theTransportObject;
-    BaseMgrClass *theGoBaseMgrObject;
-
     pthread_t theTransportThread;
-    pthread_t transportThread(void);
     QueueMgrClass *theTransportTransmitQueue;
 
+    BaseMgrClass *theGoBaseMgrObject;
     pthread_t theGoThread;
-    pthread_t goThread(void);
     QueueMgrClass *theGoReceiveQueue;
 
-    void logit(char const* str0_val, char const* str1_val);
-    void abend(char const* str0_val, char const* str1_val);
+    pthread_t transportThread(void) {return theTransportThread;}
+    pthread_t goThread(void) {return theGoThread;}
+
+    void logit (char const* str0_val, char const* str1_val) {LOGIT(str0_val, str1_val);}
+    void abend (char const* str0_val, char const* str1_val) {ABEND(str0_val, str1_val);}
 
   public:
     EngineClass(void);
     ~EngineClass(void);
 
-    char const *objectName(void) {return "EngineClass";}
     void startEngine(void);
+    void createTransportObject(void);
+    void goBaseMgrReceiveThreadLoop(void);
 
+    char const *objectName(void) {return "EngineClass";}
+    TransportClass *transportObject(void) {return theTransportObject;}
+    BaseMgrClass* goBaseMgrObject(void) {return theGoBaseMgrObject;}
     QueueMgrClass *transportTransmitQueue(void) {return theTransportTransmitQueue;}
     QueueMgrClass *goReceiveQueue(void) {return theGoReceiveQueue;}
-
-    TransportClass *transportObject(void);
-    void setTransportObject(TransportClass *val);
-    BaseMgrClass* goBaseMgrObject(void);
-    void setGoBaseMgrObject(BaseMgrClass *val);
-
-    void createGoBaseMgrObject(void);
-    void createTransportObject(void);
 };
-
-#endif

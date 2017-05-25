@@ -13,6 +13,9 @@
 
 EngineClass::EngineClass(void)
 {
+    this->theGoBaseMgrObject = new BaseMgrClass(this);
+    this->theTransportObject = new TransportClass(this);
+
     this->theTransportTransmitQueue = new QueueMgrClass();
     this->transportTransmitQueue()->initQueue(100);
 
@@ -26,33 +29,11 @@ EngineClass::~EngineClass(void)
     this->transportTransmitQueue()->~QueueMgrClass();
 }
 
-TransportClass* EngineClass::transportObject (void)
-{
-    return this->theTransportObject;
-}
-
-BaseMgrClass* EngineClass::goBaseMgrObject (void)
-{
-    return this->theGoBaseMgrObject;
-}
-
-void EngineClass::setTransportObject (TransportClass* val)
-{
-    this->theTransportObject = val;
-}
-
-void EngineClass::setGoBaseMgrObject (BaseMgrClass* val)
-{
-    this->theGoBaseMgrObject = val;
-}
-
-void EngineClass::createGoBaseMgrObject (void)
+void EngineClass::goBaseMgrReceiveThreadLoop (void)
 {
     if (1) {
         printf("BaseMgrThread starts\n");
     }
-    this->setGoBaseMgrObject(new BaseMgrClass(this));
-    this->goBaseMgrObject()->createBase();
     this->goBaseMgrObject()->receiveThreadLoop();
 
 }
@@ -62,13 +43,12 @@ void EngineClass::createTransportObject (void)
     if (1) {
         printf("TransportThread starts\n");
     }
-    this->setTransportObject(new TransportClass(this));
     this->transportObject()->startServer(8001);
 }
 
-void* createGoBaseMgrFunction (void* this_val)
+void* goBaseMgrReceiveThreadFunc (void* this_val)
 {
-    ((EngineClass *)this_val)->createGoBaseMgrObject();
+    ((EngineClass *)this_val)->goBaseMgrReceiveThreadLoop();
 }
 
 void* createTransportFunction (void* this_val)
@@ -81,7 +61,7 @@ void EngineClass::startEngine (void)
     if (0) {
         this->logit("startEngine", "create theGoThread");
     }
-    int r = pthread_create(&this->theGoThread, NULL, createGoBaseMgrFunction, this);
+    int r = pthread_create(&this->theGoThread, NULL, goBaseMgrReceiveThreadFunc, this);
     if (r) {
         printf("Error - pthread_create() return code: %d\n", r);
         return;
@@ -101,25 +81,3 @@ void EngineClass::startEngine (void)
     pthread_join(this->goThread(), NULL);
     pthread_join(this->transportThread(), NULL);
 }
-
-pthread_t EngineClass::goThread (void)
-{
-    return this->theGoThread;
-}
-
-pthread_t EngineClass::transportThread (void)
-{
-    return this->theTransportThread;
-}
-
-void EngineClass::logit (char const* str0_val, char const* str1_val)
-{
-    LOGIT(str0_val, str1_val);
-}
-
-void EngineClass::abend (char const* str0_val, char const* str1_val)
-{
-    ABEND(str0_val, str1_val);
-}
-
-
