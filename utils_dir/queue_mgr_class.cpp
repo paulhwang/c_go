@@ -13,26 +13,26 @@
 //#include "getac_def_component.h"
 //#include "getac_def_marker.h"
 
-getac_que_mgr::getac_que_mgr(void)
+QueueMgrClass::QueueMgrClass(void)
 {
   memset(this, 0, sizeof(*this));
   //this->marker_head = this->marker_tail = GETAC_MARKER_UTIL_QUE_ENT;
 }
 
-getac_que_mgr::~getac_que_mgr(void)
+QueueMgrClass::~QueueMgrClass(void)
 {
   if (this->queue_size) {
     //abend(GATEWAY_LOG_TYPE_RFID, MTC_ERR_MISC, __LINE__, __FUNCTION__);
   }
 }
 
-void getac_que_mgr::init_queue(int max_queue_size_val)
+void QueueMgrClass::init_queue(int max_queue_size_val)
 {
   max_queue_size = max_queue_size_val;
   //InitializeCriticalSectionAndSpinCount(&cs_queue, 0);
 }
 
-void getac_que_mgr::enqueue_entry(getac_que_ent *entry)
+void QueueMgrClass::enqueue_entry(getac_que_ent *entry)
 {
   if (!this) {
     //abend(GATEWAY_LOG_TYPE_RFID, MTC_ERR_MISC, __LINE__, __FUNCTION__);
@@ -71,7 +71,7 @@ void getac_que_mgr::enqueue_entry(getac_que_ent *entry)
   //LeaveCriticalSection(&cs_queue);
 }
 
-getac_que_ent *getac_que_mgr::dequeue_entry(void)
+getac_que_ent *QueueMgrClass::dequeue_entry(void)
 {
   getac_que_ent *entry;
 
@@ -100,7 +100,7 @@ getac_que_ent *getac_que_mgr::dequeue_entry(void)
   return entry;
 }
 
-void getac_que_mgr::check_queue_error(void)
+void QueueMgrClass::check_queue_error(void)
 {
 #if MITAC_RFID_DEBUG_HEAP
   getac_que_ent *entry;
@@ -125,7 +125,7 @@ void getac_que_mgr::check_queue_error(void)
 #endif
 }
 
-void getac_que_mgr::flush_queue(void)
+void QueueMgrClass::flush_queue(void)
 {
   getac_que_ent *entry, *entry_next; 
  
@@ -146,7 +146,7 @@ void getac_que_mgr::flush_queue(void)
   //LeaveCriticalSection(&cs_queue);
 }
 
-void getac_que_mgr::delete_entry(getac_que_ent *del_entry)
+void QueueMgrClass::delete_entry(getac_que_ent *del_entry)
 {
   delete del_entry;
 }

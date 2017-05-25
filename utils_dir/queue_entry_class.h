@@ -10,7 +10,7 @@ class getac_que_ent
 {
 /***************************************************************/
 /* DO NOT ADD FRIEND INTO THIS CLASS UNLESS YOU GET PERMISSION */
-  friend class getac_que_mgr;
+  friend class QueueMgrClass;
 /* DO NOT ADD FRIEND INTO THIS CLASS UNLESS YOU GET PERMISSION */
 /***************************************************************/
 

@@ -8,7 +8,7 @@
 
 class getac_que_ent;
 
-class getac_que_mgr
+class QueueMgrClass
 {
   //enum GETAC_MARKER_DEFINE_ marker_head;
 
@@ -25,8 +25,8 @@ class getac_que_mgr
   void delete_entry(getac_que_ent *del_entry);
 
 public:
-  getac_que_mgr(void);
-  ~getac_que_mgr(void);
+  QueueMgrClass(void);
+  ~QueueMgrClass(void);
 
   void init_queue(int max_queue_size_val);
   void enqueue_entry(getac_que_ent *entry);
