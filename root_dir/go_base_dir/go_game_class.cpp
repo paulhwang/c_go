@@ -22,16 +22,6 @@ GoGameClass::~GoGameClass (void)
 {
 }
 
-char const* GoGameClass::objectName (void)
-{
-    return "GoGameClass";
-}
-
-GoBaseClass* GoGameClass::baseObject (void)
-{
-    return this->theBaseObject;
-}
-
 GoEngineClass* GoGameClass::engineObject (void)
 {
     return this->baseObject()->engineObject();
@@ -45,71 +35,6 @@ GoMoveClass* GoGameClass::movesArray (int index_val)
 void GoGameClass::setMovesArray (int index_val, GoMoveClass* val)
 {
     this->theMovesArray[index_val] = val;
-}
-
-int GoGameClass::maxMove (void)
-{
-    return this->theMaxMove;
-}
-
-void GoGameClass::setMaxMove (int max_move_val)
-{
-    this->theMaxMove = max_move_val;
-}
-
-int GoGameClass::totalMoves (void)
-{
-    return this->theTotalMoves;
-}
-
-void GoGameClass::setTotalMoves (int total_moves_val)
-{
-    this->theTotalMoves = total_moves_val;
-}
-
-void GoGameClass::incrementTotalMoves (void)
-{
-    this->theTotalMoves += 1;
-}
-
-void GoGameClass::decrementTotalMoves (void)
-{
-    this->theTotalMoves -= 1;
-}
-
-char GoGameClass::nextColor (void)
-{
-    return this->theNextColor;
-}
-
-void GoGameClass::setNextColor (char next_color_val)
-{
-    this->theNextColor = next_color_val;
-}
-
-int GoGameClass::passReceived (void) {
-    return this->thePassReceived;
-}
-
-void GoGameClass::setPassReceived (void) {
-    this->thePassReceived = true;
-}
-
-void GoGameClass::clearPassReceived (void) {
-    this->thePassReceived = false;
-}
-
-int GoGameClass::gameIsOver (void)
-{
-    return this->theGameIsOver;
-}
-
-void GoGameClass::setGameIsOver (void) {
-    this->theGameIsOver = true;
-}
-
-void GoGameClass::clearGameIsOver (void) {
-    this->theGameIsOver = false;
 }
 
 char GoGameClass::getOppositeColor (char color_val)
