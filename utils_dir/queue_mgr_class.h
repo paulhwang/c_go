@@ -31,9 +31,9 @@ public:
   void initQueue(int max_queue_size_val);
   void enqueueEntry(QueueEntryClass *entry);
   QueueEntryClass *dequeueEntry(void);
-  int queue_size_(void) {return queue_size;}
-  int in_index_(void) {return in_index;}
-  int out_index_(void) {return out_index;}
+  int queueSize(void) {return queue_size;}
+  int inIndex(void) {return in_index;}
+  int outIndex(void) {return out_index;}
 
   /* always at the tail of this class */
   //enum GETAC_MARKER_DEFINE_ marker_tail;
