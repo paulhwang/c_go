@@ -31,6 +31,11 @@ TransportClass::TransportClass (void *main_object_val) {
 TransportClass::~TransportClass () {
 }
 
+void TransportClass::startServerThread (ushort port_val)
+{
+    this->startServer(port_val);
+}
+
 void TransportClass::startServer (ushort port_val) {
   char localhost[MAXHOSTNAME + 1];
   struct servent *sp;
