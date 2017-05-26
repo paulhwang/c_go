@@ -5,10 +5,15 @@
 
 
 #pragma once
+#include <pthread.h>
 #include "../includes/common.h"
 
 class TransportClass {
     void *mainObject;
+
+    pthread_t serverThread;
+    pthread_t transmitThread;
+    pthread_t receiveThread;
 
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);

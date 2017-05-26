@@ -12,6 +12,7 @@
 #include <netdb.h>
 #include <pwd.h>
 #include <arpa/inet.h>
+#include <pthread.h>
 #include "transport_class.h"
 #include "./logit.h"
 
@@ -31,9 +32,22 @@ TransportClass::TransportClass (void *main_object_val) {
 TransportClass::~TransportClass () {
 }
 
+void *transportServerThreadFunction (void *data_val)
+{
+    ((TransportClass *) data_val)->startServer(8002);
+}
+
 void TransportClass::startServerThread (ushort port_val)
 {
-    this->startServer(port_val);
+    int r;
+    if (0) {
+        this->logit("startServerThread", "");
+    }
+    r = pthread_create(&this->serverThread, 0, transportServerThreadFunction, this);
+    if (r) {
+        printf("Error - pthread_create() return code: %d\n", r);
+        return;
+    }
 }
 
 void TransportClass::startServer (ushort port_val) {
