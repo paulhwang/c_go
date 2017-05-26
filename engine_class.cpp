@@ -50,18 +50,11 @@ void EngineClass::createTransportObject (void)
     this->transportObject()->startServer(8001);
 }
 
-void* goBaseMgrReceiveThreadFunction (void* this_val)
-{
-    ((EngineClass *)this_val)->goBaseMgrReceiveThreadLoop();
-}
-
-void* transportTransmitThreadFunction (void* this_val)
-{
-    ((EngineClass *)this_val)->createTransportObject();
-}
-
 void EngineClass::startEngine (void)
 {
+    void *goBaseMgrReceiveThreadFunction (void *this_val);
+    void *transportTransmitThreadFunction (void *this_val);
+
     if (0) {
         this->logit("startEngine", "create theGoThread");
     }
