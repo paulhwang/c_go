@@ -31,7 +31,7 @@ class EngineClass {
     EngineClass(void);
     ~EngineClass(void);
 
-    void startEngine(void);
+    void startEngineThreads(void);
 
     /* exports */
     void receiveDataFromTransport(void *data_val);

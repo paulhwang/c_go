@@ -55,7 +55,7 @@ void EngineClass::transportTransmitThreadLoop (void)
     this->transportObject()->startServer(8001);
 }
 
-void EngineClass::startEngine (void)
+void EngineClass::startEngineThreads (void)
 {
     void *goBaseMgrReceiveThreadFunction (void *this_val);
     void *transportTransmitThreadFunction (void *this_val);
