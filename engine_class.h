@@ -14,14 +14,12 @@ class QueueMgrClass;
 
 class EngineClass {
     TransportClass *theTransportObject;
-    pthread_t theTransportThread;
     QueueMgrClass *theTransportTransmitQueue;
 
     BaseMgrClass *theGoBaseMgrObject;
     pthread_t theGoThread;
     QueueMgrClass *theGoReceiveQueue;
 
-    pthread_t transportThread(void) {return theTransportThread;}
     pthread_t goThread(void) {return theGoThread;}
 
     void logit (char const* str0_val, char const* str1_val) {LOGIT(str0_val, str1_val);}
@@ -38,7 +36,6 @@ class EngineClass {
     void transmitDataToTransport(void *data_val);
 
     /* thread loops */
-    void transportTransmitThreadLoop(void);
     void goBaseMgrReceiveThreadLoop(void);
 
     char const *objectName(void) {return "EngineClass";}
