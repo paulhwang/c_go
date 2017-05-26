@@ -23,6 +23,6 @@ public:
     ~TransportClass();
 
     void startServerThread(ushort port_val);
-    void startServer(ushort port_val);
+    void serverThreadFunction(ushort port_val);
     void startClient(ulong ip_addr_val, ushort port_val);
 };

@@ -34,7 +34,7 @@ TransportClass::~TransportClass () {
 
 void *transportServerThreadFunction (void *data_val)
 {
-    ((TransportClass *) data_val)->startServer(8002);
+    ((TransportClass *) data_val)->serverThreadFunction(8002);
 }
 
 void TransportClass::startServerThread (ushort port_val)
@@ -50,7 +50,7 @@ void TransportClass::startServerThread (ushort port_val)
     }
 }
 
-void TransportClass::startServer (ushort port_val) {
+void TransportClass::serverThreadFunction (ushort port_val) {
   char localhost[MAXHOSTNAME + 1];
   struct servent *sp;
   int s, data_socket;
