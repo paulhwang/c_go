@@ -28,7 +28,7 @@ public:
     void startClientThread(unsigned long ip_addr_val, ushort port_val);
     void clientThreadFunction(unsigned long ip_addr_val, ushort port_val);
     void startReceiveThread(int socket_val);
-    void ReceiveThreadFunction(int socket_val);
+    void receiveThreadFunction(int socket_val);
     void startTransmitThread(int socket_val);
     void transmitThreadFunction(int socket_val);
     char const *objectName(void) {return "TransportClass";}

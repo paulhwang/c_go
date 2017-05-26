@@ -14,7 +14,7 @@ void *goBaseMgrReceiveThreadFunction (void *this_val)
     ((EngineClass *)this_val)->goBaseMgrReceiveThreadLoop();
 }
 
-void *transportTransmitThreadFunction (void *this_val)
+void *transportTransmitThreadFunction1 (void *this_val)
 {
     ((EngineClass *)this_val)->transportTransmitThreadLoop();
 }
@@ -49,7 +49,7 @@ void EngineClass::startEngineThreads (void)
     if (0) {
         this->logit("startEngine", "create theTransportThread");
     }
-    r = pthread_create(&this->theTransportThread, NULL, transportTransmitThreadFunction, this);
+    r = pthread_create(&this->theTransportThread, NULL, transportTransmitThreadFunction1, this);
     if (r) {
         printf("Error - pthread_create() return code: %d\n", r);
         return;
