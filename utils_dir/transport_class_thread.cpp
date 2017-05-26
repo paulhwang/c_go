@@ -37,21 +37,25 @@ void TransportClass::startServerThread (ushort port_val)
 
 void *transportClientThreadFunction (void *data_val)
 {
+    unsigned long ip_addr = ((transport_thread_parameter *) data_val)->ip_addr;
     unsigned short port = ((transport_thread_parameter *) data_val)->port;
     TransportClass *transport_object = ((transport_thread_parameter *) data_val)->transport_object;
     free(data_val);
 
-    transport_object->serverThreadFunction(port);
+    printf("transportClientThreadFunction aaa %i\n", port);
+    transport_object->clientThreadFunction(ip_addr, port);
+    printf("transportClientThreadFunction bbb %i\n", port);
 }
 
-void TransportClass::startClientThread (ushort port_val)
+void TransportClass::startClientThread (unsigned long ip_addr_val, ushort port_val)
 {
     transport_thread_parameter *data = (transport_thread_parameter *) malloc(sizeof(transport_thread_parameter));
+    data->ip_addr = ip_addr_val;
     data->port = port_val;
     data->transport_object = this;
 
     int r;
-    if (0) {
+    if (1) {
         this->logit("startClientThread", "");
     }
     r = pthread_create(&this->clientThread, 0, transportClientThreadFunction, data);

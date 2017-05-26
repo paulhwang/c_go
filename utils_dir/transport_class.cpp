@@ -95,7 +95,7 @@ S
     receiveDataFromTransportFunc(this->mainObject, (void *) "Move   03031001");
 }
 
-void TransportClass::startClient (ulong ip_addr_val, ushort port_val) {
+void TransportClass::clientThreadFunction (unsigned long ip_addr_val, ushort port_val) {
   int s;
   struct sockaddr_in serv_addr;
   char buffer[1024] = {0};

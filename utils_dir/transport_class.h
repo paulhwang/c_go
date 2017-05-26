@@ -24,13 +24,18 @@ public:
     ~TransportClass();
 
     void startServerThread(ushort port_val);
-    void startClientThread(ushort port_val);
     void serverThreadFunction(ushort port_val);
-    void startClient(ulong ip_addr_val, ushort port_val);
+    void startClientThread(unsigned long ip_addr_val, ushort port_val);
+    void clientThreadFunction(unsigned long ip_addr_val, ushort port_val);
+    void startReceiveThread(int socket_val);
+    void ReceiveThreadFunction(int socket_val);
+    void startTransmitThread(int socket_val);
+    void transmitThreadFunction(int socket_val);
     char const *objectName(void) {return "TransportClass";}
 };
 
 typedef struct {
+    unsigned long ip_addr;
     unsigned short port;
     TransportClass *transport_object;
     int socket;
