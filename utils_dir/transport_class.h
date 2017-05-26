@@ -25,4 +25,11 @@ public:
     void startServerThread(ushort port_val);
     void serverThreadFunction(ushort port_val);
     void startClient(ulong ip_addr_val, ushort port_val);
+    char const *objectName(void) {return "TransportClass";}
 };
+
+typedef struct {
+    unsigned short port;
+    TransportClass *transport_object;
+} transport_server_thread_parameter;
+
