@@ -144,12 +144,14 @@ void TransportClass::clientThreadFunction (unsigned long ip_addr_val, ushort por
   */
 }
 
+#define TRANSPORT_RECEIVE_BUFFER_SIZE 1024
+
 void TransportClass::receiveThreadFunction(int socket_val)
 {
-    char buffer[1024] = {0};
+    void *buffer = malloc(TRANSPORT_RECEIVE_BUFFER_SIZE);
 
-    int length = read(socket_val, buffer, 1024);
-    printf("receiveThreadFunction length=%i data=%s\n", length, buffer);
+    int length = read(socket_val, buffer, TRANSPORT_RECEIVE_BUFFER_SIZE);
+    printf("receiveThreadFunction length=%i data=%s\n", length, (char *)buffer);
 
 }
 
