@@ -52,7 +52,7 @@ void EngineClass::transportTransmitThreadLoop (void)
     if (1) {
         printf("transportTransmitThreadLoop starts\n");
     }
-    this->transportObject()->startServer(8001);
+    this->transportObject()->startServer(8002);
 }
 
 void EngineClass::startEngineThreads (void)

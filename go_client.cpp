@@ -11,7 +11,7 @@ void receiveDataFromTransportFunc (void* engine_object_val, void *data_val) {
 
 int main (int argc, char** argv) {
   TransportClass *transport_object = new TransportClass(null);
-  transport_object->startClient(0, 8001);
+  transport_object->startClient(0, 8002);
 }
 
 
