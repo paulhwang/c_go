@@ -10,13 +10,13 @@ GO_BASE_DIR = $(ROOT_DIR)/go_base_dir
 
 DIRS	= utils_dir root_dir
 
-MAIN_OBJS = engine_class.o main_exports.o
+MAIN_OBJS = engine_class.o main_exports.o main_threads.o
 BASE_MGR_OBJS = $(BASE_MGR_DIR)/base_mgr_class.o $(BASE_MGR_DIR)/base_class.o
 UTILS_OBJS = $(UTILS_DIR)/logit.o $(UTILS_DIR)/transport_class.o $(UTILS_DIR)/queue_entry_class.o $(UTILS_DIR)/queue_mgr_class.o
 GO_BASE_OBJS = $(GO_BASE_DIR)/go_base_class.o $(GO_BASE_DIR)/go_game_class.o $(GO_BASE_DIR)/go_engine_class.o $(GO_BASE_DIR)/go_board_class.o $(GO_BASE_DIR)/go_move_class.o $(GO_BASE_DIR)/go_port_class.o $(GO_BASE_DIR)/go_config_class.o $(GO_BASE_DIR)/go_group_class.o $(GO_BASE_DIR)/go_group_list_class.o
 
 SERVER = server
-SERVER_OBJS	= go_server.o $(MAIN_OBJS) $(BASE_MGR_OBJS) $(UTILS_OBJS) $(GO_BASE_OBJS)
+SERVER_OBJS	= go_server.o $(UTILS_OBJS) $(MAIN_OBJS) $(BASE_MGR_OBJS) $(GO_BASE_OBJS)
 
 CLIENT = client 
 CLIENT_OBJS	= go_client.o $(UTILS_OBJS)

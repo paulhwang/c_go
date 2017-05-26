@@ -50,12 +50,12 @@ void EngineClass::createTransportObject (void)
     this->transportObject()->startServer(8001);
 }
 
-void* goBaseMgrReceiveThreadFunc (void* this_val)
+void* goBaseMgrReceiveThreadFunction (void* this_val)
 {
     ((EngineClass *)this_val)->goBaseMgrReceiveThreadLoop();
 }
 
-void* createTransportFunction (void* this_val)
+void* transportTransmitThreadFunction (void* this_val)
 {
     ((EngineClass *)this_val)->createTransportObject();
 }
@@ -65,7 +65,7 @@ void EngineClass::startEngine (void)
     if (0) {
         this->logit("startEngine", "create theGoThread");
     }
-    int r = pthread_create(&this->theGoThread, NULL, goBaseMgrReceiveThreadFunc, this);
+    int r = pthread_create(&this->theGoThread, NULL, goBaseMgrReceiveThreadFunction, this);
     if (r) {
         printf("Error - pthread_create() return code: %d\n", r);
         return;
@@ -74,7 +74,7 @@ void EngineClass::startEngine (void)
     if (0) {
         this->logit("startEngine", "create theTransportThread");
     }
-    r = pthread_create(&this->theTransportThread, NULL, createTransportFunction, this);
+    r = pthread_create(&this->theTransportThread, NULL, transportTransmitThreadFunction, this);
     if (r) {
         printf("Error - pthread_create() return code: %d\n", r);
         return;
