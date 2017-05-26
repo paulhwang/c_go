@@ -52,7 +52,9 @@ void BaseMgrClass::createBase (void)
 
 void BaseMgrClass::transmitData(char *data_val)
 {
-    this->logit("transmitData", data_val);
+    if (1) {
+        this->logit("transmitData", data_val);
+    }
 }
 
 void BaseMgrClass::receiveData (int base_id_val, char* data_val) {

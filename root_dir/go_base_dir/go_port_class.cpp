@@ -46,15 +46,15 @@ GoGameClass* GoPortClass::gameObject (void) {
 }
 
 void GoPortClass::transmitBoardData (void) {
-    char *encode_board = (char *) malloc(400);
-    this->boardObject()->encodeBoard(encode_board);
+    char *board_data = (char *) malloc(400);
+    this->boardObject()->encodeBoard(board_data);
 
-    if (1) {
+    if (0) {
         char s[LOGIT_BUF_SIZE];
-        sprintf(s, "encode_board=%s", encode_board);
+        sprintf(s, "board_data=%s", board_data);
         this->logit("transmitBoardData", s);
-        this->baseObject()->baseMgrObject()->transmitData(s);
     }
+    this->baseObject()->baseMgrObject()->transmitData(board_data);
 }
 
 void GoPortClass::receiveStringData (char const* str_val) {
