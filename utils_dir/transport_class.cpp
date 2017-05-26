@@ -13,6 +13,7 @@
 #include <netdb.h>
 #include <pwd.h>
 #include <arpa/inet.h>
+#include "queue_mgr_class.h"
 #include "transport_class.h"
 #include "./logit.h"
 
@@ -22,11 +23,13 @@
 void receiveDataFromTransportFunc (void *main_object_val, void *data_val);
 
 TransportClass::TransportClass (void *main_object_val) {
-  this->mainObject = main_object_val;
+    this->mainObject = main_object_val;
+    this->transmitQueue = new QueueMgrClass();
+    this->transmitQueue->initQueue(TRANSPORT_TRANSMIT_QUEUE_SIZE);
 
-  if (1) {
-    this->logit("TransportClass", "init");
-  }
+    if (1) {
+        this->logit("TransportClass", "init");
+    }
 }
 
 TransportClass::~TransportClass () {

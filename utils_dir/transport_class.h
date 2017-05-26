@@ -1,17 +1,22 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
+  File name: transport_class.h
 */
-
 
 #pragma once
 #include <pthread.h>
 #include "../includes/common.h"
 
 #define TRANSPORT_PORT_NUMBER_FOR_ME 8003
+#define TRANSPORT_TRANSMIT_QUEUE_SIZE 1000
+
+class QueueMgrClass;
 
 class TransportClass {
     void *mainObject;
+
+    QueueMgrClass *transmitQueue;
 
     pthread_t serverThread;
     pthread_t clientThread;
