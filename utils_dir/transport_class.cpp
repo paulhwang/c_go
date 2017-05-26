@@ -95,13 +95,11 @@ S
     this->startReceiveThread(data_socket);
     this->startTransmitThread(data_socket);
 
+/*
   char const* data = "from server";
   send(data_socket , data , strlen(data) , 0);
-
-  int valread = read(data_socket , buffer, 1024);
-  printf("valread=%i data=%s\n", valread, buffer);
-
-    receiveDataFromTransportFunc(this->mainObject, (void *) "Move   03031001");
+*/
+    //receiveDataFromTransportFunc(this->mainObject, (void *) "Move   03031001");
 }
 
 void TransportClass::clientThreadFunction (unsigned long ip_addr_val, ushort port_val)
@@ -137,29 +135,40 @@ void TransportClass::clientThreadFunction (unsigned long ip_addr_val, ushort por
     this->startReceiveThread(s);
     this->startTransmitThread(s);
 
+/*
   char const* data1 = "Move   10302001";
   send(s , data1 , strlen(data1) , 0);
 
-  int valread = read(s, buffer, 1024);
-  printf("valread=%i data=%s\n", valread, buffer);
-
   char const* data2 = "SpecialBACKWORD";
   send(s , data2 , strlen(data2) , 0);
+  */
 }
 
 void TransportClass::receiveThreadFunction(int socket_val)
 {
+    char buffer[1024] = {0};
 
+    int length = read(socket_val, buffer, 1024);
+    printf("receiveThreadFunction length=%i data=%s\n", length, buffer);
+
+}
+
+void TransportClass::transmitData (void *data_val)
+{
+    this->transmitQueue->enqueueData(data_val);
 }
 
 void TransportClass::transmitThreadFunction(int socket_val)
 {
-    void *data;
-
     while (1) {
-        data = this->transmitQueue->dequeueData();
-        if (data) {
-            this->logit("transmitThreadFunction", (char *) data);
+        void *data = this->transmitQueue->dequeueData();
+        if (!data) {
+            sleep(1);
+        }
+        else {
+            char *str_data = (char *) data;
+            this->logit("transmitThreadFunction", (char *) str_data);
+            send(socket_val, str_data , strlen(str_data) , 0);
         }
     }
 }
