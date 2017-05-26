@@ -1,7 +1,7 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: engine_class.cpp
+  File name: main_class.cpp
 */
 
 #include <stdio.h>
@@ -31,10 +31,6 @@ EngineClass::~EngineClass(void)
 
 void EngineClass::receiveDataFromTransport (void *data_val) {
     this->goReceiveQueue()->enqueueData(data_val);
-}
-
-void receiveDataFromTransportFunc (void* engine_object_val, void *data_val) {
-    ((EngineClass *) engine_object_val)->goReceiveQueue()->enqueueData(data_val);
 }
 
 void EngineClass::goBaseMgrReceiveThreadLoop (void)

@@ -18,7 +18,7 @@
 #define MAXHOSTNAME 32
 #define BACKLOG 5
 
-void receiveDataFromTransportFunc (void *engine_object_val, void *data_val);
+void receiveDataFromTransportFunc (void *main_object_val, void *data_val);
 
 TransportClass::TransportClass (void *main_object_val) {
   this->mainObject = main_object_val;
