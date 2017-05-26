@@ -7,6 +7,7 @@
 #include "../root_common.h"
 #include "go_base_class.h"
 #include "go_port_class.h"
+//#include "../base_mgr_dir/base_mgr_class.h"
 
 #define GO_PROTOCOL_CODE_SIZE 7
 #define GO_PROTOCOL_CODE_PROPOSE      "Propose"
@@ -51,8 +52,8 @@ void GoPortClass::transmitBoardData (void) {
         char s[LOGIT_BUF_SIZE];
         sprintf(s, "encode_board=%s", encode_board);
         this->logit("transmitBoardData", s);
+        this->baseObject()->baseMgrObject()->transmitData(s);
     }
-
 }
 
 void GoPortClass::receiveStringData (char const* str_val) {

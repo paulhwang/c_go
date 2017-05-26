@@ -32,8 +32,13 @@ class EngineClass {
     ~EngineClass(void);
 
     void startEngine(void);
+
+    /* exports */
     void receiveDataFromTransport(void *data_val);
-    void createTransportObject(void);
+    void transmitDataToTransport(void *data_val);
+
+    /* thread loops */
+    void transportTransmitThreadLoop(void);
     void goBaseMgrReceiveThreadLoop(void);
 
     char const *objectName(void) {return "EngineClass";}

@@ -13,5 +13,5 @@ void *goBaseMgrReceiveThreadFunction (void *this_val)
 
 void *transportTransmitThreadFunction (void *this_val)
 {
-    ((EngineClass *)this_val)->createTransportObject();
+    ((EngineClass *)this_val)->transportTransmitThreadLoop();
 }

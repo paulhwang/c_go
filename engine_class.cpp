@@ -33,19 +33,24 @@ void EngineClass::receiveDataFromTransport (void *data_val) {
     this->goReceiveQueue()->enqueueData(data_val);
 }
 
+void EngineClass::transmitDataToTransport(void *data_val)
+{
+    this->logit("transmitDataToTransport", (char *) data_val);
+}
+
 void EngineClass::goBaseMgrReceiveThreadLoop (void)
 {
     if (1) {
-        printf("BaseMgrThread starts\n");
+        printf("goBaseMgrReceiveThreadLoop starts\n");
     }
     this->goBaseMgrObject()->receiveThreadLoop();
 
 }
 
-void EngineClass::createTransportObject (void)
+void EngineClass::transportTransmitThreadLoop (void)
 {
     if (1) {
-        printf("TransportThread starts\n");
+        printf("transportTransmitThreadLoop starts\n");
     }
     this->transportObject()->startServer(8001);
 }

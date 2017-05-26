@@ -50,6 +50,11 @@ void BaseMgrClass::createBase (void)
     this->theGoBaseObject = new GoBaseClass(this);
 }
 
+void BaseMgrClass::transmitData(char *data_val)
+{
+    this->logit("transmitData", data_val);
+}
+
 void BaseMgrClass::receiveData (int base_id_val, char* data_val) {
     this->logit("receiveData", data_val);
     GoBaseClass* go_base = this->getBaseByBaseId(base_id_val);

@@ -37,6 +37,7 @@ public:
     void receiveThreadLoop(void);
     void createBase(void);
     void receiveData(int base_id_val, char* data_val);
+    void transmitData(char *data_val);
 
     void baseMgrLogit(char const* str0_val, char const* str1_val);
     void baseMgrAbend(char const* str0_val, char const* str1_val);
