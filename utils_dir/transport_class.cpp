@@ -94,12 +94,6 @@ S
 
     this->startReceiveThread(data_socket);
     this->startTransmitThread(data_socket);
-
-/*
-  char const* data = "from server";
-  send(data_socket , data , strlen(data) , 0);
-*/
-    //receiveDataFromTransportFunc(this->mainObject, (void *) "Move   03031001");
 }
 
 void TransportClass::clientThreadFunction (unsigned long ip_addr_val, ushort port_val)
@@ -134,14 +128,6 @@ void TransportClass::clientThreadFunction (unsigned long ip_addr_val, ushort por
 
     this->startReceiveThread(s);
     this->startTransmitThread(s);
-
-/*
-  char const* data1 = "Move   10302001";
-  send(s , data1 , strlen(data1) , 0);
-
-  char const* data2 = "SpecialBACKWORD";
-  send(s , data2 , strlen(data2) , 0);
-  */
 }
 
 #define TRANSPORT_RECEIVE_BUFFER_SIZE 1024
@@ -151,8 +137,9 @@ void TransportClass::receiveThreadFunction(int socket_val)
     void *buffer = malloc(TRANSPORT_RECEIVE_BUFFER_SIZE);
 
     int length = read(socket_val, buffer, TRANSPORT_RECEIVE_BUFFER_SIZE);
-    printf("receiveThreadFunction length=%i data=%s\n", length, (char *)buffer);
+    printf("receiveThreadFunction length=%i data=%s\n", length, (char *) buffer);
 
+    receiveDataFromTransportFunc(this->mainObject, buffer);
 }
 
 void TransportClass::transmitData (void *data_val)
