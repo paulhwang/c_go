@@ -12,7 +12,6 @@
 #include <netdb.h>
 #include <pwd.h>
 #include <arpa/inet.h>
-#include "../engine_class.h"
 #include "transport_class.h"
 #include "./logit.h"
 
@@ -21,8 +20,8 @@
 
 void receiveDataFromTransportFunc (void *engine_object_val, void *data_val);
 
-TransportClass::TransportClass (void *engine_object_val) {
-  this->theEngineObject = engine_object_val;
+TransportClass::TransportClass (void *main_object_val) {
+  this->mainObject = main_object_val;
 
   if (1) {
     this->logit("TransportClass", "init");
@@ -30,10 +29,6 @@ TransportClass::TransportClass (void *engine_object_val) {
 }
 
 TransportClass::~TransportClass () {
-}
-
-void *TransportClass::engineObject () {
-  return this->theEngineObject;
 }
 
 void TransportClass::startServer (ushort port_val) {
@@ -97,8 +92,7 @@ S
   printf("valread=%i data=%s\n", valread, buffer);
   //this->rootObject()->baseObject()->portObject()->receiveStringData(buffer);
 
-    receiveDataFromTransportFunc((void *)this->engineObject(), (void *) "Move   03031001");
-    //this->engineObject()->receiveDataFromTransport((void *) "Move   03031001");
+    receiveDataFromTransportFunc(this->mainObject, (void *) "Move   03031001");
 }
 
 void TransportClass::startClient (ulong ip_addr_val, ushort port_val) {

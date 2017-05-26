@@ -3,29 +3,20 @@
   Written by Paul Hwang
 */
 
+
+#pragma once
 #include "../includes/common.h"
 
-#ifndef __GO_TRANSPORT_CLASS_H__
-#define __GO_TRANSPORT_CLASS_H__
-
-class EngineClass;
-//#include "../root_dir/root_class.h"
-
 class TransportClass {
-  public:
-    TransportClass(void *engine_object_val);
-    ~TransportClass();
-
-    void *engineObject();
-
-    void startServer(ushort port_val);
-    void startClient(ulong ip_addr_val, ushort port_val);
-
-  private:
-    void *theEngineObject;
+    void *mainObject;
 
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
-};
+ 
+public:
+    TransportClass(void *main_object_val);
+    ~TransportClass();
 
-#endif
+    void startServer(ushort port_val);
+    void startClient(ulong ip_addr_val, ushort port_val);
+};
