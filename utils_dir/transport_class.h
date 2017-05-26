@@ -12,6 +12,7 @@ class TransportClass {
     void *mainObject;
 
     pthread_t serverThread;
+    pthread_t clientThread;
     pthread_t transmitThread;
     pthread_t receiveThread;
 
@@ -23,6 +24,7 @@ public:
     ~TransportClass();
 
     void startServerThread(ushort port_val);
+    void startClientThread(ushort port_val);
     void serverThreadFunction(ushort port_val);
     void startClient(ulong ip_addr_val, ushort port_val);
     char const *objectName(void) {return "TransportClass";}
@@ -31,5 +33,6 @@ public:
 typedef struct {
     unsigned short port;
     TransportClass *transport_object;
-} transport_server_thread_parameter;
+    int socket;
+} transport_thread_parameter;
 
