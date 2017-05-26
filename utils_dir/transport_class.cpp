@@ -22,7 +22,8 @@
 
 void receiveDataFromTransportFunc (void *main_object_val, void *data_val);
 
-TransportClass::TransportClass (void *main_object_val) {
+TransportClass::TransportClass (void *main_object_val)
+{
     this->mainObject = main_object_val;
     this->transmitQueue = new QueueMgrClass();
     this->transmitQueue->initQueue(TRANSPORT_TRANSMIT_QUEUE_SIZE);
@@ -32,10 +33,12 @@ TransportClass::TransportClass (void *main_object_val) {
     }
 }
 
-TransportClass::~TransportClass () {
+TransportClass::~TransportClass (void)
+{
 }
 
-void TransportClass::serverThreadFunction (ushort port_val) {
+void TransportClass::serverThreadFunction (ushort port_val)
+{
   char localhost[MAXHOSTNAME + 1];
   struct servent *sp;
   int s, data_socket;
@@ -101,7 +104,8 @@ S
     receiveDataFromTransportFunc(this->mainObject, (void *) "Move   03031001");
 }
 
-void TransportClass::clientThreadFunction (unsigned long ip_addr_val, ushort port_val) {
+void TransportClass::clientThreadFunction (unsigned long ip_addr_val, ushort port_val)
+{
   int s;
   struct sockaddr_in serv_addr;
   char buffer[1024] = {0};
@@ -150,14 +154,23 @@ void TransportClass::receiveThreadFunction(int socket_val)
 
 void TransportClass::transmitThreadFunction(int socket_val)
 {
+    void *data;
 
+    while (1) {
+        data = this->transmitQueue->dequeueData();
+        if (data) {
+            this->logit("transmitThreadFunction", (char *) data);
+        }
+    }
 }
 
-void TransportClass::logit (char const* str0_val, char const* str1_val) {
-  LOGIT(str0_val, str1_val);
+void TransportClass::logit (char const* str0_val, char const* str1_val)
+{
+    LOGIT(str0_val, str1_val);
 }
 
-void TransportClass::abend (char const* str0_val, char const* str1_val) {
-  ABEND(str0_val, str1_val);
+void TransportClass::abend (char const* str0_val, char const* str1_val)
+{
+    ABEND(str0_val, str1_val);
 }
 

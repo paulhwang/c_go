@@ -32,7 +32,7 @@ class TransportClass {
  
 public:
     TransportClass(void *main_object_val);
-    ~TransportClass();
+    ~TransportClass(void);
 
     void startServerThread(ushort port_val);
     void serverThreadFunction(ushort port_val);
