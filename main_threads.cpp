@@ -36,7 +36,7 @@ void EngineClass::startEngineThreads (void)
         return;
     }
 
-    this->transportObject()->startServerThread(8002);
+    this->transportObject()->startServerThread(TRANSPORT_PORT_NUMBER_FOR_ME);
 
     pthread_join(this->goThread(), NULL);
 }

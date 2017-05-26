@@ -8,6 +8,8 @@
 #include <pthread.h>
 #include "../includes/common.h"
 
+#define TRANSPORT_PORT_NUMBER_FOR_ME 8003
+
 class TransportClass {
     void *mainObject;
 
