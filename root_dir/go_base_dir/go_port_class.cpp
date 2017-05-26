@@ -4,6 +4,7 @@
   File name: go_port_class.cpp
 */
 
+#include <malloc.h>
 #include "../root_common.h"
 #include "go_base_class.h"
 #include "go_port_class.h"
@@ -45,7 +46,7 @@ GoGameClass* GoPortClass::gameObject (void) {
 }
 
 void GoPortClass::transmitBoardData (void) {
-    char encode_board[400];
+    char *encode_board = (char *) malloc(400);
     this->boardObject()->encodeBoard(encode_board);
 
     if (1) {
