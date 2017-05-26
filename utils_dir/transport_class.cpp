@@ -1,6 +1,7 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
+  File name: transport_class.cpp
 */
 
 #include <stdio.h>
@@ -53,7 +54,7 @@ void TransportClass::startServerThread (ushort port_val)
     }
     r = pthread_create(&this->serverThread, 0, transportServerThreadFunction, data);
     if (r) {
-        printf("Error - pthread_create() return code: %d\n", r);
+        printf("Error - startServerThread() return code: %d\n", r);
         return;
     }
 }
