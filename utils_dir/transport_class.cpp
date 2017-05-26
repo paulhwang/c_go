@@ -91,7 +91,6 @@ S
 
   int valread = read(data_socket , buffer, 1024);
   printf("valread=%i data=%s\n", valread, buffer);
-  //this->rootObject()->baseObject()->portObject()->receiveStringData(buffer);
 
     receiveDataFromTransportFunc(this->mainObject, (void *) "Move   03031001");
 }
