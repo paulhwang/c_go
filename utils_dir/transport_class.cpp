@@ -133,10 +133,10 @@ void TransportClass::clientThreadFunction (unsigned long ip_addr_val, ushort por
 
 void TransportClass::receiveThreadFunction(int socket_val)
 {
-    void *buffer = malloc(TRANSPORT_RECEIVE_BUFFER_SIZE);
+    char *buffer = (char *) malloc(TRANSPORT_RECEIVE_BUFFER_SIZE);
 
     int length = read(socket_val, buffer, TRANSPORT_RECEIVE_BUFFER_SIZE);
-    printf("receiveThreadFunction length=%i data=%s\n", length, (char *) buffer);
+    this->logit("receiveThreadFunction", buffer);
 
     mainReceiveDataFromTransport(this->mainObject, buffer);
 }
