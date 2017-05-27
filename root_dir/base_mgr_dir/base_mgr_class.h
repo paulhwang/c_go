@@ -18,7 +18,7 @@ class GoBaseClass;
 #define BASE_MGR_RECEIVE_QUEUE_SIZE 100
 
 class BaseMgrClass {
-  	EngineClass* theEngineObject;
+  	void *mainObject;
 
     GoBaseClass *theTestGoBase;
 
@@ -30,11 +30,10 @@ class BaseMgrClass {
     void abend(char const* str0_val, char const* str1_val);
 
 public:
-    BaseMgrClass(EngineClass *engine_object_val);
+    BaseMgrClass(void *main_object_val);
     ~BaseMgrClass();
 
     char const* objectName(void) {return "BaseMgrClass";}
-    EngineClass* engineObject(void) {return theEngineObject;}
 
     /* exports */
     void exportReceiveData(void *data_val);

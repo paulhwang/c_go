@@ -14,9 +14,9 @@
 #include "../../engine_class.h"
 #include "../go_base_dir/go_base_class.h"
 
-BaseMgrClass::BaseMgrClass (EngineClass *engine_object_val)
+BaseMgrClass::BaseMgrClass (void *main_object_val)
 {
-    this->theEngineObject = engine_object_val;
+    this->mainObject = main_object_val;
 
     this->theTestGoBase = new GoBaseClass(this);
 
@@ -39,7 +39,7 @@ GoBaseClass* BaseMgrClass::getBaseByBaseId (int base_id_val) {
 void BaseMgrClass::receiveThreadLoop (void)
 {
     while (1) {
-        char* data = (char *) this->receiveQueue->dequeueData();
+        char *data = (char *) this->receiveQueue->dequeueData();
         if (data) {
             this->receiveData(1, data);
         }
