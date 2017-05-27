@@ -13,8 +13,8 @@
 
 MainClass::MainClass(void)
 {
-    this->theGoBaseMgrObject = new BaseMgrClass(this);
-    this->theTransportObject = new TransportClass(this);
+    this->goBaseMgrObject = new BaseMgrClass(this);
+    this->transportObject = new TransportClass(this);
 
     this->theTransportTransmitQueue = new QueueMgrClass();
     this->transportTransmitQueue()->initQueue(100);

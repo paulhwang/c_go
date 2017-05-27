@@ -13,10 +13,11 @@ class BaseMgrClass;
 class QueueMgrClass;
 
 class MainClass {
-    TransportClass *theTransportObject;
+    TransportClass *transportObject;
+    BaseMgrClass *goBaseMgrObject;
+
     QueueMgrClass *theTransportTransmitQueue;
 
-    BaseMgrClass *theGoBaseMgrObject;
     pthread_t theGoThread;
 
     pthread_t goThread(void) {return theGoThread;}
@@ -38,7 +39,5 @@ class MainClass {
     void goBaseMgrReceiveThreadLoop(void);
 
     char const *objectName(void) {return "MainClass";}
-    TransportClass *transportObject(void) {return theTransportObject;}
-    BaseMgrClass* goBaseMgrObject(void) {return theGoBaseMgrObject;}
     QueueMgrClass *transportTransmitQueue(void) {return theTransportTransmitQueue;}
 };

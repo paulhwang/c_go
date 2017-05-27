@@ -19,7 +19,7 @@ void MainClass::goBaseMgrReceiveThreadLoop (void)
     if (1) {
         printf("goBaseMgrReceiveThreadLoop starts\n");
     }
-    this->goBaseMgrObject()->receiveThreadLoop();
+    this->goBaseMgrObject->receiveThreadLoop();
 
 }
 
@@ -36,7 +36,7 @@ void MainClass::startEngineThreads (void)
         return;
     }
 
-    this->transportObject()->startServerThread(TRANSPORT_PORT_NUMBER_FOR_ME);
+    this->transportObject->startServerThread(TRANSPORT_PORT_NUMBER_FOR_ME);
 
     pthread_join(this->goThread(), NULL);
 }
