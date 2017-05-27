@@ -34,6 +34,9 @@ public:
     char const* objectName(void) {return "BaseMgrClass";}
     EngineClass* engineObject(void) {return theEngineObject;}
 
+    /* exports */
+    void exportReceiveData(void *data_val);
+
     void receiveThreadLoop(void);
     void createBase(void);
     void receiveData(int base_id_val, char* data_val);
