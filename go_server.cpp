@@ -4,7 +4,7 @@
   File name: go_server.cpp
 */
 
-#include "engine_class.h"
+#include "main_class.h"
 
 int main (int argc, char** argv) {
     EngineClass *mainObject = new EngineClass();

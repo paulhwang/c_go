@@ -12,7 +12,7 @@ class EngineClass;
 class BaseClass;
 class GoBaseClass;
 
-#include "../../engine_class.h"
+#include "../../main_class.h"
 #include "../go_base_dir/go_base_class.h"
 
 #define BASE_MGR_RECEIVE_QUEUE_SIZE 100
