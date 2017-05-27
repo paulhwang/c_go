@@ -20,6 +20,9 @@ BaseMgrClass::BaseMgrClass (EngineClass *engine_object_val)
 
     this->theTestGoBase = new GoBaseClass(this);
 
+    this->receiveQueue = new QueueMgrClass();
+    this->receiveQueue->initQueue(BASE_MGR_RECEIVE_QUEUE_SIZE);
+
     if (1) {
         this->logit("init", "");
     }
