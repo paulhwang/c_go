@@ -24,3 +24,9 @@ MainClass::~MainClass(void)
 {
     this->transportTransmitQueue()->~QueueMgrClass();
 }
+
+void MainClass::startThreads (void)
+{
+    this->transportObject->startServerThread(TRANSPORT_PORT_NUMBER_FOR_ME);
+    this->goBaseMgrObject->startThreads();
+}

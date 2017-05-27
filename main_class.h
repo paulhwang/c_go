@@ -29,6 +29,7 @@ class MainClass {
     MainClass(void);
     ~MainClass(void);
 
+    void startThreads(void);
     void startEngineThreads(void);
 
     /* exports */

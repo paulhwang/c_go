@@ -8,6 +8,7 @@
 
 int main (int argc, char** argv) {
     MainClass *mainObject = new MainClass();
+    mainObject->startThreads();
     mainObject->startEngineThreads();
 }
 
