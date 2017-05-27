@@ -18,7 +18,6 @@ class EngineClass {
 
     BaseMgrClass *theGoBaseMgrObject;
     pthread_t theGoThread;
-    QueueMgrClass *theGoReceiveQueue;
 
     pthread_t goThread(void) {return theGoThread;}
 
@@ -42,5 +41,4 @@ class EngineClass {
     TransportClass *transportObject(void) {return theTransportObject;}
     BaseMgrClass* goBaseMgrObject(void) {return theGoBaseMgrObject;}
     QueueMgrClass *transportTransmitQueue(void) {return theTransportTransmitQueue;}
-    QueueMgrClass *goReceiveQueue(void) {return theGoReceiveQueue;}
 };

@@ -18,13 +18,9 @@ EngineClass::EngineClass(void)
 
     this->theTransportTransmitQueue = new QueueMgrClass();
     this->transportTransmitQueue()->initQueue(100);
-
-    this->theGoReceiveQueue = new QueueMgrClass();
-    this->goReceiveQueue()->initQueue(100);
 }
 
 EngineClass::~EngineClass(void)
 {
-    this->goReceiveQueue()->~QueueMgrClass();
     this->transportTransmitQueue()->~QueueMgrClass();
 }
