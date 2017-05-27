@@ -6,7 +6,6 @@
 
 #include <stdio.h>
 #include <unistd.h>
-#include "../root_common.h"
 #include "../../utils_dir/logit.h"
 #include "../../utils_dir/queue_mgr_class.h"
 #include "base_mgr_class.h"

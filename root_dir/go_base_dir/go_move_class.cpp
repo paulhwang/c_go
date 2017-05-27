@@ -4,7 +4,7 @@
   File name: go_move_class.cpp
 */
 
-#include "../root_common.h"
+#include <stdio.h>
 #include "go_base_class.h"
 #include "go_move_class.h"
 

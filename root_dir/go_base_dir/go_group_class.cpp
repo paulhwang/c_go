@@ -4,7 +4,7 @@
   File name go_group_class.cpp
 */
 
-#include "../root_common.h"
+#include <stdio.h>
 #include "go_base_class.h"
 #include "go_group_list_class.h"
 #include "go_group_class.h"

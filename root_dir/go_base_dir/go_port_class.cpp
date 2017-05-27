@@ -4,11 +4,11 @@
   File name: go_port_class.cpp
 */
 
+#include <stdio.h>
+#include <string.h>
 #include <malloc.h>
-#include "../root_common.h"
 #include "go_base_class.h"
 #include "go_port_class.h"
-//#include "../base_mgr_dir/base_mgr_class.h"
 
 #define GO_PROTOCOL_CODE_SIZE 7
 #define GO_PROTOCOL_CODE_PROPOSE      "Propose"

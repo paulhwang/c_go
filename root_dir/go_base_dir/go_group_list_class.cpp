@@ -4,7 +4,7 @@
   File name: go_group_list_class.cpp
 */
 
-#include "../root_common.h"
+#include <stdio.h>
 #include "go_base_class.h"
 #include "go_group_list_class.h"
 
@@ -13,7 +13,8 @@ GoGroupListClass::GoGroupListClass (GoEngineClass* engine_val,
                                     int color_val,
                                     int dead_val,
                                     char const* big_stone_val,
-                                    char const* small_stone_val) {
+                                    char const* small_stone_val)
+{
   this->theEngineObject = engine_val;
   this->theGroupCount = 0;
 
@@ -22,10 +23,12 @@ GoGroupListClass::GoGroupListClass (GoEngineClass* engine_val,
   }
 }
 
-GoGroupListClass::~GoGroupListClass () {
+GoGroupListClass::~GoGroupListClass (void)
+{
 }
 
-char const* GoGroupListClass::objectName () {
+char const* GoGroupListClass::objectName (void)
+{
   return "GoGroupListClass";
 }
 

@@ -4,7 +4,7 @@
   File name: go_engine_class.cpp
 */
 
-#include "../root_common.h"
+#include <stdio.h>
 #include "../../includes/types.h"
 #include "go_base_class.h"
 #include "go_engine_class.h"
