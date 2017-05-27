@@ -19,6 +19,7 @@ class GoBaseClass;
 
 class BaseMgrClass {
   	void *mainObject;
+    pthread_t receiveThread;
 
     GoBaseClass *theTestGoBase;
 
@@ -39,6 +40,7 @@ public:
     /* exports */
     void exportReceiveData(void *data_val);
 
+    void receiveThreadFunction(void);
     void receiveThreadLoop(void);
     void createBase(void);
     void receiveData(int base_id_val, char* data_val);

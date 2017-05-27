@@ -31,11 +31,6 @@ BaseMgrClass::~BaseMgrClass (void)
 {
 }
 
-void BaseMgrClass::startThreads (void)
-{
-
-}
-
 GoBaseClass* BaseMgrClass::getBaseByBaseId (int base_id_val) {
     return this->theTestGoBase;
 }
