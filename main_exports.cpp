@@ -10,6 +10,6 @@ void mainReceiveDataFromTransport (void* main_object_val, void *data_val) {
     ((EngineClass *) main_object_val)->receiveDataFromTransport(data_val);
 }
 
-void transmitDataToTransportFunc (void* main_object_val, void *data_val) {
+void mainTransmitDataToTransport (void* main_object_val, void *data_val) {
     ((EngineClass *) main_object_val)->transmitDataToTransport(data_val);
 }
