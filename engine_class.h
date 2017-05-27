@@ -33,7 +33,7 @@ class EngineClass {
 
     /* exports */
     void exportRreceiveDataFromTransport(void *data_val);
-    void transmitDataToTransport(void *data_val);
+    void exportTransmitDataToTransport(void *data_val);
 
     /* thread loops */
     void goBaseMgrReceiveThreadLoop(void);
