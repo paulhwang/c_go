@@ -163,11 +163,15 @@ void TransportClass::transmitThreadFunction(int socket_val)
 
 void TransportClass::logit (char const* str0_val, char const* str1_val)
 {
-    LOGIT(str0_val, str1_val);
+    char s[LOGIT_BUF_SIZE];
+    sprintf(s, "%s::%s", this->objectName(), str0_val);
+    LOGIT(s, str1_val);
 }
 
 void TransportClass::abend (char const* str0_val, char const* str1_val)
 {
-    ABEND(str0_val, str1_val);
+    char s[LOGIT_BUF_SIZE];
+    sprintf(s, "%s::%s", this->objectName(), str0_val);
+    ABEND(s, str1_val);
 }
 

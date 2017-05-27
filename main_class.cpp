@@ -30,3 +30,18 @@ void MainClass::startThreads (void)
     this->transportObject->startServerThread(TRANSPORT_PORT_NUMBER_FOR_ME);
     this->goBaseMgrObject->startThreads();
 }
+
+void MainClass::logit (char const* str0_val, char const* str1_val)
+{
+    char s[LOGIT_BUF_SIZE];
+    sprintf(s, "%s::%s", this->objectName(), str0_val);
+    LOGIT(s, str1_val);
+}
+
+void MainClass::abend (char const* str0_val, char const* str1_val)
+{
+    char s[LOGIT_BUF_SIZE];
+    sprintf(s, "%s::%s", this->objectName(), str0_val);
+    ABEND(s, str1_val);
+}
+

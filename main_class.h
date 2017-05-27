@@ -22,8 +22,8 @@ class MainClass {
 
     pthread_t goThread(void) {return theGoThread;}
 
-    void logit (char const* str0_val, char const* str1_val) {LOGIT(str0_val, str1_val);}
-    void abend (char const* str0_val, char const* str1_val) {ABEND(str0_val, str1_val);}
+    void logit(char const* str0_val, char const* str1_val);
+    void abend(char const* str0_val, char const* str1_val);
 
   public:
     MainClass(void);

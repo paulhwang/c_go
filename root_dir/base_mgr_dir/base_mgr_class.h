@@ -4,8 +4,7 @@
   File name: base_mgr_class.h
 */
 
-#ifndef __BASE_MGR_CLASS_H__
-#define __BASE_MGR_CLASS_H__
+#pragma once
 
 class QueueMgrClass;
 class EngineClass;
@@ -52,4 +51,3 @@ public:
     GoBaseClass* goBaseObject(void);
     GoBaseClass* theGoBaseObject;
 };
-#endif
