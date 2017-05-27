@@ -84,7 +84,7 @@ void TransportClass::startReceiveThread (int socket_val)
     if (0) {
         this->logit("startReceiveThread", "");
     }
-    r = pthread_create(&this->serverThread, 0, transportReceiveThreadFunction, data);
+    r = pthread_create(&this->receiveThread, 0, transportReceiveThreadFunction, data);
     if (r) {
         printf("Error - startReceiveThread() return code: %d\n", r);
         return;
@@ -110,7 +110,7 @@ void TransportClass::startTransmitThread (int socket_val)
     if (0) {
         this->logit("startTransmitThread", "");
     }
-    r = pthread_create(&this->serverThread, 0, transportTransmitThreadFunction, data);
+    r = pthread_create(&this->transmitThread, 0, transportTransmitThreadFunction, data);
     if (r) {
         printf("Error - startTransmitThread() return code: %d\n", r);
         return;
