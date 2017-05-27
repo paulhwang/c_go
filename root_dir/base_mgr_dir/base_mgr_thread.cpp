@@ -33,4 +33,5 @@ void BaseMgrClass::startThreads (void)
         printf("Error - pthread_create() return code: %d\n", r);
         return;
     }
+    pthread_join(this->receiveThread, NULL);
 }
