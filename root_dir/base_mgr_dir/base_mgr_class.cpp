@@ -39,7 +39,7 @@ GoBaseClass* BaseMgrClass::getBaseByBaseId (int base_id_val) {
 void BaseMgrClass::receiveThreadLoop (void)
 {
     while (1) {
-        char* data = (char *) this->goReceiveQueue()->dequeueData();
+        char* data = (char *) this->receiveQueue->dequeueData();
         if (data) {
             this->receiveData(1, data);
         }

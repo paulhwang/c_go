@@ -18,7 +18,7 @@ void mainTransmitDataToTransport (void* main_object_val, void *data_val) {
 }
 
 void EngineClass::exportRreceiveDataFromTransport (void *data_val) {
-    this->goReceiveQueue()->enqueueData(data_val);
+    //this->goReceiveQueue()->enqueueData(data_val);
     //return;
 
     char *game_name = (char *)"go";
