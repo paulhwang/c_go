@@ -141,7 +141,7 @@ void TransportClass::receiveThreadFunction(int socket_val)
     mainReceiveDataFromTransport(this->mainObject, buffer);
 }
 
-void TransportClass::transmitData (void *data_val)
+void TransportClass::exportTransmitData (void *data_val)
 {
     this->transmitQueue->enqueueData(data_val);
 }

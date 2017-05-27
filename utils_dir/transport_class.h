@@ -40,7 +40,8 @@ public:
     void receiveThreadFunction(int socket_val);
     void transmitThreadFunction(int socket_val);
 
-    void transmitData(void *data_val);
+    /* exports */
+    void exportTransmitData(void *data_val);
 
     char const *objectName(void) {return "TransportClass";}
 };

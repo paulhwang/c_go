@@ -11,6 +11,7 @@
 #include "../../utils_dir/queue_mgr_class.h"
 #include "base_mgr_class.h"
 #include "base_class.h"
+#include "../../main_exports.h"
 #include "../go_base_dir/go_base_class.h"
 
 BaseMgrClass::BaseMgrClass (void *main_object_val)
@@ -56,6 +57,7 @@ void BaseMgrClass::transmitData(char *data_val)
 {
     if (1) {
         this->logit("transmitData", data_val);
+        mainTransmitDataToTransport(this->mainObject, data_val);
     }
 }
 
