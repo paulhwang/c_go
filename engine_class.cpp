@@ -28,12 +28,3 @@ EngineClass::~EngineClass(void)
     this->goReceiveQueue()->~QueueMgrClass();
     this->transportTransmitQueue()->~QueueMgrClass();
 }
-
-void EngineClass::receiveDataFromTransport (void *data_val) {
-    this->goReceiveQueue()->enqueueData(data_val);
-}
-
-void EngineClass::transmitDataToTransport(void *data_val)
-{
-    this->logit("transmitDataToTransport", (char *) data_val);
-}

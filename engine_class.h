@@ -32,7 +32,7 @@ class EngineClass {
     void startEngineThreads(void);
 
     /* exports */
-    void receiveDataFromTransport(void *data_val);
+    void exportRreceiveDataFromTransport(void *data_val);
     void transmitDataToTransport(void *data_val);
 
     /* thread loops */
