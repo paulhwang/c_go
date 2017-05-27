@@ -12,7 +12,7 @@ class TransportClass;
 class BaseMgrClass;
 class QueueMgrClass;
 
-class EngineClass {
+class MainClass {
     TransportClass *theTransportObject;
     QueueMgrClass *theTransportTransmitQueue;
 
@@ -25,8 +25,8 @@ class EngineClass {
     void abend (char const* str0_val, char const* str1_val) {ABEND(str0_val, str1_val);}
 
   public:
-    EngineClass(void);
-    ~EngineClass(void);
+    MainClass(void);
+    ~MainClass(void);
 
     void startEngineThreads(void);
 
@@ -37,7 +37,7 @@ class EngineClass {
     /* thread loops */
     void goBaseMgrReceiveThreadLoop(void);
 
-    char const *objectName(void) {return "EngineClass";}
+    char const *objectName(void) {return "MainClass";}
     TransportClass *transportObject(void) {return theTransportObject;}
     BaseMgrClass* goBaseMgrObject(void) {return theGoBaseMgrObject;}
     QueueMgrClass *transportTransmitQueue(void) {return theTransportTransmitQueue;}

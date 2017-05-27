@@ -11,7 +11,7 @@
 #include "root_dir/base_mgr_dir/base_mgr_class.h"
 #include "main_class.h"
 
-EngineClass::EngineClass(void)
+MainClass::MainClass(void)
 {
     this->theGoBaseMgrObject = new BaseMgrClass(this);
     this->theTransportObject = new TransportClass(this);
@@ -20,7 +20,7 @@ EngineClass::EngineClass(void)
     this->transportTransmitQueue()->initQueue(100);
 }
 
-EngineClass::~EngineClass(void)
+MainClass::~MainClass(void)
 {
     this->transportTransmitQueue()->~QueueMgrClass();
 }

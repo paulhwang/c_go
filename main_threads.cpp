@@ -11,10 +11,10 @@
 
 void *goBaseMgrReceiveThreadFunction (void *this_val)
 {
-    ((EngineClass *)this_val)->goBaseMgrReceiveThreadLoop();
+    ((MainClass *)this_val)->goBaseMgrReceiveThreadLoop();
 }
 
-void EngineClass::goBaseMgrReceiveThreadLoop (void)
+void MainClass::goBaseMgrReceiveThreadLoop (void)
 {
     if (1) {
         printf("goBaseMgrReceiveThreadLoop starts\n");
@@ -23,7 +23,7 @@ void EngineClass::goBaseMgrReceiveThreadLoop (void)
 
 }
 
-void EngineClass::startEngineThreads (void)
+void MainClass::startEngineThreads (void)
 {
 	int r;
 

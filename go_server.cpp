@@ -7,7 +7,7 @@
 #include "main_class.h"
 
 int main (int argc, char** argv) {
-    EngineClass *mainObject = new EngineClass();
+    MainClass *mainObject = new MainClass();
     mainObject->startEngineThreads();
 }
 
