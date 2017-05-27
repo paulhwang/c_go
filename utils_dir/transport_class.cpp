@@ -13,14 +13,13 @@
 #include <netdb.h>
 #include <pwd.h>
 #include <arpa/inet.h>
+#include "../main_exports.h"
 #include "queue_mgr_class.h"
 #include "transport_class.h"
 #include "./logit.h"
 
 #define MAXHOSTNAME 32
 #define BACKLOG 5
-
-void receiveDataFromTransportFunc (void *main_object_val, void *data_val);
 
 TransportClass::TransportClass (void *main_object_val)
 {
@@ -139,7 +138,7 @@ void TransportClass::receiveThreadFunction(int socket_val)
     int length = read(socket_val, buffer, TRANSPORT_RECEIVE_BUFFER_SIZE);
     printf("receiveThreadFunction length=%i data=%s\n", length, (char *) buffer);
 
-    receiveDataFromTransportFunc(this->mainObject, buffer);
+    mainReceiveDataFromTransport(this->mainObject, buffer);
 }
 
 void TransportClass::transmitData (void *data_val)

@@ -1,12 +1,13 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
+  File name: go_client.cpp
 */
 
 #include <unistd.h>
 #include "./utils_dir/transport_class.h"
 
-void receiveDataFromTransportFunc (void* engine_object_val, void *data_val) {
+void mainReceiveDataFromTransport (void* engine_object_val, void *data_val) {
     printf("%s\n", (char *) data_val);
 }
 

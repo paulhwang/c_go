@@ -6,7 +6,7 @@
 
 #include "engine_class.h"
 
-void receiveDataFromTransportFunc (void* main_object_val, void *data_val) {
+void mainReceiveDataFromTransport (void* main_object_val, void *data_val) {
     ((EngineClass *) main_object_val)->receiveDataFromTransport(data_val);
 }
 
