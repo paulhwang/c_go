@@ -50,22 +50,25 @@ void QueueMgrClass::enqueueData (void *data_val)
 		entry->data = data_val;
 	}
 	this->enqueueEntry(entry);
+  this->suspendObject->signal();
 }
 
-void *QueueMgrClass::dequeueData (void)
+void *QueueMgrClass::dequeueData1 (void)
 {
-	  QueueEntryClass *entry = this->dequeueEntry();
-	  if (entry) {
-		    if (0) {
-			      this->logit("dequeueData", (char *) entry->data);
-		    }
-        void *data = entry->data;
-        delete entry;
-		    return data;
-	  }
-	  else {
-		    return 0;
-	  }
+    while (1) {
+        QueueEntryClass *entry = this->dequeueEntry();
+        if (entry) {
+            if (0) {
+                this->logit("dequeueData", (char *) entry->data);
+            }
+            void *data = entry->data;
+            delete entry;
+            return data;
+        }
+        else {
+            this->suspendObject->wait();
+        }
+    }
 }
 
 void QueueMgrClass::enqueueEntry(QueueEntryClass *entry)

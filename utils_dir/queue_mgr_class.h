@@ -36,7 +36,7 @@ public:
 
     void initQueue(int max_queue_size_val);
     void enqueueData(void *data_val);
-    void *dequeueData(void);
+    void *dequeueData1(void);
 
     void enqueueEntry(QueueEntryClass *entry);
     QueueEntryClass *dequeueEntry(void);
