@@ -18,7 +18,7 @@ class QueueMgrClass
     QueueEntryClass *queue_head;
     QueueEntryClass *queue_tail;
     int max_queue_size;
-    SuspendClass *suspend_object;
+    SuspendClass *suspendObject;
   //CRITICAL_SECTION cs_queue;
     int in_index;
     int out_index;

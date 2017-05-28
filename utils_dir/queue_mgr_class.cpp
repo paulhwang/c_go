@@ -10,20 +10,24 @@
 //#include "mitac_rfid_engine_common_include.h"
 #include "queue_mgr_class.h"
 #include "queue_entry_class.h"
+#include "suspend_class.h"
 //#include "getac_def_component.h"
 //#include "getac_def_marker.h"
 
 QueueMgrClass::QueueMgrClass(void)
 {
-  memset(this, 0, sizeof(*this));
-  //this->marker_head = this->marker_tail = GETAC_MARKER_UTIL_QUE_ENT;
+    memset(this, 0, sizeof(*this));
+    this->suspendObject = new SuspendClass();
+
+    //this->marker_head = this->marker_tail = GETAC_MARKER_UTIL_QUE_ENT;
 }
 
 QueueMgrClass::~QueueMgrClass(void)
 {
-  if (this->queue_size) {
-    //abend(GATEWAY_LOG_TYPE_RFID, MTC_ERR_MISC, __LINE__, __FUNCTION__);
-  }
+    if (this->queue_size) {
+        //abend(GATEWAY_LOG_TYPE_RFID, MTC_ERR_MISC, __LINE__, __FUNCTION__);
+    }
+    delete this->suspendObject;
 }
 
 void QueueMgrClass::initQueue(int max_queue_size_val)
