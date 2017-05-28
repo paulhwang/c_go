@@ -1,7 +1,7 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name:queue_mgr_class.cpp
+  File name: queue_mgr_class.cpp
 */
 
 #include <string.h>
@@ -96,99 +96,96 @@ void QueueMgrClass::enqueueEntry(QueueEntryClass *entry)
     return;
   }
     
-  entry->next = 0;  
-  //EnterCriticalSection(&cs_queue);
-  in_index++;
+    entry->next = 0;  
+    pthread_mutex_lock(this->mutex);
+    in_index++;
 
-  if (!queue_head) {
-    entry->prev = 0;
-    queue_head = entry;
-    queue_tail = entry;
-    queue_size = 1; 
-  }
-  else {        
-    entry->prev = queue_tail;
-    queue_tail->next = entry;
-    queue_tail = entry;
-    queue_size++;
-  }
-
-  //LeaveCriticalSection(&cs_queue);
+    if (!queue_head) {
+        entry->prev = 0;
+        queue_head = entry;
+        queue_tail = entry;
+        queue_size = 1; 
+    }
+    else {        
+        entry->prev = queue_tail;
+        queue_tail->next = entry;
+        queue_tail = entry;
+        queue_size++;
+    }
+    pthread_mutex_unlock(this->mutex);
 }
 
 QueueEntryClass *QueueMgrClass::dequeueEntry(void)
 {
-  QueueEntryClass *entry;
+    QueueEntryClass *entry;
 
-  if (!this->queue_head) {
-    return 0;
-  }
+    if (!this->queue_head) {
+        return 0;
+    }
 
-  out_index = in_index;
+    out_index = in_index;
+    pthread_mutex_lock(this->mutex);
 
-  //EnterCriticalSection(&cs_queue);
+    if (queue_size == 1) {
+        entry = queue_head;
+        queue_head = queue_tail = 0;
+        queue_size = 0;
+        pthread_mutex_unlock(this->mutex);
+        return entry;
+    }
 
-
-  if (queue_size == 1) {
     entry = queue_head;
-    queue_head = queue_tail = 0;
-    queue_size = 0;
-    //LeaveCriticalSection(&cs_queue);
+    queue_head = queue_head->next;
+    queue_head->prev = 0;
+    queue_size--;
+    pthread_mutex_unlock(this->mutex);
     return entry;
-  }
-
-  entry = queue_head;
-  queue_head = queue_head->next;
-  queue_head->prev = 0;
-  queue_size--;
-  //LeaveCriticalSection(&cs_queue);
-  return entry;
 }
 
 void QueueMgrClass::check_queue_error(void)
 {
 #if MITAC_RFID_DEBUG_HEAP
-  QueueEntryClass *entry;
-  int length = 0;
+    QueueEntryClass *entry;
+    int length = 0;
  
-  if (!this) {
-    return;
-  }
+    if (!this) {
+        return;
+    }
  
-  //EnterCriticalSection(&cs_queue);
-  entry = queue_head;
-  while (entry) {
-    length++;
-    entry = entry->next;
-  }
+    pthread_mutex_lock(this->mutex);
+    entry = queue_head;
+    while (entry) {
+        length++;
+        entry = entry->next;
+    }
  
-  if (length != queue_size) {
-    abend(GATEWAY_LOG_TYPE_RFID, MTC_ERR_MISC, __LINE__, __FUNCTION__);
-  }
+    if (length != queue_size) {
+        abend(GATEWAY_LOG_TYPE_RFID, MTC_ERR_MISC, __LINE__, __FUNCTION__);
+    }
 
-  //LeaveCriticalSection(&cs_queue);
+    pthread_mutex_unlock(this->mutex);
 #endif
 }
 
 void QueueMgrClass::flush_queue(void)
 {
-  QueueEntryClass *entry, *entry_next; 
+    QueueEntryClass *entry, *entry_next; 
  
-  //EnterCriticalSection(&cs_queue);
-  entry = queue_head;
-  while (entry) {
-    entry_next = entry->next;
-    delete_entry(entry);
-    queue_size--;
-    entry = entry_next;
-  }
-  queue_head = queue_tail = 0;
+    pthread_mutex_lock(this->mutex);
+    entry = queue_head;
+    while (entry) {
+        entry_next = entry->next;
+        delete_entry(entry);
+        queue_size--;
+        entry = entry_next;
+    }
+    queue_head = queue_tail = 0;
  
-  if (queue_size) {
-    //abend(GATEWAY_LOG_TYPE_RFID, MTC_ERR_MISC, __LINE__, __FUNCTION__);
-  }
+    if (queue_size) {
+        //abend(GATEWAY_LOG_TYPE_RFID, MTC_ERR_MISC, __LINE__, __FUNCTION__);
+    }
 
-  //LeaveCriticalSection(&cs_queue);
+    pthread_mutex_unlock(this->mutex);
 }
 
 void QueueMgrClass::delete_entry(QueueEntryClass *del_entry)
