@@ -1,13 +1,14 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name:queue_mgr_class.h
+  File name: queue_mgr_class.h
 */
 
 #pragma once
 
-class QueueEntryClass;
 #include "logit.h"
+class QueueEntryClass;
+class SuspendClass;
 
 class QueueMgrClass
 {
@@ -17,6 +18,7 @@ class QueueMgrClass
     QueueEntryClass *queue_head;
     QueueEntryClass *queue_tail;
     int max_queue_size;
+    SuspendClass *suspend_object;
   //CRITICAL_SECTION cs_queue;
     int in_index;
     int out_index;
