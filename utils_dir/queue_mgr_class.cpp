@@ -52,18 +52,20 @@ void QueueMgrClass::enqueueData (void *data_val)
 	this->enqueueEntry(entry);
 }
 
-void *QueueMgrClass::dequeueData(void)
+void *QueueMgrClass::dequeueData (void)
 {
-	QueueEntryClass *entry = this->dequeueEntry();
-	if (entry) {
-		if (0) {
-			this->logit("dequeueData", (char *) entry->data);
-		}
-		return entry->data;
-	}
-	else {
-		return 0;
-	}
+	  QueueEntryClass *entry = this->dequeueEntry();
+	  if (entry) {
+		    if (0) {
+			      this->logit("dequeueData", (char *) entry->data);
+		    }
+        void *data = entry->data;
+        delete entry;
+		    return data;
+	  }
+	  else {
+		    return 0;
+	  }
 }
 
 void QueueMgrClass::enqueueEntry(QueueEntryClass *entry)
