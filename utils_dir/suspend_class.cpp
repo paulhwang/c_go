@@ -22,12 +22,16 @@ SuspendClass::~SuspendClass (void)
     free(this->cond);
 }
 
-void SuspendClass::waitForEvent(void)
+void SuspendClass::wait(void)
 {
-
+    pthread_mutex_lock(this->mutex);
+    pthread_cond_wait(this->cond, this->mutex);
+    pthread_mutex_unlock(this->mutex);
 }
 
-void SuspendClass::wakeUp(void)
+void SuspendClass::signal(void)
 {
-
+    pthread_mutex_lock(this->mutex);
+    pthread_cond_signal(this->cond);
+    pthread_mutex_unlock(this->mutex);
 }

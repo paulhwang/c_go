@@ -18,6 +18,6 @@ public:
     SuspendClass(void);
     ~SuspendClass(void);
 
-    void waitForEvent(void);
-    void wakeUp(void);
+    void wait(void);
+    void signal(void);
 };
