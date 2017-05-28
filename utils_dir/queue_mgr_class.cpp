@@ -53,7 +53,7 @@ void QueueMgrClass::enqueueData (void *data_val)
   this->suspendObject->signal();
 }
 
-void *QueueMgrClass::dequeueData1 (void)
+void *QueueMgrClass::dequeueData (void)
 {
     while (1) {
         QueueEntryClass *entry = this->dequeueEntry();

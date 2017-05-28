@@ -149,10 +149,8 @@ void TransportClass::exportTransmitData (void *data_val)
 void TransportClass::transmitThreadFunction(int socket_val)
 {
     while (1) {
-        void *data = this->transmitQueue->dequeueData1();
-        if (!data) {
-        }
-        else {
+        void *data = this->transmitQueue->dequeueData();
+        if (data) {
             char *str_data = (char *) data;
             this->logit("transmitThreadFunction", (char *) str_data);
             send(socket_val, str_data , strlen(str_data) , 0);
