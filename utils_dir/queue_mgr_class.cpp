@@ -5,6 +5,7 @@
 */
 
 #include <string.h>
+#include <stdlib.h>
 //#include "stdafx.h"
 //#include "getac_aggr_include.h"/* Put this file immediately after stdafx.h */
 //#include "mitac_rfid_engine_common_include.h"
@@ -18,6 +19,8 @@ QueueMgrClass::QueueMgrClass(void)
 {
     memset(this, 0, sizeof(*this));
     this->suspendObject = new SuspendClass();
+    this->mutex = (pthread_mutex_t *) malloc(sizeof(pthread_mutex_t));
+    pthread_mutex_init(this->mutex, NULL);
 
     //this->marker_head = this->marker_tail = GETAC_MARKER_UTIL_QUE_ENT;
 }
@@ -28,6 +31,7 @@ QueueMgrClass::~QueueMgrClass(void)
         //abend(GATEWAY_LOG_TYPE_RFID, MTC_ERR_MISC, __LINE__, __FUNCTION__);
     }
     delete this->suspendObject;
+    free(this->mutex);
 }
 
 void QueueMgrClass::initQueue(int max_queue_size_val)
