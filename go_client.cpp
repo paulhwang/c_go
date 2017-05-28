@@ -6,9 +6,11 @@
 
 #include <unistd.h>
 #include "./utils_dir/transport_class.h"
+#include "./utils_dir/logit.h"
 
 void mainReceiveDataFromTransport (void* engine_object_val, void *data_val) {
-    printf("mainReceiveDataFromTransport() %s\n", (char *) data_val);
+    //printf("mainReceiveDataFromTransport() %s\n", (char *) data_val);
+    PRINT_BOARD((char *) data_val, 19);
 }
 
 int main (int argc, char** argv) {

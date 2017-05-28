@@ -10,3 +10,4 @@
 
 void LOGIT(char const* str0_val, char const* str1_val);
 void ABEND(char const* str0_val, char const* str1_val);
+void PRINT_BOARD(char const* data_val, int board_size_val);
