@@ -23,6 +23,12 @@ class QueueMgrClass
     int in_index;
     int out_index;
 
+    void enqueueEntry(QueueEntryClass *entry);
+    QueueEntryClass *dequeueEntry(void);
+    int queueSize(void) {return queue_size;}
+    int inIndex(void) {return in_index;}
+    int outIndex(void) {return out_index;}
+
     void check_queue_error(void);
     void flush_queue(void);
     void delete_entry(QueueEntryClass *del_entry);
@@ -37,12 +43,6 @@ public:
     void initQueue(int max_queue_size_val);
     void enqueueData(void *data_val);
     void *dequeueData(void);
-
-    void enqueueEntry(QueueEntryClass *entry);
-    QueueEntryClass *dequeueEntry(void);
-    int queueSize(void) {return queue_size;}
-    int inIndex(void) {return in_index;}
-    int outIndex(void) {return out_index;}
 
   /* always at the tail of this class */
   //enum GETAC_MARKER_DEFINE_ marker_tail;

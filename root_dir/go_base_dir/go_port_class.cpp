@@ -49,7 +49,7 @@ void GoPortClass::transmitBoardData (void) {
     char *board_data = (char *) malloc(400);
     this->boardObject()->encodeBoard(board_data);
 
-    if (0) {
+    if (1) {
         char s[LOGIT_BUF_SIZE];
         sprintf(s, "board_data=%s", board_data);
         this->logit("transmitBoardData", s);

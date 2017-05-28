@@ -38,19 +38,20 @@ void QueueMgrClass::initQueue(int max_queue_size_val)
 
 void QueueMgrClass::enqueueData (void *data_val)
 {
-	if (0) {
-		this->logit("enqueueData", (char *) data_val);
-	}
+    if (0) {
+        this->logit("enqueueData", (char *) data_val);
+    }
 
-	QueueEntryClass *entry = new QueueEntryClass();
-	if (!entry) {
-
-	}
-	else {
-		entry->data = data_val;
-	}
-	this->enqueueEntry(entry);
-  this->suspendObject->signal();
+    QueueEntryClass *entry = new QueueEntryClass();
+    if (!entry) {
+        this->abend("enqueueData", "fail to create new QueueEntryClass");
+        return;
+    }
+    else {
+        entry->data = data_val;
+    }
+    this->enqueueEntry(entry);
+    this->suspendObject->signal();
 }
 
 void *QueueMgrClass::dequeueData (void)
@@ -58,11 +59,12 @@ void *QueueMgrClass::dequeueData (void)
     while (1) {
         QueueEntryClass *entry = this->dequeueEntry();
         if (entry) {
-            if (0) {
-                this->logit("dequeueData", (char *) entry->data);
-            }
             void *data = entry->data;
-            delete entry;
+            this->delete_entry(entry);
+
+            if (0) {
+                this->logit("dequeueData", (char *) data);
+            }
             return data;
         }
         else {
@@ -187,5 +189,5 @@ void QueueMgrClass::flush_queue(void)
 
 void QueueMgrClass::delete_entry(QueueEntryClass *del_entry)
 {
-  delete del_entry;
+    delete del_entry;
 }
