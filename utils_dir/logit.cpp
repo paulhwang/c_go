@@ -20,13 +20,13 @@ void PRINT_BOARD (char const* data_val, int board_size_val)
     int i = strlen(data_val);
     while (i) {
         if (*data_val == '0') {
-            printf("+");
+            printf(" +");
         }
         else if (*data_val == '1') {
-            printf("*");
+            printf(" *");
         }
         else if (*data_val == '2') {
-            printf("O");
+            printf(" O");
         }
         data_val++;
         i--;
