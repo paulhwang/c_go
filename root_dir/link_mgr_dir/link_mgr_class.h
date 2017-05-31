@@ -24,6 +24,9 @@ public:
     LinkMgrClass(void *main_object_val);
     ~LinkMgrClass();
 
+    /* exports */
+    void exportReceiveData(void *data_val);
+
     char const* objectName(void) {return "LinkMgrClass";}
     void startThreads(void);
     void receiveThreadFunction(void);

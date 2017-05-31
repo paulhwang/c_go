@@ -12,7 +12,7 @@ GO_BASE_DIR = $(ROOT_DIR)/go_base_dir
 DIRS	= utils_dir root_dir
 
 MAIN_OBJS = main_class.o main_exports.o
-LINK_MGR_OBJS = $(LINK_MGR_DIR)/link_mgr_class.o $(LINK_MGR_DIR)/link_class.o $(LINK_MGR_DIR)/session_mgr_class.o $(LINK_MGR_DIR)/session_class.o $(LINK_MGR_DIR)/link_mgr_thread.o 
+LINK_MGR_OBJS = $(LINK_MGR_DIR)/link_mgr_class.o $(LINK_MGR_DIR)/link_class.o $(LINK_MGR_DIR)/session_mgr_class.o $(LINK_MGR_DIR)/session_class.o $(LINK_MGR_DIR)/link_mgr_thread.o $(LINK_MGR_DIR)/link_mgr_exports.o 
 BASE_MGR_OBJS = $(BASE_MGR_DIR)/base_mgr_class.o $(BASE_MGR_DIR)/base_mgr_exports.o $(BASE_MGR_DIR)/base_mgr_thread.o $(BASE_MGR_DIR)/base_class.o
 TRANSPORT_OBJS = $(UTILS_DIR)/transport_class.o $(UTILS_DIR)/transport_class_thread.o
 QUEUE_OBJS = $(UTILS_DIR)/queue_entry_class.o $(UTILS_DIR)/queue_mgr_class.o
