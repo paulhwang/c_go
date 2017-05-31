@@ -1,7 +1,7 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: engine_class.h
+  File name: main_class.h
 */
 
 #pragma once

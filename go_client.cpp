@@ -61,7 +61,7 @@ void mainReceiveDataFromTransport (void* engine_object_val, void *data_val) {
 
 int main (int argc, char** argv) {
     transport_object = new TransportClass(null);
-    transport_object->clientThreadFunction(0, TRANSPORT_PORT_NUMBER_FOR_ME);
+    transport_object->clientThreadFunction(0, TRANSPORT_PORT_NUMBER_FOR_BASE_MGR);
     transport_object->exportTransmitData((void *)  "m");
     sleep(1000);
 }
