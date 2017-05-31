@@ -27,8 +27,6 @@ class BaseMgrClass {
 
     pthread_t receiveThread;
 
-    GoBaseClass *theTestGoBase;
-
     QueueMgrClass *receiveQueue;
 
     GoBaseClass* getBaseByBaseId(int base_id_val);
@@ -36,7 +34,7 @@ class BaseMgrClass {
     void mallocBase(void);
     void encodeBaseId(int base_id_val, char *buf_val);
     int decodeBaseId(char *data_val);
-    int getBaseSlot(void);
+    int getEmptyBaseSlot(void);
 
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);

@@ -21,8 +21,6 @@ BaseMgrClass::BaseMgrClass (void *main_object_val)
     this->mainObject = main_object_val;
     this->globalBaseId = 0;
 
-    this->theTestGoBase = new GoBaseClass(this);
-
     this->receiveQueue = new QueueMgrClass();
     this->receiveQueue->initQueue(BASE_MGR_RECEIVE_QUEUE_SIZE);
 
@@ -35,8 +33,15 @@ BaseMgrClass::~BaseMgrClass (void)
 {
 }
 
-GoBaseClass* BaseMgrClass::getBaseByBaseId (int base_id_val) {
-    return this->theTestGoBase;
+GoBaseClass *BaseMgrClass::getBaseByBaseId (int base_id_val) {
+    int index = 0;
+    while (index < BASE_ARRAY_SIZE) {
+        if (this->baseIndexArray[index] == base_id_val) {
+            return (GoBaseClass *) this->baseTableArray[index];
+        }
+        index++;
+    }
+    return 0;
 }
 
 void BaseMgrClass::receiveThreadLoop (void)
@@ -74,7 +79,7 @@ void BaseMgrClass::mallocBase (void)
         return base.baseId();
     */
     int base_id = this->allocBaseId();
-    int slot = this->getBaseSlot();
+    int slot = this->getEmptyBaseSlot();
     if (slot != -1) {
         this->baseIndexArray[slot] = base_id;
         this->baseTableArray[slot] = new GoBaseClass(this);
@@ -89,13 +94,18 @@ void BaseMgrClass::mallocBase (void)
     }
 }
 
-int BaseMgrClass::getBaseSlot (void)
+int BaseMgrClass::getEmptyBaseSlot (void)
 {
     int index = 0;
-
-
-    return index;
+    while (index < BASE_ARRAY_SIZE) {
+        if (this->baseIndexArray[index] == 0) {
+            return index;
+        }
+        index++;
+    }
+    return -1;
 }
+
 void BaseMgrClass::encodeBaseId (int base_id_val, char *buf_val)
 {
     buf_val[4] = 0;
