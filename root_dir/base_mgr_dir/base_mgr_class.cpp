@@ -45,7 +45,7 @@ void BaseMgrClass::receiveThreadLoop (void)
                 this->mallocBase();
             }
             else if (*data == 'd') {
-                this->receiveData(1, data + 1);
+                this->receiveData(data + 1);
             }
             else {
             }
@@ -108,11 +108,11 @@ void BaseMgrClass::transmitData(char *data_val)
     }
 }
 
-void BaseMgrClass::receiveData (int base_id_val, char* data_val) {
+void BaseMgrClass::receiveData (char* data_val) {
     this->logit("receiveData", data_val);
 
     int base_id = this->decodeBaseId(data_val);
-    GoBaseClass* go_base = this->getBaseByBaseId(base_id_val);
+    GoBaseClass* go_base = this->getBaseByBaseId(base_id);
     if (!go_base) {
         return;
     }
