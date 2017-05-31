@@ -71,10 +71,27 @@ void BaseMgrClass::mallocBase (void)
 void BaseMgrClass::encodeBaseId (int base_id_val, char *buf_val)
 {
     buf_val[0] = '1';
-    buf_val[1] = '1';
-    buf_val[2] = '1';
-    buf_val[3] = '1';
+    buf_val[1] = '2';
+    buf_val[2] = '3';
+    buf_val[3] = '4';
     buf_val[4] = 0;
+}
+
+int BaseMgrClass::decodeBaseId (char *data_val)
+{
+    int base_id;
+    base_id =  (*data_val++ - '0') * 1000;
+    base_id += (*data_val++ - '0') * 100;
+    base_id += (*data_val++ - '0') * 10;
+    base_id += (*data_val - '0');
+
+    if (1) {
+        char s[LOGIT_BUF_SIZE];
+        sprintf(s, "base_id=%d", base_id);
+        this->logit("decodeBaseId", s);
+    }
+
+    return base_id;
 }
 
 void BaseMgrClass::createBase (void)
@@ -94,6 +111,7 @@ void BaseMgrClass::transmitData(char *data_val)
 void BaseMgrClass::receiveData (int base_id_val, char* data_val) {
     this->logit("receiveData", data_val);
 
+    int base_id = this->decodeBaseId(data_val);
     GoBaseClass* go_base = this->getBaseByBaseId(base_id_val);
     if (!go_base) {
         return;
