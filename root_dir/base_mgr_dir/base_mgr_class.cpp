@@ -155,11 +155,19 @@ void BaseMgrClass::receiveData (char* data_val) {
     this->logit("receiveData", data_val);
 
     int base_id = this->decodeBaseId(data_val);
-    GoBaseClass *go_base = (GoBaseClass *) this->getBaseByBaseId(base_id);
-    if (!go_base) {
+    void *base = this->getBaseByBaseId(base_id);
+    if (!base) {
         return;
     }
-    go_base->portObject()->receiveStringData(data_val + BASE_ID_SIZE);
+
+    char *game = "go";
+    if (!strcmp(game, "go")) {
+        GoBaseClass *go_base = (GoBaseClass *) base;
+        go_base->portObject()->receiveStringData(data_val + BASE_ID_SIZE);
+    }
+    else {
+        /* TBD: other games */
+    }
 }
 
 void BaseMgrClass::baseMgrLogit (char const* str0_val, char const* str1_val) {
