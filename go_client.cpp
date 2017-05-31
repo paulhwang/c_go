@@ -5,8 +5,8 @@
 */
 
 #include <unistd.h>
-#include "./utils_dir/transport_class.h"
-#include "./utils_dir/logit.h"
+#include "root_dir/transport_dir/transport_class.h"
+#include "utils_dir/logit.h"
 
 #define BASE_ID_SIZE 4
 #define GO_PROTOCOL_CODE_SIZE 7

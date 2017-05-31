@@ -13,10 +13,10 @@
 #include <netdb.h>
 #include <pwd.h>
 #include <arpa/inet.h>
-#include "../main_exports.h"
-#include "queue_mgr_class.h"
+#include "../../main_exports.h"
+#include "../../utils_dir/queue_mgr_class.h"
 #include "transport_class.h"
-#include "./logit.h"
+#include "../../utils_dir/logit.h"
 
 #define MAXHOSTNAME 32
 #define BACKLOG 5
