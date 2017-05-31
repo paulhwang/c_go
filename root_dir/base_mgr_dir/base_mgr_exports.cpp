@@ -9,15 +9,6 @@
 
 void BaseMgrClass::exportReceiveData(void *data_val)
 {
-    char *data = (char *) data_val;
-
-    if (*data == 'm') {
-
-    }
-    else if (*data == 'd') {
-        this->receiveQueue->enqueueData(data + 1);
-    }
-    else {
-    }
+    this->receiveQueue->enqueueData(data_val);
 }
 

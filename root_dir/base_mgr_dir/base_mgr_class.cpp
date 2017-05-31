@@ -40,9 +40,27 @@ void BaseMgrClass::receiveThreadLoop (void)
     while (1) {
         char *data = (char *) this->receiveQueue->dequeueData();
         if (data) {
-            this->receiveData(1, data);
+            if (*data == 'm') {
+                this->mallocBase();
+            }
+            else if (*data == 'd') {
+                this->receiveData(1, data + 1);
+            }
+            else {
+            }
         }
     }
+}
+
+int BaseMgrClass::mallocBase (void)
+{
+    /*
+        var base = this.importObject().importBase().malloc(this.rootObject(), this.allocBaseId());
+        this.baseIndexArray().push(base.baseId());
+        this.baseTableArray().push(base);
+        return base.baseId();
+    */
+    return 1000;
 }
 
 void BaseMgrClass::createBase (void)
