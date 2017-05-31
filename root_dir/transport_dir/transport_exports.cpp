@@ -11,7 +11,12 @@
 
 TransportServerClass *TransportClass::startServer (ushort port_val)
 {
-	TransportServerClass *transport_server_object = new TransportServerClass(this);
-    this->startServerThread(port_val);
-    return transport_server_object;
+	TransportServerClass *transport_server_object = new TransportServerClass(this, port_val);
+	if (transport_server_object) {
+    	this->startServerThread(port_val);
+    	return transport_server_object;
+    }
+    else {
+    	return 0;
+    }
 }
