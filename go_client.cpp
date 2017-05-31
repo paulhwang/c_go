@@ -9,10 +9,33 @@
 #include "./utils_dir/logit.h"
 
 #define BASE_ID_SIZE 4
+#define GO_PROTOCOL_CODE_SIZE 7
+
 #define MOVE_DATA_BUF_SIZE 32
 
 TransportClass *transport_object;
 char base_id[BASE_ID_SIZE + 4];
+int move_index = 0;
+char const *move_array[] = {
+    "03021001",
+    "02052002",
+    "03041003",
+    "03052004",
+    "04051005",
+    "04062006",
+    "03031007",
+};
+
+void play_a_move (void)
+{
+    char move_data_buf[MOVE_DATA_BUF_SIZE];
+    move_data_buf[0] = 'd';
+    memcpy(move_data_buf + 1, base_id, BASE_ID_SIZE);
+    strcpy(move_data_buf + 1 + BASE_ID_SIZE, "Move   ");
+    strcpy(move_data_buf + 1 + BASE_ID_SIZE + GO_PROTOCOL_CODE_SIZE, move_array[move_index++]);
+    printf("=====%s\n", move_data_buf);
+    transport_object->exportTransmitData(move_data_buf);
+}
 
 void mainReceiveDataFromTransport (void* engine_object_val, void *data_val) {
     printf("mainReceiveDataFromTransport() %s\n", (char *) data_val);
@@ -26,18 +49,13 @@ void mainReceiveDataFromTransport (void* engine_object_val, void *data_val) {
         }
         memcpy(base_id, data + 1, BASE_ID_SIZE);
         base_id[BASE_ID_SIZE] = 0;
-
-        char move_data_buf[MOVE_DATA_BUF_SIZE];
-        move_data_buf[0] = 'd';
-        memcpy(move_data_buf + 1, base_id, BASE_ID_SIZE);
-        strcpy(move_data_buf + 1 + BASE_ID_SIZE, "Move   03021001");
-        printf("=====%s\n", move_data_buf);
-        transport_object->exportTransmitData(move_data_buf);
-        //transport_object->exportTransmitData((void *)  "dMove   03021001");
-
+        play_a_move();
     }
     else if (*data == 'd') {
         PRINT_BOARD((char *) data + 1, 19);
+        if (move_index < sizeof(move_array) / sizeof(*move_array)) {
+            play_a_move();
+        }
     }
 }
 
