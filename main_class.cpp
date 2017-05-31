@@ -8,11 +8,13 @@
 #include "utils_dir/logit.h"
 #include "utils_dir/transport_class.h"
 #include "utils_dir/queue_mgr_class.h"
+#include "root_dir/link_mgr_dir/link_mgr_class.h"
 #include "root_dir/base_mgr_dir/base_mgr_class.h"
 #include "main_class.h"
 
 MainClass::MainClass(void)
 {
+    this->linkMgrObject = new LinkMgrClass(this);
     this->goBaseMgrObject = new BaseMgrClass(this);
     this->transportObject = new TransportClass(this);
 
@@ -29,6 +31,7 @@ void MainClass::startThreads (void)
 {
     this->transportObject->startServerThread(TRANSPORT_PORT_NUMBER_FOR_ME);
     this->goBaseMgrObject->startThreads();
+    this->linkMgrObject->startThreads();
 }
 
 void MainClass::logit (char const* str0_val, char const* str1_val)

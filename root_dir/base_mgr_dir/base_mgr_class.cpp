@@ -25,7 +25,7 @@ BaseMgrClass::BaseMgrClass (void *main_object_val)
     this->receiveQueue->initQueue(BASE_MGR_RECEIVE_QUEUE_SIZE);
 
     if (1) {
-        this->logit("init", "");
+        this->logit("BaseMgrClass", "init");
     }
 }
 

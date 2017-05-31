@@ -9,11 +9,13 @@
 #include "utils_dir/logit.h"
 
 class TransportClass;
+class LinkMgrClass;
 class BaseMgrClass;
 class QueueMgrClass;
 
 class MainClass {
     TransportClass *transportObject;
+    LinkMgrClass *linkMgrObject;
     BaseMgrClass *goBaseMgrObject;
 
     QueueMgrClass *theTransportTransmitQueue;

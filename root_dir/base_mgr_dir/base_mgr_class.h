@@ -43,8 +43,8 @@ public:
     BaseMgrClass(void *main_object_val);
     ~BaseMgrClass();
 
-    void startThreads(void);
     char const* objectName(void) {return "BaseMgrClass";}
+    void startThreads(void);
 
     /* exports */
     void exportReceiveData(void *data_val);
