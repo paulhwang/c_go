@@ -17,6 +17,7 @@
 BaseMgrClass::BaseMgrClass (void *main_object_val)
 {
     this->mainObject = main_object_val;
+    this->globalBaseId = 1000;
 
     this->theTestGoBase = new GoBaseClass(this);
 
@@ -53,6 +54,12 @@ void BaseMgrClass::receiveThreadLoop (void)
     }
 }
 
+int BaseMgrClass::allocBaseId (void)
+{
+    this->globalBaseId++;
+    return this->globalBaseId;
+}
+
 void BaseMgrClass::mallocBase (void)
 {
     /*
@@ -61,7 +68,7 @@ void BaseMgrClass::mallocBase (void)
         this.baseTableArray().push(base);
         return base.baseId();
     */
-    int base_id = 2348;
+    int base_id = this->allocBaseId();
     char *data_buf = (char *) malloc(BASE_ID_SIZE + 4);
     data_buf[0] = 'm';
     this->encodeBaseId(base_id, data_buf + 1);
@@ -70,7 +77,6 @@ void BaseMgrClass::mallocBase (void)
 
 void BaseMgrClass::encodeBaseId (int base_id_val, char *buf_val)
 {
-    printf("base_id before=%d\n", base_id_val);
     buf_val[4] = 0;
     buf_val[3] = '0' + base_id_val % 10;
     base_id_val /= 10;

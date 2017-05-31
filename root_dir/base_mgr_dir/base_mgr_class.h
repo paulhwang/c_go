@@ -18,7 +18,8 @@ class GoBaseClass;
 #define BASE_ID_SIZE 4
 
 class BaseMgrClass {
-  	void *mainObject;
+    void *mainObject;
+    int globalBaseId;
     pthread_t receiveThread;
 
     GoBaseClass *theTestGoBase;
@@ -26,6 +27,7 @@ class BaseMgrClass {
     QueueMgrClass *receiveQueue;
 
     GoBaseClass* getBaseByBaseId(int base_id_val);
+    int allocBaseId(void);
     void mallocBase(void);
     void encodeBaseId(int base_id_val, char *buf_val);
     int decodeBaseId(char *data_val);
