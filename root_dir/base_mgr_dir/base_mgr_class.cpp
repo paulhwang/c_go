@@ -5,6 +5,7 @@
 */
 
 #include <stdio.h>
+#include <string.h>
 #include <unistd.h>
 #include <malloc.h>
 #include "../../utils_dir/logit.h"
@@ -16,8 +17,9 @@
 
 BaseMgrClass::BaseMgrClass (void *main_object_val)
 {
+    memset(this, 0, sizeof(BaseMgrClass));
     this->mainObject = main_object_val;
-    this->globalBaseId = 1000;
+    this->globalBaseId = 0;
 
     this->theTestGoBase = new GoBaseClass(this);
 
@@ -56,6 +58,9 @@ void BaseMgrClass::receiveThreadLoop (void)
 
 int BaseMgrClass::allocBaseId (void)
 {
+    if (this->globalBaseId >= MAX_GLOBAL_BASE_ID) {
+        this->globalBaseId = 0;
+    }
     this->globalBaseId++;
     return this->globalBaseId;
 }
@@ -69,12 +74,28 @@ void BaseMgrClass::mallocBase (void)
         return base.baseId();
     */
     int base_id = this->allocBaseId();
-    char *data_buf = (char *) malloc(BASE_ID_SIZE + 4);
-    data_buf[0] = 'm';
-    this->encodeBaseId(base_id, data_buf + 1);
-    this->transmitData(data_buf);
+    int slot = this->getBaseSlot();
+    if (slot != -1) {
+        this->baseIndexArray[slot] = base_id;
+        this->baseTableArray[slot] = new GoBaseClass(this);
+
+        char *data_buf = (char *) malloc(BASE_ID_SIZE + 4);
+        data_buf[0] = 'm';
+        this->encodeBaseId(base_id, data_buf + 1);
+
+        this->transmitData(data_buf);
+    }
+    else {
+    }
 }
 
+int BaseMgrClass::getBaseSlot (void)
+{
+    int index = 0;
+
+
+    return index;
+}
 void BaseMgrClass::encodeBaseId (int base_id_val, char *buf_val)
 {
     buf_val[4] = 0;

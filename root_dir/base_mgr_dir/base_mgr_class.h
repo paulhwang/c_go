@@ -16,10 +16,15 @@ class GoBaseClass;
 
 #define BASE_MGR_RECEIVE_QUEUE_SIZE 100
 #define BASE_ID_SIZE 4
+#define BASE_ARRAY_SIZE 1000
+#define MAX_GLOBAL_BASE_ID 9999
 
 class BaseMgrClass {
     void *mainObject;
     int globalBaseId;
+    int baseIndexArray[BASE_ARRAY_SIZE + 4];
+    void *baseTableArray[BASE_ARRAY_SIZE + 4];
+
     pthread_t receiveThread;
 
     GoBaseClass *theTestGoBase;
@@ -31,6 +36,7 @@ class BaseMgrClass {
     void mallocBase(void);
     void encodeBaseId(int base_id_val, char *buf_val);
     int decodeBaseId(char *data_val);
+    int getBaseSlot(void);
 
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
