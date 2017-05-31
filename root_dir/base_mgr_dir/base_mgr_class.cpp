@@ -61,7 +61,7 @@ void BaseMgrClass::mallocBase (void)
         this.baseTableArray().push(base);
         return base.baseId();
     */
-    int base_id;
+    int base_id = 2348;
     char *data_buf = (char *) malloc(BASE_ID_SIZE + 4);
     data_buf[0] = 'm';
     this->encodeBaseId(base_id, data_buf + 1);
@@ -70,11 +70,21 @@ void BaseMgrClass::mallocBase (void)
 
 void BaseMgrClass::encodeBaseId (int base_id_val, char *buf_val)
 {
-    buf_val[0] = '1';
-    buf_val[1] = '2';
-    buf_val[2] = '3';
-    buf_val[3] = '4';
+    printf("base_id before=%d\n", base_id_val);
     buf_val[4] = 0;
+    buf_val[3] = '0' + base_id_val % 10;
+    base_id_val /= 10;
+    buf_val[2] = '0' + base_id_val % 10;
+    base_id_val /= 10;
+    buf_val[1] = '0' + base_id_val % 10;
+    base_id_val /= 10;
+    buf_val[0] = '0' + base_id_val;
+
+    if (1) {
+        char s[LOGIT_BUF_SIZE];
+        sprintf(s, "base_id=%s", buf_val);
+        this->logit("encodeBaseId", s);
+    }
 }
 
 int BaseMgrClass::decodeBaseId (char *data_val)
