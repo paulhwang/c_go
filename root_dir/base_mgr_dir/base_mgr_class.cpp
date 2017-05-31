@@ -31,13 +31,14 @@ BaseMgrClass::BaseMgrClass (void *main_object_val)
 
 BaseMgrClass::~BaseMgrClass (void)
 {
+    delete this->receiveQueue;
 }
 
-GoBaseClass *BaseMgrClass::getBaseByBaseId (int base_id_val) {
+void *BaseMgrClass::getBaseByBaseId (int base_id_val) {
     int index = 0;
     while (index < BASE_ARRAY_SIZE) {
         if (this->baseIndexArray[index] == base_id_val) {
-            return (GoBaseClass *) this->baseTableArray[index];
+            return this->baseTableArray[index];
         }
         index++;
     }
@@ -91,6 +92,7 @@ void BaseMgrClass::mallocBase (void)
         this->transmitData(data_buf);
     }
     else {
+        /* TBD */
     }
 }
 
@@ -159,7 +161,7 @@ void BaseMgrClass::receiveData (char* data_val) {
     this->logit("receiveData", data_val);
 
     int base_id = this->decodeBaseId(data_val);
-    GoBaseClass* go_base = this->getBaseByBaseId(base_id);
+    GoBaseClass *go_base = (GoBaseClass *) this->getBaseByBaseId(base_id);
     if (!go_base) {
         return;
     }

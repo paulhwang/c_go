@@ -29,7 +29,7 @@ class BaseMgrClass {
 
     QueueMgrClass *receiveQueue;
 
-    GoBaseClass* getBaseByBaseId(int base_id_val);
+    void *getBaseByBaseId(int base_id_val);
     int allocBaseId(void);
     void mallocBase(void);
     void encodeBaseId(int base_id_val, char *buf_val);
