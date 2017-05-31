@@ -45,23 +45,6 @@ void *BaseMgrClass::getBaseByBaseId (int base_id_val) {
     return 0;
 }
 
-void BaseMgrClass::receiveThreadLoop (void)
-{
-    while (1) {
-        char *data = (char *) this->receiveQueue->dequeueData();
-        if (data) {
-            if (*data == 'm') {
-                this->mallocBase();
-            }
-            else if (*data == 'd') {
-                this->receiveData(data + 1);
-            }
-            else {
-            }
-        }
-    }
-}
-
 int BaseMgrClass::allocBaseId (void)
 {
     if (this->globalBaseId >= MAX_GLOBAL_BASE_ID) {

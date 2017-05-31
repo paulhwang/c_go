@@ -26,7 +26,6 @@ class BaseMgrClass {
     void *baseTableArray[BASE_ARRAY_SIZE + 4];
 
     pthread_t receiveThread;
-
     QueueMgrClass *receiveQueue;
 
     void *getBaseByBaseId(int base_id_val);
@@ -43,12 +42,11 @@ public:
     BaseMgrClass(void *main_object_val);
     ~BaseMgrClass();
 
-    char const* objectName(void) {return "BaseMgrClass";}
-    void startThreads(void);
-
     /* exports */
     void exportReceiveData(void *data_val);
 
+    char const* objectName(void) {return "BaseMgrClass";}
+    void startThreads(void);
     void receiveThreadFunction(void);
     void receiveThreadLoop(void);
     void createBase(void);

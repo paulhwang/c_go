@@ -29,10 +29,6 @@ LinkMgrClass::~LinkMgrClass (void)
     delete this->receiveQueue;
 }
 
-void LinkMgrClass::startThreads (void)
-{
-}
-
 void LinkMgrClass::linkMgrLogit (char const* str0_val, char const* str1_val) {
     LOGIT(str0_val, str1_val);
 }
