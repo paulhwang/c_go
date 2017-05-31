@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
+#include "transport_server_class.h"
 #include "transport_class.h"
 
 void *transportServerThreadFunction (void *data_val)
@@ -18,10 +19,10 @@ void *transportServerThreadFunction (void *data_val)
     transport_object->serverThreadFunction(port);
 }
 
-void TransportClass::startServerThread (ushort port_val)
+void TransportClass::startServerThread (TransportServerClass *transport_server_val)
 {
     transport_thread_parameter *data = (transport_thread_parameter *) malloc(sizeof(transport_thread_parameter));
-    data->port = port_val;
+    data->port = transport_server_val->port();
     data->transport_object = this;
 
     int r;

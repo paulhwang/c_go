@@ -25,8 +25,8 @@ class TransportClass {
     pthread_t transmitThread;
     pthread_t receiveThread;
 
-    void startServerThread(ushort port_val);
-    void startClientThread(unsigned long ip_addr_val, ushort port_val);
+    void startServerThread(TransportServerClass *transport_server_val);
+    void startClientThread(unsigned long ip_addr_val, unsigned short port_val);
     void startReceiveThread(int socket_val);
     void startTransmitThread(int socket_val);
 
@@ -37,9 +37,9 @@ public:
     TransportClass(void *main_object_val);
     ~TransportClass(void);
 
-    TransportServerClass *startServer(ushort port_val);
-    void serverThreadFunction(ushort port_val);
-    void clientThreadFunction(unsigned long ip_addr_val, ushort port_val);
+    TransportServerClass *startServer(unsigned short port_val);
+    void serverThreadFunction(unsigned short port_val);
+    void clientThreadFunction(unsigned long ip_addr_val, unsigned short port_val);
     void receiveThreadFunction(int socket_val);
     void transmitThreadFunction(int socket_val);
 

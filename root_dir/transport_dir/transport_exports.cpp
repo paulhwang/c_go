@@ -9,11 +9,11 @@
 #include "transport_class.h"
 #include "transport_server_class.h"
 
-TransportServerClass *TransportClass::startServer (ushort port_val)
+TransportServerClass *TransportClass::startServer (unsigned short port_val)
 {
 	TransportServerClass *transport_server_object = new TransportServerClass(this, port_val);
 	if (transport_server_object) {
-    	this->startServerThread(port_val);
+    	this->startServerThread(transport_server_object);
     	return transport_server_object;
     }
     else {
