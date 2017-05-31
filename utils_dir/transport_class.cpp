@@ -138,8 +138,9 @@ void TransportClass::receiveThreadFunction(int socket_val)
 
         int length = read(socket_val, buffer, TRANSPORT_RECEIVE_BUFFER_SIZE);
         this->logit("receiveThreadFunction", buffer);
-
-        mainReceiveDataFromTransport(this->mainObject, buffer);
+        if (length > 0) {
+            mainReceiveDataFromTransport(this->mainObject, buffer);
+        }
     }
 }
 
@@ -154,6 +155,7 @@ void TransportClass::transmitThreadFunction(int socket_val)
         void *data = this->transmitQueue->dequeueData();
         if (data) {
             char *str_data = (char *) data;
+            printf("transmitThreadFunction len=%d\n", strlen(str_data));
             this->logit("transmitThreadFunction", (char *) str_data);
             send(socket_val, str_data , strlen(str_data) , 0);
         }

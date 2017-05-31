@@ -15,6 +15,7 @@ class GoBaseClass;
 #include "../go_base_dir/go_base_class.h"
 
 #define BASE_MGR_RECEIVE_QUEUE_SIZE 100
+#define BASE_ID_SIZE 4
 
 class BaseMgrClass {
   	void *mainObject;

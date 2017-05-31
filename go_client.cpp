@@ -8,7 +8,11 @@
 #include "./utils_dir/transport_class.h"
 #include "./utils_dir/logit.h"
 
+#define BASE_ID_SIZE 4
+#define MOVE_DATA_BUF_SIZE 32
+
 TransportClass *transport_object;
+char base_id[BASE_ID_SIZE + 4];
 
 void mainReceiveDataFromTransport (void* engine_object_val, void *data_val) {
     printf("mainReceiveDataFromTransport() %s\n", (char *) data_val);
@@ -20,7 +24,16 @@ void mainReceiveDataFromTransport (void* engine_object_val, void *data_val) {
             sprintf(s, "base_id=%s", data + 1);
             LOGIT("mainReceiveDataFromTransport", s);
         }
-        transport_object->exportTransmitData((void *)  "dMove   03021001");
+        memcpy(base_id, data + 1, BASE_ID_SIZE);
+        base_id[BASE_ID_SIZE] = 0;
+
+        char move_data_buf[MOVE_DATA_BUF_SIZE];
+        move_data_buf[0] = 'd';
+        memcpy(move_data_buf + 1, base_id, BASE_ID_SIZE);
+        strcpy(move_data_buf + 1 + BASE_ID_SIZE, "Move   03021001");
+        printf("=====%s\n", move_data_buf);
+        transport_object->exportTransmitData(move_data_buf);
+        //transport_object->exportTransmitData((void *)  "dMove   03021001");
 
     }
     else if (*data == 'd') {

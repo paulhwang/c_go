@@ -6,6 +6,7 @@
 
 #include <stdio.h>
 #include <unistd.h>
+#include <malloc.h>
 #include "../../utils_dir/logit.h"
 #include "../../utils_dir/queue_mgr_class.h"
 #include "base_mgr_class.h"
@@ -61,7 +62,7 @@ void BaseMgrClass::mallocBase (void)
         return base.baseId();
     */
     int base_id;
-    char data_buf[10];
+    char *data_buf = (char *) malloc(BASE_ID_SIZE + 4);
     data_buf[0] = 'm';
     this->encodeBaseId(base_id, data_buf + 1);
     this->transmitData(data_buf);
@@ -92,11 +93,12 @@ void BaseMgrClass::transmitData(char *data_val)
 
 void BaseMgrClass::receiveData (int base_id_val, char* data_val) {
     this->logit("receiveData", data_val);
+
     GoBaseClass* go_base = this->getBaseByBaseId(base_id_val);
     if (!go_base) {
         return;
     }
-    go_base->portObject()->receiveStringData(data_val);
+    go_base->portObject()->receiveStringData(data_val + BASE_ID_SIZE);
 }
 
 void BaseMgrClass::baseMgrLogit (char const* str0_val, char const* str1_val) {

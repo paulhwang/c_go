@@ -42,7 +42,7 @@ void QueueMgrClass::initQueue(int max_queue_size_val)
 
 void QueueMgrClass::enqueueData (void *data_val)
 {
-    if (0) {
+    if (1) {
         this->logit("enqueueData", (char *) data_val);
     }
 
@@ -66,7 +66,7 @@ void *QueueMgrClass::dequeueData (void)
             void *data = entry->data;
             this->delete_entry(entry);
 
-            if (0) {
+            if (1) {
                 this->logit("dequeueData", (char *) data);
             }
             return data;
