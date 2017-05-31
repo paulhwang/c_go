@@ -73,12 +73,6 @@ int BaseMgrClass::allocBaseId (void)
 
 void BaseMgrClass::mallocBase (void)
 {
-    /*
-        var base = this.importObject().importBase().malloc(this.rootObject(), this.allocBaseId());
-        this.baseIndexArray().push(base.baseId());
-        this.baseTableArray().push(base);
-        return base.baseId();
-    */
     int base_id = this->allocBaseId();
     int slot = this->getEmptyBaseSlot();
     if (slot != -1) {
