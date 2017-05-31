@@ -133,12 +133,14 @@ void TransportClass::clientThreadFunction (unsigned long ip_addr_val, ushort por
 
 void TransportClass::receiveThreadFunction(int socket_val)
 {
-    char *buffer = (char *) malloc(TRANSPORT_RECEIVE_BUFFER_SIZE);
+    while (1) {
+        char *buffer = (char *) malloc(TRANSPORT_RECEIVE_BUFFER_SIZE);
 
-    int length = read(socket_val, buffer, TRANSPORT_RECEIVE_BUFFER_SIZE);
-    this->logit("receiveThreadFunction", buffer);
+        int length = read(socket_val, buffer, TRANSPORT_RECEIVE_BUFFER_SIZE);
+        this->logit("receiveThreadFunction", buffer);
 
-    mainReceiveDataFromTransport(this->mainObject, buffer);
+        mainReceiveDataFromTransport(this->mainObject, buffer);
+    }
 }
 
 void TransportClass::exportTransmitData (void *data_val)

@@ -52,7 +52,7 @@ void BaseMgrClass::receiveThreadLoop (void)
     }
 }
 
-int BaseMgrClass::mallocBase (void)
+void BaseMgrClass::mallocBase (void)
 {
     /*
         var base = this.importObject().importBase().malloc(this.rootObject(), this.allocBaseId());
@@ -60,7 +60,20 @@ int BaseMgrClass::mallocBase (void)
         this.baseTableArray().push(base);
         return base.baseId();
     */
-    return 1000;
+    int base_id;
+    char data_buf[10];
+    data_buf[0] = 'm';
+    this->encodeBaseId(base_id, data_buf + 1);
+    this->transmitData(data_buf);
+}
+
+void BaseMgrClass::encodeBaseId (int base_id_val, char *buf_val)
+{
+    buf_val[0] = '1';
+    buf_val[1] = '1';
+    buf_val[2] = '1';
+    buf_val[3] = '1';
+    buf_val[4] = 0;
 }
 
 void BaseMgrClass::createBase (void)

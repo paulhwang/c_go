@@ -25,7 +25,8 @@ class BaseMgrClass {
     QueueMgrClass *receiveQueue;
 
     GoBaseClass* getBaseByBaseId(int base_id_val);
-    int mallocBase(void);
+    void mallocBase(void);
+    void encodeBaseId(int base_id_val, char *buf_val);
 
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
