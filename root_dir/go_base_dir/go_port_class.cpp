@@ -47,7 +47,8 @@ GoGameClass* GoPortClass::gameObject (void) {
 
 void GoPortClass::transmitBoardData (void) {
     char *board_data = (char *) malloc(400);
-    this->boardObject()->encodeBoard(board_data);
+    *board_data = 'd';
+    this->boardObject()->encodeBoard(board_data + 1);
 
     if (1) {
         char s[LOGIT_BUF_SIZE];

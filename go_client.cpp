@@ -10,7 +10,14 @@
 
 void mainReceiveDataFromTransport (void* engine_object_val, void *data_val) {
     //printf("mainReceiveDataFromTransport() %s\n", (char *) data_val);
-    PRINT_BOARD((char *) data_val, 19);
+    char *data = (char *) data_val;
+
+    if (*data == 'm') {
+
+    }
+    else if (*data == 'd') {
+        PRINT_BOARD((char *) data + 1, 19);
+    }
 }
 
 int main (int argc, char** argv) {
