@@ -13,6 +13,7 @@
 #define TRANSPORT_TRANSMIT_QUEUE_SIZE 1000
 
 class QueueMgrClass;
+class TransportServerClass;
 
 class TransportClass {
     void *mainObject;
@@ -36,7 +37,7 @@ public:
     TransportClass(void *main_object_val);
     ~TransportClass(void);
 
-    void startServer(ushort port_val);
+    TransportServerClass *startServer(ushort port_val);
     void serverThreadFunction(ushort port_val);
     void clientThreadFunction(unsigned long ip_addr_val, ushort port_val);
     void receiveThreadFunction(int socket_val);

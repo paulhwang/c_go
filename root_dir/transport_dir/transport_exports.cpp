@@ -7,8 +7,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "transport_class.h"
+#include "transport_server_class.h"
 
-void TransportClass::startServer (ushort port_val)
+TransportServerClass *TransportClass::startServer (ushort port_val)
 {
+	TransportServerClass *transport_server_object = new TransportServerClass(this);
     this->startServerThread(port_val);
+    return transport_server_object;
 }

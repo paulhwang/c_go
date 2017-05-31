@@ -12,6 +12,7 @@ class TransportClass;
 class LinkMgrClass;
 class BaseMgrClass;
 class QueueMgrClass;
+class TransportServerClass;
 
 class MainClass {
     TransportClass *transportObject;
@@ -19,6 +20,9 @@ class MainClass {
     BaseMgrClass *goBaseMgrObject;
 
     QueueMgrClass *theTransportTransmitQueue;
+
+    TransportServerClass *link_mgr_server_class;
+    TransportServerClass *base_mgr_server_class;
 
     pthread_t theGoThread;
 
