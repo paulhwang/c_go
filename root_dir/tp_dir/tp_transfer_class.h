@@ -7,6 +7,8 @@
 #pragma once
 #include <pthread.h>
 
+#define TP_TRANSFER_CLASS_TRANSMIT_QUEUE_SIZE 1000
+
 class QueueMgrClass;
 class TpClass;
 
@@ -14,9 +16,9 @@ class TpTransferClass {
     TpClass *theTpObject;
     int theSocket;
 
-    QueueMgrClass *transmitQueue;
-    pthread_t transmitThread;
-    pthread_t receiveThread;
+    QueueMgrClass *theTransmitQueue;
+    pthread_t theTransmitThread;
+    pthread_t theReceiveThread;
 
     void startReceiveThread(int socket_val);
     void startTransmitThread(int socket_val);
@@ -28,11 +30,11 @@ public:
     TpTransferClass(TpClass *tp_object_val, int socket_val);
     ~TpTransferClass(void);
     char const *objectName(void) {return "TpTransferClass";}
+    int socket(void) {return this->theSocket;}
 
     /* exports */
     void exportTransmitData(void *data_val);
 
-    int socket(void) {return this->theSocket;}
     void receiveThreadFunction(int socket_val);
     void transmitThreadFunction(int socket_val);
 };

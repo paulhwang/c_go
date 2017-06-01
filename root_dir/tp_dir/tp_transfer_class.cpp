@@ -23,8 +23,15 @@ TpTransferClass::TpTransferClass (TpClass *tp_object_val, int socket_val)
 	this->theTpObject = tp_object_val;
 	this->theSocket = socket_val;
 
+    this->theTransmitQueue = new QueueMgrClass();
+    this->theTransmitQueue->initQueue(TP_TRANSFER_CLASS_TRANSMIT_QUEUE_SIZE);
+
     this->startReceiveThread(this->socket());
     this->startTransmitThread(this->socket());
+
+    if (1) {
+        this->logit("TpTransferClass", "init");
+    }
 }
 
 TpTransferClass::~TpTransferClass (void)
@@ -48,13 +55,13 @@ void TpTransferClass::receiveThreadFunction(int socket_val)
 
 void TpTransferClass::exportTransmitData (void *data_val)
 {
-    this->transmitQueue->enqueueData(data_val);
+    this->theTransmitQueue->enqueueData(data_val);
 }
 
 void TpTransferClass::transmitThreadFunction(int socket_val)
 {
     while (1) {
-        void *data = this->transmitQueue->dequeueData();
+        void *data = this->theTransmitQueue->dequeueData();
         if (data) {
             char *str_data = (char *) data;
             printf("transmitThreadFunction len=%d\n", strlen(str_data));

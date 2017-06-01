@@ -20,8 +20,8 @@ class TpClass {
 
     QueueMgrClass *transmitQueue;
 
-    pthread_t serverThread;
-    pthread_t clientThread;
+    pthread_t theServerThread;
+    pthread_t theClientThread;
     pthread_t transmitThread;
     pthread_t receiveThread;
 

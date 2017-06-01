@@ -28,7 +28,7 @@ void TpTransferClass::startReceiveThread (int socket_val)
     if (0) {
         this->logit("startReceiveThread", "");
     }
-    r = pthread_create(&this->receiveThread, 0, tpTranferReceiveThreadFunction, data);
+    r = pthread_create(&this->theReceiveThread, 0, tpTranferReceiveThreadFunction, data);
     if (r) {
         printf("Error - startReceiveThread() return code: %d\n", r);
         return;
@@ -54,7 +54,7 @@ void TpTransferClass::startTransmitThread (int socket_val)
     if (0) {
         this->logit("startTransmitThread", "");
     }
-    r = pthread_create(&this->transmitThread, 0, tpTransferTransmitThreadFunction, data);
+    r = pthread_create(&this->theTransmitThread, 0, tpTransferTransmitThreadFunction, data);
     if (r) {
         printf("Error - startTransmitThread() return code: %d\n", r);
         return;

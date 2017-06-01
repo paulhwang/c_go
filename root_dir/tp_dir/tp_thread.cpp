@@ -29,7 +29,7 @@ void TpClass::startServerThread (TpServerClass *transport_server_val)
     if (0) {
         this->logit("startServerThread", "");
     }
-    r = pthread_create(&this->serverThread, 0, transportServerThreadFunction, data);
+    r = pthread_create(&this->theServerThread, 0, transportServerThreadFunction, data);
     if (r) {
         printf("Error - startServerThread() return code: %d\n", r);
         return;
@@ -59,7 +59,7 @@ void TpClass::startClientThread (unsigned long ip_addr_val, ushort port_val)
     if (1) {
         this->logit("startClientThread", "");
     }
-    r = pthread_create(&this->clientThread, 0, transportClientThreadFunction, data);
+    r = pthread_create(&this->theClientThread, 0, transportClientThreadFunction, data);
     if (r) {
         printf("Error - startClientThread() return code: %d\n", r);
         return;
