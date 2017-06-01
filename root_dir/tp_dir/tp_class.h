@@ -14,6 +14,7 @@
 
 class QueueMgrClass;
 class TpServerClass;
+class TpTransferClass;
 
 class TpClass {
     void *theMainObject;
@@ -24,6 +25,7 @@ class TpClass {
     pthread_t theClientThread;
     pthread_t transmitThread;
     pthread_t receiveThread;
+    TpTransferClass *theTpTransferObject;
 
     void startServerThread(TpServerClass *transport_server_val);
     void startClientThread(unsigned long ip_addr_val, unsigned short port_val);

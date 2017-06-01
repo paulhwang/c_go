@@ -16,6 +16,7 @@
 #include "../../main_exports.h"
 #include "../../utils_dir/queue_mgr_class.h"
 #include "tp_class.h"
+#include "tp_transfer_class.h"
 #include "../../utils_dir/logit.h"
 
 #define MAXHOSTNAME 32
@@ -91,6 +92,7 @@ S
 
   this->logit("startServer", "accepted");
 
+    //this->theTpTransferObject = new TpTransferClass(this, data_socket);
     this->startReceiveThread(data_socket);
     this->startTransmitThread(data_socket);
 }
@@ -125,6 +127,7 @@ void TpClass::clientThreadFunction (unsigned long ip_addr_val, ushort port_val)
 
   this->logit("startClient", "connected");
 
+    //this->theTpTransferObject = new TpTransferClass(this, s);
     this->startReceiveThread(s);
     this->startTransmitThread(s);
 }
