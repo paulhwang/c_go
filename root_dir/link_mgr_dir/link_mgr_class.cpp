@@ -13,11 +13,11 @@
 LinkMgrClass::LinkMgrClass (void *main_object_val)
 {
     memset(this, 0, sizeof(LinkMgrClass));
-    this->mainObject = main_object_val;
-    this->globalLinkId = 0;
+    this->theMainObject = main_object_val;
+    this->theGlobalLinkId = 0;
 
-    this->receiveQueue = new QueueMgrClass();
-    this->receiveQueue->initQueue(LINK_MGR_RECEIVE_QUEUE_SIZE);
+    this->theReceiveQueue = new QueueMgrClass();
+    this->theReceiveQueue->initQueue(LINK_MGR_RECEIVE_QUEUE_SIZE);
 
     if (1) {
         this->logit("LinkMgrClass", "init");
@@ -26,7 +26,7 @@ LinkMgrClass::LinkMgrClass (void *main_object_val)
 
 LinkMgrClass::~LinkMgrClass (void)
 {
-    delete this->receiveQueue;
+    delete this->theReceiveQueue;
 }
 
 void LinkMgrClass::linkMgrLogit (char const* str0_val, char const* str1_val) {

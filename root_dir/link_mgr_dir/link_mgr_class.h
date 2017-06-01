@@ -11,11 +11,11 @@
 #include "../../main_class.h"
 
 class LinkMgrClass {
-    void *mainObject;
-    int globalLinkId;
+    void *theMainObject;
+    int theGlobalLinkId;
 
-    pthread_t receiveThread;
-    QueueMgrClass *receiveQueue;
+    pthread_t theReceiveThread;
+    QueueMgrClass *theReceiveQueue;
 
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
@@ -23,11 +23,11 @@ class LinkMgrClass {
 public:
     LinkMgrClass(void *main_object_val);
     ~LinkMgrClass();
+    char const* objectName(void) {return "LinkMgrClass";}
 
     /* exports */
     void exportReceiveData(void *data_val);
 
-    char const* objectName(void) {return "LinkMgrClass";}
     void startThreads(void);
     void receiveThreadFunction(void);
     void receiveThreadLoop(void);

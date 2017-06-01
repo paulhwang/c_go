@@ -9,6 +9,6 @@
 
 void LinkMgrClass::exportReceiveData(void *data_val)
 {
-    this->receiveQueue->enqueueData(data_val);
+    this->theReceiveQueue->enqueueData(data_val);
 }
 

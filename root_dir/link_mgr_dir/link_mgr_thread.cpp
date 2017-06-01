@@ -25,7 +25,7 @@ void LinkMgrClass::receiveThreadFunction (void)
 void LinkMgrClass::receiveThreadLoop (void)
 {
     while (1) {
-        char *data = (char *) this->receiveQueue->dequeueData();
+        char *data = (char *) this->theReceiveQueue->dequeueData();
         if (data) {
         }
     }
@@ -38,10 +38,10 @@ void LinkMgrClass::startThreads (void)
     if (0) {
         this->logit("startThreads", "create receiveThread");
     }
-    r = pthread_create(&this->receiveThread, NULL, linkMgrReceiveThreadFunction, this);
+    r = pthread_create(&this->theReceiveThread, NULL, linkMgrReceiveThreadFunction, this);
     if (r) {
         printf("Error - pthread_create() return code: %d\n", r);
         return;
     }
-    pthread_join(this->receiveThread, NULL);
+    pthread_join(this->theReceiveThread, NULL);
 }
