@@ -41,7 +41,7 @@ public:
     void *mainObject(void) {return this->theMainObject;}
 
     /* exports */
-    void exportTransmitData(void *data_val);
+    void exportTransmitData1(void *data_val);
 
     TpTransferClass *startServer(unsigned short port_val);
     void serverThreadFunction(unsigned short port_val);
