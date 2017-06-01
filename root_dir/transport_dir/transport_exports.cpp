@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "transport_class.h"
-#include "transport_server_class.h"
+#include "tp_server_class.h"
 
 TransportServerClass *TransportClass::startServer (unsigned short port_val)
 {

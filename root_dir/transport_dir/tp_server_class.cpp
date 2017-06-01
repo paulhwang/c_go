@@ -1,10 +1,10 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: transport_server_class.cpp
+  File name: tp_server_class.cpp
 */
 
-#include "transport_server_class.h"
+#include "tp_server_class.h"
 
 TransportServerClass::TransportServerClass (void *transport_object_val, unsigned short port_val)
 {
