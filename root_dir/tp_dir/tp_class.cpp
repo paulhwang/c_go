@@ -90,11 +90,8 @@ S
     return;
   }
 
-  this->logit("startServer", "accepted");
+    this->logit("startServer", "accepted");
 
-    //this->theTpTransferObject = new TpTransferClass(this);
-    //this->startReceiveThread(data_socket);
-    //this->startTransmitThread(data_socket);
     this->theTpTransferObject->startThreads(data_socket);
 }
 
@@ -131,39 +128,6 @@ TpTransferClass *TpClass::clientThreadFunction (unsigned long ip_addr_val, ushor
     this->theTpTransferObject = new TpTransferClass(this);
     this->theTpTransferObject->startThreads(s);
     return this->theTpTransferObject;
-}
-
-#define TRANSPORT_RECEIVE_BUFFER_SIZE 1024
-
-void TpClass::receiveThreadFunction(int socket_val)
-{
-    while (1) {
-        char *buffer = (char *) malloc(TRANSPORT_RECEIVE_BUFFER_SIZE);
-
-        int length = read(socket_val, buffer, TRANSPORT_RECEIVE_BUFFER_SIZE);
-        this->logit("receiveThreadFunction", buffer);
-        if (length > 0) {
-            mainReceiveDataFromTransport(this->theMainObject, buffer);
-        }
-    }
-}
-
-void TpClass::exportTransmitData1 (void *data_val)
-{
-    this->transmitQueue->enqueueData(data_val);
-}
-
-void TpClass::transmitThreadFunction(int socket_val)
-{
-    while (1) {
-        void *data = this->transmitQueue->dequeueData();
-        if (data) {
-            char *str_data = (char *) data;
-            printf("transmitThreadFunction len=%d\n", strlen(str_data));
-            this->logit("transmitThreadFunction", (char *) str_data);
-            send(socket_val, str_data , strlen(str_data) , 0);
-        }
-    }
 }
 
 void TpClass::logit (char const* str0_val, char const* str1_val)
