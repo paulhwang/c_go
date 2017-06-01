@@ -1,7 +1,7 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: transport_class.cpp
+  File name: tp_class.cpp
 */
 
 #include <stdio.h>
@@ -15,7 +15,7 @@
 #include <arpa/inet.h>
 #include "../../main_exports.h"
 #include "../../utils_dir/queue_mgr_class.h"
-#include "transport_class.h"
+#include "tp_class.h"
 #include "../../utils_dir/logit.h"
 
 #define MAXHOSTNAME 32

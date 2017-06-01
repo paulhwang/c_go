@@ -1,14 +1,14 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: transport_class_thread.cpp
+  File name: tp_class_thread.cpp
 */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
 #include "tp_server_class.h"
-#include "transport_class.h"
+#include "tp_class.h"
 
 void *transportServerThreadFunction (void *data_val)
 {

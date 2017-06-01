@@ -1,12 +1,12 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: transport_exports.cpp
+  File name: tp_exports.cpp
 */
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "transport_class.h"
+#include "tp_class.h"
 #include "tp_server_class.h"
 
 TransportServerClass *TransportClass::startServer (unsigned short port_val)
