@@ -28,8 +28,6 @@ class TpClass {
 
     void startServerThread(TpTransferClass *tp_transfer_val, unsigned short port_val);
     void startClientThread(unsigned long ip_addr_val, unsigned short port_val);
-    void startReceiveThread(int socket_val);
-    void startTransmitThread(int socket_val);
 
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
