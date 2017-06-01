@@ -103,13 +103,13 @@ void QueueMgrClass::enqueueEntry(QueueEntryClass *entry)
     if (!this->theQueueHead) {
         entry->prev = 0;
         this->theQueueHead = entry;
-        queue_tail = entry;
+        this->theQueueTail = entry;
         this->theQueueSize = 1; 
     }
     else {        
-        entry->prev = queue_tail;
-        queue_tail->next = entry;
-        queue_tail = entry;
+        entry->prev = this->theQueueTail;
+        this->theQueueTail->next = entry;
+        this->theQueueTail = entry;
         this->theQueueSize++;
     }
     pthread_mutex_unlock(this->theMutex);
@@ -128,7 +128,7 @@ QueueEntryClass *QueueMgrClass::dequeueEntry(void)
 
     if (this->theQueueSize == 1) {
         entry = this->theQueueHead;
-        this->theQueueHead = queue_tail = 0;
+        this->theQueueHead = this->theQueueTail = 0;
         this->theQueueSize = 0;
         pthread_mutex_unlock(this->theMutex);
         return entry;
@@ -179,7 +179,7 @@ void QueueMgrClass::flush_queue(void)
         this->theQueueSize--;
         entry = entry_next;
     }
-    this->theQueueHead = queue_tail = 0;
+    this->theQueueHead = this->theQueueTail = 0;
  
     if (this->theQueueSize) {
         //abend(GATEWAY_LOG_TYPE_RFID, MTC_ERR_MISC, __LINE__, __FUNCTION__);
