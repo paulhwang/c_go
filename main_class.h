@@ -18,8 +18,8 @@ class MainClass {
     LinkMgrClass *theLinkMgrObject;
     BaseMgrClass *theGoBaseMgrObject;
 
-    TpTransferClass *link_mgr_tp_transfer_object;
-    TpTransferClass *base_mgr_tp_transfer_object;
+    TpTransferClass *theLinkMgrTpTransferObject;
+    TpTransferClass *theBaseMgrTpTransferObject;
 
     pthread_t theGoThread;
 

@@ -30,5 +30,5 @@ void MainClass::exportRreceiveDataFromTransport (void *data_val) {
 void MainClass::exportTransmitDataToTransport(void *data_val)
 {
     this->logit("exportTransmitDataToTransport", (char *) data_val);
-    this->base_mgr_tp_transfer_object->exportTransmitData(data_val);
+    this->theBaseMgrTpTransferObject->exportTransmitData(data_val);
 }
