@@ -36,4 +36,3 @@ void LinkClass::abend (char const* str0_val, char const* str1_val) {
     sprintf(s, "%s::%s", this->objectName(), str0_val);
     this->theLinkMgrObject->linkMgrAbend(s, str1_val);
 }
-
