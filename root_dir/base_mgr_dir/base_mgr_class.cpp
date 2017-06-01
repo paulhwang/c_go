@@ -74,9 +74,9 @@ void BaseMgrClass::mallocBase (void)
         this->theBaseIndexArray[base_index] = base_id;
         this->theBaseTableArray[base_index] = new GoBaseClass(this);
 
-        char *data_buf = (char *) malloc(BASE_ID_SIZE + 4);
+        char *data_buf = (char *) malloc(BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE + 4);
         data_buf[0] = 'm';
-        this->encodeBaseId(base_id, data_buf + 1);
+        this->encodeBaseId(base_id, base_index, data_buf + 1);
 
         this->transmitData(data_buf);
     }
@@ -85,9 +85,25 @@ void BaseMgrClass::mallocBase (void)
     }
 }
 
-void BaseMgrClass::encodeBaseId (int base_id_val, char *buf_val)
+void BaseMgrClass::encodeBaseId (int base_id_val, int base_index_val, char *buf_val)
 {
-    buf_val[4] = 0;
+
+    if (1) {
+        char s[LOGIT_BUF_SIZE];
+        sprintf(s, "base_id_val=%d base_index_val=%d", base_id_val, base_index_val);
+        this->logit("encodeBaseId", s);
+    }
+
+    buf_val[8] = 0;
+
+    buf_val[7] = '0' + base_index_val % 10;
+    base_index_val /= 10;
+    buf_val[6] = '0' + base_index_val % 10;
+    base_index_val /= 10;
+    buf_val[5] = '0' + base_index_val % 10;
+    base_index_val /= 10;
+    buf_val[4] = '0' + base_index_val;
+
     buf_val[3] = '0' + base_id_val % 10;
     base_id_val /= 10;
     buf_val[2] = '0' + base_id_val % 10;
@@ -98,26 +114,33 @@ void BaseMgrClass::encodeBaseId (int base_id_val, char *buf_val)
 
     if (1) {
         char s[LOGIT_BUF_SIZE];
-        sprintf(s, "base_id=%s", buf_val);
+        sprintf(s, "base_id_index=%s", buf_val);
         this->logit("encodeBaseId", s);
     }
 }
 
-int BaseMgrClass::decodeBaseId (char *data_val)
+int BaseMgrClass::decodeBaseId (char *data_val, int *base_id_ptr_val, int *base_index_ptr_val)
 {
     int base_id;
+    int base_index;
     base_id =  (*data_val++ - '0') * 1000;
     base_id += (*data_val++ - '0') * 100;
     base_id += (*data_val++ - '0') * 10;
-    base_id += (*data_val - '0');
+    base_id += (*data_val++ - '0');
+    base_index =  (*data_val++ - '0') * 1000;
+    base_index += (*data_val++ - '0') * 100;
+    base_index += (*data_val++ - '0') * 10;
+    base_index += (*data_val - '0');
 
     if (1) {
         char s[LOGIT_BUF_SIZE];
-        sprintf(s, "base_id=%d", base_id);
+        sprintf(s, "base_id=%d base_index=%d", base_id, base_index);
         this->logit("decodeBaseId", s);
     }
 
-    return base_id;
+    *base_id_ptr_val = base_id;
+    *base_index_ptr_val = base_index;
+    return 1;
 }
 
 void BaseMgrClass::createBase (void)
@@ -137,7 +160,9 @@ void BaseMgrClass::transmitData(char *data_val)
 void BaseMgrClass::receiveData (char* data_val) {
     this->logit("receiveData", data_val);
 
-    int base_id = this->decodeBaseId(data_val);
+    int base_id;
+    int base_index;
+    this->decodeBaseId(data_val, &base_id, &base_index);
     void *base = this->getBaseByBaseId(base_id);
     if (!base) {
         return;
@@ -146,7 +171,7 @@ void BaseMgrClass::receiveData (char* data_val) {
     char const *game = "go";
     if (!strcmp(game, "go")) {
         GoBaseClass *go_base = (GoBaseClass *) base;
-        go_base->portObject()->receiveStringData(data_val + BASE_ID_SIZE);
+        go_base->portObject()->receiveStringData(data_val + BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE);
     }
     else {
         /* TBD: other games */
