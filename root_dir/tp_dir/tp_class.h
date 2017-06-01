@@ -18,12 +18,8 @@ class TpTransferClass;
 class TpClass {
     void *theMainObject;
 
-    QueueMgrClass *transmitQueue;
-
     pthread_t theServerThread;
     pthread_t theClientThread;
-    pthread_t transmitThread;
-    pthread_t receiveThread;
     TpTransferClass *theTpTransferObject;
 
     void startServerThread(TpTransferClass *tp_transfer_val, unsigned short port_val);

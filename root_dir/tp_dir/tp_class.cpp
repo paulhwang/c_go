@@ -25,8 +25,6 @@
 TpClass::TpClass (void *main_object_val)
 {
     this->theMainObject = main_object_val;
-    this->transmitQueue = new QueueMgrClass();
-    this->transmitQueue->initQueue(TRANSPORT_TRANSMIT_QUEUE_SIZE);
 
     if (1) {
         this->logit("TpClass", "init");
