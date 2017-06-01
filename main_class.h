@@ -21,10 +21,6 @@ class MainClass {
     TpTransferClass *theLinkMgrTpTransferObject;
     TpTransferClass *theBaseMgrTpTransferObject;
 
-    pthread_t theGoThread;
-
-    pthread_t goThread(void) {return theGoThread;}
-
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
 
@@ -33,13 +29,10 @@ class MainClass {
     ~MainClass(void);
     char const *objectName(void) {return "MainClass";}
 
-    void startThreads(void);
-    void startEngineThreads(void);
-
     /* exports */
     void exportRreceiveDataFromTransport(void *data_val);
     void exportTransmitDataToTransport(void *data_val);
 
-    /* thread loops */
+    void startThreads(void);
     void goBaseMgrReceiveThreadLoop(void);
 };
