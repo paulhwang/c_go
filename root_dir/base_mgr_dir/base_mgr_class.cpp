@@ -69,10 +69,10 @@ int BaseMgrClass::allocBaseIndex (void)
 void BaseMgrClass::mallocBase (void)
 {
     int base_id = this->allocBaseId();
-    int slot = this->getEmptyBaseSlot();
-    if (slot != -1) {
-        this->theBaseIndexArray[slot] = base_id;
-        this->theBaseTableArray[slot] = new GoBaseClass(this);
+    int base_index = this->allocBaseIndex();
+    if (base_index != -1) {
+        this->theBaseIndexArray[base_index] = base_id;
+        this->theBaseTableArray[base_index] = new GoBaseClass(this);
 
         char *data_buf = (char *) malloc(BASE_ID_SIZE + 4);
         data_buf[0] = 'm';
@@ -83,18 +83,6 @@ void BaseMgrClass::mallocBase (void)
     else {
         /* TBD */
     }
-}
-
-int BaseMgrClass::getEmptyBaseSlot (void)
-{
-    int index = 0;
-    while (index < BASE_MGR_BASE_ARRAY_SIZE) {
-        if (this->theBaseIndexArray[index] == 0) {
-            return index;
-        }
-        index++;
-    }
-    return -1;
 }
 
 void BaseMgrClass::encodeBaseId (int base_id_val, char *buf_val)

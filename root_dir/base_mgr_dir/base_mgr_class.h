@@ -35,7 +35,6 @@ class BaseMgrClass {
     void mallocBase(void);
     void encodeBaseId(int base_id_val, char *buf_val);
     int decodeBaseId(char *data_val);
-    int getEmptyBaseSlot(void);
 
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
