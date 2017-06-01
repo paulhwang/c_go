@@ -15,19 +15,19 @@ class QueueMgrClass
 {
   //enum GETAC_MARKER_DEFINE_ marker_head;
 
-    int queue_size;
+    int theQueueSize;
     QueueEntryClass *queue_head;
     QueueEntryClass *queue_tail;
     int max_queue_size;
     SuspendClass *suspendObject;
-    pthread_mutex_t *mutex;
+    pthread_mutex_t *theMutex;
   //CRITICAL_SECTION cs_queue;
     int in_index;
     int out_index;
 
     void enqueueEntry(QueueEntryClass *entry);
     QueueEntryClass *dequeueEntry(void);
-    int queueSize(void) {return queue_size;}
+    int queueSize(void) {return this->theQueueSize;}
     int inIndex(void) {return in_index;}
     int outIndex(void) {return out_index;}
 

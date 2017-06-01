@@ -19,19 +19,19 @@ QueueMgrClass::QueueMgrClass(void)
 {
     memset(this, 0, sizeof(*this));
     this->suspendObject = new SuspendClass();
-    this->mutex = (pthread_mutex_t *) malloc(sizeof(pthread_mutex_t));
-    pthread_mutex_init(this->mutex, NULL);
+    this->theMutex = (pthread_mutex_t *) malloc(sizeof(pthread_mutex_t));
+    pthread_mutex_init(this->theMutex, NULL);
 
     //this->marker_head = this->marker_tail = GETAC_MARKER_UTIL_QUE_ENT;
 }
 
 QueueMgrClass::~QueueMgrClass(void)
 {
-    if (this->queue_size) {
+    if (this->theQueueSize) {
         //abend(GATEWAY_LOG_TYPE_RFID, MTC_ERR_MISC, __LINE__, __FUNCTION__);
     }
     delete this->suspendObject;
-    free(this->mutex);
+    free(this->theMutex);
 }
 
 void QueueMgrClass::initQueue(int max_queue_size_val)
@@ -90,29 +90,29 @@ void QueueMgrClass::enqueueEntry(QueueEntryClass *entry)
   }
 
   /* queue is too big */
-  if (max_queue_size && max_queue_size && (queue_size > max_queue_size)) {
+  if (max_queue_size && max_queue_size && (this->theQueueSize > max_queue_size)) {
     delete_entry(entry);
     //abend(GATEWAY_LOG_TYPE_RFID, MTC_ERR_MISC, __LINE__, __FUNCTION__);
     return;
   }
     
     entry->next = 0;  
-    pthread_mutex_lock(this->mutex);
+    pthread_mutex_lock(this->theMutex);
     in_index++;
 
     if (!queue_head) {
         entry->prev = 0;
         queue_head = entry;
         queue_tail = entry;
-        queue_size = 1; 
+        this->theQueueSize = 1; 
     }
     else {        
         entry->prev = queue_tail;
         queue_tail->next = entry;
         queue_tail = entry;
-        queue_size++;
+        this->theQueueSize++;
     }
-    pthread_mutex_unlock(this->mutex);
+    pthread_mutex_unlock(this->theMutex);
 }
 
 QueueEntryClass *QueueMgrClass::dequeueEntry(void)
@@ -124,21 +124,21 @@ QueueEntryClass *QueueMgrClass::dequeueEntry(void)
     }
 
     out_index = in_index;
-    pthread_mutex_lock(this->mutex);
+    pthread_mutex_lock(this->theMutex);
 
-    if (queue_size == 1) {
+    if (this->theQueueSize == 1) {
         entry = queue_head;
         queue_head = queue_tail = 0;
-        queue_size = 0;
-        pthread_mutex_unlock(this->mutex);
+        this->theQueueSize = 0;
+        pthread_mutex_unlock(this->theMutex);
         return entry;
     }
 
     entry = queue_head;
     queue_head = queue_head->next;
     queue_head->prev = 0;
-    queue_size--;
-    pthread_mutex_unlock(this->mutex);
+    this->theQueueSize--;
+    pthread_mutex_unlock(this->theMutex);
     return entry;
 }
 
@@ -152,7 +152,7 @@ void QueueMgrClass::check_queue_error(void)
         return;
     }
  
-    pthread_mutex_lock(this->mutex);
+    pthread_mutex_lock(this->theMutex);
     entry = queue_head;
     while (entry) {
         length++;
@@ -163,7 +163,7 @@ void QueueMgrClass::check_queue_error(void)
         abend(GATEWAY_LOG_TYPE_RFID, MTC_ERR_MISC, __LINE__, __FUNCTION__);
     }
 
-    pthread_mutex_unlock(this->mutex);
+    pthread_mutex_unlock(this->theMutex);
 #endif
 }
 
@@ -171,21 +171,21 @@ void QueueMgrClass::flush_queue(void)
 {
     QueueEntryClass *entry, *entry_next; 
  
-    pthread_mutex_lock(this->mutex);
+    pthread_mutex_lock(this->theMutex);
     entry = queue_head;
     while (entry) {
         entry_next = entry->next;
         delete_entry(entry);
-        queue_size--;
+        this->theQueueSize--;
         entry = entry_next;
     }
     queue_head = queue_tail = 0;
  
-    if (queue_size) {
+    if (this->theQueueSize) {
         //abend(GATEWAY_LOG_TYPE_RFID, MTC_ERR_MISC, __LINE__, __FUNCTION__);
     }
 
-    pthread_mutex_unlock(this->mutex);
+    pthread_mutex_unlock(this->theMutex);
 }
 
 void QueueMgrClass::delete_entry(QueueEntryClass *del_entry)
