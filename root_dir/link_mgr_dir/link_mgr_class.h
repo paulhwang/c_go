@@ -6,6 +6,8 @@
 
 #pragma once
 
+class QueueMgrClass;
+
 #define LINK_MGR_RECEIVE_QUEUE_SIZE 100
 
 #include "../../main_class.h"
