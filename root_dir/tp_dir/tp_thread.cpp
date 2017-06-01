@@ -19,10 +19,10 @@ void *transportServerThreadFunction (void *data_val)
     transport_object->serverThreadFunction(port);
 }
 
-void TpClass::startServerThread (TpServerClass *transport_server_val)
+void TpClass::startServerThread (TpTransferClass *tp_transfer_val, unsigned short port_val)
 {
     transport_thread_parameter *data = (transport_thread_parameter *) malloc(sizeof(transport_thread_parameter));
-    data->port = transport_server_val->port();
+    data->port = port_val;
     data->transport_object = this;
 
     int r;

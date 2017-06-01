@@ -12,7 +12,7 @@ class TpClass;
 class LinkMgrClass;
 class BaseMgrClass;
 class QueueMgrClass;
-class TpServerClass;
+class TpTransferClass;
 
 class MainClass {
     TpClass *transportObject;
@@ -21,8 +21,8 @@ class MainClass {
 
     QueueMgrClass *theTransportTransmitQueue;
 
-    TpServerClass *link_mgr_server_class;
-    TpServerClass *base_mgr_server_class;
+    TpTransferClass *link_mgr_tp_transfer_object;
+    TpTransferClass *base_mgr_tp_transfer_object;
 
     pthread_t theGoThread;
 
