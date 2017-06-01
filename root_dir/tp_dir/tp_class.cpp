@@ -92,7 +92,7 @@ S
 
   this->logit("startServer", "accepted");
 
-    this->theTpTransferObject = new TpTransferClass(this, data_socket);
+    this->theTpTransferObject = new TpTransferClass(this);
     this->startReceiveThread(data_socket);
     this->startTransmitThread(data_socket);
 }
@@ -127,8 +127,8 @@ TpTransferClass *TpClass::clientThreadFunction (unsigned long ip_addr_val, ushor
 
   this->logit("startClient", "connected");
 
-    this->theTpTransferObject = new TpTransferClass(this, s);
-    this->theTpTransferObject->startThreads();
+    this->theTpTransferObject = new TpTransferClass(this);
+    this->theTpTransferObject->startThreads(s);
     return this->theTpTransferObject;
 }
 

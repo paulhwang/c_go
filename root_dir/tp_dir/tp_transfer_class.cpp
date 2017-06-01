@@ -18,10 +18,9 @@
 #include "../../utils_dir/queue_mgr_class.h"
 #include "../../main_exports.h"
 
-TpTransferClass::TpTransferClass (TpClass *tp_object_val, int socket_val)
+TpTransferClass::TpTransferClass (TpClass *tp_object_val)
 {
-	this->theTpObject = tp_object_val;
-	this->theSocket = socket_val;
+    this->theTpObject = tp_object_val;
 
     this->theTransmitQueue = new QueueMgrClass();
     this->theTransmitQueue->initQueue(TP_TRANSFER_CLASS_TRANSMIT_QUEUE_SIZE);
@@ -35,8 +34,9 @@ TpTransferClass::~TpTransferClass (void)
 {
 }
 
-void TpTransferClass::startThreads(void)
+void TpTransferClass::startThreads(int socket_val)
 {
+    this->theSocket = socket_val;
     this->startReceiveThread(this->theSocket);
     this->startTransmitThread(this->theSocket);
 }

@@ -27,14 +27,14 @@ class TpTransferClass {
     void abend(char const* str0_val, char const* str1_val);
 
 public:
-    TpTransferClass(TpClass *tp_object_val, int socket_val);
+    TpTransferClass(TpClass *tp_object_val);
     ~TpTransferClass(void);
     char const *objectName(void) {return "TpTransferClass";}
     int socket(void) {return this->theSocket;}
 
     /* exports */
     void exportTransmitData(void *data_val);
-    void startThreads(void);
+    void startThreads(int socket_val);
 
     void receiveThreadFunction(int socket_val);
     void transmitThreadFunction(int socket_val);
