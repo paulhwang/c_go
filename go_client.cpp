@@ -5,7 +5,7 @@
 */
 
 #include <unistd.h>
-#include "root_dir/transport_dir/tp_class.h"
+#include "root_dir/tp_dir/tp_class.h"
 #include "utils_dir/logit.h"
 
 #define BASE_ID_SIZE 4

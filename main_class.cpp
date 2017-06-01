@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include "utils_dir/logit.h"
 #include "utils_dir/queue_mgr_class.h"
-#include "root_dir/transport_dir/tp_class.h"
+#include "root_dir/tp_dir/tp_class.h"
 #include "root_dir/link_mgr_dir/link_mgr_class.h"
 #include "root_dir/base_mgr_dir/base_mgr_class.h"
 #include "main_class.h"
