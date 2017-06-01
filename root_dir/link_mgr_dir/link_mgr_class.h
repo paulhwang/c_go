@@ -7,6 +7,7 @@
 #pragma once
 
 class QueueMgrClass;
+class LinkClass;
 
 #define LINK_MGR_RECEIVE_QUEUE_SIZE 100
 
@@ -33,6 +34,9 @@ public:
     void startThreads(void);
     void receiveThreadFunction(void);
     void receiveThreadLoop(void);
+
+    LinkClass *mallocLink (char const *my_name_val);
+    void freeLink (LinkClass *link_object_val);
 
     void linkMgrLogit(char const* str0_val, char const* str1_val);
     void linkMgrAbend(char const* str0_val, char const* str1_val);

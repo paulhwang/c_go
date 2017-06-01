@@ -9,6 +9,7 @@
 #include "../../utils_dir/logit.h"
 #include "../../utils_dir/queue_mgr_class.h"
 #include "link_mgr_class.h"
+#include "link_class.h"
 
 LinkMgrClass::LinkMgrClass (void *main_object_val)
 {
@@ -27,6 +28,21 @@ LinkMgrClass::LinkMgrClass (void *main_object_val)
 LinkMgrClass::~LinkMgrClass (void)
 {
     delete this->theReceiveQueue;
+}
+
+LinkClass *LinkMgrClass::mallocLink (char const *my_name_val)
+{
+    LinkClass *link = new LinkClass(this, 0, my_name_val);
+    if (!link) {
+        return 0;
+    }
+
+    return link;
+}
+
+void LinkMgrClass::freeLink (LinkClass *link_object_val)
+{
+
 }
 
 void LinkMgrClass::linkMgrLogit (char const* str0_val, char const* str1_val) {
