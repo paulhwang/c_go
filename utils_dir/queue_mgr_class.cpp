@@ -36,7 +36,7 @@ QueueMgrClass::~QueueMgrClass(void)
 
 void QueueMgrClass::initQueue(int max_queue_size_val)
 {
-  max_queue_size = max_queue_size_val;
+  this->theMaxQueueSize = max_queue_size_val;
   //InitializeCriticalSectionAndSpinCount(&cs_queue, 0);
 }
 
@@ -90,7 +90,7 @@ void QueueMgrClass::enqueueEntry(QueueEntryClass *entry)
   }
 
   /* queue is too big */
-  if (max_queue_size && max_queue_size && (this->theQueueSize > max_queue_size)) {
+  if (this->theMaxQueueSize && this->theMaxQueueSize && (this->theQueueSize > this->theMaxQueueSize)) {
     delete_entry(entry);
     //abend(GATEWAY_LOG_TYPE_RFID, MTC_ERR_MISC, __LINE__, __FUNCTION__);
     return;

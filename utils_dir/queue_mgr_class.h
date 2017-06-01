@@ -18,7 +18,7 @@ class QueueMgrClass
     int theQueueSize;
     QueueEntryClass *theQueueHead;
     QueueEntryClass *theQueueTail;
-    int max_queue_size;
+    int theMaxQueueSize;
     SuspendClass *suspendObject;
     pthread_mutex_t *theMutex;
   //CRITICAL_SECTION cs_queue;
