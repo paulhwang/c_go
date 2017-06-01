@@ -87,8 +87,7 @@ void BaseMgrClass::mallocBase (void)
 
 void BaseMgrClass::encodeBaseId (int base_id_val, int base_index_val, char *buf_val)
 {
-
-    if (1) {
+    if (0) {
         char s[LOGIT_BUF_SIZE];
         sprintf(s, "base_id_val=%d base_index_val=%d", base_id_val, base_index_val);
         this->logit("encodeBaseId", s);
