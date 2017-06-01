@@ -100,9 +100,9 @@ void QueueMgrClass::enqueueEntry(QueueEntryClass *entry)
     pthread_mutex_lock(this->theMutex);
     in_index++;
 
-    if (!queue_head) {
+    if (!this->theQueueHead) {
         entry->prev = 0;
-        queue_head = entry;
+        this->theQueueHead = entry;
         queue_tail = entry;
         this->theQueueSize = 1; 
     }
@@ -119,7 +119,7 @@ QueueEntryClass *QueueMgrClass::dequeueEntry(void)
 {
     QueueEntryClass *entry;
 
-    if (!this->queue_head) {
+    if (!this->theQueueHead) {
         return 0;
     }
 
@@ -127,16 +127,16 @@ QueueEntryClass *QueueMgrClass::dequeueEntry(void)
     pthread_mutex_lock(this->theMutex);
 
     if (this->theQueueSize == 1) {
-        entry = queue_head;
-        queue_head = queue_tail = 0;
+        entry = this->theQueueHead;
+        this->theQueueHead = queue_tail = 0;
         this->theQueueSize = 0;
         pthread_mutex_unlock(this->theMutex);
         return entry;
     }
 
-    entry = queue_head;
-    queue_head = queue_head->next;
-    queue_head->prev = 0;
+    entry = this->theQueueHead;
+    this->theQueueHead = this->theQueueHead->next;
+    this->theQueueHead->prev = 0;
     this->theQueueSize--;
     pthread_mutex_unlock(this->theMutex);
     return entry;
@@ -153,7 +153,7 @@ void QueueMgrClass::check_queue_error(void)
     }
  
     pthread_mutex_lock(this->theMutex);
-    entry = queue_head;
+    entry = this->theQueueHead;
     while (entry) {
         length++;
         entry = entry->next;
@@ -172,14 +172,14 @@ void QueueMgrClass::flush_queue(void)
     QueueEntryClass *entry, *entry_next; 
  
     pthread_mutex_lock(this->theMutex);
-    entry = queue_head;
+    entry = this->theQueueHead;
     while (entry) {
         entry_next = entry->next;
         delete_entry(entry);
         this->theQueueSize--;
         entry = entry_next;
     }
-    queue_head = queue_tail = 0;
+    this->theQueueHead = queue_tail = 0;
  
     if (this->theQueueSize) {
         //abend(GATEWAY_LOG_TYPE_RFID, MTC_ERR_MISC, __LINE__, __FUNCTION__);

@@ -16,7 +16,7 @@ class QueueMgrClass
   //enum GETAC_MARKER_DEFINE_ marker_head;
 
     int theQueueSize;
-    QueueEntryClass *queue_head;
+    QueueEntryClass *theQueueHead;
     QueueEntryClass *queue_tail;
     int max_queue_size;
     SuspendClass *suspendObject;
