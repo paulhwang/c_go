@@ -15,7 +15,7 @@
 class QueueMgrClass;
 class TransportServerClass;
 
-class TransportClass {
+class TpClass {
     void *mainObject;
 
     QueueMgrClass *transmitQueue;
@@ -34,8 +34,8 @@ class TransportClass {
     void abend(char const* str0_val, char const* str1_val);
  
 public:
-    TransportClass(void *main_object_val);
-    ~TransportClass(void);
+    TpClass(void *main_object_val);
+    ~TpClass(void);
 
     TransportServerClass *startServer(unsigned short port_val);
     void serverThreadFunction(unsigned short port_val);
@@ -46,13 +46,13 @@ public:
     /* exports */
     void exportTransmitData(void *data_val);
 
-    char const *objectName(void) {return "TransportClass";}
+    char const *objectName(void) {return "TpClass";}
 };
 
 typedef struct {
     unsigned long ip_addr;
     unsigned short port;
-    TransportClass *transport_object;
+    TpClass *transport_object;
     int socket;
 } transport_thread_parameter;
 

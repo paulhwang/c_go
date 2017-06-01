@@ -13,7 +13,7 @@
 
 #define MOVE_DATA_BUF_SIZE 32
 
-TransportClass *transport_object;
+TpClass *transport_object;
 char base_id[BASE_ID_SIZE + 4];
 int move_index = 0;
 char const *move_array[] = {
@@ -60,7 +60,7 @@ void mainReceiveDataFromTransport (void* engine_object_val, void *data_val) {
 }
 
 int main (int argc, char** argv) {
-    transport_object = new TransportClass(null);
+    transport_object = new TpClass(null);
     transport_object->clientThreadFunction(0, TRANSPORT_PORT_NUMBER_FOR_BASE_MGR);
     transport_object->exportTransmitData((void *)  "m");
     sleep(1000);

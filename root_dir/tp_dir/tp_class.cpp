@@ -21,22 +21,22 @@
 #define MAXHOSTNAME 32
 #define BACKLOG 5
 
-TransportClass::TransportClass (void *main_object_val)
+TpClass::TpClass (void *main_object_val)
 {
     this->mainObject = main_object_val;
     this->transmitQueue = new QueueMgrClass();
     this->transmitQueue->initQueue(TRANSPORT_TRANSMIT_QUEUE_SIZE);
 
     if (1) {
-        this->logit("TransportClass", "init");
+        this->logit("TpClass", "init");
     }
 }
 
-TransportClass::~TransportClass (void)
+TpClass::~TpClass (void)
 {
 }
 
-void TransportClass::serverThreadFunction (ushort port_val)
+void TpClass::serverThreadFunction (ushort port_val)
 {
   char localhost[MAXHOSTNAME + 1];
   struct servent *sp;
@@ -95,7 +95,7 @@ S
     this->startTransmitThread(data_socket);
 }
 
-void TransportClass::clientThreadFunction (unsigned long ip_addr_val, ushort port_val)
+void TpClass::clientThreadFunction (unsigned long ip_addr_val, ushort port_val)
 {
   int s;
   struct sockaddr_in serv_addr;
@@ -131,7 +131,7 @@ void TransportClass::clientThreadFunction (unsigned long ip_addr_val, ushort por
 
 #define TRANSPORT_RECEIVE_BUFFER_SIZE 1024
 
-void TransportClass::receiveThreadFunction(int socket_val)
+void TpClass::receiveThreadFunction(int socket_val)
 {
     while (1) {
         char *buffer = (char *) malloc(TRANSPORT_RECEIVE_BUFFER_SIZE);
@@ -144,12 +144,12 @@ void TransportClass::receiveThreadFunction(int socket_val)
     }
 }
 
-void TransportClass::exportTransmitData (void *data_val)
+void TpClass::exportTransmitData (void *data_val)
 {
     this->transmitQueue->enqueueData(data_val);
 }
 
-void TransportClass::transmitThreadFunction(int socket_val)
+void TpClass::transmitThreadFunction(int socket_val)
 {
     while (1) {
         void *data = this->transmitQueue->dequeueData();
@@ -162,14 +162,14 @@ void TransportClass::transmitThreadFunction(int socket_val)
     }
 }
 
-void TransportClass::logit (char const* str0_val, char const* str1_val)
+void TpClass::logit (char const* str0_val, char const* str1_val)
 {
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", this->objectName(), str0_val);
     LOGIT(s, str1_val);
 }
 
-void TransportClass::abend (char const* str0_val, char const* str1_val)
+void TpClass::abend (char const* str0_val, char const* str1_val)
 {
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", this->objectName(), str0_val);

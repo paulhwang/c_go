@@ -16,7 +16,7 @@ MainClass::MainClass(void)
 {
     this->linkMgrObject = new LinkMgrClass(this);
     this->goBaseMgrObject = new BaseMgrClass(this);
-    this->transportObject = new TransportClass(this);
+    this->transportObject = new TpClass(this);
 
     this->theTransportTransmitQueue = new QueueMgrClass();
     this->transportTransmitQueue()->initQueue(100);

@@ -8,14 +8,14 @@
 #include <pthread.h>
 #include "utils_dir/logit.h"
 
-class TransportClass;
+class TpClass;
 class LinkMgrClass;
 class BaseMgrClass;
 class QueueMgrClass;
 class TransportServerClass;
 
 class MainClass {
-    TransportClass *transportObject;
+    TpClass *transportObject;
     LinkMgrClass *linkMgrObject;
     BaseMgrClass *goBaseMgrObject;
 

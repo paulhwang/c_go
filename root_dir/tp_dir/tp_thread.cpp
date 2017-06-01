@@ -13,13 +13,13 @@
 void *transportServerThreadFunction (void *data_val)
 {
     unsigned short port = ((transport_thread_parameter *) data_val)->port;
-    TransportClass *transport_object = ((transport_thread_parameter *) data_val)->transport_object;
+    TpClass *transport_object = ((transport_thread_parameter *) data_val)->transport_object;
     free(data_val);
 
     transport_object->serverThreadFunction(port);
 }
 
-void TransportClass::startServerThread (TransportServerClass *transport_server_val)
+void TpClass::startServerThread (TransportServerClass *transport_server_val)
 {
     transport_thread_parameter *data = (transport_thread_parameter *) malloc(sizeof(transport_thread_parameter));
     data->port = transport_server_val->port();
@@ -40,7 +40,7 @@ void *transportClientThreadFunction (void *data_val)
 {
     unsigned long ip_addr = ((transport_thread_parameter *) data_val)->ip_addr;
     unsigned short port = ((transport_thread_parameter *) data_val)->port;
-    TransportClass *transport_object = ((transport_thread_parameter *) data_val)->transport_object;
+    TpClass *transport_object = ((transport_thread_parameter *) data_val)->transport_object;
     free(data_val);
 
     printf("transportClientThreadFunction aaa %i\n", port);
@@ -48,7 +48,7 @@ void *transportClientThreadFunction (void *data_val)
     printf("transportClientThreadFunction bbb %i\n", port);
 }
 
-void TransportClass::startClientThread (unsigned long ip_addr_val, ushort port_val)
+void TpClass::startClientThread (unsigned long ip_addr_val, ushort port_val)
 {
     transport_thread_parameter *data = (transport_thread_parameter *) malloc(sizeof(transport_thread_parameter));
     data->ip_addr = ip_addr_val;
@@ -69,13 +69,13 @@ void TransportClass::startClientThread (unsigned long ip_addr_val, ushort port_v
 void *transportReceiveThreadFunction (void *data_val)
 {
     int socket = ((transport_thread_parameter *) data_val)->socket;
-    TransportClass *transport_object = ((transport_thread_parameter *) data_val)->transport_object;
+    TpClass *transport_object = ((transport_thread_parameter *) data_val)->transport_object;
     free(data_val);
 
     transport_object->receiveThreadFunction(socket);
 }
 
-void TransportClass::startReceiveThread (int socket_val)
+void TpClass::startReceiveThread (int socket_val)
 {
     transport_thread_parameter *data = (transport_thread_parameter *) malloc(sizeof(transport_thread_parameter));
     data->socket = socket_val;
@@ -95,13 +95,13 @@ void TransportClass::startReceiveThread (int socket_val)
 void *transportTransmitThreadFunction (void *data_val)
 {
     int socket = ((transport_thread_parameter *) data_val)->socket;
-    TransportClass *transport_object = ((transport_thread_parameter *) data_val)->transport_object;
+    TpClass *transport_object = ((transport_thread_parameter *) data_val)->transport_object;
     free(data_val);
 
     transport_object->transmitThreadFunction(socket);
 }
 
-void TransportClass::startTransmitThread (int socket_val)
+void TpClass::startTransmitThread (int socket_val)
 {
     transport_thread_parameter *data = (transport_thread_parameter *) malloc(sizeof(transport_thread_parameter));
     data->socket = socket_val;
