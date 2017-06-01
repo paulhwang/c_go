@@ -9,9 +9,9 @@
 #include "tp_class.h"
 #include "tp_server_class.h"
 
-TransportServerClass *TpClass::startServer (unsigned short port_val)
+TpServerClass *TpClass::startServer (unsigned short port_val)
 {
-	TransportServerClass *transport_server_object = new TransportServerClass(this, port_val);
+	TpServerClass *transport_server_object = new TpServerClass(this, port_val);
 	if (transport_server_object) {
     	this->startServerThread(transport_server_object);
     	return transport_server_object;

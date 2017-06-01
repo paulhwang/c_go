@@ -6,14 +6,14 @@
 
 #pragma once
 
-class TransportServerClass {
+class TpServerClass {
     void *transport_object;
     unsigned short thePort;
 
 public:
-    TransportServerClass(void *transport_object_val, unsigned short port_val);
-    ~TransportServerClass(void);
-    char const *objectName(void) {return "TransportServerClass";}
+    TpServerClass(void *transport_object_val, unsigned short port_val);
+    ~TpServerClass(void);
+    char const *objectName(void) {return "TpServerClass";}
 
     unsigned short port(void) {return this->thePort;}
 };

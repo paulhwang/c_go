@@ -19,7 +19,7 @@ void *transportServerThreadFunction (void *data_val)
     transport_object->serverThreadFunction(port);
 }
 
-void TpClass::startServerThread (TransportServerClass *transport_server_val)
+void TpClass::startServerThread (TpServerClass *transport_server_val)
 {
     transport_thread_parameter *data = (transport_thread_parameter *) malloc(sizeof(transport_thread_parameter));
     data->port = transport_server_val->port();
