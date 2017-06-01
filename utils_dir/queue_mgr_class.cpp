@@ -18,7 +18,7 @@
 QueueMgrClass::QueueMgrClass(void)
 {
     memset(this, 0, sizeof(*this));
-    this->suspendObject = new SuspendClass();
+    this->theSuspendObject = new SuspendClass();
     this->theMutex = (pthread_mutex_t *) malloc(sizeof(pthread_mutex_t));
     pthread_mutex_init(this->theMutex, NULL);
 
@@ -30,7 +30,7 @@ QueueMgrClass::~QueueMgrClass(void)
     if (this->theQueueSize) {
         //abend(GATEWAY_LOG_TYPE_RFID, MTC_ERR_MISC, __LINE__, __FUNCTION__);
     }
-    delete this->suspendObject;
+    delete this->theSuspendObject;
     free(this->theMutex);
 }
 
@@ -55,7 +55,7 @@ void QueueMgrClass::enqueueData (void *data_val)
         entry->data = data_val;
     }
     this->enqueueEntry(entry);
-    this->suspendObject->signal();
+    this->theSuspendObject->signal();
 }
 
 void *QueueMgrClass::dequeueData (void)
@@ -72,7 +72,7 @@ void *QueueMgrClass::dequeueData (void)
             return data;
         }
         else {
-            this->suspendObject->wait();
+            this->theSuspendObject->wait();
         }
     }
 }
