@@ -23,7 +23,7 @@
 
 TpClass::TpClass (void *main_object_val)
 {
-    this->mainObject = main_object_val;
+    this->theMainObject = main_object_val;
     this->transmitQueue = new QueueMgrClass();
     this->transmitQueue->initQueue(TRANSPORT_TRANSMIT_QUEUE_SIZE);
 
@@ -139,7 +139,7 @@ void TpClass::receiveThreadFunction(int socket_val)
         int length = read(socket_val, buffer, TRANSPORT_RECEIVE_BUFFER_SIZE);
         this->logit("receiveThreadFunction", buffer);
         if (length > 0) {
-            mainReceiveDataFromTransport(this->mainObject, buffer);
+            mainReceiveDataFromTransport(this->theMainObject, buffer);
         }
     }
 }

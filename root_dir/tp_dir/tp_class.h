@@ -16,7 +16,7 @@ class QueueMgrClass;
 class TpServerClass;
 
 class TpClass {
-    void *mainObject;
+    void *theMainObject;
 
     QueueMgrClass *transmitQueue;
 
@@ -36,17 +36,17 @@ class TpClass {
 public:
     TpClass(void *main_object_val);
     ~TpClass(void);
+    char const *objectName(void) {return "TpClass";}
+    void *mainObject(void) {return this->theMainObject;}
+
+    /* exports */
+    void exportTransmitData(void *data_val);
 
     TpServerClass *startServer(unsigned short port_val);
     void serverThreadFunction(unsigned short port_val);
     void clientThreadFunction(unsigned long ip_addr_val, unsigned short port_val);
     void receiveThreadFunction(int socket_val);
     void transmitThreadFunction(int socket_val);
-
-    /* exports */
-    void exportTransmitData(void *data_val);
-
-    char const *objectName(void) {return "TpClass";}
 };
 
 typedef struct {

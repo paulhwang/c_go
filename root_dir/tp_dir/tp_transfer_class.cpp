@@ -4,14 +4,77 @@
   File name: tp_transfer_class.cpp
 */
 
+#include <stdio.h>
+#include <malloc.h>
+#include <netinet/in.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <netdb.h>
+#include <pwd.h>
+#include "../../includes/common.h"
 #include "tp_transfer_class.h"
+#include "tp_class.h"
+#include "../../utils_dir/logit.h"
+#include "../../utils_dir/queue_mgr_class.h"
+#include "../../main_exports.h"
 
-TpTransferClass::TpTransferClass (void *tp_object_val, int socket_val)
+TpTransferClass::TpTransferClass (TpClass *tp_object_val, int socket_val)
 {
 	this->tp_object = tp_object_val;
 	this->theSocket = socket_val;
+
+    this->startReceiveThread(this->socket());
+    this->startTransmitThread(this->socket());
 }
 
 TpTransferClass::~TpTransferClass (void)
 {
 }
+
+#define TRANSPORT_RECEIVE_BUFFER_SIZE 1024
+
+void TpTransferClass::receiveThreadFunction(int socket_val)
+{
+    while (1) {
+        char *buffer = (char *) malloc(TRANSPORT_RECEIVE_BUFFER_SIZE);
+
+        int length = read(socket_val, buffer, TRANSPORT_RECEIVE_BUFFER_SIZE);
+        this->logit("receiveThreadFunction", buffer);
+        if (length > 0) {
+            mainReceiveDataFromTransport(this->tp_object->mainObject(), buffer);
+        }
+    }
+}
+
+void TpTransferClass::exportTransmitData (void *data_val)
+{
+    this->transmitQueue->enqueueData(data_val);
+}
+
+void TpTransferClass::transmitThreadFunction(int socket_val)
+{
+    while (1) {
+        void *data = this->transmitQueue->dequeueData();
+        if (data) {
+            char *str_data = (char *) data;
+            printf("transmitThreadFunction len=%d\n", strlen(str_data));
+            this->logit("transmitThreadFunction", (char *) str_data);
+            send(socket_val, str_data , strlen(str_data) , 0);
+        }
+    }
+}
+
+void TpTransferClass::logit (char const* str0_val, char const* str1_val)
+{
+    char s[LOGIT_BUF_SIZE];
+    sprintf(s, "%s::%s", this->objectName(), str0_val);
+    LOGIT(s, str1_val);
+}
+
+void TpTransferClass::abend (char const* str0_val, char const* str1_val)
+{
+    char s[LOGIT_BUF_SIZE];
+    sprintf(s, "%s::%s", this->objectName(), str0_val);
+    ABEND(s, str1_val);
+}
+
