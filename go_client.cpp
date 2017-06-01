@@ -6,6 +6,7 @@
 
 #include <unistd.h>
 #include "root_dir/tp_dir/tp_class.h"
+#include "root_dir/tp_dir/tp_transfer_class.h"
 #include "utils_dir/logit.h"
 
 #define BASE_ID_SIZE 4
@@ -13,7 +14,7 @@
 
 #define MOVE_DATA_BUF_SIZE 32
 
-TpClass *transport_object;
+TpTransferClass *tp_transfer_object;
 char base_id[BASE_ID_SIZE + 4];
 int move_index = 0;
 char const *move_array[] = {
@@ -34,7 +35,7 @@ void play_a_move (void)
     strcpy(move_data_buf + 1 + BASE_ID_SIZE, "Move   ");
     strcpy(move_data_buf + 1 + BASE_ID_SIZE + GO_PROTOCOL_CODE_SIZE, move_array[move_index++]);
     printf("=====%s\n", move_data_buf);
-    transport_object->exportTransmitData(move_data_buf);
+    tp_transfer_object->exportTransmitData(move_data_buf);
 }
 
 void mainReceiveDataFromTransport (void* engine_object_val, void *data_val) {
@@ -60,8 +61,10 @@ void mainReceiveDataFromTransport (void* engine_object_val, void *data_val) {
 }
 
 int main (int argc, char** argv) {
-    transport_object = new TpClass(null);
-    transport_object->clientThreadFunction(0, TRANSPORT_PORT_NUMBER_FOR_BASE_MGR);
-    transport_object->exportTransmitData((void *)  "m");
+    TpClass *transport_object = new TpClass(null);
+    tp_transfer_object = transport_object->clientThreadFunction(0, TRANSPORT_PORT_NUMBER_FOR_BASE_MGR);
+    if (tp_transfer_object) {
+        tp_transfer_object->exportTransmitData((void *)  "m");
+    }
     sleep(1000);
 }

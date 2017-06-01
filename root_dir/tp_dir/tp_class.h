@@ -46,7 +46,7 @@ public:
 
     TpServerClass *startServer(unsigned short port_val);
     void serverThreadFunction(unsigned short port_val);
-    void clientThreadFunction(unsigned long ip_addr_val, unsigned short port_val);
+    TpTransferClass *clientThreadFunction(unsigned long ip_addr_val, unsigned short port_val);
     void receiveThreadFunction(int socket_val);
     void transmitThreadFunction(int socket_val);
 };

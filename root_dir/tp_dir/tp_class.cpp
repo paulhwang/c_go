@@ -97,7 +97,7 @@ S
     this->startTransmitThread(data_socket);
 }
 
-void TpClass::clientThreadFunction (unsigned long ip_addr_val, ushort port_val)
+TpTransferClass *TpClass::clientThreadFunction (unsigned long ip_addr_val, ushort port_val)
 {
   int s;
   struct sockaddr_in serv_addr;
@@ -106,7 +106,7 @@ void TpClass::clientThreadFunction (unsigned long ip_addr_val, ushort port_val)
 
   if ((s = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
     this->logit("startClient", "open socket error");
-    return;
+    return 0;
   }
  
   memset(&serv_addr, '0', sizeof(serv_addr));
@@ -116,21 +116,20 @@ void TpClass::clientThreadFunction (unsigned long ip_addr_val, ushort port_val)
   
   if (inet_pton(AF_INET, "127.0.0.1", &serv_addr.sin_addr) <= 0) {
     printf("Invalid address/ Address not supported \n");
-    return ;
+    return 0;
   }
   
   this->logit("startClient", "connecting");
   if (connect(s, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0) {
     printf("\nConnection Failed \n");
-    return;
+    return 0;
   }
 
   this->logit("startClient", "connected");
 
     this->theTpTransferObject = new TpTransferClass(this, s);
-    this->startReceiveThread(s);
-    this->startTransmitThread(s);
-    //this->startThreads();
+    this->theTpTransferObject->startThreads();
+    return this->theTpTransferObject;
 }
 
 #define TRANSPORT_RECEIVE_BUFFER_SIZE 1024
