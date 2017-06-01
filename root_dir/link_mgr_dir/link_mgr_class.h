@@ -16,9 +16,12 @@ class LinkClass;
 class LinkMgrClass {
     void *theMainObject;
     int theGlobalLinkId;
+    LinkClass *linkTableArray[1000];
 
     pthread_t theReceiveThread;
     QueueMgrClass *theReceiveQueue;
+
+    int allocLinkId (void);
 
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);

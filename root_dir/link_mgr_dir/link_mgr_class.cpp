@@ -30,9 +30,16 @@ LinkMgrClass::~LinkMgrClass (void)
     delete this->theReceiveQueue;
 }
 
+int LinkMgrClass::allocLinkId (void)
+{
+    this->theGlobalLinkId++;
+    return this->theGlobalLinkId;
+}
+
 LinkClass *LinkMgrClass::mallocLink (char const *my_name_val)
 {
-    LinkClass *link = new LinkClass(this, 0, my_name_val);
+    int link_index = 0;
+    LinkClass *link = new LinkClass(this, this->allocLinkId(), link_index, my_name_val);
     if (!link) {
         return 0;
     }
@@ -42,7 +49,11 @@ LinkClass *LinkMgrClass::mallocLink (char const *my_name_val)
 
 void LinkMgrClass::freeLink (LinkClass *link_object_val)
 {
-
+    if (!link_object_val) {
+        return;
+    }
+    this->linkTableArray[link_object_val->linkIndex()] = 0;
+    link_object_val->~LinkClass();
 }
 
 void LinkMgrClass::linkMgrLogit (char const* str0_val, char const* str1_val) {
