@@ -92,7 +92,7 @@ S
 
   this->logit("startServer", "accepted");
 
-    //this->theTpTransferObject = new TpTransferClass(this, data_socket);
+    this->theTpTransferObject = new TpTransferClass(this, data_socket);
     this->startReceiveThread(data_socket);
     this->startTransmitThread(data_socket);
 }
@@ -127,9 +127,10 @@ void TpClass::clientThreadFunction (unsigned long ip_addr_val, ushort port_val)
 
   this->logit("startClient", "connected");
 
-    //this->theTpTransferObject = new TpTransferClass(this, s);
+    this->theTpTransferObject = new TpTransferClass(this, s);
     this->startReceiveThread(s);
     this->startTransmitThread(s);
+    //this->startThreads();
 }
 
 #define TRANSPORT_RECEIVE_BUFFER_SIZE 1024

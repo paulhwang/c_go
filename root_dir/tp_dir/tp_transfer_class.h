@@ -34,6 +34,7 @@ public:
 
     /* exports */
     void exportTransmitData(void *data_val);
+    void startThreads(void);
 
     void receiveThreadFunction(int socket_val);
     void transmitThreadFunction(int socket_val);

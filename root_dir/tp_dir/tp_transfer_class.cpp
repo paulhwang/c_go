@@ -26,9 +26,6 @@ TpTransferClass::TpTransferClass (TpClass *tp_object_val, int socket_val)
     this->theTransmitQueue = new QueueMgrClass();
     this->theTransmitQueue->initQueue(TP_TRANSFER_CLASS_TRANSMIT_QUEUE_SIZE);
 
-    this->startReceiveThread(this->socket());
-    this->startTransmitThread(this->socket());
-
     if (1) {
         this->logit("TpTransferClass", "init");
     }
@@ -36,6 +33,12 @@ TpTransferClass::TpTransferClass (TpClass *tp_object_val, int socket_val)
 
 TpTransferClass::~TpTransferClass (void)
 {
+}
+
+void TpTransferClass::startThreads(void)
+{
+    this->startReceiveThread(this->theSocket);
+    this->startTransmitThread(this->theSocket);
 }
 
 #define TRANSPORT_RECEIVE_BUFFER_SIZE 1024
