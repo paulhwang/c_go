@@ -20,13 +20,13 @@ class GoBaseClass;
 #define MAX_GLOBAL_BASE_ID 9999
 
 class BaseMgrClass {
-    void *mainObject;
-    int globalBaseId;
-    int baseIndexArray[BASE_ARRAY_SIZE + 4];
-    void *baseTableArray[BASE_ARRAY_SIZE + 4];
+    void *theMainObject;
+    int theGlobalBaseId;
+    int theBaseIndexArray[BASE_ARRAY_SIZE + 4];
+    void *theBaseTableArray[BASE_ARRAY_SIZE + 4];
 
-    pthread_t receiveThread;
-    QueueMgrClass *receiveQueue;
+    pthread_t theReceiveThread;
+    QueueMgrClass *theReceiveQueue;
 
     void *getBaseByBaseId(int base_id_val);
     int allocBaseId(void);
@@ -41,11 +41,11 @@ class BaseMgrClass {
 public:
     BaseMgrClass(void *main_object_val);
     ~BaseMgrClass();
+    char const* objectName(void) {return "BaseMgrClass";}
 
     /* exports */
     void exportReceiveData(void *data_val);
 
-    char const* objectName(void) {return "BaseMgrClass";}
     void startThreads(void);
     void receiveThreadFunction(void);
     void receiveThreadLoop(void);

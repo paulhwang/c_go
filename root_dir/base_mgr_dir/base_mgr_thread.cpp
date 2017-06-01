@@ -24,7 +24,7 @@ void BaseMgrClass::receiveThreadFunction (void)
 void BaseMgrClass::receiveThreadLoop (void)
 {
     while (1) {
-        char *data = (char *) this->receiveQueue->dequeueData();
+        char *data = (char *) this->theReceiveQueue->dequeueData();
         if (data) {
             if (*data == 'm') {
                 this->mallocBase();
@@ -45,10 +45,10 @@ void BaseMgrClass::startThreads (void)
     if (0) {
         this->logit("startThreads", "create receiveThread");
     }
-    r = pthread_create(&this->receiveThread, NULL, baseMgrReceiveThreadFunction, this);
+    r = pthread_create(&this->theReceiveThread, NULL, baseMgrReceiveThreadFunction, this);
     if (r) {
         printf("Error - pthread_create() return code: %d\n", r);
         return;
     }
-    pthread_join(this->receiveThread, NULL);
+    pthread_join(this->theReceiveThread, NULL);
 }

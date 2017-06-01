@@ -18,11 +18,11 @@
 BaseMgrClass::BaseMgrClass (void *main_object_val)
 {
     memset(this, 0, sizeof(BaseMgrClass));
-    this->mainObject = main_object_val;
-    this->globalBaseId = 0;
+    this->theMainObject = main_object_val;
+    this->theGlobalBaseId = 0;
 
-    this->receiveQueue = new QueueMgrClass();
-    this->receiveQueue->initQueue(BASE_MGR_RECEIVE_QUEUE_SIZE);
+    this->theReceiveQueue = new QueueMgrClass();
+    this->theReceiveQueue->initQueue(BASE_MGR_RECEIVE_QUEUE_SIZE);
 
     if (1) {
         this->logit("BaseMgrClass", "init");
@@ -31,14 +31,14 @@ BaseMgrClass::BaseMgrClass (void *main_object_val)
 
 BaseMgrClass::~BaseMgrClass (void)
 {
-    delete this->receiveQueue;
+    delete this->theReceiveQueue;
 }
 
 void *BaseMgrClass::getBaseByBaseId (int base_id_val) {
     int index = 0;
     while (index < BASE_ARRAY_SIZE) {
-        if (this->baseIndexArray[index] == base_id_val) {
-            return this->baseTableArray[index];
+        if (this->theBaseIndexArray[index] == base_id_val) {
+            return this->theBaseTableArray[index];
         }
         index++;
     }
@@ -47,11 +47,11 @@ void *BaseMgrClass::getBaseByBaseId (int base_id_val) {
 
 int BaseMgrClass::allocBaseId (void)
 {
-    if (this->globalBaseId >= MAX_GLOBAL_BASE_ID) {
-        this->globalBaseId = 0;
+    if (this->theGlobalBaseId >= MAX_GLOBAL_BASE_ID) {
+        this->theGlobalBaseId = 0;
     }
-    this->globalBaseId++;
-    return this->globalBaseId;
+    this->theGlobalBaseId++;
+    return this->theGlobalBaseId;
 }
 
 void BaseMgrClass::mallocBase (void)
@@ -59,8 +59,8 @@ void BaseMgrClass::mallocBase (void)
     int base_id = this->allocBaseId();
     int slot = this->getEmptyBaseSlot();
     if (slot != -1) {
-        this->baseIndexArray[slot] = base_id;
-        this->baseTableArray[slot] = new GoBaseClass(this);
+        this->theBaseIndexArray[slot] = base_id;
+        this->theBaseTableArray[slot] = new GoBaseClass(this);
 
         char *data_buf = (char *) malloc(BASE_ID_SIZE + 4);
         data_buf[0] = 'm';
@@ -77,7 +77,7 @@ int BaseMgrClass::getEmptyBaseSlot (void)
 {
     int index = 0;
     while (index < BASE_ARRAY_SIZE) {
-        if (this->baseIndexArray[index] == 0) {
+        if (this->theBaseIndexArray[index] == 0) {
             return index;
         }
         index++;
@@ -130,7 +130,7 @@ void BaseMgrClass::transmitData(char *data_val)
 {
     if (1) {
         this->logit("transmitData", data_val);
-        mainTransmitDataToTransport(this->mainObject, data_val);
+        mainTransmitDataToTransport(this->theMainObject, data_val);
     }
 }
 
