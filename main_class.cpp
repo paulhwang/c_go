@@ -17,14 +17,10 @@ MainClass::MainClass(void)
     this->theLinkMgrObject = new LinkMgrClass(this);
     this->theGoBaseMgrObject = new BaseMgrClass(this);
     this->theTransportObject = new TpClass(this);
-
-    this->theTransportTransmitQueue = new QueueMgrClass();
-    this->transportTransmitQueue()->initQueue(100);
 }
 
 MainClass::~MainClass(void)
 {
-    this->transportTransmitQueue()->~QueueMgrClass();
 }
 
 void MainClass::startThreads (void)

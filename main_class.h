@@ -11,15 +11,12 @@
 class TpClass;
 class LinkMgrClass;
 class BaseMgrClass;
-class QueueMgrClass;
 class TpTransferClass;
 
 class MainClass {
     TpClass *theTransportObject;
     LinkMgrClass *theLinkMgrObject;
     BaseMgrClass *theGoBaseMgrObject;
-
-    QueueMgrClass *theTransportTransmitQueue;
 
     TpTransferClass *link_mgr_tp_transfer_object;
     TpTransferClass *base_mgr_tp_transfer_object;
@@ -34,6 +31,7 @@ class MainClass {
   public:
     MainClass(void);
     ~MainClass(void);
+    char const *objectName(void) {return "MainClass";}
 
     void startThreads(void);
     void startEngineThreads(void);
@@ -44,7 +42,4 @@ class MainClass {
 
     /* thread loops */
     void goBaseMgrReceiveThreadLoop(void);
-
-    char const *objectName(void) {return "MainClass";}
-    QueueMgrClass *transportTransmitQueue(void) {return theTransportTransmitQueue;}
 };
