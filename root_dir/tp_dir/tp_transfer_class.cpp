@@ -20,7 +20,7 @@
 
 TpTransferClass::TpTransferClass (TpClass *tp_object_val, int socket_val)
 {
-	this->tp_object = tp_object_val;
+	this->theTpObject = tp_object_val;
 	this->theSocket = socket_val;
 
     this->startReceiveThread(this->socket());
@@ -41,7 +41,7 @@ void TpTransferClass::receiveThreadFunction(int socket_val)
         int length = read(socket_val, buffer, TRANSPORT_RECEIVE_BUFFER_SIZE);
         this->logit("receiveThreadFunction", buffer);
         if (length > 0) {
-            mainReceiveDataFromTransport(this->tp_object->mainObject(), buffer);
+            mainReceiveDataFromTransport(this->theTpObject->mainObject(), buffer);
         }
     }
 }

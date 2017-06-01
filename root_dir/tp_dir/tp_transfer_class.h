@@ -11,7 +11,7 @@ class QueueMgrClass;
 class TpClass;
 
 class TpTransferClass {
-    TpClass *tp_object;
+    TpClass *theTpObject;
     int theSocket;
 
     QueueMgrClass *transmitQueue;
