@@ -7,7 +7,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
-#include "tp_server_class.h"
 #include "tp_class.h"
 
 void *transportServerThreadFunction (void *data_val)
