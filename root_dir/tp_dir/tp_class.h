@@ -34,9 +34,6 @@ public:
     char const *objectName(void) {return "TpClass";}
     void *mainObject(void) {return this->theMainObject;}
 
-    /* exports */
-    void exportTransmitData1(void *data_val);
-
     TpTransferClass *startServer(unsigned short port_val);
     void serverThreadFunction(unsigned short port_val);
     TpTransferClass *clientThreadFunction(unsigned long ip_addr_val, unsigned short port_val);
