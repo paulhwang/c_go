@@ -36,9 +36,21 @@ int LinkMgrClass::allocLinkId (void)
     return this->theGlobalLinkId;
 }
 
+int LinkMgrClass::allocLinkIndex (void)
+{
+    int index = 0;
+    while (index < 1000) {
+        if (!this->linkTableArray[index]) {
+            return index;
+        }
+        index++;
+    }
+    return -1;
+}
+
 LinkClass *LinkMgrClass::mallocLink (char const *my_name_val)
 {
-    int link_index = 0;
+    int link_index = allocLinkIndex();
     LinkClass *link = new LinkClass(this, this->allocLinkId(), link_index, my_name_val);
     if (!link) {
         return 0;

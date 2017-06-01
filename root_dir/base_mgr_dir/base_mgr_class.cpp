@@ -36,7 +36,7 @@ BaseMgrClass::~BaseMgrClass (void)
 
 void *BaseMgrClass::getBaseByBaseId (int base_id_val) {
     int index = 0;
-    while (index < BASE_ARRAY_SIZE) {
+    while (index < BASE_MGR_BASE_ARRAY_SIZE) {
         if (this->theBaseIndexArray[index] == base_id_val) {
             return this->theBaseTableArray[index];
         }
@@ -47,11 +47,23 @@ void *BaseMgrClass::getBaseByBaseId (int base_id_val) {
 
 int BaseMgrClass::allocBaseId (void)
 {
-    if (this->theGlobalBaseId >= MAX_GLOBAL_BASE_ID) {
+    if (this->theGlobalBaseId >= BASE_MGR_MAX_GLOBAL_BASE_ID) {
         this->theGlobalBaseId = 0;
     }
     this->theGlobalBaseId++;
     return this->theGlobalBaseId;
+}
+
+int BaseMgrClass::allocBaseIndex (void)
+{
+    int index = 0;
+    while (index < BASE_MGR_BASE_ARRAY_SIZE) {
+        if (!this->theBaseTableArray[index]) {
+            return index;
+        }
+        index++;
+    }
+    return -1;
 }
 
 void BaseMgrClass::mallocBase (void)
@@ -76,7 +88,7 @@ void BaseMgrClass::mallocBase (void)
 int BaseMgrClass::getEmptyBaseSlot (void)
 {
     int index = 0;
-    while (index < BASE_ARRAY_SIZE) {
+    while (index < BASE_MGR_BASE_ARRAY_SIZE) {
         if (this->theBaseIndexArray[index] == 0) {
             return index;
         }
@@ -143,7 +155,7 @@ void BaseMgrClass::receiveData (char* data_val) {
         return;
     }
 
-    char *game = "go";
+    char const *game = "go";
     if (!strcmp(game, "go")) {
         GoBaseClass *go_base = (GoBaseClass *) base;
         go_base->portObject()->receiveStringData(data_val + BASE_ID_SIZE);

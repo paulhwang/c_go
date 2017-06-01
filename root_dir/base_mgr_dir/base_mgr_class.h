@@ -16,20 +16,22 @@ class GoBaseClass;
 
 #define BASE_MGR_RECEIVE_QUEUE_SIZE 100
 #define BASE_ID_SIZE 4
-#define BASE_ARRAY_SIZE 1000
-#define MAX_GLOBAL_BASE_ID 9999
 
 class BaseMgrClass {
+#define BASE_MGR_BASE_ARRAY_SIZE 1000
+#define BASE_MGR_MAX_GLOBAL_BASE_ID 9999
+
     void *theMainObject;
     int theGlobalBaseId;
-    int theBaseIndexArray[BASE_ARRAY_SIZE + 4];
-    void *theBaseTableArray[BASE_ARRAY_SIZE + 4];
+    int theBaseIndexArray[BASE_MGR_BASE_ARRAY_SIZE + 4];
+    void *theBaseTableArray[BASE_MGR_BASE_ARRAY_SIZE + 4];
 
     pthread_t theReceiveThread;
     QueueMgrClass *theReceiveQueue;
 
     void *getBaseByBaseId(int base_id_val);
     int allocBaseId(void);
+    int allocBaseIndex(void);
     void mallocBase(void);
     void encodeBaseId(int base_id_val, char *buf_val);
     int decodeBaseId(char *data_val);
