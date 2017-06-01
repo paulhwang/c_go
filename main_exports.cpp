@@ -23,7 +23,7 @@ void MainClass::exportRreceiveDataFromTransport (void *data_val) {
     char *game_name = (char *)"go";
     if (!strcmp(game_name, "go")) {
         this->logit("exportRreceiveDataFromTransport", (char *) data_val);
-    	  this->goBaseMgrObject->exportReceiveData(data_val);
+    	  this->theGoBaseMgrObject->exportReceiveData(data_val);
     }
 }
 

@@ -15,9 +15,9 @@ class QueueMgrClass;
 class TpTransferClass;
 
 class MainClass {
-    TpClass *transportObject;
-    LinkMgrClass *linkMgrObject;
-    BaseMgrClass *goBaseMgrObject;
+    TpClass *theTransportObject;
+    LinkMgrClass *theLinkMgrObject;
+    BaseMgrClass *theGoBaseMgrObject;
 
     QueueMgrClass *theTransportTransmitQueue;
 

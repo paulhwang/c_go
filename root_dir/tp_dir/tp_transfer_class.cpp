@@ -67,7 +67,7 @@ void TpTransferClass::transmitThreadFunction(int socket_val)
         void *data = this->theTransmitQueue->dequeueData();
         if (data) {
             char *str_data = (char *) data;
-            printf("transmitThreadFunction len=%d\n", strlen(str_data));
+            //printf("transmitThreadFunction len=%d\n", strlen(str_data));
             this->logit("transmitThreadFunction", (char *) str_data);
             send(socket_val, str_data , strlen(str_data) , 0);
         }

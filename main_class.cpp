@@ -14,9 +14,9 @@
 
 MainClass::MainClass(void)
 {
-    this->linkMgrObject = new LinkMgrClass(this);
-    this->goBaseMgrObject = new BaseMgrClass(this);
-    this->transportObject = new TpClass(this);
+    this->theLinkMgrObject = new LinkMgrClass(this);
+    this->theGoBaseMgrObject = new BaseMgrClass(this);
+    this->theTransportObject = new TpClass(this);
 
     this->theTransportTransmitQueue = new QueueMgrClass();
     this->transportTransmitQueue()->initQueue(100);
@@ -29,10 +29,10 @@ MainClass::~MainClass(void)
 
 void MainClass::startThreads (void)
 {
-    this->link_mgr_tp_transfer_object = this->transportObject->startServer(TRANSPORT_PORT_NUMBER_FOR_LINK_MGR);
-    this->base_mgr_tp_transfer_object = this->transportObject->startServer(TRANSPORT_PORT_NUMBER_FOR_BASE_MGR);
-    this->goBaseMgrObject->startThreads();
-    this->linkMgrObject->startThreads();
+    this->link_mgr_tp_transfer_object = this->theTransportObject->startServer(TRANSPORT_PORT_NUMBER_FOR_LINK_MGR);
+    this->base_mgr_tp_transfer_object = this->theTransportObject->startServer(TRANSPORT_PORT_NUMBER_FOR_BASE_MGR);
+    this->theGoBaseMgrObject->startThreads();
+    this->theLinkMgrObject->startThreads();
 }
 
 void MainClass::logit (char const* str0_val, char const* str1_val)

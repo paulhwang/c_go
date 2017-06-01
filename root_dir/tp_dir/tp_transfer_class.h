@@ -41,8 +41,6 @@ public:
 };
 
 typedef struct {
-    //unsigned long ip_addr;
-    //unsigned short port;
     TpTransferClass *tp_transfer_object;
     int socket;
 } tp_transfer_thread_parameter;
