@@ -27,7 +27,7 @@ void BaseMgrClass::receiveThreadLoop (void)
     while (1) {
         char *data = (char *) this->theReceiveQueue->dequeueData();
         if (data) {
-            if (*data == BASE_MGR_PROTOCOL_COMMAND_MALLOC_BASE) {
+            if (*data == BASE_MGR_PROTOCOL_COMMAND_IS_MALLOC_BASE) {
                 data++;
                 if (*data == BASE_MGR_PROTOCOL_GAME_NAME_IS_GO) {
                     this->mallocGoBase();

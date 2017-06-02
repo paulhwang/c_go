@@ -42,7 +42,7 @@ void mainReceiveDataFromTransport (void* engine_object_val, void *data_val) {
     printf("mainReceiveDataFromTransport() %s\n", (char *) data_val);
     char *data = (char *) data_val;
 
-    if (*data == BASE_MGR_PROTOCOL_COMMAND_MALLOC_BASE) {
+    if (*data == BASE_MGR_PROTOCOL_COMMAND_IS_MALLOC_BASE) {
         if (1) {
             char s[LOGIT_BUF_SIZE];
             sprintf(s, "base_id=%s", data + 1);
@@ -70,7 +70,7 @@ int main (int argc, char** argv) {
     tp_transfer_object = transport_object->clientThreadFunction(0, TRANSPORT_PORT_NUMBER_FOR_BASE_MGR);
     if (tp_transfer_object) {
         char *buf = (char *) malloc(BASE_MGR_DATA_BUFFER_SIZE + 4);
-        buf[0] = BASE_MGR_PROTOCOL_COMMAND_MALLOC_BASE;
+        buf[0] = BASE_MGR_PROTOCOL_COMMAND_IS_MALLOC_BASE;
         buf[1] = BASE_MGR_PROTOCOL_GAME_NAME_IS_GO;
         buf[2] = 0;
         tp_transfer_object->exportTransmitData((void *) buf);
