@@ -8,11 +8,10 @@
 #include <stdlib.h>
 #include "tp_class.h"
 #include "tp_transfer_class.h"
-#include "../main_dir/main_exports.h"
 
 TpTransferClass *TpClass::startServer (unsigned short port_val, void (*receive_callback_val)(void *, void *))
 {
-    this->theTpTransferObject = new TpTransferClass(this, mainReceiveDataFromTransport);
+    this->theTpTransferObject = new TpTransferClass(this, receive_callback_val);
 	  if (this->theTpTransferObject) {
     	  this->startServerThread(this->theTpTransferObject, port_val);
     	  return this->theTpTransferObject;
