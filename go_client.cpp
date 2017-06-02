@@ -55,9 +55,12 @@ void mainReceiveDataFromTransport (void* engine_object_val, void *data_val) {
     }
     else if (*data == BASE_MGR_PROTOCOL_COMMAND_DATA) {
         data++;
-        PRINT_BOARD((char *) data, 19);
-        if (move_index < sizeof(move_array) / sizeof(*move_array)) {
-            play_a_move();
+        if (*data = BASE_MGR_PROTOCOL_GAME_NAME_IS_GO) {
+            data++;
+            PRINT_BOARD((char *) data, 19);
+            if (move_index < sizeof(move_array) / sizeof(*move_array)) {
+                play_a_move();
+            }
         }
     }
 }

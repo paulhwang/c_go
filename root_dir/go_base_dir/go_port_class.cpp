@@ -46,9 +46,10 @@ GoGameClass* GoPortClass::gameObject (void) {
 }
 
 void GoPortClass::transmitBoardData (void) {
-    char *board_data = (char *) malloc(400);
-    *board_data = BASE_MGR_PROTOCOL_COMMAND_DATA;
-    this->boardObject()->encodeBoard(board_data + 1);
+    char *board_data = (char *) malloc(BASE_MGR_DATA_BUFFER_SIZE);
+    board_data[0] = BASE_MGR_PROTOCOL_COMMAND_DATA;
+    board_data[1] = BASE_MGR_PROTOCOL_GAME_NAME_IS_GO;
+    this->boardObject()->encodeBoard(board_data + 2);
 
     if (1) {
         char s[LOGIT_BUF_SIZE];
