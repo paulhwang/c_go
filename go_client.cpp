@@ -53,7 +53,7 @@ void mainReceiveDataFromTransport (void* engine_object_val, void *data_val) {
         base_id[BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE] = 0;
         play_a_move();
     }
-    else if (*data == BASE_MGR_PROTOCOL_COMMAND_IS_TRANSFER_DATA) {
+    else if (*data == BASE_MGR_PROTOCOL_RESPOND_IS_TRANSFER_DATA) {
         data++;
         if (*data = BASE_MGR_PROTOCOL_GAME_NAME_IS_GO) {
             data++;
