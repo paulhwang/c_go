@@ -35,6 +35,8 @@ void TpClass::startServerThread (TpTransferClass *tp_transfer_val, unsigned shor
     }
 }
 
+void mainReceiveDataFromTransport (void* engine_object_val, void *data_val);
+
 void *transportClientThreadFunction (void *data_val)
 {
     unsigned long ip_addr = ((transport_thread_parameter *) data_val)->ip_addr;
@@ -43,7 +45,7 @@ void *transportClientThreadFunction (void *data_val)
     free(data_val);
 
     printf("transportClientThreadFunction aaa %i\n", port);
-    transport_object->clientThreadFunction(ip_addr, port);
+    transport_object->clientThreadFunction(ip_addr, port, mainReceiveDataFromTransport);
     printf("transportClientThreadFunction bbb %i\n", port);
 }
 

@@ -36,7 +36,7 @@ public:
 
     TpTransferClass *startServer(unsigned short port_val, void (*receive_callback_val)(void *, void *));
     void serverThreadFunction(unsigned short port_val);
-    TpTransferClass *clientThreadFunction(unsigned long ip_addr_val, unsigned short port_val);
+    TpTransferClass *clientThreadFunction(unsigned long ip_addr_val, unsigned short port_val, void (*receive_callback_val)(void *, void *));
 };
 
 typedef struct {

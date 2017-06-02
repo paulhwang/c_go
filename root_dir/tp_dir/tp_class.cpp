@@ -93,7 +93,7 @@ S
     this->theTpTransferObject->startThreads(data_socket);
 }
 
-TpTransferClass *TpClass::clientThreadFunction (unsigned long ip_addr_val, ushort port_val)
+TpTransferClass *TpClass::clientThreadFunction (unsigned long ip_addr_val, ushort port_val, void (*receive_callback_val)(void *, void *))
 {
   int s;
   struct sockaddr_in serv_addr;
