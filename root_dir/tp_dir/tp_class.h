@@ -23,7 +23,7 @@ class TpClass {
     TpTransferClass *theTpTransferObject;
 
     void startServerThread(TpTransferClass *tp_transfer_val, unsigned short port_val);
-    void startClientThread(unsigned long ip_addr_val, unsigned short port_val);
+    //void startClientThread(unsigned long ip_addr_val, unsigned short port_val);
 
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
