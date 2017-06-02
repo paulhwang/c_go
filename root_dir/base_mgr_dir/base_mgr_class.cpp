@@ -56,7 +56,7 @@ int BaseMgrClass::allocBaseIndex (void)
     return -1;
 }
 
-void BaseMgrClass::mallocBase (void)
+void BaseMgrClass::mallocGoBase (void)
 {
     int base_id = this->allocBaseId();
     int base_index = this->allocBaseIndex();

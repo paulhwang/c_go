@@ -27,7 +27,7 @@ void BaseMgrClass::receiveThreadLoop (void)
         char *data = (char *) this->theReceiveQueue->dequeueData();
         if (data) {
             if (*data == 'm') {
-                this->mallocBase();
+                this->mallocGoBase();
             }
             else if (*data == 'd') {
                 this->receiveData(data + 1);

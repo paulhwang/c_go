@@ -30,7 +30,7 @@ class BaseMgrClass {
 
     int allocBaseId(void);
     int allocBaseIndex(void);
-    void mallocBase(void);
+    void mallocGoBase(void);
 
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
