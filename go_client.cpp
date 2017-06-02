@@ -42,7 +42,7 @@ void baseMgrPlayAMove (void)
     base_mgr_tp_transfer_object->exportTransmitData(buf);
 }
 
-void baseMgr_mainReceiveDataFromTransport (void* engine_object_val, void *data_val) 
+void baseMgrReceiveDataFromTransport (void* engine_object_val, void *data_val)
 {
     printf("mainReceiveDataFromTransport() %s\n", (char *) data_val);
     char *data = (char *) data_val;
@@ -71,20 +71,6 @@ void baseMgr_mainReceiveDataFromTransport (void* engine_object_val, void *data_v
     }
 }
 
-void linkMgr_mainReceiveDataFromTransport (void* engine_object_val, void *data_val) 
-{
-}
-
-void baseMgrReceiveDataFromTransport (void* engine_object_val, void *data_val)
-{
-        baseMgr_mainReceiveDataFromTransport(engine_object_val, data_val);
-}
-
-void linkMgrReceiveDataFromTransport (void* engine_object_val, void *data_val)
-{
-        linkMgr_mainReceiveDataFromTransport(engine_object_val, data_val);
-}
-
 void baseMgrTest (void)
 {
     base_mgr_tp_transfer_object = transport_object->clientThreadFunction(0, TRANSPORT_PORT_NUMBER_FOR_BASE_MGR, baseMgrReceiveDataFromTransport);
@@ -95,6 +81,10 @@ void baseMgrTest (void)
         buf[2] = 0;
         base_mgr_tp_transfer_object->exportTransmitData((void *) buf);
     }
+}
+
+void linkMgrReceiveDataFromTransport (void* engine_object_val, void *data_val)
+{
 }
 
 void linkMgrTest (void)
