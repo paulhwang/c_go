@@ -33,7 +33,7 @@ void BaseMgrClass::receiveThreadLoop (void)
                     this->mallocGoBase();
                 }
             }
-            else if (*data == 'd') {
+            else if (*data == BASE_MGR_PROTOCOL_COMMAND_DATA) {
                 data++;
                 this->receiveData(data);
             }
