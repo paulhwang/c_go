@@ -63,10 +63,10 @@ void BaseMgrClass::mallocGoBase (void)
     if (base_index != -1) {
         this->theBaseTableArray[base_index] = new GoBaseClass(this, base_id);
 
-        char *data_buf = (char *) malloc(BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE + 4);
+        char *data_buf = (char *) malloc(BASE_MGR_DATA_BUFFER_SIZE + 4);
         data_buf[0] = BASE_MGR_PROTOCOL_RESPOND_IS_MALLOC_BASE;
-        //data_buf[1] = BASE_MGR_PROTOCOL_GAME_NAME_IS_GO;
-        encodeIdIndex(data_buf + 1, base_id, BASE_MGR_PROTOCOL_BASE_ID_SIZE, base_index, BASE_MGR_PROTOCOL_BASE_INDEX_SIZE);
+        data_buf[1] = BASE_MGR_PROTOCOL_GAME_NAME_IS_GO;
+        encodeIdIndex(data_buf + 2, base_id, BASE_MGR_PROTOCOL_BASE_ID_SIZE, base_index, BASE_MGR_PROTOCOL_BASE_INDEX_SIZE);
 
         this->transmitData(data_buf);
     }

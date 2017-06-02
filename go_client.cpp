@@ -49,6 +49,7 @@ void mainReceiveDataFromTransport (void* engine_object_val, void *data_val) {
             LOGIT("mainReceiveDataFromTransport", s);
         }
         data++;
+        data++;
         memcpy(base_id, data, BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE);
         base_id[BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE] = 0;
         play_a_move();
