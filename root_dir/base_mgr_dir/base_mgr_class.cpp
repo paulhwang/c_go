@@ -86,30 +86,6 @@ void BaseMgrClass::mallocBase (void)
     }
 }
 
-int BaseMgrClass::decodeBaseId (char *data_val, int *base_id_ptr_val, int *base_index_ptr_val)
-{
-    int base_id;
-    int base_index;
-    base_id =  (*data_val++ - '0') * 1000;
-    base_id += (*data_val++ - '0') * 100;
-    base_id += (*data_val++ - '0') * 10;
-    base_id += (*data_val++ - '0');
-    base_index =  (*data_val++ - '0') * 1000;
-    base_index += (*data_val++ - '0') * 100;
-    base_index += (*data_val++ - '0') * 10;
-    base_index += (*data_val - '0');
-
-    if (1) {
-        char s[LOGIT_BUF_SIZE];
-        sprintf(s, "base_id=%d base_index=%d", base_id, base_index);
-        this->logit("decodeBaseId", s);
-    }
-
-    *base_id_ptr_val = base_id;
-    *base_index_ptr_val = base_index;
-    return 1;
-}
-
 void BaseMgrClass::createBase (void)
 {
     BaseClass *base = new BaseClass(this);
@@ -129,7 +105,7 @@ void BaseMgrClass::receiveData (char* data_val) {
 
     int base_id;
     int base_index;
-    this->decodeBaseId(data_val, &base_id, &base_index);
+    decodeIdIndex(data_val, &base_id, BASE_MGR_PROTOCOL_BASE_ID_SIZE, &base_index, BASE_MGR_PROTOCOL_BASE_INDEX_SIZE);
     void *base = this->getBaseByBaseId(base_id);
     if (!base) {
         return;
