@@ -11,6 +11,7 @@
 #include "../link_mgr_dir/link_mgr_class.h"
 #include "../base_mgr_dir/base_mgr_class.h"
 #include "main_class.h"
+#include "../main_dir/main_exports.h"
 
 MainClass::MainClass(void)
 {
@@ -25,8 +26,8 @@ MainClass::~MainClass(void)
 
 void MainClass::startThreads (void)
 {
-    this->theLinkMgrTpTransferObject = this->theTransportObject->startServer(TRANSPORT_PORT_NUMBER_FOR_LINK_MGR);
-    this->theBaseMgrTpTransferObject = this->theTransportObject->startServer(TRANSPORT_PORT_NUMBER_FOR_BASE_MGR);
+    this->theLinkMgrTpTransferObject = this->theTransportObject->startServer(TRANSPORT_PORT_NUMBER_FOR_LINK_MGR, mainReceiveDataFromTransport);
+    this->theBaseMgrTpTransferObject = this->theTransportObject->startServer(TRANSPORT_PORT_NUMBER_FOR_BASE_MGR, mainReceiveDataFromTransport);
     this->theGoBaseMgrObject->startThreads();
     this->theLinkMgrObject->startThreads();
 }

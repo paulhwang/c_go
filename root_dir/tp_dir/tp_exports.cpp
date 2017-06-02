@@ -10,7 +10,7 @@
 #include "tp_transfer_class.h"
 #include "../main_dir/main_exports.h"
 
-TpTransferClass *TpClass::startServer (unsigned short port_val)
+TpTransferClass *TpClass::startServer (unsigned short port_val, void (*receive_callback_val)(void *, void *))
 {
     this->theTpTransferObject = new TpTransferClass(this, mainReceiveDataFromTransport);
 	  if (this->theTpTransferObject) {
