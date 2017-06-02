@@ -77,22 +77,12 @@ void linkMgr_mainReceiveDataFromTransport (void* engine_object_val, void *data_v
 
 void baseMgrReceiveDataFromTransport (void* engine_object_val, void *data_val)
 {
-    if (test_base_mgr) {
         baseMgr_mainReceiveDataFromTransport(engine_object_val, data_val);
-    }
-    else {
-        linkMgr_mainReceiveDataFromTransport(engine_object_val, data_val);
-    }
 }
 
 void linkMgrReceiveDataFromTransport (void* engine_object_val, void *data_val)
 {
-    if (test_base_mgr) {
-        baseMgr_mainReceiveDataFromTransport(engine_object_val, data_val);
-    }
-    else {
         linkMgr_mainReceiveDataFromTransport(engine_object_val, data_val);
-    }
 }
 
 void baseMgrTest (void)
