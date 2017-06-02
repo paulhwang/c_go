@@ -74,12 +74,6 @@ void BaseMgrClass::mallocBase (void)
     }
 }
 
-void BaseMgrClass::createBase (void)
-{
-    BaseClass *base = new BaseClass(this);
-    this->theGoBaseObject = new GoBaseClass(this);
-}
-
 void BaseMgrClass::transmitData(char *data_val)
 {
     if (1) {
