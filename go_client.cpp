@@ -30,9 +30,10 @@ void play_a_move (void)
 {
     char *buf = (char *) malloc(BASE_MGR_DATA_BUFFER_SIZE + 4);
     buf[0] = BASE_MGR_PROTOCOL_COMMAND_DATA;
-    memcpy(buf + 1, base_id, BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE);
-    strcpy(buf + 1 + BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE, "Move   ");
-    strcpy(buf + 1 + BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE + GO_PROTOCOL_CODE_SIZE, move_array[move_index++]);
+    buf[1] = BASE_MGR_PROTOCOL_GAME_NAME_IS_GO;
+    memcpy(buf + 2, base_id, BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE);
+    strcpy(buf + 2 + BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE, "Move   ");
+    strcpy(buf + 2 + BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE + GO_PROTOCOL_CODE_SIZE, move_array[move_index++]);
     printf("=====%s\n", buf);
     tp_transfer_object->exportTransmitData(buf);
 }
