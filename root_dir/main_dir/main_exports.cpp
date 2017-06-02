@@ -12,22 +12,30 @@
 #include "main_class.h"
 
 void mainBaseMgrReceiveDataFromTransport (void *main_object_val, void *data_val) {
-    ((MainClass *) main_object_val)->exportRreceiveDataFromTransport(data_val);
+    ((MainClass *) main_object_val)->exportBaseMgrRreceiveDataFromTransport(data_val);
 }
 
 void mainLinkMgrReceiveDataFromTransport (void *main_object_val, void *data_val) {
-    ((MainClass *) main_object_val)->exportRreceiveDataFromTransport(data_val);
+    ((MainClass *) main_object_val)->exportLinkMgrRreceiveDataFromTransport(data_val);
 }
 
 void mainTransmitDataToTransport (void *main_object_val, void *data_val) {
     ((MainClass *) main_object_val)->exportTransmitDataToTransport(data_val);
 }
 
-void MainClass::exportRreceiveDataFromTransport (void *data_val) {
+void MainClass::exportBaseMgrRreceiveDataFromTransport (void *data_val) {
     char *game_name = (char *)"go";
     if (!strcmp(game_name, "go")) {
-        this->logit("exportRreceiveDataFromTransport", (char *) data_val);
-    	  this->theGoBaseMgrObject->exportReceiveData(data_val);
+        this->logit("exportBaseMgrRreceiveDataFromTransport", (char *) data_val);
+        this->theGoBaseMgrObject->exportReceiveData(data_val);
+    }
+}
+
+void MainClass::exportLinkMgrRreceiveDataFromTransport (void *data_val) {
+    char *game_name = (char *)"go";
+    if (!strcmp(game_name, "go")) {
+        this->logit("exportLinkMgrRreceiveDataFromTransport", (char *) data_val);
+        this->theGoBaseMgrObject->exportReceiveData(data_val);
     }
 }
 
