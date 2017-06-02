@@ -29,7 +29,7 @@ char const *move_array[] = {
 void play_a_move (void)
 {
     char *buf = (char *) malloc(BASE_MGR_DATA_BUFFER_SIZE + 4);
-    buf[0] = BASE_MGR_PROTOCOL_COMMAND_DATA;
+    buf[0] = BASE_MGR_PROTOCOL_COMMAND_IS_TRANSFER_DATA;
     buf[1] = BASE_MGR_PROTOCOL_GAME_NAME_IS_GO;
     memcpy(buf + 2, base_id, BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE);
     strcpy(buf + 2 + BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE, "Move   ");
@@ -53,7 +53,7 @@ void mainReceiveDataFromTransport (void* engine_object_val, void *data_val) {
         base_id[BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE] = 0;
         play_a_move();
     }
-    else if (*data == BASE_MGR_PROTOCOL_COMMAND_DATA) {
+    else if (*data == BASE_MGR_PROTOCOL_COMMAND_IS_TRANSFER_DATA) {
         data++;
         if (*data = BASE_MGR_PROTOCOL_GAME_NAME_IS_GO) {
             data++;
