@@ -89,13 +89,13 @@ void linkMgrTest (void)
         buf[0] = LINK_MGR_PROTOCOL_COMMAND_IS_MALLOC_BASE;
         buf[1] = LINK_MGR_PROTOCOL_GAME_NAME_IS_GO;
         buf[2] = 0;
-        //link_mgr_tp_transfer_object->exportTransmitData((void *) buf);
+        link_mgr_tp_transfer_object->exportTransmitData((void *) buf);
     }
 }
 
 int main (int argc, char** argv) {
     transport_object = new TpClass(null);
     baseMgrTest();
-    linkMgrTest();
+    //linkMgrTest();
     sleep(1000);
 }
