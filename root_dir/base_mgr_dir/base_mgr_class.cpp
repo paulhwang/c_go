@@ -35,17 +35,6 @@ BaseMgrClass::~BaseMgrClass (void)
     delete this->theReceiveQueue;
 }
 
-void *BaseMgrClass::getBaseByBaseId (int base_id_val) {
-    int index = 0;
-    while (index < BASE_MGR_BASE_ARRAY_SIZE) {
-        if (this->theBaseIndexArray[index] == base_id_val) {
-            return this->theBaseTableArray[index];
-        }
-        index++;
-    }
-    return 0;
-}
-
 int BaseMgrClass::allocBaseId (void)
 {
     if (this->theGlobalBaseId >= BASE_MGR_MAX_GLOBAL_BASE_ID) {
@@ -72,7 +61,6 @@ void BaseMgrClass::mallocBase (void)
     int base_id = this->allocBaseId();
     int base_index = this->allocBaseIndex();
     if (base_index != -1) {
-        this->theBaseIndexArray[base_index] = base_id;
         this->theBaseTableArray[base_index] = new GoBaseClass(this);
 
         char *data_buf = (char *) malloc(BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE + 4);
@@ -106,7 +94,7 @@ void BaseMgrClass::receiveData (char* data_val) {
     int base_id;
     int base_index;
     decodeIdIndex(data_val, &base_id, BASE_MGR_PROTOCOL_BASE_ID_SIZE, &base_index, BASE_MGR_PROTOCOL_BASE_INDEX_SIZE);
-    void *base = this->getBaseByBaseId(base_id);
+    void *base = this->theBaseTableArray[base_index];
     if (!base) {
         return;
     }

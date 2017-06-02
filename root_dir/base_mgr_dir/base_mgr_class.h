@@ -23,13 +23,11 @@ class BaseMgrClass {
 
     void *theMainObject;
     int theGlobalBaseId;
-    int theBaseIndexArray[BASE_MGR_BASE_ARRAY_SIZE + 4];
     void *theBaseTableArray[BASE_MGR_BASE_ARRAY_SIZE + 4];
 
     pthread_t theReceiveThread;
     QueueMgrClass *theReceiveQueue;
 
-    void *getBaseByBaseId(int base_id_val);
     int allocBaseId(void);
     int allocBaseIndex(void);
     void mallocBase(void);
