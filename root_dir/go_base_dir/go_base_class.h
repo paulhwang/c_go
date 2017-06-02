@@ -19,6 +19,7 @@ class BaseMgrClass;
 #include "go_move_class.h"
 
 class GoBaseClass {
+    int theBaseId;
     BaseMgrClass* theBaseMgrObject;
     GoEngineClass* theEngineObject;
     GoBoardClass* theBoardObject;
@@ -32,16 +33,15 @@ class GoBaseClass {
   public:
     GoBaseClass(BaseMgrClass* base_mgr_object_val);
     ~GoBaseClass(void);
-
-    BaseMgrClass* baseMgrObject(void);
+    char const* objectName(void) {return "GoBaseClass";}
+    int baseId(void) {return this->theBaseId;}
+    BaseMgrClass* baseMgrObject(void) {return this->theBaseMgrObject;}
+    GoEngineClass* engineObject(void) {return this->theEngineObject;}
+    GoBoardClass* boardObject(void) {return this->theBoardObject;}
+    GoPortClass* portObject(void) {return this->thePortObject;}
+    GoConfigClass* configObject(void) {return this->theConfigObject;}
+    GoGameClass* gameObject(void) {return this->theGameObject;}
 
     void goBaseLogit(char const* str0_val, char const* str1_val) {LOGIT(str0_val, str1_val);}
     void goBaseAbend(char const* str0_val, char const* str1_val) {ABEND(str0_val, str1_val);}
-
-    GoEngineClass* engineObject(void) {return theEngineObject;}
-    GoBoardClass* boardObject(void) {return theBoardObject;}
-    GoPortClass* portObject(void) {return thePortObject;}
-    GoConfigClass* configObject(void) {return theConfigObject;}
-    GoGameClass* gameObject(void) {return theGameObject;}
-    char const* objectName(void) {return "GoBaseClass";}
 };

@@ -9,7 +9,9 @@
 #include "../base_mgr_dir/base_mgr_class.h"
 #include "go_base_class.h"
 
-GoBaseClass::GoBaseClass (BaseMgrClass* base_mgr_object_val) {
+GoBaseClass::GoBaseClass (BaseMgrClass* base_mgr_object_val)
+{
+  this->theBaseId = 0;
   this->theBaseMgrObject = base_mgr_object_val;
   this->theConfigObject = new GoConfigClass(this);
   this->theBoardObject = new GoBoardClass(this);
@@ -22,20 +24,19 @@ GoBaseClass::GoBaseClass (BaseMgrClass* base_mgr_object_val) {
   }
 }
 
-GoBaseClass::~GoBaseClass (void) {
+GoBaseClass::~GoBaseClass (void)
+{
 }
 
-BaseMgrClass* GoBaseClass::baseMgrObject (void) {
-  return this->theBaseMgrObject;
-}
-
-void GoBaseClass::logit (char const* str0_val, char const* str1_val) {
+void GoBaseClass::logit (char const* str0_val, char const* str1_val)
+{
   char s[LOGIT_BUF_SIZE];
   sprintf(s, "%s::%s", this->objectName(), str0_val);
   this->goBaseLogit(s, str1_val);
 }
 
-void GoBaseClass::abend (char const* str0_val, char const* str1_val) {
+void GoBaseClass::abend (char const* str0_val, char const* str1_val)
+{
   char s[LOGIT_BUF_SIZE];
   sprintf(s, "%s::%s", this->objectName(), str0_val);
   this->goBaseAbend(s, str1_val);
