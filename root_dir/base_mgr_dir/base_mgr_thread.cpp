@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include "../../utils_dir/queue_mgr_class.h"
 #include "base_mgr_class.h"
+#include "base_mgr_protocol.h"
 
 void *baseMgrReceiveThreadFunction (void *this_val)
 {
@@ -26,7 +27,7 @@ void BaseMgrClass::receiveThreadLoop (void)
     while (1) {
         char *data = (char *) this->theReceiveQueue->dequeueData();
         if (data) {
-            if (*data == 'm') {
+            if (*data == BASE_MGR_PROTOCOL_COMMAND_MALLOC_BASE) {
                 this->mallocGoBase();
             }
             else if (*data == 'd') {

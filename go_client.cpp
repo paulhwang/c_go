@@ -5,6 +5,7 @@
 */
 
 #include <unistd.h>
+#include <malloc.h>
 #include "root_dir/tp_dir/tp_class.h"
 #include "root_dir/tp_dir/tp_transfer_class.h"
 #include "root_dir/base_mgr_dir/base_mgr_protocol.h"
@@ -65,7 +66,10 @@ int main (int argc, char** argv) {
     TpClass *transport_object = new TpClass(null);
     tp_transfer_object = transport_object->clientThreadFunction(0, TRANSPORT_PORT_NUMBER_FOR_BASE_MGR);
     if (tp_transfer_object) {
-        tp_transfer_object->exportTransmitData((void *)  "m");
+        char *buf = (char *) malloc(100);
+        buf[0] = BASE_MGR_PROTOCOL_COMMAND_MALLOC_BASE;
+        buf[1] = 0;
+        tp_transfer_object->exportTransmitData((void *) buf);
     }
     sleep(1000);
 }
