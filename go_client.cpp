@@ -75,7 +75,17 @@ void linkMgr_mainReceiveDataFromTransport (void* engine_object_val, void *data_v
 {
 }
 
-void mainReceiveDataFromTransport (void* engine_object_val, void *data_val)
+void baseMgrReceiveDataFromTransport (void* engine_object_val, void *data_val)
+{
+    if (test_base_mgr) {
+        baseMgr_mainReceiveDataFromTransport(engine_object_val, data_val);
+    }
+    else {
+        linkMgr_mainReceiveDataFromTransport(engine_object_val, data_val);
+    }
+}
+
+void linkMgrReceiveDataFromTransport (void* engine_object_val, void *data_val)
 {
     if (test_base_mgr) {
         baseMgr_mainReceiveDataFromTransport(engine_object_val, data_val);
@@ -87,7 +97,7 @@ void mainReceiveDataFromTransport (void* engine_object_val, void *data_val)
 
 void baseMgrTest (void)
 {
-    base_mgr_tp_transfer_object = transport_object->clientThreadFunction(0, TRANSPORT_PORT_NUMBER_FOR_BASE_MGR, mainReceiveDataFromTransport);
+    base_mgr_tp_transfer_object = transport_object->clientThreadFunction(0, TRANSPORT_PORT_NUMBER_FOR_BASE_MGR, baseMgrReceiveDataFromTransport);
     if (base_mgr_tp_transfer_object) {
         char *buf = (char *) malloc(BASE_MGR_DATA_BUFFER_SIZE + 4);
         buf[0] = BASE_MGR_PROTOCOL_COMMAND_IS_MALLOC_BASE;
@@ -99,7 +109,7 @@ void baseMgrTest (void)
 
 void linkMgrTest (void)
 {
-    link_mgr_tp_transfer_object = transport_object->clientThreadFunction(0, TRANSPORT_PORT_NUMBER_FOR_LINK_MGR, mainReceiveDataFromTransport);
+    link_mgr_tp_transfer_object = transport_object->clientThreadFunction(0, TRANSPORT_PORT_NUMBER_FOR_LINK_MGR, linkMgrReceiveDataFromTransport);
     if (link_mgr_tp_transfer_object) {
         char *buf = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
         buf[0] = LINK_MGR_PROTOCOL_COMMAND_IS_MALLOC_LINK;
