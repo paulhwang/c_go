@@ -98,6 +98,9 @@ void BaseMgrClass::receiveData (char* data_val) {
 
     if (game == BASE_MGR_PROTOCOL_GAME_NAME_IS_GO) {
         GoBaseClass *go_base = (GoBaseClass *) base;
+        if (go_base->baseId() != base_id) {
+            return;
+        }
         go_base->portObject()->receiveStringData(data_val);
     }
     else {
