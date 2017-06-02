@@ -27,7 +27,7 @@ class TpTransferClass {
     void abend(char const* str0_val, char const* str1_val);
 
 public:
-    TpTransferClass(TpClass *tp_object_val);
+    TpTransferClass(TpClass *tp_object_val, void (*receive_callback_val)(void *, void *));
     ~TpTransferClass(void);
     char const *objectName(void) {return "TpTransferClass";}
     int socket(void) {return this->theSocket;}
@@ -36,6 +36,8 @@ public:
     void exportTransmitData(void *data_val);
     void startThreads(int socket_val);
 
+    /* callback */
+    void (*receiveCallback)(void *, void *);
     void receiveThreadFunction(int socket_val);
     void transmitThreadFunction(int socket_val);
 };

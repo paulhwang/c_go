@@ -18,9 +18,10 @@
 #include "../../utils_dir/queue_mgr_class.h"
 #include "../main_dir/main_exports.h"
 
-TpTransferClass::TpTransferClass (TpClass *tp_object_val)
+TpTransferClass::TpTransferClass (TpClass *tp_object_val, void (*receive_callback_val)(void *, void *))
 {
     this->theTpObject = tp_object_val;
+    this->receiveCallback = receive_callback_val;
 
     this->theTransmitQueue = new QueueMgrClass();
     this->theTransmitQueue->initQueue(TP_TRANSFER_CLASS_TRANSMIT_QUEUE_SIZE);
@@ -51,7 +52,7 @@ void TpTransferClass::receiveThreadFunction(int socket_val)
         int length = read(socket_val, buffer, TRANSPORT_RECEIVE_BUFFER_SIZE);
         this->logit("receiveThreadFunction", buffer);
         if (length > 0) {
-            mainReceiveDataFromTransport(this->theTpObject->mainObject(), buffer);
+            this->receiveCallback(this->theTpObject->mainObject(), buffer);
         }
     }
 }

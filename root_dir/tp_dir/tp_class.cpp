@@ -123,7 +123,7 @@ TpTransferClass *TpClass::clientThreadFunction (unsigned long ip_addr_val, ushor
 
   this->logit("startClient", "connected");
 
-    this->theTpTransferObject = new TpTransferClass(this);
+    this->theTpTransferObject = new TpTransferClass(this, mainReceiveDataFromTransport);
     this->theTpTransferObject->startThreads(s);
     return this->theTpTransferObject;
 }
