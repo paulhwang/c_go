@@ -14,6 +14,7 @@
 
 #define GO_PROTOCOL_CODE_SIZE 7
 
+int test_base_mgr = 1;
 TpClass *transport_object;
 TpTransferClass *base_mgr_tp_transfer_object;
 TpTransferClass *link_mgr_tp_transfer_object;
@@ -41,7 +42,8 @@ void baseMgrPlayAMove (void)
     base_mgr_tp_transfer_object->exportTransmitData(buf);
 }
 
-void mainReceiveDataFromTransport (void* engine_object_val, void *data_val) {
+void baseMgr_mainReceiveDataFromTransport (void* engine_object_val, void *data_val) 
+{
     printf("mainReceiveDataFromTransport() %s\n", (char *) data_val);
     char *data = (char *) data_val;
 
@@ -66,6 +68,20 @@ void mainReceiveDataFromTransport (void* engine_object_val, void *data_val) {
                 baseMgrPlayAMove();
             }
         }
+    }
+}
+
+void linkMgr_mainReceiveDataFromTransport (void* engine_object_val, void *data_val) 
+{
+}
+
+void mainReceiveDataFromTransport (void* engine_object_val, void *data_val)
+{
+    if (test_base_mgr) {
+        baseMgr_mainReceiveDataFromTransport(engine_object_val, data_val);
+    }
+    else {
+        linkMgr_mainReceiveDataFromTransport(engine_object_val, data_val);
     }
 }
 
@@ -95,7 +111,11 @@ void linkMgrTest (void)
 
 int main (int argc, char** argv) {
     transport_object = new TpClass(null);
-    baseMgrTest();
-    //linkMgrTest();
+    if (test_base_mgr) {
+        baseMgrTest();
+    }
+    else {
+        linkMgrTest();
+    }
     sleep(1000);
 }
