@@ -28,13 +28,13 @@ char const *move_array[] = {
 
 void play_a_move (void)
 {
-    char move_data_buf[BASE_MGR_DATA_BUFFER_SIZE + 4];
-    move_data_buf[0] = 'd';
-    memcpy(move_data_buf + 1, base_id, BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE);
-    strcpy(move_data_buf + 1 + BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE, "Move   ");
-    strcpy(move_data_buf + 1 + BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE + GO_PROTOCOL_CODE_SIZE, move_array[move_index++]);
-    printf("=====%s\n", move_data_buf);
-    tp_transfer_object->exportTransmitData(move_data_buf);
+    char *buf = (char *) malloc(BASE_MGR_DATA_BUFFER_SIZE + 4);
+    buf[0] = 'd';
+    memcpy(buf + 1, base_id, BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE);
+    strcpy(buf + 1 + BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE, "Move   ");
+    strcpy(buf + 1 + BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE + GO_PROTOCOL_CODE_SIZE, move_array[move_index++]);
+    printf("=====%s\n", buf);
+    tp_transfer_object->exportTransmitData(buf);
 }
 
 void mainReceiveDataFromTransport (void* engine_object_val, void *data_val) {
