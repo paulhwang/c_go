@@ -8,6 +8,7 @@
 #include <malloc.h>
 #include "root_dir/tp_dir/tp_class.h"
 #include "root_dir/tp_dir/tp_transfer_class.h"
+#include "root_dir/link_mgr_dir/link_mgr_protocol.h"
 #include "root_dir/base_mgr_dir/base_mgr_protocol.h"
 #include "utils_dir/logit.h"
 
@@ -82,7 +83,14 @@ void baseMgrTest (void)
 
 void linkMgrTest (void)
 {
-    printf("linkMgrTest\n");
+    link_mgr_tp_transfer_object = transport_object->clientThreadFunction(0, TRANSPORT_PORT_NUMBER_FOR_LINK_MGR);
+    if (link_mgr_tp_transfer_object) {
+        char *buf = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
+        buf[0] = LINK_MGR_PROTOCOL_COMMAND_IS_MALLOC_BASE;
+        buf[1] = LINK_MGR_PROTOCOL_GAME_NAME_IS_GO;
+        buf[2] = 0;
+        //link_mgr_tp_transfer_object->exportTransmitData((void *) buf);
+    }
 }
 
 int main (int argc, char** argv) {
