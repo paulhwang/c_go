@@ -42,7 +42,7 @@ void mainReceiveDataFromTransport (void* engine_object_val, void *data_val) {
     printf("mainReceiveDataFromTransport() %s\n", (char *) data_val);
     char *data = (char *) data_val;
 
-    if (*data == BASE_MGR_PROTOCOL_COMMAND_IS_MALLOC_BASE) {
+    if (*data == BASE_MGR_PROTOCOL_RESPOND_IS_MALLOC_BASE) {
         if (1) {
             char s[LOGIT_BUF_SIZE];
             sprintf(s, "base_id=%s", data + 1);
