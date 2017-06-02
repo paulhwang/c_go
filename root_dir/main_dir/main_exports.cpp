@@ -9,6 +9,7 @@
 #include "../tp_dir/tp_class.h"
 #include "../tp_dir/tp_transfer_class.h"
 #include "../base_mgr_dir/base_mgr_class.h"
+#include "../link_mgr_dir/link_mgr_class.h"
 #include "main_class.h"
 
 void mainBaseMgrReceiveDataFromTransport (void *main_object_val, void *data_val) {
@@ -32,11 +33,8 @@ void MainClass::exportBaseMgrRreceiveDataFromTransport (void *data_val) {
 }
 
 void MainClass::exportLinkMgrRreceiveDataFromTransport (void *data_val) {
-    char *game_name = (char *)"go";
-    if (!strcmp(game_name, "go")) {
-        this->logit("exportLinkMgrRreceiveDataFromTransport", (char *) data_val);
-        this->theGoBaseMgrObject->exportReceiveData(data_val);
-    }
+    this->logit("exportLinkMgrRreceiveDataFromTransport", (char *) data_val);
+    this->theLinkMgrObject->exportReceiveData(data_val);
 }
 
 void MainClass::exportTransmitDataToTransport(void *data_val)
