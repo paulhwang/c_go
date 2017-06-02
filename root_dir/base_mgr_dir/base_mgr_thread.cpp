@@ -29,7 +29,9 @@ void BaseMgrClass::receiveThreadLoop (void)
         if (data) {
             if (*data == BASE_MGR_PROTOCOL_COMMAND_MALLOC_BASE) {
                 data++;
-                this->mallocGoBase();
+                if (*data == BASE_MGR_PROTOCOL_GAME_NAME_IS_GO) {
+                    this->mallocGoBase();
+                }
             }
             else if (*data == 'd') {
                 data++;

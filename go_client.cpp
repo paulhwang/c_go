@@ -11,10 +11,7 @@
 #include "root_dir/base_mgr_dir/base_mgr_protocol.h"
 #include "utils_dir/logit.h"
 
-//#define BASE_ID_SIZE 8
 #define GO_PROTOCOL_CODE_SIZE 7
-
-#define MOVE_DATA_BUF_SIZE 32
 
 TpTransferClass *tp_transfer_object;
 char base_id[BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE + 4];
@@ -31,7 +28,7 @@ char const *move_array[] = {
 
 void play_a_move (void)
 {
-    char move_data_buf[MOVE_DATA_BUF_SIZE];
+    char move_data_buf[BASE_MGR_DATA_BUFFER_SIZE + 4];
     move_data_buf[0] = 'd';
     memcpy(move_data_buf + 1, base_id, BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE);
     strcpy(move_data_buf + 1 + BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE, "Move   ");
@@ -68,7 +65,8 @@ int main (int argc, char** argv) {
     if (tp_transfer_object) {
         char *buf = (char *) malloc(BASE_MGR_DATA_BUFFER_SIZE + 4);
         buf[0] = BASE_MGR_PROTOCOL_COMMAND_MALLOC_BASE;
-        buf[1] = 0;
+        buf[1] = BASE_MGR_PROTOCOL_GAME_NAME_IS_GO;
+        buf[2] = 0;
         tp_transfer_object->exportTransmitData((void *) buf);
     }
     sleep(1000);
