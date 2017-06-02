@@ -53,7 +53,7 @@ void mainReceiveDataFromTransport (void* engine_object_val, void *data_val) {
         base_id[BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE] = 0;
         play_a_move();
     }
-    else if (*data == 'd') {
+    else if (*data == BASE_MGR_PROTOCOL_COMMAND_DATA) {
         data++;
         PRINT_BOARD((char *) data, 19);
         if (move_index < sizeof(move_array) / sizeof(*move_array)) {

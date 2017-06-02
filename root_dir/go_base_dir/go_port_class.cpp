@@ -47,7 +47,7 @@ GoGameClass* GoPortClass::gameObject (void) {
 
 void GoPortClass::transmitBoardData (void) {
     char *board_data = (char *) malloc(400);
-    *board_data = 'd';
+    *board_data = BASE_MGR_PROTOCOL_COMMAND_DATA;
     this->boardObject()->encodeBoard(board_data + 1);
 
     if (1) {
