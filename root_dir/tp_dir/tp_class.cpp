@@ -13,7 +13,7 @@
 #include <netdb.h>
 #include <pwd.h>
 #include <arpa/inet.h>
-#include "../../main_exports.h"
+#include "../main_dir/main_exports.h"
 #include "../../utils_dir/queue_mgr_class.h"
 #include "tp_class.h"
 #include "tp_transfer_class.h"

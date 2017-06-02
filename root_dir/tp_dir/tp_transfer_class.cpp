@@ -16,7 +16,7 @@
 #include "tp_class.h"
 #include "../../utils_dir/logit.h"
 #include "../../utils_dir/queue_mgr_class.h"
-#include "../../main_exports.h"
+#include "../main_dir/main_exports.h"
 
 TpTransferClass::TpTransferClass (TpClass *tp_object_val)
 {

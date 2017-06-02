@@ -6,12 +6,11 @@
 
 #pragma once
 
+#include <pthread.h>
 class QueueMgrClass;
 class LinkClass;
 
 #define LINK_MGR_RECEIVE_QUEUE_SIZE 100
-
-#include "../../main_class.h"
 
 class LinkMgrClass {
     void *theMainObject;

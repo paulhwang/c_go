@@ -12,7 +12,7 @@
 #include "../../utils_dir/encode.h"
 #include "../../utils_dir/queue_mgr_class.h"
 #include "base_mgr_class.h"
-#include "../../main_exports.h"
+#include "../main_dir/main_exports.h"
 #include "../go_base_dir/go_base_class.h"
 
 BaseMgrClass::BaseMgrClass (void *main_object_val)

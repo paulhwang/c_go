@@ -6,7 +6,6 @@
 
 #pragma once
 #include <pthread.h>
-#include "utils_dir/logit.h"
 
 class TpClass;
 class LinkMgrClass;

@@ -6,13 +6,14 @@ include Makefile.inc
 ROOT_DIR = root_dir
 UTILS_DIR = utils_dir
 TP_DIR = $(ROOT_DIR)/tp_dir
+MAIN_DIR = $(ROOT_DIR)/main_dir
 LINK_MGR_DIR = $(ROOT_DIR)/link_mgr_dir
 BASE_MGR_DIR = $(ROOT_DIR)/base_mgr_dir
 GO_BASE_DIR = $(ROOT_DIR)/go_base_dir
 
 DIRS	= utils_dir root_dir
 
-MAIN_OBJS = main_class.o main_exports.o
+MAIN_OBJS = $(MAIN_DIR)/main_class.o $(MAIN_DIR)/main_exports.o
 LINK_MGR_OBJS = $(LINK_MGR_DIR)/link_mgr_class.o $(LINK_MGR_DIR)/link_class.o $(LINK_MGR_DIR)/session_mgr_class.o $(LINK_MGR_DIR)/session_class.o $(LINK_MGR_DIR)/link_mgr_thread.o $(LINK_MGR_DIR)/link_mgr_exports.o 
 BASE_MGR_OBJS = $(BASE_MGR_DIR)/base_mgr_class.o $(BASE_MGR_DIR)/base_mgr_exports.o $(BASE_MGR_DIR)/base_mgr_thread.o 
 TP_OBJS = $(TP_DIR)/tp_class.o $(TP_DIR)/tp_thread.o $(TP_DIR)/tp_exports.o $(TP_DIR)/tp_transfer_class.o $(TP_DIR)/tp_transfer_thread.o 

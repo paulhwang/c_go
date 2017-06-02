@@ -6,7 +6,7 @@
 
 #pragma once
 
-class BaseMgrClass;
+#include "../../utils_dir/logit.h"
 #include "../base_mgr_dir/base_mgr_class.h"
 #include "go_define.h"
 #include "go_board_class.h"
@@ -17,6 +17,7 @@ class BaseMgrClass;
 #include "go_group_class.h"
 #include "go_group_list_class.h"
 #include "go_move_class.h"
+class BaseMgrClass;
 
 class GoBaseClass {
     int theBaseId;
