@@ -28,10 +28,12 @@ void BaseMgrClass::receiveThreadLoop (void)
         char *data = (char *) this->theReceiveQueue->dequeueData();
         if (data) {
             if (*data == BASE_MGR_PROTOCOL_COMMAND_MALLOC_BASE) {
+                data++;
                 this->mallocGoBase();
             }
             else if (*data == 'd') {
-                this->receiveData(data + 1);
+                data++;
+                this->receiveData(data);
             }
             else {
             }

@@ -66,7 +66,7 @@ int main (int argc, char** argv) {
     TpClass *transport_object = new TpClass(null);
     tp_transfer_object = transport_object->clientThreadFunction(0, TRANSPORT_PORT_NUMBER_FOR_BASE_MGR);
     if (tp_transfer_object) {
-        char *buf = (char *) malloc(100);
+        char *buf = (char *) malloc(BASE_MGR_DATA_BUFFER_SIZE + 4);
         buf[0] = BASE_MGR_PROTOCOL_COMMAND_MALLOC_BASE;
         buf[1] = 0;
         tp_transfer_object->exportTransmitData((void *) buf);
