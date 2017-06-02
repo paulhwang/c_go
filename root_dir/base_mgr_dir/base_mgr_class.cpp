@@ -77,29 +77,12 @@ void BaseMgrClass::mallocBase (void)
 
         char *data_buf = (char *) malloc(BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE + 4);
         data_buf[0] = 'm';
-        this->encodeBaseIdIndex(base_id, base_index, data_buf + 1);
+        encodeIdIndex(data_buf + 1, base_id, BASE_MGR_PROTOCOL_BASE_ID_SIZE, base_index, BASE_MGR_PROTOCOL_BASE_INDEX_SIZE);
 
         this->transmitData(data_buf);
     }
     else {
         /* TBD */
-    }
-}
-
-void BaseMgrClass::encodeBaseIdIndex (int base_id_val, int base_index_val, char *buf_val)
-{
-    if (1) {
-        char s[LOGIT_BUF_SIZE];
-        sprintf(s, "base_id_val=%d base_index_val=%d", base_id_val, base_index_val);
-        this->logit("encodeBaseIdIndex", s);
-    }
-
-    encodeIdIndex(buf_val, base_id_val, BASE_MGR_PROTOCOL_BASE_ID_SIZE, base_index_val, BASE_MGR_PROTOCOL_BASE_INDEX_SIZE);
-
-    if (1) {
-        char s[LOGIT_BUF_SIZE];
-        sprintf(s, "base_id_index=%s", buf_val);
-        this->logit("encodeBaseIdIndex", s);
     }
 }
 
