@@ -9,6 +9,7 @@
 #include <unistd.h>
 #include <malloc.h>
 #include "../../utils_dir/logit.h"
+#include "../../utils_dir/encode.h"
 #include "../../utils_dir/queue_mgr_class.h"
 #include "base_mgr_class.h"
 #include "base_class.h"
@@ -76,7 +77,7 @@ void BaseMgrClass::mallocBase (void)
 
         char *data_buf = (char *) malloc(BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE + 4);
         data_buf[0] = 'm';
-        this->encodeBaseId(base_id, base_index, data_buf + 1);
+        this->encodeBaseIdIndex(base_id, base_index, data_buf + 1);
 
         this->transmitData(data_buf);
     }
@@ -85,36 +86,20 @@ void BaseMgrClass::mallocBase (void)
     }
 }
 
-void BaseMgrClass::encodeBaseId (int base_id_val, int base_index_val, char *buf_val)
+void BaseMgrClass::encodeBaseIdIndex (int base_id_val, int base_index_val, char *buf_val)
 {
-    if (0) {
+    if (1) {
         char s[LOGIT_BUF_SIZE];
         sprintf(s, "base_id_val=%d base_index_val=%d", base_id_val, base_index_val);
-        this->logit("encodeBaseId", s);
+        this->logit("encodeBaseIdIndex", s);
     }
 
-    buf_val[8] = 0;
-
-    buf_val[7] = '0' + base_index_val % 10;
-    base_index_val /= 10;
-    buf_val[6] = '0' + base_index_val % 10;
-    base_index_val /= 10;
-    buf_val[5] = '0' + base_index_val % 10;
-    base_index_val /= 10;
-    buf_val[4] = '0' + base_index_val;
-
-    buf_val[3] = '0' + base_id_val % 10;
-    base_id_val /= 10;
-    buf_val[2] = '0' + base_id_val % 10;
-    base_id_val /= 10;
-    buf_val[1] = '0' + base_id_val % 10;
-    base_id_val /= 10;
-    buf_val[0] = '0' + base_id_val;
+    encodeIdIndex(buf_val, base_id_val, BASE_MGR_PROTOCOL_BASE_ID_SIZE, base_index_val, BASE_MGR_PROTOCOL_BASE_INDEX_SIZE);
 
     if (1) {
         char s[LOGIT_BUF_SIZE];
         sprintf(s, "base_id_index=%s", buf_val);
-        this->logit("encodeBaseId", s);
+        this->logit("encodeBaseIdIndex", s);
     }
 }
 

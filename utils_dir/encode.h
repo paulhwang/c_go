@@ -8,3 +8,4 @@
 
 void encodeNumber (char *str_val, int data_val, int size_val);
 int decodeNumber (char *str_val, int size_val);
+void encodeIdIndex(char *str_val, int id_val, int id_size_val, int index_val, int index_size_val);
