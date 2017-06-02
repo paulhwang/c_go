@@ -13,8 +13,10 @@
 
 #define GO_PROTOCOL_CODE_SIZE 7
 
-TpTransferClass *tp_transfer_object;
-char base_id[BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE + 4];
+TpClass *transport_object;
+TpTransferClass *base_mgr_tp_transfer_object;
+TpTransferClass *link_mgr_tp_transfer_object;
+char base_id_index[BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE + 4];
 int move_index = 0;
 char const *move_array[] = {
     "03021001",
@@ -26,16 +28,16 @@ char const *move_array[] = {
     "03031007",
 };
 
-void play_a_move (void)
+void baseMgrPlayAMove (void)
 {
     char *buf = (char *) malloc(BASE_MGR_DATA_BUFFER_SIZE + 4);
     buf[0] = BASE_MGR_PROTOCOL_COMMAND_IS_TRANSFER_DATA;
     buf[1] = BASE_MGR_PROTOCOL_GAME_NAME_IS_GO;
-    memcpy(buf + 2, base_id, BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE);
+    memcpy(buf + 2, base_id_index, BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE);
     strcpy(buf + 2 + BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE, "Move   ");
     strcpy(buf + 2 + BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE + GO_PROTOCOL_CODE_SIZE, move_array[move_index++]);
     printf("=====%s\n", buf);
-    tp_transfer_object->exportTransmitData(buf);
+    base_mgr_tp_transfer_object->exportTransmitData(buf);
 }
 
 void mainReceiveDataFromTransport (void* engine_object_val, void *data_val) {
@@ -45,14 +47,14 @@ void mainReceiveDataFromTransport (void* engine_object_val, void *data_val) {
     if (*data == BASE_MGR_PROTOCOL_RESPOND_IS_MALLOC_BASE) {
         if (1) {
             char s[LOGIT_BUF_SIZE];
-            sprintf(s, "base_id=%s", data + 1);
+            sprintf(s, "base_id_index=%s", data + 1);
             LOGIT("mainReceiveDataFromTransport", s);
         }
         data++;
         data++;
-        memcpy(base_id, data, BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE);
-        base_id[BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE] = 0;
-        play_a_move();
+        memcpy(base_id_index, data, BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE);
+        base_id_index[BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE] = 0;
+        baseMgrPlayAMove();
     }
     else if (*data == BASE_MGR_PROTOCOL_RESPOND_IS_TRANSFER_DATA) {
         data++;
@@ -60,21 +62,32 @@ void mainReceiveDataFromTransport (void* engine_object_val, void *data_val) {
             data++;
             PRINT_BOARD((char *) data, 19);
             if (move_index < sizeof(move_array) / sizeof(*move_array)) {
-                play_a_move();
+                baseMgrPlayAMove();
             }
         }
     }
 }
 
-int main (int argc, char** argv) {
-    TpClass *transport_object = new TpClass(null);
-    tp_transfer_object = transport_object->clientThreadFunction(0, TRANSPORT_PORT_NUMBER_FOR_BASE_MGR);
-    if (tp_transfer_object) {
+void baseMgrTest (void)
+{
+    base_mgr_tp_transfer_object = transport_object->clientThreadFunction(0, TRANSPORT_PORT_NUMBER_FOR_BASE_MGR);
+    if (base_mgr_tp_transfer_object) {
         char *buf = (char *) malloc(BASE_MGR_DATA_BUFFER_SIZE + 4);
         buf[0] = BASE_MGR_PROTOCOL_COMMAND_IS_MALLOC_BASE;
         buf[1] = BASE_MGR_PROTOCOL_GAME_NAME_IS_GO;
         buf[2] = 0;
-        tp_transfer_object->exportTransmitData((void *) buf);
+        base_mgr_tp_transfer_object->exportTransmitData((void *) buf);
     }
+}
+
+void linkMgrTest (void)
+{
+    printf("linkMgrTest\n");
+}
+
+int main (int argc, char** argv) {
+    transport_object = new TpClass(null);
+    baseMgrTest();
+    linkMgrTest();
     sleep(1000);
 }
