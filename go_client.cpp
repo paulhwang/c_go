@@ -48,12 +48,14 @@ void mainReceiveDataFromTransport (void* engine_object_val, void *data_val) {
             sprintf(s, "base_id=%s", data + 1);
             LOGIT("mainReceiveDataFromTransport", s);
         }
-        memcpy(base_id, data + 1, BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE);
+        data++;
+        memcpy(base_id, data, BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE);
         base_id[BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE] = 0;
         play_a_move();
     }
     else if (*data == 'd') {
-        PRINT_BOARD((char *) data + 1, 19);
+        data++;
+        PRINT_BOARD((char *) data, 19);
         if (move_index < sizeof(move_array) / sizeof(*move_array)) {
             play_a_move();
         }
