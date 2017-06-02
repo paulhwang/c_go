@@ -9,9 +9,9 @@
 #include "../base_mgr_dir/base_mgr_class.h"
 #include "go_base_class.h"
 
-GoBaseClass::GoBaseClass (BaseMgrClass* base_mgr_object_val)
+GoBaseClass::GoBaseClass (BaseMgrClass* base_mgr_object_val, int base_id_val)
 {
-  this->theBaseId = 0;
+  this->theBaseId = base_id_val;
   this->theBaseMgrObject = base_mgr_object_val;
   this->theConfigObject = new GoConfigClass(this);
   this->theBoardObject = new GoBoardClass(this);

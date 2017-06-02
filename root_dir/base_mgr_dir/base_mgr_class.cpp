@@ -61,7 +61,7 @@ void BaseMgrClass::mallocGoBase (void)
     int base_id = this->allocBaseId();
     int base_index = this->allocBaseIndex();
     if (base_index != -1) {
-        this->theBaseTableArray[base_index] = new GoBaseClass(this);
+        this->theBaseTableArray[base_index] = new GoBaseClass(this, base_id);
 
         char *data_buf = (char *) malloc(BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE + 4);
         data_buf[0] = 'm';

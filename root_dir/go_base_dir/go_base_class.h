@@ -31,8 +31,9 @@ class GoBaseClass {
     void abend(char const* str0_val, char const* str1_val);
 
   public:
-    GoBaseClass(BaseMgrClass* base_mgr_object_val);
+    GoBaseClass(BaseMgrClass* base_mgr_object_val, int base_id_val);
     ~GoBaseClass(void);
+
     char const* objectName(void) {return "GoBaseClass";}
     int baseId(void) {return this->theBaseId;}
     BaseMgrClass* baseMgrObject(void) {return this->theBaseMgrObject;}
