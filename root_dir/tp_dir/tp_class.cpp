@@ -89,7 +89,7 @@ S
 
     this->logit("startServer", "accepted");
 
-    this->theTpTransferObject->startThreads(data_socket);
+    tp_transfer_object_val->startThreads(data_socket);
 }
 
 TpTransferClass *TpClass::clientThreadFunction (unsigned long ip_addr_val, ushort port_val, void (*receive_callback_val)(void *, void *))
