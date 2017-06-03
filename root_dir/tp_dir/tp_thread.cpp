@@ -13,9 +13,10 @@ void *transportServerThreadFunction (void *data_val)
 {
     unsigned short port = ((transport_thread_parameter *) data_val)->port;
     TpClass *transport_object = ((transport_thread_parameter *) data_val)->transport_object;
+    TpTransferClass *tp_transfer_object = ((transport_thread_parameter *) data_val)->tp_transfer_object;
     free(data_val);
 
-    transport_object->serverThreadFunction(port);
+    transport_object->serverThreadFunction(port, tp_transfer_object);
 }
 
 void TpClass::startServerThread (TpTransferClass *tp_transfer_object_val, unsigned short port_val)

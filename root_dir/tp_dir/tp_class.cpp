@@ -34,7 +34,7 @@ TpClass::~TpClass (void)
 {
 }
 
-void TpClass::serverThreadFunction (ushort port_val)
+void TpClass::serverThreadFunction (ushort port_val, TpTransferClass *tp_transfer_object_val)
 {
   char localhost[MAXHOSTNAME + 1];
   struct servent *sp;
