@@ -5,12 +5,10 @@
 */
 
 #pragma once
-#include <pthread.h>
 
 class TpClass;
 class LinkMgrClass;
 class BaseMgrClass;
-class TpTransferClass;
 
 class MainClass {
     TpClass *theTransportObject;
