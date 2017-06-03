@@ -12,7 +12,6 @@
 #include "../link_mgr_dir/link_mgr_class.h"
 #include "../base_mgr_dir/base_mgr_class.h"
 #include "main_class.h"
-#include "../main_dir/main_exports.h"
 
 MainClass::MainClass(void)
 {
