@@ -40,9 +40,6 @@ void MainClass::startThreads (void)
     this->theLinkMgrObject->theTpTransferObject = start_server_output.tp_transfer_object;
     this->theLinkMgrObject->theTpServerThread = start_server_output.server_thread;
 
-    this->theGoBaseMgrObject->startThreads();
-    this->theLinkMgrObject->startThreads();
-
     //pthread_join(this->theGoBaseMgrObject->receiveThread(), NULL);
     //pthread_join(this->theLinkMgrObject->receiveThread(), NULL);
 }
