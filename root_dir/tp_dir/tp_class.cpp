@@ -18,9 +18,6 @@
 #include "tp_transfer_class.h"
 #include "../../utils_dir/logit.h"
 
-#define MAXHOSTNAME 32
-#define BACKLOG 5
-
 TpClass::TpClass (void *main_object_val)
 {
     this->theMainObject = main_object_val;
@@ -32,64 +29,6 @@ TpClass::TpClass (void *main_object_val)
 
 TpClass::~TpClass (void)
 {
-}
-
-void TpClass::serverThreadFunction (ushort port_val, TpTransferClass *tp_transfer_object_val)
-{
-  char localhost[MAXHOSTNAME + 1];
-  struct servent *sp;
-  int s, data_socket;
-  struct hostent *hp;
-  int opt = 1;
-  struct sockaddr_in address;
-  int addrlen = sizeof(address);
-  char buffer[1024] = {0};
-
-  this->logit("startServer", "start");
-/*
-  if ((sp = getservbyname("whois", "tcp")) == NULL) {
-    this->logit("start_server", "No whois service on this host");
-    return;
-  }
-  printf("port=%d\n", sp->s_port);
-S
-  //gethostname(localhost, MAXHOSTNAME);
-  this->logit("start_server", localhost);
-
-  hp = gethostbyname("")
-*/
-
-  if ((s = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
-  	this->logit("startServer", "open socket error");
-  	return;
-  }
-
-  if (setsockopt(s, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &opt, sizeof(opt))) {
-  	this->logit("startServer", "setsockopt error");
-    return;
-  }
-
-  address.sin_family = AF_INET;
-  address.sin_addr.s_addr = INADDR_ANY;
-  address.sin_port = htons(port_val);
-
-  if (bind(s, (struct sockaddr *)&address, sizeof(address)) < 0) {
-  	this->logit("startServer", "bind error");
-    return;
-  }
-
-  this->logit("startServer", "listening");
-  listen(s, BACKLOG);
-
-  this->logit("startServer", "accepting");
-  if ((data_socket = accept(s, (struct sockaddr *)&address, (socklen_t*)&addrlen)) < 0) {
-    this->logit("startServer", "accept error");
-    return;
-  }
-
-    this->logit("startServer", "accepted");
-
-    tp_transfer_object_val->startThreads(data_socket);
 }
 
 TpTransferClass *TpClass::clientThreadFunction (unsigned long ip_addr_val, ushort port_val, void (*receive_callback_val)(void *, void *))
