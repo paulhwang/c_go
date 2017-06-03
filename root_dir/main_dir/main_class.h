@@ -33,9 +33,7 @@ class MainClass {
     TpClass *transportObject(void) {return this->theTransportObject;}
 
     /* exports */
-    void exportBaseMgrReceiveDataFromTransport(void *data_val);
     void exportBaseMgrTransmitDataToTransport(void *data_val);
-    void exportLinkMgrReceiveDataFromTransport(void *data_val);
     void exportLinkMgrTransmitDataToTransport(void *data_val);
 
     void startThreads(void);

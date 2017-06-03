@@ -14,12 +14,12 @@
 
 void mainBaseMgrReceiveDataFromTransport (void *main_object_val, void *data_val) {
     LOGIT("Golbal::mainBaseMgrReceiveDataFromTransport", (char *) data_val);
-    ((MainClass *) main_object_val)->exportBaseMgrReceiveDataFromTransport(data_val);
+    ((BaseMgrClass *) main_object_val)->exportReceiveData(data_val);
 }
 
 void mainLinkMgrReceiveDataFromTransport (void *main_object_val, void *data_val) {
     LOGIT("Golbal::mainLinkMgrReceiveDataFromTransport", (char *) data_val);
-    ((MainClass *) main_object_val)->exportLinkMgrReceiveDataFromTransport(data_val);
+    ((LinkMgrClass *) main_object_val)->exportReceiveData(data_val);
 }
 
 void mainBaseMgrTransmitDataToTransport (void *main_object_val, void *data_val) {
@@ -28,19 +28,6 @@ void mainBaseMgrTransmitDataToTransport (void *main_object_val, void *data_val) 
 
 void mainLinkMgrTransmitDataToTransport (void *main_object_val, void *data_val) {
     ((MainClass *) main_object_val)->exportLinkMgrTransmitDataToTransport(data_val);
-}
-
-void MainClass::exportBaseMgrReceiveDataFromTransport (void *data_val) {
-    char *game_name = (char *)"go";
-    if (!strcmp(game_name, "go")) {
-        this->logit("exportBaseMgrReceiveDataFromTransport", (char *) data_val);
-        this->theGoBaseMgrObject->exportReceiveData(data_val);
-    }
-}
-
-void MainClass::exportLinkMgrReceiveDataFromTransport (void *data_val) {
-    this->logit("exportLinkMgrReceiveDataFromTransport", (char *) data_val);
-    this->theLinkMgrObject->exportReceiveData(data_val);
 }
 
 void MainClass::exportBaseMgrTransmitDataToTransport(void *data_val)
