@@ -8,8 +8,8 @@
 #include <pthread.h>
 #include "../../includes/common.h"
 
-#define TRANSPORT_PORT_NUMBER_FOR_BASE_MGR 8003
-#define TRANSPORT_PORT_NUMBER_FOR_LINK_MGR 8004
+#define TRANSPORT_PORT_NUMBER_FOR_BASE_MGR 8005
+#define TRANSPORT_PORT_NUMBER_FOR_LINK_MGR 8006
 #define TRANSPORT_TRANSMIT_QUEUE_SIZE 1000
 
 class QueueMgrClass;

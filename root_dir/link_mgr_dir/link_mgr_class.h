@@ -11,6 +11,7 @@
 class QueueMgrClass;
 class LinkClass;
 class MainClass;
+class TpTransferClass;
 
 #define LINK_MGR_RECEIVE_QUEUE_SIZE 100
 
@@ -53,4 +54,9 @@ public:
 
     void linkMgrLogit(char const* str0_val, char const* str1_val);
     void linkMgrAbend(char const* str0_val, char const* str1_val);
+
+
+    pthread_t theLinkMgrTpServerThread;
+    TpTransferClass *theLinkMgrTpTransferObject;
+
 };

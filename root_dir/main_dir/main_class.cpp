@@ -23,8 +23,6 @@ MainClass::MainClass(void)
 
 MainClass::~MainClass(void)
 {
-    this->theLinkMgrTpTransferObject->~TpTransferClass(); 
-
     this->theLinkMgrObject->~LinkMgrClass(); 
     this->theGoBaseMgrObject->~BaseMgrClass(); 
     this->theTransportObject->~TpClass(); 
@@ -39,8 +37,8 @@ void MainClass::startThreads (void)
 
 
     this->theTransportObject->startServer(TRANSPORT_PORT_NUMBER_FOR_LINK_MGR, mainLinkMgrReceiveDataFromTransport, this->theLinkMgrObject, &start_server_output);
-    this->theLinkMgrTpTransferObject = start_server_output.tp_transfer_object;
-    this->theLinkMgrTpServerThread = start_server_output.server_thread;
+    this->theLinkMgrObject->theLinkMgrTpTransferObject = start_server_output.tp_transfer_object;
+    this->theLinkMgrObject->theLinkMgrTpServerThread = start_server_output.server_thread;
 
     this->theGoBaseMgrObject->startThreads();
     this->theLinkMgrObject->startThreads();

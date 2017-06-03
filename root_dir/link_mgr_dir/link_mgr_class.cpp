@@ -11,6 +11,7 @@
 #include "../../utils_dir/encode.h"
 #include "../../utils_dir/queue_mgr_class.h"
 #include "../main_dir/main_exports.h"
+#include "../tp_dir/tp_transfer_class.h"
 #include "link_mgr_class.h"
 #include "link_class.h"
 
@@ -31,6 +32,8 @@ LinkMgrClass::LinkMgrClass (MainClass *main_object_val)
 LinkMgrClass::~LinkMgrClass (void)
 {
     delete this->theReceiveQueue;
+    this->theLinkMgrTpTransferObject->~TpTransferClass(); 
+
 }
 
 int LinkMgrClass::allocLinkId (void)
