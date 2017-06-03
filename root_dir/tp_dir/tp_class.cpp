@@ -31,7 +31,7 @@ TpClass::~TpClass (void)
 {
 }
 
-TpTransferClass *TpClass::clientThreadFunction (unsigned long ip_addr_val, ushort port_val, void (*receive_callback_val)(void *, void *))
+TpTransferClass *TpClass::clientThreadFunction (unsigned long ip_addr_val, ushort port_val, void (*receive_callback_val)(void *, void *), void *receive_object_val)
 {
   int s;
   struct sockaddr_in serv_addr;
@@ -61,7 +61,7 @@ TpTransferClass *TpClass::clientThreadFunction (unsigned long ip_addr_val, ushor
 
   this->logit("startClient", "connected");
 
-    TpTransferClass *tp_transfer_object = new TpTransferClass(this, receive_callback_val, 0);
+    TpTransferClass *tp_transfer_object = new TpTransferClass(this, receive_callback_val, receive_object_val);
     tp_transfer_object->startThreads(s);
     return tp_transfer_object;
 }
