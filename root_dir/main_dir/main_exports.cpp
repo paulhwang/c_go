@@ -12,11 +12,6 @@
 #include "../link_mgr_dir/link_mgr_class.h"
 #include "main_class.h"
 
-void mainLinkMgrReceiveDataFromTransport (void *main_object_val, void *data_val) {
-    LOGIT("Golbal::mainLinkMgrReceiveDataFromTransport", (char *) data_val);
-    ((LinkMgrClass *) main_object_val)->exportReceiveData(data_val);
-}
-
 void mainLinkMgrTransmitDataToTransport (void *main_object_val, void *data_val) {
     ((MainClass *) main_object_val)->exportLinkMgrTransmitDataToTransport(data_val);
 }

@@ -50,6 +50,11 @@ void LinkMgrClass::startReceiveThread (void)
     }
 }
 
+void mainLinkMgrReceiveDataFromTransport (void *link_mgr_object_val, void *data_val) {
+    LOGIT("Golbal::mainLinkMgrReceiveDataFromTransport", (char *) data_val);
+    ((LinkMgrClass *) link_mgr_object_val)->exportReceiveData(data_val);
+}
+
 void LinkMgrClass::startThreads (void)
 {
     this->startReceiveThread();
