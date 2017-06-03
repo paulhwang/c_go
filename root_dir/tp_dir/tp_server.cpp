@@ -51,7 +51,9 @@ pthread_t TpClass::startServerThread (TpTransferClass *tp_transfer_object_val, u
     return thread;
 }
 
-TpTransferClass *TpClass::startServer (unsigned short port_val, void (*receive_callback_val)(void *, void *))
+TpTransferClass *TpClass::startServer (unsigned short port_val,
+                                       void (*receive_callback_val)(void *, void *),
+                                       StartServerOutputStruct *output_val)
 {
     pthread_t thread;
 
@@ -59,9 +61,8 @@ TpTransferClass *TpClass::startServer (unsigned short port_val, void (*receive_c
       if (tp_transfer_object) {
           thread = this->startServerThread(tp_transfer_object, port_val);
           if (thread) {
-              server_setup_output *output = (server_setup_output *) malloc(sizeof(server_setup_output));
-              output->tp_transfer_object = tp_transfer_object;
-              output->server_thread = thread;
+              output_val->tp_transfer_object = tp_transfer_object;
+              output_val->server_thread = thread;
               return tp_transfer_object;
           }
     }

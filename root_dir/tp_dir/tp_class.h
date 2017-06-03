@@ -15,6 +15,11 @@
 class QueueMgrClass;
 class TpTransferClass;
 
+typedef struct {
+    pthread_t server_thread;
+    TpTransferClass *tp_transfer_object;
+} StartServerOutputStruct;
+
 class TpClass {
     void *theMainObject;
 
@@ -29,7 +34,7 @@ public:
     char const *objectName(void) {return "TpClass";}
     void *mainObject(void) {return this->theMainObject;}
 
-    TpTransferClass *startServer(unsigned short port_val, void (*receive_callback_val)(void *, void *));
+    TpTransferClass *startServer(unsigned short port_val, void (*receive_callback_val)(void *, void *), StartServerOutputStruct *output_val);
     void serverThreadFunction(unsigned short port_val, TpTransferClass *tp_transfer_object_val);
     TpTransferClass *clientThreadFunction(unsigned long ip_addr_val, unsigned short port_val, void (*receive_callback_val)(void *, void *));
 };
@@ -41,8 +46,3 @@ typedef struct {
     TpTransferClass *tp_transfer_object;
     int socket;
 } transport_thread_parameter;
-
-typedef struct {
-    pthread_t server_thread;
-    TpTransferClass *tp_transfer_object;
-} server_setup_output;
