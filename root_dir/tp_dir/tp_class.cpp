@@ -61,7 +61,7 @@ TpTransferClass *TpClass::clientThreadFunction (unsigned long ip_addr_val, ushor
 
   this->logit("startClient", "connected");
 
-    TpTransferClass *tp_transfer_object = new TpTransferClass(this, receive_callback_val);
+    TpTransferClass *tp_transfer_object = new TpTransferClass(this, receive_callback_val, 0);
     tp_transfer_object->startThreads(s);
     return tp_transfer_object;
 }

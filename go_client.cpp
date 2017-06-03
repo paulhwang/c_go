@@ -12,7 +12,7 @@
 #include "root_dir/base_mgr_dir/base_mgr_protocol.h"
 #include "utils_dir/logit.h"
 
-int test_base_mgr = 1;
+int test_base_mgr = 0;
 TpClass *transport_object;
 
 TpTransferClass *link_mgr_tp_transfer_object;
