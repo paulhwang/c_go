@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include "../../utils_dir/queue_mgr_class.h"
 #include "link_mgr_class.h"
+#include "../tp_dir/tp_class.h"
 
 void *linkMgrReceiveThreadFunction (void *this_val)
 {
@@ -52,4 +53,6 @@ void LinkMgrClass::startReceiveThread (void)
 void LinkMgrClass::startThreads (void)
 {
     this->startReceiveThread();
+
+    StartServerOutputStruct start_server_output;
 }

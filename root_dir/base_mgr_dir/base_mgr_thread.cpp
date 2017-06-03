@@ -8,6 +8,7 @@
 #include "../../utils_dir/queue_mgr_class.h"
 #include "base_mgr_class.h"
 #include "base_mgr_protocol.h"
+#include "../tp_dir/tp_class.h"
 
 void *baseMgrReceiveThreadFunction (void *this_val)
 {
@@ -60,4 +61,6 @@ void BaseMgrClass::startReceiveThread (void)
 void BaseMgrClass::startThreads (void)
 {
     this->startReceiveThread();
+
+    StartServerOutputStruct start_server_output;
 }
