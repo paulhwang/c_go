@@ -7,7 +7,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
+#include <malloc.h>
+#include <netinet/in.h>
+#include <unistd.h>
+#include <netdb.h>
+#include <pwd.h>
 #include "tp_transfer_class.h"
+#include "tp_class.h"
 
 void *tpTranferReceiveThreadFunction (void *data_val)
 {
@@ -32,5 +38,18 @@ void TpTransferClass::startReceiveThread (int socket_val)
     if (r) {
         printf("Error - startReceiveThread() return code: %d\n", r);
         return;
+    }
+}
+
+void TpTransferClass::receiveThreadFunction(int socket_val)
+{
+    while (1) {
+        char *buffer = (char *) malloc(TP_TRANSFER_CLASS_RECEIVE_BUFFER_SIZE);
+
+        int length = read(socket_val, buffer, TP_TRANSFER_CLASS_RECEIVE_BUFFER_SIZE);
+        this->logit("receiveThreadFunction", buffer);
+        if (length > 0) {
+            this->receiveCallback(this->theTpObject->mainObject(), buffer);
+        }
     }
 }

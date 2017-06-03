@@ -8,6 +8,7 @@
 #include <pthread.h>
 
 #define TP_TRANSFER_CLASS_TRANSMIT_QUEUE_SIZE 1000
+#define TP_TRANSFER_CLASS_RECEIVE_BUFFER_SIZE 1024
 
 class QueueMgrClass;
 class TpClass;

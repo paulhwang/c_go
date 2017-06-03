@@ -41,21 +41,6 @@ void TpTransferClass::startThreads(int socket_val)
     this->startTransmitThread(this->theSocket);
 }
 
-#define TRANSPORT_RECEIVE_BUFFER_SIZE 1024
-
-void TpTransferClass::receiveThreadFunction(int socket_val)
-{
-    while (1) {
-        char *buffer = (char *) malloc(TRANSPORT_RECEIVE_BUFFER_SIZE);
-
-        int length = read(socket_val, buffer, TRANSPORT_RECEIVE_BUFFER_SIZE);
-        this->logit("receiveThreadFunction", buffer);
-        if (length > 0) {
-            this->receiveCallback(this->theTpObject->mainObject(), buffer);
-        }
-    }
-}
-
 void TpTransferClass::exportTransmitData (void *data_val)
 {
     this->theTransmitQueue->enqueueData(data_val);
