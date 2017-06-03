@@ -8,6 +8,7 @@
 #include "../../utils_dir/queue_mgr_class.h"
 #include "link_mgr_class.h"
 #include "../tp_dir/tp_class.h"
+#include "../main_dir/main_class.h"
 
 void *linkMgrReceiveThreadFunction (void *this_val)
 {
@@ -60,4 +61,7 @@ void LinkMgrClass::startThreads (void)
     this->startReceiveThread();
 
     StartServerOutputStruct start_server_output;
+    this->theMainObject->transportObject()->startServer(TRANSPORT_PORT_NUMBER_FOR_LINK_MGR, mainLinkMgrReceiveDataFromTransport, this, &start_server_output);
+    this->theTpTransferObject = start_server_output.tp_transfer_object;
+    this->theTpServerThread = start_server_output.server_thread;
 }

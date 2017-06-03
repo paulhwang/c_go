@@ -33,13 +33,6 @@ void MainClass::startThreads (void)
     this->theGoBaseMgrObject->startThreads();
     this->theLinkMgrObject->startThreads();
 
-    StartServerOutputStruct start_server_output;
-
-
-    this->theTransportObject->startServer(TRANSPORT_PORT_NUMBER_FOR_LINK_MGR, mainLinkMgrReceiveDataFromTransport, this->theLinkMgrObject, &start_server_output);
-    this->theLinkMgrObject->theTpTransferObject = start_server_output.tp_transfer_object;
-    this->theLinkMgrObject->theTpServerThread = start_server_output.server_thread;
-
     //pthread_join(this->theGoBaseMgrObject->receiveThread(), NULL);
     //pthread_join(this->theLinkMgrObject->receiveThread(), NULL);
 }
