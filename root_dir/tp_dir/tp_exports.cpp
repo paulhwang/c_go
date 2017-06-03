@@ -11,10 +11,10 @@
 
 TpTransferClass *TpClass::startServer (unsigned short port_val, void (*receive_callback_val)(void *, void *))
 {
-    this->theTpTransferObject = new TpTransferClass(this, receive_callback_val);
-	  if (this->theTpTransferObject) {
-    	  this->startServerThread(this->theTpTransferObject, port_val);
-    	  return this->theTpTransferObject;
+    TpTransferClass *tp_transfer_object = new TpTransferClass(this, receive_callback_val);
+	  if (tp_transfer_object) {
+    	  this->startServerThread(tp_transfer_object, port_val);
+    	  return tp_transfer_object;
     }
     else {
     	  return 0;

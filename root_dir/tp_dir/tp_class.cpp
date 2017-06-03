@@ -122,9 +122,9 @@ TpTransferClass *TpClass::clientThreadFunction (unsigned long ip_addr_val, ushor
 
   this->logit("startClient", "connected");
 
-    this->theTpTransferObject = new TpTransferClass(this, receive_callback_val);
-    this->theTpTransferObject->startThreads(s);
-    return this->theTpTransferObject;
+    TpTransferClass *tp_transfer_object = new TpTransferClass(this, receive_callback_val);
+    tp_transfer_object->startThreads(s);
+    return tp_transfer_object;
 }
 
 void TpClass::logit (char const* str0_val, char const* str1_val)

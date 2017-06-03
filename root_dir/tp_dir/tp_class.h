@@ -19,8 +19,7 @@ class TpClass {
     void *theMainObject;
 
     pthread_t theServerThread;
-    pthread_t theClientThread;
-    TpTransferClass *theTpTransferObject;
+    //pthread_t theClientThread;
 
     void startServerThread(TpTransferClass *tp_transfer_val, unsigned short port_val);
     //void startClientThread(unsigned long ip_addr_val, unsigned short port_val);
