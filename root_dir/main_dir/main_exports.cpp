@@ -24,5 +24,5 @@ void mainLinkMgrTransmitDataToTransport (void *main_object_val, void *data_val) 
 void MainClass::exportLinkMgrTransmitDataToTransport(void *data_val)
 {
     this->logit("exportLinkMgrTransmitDataToTransport", (char *) data_val);
-    this->theLinkMgrObject->theLinkMgrTpTransferObject->exportTransmitData(data_val);
+    this->theLinkMgrObject->theTpTransferObject->exportTransmitData(data_val);
 }

@@ -32,7 +32,7 @@ LinkMgrClass::LinkMgrClass (MainClass *main_object_val)
 LinkMgrClass::~LinkMgrClass (void)
 {
     delete this->theReceiveQueue;
-    this->theLinkMgrTpTransferObject->~TpTransferClass(); 
+    this->theTpTransferObject->~TpTransferClass(); 
 
 }
 

@@ -56,7 +56,7 @@ public:
     void linkMgrAbend(char const* str0_val, char const* str1_val);
 
 
-    pthread_t theLinkMgrTpServerThread;
-    TpTransferClass *theLinkMgrTpTransferObject;
+    pthread_t theTpServerThread;
+    TpTransferClass *theTpTransferObject;
 
 };
