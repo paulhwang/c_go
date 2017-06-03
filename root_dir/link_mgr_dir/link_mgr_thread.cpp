@@ -51,8 +51,8 @@ void LinkMgrClass::startReceiveThread (void)
     }
 }
 
-void mainLinkMgrReceiveDataFromTransport (void *link_mgr_object_val, void *data_val) {
-    LOGIT("Golbal::mainLinkMgrReceiveDataFromTransport", (char *) data_val);
+void linkMgrReceiveDataFromTransport (void *link_mgr_object_val, void *data_val) {
+    LOGIT("Golbal::linkMgrReceiveDataFromTransport", (char *) data_val);
     ((LinkMgrClass *) link_mgr_object_val)->exportReceiveData(data_val);
 }
 
@@ -61,7 +61,7 @@ void LinkMgrClass::startThreads (void)
     this->startReceiveThread();
 
     StartServerOutputStruct start_server_output;
-    this->theMainObject->transportObject()->startServer(TRANSPORT_PORT_NUMBER_FOR_LINK_MGR, mainLinkMgrReceiveDataFromTransport, this, &start_server_output);
+    this->theMainObject->transportObject()->startServer(TRANSPORT_PORT_NUMBER_FOR_LINK_MGR, linkMgrReceiveDataFromTransport, this, &start_server_output);
     this->theTpTransferObject = start_server_output.tp_transfer_object;
     this->theTpServerThread = start_server_output.server_thread;
 }
