@@ -12,14 +12,13 @@
 #include "root_dir/base_mgr_dir/base_mgr_protocol.h"
 #include "utils_dir/logit.h"
 
-int test_base_mgr = 0;
+int test_base_mgr = 1;
+TpClass *transport_object;
 
 TpTransferClass *link_mgr_tp_transfer_object;
 char link_id_index[LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + 4];
 
 #define GO_PROTOCOL_CODE_SIZE 7
-
-TpClass *transport_object;
 TpTransferClass *base_mgr_tp_transfer_object;
 char base_id_index[BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE + 4];
 int move_index = 0;
