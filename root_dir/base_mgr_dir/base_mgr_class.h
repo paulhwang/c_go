@@ -14,6 +14,7 @@ class EngineClass;
 class BaseClass;
 class GoBaseClass;
 class MainClass;
+class TpTransferClass;
 
 #define BASE_MGR_RECEIVE_QUEUE_SIZE 100
 
@@ -53,4 +54,7 @@ public:
 
     void baseMgrLogit(char const* str0_val, char const* str1_val);
     void baseMgrAbend(char const* str0_val, char const* str1_val);
+
+    pthread_t theBaseMgrTpServerThread;
+    TpTransferClass *theBaseMgrTpTransferObject;
 };

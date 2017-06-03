@@ -14,6 +14,7 @@
 #include "base_mgr_class.h"
 #include "../main_dir/main_exports.h"
 #include "../go_base_dir/go_base_class.h"
+#include "../tp_dir/tp_transfer_class.h"
 
 BaseMgrClass::BaseMgrClass (MainClass *main_object_val)
 {
@@ -31,6 +32,7 @@ BaseMgrClass::BaseMgrClass (MainClass *main_object_val)
 
 BaseMgrClass::~BaseMgrClass (void)
 {
+    this->theBaseMgrTpTransferObject->~TpTransferClass(); 
     delete this->theReceiveQueue;
 }
 
@@ -78,7 +80,7 @@ void BaseMgrClass::transmitData(char *data_val)
 {
     if (1) {
         this->logit("transmitData", data_val);
-        mainBaseMgrTransmitDataToTransport(this->theMainObject, data_val);
+        this->theBaseMgrTpTransferObject->exportTransmitData(data_val);
     }
 }
 
