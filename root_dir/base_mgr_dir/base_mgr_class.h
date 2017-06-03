@@ -39,6 +39,7 @@ public:
     BaseMgrClass(void *main_object_val);
     ~BaseMgrClass();
     char const* objectName(void) {return "BaseMgrClass";}
+    pthread_t receiveThread(void) {return this->theReceiveThread;}
 
     /* exports */
     void exportReceiveData(void *data_val);

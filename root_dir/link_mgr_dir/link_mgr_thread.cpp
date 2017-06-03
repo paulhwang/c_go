@@ -27,6 +27,10 @@ void LinkMgrClass::receiveThreadLoop (void)
     while (1) {
         char *data = (char *) this->theReceiveQueue->dequeueData();
         if (data) {
+            if (*data == LINK_MGR_PROTOCOL_COMMAND_IS_MALLOC_LINK) {
+                data++;
+                this->mallocLink(data);
+            }
         }
     }
 }
@@ -43,5 +47,4 @@ void LinkMgrClass::startThreads (void)
         printf("Error - pthread_create() return code: %d\n", r);
         return;
     }
-    pthread_join(this->theReceiveThread, NULL);
 }

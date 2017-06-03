@@ -28,8 +28,11 @@ void MainClass::startThreads (void)
 {
     this->theBaseMgrTpTransferObject = this->theTransportObject->startServer(TRANSPORT_PORT_NUMBER_FOR_BASE_MGR, mainBaseMgrReceiveDataFromTransport);
     this->theLinkMgrTpTransferObject = this->theTransportObject->startServer(TRANSPORT_PORT_NUMBER_FOR_LINK_MGR, mainLinkMgrReceiveDataFromTransport);
-    this->theGoBaseMgrObject->startThreads();
     this->theLinkMgrObject->startThreads();
+    this->theGoBaseMgrObject->startThreads();
+
+    pthread_join(this->theLinkMgrObject->receiveThread(), NULL);
+    pthread_join(this->theGoBaseMgrObject->receiveThread(), NULL);
 }
 
 void MainClass::logit (char const* str0_val, char const* str1_val)

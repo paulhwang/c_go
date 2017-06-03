@@ -6,8 +6,11 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <malloc.h>
 #include "../../utils_dir/logit.h"
+#include "../../utils_dir/encode.h"
 #include "../../utils_dir/queue_mgr_class.h"
+#include "../main_dir/main_exports.h"
 #include "link_mgr_class.h"
 #include "link_class.h"
 
@@ -48,8 +51,27 @@ int LinkMgrClass::allocLinkIndex (void)
     return -1;
 }
 
-LinkClass *LinkMgrClass::mallocLink (char const *my_name_val)
+void LinkMgrClass::mallocLink (char const *data_val)
 {
+    if (1) {
+        this->logit("mallocLink", data_val);
+    }
+    int link_id = this->allocLinkId();
+    int link_index = this->allocLinkIndex();
+    if (link_index != -1) {
+        this->theLinkTableArray[link_index] = new LinkClass(this, link_id, link_index, data_val);
+
+        char *data_buf = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
+        data_buf[0] = LINK_MGR_PROTOCOL_RESPOND_IS_MALLOC_LINK;
+        encodeIdIndex(data_buf + 1, link_id, LINK_MGR_PROTOCOL_LINK_ID_SIZE, link_index, LINK_MGR_PROTOCOL_LINK_INDEX_SIZE);
+
+        this->transmitData(data_buf);
+    }
+    else {
+        /* TBD */
+    }
+
+/*
     int link_index = allocLinkIndex();
     LinkClass *link = new LinkClass(this, this->allocLinkId(), link_index, my_name_val);
     if (!link) {
@@ -57,6 +79,15 @@ LinkClass *LinkMgrClass::mallocLink (char const *my_name_val)
     }
 
     return link;
+    */
+}
+
+void LinkMgrClass::transmitData(char *data_val)
+{
+    if (1) {
+        this->logit("transmitData", data_val);
+        mainTransmitDataToTransport(this->theMainObject, data_val);
+    }
 }
 
 void LinkMgrClass::freeLink (LinkClass *link_object_val)
