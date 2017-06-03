@@ -49,7 +49,7 @@ void TpTransferClass::receiveThreadFunction(int socket_val)
         int length = read(socket_val, buffer, TP_TRANSFER_CLASS_RECEIVE_BUFFER_SIZE);
         this->logit("receiveThreadFunction", buffer);
         if (length > 0) {
-            this->receiveCallback(this->theTpObject->mainObject(), buffer);
+            this->receiveCallback()(this->theTpObject->mainObject(), buffer);
         }
     }
 }

@@ -34,13 +34,13 @@ public:
     ~TpTransferClass(void);
     char const *objectName(void) {return "TpTransferClass";}
     int socket(void) {return this->theSocket;}
+    void (*receiveCallback(void))(void *, void *) {return this->theReceiveCallback;}
 
     /* exports */
     void exportTransmitData(void *data_val);
     void startThreads(int socket_val);
 
     /* callback */
-    void (*receiveCallback)(void *, void *);
     void receiveThreadFunction(int socket_val);
     void transmitThreadFunction(int socket_val);
 };
