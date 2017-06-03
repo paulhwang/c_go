@@ -59,6 +59,9 @@ TpTransferClass *TpClass::startServer (unsigned short port_val, void (*receive_c
       if (tp_transfer_object) {
           thread = this->startServerThread(tp_transfer_object, port_val);
           if (thread) {
+              server_setup_output *output = (server_setup_output *) malloc(sizeof(server_setup_output));
+              output->tp_transfer_object = tp_transfer_object;
+              output->server_thread = thread;
               return tp_transfer_object;
           }
     }

@@ -42,3 +42,7 @@ typedef struct {
     int socket;
 } transport_thread_parameter;
 
+typedef struct {
+    pthread_t server_thread;
+    TpTransferClass *tp_transfer_object;
+} server_setup_output;
