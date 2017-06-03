@@ -92,7 +92,7 @@ void LinkMgrClass::transmitData(char *data_val)
 {
     if (1) {
         this->logit("transmitData", data_val);
-        mainLinkMgrTransmitDataToTransport(this->theMainObject, data_val);
+        this->theTpTransferObject->exportTransmitData(data_val);
     }
 }
 

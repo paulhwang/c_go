@@ -23,6 +23,8 @@ class LinkMgrClass {
     int theGlobalLinkId;
     LinkClass *theLinkTableArray[LINK_MGR_LINK_ARRAY_SIZE + 4];
 
+    TpTransferClass *theTpTransferObject;
+    pthread_t theTpServerThread;
     pthread_t theReceiveThread;
     QueueMgrClass *theReceiveQueue;
 
@@ -54,9 +56,4 @@ public:
 
     void linkMgrLogit(char const* str0_val, char const* str1_val);
     void linkMgrAbend(char const* str0_val, char const* str1_val);
-
-
-    pthread_t theTpServerThread;
-    TpTransferClass *theTpTransferObject;
-
 };
