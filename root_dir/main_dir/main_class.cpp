@@ -32,7 +32,7 @@ void MainClass::startThreads (void)
     this->theGoBaseMgrObject->startThreads();
     //this->theLinkMgrObject->startThreads();
 
-    pthread_join(this->theGoBaseMgrObject->receiveThread(), NULL);
+    //pthread_join(this->theGoBaseMgrObject->receiveThread(), NULL);
     //pthread_join(this->theLinkMgrObject->receiveThread(), NULL);
 }
 
