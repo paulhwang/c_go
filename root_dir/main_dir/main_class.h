@@ -27,5 +27,4 @@ class MainClass {
     TpClass *transportObject(void) {return this->theTransportObject;}
 
     void startThreads(void);
-    void goBaseMgrReceiveThreadLoop(void);
 };
