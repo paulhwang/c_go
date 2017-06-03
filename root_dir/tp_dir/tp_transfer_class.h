@@ -15,9 +15,10 @@ class TpClass;
 
 class TpTransferClass {
     TpClass *theTpObject;
+    void (*theReceiveCallback)(void *, void *);
+    void *theReceiveObject;
     int theSocket;
 
-    void *theReceiveObject;
     pthread_t theReceiveThread;
     pthread_t theTransmitThread;
     QueueMgrClass *theTransmitQueue;

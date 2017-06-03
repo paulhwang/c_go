@@ -119,11 +119,8 @@ void linkMgrTest (void)
 
 int main (int argc, char** argv) {
     transport_object = new TpClass(null);
-    if (test_base_mgr) {
-        baseMgrTest();
-    }
-    else {
-        linkMgrTest();
-    }
+    baseMgrTest();
+    sleep(1);
+    linkMgrTest();
     sleep(1000);
 }

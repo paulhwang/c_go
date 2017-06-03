@@ -21,6 +21,7 @@ TpTransferClass::TpTransferClass (TpClass *tp_object_val, void (*receive_callbac
 {
     this->theTpObject = tp_object_val;
     this->receiveCallback = receive_callback_val;
+    this->theReceiveObject = receive_object_val;
 
     this->theTransmitQueue = new QueueMgrClass();
     this->theTransmitQueue->initQueue(TP_TRANSFER_CLASS_TRANSMIT_QUEUE_SIZE);
