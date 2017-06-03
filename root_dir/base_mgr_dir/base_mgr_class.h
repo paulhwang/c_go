@@ -7,13 +7,13 @@
 #pragma once
 
 #include <pthread.h>
+#include "base_mgr_protocol.h"
+#include "../go_base_dir/go_base_class.h"
 class QueueMgrClass;
 class EngineClass;
 class BaseClass;
 class GoBaseClass;
-
-#include "base_mgr_protocol.h"
-#include "../go_base_dir/go_base_class.h"
+class MainClass;
 
 #define BASE_MGR_RECEIVE_QUEUE_SIZE 100
 
@@ -21,7 +21,7 @@ class BaseMgrClass {
 #define BASE_MGR_BASE_ARRAY_SIZE 1000
 #define BASE_MGR_MAX_GLOBAL_BASE_ID 9999
 
-    void *theMainObject;
+    MainClass *theMainObject;
     int theGlobalBaseId;
     void *theBaseTableArray[BASE_MGR_BASE_ARRAY_SIZE + 4];
 
@@ -37,7 +37,7 @@ class BaseMgrClass {
     void abend(char const* str0_val, char const* str1_val);
 
 public:
-    BaseMgrClass(void *main_object_val);
+    BaseMgrClass(MainClass *main_object_val);
     ~BaseMgrClass();
     char const* objectName(void) {return "BaseMgrClass";}
     pthread_t receiveThread(void) {return this->theReceiveThread;}

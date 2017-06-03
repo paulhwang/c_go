@@ -7,9 +7,10 @@
 #pragma once
 
 #include <pthread.h>
+#include "link_mgr_protocol.h"
 class QueueMgrClass;
 class LinkClass;
-#include "link_mgr_protocol.h"
+class MainClass;
 
 #define LINK_MGR_RECEIVE_QUEUE_SIZE 100
 
@@ -17,9 +18,8 @@ class LinkMgrClass {
 #define LINK_MGR_LINK_ARRAY_SIZE 1000
 #define LINK_MGR_MAX_GLOBAL_LINK_ID 9999
 
-    void *theMainObject;
+    MainClass *theMainObject;
     int theGlobalLinkId;
-    LinkClass *linkTableArray[1000];
     LinkClass *theLinkTableArray[LINK_MGR_LINK_ARRAY_SIZE + 4];
 
     pthread_t theReceiveThread;
@@ -34,7 +34,7 @@ class LinkMgrClass {
     void abend(char const* str0_val, char const* str1_val);
 
 public:
-    LinkMgrClass(void *main_object_val);
+    LinkMgrClass(MainClass *main_object_val);
     ~LinkMgrClass();
     char const* objectName(void) {return "LinkMgrClass";}
     pthread_t receiveThread(void) {return this->theReceiveThread;}

@@ -14,7 +14,7 @@
 #include "link_mgr_class.h"
 #include "link_class.h"
 
-LinkMgrClass::LinkMgrClass (void *main_object_val)
+LinkMgrClass::LinkMgrClass (MainClass *main_object_val)
 {
     memset(this, 0, sizeof(LinkMgrClass));
     this->theMainObject = main_object_val;
@@ -98,7 +98,6 @@ void LinkMgrClass::freeLink (LinkClass *link_object_val)
     if (!link_object_val) {
         return;
     }
-    this->linkTableArray[link_object_val->linkIndex()] = 0;
     link_object_val->~LinkClass();
 }
 

@@ -15,7 +15,7 @@
 #include "../main_dir/main_exports.h"
 #include "../go_base_dir/go_base_class.h"
 
-BaseMgrClass::BaseMgrClass (void *main_object_val)
+BaseMgrClass::BaseMgrClass (MainClass *main_object_val)
 {
     memset(this, 0, sizeof(BaseMgrClass));
     this->theMainObject = main_object_val;
