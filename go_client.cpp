@@ -14,7 +14,7 @@
 
 #define GO_PROTOCOL_CODE_SIZE 7
 
-int test_base_mgr = 1;
+int test_base_mgr = 0;
 TpClass *transport_object;
 TpTransferClass *base_mgr_tp_transfer_object;
 TpTransferClass *link_mgr_tp_transfer_object;

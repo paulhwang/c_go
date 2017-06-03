@@ -29,8 +29,8 @@ class MainClass {
     char const *objectName(void) {return "MainClass";}
 
     /* exports */
-    void exportBaseMgrRreceiveDataFromTransport(void *data_val);
-    void exportLinkMgrRreceiveDataFromTransport(void *data_val);
+    void exportBaseMgrReceiveDataFromTransport(void *data_val);
+    void exportLinkMgrReceiveDataFromTransport(void *data_val);
     void exportTransmitDataToTransport(void *data_val);
 
     void startThreads(void);
