@@ -52,5 +52,5 @@ void MainClass::exportBaseMgrTransmitDataToTransport(void *data_val)
 void MainClass::exportLinkMgrTransmitDataToTransport(void *data_val)
 {
     this->logit("exportLinkMgrTransmitDataToTransport", (char *) data_val);
-    this->theBaseMgrTpTransferObject->exportTransmitData(data_val);
+    this->theLinkMgrTpTransferObject->exportTransmitData(data_val);
 }
