@@ -58,16 +58,16 @@ TpTransferClass *TpClass::startServer (unsigned short port_val,
     pthread_t thread;
 
     TpTransferClass *tp_transfer_object = new TpTransferClass(this, receive_callback_val);
-      if (tp_transfer_object) {
-          thread = this->startServerThread(tp_transfer_object, port_val);
-          if (thread) {
-              output_val->tp_transfer_object = tp_transfer_object;
-              output_val->server_thread = thread;
-              return tp_transfer_object;
-          }
+    if (tp_transfer_object) {
+        thread = this->startServerThread(tp_transfer_object, port_val);
+        if (thread) {
+            output_val->tp_transfer_object = tp_transfer_object;
+            output_val->server_thread = thread;
+            return tp_transfer_object;
+        }
     }
     else {
-          return 0;
+        return 0;
     }
 }
 
