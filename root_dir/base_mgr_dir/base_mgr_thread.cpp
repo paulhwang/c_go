@@ -59,9 +59,9 @@ void BaseMgrClass::startReceiveThread (void)
     }
 }
 
-void mainBaseMgrReceiveDataFromTransport (void *main_object_val, void *data_val) {
-    LOGIT("Golbal::mainBaseMgrReceiveDataFromTransport", (char *) data_val);
-    ((BaseMgrClass *) main_object_val)->exportReceiveData(data_val);
+void baseMgrReceiveDataFromTransport (void *base_mgr_object_val, void *data_val) {
+    LOGIT("Golbal::baseMgrReceiveDataFromTransport", (char *) data_val);
+    ((BaseMgrClass *) base_mgr_object_val)->exportReceiveData(data_val);
 }
 
 void BaseMgrClass::startThreads (void)
@@ -69,7 +69,7 @@ void BaseMgrClass::startThreads (void)
     this->startReceiveThread();
 
     StartServerOutputStruct start_server_output;
-    this->theMainObject->transportObject()->startServer(TRANSPORT_PORT_NUMBER_FOR_BASE_MGR, mainBaseMgrReceiveDataFromTransport, this, &start_server_output);
+    this->theMainObject->transportObject()->startServer(TRANSPORT_PORT_NUMBER_FOR_BASE_MGR, baseMgrReceiveDataFromTransport, this, &start_server_output);
     this->theTpTransferObject = start_server_output.tp_transfer_object;
     this->theTpServerThread = start_server_output.server_thread;
 }
