@@ -1,7 +1,7 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: tp_transfer_transmit.cpp
+  File name: tp_transfer_receive.cpp
 */
 
 #include <stdio.h>
@@ -9,16 +9,16 @@
 #include <pthread.h>
 #include "tp_transfer_class.h"
 
-void *tpTransferTransmitThreadFunction (void *data_val)
+void *tpTranferReceiveThreadFunction (void *data_val)
 {
     int socket = ((tp_transfer_thread_parameter *) data_val)->socket;
     TpTransferClass *tp_transfer_object = ((tp_transfer_thread_parameter *) data_val)->tp_transfer_object;
     free(data_val);
 
-    tp_transfer_object->transmitThreadFunction(socket);
+    tp_transfer_object->receiveThreadFunction(socket);
 }
 
-void TpTransferClass::startTransmitThread (int socket_val)
+void TpTransferClass::startReceiveThread (int socket_val)
 {
     tp_transfer_thread_parameter *data = (tp_transfer_thread_parameter *) malloc(sizeof(tp_transfer_thread_parameter));
     data->socket = socket_val;
@@ -26,11 +26,11 @@ void TpTransferClass::startTransmitThread (int socket_val)
 
     int r;
     if (0) {
-        this->logit("startTransmitThread", "");
+        this->logit("startReceiveThread", "");
     }
-    r = pthread_create(&this->theTransmitThread, 0, tpTransferTransmitThreadFunction, data);
+    r = pthread_create(&this->theReceiveThread, 0, tpTranferReceiveThreadFunction, data);
     if (r) {
-        printf("Error - startTransmitThread() return code: %d\n", r);
+        printf("Error - startReceiveThread() return code: %d\n", r);
         return;
     }
 }
