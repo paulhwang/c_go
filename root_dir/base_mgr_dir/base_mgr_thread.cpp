@@ -70,6 +70,6 @@ void BaseMgrClass::startThreads (void)
 
     StartServerOutputStruct start_server_output;
     this->theMainObject->transportObject()->startServer(TRANSPORT_PORT_NUMBER_FOR_BASE_MGR, mainBaseMgrReceiveDataFromTransport, this, &start_server_output);
-    this->theBaseMgrTpTransferObject = start_server_output.tp_transfer_object;
-    this->theBaseMgrTpServerThread = start_server_output.server_thread;
+    this->theTpTransferObject = start_server_output.tp_transfer_object;
+    this->theTpServerThread = start_server_output.server_thread;
 }

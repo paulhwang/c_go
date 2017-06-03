@@ -26,6 +26,8 @@ class BaseMgrClass {
     int theGlobalBaseId;
     void *theBaseTableArray[BASE_MGR_BASE_ARRAY_SIZE + 4];
 
+    TpTransferClass *theTpTransferObject;
+    pthread_t theTpServerThread;
     pthread_t theReceiveThread;
     QueueMgrClass *theReceiveQueue;
 
@@ -54,7 +56,4 @@ public:
 
     void baseMgrLogit(char const* str0_val, char const* str1_val);
     void baseMgrAbend(char const* str0_val, char const* str1_val);
-
-    pthread_t theBaseMgrTpServerThread;
-    TpTransferClass *theBaseMgrTpTransferObject;
 };

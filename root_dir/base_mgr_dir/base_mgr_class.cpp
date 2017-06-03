@@ -32,7 +32,7 @@ BaseMgrClass::BaseMgrClass (MainClass *main_object_val)
 
 BaseMgrClass::~BaseMgrClass (void)
 {
-    this->theBaseMgrTpTransferObject->~TpTransferClass(); 
+    this->theTpTransferObject->~TpTransferClass(); 
     delete this->theReceiveQueue;
 }
 
@@ -80,7 +80,7 @@ void BaseMgrClass::transmitData(char *data_val)
 {
     if (1) {
         this->logit("transmitData", data_val);
-        this->theBaseMgrTpTransferObject->exportTransmitData(data_val);
+        this->theTpTransferObject->exportTransmitData(data_val);
     }
 }
 
