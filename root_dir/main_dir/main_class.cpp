@@ -6,9 +6,7 @@
 
 #include <stdio.h>
 #include "../../utils_dir/logit.h"
-#include "../../utils_dir/queue_mgr_class.h"
 #include "../tp_dir/tp_class.h"
-#include "../tp_dir/tp_transfer_class.h"
 #include "../link_mgr_dir/link_mgr_class.h"
 #include "../base_mgr_dir/base_mgr_class.h"
 #include "main_class.h"
@@ -31,9 +29,6 @@ void MainClass::startThreads (void)
 {
     this->theGoBaseMgrObject->startThreads();
     this->theLinkMgrObject->startThreads();
-
-    //pthread_join(this->theGoBaseMgrObject->receiveThread(), NULL);
-    //pthread_join(this->theLinkMgrObject->receiveThread(), NULL);
 }
 
 void MainClass::logit (char const* str0_val, char const* str1_val)
