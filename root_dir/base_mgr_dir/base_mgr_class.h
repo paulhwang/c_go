@@ -28,6 +28,7 @@ class BaseMgrClass {
     pthread_t theReceiveThread;
     QueueMgrClass *theReceiveQueue;
 
+    void startReceiveThread(void);
     int allocBaseId(void);
     int allocBaseIndex(void);
     void mallocGoBase(void);

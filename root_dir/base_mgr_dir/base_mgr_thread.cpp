@@ -43,16 +43,21 @@ void BaseMgrClass::receiveThreadLoop (void)
     }
 }
 
-void BaseMgrClass::startThreads (void)
+void BaseMgrClass::startReceiveThread (void)
 {
     int r;
 
     if (0) {
-        this->logit("startThreads", "create receiveThread");
+        this->logit("startReceiveThread", "create receiveThread");
     }
     r = pthread_create(&this->theReceiveThread, NULL, baseMgrReceiveThreadFunction, this);
     if (r) {
         printf("Error - pthread_create() return code: %d\n", r);
         return;
     }
+}
+
+void BaseMgrClass::startThreads (void)
+{
+    this->startReceiveThread();
 }

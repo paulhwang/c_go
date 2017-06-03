@@ -25,6 +25,7 @@ class LinkMgrClass {
     pthread_t theReceiveThread;
     QueueMgrClass *theReceiveQueue;
 
+    void startReceiveThread(void);
     int allocLinkId(void);
     int allocLinkIndex(void);
     void mallocLink(void);

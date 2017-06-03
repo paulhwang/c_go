@@ -30,6 +30,9 @@ MainClass::~MainClass(void)
 
 void MainClass::startThreads (void)
 {
+    this->theGoBaseMgrObject->startThreads();
+    this->theLinkMgrObject->startThreads();
+
     StartServerOutputStruct start_server_output;
 
     this->theTransportObject->startServer(TRANSPORT_PORT_NUMBER_FOR_BASE_MGR, mainBaseMgrReceiveDataFromTransport, &start_server_output);
