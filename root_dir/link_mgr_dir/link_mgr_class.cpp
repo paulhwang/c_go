@@ -35,6 +35,9 @@ LinkMgrClass::~LinkMgrClass (void)
 
 int LinkMgrClass::allocLinkId (void)
 {
+    if (this->theGlobalLinkId >= LINK_MGR_MAX_GLOBAL_LINK_ID) {
+        this->theGlobalLinkId = 0;
+    }
     this->theGlobalLinkId++;
     return this->theGlobalLinkId;
 }
@@ -42,8 +45,8 @@ int LinkMgrClass::allocLinkId (void)
 int LinkMgrClass::allocLinkIndex (void)
 {
     int index = 0;
-    while (index < 1000) {
-        if (!this->linkTableArray[index]) {
+    while (index < LINK_MGR_LINK_ARRAY_SIZE) {
+        if (!this->theLinkTableArray[index]) {
             return index;
         }
         index++;
