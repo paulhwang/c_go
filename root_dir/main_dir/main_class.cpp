@@ -16,16 +16,19 @@
 
 MainClass::MainClass(void)
 {
-    this->theLinkMgrObject = new LinkMgrClass(this);
-    this->theGoBaseMgrObject = new BaseMgrClass(this);
     this->theTransportObject = new TpClass(this);
+    this->theGoBaseMgrObject = new BaseMgrClass(this);
+    this->theLinkMgrObject = new LinkMgrClass(this);
 }
 
 MainClass::~MainClass(void)
 {
+    this->theLinkMgrTpTransferObject->~TpTransferClass(); 
     this->theBaseMgrTpTransferObject->~TpTransferClass(); 
 
-    this->theLinkMgrTpTransferObject->~TpTransferClass(); 
+    this->theLinkMgrObject->~LinkMgrClass(); 
+    this->theGoBaseMgrObject->~BaseMgrClass(); 
+    this->theTransportObject->~TpClass(); 
 }
 
 void MainClass::startThreads (void)

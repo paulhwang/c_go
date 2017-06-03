@@ -30,6 +30,7 @@ class MainClass {
     MainClass(void);
     ~MainClass(void);
     char const *objectName(void) {return "MainClass";}
+    TpClass *transportObject(void) {return this->theTransportObject;}
 
     /* exports */
     void exportBaseMgrReceiveDataFromTransport(void *data_val);
