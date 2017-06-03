@@ -43,6 +43,7 @@ typedef struct {
     unsigned long ip_addr;
     unsigned short port;
     TpClass *transport_object;
+    TpTransferClass *tp_transfer_object;
     int socket;
 } transport_thread_parameter;
 
