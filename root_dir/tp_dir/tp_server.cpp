@@ -53,6 +53,7 @@ pthread_t TpClass::startServerThread (TpTransferClass *tp_transfer_object_val, u
 
 TpTransferClass *TpClass::startServer (unsigned short port_val,
                                        void (*receive_callback_val)(void *, void *),
+                                       void *receive_object_val,
                                        StartServerOutputStruct *output_val)
 {
     pthread_t thread;

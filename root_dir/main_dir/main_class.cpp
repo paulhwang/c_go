@@ -35,11 +35,11 @@ void MainClass::startThreads (void)
 
     StartServerOutputStruct start_server_output;
 
-    this->theTransportObject->startServer(TRANSPORT_PORT_NUMBER_FOR_BASE_MGR, mainBaseMgrReceiveDataFromTransport, &start_server_output);
+    this->theTransportObject->startServer(TRANSPORT_PORT_NUMBER_FOR_BASE_MGR, mainBaseMgrReceiveDataFromTransport, this->theGoBaseMgrObject, &start_server_output);
     this->theBaseMgrTpTransferObject = start_server_output.tp_transfer_object;
     this->theBaseMgrTpServerThread = start_server_output.server_thread;
 
-    this->theTransportObject->startServer(TRANSPORT_PORT_NUMBER_FOR_LINK_MGR, mainLinkMgrReceiveDataFromTransport, &start_server_output);
+    this->theTransportObject->startServer(TRANSPORT_PORT_NUMBER_FOR_LINK_MGR, mainLinkMgrReceiveDataFromTransport, this->theLinkMgrObject, &start_server_output);
     this->theLinkMgrTpTransferObject = start_server_output.tp_transfer_object;
     this->theLinkMgrTpServerThread = start_server_output.server_thread;
 
