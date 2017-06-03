@@ -23,11 +23,11 @@ void mainLinkMgrReceiveDataFromTransport (void *main_object_val, void *data_val)
 }
 
 void mainBaseMgrTransmitDataToTransport (void *main_object_val, void *data_val) {
-    ((MainClass *) main_object_val)->exportTransmitDataToTransport(data_val);
+    ((MainClass *) main_object_val)->exportBaseMgrTransmitDataToTransport(data_val);
 }
 
 void mainLinkMgrTransmitDataToTransport (void *main_object_val, void *data_val) {
-    ((MainClass *) main_object_val)->exportTransmitDataToTransport(data_val);
+    ((MainClass *) main_object_val)->exportLinkMgrTransmitDataToTransport(data_val);
 }
 
 void MainClass::exportBaseMgrReceiveDataFromTransport (void *data_val) {
@@ -43,8 +43,14 @@ void MainClass::exportLinkMgrReceiveDataFromTransport (void *data_val) {
     this->theLinkMgrObject->exportReceiveData(data_val);
 }
 
-void MainClass::exportTransmitDataToTransport(void *data_val)
+void MainClass::exportBaseMgrTransmitDataToTransport(void *data_val)
 {
-    this->logit("exportTransmitDataToTransport", (char *) data_val);
+    this->logit("exportBaseMgrTransmitDataToTransport", (char *) data_val);
+    this->theBaseMgrTpTransferObject->exportTransmitData(data_val);
+}
+
+void MainClass::exportLinkMgrTransmitDataToTransport(void *data_val)
+{
+    this->logit("exportLinkMgrTransmitDataToTransport", (char *) data_val);
     this->theBaseMgrTpTransferObject->exportTransmitData(data_val);
 }
