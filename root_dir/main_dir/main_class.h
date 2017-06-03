@@ -26,10 +26,6 @@ class MainClass {
     char const *objectName(void) {return "MainClass";}
     TpClass *transportObject(void) {return this->theTransportObject;}
 
-    /* exports */
-    void exportBaseMgrTransmitDataToTransport(void *data_val);
-    void exportLinkMgrTransmitDataToTransport(void *data_val);
-
     void startThreads(void);
     void goBaseMgrReceiveThreadLoop(void);
 };
