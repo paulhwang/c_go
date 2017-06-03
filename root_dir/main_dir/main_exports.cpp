@@ -22,7 +22,11 @@ void mainLinkMgrReceiveDataFromTransport (void *main_object_val, void *data_val)
     ((MainClass *) main_object_val)->exportLinkMgrReceiveDataFromTransport(data_val);
 }
 
-void mainTransmitDataToTransport (void *main_object_val, void *data_val) {
+void mainBaseMgrTransmitDataToTransport (void *main_object_val, void *data_val) {
+    ((MainClass *) main_object_val)->exportTransmitDataToTransport(data_val);
+}
+
+void mainLinkMgrTransmitDataToTransport (void *main_object_val, void *data_val) {
     ((MainClass *) main_object_val)->exportTransmitDataToTransport(data_val);
 }
 

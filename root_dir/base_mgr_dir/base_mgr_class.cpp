@@ -78,7 +78,7 @@ void BaseMgrClass::transmitData(char *data_val)
 {
     if (1) {
         this->logit("transmitData", data_val);
-        mainTransmitDataToTransport(this->theMainObject, data_val);
+        mainBaseMgrTransmitDataToTransport(this->theMainObject, data_val);
     }
 }
 
