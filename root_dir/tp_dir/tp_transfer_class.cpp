@@ -20,6 +20,7 @@
 TpTransferClass::TpTransferClass (TpClass *tp_object_val, void (*receive_callback_val)(void *, void *), void *receive_object_val)
 {
     this->theTpObject = tp_object_val;
+    this->theReceiveCallback = receive_callback_val;
     this->receiveCallback = receive_callback_val;
     this->theReceiveObject = receive_object_val;
 
