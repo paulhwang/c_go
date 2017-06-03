@@ -17,7 +17,10 @@ class MainClass {
     LinkMgrClass *theLinkMgrObject;
     BaseMgrClass *theGoBaseMgrObject;
 
+    pthread_t theLinkMgrTpServerThread;
     TpTransferClass *theLinkMgrTpTransferObject;
+
+    pthread_t theBaseMgrTpServerThread;
     TpTransferClass *theBaseMgrTpTransferObject;
 
     void logit(char const* str0_val, char const* str1_val);
