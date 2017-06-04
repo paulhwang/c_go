@@ -5,22 +5,22 @@ include Makefile.inc
 
 SERVER_PROJ_DIR = server_proj_dir
 CLIENT_PROJ_DIR = client_proj_dir
-UTILS_DIR = utils_dir
+PHWANG_DIR = utils_dir
 INCLUDE_DIR = include_dir
 PROTOCOL_DIR = $(INCLUDE_DIR)/protocol_dir
-LOGIT_DIR   = $(UTILS_DIR)/logit_dir
-ENCODE_DIR  = $(UTILS_DIR)/encode_dir
-JSON_DIR    = $(UTILS_DIR)/json_dir
-SUSPEND_DIR = $(UTILS_DIR)/suspend_dir
-QUEUE_DIR   = $(UTILS_DIR)/queue_dir
-TP_DIR      = $(UTILS_DIR)/tp_dir
+LOGIT_DIR   = $(PHWANG_DIR)/logit_dir
+ENCODE_DIR  = $(PHWANG_DIR)/encode_dir
+JSON_DIR    = $(PHWANG_DIR)/json_dir
+SUSPEND_DIR = $(PHWANG_DIR)/suspend_dir
+QUEUE_DIR   = $(PHWANG_DIR)/queue_dir
+TP_DIR      = $(PHWANG_DIR)/tp_dir
 SERVER_DIR      = $(SERVER_PROJ_DIR)/server_dir
 LINK_MGR_DIR    = $(SERVER_PROJ_DIR)/link_mgr_dir
 BASE_MGR_DIR    = $(SERVER_PROJ_DIR)/base_mgr_dir
 GO_BASE_DIR     = $(SERVER_PROJ_DIR)/go_base_dir
 CLIENT_DIR = $(CLIENT_PROJ_DIR)/client_dir
 
-DIRS = $(UTILS_DIR) $(SERVER_PROJ_DIR) $(CLIENT_PROJ_DIR)
+DIRS = $(PHWANG_DIR) $(SERVER_PROJ_DIR) $(CLIENT_PROJ_DIR)
 
 LOGIT_OBJS = $(LOGIT_DIR)/logit.o 
 ENCODE_OBJS = $(ENCODE_DIR)/encode.o 
@@ -28,7 +28,7 @@ JSON_OBJS = $(JSON_DIR)/json_class.o
 SUSPEND_OBJS = $(SUSPEND_DIR)/suspend_class.o 
 QUEUE_OBJS = $(QUEUE_DIR)/queue.o $(QUEUE_DIR)/queue_entry_class.o $(QUEUE_DIR)/queue_class.o
 TP_OBJS = $(TP_DIR)/tp_class.o $(TP_DIR)/tp_server.o $(TP_DIR)/tp_transfer_class.o $(TP_DIR)/tp_transfer_transmit.o $(TP_DIR)/tp_transfer_receive.o 
-UTILS_OBJS = $(LOGIT_OBJS) $(ENCODE_OBJS) $(JSON_OBJS) $(SUSPEND_OBJS) $(QUEUE_OBJS) $(TP_OBJS) 
+PHWANG_OBJS = $(LOGIT_OBJS) $(ENCODE_OBJS) $(JSON_OBJS) $(SUSPEND_OBJS) $(QUEUE_OBJS) $(TP_OBJS) 
 
 SERVER_OBJS = $(SERVER_DIR)/go_server.o $(SERVER_DIR)/main_class.o
 LINK_MGR_OBJS = $(LINK_MGR_DIR)/link_mgr_class.o $(LINK_MGR_DIR)/link_class.o $(LINK_MGR_DIR)/session_mgr_class.o $(LINK_MGR_DIR)/session_class.o $(LINK_MGR_DIR)/link_mgr_thread.o $(LINK_MGR_DIR)/link_mgr_exports.o 
@@ -40,10 +40,10 @@ CLIENT_OBJS = $(CLIENT_DIR)/go_client.o
 CLIENT_PROJ_OBJS = $(CLIENT_OBJS)
 
 SERVER = server
-ALL_SERVER_OBJS	= $(UTILS_OBJS) $(SERVER_PROJ_OBJS)
+ALL_SERVER_OBJS	= $(PHWANG_OBJS) $(SERVER_PROJ_OBJS)
 
 CLIENT = client 
-ALL_CLIENT_OBJS	= $(UTILS_OBJS) $(CLIENT_PROJ_OBJS) 
+ALL_CLIENT_OBJS	= $(PHWANG_OBJS) $(CLIENT_PROJ_OBJS) 
 
 UTILS_OBJLIBS = lib_utils.a
 GO_ROOT_OBJLIBS	= lib_root.a lib_go_base.a lib_base_mgr.a
