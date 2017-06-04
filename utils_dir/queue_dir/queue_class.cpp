@@ -15,9 +15,10 @@
 //#include "getac_def_component.h"
 //#include "getac_def_marker.h"
 
-QueueClass::QueueClass(void)
+QueueClass::QueueClass(int max_size_val)
 {
     memset(this, 0, sizeof(*this));
+    this->theMaxQueueSize = max_size_val;
     this->theSuspendObject = new SuspendClass();
     this->theMutex = (pthread_mutex_t *) malloc(sizeof(pthread_mutex_t));
     pthread_mutex_init(this->theMutex, NULL);
@@ -34,9 +35,8 @@ QueueClass::~QueueClass(void)
     free(this->theMutex);
 }
 
-void QueueClass::initQueue(int max_queue_size_val)
+void QueueClass::initQueue (void)
 {
-  this->theMaxQueueSize = max_queue_size_val;
   //InitializeCriticalSectionAndSpinCount(&cs_queue, 0);
 }
 

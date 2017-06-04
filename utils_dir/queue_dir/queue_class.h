@@ -39,11 +39,11 @@ class QueueClass
     void abend (char const* str0_val, char const* str1_val) {ABEND(str0_val, str1_val);}
 
 public:
-    QueueClass(void);
+    QueueClass(int max_size_val);
     ~QueueClass(void);
     char const *objectName(void) {return "QueueClass";}
 
-    void initQueue(int max_queue_size_val);
+    void initQueue(void);
     void enqueueData(void *data_val);
     void *dequeueData(void);
 

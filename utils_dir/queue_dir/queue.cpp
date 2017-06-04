@@ -7,9 +7,9 @@
 #include "../phwang.h"
 #include "queue_class.h"
 
-void *phwangMallocQueue (int size_val)
+void *phwangMallocQueue (int max_size_val)
 {
-    QueueClass *queue = new QueueClass();
+    QueueClass *queue = new QueueClass(max_size_val);
     return queue;
 }
 
