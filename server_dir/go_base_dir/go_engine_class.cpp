@@ -5,7 +5,6 @@
 */
 
 #include <stdio.h>
-#include "../../includes/types.h"
 #include "go_base_class.h"
 #include "go_engine_class.h"
 
@@ -152,22 +151,22 @@ void GoEngineClass::resetMarkedGroupLists (void)
 
 void GoEngineClass::resetEmptyGroupLists (void)
 {
-    this->theGroupListArray[0] = new GoGroupListClass(this, 0, GO_EMPTY_STONE, false, null, null);
-    this->theGroupListArray[5] = new GoGroupListClass(this, 5, GO_EMPTY_STONE, false, null, "black");
-    this->theGroupListArray[6] = new GoGroupListClass(this, 6, GO_EMPTY_STONE, false, null, "white");
+    this->theGroupListArray[0] = new GoGroupListClass(this, 0, GO_EMPTY_STONE, false, 0, 0);
+    this->theGroupListArray[5] = new GoGroupListClass(this, 5, GO_EMPTY_STONE, false, 0, "black");
+    this->theGroupListArray[6] = new GoGroupListClass(this, 6, GO_EMPTY_STONE, false, 0, "white");
 }
 
 void GoEngineClass::resetEngineObjectData (void)
 {
     this->theGroupListCount = GO_GROUP_LIST_ARRAY_SIZE;
     //this.theGroupListArray = [this.groupListCount()];
-    this->theGroupListArray[1] = new GoGroupListClass(this, 1, GO_BLACK_STONE, false, null, null);
-    this->theGroupListArray[2] = new GoGroupListClass(this, 2, GO_WHITE_STONE, false, null, null);
+    this->theGroupListArray[1] = new GoGroupListClass(this, 1, GO_BLACK_STONE, false, 0, 0);
+    this->theGroupListArray[2] = new GoGroupListClass(this, 2, GO_WHITE_STONE, false, 0, 0);
     this->resetMarkedGroupLists();
     this->resetEmptyGroupLists();
 
-    this->theCaptureCount = null;
-    this->theLastDeadStone = null;
+    this->theCaptureCount = 0;
+    this->theLastDeadStone = 0;
 
     this->theBlackCaptureStones = 0;
     this->theWhiteCaptureStones = 0;
