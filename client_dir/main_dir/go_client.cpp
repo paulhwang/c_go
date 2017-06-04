@@ -9,8 +9,8 @@
 #include "../../utils_dir/logit_dir/logit.h"
 #include "../../utils_dir/tp_dir/tp_class.h"
 #include "../../utils_dir/tp_dir/tp_transfer_class.h"
-#include "../../server_dir/link_mgr_dir/link_mgr_protocol.h"
-#include "../../server_dir/base_mgr_dir/base_mgr_protocol.h"
+#include "../../include_dir/protocol_dir/link_mgr_protocol.h"
+#include "../../include_dir/protocol_dir/base_mgr_protocol.h"
 
 int test_base_mgr = 1;
 TpClass *transport_object;

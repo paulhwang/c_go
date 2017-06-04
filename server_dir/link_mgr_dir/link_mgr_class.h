@@ -7,7 +7,7 @@
 #pragma once
 
 #include <pthread.h>
-#include "link_mgr_protocol.h"
+#include "../../include_dir/protocol_dir/link_mgr_protocol.h"
 class QueueMgrClass;
 class LinkClass;
 class MainClass;

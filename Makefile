@@ -6,16 +6,17 @@ include Makefile.inc
 SERVER_DIR = server_dir
 CLIENT_DIR = client_dir
 UTILS_DIR = utils_dir
+PROTOCOL_DIR = protocol_dir
 LOGIT_DIR   = $(UTILS_DIR)/logit_dir
 ENCODE_DIR  = $(UTILS_DIR)/encode_dir
 JSON_DIR    = $(UTILS_DIR)/json_dir
 SUSPEND_DIR = $(UTILS_DIR)/suspend_dir
 QUEUE_DIR   = $(UTILS_DIR)/queue_dir
 TP_DIR      = $(UTILS_DIR)/tp_dir
-MAIN_DIR     = $(SERVER_DIR)/main_dir
-LINK_MGR_DIR = $(SERVER_DIR)/link_mgr_dir
-BASE_MGR_DIR = $(SERVER_DIR)/base_mgr_dir
-GO_BASE_DIR  = $(SERVER_DIR)/go_base_dir
+MAIN_DIR        = $(SERVER_DIR)/main_dir
+LINK_MGR_DIR    = $(SERVER_DIR)/link_mgr_dir
+BASE_MGR_DIR    = $(SERVER_DIR)/base_mgr_dir
+GO_BASE_DIR     = $(SERVER_DIR)/go_base_dir
 SERVER_MAIN_DIR = $(SERVER_DIR)/main_dir
 CLIENT_MAIN_DIR = $(CLIENT_DIR)/main_dir
 

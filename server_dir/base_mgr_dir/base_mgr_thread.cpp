@@ -6,10 +6,9 @@
 
 #include <stdio.h>
 #include "../../utils_dir/queue_dir/queue_class.h"
-#include "base_mgr_class.h"
-#include "base_mgr_protocol.h"
 #include "../../utils_dir/tp_dir/tp_class.h"
 #include "../main_dir/main_class.h"
+#include "base_mgr_class.h"
 
 void *baseMgrReceiveThreadFunction (void *this_val)
 {
