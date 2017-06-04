@@ -72,7 +72,7 @@ void baseMgrReceiveDataFromTransport (void* engine_object_val, void *data_val)
 
 void baseMgrTest (void)
 {
-    base_mgr_tp_transfer_object = phwangTpConnect(0, TRANSPORT_PORT_NUMBER_FOR_BASE_MGR, baseMgrReceiveDataFromTransport, 0);
+    base_mgr_tp_transfer_object = phwangTpConnect(0, BASE_MGR_PROTOCOL_TRANSPORT_PORT_NUMBER, baseMgrReceiveDataFromTransport, 0);
     if (base_mgr_tp_transfer_object) {
         char *buf = (char *) malloc(BASE_MGR_DATA_BUFFER_SIZE + 4);
         buf[0] = BASE_MGR_PROTOCOL_COMMAND_IS_MALLOC_BASE;
@@ -104,7 +104,7 @@ void linkMgrReceiveDataFromTransport (void* engine_object_val, void *data_val)
 void linkMgrTest (void)
 {
     char const *name = "phwang";
-    link_mgr_tp_transfer_object = phwangTpConnect(0, TRANSPORT_PORT_NUMBER_FOR_LINK_MGR, linkMgrReceiveDataFromTransport, 0);
+    link_mgr_tp_transfer_object = phwangTpConnect(0, LINK_MGR_PROTOCOL_TRANSPORT_PORT_NUMBER, linkMgrReceiveDataFromTransport, 0);
     if (link_mgr_tp_transfer_object) {
         char *buf = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
         buf[0] = LINK_MGR_PROTOCOL_COMMAND_IS_MALLOC_LINK;

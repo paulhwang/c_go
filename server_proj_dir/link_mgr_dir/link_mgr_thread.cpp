@@ -61,7 +61,7 @@ void LinkMgrClass::startThreads (void)
     this->startReceiveThread();
 
     StartServerOutputStruct start_server_output;
-    this->theMainObject->transportObject()->startServer(TRANSPORT_PORT_NUMBER_FOR_LINK_MGR, linkMgrReceiveDataFromTransport, this, &start_server_output);
+    this->theMainObject->transportObject()->startServer(LINK_MGR_PROTOCOL_TRANSPORT_PORT_NUMBER, linkMgrReceiveDataFromTransport, this, &start_server_output);
     this->theTpTransferObject = start_server_output.tp_transfer_object;
     this->theTpServerThread = start_server_output.server_thread;
 }
