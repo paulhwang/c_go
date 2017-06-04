@@ -6,7 +6,6 @@
 
 #pragma once
 #include <pthread.h>
-#include <string.h>
 
 #define TRANSPORT_TRANSMIT_QUEUE_SIZE 1000
 
@@ -30,11 +29,9 @@ public:
     TpClass(void *main_object_val);
     ~TpClass(void);
     char const *objectName(void) {return "TpClass";}
-    void *mainObject(void) {return this->theMainObject;}
 
     TpTransferClass *startServer(unsigned short port_val, void (*receive_callback_val)(void *, void *), void *receive_object_val, StartServerOutputStruct *output_val);
     void serverThreadFunction(unsigned short port_val, TpTransferClass *tp_transfer_object_val);
-    TpTransferClass *clientThreadFunction(unsigned long ip_addr_val, unsigned short port_val, void (*receive_callback_val)(void *, void *), void *receive_object_val);
 };
 
 typedef struct {
