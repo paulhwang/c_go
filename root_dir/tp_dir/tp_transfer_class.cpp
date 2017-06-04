@@ -14,7 +14,7 @@
 #include "../../includes/common.h"
 #include "tp_transfer_class.h"
 #include "tp_class.h"
-#include "../../utils_dir/logit.h"
+#include "../../utils_dir/logit_dir/logit.h"
 #include "../../utils_dir/queue_dir/queue_class.h"
 
 TpTransferClass::TpTransferClass (TpClass *tp_object_val, void (*receive_callback_val)(void *, void *), void *receive_object_val)

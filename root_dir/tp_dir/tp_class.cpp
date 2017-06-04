@@ -16,7 +16,7 @@
 #include "../../utils_dir/queue_dir/queue_class.h"
 #include "tp_class.h"
 #include "tp_transfer_class.h"
-#include "../../utils_dir/logit.h"
+#include "../../utils_dir/logit_dir/logit.h"
 
 TpClass::TpClass (void *main_object_val)
 {

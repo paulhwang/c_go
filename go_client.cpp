@@ -6,11 +6,11 @@
 
 #include <unistd.h>
 #include <malloc.h>
+#include "utils_dir/logit_dir/logit.h"
 #include "root_dir/tp_dir/tp_class.h"
 #include "root_dir/tp_dir/tp_transfer_class.h"
 #include "root_dir/link_mgr_dir/link_mgr_protocol.h"
 #include "root_dir/base_mgr_dir/base_mgr_protocol.h"
-#include "utils_dir/logit.h"
 
 int test_base_mgr = 1;
 TpClass *transport_object;

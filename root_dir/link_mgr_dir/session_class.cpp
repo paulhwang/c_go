@@ -8,7 +8,7 @@
 #include <string.h>
 #include "session_class.h"
 #include "session_mgr_class.h"
-#include "../../utils_dir/logit.h"
+#include "../../utils_dir/logit_dir/logit.h"
 
 SessionClass::SessionClass (SessionMgrClass *session_mgr_object_val, int session_id_val)
 {

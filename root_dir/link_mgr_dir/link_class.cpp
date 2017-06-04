@@ -8,7 +8,7 @@
 #include <string.h>
 #include "link_class.h"
 #include "link_mgr_class.h"
-#include "../../utils_dir/logit.h"
+#include "../../utils_dir/logit_dir/logit.h"
 
 LinkClass::LinkClass (LinkMgrClass *link_mgr_object_val, int link_id_val, int link_index_val, char const* link_name_val)
 {

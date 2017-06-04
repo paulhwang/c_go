@@ -5,7 +5,7 @@
 */
 
 #include <stdio.h>
-#include "../../utils_dir/logit.h"
+#include "../../utils_dir/logit_dir/logit.h"
 #include "../base_mgr_dir/base_mgr_class.h"
 #include "go_base_class.h"
 

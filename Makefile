@@ -27,7 +27,7 @@ ENCODE_OBJS = $(ENCODE_DIR)/encode.o
 JSON_OBJS = $(JSON_DIR)/json_class.o 
 SUSPEND_OBJS = $(SUSPEND_DIR)/suspend_class.o 
 QUEUE_OBJS = $(QUEUE_DIR)/queue_entry_class.o $(QUEUE_DIR)/queue_class.o
-UTILS_OBJS = $(ENCODE_OBJS) $(SUSPEND_OBJS) $(QUEUE_OBJS) $(TP_OBJS) $(UTILS_DIR)/logit.o 
+UTILS_OBJS = $(LOGIT_OBJS) $(ENCODE_OBJS) $(SUSPEND_OBJS) $(QUEUE_OBJS) $(TP_OBJS) 
 GO_BASE_OBJS = $(GO_BASE_DIR)/go_base_class.o $(GO_BASE_DIR)/go_game_class.o $(GO_BASE_DIR)/go_engine_class.o $(GO_BASE_DIR)/go_board_class.o $(GO_BASE_DIR)/go_move_class.o $(GO_BASE_DIR)/go_port_class.o $(GO_BASE_DIR)/go_config_class.o $(GO_BASE_DIR)/go_group_class.o $(GO_BASE_DIR)/go_group_list_class.o
 
 SERVER = server

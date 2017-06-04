@@ -6,7 +6,7 @@
 
 #include <stdio.h>
 #include <string.h>
-#include "../../utils_dir/logit.h"
+#include "../../utils_dir/logit_dir/logit.h"
 #include "session_mgr_class.h"
 
 SessionMgrClass::SessionMgrClass (void *link_object_val)

@@ -7,7 +7,7 @@
 #pragma once
 
 #include <pthread.h>
-#include "../logit.h"
+#include "../logit_dir/logit.h"
 class QueueEntryClass;
 class SuspendClass;
 
