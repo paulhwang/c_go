@@ -6,9 +6,9 @@
 
 #include <stdio.h>
 #include "../../utils_dir/queue_dir/queue_class.h"
-#include "link_mgr_class.h"
 #include "../../utils_dir/tp_dir/tp_class.h"
-#include "../main_dir/main_class.h"
+#include "../server_dir/main_class.h"
+#include "link_mgr_class.h"
 
 void *linkMgrReceiveThreadFunction (void *this_val)
 {
