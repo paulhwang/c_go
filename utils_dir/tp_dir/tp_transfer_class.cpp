@@ -12,7 +12,6 @@
 #include <netdb.h>
 #include <pwd.h>
 #include "../../utils_dir/phwang.h"
-#include "../../utils_dir/queue_dir/queue_class.h"
 #include "tp_transfer_class.h"
 #include "tp_class.h"
 
@@ -22,8 +21,7 @@ TpTransferClass::TpTransferClass (TpClass *tp_object_val, void (*receive_callbac
     this->theReceiveCallback = receive_callback_val;
     this->theReceiveObject = receive_object_val;
 
-    this->theTransmitQueue = new QueueMgrClass();
-    this->theTransmitQueue->initQueue(TP_TRANSFER_CLASS_TRANSMIT_QUEUE_SIZE);
+    this->theTransmitQueue = phwangMallocQueue(TP_TRANSFER_CLASS_TRANSMIT_QUEUE_SIZE);
 
     if (1) {
         this->logit("TpTransferClass", "init");
@@ -43,13 +41,13 @@ void TpTransferClass::startThreads(int socket_val)
 
 void TpTransferClass::exportTransmitData (void *data_val)
 {
-    this->theTransmitQueue->enqueueData(data_val);
+    phwangEnqueue(this->theTransmitQueue, data_val);
 }
 
 void TpTransferClass::transmitThreadFunction(int socket_val)
 {
     while (1) {
-        void *data = this->theTransmitQueue->dequeueData();
+        void *data = phwangDequeue(this->theTransmitQueue);
         if (data) {
             char *str_data = (char *) data;
             //printf("transmitThreadFunction len=%d\n", strlen(str_data));
@@ -63,13 +61,13 @@ void TpTransferClass::logit (char const* str0_val, char const* str1_val)
 {
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", this->objectName(), str0_val);
-    LOGIT(s, str1_val);
+    phwangLogit(s, str1_val);
 }
 
 void TpTransferClass::abend (char const* str0_val, char const* str1_val)
 {
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", this->objectName(), str0_val);
-    ABEND(s, str1_val);
+    phwangAbend(s, str1_val);
 }
 

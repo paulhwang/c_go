@@ -10,7 +10,6 @@
 #define TP_TRANSFER_CLASS_TRANSMIT_QUEUE_SIZE 1000
 #define TP_TRANSFER_CLASS_RECEIVE_BUFFER_SIZE 1024
 
-class QueueMgrClass;
 class TpClass;
 
 class TpTransferClass {
@@ -21,7 +20,7 @@ class TpTransferClass {
 
     pthread_t theReceiveThread;
     pthread_t theTransmitThread;
-    QueueMgrClass *theTransmitQueue;
+    void *theTransmitQueue;
 
     void startReceiveThread(int socket_val);
     void startTransmitThread(int socket_val);
