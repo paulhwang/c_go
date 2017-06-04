@@ -8,7 +8,6 @@
 
 #include <pthread.h>
 #include "../../include_dir/protocol_dir/link_mgr_protocol.h"
-class QueueMgrClass;
 class LinkClass;
 class MainClass;
 class TpTransferClass;
@@ -26,7 +25,7 @@ class LinkMgrClass {
     TpTransferClass *theTpTransferObject;
     pthread_t theTpServerThread;
     pthread_t theReceiveThread;
-    QueueMgrClass *theReceiveQueue;
+    void *theReceiveQueue;
 
     void startReceiveThread(void);
     int allocLinkId(void);

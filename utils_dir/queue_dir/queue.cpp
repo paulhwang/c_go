@@ -13,6 +13,21 @@ void *phwangMallocQueue (int size_val)
     return queue;
 }
 
+void phwangFreeQueue (void *queue_val)
+{
+    if (!queue_val) {
+        phwangLogit("phwangFreeQueue", "null queue_val");
+        return;
+    }
+
+    if (strcmp(((QueueMgrClass *) queue_val)->objectName(), "QueueMgrClass")) {
+        phwangLogit("phwangFreeQueue", "wrong object");
+        return;
+    }
+
+    ((QueueMgrClass *) queue_val)->~QueueMgrClass();
+}
+
 void phwangEnqueue (void *queue_val, void *data_val)
 {
     if (!queue_val) {

@@ -14,5 +14,6 @@ void phwangAbend(char const* str0_val, char const* str1_val);
 void phwangPrintBoard(char const* data_val, int board_size_val);
 
 void *phwangMallocQueue(int size_val);
+void phwangFreeQueue(void *queue_val);
 void phwangEnqueue(void *queue_val, void *data_val);
 void *phwangDequeue(void *queue_val);

@@ -5,7 +5,7 @@
 */
 
 #include <stdio.h>
-#include "../../utils_dir/queue_dir/queue_class.h"
+#include "../../utils_dir/phwang.h"
 #include "../../utils_dir/tp_dir/tp_class.h"
 #include "../server_dir/main_class.h"
 #include "link_mgr_class.h"
@@ -27,7 +27,7 @@ void LinkMgrClass::receiveThreadFunction (void)
 void LinkMgrClass::receiveThreadLoop (void)
 {
     while (1) {
-        char *data = (char *) this->theReceiveQueue->dequeueData();
+        char *data = (char *) phwangDequeue(this->theReceiveQueue);
         if (data) {
             if (*data == LINK_MGR_PROTOCOL_COMMAND_IS_MALLOC_LINK) {
                 data++;
@@ -52,7 +52,7 @@ void LinkMgrClass::startReceiveThread (void)
 }
 
 void linkMgrReceiveDataFromTransport (void *link_mgr_object_val, void *data_val) {
-    LOGIT("Golbal::linkMgrReceiveDataFromTransport", (char *) data_val);
+    phwangLogit("Golbal::linkMgrReceiveDataFromTransport", (char *) data_val);
     ((LinkMgrClass *) link_mgr_object_val)->exportReceiveData(data_val);
 }
 
