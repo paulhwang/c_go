@@ -3,8 +3,8 @@
 
 include Makefile.inc
 
-SERVER_DIR = server_proj_dir
-CLIENT_DIR = client_proj_dir
+SERVER_PROJ_DIR = server_proj_dir
+CLIENT_PROJ_DIR = client_proj_dir
 UTILS_DIR = utils_dir
 INCLUDE_DIR = include_dir
 PROTOCOL_DIR = $(INCLUDE_DIR)/protocol_dir
@@ -14,14 +14,14 @@ JSON_DIR    = $(UTILS_DIR)/json_dir
 SUSPEND_DIR = $(UTILS_DIR)/suspend_dir
 QUEUE_DIR   = $(UTILS_DIR)/queue_dir
 TP_DIR      = $(UTILS_DIR)/tp_dir
-MAIN_DIR        = $(SERVER_DIR)/main_dir
-LINK_MGR_DIR    = $(SERVER_DIR)/link_mgr_dir
-BASE_MGR_DIR    = $(SERVER_DIR)/base_mgr_dir
-GO_BASE_DIR     = $(SERVER_DIR)/go_base_dir
-SERVER_MAIN_DIR = $(SERVER_DIR)/main_dir
-CLIENT_MAIN_DIR = $(CLIENT_DIR)/main_dir
+MAIN_DIR        = $(SERVER_PROJ_DIR)/main_dir
+LINK_MGR_DIR    = $(SERVER_PROJ_DIR)/link_mgr_dir
+BASE_MGR_DIR    = $(SERVER_PROJ_DIR)/base_mgr_dir
+GO_BASE_DIR     = $(SERVER_PROJ_DIR)/go_base_dir
+SERVER_MAIN_DIR = $(SERVER_PROJ_DIR)/main_dir
+CLIENT_MAIN_DIR = $(CLIENT_PROJ_DIR)/main_dir
 
-DIRS = $(UTILS_DIR) $(SERVER_DIR) $(CLIENT_DIR)
+DIRS = $(UTILS_DIR) $(SERVER_PROJ_DIR) $(CLIENT_PROJ_DIR)
 
 MAIN_OBJS = $(MAIN_DIR)/main_class.o
 LINK_MGR_OBJS = $(LINK_MGR_DIR)/link_mgr_class.o $(LINK_MGR_DIR)/link_class.o $(LINK_MGR_DIR)/session_mgr_class.o $(LINK_MGR_DIR)/session_class.o $(LINK_MGR_DIR)/link_mgr_thread.o $(LINK_MGR_DIR)/link_mgr_exports.o 
