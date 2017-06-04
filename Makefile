@@ -4,7 +4,7 @@
 include Makefile.inc
 
 SERVER_DIR = server_dir
-CLIENT_DIR = client_dir
+CLIENT_DIR = client_proj_dir
 UTILS_DIR = utils_dir
 INCLUDE_DIR = include_dir
 PROTOCOL_DIR = $(INCLUDE_DIR)/protocol_dir
