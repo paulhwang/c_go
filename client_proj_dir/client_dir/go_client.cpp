@@ -14,11 +14,11 @@
 int test_base_mgr = 1;
 TpClass *transport_object;
 
-TpTransferClass *link_mgr_tp_transfer_object;
+void *link_mgr_tp_transfer_object;
 char link_id_index[LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + 4];
 
 #define GO_PROTOCOL_CODE_SIZE 7
-TpTransferClass *base_mgr_tp_transfer_object;
+void *base_mgr_tp_transfer_object;
 char base_id_index[BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE + 4];
 int move_index = 0;
 char const *move_array[] = {
@@ -74,7 +74,7 @@ void baseMgrReceiveDataFromTransport (void* engine_object_val, void *data_val)
 
 void baseMgrTest (void)
 {
-    base_mgr_tp_transfer_object = transport_object->clientThreadFunction(0, TRANSPORT_PORT_NUMBER_FOR_BASE_MGR, baseMgrReceiveDataFromTransport, 0);
+    base_mgr_tp_transfer_object = phwangTpConnect(0, TRANSPORT_PORT_NUMBER_FOR_BASE_MGR, baseMgrReceiveDataFromTransport, 0);
     if (base_mgr_tp_transfer_object) {
         char *buf = (char *) malloc(BASE_MGR_DATA_BUFFER_SIZE + 4);
         buf[0] = BASE_MGR_PROTOCOL_COMMAND_IS_MALLOC_BASE;
@@ -106,7 +106,7 @@ void linkMgrReceiveDataFromTransport (void* engine_object_val, void *data_val)
 void linkMgrTest (void)
 {
     char const *name = "phwang";
-    link_mgr_tp_transfer_object = transport_object->clientThreadFunction(0, TRANSPORT_PORT_NUMBER_FOR_LINK_MGR, linkMgrReceiveDataFromTransport, 0);
+    link_mgr_tp_transfer_object = phwangTpConnect(0, TRANSPORT_PORT_NUMBER_FOR_LINK_MGR, linkMgrReceiveDataFromTransport, 0);
     if (link_mgr_tp_transfer_object) {
         char *buf = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
         buf[0] = LINK_MGR_PROTOCOL_COMMAND_IS_MALLOC_LINK;

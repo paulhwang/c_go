@@ -7,6 +7,8 @@
 #include "../phwang.h"
 #include "tp_transfer_class.h"
 
+TpTransferClass *tpConnect(unsigned long ip_addr_val, unsigned short port_val, void (*receive_callback_val)(void *, void *), void *receive_object_val);
+
 void phwangFreeTpTransfer (void *tp_transfer_val)
 {
     if (!tp_transfer_val) {
@@ -22,9 +24,11 @@ void phwangFreeTpTransfer (void *tp_transfer_val)
     ((TpTransferClass *) tp_transfer_val)->~TpTransferClass();
 }
 
-void *phwangTpConnect(unsigned long ip_addr_val, unsigned short port_val, void (*receive_callback_val)(void *, void *), void *receive_object_val)
+void *phwangTpConnect (unsigned long ip_addr_val, unsigned short port_val, void (*receive_callback_val)(void *, void *), void *receive_object_val)
 {
-
+    void *tp_connect;
+    tp_connect = tpConnect(ip_addr_val, port_val, receive_callback_val, receive_object_val);
+    return tp_connect;
 }
 
 void phwangTpTransmit (void *tp_transfer_val, char *data_val)
