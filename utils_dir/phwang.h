@@ -20,5 +20,6 @@ void phwangFreeQueue(void *queue_val);
 void phwangEnqueue(void *queue_val, void *data_val);
 void *phwangDequeue(void *queue_val);
 
-/* tp_transfer */
+/* tp */
 void phwangFreeTpTransfer(void *tp_transfer_val);
+void phwangTpTransmit(void *tp_transfer_val, char *data_val);

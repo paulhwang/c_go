@@ -6,9 +6,8 @@
 
 #include <unistd.h>
 #include <malloc.h>
-#include "../../utils_dir/logit_dir/logit.h"
+#include "../../utils_dir/phwang.h"
 #include "../../utils_dir/tp_dir/tp_class.h"
-#include "../../utils_dir/tp_dir/tp_transfer_class.h"
 #include "../../include_dir/protocol_dir/link_mgr_protocol.h"
 #include "../../include_dir/protocol_dir/base_mgr_protocol.h"
 
@@ -41,7 +40,7 @@ void baseMgrPlayAMove (void)
     strcpy(buf + 2 + BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE, "Move   ");
     strcpy(buf + 2 + BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE + GO_PROTOCOL_CODE_SIZE, move_array[move_index++]);
     printf("=====%s\n", buf);
-    base_mgr_tp_transfer_object->exportTransmitData(buf);
+    phwangTpTransmit(base_mgr_tp_transfer_object, buf);
 }
 
 void baseMgrReceiveDataFromTransport (void* engine_object_val, void *data_val)
@@ -53,7 +52,7 @@ void baseMgrReceiveDataFromTransport (void* engine_object_val, void *data_val)
         if (1) {
             char s[LOGIT_BUF_SIZE];
             sprintf(s, "base_id_index=%s", data + 1);
-            LOGIT("mainReceiveDataFromTransport", s);
+            phwangLogit("mainReceiveDataFromTransport", s);
         }
         data++;
         data++;
@@ -65,7 +64,7 @@ void baseMgrReceiveDataFromTransport (void* engine_object_val, void *data_val)
         data++;
         if (*data = BASE_MGR_PROTOCOL_GAME_NAME_IS_GO) {
             data++;
-            PRINT_BOARD((char *) data, 19);
+            phwangPrintBoard((char *) data, 19);
             if (move_index < sizeof(move_array) / sizeof(*move_array)) {
                 baseMgrPlayAMove();
             }
@@ -81,7 +80,7 @@ void baseMgrTest (void)
         buf[0] = BASE_MGR_PROTOCOL_COMMAND_IS_MALLOC_BASE;
         buf[1] = BASE_MGR_PROTOCOL_GAME_NAME_IS_GO;
         buf[2] = 0;
-        base_mgr_tp_transfer_object->exportTransmitData((void *) buf);
+        phwangTpTransmit(base_mgr_tp_transfer_object, buf);
     }
 }
 
@@ -94,7 +93,7 @@ void linkMgrReceiveDataFromTransport (void* engine_object_val, void *data_val)
         if (1) {
             char s[LOGIT_BUF_SIZE];
             sprintf(s, "link_id_index=%s", data + 1);
-            LOGIT("linkMgrReceiveDataFromTransport", s);
+            phwangLogit("linkMgrReceiveDataFromTransport", s);
         }
         data++;
         data++;
@@ -113,7 +112,7 @@ void linkMgrTest (void)
         buf[0] = LINK_MGR_PROTOCOL_COMMAND_IS_MALLOC_LINK;
         strcpy(buf + 1, name);
         buf[strlen(name) + 1] = 0;
-        link_mgr_tp_transfer_object->exportTransmitData((void *) buf);
+        phwangTpTransmit(link_mgr_tp_transfer_object, buf);
     }
 }
 
