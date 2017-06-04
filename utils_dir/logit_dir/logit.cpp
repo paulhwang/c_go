@@ -3,8 +3,9 @@
   Written by Paul Hwang
 */
 
+#include <stdio.h>
+#include <string.h>
 #include "logit.h"
-#include "../../includes/common.h"
 
 void LOGIT (char const* str0_val, char const* str1_val)
 {
