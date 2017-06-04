@@ -6,7 +6,7 @@
 
 #include <sys/socket.h>
 #include <arpa/inet.h>
-#include "../../utils_dir/phwang.h"
+#include "../../phwang_dir/phwang.h"
 #include "tp_transfer_class.h"
 
 TpTransferClass *tpConnect (unsigned long ip_addr_val, unsigned short port_val, void (*receive_callback_val)(void *, void *), void *receive_object_val)

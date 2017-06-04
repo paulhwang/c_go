@@ -5,7 +5,7 @@ include Makefile.inc
 
 SERVER_PROJ_DIR = server_proj_dir
 CLIENT_PROJ_DIR = client_proj_dir
-PHWANG_DIR = utils_dir
+PHWANG_DIR = phwang_dir
 INCLUDE_DIR = include_dir
 PROTOCOL_DIR = $(INCLUDE_DIR)/protocol_dir
 LOGIT_DIR   = $(PHWANG_DIR)/logit_dir

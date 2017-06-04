@@ -4,9 +4,8 @@
   File name: link_mgr_thread.cpp
 */
 
-#include <stdio.h>
-#include "../../utils_dir/phwang.h"
-#include "../../utils_dir/tp_dir/tp_class.h"
+#include "../../phwang_dir/phwang.h"
+#include "../../phwang_dir/tp_dir/tp_class.h"
 #include "../server_dir/main_class.h"
 #include "link_mgr_class.h"
 

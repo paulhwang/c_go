@@ -5,13 +5,12 @@
 */
 
 #include <unistd.h>
-#include <malloc.h>
-#include "../../utils_dir/phwang.h"
-#include "../../utils_dir/encode_dir/encode.h"
-#include "../../utils_dir/queue_dir/queue_class.h"
+#include "../../phwang_dir/phwang.h"
+#include "../../phwang_dir/encode_dir/encode.h"
+#include "../../phwang_dir/queue_dir/queue_class.h"
+#include "../../phwang_dir/tp_dir/tp_transfer_class.h"
 #include "base_mgr_class.h"
 #include "../go_base_dir/go_base_class.h"
-#include "../../utils_dir/tp_dir/tp_transfer_class.h"
 
 BaseMgrClass::BaseMgrClass (MainClass *main_object_val)
 {
@@ -107,11 +106,11 @@ void BaseMgrClass::receiveData (char* data_val) {
 }
 
 void BaseMgrClass::baseMgrLogit (char const* str0_val, char const* str1_val) {
-    LOGIT(str0_val, str1_val);
+    phwangLogit(str0_val, str1_val);
 }
 
 void BaseMgrClass::baseMgrAbend (char const* str0_val, char const* str1_val) {
-    LOGIT(str0_val, str1_val);
+    phwangAbend(str0_val, str1_val);
 }
 
 void BaseMgrClass::logit (char const* str0_val, char const* str1_val) {

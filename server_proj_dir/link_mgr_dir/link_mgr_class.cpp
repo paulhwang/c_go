@@ -4,12 +4,10 @@
   File name: link_mgr_class.cpp
 */
 
-#include <stdio.h>
-#include <string.h>
 #include <malloc.h>
-#include "../../utils_dir/phwang.h"
-#include "../../utils_dir/encode_dir/encode.h"
-#include "../../utils_dir/tp_dir/tp_transfer_class.h"
+#include "../../phwang_dir/phwang.h"
+#include "../../phwang_dir/encode_dir/encode.h"
+#include "../../phwang_dir/tp_dir/tp_transfer_class.h"
 #include "link_mgr_class.h"
 #include "link_class.h"
 

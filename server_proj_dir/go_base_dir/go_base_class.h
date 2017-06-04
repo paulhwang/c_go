@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "../../utils_dir/logit_dir/logit.h"
+#include "../../phwang_dir/phwang.h"
 #include "../base_mgr_dir/base_mgr_class.h"
 #include "go_define.h"
 #include "go_board_class.h"
@@ -44,6 +44,6 @@ class GoBaseClass {
     GoConfigClass* configObject(void) {return this->theConfigObject;}
     GoGameClass* gameObject(void) {return this->theGameObject;}
 
-    void goBaseLogit(char const* str0_val, char const* str1_val) {LOGIT(str0_val, str1_val);}
-    void goBaseAbend(char const* str0_val, char const* str1_val) {ABEND(str0_val, str1_val);}
+    void goBaseLogit(char const* str0_val, char const* str1_val) {phwangLogit(str0_val, str1_val);}
+    void goBaseAbend(char const* str0_val, char const* str1_val) {phwangAbend(str0_val, str1_val);}
 };

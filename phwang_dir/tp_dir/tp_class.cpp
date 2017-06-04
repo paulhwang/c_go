@@ -4,7 +4,7 @@
   File name: tp_class.cpp
 */
 
-#include "../../utils_dir/phwang.h"
+#include "../../phwang_dir/phwang.h"
 #include "tp_class.h"
 
 TpClass::TpClass (void *main_object_val)

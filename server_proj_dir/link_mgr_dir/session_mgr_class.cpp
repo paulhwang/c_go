@@ -4,9 +4,7 @@
   File name: session_mgr_class.cpp
 */
 
-#include <stdio.h>
-#include <string.h>
-#include "../../utils_dir/logit_dir/logit.h"
+#include "../../phwang_dir/phwang.h"
 #include "session_mgr_class.h"
 
 SessionMgrClass::SessionMgrClass (void *link_object_val)
@@ -25,11 +23,11 @@ SessionMgrClass::~SessionMgrClass (void)
 }
 
 void SessionMgrClass::sessionMgrLogit (char const* str0_val, char const* str1_val) {
-    LOGIT(str0_val, str1_val);
+    phwangLogit(str0_val, str1_val);
 }
 
 void SessionMgrClass::sessionMgrAbend (char const* str0_val, char const* str1_val) {
-    LOGIT(str0_val, str1_val);
+    phwangAbend(str0_val, str1_val);
 }
 
 void SessionMgrClass::logit (char const* str0_val, char const* str1_val) {

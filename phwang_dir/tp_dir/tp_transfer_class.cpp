@@ -4,14 +4,12 @@
   File name: tp_transfer_class.cpp
 */
 
-#include <stdio.h>
-#include <malloc.h>
 #include <netinet/in.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <netdb.h>
 #include <pwd.h>
-#include "../../utils_dir/phwang.h"
+#include "../../phwang_dir/phwang.h"
 #include "tp_transfer_class.h"
 #include "tp_class.h"
 

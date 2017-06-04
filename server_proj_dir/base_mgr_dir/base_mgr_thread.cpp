@@ -5,8 +5,8 @@
 */
 
 #include <stdio.h>
-#include "../../utils_dir/phwang.h"
-#include "../../utils_dir/tp_dir/tp_class.h"
+#include "../../phwang_dir/phwang.h"
+#include "../../phwang_dir/tp_dir/tp_class.h"
 #include "../server_dir/main_class.h"
 #include "base_mgr_class.h"
 
@@ -59,7 +59,7 @@ void BaseMgrClass::startReceiveThread (void)
 }
 
 void baseMgrReceiveDataFromTransport (void *base_mgr_object_val, void *data_val) {
-    LOGIT("Golbal::baseMgrReceiveDataFromTransport", (char *) data_val);
+    phwangLogit("Golbal::baseMgrReceiveDataFromTransport", (char *) data_val);
     ((BaseMgrClass *) base_mgr_object_val)->exportReceiveData(data_val);
 }
 

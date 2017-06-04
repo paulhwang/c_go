@@ -5,8 +5,7 @@
 */
 
 #include <unistd.h>
-#include <malloc.h>
-#include "../../utils_dir/phwang.h"
+#include "../../phwang_dir/phwang.h"
 #include "../../include_dir/protocol_dir/link_mgr_protocol.h"
 #include "../../include_dir/protocol_dir/base_mgr_protocol.h"
 

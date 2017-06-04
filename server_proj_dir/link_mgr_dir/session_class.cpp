@@ -4,11 +4,9 @@
   File name: session_class.cpp
 */
 
-#include <stdio.h>
-#include <string.h>
+#include "../../phwang_dir/phwang.h"
 #include "session_class.h"
 #include "session_mgr_class.h"
-#include "../../utils_dir/logit_dir/logit.h"
 
 SessionClass::SessionClass (SessionMgrClass *session_mgr_object_val, int session_id_val)
 {
