@@ -5,7 +5,7 @@
 */
 
 #include <stdio.h>
-#include "../../utils_dir/queue_mgr_class.h"
+#include "../../utils_dir/queue_class.h"
 #include "link_mgr_class.h"
 #include "../tp_dir/tp_class.h"
 #include "../main_dir/main_class.h"

@@ -1,7 +1,7 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: queue_mgr_class.cpp
+  File name: queue_class.cpp
 */
 
 #include <string.h>
@@ -9,7 +9,7 @@
 //#include "stdafx.h"
 //#include "getac_aggr_include.h"/* Put this file immediately after stdafx.h */
 //#include "mitac_rfid_engine_common_include.h"
-#include "queue_mgr_class.h"
+#include "queue_class.h"
 #include "queue_entry_class.h"
 #include "suspend_class.h"
 //#include "getac_def_component.h"
