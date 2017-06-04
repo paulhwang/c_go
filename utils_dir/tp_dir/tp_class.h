@@ -6,7 +6,7 @@
 
 #pragma once
 #include <pthread.h>
-#include "../../includes/common.h"
+#include <string.h>
 
 #define TRANSPORT_PORT_NUMBER_FOR_BASE_MGR 8005
 #define TRANSPORT_PORT_NUMBER_FOR_LINK_MGR 8006
