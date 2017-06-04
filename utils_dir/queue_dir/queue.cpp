@@ -13,14 +13,17 @@ void *phwangMallocQueue (int size_val)
     return queue;
 }
 
-void phwangEnqueue (void *queue_val, void *data)
+void phwangEnqueue (void *queue_val, void *data_val)
 {
     if (!queue_val) {
         return;
     }
+
     if (!strcmp(((QueueMgrClass *) queue_val)->objectName(), "QueueMgrClass")) {
         return;
     }
+
+    ((QueueMgrClass *) queue_val)->enqueueData(data_val);
 }
 
 void *phwangDequeue (void *queue_val)
@@ -29,4 +32,9 @@ void *phwangDequeue (void *queue_val)
         return 0;
     }
 
+    if (!strcmp(((QueueMgrClass *) queue_val)->objectName(), "QueueMgrClass")) {
+        return 0;
+    }
+
+    return ((QueueMgrClass *) queue_val)->dequeueData();
 }

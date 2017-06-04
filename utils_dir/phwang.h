@@ -8,5 +8,5 @@
 #include "string.h"
   
 void *phwangMallocQueue(int size_val);
-void phwangEenqueue(void *queue_val, void *data);
+void phwangEenqueue(void *queue_val, void *data_val);
 void *phwangDequeue(void *queue_val);
