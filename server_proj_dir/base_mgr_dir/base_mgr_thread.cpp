@@ -4,7 +4,6 @@
   File name: base_mgr_thread.cpp
 */
 
-#include <stdio.h>
 #include "../../phwang_dir/phwang.h"
 #include "../../phwang_dir/tp_dir/tp_class.h"
 #include "../server_dir/main_class.h"
