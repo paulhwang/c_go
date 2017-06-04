@@ -1,22 +1,13 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: tp_class.cpp
+  File name: tp_connect.cpp
 */
 
-#include <stdio.h>
-#include <sys/types.h>
 #include <sys/socket.h>
-#include <netinet/in.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <netdb.h>
-#include <pwd.h>
 #include <arpa/inet.h>
-#include "../../utils_dir/queue_dir/queue_class.h"
-#include "tp_class.h"
-#include "tp_transfer_class.h"
 #include "../../utils_dir/phwang.h"
+#include "tp_transfer_class.h"
 
 TpTransferClass *tpConnect (unsigned long ip_addr_val, unsigned short port_val, void (*receive_callback_val)(void *, void *), void *receive_object_val)
 {
