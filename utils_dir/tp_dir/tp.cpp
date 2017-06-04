@@ -22,6 +22,11 @@ void phwangFreeTpTransfer (void *tp_transfer_val)
     ((TpTransferClass *) tp_transfer_val)->~TpTransferClass();
 }
 
+void *phwangTpConnect(unsigned long ip_addr_val, unsigned short port_val, void (*receive_callback_val)(void *, void *), void *receive_object_val)
+{
+
+}
+
 void phwangTpTransmit (void *tp_transfer_val, char *data_val)
 {
     if (!tp_transfer_val) {

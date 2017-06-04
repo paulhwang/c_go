@@ -121,6 +121,5 @@ int main (int argc, char** argv) {
     baseMgrTest();
     sleep(1);
     linkMgrTest();
-    phwangAbend("a", "b");
     sleep(1000);
 }

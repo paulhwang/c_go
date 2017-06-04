@@ -22,4 +22,5 @@ void *phwangDequeue(void *queue_val);
 
 /* tp */
 void phwangFreeTpTransfer(void *tp_transfer_val);
+void *phwangTpConnect(unsigned long ip_addr_val, unsigned short port_val, void (*receive_callback_val)(void *, void *), void *receive_object_val);
 void phwangTpTransmit(void *tp_transfer_val, char *data_val);
