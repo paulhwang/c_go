@@ -41,6 +41,7 @@ class QueueMgrClass
 public:
     QueueMgrClass(void);
     ~QueueMgrClass(void);
+    char const *objectName(void) {return "QueueMgrClass";}
 
     void initQueue(int max_queue_size_val);
     void enqueueData(void *data_val);
