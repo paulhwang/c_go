@@ -8,7 +8,7 @@
 #include "../../utils_dir/queue_dir/queue_class.h"
 #include "base_mgr_class.h"
 #include "base_mgr_protocol.h"
-#include "../tp_dir/tp_class.h"
+#include "../../utils_dir/tp_dir/tp_class.h"
 #include "../main_dir/main_class.h"
 
 void *baseMgrReceiveThreadFunction (void *this_val)
