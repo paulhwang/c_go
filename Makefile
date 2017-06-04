@@ -5,13 +5,16 @@ include Makefile.inc
 
 ROOT_DIR = root_dir
 UTILS_DIR = utils_dir
+LOGIT_DIR   = $(UTILS_DIR)/logit_dir
+ENCODE_DIR  = $(UTILS_DIR)/encode_dir
+JSON_DIR    = $(UTILS_DIR)/json_dir
 SUSPEND_DIR = $(UTILS_DIR)/suspend_dir
-QUEUE_DIR = $(UTILS_DIR)/queue_dir
-TP_DIR = $(ROOT_DIR)/tp_dir
-MAIN_DIR = $(ROOT_DIR)/main_dir
+QUEUE_DIR   = $(UTILS_DIR)/queue_dir
+TP_DIR      = $(ROOT_DIR)/tp_dir
+MAIN_DIR     = $(ROOT_DIR)/main_dir
 LINK_MGR_DIR = $(ROOT_DIR)/link_mgr_dir
 BASE_MGR_DIR = $(ROOT_DIR)/base_mgr_dir
-GO_BASE_DIR = $(ROOT_DIR)/go_base_dir
+GO_BASE_DIR  = $(ROOT_DIR)/go_base_dir
 
 DIRS	= utils_dir root_dir
 
@@ -19,9 +22,12 @@ MAIN_OBJS = $(MAIN_DIR)/main_class.o
 LINK_MGR_OBJS = $(LINK_MGR_DIR)/link_mgr_class.o $(LINK_MGR_DIR)/link_class.o $(LINK_MGR_DIR)/session_mgr_class.o $(LINK_MGR_DIR)/session_class.o $(LINK_MGR_DIR)/link_mgr_thread.o $(LINK_MGR_DIR)/link_mgr_exports.o 
 BASE_MGR_OBJS = $(BASE_MGR_DIR)/base_mgr_class.o $(BASE_MGR_DIR)/base_mgr_exports.o $(BASE_MGR_DIR)/base_mgr_thread.o 
 TP_OBJS = $(TP_DIR)/tp_class.o $(TP_DIR)/tp_server.o $(TP_DIR)/tp_transfer_class.o $(TP_DIR)/tp_transfer_transmit.o $(TP_DIR)/tp_transfer_receive.o 
+LOGIT_OBJS = $(LOGIT_DIR)/logit.o 
+ENCODE_OBJS = $(ENCODE_DIR)/encode.o 
+JSON_OBJS = $(JSON_DIR)/json_class.o 
 SUSPEND_OBJS = $(SUSPEND_DIR)/suspend_class.o 
 QUEUE_OBJS = $(QUEUE_DIR)/queue_entry_class.o $(QUEUE_DIR)/queue_class.o
-UTILS_OBJS = $(SUSPEND_OBJS) $(QUEUE_OBJS) $(TP_OBJS) $(UTILS_DIR)/logit.o $(UTILS_DIR)/encode.o 
+UTILS_OBJS = $(ENCODE_OBJS) $(SUSPEND_OBJS) $(QUEUE_OBJS) $(TP_OBJS) $(UTILS_DIR)/logit.o 
 GO_BASE_OBJS = $(GO_BASE_DIR)/go_base_class.o $(GO_BASE_DIR)/go_game_class.o $(GO_BASE_DIR)/go_engine_class.o $(GO_BASE_DIR)/go_board_class.o $(GO_BASE_DIR)/go_move_class.o $(GO_BASE_DIR)/go_port_class.o $(GO_BASE_DIR)/go_config_class.o $(GO_BASE_DIR)/go_group_class.o $(GO_BASE_DIR)/go_group_list_class.o
 
 SERVER = server
