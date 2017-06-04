@@ -7,7 +7,7 @@
 #pragma once
 
 #include <pthread.h>
-#include "logit.h"
+#include "../logit.h"
 
 class SuspendClass
 {
