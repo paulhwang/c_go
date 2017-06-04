@@ -12,7 +12,6 @@
 #include "../../include_dir/protocol_dir/base_mgr_protocol.h"
 
 int test_base_mgr = 1;
-TpClass *transport_object;
 
 void *link_mgr_tp_transfer_object;
 char link_id_index[LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + 4];
@@ -117,7 +116,6 @@ void linkMgrTest (void)
 }
 
 int main (int argc, char** argv) {
-    transport_object = new TpClass(0);
     baseMgrTest();
     sleep(1);
     linkMgrTest();
