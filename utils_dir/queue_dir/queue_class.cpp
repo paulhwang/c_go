@@ -6,6 +6,7 @@
 
 #include <string.h>
 #include <stdlib.h>
+#include "../phwang.h"
 //#include "stdafx.h"
 //#include "getac_aggr_include.h"/* Put this file immediately after stdafx.h */
 //#include "mitac_rfid_engine_common_include.h"
@@ -191,4 +192,14 @@ void QueueClass::flush_queue(void)
 void QueueClass::delete_entry(QueueEntryClass *del_entry)
 {
     delete del_entry;
+}
+
+void QueueClass::logit (char const* str0_val, char const* str1_val)
+{
+    phwangLogit(str0_val, str1_val);
+}
+
+void QueueClass::abend (char const* str0_val, char const* str1_val)
+{
+    phwangAbend(str0_val, str1_val);
 }

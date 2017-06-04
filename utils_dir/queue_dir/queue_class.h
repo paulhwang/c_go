@@ -7,7 +7,6 @@
 #pragma once
 
 #include <pthread.h>
-#include "../logit_dir/logit.h"
 class QueueEntryClass;
 class SuspendClass;
 
@@ -35,8 +34,8 @@ class QueueClass
     void flush_queue(void);
     void delete_entry(QueueEntryClass *del_entry);
 
-    void logit (char const* str0_val, char const* str1_val) {LOGIT(str0_val, str1_val);}
-    void abend (char const* str0_val, char const* str1_val) {ABEND(str0_val, str1_val);}
+    void logit(char const* str0_val, char const* str1_val);
+    void abend(char const* str0_val, char const* str1_val);
 
 public:
     QueueClass(int max_size_val);
