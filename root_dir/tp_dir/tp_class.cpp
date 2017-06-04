@@ -13,7 +13,7 @@
 #include <netdb.h>
 #include <pwd.h>
 #include <arpa/inet.h>
-#include "../../utils_dir/queue_class.h"
+#include "../../utils_dir/queue_dir/queue_class.h"
 #include "tp_class.h"
 #include "tp_transfer_class.h"
 #include "../../utils_dir/logit.h"

@@ -10,7 +10,7 @@
 #include <malloc.h>
 #include "../../utils_dir/logit.h"
 #include "../../utils_dir/encode.h"
-#include "../../utils_dir/queue_class.h"
+#include "../../utils_dir/queue_dir/queue_class.h"
 #include "base_mgr_class.h"
 #include "../go_base_dir/go_base_class.h"
 #include "../tp_dir/tp_transfer_class.h"

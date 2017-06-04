@@ -1,13 +1,13 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: queue_mgr_class.h
+  File name: queue_class.h
 */
 
 #pragma once
 
 #include <pthread.h>
-#include "logit.h"
+#include "../logit.h"
 class QueueEntryClass;
 class SuspendClass;
 

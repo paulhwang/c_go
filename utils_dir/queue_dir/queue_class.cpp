@@ -11,7 +11,7 @@
 //#include "mitac_rfid_engine_common_include.h"
 #include "queue_class.h"
 #include "queue_entry_class.h"
-#include "suspend_class.h"
+#include "../suspend_class.h"
 //#include "getac_def_component.h"
 //#include "getac_def_marker.h"
 
