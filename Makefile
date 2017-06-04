@@ -3,7 +3,7 @@
 
 include Makefile.inc
 
-SERVER_DIR = server_dir
+SERVER_DIR = server_proj_dir
 CLIENT_DIR = client_proj_dir
 UTILS_DIR = utils_dir
 INCLUDE_DIR = include_dir
