@@ -3,7 +3,7 @@
 
 include Makefile.inc
 
-ROOT_DIR = root_dir
+ROOT_DIR = server_dir
 CLIENT_DIR = client_dir
 UTILS_DIR = utils_dir
 LOGIT_DIR   = $(UTILS_DIR)/logit_dir
@@ -19,7 +19,7 @@ GO_BASE_DIR  = $(ROOT_DIR)/go_base_dir
 SERVER_MAIN_DIR = $(ROOT_DIR)/main_dir
 CLIENT_MAIN_DIR = $(CLIENT_DIR)/main_dir
 
-DIRS	= utils_dir root_dir
+DIRS	= utils_dir server_dir
 
 MAIN_OBJS = $(MAIN_DIR)/main_class.o
 LINK_MGR_OBJS = $(LINK_MGR_DIR)/link_mgr_class.o $(LINK_MGR_DIR)/link_class.o $(LINK_MGR_DIR)/session_mgr_class.o $(LINK_MGR_DIR)/session_class.o $(LINK_MGR_DIR)/link_mgr_thread.o $(LINK_MGR_DIR)/link_mgr_exports.o 
