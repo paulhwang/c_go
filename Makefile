@@ -6,7 +6,8 @@ include Makefile.inc
 SERVER_DIR = server_dir
 CLIENT_DIR = client_dir
 UTILS_DIR = utils_dir
-PROTOCOL_DIR = protocol_dir
+INCLUDE_DIR = include_dir
+PROTOCOL_DIR = $(INCLUDE_DIR)/protocol_dir
 LOGIT_DIR   = $(UTILS_DIR)/logit_dir
 ENCODE_DIR  = $(UTILS_DIR)/encode_dir
 JSON_DIR    = $(UTILS_DIR)/json_dir
