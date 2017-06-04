@@ -4,11 +4,9 @@
   File name: base_mgr_class.cpp
 */
 
-#include <stdio.h>
-#include <string.h>
 #include <unistd.h>
 #include <malloc.h>
-#include "../../utils_dir/logit_dir/logit.h"
+#include "../../utils_dir/phwang.h"
 #include "../../utils_dir/encode_dir/encode.h"
 #include "../../utils_dir/queue_dir/queue_class.h"
 #include "base_mgr_class.h"
@@ -21,8 +19,7 @@ BaseMgrClass::BaseMgrClass (MainClass *main_object_val)
     this->theMainObject = main_object_val;
     this->theGlobalBaseId = 0;
 
-    this->theReceiveQueue = new QueueMgrClass();
-    this->theReceiveQueue->initQueue(BASE_MGR_RECEIVE_QUEUE_SIZE);
+    this->theReceiveQueue = phwangMallocQueue(BASE_MGR_RECEIVE_QUEUE_SIZE);
 
     if (1) {
         this->logit("BaseMgrClass", "init");
@@ -32,7 +29,7 @@ BaseMgrClass::BaseMgrClass (MainClass *main_object_val)
 BaseMgrClass::~BaseMgrClass (void)
 {
     this->theTpTransferObject->~TpTransferClass(); 
-    delete this->theReceiveQueue;
+    phwangFreeQueue(this->theReceiveQueue);
 }
 
 int BaseMgrClass::allocBaseId (void)

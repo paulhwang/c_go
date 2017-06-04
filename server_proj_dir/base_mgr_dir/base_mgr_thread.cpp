@@ -5,7 +5,7 @@
 */
 
 #include <stdio.h>
-#include "../../utils_dir/queue_dir/queue_class.h"
+#include "../../utils_dir/phwang.h"
 #include "../../utils_dir/tp_dir/tp_class.h"
 #include "../server_dir/main_class.h"
 #include "base_mgr_class.h"
@@ -26,7 +26,7 @@ void BaseMgrClass::receiveThreadFunction (void)
 void BaseMgrClass::receiveThreadLoop (void)
 {
     while (1) {
-        char *data = (char *) this->theReceiveQueue->dequeueData();
+        char *data = (char *) phwangDequeue(this->theReceiveQueue);
         if (data) {
             if (*data == BASE_MGR_PROTOCOL_COMMAND_IS_MALLOC_BASE) {
                 data++;

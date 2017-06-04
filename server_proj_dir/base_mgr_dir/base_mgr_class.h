@@ -9,7 +9,6 @@
 #include <pthread.h>
 #include "../../include_dir/protocol_dir/base_mgr_protocol.h"
 #include "../go_base_dir/go_base_class.h"
-class QueueMgrClass;
 class EngineClass;
 class BaseClass;
 class GoBaseClass;
@@ -29,7 +28,7 @@ class BaseMgrClass {
     TpTransferClass *theTpTransferObject;
     pthread_t theTpServerThread;
     pthread_t theReceiveThread;
-    QueueMgrClass *theReceiveQueue;
+    void *theReceiveQueue;
 
     void startReceiveThread(void);
     int allocBaseId(void);
