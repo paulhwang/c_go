@@ -4,7 +4,6 @@
   File name: suspend_class.cpp
 */
 
-#include <stdio.h>
 #include <stdlib.h>
 #include "suspend_class.h"
 

@@ -1,11 +1,11 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
+  File name: logit.cpp
 */
 
 #include <stdio.h>
 #include <string.h>
-#include "logit.h"
 
 void phwangLogit (char const* str0_val, char const* str1_val)
 {
@@ -18,16 +18,6 @@ void phwangAbend (char const* str0_val, char const* str1_val)
     phwangLogit("*****Abend*****", str0_val);
     int *junk = 0;
     *junk = 0;
-}
-
-void LOGIT (char const* str0_val, char const* str1_val)
-{
-  printf("%s() %s\n", str0_val, str1_val);
-}
-
-void ABEND (char const* str0_val, char const* str1_val)
-{
-  LOGIT(str0_val, str1_val);
 }
 
 void phwangPrintBoard (char const* data_val, int board_size_val)
