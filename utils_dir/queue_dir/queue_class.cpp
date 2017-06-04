@@ -15,7 +15,7 @@
 //#include "getac_def_component.h"
 //#include "getac_def_marker.h"
 
-QueueMgrClass::QueueMgrClass(void)
+QueueClass::QueueClass(void)
 {
     memset(this, 0, sizeof(*this));
     this->theSuspendObject = new SuspendClass();
@@ -25,7 +25,7 @@ QueueMgrClass::QueueMgrClass(void)
     //this->marker_head = this->marker_tail = GETAC_MARKER_UTIL_QUE_ENT;
 }
 
-QueueMgrClass::~QueueMgrClass(void)
+QueueClass::~QueueClass(void)
 {
     if (this->theQueueSize) {
         //abend(GATEWAY_LOG_TYPE_RFID, MTC_ERR_MISC, __LINE__, __FUNCTION__);
@@ -34,13 +34,13 @@ QueueMgrClass::~QueueMgrClass(void)
     free(this->theMutex);
 }
 
-void QueueMgrClass::initQueue(int max_queue_size_val)
+void QueueClass::initQueue(int max_queue_size_val)
 {
   this->theMaxQueueSize = max_queue_size_val;
   //InitializeCriticalSectionAndSpinCount(&cs_queue, 0);
 }
 
-void QueueMgrClass::enqueueData (void *data_val)
+void QueueClass::enqueueData (void *data_val)
 {
     if (1) {
         this->logit("enqueueData", (char *) data_val);
@@ -58,7 +58,7 @@ void QueueMgrClass::enqueueData (void *data_val)
     this->theSuspendObject->signal();
 }
 
-void *QueueMgrClass::dequeueData (void)
+void *QueueClass::dequeueData (void)
 {
     while (1) {
         QueueEntryClass *entry = this->dequeueEntry();
@@ -77,7 +77,7 @@ void *QueueMgrClass::dequeueData (void)
     }
 }
 
-void QueueMgrClass::enqueueEntry(QueueEntryClass *entry)
+void QueueClass::enqueueEntry(QueueEntryClass *entry)
 {
   if (!this) {
     //abend(GATEWAY_LOG_TYPE_RFID, MTC_ERR_MISC, __LINE__, __FUNCTION__);
@@ -115,7 +115,7 @@ void QueueMgrClass::enqueueEntry(QueueEntryClass *entry)
     pthread_mutex_unlock(this->theMutex);
 }
 
-QueueEntryClass *QueueMgrClass::dequeueEntry(void)
+QueueEntryClass *QueueClass::dequeueEntry(void)
 {
     QueueEntryClass *entry;
 
@@ -142,7 +142,7 @@ QueueEntryClass *QueueMgrClass::dequeueEntry(void)
     return entry;
 }
 
-void QueueMgrClass::check_queue_error(void)
+void QueueClass::check_queue_error(void)
 {
 #if MITAC_RFID_DEBUG_HEAP
     QueueEntryClass *entry;
@@ -167,7 +167,7 @@ void QueueMgrClass::check_queue_error(void)
 #endif
 }
 
-void QueueMgrClass::flush_queue(void)
+void QueueClass::flush_queue(void)
 {
     QueueEntryClass *entry, *entry_next; 
  
@@ -188,7 +188,7 @@ void QueueMgrClass::flush_queue(void)
     pthread_mutex_unlock(this->theMutex);
 }
 
-void QueueMgrClass::delete_entry(QueueEntryClass *del_entry)
+void QueueClass::delete_entry(QueueEntryClass *del_entry)
 {
     delete del_entry;
 }

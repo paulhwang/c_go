@@ -11,7 +11,7 @@
 class QueueEntryClass;
 class SuspendClass;
 
-class QueueMgrClass
+class QueueClass
 {
   //enum GETAC_MARKER_DEFINE_ marker_head;
 
@@ -39,9 +39,9 @@ class QueueMgrClass
     void abend (char const* str0_val, char const* str1_val) {ABEND(str0_val, str1_val);}
 
 public:
-    QueueMgrClass(void);
-    ~QueueMgrClass(void);
-    char const *objectName(void) {return "QueueMgrClass";}
+    QueueClass(void);
+    ~QueueClass(void);
+    char const *objectName(void) {return "QueueClass";}
 
     void initQueue(int max_queue_size_val);
     void enqueueData(void *data_val);

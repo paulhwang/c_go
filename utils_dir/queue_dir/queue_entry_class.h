@@ -10,7 +10,7 @@ class QueueEntryClass
 {
 /***************************************************************/
 /* DO NOT ADD FRIEND INTO THIS CLASS UNLESS YOU GET PERMISSION */
-  friend class QueueMgrClass;
+  friend class QueueClass;
 /* DO NOT ADD FRIEND INTO THIS CLASS UNLESS YOU GET PERMISSION */
 /***************************************************************/
 

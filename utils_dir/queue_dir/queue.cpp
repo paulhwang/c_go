@@ -9,7 +9,7 @@
 
 void *phwangMallocQueue (int size_val)
 {
-    QueueMgrClass *queue = new QueueMgrClass();
+    QueueClass *queue = new QueueClass();
     return queue;
 }
 
@@ -20,12 +20,12 @@ void phwangFreeQueue (void *queue_val)
         return;
     }
 
-    if (strcmp(((QueueMgrClass *) queue_val)->objectName(), "QueueMgrClass")) {
+    if (strcmp(((QueueClass *) queue_val)->objectName(), "QueueClass")) {
         phwangLogit("phwangFreeQueue", "wrong object");
         return;
     }
 
-    ((QueueMgrClass *) queue_val)->~QueueMgrClass();
+    ((QueueClass *) queue_val)->~QueueClass();
 }
 
 void phwangEnqueue (void *queue_val, void *data_val)
@@ -35,12 +35,12 @@ void phwangEnqueue (void *queue_val, void *data_val)
         return;
     }
 
-    if (strcmp(((QueueMgrClass *) queue_val)->objectName(), "QueueMgrClass")) {
+    if (strcmp(((QueueClass *) queue_val)->objectName(), "QueueClass")) {
         phwangLogit("phwangEnqueue", "wrong object");
         return;
     }
 
-    ((QueueMgrClass *) queue_val)->enqueueData(data_val);
+    ((QueueClass *) queue_val)->enqueueData(data_val);
 }
 
 void *phwangDequeue (void *queue_val)
@@ -50,10 +50,10 @@ void *phwangDequeue (void *queue_val)
         return 0;
     }
 
-    if (strcmp(((QueueMgrClass *) queue_val)->objectName(), "QueueMgrClass")) {
+    if (strcmp(((QueueClass *) queue_val)->objectName(), "QueueClass")) {
         phwangLogit("phwangDequeue", "wrong object");
         return 0;
     }
 
-    return ((QueueMgrClass *) queue_val)->dequeueData();
+    return ((QueueClass *) queue_val)->dequeueData();
 }
