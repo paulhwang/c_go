@@ -31,21 +31,21 @@ UTILS_OBJS = $(LOGIT_OBJS) $(ENCODE_OBJS) $(JSON_OBJS) $(SUSPEND_OBJS) $(QUEUE_O
 GO_BASE_OBJS = $(GO_BASE_DIR)/go_base_class.o $(GO_BASE_DIR)/go_game_class.o $(GO_BASE_DIR)/go_engine_class.o $(GO_BASE_DIR)/go_board_class.o $(GO_BASE_DIR)/go_move_class.o $(GO_BASE_DIR)/go_port_class.o $(GO_BASE_DIR)/go_config_class.o $(GO_BASE_DIR)/go_group_class.o $(GO_BASE_DIR)/go_group_list_class.o
 
 SERVER = server
-SERVER_OBJS	= go_server.o $(UTILS_OBJS) $(MAIN_OBJS) $(LINK_MGR_OBJS) $(BASE_MGR_OBJS) $(GO_BASE_OBJS)
+ALL_SERVER_OBJS	= go_server.o $(UTILS_OBJS) $(MAIN_OBJS) $(LINK_MGR_OBJS) $(BASE_MGR_OBJS) $(GO_BASE_OBJS)
 
 CLIENT = client 
-CLIENT_OBJS	= go_client.o $(UTILS_OBJS)
+ALL_CLIENT_OBJS	= go_client.o $(UTILS_OBJS)
 
 UTILS_OBJLIBS = lib_utils.a
 GO_ROOT_OBJLIBS	= lib_root.a lib_go_base.a lib_base_mgr.a
 
 all:	$(SERVER) $(CLIENT)
 
-$(SERVER): $(SERVER_OBJS) 
-	$(CC) -o $(SERVER) $(SERVER_OBJS) -lstdc++ -pthread
+$(SERVER): $(ALL_SERVER_OBJS) 
+	$(CC) -o $(SERVER) $(ALL_SERVER_OBJS) -lstdc++ -pthread
 
-$(CLIENT): $(CLIENT_OBJS) 
-	$(CC) -o $(CLIENT) $(CLIENT_OBJS) -lstdc++ -pthread
+$(CLIENT): $(ALL_CLIENT_OBJS) 
+	$(CC) -o $(CLIENT) $(ALL_CLIENT_OBJS) -lstdc++ -pthread
 
 ##lib_utils.a:	force_look
 ##	$(ECHO) looking into utils_dir : $(MAKE) $(MFLAGS)
