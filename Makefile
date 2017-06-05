@@ -8,7 +8,6 @@ CLIENT_PROJ_DIR = client_proj_dir
 PHWANG_DIR = phwang_dir
 INCLUDE_DIR = include_dir
 PROTOCOL_DIR = $(INCLUDE_DIR)/protocol_dir
-LOGIT_DIR   = $(PHWANG_DIR)/logit_dir
 JSON_DIR    = $(PHWANG_DIR)/json_dir
 SUSPEND_DIR = $(PHWANG_DIR)/suspend_dir
 QUEUE_DIR   = $(PHWANG_DIR)/queue_dir
@@ -22,13 +21,12 @@ CLIENT_DIR = $(CLIENT_PROJ_DIR)/client_dir
 
 DIRS = $(PHWANG_DIR) $(SERVER_PROJ_DIR) $(CLIENT_PROJ_DIR)
 
-LOGIT_OBJS = $(LOGIT_DIR)/logit.o 
 JSON_OBJS = $(JSON_DIR)/json_class.o 
 SUSPEND_OBJS = $(SUSPEND_DIR)/suspend_class.o 
 QUEUE_OBJS = $(QUEUE_DIR)/queue.o $(QUEUE_DIR)/queue_entry_class.o $(QUEUE_DIR)/queue_class.o
 TP_OBJS = $(TP_DIR)/tp.o $(TP_DIR)/tp_class.o $(TP_DIR)/tp_server.o $(TP_DIR)/tp_connect.o $(TP_DIR)/tp_transfer_class.o $(TP_DIR)/tp_transfer_transmit.o $(TP_DIR)/tp_transfer_receive.o 
 EXTERN_OBJS = $(EXTERN_DIR)/phwang_logit.o $(EXTERN_DIR)/phwang_encode.o $(EXTERN_DIR)/phwang_suspend.o 
-PHWANG_OBJS = $(LOGIT_OBJS) $(JSON_OBJS) $(SUSPEND_OBJS) $(QUEUE_OBJS) $(TP_OBJS) $(EXTERN_OBJS) 
+PHWANG_OBJS = $(JSON_OBJS) $(SUSPEND_OBJS) $(QUEUE_OBJS) $(TP_OBJS) $(EXTERN_OBJS) 
 
 SERVER_OBJS = $(SERVER_DIR)/go_server.o $(SERVER_DIR)/main_class.o
 LINK_MGR_OBJS = $(LINK_MGR_DIR)/link_mgr_class.o $(LINK_MGR_DIR)/link_class.o $(LINK_MGR_DIR)/session_mgr_class.o $(LINK_MGR_DIR)/session_class.o $(LINK_MGR_DIR)/link_mgr_thread.o $(LINK_MGR_DIR)/link_mgr_exports.o 
