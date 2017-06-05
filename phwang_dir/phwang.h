@@ -88,11 +88,7 @@ inline void phwangFreeTpTransfer(void *tp_transfer_val)
 
 inline void *phwangTpConnect(unsigned long ip_addr_val, unsigned short port_val, void (*receive_callback_val)(void *, void *), void *receive_object_val)
 {
-    printf("jjj\n");
-    void *i = thePhwangObject->tpConnect1(ip_addr_val, port_val, receive_callback_val, receive_object_val);
-    printf("jjj123\n");
-    return i;
-    //return thePhwangObject->tpConnect(ip_addr_val, port_val, receive_callback_val, receive_object_val);
+    return thePhwangObject->tpConnect1(ip_addr_val, port_val, receive_callback_val, receive_object_val);
 }
 
 inline void phwangTpTransmit(void *tp_transfer_val, char *data_val)
