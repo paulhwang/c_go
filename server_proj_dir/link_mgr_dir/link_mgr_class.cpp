@@ -63,7 +63,7 @@ void LinkMgrClass::mallocLink (char const *data_val)
 
         char *data_buf = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
         data_buf[0] = LINK_MGR_PROTOCOL_RESPOND_IS_MALLOC_LINK;
-        encodeIdIndex(data_buf + 1, link_id, LINK_MGR_PROTOCOL_LINK_ID_SIZE, link_index, LINK_MGR_PROTOCOL_LINK_INDEX_SIZE);
+        phwangEncodeIdIndex(data_buf + 1, link_id, LINK_MGR_PROTOCOL_LINK_ID_SIZE, link_index, LINK_MGR_PROTOCOL_LINK_INDEX_SIZE);
 
         this->transmitData(data_buf);
     }
