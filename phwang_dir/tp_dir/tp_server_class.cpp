@@ -109,8 +109,8 @@ void TpServerClass::serverThreadFunction (void *data_val)
 
     this->logit("startServer", "accepted");
 
-    TpTransferClass *tp_transfer_object = new TpTransferClass(data->receive_callback_func, data->receive_callback_parameter);
-    tp_transfer_object->startThreads(data_socket);
+    TpTransferClass *tp_transfer_object = new TpTransferClass(data_socket, data->receive_callback_func, data->receive_callback_parameter);
+    tp_transfer_object->startThreads();
     data->accept_callback_func(data->accept_callback_parameter, tp_transfer_object);
     free(data_val);
 }

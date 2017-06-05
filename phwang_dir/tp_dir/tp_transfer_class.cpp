@@ -12,8 +12,11 @@
 #include "../../phwang_dir/phwang.h"
 #include "tp_transfer_class.h"
 
-TpTransferClass::TpTransferClass (void (*receive_callback_val)(void *, void *), void *receive_object_val)
+TpTransferClass::TpTransferClass (int socket_val,
+                                  void (*receive_callback_val)(void *, void *),
+                                  void *receive_object_val)
 {
+    this->theSocket = socket_val;
     this->theReceiveCallback = receive_callback_val;
     this->theReceiveObject = receive_object_val;
 
@@ -28,9 +31,8 @@ TpTransferClass::~TpTransferClass (void)
 {
 }
 
-void TpTransferClass::startThreads(int socket_val)
+void TpTransferClass::startThreads()
 {
-    this->theSocket = socket_val;
     this->startReceiveThread(this->theSocket);
     this->startTransmitThread(this->theSocket);
 }
