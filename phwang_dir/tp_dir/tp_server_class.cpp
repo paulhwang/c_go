@@ -132,9 +132,9 @@ void TpServerClass::serverThreadFunction (unsigned short port_val, TpTransferCla
 
     this->logit("startServer", "accepted");
 
-    tp_transfer_object_val->startThreads(data_socket);
 
     TpTransferClass *tp_transfer_object = new TpTransferClass(this->theReceiveCallbackFunc, this->theAcceptCallbackParameter);
+    tp_transfer_object_val->startThreads(data_socket);
     //tp_transfer_object->startThreads(data_socket);
     accept_callback_func_val(this->theAcceptCallbackParameter, tp_transfer_object_val);
 }
