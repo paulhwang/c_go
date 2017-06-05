@@ -26,7 +26,7 @@ TpServerClass::TpServerClass (void *caller_object_val,
     this->theCallerObject = caller_object_val;
     this->thePort = port_val;
     this->theAcceptCallbackFunc = accept_callback_func_val;
-    this->theAcceptCallbackFunc = receive_callback_func_val;
+    this->theReceiveCallbackFunc = receive_callback_func_val;
 
     if (1) {
         this->logit("TpServerClass", "init");
@@ -115,9 +115,9 @@ void TpServerClass::serverThreadFunction (void *data_val)
 
     this->logit("startServer", "accepted");
 
-    TpTransferClass *tp_transfer_object = new TpTransferClass(data_socket, data->receive_callback_func, this->theCallerObject);
+    TpTransferClass *tp_transfer_object = new TpTransferClass(data_socket, this->theReceiveCallbackFunc, this->theCallerObject);
     tp_transfer_object->startThreads();
-    data->accept_callback_func(this->theCallerObject, tp_transfer_object);
+    this->theAcceptCallbackFunc(this->theCallerObject, tp_transfer_object);
     free(data_val);
 }
 
