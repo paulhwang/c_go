@@ -79,6 +79,15 @@ inline void *phwangDequeue(void *queue_val)
 }
 
 /* tp */
+inline pthread_t startServerThread(unsigned short port_val,
+                                void (*accept_callback_func_val)(void *, void *),
+                                void *accept_callback_parameter_val,
+                                void (*receive_callback_func_val)(void *, void *),
+                                void *receive_callback_parameter_val)
+{
+    
+}
+
 inline void *phwangTpConnect(unsigned long ip_addr_val, unsigned short port_val, void (*receive_callback_val)(void *, void *), void *receive_object_val)
 {
     return thePhwangObject->tpConnect(ip_addr_val, port_val, receive_callback_val, receive_object_val);
