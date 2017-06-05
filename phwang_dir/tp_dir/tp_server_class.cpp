@@ -38,7 +38,11 @@ void *transportServerThreadFunction (void *data_val)
     TpTransferClass *tp_transfer_object = ((transport_thread_parameter *) data_val)->tp_transfer_object;
     free(data_val);
 
-    transport_object->serverThreadFunction(port, tp_transfer_object, ((transport_thread_parameter *) data_val)->accept_callback_func, 0, 0, 0);
+    transport_object->serverThreadFunction(port, tp_transfer_object,
+                                           ((transport_thread_parameter *) data_val)->accept_callback_func,
+                                           ((transport_thread_parameter *) data_val)->accept_callback_parameter,
+                                           ((transport_thread_parameter *) data_val)->receive_callback_func,
+                                           ((transport_thread_parameter *) data_val)->receive_callback_parameter);
 }
 
 pthread_t TpServerClass::startServerThread (TpTransferClass *tp_transfer_object_val,
