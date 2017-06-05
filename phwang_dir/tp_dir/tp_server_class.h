@@ -26,7 +26,7 @@ class TpServerClass {
     pthread_t startServerThread(TpTransferClass *tp_transfer_val, unsigned short port_val,
                                             void (*accept_callback_func_val)(void *, void *),
                                             void *accept_callback_parameter_val,
-                                            void (*receive_callback_val)(void *, void *),
+                                            void (*receive_callback_func_val)(void *, void *),
                                             void *receive_callback_parameter_val);
 
     void logit(char const* str0_val, char const* str1_val);
@@ -40,7 +40,7 @@ public:
 
     TpTransferClass *startServer(unsigned short port_val, void (*accept_callback_func_val)(void *, void *),
                                                           void *accept_callback_parameter_val,
-                                                          void (*receive_callback_val)(void *, void *),
+                                                          void (*receive_callback_func_val)(void *, void *),
                                                           void *receive_callback_parameter_val,
                                                           StartServerOutputStruct *output_val);
     void serverThreadFunction(unsigned short port_val, TpTransferClass *tp_transfer_object_val, void (*accept_callback_func_val)(void *, void *));
@@ -53,4 +53,7 @@ typedef struct {
     TpTransferClass *tp_transfer_object;
     int socket;
     void (*accept_callback_func)(void *, void *);
+    void *accept_callback_parameter;
+    void (*receive_callback_func)(void *, void *);
+    void *receive_callback_parameter;
 } transport_thread_parameter;

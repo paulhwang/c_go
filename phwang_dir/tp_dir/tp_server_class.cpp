@@ -45,7 +45,7 @@ pthread_t TpServerClass::startServerThread (TpTransferClass *tp_transfer_object_
                                             unsigned short port_val,
                                             void (*accept_callback_func_val)(void *, void *),
                                             void *accept_callback_parameter_val,
-                                            void (*receive_callback_val)(void *, void *),
+                                            void (*receive_callback_func_val)(void *, void *),
                                             void *receive_callback_parameter_val)
 {
     pthread_t thread;
@@ -55,6 +55,9 @@ pthread_t TpServerClass::startServerThread (TpTransferClass *tp_transfer_object_
     data->transport_object = this;
     data->tp_transfer_object = tp_transfer_object_val;
     data->accept_callback_func = accept_callback_func_val;
+    data->accept_callback_parameter = accept_callback_parameter_val;
+    data->receive_callback_func = receive_callback_func_val;
+    data->receive_callback_parameter = receive_callback_parameter_val;
 
     int r;
     if (0) {
@@ -72,18 +75,18 @@ pthread_t TpServerClass::startServerThread (TpTransferClass *tp_transfer_object_
 TpTransferClass *TpServerClass::startServer (unsigned short port_val,
                                              void (*accept_callback_func_val)(void *, void *),
                                              void *accept_callback_parameter_val,
-                                             void (*receive_callback_val)(void *, void *),
+                                             void (*receive_callback_func_val)(void *, void *),
                                              void *receive_callback_parameter_val,
                                              StartServerOutputStruct *output_val)
 {
     pthread_t thread;
 
-    this->theReceiveCallbackFunc = receive_callback_val;
+    this->theReceiveCallbackFunc = receive_callback_func_val;
     this->theAcceptCallbackFunc = accept_callback_func_val;
     this->theAcceptCallbackParameter = receive_callback_parameter_val;
     TpTransferClass *tp_transfer_object = new TpTransferClass(this->theReceiveCallbackFunc, this->theAcceptCallbackParameter);
     if (tp_transfer_object) {
-        thread = this->startServerThread(tp_transfer_object, port_val, accept_callback_func_val, 0, 0, 0);
+        thread = this->startServerThread(tp_transfer_object, port_val, accept_callback_func_val, accept_callback_parameter_val, receive_callback_func_val, receive_callback_parameter_val);
         if (thread) {
             output_val->tp_transfer_object = tp_transfer_object;
             output_val->server_thread = thread;
