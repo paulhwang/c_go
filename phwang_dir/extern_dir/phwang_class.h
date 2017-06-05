@@ -26,7 +26,8 @@ class PhwangClass {
     void enqueue(void *queue_val, void *data_val);
     void *dequeue(void *queue_val);
 
-    pthread_t startServerThread(unsigned short port_val,
+    pthread_t startServerThread(void *tp_server_object_val,
+                                unsigned short port_val,
                                 void (*accept_callback_func_val)(void *, void *),
                                 void *accept_callback_parameter_val,
                                 void (*receive_callback_func_val)(void *, void *),

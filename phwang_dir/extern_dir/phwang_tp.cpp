@@ -9,7 +9,8 @@
 #include "../tp_dir/tp_transfer_class.h"
 #include "phwang_class.h"
 
-pthread_t PhwangClass::startServerThread (unsigned short port_val,
+pthread_t PhwangClass::startServerThread (void *tp_server_object_val,
+                                          unsigned short port_val,
                                           void (*accept_callback_func_val)(void *, void *),
                                           void *accept_callback_parameter_val,
                                           void (*receive_callback_func_val)(void *, void *),
