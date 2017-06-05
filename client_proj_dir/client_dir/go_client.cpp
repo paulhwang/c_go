@@ -18,12 +18,12 @@ void *base_mgr_tp_transfer_object;
 char base_id_index[BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE + 4];
 int move_index = 0;
 char const *move_array[] = {
-    "03021001",
-    "02052002",
-    "03041003",
-    "03052004",
-    "04051005",
-    "04062006",
+//    "03021001",
+//    "02052002",
+//    "03041003",
+//    "03052004",
+//    "04051005",
+//    "04062006",
     "03031007",
 };
 

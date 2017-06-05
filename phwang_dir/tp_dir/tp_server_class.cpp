@@ -41,7 +41,7 @@ void *transportServerThreadFunction (void *data_val)
     transport_object->serverThreadFunction(port, tp_transfer_object);
 }
 
-pthread_t TpServerClass::startServerThread (TpTransferClass *tp_transfer_object_val, unsigned short port_val)
+pthread_t TpServerClass::startServerThread (TpTransferClass *tp_transfer_object_val, unsigned short port_val, void (*accept_callback_func_val)(void *, void *))
 {
     pthread_t thread;
 
@@ -76,7 +76,7 @@ TpTransferClass *TpServerClass::startServer (unsigned short port_val,
     this->theAcceptCallbackParameter = receive_object_val;
     TpTransferClass *tp_transfer_object = new TpTransferClass(this->theReceiveCallbackFunc, this->theAcceptCallbackParameter);
     if (tp_transfer_object) {
-        thread = this->startServerThread(tp_transfer_object, port_val);
+        thread = this->startServerThread(tp_transfer_object, port_val, accept_callback_func_val);
         if (thread) {
             output_val->tp_transfer_object = tp_transfer_object;
             output_val->server_thread = thread;
@@ -135,7 +135,7 @@ void TpServerClass::serverThreadFunction (unsigned short port_val, TpTransferCla
 
     TpTransferClass *tp_transfer_object = new TpTransferClass(this->theReceiveCallbackFunc, this->theAcceptCallbackParameter);
     //tp_transfer_object->startThreads(data_socket);
-    this->theAcceptCallbackFunc(tp_transfer_object_val, this->theAcceptCallbackParameter);
+    this->theAcceptCallbackFunc(this->theAcceptCallbackParameter, tp_transfer_object_val);
 }
 
 void TpServerClass::logit (char const* str0_val, char const* str1_val)
