@@ -6,6 +6,7 @@
 
 #include "../phwang.h"
 #include "../tp_dir/tp_connect.h"
+#include "../tp_dir/tp_server_class.h"
 #include "../tp_dir/tp_transfer_class.h"
 #include "phwang_class.h"
 
@@ -16,7 +17,11 @@ pthread_t PhwangClass::startServerThread (void *tp_server_object_val,
                                           void (*receive_callback_func_val)(void *, void *),
                                           void *receive_callback_parameter_val)
 {
-
+    return ((TpServerClass *) tp_server_object_val)->startServerThread(port_val,
+                                          accept_callback_func_val,
+                                          accept_callback_parameter_val,
+                                          receive_callback_func_val,
+                                          receive_callback_parameter_val);
 }
 
 void *PhwangClass::tpConnect (unsigned long ip_addr_val, unsigned short port_val, void (*receive_callback_val)(void *, void *), void *receive_object_val)

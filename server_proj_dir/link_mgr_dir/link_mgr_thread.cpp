@@ -5,7 +5,6 @@
 */
 
 #include "../../phwang_dir/phwang.h"
-#include "../../phwang_dir/tp_dir/tp_server_class.h"
 #include "../server_dir/main_class.h"
 #include "link_mgr_class.h"
 
@@ -72,5 +71,4 @@ void LinkMgrClass::startThreads (void)
     this->startReceiveThread();
     this->theTpServerThread = phwangStartTpServerListening(this->theMainObject->transportObject(),
                                    LINK_MGR_PROTOCOL_TRANSPORT_PORT_NUMBER, linkMgrTransportServerAcceptConnection, this, linkMgrReceiveDataFromTransport, this);
-    this->theTpServerThread = this->theMainObject->transportObject()->startServerThread(LINK_MGR_PROTOCOL_TRANSPORT_PORT_NUMBER, linkMgrTransportServerAcceptConnection, this, linkMgrReceiveDataFromTransport, this);
 }
