@@ -52,10 +52,25 @@ inline void phwangDecodeIdIndex (char *str_val, int *id_ptr_val, int id_size_val
 }
 
 /* queue */
-void *phwangMallocQueue(int size_val);
-void phwangFreeQueue(void *queue_val);
-void phwangEnqueue(void *queue_val, void *data_val);
-void *phwangDequeue(void *queue_val);
+inline void *phwangMallocQueue(int size_val)
+{
+    return thePhwangObject->mallocQueue(size_val);
+}
+
+inline void phwangFreeQueue(void *queue_val)
+{
+    thePhwangObject->freeQueue(queue_val);
+}
+
+inline void phwangEnqueue(void *queue_val, void *data_val)
+{
+    thePhwangObject->enqueue(queue_val, data_val);
+}
+
+inline void *phwangDequeue(void *queue_val)
+{
+    return thePhwangObject->dequeue(queue_val);
+}
 
 /* tp */
 void phwangFreeTpTransfer(void *tp_transfer_val);
