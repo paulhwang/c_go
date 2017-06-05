@@ -36,7 +36,6 @@ void *transportServerThreadFunction (void *data_val)
     unsigned short port = ((transport_thread_parameter *) data_val)->port;
     TpServerClass *transport_object = ((transport_thread_parameter *) data_val)->transport_object;
     TpTransferClass *tp_transfer_object = ((transport_thread_parameter *) data_val)->tp_transfer_object;
-    free(data_val);
 
     transport_object->serverThreadFunction(data_val);
 }
@@ -101,41 +100,42 @@ void TpServerClass::serverThreadFunction (void *data_val)
     int addrlen = sizeof(address);
     char buffer[1024] = {0};
 
-  this->logit("startServer", "start");
+    this->logit("startServer", "start");
 
-  if ((s = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
-    this->logit("startServer", "open socket error");
-    return;
-  }
+    if ((s = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
+        this->logit("startServer", "open socket error");
+        return;
+    }
 
-  if (setsockopt(s, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &opt, sizeof(opt))) {
-    this->logit("startServer", "setsockopt error");
-    return;
-  }
+    if (setsockopt(s, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &opt, sizeof(opt))) {
+        this->logit("startServer", "setsockopt error");
+        return;
+    }
 
-  address.sin_family = AF_INET;
-  address.sin_addr.s_addr = INADDR_ANY;
-  address.sin_port = htons(data->port);
+    address.sin_family = AF_INET;
+    address.sin_addr.s_addr = INADDR_ANY;
+    address.sin_port = htons(data->port);
 
-  if (bind(s, (struct sockaddr *)&address, sizeof(address)) < 0) {
-    this->logit("startServer", "bind error");
-    return;
-  }
+    if (bind(s, (struct sockaddr *)&address, sizeof(address)) < 0) {
+        this->logit("startServer", "bind error");
+        return;
+    }
 
-  this->logit("startServer", "listening");
-  listen(s, BACKLOG);
+    this->logit("startServer", "listening");
+    listen(s, BACKLOG);
 
-  this->logit("startServer", "accepting");
-  if ((data_socket = accept(s, (struct sockaddr *)&address, (socklen_t*)&addrlen)) < 0) {
-    this->logit("startServer", "accept error");
-    return;
-  }
+    this->logit("startServer", "accepting");
+    if ((data_socket = accept(s, (struct sockaddr *)&address, (socklen_t*)&addrlen)) < 0) {
+        this->logit("startServer", "accept error");
+        return;
+    }
 
     this->logit("startServer", "accepted");
 
     TpTransferClass *tp_transfer_object = new TpTransferClass(data->receive_callback_func, data->receive_callback_parameter);
     tp_transfer_object->startThreads(data_socket);
     data->accept_callback_func(data->accept_callback_parameter, tp_transfer_object);
+    free(data_val);
 }
 
 void TpServerClass::logit (char const* str0_val, char const* str1_val)
