@@ -14,29 +14,41 @@ extern PhwangClass *thePhwangObject;
 
 /* logit */
 #define LOGIT_BUF_SIZE 512
-void phwangLogit(char const* str0_val, char const* str1_val);
-void phwangAbend(char const* str0_val, char const* str1_val);
-void phwangPrintBoard(char const* data_val, int board_size_val);
+
+inline void phwangLogit(char const* str0_val, char const* str1_val)
+{
+    thePhwangObject->logit(str0_val, str1_val);
+}
+
+inline void phwangAbend(char const* str0_val, char const* str1_val)
+{
+    thePhwangObject->abend(str0_val, str1_val);
+}
+
+inline void phwangPrintBoard(char const* data_val, int board_size_val)
+{
+    thePhwangObject->printBoard(data_val, board_size_val);
+}
 
 /* encode */
 inline void phwangEncodeNumber (char *str_val, int number_val, int size_val)
 {
-	thePhwangObject->encodeNumber(str_val, number_val, size_val);
+    thePhwangObject->encodeNumber(str_val, number_val, size_val);
 }
 
 inline int phwangDecodeNumber (char *str_val, int size_val)
 {
-	return thePhwangObject->decodeNumber(str_val, size_val);
+    return thePhwangObject->decodeNumber(str_val, size_val);
 }
 
 inline void phwangEncodeIdIndex (char *str_val, int id_val, int id_size_val, int index_val, int index_size_val)
 {
-	thePhwangObject->encodeIdIndex(str_val, id_val, id_size_val, index_val, index_size_val);
+    thePhwangObject->encodeIdIndex(str_val, id_val, id_size_val, index_val, index_size_val);
 }
 
 inline void phwangDecodeIdIndex (char *str_val, int *id_ptr_val, int id_size_val, int *index_ptr_val, int index_size_val)
 {
-	thePhwangObject->decodeIdIndex(str_val, id_ptr_val, id_size_val, index_ptr_val, index_size_val);
+    thePhwangObject->decodeIdIndex(str_val, id_ptr_val, id_size_val, index_ptr_val, index_size_val);
 }
 
 /* queue */
