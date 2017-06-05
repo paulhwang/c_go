@@ -24,7 +24,10 @@ inline void phwangEncodeNumber (char *str_val, int number_val, int size_val)
 	thePhwangObject->encodeNumber(str_val, number_val, size_val);
 }
 
-int phwangDecodeNumber(char *str_val, int size_val);
+inline int phwangDecodeNumber (char *str_val, int size_val)
+{
+	return thePhwangObject->decodeNumber(str_val, size_val);
+}
 
 inline void phwangEncodeIdIndex (char *str_val, int id_val, int id_size_val, int index_val, int index_size_val)
 {

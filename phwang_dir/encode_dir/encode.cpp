@@ -5,7 +5,6 @@
 */
 
 #include <stdio.h>
-#include "encode.h"
 
 void encodeNumber (char *str_val, int number_val, int size_val)
 {

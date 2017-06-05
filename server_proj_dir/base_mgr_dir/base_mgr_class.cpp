@@ -6,7 +6,6 @@
 
 #include <unistd.h>
 #include "../../phwang_dir/phwang.h"
-#include "../../phwang_dir/encode_dir/encode.h"
 #include "../../phwang_dir/queue_dir/queue_class.h"
 #include "../../phwang_dir/tp_dir/tp_transfer_class.h"
 #include "base_mgr_class.h"
