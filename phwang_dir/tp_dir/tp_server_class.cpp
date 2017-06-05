@@ -33,11 +33,7 @@ TpServerClass::~TpServerClass (void)
 
 void *transportServerThreadFunction (void *data_val)
 {
-    unsigned short port = ((transport_thread_parameter *) data_val)->port;
-    TpServerClass *transport_object = ((transport_thread_parameter *) data_val)->transport_object;
-    TpTransferClass *tp_transfer_object = ((transport_thread_parameter *) data_val)->tp_transfer_object;
-
-    transport_object->serverThreadFunction(data_val);
+    ((transport_thread_parameter *) data_val)->transport_object->serverThreadFunction(data_val);
 }
 
 pthread_t TpServerClass::startServerThread (TpTransferClass *tp_transfer_object_val,
