@@ -39,7 +39,7 @@ TpTransferClass *tpConnectServiceFunction (unsigned long ip_addr_val, unsigned s
 
     phwangLogit("startClient", "connected");
 
-    TpTransferClass *tp_transfer_object = new TpTransferClass(0, receive_callback_val, receive_object_val);
+    TpTransferClass *tp_transfer_object = new TpTransferClass(receive_callback_val, receive_object_val);
     tp_transfer_object->startThreads(s);
     return tp_transfer_object;
 }

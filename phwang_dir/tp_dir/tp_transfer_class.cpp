@@ -12,9 +12,8 @@
 #include "../../phwang_dir/phwang.h"
 #include "tp_transfer_class.h"
 
-TpTransferClass::TpTransferClass (TpServerClass *tp_object_val, void (*receive_callback_val)(void *, void *), void *receive_object_val)
+TpTransferClass::TpTransferClass (void (*receive_callback_val)(void *, void *), void *receive_object_val)
 {
-    this->theTpObject = tp_object_val;
     this->theReceiveCallback = receive_callback_val;
     this->theReceiveObject = receive_object_val;
 
