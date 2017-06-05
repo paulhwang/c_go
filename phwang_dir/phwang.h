@@ -8,6 +8,9 @@
 #include "stdio.h"
 #include "string.h"
 #include <malloc.h>
+#include "extern_dir/phwang_class.h"
+
+extern PhwangClass *thePhwangObject;
 
 /* logit */
 #define LOGIT_BUF_SIZE 512

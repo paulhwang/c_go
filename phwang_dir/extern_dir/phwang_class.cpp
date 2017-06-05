@@ -4,8 +4,9 @@
   File name: phwang_class.cpp
 */
 
+#include "../phwang.h"
 #include "phwang_class.h"
-  
+
 void PhwangClass::encodeNumber (char *str_val, int number_val, int size_val)
 {
     str_val[size_val] = 0;

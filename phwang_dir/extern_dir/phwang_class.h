@@ -8,8 +8,8 @@
 
 class PhwangClass {
  public:
-    PhwangClass(void);
-    ~PhwangClass(void);
+    PhwangClass(void){}
+    ~PhwangClass(void){}
 
     void encodeNumber(char *str_val, int number_val, int size_val);
     int decodeNumber(char *str_val, int size_val);
