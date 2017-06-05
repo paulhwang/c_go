@@ -97,7 +97,7 @@ void TpServerClass::serverThreadFunction (void *data_val)
 
     address.sin_family = AF_INET;
     address.sin_addr.s_addr = INADDR_ANY;
-    address.sin_port = htons(data->port);
+    address.sin_port = htons(this->thePort);
 
     if (bind(s, (struct sockaddr *)&address, sizeof(address)) < 0) {
         this->logit("startServer", "bind error");
