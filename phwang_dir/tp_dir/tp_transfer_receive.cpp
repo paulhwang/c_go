@@ -4,16 +4,14 @@
   File name: tp_transfer_receive.cpp
 */
 
-#include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
-#include <malloc.h>
 #include <netinet/in.h>
 #include <unistd.h>
 #include <netdb.h>
 #include <pwd.h>
+#include "../../phwang_dir/phwang.h"
 #include "tp_transfer_class.h"
-#include "tp_class.h"
 
 void *tpTranferReceiveThreadFunction (void *data_val)
 {

@@ -5,7 +5,7 @@
 */
 
 #include "../../phwang_dir/phwang.h"
-#include "../../phwang_dir/tp_dir/tp_class.h"
+#include "../../phwang_dir/tp_dir/tp_server_class.h"
 #include "../server_dir/main_class.h"
 #include "base_mgr_class.h"
 

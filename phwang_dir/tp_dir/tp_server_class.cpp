@@ -1,7 +1,7 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: tp_class.cpp
+  File name: tp_server_class.cpp
 */
 
 #include <pthread.h>
@@ -13,7 +13,7 @@
 #include <pwd.h>
 #include "tp_transfer_class.h"
 #include "../../phwang_dir/phwang.h"
-#include "tp_class.h"
+#include "tp_server_class.h"
 
 #define MAXHOSTNAME 32
 #define BACKLOG 5
