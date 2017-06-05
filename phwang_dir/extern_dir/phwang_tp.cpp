@@ -17,6 +17,16 @@ pthread_t PhwangClass::startServerThread (void *tp_server_object_val,
                                           void (*receive_callback_func_val)(void *, void *),
                                           void *receive_callback_parameter_val)
 {
+    if (!tp_server_object_val) {
+        phwangLogit("startServerThread", "null tp_server_object_val");
+        return 0;
+    }
+
+    if (strcmp(((TpServerClass *) tp_server_object_val)->objectName(), "TpServerClass")) {
+        phwangLogit("startServerThread", "wrong object");
+        return 0;
+    }
+
     return ((TpServerClass *) tp_server_object_val)->startServerThread(port_val,
                                           accept_callback_func_val,
                                           accept_callback_parameter_val,
