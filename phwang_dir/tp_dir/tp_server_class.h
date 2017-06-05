@@ -19,7 +19,8 @@ typedef struct {
 
 class TpServerClass {
     void *theMainObject;
-    void (*theServerCallback)(void *, void *);
+    void (*theAcceptCallbackFunc)(void *, void *);
+    void *theAcceptCallbackParameter;
 
     pthread_t startServerThread(TpTransferClass *tp_transfer_val, unsigned short port_val);
 
@@ -30,7 +31,7 @@ public:
     TpServerClass(void *main_object_val);
     ~TpServerClass(void);
     char const *objectName(void) {return "TpServerClass";}
-    void (*serverCallback(void))(void *, void *) {return this->theServerCallback;}
+    //void (*acceptCallbackFunc(void))(void *, void *) {return this->theAcceptCallbackFunc;}
 
     TpTransferClass *startServer(unsigned short port_val, void (*server_callback_val)(void *, void *), void (*receive_callback_val)(void *, void *), void *receive_object_val, StartServerOutputStruct *output_val);
     void serverThreadFunction(unsigned short port_val, TpTransferClass *tp_transfer_object_val);
