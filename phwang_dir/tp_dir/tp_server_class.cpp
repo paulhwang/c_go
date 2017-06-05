@@ -36,17 +36,17 @@ void *transportServerThreadFunction (void *data_val)
     ((transport_thread_parameter *) data_val)->transport_object->serverThreadFunction(data_val);
 }
 
-pthread_t TpServerClass::startServer (unsigned short port_val,
-                                      void (*accept_callback_func_val)(void *, void *),
-                                      void *accept_callback_parameter_val,
-                                      void (*receive_callback_func_val)(void *, void *),
-                                      void *receive_callback_parameter_val)
+pthread_t TpServerClass::startServerThread (unsigned short port_val,
+                                            void (*accept_callback_func_val)(void *, void *),
+                                            void *accept_callback_parameter_val,
+                                            void (*receive_callback_func_val)(void *, void *),
+                                            void *receive_callback_parameter_val)
 {
     pthread_t thread;
     transport_thread_parameter *data = (transport_thread_parameter *) malloc(sizeof(transport_thread_parameter));
 
-    data->port = port_val;
     data->transport_object = this;
+    data->port = port_val;
     data->accept_callback_func = accept_callback_func_val;
     data->accept_callback_parameter = accept_callback_parameter_val;
     data->receive_callback_func = receive_callback_func_val;

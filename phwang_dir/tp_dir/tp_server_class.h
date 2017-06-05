@@ -30,11 +30,11 @@ public:
     ~TpServerClass(void);
     char const *objectName(void) {return "TpServerClass";}
 
-    pthread_t startServer(unsigned short port_val,
-                          void (*accept_callback_func_val)(void *, void *),
-                          void *accept_callback_parameter_val,
-                          void (*receive_callback_func_val)(void *, void *),
-                          void *receive_callback_parameter_val);
+    pthread_t startServerThread(unsigned short port_val,
+                                void (*accept_callback_func_val)(void *, void *),
+                                void *accept_callback_parameter_val,
+                                void (*receive_callback_func_val)(void *, void *),
+                                void *receive_callback_parameter_val);
     void serverThreadFunction(void *data_val);
 };
 
@@ -42,7 +42,6 @@ typedef struct {
     unsigned long ip_addr;
     unsigned short port;
     TpServerClass *transport_object;
-    TpTransferClass *tp_transfer_object;
     int socket;
     void (*accept_callback_func)(void *, void *);
     void *accept_callback_parameter;
