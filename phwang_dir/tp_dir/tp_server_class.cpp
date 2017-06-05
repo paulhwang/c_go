@@ -38,11 +38,7 @@ void *transportServerThreadFunction (void *data_val)
     TpTransferClass *tp_transfer_object = ((transport_thread_parameter *) data_val)->tp_transfer_object;
     free(data_val);
 
-    transport_object->serverThreadFunction(port, tp_transfer_object, data_val,
-                                           ((transport_thread_parameter *) data_val)->accept_callback_func,
-                                           ((transport_thread_parameter *) data_val)->accept_callback_parameter,
-                                           ((transport_thread_parameter *) data_val)->receive_callback_func,
-                                           ((transport_thread_parameter *) data_val)->receive_callback_parameter);
+    transport_object->serverThreadFunction(0, 0, data_val,0,0,0,0);
 }
 
 pthread_t TpServerClass::startServerThread (TpTransferClass *tp_transfer_object_val,
@@ -101,14 +97,15 @@ void TpServerClass::serverThreadFunction (unsigned short port_val,
                                           void (*receive_callback_func_val)(void *, void *),
                                           void *receive_callback_parameter_val)
 {
-  char localhost[MAXHOSTNAME + 1];
-  struct servent *sp;
-  int s, data_socket;
-  struct hostent *hp;
-  int opt = 1;
-  struct sockaddr_in address;
-  int addrlen = sizeof(address);
-  char buffer[1024] = {0};
+    transport_thread_parameter *data = (transport_thread_parameter *) data_val;
+    char localhost[MAXHOSTNAME + 1];
+    struct servent *sp;
+    int s, data_socket;
+    struct hostent *hp;
+    int opt = 1;
+    struct sockaddr_in address;
+    int addrlen = sizeof(address);
+    char buffer[1024] = {0};
 
   this->logit("startServer", "start");
 
@@ -124,7 +121,7 @@ void TpServerClass::serverThreadFunction (unsigned short port_val,
 
   address.sin_family = AF_INET;
   address.sin_addr.s_addr = INADDR_ANY;
-  address.sin_port = htons(port_val);
+  address.sin_port = htons(data->port);
 
   if (bind(s, (struct sockaddr *)&address, sizeof(address)) < 0) {
     this->logit("startServer", "bind error");
@@ -142,7 +139,6 @@ void TpServerClass::serverThreadFunction (unsigned short port_val,
 
     this->logit("startServer", "accepted");
 
-    transport_thread_parameter *data = (transport_thread_parameter *) data_val;
     TpTransferClass *tp_transfer_object = new TpTransferClass(data->receive_callback_func, data->receive_callback_parameter);
     tp_transfer_object->startThreads(data_socket);
     data->accept_callback_func(data->accept_callback_parameter, tp_transfer_object);
