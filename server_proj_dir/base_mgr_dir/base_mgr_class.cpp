@@ -12,11 +12,14 @@
 #include "base_mgr_class.h"
 #include "../go_base_dir/go_base_class.h"
 
+void baseMgrTransportServerAcceptConnection (void *base_mgr_object_val, void *tp_transfer_object_val);
+void baseMgrReceiveDataFromTransport (void *base_mgr_object_val, void *data_val);
+
 BaseMgrClass::BaseMgrClass (MainClass *main_object_val)
 {
     memset(this, 0, sizeof(BaseMgrClass));
     this->theMainObject = main_object_val;
-    this->theTpServerObject = new TpServerClass(this, 0, 0,0);
+    this->theTpServerObject = new TpServerClass(this, BASE_MGR_PROTOCOL_TRANSPORT_PORT_NUMBER, baseMgrTransportServerAcceptConnection, baseMgrReceiveDataFromTransport);
     this->theGlobalBaseId = 0;
 
     this->theReceiveQueue = phwangMallocQueue(BASE_MGR_RECEIVE_QUEUE_SIZE);

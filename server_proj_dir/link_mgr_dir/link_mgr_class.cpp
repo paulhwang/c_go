@@ -10,11 +10,14 @@
 #include "link_mgr_class.h"
 #include "link_class.h"
 
+void linkMgrTransportServerAcceptConnection (void *link_mgr_object_val, void *tp_transfer_object_val);
+void linkMgrReceiveDataFromTransport (void *link_mgr_object_val, void *data_val);
+
 LinkMgrClass::LinkMgrClass (MainClass *main_object_val)
 {
     memset(this, 0, sizeof(LinkMgrClass));
     this->theMainObject = main_object_val;
-    this->theTpServerObject = new TpServerClass(this, 0, 0, 0);
+    this->theTpServerObject = new TpServerClass(this, LINK_MGR_PROTOCOL_TRANSPORT_PORT_NUMBER, linkMgrTransportServerAcceptConnection, linkMgrReceiveDataFromTransport);
     this->theGlobalLinkId = 0;
 
     this->theReceiveQueue = phwangMallocQueue(LINK_MGR_RECEIVE_QUEUE_SIZE);
