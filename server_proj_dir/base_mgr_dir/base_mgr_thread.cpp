@@ -5,7 +5,6 @@
 */
 
 #include "../../phwang_dir/phwang.h"
-#include "../server_dir/main_class.h"
 #include "base_mgr_class.h"
 
 void *baseMgrReceiveThreadFunction (void *this_val)
@@ -75,6 +74,6 @@ void baseMgrReceiveDataFromTransport (void *base_mgr_object_val, void *data_val)
 void BaseMgrClass::startThreads (void)
 {
     this->startReceiveThread();
-    this->theTpServerThread = phwangStartTpServerListening(this->theMainObject->transportObject(),
+    this->theTpServerThread = phwangStartTpServerListening(this->theTpServerObject,
                                    BASE_MGR_PROTOCOL_TRANSPORT_PORT_NUMBER, baseMgrTransportServerAcceptConnection, this, baseMgrReceiveDataFromTransport, this);
 }

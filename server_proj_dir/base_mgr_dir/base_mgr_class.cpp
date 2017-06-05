@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include "../../phwang_dir/phwang.h"
 #include "../../phwang_dir/queue_dir/queue_class.h"
+#include "../../phwang_dir/tp_dir/tp_server_class.h"
 #include "../../phwang_dir/tp_dir/tp_transfer_class.h"
 #include "base_mgr_class.h"
 #include "../go_base_dir/go_base_class.h"
@@ -15,6 +16,7 @@ BaseMgrClass::BaseMgrClass (MainClass *main_object_val)
 {
     memset(this, 0, sizeof(BaseMgrClass));
     this->theMainObject = main_object_val;
+    this->theTpServerObject = new TpServerClass(this->theMainObject);
     this->theGlobalBaseId = 0;
 
     this->theReceiveQueue = phwangMallocQueue(BASE_MGR_RECEIVE_QUEUE_SIZE);

@@ -5,6 +5,7 @@
 */
 
 #include "../../phwang_dir/phwang.h"
+#include "../../phwang_dir/tp_dir/tp_server_class.h"
 #include "../../phwang_dir/tp_dir/tp_transfer_class.h"
 #include "link_mgr_class.h"
 #include "link_class.h"
@@ -13,6 +14,7 @@ LinkMgrClass::LinkMgrClass (MainClass *main_object_val)
 {
     memset(this, 0, sizeof(LinkMgrClass));
     this->theMainObject = main_object_val;
+    this->theTpServerObject = new TpServerClass(this->theMainObject);
     this->theGlobalLinkId = 0;
 
     this->theReceiveQueue = phwangMallocQueue(LINK_MGR_RECEIVE_QUEUE_SIZE);

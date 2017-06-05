@@ -10,6 +10,7 @@
 #include "../../include_dir/protocol_dir/link_mgr_protocol.h"
 class LinkClass;
 class MainClass;
+class TpServerClass;
 class TpTransferClass;
 
 #define LINK_MGR_RECEIVE_QUEUE_SIZE 100
@@ -19,6 +20,7 @@ class LinkMgrClass {
 #define LINK_MGR_MAX_GLOBAL_LINK_ID 9999
 
     MainClass *theMainObject;
+    TpServerClass *theTpServerObject;
     int theGlobalLinkId;
     LinkClass *theLinkTableArray[LINK_MGR_LINK_ARRAY_SIZE + 4];
 
