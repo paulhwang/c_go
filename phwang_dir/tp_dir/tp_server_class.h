@@ -41,10 +41,9 @@ public:
 typedef struct {
     unsigned long ip_addr;
     unsigned short port;
-    TpServerClass *transport_object;
-    int socket;
+    TpServerClass *tp_server_object;
     void (*accept_callback_func)(void *, void *);
     void *accept_callback_parameter;
     void (*receive_callback_func)(void *, void *);
     void *receive_callback_parameter;
-} transport_thread_parameter;
+} tp_server_thread_parameter;

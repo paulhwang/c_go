@@ -33,7 +33,7 @@ TpServerClass::~TpServerClass (void)
 
 void *transportServerThreadFunction (void *data_val)
 {
-    ((transport_thread_parameter *) data_val)->transport_object->serverThreadFunction(data_val);
+    ((tp_server_thread_parameter *) data_val)->tp_server_object->serverThreadFunction(data_val);
 }
 
 pthread_t TpServerClass::startServerThread (unsigned short port_val,
@@ -43,9 +43,9 @@ pthread_t TpServerClass::startServerThread (unsigned short port_val,
                                             void *receive_callback_parameter_val)
 {
     pthread_t thread;
-    transport_thread_parameter *data = (transport_thread_parameter *) malloc(sizeof(transport_thread_parameter));
+    tp_server_thread_parameter *data = (tp_server_thread_parameter *) malloc(sizeof(tp_server_thread_parameter));
 
-    data->transport_object = this;
+    data->tp_server_object = this;
     data->port = port_val;
     data->accept_callback_func = accept_callback_func_val;
     data->accept_callback_parameter = accept_callback_parameter_val;
@@ -67,7 +67,7 @@ pthread_t TpServerClass::startServerThread (unsigned short port_val,
 
 void TpServerClass::serverThreadFunction (void *data_val)
 {
-    transport_thread_parameter *data = (transport_thread_parameter *) data_val;
+    tp_server_thread_parameter *data = (tp_server_thread_parameter *) data_val;
     char localhost[MAXHOSTNAME + 1];
     struct servent *sp;
     int s, data_socket;
