@@ -10,10 +10,10 @@
 #include "phwang_class.h"
 
 pthread_t PhwangClass::startServerThread (unsigned short port_val,
-                                            void (*accept_callback_func_val)(void *, void *),
-                                            void *accept_callback_parameter_val,
-                                            void (*receive_callback_func_val)(void *, void *),
-                                            void *receive_callback_parameter_val)
+                                          void (*accept_callback_func_val)(void *, void *),
+                                          void *accept_callback_parameter_val,
+                                          void (*receive_callback_func_val)(void *, void *),
+                                          void *receive_callback_parameter_val)
 {
 
 }
@@ -23,32 +23,32 @@ void *PhwangClass::tpConnect (unsigned long ip_addr_val, unsigned short port_val
     return tpConnectServiceFunction(ip_addr_val, port_val, receive_callback_val, receive_object_val);
 }
 
-void PhwangClass::freeTpTransfer (void *tp_transfer_val)
+void PhwangClass::freeTpTransfer (void *tp_transfer_object_val)
 {
-    if (!tp_transfer_val) {
-        phwangLogit("phwangFreeTpTransfer", "null tp_transfer_val");
+    if (!tp_transfer_object_val) {
+        phwangLogit("phwangFreeTpTransfer", "null tp_transfer_object_val");
         return;
     }
 
-    if (strcmp(((TpTransferClass *) tp_transfer_val)->objectName(), "TpTransferClass")) {
+    if (strcmp(((TpTransferClass *) tp_transfer_object_val)->objectName(), "TpTransferClass")) {
         phwangLogit("phwangFreeTpTransfer", "wrong object");
         return;
     }
 
-    ((TpTransferClass *) tp_transfer_val)->~TpTransferClass();
+    ((TpTransferClass *) tp_transfer_object_val)->~TpTransferClass();
 }
 
-void PhwangClass::tpTransmit (void *tp_transfer_val, char *data_val)
+void PhwangClass::tpTransmit (void *tp_transfer_object_val, char *data_val)
 {
-    if (!tp_transfer_val) {
-        phwangLogit("phwangTpTransmit", "null tp_transfer_val");
+    if (!tp_transfer_object_val) {
+        phwangLogit("phwangTpTransmit", "null tp_transfer_object_val");
         return;
     }
 
-    if (strcmp(((TpTransferClass *) tp_transfer_val)->objectName(), "TpTransferClass")) {
+    if (strcmp(((TpTransferClass *) tp_transfer_object_val)->objectName(), "TpTransferClass")) {
         phwangLogit("phwangTpTransmit", "wrong object");
         return;
     }
 
-    ((TpTransferClass *) tp_transfer_val)->exportTransmitData(data_val);
+    ((TpTransferClass *) tp_transfer_object_val)->exportTransmitData(data_val);
 }
