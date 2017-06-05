@@ -5,7 +5,6 @@
 */
 
 #include <unistd.h>
-#include "../../phwang_dir/extern_dir/phwang_class.h"
 #include "main_class.h"
 
 main (int argc, char** argv) {
