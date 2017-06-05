@@ -17,7 +17,7 @@ typedef struct {
     TpTransferClass *tp_transfer_object;
 } StartServerOutputStruct;
 
-class TpClass {
+class TpServerClass {
     void *theMainObject;
 
     pthread_t startServerThread(TpTransferClass *tp_transfer_val, unsigned short port_val);
@@ -26,9 +26,9 @@ class TpClass {
     void abend(char const* str0_val, char const* str1_val);
  
 public:
-    TpClass(void *main_object_val);
-    ~TpClass(void);
-    char const *objectName(void) {return "TpClass";}
+    TpServerClass(void *main_object_val);
+    ~TpServerClass(void);
+    char const *objectName(void) {return "TpServerClass";}
 
     TpTransferClass *startServer(unsigned short port_val, void (*receive_callback_val)(void *, void *), void *receive_object_val, StartServerOutputStruct *output_val);
     void serverThreadFunction(unsigned short port_val, TpTransferClass *tp_transfer_object_val);
@@ -37,7 +37,7 @@ public:
 typedef struct {
     unsigned long ip_addr;
     unsigned short port;
-    TpClass *transport_object;
+    TpServerClass *transport_object;
     TpTransferClass *tp_transfer_object;
     int socket;
 } transport_thread_parameter;

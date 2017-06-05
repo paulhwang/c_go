@@ -18,30 +18,30 @@
 #define MAXHOSTNAME 32
 #define BACKLOG 5
 
-TpClass::TpClass (void *main_object_val)
+TpServerClass::TpServerClass (void *main_object_val)
 {
     this->theMainObject = main_object_val;
 
     if (1) {
-        this->logit("TpClass", "init");
+        this->logit("TpServerClass", "init");
     }
 }
 
-TpClass::~TpClass (void)
+TpServerClass::~TpServerClass (void)
 {
 }
 
 void *transportServerThreadFunction (void *data_val)
 {
     unsigned short port = ((transport_thread_parameter *) data_val)->port;
-    TpClass *transport_object = ((transport_thread_parameter *) data_val)->transport_object;
+    TpServerClass *transport_object = ((transport_thread_parameter *) data_val)->transport_object;
     TpTransferClass *tp_transfer_object = ((transport_thread_parameter *) data_val)->tp_transfer_object;
     free(data_val);
 
     transport_object->serverThreadFunction(port, tp_transfer_object);
 }
 
-pthread_t TpClass::startServerThread (TpTransferClass *tp_transfer_object_val, unsigned short port_val)
+pthread_t TpServerClass::startServerThread (TpTransferClass *tp_transfer_object_val, unsigned short port_val)
 {
     pthread_t thread;
 
@@ -63,7 +63,7 @@ pthread_t TpClass::startServerThread (TpTransferClass *tp_transfer_object_val, u
     return thread;
 }
 
-TpTransferClass *TpClass::startServer (unsigned short port_val,
+TpTransferClass *TpServerClass::startServer (unsigned short port_val,
                                        void (*receive_callback_val)(void *, void *),
                                        void *receive_object_val,
                                        StartServerOutputStruct *output_val)
@@ -84,7 +84,7 @@ TpTransferClass *TpClass::startServer (unsigned short port_val,
     }
 }
 
-void TpClass::serverThreadFunction (unsigned short port_val, TpTransferClass *tp_transfer_object_val)
+void TpServerClass::serverThreadFunction (unsigned short port_val, TpTransferClass *tp_transfer_object_val)
 {
   char localhost[MAXHOSTNAME + 1];
   struct servent *sp;
@@ -130,14 +130,14 @@ void TpClass::serverThreadFunction (unsigned short port_val, TpTransferClass *tp
     tp_transfer_object_val->startThreads(data_socket);
 }
 
-void TpClass::logit (char const* str0_val, char const* str1_val)
+void TpServerClass::logit (char const* str0_val, char const* str1_val)
 {
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", this->objectName(), str0_val);
     phwangLogit(s, str1_val);
 }
 
-void TpClass::abend (char const* str0_val, char const* str1_val)
+void TpServerClass::abend (char const* str0_val, char const* str1_val)
 {
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", this->objectName(), str0_val);

@@ -10,10 +10,10 @@
 #define TP_TRANSFER_CLASS_TRANSMIT_QUEUE_SIZE 1000
 #define TP_TRANSFER_CLASS_RECEIVE_BUFFER_SIZE 1024
 
-class TpClass;
+class TpServerClass;
 
 class TpTransferClass {
-    TpClass *theTpObject;
+    TpServerClass *theTpObject;
     void (*theReceiveCallback)(void *, void *);
     void *theReceiveObject;
     int theSocket;
@@ -29,7 +29,7 @@ class TpTransferClass {
     void abend(char const* str0_val, char const* str1_val);
 
 public:
-    TpTransferClass(TpClass *tp_object_val, void (*receive_callback_val)(void *, void *), void *receive_object_val);
+    TpTransferClass(TpServerClass *tp_object_val, void (*receive_callback_val)(void *, void *), void *receive_object_val);
     ~TpTransferClass(void);
     char const *objectName(void) {return "TpTransferClass";}
     int socket(void) {return this->theSocket;}
