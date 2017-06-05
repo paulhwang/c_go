@@ -18,7 +18,7 @@ typedef struct {
 } StartServerOutputStruct;
 
 class TpServerClass {
-    void *theMainObject;
+    void *theCallerObject;
     void (*theReceiveCallbackFunc)(void *, void *);
     void *theAcceptCallbackParameter;
 
@@ -26,7 +26,7 @@ class TpServerClass {
     void abend(char const* str0_val, char const* str1_val);
  
 public:
-    TpServerClass(void *main_object_val);
+    TpServerClass(void *caller_object_val);
     ~TpServerClass(void);
     char const *objectName(void) {return "TpServerClass";}
 

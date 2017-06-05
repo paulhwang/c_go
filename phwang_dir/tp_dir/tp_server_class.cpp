@@ -18,9 +18,9 @@
 #define MAXHOSTNAME 32
 #define BACKLOG 5
 
-TpServerClass::TpServerClass (void *main_object_val)
+TpServerClass::TpServerClass (void *caller_object_val)
 {
-    this->theMainObject = main_object_val;
+    this->theCallerObject = caller_object_val;
 
     if (1) {
         this->logit("TpServerClass", "init");

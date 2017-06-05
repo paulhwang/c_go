@@ -16,7 +16,7 @@ BaseMgrClass::BaseMgrClass (MainClass *main_object_val)
 {
     memset(this, 0, sizeof(BaseMgrClass));
     this->theMainObject = main_object_val;
-    this->theTpServerObject = new TpServerClass(this->theMainObject);
+    this->theTpServerObject = new TpServerClass(this);
     this->theGlobalBaseId = 0;
 
     this->theReceiveQueue = phwangMallocQueue(BASE_MGR_RECEIVE_QUEUE_SIZE);
