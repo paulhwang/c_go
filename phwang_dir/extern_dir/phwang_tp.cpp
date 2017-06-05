@@ -9,6 +9,20 @@
 #include "../tp_dir/tp_transfer_class.h"
 #include "phwang_class.h"
 
+pthread_t PhwangClass::startServerThread (unsigned short port_val,
+                                            void (*accept_callback_func_val)(void *, void *),
+                                            void *accept_callback_parameter_val,
+                                            void (*receive_callback_func_val)(void *, void *),
+                                            void *receive_callback_parameter_val)
+{
+
+}
+
+void *PhwangClass::tpConnect (unsigned long ip_addr_val, unsigned short port_val, void (*receive_callback_val)(void *, void *), void *receive_object_val)
+{
+    return tpConnectServiceFunction(ip_addr_val, port_val, receive_callback_val, receive_object_val);
+}
+
 void PhwangClass::freeTpTransfer (void *tp_transfer_val)
 {
     if (!tp_transfer_val) {
@@ -22,11 +36,6 @@ void PhwangClass::freeTpTransfer (void *tp_transfer_val)
     }
 
     ((TpTransferClass *) tp_transfer_val)->~TpTransferClass();
-}
-
-void *PhwangClass::tpConnect (unsigned long ip_addr_val, unsigned short port_val, void (*receive_callback_val)(void *, void *), void *receive_object_val)
-{
-    return tpConnectServiceFunction(ip_addr_val, port_val, receive_callback_val, receive_object_val);
 }
 
 void PhwangClass::tpTransmit (void *tp_transfer_val, char *data_val)
