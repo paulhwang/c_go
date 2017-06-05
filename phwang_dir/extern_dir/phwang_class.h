@@ -26,6 +26,6 @@ class PhwangClass {
     void *dequeue(void *queue_val);
 
     void freeTpTransfer(void *tp_transfer_val);
-    void *tpConnect1(unsigned long ip_addr_val, unsigned short port_val, void (*receive_callback_val)(void *, void *), void *receive_object_val);
+    void *tpConnect(unsigned long ip_addr_val, unsigned short port_val, void (*receive_callback_val)(void *, void *), void *receive_object_val);
     void tpTransmit(void *tp_transfer_val, char *data_val);
 };
