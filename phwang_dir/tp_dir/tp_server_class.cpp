@@ -24,6 +24,9 @@ TpServerClass::TpServerClass (void *caller_object_val,
                               void (*receive_callback_func_val)(void *, void *))
 {
     this->theCallerObject = caller_object_val;
+    this->thePort = port_val;
+    this->theAcceptCallbackFunc = accept_callback_func_val;
+    this->theAcceptCallbackFunc = receive_callback_func_val;
 
     if (1) {
         this->logit("TpServerClass", "init");

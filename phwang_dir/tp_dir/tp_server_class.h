@@ -19,6 +19,8 @@ typedef struct {
 
 class TpServerClass {
     void *theCallerObject;
+    unsigned short thePort;
+    void (*theAcceptCallbackFunc)(void *, void *);
     void (*theReceiveCallbackFunc)(void *, void *);
     void *theAcceptCallbackParameter;
 
