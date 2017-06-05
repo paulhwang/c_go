@@ -12,8 +12,6 @@
 #include "extern_dir/phwang_class.h"
 #include "tp_dir/tp_connect.h"
 
-extern PhwangClass *thePhwangObject;
-
 /* init */
 inline void phwangInit (void)
 {
