@@ -26,7 +26,10 @@ class TpServerClass {
     void abend(char const* str0_val, char const* str1_val);
  
 public:
-    TpServerClass(void *caller_object_val);
+    TpServerClass(void *caller_object_val,
+                  unsigned short port_val,
+                  void (*accept_callback_func_val)(void *, void *),
+                  void (*receive_callback_func_val)(void *, void *));
     ~TpServerClass(void);
     char const *objectName(void) {return "TpServerClass";}
 

@@ -18,7 +18,10 @@
 #define MAXHOSTNAME 32
 #define BACKLOG 5
 
-TpServerClass::TpServerClass (void *caller_object_val)
+TpServerClass::TpServerClass (void *caller_object_val,
+                              unsigned short port_val,
+                              void (*accept_callback_func_val)(void *, void *),
+                              void (*receive_callback_func_val)(void *, void *))
 {
     this->theCallerObject = caller_object_val;
 
@@ -109,9 +112,9 @@ void TpServerClass::serverThreadFunction (void *data_val)
 
     this->logit("startServer", "accepted");
 
-    TpTransferClass *tp_transfer_object = new TpTransferClass(data_socket, data->receive_callback_func, data->receive_callback_parameter);
+    TpTransferClass *tp_transfer_object = new TpTransferClass(data_socket, data->receive_callback_func, this->theCallerObject);
     tp_transfer_object->startThreads();
-    data->accept_callback_func(data->accept_callback_parameter, tp_transfer_object);
+    data->accept_callback_func(this->theCallerObject, tp_transfer_object);
     free(data_val);
 }
 

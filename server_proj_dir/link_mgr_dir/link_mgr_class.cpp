@@ -14,7 +14,7 @@ LinkMgrClass::LinkMgrClass (MainClass *main_object_val)
 {
     memset(this, 0, sizeof(LinkMgrClass));
     this->theMainObject = main_object_val;
-    this->theTpServerObject = new TpServerClass(this);
+    this->theTpServerObject = new TpServerClass(this, 0, 0, 0);
     this->theGlobalLinkId = 0;
 
     this->theReceiveQueue = phwangMallocQueue(LINK_MGR_RECEIVE_QUEUE_SIZE);
