@@ -22,12 +22,6 @@ class TpServerClass {
     void (*theReceiveCallbackFunc)(void *, void *);
     void *theAcceptCallbackParameter;
 
-    pthread_t startServerThread(TpTransferClass *tp_transfer_val, unsigned short port_val,
-                                            void (*accept_callback_func_val)(void *, void *),
-                                            void *accept_callback_parameter_val,
-                                            void (*receive_callback_func_val)(void *, void *),
-                                            void *receive_callback_parameter_val);
-
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
  
@@ -35,7 +29,6 @@ public:
     TpServerClass(void *main_object_val);
     ~TpServerClass(void);
     char const *objectName(void) {return "TpServerClass";}
-    //void (*acceptCallbackFunc(void))(void *, void *) {return this->theAcceptCallbackFunc;}
 
     pthread_t startServer(unsigned short port_val,
                           void (*accept_callback_func_val)(void *, void *),
