@@ -19,7 +19,6 @@ typedef struct {
 
 class TpServerClass {
     void *theMainObject;
-    void (*theAcceptCallbackFunc)(void *, void *);
     void (*theReceiveCallbackFunc)(void *, void *);
     void *theAcceptCallbackParameter;
 
