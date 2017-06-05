@@ -12,7 +12,6 @@
 
 MainClass::MainClass(void)
 {
-    this->theTransportObject = new TpServerClass(this);
     this->theGoBaseMgrObject = new BaseMgrClass(this);
     this->theLinkMgrObject = new LinkMgrClass(this);
 }
@@ -21,7 +20,6 @@ MainClass::~MainClass(void)
 {
     this->theLinkMgrObject->~LinkMgrClass(); 
     this->theGoBaseMgrObject->~BaseMgrClass(); 
-    this->theTransportObject->~TpServerClass(); 
 }
 
 void MainClass::startThreads (void)

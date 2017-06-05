@@ -28,7 +28,7 @@ LinkMgrClass::~LinkMgrClass (void)
 {
     phwangFreeQueue(this->theReceiveQueue);
     this->theTpTransferObject->~TpTransferClass(); 
-
+    this->theTpServerObject->~TpServerClass(); 
 }
 
 int LinkMgrClass::allocLinkId (void)

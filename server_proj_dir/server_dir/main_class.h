@@ -6,12 +6,10 @@
 
 #pragma once
 
-class TpServerClass;
 class LinkMgrClass;
 class BaseMgrClass;
 
 class MainClass {
-    TpServerClass *theTransportObject;
     LinkMgrClass *theLinkMgrObject;
     BaseMgrClass *theGoBaseMgrObject;
 
@@ -22,7 +20,6 @@ class MainClass {
     MainClass(void);
     ~MainClass(void);
     char const *objectName(void) {return "MainClass";}
-    TpServerClass *transportObject(void) {return this->theTransportObject;}
 
     void startThreads(void);
 };

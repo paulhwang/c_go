@@ -30,6 +30,7 @@ BaseMgrClass::~BaseMgrClass (void)
 {
     this->theTpTransferObject->~TpTransferClass(); 
     phwangFreeQueue(this->theReceiveQueue);
+    this->theTpServerObject->~TpServerClass(); 
 }
 
 int BaseMgrClass::allocBaseId (void)
