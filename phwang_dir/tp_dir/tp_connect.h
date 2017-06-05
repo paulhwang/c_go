@@ -8,4 +8,4 @@
 
 #include "../tp_dir/tp_transfer_class.h"
 
-TpTransferClass *tpConnect(unsigned long ip_addr_val, unsigned short port_val, void (*receive_callback_val)(void *, void *), void *receive_object_val);
+TpTransferClass *tpConnectServiceFunction(unsigned long ip_addr_val, unsigned short port_val, void (*receive_callback_val)(void *, void *), void *receive_object_val);

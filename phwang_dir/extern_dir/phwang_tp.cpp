@@ -26,7 +26,7 @@ void PhwangClass::freeTpTransfer (void *tp_transfer_val)
 
 void *PhwangClass::tpConnect1 (unsigned long ip_addr_val, unsigned short port_val, void (*receive_callback_val)(void *, void *), void *receive_object_val)
 {
-    return tpConnect(ip_addr_val, port_val, receive_callback_val, receive_object_val);
+    return tpConnectServiceFunction(ip_addr_val, port_val, receive_callback_val, receive_object_val);
 }
 
 void PhwangClass::tpTransmit (void *tp_transfer_val, char *data_val)
