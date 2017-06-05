@@ -76,9 +76,5 @@ void baseMgrReceiveDataFromTransport (void *base_mgr_object_val, void *data_val)
 void BaseMgrClass::startThreads (void)
 {
     this->startReceiveThread();
-
-    StartServerOutputStruct start_server_output;
-    this->theMainObject->transportObject()->startServer(BASE_MGR_PROTOCOL_TRANSPORT_PORT_NUMBER, baseMgrTransportServerAcceptConnection, this, baseMgrReceiveDataFromTransport, this, &start_server_output);
-    this->theTpTransferObject = start_server_output.tp_transfer_object;
-    this->theTpServerThread = start_server_output.server_thread;
+    this->theTpServerThread = this->theMainObject->transportObject()->startServer(BASE_MGR_PROTOCOL_TRANSPORT_PORT_NUMBER, baseMgrTransportServerAcceptConnection, this, baseMgrReceiveDataFromTransport, this);
 }

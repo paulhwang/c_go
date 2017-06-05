@@ -67,21 +67,16 @@ pthread_t TpServerClass::startServerThread (TpTransferClass *tp_transfer_object_
     return thread;
 }
 
-TpTransferClass *TpServerClass::startServer (unsigned short port_val,
-                                             void (*accept_callback_func_val)(void *, void *),
-                                             void *accept_callback_parameter_val,
-                                             void (*receive_callback_func_val)(void *, void *),
-                                             void *receive_callback_parameter_val,
-                                             StartServerOutputStruct *output_val)
+pthread_t TpServerClass::startServer (unsigned short port_val,
+                                      void (*accept_callback_func_val)(void *, void *),
+                                      void *accept_callback_parameter_val,
+                                      void (*receive_callback_func_val)(void *, void *),
+                                      void *receive_callback_parameter_val)
 {
     pthread_t thread;
 
     thread = this->startServerThread(0, port_val, accept_callback_func_val, accept_callback_parameter_val, receive_callback_func_val, receive_callback_parameter_val);
-    if (thread) {
-        output_val->tp_transfer_object = 0;
-        output_val->server_thread = thread;
-        return 0;
-    }
+    return thread;
 }
 
 void TpServerClass::serverThreadFunction (void *data_val)

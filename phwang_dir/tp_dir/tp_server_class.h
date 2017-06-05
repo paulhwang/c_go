@@ -37,11 +37,11 @@ public:
     char const *objectName(void) {return "TpServerClass";}
     //void (*acceptCallbackFunc(void))(void *, void *) {return this->theAcceptCallbackFunc;}
 
-    TpTransferClass *startServer(unsigned short port_val, void (*accept_callback_func_val)(void *, void *),
-                                                          void *accept_callback_parameter_val,
-                                                          void (*receive_callback_func_val)(void *, void *),
-                                                          void *receive_callback_parameter_val,
-                                                          StartServerOutputStruct *output_val);
+    pthread_t startServer(unsigned short port_val,
+                          void (*accept_callback_func_val)(void *, void *),
+                          void *accept_callback_parameter_val,
+                          void (*receive_callback_func_val)(void *, void *),
+                          void *receive_callback_parameter_val);
     void serverThreadFunction(void *data_val);
 };
 
