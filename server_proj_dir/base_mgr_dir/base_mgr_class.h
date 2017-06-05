@@ -46,6 +46,7 @@ public:
 
     /* exports */
     void exportReceiveData(void *data_val);
+    void exportAcceptConnection(void *tp_transfer_object_val);
 
     void startThreads(void);
     void receiveThreadFunction(void);

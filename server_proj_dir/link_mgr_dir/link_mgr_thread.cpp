@@ -50,9 +50,14 @@ void LinkMgrClass::startReceiveThread (void)
     }
 }
 
+void LinkMgrClass::exportAcceptConnection (void *tp_transfer_object_val)
+{
+    this->theTpTransferObject = (TpTransferClass *) tp_transfer_object_val;
+}
+
 void linkMgrTransportServerAcceptConnection (void *link_mgr_object_val, void *tp_transfer_object_val) {
     phwangLogit("Golbal::linkMgrTransportServerAcceptConnection", "");
-    //((LinkMgrClass *) link_mgr_object_val)->theTpTransferObject = start_server_output.tp_transfer_object_val;
+    ((LinkMgrClass *) link_mgr_object_val)->exportAcceptConnection(tp_transfer_object_val);
 }
 
 void linkMgrReceiveDataFromTransport (void *link_mgr_object_val, void *data_val) {
