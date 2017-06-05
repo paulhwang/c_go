@@ -1,7 +1,7 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: phwang_class.cpp
+  File name: phwang_encode.cpp
 */
 
 #include "../phwang.h"
