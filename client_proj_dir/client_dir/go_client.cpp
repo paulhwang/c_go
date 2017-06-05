@@ -10,8 +10,6 @@
 #include "../../include_dir/protocol_dir/link_mgr_protocol.h"
 #include "../../include_dir/protocol_dir/base_mgr_protocol.h"
 
-PhwangClass *thePhwangObject;
-
 void *link_mgr_tp_transfer_object;
 char link_id_index[LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + 4];
 
@@ -115,7 +113,7 @@ void linkMgrTest (void)
 }
 
 int main (int argc, char** argv) {
-    thePhwangObject = new PhwangClass();
+    phwangInit();
     baseMgrTest();
     sleep(1);
     linkMgrTest();

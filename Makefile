@@ -25,7 +25,7 @@ JSON_OBJS = $(JSON_DIR)/json_class.o
 SUSPEND_OBJS = $(SUSPEND_DIR)/suspend_class.o 
 QUEUE_OBJS = $(QUEUE_DIR)/queue_entry_class.o $(QUEUE_DIR)/queue_class.o
 TP_OBJS = $(TP_DIR)/tp.o $(TP_DIR)/tp_class.o $(TP_DIR)/tp_server.o $(TP_DIR)/tp_connect.o $(TP_DIR)/tp_transfer_class.o $(TP_DIR)/tp_transfer_transmit.o $(TP_DIR)/tp_transfer_receive.o 
-EXTERN_OBJS = $(EXTERN_DIR)/phwang_logit.o $(EXTERN_DIR)/phwang_encode.o $(EXTERN_DIR)/phwang_suspend.o $(EXTERN_DIR)/phwang_queue.o $(EXTERN_DIR)/phwang_tp.o 
+EXTERN_OBJS = $(EXTERN_DIR)/phwang_logit.o $(EXTERN_DIR)/phwang_encode.o $(EXTERN_DIR)/phwang_suspend.o $(EXTERN_DIR)/phwang_queue.o $(EXTERN_DIR)/phwang_tp.o $(EXTERN_DIR)/phwang_base.o 
 PHWANG_OBJS = $(JSON_OBJS) $(SUSPEND_OBJS) $(QUEUE_OBJS) $(TP_OBJS) $(EXTERN_OBJS) 
 
 SERVER_OBJS = $(SERVER_DIR)/go_server.o $(SERVER_DIR)/main_class.o

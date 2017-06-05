@@ -8,24 +8,32 @@
 #include "stdio.h"
 #include "string.h"
 #include <malloc.h>
+#include "extern_dir/phwang_base.h"
 #include "extern_dir/phwang_class.h"
+#include "tp_dir/tp_connect.h"
 
 extern PhwangClass *thePhwangObject;
+
+/* init */
+inline void phwangInit (void)
+{
+    initPhwangObject();
+}
 
 /* logit */
 #define LOGIT_BUF_SIZE 512
 
-inline void phwangLogit(char const* str0_val, char const* str1_val)
+inline void phwangLogit (char const* str0_val, char const* str1_val)
 {
     thePhwangObject->logit(str0_val, str1_val);
 }
 
-inline void phwangAbend(char const* str0_val, char const* str1_val)
+inline void phwangAbend (char const* str0_val, char const* str1_val)
 {
     thePhwangObject->abend(str0_val, str1_val);
 }
 
-inline void phwangPrintBoard(char const* data_val, int board_size_val)
+inline void phwangPrintBoard (char const* data_val, int board_size_val)
 {
     thePhwangObject->printBoard(data_val, board_size_val);
 }
@@ -73,6 +81,21 @@ inline void *phwangDequeue(void *queue_val)
 }
 
 /* tp */
-void phwangFreeTpTransfer(void *tp_transfer_val);
-void *phwangTpConnect(unsigned long ip_addr_val, unsigned short port_val, void (*receive_callback_val)(void *, void *), void *receive_object_val);
-void phwangTpTransmit(void *tp_transfer_val, char *data_val);
+inline void phwangFreeTpTransfer(void *tp_transfer_val)
+{
+    thePhwangObject->freeTpTransfer(tp_transfer_val);
+}
+
+inline void *phwangTpConnect(unsigned long ip_addr_val, unsigned short port_val, void (*receive_callback_val)(void *, void *), void *receive_object_val)
+{
+    printf("jjj\n");
+    void *i = thePhwangObject->tpConnect1(ip_addr_val, port_val, receive_callback_val, receive_object_val);
+    printf("jjj123\n");
+    return i;
+    //return thePhwangObject->tpConnect(ip_addr_val, port_val, receive_callback_val, receive_object_val);
+}
+
+inline void phwangTpTransmit(void *tp_transfer_val, char *data_val)
+{
+    thePhwangObject->tpTransmit(tp_transfer_val, data_val);
+}

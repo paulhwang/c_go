@@ -5,6 +5,7 @@
 */
 
 #include "../phwang.h"
+#include "../tp_dir/tp_connect.h"
 #include "../tp_dir/tp_transfer_class.h"
 #include "phwang_class.h"
 
@@ -23,11 +24,9 @@ void PhwangClass::freeTpTransfer (void *tp_transfer_val)
     ((TpTransferClass *) tp_transfer_val)->~TpTransferClass();
 }
 
-void *PhwangClass::tpConnect (unsigned long ip_addr_val, unsigned short port_val, void (*receive_callback_val)(void *, void *), void *receive_object_val)
+void *PhwangClass::tpConnect1 (unsigned long ip_addr_val, unsigned short port_val, void (*receive_callback_val)(void *, void *), void *receive_object_val)
 {
-    void *tp_connect;
-    tp_connect = tpConnect(ip_addr_val, port_val, receive_callback_val, receive_object_val);
-    return tp_connect;
+    return tpConnect(ip_addr_val, port_val, receive_callback_val, receive_object_val);
 }
 
 void PhwangClass::tpTransmit (void *tp_transfer_val, char *data_val)
