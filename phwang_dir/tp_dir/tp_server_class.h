@@ -44,4 +44,5 @@ typedef struct {
     TpServerClass *transport_object;
     TpTransferClass *tp_transfer_object;
     int socket;
+    void (*accept_callback_func)(void *, void *);
 } transport_thread_parameter;
