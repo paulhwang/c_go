@@ -53,9 +53,6 @@ void *transportServerThreadFunction (void *tp_server_object_val)
 pthread_t TpServerClass::startServerThread (void)
 {
     pthread_t thread;
-    tp_server_thread_parameter *data = (tp_server_thread_parameter *) malloc(sizeof(tp_server_thread_parameter));
-
-    data->tp_server_object = this;
 
     int r;
     if (0) {

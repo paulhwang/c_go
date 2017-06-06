@@ -25,6 +25,8 @@ class TpServerClass {
     void *theAcceptCallbackParameter;
     void *theReceiveCallbackParameter;
 
+    pthread_t startServerThread(void);
+
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
  
@@ -38,7 +40,6 @@ public:
     ~TpServerClass(void);
     char const *objectName(void) {return "TpServerClass";}
 
-    pthread_t startServerThread(void);
     void serverThreadFunction(void *data_val);
 };
 
