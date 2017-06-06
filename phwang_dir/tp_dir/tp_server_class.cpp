@@ -50,21 +50,17 @@ void *transportServerThreadFunction (void *tp_server_object_val)
     ((TpServerClass *) tp_server_object_val)->serverThreadFunction(0);
 }
 
-pthread_t TpServerClass::startServerThread (void)
+void TpServerClass::startServerThread (void)
 {
-    pthread_t thread;
-
-    int r;
     if (0) {
         this->logit("startServerThread", "");
     }
-    r = pthread_create(&thread, 0, transportServerThreadFunction, this);
+
+    int r = pthread_create(&this->theServerThread, 0, transportServerThreadFunction, this);
     if (r) {
         printf("Error - startServerThread() return code: %d\n", r);
-        return 0;
+        return;
     }
-
-    return thread;
 }
 
 void TpServerClass::serverThreadFunction (void *data_val)

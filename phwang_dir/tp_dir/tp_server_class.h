@@ -24,8 +24,9 @@ class TpServerClass {
     void (*theReceiveCallbackFunc)(void *, void *);
     void *theAcceptCallbackParameter;
     void *theReceiveCallbackParameter;
+    pthread_t theServerThread;
 
-    pthread_t startServerThread(void);
+    void startServerThread(void);
 
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
