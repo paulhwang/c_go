@@ -42,12 +42,3 @@ public:
 
     void serverThreadFunction(void *data_val);
 };
-
-typedef struct {
-    TpServerClass *tp_server_object;
-    unsigned short port;
-    void (*accept_callback_func)(void *, void *);
-    void *accept_callback_parameter;
-    void (*receive_callback_func)(void *, void *);
-    void *receive_callback_parameter;
-} tp_server_thread_parameter;

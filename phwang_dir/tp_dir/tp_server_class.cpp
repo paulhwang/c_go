@@ -69,7 +69,6 @@ pthread_t TpServerClass::startServerThread (void)
 
 void TpServerClass::serverThreadFunction (void *data_val)
 {
-    tp_server_thread_parameter *data = (tp_server_thread_parameter *) data_val;
     char localhost[MAXHOSTNAME + 1];
     struct servent *sp;
     int s, data_socket;
