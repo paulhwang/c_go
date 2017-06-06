@@ -5,8 +5,6 @@
 */
 
 #include "../../phwang_dir/phwang.h"
-#include "../../phwang_dir/tp_dir/tp_server_class.h"
-#include "../../phwang_dir/tp_dir/tp_transfer_class.h"
 #include "link_mgr_class.h"
 #include "link_class.h"
 
@@ -37,9 +35,9 @@ LinkMgrClass::LinkMgrClass (MainClass *main_object_val)
 
 LinkMgrClass::~LinkMgrClass (void)
 {
+    phwangFreeTpServer(this->theTpServerObject); 
+    phwangFreeTpTransfer(this->theTpTransferObject); 
     phwangFreeQueue(this->theReceiveQueue);
-    this->theTpTransferObject->~TpTransferClass(); 
-    this->theTpServerObject->~TpServerClass(); 
 }
 
 int LinkMgrClass::allocLinkId (void)

@@ -13,7 +13,6 @@ class EngineClass;
 class BaseClass;
 class GoBaseClass;
 class MainClass;
-class TpServerClass;
 class TpTransferClass;
 
 #define BASE_MGR_RECEIVE_QUEUE_SIZE 100
@@ -23,7 +22,7 @@ class BaseMgrClass {
 #define BASE_MGR_MAX_GLOBAL_BASE_ID 9999
 
     MainClass *theMainObject;
-    TpServerClass *theTpServerObject;
+    void *theTpServerObject;
     int theGlobalBaseId;
     void *theBaseTableArray[BASE_MGR_BASE_ARRAY_SIZE + 4];
 
