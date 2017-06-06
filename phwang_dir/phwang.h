@@ -111,7 +111,7 @@ inline void *phwangTpConnect(
 
 inline void phwangFreeTpServer(void *tp_server_object_val)
 {
-
+    thePhwangObject->freeTpServer(tp_server_object_val);
 }
 
 inline void phwangFreeTpTransfer(void *tp_transfer_object_val)

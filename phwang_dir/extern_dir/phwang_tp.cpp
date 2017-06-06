@@ -33,6 +33,21 @@ void *PhwangClass::tpConnect (unsigned long ip_addr_val, unsigned short port_val
     return tpConnectServiceFunction(ip_addr_val, port_val, receive_callback_val, receive_object_val);
 }
 
+void PhwangClass::freeTpServer (void *tp_server_object_val)
+{
+    if (!tp_server_object_val) {
+        phwangLogit("phwangFreeTpTransfer", "null tp_server_object_val");
+        return;
+    }
+
+    if (strcmp(((TpServerClass *) tp_server_object_val)->objectName(), "TpServerClass")) {
+        phwangLogit("phwangFreeTpTransfer", "wrong object");
+        return;
+    }
+
+    ((TpServerClass *) tp_server_object_val)->~TpServerClass();
+}
+
 void PhwangClass::freeTpTransfer (void *tp_transfer_object_val)
 {
     if (!tp_transfer_object_val) {
