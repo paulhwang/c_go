@@ -9,9 +9,6 @@
 #include <pthread.h>
 #include "../../include_dir/protocol_dir/link_mgr_protocol.h"
 class LinkClass;
-class MainClass;
-class TpServerClass;
-class TpTransferClass;
 
 #define LINK_MGR_RECEIVE_QUEUE_SIZE 100
 
@@ -19,12 +16,12 @@ class LinkMgrClass {
 #define LINK_MGR_LINK_ARRAY_SIZE 1000
 #define LINK_MGR_MAX_GLOBAL_LINK_ID 9999
 
-    MainClass *theMainObject;
-    TpServerClass *theTpServerObject;
+    void *theMainObject;
+    void *theTpServerObject;
     int theGlobalLinkId;
     LinkClass *theLinkTableArray[LINK_MGR_LINK_ARRAY_SIZE + 4];
 
-    TpTransferClass *theTpTransferObject;
+    void *theTpTransferObject;
     pthread_t theTpServerThread;
     pthread_t theReceiveThread;
     void *theReceiveQueue;
@@ -38,7 +35,7 @@ class LinkMgrClass {
     void abend(char const* str0_val, char const* str1_val);
 
 public:
-    LinkMgrClass(MainClass *main_object_val);
+    LinkMgrClass(void *main_object_val);
     ~LinkMgrClass();
     char const* objectName(void) {return "LinkMgrClass";}
     pthread_t receiveThread(void) {return this->theReceiveThread;}

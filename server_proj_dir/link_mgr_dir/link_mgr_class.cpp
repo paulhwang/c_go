@@ -19,11 +19,11 @@ void linkMgrReceiveDataFromTransport (void *link_mgr_object_val, void *data_val)
     ((LinkMgrClass *) link_mgr_object_val)->exportReceiveData(data_val);
 }
 
-LinkMgrClass::LinkMgrClass (MainClass *main_object_val)
+LinkMgrClass::LinkMgrClass (void *main_object_val)
 {
     memset(this, 0, sizeof(LinkMgrClass));
     this->theMainObject = main_object_val;
-    this->theTpServerObject = (TpServerClass *) phwangMallocTpServer(this, LINK_MGR_PROTOCOL_TRANSPORT_PORT_NUMBER, linkMgrTransportServerAcceptConnection, this, linkMgrReceiveDataFromTransport, this);
+    this->theTpServerObject = phwangMallocTpServer(this, LINK_MGR_PROTOCOL_TRANSPORT_PORT_NUMBER, linkMgrTransportServerAcceptConnection, this, linkMgrReceiveDataFromTransport, this);
     this->theGlobalLinkId = 0;
 
     this->theReceiveQueue = phwangMallocQueue(LINK_MGR_RECEIVE_QUEUE_SIZE);
