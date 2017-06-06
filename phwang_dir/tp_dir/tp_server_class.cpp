@@ -58,11 +58,6 @@ pthread_t TpServerClass::startServerThread (unsigned short port_val,
     tp_server_thread_parameter *data = (tp_server_thread_parameter *) malloc(sizeof(tp_server_thread_parameter));
 
     data->tp_server_object = this;
-    data->port = port_val;
-    data->accept_callback_func = accept_callback_func_val;
-    data->accept_callback_parameter = accept_callback_parameter_val;
-    data->receive_callback_func = receive_callback_func_val;
-    data->receive_callback_parameter = receive_callback_parameter_val;
 
     int r;
     if (0) {
