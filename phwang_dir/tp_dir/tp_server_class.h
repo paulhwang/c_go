@@ -38,11 +38,7 @@ public:
     ~TpServerClass(void);
     char const *objectName(void) {return "TpServerClass";}
 
-    pthread_t startServerThread(unsigned short port_val,
-                                void (*accept_callback_func_val)(void *, void *),
-                                void *accept_callback_parameter_val,
-                                void (*receive_callback_func_val)(void *, void *),
-                                void *receive_callback_parameter_val);
+    pthread_t startServerThread(void);
     void serverThreadFunction(void *data_val);
 };
 

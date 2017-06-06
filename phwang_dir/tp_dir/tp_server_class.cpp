@@ -34,7 +34,7 @@ TpServerClass::TpServerClass (
     this->theAcceptCallbackParameter = accept_callback_parameter_val;
     this->theReceiveCallbackParameter = receive_callback_parameter_val;
 
-    this->startServerThread(0,0,0,0,0);
+    this->startServerThread();
 
     if (1) {
         this->logit("TpServerClass", "init");
@@ -50,11 +50,7 @@ void *transportServerThreadFunction (void *tp_server_object_val)
     ((TpServerClass *) tp_server_object_val)->serverThreadFunction(0);
 }
 
-pthread_t TpServerClass::startServerThread (unsigned short port_val,
-                                            void (*accept_callback_func_val)(void *, void *),
-                                            void *accept_callback_parameter_val,
-                                            void (*receive_callback_func_val)(void *, void *),
-                                            void *receive_callback_parameter_val)
+pthread_t TpServerClass::startServerThread (void)
 {
     pthread_t thread;
     tp_server_thread_parameter *data = (tp_server_thread_parameter *) malloc(sizeof(tp_server_thread_parameter));
