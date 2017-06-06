@@ -5,7 +5,6 @@
 */
 
 #include "../../phwang_dir/phwang.h"
-#include "../../phwang_dir/net_dir/tp_transfer_class.h"
 #include "link_mgr_class.h"
 #include "link_class.h"
 
@@ -97,7 +96,7 @@ void LinkMgrClass::transmitData(char *data_val)
 {
     if (1) {
         this->logit("transmitData", data_val);
-        this->theTpTransferObject->exportTransmitData(data_val);
+        phwangTpTransmit(this->theTpTransferObject, data_val);
     }
 }
 
