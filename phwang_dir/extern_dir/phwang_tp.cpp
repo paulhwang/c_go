@@ -28,30 +28,6 @@ void *PhwangClass::mallocTpServer (
             receive_callback_parameter_val);
 }
 
-pthread_t PhwangClass::startServerThread (void *tp_server_object_val,
-                                          unsigned short port_val,
-                                          void (*accept_callback_func_val)(void *, void *),
-                                          void *accept_callback_parameter_val,
-                                          void (*receive_callback_func_val)(void *, void *),
-                                          void *receive_callback_parameter_val)
-{
-    if (!tp_server_object_val) {
-        phwangLogit("startServerThread", "null tp_server_object_val");
-        return 0;
-    }
-
-    if (strcmp(((TpServerClass *) tp_server_object_val)->objectName(), "TpServerClass")) {
-        phwangLogit("startServerThread", "wrong object");
-        return 0;
-    }
-
-    return ((TpServerClass *) tp_server_object_val)->startServerThread(port_val,
-                                          accept_callback_func_val,
-                                          accept_callback_parameter_val,
-                                          receive_callback_func_val,
-                                          receive_callback_parameter_val);
-}
-
 void *PhwangClass::tpConnect (unsigned long ip_addr_val, unsigned short port_val, void (*receive_callback_val)(void *, void *), void *receive_object_val)
 {
     return tpConnectServiceFunction(ip_addr_val, port_val, receive_callback_val, receive_object_val);

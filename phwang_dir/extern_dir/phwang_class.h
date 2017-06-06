@@ -5,7 +5,6 @@
 */
 
 #pragma once
-#include <pthread.h>
 
 class PhwangClass {
  public:
@@ -33,13 +32,6 @@ class PhwangClass {
             void *accept_callback_parameter_val,
             void (*receive_callback_func_val)(void *, void *),
             void *receive_callback_parameter_val);
-
-   pthread_t startServerThread(void *tp_server_object_val,
-                                unsigned short port_val,
-                                void (*accept_callback_func_val)(void *, void *),
-                                void *accept_callback_parameter_val,
-                                void (*receive_callback_func_val)(void *, void *),
-                                void *receive_callback_parameter_val);
     void *tpConnect(unsigned long ip_addr_val, unsigned short port_val, void (*receive_callback_val)(void *, void *), void *receive_object_val);
     void freeTpTransfer(void *tp_transfer_object_val);
     void tpTransmit(void *tp_transfer_object_val, char *data_val);
