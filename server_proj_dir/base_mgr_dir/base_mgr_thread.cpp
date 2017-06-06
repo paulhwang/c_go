@@ -61,16 +61,6 @@ void BaseMgrClass::exportAcceptConnection (void *tp_transfer_object_val)
     //phwangLogit("exportAcceptConnection", this->theTpTransferObject->objectName());
 }
 
-void baseMgrTransportServerAcceptConnection (void *base_mgr_object_val, void *tp_transfer_object_val) {
-    //phwangLogit("Golbal::baseMgrTransportServerAcceptConnection", "");
-    ((BaseMgrClass *) base_mgr_object_val)->exportAcceptConnection(tp_transfer_object_val);
-}
-
-void baseMgrReceiveDataFromTransport (void *base_mgr_object_val, void *data_val) {
-    phwangLogit("Golbal::baseMgrReceiveDataFromTransport", (char *) data_val);
-    ((BaseMgrClass *) base_mgr_object_val)->exportReceiveData(data_val);
-}
-
 void BaseMgrClass::startThreads (void)
 {
     this->startReceiveThread();

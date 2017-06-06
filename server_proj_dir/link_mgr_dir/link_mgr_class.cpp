@@ -10,8 +10,16 @@
 #include "link_mgr_class.h"
 #include "link_class.h"
 
-void linkMgrTransportServerAcceptConnection (void *link_mgr_object_val, void *tp_transfer_object_val);
-void linkMgrReceiveDataFromTransport (void *link_mgr_object_val, void *data_val);
+void linkMgrTransportServerAcceptConnection (void *link_mgr_object_val, void *tp_transfer_object_val) {
+    //phwangLogit("Golbal::linkMgrTransportServerAcceptConnection", ((LinkMgrClass *) link_mgr_object_val)->objectName());
+    //phwangLogit("Golbal::linkMgrTransportServerAcceptConnection", ((TpTransferClass *) tp_transfer_object_val)->objectName());
+    ((LinkMgrClass *) link_mgr_object_val)->exportAcceptConnection(tp_transfer_object_val);
+}
+
+void linkMgrReceiveDataFromTransport (void *link_mgr_object_val, void *data_val) {
+    phwangLogit("Golbal::linkMgrReceiveDataFromTransport", (char *) data_val);
+    ((LinkMgrClass *) link_mgr_object_val)->exportReceiveData(data_val);
+}
 
 LinkMgrClass::LinkMgrClass (MainClass *main_object_val)
 {

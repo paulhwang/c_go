@@ -12,8 +12,15 @@
 #include "base_mgr_class.h"
 #include "../go_base_dir/go_base_class.h"
 
-void baseMgrTransportServerAcceptConnection (void *base_mgr_object_val, void *tp_transfer_object_val);
-void baseMgrReceiveDataFromTransport (void *base_mgr_object_val, void *data_val);
+void baseMgrTransportServerAcceptConnection (void *base_mgr_object_val, void *tp_transfer_object_val) {
+    //phwangLogit("Golbal::baseMgrTransportServerAcceptConnection", "");
+    ((BaseMgrClass *) base_mgr_object_val)->exportAcceptConnection(tp_transfer_object_val);
+}
+
+void baseMgrReceiveDataFromTransport (void *base_mgr_object_val, void *data_val) {
+    phwangLogit("Golbal::baseMgrReceiveDataFromTransport", (char *) data_val);
+    ((BaseMgrClass *) base_mgr_object_val)->exportReceiveData(data_val);
+}
 
 BaseMgrClass::BaseMgrClass (MainClass *main_object_val)
 {
