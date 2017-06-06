@@ -57,7 +57,7 @@ void BaseMgrClass::startReceiveThread (void)
 
 void BaseMgrClass::exportAcceptConnection (void *tp_transfer_object_val)
 {
-    this->theTpTransferObject = (TpTransferClass *) tp_transfer_object_val;
+    this->theTpTransferObject = tp_transfer_object_val;
     //phwangLogit("exportAcceptConnection", this->theTpTransferObject->objectName());
 }
 

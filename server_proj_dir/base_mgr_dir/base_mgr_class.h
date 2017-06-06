@@ -12,8 +12,6 @@
 class EngineClass;
 class BaseClass;
 class GoBaseClass;
-class MainClass;
-class TpTransferClass;
 
 #define BASE_MGR_RECEIVE_QUEUE_SIZE 100
 
@@ -21,12 +19,12 @@ class BaseMgrClass {
 #define BASE_MGR_BASE_ARRAY_SIZE 1000
 #define BASE_MGR_MAX_GLOBAL_BASE_ID 9999
 
-    MainClass *theMainObject;
+    void *theMainObject;
     void *theTpServerObject;
     int theGlobalBaseId;
     void *theBaseTableArray[BASE_MGR_BASE_ARRAY_SIZE + 4];
 
-    TpTransferClass *theTpTransferObject;
+    void *theTpTransferObject;
     pthread_t theTpServerThread;
     pthread_t theReceiveThread;
     void *theReceiveQueue;
@@ -40,7 +38,7 @@ class BaseMgrClass {
     void abend(char const* str0_val, char const* str1_val);
 
 public:
-    BaseMgrClass(MainClass *main_object_val);
+    BaseMgrClass(void *main_object_val);
     ~BaseMgrClass();
     char const* objectName(void) {return "BaseMgrClass";}
     pthread_t receiveThread(void) {return this->theReceiveThread;}

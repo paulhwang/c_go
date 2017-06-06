@@ -18,7 +18,7 @@ void baseMgrReceiveDataFromTransport (void *base_mgr_object_val, void *data_val)
     ((BaseMgrClass *) base_mgr_object_val)->exportReceiveData(data_val);
 }
 
-BaseMgrClass::BaseMgrClass (MainClass *main_object_val)
+BaseMgrClass::BaseMgrClass (void *main_object_val)
 {
     memset(this, 0, sizeof(BaseMgrClass));
     this->theMainObject = main_object_val;
