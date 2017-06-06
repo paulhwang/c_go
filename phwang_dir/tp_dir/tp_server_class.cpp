@@ -31,9 +31,8 @@ TpServerClass::TpServerClass (
     this->thePort = port_val;
     this->theAcceptCallbackFunc = accept_callback_func_val;
     this->theReceiveCallbackFunc = receive_callback_func_val;
-    this->theAcceptCallbackParameter = 0;
-    this->theReceiveCallbackParameter = 0;
-
+    this->theAcceptCallbackParameter = accept_callback_parameter_val;
+    this->theReceiveCallbackParameter = receive_callback_parameter_val;
 
     if (1) {
         this->logit("TpServerClass", "init");
