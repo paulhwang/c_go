@@ -10,7 +10,6 @@
 #include <malloc.h>
 #include "extern_dir/phwang_base.h"
 #include "extern_dir/phwang_class.h"
-#include "tp_dir/tp_connect.h"
 
 /* init */
 inline void phwangInit (void)

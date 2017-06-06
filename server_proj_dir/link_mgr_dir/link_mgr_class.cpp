@@ -5,6 +5,7 @@
 */
 
 #include "../../phwang_dir/phwang.h"
+#include "../../phwang_dir/net_dir/tp_transfer_class.h"
 #include "link_mgr_class.h"
 #include "link_class.h"
 
