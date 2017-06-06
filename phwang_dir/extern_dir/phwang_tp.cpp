@@ -12,20 +12,20 @@
 
 
 void *PhwangClass::mallocTpServer (
-        void *caller_object_val,
-        unsigned short port_val,
-        void (*accept_callback_func_val)(void *, void *),
-        void *accept_callback_parameter_val,
-        void (*receive_callback_func_val)(void *, void *),
-        void *receive_callback_parameter_val)
+                        void *caller_object_val,
+                        unsigned short port_val,
+                        void (*accept_callback_func_val)(void *, void *),
+                        void *accept_callback_parameter_val,
+                        void (*receive_callback_func_val)(void *, void *),
+                        void *receive_callback_parameter_val)
 {
     return new TpServerClass(
-            caller_object_val,
-            port_val,
-            accept_callback_func_val,
-            accept_callback_parameter_val,
-            receive_callback_func_val,
-            receive_callback_parameter_val);
+                    caller_object_val,
+                    port_val,
+                    accept_callback_func_val,
+                    accept_callback_parameter_val,
+                    receive_callback_func_val,
+                    receive_callback_parameter_val);
 }
 
 void *PhwangClass::tpConnect (unsigned long ip_addr_val, unsigned short port_val, void (*receive_callback_val)(void *, void *), void *receive_object_val)
