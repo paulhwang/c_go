@@ -34,6 +34,8 @@ TpServerClass::TpServerClass (
     this->theAcceptCallbackParameter = accept_callback_parameter_val;
     this->theReceiveCallbackParameter = receive_callback_parameter_val;
 
+    this->startServerThread(0,0,0,0,0);
+
     if (1) {
         this->logit("TpServerClass", "init");
     }

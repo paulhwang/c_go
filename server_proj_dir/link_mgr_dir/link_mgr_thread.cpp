@@ -57,6 +57,4 @@ void LinkMgrClass::exportAcceptConnection (void *tp_transfer_object_val)
 void LinkMgrClass::startThreads (void)
 {
     this->startReceiveThread();
-    this->theTpServerThread = phwangStartTpServerListening(this->theTpServerObject,
-                                   0, 0, 0, 0, 0);
 }
