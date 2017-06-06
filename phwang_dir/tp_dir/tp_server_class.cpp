@@ -43,9 +43,9 @@ TpServerClass::~TpServerClass (void)
 {
 }
 
-void *transportServerThreadFunction (void *data_val)
+void *transportServerThreadFunction (void *tp_server_object_val)
 {
-    ((tp_server_thread_parameter *) data_val)->tp_server_object->serverThreadFunction(0);
+    ((TpServerClass *) tp_server_object_val)->serverThreadFunction(0);
 }
 
 pthread_t TpServerClass::startServerThread (unsigned short port_val,
@@ -63,7 +63,7 @@ pthread_t TpServerClass::startServerThread (unsigned short port_val,
     if (0) {
         this->logit("startServerThread", "");
     }
-    r = pthread_create(&thread, 0, transportServerThreadFunction, data);
+    r = pthread_create(&thread, 0, transportServerThreadFunction, this);
     if (r) {
         printf("Error - startServerThread() return code: %d\n", r);
         return 0;
