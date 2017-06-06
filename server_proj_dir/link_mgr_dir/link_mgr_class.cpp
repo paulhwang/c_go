@@ -17,7 +17,7 @@ LinkMgrClass::LinkMgrClass (MainClass *main_object_val)
 {
     memset(this, 0, sizeof(LinkMgrClass));
     this->theMainObject = main_object_val;
-    this->theTpServerObject = new TpServerClass(this, LINK_MGR_PROTOCOL_TRANSPORT_PORT_NUMBER, linkMgrTransportServerAcceptConnection, linkMgrReceiveDataFromTransport);
+    this->theTpServerObject = (TpServerClass *) phwangMallocTpServer(this, LINK_MGR_PROTOCOL_TRANSPORT_PORT_NUMBER, linkMgrTransportServerAcceptConnection, this, linkMgrReceiveDataFromTransport, this);
     this->theGlobalLinkId = 0;
 
     this->theReceiveQueue = phwangMallocQueue(LINK_MGR_RECEIVE_QUEUE_SIZE);

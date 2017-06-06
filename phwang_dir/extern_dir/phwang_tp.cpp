@@ -10,6 +10,18 @@
 #include "../tp_dir/tp_transfer_class.h"
 #include "phwang_class.h"
 
+
+void *PhwangClass::mallocTpServer (
+        void *caller_object_val,
+        unsigned short port_val,
+        void (*accept_callback_func_val)(void *, void *),
+        void *accept_callback_parameter_val,
+        void (*receive_callback_func_val)(void *, void *),
+        void *receive_callback_parameter_val)
+{
+    return new TpServerClass(caller_object_val, port_val, accept_callback_func_val, receive_callback_func_val);
+}
+
 pthread_t PhwangClass::startServerThread (void *tp_server_object_val,
                                           unsigned short port_val,
                                           void (*accept_callback_func_val)(void *, void *),
