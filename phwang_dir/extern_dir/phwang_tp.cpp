@@ -19,7 +19,13 @@ void *PhwangClass::mallocTpServer (
         void (*receive_callback_func_val)(void *, void *),
         void *receive_callback_parameter_val)
 {
-    return new TpServerClass(caller_object_val, port_val, accept_callback_func_val, receive_callback_func_val);
+    return new TpServerClass(
+            caller_object_val,
+            port_val,
+            accept_callback_func_val,
+            accept_callback_parameter_val,
+            receive_callback_func_val,
+            receive_callback_parameter_val);
 }
 
 pthread_t PhwangClass::startServerThread (void *tp_server_object_val,

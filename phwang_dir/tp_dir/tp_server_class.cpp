@@ -18,15 +18,22 @@
 #define MAXHOSTNAME 32
 #define BACKLOG 5
 
-TpServerClass::TpServerClass (void *caller_object_val,
-                              unsigned short port_val,
-                              void (*accept_callback_func_val)(void *, void *),
-                              void (*receive_callback_func_val)(void *, void *))
+TpServerClass::TpServerClass (
+                    void *caller_object_val,
+                    unsigned short port_val,
+                    void (*accept_callback_func_val)(void *, void *),
+                    void *accept_callback_parameter_val,
+                    void (*receive_callback_func_val)(void *, void *),
+                    void *receive_callback_parameter_val)
+
 {
     this->theCallerObject = caller_object_val;
     this->thePort = port_val;
     this->theAcceptCallbackFunc = accept_callback_func_val;
     this->theReceiveCallbackFunc = receive_callback_func_val;
+    this->theAcceptCallbackParameter = 0;
+    this->theReceiveCallbackParameter = 0;
+
 
     if (1) {
         this->logit("TpServerClass", "init");
