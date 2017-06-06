@@ -69,5 +69,5 @@ void LinkMgrClass::startThreads (void)
 {
     this->startReceiveThread();
     this->theTpServerThread = phwangStartTpServerListening(this->theTpServerObject,
-                                   LINK_MGR_PROTOCOL_TRANSPORT_PORT_NUMBER, linkMgrTransportServerAcceptConnection, this, linkMgrReceiveDataFromTransport, this);
+                                   0, 0, 0, 0, 0);
 }

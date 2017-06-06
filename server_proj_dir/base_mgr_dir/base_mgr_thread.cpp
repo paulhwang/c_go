@@ -75,5 +75,5 @@ void BaseMgrClass::startThreads (void)
 {
     this->startReceiveThread();
     this->theTpServerThread = phwangStartTpServerListening(this->theTpServerObject,
-                                   BASE_MGR_PROTOCOL_TRANSPORT_PORT_NUMBER, baseMgrTransportServerAcceptConnection, this, baseMgrReceiveDataFromTransport, this);
+                                   0, 0, 0, 0, 0);
 }
