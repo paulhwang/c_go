@@ -9,7 +9,6 @@
 #include <pthread.h>
 #include "../../include_dir/protocol_dir/base_mgr_protocol.h"
 #include "../go_base_dir/go_base_class.h"
-class EngineClass;
 class BaseClass;
 class GoBaseClass;
 

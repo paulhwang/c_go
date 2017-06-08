@@ -92,6 +92,28 @@ void LinkMgrClass::mallocLink (char const *data_val)
     */
 }
 
+void LinkMgrClass::mallocSession (char *data_val)
+{
+    int link_id;
+    int link_id_index;
+    if (1) {
+        this->logit("mallocSession", data_val);
+    }
+
+    phwangDecodeIdIndex(data_val,
+                &link_id,
+                LINK_MGR_PROTOCOL_LINK_ID_SIZE,
+                &link_id_index,
+                LINK_MGR_PROTOCOL_LINK_INDEX_SIZE);
+    data_val += LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE;
+
+    if (1) {
+        char s[LOGIT_BUF_SIZE];
+        sprintf(s, "link_id=%d link_index-%d", link_id, link_id_index);
+        this->logit("mallocSession", s);
+    }
+}
+
 void LinkMgrClass::transmitData(char *data_val)
 {
     if (1) {

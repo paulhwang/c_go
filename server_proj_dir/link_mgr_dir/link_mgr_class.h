@@ -29,7 +29,6 @@ class LinkMgrClass {
     void startReceiveThread(void);
     int allocLinkId(void);
     int allocLinkIndex(void);
-    void mallocLink(void);
 
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
@@ -52,6 +51,8 @@ public:
 
     void mallocLink (char const *my_name_val);
     void freeLink (LinkClass *link_object_val);
+
+    void mallocSession (char *my_name_val);
 
     void linkMgrLogit(char const* str0_val, char const* str1_val);
     void linkMgrAbend(char const* str0_val, char const* str1_val);

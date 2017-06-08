@@ -30,6 +30,10 @@ void LinkMgrClass::receiveThreadLoop (void)
                 data++;
                 this->mallocLink(data);
             }
+            else if (*data == LINK_MGR_PROTOCOL_COMMAND_IS_MALLOC_SESSION) {
+                data++;
+                this->mallocSession(data);
+            }
         }
     }
 }
