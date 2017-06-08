@@ -26,11 +26,11 @@ class SessionMgrClass {
 
 public:
     SessionMgrClass(LinkClass *link_object_val);
-    ~SessionMgrClass();
+    ~SessionMgrClass(void);
     char const* objectName(void) {return "SessionMgrClass";}
 
     void mallocSession(void);
-    void freeSession(SessionClass *Session_object_val);
+    void freeSession(SessionClass *session_object_val);
 
     void sessionMgrLogit(char const* str0_val, char const* str1_val);
     void sessionMgrAbend(char const* str0_val, char const* str1_val);
