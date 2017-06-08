@@ -6,8 +6,11 @@
 
 #include "../../phwang_dir/phwang.h"
 #include "session_mgr_class.h"
+#include "session_class.h"
+#include "link_class.h"
+#include "link_mgr_class.h"
 
-SessionMgrClass::SessionMgrClass (void *link_object_val)
+SessionMgrClass::SessionMgrClass (LinkClass *link_object_val)
 {
     memset(this, 0, sizeof(SessionMgrClass));
     this->theLinkObject = link_object_val;
@@ -20,6 +23,48 @@ SessionMgrClass::SessionMgrClass (void *link_object_val)
 
 SessionMgrClass::~SessionMgrClass (void)
 {
+}
+
+int SessionMgrClass::allocSessionId (void)
+{
+    if (this->theGlobalSessionId >= SESSION_MGR_MAX_GLOBAL_SESSION_ID) {
+        this->theGlobalSessionId = 0;
+    }
+    this->theGlobalSessionId++;
+    return this->theGlobalSessionId;
+}
+
+int SessionMgrClass::allocSessionIndex (void)
+{
+    int index = 0;
+    while (index < SESSION_MGR_SESSION_ARRAY_SIZE) {
+        if (!this->theSessionTableArray[index]) {
+            return index;
+        }
+        index++;
+    }
+    return -1;
+}
+
+void SessionMgrClass::mallocSession (void)
+{
+    if (1) {
+        this->logit("mallocSession", "");
+    }
+    int session_id = this->allocSessionId();
+    int session_index = this->allocSessionIndex();
+    if (session_index != -1) {
+        this->theSessionTableArray[session_index] = new SessionClass(this, session_id, session_index);
+
+        char *data_buf = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
+        data_buf[0] = LINK_MGR_PROTOCOL_RESPOND_IS_MALLOC_SESSION;
+        phwangEncodeIdIndex(data_buf + 1, session_id, LINK_MGR_PROTOCOL_SESSION_ID_SIZE, session_index, LINK_MGR_PROTOCOL_SESSION_INDEX_SIZE);
+
+        this->theLinkObject->linkMgrObject()->transmitData(data_buf);
+    }
+    else {
+        /* TBD */
+    }
 }
 
 void SessionMgrClass::sessionMgrLogit (char const* str0_val, char const* str1_val) {

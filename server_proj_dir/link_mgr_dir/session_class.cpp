@@ -8,11 +8,12 @@
 #include "session_class.h"
 #include "session_mgr_class.h"
 
-SessionClass::SessionClass (SessionMgrClass *session_mgr_object_val, int session_id_val)
+SessionClass::SessionClass (SessionMgrClass *session_mgr_object_val, int session_id_val, int session_index_val)
 {
     memset(this, 0, sizeof(SessionClass));
     this->theSessionMgrObject = session_mgr_object_val;
     this->theSessionId = session_id_val;
+    this->theSessionIndex = session_index_val;
 
     if (1) {
         this->logit("SessionClass", "init");

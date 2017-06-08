@@ -6,6 +6,7 @@
 
 #include "../../phwang_dir/phwang.h"
 #include "link_class.h"
+#include "session_mgr_class.h"
 #include "link_mgr_class.h"
 
 LinkClass::LinkClass (LinkMgrClass *link_mgr_object_val, int link_id_val, int link_index_val, char const* link_name_val)
@@ -21,6 +22,7 @@ LinkClass::LinkClass (LinkMgrClass *link_mgr_object_val, int link_id_val, int li
         memcpy(this->theLinkName, link_name_val, LINK_CLASS_LINK_NAME_BUF_SIZE);
         this->theLinkName[LINK_CLASS_LINK_NAME_BUF_SIZE] = 0;
     }
+    this->theSessionMgrObject = new SessionMgrClass(this);
 
     if (1) {
         this->logit("LinkClass", "init");

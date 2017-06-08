@@ -5,18 +5,32 @@
 */
 
 #pragma once
+#include "../../include_dir/protocol_dir/link_mgr_protocol.h"
+class SessionClass;
+class LinkClass;
 
 class SessionMgrClass {
-    void *theLinkObject;
+#define SESSION_MGR_SESSION_ARRAY_SIZE 1000
+#define SESSION_MGR_MAX_GLOBAL_SESSION_ID 9999
+
+    LinkClass *theLinkObject;
     int theGlobalSessionId;
+    SessionClass *theSessionTableArray[SESSION_MGR_SESSION_ARRAY_SIZE + 4];
+
+    int allocSessionId(void);
+    int allocSessionIndex(void);
+    SessionClass *getSessionByIdIndex(int session_id_val, int session_index_val);
 
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
 
 public:
-    SessionMgrClass(void *link_object_val);
+    SessionMgrClass(LinkClass *link_object_val);
     ~SessionMgrClass();
     char const* objectName(void) {return "SessionMgrClass";}
+
+    void mallocSession(void);
+    void freeSession(SessionClass *Session_object_val);
 
     void sessionMgrLogit(char const* str0_val, char const* str1_val);
     void sessionMgrAbend(char const* str0_val, char const* str1_val);
