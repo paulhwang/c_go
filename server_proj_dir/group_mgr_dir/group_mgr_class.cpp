@@ -44,7 +44,7 @@ int GroupMgrClass::allocGroupIndex (void)
     return -1;
 }
 
-void GroupMgrClass::mallocGroup (void)
+GroupClass *GroupMgrClass::mallocGroup (void)
 {
     if (1) {
         this->logit("mallocGroup", "");
@@ -52,13 +52,9 @@ void GroupMgrClass::mallocGroup (void)
     int group_id = this->allocGroupId();
     int group_index = this->allocGroupIndex();
     if (group_index != -1) {
-    //    this->theGroupTableArray[group_index] = new GroupClass(this, group_id, group_index);
-
-    //    char *data_buf = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
-    //    data_buf[0] = LINK_MGR_PROTOCOL_RESPOND_IS_MALLOC_SESSION;
-    //    phwangEncodeIdIndex(data_buf + 1, group_id, LINK_MGR_PROTOCOL_SESSION_ID_SIZE, group_index, LINK_MGR_PROTOCOL_SESSION_INDEX_SIZE);
-
-    //    this->theLinkObject->linkMgrObject()->transmitData(data_buf);
+        GroupClass *group = new GroupClass(this, group_id, group_index);
+        this->theGroupTableArray[group_index] = group;
+        return group;
     }
     else {
         /* TBD */
