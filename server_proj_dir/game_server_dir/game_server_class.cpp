@@ -6,12 +6,13 @@
 
 #include "../../phwang_dir/phwang.h"
 #include "game_server_class.h"
+#include "../group_mgr_dir/group_mgr_class.h"
 
 GameServerClass::GameServerClass (void *main_object_val)
 {
     memset(this, 0, sizeof(GameServerClass));
     this->theMainObject = main_object_val;
-    this->theGroupMgrObject = 0;
+    this->theGroupMgrObject = new GroupMgrClass(this->theMainObject);
 
     if (1) {
         this->logit("GameServerClass", "init");
@@ -52,12 +53,12 @@ void GameServerClass::logit (char const* str0_val, char const* str1_val)
 {
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", this->objectName(), str0_val);
-    //this->theGroupMgrObject->groupMgrLogit(s, str1_val);
+    phwangLogit(s, str1_val);
 }
 
 void GameServerClass::abend (char const* str0_val, char const* str1_val)
 {
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", this->objectName(), str0_val);
-    //this->theGroupMgrObject->groupMgrAbend(s, str1_val);
+    phwangAbend(s, str1_val);
 }

@@ -8,10 +8,12 @@
 #include "../link_mgr_dir/link_mgr_class.h"
 #include "../base_mgr_dir/base_mgr_class.h"
 #include "../group_mgr_dir/group_mgr_class.h"
+#include "../game_server_dir/game_server_class.h"
 #include "main_class.h"
 
 MainClass::MainClass(void)
 {
+    this->theGoGameServerObject = new GameServerClass(this);
     this->theGroupMgrObject = new GroupMgrClass(this);
     this->theGoBaseMgrObject = new BaseMgrClass(this);
     this->theLinkMgrObject = new LinkMgrClass(this);
@@ -22,6 +24,7 @@ MainClass::~MainClass(void)
     this->theLinkMgrObject->~LinkMgrClass(); 
     this->theGoBaseMgrObject->~BaseMgrClass(); 
     this->theGroupMgrObject->~GroupMgrClass(); 
+    this->theGoGameServerObject->~GameServerClass(); 
 }
 
 void MainClass::startThreads (void)
