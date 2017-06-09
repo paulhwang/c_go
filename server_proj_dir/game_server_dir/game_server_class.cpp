@@ -23,6 +23,11 @@ GameServerClass::~GameServerClass (void)
 {
 }
 
+void GameServerClass::startThreads (void)
+{
+
+}
+
 void GameServerClass::insertGroup (GroupClass *group_object_val)
 {
     int i = 0;

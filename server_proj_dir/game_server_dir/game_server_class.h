@@ -24,6 +24,8 @@ public:
     ~GameServerClass(void);
     char const* objectName(void) {return "GameServerClass";}
 
+    void startThreads(void);
+    
     void insertGroup(GroupClass *game_object_val);
     void removeGroup(GroupClass *game_object_val);
 };
