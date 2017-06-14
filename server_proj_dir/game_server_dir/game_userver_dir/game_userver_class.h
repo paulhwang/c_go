@@ -17,8 +17,10 @@ class GameUServerClass {
 
     void *theGameServerObject;
     void *theReceiveQueue;
+    pthread_t theReceiveThread;
 
     void startReceiveThread(void);
+    void receiveThreadLoop(void);
 
     void debug(int on_off_val, char const* str0_val, char const* str1_val);
     void logit(char const* str0_val, char const* str1_val);
@@ -30,4 +32,5 @@ public:
     char const* objectName(void) {return "GameUServerClass";}
 
     void startThreads(void);
+    void receiveThreadFunction(void);
 };
