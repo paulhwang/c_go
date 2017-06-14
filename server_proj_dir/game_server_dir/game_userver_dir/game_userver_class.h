@@ -18,6 +18,8 @@ class GameUServerClass {
     void *theGameServerObject;
     void *theReceiveQueue;
 
+    void startReceiveThread(void);
+
     void debug(int on_off_val, char const* str0_val, char const* str1_val);
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
@@ -26,4 +28,6 @@ public:
     GameUServerClass(GameServerClass *game_server_object_val);
     ~GameUServerClass(void);
     char const* objectName(void) {return "GameUServerClass";}
+
+    void startThreads(void);
 };

@@ -22,6 +22,11 @@ GameDServerClass::~GameDServerClass (void)
 {
 }
 
+void GameDServerClass::startThreads (void)
+{
+    this->startReceiveThread();
+}
+
 void GameDServerClass::debug (int on_off_val, char const* str0_val, char const* str1_val)
 {
     if (on_off_val) {

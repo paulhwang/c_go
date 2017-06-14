@@ -57,7 +57,3 @@ void GameServerClass::startReceiveThread (void)
         return;
     }
 }
-void GameServerClass::startThreads (void)
-{
-    this->startReceiveThread();
-}

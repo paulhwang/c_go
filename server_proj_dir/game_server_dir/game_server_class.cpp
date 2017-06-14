@@ -61,6 +61,13 @@ GameServerClass::~GameServerClass (void)
 {
 }
 
+void GameServerClass::startThreads (void)
+{
+    this->theGameUServerObject->startThreads();
+    this->theGameDServerObject->startThreads();
+    this->startReceiveThread();
+}
+
 void GameServerClass::insertGroup (GroupClass *group_object_val)
 {
     int i = 0;
