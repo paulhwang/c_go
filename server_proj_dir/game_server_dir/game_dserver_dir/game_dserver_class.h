@@ -10,11 +10,13 @@
 #include "../../protocol_dir/base_mgr_protocol.h"
 
 #define GAME_DSERVER_RECEIVE_QUEUE_SIZE 100
+#define GAME_DSERVER_GROUP_ARRAY_SIZE 32
 
 class GameServerClass;
 
 class GameDServerClass {
     void *theGameServerObject;
+    void *theReceiveQueue;
 
     void debug(int on_off_val, char const* str0_val, char const* str1_val);
     void logit(char const* str0_val, char const* str1_val);

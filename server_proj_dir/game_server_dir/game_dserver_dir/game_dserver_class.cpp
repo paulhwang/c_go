@@ -11,6 +11,7 @@ GameDServerClass::GameDServerClass (GameServerClass *game_server_object_val)
 {
     memset(this, 0, sizeof(GameDServerClass));
     this->theGameServerObject = game_server_object_val;
+    this->theReceiveQueue = phwangMallocQueue(GAME_DSERVER_RECEIVE_QUEUE_SIZE);
 
     if (1) {
         this->logit("GameDServerClass", "init");

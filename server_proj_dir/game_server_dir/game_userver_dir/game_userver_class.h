@@ -14,9 +14,9 @@
 class GameServerClass;
 
 class GameUServerClass {
-#define GAME_SERVER_GROUP_ARRAY_SIZE 32
 
     void *theGameServerObject;
+    void *theReceiveQueue;
 
     void debug(int on_off_val, char const* str0_val, char const* str1_val);
     void logit(char const* str0_val, char const* str1_val);
