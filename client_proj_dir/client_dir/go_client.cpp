@@ -7,8 +7,8 @@
 #include <unistd.h>
 #include "../../phwang_dir/extern_dir/phwang_class.h"
 #include "../../phwang_dir/phwang.h"
-#include "../../include_dir/protocol_dir/link_mgr_protocol.h"
-#include "../../include_dir/protocol_dir/base_mgr_protocol.h"
+#include "../../server_proj_dir/protocol_dir/link_mgr_protocol.h"
+#include "../../server_proj_dir/protocol_dir/base_mgr_protocol.h"
 
 void *link_mgr_tp_transfer_object;
 char link_id_index[LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + 4];
@@ -70,7 +70,7 @@ void baseMgrReceiveDataFromTransport (void* engine_object_val, void *data_val)
 
 void baseMgrTest (void)
 {
-    base_mgr_tp_transfer_object = phwangTpConnect(0, BASE_MGR_PROTOCOL_TRANSPORT_PORT_NUMBER, baseMgrReceiveDataFromTransport, 0);
+    base_mgr_tp_transfer_object = phwangTpConnect(0, BASE_MGR_PROTOCOL_TRANSPORT_PORT_NUMBER1, baseMgrReceiveDataFromTransport, 0);
     if (base_mgr_tp_transfer_object) {
         char *buf = (char *) malloc(BASE_MGR_DATA_BUFFER_SIZE + 4);
         buf[0] = BASE_MGR_PROTOCOL_COMMAND_IS_MALLOC_BASE;
