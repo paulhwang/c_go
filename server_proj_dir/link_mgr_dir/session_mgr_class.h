@@ -5,7 +5,7 @@
 */
 
 #pragma once
-#include "../../include_dir/protocol_dir/link_mgr_protocol.h"
+#include "../protocol_dir/link_mgr_protocol.h"
 class SessionClass;
 class LinkClass;
 
