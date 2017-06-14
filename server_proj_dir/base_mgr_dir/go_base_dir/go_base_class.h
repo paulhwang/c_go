@@ -6,8 +6,8 @@
 
 #pragma once
 
-#include "../../phwang_dir/phwang.h"
-#include "../base_mgr_dir/base_mgr_class.h"
+#include "../../../phwang_dir/phwang.h"
+#include "../base_mgr_class.h"
 #include "go_define.h"
 #include "go_board_class.h"
 #include "go_engine_class.h"

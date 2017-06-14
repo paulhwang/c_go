@@ -6,7 +6,7 @@
 
 #include "../../phwang_dir/phwang.h"
 #include "base_mgr_class.h"
-#include "../go_base_dir/go_base_class.h"
+#include "go_base_dir/go_base_class.h"
 
 void baseMgrTransportServerAcceptConnection (void *base_mgr_object_val, void *tp_transfer_object_val) {
     //phwangLogit("Golbal::baseMgrTransportServerAcceptConnection", "");
