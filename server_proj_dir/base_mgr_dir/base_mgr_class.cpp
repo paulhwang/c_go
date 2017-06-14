@@ -18,14 +18,19 @@ void baseMgrReceiveDataFromTransport (void *base_mgr_object_val, void *data_val)
     ((BaseMgrClass *) base_mgr_object_val)->exportReceiveData(data_val);
 }
 
+void BaseMgrClass::exportReceiveData(void *data_val)
+{
+    this->logit("exportReceiveData", (char *) data_val);
+    phwangEnqueue(this->theReceiveQueue, data_val);
+}
+
 BaseMgrClass::BaseMgrClass (void *main_object_val)
 {
     memset(this, 0, sizeof(BaseMgrClass));
     this->theMainObject = main_object_val;
-    this->theTpServerObject = phwangMallocTpServer(this, BASE_MGR_PROTOCOL_TRANSPORT_PORT_NUMBER1, baseMgrTransportServerAcceptConnection, this, baseMgrReceiveDataFromTransport, this);
     this->theGlobalBaseId = 0;
-
     this->theReceiveQueue = phwangMallocQueue(BASE_MGR_RECEIVE_QUEUE_SIZE);
+    this->theTpServerObject = phwangMallocTpServer(this, BASE_MGR_PROTOCOL_TRANSPORT_PORT_NUMBER1, baseMgrTransportServerAcceptConnection, this, baseMgrReceiveDataFromTransport, this);
 
     if (1) {
         this->logit("BaseMgrClass", "init");

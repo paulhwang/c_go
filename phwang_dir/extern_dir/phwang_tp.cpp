@@ -36,12 +36,12 @@ void *PhwangClass::tpConnect (unsigned long ip_addr_val, unsigned short port_val
 void PhwangClass::freeTpServer (void *tp_server_object_val)
 {
     if (!tp_server_object_val) {
-        phwangLogit("phwangFreeTpTransfer", "null tp_server_object_val");
+        phwangAbend("phwangFreeTpTransfer", "null tp_server_object_val");
         return;
     }
 
     if (strcmp(((TpServerClass *) tp_server_object_val)->objectName(), "TpServerClass")) {
-        phwangLogit("phwangFreeTpTransfer", "wrong object");
+        phwangAbend("phwangFreeTpTransfer", "wrong object");
         return;
     }
 
@@ -51,12 +51,12 @@ void PhwangClass::freeTpServer (void *tp_server_object_val)
 void PhwangClass::freeTpTransfer (void *tp_transfer_object_val)
 {
     if (!tp_transfer_object_val) {
-        phwangLogit("phwangFreeTpTransfer", "null tp_transfer_object_val");
+        phwangAbend("phwangFreeTpTransfer", "null tp_transfer_object_val");
         return;
     }
 
     if (strcmp(((TpTransferClass *) tp_transfer_object_val)->objectName(), "TpTransferClass")) {
-        phwangLogit("phwangFreeTpTransfer", "wrong object");
+        phwangAbend("phwangFreeTpTransfer", "wrong object");
         return;
     }
 
@@ -66,12 +66,12 @@ void PhwangClass::freeTpTransfer (void *tp_transfer_object_val)
 void PhwangClass::tpTransmit (void *tp_transfer_object_val, char *data_val)
 {
     if (!tp_transfer_object_val) {
-        phwangLogit("phwangTpTransmit", "null tp_transfer_object_val");
+        phwangAbend("phwangTpTransmit", "null tp_transfer_object_val");
         return;
     }
 
     if (strcmp(((TpTransferClass *) tp_transfer_object_val)->objectName(), "TpTransferClass")) {
-        phwangLogit("phwangTpTransmit", "wrong object");
+        phwangAbend("phwangTpTransmit", "wrong object");
         return;
     }
 

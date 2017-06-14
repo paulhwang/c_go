@@ -33,7 +33,7 @@ SERVER_OBJS = $(SERVER_DIR)/go_server.o $(SERVER_DIR)/main_class.o
 LINK_MGR_OBJS = $(LINK_MGR_DIR)/link_mgr_class.o $(LINK_MGR_DIR)/link_class.o $(LINK_MGR_DIR)/session_mgr_class.o $(LINK_MGR_DIR)/session_class.o $(LINK_MGR_DIR)/link_mgr_thread.o $(LINK_MGR_DIR)/link_mgr_exports.o 
 GO_BASE_OBJS = $(GO_BASE_DIR)/go_base_class.o $(GO_BASE_DIR)/go_game_class.o $(GO_BASE_DIR)/go_engine_class.o $(GO_BASE_DIR)/go_board_class.o $(GO_BASE_DIR)/go_move_class.o $(GO_BASE_DIR)/go_port_class.o $(GO_BASE_DIR)/go_config_class.o $(GO_BASE_DIR)/go_group_class.o $(GO_BASE_DIR)/go_group_list_class.o
 BASE_MGR_OBJS = $(BASE_MGR_DIR)/base_mgr_class.o $(BASE_MGR_DIR)/base_mgr_exports.o $(BASE_MGR_DIR)/base_mgr_thread.o $(GO_BASE_OBJS)
-GAME_SERVER_OBJS = $(GAME_SERVER_DIR)/game_server_class.o  $(GAME_SERVER_DIR)/group_mgr_class.o $(GAME_SERVER_DIR)/group_class.o
+GAME_SERVER_OBJS = $(GAME_SERVER_DIR)/game_server_class.o  $(GAME_SERVER_DIR)/game_server_thread.o  $(GAME_SERVER_DIR)/group_mgr_class.o $(GAME_SERVER_DIR)/group_class.o
 SERVER_PROJ_OBJS = $(SERVER_OBJS) $(LINK_MGR_OBJS) $(GROUP_MGR_OBJS) $(BASE_MGR_OBJS) $(GAME_SERVER_OBJS)
 
 CLIENT_OBJS = $(CLIENT_DIR)/go_client.o

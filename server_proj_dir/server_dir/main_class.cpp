@@ -12,23 +12,24 @@
 
 MainClass::MainClass(void)
 {
-    this->theGoBaseMgrObject = new BaseMgrClass(this);
-    this->theGoGameServerObject = new GameServerClass(this);
     this->theLinkMgrObject = new LinkMgrClass(this);
+    this->theGoGameServerObject = new GameServerClass(this);
+    this->theGoBaseMgrObject = new BaseMgrClass(this);
 }
 
 MainClass::~MainClass(void)
 {
-    this->theLinkMgrObject->~LinkMgrClass(); 
-    this->theGoGameServerObject->~GameServerClass(); 
     this->theGoBaseMgrObject->~BaseMgrClass(); 
+    this->theGoGameServerObject->~GameServerClass(); 
+    this->theLinkMgrObject->~LinkMgrClass(); 
 }
 
 void MainClass::startThreads (void)
 {
-    this->theGoBaseMgrObject->startThreads();
-    this->theGoGameServerObject->startThreads();
     this->theLinkMgrObject->startThreads();
+    this->theGoGameServerObject->startThreads();
+    sleep(3);
+    this->theGoBaseMgrObject->startThreads();
 }
 
 void MainClass::logit (char const* str0_val, char const* str1_val)

@@ -1,36 +1,32 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: base_mgr_thread.cpp
+  File name: game_server_thread.cpp
 */
 
 #include "../../phwang_dir/phwang.h"
-#include "base_mgr_class.h"
+#include "game_server_class.h"
 
-void baseMgrReceiveDataFromTransport (void *base_mgr_object_val, void *data_val);
-
-void *baseMgrReceiveThreadFunction (void *this_val)
+void *gameServerReceiveThreadFunction (void *this_val)
 {
-    ((BaseMgrClass *)this_val)->receiveThreadFunction();
+    ((GameServerClass *)this_val)->receiveThreadFunction();
 }
 
-void BaseMgrClass::receiveThreadFunction (void)
+void GameServerClass::receiveThreadFunction (void)
 {
     if (1) {
         this->logit("receiveThreadFunction", "starts");
     }
-
-    this->theTpTransferObject = phwangTpConnect(0, BASE_MGR_PROTOCOL_TRANSPORT_PORT_NUMBER, baseMgrReceiveDataFromTransport, this);
-
     this->receiveThreadLoop();
 }
 
-void BaseMgrClass::receiveThreadLoop (void)
+void GameServerClass::receiveThreadLoop (void)
 {
     while (1) {
         char *data = (char *) phwangDequeue(this->theReceiveQueue);
-        this->logit("receiveThreadLoop", data);
+        //this->logit("receiveThreadLoop", data);
         if (data) {
+            /*
             if (*data == BASE_MGR_PROTOCOL_COMMAND_IS_MALLOC_BASE) {
                 data++;
                 if (*data == BASE_MGR_PROTOCOL_GAME_NAME_IS_GO) {
@@ -43,31 +39,25 @@ void BaseMgrClass::receiveThreadLoop (void)
             }
             else {
             }
+            */
         }
     }
 }
 
-void BaseMgrClass::startReceiveThread (void)
+void GameServerClass::startReceiveThread (void)
 {
     int r;
 
     if (0) {
         this->logit("startReceiveThread", "create receiveThread");
     }
-    r = pthread_create(&this->theReceiveThread, NULL, baseMgrReceiveThreadFunction, this);
+    r = pthread_create(&this->theReceiveThread, NULL, gameServerReceiveThreadFunction, this);
     if (r) {
         printf("Error - pthread_create() return code: %d\n", r);
         return;
     }
 }
-
-void BaseMgrClass::exportAcceptConnection (void *tp_transfer_object_val)
-{
-    this->theTpTransferObject = tp_transfer_object_val;
-    //phwangLogit("exportAcceptConnection", this->theTpTransferObject->objectName());
-}
-
-void BaseMgrClass::startThreads (void)
+void GameServerClass::startThreads (void)
 {
     this->startReceiveThread();
 }

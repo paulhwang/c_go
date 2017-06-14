@@ -8,16 +8,35 @@
 #include "game_server_class.h"
 #include "group_mgr_class.h"
 
-void gameServerTpServerAcceptFunction (void *base_mgr_object_val, void *tp_transfer_object_val) {
-    phwangLogit("Golbal::gameServerTpServerAcceptFunction", "");
-    phwangAbend("Golbal::gameServerTpServerAcceptFunction", "");
-    //((BaseMgrClass *) base_mgr_object_val)->exportAcceptConnection(tp_transfer_object_val);
+void GameServerClass::baseMgrTest (void)
+{
+    char *buf = (char *) malloc(BASE_MGR_DATA_BUFFER_SIZE + 4);
+    buf[0] = BASE_MGR_PROTOCOL_COMMAND_IS_MALLOC_BASE;
+    buf[1] = BASE_MGR_PROTOCOL_GAME_NAME_IS_GO;
+    buf[2] = 0;
+    phwangTpTransmit(this->theTpTransferObject, buf);
 }
 
-void gameServerTpReceiveDataFunction (void *base_mgr_object_val, void *data_val) {
+void gameServerTpServerAcceptFunction (void *game_server_object_val, void *tp_transfer_object_val) {
+    phwangLogit("Golbal::gameServerTpServerAcceptFunction", "");
+    ((GameServerClass *) game_server_object_val)->exportAcceptConnectionFromBaseMgr(tp_transfer_object_val);
+}
+
+void GameServerClass::exportAcceptConnectionFromBaseMgr (void *tp_transfer_object_val)
+{
+    this->theTpTransferObject = tp_transfer_object_val;
+    sleep(1);
+    baseMgrTest();
+}
+
+void gameServerTpReceiveDataFunction (void *game_server_object_val, void *data_val) {
     phwangLogit("Golbal::gameServerTpReceiveDataFunction", (char *) data_val);
-    phwangAbend("Golbal::gameServerTpReceiveDataFunction", (char *) data_val);
-    //((BaseMgrClass *) base_mgr_object_val)->exportReceiveData(data_val);
+    ((GameServerClass *) game_server_object_val)->exportReceiveDataFromBaseMgr(data_val);
+}
+
+void GameServerClass::exportReceiveDataFromBaseMgr(void *data_val)
+{
+    phwangEnqueue(this->theReceiveQueue, data_val);
 }
 
 GameServerClass::GameServerClass (void *main_object_val)
@@ -25,6 +44,7 @@ GameServerClass::GameServerClass (void *main_object_val)
     memset(this, 0, sizeof(GameServerClass));
     this->theMainObject = main_object_val;
     this->theGroupMgrObject = new GroupMgrClass(this);
+    this->theReceiveQueue = phwangMallocQueue(GAME_SERVER_RECEIVE_QUEUE_SIZE);
     this->theTpServerObject = phwangMallocTpServer(this, BASE_MGR_PROTOCOL_TRANSPORT_PORT_NUMBER, gameServerTpServerAcceptFunction, this, gameServerTpReceiveDataFunction, this);
 
     if (1) {
@@ -34,11 +54,6 @@ GameServerClass::GameServerClass (void *main_object_val)
 
 GameServerClass::~GameServerClass (void)
 {
-}
-
-void GameServerClass::startThreads (void)
-{
-
 }
 
 void GameServerClass::insertGroup (GroupClass *group_object_val)
