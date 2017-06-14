@@ -50,7 +50,7 @@ GameServerClass::GameServerClass (void *main_object_val)
 
     this->theGroupMgrObject = new GroupMgrClass(this);
     this->theReceiveQueue = phwangMallocQueue(GAME_SERVER_RECEIVE_QUEUE_SIZE);
-    this->theTpServerObject = phwangMallocTpServer(this, BASE_MGR_PROTOCOL_TRANSPORT_PORT_NUMBER, gameServerTpServerAcceptFunction, this, gameServerTpReceiveDataFunction, this);
+    //this->theTpServerObject = phwangMallocTpServer(this, BASE_MGR_PROTOCOL_TRANSPORT_PORT_NUMBER, gameServerTpServerAcceptFunction, this, gameServerTpReceiveDataFunction, this);
 
     if (1) {
         this->logit("GameServerClass", "init");
