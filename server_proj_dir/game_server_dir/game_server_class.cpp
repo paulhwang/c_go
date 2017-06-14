@@ -6,13 +6,13 @@
 
 #include "../../phwang_dir/phwang.h"
 #include "game_server_class.h"
-#include "../group_mgr_dir/group_mgr_class.h"
+#include "group_mgr_class.h"
 
 GameServerClass::GameServerClass (void *main_object_val)
 {
     memset(this, 0, sizeof(GameServerClass));
     this->theMainObject = main_object_val;
-    this->theGroupMgrObject = new GroupMgrClass(this->theMainObject);
+    this->theGroupMgrObject = new GroupMgrClass(this);
 
     if (1) {
         this->logit("GameServerClass", "init");

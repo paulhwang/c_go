@@ -8,10 +8,10 @@
 #include "group_mgr_class.h"
 #include "group_class.h"
 
-GroupMgrClass::GroupMgrClass (void *main_object_val)
+GroupMgrClass::GroupMgrClass (GameServerClass *game_server_object_val)
 {
     memset(this, 0, sizeof(GroupMgrClass));
-    this->theMainObject = main_object_val;
+    this->theGameServerObject = game_server_object_val;
     this->theGlobalGroupId = 0;
 
     if (1) {
