@@ -10,6 +10,8 @@
 #include "../protocol_dir/base_mgr_protocol.h"
 class GroupMgrClass;
 class GroupClass;
+class GameUServerClass;
+class GameDServerClass;
 
 #define GAME_SERVER_RECEIVE_QUEUE_SIZE 100
 
@@ -17,6 +19,9 @@ class GameServerClass {
 #define GAME_SERVER_GROUP_ARRAY_SIZE 32
 
     void *theMainObject;
+    GameUServerClass *theGameUServerObject;
+    GameDServerClass *theGameDServerObject;
+
     void *theTpServerObject;
     GroupMgrClass *theGroupMgrObject;
     GroupClass *theGroupTableArray[GAME_SERVER_GROUP_ARRAY_SIZE];

@@ -6,6 +6,8 @@
 
 #include "../../phwang_dir/phwang.h"
 #include "game_server_class.h"
+#include "game_userver_dir/game_userver_class.h"
+#include "game_dserver_dir/game_dserver_class.h"
 #include "group_mgr_class.h"
 
 void GameServerClass::baseMgrTest (void)
@@ -43,6 +45,9 @@ GameServerClass::GameServerClass (void *main_object_val)
 {
     memset(this, 0, sizeof(GameServerClass));
     this->theMainObject = main_object_val;
+    this->theGameUServerObject = new GameUServerClass(this);
+    this->theGameDServerObject = new GameDServerClass(this);
+
     this->theGroupMgrObject = new GroupMgrClass(this);
     this->theReceiveQueue = phwangMallocQueue(GAME_SERVER_RECEIVE_QUEUE_SIZE);
     this->theTpServerObject = phwangMallocTpServer(this, BASE_MGR_PROTOCOL_TRANSPORT_PORT_NUMBER, gameServerTpServerAcceptFunction, this, gameServerTpReceiveDataFunction, this);
