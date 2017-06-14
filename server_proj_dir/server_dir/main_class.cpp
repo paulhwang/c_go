@@ -5,6 +5,7 @@
 */
 
 #include "../../phwang_dir/phwang.h"
+#include "../fabric_dir/fabric_class.h"
 #include "../link_mgr_dir/link_mgr_class.h"
 #include "../base_mgr_dir/base_mgr_class.h"
 #include "../game_server_dir/game_server_class.h"
@@ -12,6 +13,7 @@
 
 MainClass::MainClass(void)
 {
+    this->theFabricObject = new FabricClass(this);
     this->theLinkMgrObject = new LinkMgrClass(this);
     this->theGoGameServerObject = new GameServerClass(this);
     this->theGoBaseMgrObject = new BaseMgrClass(this);
@@ -22,10 +24,12 @@ MainClass::~MainClass(void)
     this->theGoBaseMgrObject->~BaseMgrClass(); 
     this->theGoGameServerObject->~GameServerClass(); 
     this->theLinkMgrObject->~LinkMgrClass(); 
+    this->theFabricObject->~FabricClass(); 
 }
 
 void MainClass::startThreads (void)
 {
+    this->theFabricObject->startThreads();
     this->theLinkMgrObject->startThreads();
     this->theGoGameServerObject->startThreads();
     sleep(3);
