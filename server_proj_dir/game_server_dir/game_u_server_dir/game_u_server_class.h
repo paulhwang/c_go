@@ -14,7 +14,6 @@ class GameServerClass;
 #define GAME_USERVER_RECEIVE_QUEUE_SIZE 100
 
 class GameUServerClass {
-
     GameServerClass *theGameServerObject;
     void *theReceiveQueue;
     pthread_t theReceiveThread;

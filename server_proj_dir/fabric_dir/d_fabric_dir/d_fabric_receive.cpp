@@ -7,12 +7,6 @@
 #include "../../../phwang_dir/phwang.h"
 #include "d_fabric_class.h"
 
-void DFabricClass::transmitFunction (char *data_val)
-{
-    this->logit("transmitFunction", data_val);
-    phwangTpTransmit(this->theTpTransferObject, data_val);
-}
-
 void DFabricClass::receiveFunction (char *data_val)
 {
     this->logit("receiveFunction", data_val);
