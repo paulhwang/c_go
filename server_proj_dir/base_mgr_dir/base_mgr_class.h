@@ -49,6 +49,7 @@ public:
     void exportAcceptConnection(void *tp_transfer_object_val);
 
     void startThreads(void);
+    void startNetConnect(void);
     void receiveThreadFunction(void);
     void receiveData(char* data_val);
     void transmitFunction(char *data_val);

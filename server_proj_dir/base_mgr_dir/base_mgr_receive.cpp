@@ -7,21 +7,6 @@
 #include "../../phwang_dir/phwang.h"
 #include "base_mgr_class.h"
 
-
-void baseMgrReceiveDataFromTransport (void *base_mgr_object_val, void *data_val);
-
-void BaseMgrClass::exportAcceptConnection (void *tp_transfer_object_val)
-{
-    this->theTpTransferObject = tp_transfer_object_val;
-    //phwangLogit("exportAcceptConnection", this->theTpTransferObject->objectName());
-}
-
-
-
-
-
-
-
 void BaseMgrClass::transmitFunction (char *data_val)
 {
     this->logit("transmitFunction", data_val);
@@ -52,7 +37,7 @@ void BaseMgrClass::receiveThreadFunction (void)
         this->logit("receiveThreadFunction", "starts");
     }
 
-    this->theTpTransferObject = phwangTpConnect(0, BASE_MGR_PROTOCOL_TRANSPORT_PORT_NUMBER, baseMgrReceiveDataFromTransport, this);
+    this->startNetConnect();
 
     while (1) {
         void *data = phwangDequeue(this->theReceiveQueue);
