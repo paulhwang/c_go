@@ -29,7 +29,6 @@ class BaseMgrClass {
     void *theReceiveQueue;
 
     void startReceiveThread(void);
-    void receiveThreadLoop(void);
     void receiveFunction(char *data_val);
 
     int allocBaseId(void);
