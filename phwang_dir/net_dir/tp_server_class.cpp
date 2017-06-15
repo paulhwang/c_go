@@ -34,11 +34,12 @@ TpServerClass::TpServerClass (
     this->theReceiveCallbackFunc = receive_callback_func_val;
     this->theAcceptCallbackParameter = accept_callback_parameter_val;
     this->theReceiveCallbackParameter = receive_callback_parameter_val;
+    this->theWho = who_val;
 
     this->startServerThread();
 
     if (1) {
-        this->logit(who_val, "TpServerClass");
+        this->logit(who_val, "TpServerClass=====");
         this->logit("TpServerClass", "init");
     }
 }
@@ -76,15 +77,15 @@ void TpServerClass::serverThreadFunction (void *data_val)
     int addrlen = sizeof(address);
     char buffer[1024] = {0};
 
-    this->logit("startServer", "start");
+    this->logit("serverThreadFunction", "start");
 
     if ((s = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
-        this->logit("startServer", "open socket error");
+        this->logit("serverThreadFunction", "open socket error");
         return;
     }
 
     if (setsockopt(s, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &opt, sizeof(opt))) {
-        this->logit("startServer", "setsockopt error");
+        this->logit("serverThreadFunction", "setsockopt error");
         return;
     }
 
@@ -93,20 +94,21 @@ void TpServerClass::serverThreadFunction (void *data_val)
     address.sin_port = htons(this->thePort);
 
     if (bind(s, (struct sockaddr *)&address, sizeof(address)) < 0) {
-        this->logit("startServer", "bind error");
+        this->logit("serverThreadFunction", "bind error");
         return;
     }
 
-    this->logit("startServer", "listening");
+    this->logit("serverThreadFunction", "listening");
     listen(s, BACKLOG);
 
-    this->logit("startServer", "accepting");
+    this->logit("serverThreadFunction", "accepting");
     if ((data_socket = accept(s, (struct sockaddr *)&address, (socklen_t*)&addrlen)) < 0) {
-        this->logit("startServer", "accept error");
+        this->logit("serverThreadFunction", "accept error");
         return;
     }
 
-    this->logit("startServer", "accepted");
+    this->logit("serverThreadFunction", "accepted");
+    this->logit("serverThreadFunction", this->theWho);
 
     TpTransferClass *tp_transfer_object = new TpTransferClass(data_socket, this->theReceiveCallbackFunc, this->theCallerObject);
     tp_transfer_object->startThreads();

@@ -24,6 +24,7 @@ class TpServerClass {
     void (*theReceiveCallbackFunc)(void *, void *);
     void *theAcceptCallbackParameter;
     void *theReceiveCallbackParameter;
+    char const *theWho;
     pthread_t theServerThread;
 
     void startServerThread(void);
