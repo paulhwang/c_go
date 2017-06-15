@@ -45,10 +45,11 @@ public:
     pthread_t receiveThread(void) {return this->theReceiveThread;}
 
     /* exports */
-    void exportReceiveData(void *data_val);
-    void exportAcceptConnection(void *tp_transfer_object_val);
+    void exportedReceiveFunction(void *data_val);
+    void exportedAcceptFunction(void *tp_transfer_object_val);
 
     void startThreads(void);
+    void startNetServer(void);
     void startNetConnect(void);
     void receiveThreadFunction(void);
     void receiveData(char* data_val);
