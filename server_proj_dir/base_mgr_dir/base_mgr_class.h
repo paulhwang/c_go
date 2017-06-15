@@ -29,6 +29,9 @@ class BaseMgrClass {
     void *theReceiveQueue;
 
     void startReceiveThread(void);
+    void receiveThreadLoop(void);
+    void receiveFunction(char *data_val);
+
     int allocBaseId(void);
     int allocBaseIndex(void);
     void mallocGoBase(void);
@@ -48,9 +51,9 @@ public:
 
     void startThreads(void);
     void receiveThreadFunction(void);
-    void receiveThreadLoop(void);
     void receiveData(char* data_val);
     void transmitData(char *data_val);
+    void transmitFunction(char *data_val);
 
     void baseMgrLogit(char const* str0_val, char const* str1_val);
     void baseMgrAbend(char const* str0_val, char const* str1_val);
