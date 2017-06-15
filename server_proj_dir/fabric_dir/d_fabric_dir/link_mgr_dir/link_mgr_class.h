@@ -6,8 +6,6 @@
 
 #pragma once
 
-#include <pthread.h>
-#include "../../../protocol_dir/link_mgr_protocol.h"
 class LinkClass;
 class DFabricClass;
 
@@ -18,14 +16,8 @@ class LinkMgrClass {
 #define LINK_MGR_MAX_GLOBAL_LINK_ID 9999
 
     DFabricClass *theDFabricObject;
-    void *theTpServerObject;
     int theGlobalLinkId;
     LinkClass *theLinkTableArray[LINK_MGR_LINK_ARRAY_SIZE + 4];
-
-    void *theTpTransferObject;
-    pthread_t theTpServerThread;
-    pthread_t theReceiveThread;
-    void *theReceiveQueue;
 
     void startReceiveThread(void);
     int allocLinkId(void);
@@ -39,15 +31,11 @@ public:
     LinkMgrClass(DFabricClass *d_fabric_object_val);
     ~LinkMgrClass();
     char const* objectName(void) {return "LinkMgrClass";}
-    pthread_t receiveThread(void) {return this->theReceiveThread;}
 
     /* exports */
     void exportReceiveData(void *data_val);
     void exportAcceptConnection(void *tp_transfer_object_val);
 
-    void startThreads(void);
-    void receiveThreadFunction(void);
-    void receiveThreadLoop(void);
     void receiveData(char* data_val);
     void transmitData(char *data_val);
 

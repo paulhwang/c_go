@@ -9,26 +9,12 @@
 #include "link_mgr_class.h"
 #include "link_class.h"
 #include "../d_fabric_class.h"
-  
-void linkMgrTransportServerAcceptConnection (void *link_mgr_object_val, void *tp_transfer_object_val) {
-    //phwangLogit("Golbal::linkMgrTransportServerAcceptConnection", ((LinkMgrClass *) link_mgr_object_val)->objectName());
-    //phwangLogit("Golbal::linkMgrTransportServerAcceptConnection", ((TpTransferClass *) tp_transfer_object_val)->objectName());
-    ((LinkMgrClass *) link_mgr_object_val)->exportAcceptConnection(tp_transfer_object_val);
-}
-
-void linkMgrReceiveDataFromTransport (void *link_mgr_object_val, void *data_val) {
-    phwangLogit("Golbal::linkMgrReceiveDataFromTransport", (char *) data_val);
-    ((LinkMgrClass *) link_mgr_object_val)->exportReceiveData(data_val);
-}
 
 LinkMgrClass::LinkMgrClass (DFabricClass *d_fabric_object_val)
 {
     memset(this, 0, sizeof(LinkMgrClass));
     this->theDFabricObject = d_fabric_object_val;
-    //this->theTpServerObject = phwangMallocTpServer(this, LINK_MGR_PROTOCOL_TRANSPORT_PORT_NUMBER, linkMgrTransportServerAcceptConnection, this, linkMgrReceiveDataFromTransport, this, this->objectName());
     this->theGlobalLinkId = 0;
-
-    this->theReceiveQueue = phwangMallocQueue(LINK_MGR_RECEIVE_QUEUE_SIZE);
 
     if (1) {
         this->logit("LinkMgrClass", "init");
@@ -37,9 +23,6 @@ LinkMgrClass::LinkMgrClass (DFabricClass *d_fabric_object_val)
 
 LinkMgrClass::~LinkMgrClass (void)
 {
-    phwangFreeTpServer(this->theTpServerObject); 
-    phwangFreeTpTransfer(this->theTpTransferObject); 
-    phwangFreeQueue(this->theReceiveQueue);
 }
 
 int LinkMgrClass::allocLinkId (void)
