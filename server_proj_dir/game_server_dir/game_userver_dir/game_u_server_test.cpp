@@ -5,7 +5,7 @@
 */
 
 #include "../../../phwang_dir/phwang.h"
-#include "game_userver_class.h"
+#include "game_u_server_class.h"
 
 void GameUServerClass::baseMgrTest (void)
 {

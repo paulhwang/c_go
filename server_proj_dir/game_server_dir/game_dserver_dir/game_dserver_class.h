@@ -1,7 +1,7 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: game_dserver_class.h
+  File name: game_d_server_class.h
 */
 
 #pragma once

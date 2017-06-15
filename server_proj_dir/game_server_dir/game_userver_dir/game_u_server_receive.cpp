@@ -1,11 +1,11 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: game_userver_receive.cpp
+  File name: game_u_server_receive.cpp
 */
 
 #include "../../../phwang_dir/phwang.h"
-#include "game_userver_class.h"
+#include "game_u_server_class.h"
 
 void GameUServerClass::transmitFunction (char *data_val)
 {

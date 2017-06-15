@@ -1,7 +1,7 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: game_dserver_receive.cpp
+  File name: game_d_server_receive.cpp
 */
 
 #include "../../../phwang_dir/phwang.h"

@@ -1,11 +1,11 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: game_userver_class.cpp
+  File name: game_u_server_class.cpp
 */
 
 #include "../../../phwang_dir/phwang.h"
-#include "game_userver_class.h"
+#include "game_u_server_class.h"
 
 void gameUServerTpServerAcceptFunction (void *game_server_object_val, void *tp_transfer_object_val) {
     phwangLogit("Golbal::gameUServerTpServerAcceptFunction", "");
