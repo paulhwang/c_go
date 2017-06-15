@@ -21,5 +21,7 @@ public:
     FabricClass(void *main_object_val);
     ~FabricClass(void);
     char const* objectName(void) {return "FabricClass";}
+    UFabricClass *uFabricObject(void) {return this->theUFabricObject;}
+    DFabricClass *dFabricObject(void) {return this->theDFabricObject;}
 
     void startThreads(void);};

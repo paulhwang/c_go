@@ -6,10 +6,13 @@
 
 #include "../../../phwang_dir/phwang.h"
 #include "u_fabric_class.h"
+#include "../fabric_class.h"
+#include "../d_fabric_dir/d_fabric_class.h"
 
 void UFabricClass::receiveFunction (char *data_val)
 {
     this->logit("receiveFunction", data_val);
+    this->theFabricObject->dFabricObject()->transmitFunction(data_val);
 }
 
 void UFabricClass::receiveThreadFunction (void)

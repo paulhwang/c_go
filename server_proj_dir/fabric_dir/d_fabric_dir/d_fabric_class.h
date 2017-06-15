@@ -14,7 +14,7 @@
 class FabricClass;
 
 class DFabricClass {
-    void *theFabricObject;
+    FabricClass *theFabricObject;
     void *theReceiveQueue;
     pthread_t theReceiveThread;
     void *theTpTransferObject;
