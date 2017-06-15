@@ -18,6 +18,7 @@ class GameDServerClass {
     void *theGameServerObject;
     void *theReceiveQueue;
     pthread_t theReceiveThread;
+    void *theTpTransferObject;
 
     void startReceiveThread(void);
     void receiveThreadLoop(void);
@@ -33,4 +34,6 @@ public:
 
     void startThreads(void);
     void receiveThreadFunction(void);
+    void receiveFunction(char *data_val);
+    void transmitFunction(char *data_val);
 };

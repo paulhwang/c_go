@@ -7,7 +7,6 @@
 #include "../../../phwang_dir/phwang.h"
 #include "game_userver_class.h"
 
-
 void GameUServerClass::transmitFunction (char *data_val)
 {
     this->logit("transmitFunction", data_val);
