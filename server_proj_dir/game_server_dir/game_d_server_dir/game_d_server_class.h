@@ -21,7 +21,6 @@ class GameDServerClass {
     void *theTpTransferObject;
 
     void startReceiveThread(void);
-    void receiveThreadLoop(void);
     void receiveFunction(char *data_val);
 
     void debug(int on_off_val, char const* str0_val, char const* str1_val);

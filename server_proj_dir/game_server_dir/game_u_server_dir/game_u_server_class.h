@@ -22,7 +22,6 @@ class GameUServerClass {
     void *theTpTransferObject;
 
     void startReceiveThread(void);
-    void receiveThreadLoop(void);
     void receiveFunction(char *data_val);
 
     void baseMgrTest(void);
