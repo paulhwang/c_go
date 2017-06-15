@@ -14,7 +14,6 @@ BaseMgrClass::BaseMgrClass (void *main_object_val)
     this->theMainObject = main_object_val;
     this->theGlobalBaseId = 0;
     this->theReceiveQueue = phwangMallocQueue(BASE_MGR_RECEIVE_QUEUE_SIZE);
-    this->startNetServer();
 
     if (1) {
         this->logit("BaseMgrClass", "init");
@@ -23,7 +22,6 @@ BaseMgrClass::BaseMgrClass (void *main_object_val)
 
 BaseMgrClass::~BaseMgrClass (void)
 {
-    phwangFreeTpServer(this->theTpServerObject);
     phwangFreeTpTransfer(this->theTpTransferObject); 
     phwangFreeQueue(this->theReceiveQueue);
 }

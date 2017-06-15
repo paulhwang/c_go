@@ -19,12 +19,10 @@ class BaseMgrClass {
 #define BASE_MGR_MAX_GLOBAL_BASE_ID 9999
 
     void *theMainObject;
-    void *theTpServerObject;
     int theGlobalBaseId;
     void *theBaseTableArray[BASE_MGR_BASE_ARRAY_SIZE + 4];
 
     void *theTpTransferObject;
-    pthread_t theTpServerThread;
     pthread_t theReceiveThread;
     void *theReceiveQueue;
 
@@ -47,10 +45,8 @@ public:
 
     /* exports */
     void exportedNetReceiveFunction(void *data_val);
-    void exportedNetAcceptFunction(void *tp_transfer_object_val);
 
     void startThreads(void);
-    void startNetServer(void);
     void startNetConnect(void);
     void receiveThreadFunction(void);
     void receiveData(char* data_val);
