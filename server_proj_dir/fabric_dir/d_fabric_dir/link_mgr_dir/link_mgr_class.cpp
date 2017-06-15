@@ -121,15 +121,6 @@ LinkClass *LinkMgrClass::getLinkByIdIndex(int link_id_val, int link_index_val)
     return link;
 }
 
-void LinkMgrClass::transmitData1(char *data_val)
-{
-    if (1) {
-        this->logit("transmitData", data_val);
-        //phwangTpTransmit(this->theTpTransferObject, data_val);
-        this->theDFabricObject->transmitFunction(data_val);
-    }
-}
-
 void LinkMgrClass::freeLink (LinkClass *link_object_val)
 {
     if (!link_object_val) {

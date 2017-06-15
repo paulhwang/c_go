@@ -31,8 +31,6 @@ public:
     char const* objectName(void) {return "LinkMgrClass";}
     DFabricClass *dFabricObject(void) {return this->theDFabricObject;}
 
-    void transmitData1(char *data_val);
-
     void mallocLink (char const *my_name_val);
     void freeLink (LinkClass *link_object_val);
 
