@@ -9,10 +9,10 @@
 
 void gameUServerTpServerAcceptFunction (void *game_server_object_val, void *tp_transfer_object_val) {
     phwangLogit("Golbal::gameUServerTpServerAcceptFunction", "");
-    ((GameUServerClass *) game_server_object_val)->exportAcceptConnectionFromBaseMgr(tp_transfer_object_val);
+    ((GameUServerClass *) game_server_object_val)->exportedNetAcceptFunction(tp_transfer_object_val);
 }
 
-void GameUServerClass::exportAcceptConnectionFromBaseMgr (void *tp_transfer_object_val)
+void GameUServerClass::exportedNetAcceptFunction (void *tp_transfer_object_val)
 {
     this->theTpTransferObject = tp_transfer_object_val;
     sleep(1);
@@ -21,10 +21,10 @@ void GameUServerClass::exportAcceptConnectionFromBaseMgr (void *tp_transfer_obje
 
 void gameUServerTpReceiveDataFunction (void *game_server_object_val, void *data_val) {
     phwangLogit("Golbal::gameUServerTpReceiveDataFunction", (char *) data_val);
-    ((GameUServerClass *) game_server_object_val)->exportReceiveDataFromBaseMgr(data_val);
+    ((GameUServerClass *) game_server_object_val)->exportedNetReceiveFunction(data_val);
 }
 
-void GameUServerClass::exportReceiveDataFromBaseMgr(void *data_val)
+void GameUServerClass::exportedNetReceiveFunction(void *data_val)
 {
     phwangEnqueue(this->theReceiveQueue, data_val);
 }

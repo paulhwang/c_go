@@ -46,8 +46,8 @@ public:
     pthread_t receiveThread(void) {return this->theReceiveThread;}
 
     /* exports */
-    void exportedReceiveFunction(void *data_val);
-    void exportedAcceptFunction(void *tp_transfer_object_val);
+    void exportedNetReceiveFunction(void *data_val);
+    void exportedNetAcceptFunction(void *tp_transfer_object_val);
 
     void startThreads(void);
     void startNetServer(void);

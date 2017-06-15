@@ -17,6 +17,7 @@ class DFabricClass {
     FabricClass *theFabricObject;
     void *theReceiveQueue;
     pthread_t theReceiveThread;
+    void *theTpServerObject;
     void *theTpTransferObject;
 
     void startReceiveThread(void);
@@ -30,6 +31,10 @@ public:
     DFabricClass(FabricClass *fabric_object_val);
     ~DFabricClass(void);
     char const* objectName(void) {return "DFabricClass";}
+
+    /* exports */
+    void exportedNetReceiveFunction(void *data_val);
+    void exportedNetAcceptFunction(void *tp_transfer_object_val);
 
     void startThreads(void);
     void startNetServer(void);

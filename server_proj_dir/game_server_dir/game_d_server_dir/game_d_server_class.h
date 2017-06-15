@@ -34,6 +34,9 @@ public:
     ~GameDServerClass(void);
     char const* objectName(void) {return "GameDServerClass";}
 
+    /* exports */
+    void exportedNetReceiveFunction(void *data_val);
+
     void startThreads(void);
     void startNetConnect(void);
     void receiveThreadFunction(void);

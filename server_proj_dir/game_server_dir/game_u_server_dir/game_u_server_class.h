@@ -35,8 +35,8 @@ public:
     char const* objectName(void) {return "GameUServerClass";}
 
     /* exports */
-    void exportAcceptConnectionFromBaseMgr(void *tp_transfer_object_val);
-    void exportReceiveDataFromBaseMgr(void *data_val);
+    void exportedNetReceiveFunction(void *data_val);
+    void exportedNetAcceptFunction(void *tp_transfer_object_val);
 
     void startThreads(void);
     void startNetServer(void);

@@ -9,22 +9,22 @@
 
 void baseMgrTransportServerAcceptConnection (void *base_mgr_object_val, void *tp_transfer_object_val) {
     //phwangLogit("Golbal::baseMgrTransportServerAcceptConnection", "");
-    ((BaseMgrClass *) base_mgr_object_val)->exportedAcceptFunction(tp_transfer_object_val);
+    ((BaseMgrClass *) base_mgr_object_val)->exportedNetAcceptFunction(tp_transfer_object_val);
 }
 
-void BaseMgrClass::exportedAcceptFunction (void *tp_transfer_object_val)
+void BaseMgrClass::exportedNetAcceptFunction (void *tp_transfer_object_val)
 {
     this->theTpTransferObject = tp_transfer_object_val;
 }
 
 void baseMgrReceiveDataFromTransport (void *base_mgr_object_val, void *data_val) {
     //phwangLogit("Golbal::baseMgrReceiveDataFromTransport", (char *) data_val);
-    ((BaseMgrClass *) base_mgr_object_val)->exportedReceiveFunction(data_val);
+    ((BaseMgrClass *) base_mgr_object_val)->exportedNetReceiveFunction(data_val);
 }
 
-void BaseMgrClass::exportedReceiveFunction(void *data_val)
+void BaseMgrClass::exportedNetReceiveFunction(void *data_val)
 {
-    this->logit("exportedReceiveFunction", (char *) data_val);
+    this->logit("exportedNetReceiveFunction", (char *) data_val);
     phwangEnqueue(this->theReceiveQueue, data_val);
 }
 

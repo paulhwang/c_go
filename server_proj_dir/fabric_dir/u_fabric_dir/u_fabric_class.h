@@ -32,6 +32,10 @@ public:
     ~UFabricClass(void);
     char const* objectName(void) {return "UFabricClass";}
 
+    /* exports */
+    void exportedNetReceiveFunction(void *data_val);
+    void exportedNetAcceptFunction(void *tp_transfer_object_val);
+
     void startThreads(void);
     void startNetServer(void);
     void receiveThreadFunction(void);
