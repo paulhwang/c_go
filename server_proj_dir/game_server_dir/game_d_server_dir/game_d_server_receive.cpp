@@ -9,18 +9,6 @@
 #include "../game_server_class.h"
 #include "../game_u_server_dir/game_u_server_class.h"
 
-void GameDServerClass::transmitFunction (char *data_val)
-{
-    this->logit("transmitFunction", data_val);
-
-    if (!this->theTpTransferObject) {
-        this->abend("transmitFunction", "null theTpTransferObject");
-        return;
-    }
-
-    phwangTpTransmit(this->theTpTransferObject, data_val);
-}
-
 void GameDServerClass::receiveFunction (char *data_val)
 {
     this->logit("receiveFunction", data_val);
