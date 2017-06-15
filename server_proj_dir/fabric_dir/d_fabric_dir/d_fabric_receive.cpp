@@ -8,11 +8,22 @@
 #include "d_fabric_class.h"
 #include "../fabric_class.h"
 #include "../u_fabric_dir/u_fabric_class.h"
+#include "link_mgr_dir/link_mgr_class.h"
 
 void DFabricClass::receiveFunction (char *data_val)
 {
     this->logit("receiveFunction", data_val);
-    this->theFabricObject->uFabricObject()->transmitFunction(data_val);
+
+    if (*data_val == LINK_MGR_PROTOCOL_COMMAND_IS_MALLOC_LINK) {
+        data_val++;
+        this->theLinkMgrObject->mallocLink(data_val);
+    }
+    else if (*data_val == LINK_MGR_PROTOCOL_COMMAND_IS_MALLOC_SESSION) {
+        data_val++;
+        this->theLinkMgrObject->mallocSession(data_val);
+    }
+
+    //this->theFabricObject->uFabricObject()->transmitFunction(data_val);
 }
 
 void DFabricClass::receiveThreadFunction (void)
