@@ -9,13 +9,13 @@
 #include <pthread.h>
 #include "../../protocol_dir/base_mgr_protocol.h"
 
-#define GAME_USERVER_RECEIVE_QUEUE_SIZE 100
-
 class GameServerClass;
+
+#define GAME_USERVER_RECEIVE_QUEUE_SIZE 100
 
 class GameUServerClass {
 
-    void *theGameServerObject;
+    GameServerClass *theGameServerObject;
     void *theReceiveQueue;
     pthread_t theReceiveThread;
     void *theTpServerObject;

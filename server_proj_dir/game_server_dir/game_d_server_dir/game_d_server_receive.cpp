@@ -6,6 +6,8 @@
 
 #include "../../../phwang_dir/phwang.h"
 #include "game_d_server_class.h"
+#include "../game_server_class.h"
+#include "../game_u_server_dir/game_u_server_class.h"
 
 void GameDServerClass::transmitFunction (char *data_val)
 {
@@ -16,6 +18,7 @@ void GameDServerClass::transmitFunction (char *data_val)
 void GameDServerClass::receiveFunction (char *data_val)
 {
     this->logit("receiveFunction", data_val);
+    this->theGameServerObject->gameUServerObject()->transmitFunction(data_val);
 }
 
 void GameDServerClass::receiveThreadFunction (void)

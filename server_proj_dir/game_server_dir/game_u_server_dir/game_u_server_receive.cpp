@@ -6,6 +6,8 @@
 
 #include "../../../phwang_dir/phwang.h"
 #include "game_u_server_class.h"
+#include "../game_server_class.h"
+#include "../game_d_server_dir/game_d_server_class.h"
 
 void GameUServerClass::transmitFunction (char *data_val)
 {
@@ -16,21 +18,7 @@ void GameUServerClass::transmitFunction (char *data_val)
 void GameUServerClass::receiveFunction (char *data_val)
 {
     this->logit("receiveFunction", data_val);
-            /*
-            if (*data == BASE_MGR_PROTOCOL_COMMAND_IS_MALLOC_BASE) {
-                data++;
-                if (*data == BASE_MGR_PROTOCOL_GAME_NAME_IS_GO) {
-                    this->mallocGoBase();
-                }
-            }
-            else if (*data == BASE_MGR_PROTOCOL_COMMAND_IS_TRANSFER_DATA) {
-                data++;
-                this->receiveData(data);
-            }
-            else {
-            }
-            */
-
+    this->theGameServerObject->gameDServerObject()->transmitFunction(data_val);
 }
 
 void GameUServerClass::receiveThreadFunction (void)

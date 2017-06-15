@@ -13,7 +13,6 @@ GameUServerClass::GameUServerClass (GameServerClass *game_server_object_val)
     this->theGameServerObject = game_server_object_val;
     this->theReceiveQueue = phwangMallocQueue(GAME_USERVER_RECEIVE_QUEUE_SIZE);
     this->startNetServer();
-    //this->theTpServerObject = phwangMallocTpServer(this, BASE_MGR_PROTOCOL_TRANSPORT_PORT_NUMBER, gameUServerTpServerAcceptFunction, this, gameUServerTpReceiveDataFunction, this);
 
     if (1) {
         this->logit("GameUServerClass", "init");

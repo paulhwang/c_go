@@ -30,6 +30,8 @@ public:
     GameServerClass(void *main_object_val);
     ~GameServerClass(void);
     char const* objectName(void) {return "GameServerClass";}
+    GameUServerClass *gameUServerObject(void) {return this->theGameUServerObject;}
+    GameDServerClass *gameDServerObject(void) {return this->theGameDServerObject;}
 
     /* exports */
     void startThreads(void);
