@@ -8,12 +8,15 @@
 #include "base_mgr_class.h"
 
 
-
-
-
-
-
 void baseMgrReceiveDataFromTransport (void *base_mgr_object_val, void *data_val);
+
+void BaseMgrClass::exportAcceptConnection (void *tp_transfer_object_val)
+{
+    this->theTpTransferObject = tp_transfer_object_val;
+    //phwangLogit("exportAcceptConnection", this->theTpTransferObject->objectName());
+}
+
+
 
 
 
@@ -59,8 +62,6 @@ void BaseMgrClass::receiveThreadFunction (void)
     }
 }
 
-
-
 void *baseMgrReceiveThreadFunction (void *this_val)
 {
     ((BaseMgrClass *)this_val)->receiveThreadFunction();
@@ -78,15 +79,4 @@ void BaseMgrClass::startReceiveThread (void)
         printf("Error - pthread_create() return code: %d\n", r);
         return;
     }
-}
-
-void BaseMgrClass::exportAcceptConnection (void *tp_transfer_object_val)
-{
-    this->theTpTransferObject = tp_transfer_object_val;
-    //phwangLogit("exportAcceptConnection", this->theTpTransferObject->objectName());
-}
-
-void BaseMgrClass::startThreads (void)
-{
-    this->startReceiveThread();
 }

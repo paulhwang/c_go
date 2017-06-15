@@ -44,6 +44,11 @@ BaseMgrClass::~BaseMgrClass (void)
     phwangFreeQueue(this->theReceiveQueue);
 }
 
+void BaseMgrClass::startThreads (void)
+{
+    this->startReceiveThread();
+}
+
 int BaseMgrClass::allocBaseId (void)
 {
     if (this->theGlobalBaseId >= BASE_MGR_MAX_GLOBAL_BASE_ID) {

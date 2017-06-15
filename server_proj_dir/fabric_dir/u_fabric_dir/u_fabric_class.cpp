@@ -24,7 +24,7 @@ UFabricClass::~UFabricClass (void)
 
 void UFabricClass::startThreads (void)
 {
-    //this->startReceiveThread();
+    this->startReceiveThread();
 }
 
 void UFabricClass::debug (int on_off_val, char const* str0_val, char const* str1_val)
