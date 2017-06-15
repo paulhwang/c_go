@@ -60,7 +60,7 @@ void LinkMgrClass::mallocLink (char const *data_val)
         data_buf[0] = LINK_MGR_PROTOCOL_RESPOND_IS_MALLOC_LINK;
         phwangEncodeIdIndex(data_buf + 1, link_id, LINK_MGR_PROTOCOL_LINK_ID_SIZE, link_index, LINK_MGR_PROTOCOL_LINK_INDEX_SIZE);
 
-        this->transmitData(data_buf);
+        this->theDFabricObject->transmitFunction(data_buf);
     }
     else {
         /* TBD */
@@ -121,7 +121,7 @@ LinkClass *LinkMgrClass::getLinkByIdIndex(int link_id_val, int link_index_val)
     return link;
 }
 
-void LinkMgrClass::transmitData(char *data_val)
+void LinkMgrClass::transmitData1(char *data_val)
 {
     if (1) {
         this->logit("transmitData", data_val);

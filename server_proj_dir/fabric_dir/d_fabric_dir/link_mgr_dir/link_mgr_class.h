@@ -6,6 +6,7 @@
 
 #pragma once
 
+#include "../d_fabric_class.h"
 class LinkClass;
 class DFabricClass;
 
@@ -28,8 +29,9 @@ public:
     LinkMgrClass(DFabricClass *d_fabric_object_val);
     ~LinkMgrClass();
     char const* objectName(void) {return "LinkMgrClass";}
+    DFabricClass *dFabricObject(void) {return this->theDFabricObject;}
 
-    void transmitData(char *data_val);
+    void transmitData1(char *data_val);
 
     void mallocLink (char const *my_name_val);
     void freeLink (LinkClass *link_object_val);

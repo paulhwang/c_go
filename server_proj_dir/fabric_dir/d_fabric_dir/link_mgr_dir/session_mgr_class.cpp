@@ -60,7 +60,8 @@ void SessionMgrClass::mallocSession (void)
         data_buf[0] = LINK_MGR_PROTOCOL_RESPOND_IS_MALLOC_SESSION;
         phwangEncodeIdIndex(data_buf + 1, session_id, LINK_MGR_PROTOCOL_SESSION_ID_SIZE, session_index, LINK_MGR_PROTOCOL_SESSION_INDEX_SIZE);
 
-        this->theLinkObject->linkMgrObject()->transmitData(data_buf);
+        //this->theLinkObject->linkMgrObject()->transmitData(data_buf);
+        this->theLinkObject->linkMgrObject()->dFabricObject()->transmitFunction(data_buf);
     }
     else {
         /* TBD */
