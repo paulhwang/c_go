@@ -4,7 +4,7 @@
   File name: link_class.cpp
 */
 
-#include "../../phwang_dir/phwang.h"
+#include "../../../../phwang_dir/phwang.h"
 #include "link_class.h"
 #include "session_mgr_class.h"
 #include "link_mgr_class.h"

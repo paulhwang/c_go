@@ -7,13 +7,11 @@
 #pragma once
 
 class FabricClass;
-class LinkMgrClass;
 class BaseMgrClass;
 class GameServerClass;
 
 class MainClass {
     FabricClass *theFabricObject;
-    LinkMgrClass *theLinkMgrObject;
     BaseMgrClass *theGoBaseMgrObject;
     GameServerClass *theGoGameServerObject;
 

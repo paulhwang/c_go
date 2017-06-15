@@ -7,7 +7,7 @@
 #pragma once
 
 #include <pthread.h>
-#include "../protocol_dir/link_mgr_protocol.h"
+#include "../../../protocol_dir/link_mgr_protocol.h"
 class LinkClass;
 
 #define LINK_MGR_RECEIVE_QUEUE_SIZE 100

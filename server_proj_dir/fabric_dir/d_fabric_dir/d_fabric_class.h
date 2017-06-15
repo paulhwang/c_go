@@ -9,12 +9,15 @@
 #include <pthread.h>
 #include "../../protocol_dir/link_mgr_protocol.h"
 
+class LinkMgrClass;
+
 #define D_FABRIC_RECEIVE_QUEUE_SIZE 100
 
 class FabricClass;
 
 class DFabricClass {
     FabricClass *theFabricObject;
+    LinkMgrClass *theLinkMgrObject;
     void *theReceiveQueue;
     pthread_t theReceiveThread;
     void *theTpServerObject;
