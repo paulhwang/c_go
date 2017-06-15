@@ -32,6 +32,7 @@ public:
     char const* objectName(void) {return "DFabricClass";}
 
     void startThreads(void);
+    void startNetServer(void);
     void receiveThreadFunction(void);
     void transmitFunction(char *data_val);
 };

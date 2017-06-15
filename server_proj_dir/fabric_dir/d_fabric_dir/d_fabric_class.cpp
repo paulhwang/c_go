@@ -12,6 +12,7 @@ DFabricClass::DFabricClass (FabricClass *fabric_object_val)
     memset(this, 0, sizeof(DFabricClass));
     this->theFabricObject = fabric_object_val;
     this->theReceiveQueue = phwangMallocQueue(D_FABRIC_RECEIVE_QUEUE_SIZE);
+    this->startNetServer();
 
     if (1) {
         this->logit("DFabricClass", "init");

@@ -33,6 +33,7 @@ public:
     char const* objectName(void) {return "UFabricClass";}
 
     void startThreads(void);
+    void startNetServer(void);
     void receiveThreadFunction(void);
     void transmitFunction(char *data_val);
 };
