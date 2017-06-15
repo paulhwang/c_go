@@ -5,7 +5,7 @@
 */
 
 #include "../../../phwang_dir/phwang.h"
-#include "game_dserver_class.h"
+#include "game_d_server_class.h"
 
 void GameDServerClass::transmitFunction (char *data_val)
 {
