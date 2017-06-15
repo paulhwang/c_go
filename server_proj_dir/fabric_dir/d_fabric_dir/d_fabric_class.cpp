@@ -14,7 +14,7 @@ DFabricClass::DFabricClass (FabricClass *fabric_object_val)
     this->theFabricObject = fabric_object_val;
     this->theReceiveQueue = phwangMallocQueue(D_FABRIC_RECEIVE_QUEUE_SIZE);
     this->theLinkMgrObject = new LinkMgrClass(this);
-    //this->startNetServer();
+    this->startNetServer();
 
     if (1) {
         this->logit("DFabricClass", "init");
@@ -28,7 +28,7 @@ DFabricClass::~DFabricClass (void)
 
 void DFabricClass::startThreads (void)
 {
-    //this->startReceiveThread();
+    this->startReceiveThread();
     this->theLinkMgrObject->startThreads();
 }
 

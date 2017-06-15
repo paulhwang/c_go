@@ -28,12 +28,11 @@ void DFabricClass::receiveFunction (char *data_val)
 
 void DFabricClass::receiveThreadFunction (void)
 {
-    if (1) {
-        this->logit("receiveThreadFunction", "starts");
-    }
+    this->debug(1, "receiveThreadFunction", "starts");
 
     while (1) {
         void *data = phwangDequeue(this->theReceiveQueue);
+        this->debug(1, "receiveThreadFunction", (char *) data);
         if (data) {
             this->receiveFunction((char *) data);
         }
