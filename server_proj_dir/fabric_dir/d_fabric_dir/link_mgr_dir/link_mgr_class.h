@@ -9,8 +9,6 @@
 class LinkClass;
 class DFabricClass;
 
-#define LINK_MGR_RECEIVE_QUEUE_SIZE 100
-
 class LinkMgrClass {
 #define LINK_MGR_LINK_ARRAY_SIZE 1000
 #define LINK_MGR_MAX_GLOBAL_LINK_ID 9999
@@ -19,7 +17,6 @@ class LinkMgrClass {
     int theGlobalLinkId;
     LinkClass *theLinkTableArray[LINK_MGR_LINK_ARRAY_SIZE + 4];
 
-    void startReceiveThread(void);
     int allocLinkId(void);
     int allocLinkIndex(void);
     LinkClass *getLinkByIdIndex(int link_id_val, int link_index_val);
@@ -32,11 +29,6 @@ public:
     ~LinkMgrClass();
     char const* objectName(void) {return "LinkMgrClass";}
 
-    /* exports */
-    void exportReceiveData(void *data_val);
-    void exportAcceptConnection(void *tp_transfer_object_val);
-
-    void receiveData(char* data_val);
     void transmitData(char *data_val);
 
     void mallocLink (char const *my_name_val);
