@@ -82,18 +82,10 @@ void BaseMgrClass::mallocGoBase (void)
         data_buf[1] = BASE_MGR_PROTOCOL_GAME_NAME_IS_GO;
         phwangEncodeIdIndex(data_buf + 2, base_id, BASE_MGR_PROTOCOL_BASE_ID_SIZE, base_index, BASE_MGR_PROTOCOL_BASE_INDEX_SIZE);
 
-        this->transmitData(data_buf);
+        this->transmitFunction(data_buf);
     }
     else {
         /* TBD */
-    }
-}
-
-void BaseMgrClass::transmitData(char *data_val)
-{
-    if (1) {
-        this->logit("transmitData", data_val);
-        phwangTpTransmit(this->theTpTransferObject, data_val);
     }
 }
 

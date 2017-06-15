@@ -56,7 +56,7 @@ void GoPortClass::transmitBoardData (void) {
         sprintf(s, "board_data=%s", board_data);
         this->logit("transmitBoardData", s);
     }
-    this->baseObject()->baseMgrObject()->transmitData(board_data);
+    this->baseObject()->baseMgrObject()->transmitFunction(board_data);
 }
 
 void GoPortClass::receiveStringData (char const* str_val) {

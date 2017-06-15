@@ -51,7 +51,6 @@ public:
     void startThreads(void);
     void receiveThreadFunction(void);
     void receiveData(char* data_val);
-    void transmitData(char *data_val);
     void transmitFunction(char *data_val);
 
     void baseMgrLogit(char const* str0_val, char const* str1_val);
