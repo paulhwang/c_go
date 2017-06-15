@@ -6,6 +6,7 @@
 
 #include "../../../phwang_dir/phwang.h"
 #include "u_fabric_class.h"
+#include "../../protocol_dir/game_server_protocol.h"
 
 void uFabricTpServerAcceptFunction (void *u_fabric_object_val, void *tp_transfer_object_val) {
     phwangLogit("Golbal::uFabricTpServerAcceptFunction", "");
@@ -29,5 +30,5 @@ void UFabricClass::exportedNetReceiveFunction(void *data_val)
 
 void UFabricClass::startNetServer (void)
 {
-    this->theTpServerObject = phwangMallocTpServer(this, LINK_MGR_PROTOCOL_TRANSPORT_PORT_NUMBER, uFabricTpServerAcceptFunction, this, uFabricTpReceiveDataFunction, this);
+    this->theTpServerObject = phwangMallocTpServer(this, GAME_SERVER_PROTOCOL_TRANSPORT_PORT_NUMBER, uFabricTpServerAcceptFunction, this, uFabricTpReceiveDataFunction, this);
 }

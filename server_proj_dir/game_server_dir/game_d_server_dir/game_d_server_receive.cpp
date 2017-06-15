@@ -21,6 +21,8 @@ void GameDServerClass::receiveThreadFunction (void)
         this->logit("receiveThreadFunction", "starts");
     }
 
+    this->startNetConnect();
+
     while (1) {
         void *data = phwangDequeue(this->theReceiveQueue);
         if (data) {
