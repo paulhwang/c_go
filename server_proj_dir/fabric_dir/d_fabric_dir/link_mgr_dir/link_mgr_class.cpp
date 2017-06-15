@@ -20,10 +20,10 @@ void linkMgrReceiveDataFromTransport (void *link_mgr_object_val, void *data_val)
     ((LinkMgrClass *) link_mgr_object_val)->exportReceiveData(data_val);
 }
 
-LinkMgrClass::LinkMgrClass (void *main_object_val)
+LinkMgrClass::LinkMgrClass (DFabricClass *d_fabric_object_val)
 {
     memset(this, 0, sizeof(LinkMgrClass));
-    this->theMainObject = main_object_val;
+    this->theDFabricObject = d_fabric_object_val;
     this->theTpServerObject = phwangMallocTpServer(this, LINK_MGR_PROTOCOL_TRANSPORT_PORT_NUMBER, linkMgrTransportServerAcceptConnection, this, linkMgrReceiveDataFromTransport, this, this->objectName());
     this->theGlobalLinkId = 0;
 

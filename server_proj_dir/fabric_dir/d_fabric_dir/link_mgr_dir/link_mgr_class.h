@@ -9,6 +9,7 @@
 #include <pthread.h>
 #include "../../../protocol_dir/link_mgr_protocol.h"
 class LinkClass;
+class DFabricClass;
 
 #define LINK_MGR_RECEIVE_QUEUE_SIZE 100
 
@@ -16,7 +17,7 @@ class LinkMgrClass {
 #define LINK_MGR_LINK_ARRAY_SIZE 1000
 #define LINK_MGR_MAX_GLOBAL_LINK_ID 9999
 
-    void *theMainObject;
+    DFabricClass *theDFabricObject;
     void *theTpServerObject;
     int theGlobalLinkId;
     LinkClass *theLinkTableArray[LINK_MGR_LINK_ARRAY_SIZE + 4];
@@ -35,7 +36,7 @@ class LinkMgrClass {
     void abend(char const* str0_val, char const* str1_val);
 
 public:
-    LinkMgrClass(void *main_object_val);
+    LinkMgrClass(DFabricClass *d_fabric_object_val);
     ~LinkMgrClass();
     char const* objectName(void) {return "LinkMgrClass";}
     pthread_t receiveThread(void) {return this->theReceiveThread;}
