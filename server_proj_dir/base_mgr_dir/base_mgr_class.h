@@ -29,7 +29,7 @@ class BaseMgrClass {
     void *theReceiveQueue;
 
     void startReceiveThread(void);
-    void receiveFunction(char *data_val);
+    void parseReceiveData(char *data_val);
 
     int allocBaseId(void);
     int allocBaseIndex(void);
