@@ -38,6 +38,7 @@ TpServerClass::TpServerClass (
     this->startServerThread();
 
     if (1) {
+        this->logit(who_val, "TpServerClass");
         this->logit("TpServerClass", "init");
     }
 }
