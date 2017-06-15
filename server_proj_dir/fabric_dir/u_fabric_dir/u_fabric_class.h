@@ -14,9 +14,11 @@
 class FabricClass;
 
 class UFabricClass {
-
     void *theFabricObject;
     void *theReceiveQueue;
+    pthread_t theReceiveThread;
+    void *theTpServerObject;
+    void *theTpTransferObject;
 
     void startReceiveThread(void);
 
@@ -30,4 +32,7 @@ public:
     char const* objectName(void) {return "UFabricClass";}
 
     void startThreads(void);
+    void receiveThreadFunction(void);
+    void receiveFunction(char *data_val);
+    void transmitFunction(char *data_val);
 };

@@ -14,9 +14,10 @@
 class FabricClass;
 
 class DFabricClass {
-
     void *theFabricObject;
     void *theReceiveQueue;
+    pthread_t theReceiveThread;
+    void *theTpTransferObject;
 
     void startReceiveThread(void);
 
@@ -30,4 +31,7 @@ public:
     char const* objectName(void) {return "DFabricClass";}
 
     void startThreads(void);
+    void receiveThreadFunction(void);
+    void receiveFunction(char *data_val);
+    void transmitFunction(char *data_val);
 };
