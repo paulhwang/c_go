@@ -6,8 +6,8 @@
 
 #include "../../phwang_dir/phwang.h"
 #include "game_server_class.h"
-#include "game_userver_dir/game_u_server_class.h"
-#include "game_dserver_dir/game_d_server_class.h"
+#include "game_u_server_dir/game_u_server_class.h"
+#include "game_d_server_dir/game_d_server_class.h"
 #include "group_mgr_class.h"
 
 GameServerClass::GameServerClass (void *main_object_val)

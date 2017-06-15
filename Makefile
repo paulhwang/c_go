@@ -20,8 +20,8 @@ BASE_MGR_DIR    = $(SERVER_PROJ_DIR)/base_mgr_dir
 GAME_SERVER_DIR = $(SERVER_PROJ_DIR)/game_server_dir
 U_FABRIC_DIR    = $(FABRIC_DIR)/u_fabric_dir
 D_FABRIC_DIR    = $(FABRIC_DIR)/d_fabric_dir
-GAME_USERVER_DIR = $(GAME_SERVER_DIR)/game_userver_dir
-GAME_DSERVER_DIR = $(GAME_SERVER_DIR)/game_dserver_dir
+GAME_USERVER_DIR = $(GAME_SERVER_DIR)/game_u_server_dir
+GAME_DSERVER_DIR = $(GAME_SERVER_DIR)/game_d_server_dir
 GO_BASE_DIR = $(BASE_MGR_DIR)/go_base_dir
 CLIENT_DIR = $(CLIENT_PROJ_DIR)/client_dir
 
