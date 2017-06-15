@@ -45,9 +45,12 @@ void TpTransferClass::receiveThreadFunction(int socket_val)
         char *buffer = (char *) malloc(TP_TRANSFER_CLASS_RECEIVE_BUFFER_SIZE);
 
         int length = read(socket_val, buffer, TP_TRANSFER_CLASS_RECEIVE_BUFFER_SIZE);
-        this->logit("receiveThreadFunction", buffer);
         if (length > 0) {
+            this->logit("receiveThreadFunction", buffer);
             this->receiveCallback()(this->theReceiveObject, buffer);
+        }
+        else {
+            usleep(10);
         }
     }
 }
