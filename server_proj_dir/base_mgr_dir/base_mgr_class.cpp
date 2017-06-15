@@ -41,6 +41,13 @@ void BaseMgrClass::baseMgrAbend (char const* str0_val, char const* str1_val) {
     phwangAbend(str0_val, str1_val);
 }
 
+void BaseMgrClass::debug (int on_off_val, char const* str0_val, char const* str1_val)
+{
+    if (on_off_val) {
+        this->logit(str0_val, str1_val);
+    }
+}
+
 void BaseMgrClass::logit (char const* str0_val, char const* str1_val) {
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", this->objectName(), str0_val);
