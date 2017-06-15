@@ -33,6 +33,7 @@ public:
     char const* objectName(void) {return "GameDServerClass";}
 
     void startThreads(void);
+    void startNetConnect(void);
     void receiveThreadFunction(void);
     void transmitFunction(char *data_val);
 };

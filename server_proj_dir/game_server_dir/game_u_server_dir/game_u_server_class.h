@@ -40,6 +40,7 @@ public:
     void exportReceiveDataFromBaseMgr(void *data_val);
 
     void startThreads(void);
+    void startNetServer(void);
     void receiveThreadFunction(void);
     void transmitFunction(char *data_val);
 };

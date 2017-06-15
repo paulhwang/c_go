@@ -37,5 +37,3 @@ void BaseMgrClass::startNetConnect (void)
 {
     this->theTpTransferObject = phwangTpConnect(0, BASE_MGR_PROTOCOL_TRANSPORT_PORT_NUMBER, baseMgrReceiveDataFromTransport, this);
 }
-
-

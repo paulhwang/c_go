@@ -7,34 +7,13 @@
 #include "../../../phwang_dir/phwang.h"
 #include "game_u_server_class.h"
 
-void gameUServerTpServerAcceptFunction (void *game_server_object_val, void *tp_transfer_object_val) {
-    phwangLogit("Golbal::gameUServerTpServerAcceptFunction", "");
-    ((GameUServerClass *) game_server_object_val)->exportAcceptConnectionFromBaseMgr(tp_transfer_object_val);
-}
-
-void GameUServerClass::exportAcceptConnectionFromBaseMgr (void *tp_transfer_object_val)
-{
-    this->theTpTransferObject = tp_transfer_object_val;
-    sleep(1);
-    baseMgrTest();
-}
-
-void gameUServerTpReceiveDataFunction (void *game_server_object_val, void *data_val) {
-    phwangLogit("Golbal::gameUServerTpReceiveDataFunction", (char *) data_val);
-    ((GameUServerClass *) game_server_object_val)->exportReceiveDataFromBaseMgr(data_val);
-}
-
-void GameUServerClass::exportReceiveDataFromBaseMgr(void *data_val)
-{
-    phwangEnqueue(this->theReceiveQueue, data_val);
-}
-
 GameUServerClass::GameUServerClass (GameServerClass *game_server_object_val)
 {
     memset(this, 0, sizeof(GameUServerClass));
     this->theGameServerObject = game_server_object_val;
     this->theReceiveQueue = phwangMallocQueue(GAME_USERVER_RECEIVE_QUEUE_SIZE);
-    this->theTpServerObject = phwangMallocTpServer(this, BASE_MGR_PROTOCOL_TRANSPORT_PORT_NUMBER, gameUServerTpServerAcceptFunction, this, gameUServerTpReceiveDataFunction, this);
+    this->startNetServer();
+    //this->theTpServerObject = phwangMallocTpServer(this, BASE_MGR_PROTOCOL_TRANSPORT_PORT_NUMBER, gameUServerTpServerAcceptFunction, this, gameUServerTpReceiveDataFunction, this);
 
     if (1) {
         this->logit("GameUServerClass", "init");
