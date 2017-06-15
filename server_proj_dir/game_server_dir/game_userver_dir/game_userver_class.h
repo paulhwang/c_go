@@ -41,4 +41,6 @@ public:
 
     void startThreads(void);
     void receiveThreadFunction(void);
+    void receiveFunction(char *data_val);
+    void transmitFunction(char *data_val);
 };

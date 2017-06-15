@@ -7,20 +7,16 @@
 #include "../../../phwang_dir/phwang.h"
 #include "game_userver_class.h"
 
-void GameUServerClass::receiveThreadFunction (void)
+
+void GameUServerClass::transmitFunction (char *data_val)
 {
-    if (1) {
-        this->logit("receiveThreadFunction", "starts");
-    }
-    this->receiveThreadLoop();
+    this->logit("transmitFunction", data_val);
+    phwangTpTransmit(this->theTpTransferObject, data_val);
 }
 
-void GameUServerClass::receiveThreadLoop (void)
+void GameUServerClass::receiveFunction (char *data_val)
 {
-    while (1) {
-        char *data = (char *) phwangDequeue(this->theReceiveQueue);
-        //this->logit("receiveThreadLoop", data);
-        if (data) {
+    this->logit("receiveFunction", data_val);
             /*
             if (*data == BASE_MGR_PROTOCOL_COMMAND_IS_MALLOC_BASE) {
                 data++;
@@ -35,6 +31,19 @@ void GameUServerClass::receiveThreadLoop (void)
             else {
             }
             */
+
+}
+
+void GameUServerClass::receiveThreadFunction (void)
+{
+    if (1) {
+        this->logit("receiveThreadFunction", "starts");
+    }
+
+    while (1) {
+        void *data = phwangDequeue(this->theReceiveQueue);
+        if (data) {
+            this->receiveFunction((char *) data);
         }
     }
 }
