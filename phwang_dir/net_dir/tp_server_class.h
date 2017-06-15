@@ -37,7 +37,8 @@ public:
             void (*accept_callback_func_val)(void *, void *),
             void *accept_callback_parameter_val,
             void (*receive_callback_func_val)(void *, void *),
-            void *receive_callback_parameter_val);
+            void *receive_callback_parameter_val,
+            char const *who_val);
     ~TpServerClass(void);
     char const *objectName(void) {return "TpServerClass";}
 

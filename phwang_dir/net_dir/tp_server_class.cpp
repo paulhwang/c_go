@@ -24,7 +24,8 @@ TpServerClass::TpServerClass (
                     void (*accept_callback_func_val)(void *, void *),
                     void *accept_callback_parameter_val,
                     void (*receive_callback_func_val)(void *, void *),
-                    void *receive_callback_parameter_val)
+                    void *receive_callback_parameter_val,
+                    char const *who_val)
 
 {
     this->theCallerObject = caller_object_val;

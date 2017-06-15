@@ -31,5 +31,5 @@ void GameUServerClass::exportedNetReceiveFunction(void *data_val)
 
 void GameUServerClass::startNetServer (void)
 {
-    this->theTpServerObject = phwangMallocTpServer(this, BASE_MGR_PROTOCOL_TRANSPORT_PORT_NUMBER, gameUServerTpServerAcceptFunction, this, gameUServerTpReceiveDataFunction, this);
+    this->theTpServerObject = phwangMallocTpServer(this, BASE_MGR_PROTOCOL_TRANSPORT_PORT_NUMBER, gameUServerTpServerAcceptFunction, this, gameUServerTpReceiveDataFunction, this, this->objectName());
 }

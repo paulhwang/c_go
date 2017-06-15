@@ -30,10 +30,10 @@ void BaseMgrClass::exportedNetReceiveFunction(void *data_val)
 
 void BaseMgrClass::startNetServer (void)
 {
-    this->theTpServerObject = phwangMallocTpServer(this, BASE_MGR_PROTOCOL_TRANSPORT_PORT_NUMBER1, baseMgrTransportServerAcceptConnection, this, baseMgrReceiveDataFromTransport, this);
+    this->theTpServerObject = phwangMallocTpServer(this, BASE_MGR_PROTOCOL_TRANSPORT_PORT_NUMBER1, baseMgrTransportServerAcceptConnection, this, baseMgrReceiveDataFromTransport, this, this->objectName());
 }
 
 void BaseMgrClass::startNetConnect (void)
 {
-    this->theTpTransferObject = phwangTpConnect(0, BASE_MGR_PROTOCOL_TRANSPORT_PORT_NUMBER, baseMgrReceiveDataFromTransport, this);
+    this->theTpTransferObject = phwangTpConnect(0, BASE_MGR_PROTOCOL_TRANSPORT_PORT_NUMBER, baseMgrReceiveDataFromTransport, this, this->objectName());
 }
