@@ -23,6 +23,7 @@ class GameUServerClass {
 
     void startReceiveThread(void);
     void receiveThreadLoop(void);
+    void receiveFunction(char *data_val);
 
     void baseMgrTest(void);
     
@@ -41,6 +42,5 @@ public:
 
     void startThreads(void);
     void receiveThreadFunction(void);
-    void receiveFunction(char *data_val);
     void transmitFunction(char *data_val);
 };
