@@ -4,12 +4,12 @@
   File name: phwang_class.cpp
 */
 
-#include "../phwang.h"
+#include "phwang.h"
 #include "phwang_class.h"
-#include "../queue_dir/queue_class.h"
-#include "../net_dir/tp_connect.h"
-#include "../net_dir/tp_server_class.h"
-#include "../net_dir/tp_transfer_class.h"
+#include "queue_dir/queue_class.h"
+#include "net_dir/tp_connect.h"
+#include "net_dir/tp_server_class.h"
+#include "net_dir/tp_transfer_class.h"
 
 void PhwangClass::logit (char const* str0_val, char const* str1_val)
 {

@@ -5,7 +5,7 @@
 */
 
 #include <unistd.h>
-#include "../../phwang_dir/extern_dir/phwang_class.h"
+#include "../../phwang_dir/phwang_class.h"
 #include "../../phwang_dir/phwang.h"
 #include "../../server_proj_dir/protocol_dir/link_mgr_protocol.h"
 #include "../../server_proj_dir/protocol_dir/base_mgr_protocol.h"

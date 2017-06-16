@@ -9,7 +9,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <malloc.h>
-#include "extern_dir/phwang_class.h"
+#include "phwang_class.h"
 
 /* init */
 void phwangInit(void);

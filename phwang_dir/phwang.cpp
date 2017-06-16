@@ -4,7 +4,7 @@
   File name: phwang.cpp
 */
 
-#include "../phwang.h"
+#include "phwang.h"
 #include "phwang_class.h"
 
 PhwangClass *thePhwangObject = 0;
