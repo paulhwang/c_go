@@ -155,7 +155,7 @@ void *PhwangClass::mallocTpServer (
                         void *receive_callback_parameter_val,
                         char const *who_val)
 {
-    return new TpServerClass(
+    TpServerClass *tp_server_object = new TpServerClass(
                     caller_object_val,
                     port_val,
                     accept_callback_func_val,
@@ -163,6 +163,11 @@ void *PhwangClass::mallocTpServer (
                     receive_callback_func_val,
                     receive_callback_parameter_val,
                     who_val);
+
+    if (tp_server_object) {
+        tp_server_object->startServerThread();
+    }
+    return tp_server_object;
 }
 
 void *PhwangClass::tpConnect (

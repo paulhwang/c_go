@@ -36,8 +36,6 @@ TpServerClass::TpServerClass (
     this->theReceiveCallbackParameter = receive_callback_parameter_val;
     this->theWho = who_val;
 
-    this->startServerThread();
-
     if (1) {
         this->logit(who_val, "TpServerClass=====");
         this->logit("TpServerClass", "init");

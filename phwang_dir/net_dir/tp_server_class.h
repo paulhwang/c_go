@@ -27,11 +27,14 @@ class TpServerClass {
     char const *theWho;
     pthread_t theServerThread;
 
-    void startServerThread(void);
-
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
- 
+
+protected:
+    friend class PhwangClass;
+    
+    void startServerThread(void);
+
 public:
     TpServerClass(void *caller_object_val,
             unsigned short port_val,

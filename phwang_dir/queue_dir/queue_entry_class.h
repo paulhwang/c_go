@@ -19,11 +19,11 @@ class QueueEntryClass
   QueueEntryClass *next;
   QueueEntryClass *prev;
 
-public:
-  QueueEntryClass(void);
-  ~QueueEntryClass(void);
-
   void deleteQueueEntry(void);
 
   void *data;
+
+public:
+  QueueEntryClass(void);
+  ~QueueEntryClass(void);
 };
