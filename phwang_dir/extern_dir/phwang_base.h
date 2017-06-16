@@ -8,5 +8,3 @@
 
 #include "phwang_class.h"
 
-extern PhwangClass *thePhwangObject;
-void initPhwangObject(void);
