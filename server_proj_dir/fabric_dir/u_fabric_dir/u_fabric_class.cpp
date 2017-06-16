@@ -6,7 +6,6 @@
 
 #include "../../../phwang_dir/phwang.h"
 #include "u_fabric_class.h"
-#include "group_mgr_dir/group_mgr_class.h"
 
 UFabricClass::UFabricClass (FabricClass *fabric_object_val)
 {

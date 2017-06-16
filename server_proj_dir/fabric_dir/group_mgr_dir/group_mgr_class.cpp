@@ -4,7 +4,7 @@
   File name: group_mgr_class.cpp
 */
 
-#include "../../../../phwang_dir/phwang.h"
+#include "../../../phwang_dir/phwang.h"
 #include "group_mgr_class.h"
 #include "group_class.h"
 
