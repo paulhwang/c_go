@@ -7,13 +7,14 @@
 #include "../phwang.h"
 #include "phwang_class.h"
 
-extern PhwangClass *thePhwangObject;
-void initPhwangObject(void);
+PhwangClass *thePhwangObject = 0;
 
 /* init */
 void phwangInit (void)
 {
-    initPhwangObject();
+	if (!thePhwangObject) {
+		thePhwangObject = new PhwangClass();
+	}
 }
 
 /* logit */
