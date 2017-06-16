@@ -7,7 +7,7 @@
 #pragma once
 
 #include <pthread.h>
-#include "../../protocol_dir/link_mgr_protocol.h"
+#include "../../protocol_dir/game_server_protocol.h"
 
 #define U_FABRIC_RECEIVE_QUEUE_SIZE 100
 
