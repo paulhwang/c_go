@@ -20,7 +20,8 @@ void DFabricClass::exportedNetAcceptFunction (void *tp_transfer_object_val)
 
 void dFabricTpReceiveDataFunction (void *d_fabric_object_val, void *data_val) {
     phwangLogit("Golbal::dFabricTpReceiveDataFunction", (char *) data_val);
-    ((DFabricClass *) d_fabric_object_val)->exportedNetReceiveFunction(data_val);
+    //((DFabricClass *) d_fabric_object_val)->exportedNetReceiveFunction(data_val);
+    ((DFabricClass *) d_fabric_object_val)->receiveFunction((char *) data_val);
 }
 
 void DFabricClass::exportedNetReceiveFunction(void *data_val)

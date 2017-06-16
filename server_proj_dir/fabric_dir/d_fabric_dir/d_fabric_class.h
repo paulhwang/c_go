@@ -21,7 +21,6 @@ class DFabricClass {
     void *theTpTransferObject;
 
     void startReceiveThread(void);
-    void receiveFunction(char *data_val);
 
     void debug(int on_off_val, char const* str0_val, char const* str1_val);
     void logit(char const* str0_val, char const* str1_val);
@@ -35,6 +34,7 @@ public:
     /* exports */
     void exportedNetReceiveFunction(void *data_val);
     void exportedNetAcceptFunction(void *tp_transfer_object_val);
+    void receiveFunction(char *data_val);
 
     void startThreads(void);
     void startNetServer(void);
