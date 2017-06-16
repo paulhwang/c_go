@@ -30,5 +30,5 @@ void UFabricClass::exportedNetReceiveFunction(void *data_val)
 
 void UFabricClass::startNetServer (void)
 {
-    this->theTpServerObject = phwangMallocTpServer(this, GAME_SERVER_PROTOCOL_TRANSPORT_PORT_NUMBER, uFabricTpServerAcceptFunction, this, uFabricTpReceiveDataFunction, this, this->objectName());
+    this->theTpServerObject = phwangMallocTpServer(this, GROUP_ROOM_PROTOCOL_TRANSPORT_PORT_NUMBER, uFabricTpServerAcceptFunction, this, uFabricTpReceiveDataFunction, this, this->objectName());
 }

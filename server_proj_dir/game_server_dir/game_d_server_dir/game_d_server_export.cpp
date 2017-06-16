@@ -21,5 +21,5 @@ void GameDServerClass::exportedNetReceiveFunction(void *data_val)
 
 void GameDServerClass::startNetConnect (void)
 {
-    this->theTpTransferObject = phwangTpConnect(0, GAME_SERVER_PROTOCOL_TRANSPORT_PORT_NUMBER, gameDServerReceiveDataFromTransport, this, this->objectName());
+    this->theTpTransferObject = phwangTpConnect(0, GROUP_ROOM_PROTOCOL_TRANSPORT_PORT_NUMBER, gameDServerReceiveDataFromTransport, this, this->objectName());
 }
