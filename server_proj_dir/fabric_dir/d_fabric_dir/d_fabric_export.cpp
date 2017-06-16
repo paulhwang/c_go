@@ -7,6 +7,9 @@
 #include "../../../phwang_dir/phwang.h"
 #include "d_fabric_class.h"
 #include "../../protocol_dir/net_port_protocol.h"
+#include "../fabric_class.h"
+#include "../u_fabric_dir/u_fabric_class.h"
+#include "../link_mgr_dir/link_mgr_class.h"
 
 void dFabricTpServerAcceptFunction (void *d_fabric_object_val, void *tp_transfer_object_val) {
     phwangLogit("Golbal::dFabricTpServerAcceptFunction", "");
@@ -20,13 +23,23 @@ void DFabricClass::exportedNetAcceptFunction (void *tp_transfer_object_val)
 
 void dFabricTpReceiveDataFunction (void *d_fabric_object_val, void *data_val) {
     phwangLogit("Golbal::dFabricTpReceiveDataFunction", (char *) data_val);
-    //((DFabricClass *) d_fabric_object_val)->exportedNetReceiveFunction(data_val);
-    ((DFabricClass *) d_fabric_object_val)->receiveFunction((char *) data_val);
+    ((DFabricClass *) d_fabric_object_val)->exportedNetReceiveFunction((char *) data_val);
 }
 
-void DFabricClass::exportedNetReceiveFunction(void *data_val)
+void DFabricClass::exportedNetReceiveFunction(char *data_val)
 {
-    phwangEnqueue(this->theReceiveQueue, data_val);
+    this->logit("receiveFunction", data_val);
+
+    if (*data_val == LINK_MGR_PROTOCOL_COMMAND_IS_MALLOC_LINK) {
+        data_val++;
+        this->theFabricObject->linkMgrObject()->mallocLink(data_val);
+    }
+    else if (*data_val == LINK_MGR_PROTOCOL_COMMAND_IS_MALLOC_SESSION) {
+        data_val++;
+        this->theFabricObject->linkMgrObject()->mallocSession(data_val);
+    }
+
+    //this->theFabricObject->uFabricObject()->transmitFunction(data_val);
 }
 
 void DFabricClass::startNetServer (void)
