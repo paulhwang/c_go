@@ -30,6 +30,7 @@ class PhwangClass {
     void enqueue(void *queue_val, void *data_val);
     void *dequeue(void *queue_val);
 
+    /* tp */
     void *mallocTpServer (
             void *caller_object_val,
             unsigned short port_val,
