@@ -11,7 +11,6 @@ DFabricClass::DFabricClass (FabricClass *fabric_object_val)
 {
     memset(this, 0, sizeof(DFabricClass));
     this->theFabricObject = fabric_object_val;
-    this->theReceiveQueue = phwangMallocQueue(D_FABRIC_RECEIVE_QUEUE_SIZE);
     this->startNetServer();
 
     if (1) {
@@ -25,7 +24,6 @@ DFabricClass::~DFabricClass (void)
 
 void DFabricClass::startThreads (void)
 {
-    ///this->startReceiveThread();
 }
 
 void DFabricClass::debug (int on_off_val, char const* str0_val, char const* str1_val)

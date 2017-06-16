@@ -15,12 +15,8 @@ class FabricClass;
 
 class DFabricClass {
     FabricClass *theFabricObject;
-    void *theReceiveQueue;
-    pthread_t theReceiveThread;
     void *theTpServerObject;
     void *theTpTransferObject;
-
-    void startReceiveThread(void);
 
     void debug(int on_off_val, char const* str0_val, char const* str1_val);
     void logit(char const* str0_val, char const* str1_val);
@@ -34,7 +30,6 @@ public:
     /* exports */
     void exportedNetReceiveFunction(char *data_val);
     void exportedNetAcceptFunction(void *tp_transfer_object_val);
-    void receiveFunction(char *data_val);
 
     void startThreads(void);
     void startNetServer(void);
