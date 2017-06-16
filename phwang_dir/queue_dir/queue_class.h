@@ -37,14 +37,17 @@ class QueueClass
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
 
+protected:
+    friend class PhwangClass;
+    
+    void initQueue(void);
+    void enqueueData(void *data_val);
+    void *dequeueData(void);
+
 public:
     QueueClass(int max_size_val);
     ~QueueClass(void);
     char const *objectName(void) {return "QueueClass";}
-
-    void initQueue(void);
-    void enqueueData(void *data_val);
-    void *dequeueData(void);
 
   /* always at the tail of this class */
   //enum GETAC_MARKER_DEFINE_ marker_tail;
