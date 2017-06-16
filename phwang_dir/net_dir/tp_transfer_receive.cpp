@@ -13,6 +13,22 @@
 #include "../../phwang_dir/phwang.h"
 #include "tp_transfer_class.h"
 
+void TpTransferClass::receiveThreadFunction(int socket_val)
+{
+    while (1) {
+        char *buffer = (char *) malloc(TP_TRANSFER_CLASS_RECEIVE_BUFFER_SIZE);
+
+        int length = read(socket_val, buffer, TP_TRANSFER_CLASS_RECEIVE_BUFFER_SIZE);
+        if (length > 0) {
+            this->logit("receiveThreadFunction", buffer);
+            this->receiveCallback()(this->theReceiveObject, buffer);
+        }
+        else {
+            usleep(10);
+        }
+    }
+}
+
 void *tpTranferReceiveThreadFunction (void *data_val)
 {
     int socket = ((tp_transfer_thread_parameter *) data_val)->socket;
@@ -39,18 +55,40 @@ void TpTransferClass::startReceiveThread (int socket_val)
     }
 }
 
-void TpTransferClass::receiveThreadFunction(int socket_val)
-{
-    while (1) {
-        char *buffer = (char *) malloc(TP_TRANSFER_CLASS_RECEIVE_BUFFER_SIZE);
+/**************************************************************************************************************/
+/**************************************************************************************************************/
+/**************************************************************************************************************/
 
-        int length = read(socket_val, buffer, TP_TRANSFER_CLASS_RECEIVE_BUFFER_SIZE);
-        if (length > 0) {
-            this->logit("receiveThreadFunction", buffer);
-            this->receiveCallback()(this->theReceiveObject, buffer);
+void TpTransferClass::receiveThreadFunction2 (void)
+{
+    if (1) {
+        this->logit("receiveThreadFunction", "starts");
+    }
+
+    while (1) {
+        char *data = (char *) phwangDequeue(this->theReceiveQueue);
+        if (data) {
+            this->logit("receiveThreadFunction", data);
+            this->receiveCallback()(this->theReceiveObject, data);
         }
-        else {
-            usleep(10);
-        }
+    }
+}
+
+void *tpTranferReceiveThreadFunction2 (void *this_val)
+{
+    ((TpTransferClass *)this_val)->receiveThreadFunction2();
+}
+
+void TpTransferClass::startReceiveThread2 (void)
+{
+    int r;
+
+    if (0) {
+        this->logit("startReceiveThread2", "create receiveThread");
+    }
+    r = pthread_create(&this->theReceiveThread2, NULL, tpTranferReceiveThreadFunction2, this);
+    if (r) {
+        printf("Error - pthread_create() return code: %d\n", r);
+        return;
     }
 }
