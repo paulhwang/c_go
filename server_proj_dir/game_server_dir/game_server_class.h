@@ -16,7 +16,6 @@ class GameDServerClass;
 class GameServerClass {
 #define GAME_SERVER_ROOM_ARRAY_SIZE 32
 
-    void *theMainObject;
     GameUServerClass *theGameUServerObject;
     GameDServerClass *theGameDServerObject;
 
@@ -28,7 +27,7 @@ class GameServerClass {
     void abend(char const* str0_val, char const* str1_val);
 
 public:
-    GameServerClass(void *main_object_val);
+    GameServerClass(void);
     ~GameServerClass(void);
     char const* objectName(void) {return "GameServerClass";}
     GameUServerClass *gameUServerObject(void) {return this->theGameUServerObject;}

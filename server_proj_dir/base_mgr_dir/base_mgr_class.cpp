@@ -8,10 +8,9 @@
 #include "base_mgr_class.h"
 #include "go_base_dir/go_base_class.h"
 
-BaseMgrClass::BaseMgrClass (void *main_object_val)
+BaseMgrClass::BaseMgrClass (void)
 {
     memset(this, 0, sizeof(BaseMgrClass));
-    this->theMainObject = main_object_val;
     this->theGlobalBaseId = 0;
     this->theReceiveQueue = phwangMallocQueue(BASE_MGR_RECEIVE_QUEUE_SIZE);
 

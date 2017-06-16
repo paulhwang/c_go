@@ -10,13 +10,11 @@
 #include "game_d_server_dir/game_d_server_class.h"
 #include "game_d_server_dir/room_mgr_dir/room_mgr_class.h"
 
-GameServerClass::GameServerClass (void *main_object_val)
+GameServerClass::GameServerClass (void)
 {
     memset(this, 0, sizeof(GameServerClass));
-    this->theMainObject = main_object_val;
     this->theGameUServerObject = new GameUServerClass(this);
     this->theGameDServerObject = new GameDServerClass(this);
-
     this->theRoomMgrObject = new RoomMgrClass(this);
 
     if (1) {

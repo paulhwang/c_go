@@ -9,10 +9,9 @@
 #include "u_fabric_dir/u_fabric_class.h"
 #include "d_fabric_dir/d_fabric_class.h"
 
-FabricClass::FabricClass (void *main_object_val)
+FabricClass::FabricClass (void)
 {
     memset(this, 0, sizeof(FabricClass));
-    this->theMainObject = main_object_val;
     this->theUFabricObject = new UFabricClass(this);
     this->theDFabricObject = new DFabricClass(this);
 

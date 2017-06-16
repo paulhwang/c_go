@@ -12,9 +12,9 @@
 
 MainClass::MainClass(void)
 {
-    this->theFabricObject = new FabricClass(this);
-    this->theGoGameServerObject = new GameServerClass(this);
-    this->theGoBaseMgrObject = new BaseMgrClass(this);
+    this->theFabricObject = new FabricClass();
+    this->theGoGameServerObject = new GameServerClass();
+    this->theGoBaseMgrObject = new BaseMgrClass();
 }
 
 MainClass::~MainClass(void)

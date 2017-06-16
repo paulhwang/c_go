@@ -10,7 +10,6 @@ class UFabricClass;
 class DFabricClass;
 
 class FabricClass {
-    void *theMainObject;
     UFabricClass *theUFabricObject;
     DFabricClass *theDFabricObject;
 
@@ -18,7 +17,7 @@ class FabricClass {
     void abend(char const* str0_val, char const* str1_val);
 
 public:
-    FabricClass(void *main_object_val);
+    FabricClass(void);
     ~FabricClass(void);
     char const* objectName(void) {return "FabricClass";}
     UFabricClass *uFabricObject(void) {return this->theUFabricObject;}

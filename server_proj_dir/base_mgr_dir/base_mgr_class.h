@@ -18,7 +18,6 @@ class BaseMgrClass {
 #define BASE_MGR_BASE_ARRAY_SIZE 1000
 #define BASE_MGR_MAX_GLOBAL_BASE_ID 9999
 
-    void *theMainObject;
     int theGlobalBaseId;
     void *theBaseTableArray[BASE_MGR_BASE_ARRAY_SIZE + 4];
 
@@ -38,7 +37,7 @@ class BaseMgrClass {
     void abend(char const* str0_val, char const* str1_val);
 
 public:
-    BaseMgrClass(void *main_object_val);
+    BaseMgrClass(void);
     ~BaseMgrClass();
     char const* objectName(void) {return "BaseMgrClass";}
     pthread_t receiveThread(void) {return this->theReceiveThread;}
