@@ -31,8 +31,8 @@ JSON_OBJS = $(JSON_DIR)/json_class.o
 SUSPEND_OBJS = $(SUSPEND_DIR)/suspend_class.o 
 QUEUE_OBJS = $(QUEUE_DIR)/queue_entry_class.o $(QUEUE_DIR)/queue_class.o
 NET_OBJS = $(NET_DIR)/tp_server_class.o $(NET_DIR)/tp_connect.o $(NET_DIR)/tp_transfer_class.o $(NET_DIR)/tp_transfer_transmit.o $(NET_DIR)/tp_transfer_receive.o 
-EXTERN_OBJS = $(EXTERN_DIR)/phwang_logit.o $(EXTERN_DIR)/phwang_encode.o $(EXTERN_DIR)/phwang_suspend.o $(EXTERN_DIR)/phwang_queue.o $(EXTERN_DIR)/phwang_tp.o $(EXTERN_DIR)/phwang_base.o 
-PHWANG_OBJS = $(JSON_OBJS) $(SUSPEND_OBJS) $(QUEUE_OBJS) $(NET_OBJS) $(EXTERN_OBJS) 
+EXTERN_OBJS = $(EXTERN_DIR)/phwang_suspend.o $(EXTERN_DIR)/phwang_queue.o $(EXTERN_DIR)/phwang_tp.o $(EXTERN_DIR)/phwang_base.o 
+PHWANG_OBJS = $(EXTERN_DIR)/phwang.o $(EXTERN_DIR)/phwang_class.o $(JSON_OBJS) $(SUSPEND_OBJS) $(QUEUE_OBJS) $(NET_OBJS) $(EXTERN_OBJS) 
 
 SERVER_OBJS = $(SERVER_DIR)/go_server.o $(SERVER_DIR)/main_class.o
 LINK_MGR_OBJS = $(LINK_MGR_DIR)/link_mgr_class.o $(LINK_MGR_DIR)/link_class.o $(LINK_MGR_DIR)/session_mgr_class.o $(LINK_MGR_DIR)/session_class.o 
