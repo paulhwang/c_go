@@ -16,12 +16,12 @@
 void TpTransferClass::receiveThreadFunction(int socket_val)
 {
     while (1) {
-        char *buffer = (char *) malloc(TP_TRANSFER_CLASS_RECEIVE_BUFFER_SIZE);
+        char *data = (char *) malloc(TP_TRANSFER_CLASS_RECEIVE_BUFFER_SIZE);
 
-        int length = read(socket_val, buffer, TP_TRANSFER_CLASS_RECEIVE_BUFFER_SIZE);
+        int length = read(socket_val, data, TP_TRANSFER_CLASS_RECEIVE_BUFFER_SIZE);
         if (length > 0) {
-            this->logit("receiveThreadFunction", buffer);
-            this->receiveCallback()(this->theReceiveObject, buffer);
+            this->logit("receiveThreadFunction", data);
+            phwangEnqueue(this->theReceiveQueue, data);
         }
         else {
             usleep(10);
@@ -62,13 +62,13 @@ void TpTransferClass::startReceiveThread (int socket_val)
 void TpTransferClass::receiveThreadFunction2 (void)
 {
     if (1) {
-        this->logit("receiveThreadFunction", "starts");
+        this->logit("receiveThreadFunction2", "starts");
     }
 
     while (1) {
         char *data = (char *) phwangDequeue(this->theReceiveQueue);
         if (data) {
-            this->logit("receiveThreadFunction", data);
+            this->logit("receiveThreadFunction2", data);
             this->receiveCallback()(this->theReceiveObject, data);
         }
     }

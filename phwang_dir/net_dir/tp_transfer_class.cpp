@@ -34,6 +34,7 @@ TpTransferClass::~TpTransferClass (void)
 
 void TpTransferClass::startThreads()
 {
+    this->startReceiveThread2();
     this->startReceiveThread(this->theSocket);
     this->startTransmitThread(this->theSocket);
 }
