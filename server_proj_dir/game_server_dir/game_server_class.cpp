@@ -8,7 +8,7 @@
 #include "game_server_class.h"
 #include "game_u_server_dir/game_u_server_class.h"
 #include "game_d_server_dir/game_d_server_class.h"
-#include "group_mgr_class.h"
+#include "game_d_server_dir/room_mgr_dir/room_mgr_class.h"
 
 GameServerClass::GameServerClass (void *main_object_val)
 {
@@ -17,7 +17,7 @@ GameServerClass::GameServerClass (void *main_object_val)
     this->theGameUServerObject = new GameUServerClass(this);
     this->theGameDServerObject = new GameDServerClass(this);
 
-    this->theGroupMgrObject = new GroupMgrClass(this);
+    this->theRoomMgrObject = new RoomMgrClass(this);
 
     if (1) {
         this->logit("GameServerClass", "init");
@@ -34,12 +34,12 @@ void GameServerClass::startThreads (void)
     this->theGameDServerObject->startThreads();
 }
 
-void GameServerClass::insertGroup (GroupClass *group_object_val)
+void GameServerClass::insertRoom (RoomClass *group_object_val)
 {
     int i = 0;
-    while (i < GAME_SERVER_GROUP_ARRAY_SIZE) {
-        if (!this->theGroupTableArray[i]) {
-            this->theGroupTableArray[i] = group_object_val;
+    while (i < GAME_SERVER_ROOM_ARRAY_SIZE) {
+        if (!this->theRoomTableArray[i]) {
+            this->theRoomTableArray[i] = group_object_val;
             return;
         }
         i++;
@@ -47,12 +47,12 @@ void GameServerClass::insertGroup (GroupClass *group_object_val)
     this->abend("insertGroup", "table is full");
 }
 
-void GameServerClass::removeGroup (GroupClass *group_object_val)
+void GameServerClass::removeRoom (RoomClass *group_object_val)
 {
     int i = 0;
-    while (i < GAME_SERVER_GROUP_ARRAY_SIZE) {
-        if (this->theGroupTableArray[i] == group_object_val) {
-            this->theGroupTableArray[i] = 0;
+    while (i < GAME_SERVER_ROOM_ARRAY_SIZE) {
+        if (this->theRoomTableArray[i] == group_object_val) {
+            this->theRoomTableArray[i] = 0;
             return;
         }
         i++;

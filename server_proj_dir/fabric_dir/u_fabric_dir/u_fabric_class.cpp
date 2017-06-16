@@ -6,11 +6,13 @@
 
 #include "../../../phwang_dir/phwang.h"
 #include "u_fabric_class.h"
+#include "group_mgr_dir/group_mgr_class.h"
 
 UFabricClass::UFabricClass (FabricClass *fabric_object_val)
 {
     memset(this, 0, sizeof(UFabricClass));
     this->theFabricObject = fabric_object_val;
+    this->theGroupMgrObject = new GroupMgrClass(this);
     this->theReceiveQueue = phwangMallocQueue(U_FABRIC_RECEIVE_QUEUE_SIZE);
     this->startNetServer();
 
@@ -21,18 +23,12 @@ UFabricClass::UFabricClass (FabricClass *fabric_object_val)
 
 UFabricClass::~UFabricClass (void)
 {
+   this->theGroupMgrObject->~GroupMgrClass(); 
 }
 
 void UFabricClass::startThreads (void)
 {
     this->startReceiveThread();
-}
-
-void UFabricClass::debug (int on_off_val, char const* str0_val, char const* str1_val)
-{
-    if (on_off_val) {
-        this->logit(str0_val, str1_val);
-    }
 }
 
 void UFabricClass::logit (char const* str0_val, char const* str1_val)
