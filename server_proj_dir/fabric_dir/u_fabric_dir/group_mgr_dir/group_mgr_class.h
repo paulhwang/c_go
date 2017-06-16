@@ -7,13 +7,13 @@
 #pragma once
 //#include "../../include_dir/protocol_dir/link_mgr_protocol.h"
 class GroupClass;
-class UFabricClass;
+class FabricClass;
 
 class GroupMgrClass {
 #define GROUP_MGR_GROUP_ARRAY_SIZE 1000
 #define GROUP_MGR_MAX_GLOBAL_GROUP_ID 9999
 
-    UFabricClass *theUFabricObject;
+    FabricClass *theFabricObject;
     int theGlobalGroupId;
     GroupClass *theGroupTableArray[GROUP_MGR_GROUP_ARRAY_SIZE + 4];
 
@@ -26,7 +26,7 @@ class GroupMgrClass {
     void abend(char const* str0_val, char const* str1_val);
 
 public:
-    GroupMgrClass(UFabricClass *u_fabric_object_val);
+    GroupMgrClass(FabricClass *fabric_object_val);
     ~GroupMgrClass(void);
     char const* objectName(void) {return "GroupMgrClass";}
 

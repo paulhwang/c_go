@@ -12,7 +12,6 @@ UFabricClass::UFabricClass (FabricClass *fabric_object_val)
 {
     memset(this, 0, sizeof(UFabricClass));
     this->theFabricObject = fabric_object_val;
-    this->theGroupMgrObject = new GroupMgrClass(this);
     this->theReceiveQueue = phwangMallocQueue(U_FABRIC_RECEIVE_QUEUE_SIZE);
     this->startNetServer();
 
@@ -23,7 +22,6 @@ UFabricClass::UFabricClass (FabricClass *fabric_object_val)
 
 UFabricClass::~UFabricClass (void)
 {
-   this->theGroupMgrObject->~GroupMgrClass(); 
 }
 
 void UFabricClass::startThreads (void)

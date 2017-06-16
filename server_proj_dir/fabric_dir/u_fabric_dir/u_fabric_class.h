@@ -12,11 +12,9 @@
 #define U_FABRIC_RECEIVE_QUEUE_SIZE 100
 
 class FabricClass;
-class GroupMgrClass;
 
 class UFabricClass {
     FabricClass *theFabricObject;
-    GroupMgrClass *theGroupMgrObject;
     void *theReceiveQueue;
     pthread_t theReceiveThread;
     void *theTpServerObject;

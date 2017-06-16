@@ -8,12 +8,14 @@
 #include "fabric_class.h"
 #include "u_fabric_dir/u_fabric_class.h"
 #include "d_fabric_dir/d_fabric_class.h"
+#include "u_fabric_dir/group_mgr_dir/group_mgr_class.h"
 
 FabricClass::FabricClass (void)
 {
     memset(this, 0, sizeof(FabricClass));
     this->theUFabricObject = new UFabricClass(this);
     this->theDFabricObject = new DFabricClass(this);
+    this->theGroupMgrObject = new GroupMgrClass(this);
 
     if (1) {
         this->logit("FabricClass", "init");
@@ -22,6 +24,7 @@ FabricClass::FabricClass (void)
 
 FabricClass::~FabricClass (void)
 {
+   this->theGroupMgrObject->~GroupMgrClass(); 
 }
 
 void FabricClass::startThreads (void)

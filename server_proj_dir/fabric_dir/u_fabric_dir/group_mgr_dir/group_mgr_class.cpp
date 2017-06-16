@@ -8,10 +8,10 @@
 #include "group_mgr_class.h"
 #include "group_class.h"
 
-GroupMgrClass::GroupMgrClass (UFabricClass *u_fabric_object_val)
+GroupMgrClass::GroupMgrClass (FabricClass *fabric_object_val)
 {
     memset(this, 0, sizeof(GroupMgrClass));
-    this->theUFabricObject = u_fabric_object_val;
+    this->theFabricObject = fabric_object_val;
     this->theGlobalGroupId = 0;
 
     if (1) {

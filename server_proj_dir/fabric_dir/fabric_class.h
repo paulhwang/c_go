@@ -8,10 +8,12 @@
 
 class UFabricClass;
 class DFabricClass;
+class GroupMgrClass;
 
 class FabricClass {
     UFabricClass *theUFabricObject;
     DFabricClass *theDFabricObject;
+    GroupMgrClass *theGroupMgrObject;
 
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
