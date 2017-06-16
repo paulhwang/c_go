@@ -25,16 +25,21 @@ class TpTransferClass {
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
 
-public:
-    TpTransferClass(int socket_val, void (*receive_callback_val)(void *, void *), void *receive_object_val);
-    ~TpTransferClass(void);
-    char const *objectName(void) {return "TpTransferClass";}
+protected:
+    friend class PhwangClass;
+    friend class TpServerClass;
+
     int socket(void) {return this->theSocket;}
     void (*receiveCallback(void))(void *, void *) {return this->theReceiveCallback;}
 
     /* exports */
     void exportTransmitData(void *data_val);
     void startThreads(void);
+
+public:
+    TpTransferClass(int socket_val, void (*receive_callback_val)(void *, void *), void *receive_object_val);
+    ~TpTransferClass(void);
+    char const *objectName(void) {return "TpTransferClass";}
 
     /* callback */
     void receiveThreadFunction(int socket_val);
