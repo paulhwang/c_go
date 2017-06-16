@@ -9,6 +9,7 @@
 #include "../../phwang_dir/phwang.h"
 #include "../../server_proj_dir/protocol_dir/link_mgr_protocol.h"
 #include "../../server_proj_dir/protocol_dir/base_mgr_protocol.h"
+#include "../../server_proj_dir/protocol_dir/net_port_protocol.h"
 
 void *link_mgr_tp_transfer_object;
 char link_id_index[LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + 4];

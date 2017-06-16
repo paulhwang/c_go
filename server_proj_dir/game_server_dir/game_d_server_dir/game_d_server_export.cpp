@@ -6,7 +6,7 @@
 
 #include "../../../phwang_dir/phwang.h"
 #include "game_d_server_class.h"
-#include "../../protocol_dir/group_room_protocol.h"
+#include "../../protocol_dir/net_port_protocol.h"
 
 void gameDServerReceiveDataFromTransport (void *game_d_server_object_val, void *data_val) {
     phwangLogit("Golbal::gameDServerReceiveDataFromTransport", (char *) data_val);

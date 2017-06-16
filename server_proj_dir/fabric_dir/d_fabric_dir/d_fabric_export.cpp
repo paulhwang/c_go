@@ -6,6 +6,7 @@
 
 #include "../../../phwang_dir/phwang.h"
 #include "d_fabric_class.h"
+#include "../../protocol_dir/net_port_protocol.h"
 
 void dFabricTpServerAcceptFunction (void *d_fabric_object_val, void *tp_transfer_object_val) {
     phwangLogit("Golbal::dFabricTpServerAcceptFunction", "");
