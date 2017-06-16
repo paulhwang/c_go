@@ -6,7 +6,6 @@
 
 #pragma once
 
-#include "../d_fabric_class.h"
 class LinkClass;
 class FabricClass;
 

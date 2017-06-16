@@ -4,11 +4,12 @@
   File name: link_mgr_class.cpp
 */
 
-#include "../../../../phwang_dir/phwang.h"
+#include "../../../phwang_dir/phwang.h"
 #include "session_mgr_class.h"
 #include "link_mgr_class.h"
 #include "link_class.h"
-#include "../../fabric_class.h"
+#include "../fabric_class.h"
+#include "../d_fabric_dir/d_fabric_class.h"
 
 LinkMgrClass::LinkMgrClass (FabricClass *fabric_object_val)
 {
