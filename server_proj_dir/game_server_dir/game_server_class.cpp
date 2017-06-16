@@ -8,7 +8,7 @@
 #include "game_server_class.h"
 #include "game_u_server_dir/game_u_server_class.h"
 #include "game_d_server_dir/game_d_server_class.h"
-#include "game_d_server_dir/room_mgr_dir/room_mgr_class.h"
+#include "room_mgr_dir/room_mgr_class.h"
 
 GameServerClass::GameServerClass (void)
 {
@@ -24,6 +24,7 @@ GameServerClass::GameServerClass (void)
 
 GameServerClass::~GameServerClass (void)
 {
+    this->theRoomMgrObject->~RoomMgrClass();
 }
 
 void GameServerClass::startThreads (void)

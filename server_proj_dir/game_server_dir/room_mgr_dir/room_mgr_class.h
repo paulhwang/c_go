@@ -5,7 +5,7 @@
 */
 
 #pragma once
-#include "../../../protocol_dir/link_mgr_protocol.h"
+#include "../../protocol_dir/link_mgr_protocol.h"
 class RoomClass;
 class GameServerClass;
 

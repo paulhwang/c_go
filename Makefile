@@ -21,8 +21,8 @@ U_FABRIC_DIR  = $(FABRIC_DIR)/u_fabric_dir
 LINK_MGR_DIR  = $(FABRIC_DIR)/link_mgr_dir
 GROUP_MGR_DIR = $(FABRIC_DIR)/group_mgr_dir
 GAME_D_SERVER_DIR = $(GAME_SERVER_DIR)/game_d_server_dir
-ROOM_MGR_DIR = $(GAME_D_SERVER_DIR)/room_mgr_dir
 GAME_U_SERVER_DIR = $(GAME_SERVER_DIR)/game_u_server_dir
+ROOM_MGR_DIR      = $(GAME_SERVER_DIR)/room_mgr_dir
 GO_BASE_DIR = $(BASE_MGR_DIR)/go_base_dir
 CLIENT_DIR = $(CLIENT_PROJ_DIR)/client_dir
 

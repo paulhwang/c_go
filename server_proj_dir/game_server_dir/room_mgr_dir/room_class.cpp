@@ -4,7 +4,7 @@
   File name: room_class.cpp
 */
 
-#include "../../../../phwang_dir/phwang.h"
+#include "../../../phwang_dir/phwang.h"
 #include "room_class.h"
 #include "room_mgr_class.h"
 
