@@ -28,7 +28,6 @@ void MainClass::startThreads (void)
 {
     this->theFabricObject->startThreads();
     this->theGoGameServerObject->startThreads();
-    sleep(3);
     this->theGoBaseMgrObject->startThreads();
 }
 

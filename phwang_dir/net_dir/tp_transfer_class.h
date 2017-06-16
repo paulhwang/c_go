@@ -8,6 +8,7 @@
 #include <pthread.h>
 
 #define TP_TRANSFER_CLASS_TRANSMIT_QUEUE_SIZE 1000
+#define TP_TRANSFER_CLASS_RECEIVE_QUEUE_SIZE 1000
 #define TP_TRANSFER_CLASS_RECEIVE_BUFFER_SIZE 1024
 
 class TpTransferClass {
@@ -18,6 +19,7 @@ class TpTransferClass {
     pthread_t theReceiveThread;
     pthread_t theTransmitThread;
     void *theTransmitQueue;
+    void *theReceiveQueue;
 
     void startReceiveThread(int socket_val);
     void startTransmitThread(int socket_val);
