@@ -6,14 +6,12 @@
 
 #include "../../../phwang_dir/phwang.h"
 #include "d_fabric_class.h"
-#include "link_mgr_dir/link_mgr_class.h"
 
 DFabricClass::DFabricClass (FabricClass *fabric_object_val)
 {
     memset(this, 0, sizeof(DFabricClass));
     this->theFabricObject = fabric_object_val;
     this->theReceiveQueue = phwangMallocQueue(D_FABRIC_RECEIVE_QUEUE_SIZE);
-    this->theLinkMgrObject = new LinkMgrClass(this);
     this->startNetServer();
 
     if (1) {
@@ -23,7 +21,6 @@ DFabricClass::DFabricClass (FabricClass *fabric_object_val)
 
 DFabricClass::~DFabricClass (void)
 {
-    this->theLinkMgrObject->~LinkMgrClass(); 
 }
 
 void DFabricClass::startThreads (void)

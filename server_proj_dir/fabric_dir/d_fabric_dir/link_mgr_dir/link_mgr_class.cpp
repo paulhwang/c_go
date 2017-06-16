@@ -8,12 +8,12 @@
 #include "session_mgr_class.h"
 #include "link_mgr_class.h"
 #include "link_class.h"
-#include "../d_fabric_class.h"
+#include "../../fabric_class.h"
 
-LinkMgrClass::LinkMgrClass (DFabricClass *d_fabric_object_val)
+LinkMgrClass::LinkMgrClass (FabricClass *fabric_object_val)
 {
     memset(this, 0, sizeof(LinkMgrClass));
-    this->theDFabricObject = d_fabric_object_val;
+    this->theFabricObject = fabric_object_val;
     this->theGlobalLinkId = 0;
 
     if (1) {
@@ -60,7 +60,7 @@ void LinkMgrClass::mallocLink (char const *data_val)
         data_buf[0] = LINK_MGR_PROTOCOL_RESPOND_IS_MALLOC_LINK;
         phwangEncodeIdIndex(data_buf + 1, link_id, LINK_MGR_PROTOCOL_LINK_ID_SIZE, link_index, LINK_MGR_PROTOCOL_LINK_INDEX_SIZE);
 
-        this->theDFabricObject->transmitFunction(data_buf);
+        this->theFabricObject->dFabricObject()->transmitFunction(data_buf);
     }
     else {
         /* TBD */

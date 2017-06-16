@@ -8,13 +8,13 @@
 
 #include "../d_fabric_class.h"
 class LinkClass;
-class DFabricClass;
+class FabricClass;
 
 class LinkMgrClass {
 #define LINK_MGR_LINK_ARRAY_SIZE 1000
 #define LINK_MGR_MAX_GLOBAL_LINK_ID 9999
 
-    DFabricClass *theDFabricObject;
+    FabricClass *theFabricObject;
     int theGlobalLinkId;
     LinkClass *theLinkTableArray[LINK_MGR_LINK_ARRAY_SIZE + 4];
 
@@ -26,10 +26,10 @@ class LinkMgrClass {
     void abend(char const* str0_val, char const* str1_val);
 
 public:
-    LinkMgrClass(DFabricClass *d_fabric_object_val);
+    LinkMgrClass(FabricClass *fabric_object_val);
     ~LinkMgrClass();
     char const* objectName(void) {return "LinkMgrClass";}
-    DFabricClass *dFabricObject(void) {return this->theDFabricObject;}
+    FabricClass *fabricObject(void) {return this->theFabricObject;}
 
     void mallocLink (char const *my_name_val);
     void freeLink (LinkClass *link_object_val);

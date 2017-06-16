@@ -16,11 +16,11 @@ void DFabricClass::receiveFunction (char *data_val)
 
     if (*data_val == LINK_MGR_PROTOCOL_COMMAND_IS_MALLOC_LINK) {
         data_val++;
-        this->theLinkMgrObject->mallocLink(data_val);
+        this->theFabricObject->linkMgrObject()->mallocLink(data_val);
     }
     else if (*data_val == LINK_MGR_PROTOCOL_COMMAND_IS_MALLOC_SESSION) {
         data_val++;
-        this->theLinkMgrObject->mallocSession(data_val);
+        this->theFabricObject->linkMgrObject()->mallocSession(data_val);
     }
 
     //this->theFabricObject->uFabricObject()->transmitFunction(data_val);

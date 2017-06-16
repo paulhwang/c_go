@@ -9,6 +9,7 @@
 #include "session_class.h"
 #include "link_class.h"
 #include "link_mgr_class.h"
+#include "../../fabric_class.h"
 
 SessionMgrClass::SessionMgrClass (LinkClass *link_object_val)
 {
@@ -60,7 +61,7 @@ void SessionMgrClass::mallocSession (void)
         data_buf[0] = LINK_MGR_PROTOCOL_RESPOND_IS_MALLOC_SESSION;
         phwangEncodeIdIndex(data_buf + 1, session_id, LINK_MGR_PROTOCOL_SESSION_ID_SIZE, session_index, LINK_MGR_PROTOCOL_SESSION_INDEX_SIZE);
 
-        this->theLinkObject->linkMgrObject()->dFabricObject()->transmitFunction(data_buf);
+        this->theLinkObject->linkMgrObject()->fabricObject()->dFabricObject()->transmitFunction(data_buf);
     }
     else {
         /* TBD */
