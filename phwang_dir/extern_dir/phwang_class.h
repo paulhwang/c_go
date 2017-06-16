@@ -6,20 +6,25 @@
 
 #pragma once
 
+#define LOGIT_BUF_SIZE 512
+
 class PhwangClass {
  public:
     PhwangClass(void){}
     ~PhwangClass(void){}
 
+    /* logit */
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
     void printBoard(char const* data_val, int board_size_val);
 
+    /* encode */
     void encodeNumber(char *str_val, int number_val, int size_val);
     int decodeNumber(char *str_val, int size_val);
     void encodeIdIndex(char *str_val, int id_val, int id_size_val, int index_val, int index_size_val);
     void decodeIdIndex(char *str_val, int *id_ptr_val, int id_size_val, int *index_ptr_val, int index_size_val);
 
+    /* queue */
     void *mallocQueue(int max_size_val);
     void freeQueue(void *queue_val);
     void enqueue(void *queue_val, void *data_val);
