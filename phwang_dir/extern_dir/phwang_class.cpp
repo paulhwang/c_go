@@ -6,6 +6,7 @@
 
 #include "../phwang.h"
 #include "phwang_class.h"
+#include "../queue_dir/queue_class.h"
 
 void PhwangClass::logit (char const* str0_val, char const* str1_val)
 {
@@ -40,6 +41,10 @@ void PhwangClass::printBoard (char const* data_val, int board_size_val)
         }
     }
 }
+
+/**************************************************************************************************************/
+/**************************************************************************************************************/
+/**************************************************************************************************************/
 
 void PhwangClass::encodeNumber (char *str_val, int number_val, int size_val)
 {
@@ -77,3 +82,62 @@ void PhwangClass::decodeIdIndex (char *str_val, int *id_ptr_val, int id_size_val
     *id_ptr_val = decodeNumber(str_val, id_size_val);
     *index_ptr_val = decodeNumber(str_val + id_size_val, index_size_val);
 }
+
+void *PhwangClass::mallocQueue (int max_size_val)
+{
+    QueueClass *queue = new QueueClass(max_size_val);
+    return queue;
+}
+
+/**************************************************************************************************************/
+/**************************************************************************************************************/
+/**************************************************************************************************************/
+
+void PhwangClass::freeQueue (void *queue_val)
+{
+    if (!queue_val) {
+        phwangAbend("phwangFreeQueue", "null queue_val");
+        return;
+    }
+
+    if (strcmp(((QueueClass *) queue_val)->objectName(), "QueueClass")) {
+        phwangAbend("phwangFreeQueue", "wrong object");
+        return;
+    }
+
+    ((QueueClass *) queue_val)->~QueueClass();
+}
+
+void PhwangClass::enqueue (void *queue_val, void *data_val)
+{
+    if (!queue_val) {
+        phwangAbend("phwangEnqueue", "null queue_val");
+        return;
+    }
+
+    if (strcmp(((QueueClass *) queue_val)->objectName(), "QueueClass")) {
+        phwangAbend("phwangEnqueue", "wrong object");
+        return;
+    }
+
+    ((QueueClass *) queue_val)->enqueueData(data_val);
+}
+
+void *PhwangClass::dequeue (void *queue_val)
+{
+    if (!queue_val) {
+        phwangAbend("phwangDequeue", "null queue_val");
+        return 0;
+    }
+
+    if (strcmp(((QueueClass *) queue_val)->objectName(), "QueueClass")) {
+        phwangAbend("phwangDequeue", "wrong object");
+        return 0;
+    }
+
+    return ((QueueClass *) queue_val)->dequeueData();
+}
+
+/**************************************************************************************************************/
+/**************************************************************************************************************/
+/**************************************************************************************************************/
