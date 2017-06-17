@@ -14,6 +14,8 @@ BaseMgrClass::BaseMgrClass (void)
     this->theGlobalBaseId = 0;
     this->theReceiveQueue = phwangMallocQueue(BASE_MGR_RECEIVE_QUEUE_SIZE);
 
+    this->startNetConnect();
+
     if (1) {
         this->logit("BaseMgrClass", "init");
     }
@@ -27,7 +29,6 @@ BaseMgrClass::~BaseMgrClass (void)
 
 void BaseMgrClass::startThreads (void)
 {
-    this->startReceiveThread();
 }
 
 void BaseMgrClass::baseMgrLogit (char const* str0_val, char const* str1_val) {

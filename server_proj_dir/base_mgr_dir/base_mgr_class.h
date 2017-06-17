@@ -43,7 +43,7 @@ public:
     pthread_t receiveThread(void) {return this->theReceiveThread;}
 
     /* exports */
-    void exportedNetReceiveFunction(void *data_val);
+    void exportedNetReceiveFunction(char *data_val);
 
     void startThreads(void);
     void startNetConnect(void);

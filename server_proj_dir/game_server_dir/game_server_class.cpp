@@ -14,8 +14,8 @@ GameServerClass::GameServerClass (void)
 {
     memset(this, 0, sizeof(GameServerClass));
     this->theGameUServerObject = new GameUServerClass(this);
-    this->theGameDServerObject = new GameDServerClass(this);
     this->theRoomMgrObject = new RoomMgrClass(this);
+    this->theGameDServerObject = new GameDServerClass(this);
 
     if (1) {
         this->logit("GameServerClass", "init");
@@ -24,7 +24,9 @@ GameServerClass::GameServerClass (void)
 
 GameServerClass::~GameServerClass (void)
 {
+    this->theGameDServerObject->~GameDServerClass();
     this->theRoomMgrObject->~RoomMgrClass();
+    this->theGameUServerObject->~GameUServerClass();
 }
 
 void GameServerClass::insertRoom (RoomClass *group_object_val)
