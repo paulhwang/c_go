@@ -12,7 +12,6 @@ BaseMgrClass::BaseMgrClass (void)
 {
     memset(this, 0, sizeof(BaseMgrClass));
     this->theGlobalBaseId = 0;
-    this->theReceiveQueue = phwangMallocQueue(BASE_MGR_RECEIVE_QUEUE_SIZE);
 
     this->startNetConnect();
 
@@ -24,11 +23,6 @@ BaseMgrClass::BaseMgrClass (void)
 BaseMgrClass::~BaseMgrClass (void)
 {
     phwangFreeTpTransfer(this->theTpTransferObject); 
-    phwangFreeQueue(this->theReceiveQueue);
-}
-
-void BaseMgrClass::startThreads (void)
-{
 }
 
 void BaseMgrClass::baseMgrLogit (char const* str0_val, char const* str1_val) {
@@ -37,13 +31,6 @@ void BaseMgrClass::baseMgrLogit (char const* str0_val, char const* str1_val) {
 
 void BaseMgrClass::baseMgrAbend (char const* str0_val, char const* str1_val) {
     phwangAbend(str0_val, str1_val);
-}
-
-void BaseMgrClass::debug (int on_off_val, char const* str0_val, char const* str1_val)
-{
-    if (on_off_val) {
-        this->logit(str0_val, str1_val);
-    }
 }
 
 void BaseMgrClass::logit (char const* str0_val, char const* str1_val) {

@@ -22,34 +22,31 @@ class BaseMgrClass {
     void *theBaseTableArray[BASE_MGR_BASE_ARRAY_SIZE + 4];
 
     void *theTpTransferObject;
-    pthread_t theReceiveThread;
-    void *theReceiveQueue;
 
-    void startReceiveThread(void);
     void parseReceiveData(char *data_val);
+
+    void startNetConnect(void);
 
     int allocBaseId(void);
     int allocBaseIndex(void);
     void mallocGoBase(void);
 
-    void debug(int on_off_val, char const* str0_val, char const* str1_val);
+    void debug(int on_off_val, char const* str0_val, char const* str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
+
+protected:
 
 public:
     BaseMgrClass(void);
     ~BaseMgrClass();
     char const* objectName(void) {return "BaseMgrClass";}
-    pthread_t receiveThread(void) {return this->theReceiveThread;}
 
     /* exports */
     void exportedNetReceiveFunction(char *data_val);
 
-    void startThreads(void);
-    void startNetConnect(void);
-    void receiveThreadFunction(void);
-    void receiveData(char* data_val);
     void transmitFunction(char *data_val);
+    void receiveData(char* data_val);
 
     void baseMgrLogit(char const* str0_val, char const* str1_val);
     void baseMgrAbend(char const* str0_val, char const* str1_val);

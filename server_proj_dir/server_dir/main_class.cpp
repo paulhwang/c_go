@@ -26,7 +26,6 @@ MainClass::~MainClass(void)
 
 void MainClass::startThreads (void)
 {
-    this->theGoBaseMgrObject->startThreads();
 }
 
 void MainClass::logit (char const* str0_val, char const* str1_val)
