@@ -26,15 +26,20 @@ class GameServerClass {
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
 
+protected:
+    friend class GameUServerClass;
+    friend class GameDServerClass;
+    friend class RoomMgrClass;
+
+    GameUServerClass *gameUServerObject(void) {return this->theGameUServerObject;}
+    GameDServerClass *gameDServerObject(void) {return this->theGameDServerObject;}
+
 public:
     GameServerClass(void);
     ~GameServerClass(void);
     char const* objectName(void) {return "GameServerClass";}
-    GameUServerClass *gameUServerObject(void) {return this->theGameUServerObject;}
-    GameDServerClass *gameDServerObject(void) {return this->theGameDServerObject;}
 
     /* exports */
-    void startThreads(void);
     void receiveData(char* data_val);
     void transmitData(char *data_val);
 

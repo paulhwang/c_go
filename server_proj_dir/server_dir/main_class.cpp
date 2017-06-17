@@ -26,7 +26,6 @@ MainClass::~MainClass(void)
 
 void MainClass::startThreads (void)
 {
-    this->theGoGameServerObject->startThreads();
     this->theGoBaseMgrObject->startThreads();
 }
 
