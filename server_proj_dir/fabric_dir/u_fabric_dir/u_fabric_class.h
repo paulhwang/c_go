@@ -18,19 +18,27 @@ class UFabricClass {
     void *theTpServerObject;
     void *theTpTransferObject;
 
+    void startNetServer(void);
+
     void debug(int on_off_val, char const* str0_val, char const* str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
 
+protected:
+    friend class LinkMgrClass;
+    friend class SessionMgrClass;
+    friend class GroupMgrClass;
+    friend class UFabricClass;
+    friend class DFabricClass;
+
+    char const* objectName(void) {return "UFabricClass";}
+    void transmitFunction(char *data_val);
+
 public:
     UFabricClass(FabricClass *fabric_object_val);
     ~UFabricClass(void);
-    char const* objectName(void) {return "UFabricClass";}
 
     /* exports */
     void exportedNetReceiveFunction(char *data_val);
     void exportedNetAcceptFunction(void *tp_transfer_object_val);
-
-    void startNetServer(void);
-    void transmitFunction(char *data_val);
 };
