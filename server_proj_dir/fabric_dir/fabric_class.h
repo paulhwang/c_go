@@ -28,5 +28,4 @@ public:
     GroupMgrClass *groupMgrObject(void) {return this->theGroupMgrObject;}
     UFabricClass *uFabricObject(void) {return this->theUFabricObject;}
     DFabricClass *dFabricObject(void) {return this->theDFabricObject;}
-
-    void startThreads(void);};
+};

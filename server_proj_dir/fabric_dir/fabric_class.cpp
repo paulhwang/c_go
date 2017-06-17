@@ -30,10 +30,6 @@ FabricClass::~FabricClass (void)
     this->theLinkMgrObject->~LinkMgrClass(); 
 }
 
-void FabricClass::startThreads (void)
-{
-}
-
 void FabricClass::logit (char const* str0_val, char const* str1_val)
 {
     char s[LOGIT_BUF_SIZE];
