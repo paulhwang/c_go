@@ -21,6 +21,7 @@ class LinkMgrClass {
     int allocLinkIndex(void);
     LinkClass *getLinkByIdIndex(int link_id_val, int link_index_val);
 
+    void debug(int on_off_val, char const* str0_val, char const* str1_val);
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
 
