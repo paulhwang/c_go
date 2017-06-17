@@ -17,6 +17,7 @@ class FabricClass {
     UFabricClass *theUFabricObject;
     DFabricClass *theDFabricObject;
 
+    void debug(int on_off_val, char const* str0_val, char const* str1_val);
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
 
@@ -27,7 +28,6 @@ protected:
     friend class UFabricClass;
     friend class DFabricClass;
 
-    char const* objectName(void) {return "FabricClass";}
     LinkMgrClass *linkMgrObject(void) {return this->theLinkMgrObject;}
     GroupMgrClass *groupMgrObject(void) {return this->theGroupMgrObject;}
     UFabricClass *uFabricObject(void) {return this->theUFabricObject;}
@@ -36,4 +36,5 @@ protected:
 public:
     FabricClass(void);
     ~FabricClass(void);
+    char const* objectName(void) {return "FabricClass";}
 };

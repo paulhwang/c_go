@@ -14,9 +14,9 @@
 FabricClass::FabricClass (void)
 {
     memset(this, 0, sizeof(FabricClass));
+    this->theUFabricObject = new UFabricClass(this);
     this->theLinkMgrObject = new LinkMgrClass(this);
     this->theGroupMgrObject = new GroupMgrClass(this);
-    this->theUFabricObject = new UFabricClass(this);
     this->theDFabricObject = new DFabricClass(this);
 
     if (1) {
@@ -26,8 +26,10 @@ FabricClass::FabricClass (void)
 
 FabricClass::~FabricClass (void)
 {
+    this->theDFabricObject->~DFabricClass(); 
     this->theGroupMgrObject->~GroupMgrClass(); 
     this->theLinkMgrObject->~LinkMgrClass(); 
+    this->theUFabricObject->~UFabricClass(); 
 }
 
 void FabricClass::logit (char const* str0_val, char const* str1_val)

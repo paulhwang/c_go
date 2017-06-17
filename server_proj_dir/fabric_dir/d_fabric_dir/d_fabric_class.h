@@ -31,12 +31,12 @@ protected:
     friend class UFabricClass;
     friend class DFabricClass;
 
-    char const* objectName(void) {return "DFabricClass";}
     void transmitFunction(char *data_val);
    
 public:
     DFabricClass(FabricClass *fabric_object_val);
     ~DFabricClass(void);
+    char const* objectName(void) {return "DFabricClass";}
 
     /* exports */
     void exportedNetReceiveFunction(char *data_val);
