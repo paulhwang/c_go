@@ -7,11 +7,12 @@
 #include "../../phwang_dir/phwang.h"
 #include "list_entry_class.h"
 
-ListEntryClass::ListEntryClass (ListMgrClass *list_mgr_object, int entry_id_val)
+ListEntryClass::ListEntryClass (ListMgrClass *list_mgr_object, int entry_id_val, void *data_val)
 {
     memset(this, 0, sizeof(ListEntryClass));
     this->theListMgrObject = list_mgr_object;
     this->theEntryId = entry_id_val;
+    this->theEntryData = data_val;
 
     if (1) {
         this->logit("ListEntryClass", "init");

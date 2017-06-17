@@ -7,9 +7,11 @@
 #include "../../phwang_dir/phwang.h"
 #include "list_mgr_class.h"
 
-ListMgrClass::ListMgrClass (void)
+ListMgrClass::ListMgrClass (void *caller_object_val, int string_size_val)
 {
     memset(this, 0, sizeof(ListMgrClass));
+	this->theCallerObject = caller_object_val;
+    this->theStringSize = string_size_val;
 
     if (1) {
         this->logit("ListMgrClass", "init");

@@ -21,7 +21,7 @@ protected:
     void *entryData(void) {return this->theEntryData;}
 
 public:
-    ListEntryClass(ListMgrClass *list_mgr_object, int entry_id_val);
+    ListEntryClass(ListMgrClass *list_mgr_object, int entry_id_val, void *data_val);
     ~ListEntryClass(void);
     char const* objectName(void) {return "ListEntryClass";}
 };
