@@ -15,19 +15,22 @@ class GameServerClass;
 
 class GameUServerClass {
     GameServerClass *theGameServerObject;
-    void *theReceiveQueue;
-    pthread_t theReceiveThread;
     void *theTpServerObject;
     void *theTpTransferObject;
 
-    void startReceiveThread(void);
-    void receiveFunction(char *data_val);
-
     void baseMgrTest(void);
-    
-    void debug(int on_off_val, char const* str0_val, char const* str1_val);
+    void startNetServer(void);
+
+    void debug(int on_off_val, char const* str0_val, char const* str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
+
+protected:
+    friend class GameUServerClass;
+    friend class GameDServerClass;
+    friend class RoomMgrClass;
+
+    void transmitFunction(char *data_val);
 
 public:
     GameUServerClass(GameServerClass *game_server_object_val);
@@ -37,9 +40,4 @@ public:
     /* exports */
     void exportedNetReceiveFunction(char *data_val);
     void exportedNetAcceptFunction(void *tp_transfer_object_val);
-
-    void startThreads(void);
-    void startNetServer(void);
-    void receiveThreadFunction(void);
-    void transmitFunction(char *data_val);
 };

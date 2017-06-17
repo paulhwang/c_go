@@ -29,7 +29,6 @@ GameServerClass::~GameServerClass (void)
 
 void GameServerClass::startThreads (void)
 {
-    this->theGameUServerObject->startThreads();
     this->theGameDServerObject->startThreads();
 }
 
