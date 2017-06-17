@@ -36,6 +36,9 @@ class BaseMgrClass {
     void abend(char const* str0_val, char const* str1_val);
 
 protected:
+    friend class GoPortClass;
+
+    void transmitFunction(char *data_val);
 
 public:
     BaseMgrClass(void);
@@ -45,7 +48,6 @@ public:
     /* exports */
     void exportedNetReceiveFunction(char *data_val);
 
-    void transmitFunction(char *data_val);
     void receiveData(char* data_val);
 
     void baseMgrLogit(char const* str0_val, char const* str1_val);

@@ -12,6 +12,8 @@ GameDServerClass::GameDServerClass (GameServerClass *game_server_object_val)
     memset(this, 0, sizeof(GameDServerClass));
     this->theGameServerObject = game_server_object_val;
 
+    this->startNetConnect();
+
     if (1) {
         this->logit("GameDServerClass", "init");
     }
