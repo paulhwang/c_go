@@ -22,10 +22,6 @@ UFabricClass::~UFabricClass (void)
 {
 }
 
-void UFabricClass::startThreads (void)
-{
-}
-
 void UFabricClass::logit (char const* str0_val, char const* str1_val)
 {
     char s[LOGIT_BUF_SIZE];

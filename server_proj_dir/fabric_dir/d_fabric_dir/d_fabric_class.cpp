@@ -22,10 +22,6 @@ DFabricClass::~DFabricClass (void)
 {
 }
 
-void DFabricClass::startThreads (void)
-{
-}
-
 void DFabricClass::debug (int on_off_val, char const* str0_val, char const* str1_val)
 {
     if (on_off_val) {

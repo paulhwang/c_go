@@ -32,8 +32,6 @@ FabricClass::~FabricClass (void)
 
 void FabricClass::startThreads (void)
 {
-    this->theDFabricObject->startThreads();
-    this->theUFabricObject->startThreads();
 }
 
 void FabricClass::logit (char const* str0_val, char const* str1_val)
