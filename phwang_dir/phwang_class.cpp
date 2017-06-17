@@ -170,6 +170,8 @@ void *PhwangClass::mallocTpServer (
     return tp_server_object;
 }
 
+#define PHWANG_TP_CONNECT_RETRY_MAX_COUNT 30
+
 void *PhwangClass::tpConnect (
                     unsigned long ip_addr_val, 
                     unsigned short port_val, 
@@ -198,9 +200,21 @@ void *PhwangClass::tpConnect (
     }
   
     phwangLogit(who_val, "tpConnectServiceFunction() connecting");
-    if (connect(s, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0) {
-        phwangLogit(who_val, "tpConnectServiceFunction() Failed \n");
-        return 0;
+    int retry_count = PHWANG_TP_CONNECT_RETRY_MAX_COUNT;
+    while (retry_count) {
+        if (connect(s, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0) {
+            if (!retry_count--) {
+                phwangLogit(who_val, "tpConnectServiceFunction() Failed \n");
+                return 0;
+            }
+            else {
+                phwangLogit(who_val, "tpConnectServiceFunction() retry-----");
+                sleep(1);
+            }
+        }
+        else {
+            break;
+        }
     }
 
     phwangLogit(who_val, "tpConnectServiceFunction() connected");
