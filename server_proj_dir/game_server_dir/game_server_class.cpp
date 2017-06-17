@@ -29,7 +29,6 @@ GameServerClass::~GameServerClass (void)
 
 void GameServerClass::startThreads (void)
 {
-    this->theGameDServerObject->startThreads();
 }
 
 void GameServerClass::insertRoom (RoomClass *group_object_val)

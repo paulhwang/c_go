@@ -5,18 +5,20 @@
 */
 
 #include "../../../phwang_dir/phwang.h"
-#include "game_d_server_class.h"
 #include "../../protocol_dir/net_port_protocol.h"
+#include "game_d_server_class.h"
+#include "../game_server_class.h"
+#include "../game_u_server_dir/game_u_server_class.h"
 
 void gameDServerReceiveDataFromTransport (void *game_d_server_object_val, void *data_val) {
     phwangLogit("Golbal::gameDServerReceiveDataFromTransport", (char *) data_val);
-    ((GameDServerClass *) game_d_server_object_val)->exportedNetReceiveFunction(data_val);
+    ((GameDServerClass *) game_d_server_object_val)->exportedNetReceiveFunction((char *) data_val);
 }
 
-void GameDServerClass::exportedNetReceiveFunction(void *data_val)
+void GameDServerClass::exportedNetReceiveFunction(char *data_val)
 {
-    this->logit("exportedNetReceiveFunction", (char *) data_val);
-    phwangEnqueue(this->theReceiveQueue, data_val);
+    this->logit("exportedNetReceiveFunction", data_val);
+    this->theGameServerObject->gameUServerObject()->transmitFunction(data_val);
 }
 
 void GameDServerClass::startNetConnect (void)
