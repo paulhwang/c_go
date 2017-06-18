@@ -31,10 +31,11 @@ public:
     char const* objectName(void) {return "LinkMgrClass";}
     FabricClass *fabricObject(void) {return this->theFabricObject;}
 
-    void mallocLink (char const *my_name_val);
-    void freeLink (LinkClass *link_object_val);
+    void mallocLink(char const *my_name_val);
+    void freeLink(LinkClass *link_object_val);
 
-    void mallocSession (char *my_name_val);
+    void mallocSession(char *my_name_val);
+    void putSessionData(char *my_name_val);
 
     void linkMgrLogit(char const* str0_val, char const* str1_val);
     void linkMgrAbend(char const* str0_val, char const* str1_val);

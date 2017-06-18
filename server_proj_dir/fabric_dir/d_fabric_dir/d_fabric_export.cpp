@@ -38,6 +38,10 @@ void DFabricClass::exportedNetReceiveFunction(char *data_val)
         data_val++;
         this->theFabricObject->linkMgrObject()->mallocSession(data_val);
     }
+    else if (*data_val == LINK_MGR_PROTOCOL_COMMAND_IS_PUT_SESSION_DATA) {
+        data_val++;
+        this->theFabricObject->linkMgrObject()->putSessionData(data_val);
+    }
 
     //this->theFabricObject->uFabricObject()->transmitFunction(data_val);
 }
