@@ -61,7 +61,7 @@ void TpTransferClass::startReceiveThread (int socket_val)
 
 void TpTransferClass::receiveThreadFunction2 (void)
 {
-    if (1) {
+    if (0) {
         this->logit("receiveThreadFunction2", "starts");
     }
 
