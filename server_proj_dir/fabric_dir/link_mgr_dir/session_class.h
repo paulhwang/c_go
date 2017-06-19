@@ -19,6 +19,7 @@ class SessionClass {
 
 protected:
     friend class DFabricClass;
+    friend class SessionMgrClass;
 
     int sessionId(void) {return this->theSessionId;}
     int sessionIndex(void) {return this->theSessionIndex;}

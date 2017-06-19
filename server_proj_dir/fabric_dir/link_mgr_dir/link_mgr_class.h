@@ -22,21 +22,25 @@ class LinkMgrClass {
     int allocLinkIndex(void);
     LinkClass *getLinkByIdIndex(int link_id_val, int link_index_val);
 
-    void debug(int on_off_val, char const* str0_val, char const* str1_val);
+    void debug(int on_off_val, char const* str0_val, char const* str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
+
+protected:
+    friend class DFabricClass;
+
+    FabricClass *fabricObject(void) {return this->theFabricObject;}
+
+    LinkClass *mallocLink(char const *my_name_val);
+    void freeLink(LinkClass *link_object_val);
+    SessionClass *mallocSession(char *my_name_val);
+    LinkClass *searchLink(char *data_val);
+    SessionClass *serachSession(char *data_val);
 
 public:
     LinkMgrClass(FabricClass *fabric_object_val);
     ~LinkMgrClass();
     char const* objectName(void) {return "LinkMgrClass";}
-    FabricClass *fabricObject(void) {return this->theFabricObject;}
-
-    LinkClass *mallocLink(char const *my_name_val);
-    void freeLink(LinkClass *link_object_val);
-
-    SessionClass *mallocSession(char *my_name_val);
-    void putSessionData(char *my_name_val);
 
     void linkMgrLogit(char const* str0_val, char const* str1_val);
     void linkMgrAbend(char const* str0_val, char const* str1_val);

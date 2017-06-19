@@ -72,8 +72,13 @@ void DFabricClass::processPutSessionData(char *data_val)
     char *data_buf = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
     data_buf[0] = LINK_MGR_PROTOCOL_RESPOND_IS_PUT_SESSION_DATA;
 
-    this->theFabricObject->linkMgrObject()->putSessionData(data_val);
+    SessionClass *session = this->theFabricObject->linkMgrObject()->serachSession(data_val);
+    if (session) {
 
+    }
+    else {
+        
+    }
     //this->theFabricObject->dFabricObject()->transmitFunction(data_buf);
     this->theFabricObject->dFabricObject()->transmitFunction("put_session_data TBD");
 }

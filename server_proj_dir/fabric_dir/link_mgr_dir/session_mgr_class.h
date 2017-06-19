@@ -30,6 +30,7 @@ protected:
 
     SessionClass *mallocSession(void);
     void freeSession(SessionClass *session_object_val);
+    SessionClass *searchSession(char *data_val);
 
 public:
     SessionMgrClass(LinkClass *link_object_val);

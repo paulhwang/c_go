@@ -92,12 +92,12 @@ SessionClass *LinkMgrClass::mallocSession (char *data_val)
     return link->sessionMgrObject()->mallocSession();
 }
 
-void LinkMgrClass::putSessionData (char *data_val)
+LinkClass *LinkMgrClass::searchLink (char *data_val)
 {
     int link_id;
     int link_index;
     if (1) {
-        this->logit("putSessionData", data_val);
+        this->logit("searchLink", data_val);
     }
 
     phwangDecodeIdIndex(data_val,
@@ -105,31 +105,37 @@ void LinkMgrClass::putSessionData (char *data_val)
                 LINK_MGR_PROTOCOL_LINK_ID_SIZE,
                 &link_index,
                 LINK_MGR_PROTOCOL_LINK_INDEX_SIZE);
-    data_val += LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE;
+    //data_val += LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE;
 
     if (1) {
         char s[LOGIT_BUF_SIZE];
         sprintf(s, "link_id=%d link_index=%d", link_id, link_index);
-        this->logit("putSessionData", s);
+        this->logit("searchLink", s);
     }
 
-    LinkClass *link = this->getLinkByIdIndex(link_id, link_index);
-    if (!link) {
-        return;
-    }
-
+    return this->getLinkByIdIndex(link_id, link_index);
 }
 
-LinkClass *LinkMgrClass::getLinkByIdIndex(int link_id_val, int link_index_val)
+SessionClass *LinkMgrClass::serachSession (char *data_val)
+{
+    LinkClass *link = searchLink(data_val);
+    if (!link) {
+        return 0;
+    }
+
+    return link->sessionMgrObject()->searchSession(data_val + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE);
+}
+
+LinkClass *LinkMgrClass::getLinkByIdIndex (int link_id_val, int link_index_val)
 {
     LinkClass *link = this->theLinkTableArray[link_index_val];
     if (!link) {
-        this->abend("getLink", "null link");
+        this->abend("getLinkByIdIndex", "null link");
         return 0;
     }
 
     if (link->linkId() != link_id_val){
-        this->abend("getLink", "link id does not match");
+        this->abend("getLinkByIdIndex", "link id does not match");
         return 0;
     }
 
