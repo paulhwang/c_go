@@ -128,6 +128,16 @@ SessionClass *LinkMgrClass::serachSession (char *data_val)
 
 LinkClass *LinkMgrClass::getLinkByIdIndex (int link_id_val, int link_index_val)
 {
+    if (link_id_val > LINK_MGR_MAX_GLOBAL_LINK_ID) {
+        this->abend("getSessionByIdIndex", "link_id_val too big");
+        return 0;
+    }
+
+    if (link_index_val >= LINK_MGR_LINK_ARRAY_SIZE) {
+        this->abend("getSessionByIdIndex", "link_index_val too big");
+        return 0;
+    }
+
     LinkClass *link = this->theLinkTableArray[link_index_val];
     if (!link) {
         this->abend("getLinkByIdIndex", "null link");

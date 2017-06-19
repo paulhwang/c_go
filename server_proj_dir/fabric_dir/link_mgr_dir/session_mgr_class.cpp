@@ -89,6 +89,16 @@ SessionClass *SessionMgrClass::searchSession (char *data_val)
 
 SessionClass *SessionMgrClass::getSessionByIdIndex (int session_id_val, int session_index_val)
 {
+    if (session_id_val > SESSION_MGR_MAX_GLOBAL_SESSION_ID) {
+        this->abend("getSessionByIdIndex", "session_id_val too big");
+        return 0;
+    }
+
+    if (session_index_val >= SESSION_MGR_SESSION_ARRAY_SIZE) {
+        this->abend("getSessionByIdIndex", "session_index_val too big");
+        return 0;
+    }
+
     SessionClass *session = this->theSessionTableArray[session_index_val];
     if (!session) {
         this->abend("getSessionByIdIndex", "null session");
