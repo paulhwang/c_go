@@ -28,7 +28,6 @@ class GameDServerClass {
 
 protected:
     friend class GameUServerClass;
-    friend class GameDServerClass;
     friend class RoomMgrClass;
 
     void transmitFunction(char *data_val);

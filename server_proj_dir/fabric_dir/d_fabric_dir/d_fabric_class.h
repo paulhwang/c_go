@@ -29,7 +29,6 @@ protected:
     friend class SessionMgrClass;
     friend class GroupMgrClass;
     friend class UFabricClass;
-    friend class DFabricClass;
 
     void transmitFunction(char *data_val);
    
