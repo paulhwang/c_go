@@ -118,7 +118,6 @@ void LinkMgrClass::putSessionData (char *data_val)
         return;
     }
 
-    this->theFabricObject->dFabricObject()->transmitFunction("put_session_data TBD");
 }
 
 LinkClass *LinkMgrClass::getLinkByIdIndex(int link_id_val, int link_index_val)

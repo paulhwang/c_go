@@ -29,9 +29,6 @@ class DFabricClass {
     void abend(char const* str0_val, char const* str1_val);
 
 protected:
-    friend class LinkMgrClass;
-    friend class SessionMgrClass;
-    friend class GroupMgrClass;
     friend class UFabricClass;
 
     void transmitFunction(char *data_val);

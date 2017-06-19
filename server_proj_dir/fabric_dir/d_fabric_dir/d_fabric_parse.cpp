@@ -75,4 +75,5 @@ void DFabricClass::processPutSessionData(char *data_val)
     this->theFabricObject->linkMgrObject()->putSessionData(data_val);
 
     //this->theFabricObject->dFabricObject()->transmitFunction(data_buf);
+    this->theFabricObject->dFabricObject()->transmitFunction("put_session_data TBD");
 }
