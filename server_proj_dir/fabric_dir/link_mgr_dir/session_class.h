@@ -17,10 +17,14 @@ class SessionClass {
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
 
+protected:
+    friend class DFabricClass;
+
+    int sessionId(void) {return this->theSessionId;}
+    int sessionIndex(void) {return this->theSessionIndex;}
+
 public:
     SessionClass(SessionMgrClass *session_mgr_object_val, int session_id_val, int session_index_val);
     ~SessionClass(void);
     char const* objectName(void) {return "SessionClass";}
-    int sessionId(void) {return this->theSessionId;}
-    int sessionIndex(void) {return this->theSessionIndex;}
 };

@@ -22,12 +22,19 @@ class LinkClass {
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
 
+protected:
+    friend class LinkMgrClass;
+    friend class SessionMgrClass;
+    friend class DFabricClass;
+
+    LinkMgrClass *linkMgrObject(void) {return this->theLinkMgrObject;}
+    SessionMgrClass *sessionMgrObject(void) {return this->theSessionMgrObject;}
+
+    int linkId(void) {return this->theLinkId;}
+    int linkIndex(void) {return this->theLinkIndex;}
+
 public:
     LinkClass(LinkMgrClass *link_mgr_object_val, int link_id_val, int link_index_val, char const* link_name_val);
     ~LinkClass(void);
     char const* objectName(void) {return "LinkClass";}
-    LinkMgrClass *linkMgrObject(void) {return this->theLinkMgrObject;}
-    int linkId(void) {return this->theLinkId;}
-    int linkIndex(void) {return this->theLinkIndex;}
-    SessionMgrClass *sessionMgrObject(void) {return this->theSessionMgrObject;}
 };
