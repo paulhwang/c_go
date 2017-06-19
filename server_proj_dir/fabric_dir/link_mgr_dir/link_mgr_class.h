@@ -7,6 +7,7 @@
 #pragma once
 
 class LinkClass;
+class SessionClass;
 class FabricClass;
 
 class LinkMgrClass {
@@ -34,7 +35,7 @@ public:
     LinkClass *mallocLink(char const *my_name_val);
     void freeLink(LinkClass *link_object_val);
 
-    void mallocSession(char *my_name_val);
+    SessionClass *mallocSession(char *my_name_val);
     void putSessionData(char *my_name_val);
 
     void linkMgrLogit(char const* str0_val, char const* str1_val);

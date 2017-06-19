@@ -63,7 +63,7 @@ LinkClass *LinkMgrClass::mallocLink (char const *data_val)
     }
 }
 
-void LinkMgrClass::mallocSession (char *data_val)
+SessionClass *LinkMgrClass::mallocSession (char *data_val)
 {
     int link_id;
     int link_index;
@@ -86,9 +86,10 @@ void LinkMgrClass::mallocSession (char *data_val)
 
     LinkClass *link = this->getLinkByIdIndex(link_id, link_index);
     if (!link) {
-        return;
+        return 0;
     }
     link->sessionMgrObject()->mallocSession();
+    return 0;
 }
 
 void LinkMgrClass::putSessionData (char *data_val)
