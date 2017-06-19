@@ -88,8 +88,8 @@ SessionClass *LinkMgrClass::mallocSession (char *data_val)
     if (!link) {
         return 0;
     }
-    link->sessionMgrObject()->mallocSession();
-    return 0;
+
+    return link->sessionMgrObject()->mallocSession();
 }
 
 void LinkMgrClass::putSessionData (char *data_val)
