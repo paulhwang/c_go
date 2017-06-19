@@ -25,13 +25,16 @@ class SessionMgrClass {
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
 
+protected:
+    friend class LinkMgrClass;
+
+    SessionClass *mallocSession(void);
+    void freeSession(SessionClass *session_object_val);
+
 public:
     SessionMgrClass(LinkClass *link_object_val);
     ~SessionMgrClass(void);
     char const* objectName(void) {return "SessionMgrClass";}
-
-    SessionClass *mallocSession(void);
-    void freeSession(SessionClass *session_object_val);
 
     void sessionMgrLogit(char const* str0_val, char const* str1_val);
     void sessionMgrAbend(char const* str0_val, char const* str1_val);
