@@ -55,7 +55,7 @@ void DFabricClass::processMallocSession(char *data_val)
 
     SessionClass *session = this->theFabricObject->linkMgrObject()->mallocSession(data_val);
     if (session) {
-
+        phwangEncodeIdIndex(data_buf + 1, session->sessionId(), LINK_MGR_PROTOCOL_SESSION_ID_SIZE, session->sessionIndex(), LINK_MGR_PROTOCOL_SESSION_INDEX_SIZE);
     }
     else {
         /* TBD */
