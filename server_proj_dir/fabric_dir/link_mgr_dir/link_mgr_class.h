@@ -31,7 +31,7 @@ public:
     char const* objectName(void) {return "LinkMgrClass";}
     FabricClass *fabricObject(void) {return this->theFabricObject;}
 
-    void mallocLink(char const *my_name_val);
+    LinkClass *mallocLink(char const *my_name_val);
     void freeLink(LinkClass *link_object_val);
 
     void mallocSession(char *my_name_val);

@@ -47,7 +47,7 @@ int LinkMgrClass::allocLinkIndex (void)
     return -1;
 }
 
-void LinkMgrClass::mallocLink (char const *data_val)
+LinkClass *LinkMgrClass::mallocLink (char const *data_val)
 {
     if (1) {
         this->logit("mallocLink", data_val);
@@ -56,26 +56,11 @@ void LinkMgrClass::mallocLink (char const *data_val)
     int link_index = this->allocLinkIndex();
     if (link_index != -1) {
         this->theLinkTableArray[link_index] = new LinkClass(this, link_id, link_index, data_val);
-
-        char *data_buf = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
-        data_buf[0] = LINK_MGR_PROTOCOL_RESPOND_IS_MALLOC_LINK;
-        phwangEncodeIdIndex(data_buf + 1, link_id, LINK_MGR_PROTOCOL_LINK_ID_SIZE, link_index, LINK_MGR_PROTOCOL_LINK_INDEX_SIZE);
-
-        this->theFabricObject->dFabricObject()->transmitFunction(data_buf);
+        return this->theLinkTableArray[link_index];
     }
     else {
-        /* TBD */
-    }
-
-/*
-    int link_index = allocLinkIndex();
-    LinkClass *link = new LinkClass(this, this->allocLinkId(), link_index, my_name_val);
-    if (!link) {
         return 0;
     }
-
-    return link;
-    */
 }
 
 void LinkMgrClass::mallocSession (char *data_val)
