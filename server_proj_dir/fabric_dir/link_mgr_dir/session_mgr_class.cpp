@@ -48,7 +48,7 @@ int SessionMgrClass::allocSessionIndex (void)
     return -1;
 }
 
-void SessionMgrClass::mallocSession (void)
+SessionClass *SessionMgrClass::mallocSession (void)
 {
     if (1) {
         this->logit("mallocSession", "");
@@ -57,15 +57,10 @@ void SessionMgrClass::mallocSession (void)
     int session_index = this->allocSessionIndex();
     if (session_index != -1) {
         this->theSessionTableArray[session_index] = new SessionClass(this, session_id, session_index);
-
-        char *data_buf = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
-        data_buf[0] = LINK_MGR_PROTOCOL_RESPOND_IS_MALLOC_SESSION;
-        phwangEncodeIdIndex(data_buf + 1, session_id, LINK_MGR_PROTOCOL_SESSION_ID_SIZE, session_index, LINK_MGR_PROTOCOL_SESSION_INDEX_SIZE);
-
-        this->theLinkObject->linkMgrObject()->fabricObject()->dFabricObject()->transmitFunction(data_buf);
+        return this->theSessionTableArray[session_index];
     }
     else {
-        /* TBD */
+        return 0;
     }
 }
 

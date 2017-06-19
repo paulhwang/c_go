@@ -60,7 +60,7 @@ void DFabricClass::processMallocSession(char *data_val)
     else {
         /* TBD */
     }
-    //this->theFabricObject->dFabricObject()->transmitFunction(data_buf);
+    this->theFabricObject->dFabricObject()->transmitFunction(data_buf);
 }
 
 void DFabricClass::processGetSessionData(char *data_val)

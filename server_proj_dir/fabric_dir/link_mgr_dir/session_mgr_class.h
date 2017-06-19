@@ -30,7 +30,7 @@ public:
     ~SessionMgrClass(void);
     char const* objectName(void) {return "SessionMgrClass";}
 
-    void mallocSession(void);
+    SessionClass *mallocSession(void);
     void freeSession(SessionClass *session_object_val);
 
     void sessionMgrLogit(char const* str0_val, char const* str1_val);
