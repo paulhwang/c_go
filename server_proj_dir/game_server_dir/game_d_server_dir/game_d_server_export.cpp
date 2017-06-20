@@ -7,7 +7,7 @@
 #include "../../../phwang_dir/phwang.h"
 #include "../../protocol_dir/net_port_protocol.h"
 #include "game_d_server_class.h"
-#include "../game_server_class.h"
+#include "../theme_class.h"
 #include "../game_u_server_dir/game_u_server_class.h"
 
 void gameDServerReceiveDataFromTransport (void *game_d_server_object_val, void *data_val) {

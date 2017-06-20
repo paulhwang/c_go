@@ -7,7 +7,7 @@
 #include "../../phwang_dir/phwang.h"
 #include "../fabric_dir/fabric_class.h"
 #include "../base_mgr_dir/base_mgr_class.h"
-#include "../game_server_dir/game_server_class.h"
+#include "../game_server_dir/theme_class.h"
 #include "main_class.h"
 
 MainClass::MainClass(void)

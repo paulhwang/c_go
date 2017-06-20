@@ -1,11 +1,11 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: game_server_class.cpp
+  File name: theme_class.cpp
 */
 
 #include "../../phwang_dir/phwang.h"
-#include "game_server_class.h"
+#include "theme_class.h"
 #include "game_u_server_dir/game_u_server_class.h"
 #include "game_d_server_dir/game_d_server_class.h"
 #include "room_mgr_dir/room_mgr_class.h"

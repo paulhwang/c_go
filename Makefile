@@ -47,8 +47,8 @@ GAME_D_SERVER_OBJS = $(ROOM_MGR_OBJS) $(GAME_D_SERVER_DIR)/game_d_server_class.o
 GAME_U_SERVER_OBJS = $(BASE_MGR_OBJS) $(GAME_U_SERVER_DIR)/game_u_server_class.o $(GAME_U_SERVER_DIR)/game_u_server_transmit.o $(GAME_U_SERVER_DIR)/game_u_server_export.o $(GAME_U_SERVER_DIR)/game_u_server_test.o 
 GO_BASE_OBJS = $(GO_BASE_DIR)/go_base_class.o $(GO_BASE_DIR)/go_game_class.o $(GO_BASE_DIR)/go_engine_class.o $(GO_BASE_DIR)/go_board_class.o $(GO_BASE_DIR)/go_move_class.o $(GO_BASE_DIR)/go_port_class.o $(GO_BASE_DIR)/go_config_class.o $(GO_BASE_DIR)/go_group_class.o $(GO_BASE_DIR)/go_group_list_class.o
 BASE_MGR_OBJS = $(BASE_MGR_DIR)/base_mgr_class.o $(BASE_MGR_DIR)/base_mgr_exports.o $(BASE_MGR_DIR)/base_mgr_parse.o $(BASE_MGR_DIR)/base_mgr_transmit.o $(BASE_MGR_DIR)/base_mgr_base.o $(GO_BASE_OBJS)
-GAME_SERVER_OBJS = $(GAME_U_SERVER_OBJS)  $(GAME_D_SERVER_OBJS) $(GAME_SERVER_DIR)/game_server_class.o 
-SERVER_PROJ_OBJS = $(SERVER_OBJS) $(FABRIC_OBJS) $(GAME_SERVER_OBJS)
+THEME_OBJS = $(GAME_U_SERVER_OBJS)  $(GAME_D_SERVER_OBJS) $(GAME_SERVER_DIR)/theme_class.o 
+SERVER_PROJ_OBJS = $(SERVER_OBJS) $(FABRIC_OBJS) $(THEME_OBJS)
 
 CLIENT_OBJS = $(CLIENT_DIR)/go_client.o
 CLIENT_PROJ_OBJS = $(CLIENT_OBJS)
