@@ -8,7 +8,7 @@
 #include "../../protocol_dir/net_port_protocol.h"
 #include "d_theme_class.h"
 #include "../theme_class.h"
-#include "../game_u_server_dir/u_theme_class.h"
+#include "../u_theme_dir/u_theme_class.h"
 
 void gameDServerReceiveDataFromTransport (void *game_d_server_object_val, void *data_val) {
     phwangLogit("Golbal::gameDServerReceiveDataFromTransport", (char *) data_val);

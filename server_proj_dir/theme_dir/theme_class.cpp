@@ -6,8 +6,8 @@
 
 #include "../../phwang_dir/phwang.h"
 #include "theme_class.h"
-#include "game_u_server_dir/u_theme_class.h"
-#include "game_d_server_dir/d_theme_class.h"
+#include "u_theme_dir/u_theme_class.h"
+#include "d_theme_dir/d_theme_class.h"
 #include "room_mgr_dir/room_mgr_class.h"
 
 GameServerClass::GameServerClass (void)
