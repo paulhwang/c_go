@@ -12,6 +12,8 @@
 #include "../link_mgr_dir/link_mgr_class.h"
 #include "../link_mgr_dir/link_class.h"
 #include "../link_mgr_dir/session_class.h"
+#include "../group_mgr_dir/group_mgr_class.h"
+#include "../group_mgr_dir/group_class.h"
 
 void DFabricClass::exportedparseFunction(char *data_val)
 {
@@ -35,31 +37,35 @@ void DFabricClass::exportedparseFunction(char *data_val)
 
 void DFabricClass::processMallocLink(char *data_val)
 {
+    LinkClass *link = this->theFabricObject->linkMgrObject()->mallocLink(data_val);
+    if (!link) {
+        this->abend("processMallocLink", "null link");
+        return;
+    }
+
     char *data_buf = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
     data_buf[0] = LINK_MGR_PROTOCOL_RESPOND_IS_MALLOC_LINK;
-
-    LinkClass *link = this->theFabricObject->linkMgrObject()->mallocLink(data_val);
-    if (link) {
-        phwangEncodeIdIndex(data_buf + 1, link->linkId(), LINK_MGR_PROTOCOL_LINK_ID_SIZE, link->linkIndex(), LINK_MGR_PROTOCOL_LINK_INDEX_SIZE);
-    }
-    else {
-        /* TBD */
-    }
+    phwangEncodeIdIndex(data_buf + 1, link->linkId(), LINK_MGR_PROTOCOL_LINK_ID_SIZE, link->linkIndex(), LINK_MGR_PROTOCOL_LINK_INDEX_SIZE);
     this->theFabricObject->dFabricObject()->transmitFunction(data_buf);
 }
 
 void DFabricClass::processMallocSession(char *data_val)
 {
+    GroupClass *group = this->groupMgrObject()->mallocGroup();
+    if (!group) {
+        this->abend("processMallocSession", "null group");
+        return;
+    }
+
+    SessionClass *session = this->linkMgrObject()->mallocSession(data_val);
+    if (!session) {
+        this->abend("processMallocSession", "null session");
+        return;
+    }
+
     char *data_buf = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
     data_buf[0] = LINK_MGR_PROTOCOL_RESPOND_IS_MALLOC_SESSION;
-
-    SessionClass *session = this->theFabricObject->linkMgrObject()->mallocSession(data_val);
-    if (session) {
-        phwangEncodeIdIndex(data_buf + 1, session->sessionId(), LINK_MGR_PROTOCOL_SESSION_ID_SIZE, session->sessionIndex(), LINK_MGR_PROTOCOL_SESSION_INDEX_SIZE);
-    }
-    else {
-        /* TBD */
-    }
+    phwangEncodeIdIndex(data_buf + 1, session->sessionId(), LINK_MGR_PROTOCOL_SESSION_ID_SIZE, session->sessionIndex(), LINK_MGR_PROTOCOL_SESSION_INDEX_SIZE);
     this->theFabricObject->dFabricObject()->transmitFunction(data_buf);
 }
 
@@ -72,13 +78,13 @@ void DFabricClass::processPutSessionData(char *data_val)
     char *data_buf = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
     data_buf[0] = LINK_MGR_PROTOCOL_RESPOND_IS_PUT_SESSION_DATA;
 
-    SessionClass *session = this->theFabricObject->linkMgrObject()->serachSession(data_val);
-    if (session) {
+    SessionClass *session = this->linkMgrObject()->serachSession(data_val);
+    if (!session) {
+        strcpy(data_buf + 1, "null session");
+        this->theFabricObject->dFabricObject()->transmitFunction(data_buf);
+        return;
+    }
 
-    }
-    else {
-        
-    }
-    //this->theFabricObject->dFabricObject()->transmitFunction(data_buf);
-    this->theFabricObject->dFabricObject()->transmitFunction("put_session_data TBD");
+    strcpy(data_buf + 1, "TBD");
+    this->theFabricObject->dFabricObject()->transmitFunction(data_buf);
 }

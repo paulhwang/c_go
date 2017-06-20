@@ -8,10 +8,11 @@
 
 #include <pthread.h>
 #include "../../protocol_dir/link_mgr_protocol.h"
-
-#define D_FABRIC_RECEIVE_QUEUE_SIZE 100
+#include "../fabric_class.h"
 
 class FabricClass;
+class LinkMgrClass;
+class GroupMgrClass;
 
 class DFabricClass {
     FabricClass *theFabricObject;
@@ -31,6 +32,8 @@ class DFabricClass {
 protected:
     friend class UFabricClass;
 
+    LinkMgrClass  *linkMgrObject(void)  {return this->theFabricObject->theLinkMgrObject;}
+    GroupMgrClass *groupMgrObject(void) {return this->theFabricObject->theGroupMgrObject;}
     void transmitFunction(char *data_val);
    
 public:
