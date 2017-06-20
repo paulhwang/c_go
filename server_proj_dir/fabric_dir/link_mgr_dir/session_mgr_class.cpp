@@ -5,6 +5,7 @@
 */
 
 #include "../../../phwang_dir/phwang.h"
+#include "../../protocol_dir/session_mgr_protocol.h"
 #include "session_mgr_class.h"
 #include "session_class.h"
 #include "link_class.h"
@@ -74,9 +75,9 @@ SessionClass *SessionMgrClass::searchSession (char *data_val)
 
     phwangDecodeIdIndex(data_val,
                 &session_id,
-                LINK_MGR_PROTOCOL_SESSION_ID_SIZE,
+                SESSION_MGR_PROTOCOL_SESSION_ID_SIZE,
                 &session_index,
-                LINK_MGR_PROTOCOL_SESSION_INDEX_SIZE);
+                SESSION_MGR_PROTOCOL_SESSION_INDEX_SIZE);
 
     if (1) {
         char s[LOGIT_BUF_SIZE];
