@@ -50,6 +50,11 @@ void GroupClass::removeSession (SessionClass *session_object_val)
     this->abend("insertSession", "not found");
 }
 
+void GroupClass::transmitToTheme(void *data_val, void *session_object_val)
+{
+    this->theSessionCallbackObject = session_object_val;
+}
+
 void GroupClass::logit (char const* str0_val, char const* str1_val)
 {
     char s[LOGIT_BUF_SIZE];

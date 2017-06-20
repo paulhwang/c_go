@@ -13,6 +13,7 @@
 class FabricClass;
 class LinkMgrClass;
 class GroupMgrClass;
+class SessionClass;
 
 class DFabricClass {
     FabricClass *theFabricObject;
@@ -22,8 +23,11 @@ class DFabricClass {
     void startNetServer(void);
     void processMallocLink(char *data_val);
     void processMallocSession(char *data_val);
+    void processMallocSessionResponse(char *data_val, SessionClass *session_object_val);
     void processGetSessionData(char *data_val);
+    void processGetSessionDataResponse(char *data_val, SessionClass *session_object_val);
     void processPutSessionData(char *data_val);
+    void processPutSessionDataResponse(char *data_val, SessionClass *session_object_val);
 
     void debug(int on_off_val, char const* str0_val, char const* str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
     void logit(char const* str0_val, char const* str1_val);
@@ -35,6 +39,7 @@ protected:
     LinkMgrClass  *linkMgrObject(void)  {return this->theFabricObject->theLinkMgrObject;}
     GroupMgrClass *groupMgrObject(void) {return this->theFabricObject->theGroupMgrObject;}
     void transmitFunction(char *data_val);
+    void receiveFromTheme(SessionClass *session_object_val, char *data_val);
    
 public:
     DFabricClass(FabricClass *fabric_object_val);
@@ -44,4 +49,5 @@ public:
     /* exports */
     void exportedNetAcceptFunction(void *tp_transfer_object_val);
     void exportedparseFunction(char *data_val);
+    void exportedProcessPutSessionResponse(void *data_val);
 };
