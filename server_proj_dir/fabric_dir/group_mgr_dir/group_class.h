@@ -25,6 +25,9 @@ class GroupClass {
 protected:
     friend class DFabricClass;
 
+    int groupId(void) {return this->theGroupId;}
+    int groupIndex(void) {return this->theGroupIndex;}
+
     void insertSession(SessionClass *session_object_val);
     void removeSession(SessionClass *session_object_val);
     void transmitToTheme(void *data_val, void *session_object_val);
