@@ -8,12 +8,12 @@
 
 class FabricClass;
 class BaseMgrClass;
-class GameServerClass;
+class ThemeClass;
 
 class MainClass {
     FabricClass *theFabricObject;
     BaseMgrClass *theGoBaseMgrObject;
-    GameServerClass *theGoGameServerObject;
+    ThemeClass *theGoThemeObject;
 
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);

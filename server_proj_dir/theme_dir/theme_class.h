@@ -1,7 +1,7 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: game_server_class.h
+  File name: theme_class.h
 */
 
 #pragma once
@@ -13,7 +13,7 @@ class RoomClass;
 class GameUServerClass;
 class GameDServerClass;
 
-class GameServerClass {
+class ThemeClass {
 #define GAME_SERVER_ROOM_ARRAY_SIZE 32
 
     GameUServerClass *theGameUServerObject;
@@ -35,9 +35,9 @@ protected:
     GameDServerClass *gameDServerObject(void) {return this->theGameDServerObject;}
 
 public:
-    GameServerClass(void);
-    ~GameServerClass(void);
-    char const* objectName(void) {return "GameServerClass";}
+    ThemeClass(void);
+    ~ThemeClass(void);
+    char const* objectName(void) {return "ThemeClass";}
 
     /* exports */
     void receiveData(char* data_val);

@@ -1,7 +1,7 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: game_dserver_export.cpp
+  File name: d_theme_export.cpp
 */
 
 #include "../../../phwang_dir/phwang.h"
@@ -18,7 +18,7 @@ void gameDServerReceiveDataFromTransport (void *game_d_server_object_val, void *
 void GameDServerClass::exportedNetReceiveFunction(char *data_val)
 {
     this->logit("exportedNetReceiveFunction", data_val);
-    this->theGameServerObject->gameUServerObject()->transmitFunction(data_val);
+    this->theThemeObject->gameUServerObject()->transmitFunction(data_val);
 }
 
 void GameDServerClass::startNetConnect (void)

@@ -1,7 +1,7 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: game_u_server_class.h
+  File name: u_theme_class.h
 */
 
 #pragma once
@@ -9,12 +9,12 @@
 #include <pthread.h>
 #include "../../protocol_dir/base_mgr_protocol.h"
 
-class GameServerClass;
+class ThemeClass;
 
 #define GAME_USERVER_RECEIVE_QUEUE_SIZE 100
 
 class GameUServerClass {
-    GameServerClass *theGameServerObject;
+    ThemeClass *theThemeObject;
     void *theTpServerObject;
     void *theTpTransferObject;
 
@@ -32,7 +32,7 @@ protected:
     void transmitFunction(char *data_val);
 
 public:
-    GameUServerClass(GameServerClass *game_server_object_val);
+    GameUServerClass(ThemeClass *theme_object_val);
     ~GameUServerClass(void);
     char const* objectName(void) {return "GameUServerClass";}
 

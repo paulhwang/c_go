@@ -7,13 +7,13 @@
 #pragma once
 #include "../../protocol_dir/link_mgr_protocol.h"
 class RoomClass;
-class GameServerClass;
+class ThemeClass;
 
 class RoomMgrClass {
 #define GROUP_MGR_GROUP_ARRAY_SIZE 1000
 #define GROUP_MGR_MAX_GLOBAL_GROUP_ID 9999
 
-    GameServerClass *theGameServerObject;
+    ThemeClass *theThemeObject;
     int theGlobalGroupId;
     RoomClass *theGroupTableArray[GROUP_MGR_GROUP_ARRAY_SIZE + 4];
 
@@ -26,7 +26,7 @@ class RoomMgrClass {
     void abend(char const* str0_val, char const* str1_val);
 
 public:
-    RoomMgrClass(GameServerClass *game_server_object_val);
+    RoomMgrClass(ThemeClass *theme_object_val);
     ~RoomMgrClass(void);
     char const* objectName(void) {return "RoomMgrClass";}
 

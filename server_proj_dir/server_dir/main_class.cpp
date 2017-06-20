@@ -13,14 +13,14 @@
 MainClass::MainClass(void)
 {
     this->theFabricObject = new FabricClass();
-    this->theGoGameServerObject = new GameServerClass();
+    this->theGoThemeObject = new ThemeClass();
     this->theGoBaseMgrObject = new BaseMgrClass();
 }
 
 MainClass::~MainClass(void)
 {
     this->theGoBaseMgrObject->~BaseMgrClass(); 
-    this->theGoGameServerObject->~GameServerClass(); 
+    this->theGoThemeObject->~ThemeClass(); 
     this->theFabricObject->~FabricClass(); 
 }
 

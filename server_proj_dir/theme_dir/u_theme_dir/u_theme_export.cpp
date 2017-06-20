@@ -1,7 +1,7 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: game_u_server_export.cpp
+  File name: u_theme_export.cpp
 */
 
 #include "../../../phwang_dir/phwang.h"
@@ -30,7 +30,7 @@ void gameUServerTpReceiveDataFunction (void *game_server_object_val, void *data_
 void GameUServerClass::exportedNetReceiveFunction(char *data_val)
 {
     this->logit("exportedNetReceiveFunction", data_val);
-    this->theGameServerObject->gameDServerObject()->transmitFunction(data_val);
+    this->theThemeObject->gameDServerObject()->transmitFunction(data_val);
 }
 
 void GameUServerClass::startNetServer (void)

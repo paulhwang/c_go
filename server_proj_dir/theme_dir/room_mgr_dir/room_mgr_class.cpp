@@ -8,10 +8,10 @@
 #include "room_mgr_class.h"
 #include "room_class.h"
 
-RoomMgrClass::RoomMgrClass (GameServerClass *game_server_object_val)
+RoomMgrClass::RoomMgrClass (ThemeClass *theme_object_val)
 {
     memset(this, 0, sizeof(RoomMgrClass));
-    this->theGameServerObject = game_server_object_val;
+    this->theThemeObject = theme_object_val;
     this->theGlobalGroupId = 0;
 
     if (1) {

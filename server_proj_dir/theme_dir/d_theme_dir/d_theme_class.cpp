@@ -1,16 +1,16 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: game_dserver_class.cpp
+  File name: d_theme_class.cpp
 */
 
 #include "../../../phwang_dir/phwang.h"
 #include "d_theme_class.h"
 
-GameDServerClass::GameDServerClass (GameServerClass *game_server_object_val)
+GameDServerClass::GameDServerClass (ThemeClass *theme_object_val)
 {
     memset(this, 0, sizeof(GameDServerClass));
-    this->theGameServerObject = game_server_object_val;
+    this->theThemeObject = theme_object_val;
 
     this->startNetConnect();
 

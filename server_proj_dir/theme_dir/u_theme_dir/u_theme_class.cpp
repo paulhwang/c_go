@@ -1,16 +1,16 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: game_u_server_class.cpp
+  File name: u_theme_class.cpp
 */
 
 #include "../../../phwang_dir/phwang.h"
 #include "u_theme_class.h"
 
-GameUServerClass::GameUServerClass (GameServerClass *game_server_object_val)
+GameUServerClass::GameUServerClass (ThemeClass *theme_object_val)
 {
     memset(this, 0, sizeof(GameUServerClass));
-    this->theGameServerObject = game_server_object_val;
+    this->theThemeObject = theme_object_val;
     this->startNetServer();
 
     if (1) {

@@ -1,7 +1,7 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: game_d_server_class.h
+  File name: d_theme_class.h
 */
 
 #pragma once
@@ -14,10 +14,10 @@ class GameServerClass;
 #define GAME_DSERVER_RECEIVE_QUEUE_SIZE 100
 #define GAME_DSERVER_GROUP_ARRAY_SIZE 32
 
-class GameServerClass;
+class ThemeClass;
 
 class GameDServerClass {
-    GameServerClass *theGameServerObject;
+    ThemeClass *theThemeObject;
     void *theTpTransferObject;
 
     void startNetConnect(void);
@@ -33,7 +33,7 @@ protected:
     void transmitFunction(char *data_val);
 
 public:
-    GameDServerClass(GameServerClass *game_server_object_val);
+    GameDServerClass(ThemeClass *theme_object_val);
     ~GameDServerClass(void);
     char const* objectName(void) {return "GameDServerClass";}
 
