@@ -10,13 +10,13 @@
 #include "../protocol_dir/base_mgr_protocol.h"
 class RoomMgrClass;
 class RoomClass;
-class GameUServerClass;
+class UThemeClass;
 class DThemeClass;
 
 class ThemeClass {
 #define GAME_SERVER_ROOM_ARRAY_SIZE 32
 
-    GameUServerClass *theGameUServerObject;
+    UThemeClass *theUThemeObject;
     DThemeClass *theDThemeObject;
 
     RoomMgrClass *theRoomMgrObject;
@@ -27,12 +27,12 @@ class ThemeClass {
     void abend(char const* str0_val, char const* str1_val);
 
 protected:
-    friend class GameUServerClass;
+    friend class UThemeClass;
     friend class DThemeClass;
     friend class RoomMgrClass;
 
-    GameUServerClass *gameUServerObject(void) {return this->theGameUServerObject;}
-    DThemeClass *DThemeObject(void) {return this->theDThemeObject;}
+    UThemeClass *uThemeObject(void) {return this->theUThemeObject;}
+    DThemeClass *dThemeObject(void) {return this->theDThemeObject;}
 
 public:
     ThemeClass(void);

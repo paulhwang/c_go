@@ -18,7 +18,7 @@ void dThemeReceiveDataFromTransport (void *game_d_server_object_val, void *data_
 void DThemeClass::exportedNetReceiveFunction(char *data_val)
 {
     this->logit("exportedNetReceiveFunction", data_val);
-    this->theThemeObject->gameUServerObject()->transmitFunction(data_val);
+    this->theThemeObject->uThemeObject()->transmitFunction(data_val);
 }
 
 void DThemeClass::startNetConnect (void)

@@ -1,13 +1,13 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: game_u_server_test.cpp
+  File name: u_theme_test.cpp
 */
 
 #include "../../../phwang_dir/phwang.h"
 #include "u_theme_class.h"
 
-void GameUServerClass::baseMgrTest (void)
+void UThemeClass::baseMgrTest (void)
 {
 	return;
 

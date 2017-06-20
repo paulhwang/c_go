@@ -13,7 +13,7 @@
 ThemeClass::ThemeClass (void)
 {
     memset(this, 0, sizeof(ThemeClass));
-    this->theGameUServerObject = new GameUServerClass(this);
+    this->theUThemeObject = new UThemeClass(this);
     this->theRoomMgrObject = new RoomMgrClass(this);
     this->theDThemeObject = new DThemeClass(this);
 
@@ -26,7 +26,7 @@ ThemeClass::~ThemeClass (void)
 {
     this->theDThemeObject->~DThemeClass();
     this->theRoomMgrObject->~RoomMgrClass();
-    this->theGameUServerObject->~GameUServerClass();
+    this->theUThemeObject->~UThemeClass();
 }
 
 void ThemeClass::insertRoom (RoomClass *group_object_val)

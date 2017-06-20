@@ -9,8 +9,6 @@
 #include <pthread.h>
 #include "../../protocol_dir/base_mgr_protocol.h"
 
-class GameServerClass;
-
 #define GAME_DSERVER_RECEIVE_QUEUE_SIZE 100
 #define GAME_DSERVER_GROUP_ARRAY_SIZE 32
 
@@ -27,7 +25,7 @@ class DThemeClass {
     void abend(char const* str0_val, char const* str1_val);
 
 protected:
-    friend class GameUServerClass;
+    friend class UThemeClass;
     friend class RoomMgrClass;
 
     void transmitFunction(char *data_val);

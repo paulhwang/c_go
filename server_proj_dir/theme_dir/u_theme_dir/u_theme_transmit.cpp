@@ -7,7 +7,7 @@
 #include "../../../phwang_dir/phwang.h"
 #include "u_theme_class.h"
 
-void GameUServerClass::transmitFunction (char *data_val)
+void UThemeClass::transmitFunction (char *data_val)
 {
     this->logit("transmitFunction", data_val);
 

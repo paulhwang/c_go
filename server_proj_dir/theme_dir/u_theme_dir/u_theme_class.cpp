@@ -7,29 +7,29 @@
 #include "../../../phwang_dir/phwang.h"
 #include "u_theme_class.h"
 
-GameUServerClass::GameUServerClass (ThemeClass *theme_object_val)
+UThemeClass::UThemeClass (ThemeClass *theme_object_val)
 {
-    memset(this, 0, sizeof(GameUServerClass));
+    memset(this, 0, sizeof(UThemeClass));
     this->theThemeObject = theme_object_val;
     this->startNetServer();
 
     if (1) {
-        this->logit("GameUServerClass", "init");
+        this->logit("UThemeClass", "init");
     }
 }
 
-GameUServerClass::~GameUServerClass (void)
+UThemeClass::~UThemeClass (void)
 {
 }
 
-void GameUServerClass::logit (char const* str0_val, char const* str1_val)
+void UThemeClass::logit (char const* str0_val, char const* str1_val)
 {
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", this->objectName(), str0_val);
     phwangLogit(s, str1_val);
 }
 
-void GameUServerClass::abend (char const* str0_val, char const* str1_val)
+void UThemeClass::abend (char const* str0_val, char const* str1_val)
 {
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", this->objectName(), str0_val);

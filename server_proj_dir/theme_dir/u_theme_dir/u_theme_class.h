@@ -13,7 +13,7 @@ class ThemeClass;
 
 #define GAME_USERVER_RECEIVE_QUEUE_SIZE 100
 
-class GameUServerClass {
+class UThemeClass {
     ThemeClass *theThemeObject;
     void *theTpServerObject;
     void *theTpTransferObject;
@@ -32,9 +32,9 @@ protected:
     void transmitFunction(char *data_val);
 
 public:
-    GameUServerClass(ThemeClass *theme_object_val);
-    ~GameUServerClass(void);
-    char const* objectName(void) {return "GameUServerClass";}
+    UThemeClass(ThemeClass *theme_object_val);
+    ~UThemeClass(void);
+    char const* objectName(void) {return "UThemeClass";}
 
     /* exports */
     void exportedNetReceiveFunction(char *data_val);
