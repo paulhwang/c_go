@@ -8,7 +8,7 @@
 #include "../../protocol_dir/net_port_protocol.h"
 #include "game_u_server_class.h"
 #include "../theme_class.h"
-#include "../game_d_server_dir/game_d_server_class.h"
+#include "../game_d_server_dir/d_theme_class.h"
 
 void gameUServerTpServerAcceptFunction (void *game_server_object_val, void *tp_transfer_object_val) {
     phwangLogit("Golbal::gameUServerTpServerAcceptFunction", "");
