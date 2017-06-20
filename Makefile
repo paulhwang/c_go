@@ -44,10 +44,10 @@ U_FABRIC_OBJS = $(GROUP_MGR_OBJS) $(U_FABRIC_DIR)/u_fabric_class.o $(U_FABRIC_DI
 FABRIC_OBJS = $(U_FABRIC_OBJS) $(D_FABRIC_OBJS) $(FABRIC_DIR)/fabric_class.o 
 ROOM_MGR_OBJS = $(ROOM_MGR_DIR)/room_mgr_class.o $(ROOM_MGR_DIR)/room_class.o 
 D_THEME_OBJS = $(ROOM_MGR_OBJS) $(GAME_D_SERVER_DIR)/d_theme_class.o $(GAME_D_SERVER_DIR)/d_theme_transmit.o $(GAME_D_SERVER_DIR)/d_theme_export.o 
-GAME_U_SERVER_OBJS = $(BASE_MGR_OBJS) $(GAME_U_SERVER_DIR)/game_u_server_class.o $(GAME_U_SERVER_DIR)/game_u_server_transmit.o $(GAME_U_SERVER_DIR)/game_u_server_export.o $(GAME_U_SERVER_DIR)/game_u_server_test.o 
+U_THEME_OBJS = $(BASE_MGR_OBJS) $(GAME_U_SERVER_DIR)/u_theme_class.o $(GAME_U_SERVER_DIR)/u_theme_transmit.o $(GAME_U_SERVER_DIR)/u_theme_export.o $(GAME_U_SERVER_DIR)/u_theme_test.o 
 GO_BASE_OBJS = $(GO_BASE_DIR)/go_base_class.o $(GO_BASE_DIR)/go_game_class.o $(GO_BASE_DIR)/go_engine_class.o $(GO_BASE_DIR)/go_board_class.o $(GO_BASE_DIR)/go_move_class.o $(GO_BASE_DIR)/go_port_class.o $(GO_BASE_DIR)/go_config_class.o $(GO_BASE_DIR)/go_group_class.o $(GO_BASE_DIR)/go_group_list_class.o
 BASE_MGR_OBJS = $(BASE_MGR_DIR)/base_mgr_class.o $(BASE_MGR_DIR)/base_mgr_exports.o $(BASE_MGR_DIR)/base_mgr_parse.o $(BASE_MGR_DIR)/base_mgr_transmit.o $(BASE_MGR_DIR)/base_mgr_base.o $(GO_BASE_OBJS)
-THEME_OBJS = $(GAME_U_SERVER_OBJS)  $(D_THEME_OBJS) $(GAME_SERVER_DIR)/theme_class.o 
+THEME_OBJS = $(U_THEME_OBJS)  $(D_THEME_OBJS) $(GAME_SERVER_DIR)/theme_class.o 
 SERVER_PROJ_OBJS = $(SERVER_OBJS) $(FABRIC_OBJS) $(THEME_OBJS)
 
 CLIENT_OBJS = $(CLIENT_DIR)/go_client.o

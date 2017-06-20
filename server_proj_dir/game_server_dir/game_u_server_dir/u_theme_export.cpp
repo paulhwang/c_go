@@ -6,7 +6,7 @@
 
 #include "../../../phwang_dir/phwang.h"
 #include "../../protocol_dir/net_port_protocol.h"
-#include "game_u_server_class.h"
+#include "u_theme_class.h"
 #include "../theme_class.h"
 #include "../game_d_server_dir/d_theme_class.h"
 

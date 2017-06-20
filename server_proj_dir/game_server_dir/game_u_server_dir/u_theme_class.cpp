@@ -5,7 +5,7 @@
 */
 
 #include "../../../phwang_dir/phwang.h"
-#include "game_u_server_class.h"
+#include "u_theme_class.h"
 
 GameUServerClass::GameUServerClass (GameServerClass *game_server_object_val)
 {

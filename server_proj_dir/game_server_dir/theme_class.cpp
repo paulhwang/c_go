@@ -6,7 +6,7 @@
 
 #include "../../phwang_dir/phwang.h"
 #include "theme_class.h"
-#include "game_u_server_dir/game_u_server_class.h"
+#include "game_u_server_dir/u_theme_class.h"
 #include "game_d_server_dir/d_theme_class.h"
 #include "room_mgr_dir/room_mgr_class.h"
 
