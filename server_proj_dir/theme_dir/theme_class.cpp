@@ -15,7 +15,7 @@ ThemeClass::ThemeClass (void)
     memset(this, 0, sizeof(ThemeClass));
     this->theGameUServerObject = new GameUServerClass(this);
     this->theRoomMgrObject = new RoomMgrClass(this);
-    this->theGameDServerObject = new GameDServerClass(this);
+    this->theDThemeObject = new DThemeClass(this);
 
     if (1) {
         this->logit("ThemeClass", "init");
@@ -24,7 +24,7 @@ ThemeClass::ThemeClass (void)
 
 ThemeClass::~ThemeClass (void)
 {
-    this->theGameDServerObject->~GameDServerClass();
+    this->theDThemeObject->~DThemeClass();
     this->theRoomMgrObject->~RoomMgrClass();
     this->theGameUServerObject->~GameUServerClass();
 }

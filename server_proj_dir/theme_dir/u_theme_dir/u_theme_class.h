@@ -26,7 +26,7 @@ class GameUServerClass {
     void abend(char const* str0_val, char const* str1_val);
 
 protected:
-    friend class GameDServerClass;
+    friend class DThemeClass;
     friend class RoomMgrClass;
 
     void transmitFunction(char *data_val);

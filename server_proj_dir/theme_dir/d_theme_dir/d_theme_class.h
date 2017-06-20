@@ -16,7 +16,7 @@ class GameServerClass;
 
 class ThemeClass;
 
-class GameDServerClass {
+class DThemeClass {
     ThemeClass *theThemeObject;
     void *theTpTransferObject;
 
@@ -33,9 +33,9 @@ protected:
     void transmitFunction(char *data_val);
 
 public:
-    GameDServerClass(ThemeClass *theme_object_val);
-    ~GameDServerClass(void);
-    char const* objectName(void) {return "GameDServerClass";}
+    DThemeClass(ThemeClass *theme_object_val);
+    ~DThemeClass(void);
+    char const* objectName(void) {return "DThemeClass";}
 
     /* exports */
     void exportedNetReceiveFunction(char *data_val);

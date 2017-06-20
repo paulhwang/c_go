@@ -11,13 +11,13 @@
 class RoomMgrClass;
 class RoomClass;
 class GameUServerClass;
-class GameDServerClass;
+class DThemeClass;
 
 class ThemeClass {
 #define GAME_SERVER_ROOM_ARRAY_SIZE 32
 
     GameUServerClass *theGameUServerObject;
-    GameDServerClass *theGameDServerObject;
+    DThemeClass *theDThemeObject;
 
     RoomMgrClass *theRoomMgrObject;
     RoomClass *theRoomTableArray[GAME_SERVER_ROOM_ARRAY_SIZE];
@@ -28,11 +28,11 @@ class ThemeClass {
 
 protected:
     friend class GameUServerClass;
-    friend class GameDServerClass;
+    friend class DThemeClass;
     friend class RoomMgrClass;
 
     GameUServerClass *gameUServerObject(void) {return this->theGameUServerObject;}
-    GameDServerClass *gameDServerObject(void) {return this->theGameDServerObject;}
+    DThemeClass *DThemeObject(void) {return this->theDThemeObject;}
 
 public:
     ThemeClass(void);

@@ -10,8 +10,8 @@
 #include "../theme_class.h"
 #include "../d_theme_dir/d_theme_class.h"
 
-void gameUServerTpServerAcceptFunction (void *game_server_object_val, void *tp_transfer_object_val) {
-    phwangLogit("Golbal::gameUServerTpServerAcceptFunction", "");
+void uThemeTpServerAcceptFunction (void *game_server_object_val, void *tp_transfer_object_val) {
+    phwangLogit("Golbal::uThemeTpServerAcceptFunction", "");
     ((GameUServerClass *) game_server_object_val)->exportedNetAcceptFunction(tp_transfer_object_val);
 }
 
@@ -22,18 +22,18 @@ void GameUServerClass::exportedNetAcceptFunction (void *tp_transfer_object_val)
     baseMgrTest();
 }
 
-void gameUServerTpReceiveDataFunction (void *game_server_object_val, void *data_val) {
-    phwangLogit("Golbal::gameUServerTpReceiveDataFunction", (char *) data_val);
+void uThemeTpReceiveDataFunction (void *game_server_object_val, void *data_val) {
+    phwangLogit("Golbal::uThemeTpReceiveDataFunction", (char *) data_val);
     ((GameUServerClass *) game_server_object_val)->exportedNetReceiveFunction((char *) data_val);
 }
 
 void GameUServerClass::exportedNetReceiveFunction(char *data_val)
 {
     this->logit("exportedNetReceiveFunction", data_val);
-    this->theThemeObject->gameDServerObject()->transmitFunction(data_val);
+    this->theThemeObject->DThemeObject()->transmitFunction(data_val);
 }
 
 void GameUServerClass::startNetServer (void)
 {
-    this->theTpServerObject = phwangMallocTpServer(this, BASE_MGR_PROTOCOL_TRANSPORT_PORT_NUMBER, gameUServerTpServerAcceptFunction, this, gameUServerTpReceiveDataFunction, this, this->objectName());
+    this->theTpServerObject = phwangMallocTpServer(this, BASE_MGR_PROTOCOL_TRANSPORT_PORT_NUMBER, uThemeTpServerAcceptFunction, this, uThemeTpReceiveDataFunction, this, this->objectName());
 }
