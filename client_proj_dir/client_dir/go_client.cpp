@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include "../../phwang_dir/phwang_class.h"
 #include "../../phwang_dir/phwang.h"
+#include "../../server_proj_dir/protocol_dir/web_fabric_protocol.h"
 #include "../../server_proj_dir/protocol_dir/link_mgr_protocol.h"
 #include "../../server_proj_dir/protocol_dir/base_mgr_protocol.h"
 #include "../../server_proj_dir/protocol_dir/net_port_protocol.h"
@@ -86,7 +87,7 @@ void linkMgrReceiveDataFromTransport (void* engine_object_val, void *data_val)
     printf("linkMgrReceiveDataFromTransport() %s\n", (char *) data_val);
     char *data = (char *) data_val;
 
-    if (*data == LINK_MGR_PROTOCOL_RESPOND_IS_MALLOC_LINK) {
+    if (*data == WEB_FABRIC_PROTOCOL_RESPOND_IS_MALLOC_LINK) {
         if (1) {
             char s[LOGIT_BUF_SIZE];
             sprintf(s, "link_id_index=%s", data + 1);
@@ -106,7 +107,7 @@ void linkMgrTest (void)
     link_mgr_tp_transfer_object = phwangTpConnect(0, LINK_MGR_PROTOCOL_TRANSPORT_PORT_NUMBER, linkMgrReceiveDataFromTransport, 0, "testLinkMgr");
     if (link_mgr_tp_transfer_object) {
         char *buf = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
-        buf[0] = LINK_MGR_PROTOCOL_COMMAND_IS_MALLOC_LINK;
+        buf[0] = WEB_FABRIC_PROTOCOL_COMMAND_IS_MALLOC_LINK;
         strcpy(buf + 1, name);
         buf[strlen(name) + 1] = 0;
         phwangTpTransmit(link_mgr_tp_transfer_object, buf);
