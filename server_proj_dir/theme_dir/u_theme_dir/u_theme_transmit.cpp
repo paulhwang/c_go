@@ -1,7 +1,7 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: game_u_server_transmit.cpp
+  File name: u_theme_transmit.cpp
 */
 
 #include "../../../phwang_dir/phwang.h"
