@@ -39,19 +39,6 @@ void DFabricClass::exportedparseFunction (char *data_val)
     //this->theFabricObject->uFabricObject()->transmitFunction(data_val);
 }
 
-void DFabricClass::receiveFromTheme (SessionClass *session_object_val, char *data_val)
-{
-    if (*data_val == WEB_FABRIC_PROTOCOL_RESPOND_IS_MALLOC_SESSION) {
-        this->processMallocSessionResponse(++data_val, session_object_val);
-    }
-    else if (*data_val == WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_SESSION_DATA) {
-        this->processGetSessionDataResponse(++data_val, session_object_val);
-    }
-    else if (*data_val == WEB_FABRIC_PROTOCOL_RESPOND_IS_PUT_SESSION_DATA) {
-        this->processPutSessionDataResponse(++data_val, session_object_val);
-    }
-}
-
 void DFabricClass::processMallocLink (char *data_val)
 {
     char *data_buf = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
