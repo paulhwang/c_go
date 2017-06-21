@@ -5,6 +5,7 @@
 */
 
 #pragma once
+#include "../../protocol_dir/group_mgr_protocol.h"
 
 class RoomMgrClass;
 class SessionClass;
@@ -15,6 +16,7 @@ class RoomClass {
     RoomMgrClass *theRoomMgrObject;
     int theRoomId;
     int theRoomIndex;
+    char groupIdIndex[GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE + 4];
     SessionClass *theSessionTableArray[GROUP_SESSION_ARRAY_SIZE];
 
     void debug(int on_off_val, char const* str0_val, char const* str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
