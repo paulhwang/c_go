@@ -38,6 +38,6 @@ void DThemeClass::processMallocRoom (char *data_val)
         return;
     }
 
-    //phwangEncodeIdIndex(data_buf + 1, room->roomId(), ROOM_MGR_PROTOCOL_ROOM_ID_SIZE, room->roomIndex(), ROOM_MGR_PROTOCOL_ROOM_INDEX_SIZE);
-    //this->transmitFunction(data_buf);
+    phwangEncodeIdIndex(data_buf + 1, room->roomId(), ROOM_MGR_PROTOCOL_ROOM_ID_SIZE, room->roomIndex(), ROOM_MGR_PROTOCOL_ROOM_INDEX_SIZE);
+    this->transmitFunction(data_buf);
 }

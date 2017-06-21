@@ -38,6 +38,6 @@ public:
     char const* objectName(void) {return "UFabricClass";}
 
     /* exports */
-    void exportedNetReceiveFunction(char *data_val);
+    void exportedParseFunction(char *data_val);
     void exportedNetAcceptFunction(void *tp_transfer_object_val);
 };
