@@ -16,7 +16,7 @@ class RoomClass {
     RoomMgrClass *theRoomMgrObject;
     int theRoomId;
     int theRoomIndex;
-    char groupIdIndex[GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE + 4];
+    char theGroupIdIndex[GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE + 4];
     SessionClass *theSessionTableArray[GROUP_SESSION_ARRAY_SIZE];
 
     void debug(int on_off_val, char const* str0_val, char const* str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
@@ -25,9 +25,11 @@ class RoomClass {
 
 protected:
     friend class DThemeClass;
+    friend class RoomMgrClass;
 
     int roomId(void) {return this->theRoomId;}
     int roomIndex(void) {return this->theRoomIndex;}
+    char *groupIdIndex(void) {return this->theGroupIdIndex;}
 
 public:
     RoomClass(RoomMgrClass *room_mgr_object_val, int room_id_val, int room_index_val, char *group_id_index_val);

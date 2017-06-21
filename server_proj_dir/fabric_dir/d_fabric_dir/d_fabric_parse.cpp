@@ -9,6 +9,7 @@
 #include "../../protocol_dir/fabric_theme_protocol.h"
 #include "../../protocol_dir/session_mgr_protocol.h"
 #include "../../protocol_dir/group_mgr_protocol.h"
+#include "../../protocol_dir/room_mgr_protocol.h"
 #include "../../protocol_dir/web_fabric_protocol.h"
 #include "d_fabric_class.h"
 #include "../fabric_class.h"
@@ -106,18 +107,36 @@ void dFabricProcessPutSessionResponseCallbackFunction (void *this0_val, void *da
 
 void DFabricClass::processPutSessionData (char *data_val)
 {
-    char *data_buf = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
-    data_buf[0] = WEB_FABRIC_PROTOCOL_RESPOND_IS_PUT_SESSION_DATA;
+    char *output_data = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
 
     SessionClass *session = this->linkMgrObject()->serachSession(data_val);
     if (!session) {
-        strcpy(data_buf + 1, "null session");
-        this->transmitFunction(data_buf);
+        strcpy(output_data + 1, "null session");
+        output_data[0] = WEB_FABRIC_PROTOCOL_RESPOND_IS_PUT_SESSION_DATA;
+        this->transmitFunction(output_data);
         return;
     }
 
-    session->groupObject()->transmitToTheme(data_val, this);
+    char *room = session->groupObject()->roomIdIndexString();
+    if (!room) {
+        this->abend("processPutSessionData", "null room");
+        output_data[0] = WEB_FABRIC_PROTOCOL_RESPOND_IS_PUT_SESSION_DATA;
+        strcpy(output_data + 1, "null room");
+        this->transmitFunction(output_data);
+        return;
+    }
 
+    output_data[0] = FABRIC_THEME_PROTOCOL_COMMAND_IS_PUT_SESSION_DATA;
+    memcpy(output_data + 1, room, ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);
+    this->theFabricObject->uFabricObject()->transmitFunction(output_data);
+
+
+
+
+    //session->groupObject()->transmitToTheme(data_val, this);
+
+    char *data_buf = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
+    data_buf[0] = WEB_FABRIC_PROTOCOL_RESPOND_IS_PUT_SESSION_DATA;
     strcpy(data_buf + 1, "TBD");
     this->transmitFunction(data_buf);
 }
