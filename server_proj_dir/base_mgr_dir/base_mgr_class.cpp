@@ -11,7 +11,7 @@
 BaseMgrClass::BaseMgrClass (void)
 {
     memset(this, 0, sizeof(BaseMgrClass));
-    this->theGlobalBaseId = 0;
+    this->theGlobalBaseId = 900;
 
     this->startNetConnect();
 

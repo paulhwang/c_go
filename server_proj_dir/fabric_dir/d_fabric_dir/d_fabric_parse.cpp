@@ -96,21 +96,18 @@ void DFabricClass::processMallocSession(char *data_val)
 
     data_buf[0] = FABRIC_THEME_PROTOCOL_COMMAND_IS_MALLOC_ROOM;
     phwangEncodeIdIndex(data_buf + 1,
-                        session->sessionId(), SESSION_MGR_PROTOCOL_SESSION_ID_SIZE,
-                        session->sessionIndex(), SESSION_MGR_PROTOCOL_SESSION_INDEX_SIZE);
-    phwangEncodeIdIndex(data_buf + 1 + SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE,
                         group->groupId(), GROUP_MGR_PROTOCOL_GROUP_ID_SIZE,
                         group->groupIndex(), GROUP_MGR_PROTOCOL_GROUP_INDEX_SIZE);
 
     this->theFabricObject->uFabricObject()->transmitFunction(data_buf);
 
-    phwangEncodeIdIndex(data_buf + 1, session->sessionId(), SESSION_MGR_PROTOCOL_SESSION_ID_SIZE, session->sessionIndex(), SESSION_MGR_PROTOCOL_SESSION_INDEX_SIZE);
-    this->theFabricObject->dFabricObject()->transmitFunction(data_buf);
+    this->processMallocSessionResponse("", session);
 }
 
 void DFabricClass::processMallocSessionResponse(char *data_val, SessionClass *session_object_val)
 {
     char *data_buf = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
+
     data_buf[0] = WEB_FABRIC_PROTOCOL_RESPOND_IS_MALLOC_SESSION;
     phwangEncodeIdIndex(data_buf + 1, session_object_val->sessionId(), SESSION_MGR_PROTOCOL_SESSION_ID_SIZE, session_object_val->sessionIndex(), SESSION_MGR_PROTOCOL_SESSION_INDEX_SIZE);
     this->theFabricObject->dFabricObject()->transmitFunction(data_buf);

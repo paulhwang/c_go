@@ -23,9 +23,7 @@ TpTransferClass::TpTransferClass (int socket_val,
     this->theReceiveQueue = phwangMallocQueue(TP_TRANSFER_CLASS_RECEIVE_QUEUE_SIZE);
     this->theTransmitQueue = phwangMallocQueue(TP_TRANSFER_CLASS_TRANSMIT_QUEUE_SIZE);
 
-    if (1) {
-        this->logit("TpTransferClass", "init");
-    }
+    this->debug(true, "TpTransferClass", "init");
 }
 
 TpTransferClass::~TpTransferClass (void)
@@ -50,8 +48,8 @@ void TpTransferClass::transmitThreadFunction(int socket_val)
         void *data = phwangDequeue(this->theTransmitQueue);
         if (data) {
             char *str_data = (char *) data;
-            //printf("transmitThreadFunction len=%d\n", strlen(str_data));
-            this->logit("transmitThreadFunction", (char *) str_data);
+
+            this->debug(false, "transmitThreadFunction", (char *) str_data);
             send(socket_val, str_data , strlen(str_data) , 0);
         }
     }

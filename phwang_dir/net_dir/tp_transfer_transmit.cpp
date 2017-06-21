@@ -24,11 +24,9 @@ void TpTransferClass::startTransmitThread (int socket_val)
     data->socket = socket_val;
     data->tp_transfer_object = this;
 
-    int r;
-    if (0) {
-        this->logit("startTransmitThread", "");
-    }
-    r = pthread_create(&this->theTransmitThread, 0, tpTransferTransmitThreadFunction, data);
+    this->debug(false, "startTransmitThread", "");
+
+    int r = pthread_create(&this->theTransmitThread, 0, tpTransferTransmitThreadFunction, data);
     if (r) {
         printf("Error - startTransmitThread() return code: %d\n", r);
         return;

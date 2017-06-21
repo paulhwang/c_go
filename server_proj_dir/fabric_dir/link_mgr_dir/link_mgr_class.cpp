@@ -15,7 +15,7 @@ LinkMgrClass::LinkMgrClass (FabricClass *fabric_object_val)
 {
     memset(this, 0, sizeof(LinkMgrClass));
     this->theFabricObject = fabric_object_val;
-    this->theGlobalLinkId = 0;
+    this->theGlobalLinkId = 100;
 
     if (1) {
         this->logit("LinkMgrClass", "init");

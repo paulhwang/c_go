@@ -12,11 +12,9 @@ GroupMgrClass::GroupMgrClass (FabricClass *fabric_object_val)
 {
     memset(this, 0, sizeof(GroupMgrClass));
     this->theFabricObject = fabric_object_val;
-    this->theGlobalGroupId = 0;
+    this->theGlobalGroupId = 500;
 
-    if (1) {
-        this->logit("GroupMgrClass", "init");
-    }
+    this->debug(true, "GroupMgrClass", "init");
 }
 
 GroupMgrClass::~GroupMgrClass (void)

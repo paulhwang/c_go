@@ -12,11 +12,9 @@ RoomMgrClass::RoomMgrClass (ThemeClass *theme_object_val)
 {
     memset(this, 0, sizeof(RoomMgrClass));
     this->theThemeObject = theme_object_val;
-    this->theGlobalGroupId = 0;
+    this->theGlobalGroupId = 700;
 
-    if (1) {
-        this->logit("RoomMgrClass", "init");
-    }
+    this->debug(true, "RoomMgrClass", "init");
 }
 
 RoomMgrClass::~RoomMgrClass (void)

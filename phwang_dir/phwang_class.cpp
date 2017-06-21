@@ -65,13 +65,13 @@ int PhwangClass::decodeNumber (char *str_val, int size_val)
     int number = 0;
     int factor = 1;
 
-    printf("-decodeNumber=%s\n", str_val);
+    //printf("decodeNumber() input=%s\n", str_val);
     while (size_val > 0) {
         size_val--;
         number += (str_val[size_val] - '0') * factor;
         factor *= 10;
     }
-    printf("decodeNumber=%d\n", number);
+    //printf("decodeNumber() output=%d\n", number);
     return number;
 }
 

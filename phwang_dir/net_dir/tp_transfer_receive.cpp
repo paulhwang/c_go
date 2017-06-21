@@ -20,7 +20,7 @@ void TpTransferClass::receiveThreadFunction(int socket_val)
 
         int length = read(socket_val, data, TP_TRANSFER_CLASS_RECEIVE_BUFFER_SIZE);
         if (length > 0) {
-            this->logit("receiveThreadFunction", data);
+            this->debug(false, "receiveThreadFunction", data);
             phwangEnqueue(this->theReceiveQueue, data);
         }
         else {
@@ -44,11 +44,9 @@ void TpTransferClass::startReceiveThread (int socket_val)
     data->socket = socket_val;
     data->tp_transfer_object = this;
 
-    int r;
-    if (0) {
-        this->logit("startReceiveThread", "");
-    }
-    r = pthread_create(&this->theReceiveThread, 0, tpTranferReceiveThreadFunction, data);
+    this->debug(false, "startReceiveThread", "");
+
+    int r = pthread_create(&this->theReceiveThread, 0, tpTranferReceiveThreadFunction, data);
     if (r) {
         printf("Error - startReceiveThread() return code: %d\n", r);
         return;
@@ -61,14 +59,13 @@ void TpTransferClass::startReceiveThread (int socket_val)
 
 void TpTransferClass::receiveThreadFunction2 (void)
 {
-    if (0) {
-        this->logit("receiveThreadFunction2", "starts");
-    }
+    this->debug(false, "receiveThreadFunction2", "starts");
 
     while (1) {
         char *data = (char *) phwangDequeue(this->theReceiveQueue);
         if (data) {
-            this->logit("receiveThreadFunction2", data);
+            this->debug(false, "receiveThreadFunction2", data);
+
             this->receiveCallback()(this->theReceiveObject, data);
         }
     }
@@ -81,12 +78,9 @@ void *tpTranferReceiveThreadFunction2 (void *this_val)
 
 void TpTransferClass::startReceiveThread2 (void)
 {
-    int r;
+    this->debug(false, "startReceiveThread2", "create receiveThread");
 
-    if (0) {
-        this->logit("startReceiveThread2", "create receiveThread");
-    }
-    r = pthread_create(&this->theReceiveThread2, NULL, tpTranferReceiveThreadFunction2, this);
+    int r = pthread_create(&this->theReceiveThread2, NULL, tpTranferReceiveThreadFunction2, this);
     if (r) {
         printf("Error - pthread_create() return code: %d\n", r);
         return;

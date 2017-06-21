@@ -17,7 +17,7 @@ SessionMgrClass::SessionMgrClass (LinkClass *link_object_val)
 {
     memset(this, 0, sizeof(SessionMgrClass));
     this->theLinkObject = link_object_val;
-    this->theGlobalSessionId = 0;
+    this->theGlobalSessionId = 300;
 
     if (0) {
         this->logit("SessionMgrClass", "init");
