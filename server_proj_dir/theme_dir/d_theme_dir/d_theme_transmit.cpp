@@ -9,7 +9,7 @@
 
 void DThemeClass::transmitFunction (char *data_val)
 {
-    this->logit("transmitFunction", data_val);
+    this->debug(true, "transmitFunction", data_val);
 
     if (!this->theTpTransferObject) {
         this->abend("transmitFunction", "null theTpTransferObject");

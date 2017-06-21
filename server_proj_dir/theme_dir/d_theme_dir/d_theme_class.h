@@ -36,5 +36,5 @@ public:
     char const* objectName(void) {return "DThemeClass";}
 
     /* exports */
-    void exportedNetReceiveFunction(char *data_val);
+    void exportedparseFunction(char *data_val);
 };

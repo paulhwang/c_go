@@ -17,9 +17,7 @@ DFabricClass::DFabricClass (FabricClass *fabric_object_val)
     this->theFabricObject = fabric_object_val;
     this->startNetServer();
 
-    if (1) {
-        this->logit("DFabricClass", "init");
-    }
+    this->debug(true, "DFabricClass", "init");
 }
 
 DFabricClass::~DFabricClass (void)
