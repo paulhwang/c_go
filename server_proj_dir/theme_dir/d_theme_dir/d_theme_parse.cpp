@@ -98,7 +98,10 @@ void DThemeClass::processPutSessionData (char *data_val)
     this->debug(true, "processPutSessionData", uplink_data);
     this->theThemeObject->uThemeObject()->transmitFunction(uplink_data);
 
-    //////output_data[0] = FABRIC_THEME_PROTOCOL_RESPOND_IS_PUT_SESSION_DATA;
-    ////strcpy(output_data + 1, (char *) data_val);
-    //this->transmitFunction(output_data);
+    downlink_data = data_ptr = (char *) malloc(ROOM_MGR_DATA_BUFFER_SIZE + 4);
+    *data_ptr++ = FABRIC_THEME_PROTOCOL_COMMAND_IS_PUT_SESSION_DATA;
+    memcpy(data_ptr, room->groupIdIndex(), room->theGroupIdIndexSize);
+    data_ptr += room->theGroupIdIndexSize;
+    *data_ptr = 0;
+    this->transmitFunction(downlink_data);
 }
