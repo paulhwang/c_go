@@ -34,21 +34,36 @@ void DThemeClass::exportedparseFunction (char *data_val)
 
 void DThemeClass::processMallocRoom (char *data_val)
 {
-    char *output_data = (char *) malloc(ROOM_MGR_DATA_BUFFER_SIZE + 4);
+    char *downlink_data;
+    char *uplink_data;
+    char *data_ptr;
 
     RoomClass *room = this->theThemeObject->roomMgrObject()->mallocRoom(data_val);
     if (!room) {
         this->abend("processMallocRoom", "null room");
-        output_data[0] = FABRIC_THEME_PROTOCOL_RESPOND_IS_MALLOC_ROOM;
-        strcpy(output_data + 1, "null room");
-        this->transmitFunction(output_data);
+        downlink_data = data_ptr = (char *) malloc(ROOM_MGR_DATA_BUFFER_SIZE + 4);
+        *data_ptr++ = FABRIC_THEME_PROTOCOL_RESPOND_IS_MALLOC_ROOM;
+        strcpy(data_ptr, "null room");
+        this->transmitFunction(downlink_data);
         return;
     }
 
-    output_data[0] = FABRIC_THEME_PROTOCOL_RESPOND_IS_MALLOC_ROOM;
-    memcpy(output_data + 1, room->groupIdIndex(), GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE);
-    phwangEncodeIdIndex(output_data + 1 + GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE, room->roomId(), ROOM_MGR_PROTOCOL_ROOM_ID_SIZE, room->roomIndex(), ROOM_MGR_PROTOCOL_ROOM_INDEX_SIZE);
-    this->transmitFunction(output_data);
+    uplink_data = data_ptr = (char *) malloc(ROOM_MGR_DATA_BUFFER_SIZE + 4);
+    *data_ptr++ = THEME_ENGINE_PROTOCOL_COMMAND_IS_MALLOC_BASE;
+    memcpy(data_ptr, room->theRoomIdIndex, room->theRoomIdIndexSize);
+    data_ptr += room->theRoomIdIndexSize;
+    *data_ptr = 0;
+    this->debug(true, "processPutSessionData", uplink_data);
+    this->theThemeObject->uThemeObject()->transmitFunction(uplink_data);
+ 
+    downlink_data = data_ptr = (char *) malloc(ROOM_MGR_DATA_BUFFER_SIZE + 4);
+    *data_ptr++ = FABRIC_THEME_PROTOCOL_RESPOND_IS_MALLOC_ROOM;
+    memcpy(data_ptr, room->groupIdIndex(), room->theGroupIdIndexSize);
+    data_ptr += room->theGroupIdIndexSize;
+    memcpy(data_ptr, room->roomIdIndex(), room->theRoomIdIndexSize);
+    data_ptr += room->theRoomIdIndexSize;
+    *data_ptr = 0;
+    this->transmitFunction(downlink_data);
 }
 
 void DThemeClass::processGetSessionData (char *data_val)
@@ -59,30 +74,31 @@ void DThemeClass::processGetSessionData (char *data_val)
 
 void DThemeClass::processPutSessionData (char *data_val)
 {
-    char *output_data = (char *) malloc(ROOM_MGR_DATA_BUFFER_SIZE + 4);
-    char *output = output_data;
+    char *downlink_data;
+    char *uplink_data;
+    char *data_ptr;
 
     this->debug(true, "processPutSessionData===", data_val);
 
     RoomClass *room = this->theThemeObject->roomMgrObject()->searchRoom(data_val);
     if (!room) {
         this->abend("processPutSessionData", "null room");
-        output_data[0] = FABRIC_THEME_PROTOCOL_RESPOND_IS_PUT_SESSION_DATA;
-        strcpy(output_data + 1, "null room");
-        this->transmitFunction(output_data);
+        downlink_data = data_ptr = (char *) malloc(ROOM_MGR_DATA_BUFFER_SIZE + 4);
+        *data_ptr++ = FABRIC_THEME_PROTOCOL_RESPOND_IS_PUT_SESSION_DATA;
+        strcpy(data_ptr, "null room");
+        this->transmitFunction(downlink_data);
         return;
     }
 
-    *output++ = THEME_ENGINE_PROTOCOL_RESPOND_IS_MALLOC_BASE;
-    memcpy(output, room->theRoomIdIndex, room->theRoomIdIndexSize);
-    output += room->theRoomIdIndexSize;
-    *output = 0;
+    uplink_data = data_ptr = (char *) malloc(ROOM_MGR_DATA_BUFFER_SIZE + 4);
+    *data_ptr++ = THEME_ENGINE_PROTOCOL_COMMAND_IS_PUT_SESSION_DATA;
+    memcpy(data_ptr, room->theRoomIdIndex, room->theRoomIdIndexSize);
+    data_ptr += room->theRoomIdIndexSize;
+    *data_ptr = 0;
+    this->debug(true, "processPutSessionData", uplink_data);
+    this->theThemeObject->uThemeObject()->transmitFunction(uplink_data);
 
-    this->debug(true, "processPutSessionData", output_data);
-    this->theThemeObject->uThemeObject()->transmitFunction(output_data);
-    return;
-
-    output_data[0] = FABRIC_THEME_PROTOCOL_RESPOND_IS_PUT_SESSION_DATA;
-    strcpy(output_data + 1, (char *) data_val);
-    this->transmitFunction(output_data);
+    //////output_data[0] = FABRIC_THEME_PROTOCOL_RESPOND_IS_PUT_SESSION_DATA;
+    ////strcpy(output_data + 1, (char *) data_val);
+    //this->transmitFunction(output_data);
 }

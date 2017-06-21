@@ -20,6 +20,7 @@ class RoomClass {
     int theRoomIdSize;
     int theRoomIndexSize;
     int theRoomIdIndexSize;
+    int theGroupIdIndexSize;
     char theRoomIdIndex[ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE + 4];
 
     char theGroupIdIndex[GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE + 4];
