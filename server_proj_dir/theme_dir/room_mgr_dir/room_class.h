@@ -13,13 +13,19 @@ class RoomClass {
 #define GROUP_SESSION_ARRAY_SIZE 32
 
     RoomMgrClass *theGroupMgrObject;
-    int theGroupId;
-    int theGroupIndex;
+    int theRoomId;
+    int theRoomIndex;
     SessionClass *theSessionTableArray[GROUP_SESSION_ARRAY_SIZE];
 
     void debug(int on_off_val, char const* str0_val, char const* str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
+
+protected:
+    friend class DThemeClass;
+
+    int roomId(void) {return this->theRoomId;}
+    int roomIndex(void) {return this->theRoomIndex;}
 
 public:
     RoomClass(RoomMgrClass *group_mgr_object_val, int group_id_val, int group_index_val);

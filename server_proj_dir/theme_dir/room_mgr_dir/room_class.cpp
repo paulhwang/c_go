@@ -12,8 +12,8 @@ RoomClass::RoomClass (RoomMgrClass *group_mgr_object_val, int group_id_val, int 
 {
     memset(this, 0, sizeof(RoomClass));
     this->theGroupMgrObject = group_mgr_object_val;
-    this->theGroupId = group_id_val;
-    this->theGroupIndex = group_index_val;
+    this->theRoomId = group_id_val;
+    this->theRoomIndex = group_index_val;
 
     if (1) {
         this->logit("RoomClass", "init");

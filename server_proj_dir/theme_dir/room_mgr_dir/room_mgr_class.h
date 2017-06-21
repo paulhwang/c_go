@@ -30,8 +30,8 @@ public:
     ~RoomMgrClass(void);
     char const* objectName(void) {return "RoomMgrClass";}
 
-    RoomClass *mallocGroup(void);
-    void freeGroup(RoomClass *group_object_val);
+    RoomClass *mallocRoom(void *group_id_index_val);
+    void freeRoom(RoomClass *group_object_val);
 
     void groupMgrLogit(char const* str0_val, char const* str1_val);
     void groupMgrAbend(char const* str0_val, char const* str1_val);

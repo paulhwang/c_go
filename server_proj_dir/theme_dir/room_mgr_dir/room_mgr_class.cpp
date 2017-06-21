@@ -42,7 +42,7 @@ int RoomMgrClass::allocGroupIndex (void)
     return -1;
 }
 
-RoomClass *RoomMgrClass::mallocGroup (void)
+RoomClass *RoomMgrClass::mallocRoom (void *group_id_index_val)
 {
     if (1) {
         this->logit("mallocGroup", "");

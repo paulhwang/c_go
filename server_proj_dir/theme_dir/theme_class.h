@@ -33,6 +33,7 @@ protected:
 
     UThemeClass *uThemeObject(void) {return this->theUThemeObject;}
     DThemeClass *dThemeObject(void) {return this->theDThemeObject;}
+    RoomMgrClass *roomMgrObject(void) {return this->theRoomMgrObject;}
 
 public:
     ThemeClass(void);

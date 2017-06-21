@@ -101,7 +101,8 @@ void DFabricClass::processMallocSession(char *data_val)
 
     this->theFabricObject->uFabricObject()->transmitFunction(data_buf);
 
-    this->processMallocSessionResponse("", session);
+    phwangEncodeIdIndex(data_buf + 1, session->sessionId(), SESSION_MGR_PROTOCOL_SESSION_ID_SIZE, session->sessionIndex(), SESSION_MGR_PROTOCOL_SESSION_INDEX_SIZE);
+    this->theFabricObject->dFabricObject()->transmitFunction(data_buf);
 }
 
 void DFabricClass::processMallocSessionResponse(char *data_val, SessionClass *session_object_val)
