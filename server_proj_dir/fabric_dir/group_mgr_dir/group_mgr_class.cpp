@@ -63,21 +63,19 @@ GroupClass *GroupMgrClass::searchGroup (char *data_val)
 {
     int group_id;
     int group_index;
-    if (1) {
-        this->logit("searchLink", data_val);
-    }
+
+    this->debug(true, "searchGroup", data_val);
 
     phwangDecodeIdIndex(data_val,
                 &group_id,
                 GROUP_MGR_PROTOCOL_GROUP_ID_SIZE,
                 &group_index,
                 GROUP_MGR_PROTOCOL_GROUP_INDEX_SIZE);
-    //data_val += LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE;
 
     if (1) {
         char s[LOGIT_BUF_SIZE];
         sprintf(s, "group_id=%d group_index=%d", group_id, group_index);
-        this->logit("searchLink", s);
+        this->logit("searchGroup", s);
     }
 
     return this->getGroupByIdIndex(group_id, group_index);

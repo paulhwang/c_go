@@ -23,7 +23,6 @@ class DFabricClass {
     void startNetServer(void);
     void processMallocLink(char *data_val);
     void processMallocSession(char *data_val);
-    void processMallocSessionResponse(char *data_val, SessionClass *session_object_val);
     void processGetSessionData(char *data_val);
     void processGetSessionDataResponse(char *data_val, SessionClass *session_object_val);
     void processPutSessionData(char *data_val);

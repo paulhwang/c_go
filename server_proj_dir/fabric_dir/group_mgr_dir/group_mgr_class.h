@@ -26,6 +26,8 @@ class GroupMgrClass {
     void abend(char const* str0_val, char const* str1_val);
 
 protected:
+    friend class UFabricClass;
+
     GroupClass *searchGroup(char *data_val);
 
 public:

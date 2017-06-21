@@ -22,6 +22,7 @@ class SessionClass {
     void abend(char const* str0_val, char const* str1_val);
 
 protected:
+    friend class UFabricClass;
     friend class DFabricClass;
     friend class SessionMgrClass;
 
