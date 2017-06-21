@@ -60,6 +60,7 @@ void DThemeClass::processGetSessionData (char *data_val)
 void DThemeClass::processPutSessionData (char *data_val)
 {
     char *output_data = (char *) malloc(ROOM_MGR_DATA_BUFFER_SIZE + 4);
+    char *output = output_data;
 
     this->debug(true, "processPutSessionData===", data_val);
 
@@ -72,8 +73,13 @@ void DThemeClass::processPutSessionData (char *data_val)
         return;
     }
 
-    output_data[0] = THEME_ENGINE_PROTOCOL_RESPOND_IS_MALLOC_BASE;
-    //this->theThemeObject->uThemeObject()->transmitFunction(output_data);
+    *output++ = THEME_ENGINE_PROTOCOL_RESPOND_IS_MALLOC_BASE;
+    memcpy(output, room->theRoomIdIndex, room->theRoomIdIndexSize);
+    output += room->theRoomIdIndexSize;
+    *output = 0;
+
+    this->debug(true, "processPutSessionData", output_data);
+    this->theThemeObject->uThemeObject()->transmitFunction(output_data);
     return;
 
     output_data[0] = FABRIC_THEME_PROTOCOL_RESPOND_IS_PUT_SESSION_DATA;

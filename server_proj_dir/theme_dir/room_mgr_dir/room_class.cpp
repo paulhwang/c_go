@@ -14,6 +14,10 @@ RoomClass::RoomClass (RoomMgrClass *room_mgr_object_val, int room_id_val, int ro
     this->theRoomMgrObject = room_mgr_object_val;
     this->theRoomId = room_id_val;
     this->theRoomIndex = room_index_val;
+    this->theRoomIdSize = ROOM_MGR_PROTOCOL_ROOM_ID_SIZE;
+    this->theRoomIndexSize = ROOM_MGR_PROTOCOL_ROOM_INDEX_SIZE;
+    this->theRoomIdIndexSize = ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE;
+    phwangEncodeIdIndex(this->theRoomIdIndex, this->theRoomId, this->theRoomIdSize, this->theRoomIndex, this->theRoomIndexSize);
     memcpy(this->theGroupIdIndex, group_id_index_val, GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE);
     this->theGroupIdIndex[GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE] = 0;
 

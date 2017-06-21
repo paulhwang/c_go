@@ -5,6 +5,7 @@
 */
 
 #pragma once
+#include "../../protocol_dir/room_mgr_protocol.h"
 #include "../../protocol_dir/group_mgr_protocol.h"
 
 class RoomMgrClass;
@@ -16,6 +17,11 @@ class RoomClass {
     RoomMgrClass *theRoomMgrObject;
     int theRoomId;
     int theRoomIndex;
+    int theRoomIdSize;
+    int theRoomIndexSize;
+    int theRoomIdIndexSize;
+    char theRoomIdIndex[ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE + 4];
+
     char theGroupIdIndex[GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE + 4];
     SessionClass *theSessionTableArray[GROUP_SESSION_ARRAY_SIZE];
 
@@ -29,6 +35,7 @@ protected:
 
     int roomId(void) {return this->theRoomId;}
     int roomIndex(void) {return this->theRoomIndex;}
+    char *roomIdIndex(void) {return this->theRoomIdIndex;}
     char *groupIdIndex(void) {return this->theGroupIdIndex;}
 
 public:

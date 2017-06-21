@@ -34,11 +34,11 @@ void UFabricClass::processMallocRoomResponse(char *data_val)
     GroupClass *group = this->theFabricObject->groupMgrObject()->searchGroup(data_val);
     if (group) {
         group->setRoomIdIndexString(data_val + GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE);
-    	SessionClass *session = group->theSessionTableArray[0];
-    	output_data = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
-    	output_data[0] = WEB_FABRIC_PROTOCOL_RESPOND_IS_MALLOC_SESSION;
-    	phwangEncodeIdIndex(output_data + 1, session->sessionId(), SESSION_MGR_PROTOCOL_SESSION_ID_SIZE, session->sessionIndex(), SESSION_MGR_PROTOCOL_SESSION_INDEX_SIZE);
-    	this->theFabricObject->dFabricObject()->transmitFunction(output_data);
+        SessionClass *session = group->theSessionTableArray[0];
+        output_data = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
+        output_data[0] = WEB_FABRIC_PROTOCOL_RESPOND_IS_MALLOC_SESSION;
+        phwangEncodeIdIndex(output_data + 1, session->sessionId(), SESSION_MGR_PROTOCOL_SESSION_ID_SIZE, session->sessionIndex(), SESSION_MGR_PROTOCOL_SESSION_INDEX_SIZE);
+        this->theFabricObject->dFabricObject()->transmitFunction(output_data);
     }
 }
 
