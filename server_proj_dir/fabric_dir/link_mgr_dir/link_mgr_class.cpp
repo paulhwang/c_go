@@ -17,9 +17,7 @@ LinkMgrClass::LinkMgrClass (FabricClass *fabric_object_val)
     this->theFabricObject = fabric_object_val;
     this->theGlobalLinkId = 100;
 
-    if (1) {
-        this->logit("LinkMgrClass", "init");
-    }
+    this->debug(true, "LinkMgrClass", "init");
 }
 
 LinkMgrClass::~LinkMgrClass (void)

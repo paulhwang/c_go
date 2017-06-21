@@ -5,7 +5,7 @@
 */
 
 #pragma once
-//#include "../../include_dir/protocol_dir/link_mgr_protocol.h"
+#include "../../protocol_dir/group_mgr_protocol.h"
 class GroupClass;
 class FabricClass;
 
@@ -24,6 +24,9 @@ class GroupMgrClass {
     void debug(int on_off_val, char const* str0_val, char const* str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
+
+protected:
+    GroupClass *searchGroup(char *data_val);
 
 public:
     GroupMgrClass(FabricClass *fabric_object_val);

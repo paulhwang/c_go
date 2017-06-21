@@ -59,6 +59,56 @@ GroupClass *GroupMgrClass::mallocGroup (void)
     }
 }
 
+GroupClass *GroupMgrClass::searchGroup (char *data_val)
+{
+    int group_id;
+    int group_index;
+    if (1) {
+        this->logit("searchLink", data_val);
+    }
+
+    phwangDecodeIdIndex(data_val,
+                &group_id,
+                GROUP_MGR_PROTOCOL_GROUP_ID_SIZE,
+                &group_index,
+                GROUP_MGR_PROTOCOL_GROUP_INDEX_SIZE);
+    //data_val += LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE;
+
+    if (1) {
+        char s[LOGIT_BUF_SIZE];
+        sprintf(s, "group_id=%d group_index=%d", group_id, group_index);
+        this->logit("searchLink", s);
+    }
+
+    return this->getGroupByIdIndex(group_id, group_index);
+}
+
+GroupClass *GroupMgrClass::getGroupByIdIndex (int group_id_val, int group_index_val)
+{
+    if (group_id_val > GROUP_MGR_MAX_GLOBAL_GROUP_ID) {
+        this->abend("getSessionByIdIndex", "group_id_val too big");
+        return 0;
+    }
+
+    if (group_index_val >= GROUP_MGR_GROUP_ARRAY_SIZE) {
+        this->abend("getSessionByIdIndex", "group_index_val too big");
+        return 0;
+    }
+
+    GroupClass *group = this->theGroupTableArray[group_index_val];
+    if (!group) {
+        this->abend("getLinkByIdIndex", "null group");
+        return 0;
+    }
+
+    if (group->groupId() != group_id_val){
+        this->abend("getLinkByIdIndex", "group id does not match");
+        return 0;
+    }
+
+    return group;
+}
+
 void GroupMgrClass::groupMgrLogit (char const* str0_val, char const* str1_val) {
     phwangLogit(str0_val, str1_val);
 }

@@ -24,6 +24,7 @@ class GroupClass {
 
 protected:
     friend class DFabricClass;
+    friend class GroupMgrClass;
 
     int groupId(void) {return this->theGroupId;}
     int groupIndex(void) {return this->theGroupIndex;}
