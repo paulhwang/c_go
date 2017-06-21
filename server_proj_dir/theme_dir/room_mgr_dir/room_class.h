@@ -12,19 +12,15 @@ class RoomMgrClass;
 class SessionClass;
 
 class RoomClass {
-#define GROUP_SESSION_ARRAY_SIZE 32
+#define ROOM_GROUP_ARRAY_SIZE 32
 
     RoomMgrClass *theRoomMgrObject;
     int theRoomId;
     int theRoomIndex;
-    int theRoomIdSize;
-    int theRoomIndexSize;
-    int theRoomIdIndexSize;
-    int theGroupIdIndexSize;
     char theRoomIdIndex[ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE + 4];
 
     char theGroupIdIndex[GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE + 4];
-    SessionClass *theSessionTableArray[GROUP_SESSION_ARRAY_SIZE];
+    char *theGroupTableArray[ROOM_GROUP_ARRAY_SIZE];
 
     void debug(int on_off_val, char const* str0_val, char const* str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
     void logit(char const* str0_val, char const* str1_val);
@@ -44,6 +40,6 @@ public:
     ~RoomClass(void);
     char const* objectName(void) {return "RoomClass";}
 
-    void insertSession(SessionClass *session_object_val);
-    void removeSession(SessionClass *session_object_val);
+    void insertGroup(char *group_id_index_val);
+    void removeGroup(char *group_id_index_val);
 };

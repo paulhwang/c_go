@@ -14,13 +14,9 @@ RoomClass::RoomClass (RoomMgrClass *room_mgr_object_val, int room_id_val, int ro
     this->theRoomMgrObject = room_mgr_object_val;
     this->theRoomId = room_id_val;
     this->theRoomIndex = room_index_val;
-    this->theRoomIdSize = ROOM_MGR_PROTOCOL_ROOM_ID_SIZE;
-    this->theRoomIndexSize = ROOM_MGR_PROTOCOL_ROOM_INDEX_SIZE;
-    this->theRoomIdIndexSize = ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE;
-    this->theGroupIdIndexSize = GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE;
-    phwangEncodeIdIndex(this->theRoomIdIndex, this->theRoomId, this->theRoomIdSize, this->theRoomIndex, this->theRoomIndexSize);
-    memcpy(this->theGroupIdIndex, group_id_index_val, this->theGroupIdIndexSize);
-    this->theGroupIdIndex[this->theGroupIdIndexSize] = 0;
+    phwangEncodeIdIndex(this->theRoomIdIndex, this->theRoomId, ROOM_MGR_PROTOCOL_ROOM_ID_SIZE, this->theRoomIndex, ROOM_MGR_PROTOCOL_ROOM_INDEX_SIZE);
+    memcpy(this->theGroupIdIndex, group_id_index_val, GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE);
+    this->theGroupIdIndex[GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE] = 0;
 
     this->debug(true, "RoomClass", "init");
 }
@@ -29,30 +25,33 @@ RoomClass::~RoomClass (void)
 {
 }
 
-void RoomClass::insertSession (SessionClass *session_object_val)
+void RoomClass::insertGroup (char *group_id_index_val)
 {
     int i = 0;
-    while (i < GROUP_SESSION_ARRAY_SIZE) {
-        if (!this->theSessionTableArray[i]) {
-            this->theSessionTableArray[i] = session_object_val;
+    while (i < ROOM_GROUP_ARRAY_SIZE) {
+        if (!this->theGroupTableArray[i]) {
+            this->theGroupTableArray[i] = (char *) malloc(GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE + 4);
+            memcpy(this->theGroupTableArray[i], group_id_index_val, GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE);
+            this->theGroupTableArray[i][GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE] = 0;
             return;
         }
         i++;
     }
-    this->abend("insertSession", "table is full");
+    this->abend("insertGroup", "table is full");
 }
 
-void RoomClass::removeSession (SessionClass *session_object_val)
+void RoomClass::removeGroup (char *group_id_index_val)
 {
     int i = 0;
-    while (i < GROUP_SESSION_ARRAY_SIZE) {
-        if (this->theSessionTableArray[i] == session_object_val) {
-            this->theSessionTableArray[i] = 0;
+    while (i < ROOM_GROUP_ARRAY_SIZE) {
+        if (!memcmp(this->theGroupTableArray[i], group_id_index_val, GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE)) {
+            free(this->theGroupTableArray[i]);
+            this->theGroupTableArray[i] = 0;
             return;
         }
         i++;
     }
-    this->abend("insertSession", "not found");
+    this->abend("removeGroup", "not found");
 }
 
 void RoomClass::logit (char const* str0_val, char const* str1_val)

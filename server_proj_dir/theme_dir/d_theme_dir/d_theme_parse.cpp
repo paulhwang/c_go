@@ -50,18 +50,18 @@ void DThemeClass::processMallocRoom (char *data_val)
 
     uplink_data = data_ptr = (char *) malloc(ROOM_MGR_DATA_BUFFER_SIZE + 4);
     *data_ptr++ = THEME_ENGINE_PROTOCOL_COMMAND_IS_MALLOC_BASE;
-    memcpy(data_ptr, room->theRoomIdIndex, room->theRoomIdIndexSize);
-    data_ptr += room->theRoomIdIndexSize;
+    memcpy(data_ptr, room->theRoomIdIndex, ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);
+    data_ptr += ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE;
     *data_ptr = 0;
     this->debug(true, "processPutSessionData", uplink_data);
     this->theThemeObject->uThemeObject()->transmitFunction(uplink_data);
  
     downlink_data = data_ptr = (char *) malloc(ROOM_MGR_DATA_BUFFER_SIZE + 4);
     *data_ptr++ = FABRIC_THEME_PROTOCOL_RESPOND_IS_MALLOC_ROOM;
-    memcpy(data_ptr, room->groupIdIndex(), room->theGroupIdIndexSize);
-    data_ptr += room->theGroupIdIndexSize;
-    memcpy(data_ptr, room->roomIdIndex(), room->theRoomIdIndexSize);
-    data_ptr += room->theRoomIdIndexSize;
+    memcpy(data_ptr, room->groupIdIndex(), GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE);
+    data_ptr += GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE;
+    memcpy(data_ptr, room->roomIdIndex(), ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);
+    data_ptr += ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE;
     *data_ptr = 0;
     this->transmitFunction(downlink_data);
 }
@@ -92,16 +92,16 @@ void DThemeClass::processPutSessionData (char *data_val)
 
     uplink_data = data_ptr = (char *) malloc(ROOM_MGR_DATA_BUFFER_SIZE + 4);
     *data_ptr++ = THEME_ENGINE_PROTOCOL_COMMAND_IS_PUT_SESSION_DATA;
-    memcpy(data_ptr, room->theRoomIdIndex, room->theRoomIdIndexSize);
-    data_ptr += room->theRoomIdIndexSize;
+    memcpy(data_ptr, room->theRoomIdIndex, ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);
+    data_ptr += ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE;
     *data_ptr = 0;
     this->debug(true, "processPutSessionData", uplink_data);
     this->theThemeObject->uThemeObject()->transmitFunction(uplink_data);
 
     downlink_data = data_ptr = (char *) malloc(ROOM_MGR_DATA_BUFFER_SIZE + 4);
     *data_ptr++ = FABRIC_THEME_PROTOCOL_COMMAND_IS_PUT_SESSION_DATA;
-    memcpy(data_ptr, room->groupIdIndex(), room->theGroupIdIndexSize);
-    data_ptr += room->theGroupIdIndexSize;
+    memcpy(data_ptr, room->groupIdIndex(), GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE);
+    data_ptr += GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE;
     *data_ptr = 0;
     this->transmitFunction(downlink_data);
 }
