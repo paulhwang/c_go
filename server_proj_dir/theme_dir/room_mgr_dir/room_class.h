@@ -30,7 +30,7 @@ protected:
     int roomIndex(void) {return this->theRoomIndex;}
 
 public:
-    RoomClass(RoomMgrClass *room_mgr_object_val, int room_id_val, int room_index_val);
+    RoomClass(RoomMgrClass *room_mgr_object_val, int room_id_val, int room_index_val, char *group_id_index_val);
     ~RoomClass(void);
     char const* objectName(void) {return "RoomClass";}
 

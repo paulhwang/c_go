@@ -17,8 +17,8 @@ class RoomMgrClass {
     int theGlobalGroupId;
     RoomClass *theGroupTableArray[GROUP_MGR_GROUP_ARRAY_SIZE + 4];
 
-    int allocGroupId(void);
-    int allocGroupIndex(void);
+    int allocRoomId(void);
+    int allocRoomIndex(void);
     RoomClass *getGroupByIdIndex(int group_id_val, int group_index_val);
 
     void debug(int on_off_val, char const* str0_val, char const* str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
@@ -30,7 +30,7 @@ public:
     ~RoomMgrClass(void);
     char const* objectName(void) {return "RoomMgrClass";}
 
-    RoomClass *mallocRoom(void *group_id_index_val);
+    RoomClass *mallocRoom(char *group_id_index_val);
     void freeRoom(RoomClass *group_object_val);
 
     void groupMgrLogit(char const* str0_val, char const* str1_val);

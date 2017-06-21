@@ -21,7 +21,7 @@ RoomMgrClass::~RoomMgrClass (void)
 {
 }
 
-int RoomMgrClass::allocGroupId (void)
+int RoomMgrClass::allocRoomId (void)
 {
     if (this->theGlobalGroupId >= GROUP_MGR_MAX_GLOBAL_GROUP_ID) {
         this->theGlobalGroupId = 0;
@@ -30,7 +30,7 @@ int RoomMgrClass::allocGroupId (void)
     return this->theGlobalGroupId;
 }
 
-int RoomMgrClass::allocGroupIndex (void)
+int RoomMgrClass::allocRoomIndex (void)
 {
     int index = 0;
     while (index < GROUP_MGR_GROUP_ARRAY_SIZE) {
@@ -42,17 +42,17 @@ int RoomMgrClass::allocGroupIndex (void)
     return -1;
 }
 
-RoomClass *RoomMgrClass::mallocRoom (void *group_id_index_val)
+RoomClass *RoomMgrClass::mallocRoom (char *group_id_index_val)
 {
     if (1) {
         this->logit("mallocGroup", "");
     }
-    int group_id = this->allocGroupId();
-    int group_index = this->allocGroupIndex();
-    if (group_index != -1) {
-        RoomClass *group = new RoomClass(this, group_id, group_index);
-        this->theGroupTableArray[group_index] = group;
-        return group;
+    int room_id = this->allocRoomId();
+    int room_index = this->allocRoomIndex();
+    if (room_index != -1) {
+        RoomClass *room = new RoomClass(this, room_id, room_index, group_id_index_val);
+        this->theGroupTableArray[room_index] = room;
+        return room;
     }
     else {
         /* TBD */

@@ -8,12 +8,14 @@
 #include "room_class.h"
 #include "room_mgr_class.h"
 
-RoomClass::RoomClass (RoomMgrClass *room_mgr_object_val, int room_id_val, int room_index_val)
+RoomClass::RoomClass (RoomMgrClass *room_mgr_object_val, int room_id_val, int room_index_val, char *group_id_index_val)
 {
     memset(this, 0, sizeof(RoomClass));
     this->theRoomMgrObject = room_mgr_object_val;
     this->theRoomId = room_id_val;
     this->theRoomIndex = room_index_val;
+    memcpy(this->groupIdIndex, group_id_index_val, GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE);
+    this->groupIdIndex[GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE] = 0;
 
     this->debug(true, "RoomClass", "init");
 }
