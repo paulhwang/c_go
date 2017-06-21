@@ -27,17 +27,17 @@ void DThemeClass::exportedparseFunction (char *data_val)
 
 void DThemeClass::processMallocRoom (char *data_val)
 {
-    char *data_buf = (char *) malloc(ROOM_MGR_DATA_BUFFER_SIZE + 4);
-    data_buf[0] = FABRIC_THEME_PROTOCOL_RESPOND_IS_MALLOC_ROOM;
+    char *output_data = (char *) malloc(ROOM_MGR_DATA_BUFFER_SIZE + 4);
+    output_data[0] = FABRIC_THEME_PROTOCOL_RESPOND_IS_MALLOC_ROOM;
 
     RoomClass *room = this->theThemeObject->roomMgrObject()->mallocRoom(data_val);
     if (!room) {
         this->abend("processMallocRoom", "null room");
-        strcpy(data_buf + 1, "null room");
-        this->transmitFunction(data_buf);
+        strcpy(output_data + 1, "null room");
+        this->transmitFunction(output_data);
         return;
     }
 
-    phwangEncodeIdIndex(data_buf + 1, room->roomId(), ROOM_MGR_PROTOCOL_ROOM_ID_SIZE, room->roomIndex(), ROOM_MGR_PROTOCOL_ROOM_INDEX_SIZE);
-    this->transmitFunction(data_buf);
+    phwangEncodeIdIndex(output_data + 1, room->roomId(), ROOM_MGR_PROTOCOL_ROOM_ID_SIZE, room->roomIndex(), ROOM_MGR_PROTOCOL_ROOM_INDEX_SIZE);
+    this->transmitFunction(output_data);
 }

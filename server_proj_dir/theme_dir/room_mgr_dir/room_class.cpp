@@ -8,16 +8,14 @@
 #include "room_class.h"
 #include "room_mgr_class.h"
 
-RoomClass::RoomClass (RoomMgrClass *group_mgr_object_val, int group_id_val, int group_index_val)
+RoomClass::RoomClass (RoomMgrClass *room_mgr_object_val, int room_id_val, int room_index_val)
 {
     memset(this, 0, sizeof(RoomClass));
-    this->theGroupMgrObject = group_mgr_object_val;
-    this->theRoomId = group_id_val;
-    this->theRoomIndex = group_index_val;
+    this->theRoomMgrObject = room_mgr_object_val;
+    this->theRoomId = room_id_val;
+    this->theRoomIndex = room_index_val;
 
-    if (1) {
-        this->logit("RoomClass", "init");
-    }
+    this->debug(true, "RoomClass", "init");
 }
 
 RoomClass::~RoomClass (void)
@@ -54,12 +52,12 @@ void RoomClass::logit (char const* str0_val, char const* str1_val)
 {
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", this->objectName(), str0_val);
-    this->theGroupMgrObject->groupMgrLogit(s, str1_val);
+    this->theRoomMgrObject->groupMgrLogit(s, str1_val);
 }
 
 void RoomClass::abend (char const* str0_val, char const* str1_val)
 {
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", this->objectName(), str0_val);
-    this->theGroupMgrObject->groupMgrAbend(s, str1_val);
+    this->theRoomMgrObject->groupMgrAbend(s, str1_val);
 }

@@ -12,7 +12,7 @@ class SessionClass;
 class RoomClass {
 #define GROUP_SESSION_ARRAY_SIZE 32
 
-    RoomMgrClass *theGroupMgrObject;
+    RoomMgrClass *theRoomMgrObject;
     int theRoomId;
     int theRoomIndex;
     SessionClass *theSessionTableArray[GROUP_SESSION_ARRAY_SIZE];
@@ -28,7 +28,7 @@ protected:
     int roomIndex(void) {return this->theRoomIndex;}
 
 public:
-    RoomClass(RoomMgrClass *group_mgr_object_val, int group_id_val, int group_index_val);
+    RoomClass(RoomMgrClass *room_mgr_object_val, int room_id_val, int room_index_val);
     ~RoomClass(void);
     char const* objectName(void) {return "RoomClass";}
 
