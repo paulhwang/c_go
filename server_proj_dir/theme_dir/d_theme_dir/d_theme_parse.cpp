@@ -6,6 +6,7 @@
 
 #include "../../../phwang_dir/phwang.h"
 #include "../../protocol_dir/fabric_theme_protocol.h"
+#include "../../protocol_dir/theme_engine_protocol.h"
 #include "../../protocol_dir/room_mgr_protocol.h"
 #include "d_theme_class.h"
 #include "../theme_class.h"
@@ -71,7 +72,7 @@ void DThemeClass::processPutSessionData (char *data_val)
         return;
     }
 
-    //output_data[0] = THEME_ENGINE_PROTOCOL_RESPOND_IS_MALLOC_ROOM;
+    output_data[0] = THEME_ENGINE_PROTOCOL_RESPOND_IS_MALLOC_BASE;
     //this->theThemeObject->uThemeObject()->transmitFunction(output_data);
     return;
 
