@@ -11,6 +11,7 @@
 
 class RoomMgrClass;
 class SessionClass;
+class IdIndexListClass;
 
 class RoomClass {
 #define ROOM_GROUP_ARRAY_SIZE 32
@@ -22,6 +23,7 @@ class RoomClass {
 
     char *theGroupTableArray[ROOM_GROUP_ARRAY_SIZE];
     int maxGroupTableArrayIndex;
+    IdIndexListClass *theGroupIdIndexList;
 
     char theBaseIdIndex[BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE + 4];
 

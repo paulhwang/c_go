@@ -1,15 +1,15 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: list_mgr_class.cpp
+  File name: id_index_list_class.cpp
 */
 
 #include "../../phwang_dir/phwang.h"
-#include "list_mgr_class.h"
+#include "id_index_list_class.h"
 
-ListMgrClass::ListMgrClass (void *caller_object_val, int id_size_val, int index_size_val)
+IdIndexListClass::IdIndexListClass (void *caller_object_val, int id_size_val, int index_size_val)
 {
-    memset(this, 0, sizeof(ListMgrClass));
+    memset(this, 0, sizeof(IdIndexListClass));
     this->theCallerObject = caller_object_val;
     this->theIdSize = id_size_val;
     this->theIndexSize = index_size_val;
@@ -18,14 +18,14 @@ ListMgrClass::ListMgrClass (void *caller_object_val, int id_size_val, int index_
     this->theGlobalEntryId = 0;
     this->theMaxIdIndexTableIndex = 0;
 
-    this->debug(true, "ListMgrClass", "init");
+    this->debug(true, "IdIndexListClass", "init");
 }
 
-ListMgrClass::~ListMgrClass (void)
+IdIndexListClass::~IdIndexListClass (void)
 {
 }
 
-void ListMgrClass::insertIdIndex (char *id_index_val)
+void IdIndexListClass::insertIdIndex (char *id_index_val)
 {
     char *buf = (char *) malloc(this->theIdIndexSize + 4);
     memcpy(buf, id_index_val, this->theIdIndexSize);
@@ -50,7 +50,7 @@ void ListMgrClass::insertIdIndex (char *id_index_val)
     this->abend("insertIdIndex", "theIdIndexTableArray is full");
 }
 
-void ListMgrClass::removeIdIndex (char *id_index_val)
+void IdIndexListClass::removeIdIndex (char *id_index_val)
 {
     int i = 0;
     while (i < this->theMaxIdIndexTableIndex) {
@@ -64,14 +64,14 @@ void ListMgrClass::removeIdIndex (char *id_index_val)
     this->abend("removeIdIndex", "not found");
 }
 
-void ListMgrClass::logit (char const* str0_val, char const* str1_val)
+void IdIndexListClass::logit (char const* str0_val, char const* str1_val)
 {
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", this->objectName(), str0_val);
     phwangLogit(s, str1_val);
 }
 
-void ListMgrClass::abend (char const* str0_val, char const* str1_val)
+void IdIndexListClass::abend (char const* str0_val, char const* str1_val)
 {
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", this->objectName(), str0_val);

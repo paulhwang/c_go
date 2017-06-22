@@ -5,6 +5,7 @@
 */
 
 #include "../../../phwang_dir/phwang.h"
+#include "../../../phwang_dir/list_mgr_dir/list_mgr_class.h"
 #include "group_class.h"
 #include "group_mgr_class.h"
 
@@ -15,6 +16,8 @@ GroupClass::GroupClass (GroupMgrClass *group_mgr_object_val, int group_id_val, i
     this->theGroupId = group_id_val;
     this->theGroupIndex = group_index_val;
     phwangEncodeIdIndex(this->theGroupIdIndex, this->theGroupId, GROUP_MGR_PROTOCOL_GROUP_ID_SIZE, this->theGroupIndex, GROUP_MGR_PROTOCOL_GROUP_INDEX_SIZE);
+
+    this->theSessionListMgr = new ListMgrClass(this, SESSION_MGR_PROTOCOL_SESSION_ID_SIZE, SESSION_MGR_PROTOCOL_SESSION_INDEX_SIZE);
 
     this->debug(true, "GroupClass", this->theGroupIdIndex);
 }

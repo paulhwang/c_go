@@ -7,8 +7,11 @@
 #pragma once
 #include "../../protocol_dir/group_mgr_protocol.h"
 #include "../../protocol_dir/room_mgr_protocol.h"
+#include "../../protocol_dir/session_mgr_protocol.h"
+
 class GroupMgrClass;
 class SessionClass;
+class ListMgrClass;
 
 class GroupClass {
 #define GROUP_SESSION_ARRAY_SIZE 32
@@ -17,6 +20,7 @@ class GroupClass {
     int theGroupId;
     int theGroupIndex;
     char theGroupIdIndex[GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE + 4];
+    ListMgrClass *theSessionListMgr;
 
     char theRoomIdIndexString[ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE + 4];
 

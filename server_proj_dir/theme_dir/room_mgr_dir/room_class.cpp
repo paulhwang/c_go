@@ -5,6 +5,7 @@
 */
 
 #include "../../../phwang_dir/phwang.h"
+#include "../../../phwang_dir/id_index_list_dir/id_index_list_class.h"
 #include "room_class.h"
 #include "room_mgr_class.h"
 
@@ -18,6 +19,7 @@ RoomClass::RoomClass (RoomMgrClass *room_mgr_object_val, int room_id_val, int ro
 
     this->maxGroupTableArrayIndex = 0;
     this->insertGroup(group_id_index_val);
+    this->theGroupIdIndexList = new IdIndexListClass(this, GROUP_MGR_PROTOCOL_GROUP_ID_SIZE, GROUP_MGR_PROTOCOL_GROUP_INDEX_SIZE);
 
     this->debug(true, "RoomClass", this->theRoomIdIndex);
 }
