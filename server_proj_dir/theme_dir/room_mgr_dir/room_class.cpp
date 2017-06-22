@@ -14,6 +14,7 @@ RoomClass::RoomClass (RoomMgrClass *room_mgr_object_val, int room_id_val, int ro
     this->theRoomMgrObject = room_mgr_object_val;
     this->theRoomId = room_id_val;
     this->theRoomIndex = room_index_val;
+    this->maxGroupTableArrayIndex = 0;
     phwangEncodeIdIndex(this->theRoomIdIndex, this->theRoomId, ROOM_MGR_PROTOCOL_ROOM_ID_SIZE, this->theRoomIndex, ROOM_MGR_PROTOCOL_ROOM_INDEX_SIZE);
     memcpy(this->theGroupIdIndex, group_id_index_val, GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE);
     this->theGroupIdIndex[GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE] = 0;
@@ -27,16 +28,25 @@ RoomClass::~RoomClass (void)
 
 void RoomClass::insertGroup (char *group_id_index_val)
 {
+    char *buf = (char *) malloc(GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE + 4);
+    memcpy(buf, group_id_index_val, GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE);
+    buf[GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE] = 0;
+
     int i = 0;
-    while (i < ROOM_GROUP_ARRAY_SIZE) {
+    while (i < this->maxGroupTableArrayIndex) {
         if (!this->theGroupTableArray[i]) {
-            this->theGroupTableArray[i] = (char *) malloc(GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE + 4);
-            memcpy(this->theGroupTableArray[i], group_id_index_val, GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE);
-            this->theGroupTableArray[i][GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE] = 0;
+            this->theGroupTableArray[i] = buf;
             return;
         }
         i++;
     }
+    if (this->maxGroupTableArrayIndex < ROOM_GROUP_ARRAY_SIZE) {
+        this->theGroupTableArray[this->maxGroupTableArrayIndex] = buf;
+        this->maxGroupTableArrayIndex++;
+        return;
+    }
+
+    free(buf);
     this->abend("insertGroup", "table is full");
 }
 

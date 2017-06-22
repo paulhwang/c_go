@@ -28,7 +28,7 @@ void DThemeClass::exportedparseFunction (char *data_val)
         this->processPutSessionData(++data_val);
     }
     else {
-    	this->theThemeObject->uThemeObject()->transmitFunction(data_val);
+        this->abend("exportedparseFunction", data_val);
     }
 }
 

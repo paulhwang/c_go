@@ -5,7 +5,10 @@
 */
 
 #include "../../../phwang_dir/phwang.h"
+#include "../../protocol_dir/net_port_protocol.h"
 #include "u_theme_class.h"
+#include "../theme_class.h"
+#include "../d_theme_dir/d_theme_class.h"
 
 UThemeClass::UThemeClass (ThemeClass *theme_object_val)
 {
@@ -13,13 +16,33 @@ UThemeClass::UThemeClass (ThemeClass *theme_object_val)
     this->theThemeObject = theme_object_val;
     this->startNetServer();
 
-    if (1) {
-        this->logit("UThemeClass", "init");
-    }
+    this->debug(true, "UThemeClass", "init");
 }
 
 UThemeClass::~UThemeClass (void)
 {
+}
+
+void uThemeTpServerAcceptFunction (void *game_server_object_val, void *tp_transfer_object_val) {
+    phwangLogit("Golbal::uThemeTpServerAcceptFunction", "");
+    ((UThemeClass *) game_server_object_val)->exportedNetAcceptFunction(tp_transfer_object_val);
+}
+
+void UThemeClass::exportedNetAcceptFunction (void *tp_transfer_object_val)
+{
+    this->theTpTransferObject = tp_transfer_object_val;
+    sleep(1);
+    baseMgrTest();
+}
+
+void uThemeTpReceiveDataFunction (void *game_server_object_val, void *data_val) {
+    phwangLogit("Golbal::uThemeTpReceiveDataFunction", (char *) data_val);
+    ((UThemeClass *) game_server_object_val)->exportedparseFunction((char *) data_val);
+}
+
+void UThemeClass::startNetServer (void)
+{
+    this->theTpServerObject = phwangMallocTpServer(this, BASE_MGR_PROTOCOL_TRANSPORT_PORT_NUMBER, uThemeTpServerAcceptFunction, this, uThemeTpReceiveDataFunction, this, this->objectName());
 }
 
 void UThemeClass::logit (char const* str0_val, char const* str1_val)
