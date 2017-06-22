@@ -6,6 +6,7 @@
 
 #include "../../phwang_dir/phwang.h"
 #include "../protocol_dir/theme_engine_protocol.h"
+#include "../protocol_dir/room_mgr_protocol.h"
 #include "base_mgr_class.h"
 
 void BaseMgrClass::parseReceiveData (char *data_val)
@@ -48,8 +49,17 @@ void BaseMgrClass::parseReceiveData (char *data_val)
 
 void BaseMgrClass::processMallocBase(char *data_val)
 {
+    char *downlink_data;
+    char *data_ptr;
+
     this->debug(true, "processMallocBaseResponse", data_val);
 
+    downlink_data = data_ptr = (char *) malloc(BASE_MGR_DATA_BUFFER_SIZE + 4);
+    *data_ptr++ = THEME_ENGINE_PROTOCOL_RESPOND_IS_MALLOC_BASE;
+    memcpy(data_ptr, data_val, ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);
+    data_ptr += ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE;
+    *data_ptr = 0;
+    this->transmitFunction(downlink_data);
 }
 
 void BaseMgrClass::processGetSessionData(char *data_val)
