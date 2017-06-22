@@ -95,10 +95,17 @@ void DThemeClass::processPutSessionData (char *data_val)
     this->debug(true, "processPutSessionData", uplink_data);
     this->theThemeObject->uThemeObject()->transmitFunction(uplink_data);
 
-    downlink_data = data_ptr = (char *) malloc(ROOM_MGR_DATA_BUFFER_SIZE + 4);
-    *data_ptr++ = FABRIC_THEME_PROTOCOL_COMMAND_IS_PUT_SESSION_DATA;
-    memcpy(data_ptr, room->groupIdIndex(), GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE);
-    data_ptr += GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE;
-    *data_ptr = 0;
-    this->transmitFunction(downlink_data);
+    int i = 0;
+    while (i < room->maxGroupTableArrayIndex) {
+        if (room->theGroupTableArray[i]) {
+            downlink_data = data_ptr = (char *) malloc(ROOM_MGR_DATA_BUFFER_SIZE + 4);
+            *data_ptr++ = FABRIC_THEME_PROTOCOL_COMMAND_IS_PUT_SESSION_DATA;
+            memcpy(data_ptr, room->theGroupTableArray[i], GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE);
+            data_ptr += GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE;
+            strcpy(data_ptr, data_val + 1 + ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);
+            //*data_ptr = 0;
+            this->transmitFunction(downlink_data);
+        }
+        i++;
+    }
 }

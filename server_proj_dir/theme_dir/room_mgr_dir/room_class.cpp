@@ -17,14 +17,19 @@ RoomClass::RoomClass (RoomMgrClass *room_mgr_object_val, int room_id_val, int ro
     phwangEncodeIdIndex(this->theRoomIdIndex, this->theRoomId, ROOM_MGR_PROTOCOL_ROOM_ID_SIZE, this->theRoomIndex, ROOM_MGR_PROTOCOL_ROOM_INDEX_SIZE);
 
     this->maxGroupTableArrayIndex = 0;
-    memcpy(this->theGroupIdIndex, group_id_index_val, GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE);
-    this->theGroupIdIndex[GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE] = 0;
+    this->insertGroup(group_id_index_val);
 
     this->debug(true, "RoomClass", this->theRoomIdIndex);
 }
 
 RoomClass::~RoomClass (void)
 {
+}
+
+void RoomClass::insertBase (char *base_id_index_val)
+{
+    memcpy(this->theBaseIdIndex, base_id_index_val, BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE);
+    this->theBaseIdIndex[BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE] = 0;
 }
 
 void RoomClass::insertGroup (char *group_id_index_val)
