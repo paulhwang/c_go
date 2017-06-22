@@ -15,6 +15,8 @@ LinkClass::LinkClass (LinkMgrClass *link_mgr_object_val, int link_id_val, int li
     this->theLinkMgrObject = link_mgr_object_val;
     this->theLinkId = link_id_val;
     this->theLinkIndex = link_index_val;
+    phwangEncodeIdIndex(this->theLinkIdIndex, this->theLinkId, LINK_MGR_PROTOCOL_LINK_ID_SIZE, this->theLinkIndex, LINK_MGR_PROTOCOL_LINK_INDEX_SIZE);
+
     if (strlen(link_name_val) <= LINK_CLASS_LINK_NAME_BUF_SIZE) {
         strcpy(this->theLinkName, link_name_val);
     }
@@ -24,9 +26,7 @@ LinkClass::LinkClass (LinkMgrClass *link_mgr_object_val, int link_id_val, int li
     }
     this->theSessionMgrObject = new SessionMgrClass(this);
 
-    if (1) {
-        this->logit("LinkClass", "init");
-    }
+    this->debug(true, "LinkClass", this->theLinkIdIndex);
 }
 
 LinkClass::~LinkClass (void)

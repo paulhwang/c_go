@@ -5,6 +5,7 @@
 */
 
 #pragma once
+#include "../../protocol_dir/session_mgr_protocol.h"
 
 class SessionMgrClass;
 class GroupClass;
@@ -13,6 +14,7 @@ class SessionClass {
     SessionMgrClass *theSessionMgrObject;
     int theSessionId;
     int theSessionIndex;
+    char theSessionIdIndex[SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE + 4];
     GroupClass *theGroupObject;
 
     void bindGroup(GroupClass *group_object_val) {this->theGroupObject = group_object_val;}

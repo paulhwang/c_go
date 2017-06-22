@@ -5,16 +5,17 @@
 */
 
 #pragma once
-
-#define  LINK_CLASS_LINK_NAME_BUF_SIZE 32
+#include "../../protocol_dir/link_mgr_protocol.h"
 
 class LinkMgrClass;
 class SessionMgrClass;
 
 class LinkClass {
+#define  LINK_CLASS_LINK_NAME_BUF_SIZE 32
     LinkMgrClass *theLinkMgrObject;
     int theLinkId;
     int theLinkIndex;
+    char theLinkIdIndex[LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + 4];
     char theLinkName[LINK_CLASS_LINK_NAME_BUF_SIZE + 4];
     SessionMgrClass *theSessionMgrObject;
 

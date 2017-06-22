@@ -21,7 +21,7 @@ GoBaseClass::GoBaseClass (BaseMgrClass* base_mgr_object_val, int base_id_val, in
     this->thePortObject = new GoPortClass(this);
     this->theGameObject = new GoGameClass(this);
 
-    this->debug(true, "GoBaseClass", "init");
+    this->debug(true, "GoBaseClass", this->theBaseIdIndex);
 }
 
 GoBaseClass::~GoBaseClass (void)

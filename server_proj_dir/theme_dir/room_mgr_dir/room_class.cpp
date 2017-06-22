@@ -14,12 +14,13 @@ RoomClass::RoomClass (RoomMgrClass *room_mgr_object_val, int room_id_val, int ro
     this->theRoomMgrObject = room_mgr_object_val;
     this->theRoomId = room_id_val;
     this->theRoomIndex = room_index_val;
-    this->maxGroupTableArrayIndex = 0;
     phwangEncodeIdIndex(this->theRoomIdIndex, this->theRoomId, ROOM_MGR_PROTOCOL_ROOM_ID_SIZE, this->theRoomIndex, ROOM_MGR_PROTOCOL_ROOM_INDEX_SIZE);
+
+    this->maxGroupTableArrayIndex = 0;
     memcpy(this->theGroupIdIndex, group_id_index_val, GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE);
     this->theGroupIdIndex[GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE] = 0;
 
-    this->debug(true, "RoomClass", "init");
+    this->debug(true, "RoomClass", this->theRoomIdIndex);
 }
 
 RoomClass::~RoomClass (void)

@@ -14,10 +14,9 @@ GroupClass::GroupClass (GroupMgrClass *group_mgr_object_val, int group_id_val, i
     this->theGroupMgrObject = group_mgr_object_val;
     this->theGroupId = group_id_val;
     this->theGroupIndex = group_index_val;
+    phwangEncodeIdIndex(this->theGroupIdIndex, this->theGroupId, GROUP_MGR_PROTOCOL_GROUP_ID_SIZE, this->theGroupIndex, GROUP_MGR_PROTOCOL_GROUP_INDEX_SIZE);
 
-    if (1) {
-        this->logit("GroupClass", "init");
-    }
+    this->debug(true, "GroupClass", this->theGroupIdIndex);
 }
 
 GroupClass::~GroupClass (void)

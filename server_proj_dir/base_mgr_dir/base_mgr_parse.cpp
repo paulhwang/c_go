@@ -52,7 +52,13 @@ void BaseMgrClass::processMallocBase(char *data_val)
     char *downlink_data;
     char *data_ptr;
 
-    this->debug(true, "processMallocBaseResponse", data_val);
+    this->debug(true, "processMallocBase", data_val);
+
+    GoBaseClass *go_base_object = this->mallocGoBase();
+    if (!go_base_object) {
+        this->abend("processMallocBase", "null go_base");
+        return;
+    }
 
     downlink_data = data_ptr = (char *) malloc(BASE_MGR_DATA_BUFFER_SIZE + 4);
     *data_ptr++ = THEME_ENGINE_PROTOCOL_RESPOND_IS_MALLOC_BASE;

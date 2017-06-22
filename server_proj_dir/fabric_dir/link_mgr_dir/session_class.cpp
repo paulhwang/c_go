@@ -14,10 +14,9 @@ SessionClass::SessionClass (SessionMgrClass *session_mgr_object_val, int session
     this->theSessionMgrObject = session_mgr_object_val;
     this->theSessionId = session_id_val;
     this->theSessionIndex = session_index_val;
+    phwangEncodeIdIndex(this->theSessionIdIndex, this->theSessionId, SESSION_MGR_PROTOCOL_SESSION_ID_SIZE, this->theSessionIndex, SESSION_MGR_PROTOCOL_SESSION_INDEX_SIZE);
 
-    if (1) {
-        this->logit("SessionClass", "init");
-    }
+    this->debug(true, "SessionClass", this->theSessionIdIndex);
 }
 
 SessionClass::~SessionClass (void)
