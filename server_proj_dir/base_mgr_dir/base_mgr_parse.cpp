@@ -5,10 +5,31 @@
 */
 
 #include "../../phwang_dir/phwang.h"
+#include "../protocol_dir/theme_engine_protocol.h"
 #include "base_mgr_class.h"
 
 void BaseMgrClass::parseReceiveData (char *data_val)
 {
+    this->debug(true, "exportedparseFunction", data_val);
+
+    if (*data_val == THEME_ENGINE_PROTOCOL_COMMAND_IS_MALLOC_BASE) {
+        this->processMallocBase(data_val + 1);
+        return;
+    }
+
+    if (*data_val == THEME_ENGINE_PROTOCOL_COMMAND_IS_GET_SESSION_DATA) {
+        this->processGetSessionData(data_val + 1);
+        return;
+    }
+
+    if (*data_val == THEME_ENGINE_PROTOCOL_COMMAND_IS_PUT_SESSION_DATA) {
+        this->processPutSessionData(data_val + 1);
+        return;
+    }
+
+    this->abend("exportedparseFunction", data_val);
+    return;
+
     this->logit("receiveFunction", data_val);
 
     if (*data_val == BASE_MGR_PROTOCOL_COMMAND_IS_MALLOC_BASE) {
@@ -23,6 +44,24 @@ void BaseMgrClass::parseReceiveData (char *data_val)
     }
     else {
     }
+}
+
+void BaseMgrClass::processMallocBase(char *data_val)
+{
+    this->debug(true, "processMallocBaseResponse", data_val);
+
+}
+
+void BaseMgrClass::processGetSessionData(char *data_val)
+{
+    this->debug(true, "processGetSessionDataResponse", data_val);
+
+}
+
+void BaseMgrClass::processPutSessionData(char *data_val)
+{
+    this->debug(true, "processPutSessionDataResponse", data_val);
+
 }
 
 void BaseMgrClass::receiveData (char* data_val) {

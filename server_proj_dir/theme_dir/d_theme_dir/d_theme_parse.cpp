@@ -19,17 +19,21 @@ void DThemeClass::exportedparseFunction (char *data_val)
     this->debug(true, "exportedparseFunction", data_val);
 
     if (*data_val == FABRIC_THEME_PROTOCOL_COMMAND_IS_MALLOC_ROOM) {
-        this->processMallocRoom(++data_val);
+        this->processMallocRoom(data_val + 1);
+        return;
     }
-    else if (*data_val == FABRIC_THEME_PROTOCOL_COMMAND_IS_GET_SESSION_DATA) {
-        this->processGetSessionData(++data_val);
+
+    if (*data_val == FABRIC_THEME_PROTOCOL_COMMAND_IS_GET_SESSION_DATA) {
+        this->processGetSessionData(data_val + 1);
+        return;
     }
-    else if (*data_val == FABRIC_THEME_PROTOCOL_COMMAND_IS_PUT_SESSION_DATA) {
-        this->processPutSessionData(++data_val);
+
+    if (*data_val == FABRIC_THEME_PROTOCOL_COMMAND_IS_PUT_SESSION_DATA) {
+        this->processPutSessionData(data_val + 1);
+        return;
     }
-    else {
-        this->abend("exportedparseFunction", data_val);
-    }
+
+    this->abend("exportedparseFunction", data_val);
 }
 
 void DThemeClass::processMallocRoom (char *data_val)
@@ -37,6 +41,8 @@ void DThemeClass::processMallocRoom (char *data_val)
     char *downlink_data;
     char *uplink_data;
     char *data_ptr;
+
+    this->debug(true, "processMallocRoom", data_val);
 
     RoomClass *room = this->theThemeObject->roomMgrObject()->mallocRoom(data_val);
     if (!room) {
@@ -78,7 +84,7 @@ void DThemeClass::processPutSessionData (char *data_val)
     char *uplink_data;
     char *data_ptr;
 
-    this->debug(true, "processPutSessionData===", data_val);
+    this->debug(true, "processPutSessionData", data_val);
 
     RoomClass *room = this->theThemeObject->roomMgrObject()->searchRoom(data_val);
     if (!room) {
