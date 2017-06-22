@@ -119,30 +119,38 @@ void dFabricProcessPutSessionResponseCallbackFunction (void *this0_val, void *da
 
 void DFabricClass::processPutSessionData (char *data_val)
 {
-    this->logit("processPutSessionData", data_val);
+    char *downlink_data;
+    char *uplink_data;
+    char *data_ptr;
 
-    char *output_data = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
+    this->debug(true, "processPutSessionData", data_val);
 
     SessionClass *session = this->linkMgrObject()->serachSession(data_val);
     if (!session) {
-        strcpy(output_data + 1, "null session");
-        output_data[0] = WEB_FABRIC_PROTOCOL_RESPOND_IS_PUT_SESSION_DATA;
-        this->transmitFunction(output_data);
+        downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
+        *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_PUT_SESSION_DATA;
+        strcpy(data_ptr, "null session");
+        this->transmitFunction(downlink_data);
+        this->abend("processPutSessionData", "null session");
         return;
     }
 
     char *room = session->groupObject()->roomIdIndexString();
     if (!room) {
+        downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
+        *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_PUT_SESSION_DATA;
+        strcpy(data_ptr, "null room");
+        this->transmitFunction(downlink_data);
         this->abend("processPutSessionData", "null room");
-        output_data[0] = WEB_FABRIC_PROTOCOL_RESPOND_IS_PUT_SESSION_DATA;
-        strcpy(output_data + 1, "null room");
-        this->transmitFunction(output_data);
         return;
     }
 
-    output_data[0] = FABRIC_THEME_PROTOCOL_COMMAND_IS_PUT_SESSION_DATA;
-    memcpy(output_data + 1, room, ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);
-    this->theFabricObject->uFabricObject()->transmitFunction(output_data);
+    uplink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
+    *data_ptr++ = FABRIC_THEME_PROTOCOL_COMMAND_IS_PUT_SESSION_DATA;
+    memcpy(data_ptr, room, ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);
+    data_ptr += ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE;
+    strcpy(data_ptr, data_val + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE);
+    this->theFabricObject->uFabricObject()->transmitFunction(uplink_data);
 
 
 

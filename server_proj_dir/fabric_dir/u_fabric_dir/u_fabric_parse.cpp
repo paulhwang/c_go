@@ -53,6 +53,14 @@ void UFabricClass::processGetSessionDataResponse(char *data_val)
 
 void UFabricClass::processPutSessionDataResponse(char *data_val)
 {
+    char *downlink_data;
+    char *data_ptr;
+
     this->debug(true, "processPutSessionDataResponse", data_val);
+
+    downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
+    *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_PUT_SESSION_DATA;
+    strcpy(data_ptr + 1, "TBD");
+    this->transmitFunction(downlink_data);
 
 }

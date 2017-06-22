@@ -89,9 +89,10 @@ void DThemeClass::processPutSessionData (char *data_val)
 
     uplink_data = data_ptr = (char *) malloc(ROOM_MGR_DATA_BUFFER_SIZE + 4);
     *data_ptr++ = THEME_ENGINE_PROTOCOL_COMMAND_IS_PUT_SESSION_DATA;
-    memcpy(data_ptr, room->theRoomIdIndex, ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);
-    data_ptr += ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE;
-    *data_ptr = 0;
+    memcpy(data_ptr, room->theBaseIdIndex, BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE);
+    data_ptr += BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE;
+    strcpy(data_ptr, data_val + ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);
+    //*data_ptr = 0;
     this->debug(true, "processPutSessionData", uplink_data);
     this->theThemeObject->uThemeObject()->transmitFunction(uplink_data);
 

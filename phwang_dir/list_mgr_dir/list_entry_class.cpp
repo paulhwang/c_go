@@ -17,10 +17,7 @@ ListEntryClass::ListEntryClass (ListMgrClass *list_mgr_object, int entry_id_val,
     this->theEntryData = data_val;
     this->theEntryIdIndex = (char *) malloc(this->theListMgrObject->theIdSize + this->theListMgrObject->theIndexSize + 4);
 
-    if (1) {
-        this->logit("ListEntryClass", "init");
-    }
-
+    this->debug(true, "ListEntryClass", "init");
 }
 
 ListEntryClass::~ListEntryClass (void)
