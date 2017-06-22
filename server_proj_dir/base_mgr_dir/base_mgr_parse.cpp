@@ -18,13 +18,8 @@ void BaseMgrClass::parseReceiveData (char *data_val)
         return;
     }
 
-    if (*data_val == THEME_ENGINE_PROTOCOL_COMMAND_IS_GET_SESSION_DATA) {
-        this->processGetSessionData(data_val + 1);
-        return;
-    }
-
-    if (*data_val == THEME_ENGINE_PROTOCOL_COMMAND_IS_PUT_SESSION_DATA) {
-        this->processPutSessionData(data_val + 1);
+    if (*data_val == THEME_ENGINE_PROTOCOL_COMMAND_IS_TRANSFER_DATA) {
+        this->processInputData(data_val + 1);
         return;
     }
 
@@ -70,16 +65,25 @@ void BaseMgrClass::processMallocBase(char *data_val)
     this->transmitFunction(downlink_data);
 }
 
-void BaseMgrClass::processGetSessionData(char *data_val)
+void BaseMgrClass::processInputData(char *data_val)
 {
-    this->debug(true, "processGetSessionDataResponse", data_val);
+    this->debug(true, "processPutSessionData", data_val);
 
-}
+    GoBaseClass *base_object = this->searchBase(data_val);
+    if (!base_object) {
+        this->abend("processPutSessionData", "null base_object");
+        /* TBD */
+        return;
+    }
 
-void BaseMgrClass::processPutSessionData(char *data_val)
-{
-    this->debug(true, "processPutSessionDataResponse", data_val);
 
+    if (1) {
+        char s[LOGIT_BUF_SIZE];
+        sprintf(s, "baseId=%d baseIndex=%d", base_object->baseId(), base_object->baseIndex());
+        this->logit("processPutSessionData", s);
+    }
+
+    base_object->portObject()->receiveStringData(data_val + ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);
 }
 
 void BaseMgrClass::receiveData (char* data_val) {

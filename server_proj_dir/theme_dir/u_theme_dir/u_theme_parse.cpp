@@ -24,13 +24,8 @@ void UThemeClass::exportedparseFunction(char *data_val)
         return;
     }
 
-    if (*data_val == THEME_ENGINE_PROTOCOL_RESPOND_IS_GET_SESSION_DATA) {
-        this->processGetSessionDataResponse(data_val + 1);
-        return;
-    }
-
-    if (*data_val == THEME_ENGINE_PROTOCOL_RESPOND_IS_PUT_SESSION_DATA) {
-        this->processPutSessionDataResponse(data_val + 1);
+    if (*data_val == THEME_ENGINE_PROTOCOL_RESPOND_IS_TRANSFER_DATA) {
+        this->processTransferDataResponse(data_val + 1);
         return;
     }
 
@@ -68,33 +63,13 @@ void UThemeClass::processMallocBaseResponse(char *data_val)
     this->theThemeObject->dThemeObject()->transmitFunction(downlink_data);
 }
 
-void UThemeClass::processGetSessionDataResponse(char *data_val)
+void UThemeClass::processTransferDataResponse(char *data_val)
 {
-    this->debug(true, "processGetSessionDataResponse", data_val);
+    this->debug(true, "processTransferDataResponse", data_val);
 
     RoomClass *room = this->theThemeObject->roomMgrObject()->searchRoom(data_val);
     if (!room) {
-        this->abend("processGetSessionDataResponse", "null room");
-        return;
-    }
-
-    int i = 0;
-    while (i < room->maxGroupTableArrayIndex) {
-        if (room->theGroupTableArray[i]) {
-
-        }
-        i++;
-    }
-
-}
-
-void UThemeClass::processPutSessionDataResponse(char *data_val)
-{
-    this->debug(true, "processPutSessionDataResponse", data_val);
-
-    RoomClass *room = this->theThemeObject->roomMgrObject()->searchRoom(data_val);
-    if (!room) {
-        this->abend("processPutSessionDataResponse", "null room");
+        this->abend("processTransferDataResponse", "null room");
         return;
     }
 

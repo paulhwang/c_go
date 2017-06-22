@@ -19,7 +19,7 @@ class BaseMgrClass {
 #define BASE_MGR_MAX_GLOBAL_BASE_ID 9999
 
     int theGlobalBaseId;
-    void *theBaseTableArray[BASE_MGR_BASE_ARRAY_SIZE + 4];
+    GoBaseClass *theBaseTableArray[BASE_MGR_BASE_ARRAY_SIZE + 4];
 
     void *theTpTransferObject;
 
@@ -32,8 +32,7 @@ class BaseMgrClass {
     GoBaseClass *mallocGoBase(void);
 
     void processMallocBase(char *data_al);
-    void processGetSessionData(char *data_val);
-    void processPutSessionData(char *data_val);
+    void processInputData(char *data_val);
 
     void debug(int on_off_val, char const* str0_val, char const* str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
     void logit(char const* str0_val, char const* str1_val);
@@ -53,6 +52,9 @@ public:
     void exportedNetReceiveFunction(char *data_val);
 
     void receiveData(char* data_val);
+
+    GoBaseClass *searchBase(char *data_val);
+    GoBaseClass *getBaseByIdIndex(int base_id_val, int base_index_val);
 
     void baseMgrLogit(char const* str0_val, char const* str1_val);
     void baseMgrAbend(char const* str0_val, char const* str1_val);

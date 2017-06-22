@@ -84,23 +84,23 @@ GroupClass *GroupMgrClass::searchGroup (char *data_val)
 GroupClass *GroupMgrClass::getGroupByIdIndex (int group_id_val, int group_index_val)
 {
     if (group_id_val > GROUP_MGR_MAX_GLOBAL_GROUP_ID) {
-        this->abend("getSessionByIdIndex", "group_id_val too big");
+        this->abend("getGroupByIdIndex", "group_id_val too big");
         return 0;
     }
 
     if (group_index_val >= GROUP_MGR_GROUP_ARRAY_SIZE) {
-        this->abend("getSessionByIdIndex", "group_index_val too big");
+        this->abend("getGroupByIdIndex", "group_index_val too big");
         return 0;
     }
 
     GroupClass *group = this->theGroupTableArray[group_index_val];
     if (!group) {
-        this->abend("getLinkByIdIndex", "null group");
+        this->abend("getGroupByIdIndex", "null group");
         return 0;
     }
 
     if (group->groupId() != group_id_val){
-        this->abend("getLinkByIdIndex", "group id does not match");
+        this->abend("getGroupByIdIndex", "group id does not match");
         return 0;
     }
 
