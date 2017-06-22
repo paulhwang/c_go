@@ -21,6 +21,9 @@ class BaseMgrClass;
 
 class GoBaseClass {
     int theBaseId;
+    int theBaseIndex;
+    char theBaseIdIndex[BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE + 4];
+
     BaseMgrClass* theBaseMgrObject;
     GoEngineClass* theEngineObject;
     GoBoardClass* theBoardObject;
@@ -28,15 +31,17 @@ class GoBaseClass {
     GoConfigClass* theConfigObject;
     GoGameClass* theGameObject;
 
+    void debug(int on_off_val, char const* str0_val, char const* str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
 
   public:
-    GoBaseClass(BaseMgrClass* base_mgr_object_val, int base_id_val);
+    GoBaseClass(BaseMgrClass* base_mgr_object_val, int base_id_val, int base_index_val);
     ~GoBaseClass(void);
 
     char const* objectName(void) {return "GoBaseClass";}
     int baseId(void) {return this->theBaseId;}
+    int baseIndex(void) {return this->theBaseIndex;}
     BaseMgrClass* baseMgrObject(void) {return this->theBaseMgrObject;}
     GoEngineClass* engineObject(void) {return this->theEngineObject;}
     GoBoardClass* boardObject(void) {return this->theBoardObject;}

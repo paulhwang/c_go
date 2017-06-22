@@ -29,7 +29,7 @@ class BaseMgrClass {
 
     int allocBaseId(void);
     int allocBaseIndex(void);
-    void mallocGoBase(void);
+    GoBaseClass *mallocGoBase(void);
 
     void processMallocBase(char *data_al);
     void processGetSessionData(char *data_val);
