@@ -28,6 +28,7 @@ class RoomClass {
     void abend(char const* str0_val, char const* str1_val);
 
 protected:
+    friend class UThemeClass;
     friend class DThemeClass;
     friend class RoomMgrClass;
 

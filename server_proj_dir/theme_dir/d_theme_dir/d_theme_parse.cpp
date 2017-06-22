@@ -61,15 +61,6 @@ void DThemeClass::processMallocRoom (char *data_val)
     *data_ptr = 0;
     this->debug(true, "processPutSessionData", uplink_data);
     this->theThemeObject->uThemeObject()->transmitFunction(uplink_data);
- 
-    downlink_data = data_ptr = (char *) malloc(ROOM_MGR_DATA_BUFFER_SIZE + 4);
-    *data_ptr++ = FABRIC_THEME_PROTOCOL_RESPOND_IS_MALLOC_ROOM;
-    memcpy(data_ptr, room->groupIdIndex(), GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE);
-    data_ptr += GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE;
-    memcpy(data_ptr, room->roomIdIndex(), ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);
-    data_ptr += ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE;
-    *data_ptr = 0;
-    this->transmitFunction(downlink_data);
 }
 
 void DThemeClass::processGetSessionData (char *data_val)
