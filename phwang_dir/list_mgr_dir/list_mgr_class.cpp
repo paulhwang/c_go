@@ -6,6 +6,7 @@
 
 #include "../../phwang_dir/phwang.h"
 #include "list_mgr_class.h"
+#include "list_entry_class.h"
 
 ListMgrClass::ListMgrClass (void *caller_object_val, int id_size_val, int index_size_val)
 {
@@ -13,7 +14,6 @@ ListMgrClass::ListMgrClass (void *caller_object_val, int id_size_val, int index_
     this->theCallerObject = caller_object_val;
     this->theIdSize = id_size_val;
     this->theIndexSize = index_size_val;
-    this->theIdIndexSize = this->theIdSize + this->theIndexSize;
 
     this->theGlobalEntryId = 0;
     this->theMaxIdIndexTableIndex = 0;
@@ -25,43 +25,47 @@ ListMgrClass::~ListMgrClass (void)
 {
 }
 
-void ListMgrClass::insertIdIndex (char *id_index_val)
+int ListMgrClass::allocEntryId (void)
 {
-    char *buf = (char *) malloc(this->theIdIndexSize + 4);
-    memcpy(buf, id_index_val, this->theIdIndexSize);
-    buf[this->theIdIndexSize] = 0;
-
-    int i = 0;
-    while (i < this->theMaxIdIndexTableIndex) {
-        if (!this->theIdIndexTableArray[i]) {
-            this->theIdIndexTableArray[i] = buf;
-            return;
-        }
-        i++;
+    if (this->theGlobalEntryId >= LIST_MGR_MAX_GLOBAL_LIST_ID) {
+        this->theGlobalEntryId = 0;
     }
-
-    if (this->theMaxIdIndexTableIndex < LIST_MGR_ID_INDEX_ARRAY_SIZE) {
-        this->theIdIndexTableArray[this->theMaxIdIndexTableIndex] = buf;
-        this->theMaxIdIndexTableIndex++;
-        return;
-    }
-
-    free(buf);
-    this->abend("insertIdIndex", "theIdIndexTableArray is full");
+    this->theGlobalEntryId++;
+    return this->theGlobalEntryId;
 }
 
-void ListMgrClass::removeIdIndex (char *id_index_val)
+int ListMgrClass::allocEntryIndex (void)
 {
-    int i = 0;
-    while (i < this->theMaxIdIndexTableIndex) {
-        if (!memcmp(this->theIdIndexTableArray[i], id_index_val, this->theIdIndexSize)) {
-            free(this->theIdIndexTableArray[i]);
-            this->theIdIndexTableArray[i] = 0;
-            return;
+    int index = 0;
+    while (index < LIST_MGR_ID_INDEX_ARRAY_SIZE) {
+        if (!this->theEntryTableArray[index]) {
+            return index;
         }
-        i++;
+        index++;
     }
-    this->abend("removeIdIndex", "not found");
+
+    this->abend("allocEntryIndex", "out of entry_index");
+    return -1;
+}
+
+ListEntryClass *ListMgrClass::mallocEntry(void *entry_data_val)
+{
+    this->debug(true, "mallocEntry", "");
+
+    int entry_id = this->allocEntryId();
+    int entry_index = this->allocEntryIndex();
+    if (entry_index == -1) {
+        return 0;
+    }
+
+    ListEntryClass *entry = new ListEntryClass(this, entry_id, entry_index, entry_data_val);
+    this->theEntryTableArray[entry_index] = entry;
+    return entry;
+}
+
+void ListMgrClass::freeEntry(ListEntryClass *list_entry_object_val)
+{
+
 }
 
 void ListMgrClass::logit (char const* str0_val, char const* str1_val)

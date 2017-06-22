@@ -18,11 +18,12 @@ class ListMgrClass {
 
     int theGlobalEntryId;
     int theMaxIdIndexTableIndex;
-    char *theIdIndexTableArray[LIST_MGR_ID_INDEX_ARRAY_SIZE + 4];
+    ListEntryClass *theEntryTableArray[LIST_MGR_ID_INDEX_ARRAY_SIZE];
 
 
     int allocEntryId(void);
-    int allocLinkIndex(void);
+    int allocEntryIndex(void);
+
     ListEntryClass *getEntryByIdIndex(int entry_id_val, int link_index_val);
 
     void debug(int on_off_val, char const* str0_val, char const* str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
@@ -30,14 +31,13 @@ class ListMgrClass {
     void abend(char const* str0_val, char const* str1_val);
 
 protected:
+    friend class ListEntryClass;
 
 public:
     ListMgrClass(void *caller_object_val, int id_size_val, int index_size_val);
     ~ListMgrClass(void);
     char const* objectName(void) {return "ListMgrClass";}
 
-    void insertEntry(void *entry_val);
-    void removeEntry(void *entry_val);
-    void insertIdIndex(char *id_index_val);
-    void removeIdIndex(char *id_index_val);
+    ListEntryClass *mallocEntry(void *entry_data_val);
+    void freeEntry(ListEntryClass *list_entry_object_val);
 };
