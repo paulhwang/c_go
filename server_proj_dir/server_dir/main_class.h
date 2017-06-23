@@ -7,13 +7,11 @@
 #pragma once
 
 class FabricClass;
-class BaseMgrClass;
 class ThemeClass;
 class EngineClass;
 
 class MainClass {
     FabricClass *theFabricObject;
-    BaseMgrClass *theGoBaseMgrObject;
     ThemeClass *theGoThemeObject;
     EngineClass *theEngineObject;
 
