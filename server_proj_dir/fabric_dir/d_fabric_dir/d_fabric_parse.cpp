@@ -35,7 +35,7 @@ void DFabricClass::exportedparseFunction (char *data_val)
     }
 
     if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_TRANSFER_SESSION_DATA) {
-        this->processPutSessionData(data_val + 1);
+        this->processTransferSessionData(data_val + 1);
         return;
     }
 
@@ -96,14 +96,7 @@ void DFabricClass::processMallocSession (char *data_val)
     this->theFabricObject->uFabricObject()->transmitFunction(data_buf);
 }
 
-/*
-void dFabricProcessPutSessionResponseCallbackFunction (void *this0_val, void *data_val)
-{
-    ((DFabricClass *)(this0_val))->exportedProcessPutSessionResponse(data_val);
-}
-*/
-
-void DFabricClass::processPutSessionData (char *data_val)
+void DFabricClass::processTransferSessionData (char *data_val)
 {
     char *downlink_data;
     char *uplink_data;
@@ -137,12 +130,4 @@ void DFabricClass::processPutSessionData (char *data_val)
     data_ptr += ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE;
     strcpy(data_ptr, data_val + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE);
     this->theFabricObject->uFabricObject()->transmitFunction(uplink_data);
-}
-
-void DFabricClass::processPutSessionDataResponse (char *data_val, SessionClass *session_object_val)
-{
-    char *data_buf = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
-    data_buf[0] = WEB_FABRIC_PROTOCOL_RESPOND_IS_TRANSFER_SESSION_DATA;
-    strcpy(data_buf + 1, (char *) data_val);
-    this->transmitFunction(data_buf);
 }
