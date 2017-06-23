@@ -28,7 +28,7 @@ void UFabricClass::exportedParseFunction(char *data_val)
     }
 
     if (*data_val == FABRIC_THEME_PROTOCOL_RESPOND_IS_TRANSFER_DATA) {
-        this->processPutSessionDataResponse(data_val + 1);
+        this->processTransferDataResponse(data_val + 1);
         return;
     }
 
@@ -52,16 +52,16 @@ void UFabricClass::processMallocRoomResponse(char *data_val)
     }
 }
 
-void UFabricClass::processPutSessionDataResponse(char *data_val)
+void UFabricClass::processTransferDataResponse(char *data_val)
 {
     char *downlink_data;
     char *data_ptr;
 
-    this->debug(true, "processPutSessionDataResponse", data_val);
+    this->debug(true, "processTransferDataResponse", data_val);
 
     GroupClass *group = this->theFabricObject->groupMgrObject()->searchGroup(data_val);
     if (!group) {
-        this->abend("processPutSessionDataResponse", "null group");
+        this->abend("processTransferDataResponse", "null group");
         return;
     }
     data_val += GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE;

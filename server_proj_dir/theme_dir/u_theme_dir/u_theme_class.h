@@ -26,8 +26,6 @@ class UThemeClass {
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
 
-    void baseMgrTest(void);
-
 protected:
     friend class DThemeClass;
     friend class RoomMgrClass;

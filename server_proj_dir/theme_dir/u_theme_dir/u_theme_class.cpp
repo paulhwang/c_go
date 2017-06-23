@@ -33,8 +33,6 @@ void uThemeTpServerAcceptFunction (void *game_server_object_val, void *tp_transf
 void UThemeClass::exportedNetAcceptFunction (void *tp_transfer_object_val)
 {
     this->theTpTransferObject = tp_transfer_object_val;
-    sleep(1);
-    baseMgrTest();
 }
 
 void uThemeTpReceiveDataFunction (void *game_server_object_val, void *data_val) {

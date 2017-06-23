@@ -61,7 +61,6 @@ void BaseMgrClass::processTransferData(char *data_val)
         return;
     }
 
-
     if (1) {
         char s[LOGIT_BUF_SIZE];
         sprintf(s, "baseId=%d baseIndex=%d", base_object->baseId(), base_object->baseIndex());
