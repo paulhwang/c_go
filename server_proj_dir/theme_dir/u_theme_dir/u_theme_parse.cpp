@@ -47,19 +47,13 @@ void UThemeClass::processMallocBaseResponse(char *data_val)
 
     data_val += ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE;
     room->setBaseIdIndex(data_val);
-    this->debug(true, "processMallocBaseResponse==1", "");
-
     downlink_data = data_ptr = (char *) malloc(ROOM_MGR_DATA_BUFFER_SIZE + 4);
     *data_ptr++ = FABRIC_THEME_PROTOCOL_RESPOND_IS_MALLOC_ROOM;
-    this->debug(true, "processMallocBaseResponse==2", "");
     memcpy(data_ptr, room->theGroupTableArray[0], GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE);
     data_ptr += GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE;
-    this->debug(true, "processMallocBaseResponse==3", "");
     memcpy(data_ptr, room->roomIdIndex(), ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);
-    this->debug(true, "processMallocBaseResponse==4", "");
     data_ptr += ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE;
     *data_ptr = 0;
-    this->debug(true, "processMallocBaseResponse==", downlink_data);
     this->theThemeObject->dThemeObject()->transmitFunction(downlink_data);
 }
 
