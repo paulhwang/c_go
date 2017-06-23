@@ -27,12 +27,14 @@ protected:
     friend class LinkMgrClass;
     friend class SessionMgrClass;
     friend class DFabricClass;
+    friend class UFabricClass;
 
     LinkMgrClass *linkMgrObject(void) {return this->theLinkMgrObject;}
     SessionMgrClass *sessionMgrObject(void) {return this->theSessionMgrObject;}
 
     int linkId(void) {return this->theLinkId;}
     int linkIndex(void) {return this->theLinkIndex;}
+    char *linkIdIndex(void) {return this->theLinkIdIndex;}
 
 public:
     LinkClass(LinkMgrClass *link_mgr_object_val, int link_id_val, int link_index_val, char const* link_name_val);

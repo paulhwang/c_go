@@ -27,7 +27,9 @@ class SessionMgrClass {
 
 protected:
     friend class LinkMgrClass;
+    friend class UFabricClass;
 
+    LinkClass *linkObject(void) {return this->theLinkObject;}
     SessionClass *mallocSession(void);
     void freeSession(SessionClass *session_object_val);
     SessionClass *searchSession(char *data_val);

@@ -49,14 +49,14 @@ void GoPortClass::transmitBoardData (void) {
     char *board_data = (char *) malloc(BASE_MGR_DATA_BUFFER_SIZE);
     board_data[0] = BASE_MGR_PROTOCOL_RESPOND_IS_TRANSFER_DATA;
     board_data[1] = BASE_MGR_PROTOCOL_GAME_NAME_IS_GO;
-    this->boardObject()->encodeBoard(board_data + 2);
+    this->boardObject()->encodeBoard(board_data);
 
     if (1) {
         char s[LOGIT_BUF_SIZE];
         sprintf(s, "board_data=%s", board_data);
         this->logit("transmitBoardData", s);
     }
-    this->baseObject()->baseMgrObject()->transmitFunction(board_data);
+    this->baseObject()->baseMgrObject()->processTransferDataResponse(this->baseObject(), board_data);
 }
 
 void GoPortClass::receiveStringData (char const* str_val) {

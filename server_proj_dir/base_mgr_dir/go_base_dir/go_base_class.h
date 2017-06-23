@@ -23,6 +23,7 @@ class GoBaseClass {
     int theBaseId;
     int theBaseIndex;
     char theBaseIdIndex[BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE + 4];
+    char theRoomIdIndex[ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE + 4];
 
     BaseMgrClass* theBaseMgrObject;
     GoEngineClass* theEngineObject;
@@ -39,6 +40,7 @@ protected:
     friend class BaseMgrClass;
 
     char *baseIdIndex(void) {return this->theBaseIdIndex;}
+    void setRoomIdIndex(char *room_id_index_val) {memcpy(this->theRoomIdIndex, room_id_index_val, ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE); this->theRoomIdIndex[ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE] = 0;}
 
   public:
     GoBaseClass(BaseMgrClass* base_mgr_object_val, int base_id_val, int base_index_val);

@@ -7,8 +7,10 @@
 #pragma once
 
 #include <pthread.h>
+#include "../protocol_dir/room_mgr_protocol.h"
 #include "../protocol_dir/base_mgr_protocol.h"
 #include "go_base_dir/go_base_class.h"
+
 class BaseClass;
 class GoBaseClass;
 
@@ -32,7 +34,7 @@ class BaseMgrClass {
     GoBaseClass *mallocGoBase(void);
 
     void processMallocBase(char *data_al);
-    void processInputData(char *data_val);
+    void processTransferData(char *data_val);
 
     void debug(int on_off_val, char const* str0_val, char const* str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
     void logit(char const* str0_val, char const* str1_val);
@@ -41,6 +43,7 @@ class BaseMgrClass {
 protected:
     friend class GoPortClass;
 
+    void processTransferDataResponse(GoBaseClass *base_object_val, char *data_val);
     void transmitFunction(char *data_val);
 
 public:

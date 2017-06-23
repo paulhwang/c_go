@@ -23,12 +23,7 @@ void DThemeClass::exportedparseFunction (char *data_val)
         return;
     }
 
-    if (*data_val == FABRIC_THEME_PROTOCOL_COMMAND_IS_GET_SESSION_DATA) {
-        this->processGetSessionData(data_val + 1);
-        return;
-    }
-
-    if (*data_val == FABRIC_THEME_PROTOCOL_COMMAND_IS_PUT_SESSION_DATA) {
+    if (*data_val == FABRIC_THEME_PROTOCOL_COMMAND_IS_TRANSFER_DATA) {
         this->processPutSessionData(data_val + 1);
         return;
     }
@@ -63,12 +58,6 @@ void DThemeClass::processMallocRoom (char *data_val)
     this->theThemeObject->uThemeObject()->transmitFunction(uplink_data);
 }
 
-void DThemeClass::processGetSessionData (char *data_val)
-{
-    this->debug(true, "processGetSessionData", data_val);
-
-}
-
 void DThemeClass::processPutSessionData (char *data_val)
 {
     char *downlink_data;
@@ -81,7 +70,7 @@ void DThemeClass::processPutSessionData (char *data_val)
     if (!room) {
         this->abend("processPutSessionData", "null room");
         downlink_data = data_ptr = (char *) malloc(ROOM_MGR_DATA_BUFFER_SIZE + 4);
-        *data_ptr++ = FABRIC_THEME_PROTOCOL_RESPOND_IS_PUT_SESSION_DATA;
+        *data_ptr++ = FABRIC_THEME_PROTOCOL_RESPOND_IS_TRANSFER_DATA;
         strcpy(data_ptr, "null room");
         this->transmitFunction(downlink_data);
         return;
@@ -101,7 +90,7 @@ void DThemeClass::processPutSessionData (char *data_val)
     while (i < room->maxGroupTableArrayIndex) {
         if (room->theGroupTableArray[i]) {
             downlink_data = data_ptr = (char *) malloc(ROOM_MGR_DATA_BUFFER_SIZE + 4);
-            *data_ptr++ = FABRIC_THEME_PROTOCOL_COMMAND_IS_PUT_SESSION_DATA;
+            *data_ptr++ = FABRIC_THEME_PROTOCOL_COMMAND_IS_TRANSFER_DATA;
             memcpy(data_ptr, room->theGroupTableArray[i], GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE);
             data_ptr += GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE;
             strcpy(data_ptr, data_val + 1 + ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);

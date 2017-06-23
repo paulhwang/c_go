@@ -65,6 +65,9 @@ void UThemeClass::processMallocBaseResponse(char *data_val)
 
 void UThemeClass::processTransferDataResponse(char *data_val)
 {
+    char *downlink_data;
+    char *data_ptr;
+
     this->debug(true, "processTransferDataResponse", data_val);
 
     RoomClass *room = this->theThemeObject->roomMgrObject()->searchRoom(data_val);
@@ -72,13 +75,18 @@ void UThemeClass::processTransferDataResponse(char *data_val)
         this->abend("processTransferDataResponse", "null room");
         return;
     }
+    data_val += ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE;
 
     int i = 0;
     while (i < room->maxGroupTableArrayIndex) {
         if (room->theGroupTableArray[i]) {
-
+            downlink_data = data_ptr = (char *) malloc(ROOM_MGR_DATA_BUFFER_SIZE + 4);
+            *data_ptr++ = FABRIC_THEME_PROTOCOL_RESPOND_IS_TRANSFER_DATA;
+            memcpy(data_ptr, room->theGroupTableArray[i], GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE);
+            data_ptr += GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE;
+            strcpy(data_ptr, data_val);
+            this->theThemeObject->dThemeObject()->transmitFunction(downlink_data);
         }
         i++;
     }
-
 }
