@@ -17,6 +17,13 @@ class EngineClass {
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
 
+protected:
+    friend class DEngineClass;
+    friend class BaseMgrClass;
+
+    DEngineClass *eEngineObject(void) {return this->theDEngineObject;}
+    BaseMgrClass *goBaseMgrObject(void) {return this->theGoBaseMgrObject;}
+
 public:
     EngineClass(void);
     ~EngineClass(void);

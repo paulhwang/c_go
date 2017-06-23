@@ -12,8 +12,8 @@
 EngineClass::EngineClass (void)
 {
     memset(this, 0, sizeof(EngineClass));
-    this->theDEngineObject = new DEngineClass();
-    this->theGoBaseMgrObject = new BaseMgrClass();
+    this->theDEngineObject = new DEngineClass(this);
+    this->theGoBaseMgrObject = new BaseMgrClass(this);
 
     this->debug(true, "EngineClass", "init");
 }

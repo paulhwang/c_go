@@ -8,9 +8,10 @@
 #include "base_mgr_class.h"
 #include "../go_base_dir/go_base_class.h"
 
-BaseMgrClass::BaseMgrClass (void)
+BaseMgrClass::BaseMgrClass (EngineClass *engine_object_val)
 {
     memset(this, 0, sizeof(BaseMgrClass));
+    this->theEngineObject = engine_object_val;
     this->theGlobalBaseId = 900;
 
     this->startNetConnect();

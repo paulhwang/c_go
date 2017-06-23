@@ -11,6 +11,7 @@
 #include "../../protocol_dir/base_mgr_protocol.h"
 #include "../go_base_dir/go_base_class.h"
 
+class EngineClass;
 class BaseClass;
 class GoBaseClass;
 
@@ -20,6 +21,7 @@ class BaseMgrClass {
 #define BASE_MGR_BASE_ARRAY_SIZE 1000
 #define BASE_MGR_MAX_GLOBAL_BASE_ID 9999
 
+    EngineClass *theEngineObject;
     int theGlobalBaseId;
     GoBaseClass *theBaseTableArray[BASE_MGR_BASE_ARRAY_SIZE + 4];
 
@@ -42,12 +44,13 @@ class BaseMgrClass {
 
 protected:
     friend class GoPortClass;
+    friend class DEngineClass;
 
     void processTransferDataResponse(GoBaseClass *base_object_val, char *data_val);
     void transmitFunction(char *data_val);
 
 public:
-    BaseMgrClass(void);
+    BaseMgrClass(EngineClass *engine_object_val);
     ~BaseMgrClass();
     char const* objectName(void) {return "BaseMgrClass";}
 

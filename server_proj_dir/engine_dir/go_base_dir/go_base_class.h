@@ -37,6 +37,7 @@ class GoBaseClass {
     void abend(char const* str0_val, char const* str1_val);
 
 protected:
+    friend class DEngineClass;
     friend class BaseMgrClass;
 
     char *baseIdIndex(void) {return this->theBaseIdIndex;}

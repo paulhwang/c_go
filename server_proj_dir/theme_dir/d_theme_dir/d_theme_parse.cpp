@@ -1,7 +1,7 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: d_theme_export.cpp
+  File name: d_theme_parse.cpp
 */
 
 #include "../../../phwang_dir/phwang.h"
