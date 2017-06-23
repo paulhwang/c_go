@@ -16,10 +16,12 @@ MainClass::MainClass(void)
     this->theFabricObject = new FabricClass();
     this->theGoThemeObject = new ThemeClass();
     this->theGoBaseMgrObject = new BaseMgrClass();
+    this->theEngineObject = new EngineClass();
 }
 
 MainClass::~MainClass(void)
 {
+    this->theEngineObject->~EngineClass(); 
     this->theGoBaseMgrObject->~BaseMgrClass(); 
     this->theGoThemeObject->~ThemeClass(); 
     this->theFabricObject->~FabricClass(); 

@@ -17,9 +17,7 @@ ThemeClass::ThemeClass (void)
     this->theRoomMgrObject = new RoomMgrClass(this);
     this->theDThemeObject = new DThemeClass(this);
 
-    if (1) {
-        this->logit("ThemeClass", "init");
-    }
+    this->debug(true, "ThemeClass", "init");
 }
 
 ThemeClass::~ThemeClass (void)

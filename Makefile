@@ -52,7 +52,7 @@ THEME_OBJS = $(U_THEME_OBJS)  $(D_THEME_OBJS) $(THEME_DIR)/theme_class.o
 GO_BASE_OBJS = $(GO_BASE_DIR)/go_base_class.o $(GO_BASE_DIR)/go_game_class.o $(GO_BASE_DIR)/go_engine_class.o $(GO_BASE_DIR)/go_board_class.o $(GO_BASE_DIR)/go_move_class.o $(GO_BASE_DIR)/go_port_class.o $(GO_BASE_DIR)/go_config_class.o $(GO_BASE_DIR)/go_group_class.o $(GO_BASE_DIR)/go_group_list_class.o
 ENGINE_OBJS = $(ENGINE_DIR)/engine_class.o 
 BASE_MGR_OBJS = $(BASE_MGR_DIR)/base_mgr_class.o $(BASE_MGR_DIR)/base_mgr_exports.o $(BASE_MGR_DIR)/base_mgr_parse.o $(BASE_MGR_DIR)/base_mgr_transmit.o $(BASE_MGR_DIR)/base_mgr_base.o $(GO_BASE_OBJS)
-SERVER_PROJ_OBJS = $(SERVER_OBJS) $(FABRIC_OBJS) $(THEME_OBJS)
+SERVER_PROJ_OBJS = $(SERVER_OBJS) $(FABRIC_OBJS) $(THEME_OBJS) $(ENGINE_OBJS)
 
 CLIENT_OBJS = $(CLIENT_DIR)/go_client.o
 CLIENT_PROJ_OBJS = $(CLIENT_OBJS)
