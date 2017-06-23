@@ -27,12 +27,6 @@ RoomClass::~RoomClass (void)
 {
 }
 
-void RoomClass::insertBase (char *base_id_index_val)
-{
-    memcpy(this->theBaseIdIndex, base_id_index_val, BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE);
-    this->theBaseIdIndex[BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE] = 0;
-}
-
 void RoomClass::insertGroup (char *group_id_index_val)
 {
     char *buf = (char *) malloc(GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE + 4);

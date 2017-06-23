@@ -22,7 +22,7 @@ class GroupClass {
     char theGroupIdIndex[GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE + 4];
     ListMgrClass *theSessionListMgr;
 
-    char theRoomIdIndexString[ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE + 4];
+    char theRoomIdIndex[ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE + 4];
 
     void debug(int on_off_val, char const* str0_val, char const* str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
     void logit(char const* str0_val, char const* str1_val);
@@ -37,9 +37,8 @@ protected:
 
     int groupId(void) {return this->theGroupId;}
     int groupIndex(void) {return this->theGroupIndex;}
-    char *roomIdIndexString(void) {return this->theRoomIdIndexString;}
-    void setRoomIdIndexString(char *val) {memcpy(this->theRoomIdIndexString, val, ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);}
-
+    char *roomIdIndex(void) {return this->theRoomIdIndex;}
+    void setRoomIdIndex(char *val) {memcpy(this->theRoomIdIndex, val, ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);}
     void insertSession(SessionClass *session_object_val);
     void removeSession(SessionClass *session_object_val);
 

@@ -114,7 +114,7 @@ void DFabricClass::processTransferSessionData (char *data_val)
         return;
     }
 
-    char *room = session->groupObject()->roomIdIndexString();
+    char *room = session->groupObject()->roomIdIndex();
     if (!room) {
         downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
         *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_TRANSFER_SESSION_DATA;

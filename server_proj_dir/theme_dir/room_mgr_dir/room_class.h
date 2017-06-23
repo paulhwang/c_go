@@ -39,7 +39,7 @@ protected:
     int roomIndex(void) {return this->theRoomIndex;}
     char *roomIdIndex(void) {return this->theRoomIdIndex;}
 
-    void insertBase(char *base_id_index_val);
+    void insertBase(char *base_id_index_val) {memcpy(this->theBaseIdIndex, base_id_index_val, BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE); this->theBaseIdIndex[BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE] = 0;}
     void insertGroup(char *group_id_index_val);
     void removeGroup(char *group_id_index_val);
 
