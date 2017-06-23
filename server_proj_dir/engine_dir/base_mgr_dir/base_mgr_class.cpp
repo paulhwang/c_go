@@ -54,11 +54,6 @@ GoBaseClass *BaseMgrClass::mallocGoBase (void)
     GoBaseClass *base_object = new GoBaseClass(this, base_id, base_index);
     this->theBaseTableArray[base_index] = base_object;
 
-    char *data_buf = (char *) malloc(BASE_MGR_DATA_BUFFER_SIZE + 4);
-    data_buf[0] = BASE_MGR_PROTOCOL_RESPOND_IS_MALLOC_BASE;
-    data_buf[1] = BASE_MGR_PROTOCOL_GAME_NAME_IS_GO;
-    phwangEncodeIdIndex(data_buf + 2, base_id, BASE_MGR_PROTOCOL_BASE_ID_SIZE, base_index, BASE_MGR_PROTOCOL_BASE_INDEX_SIZE);
-
     return base_object;
 }
 
