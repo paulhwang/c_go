@@ -151,16 +151,6 @@ void DFabricClass::processPutSessionData (char *data_val)
     data_ptr += ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE;
     strcpy(data_ptr, data_val + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE);
     this->theFabricObject->uFabricObject()->transmitFunction(uplink_data);
-
-
-
-
-    //session->groupObject()->transmitToTheme(data_val, this);
-
-    char *data_buf = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
-    data_buf[0] = WEB_FABRIC_PROTOCOL_RESPOND_IS_PUT_SESSION_DATA;
-    strcpy(data_buf + 1, "TBD");
-    this->transmitFunction(data_buf);
 }
 
 void DFabricClass::processPutSessionDataResponse (char *data_val, SessionClass *session_object_val)

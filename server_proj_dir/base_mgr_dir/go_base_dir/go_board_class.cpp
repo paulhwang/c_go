@@ -65,6 +65,8 @@ void GoBoardClass::addStoneToBoard (int x_val, int y_val, char color_val)
 
 void GoBoardClass::encodeBoard (char* buf_ptr) {
     char *buf_ptr0 = buf_ptr;
+
+    this->theBoardArray[0][0] = GO_BLACK_STONE;
     int i = 0;
     while (i < this->boardSize()) {
         int j = 0;
