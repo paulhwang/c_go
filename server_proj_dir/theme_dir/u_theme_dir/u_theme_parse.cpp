@@ -46,7 +46,7 @@ void UThemeClass::processMallocBaseResponse(char *data_val)
     }
 
     data_val += ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE;
-    room->insertBase(data_val);
+    room->setBaseIdIndex(data_val);
     this->debug(true, "processMallocBaseResponse==1", "");
 
     downlink_data = data_ptr = (char *) malloc(ROOM_MGR_DATA_BUFFER_SIZE + 4);
@@ -78,7 +78,7 @@ void UThemeClass::processTransferDataResponse(char *data_val)
     data_val += ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE;
 
     int i = 0;
-    while (i < room->maxGroupTableArrayIndex) {
+    while (i < room->theMaxGroupTableArrayIndex) {
         if (room->theGroupTableArray[i]) {
             downlink_data = data_ptr = (char *) malloc(ROOM_MGR_DATA_BUFFER_SIZE + 4);
             *data_ptr++ = FABRIC_THEME_PROTOCOL_RESPOND_IS_TRANSFER_DATA;

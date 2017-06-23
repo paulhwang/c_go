@@ -14,17 +14,15 @@ class SessionClass;
 class IdIndexListClass;
 
 class RoomClass {
-#define ROOM_GROUP_ARRAY_SIZE 32
+#define ROOM_CLASS_GROUP_ARRAY_SIZE 32
 
     RoomMgrClass *theRoomMgrObject;
     int theRoomId;
     int theRoomIndex;
     char theRoomIdIndex[ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE + 4];
-
-    char *theGroupTableArray[ROOM_GROUP_ARRAY_SIZE];
-    int maxGroupTableArrayIndex;
-
     char theBaseIdIndex[BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE + 4];
+    char *theGroupTableArray[ROOM_CLASS_GROUP_ARRAY_SIZE];
+    int theMaxGroupTableArrayIndex;
 
     void debug(int on_off_val, char const* str0_val, char const* str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
     void logit(char const* str0_val, char const* str1_val);
@@ -38,8 +36,7 @@ protected:
     int roomId(void) {return this->theRoomId;}
     int roomIndex(void) {return this->theRoomIndex;}
     char *roomIdIndex(void) {return this->theRoomIdIndex;}
-
-    void insertBase(char *base_id_index_val) {memcpy(this->theBaseIdIndex, base_id_index_val, BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE); this->theBaseIdIndex[BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE] = 0;}
+    void setBaseIdIndex(char *base_id_index_val) {memcpy(this->theBaseIdIndex, base_id_index_val, BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE); this->theBaseIdIndex[BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE] = 0;}
     void insertGroup(char *group_id_index_val);
     void removeGroup(char *group_id_index_val);
 

@@ -17,7 +17,7 @@ RoomClass::RoomClass (RoomMgrClass *room_mgr_object_val, int room_id_val, int ro
     this->theRoomIndex = room_index_val;
     phwangEncodeIdIndex(this->theRoomIdIndex, this->theRoomId, ROOM_MGR_PROTOCOL_ROOM_ID_SIZE, this->theRoomIndex, ROOM_MGR_PROTOCOL_ROOM_INDEX_SIZE);
 
-    this->maxGroupTableArrayIndex = 0;
+    this->theMaxGroupTableArrayIndex = 0;
     this->insertGroup(group_id_index_val);
 
     this->debug(true, "RoomClass", this->theRoomIdIndex);
@@ -34,16 +34,17 @@ void RoomClass::insertGroup (char *group_id_index_val)
     buf[GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE] = 0;
 
     int i = 0;
-    while (i < this->maxGroupTableArrayIndex) {
+    while (i < this->theMaxGroupTableArrayIndex) {
         if (!this->theGroupTableArray[i]) {
             this->theGroupTableArray[i] = buf;
             return;
         }
         i++;
     }
-    if (this->maxGroupTableArrayIndex < ROOM_GROUP_ARRAY_SIZE) {
-        this->theGroupTableArray[this->maxGroupTableArrayIndex] = buf;
-        this->maxGroupTableArrayIndex++;
+
+    if (this->theMaxGroupTableArrayIndex < ROOM_CLASS_GROUP_ARRAY_SIZE) {
+        this->theGroupTableArray[this->theMaxGroupTableArrayIndex] = buf;
+        this->theMaxGroupTableArrayIndex++;
         return;
     }
 
@@ -54,7 +55,7 @@ void RoomClass::insertGroup (char *group_id_index_val)
 void RoomClass::removeGroup (char *group_id_index_val)
 {
     int i = 0;
-    while (i < ROOM_GROUP_ARRAY_SIZE) {
+    while (i < ROOM_CLASS_GROUP_ARRAY_SIZE) {
         if (!memcmp(this->theGroupTableArray[i], group_id_index_val, GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE)) {
             free(this->theGroupTableArray[i]);
             this->theGroupTableArray[i] = 0;
