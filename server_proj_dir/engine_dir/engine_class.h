@@ -20,8 +20,9 @@ class EngineClass {
 protected:
     friend class DEngineClass;
     friend class BaseMgrClass;
+    friend class GoPortClass;
 
-    DEngineClass *eEngineObject(void) {return this->theDEngineObject;}
+    DEngineClass *dEngineObject(void) {return this->theDEngineObject;}
     BaseMgrClass *goBaseMgrObject(void) {return this->theGoBaseMgrObject;}
 
 public:

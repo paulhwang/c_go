@@ -13,7 +13,7 @@ DEngineClass::DEngineClass (EngineClass *engine_object_val)
     memset(this, 0, sizeof(DEngineClass));
     this->theEngineObject = engine_object_val;
 
-    //this->startNetConnect();
+    this->startNetConnect();
 
     this->debug(true, "DEngineClass", "init");
 }

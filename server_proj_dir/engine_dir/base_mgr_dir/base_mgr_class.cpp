@@ -14,7 +14,7 @@ BaseMgrClass::BaseMgrClass (EngineClass *engine_object_val)
     this->theEngineObject = engine_object_val;
     this->theGlobalBaseId = 900;
 
-    this->startNetConnect();
+    //this->startNetConnect();
 
     if (1) {
         this->logit("BaseMgrClass", "init");

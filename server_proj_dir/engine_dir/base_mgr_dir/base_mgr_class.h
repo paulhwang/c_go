@@ -46,6 +46,8 @@ protected:
     friend class GoPortClass;
     friend class DEngineClass;
 
+    EngineClass *engineObject(void) {return this->theEngineObject;}
+
     void processTransferDataResponse(GoBaseClass *base_object_val, char *data_val);
     void transmitFunction(char *data_val);
 

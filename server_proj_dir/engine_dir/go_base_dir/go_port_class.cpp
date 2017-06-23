@@ -9,6 +9,8 @@
 #include <malloc.h>
 #include "go_base_class.h"
 #include "go_port_class.h"
+#include "../engine_class.h"
+#include "../d_engine_dir/d_engine_class.h"
 
 #define GO_PROTOCOL_CODE_SIZE 7
 #define GO_PROTOCOL_CODE_PROPOSE      "Propose"
@@ -56,7 +58,7 @@ void GoPortClass::transmitBoardData (void) {
         sprintf(s, "board_data=%s", board_data);
         this->logit("transmitBoardData", s);
     }
-    this->baseObject()->baseMgrObject()->processTransferDataResponse(this->baseObject(), board_data);
+    this->baseObject()->baseMgrObject()->engineObject()->dEngineObject()->processTransferDataResponse(this->baseObject(), board_data);
 }
 
 void GoPortClass::receiveStringData (char const* str_val) {
