@@ -24,22 +24,6 @@ void BaseMgrClass::parseReceiveData (char *data_val)
     }
 
     this->abend("exportedparseFunction", data_val);
-    return;
-
-    this->logit("receiveFunction", data_val);
-
-    if (*data_val == BASE_MGR_PROTOCOL_COMMAND_IS_MALLOC_BASE) {
-        data_val++;
-        if (*data_val == BASE_MGR_PROTOCOL_GAME_NAME_IS_GO) {
-            this->mallocGoBase();
-        }
-    }
-    else if (*data_val == BASE_MGR_PROTOCOL_COMMAND_IS_TRANSFER_DATA) {
-        data_val++;
-        this->receiveData(data_val);
-    }
-    else {
-    }
 }
 
 void BaseMgrClass::processMallocBase(char *data_val)

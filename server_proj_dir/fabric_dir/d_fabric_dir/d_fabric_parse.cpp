@@ -34,12 +34,7 @@ void DFabricClass::exportedparseFunction (char *data_val)
         return;
     }
 
-    if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_GET_SESSION_DATA) {
-        this->processGetSessionData(data_val + 1);
-        return;
-    }
-
-    if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_PUT_SESSION_DATA) {
+    if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_TRANSFER_SESSION_DATA) {
         this->processPutSessionData(data_val + 1);
         return;
     }
@@ -101,15 +96,6 @@ void DFabricClass::processMallocSession (char *data_val)
     this->theFabricObject->uFabricObject()->transmitFunction(data_buf);
 }
 
-void DFabricClass::processGetSessionData (char *data_val)
-{
-    this->logit("processGetSessionData", data_val);
-}
-
-void DFabricClass::processGetSessionDataResponse (char *data_val, SessionClass *session_object_val)
-{
-}
-
 /*
 void dFabricProcessPutSessionResponseCallbackFunction (void *this0_val, void *data_val)
 {
@@ -128,7 +114,7 @@ void DFabricClass::processPutSessionData (char *data_val)
     SessionClass *session = this->linkMgrObject()->serachSession(data_val);
     if (!session) {
         downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
-        *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_PUT_SESSION_DATA;
+        *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_TRANSFER_SESSION_DATA;
         strcpy(data_ptr, "null session");
         this->transmitFunction(downlink_data);
         this->abend("processPutSessionData", "null session");
@@ -138,7 +124,7 @@ void DFabricClass::processPutSessionData (char *data_val)
     char *room = session->groupObject()->roomIdIndexString();
     if (!room) {
         downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
-        *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_PUT_SESSION_DATA;
+        *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_TRANSFER_SESSION_DATA;
         strcpy(data_ptr, "null room");
         this->transmitFunction(downlink_data);
         this->abend("processPutSessionData", "null room");
@@ -156,7 +142,7 @@ void DFabricClass::processPutSessionData (char *data_val)
 void DFabricClass::processPutSessionDataResponse (char *data_val, SessionClass *session_object_val)
 {
     char *data_buf = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
-    data_buf[0] = WEB_FABRIC_PROTOCOL_RESPOND_IS_PUT_SESSION_DATA;
+    data_buf[0] = WEB_FABRIC_PROTOCOL_RESPOND_IS_TRANSFER_SESSION_DATA;
     strcpy(data_buf + 1, (char *) data_val);
     this->transmitFunction(data_buf);
 }

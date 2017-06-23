@@ -12,9 +12,7 @@ GoBoardClass::GoBoardClass (GoBaseClass* base_object_val) {
     this->theBaseObject = base_object_val;
     this->resetBoardObjectData();
 
-    if (1) {
-        this->logit("init", "");
-    }
+    this->debug(true, "init", "");
 }
 
 GoBoardClass::~GoBoardClass (void) {
