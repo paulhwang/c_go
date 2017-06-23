@@ -5,14 +5,11 @@
 */
 
 #pragma once
-
-#include <pthread.h>
 #include "../../protocol_dir/room_mgr_protocol.h"
 #include "../../protocol_dir/base_mgr_protocol.h"
 #include "../go_base_dir/go_base_class.h"
 
 class EngineClass;
-class BaseClass;
 class GoBaseClass;
 
 #define BASE_MGR_RECEIVE_QUEUE_SIZE 100
@@ -24,12 +21,6 @@ class BaseMgrClass {
     EngineClass *theEngineObject;
     int theGlobalBaseId;
     GoBaseClass *theBaseTableArray[BASE_MGR_BASE_ARRAY_SIZE + 4];
-
-    void *theTpTransferObject;
-
-    void parseReceiveData(char *data_val);
-
-    void startNetConnect(void);
 
     int allocBaseId(void);
     int allocBaseIndex(void);
@@ -44,14 +35,13 @@ protected:
     friend class DEngineClass;
 
     EngineClass *engineObject(void) {return this->theEngineObject;}
+    GoBaseClass *searchBase(char *data_val);
+    GoBaseClass *getBaseByIdIndex(int base_id_val, int base_index_val);
 
 public:
     BaseMgrClass(EngineClass *engine_object_val);
     ~BaseMgrClass();
     char const* objectName(void) {return "BaseMgrClass";}
-
-    GoBaseClass *searchBase(char *data_val);
-    GoBaseClass *getBaseByIdIndex(int base_id_val, int base_index_val);
 
     void baseMgrLogit(char const* str0_val, char const* str1_val);
     void baseMgrAbend(char const* str0_val, char const* str1_val);

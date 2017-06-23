@@ -19,7 +19,6 @@ BaseMgrClass::BaseMgrClass (EngineClass *engine_object_val)
 
 BaseMgrClass::~BaseMgrClass (void)
 {
-    phwangFreeTpTransfer(this->theTpTransferObject); 
 }
 
 int BaseMgrClass::allocBaseIndex (void)
