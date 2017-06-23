@@ -35,7 +35,6 @@ protected:
     LinkMgrClass  *linkMgrObject(void)  {return this->theFabricObject->theLinkMgrObject;}
     GroupMgrClass *groupMgrObject(void) {return this->theFabricObject->theGroupMgrObject;}
     void transmitFunction(char *data_val);
-    void receiveFromTheme(SessionClass *session_object_val, char *data_val);
    
 public:
     DFabricClass(FabricClass *fabric_object_val);
@@ -45,5 +44,4 @@ public:
     /* exports */
     void exportedNetAcceptFunction(void *tp_transfer_object_val);
     void exportedparseFunction(char *data_val);
-    void exportedProcessPutSessionResponse(void *data_val);
 };
