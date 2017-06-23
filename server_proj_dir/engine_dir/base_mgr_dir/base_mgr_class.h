@@ -50,8 +50,6 @@ public:
     ~BaseMgrClass();
     char const* objectName(void) {return "BaseMgrClass";}
 
-    void receiveData(char* data_val);
-
     GoBaseClass *searchBase(char *data_val);
     GoBaseClass *getBaseByIdIndex(int base_id_val, int base_index_val);
 
