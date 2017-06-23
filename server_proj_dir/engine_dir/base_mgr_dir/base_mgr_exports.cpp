@@ -4,9 +4,9 @@
   File name: base_mgr_export.cpp
 */
 
-#include "../../phwang_dir/phwang.h"
+#include "../../../phwang_dir/phwang.h"
+#include "../../protocol_dir/net_port_protocol.h"
 #include "base_mgr_class.h"
-#include "../protocol_dir/net_port_protocol.h"
 
 void baseMgrReceiveDataFromTransport (void *base_mgr_object_val, void *data_val) {
     //phwangLogit("Golbal::baseMgrReceiveDataFromTransport", (char *) data_val);

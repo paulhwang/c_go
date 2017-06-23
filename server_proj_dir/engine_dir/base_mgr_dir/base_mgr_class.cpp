@@ -4,9 +4,9 @@
   File name: base_mgr_class.cpp
 */
 
-#include "../../phwang_dir/phwang.h"
+#include "../../../phwang_dir/phwang.h"
 #include "base_mgr_class.h"
-#include "go_base_dir/go_base_class.h"
+#include "../go_base_dir/go_base_class.h"
 
 BaseMgrClass::BaseMgrClass (void)
 {

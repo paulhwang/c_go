@@ -4,7 +4,7 @@
   File name: base_mgr_base.cpp
 */
 
-#include "../../phwang_dir/phwang.h"
+#include "../../../phwang_dir/phwang.h"
 #include "base_mgr_class.h"
 
 int BaseMgrClass::allocBaseIndex (void)

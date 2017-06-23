@@ -5,7 +5,7 @@
 */
 
 #include "../../../phwang_dir/phwang.h"
-#include "../base_mgr_class.h"
+#include "../base_mgr_dir/base_mgr_class.h"
 #include "go_base_class.h"
 
 GoBaseClass::GoBaseClass (BaseMgrClass* base_mgr_object_val, int base_id_val, int base_index_val)

@@ -6,7 +6,8 @@
 
 #include "../../phwang_dir/phwang.h"
 #include "../fabric_dir/fabric_class.h"
-#include "../base_mgr_dir/base_mgr_class.h"
+#include "../engine_dir/engine_class.h"
+#include "../engine_dir/base_mgr_dir/base_mgr_class.h"
 #include "../theme_dir/theme_class.h"
 #include "main_class.h"
 

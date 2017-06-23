@@ -7,9 +7,9 @@
 #pragma once
 
 #include <pthread.h>
-#include "../protocol_dir/room_mgr_protocol.h"
-#include "../protocol_dir/base_mgr_protocol.h"
-#include "go_base_dir/go_base_class.h"
+#include "../../protocol_dir/room_mgr_protocol.h"
+#include "../../protocol_dir/base_mgr_protocol.h"
+#include "../go_base_dir/go_base_class.h"
 
 class BaseClass;
 class GoBaseClass;
