@@ -56,9 +56,6 @@ public:
     ~BaseMgrClass();
     char const* objectName(void) {return "BaseMgrClass";}
 
-    /* exports */
-    void exportedNetReceiveFunction(char *data_val);
-
     void receiveData(char* data_val);
 
     GoBaseClass *searchBase(char *data_val);
