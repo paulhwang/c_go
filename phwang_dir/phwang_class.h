@@ -6,8 +6,6 @@
 
 #pragma once
 
-class ListEntryClass;
-
 #define LOGIT_BUF_SIZE 512
 
 class PhwangClass {
