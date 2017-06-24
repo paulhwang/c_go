@@ -20,7 +20,6 @@ protected:
     friend class LinkMgrClass;
     friend class UFabricClass;
 
-    SessionClass *searchSession(char *data_val) {return (SessionClass *) this->searchEntry(data_val);}
 
 public:
     SessionMgrClass(LinkClass *link_object_val);

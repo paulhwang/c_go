@@ -121,7 +121,7 @@ SessionClass *LinkMgrClass::serachSession (char *data_val)
         return 0;
     }
 
-    return link->sessionMgrObject()->searchSession(data_val + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE);
+    return link->searchSession(data_val + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE);
 }
 
 LinkClass *LinkMgrClass::getLinkByIdIndex (int link_id_val, int link_index_val)
