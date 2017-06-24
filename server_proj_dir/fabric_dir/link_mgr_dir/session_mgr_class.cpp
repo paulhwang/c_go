@@ -16,8 +16,6 @@
 SessionMgrClass::SessionMgrClass (LinkClass *link_object_val)
         : ListMgrClass(0, SESSION_MGR_PROTOCOL_SESSION_ID_SIZE, SESSION_MGR_PROTOCOL_SESSION_INDEX_SIZE, 300)
 {
-    //memset(this, 0, sizeof(SessionMgrClass));
-    this->theLinkObject = link_object_val;
     this->debug(true, "SessionMgrClass", "init");
 }
 
