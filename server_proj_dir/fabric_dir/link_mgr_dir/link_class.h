@@ -37,7 +37,7 @@ protected:
     //SessionMgrClass *sessionMgrObject(void) {return this->theSessionMgrObject;}
     SessionClass *mallocSession(void);
     ListMgrClass *sessionListMgrObject(void) {return this->theSessionListMgrObject;}
-    SessionClass *searchSession(char *data_val) {return (SessionClass *) this->theSessionListMgrObject->searchEntry(data_val);}
+    SessionClass *searchSession(char *data_val) {return (SessionClass *) phwangListMgrSearchEntry(this->theSessionListMgrObject, data_val);}
 
     int linkId(void) {return this->theLinkId;}
     int linkIndex(void) {return this->theLinkIndex;}

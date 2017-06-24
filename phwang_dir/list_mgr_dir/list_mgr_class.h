@@ -30,16 +30,17 @@ class ListMgrClass {
 
 protected:
     friend class ListEntryClass;
+    friend class PhwangClass;
 
     void insertEntry(ListEntryClass * entry_val);
     ListEntryClass *mallocEntry(void);
     void freeEntry(ListEntryClass *list_entry_object_val);
+    ListEntryClass *searchEntry(char *data_val);
 
 public:
     ListMgrClass(char *caller_name_val, int id_size_val, int index_size_val, int global_entry_id_val);
     ~ListMgrClass(void);
     char const* objectName(void) {return "ListMgrClass";}
 
-    ListEntryClass *searchEntry(char *data_val);
 
 };
