@@ -28,9 +28,7 @@ ListEntryClass::ListEntryClass (ListMgrClass *list_mgr_object, int entry_id_val,
 ListEntryClass::ListEntryClass (ListMgrClass *list_mgr_object, int id_size_val, int index_size_val):
         theListMgrObject(list_mgr_object),
         theEntryId(0),
-        theEntryIndex(0),
-        theIdSize(id_size_val),
-        theIndexSize(index_size_val)
+        theEntryIndex(0)
 {
     //memset(this, 0, sizeof(ListEntryClass));
     this->theEntryIdIndex = (char *) malloc(this->theListMgrObject->theIdSize + this->theListMgrObject->theIndexSize + 4);
