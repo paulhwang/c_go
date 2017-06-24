@@ -14,8 +14,9 @@
 #include "../d_fabric_dir/d_fabric_class.h"
 
 SessionMgrClass::SessionMgrClass (LinkClass *link_object_val)
+        : ListMgrClass(0, SESSION_MGR_PROTOCOL_SESSION_ID_SIZE, SESSION_MGR_PROTOCOL_SESSION_INDEX_SIZE, 300)
 {
-    memset(this, 0, sizeof(SessionMgrClass));
+    //memset(this, 0, sizeof(SessionMgrClass));
     this->theLinkObject = link_object_val;
     this->theGlobalSessionId = 300;
 
@@ -27,7 +28,7 @@ SessionMgrClass::SessionMgrClass (LinkClass *link_object_val)
 SessionMgrClass::~SessionMgrClass (void)
 {
 }
-
+/*
 int SessionMgrClass::allocSessionId (void)
 {
     if (this->theGlobalSessionId >= SESSION_MGR_MAX_GLOBAL_SESSION_ID) {
@@ -48,7 +49,16 @@ int SessionMgrClass::allocSessionIndex (void)
     }
     return -1;
 }
+*/
+SessionClass *SessionMgrClass::mallocSession (void)
+{
+    this->debug(true, "mallocSession", "");
+    SessionClass *session = new SessionClass(this);
+    //this->insertEntry(session);
+    return session;
+}
 
+/*
 SessionClass *SessionMgrClass::mallocSession (void)
 {
     if (1) {
@@ -65,6 +75,7 @@ SessionClass *SessionMgrClass::mallocSession (void)
     }
 }
 
+/*
 SessionClass *SessionMgrClass::searchSession (char *data_val)
 {
     int session_id;
@@ -113,7 +124,7 @@ SessionClass *SessionMgrClass::getSessionByIdIndex (int session_id_val, int sess
 
     return session;
 }
-
+*/
 void SessionMgrClass::sessionMgrLogit (char const* str0_val, char const* str1_val) {
     phwangLogit(str0_val, str1_val);
 }

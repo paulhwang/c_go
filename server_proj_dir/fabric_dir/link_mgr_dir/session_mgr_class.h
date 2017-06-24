@@ -5,11 +5,13 @@
 */
 
 #pragma once
+#include "../../../phwang_dir/list_mgr_dir/list_mgr_class.h"
 #include "../../protocol_dir/link_mgr_protocol.h"
+
 class SessionClass;
 class LinkClass;
 
-class SessionMgrClass {
+class SessionMgrClass : public ListMgrClass {
 #define SESSION_MGR_SESSION_ARRAY_SIZE 1000
 #define SESSION_MGR_MAX_GLOBAL_SESSION_ID 9999
 
@@ -31,8 +33,8 @@ protected:
 
     LinkClass *linkObject(void) {return this->theLinkObject;}
     SessionClass *mallocSession(void);
-    void freeSession(SessionClass *session_object_val);
-    SessionClass *searchSession(char *data_val);
+    //void freeSession(SessionClass *session_object_val) {this->freeEntry(session_object_val);}
+    SessionClass *searchSession(char *data_val) {return (SessionClass *) this->searchEntry(data_val);}
 
 public:
     SessionMgrClass(LinkClass *link_object_val);

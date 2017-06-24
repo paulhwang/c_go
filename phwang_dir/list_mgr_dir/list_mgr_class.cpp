@@ -8,14 +8,14 @@
 #include "list_mgr_class.h"
 #include "list_entry_class.h"
 
-ListMgrClass::ListMgrClass (void *caller_object_val, int id_size_val, int index_size_val)
+ListMgrClass::ListMgrClass (void *caller_object_val, int id_size_val, int index_size_val, int global_entry_id_val)
+        : theIdSize(id_size_val),
+          theIndexSize(index_size_val),
+          theGlobalEntryId(global_entry_id_val)
 {
-    memset(this, 0, sizeof(ListMgrClass));
+    //memset(this, 0, sizeof(ListMgrClass));
     this->theCallerObject = caller_object_val;
-    this->theIdSize = id_size_val;
-    this->theIndexSize = index_size_val;
 
-    this->theGlobalEntryId = 0;
     this->theMaxIdIndexTableIndex = 0;
 
     this->debug(true, "ListMgrClass", "init");
@@ -48,7 +48,23 @@ int ListMgrClass::allocEntryIndex (void)
     return -1;
 }
 
-ListEntryClass *ListMgrClass::mallocEntry(void *entry_data_val)
+void ListMgrClass::insertEntry (ListEntryClass * entry_val)
+{
+    this->debug(true, "InsertEntry", "");
+
+    entry_val->theEntryId = this->allocEntryId();
+    entry_val->theEntryIndex = this->allocEntryIndex();
+    if (entry_val->theEntryIndex != -1) {
+        phwangEncodeIdIndex(entry_val->theEntryIdIndex, entry_val->theEntryId, this->theIdSize, entry_val->theEntryIndex, this->theIndexSize);
+        this->theEntryTableArray[entry_val->theEntryIndex] = entry_val;
+        return;
+    }
+
+    this->abend("InsertEntry", "TBD");
+}
+
+/*
+ListEntryClass *ListMgrClass::mallocEntry(void)
 {
     this->debug(true, "mallocEntry", "");
 
@@ -58,14 +74,59 @@ ListEntryClass *ListMgrClass::mallocEntry(void *entry_data_val)
         return 0;
     }
 
-    ListEntryClass *entry = new ListEntryClass(this, entry_id, entry_index, entry_data_val);
+    ListEntryClass *entry = new ListEntryClass(this, entry_id, entry_index, 0, this->theIdSize, this->theIndexSize);
     this->theEntryTableArray[entry_index] = entry;
     return entry;
 }
+*/
 
-void ListMgrClass::freeEntry(ListEntryClass *list_entry_object_val)
+void ListMgrClass::freeEntry (ListEntryClass *list_entry_object_val)
 {
 
+}
+
+ListEntryClass *ListMgrClass::searchEntry (char *data_val)
+{
+    int entry_id;
+    int entry_index;
+
+    this->debug(true, "searchEntry", data_val);
+
+    phwangDecodeIdIndex(data_val, &entry_id, this->theIdSize, &entry_index, this->theIndexSize);
+
+    if (1) {
+        char s[LOGIT_BUF_SIZE];
+        sprintf(s, "entry_id=%d entry_index=%d", entry_id, entry_index);
+        this->logit("searchEntry", s);
+    }
+
+    return this->getEntryByIdIndex(entry_id, entry_index);
+}
+
+ListEntryClass *ListMgrClass::getEntryByIdIndex (int entry_id_val, int link_index_val)
+{
+    if (entry_id_val > LIST_MGR_MAX_GLOBAL_LIST_ID) {
+        this->abend("getEntryByIdIndex", "entry_id_val too big");
+        return 0;
+    }
+
+    if (link_index_val >= LIST_MGR_MAX_GLOBAL_LIST_ID) {
+        this->abend("getEntryByIdIndex", "link_index_val too big");
+        return 0;
+    }
+
+    ListEntryClass *entry = this->theEntryTableArray[link_index_val];
+    if (!entry) {
+        this->abend("getEntryByIdIndex", "null entry");
+        return 0;
+    }
+
+    if (entry->theEntryId != entry_id_val){
+        this->abend("getEntryByIdIndex", "entry id does not match");
+        return 0;
+    }
+
+    return entry;
 }
 
 void ListMgrClass::logit (char const* str0_val, char const* str1_val)

@@ -5,16 +5,14 @@
 */
 
 #pragma once
+#include "../../../phwang_dir/list_mgr_dir/list_entry_class.h"
 #include "../../protocol_dir/session_mgr_protocol.h"
 
 class SessionMgrClass;
 class GroupClass;
 
-class SessionClass {
+class SessionClass : public ListEntryClass {
     SessionMgrClass *theSessionMgrObject;
-    int theSessionId;
-    int theSessionIndex;
-    char theSessionIdIndex[SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE + 4];
     GroupClass *theGroupObject;
 
     void bindGroup(GroupClass *group_object_val) {this->theGroupObject = group_object_val;}
@@ -28,12 +26,14 @@ protected:
     friend class DFabricClass;
     friend class SessionMgrClass;
 
-    int sessionId(void) {return this->theSessionId;}
-    int sessionIndex(void) {return this->theSessionIndex;}
+    int sessionId(void) {return this->theEntryId;}
+    int sessionIndex(void) {return this->theEntryIndex;}
+    char *sessionIdIndex(void) {return this->theEntryIdIndex;}
     GroupClass *groupObject(void) {return this->theGroupObject;}
 
 public:
-    SessionClass(SessionMgrClass *session_mgr_object_val, int session_id_val, int session_index_val);
+    //SessionClass(SessionMgrClass *session_mgr_object_val, int session_id_val, int session_index_val);
+    SessionClass(SessionMgrClass *session_mgr_object_vall);
     ~SessionClass(void);
     char const* objectName(void) {return "SessionClass";}
 };

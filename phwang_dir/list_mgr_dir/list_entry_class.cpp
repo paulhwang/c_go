@@ -8,16 +8,35 @@
 #include "list_entry_class.h"
 #include "list_mgr_class.h"
 
-ListEntryClass::ListEntryClass (ListMgrClass *list_mgr_object, int entry_id_val, int entry_index_val, void *data_val)
+/*
+ListEntryClass::ListEntryClass (ListMgrClass *list_mgr_object, int entry_id_val, int entry_index_val, void *data_val, int id_size_val, int index_size_val):
+        theEntryId(entry_id_val),
+        theEntryIndex(entry_index_val),
+        theEntryData(data_val),
+        theIdSize(id_size_val),
+        theIndexSize(index_size_val)
 {
-    memset(this, 0, sizeof(ListEntryClass));
+    //memset(this, 0, sizeof(ListEntryClass));
     this->theListMgrObject = list_mgr_object;
-    this->theEntryId = entry_id_val;
-    this->theEntryIndex = entry_index_val;
-    this->theEntryData = data_val;
-    this->theEntryIdIndex = (char *) malloc(this->theListMgrObject->theIdSize + this->theListMgrObject->theIndexSize + 4);
+    this->theEntryIdIndex = (char *) malloc(this->theIdSize + this->theIndexSize + 4);
+    phwangEncodeIdIndex(this->theEntryIdIndex, this->theEntryId, this->theIdSize, this->theEntryIndex, this->theIndexSize);
 
-    this->debug(true, "ListEntryClass", "init");
+    this->debug(true, "ListEntryClass", this->theEntryIdIndex);
+}
+*/
+
+ListEntryClass::ListEntryClass (ListMgrClass *list_mgr_object, int id_size_val, int index_size_val):
+        theEntryId(0),
+        theEntryIndex(0),
+        theIdSize(id_size_val),
+        theIndexSize(index_size_val)
+{
+    //memset(this, 0, sizeof(ListEntryClass));
+    this->theListMgrObject = list_mgr_object;
+    this->theEntryIdIndex = (char *) malloc(this->theIdSize + this->theIndexSize + 4);
+    phwangEncodeIdIndex(this->theEntryIdIndex, this->theEntryId, this->theIdSize, this->theEntryIndex, this->theIndexSize);
+
+    this->debug(true, "ListEntryClass", this->theEntryIdIndex);
 }
 
 ListEntryClass::~ListEntryClass (void)
