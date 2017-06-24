@@ -11,7 +11,7 @@ class ListEntryClass;
 class ListMgrClass {
 #define LIST_MGR_ID_INDEX_ARRAY_SIZE 1000
 #define LIST_MGR_MAX_GLOBAL_LIST_ID 9999
-    void *theCallerObject;
+    char *theCallerName;
     int theIdSize;
     int theIndexSize;
     int theIdIndexSize;
@@ -34,7 +34,7 @@ protected:
     friend class ListEntryClass;
 
 public:
-    ListMgrClass(void *caller_object_val, int id_size_val, int index_size_val, int global_entry_id_val);
+    ListMgrClass(char *caller_name_val, int id_size_val, int index_size_val, int global_entry_id_val);
     ~ListMgrClass(void);
     char const* objectName(void) {return "ListMgrClass";}
 

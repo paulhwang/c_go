@@ -8,13 +8,13 @@
 #include "list_mgr_class.h"
 #include "list_entry_class.h"
 
-ListMgrClass::ListMgrClass (void *caller_object_val, int id_size_val, int index_size_val, int global_entry_id_val):
+ListMgrClass::ListMgrClass (char *caller_name_val, int id_size_val, int index_size_val, int global_entry_id_val):
+        theCallerName(caller_name_val),
         theIdSize(id_size_val),
         theIndexSize(index_size_val),
         theGlobalEntryId(global_entry_id_val),
         theMaxIdIndexTableIndex(0)
 {
-    this->theCallerObject = caller_object_val;
     this->debug(true, "ListMgrClass", "init");
 }
 
@@ -59,23 +59,6 @@ void ListMgrClass::insertEntry (ListEntryClass * entry_val)
 
     this->abend("InsertEntry", "TBD");
 }
-
-/*
-ListEntryClass *ListMgrClass::mallocEntry(void)
-{
-    this->debug(true, "mallocEntry", "");
-
-    int entry_id = this->allocEntryId();
-    int entry_index = this->allocEntryIndex();
-    if (entry_index == -1) {
-        return 0;
-    }
-
-    ListEntryClass *entry = new ListEntryClass(this, entry_id, entry_index, 0, this->theIdSize, this->theIndexSize);
-    this->theEntryTableArray[entry_index] = entry;
-    return entry;
-}
-*/
 
 void ListMgrClass::freeEntry (ListEntryClass *list_entry_object_val)
 {
@@ -129,13 +112,13 @@ ListEntryClass *ListMgrClass::getEntryByIdIndex (int entry_id_val, int link_inde
 void ListMgrClass::logit (char const* str0_val, char const* str1_val)
 {
     char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
+    sprintf(s, "%s(%s)::%s", this->objectName(), this->theCallerName, str0_val);
     phwangLogit(s, str1_val);
 }
 
 void ListMgrClass::abend (char const* str0_val, char const* str1_val)
 {
     char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
+    sprintf(s, "%s(%s)::%s", this->objectName(), this->theCallerName, str0_val);
     phwangAbend(s, str1_val);
 }
