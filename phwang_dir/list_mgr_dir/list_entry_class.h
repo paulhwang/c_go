@@ -16,8 +16,7 @@ class ListEntryClass {
     void abend(char const* str0_val, char const* str1_val);
 
 public:
-    //ListEntryClass(ListMgrClass *list_mgr_object, int entry_id_val, int entry_index_val, void *data_val, int id_size_val, int index_size_val);
-    ListEntryClass(ListMgrClass *list_mgr_object, int id_size_val, int index_size_val);
+    ListEntryClass(ListMgrClass *list_mgr_object);
     ~ListEntryClass(void);
     char const* objectName(void) {return "ListEntryClass";}
 
