@@ -10,6 +10,7 @@
 class LinkMgrClass;
 class SessionMgrClass;
 class SessionClass;
+class ListMgrClass;
 
 class LinkClass {
 #define  LINK_CLASS_LINK_NAME_BUF_SIZE 32
@@ -19,6 +20,7 @@ class LinkClass {
     char theLinkIdIndex[LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + 4];
     char theLinkName[LINK_CLASS_LINK_NAME_BUF_SIZE + 4];
     SessionMgrClass *theSessionMgrObject;
+    ListMgrClass *theSessionListMgrObject;
 
     void debug(int on_off_val, char const* str0_val, char const* str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
     void logit(char const* str0_val, char const* str1_val);
@@ -33,6 +35,7 @@ protected:
     LinkMgrClass *linkMgrObject(void) {return this->theLinkMgrObject;}
     SessionMgrClass *sessionMgrObject(void) {return this->theSessionMgrObject;}
     SessionClass *mallocSession(void);
+    ListMgrClass *sessionListMgrObject(void) {return this->theSessionListMgrObject;}
 
     int linkId(void) {return this->theLinkId;}
     int linkIndex(void) {return this->theLinkIndex;}
