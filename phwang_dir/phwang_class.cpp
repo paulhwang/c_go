@@ -9,6 +9,7 @@
 #include "phwang.h"
 #include "phwang_class.h"
 #include "queue_dir/queue_class.h"
+#include "list_mgr_dir/list_mgr_class.h"
 #include "net_dir/tp_server_class.h"
 #include "net_dir/tp_transfer_class.h"
 
@@ -91,6 +92,16 @@ void *PhwangClass::mallocQueue (int max_size_val)
 {
     QueueClass *queue = new QueueClass(max_size_val);
     return queue;
+}
+
+/**************************************************************************************************************/
+/**************************************************************************************************************/
+/**************************************************************************************************************/
+
+void *PhwangClass::mallocListMgr (char *caller_name_val, int id_size_val, int index_size_val, int global_entry_id_val)
+{
+    ListMgrClass *list_mgr = new ListMgrClass(caller_name_val, id_size_val, index_size_val, global_entry_id_val);
+    return list_mgr;
 }
 
 /**************************************************************************************************************/

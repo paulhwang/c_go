@@ -30,6 +30,9 @@ class PhwangClass {
     void enqueue(void *queue_val, void *data_val);
     void *dequeue(void *queue_val);
 
+    /* list_mgr */
+    void *mallocListMgr(char *caller_name_val, int id_size_val, int index_size_val, int global_entry_id_val);
+
     /* tp */
     void *mallocTpServer (
             void *caller_object_val,
