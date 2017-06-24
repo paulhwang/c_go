@@ -25,7 +25,7 @@ LinkClass::LinkClass (LinkMgrClass *link_mgr_object_val, int link_id_val, int li
         memcpy(this->theLinkName, link_name_val, LINK_CLASS_LINK_NAME_BUF_SIZE);
         this->theLinkName[LINK_CLASS_LINK_NAME_BUF_SIZE] = 0;
     }
-    this->theSessionListMgrObject = (ListMgrClass *) phwangMallocListMgr("SESSION", SESSION_MGR_PROTOCOL_SESSION_ID_SIZE, SESSION_MGR_PROTOCOL_SESSION_INDEX_SIZE, 300);
+    this->theSessionListMgrObject = phwangMallocListMgr("SESSION", SESSION_MGR_PROTOCOL_SESSION_ID_SIZE, SESSION_MGR_PROTOCOL_SESSION_INDEX_SIZE, 300);
 
     this->debug(true, "LinkClass", this->theLinkIdIndex);
 }
