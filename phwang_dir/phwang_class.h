@@ -34,7 +34,7 @@ class PhwangClass {
 
     /* list_mgr */
     void *mallocListMgr(char *caller_name_val, int id_size_val, int index_size_val, int global_entry_id_val);
-    ListEntryClass *listMgrSearchEntry(void *list_mgr_val, char *data_val);
+    void *listMgrSearchEntry(void *list_mgr_val, char *data_val);
 
     /* tp */
     void *mallocTpServer (

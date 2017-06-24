@@ -10,7 +10,6 @@
 #include <unistd.h>
 #include <malloc.h>
 #include "phwang_class.h"
-#include "list_mgr_dir/list_entry_class.h"
 
 /* init */
 void phwangInit(void);
@@ -34,7 +33,7 @@ void *phwangDequeue(void *queue_val);
 
 /* list_mgr */
 void *phwangMallocListMgr(char *caller_name_val, int id_size_val, int index_size_val, int global_entry_id_val);
-ListEntryClass *phwangListMgrSearchEntry(void *list_mgr_val, char *data_val);
+void *phwangListMgrSearchEntry(void *list_mgr_val, char *data_val);
 
 /* tp */
 void *phwangMallocTpServer(

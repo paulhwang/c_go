@@ -104,7 +104,7 @@ void *PhwangClass::mallocListMgr (char *caller_name_val, int id_size_val, int in
     return list_mgr;
 }
 
-ListEntryClass *PhwangClass::listMgrSearchEntry(void *list_mgr_val, char *data_val)
+void *PhwangClass::listMgrSearchEntry(void *list_mgr_val, char *data_val)
 {
     if (!list_mgr_val) {
         phwangAbend("listMgrSearchEntry", "null list_mgr_val");
