@@ -81,6 +81,11 @@ void *phwangMallocListMgr (char *caller_name_val, int id_size_val, int index_siz
     return thePhwangObject->mallocListMgr(caller_name_val, id_size_val, index_size_val, global_entry_id_val);
 }
 
+ListEntryClass *phwangListMgrSearchEntry(void *list_mgr_val, char *data_val)
+{
+    return thePhwangObject->listMgrSearchEntry(list_mgr_val, data_val);
+}
+
 /* tp */
 void *phwangMallocTpServer (
                 void *caller_object_val,

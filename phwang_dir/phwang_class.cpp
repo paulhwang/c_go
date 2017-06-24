@@ -104,6 +104,21 @@ void *PhwangClass::mallocListMgr (char *caller_name_val, int id_size_val, int in
     return list_mgr;
 }
 
+ListEntryClass *PhwangClass::listMgrSearchEntry(void *list_mgr_val, char *data_val)
+{
+    if (!list_mgr_val) {
+        phwangAbend("listMgrSearchEntry", "null list_mgr_val");
+        return 0;
+    }
+
+    if (strcmp(((ListMgrClass *) list_mgr_val)->objectName(), "ListMgrClass")) {
+        phwangAbend("listMgrSearchEntry", "wrong object");
+        return 0;
+    }
+
+    return ((ListMgrClass *) list_mgr_val)->searchEntry(data_val);
+}
+
 /**************************************************************************************************************/
 /**************************************************************************************************************/
 /**************************************************************************************************************/
@@ -111,12 +126,12 @@ void *PhwangClass::mallocListMgr (char *caller_name_val, int id_size_val, int in
 void PhwangClass::freeQueue (void *queue_val)
 {
     if (!queue_val) {
-        phwangAbend("phwangFreeQueue", "null queue_val");
+        phwangAbend("freeQueue", "null queue_val");
         return;
     }
 
     if (strcmp(((QueueClass *) queue_val)->objectName(), "QueueClass")) {
-        phwangAbend("phwangFreeQueue", "wrong object");
+        phwangAbend("freeQueue", "wrong object");
         return;
     }
 
@@ -126,12 +141,12 @@ void PhwangClass::freeQueue (void *queue_val)
 void PhwangClass::enqueue (void *queue_val, void *data_val)
 {
     if (!queue_val) {
-        phwangAbend("phwangEnqueue", "null queue_val");
+        phwangAbend("enqueue", "null queue_val");
         return;
     }
 
     if (strcmp(((QueueClass *) queue_val)->objectName(), "QueueClass")) {
-        phwangAbend("phwangEnqueue", "wrong object");
+        phwangAbend("enqueue", "wrong object");
         return;
     }
 
@@ -141,12 +156,12 @@ void PhwangClass::enqueue (void *queue_val, void *data_val)
 void *PhwangClass::dequeue (void *queue_val)
 {
     if (!queue_val) {
-        phwangAbend("phwangDequeue", "null queue_val");
+        phwangAbend("dequeue", "null queue_val");
         return 0;
     }
 
     if (strcmp(((QueueClass *) queue_val)->objectName(), "QueueClass")) {
-        phwangAbend("phwangDequeue", "wrong object");
+        phwangAbend("dequeue", "wrong object");
         return 0;
     }
 
