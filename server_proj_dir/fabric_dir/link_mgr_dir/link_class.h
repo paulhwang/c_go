@@ -7,7 +7,6 @@
 #pragma once
 #include "../../protocol_dir/link_mgr_protocol.h"
 #include "../../../phwang_dir/list_mgr_dir/list_mgr_class.h"
-#include "session_mgr_class.h"
 
 class LinkMgrClass;
 class SessionMgrClass;
