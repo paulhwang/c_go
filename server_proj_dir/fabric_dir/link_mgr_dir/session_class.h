@@ -14,7 +14,6 @@ class GroupClass;
 
 class SessionClass : public ListEntryClass {
     LinkClass *theLinkObject;
-    SessionMgrClass *theSessionMgrObject;
     GroupClass *theGroupObject;
 
     void bindGroup(GroupClass *group_object_val) {this->theGroupObject = group_object_val;}
