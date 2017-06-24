@@ -8,16 +8,13 @@
 #include "list_mgr_class.h"
 #include "list_entry_class.h"
 
-ListMgrClass::ListMgrClass (void *caller_object_val, int id_size_val, int index_size_val, int global_entry_id_val)
-        : theIdSize(id_size_val),
-          theIndexSize(index_size_val),
-          theGlobalEntryId(global_entry_id_val)
+ListMgrClass::ListMgrClass (void *caller_object_val, int id_size_val, int index_size_val, int global_entry_id_val):
+        theIdSize(id_size_val),
+        theIndexSize(index_size_val),
+        theGlobalEntryId(global_entry_id_val),
+        theMaxIdIndexTableIndex(0)
 {
-    //memset(this, 0, sizeof(ListMgrClass));
     this->theCallerObject = caller_object_val;
-
-    this->theMaxIdIndexTableIndex = 0;
-
     this->debug(true, "ListMgrClass", "init");
 }
 
