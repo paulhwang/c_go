@@ -7,6 +7,7 @@
 #include "../../../phwang_dir/phwang.h"
 #include "link_class.h"
 #include "session_mgr_class.h"
+#include "session_class.h"
 #include "link_mgr_class.h"
 
 LinkClass::LinkClass (LinkMgrClass *link_mgr_object_val, int link_id_val, int link_index_val, char const* link_name_val)
@@ -31,6 +32,13 @@ LinkClass::LinkClass (LinkMgrClass *link_mgr_object_val, int link_id_val, int li
 
 LinkClass::~LinkClass (void)
 {
+}
+
+SessionClass *LinkClass::mallocSession (void)
+{
+    this->debug(true, "mallocSession", "");
+    SessionClass *session = new SessionClass(this->theSessionMgrObject, this);
+    return session;
 }
 
 void LinkClass::logit (char const* str0_val, char const* str1_val) {

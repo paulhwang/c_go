@@ -9,6 +9,7 @@
 
 class LinkMgrClass;
 class SessionMgrClass;
+class SessionClass;
 
 class LinkClass {
 #define  LINK_CLASS_LINK_NAME_BUF_SIZE 32
@@ -31,6 +32,7 @@ protected:
 
     LinkMgrClass *linkMgrObject(void) {return this->theLinkMgrObject;}
     SessionMgrClass *sessionMgrObject(void) {return this->theSessionMgrObject;}
+    SessionClass *mallocSession(void);
 
     int linkId(void) {return this->theLinkId;}
     int linkIndex(void) {return this->theLinkIndex;}

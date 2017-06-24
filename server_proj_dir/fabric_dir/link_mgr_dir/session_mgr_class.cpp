@@ -25,14 +25,6 @@ SessionMgrClass::~SessionMgrClass (void)
 {
 }
 
-SessionClass *SessionMgrClass::mallocSession (void)
-{
-    this->debug(true, "mallocSession", "");
-    SessionClass *session = new SessionClass(this, this->theLinkObject);
-    //this->insertEntry(session);
-    return session;
-}
-
 void SessionMgrClass::sessionMgrLogit (char const* str0_val, char const* str1_val) {
     phwangLogit(str0_val, str1_val);
 }

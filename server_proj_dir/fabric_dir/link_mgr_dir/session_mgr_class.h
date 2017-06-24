@@ -23,7 +23,6 @@ protected:
     friend class UFabricClass;
 
     LinkClass *linkObject(void) {return this->theLinkObject;}
-    SessionClass *mallocSession(void);
     SessionClass *searchSession(char *data_val) {return (SessionClass *) this->searchEntry(data_val);}
 
 public:

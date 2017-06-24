@@ -87,7 +87,7 @@ SessionClass *LinkMgrClass::mallocSession (char *data_val)
         return 0;
     }
 
-    return link->sessionMgrObject()->mallocSession();
+    return link->mallocSession();
 }
 
 LinkClass *LinkMgrClass::searchLink (char *data_val)
