@@ -6,12 +6,10 @@
 
 #pragma once
 #include "../../protocol_dir/link_mgr_protocol.h"
-#include "../../../phwang_dir/list_mgr_dir/list_mgr_class.h"
 
 class LinkMgrClass;
 class SessionMgrClass;
 class SessionClass;
-class ListMgrClass;
 
 class LinkClass {
 #define  LINK_CLASS_LINK_NAME_BUF_SIZE 32
