@@ -5,6 +5,7 @@
 */
 
 #include "../../../phwang_dir/phwang.h"
+#include "../../../phwang_dir/list_mgr_dir/list_mgr_class.h"
 #include "link_class.h"
 #include "session_mgr_class.h"
 #include "session_class.h"
