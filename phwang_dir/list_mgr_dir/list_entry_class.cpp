@@ -8,8 +8,8 @@
 #include "list_entry_class.h"
 #include "list_mgr_class.h"
 
-ListEntryClass::ListEntryClass (ListMgrClass *list_mgr_object):
-        theListMgrObject(list_mgr_object),
+ListEntryClass::ListEntryClass (void *list_mgr_object):
+        theListMgrObject((ListMgrClass *) list_mgr_object),
         theEntryId(0),
         theEntryIndex(0)
 {

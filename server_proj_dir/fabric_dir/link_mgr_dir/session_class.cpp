@@ -9,7 +9,7 @@
 #include "session_class.h"
 
 SessionClass::SessionClass (void *list_mgr_object_val, LinkClass *link_object_val)
-    : ListEntryClass((ListMgrClass *) list_mgr_object_val)
+    : ListEntryClass(list_mgr_object_val)
 {
     this->theLinkObject = link_object_val;
     this->debug(true, "SessionClass", this->sessionIdIndex());
