@@ -33,9 +33,9 @@ ListEntryClass::ListEntryClass (ListMgrClass *list_mgr_object, int id_size_val, 
         theIndexSize(index_size_val)
 {
     //memset(this, 0, sizeof(ListEntryClass));
-    this->theEntryIdIndex = (char *) malloc(this->theIdSize + this->theIndexSize + 4);
+    this->theEntryIdIndex = (char *) malloc(this->theListMgrObject->theIdSize + this->theListMgrObject->theIndexSize + 4);
     this->theListMgrObject->insertEntry(this);
-    phwangEncodeIdIndex(this->theEntryIdIndex, this->theEntryId, this->theIdSize, this->theEntryIndex, this->theIndexSize);
+    phwangEncodeIdIndex(this->theEntryIdIndex, this->theEntryId, this->theListMgrObject->theIdSize, this->theEntryIndex, this->theListMgrObject->theIndexSize);
 
     this->debug(true, "ListEntryClass", this->theEntryIdIndex);
 }
