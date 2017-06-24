@@ -6,6 +6,8 @@
 
 #pragma once
 #include "../../protocol_dir/link_mgr_protocol.h"
+#include "../../../phwang_dir/list_mgr_dir/list_mgr_class.h"
+#include "session_mgr_class.h"
 
 class LinkMgrClass;
 class SessionMgrClass;
@@ -36,6 +38,7 @@ protected:
     SessionMgrClass *sessionMgrObject(void) {return this->theSessionMgrObject;}
     SessionClass *mallocSession(void);
     ListMgrClass *sessionListMgrObject(void) {return this->theSessionListMgrObject;}
+    SessionClass *searchSession(char *data_val) {return (SessionClass *) this->theSessionMgrObject->searchEntry(data_val);}
 
     int linkId(void) {return this->theLinkId;}
     int linkIndex(void) {return this->theLinkIndex;}
