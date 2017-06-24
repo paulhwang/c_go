@@ -5,11 +5,11 @@
 */
 
 #include "../../../phwang_dir/phwang.h"
+#include "../../../phwang_dir/list_mgr_dir/list_mgr_class.h"
 #include "session_class.h"
-#include "session_mgr_class.h"
 
-SessionClass::SessionClass (SessionMgrClass *session_mgr_object_val, LinkClass *link_object_val)
-    : ListEntryClass(session_mgr_object_val)
+SessionClass::SessionClass (ListMgrClass *list_mgr_object_val, LinkClass *link_object_val)
+    : ListEntryClass(list_mgr_object_val)
 {
     this->theLinkObject = link_object_val;
     this->debug(true, "SessionClass", this->sessionIdIndex());

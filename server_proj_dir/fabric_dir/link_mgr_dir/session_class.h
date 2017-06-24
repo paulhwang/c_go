@@ -33,7 +33,7 @@ protected:
     GroupClass *groupObject(void) {return this->theGroupObject;}
 
 public:
-    SessionClass(SessionMgrClass *session_mgr_object_val, LinkClass *link_object_val);
+    SessionClass(ListMgrClass *list_mgr_object_val, LinkClass *link_object_val);
     ~SessionClass(void);
     char const* objectName(void) {return "SessionClass";}
 };
