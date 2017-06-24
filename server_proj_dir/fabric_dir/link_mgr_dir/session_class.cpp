@@ -8,9 +8,10 @@
 #include "session_class.h"
 #include "session_mgr_class.h"
 
-SessionClass::SessionClass (SessionMgrClass *session_mgr_object_val)
+SessionClass::SessionClass (SessionMgrClass *session_mgr_object_val, LinkClass *link_object_val)
     : ListEntryClass(session_mgr_object_val)
 {
+    this->theLinkObject = link_object_val;
     this->theSessionMgrObject = session_mgr_object_val;
     this->debug(true, "SessionClass", this->sessionIdIndex());
 }

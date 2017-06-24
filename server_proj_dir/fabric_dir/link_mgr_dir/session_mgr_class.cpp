@@ -28,7 +28,7 @@ SessionMgrClass::~SessionMgrClass (void)
 SessionClass *SessionMgrClass::mallocSession (void)
 {
     this->debug(true, "mallocSession", "");
-    SessionClass *session = new SessionClass(this);
+    SessionClass *session = new SessionClass(this, this->theLinkObject);
     //this->insertEntry(session);
     return session;
 }
