@@ -8,16 +8,6 @@
 #include "session_class.h"
 #include "session_mgr_class.h"
 
-/*
-SessionClass::SessionClass (SessionMgrClass *session_mgr_object_val, int session_id_val, int session_index_val)
-    : ListEntryClass(0, session_id_val, session_index_val, 0, SESSION_MGR_PROTOCOL_SESSION_ID_SIZE, SESSION_MGR_PROTOCOL_SESSION_INDEX_SIZE)
-{
-    this->theSessionMgrObject = session_mgr_object_val;
-    this->theSessionMgrObject->insertEntry(this);
-    this->debug(true, "SessionClass", this->sessionIdIndex());
-}
-*/
-
 SessionClass::SessionClass (SessionMgrClass *session_mgr_object_val)
     : ListEntryClass(session_mgr_object_val, SESSION_MGR_PROTOCOL_SESSION_ID_SIZE, SESSION_MGR_PROTOCOL_SESSION_INDEX_SIZE)
 {
