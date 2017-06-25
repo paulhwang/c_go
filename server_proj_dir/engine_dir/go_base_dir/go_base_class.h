@@ -22,13 +22,12 @@ class BaseMgrClass;
 class EngineClass;
 
 class GoBaseClass {
-    EngineClass *thetheEngineObject;
+    EngineClass *theEngineObject___;
     int theBaseId;
     int theBaseIndex;
     char theBaseIdIndex[BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE + 4];
     char theRoomIdIndex[ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE + 4];
 
-    BaseMgrClass* theBaseMgrObject;
     GoEngineClass* theEngineObject;
     GoBoardClass* theBoardObject;
     GoPortClass* thePortObject;
@@ -53,12 +52,13 @@ protected:
     char const* objectName(void) {return "GoBaseClass";}
     int baseId(void) {return this->theBaseId;}
     int baseIndex(void) {return this->theBaseIndex;}
-    BaseMgrClass* baseMgrObject(void) {return this->theBaseMgrObject;}
     GoEngineClass* engineObject(void) {return this->theEngineObject;}
     GoBoardClass* boardObject(void) {return this->theBoardObject;}
     GoPortClass* portObject(void) {return this->thePortObject;}
     GoConfigClass* configObject(void) {return this->theConfigObject;}
     GoGameClass* gameObject(void) {return this->theGameObject;}
+
+    EngineClass *engineObject___(void) {return this->theEngineObject___;}
 
     void goBaseLogit(char const* str0_val, char const* str1_val) {phwangLogit(str0_val, str1_val);}
     void goBaseAbend(char const* str0_val, char const* str1_val) {phwangAbend(str0_val, str1_val);}
