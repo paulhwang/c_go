@@ -18,7 +18,6 @@ public:
     ~GroupMgrClass(void);
     char const* objectName(void) {return "GroupMgrClass";}
 
-    GroupClass *mallocGroup(void);
     void freeGroup(GroupClass *group_object_val);
 
     void groupMgrLogit(char const* str0_val, char const* str1_val);

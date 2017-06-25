@@ -67,7 +67,7 @@ void DFabricClass::processMallocSession (char *data_val)
 
     char *data_buf = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
 
-    GroupClass *group = this->groupMgrObject()->mallocGroup();
+    GroupClass *group = this->theFabricObject->mallocGroup();
     if (!group) {
         this->abend("processMallocSession", "null group");
         data_buf[0] = WEB_FABRIC_PROTOCOL_RESPOND_IS_MALLOC_SESSION;

@@ -42,23 +42,6 @@ int GroupMgrClass::allocGroupIndex (void)
     return -1;
 }
 
-GroupClass *GroupMgrClass::mallocGroup (void)
-{
-    if (1) {
-        this->logit("mallocGroup", "");
-    }
-    int group_id = this->allocGroupId();
-    int group_index = this->allocGroupIndex();
-    if (group_index != -1) {
-        GroupClass *group = new GroupClass(this, this->theFabricObject, group_id, group_index);
-        this->theGroupTableArray[group_index] = group;
-        return group;
-    }
-    else {
-        /* TBD */
-    }
-}
-
 GroupClass *GroupMgrClass::searchGroup (char *data_val)
 {
     int group_id;
