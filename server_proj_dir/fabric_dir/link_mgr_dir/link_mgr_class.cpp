@@ -44,30 +44,6 @@ int LinkMgrClass::allocLinkIndex (void)
     return -1;
 }
 
-LinkClass *LinkMgrClass::searchLink (char *data_val)
-{
-    int link_id;
-    int link_index;
-    if (1) {
-        this->logit("searchLink", data_val);
-    }
-
-    phwangDecodeIdIndex(data_val,
-                &link_id,
-                LINK_MGR_PROTOCOL_LINK_ID_SIZE,
-                &link_index,
-                LINK_MGR_PROTOCOL_LINK_INDEX_SIZE);
-    //data_val += LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE;
-
-    if (1) {
-        char s[LOGIT_BUF_SIZE];
-        sprintf(s, "link_id=%d link_index=%d", link_id, link_index);
-        this->logit("searchLink", s);
-    }
-
-    return this->getLinkByIdIndex(link_id, link_index);
-}
-
 LinkClass *LinkMgrClass::getLinkByIdIndex (int link_id_val, int link_index_val)
 {
     if (link_id_val > LINK_MGR_MAX_GLOBAL_LINK_ID) {
@@ -92,14 +68,6 @@ LinkClass *LinkMgrClass::getLinkByIdIndex (int link_id_val, int link_index_val)
     }
 
     return link;
-}
-
-void LinkMgrClass::freeLink (LinkClass *link_object_val)
-{
-    if (!link_object_val) {
-        return;
-    }
-    link_object_val->~LinkClass();
 }
 
 void LinkMgrClass::linkMgrLogit (char const* str0_val, char const* str1_val) {

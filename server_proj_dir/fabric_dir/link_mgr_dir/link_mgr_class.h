@@ -36,9 +36,6 @@ public:
 
     FabricClass *fabricObject(void) {return this->theFabricObject;}
 
-    void freeLink(LinkClass *link_object_val);
-    LinkClass *searchLink(char *data_val);
-
     int allocLinkId(void);
     int allocLinkIndex(void);
     LinkClass *getLinkByIdIndex(int link_id_val, int link_index_val);

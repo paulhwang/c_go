@@ -49,6 +49,38 @@ LinkClass *FabricClass::mallocLink (char const *data_val)
     }
 }
 
+void FabricClass::freeLink (LinkClass *link_object_val)
+{
+    if (!link_object_val) {
+        return;
+    }
+    link_object_val->~LinkClass();
+}
+
+LinkClass *FabricClass::searchLink (char *data_val)
+{
+    int link_id;
+    int link_index;
+    if (1) {
+        this->logit("searchLink", data_val);
+    }
+
+    phwangDecodeIdIndex(data_val,
+                &link_id,
+                LINK_MGR_PROTOCOL_LINK_ID_SIZE,
+                &link_index,
+                LINK_MGR_PROTOCOL_LINK_INDEX_SIZE);
+    //data_val += LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE;
+
+    if (1) {
+        char s[LOGIT_BUF_SIZE];
+        sprintf(s, "link_id=%d link_index=%d", link_id, link_index);
+        this->logit("searchLink", s);
+    }
+
+    return this->theLinkMgrObject->getLinkByIdIndex(link_id, link_index);
+}
+
 GroupClass *FabricClass::mallocGroup (void)
 {
     if (1) {
@@ -97,7 +129,7 @@ SessionClass *FabricClass::searchLinkAndMallocSession (char *data_val)
 
 SessionClass *FabricClass::serachLinkAndSession (char *data_val)
 {
-    LinkClass *link = this->theLinkMgrObject->searchLink(data_val);
+    LinkClass *link = this->searchLink(data_val);
     if (!link) {
         return 0;
     }

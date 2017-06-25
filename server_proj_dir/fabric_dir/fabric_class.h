@@ -39,7 +39,13 @@ protected:
     DFabricClass *dFabricObject(void) {return this->theDFabricObject;}
 
     LinkClass *mallocLink(char const *my_name_val);
+    void freeLink(LinkClass *link_object_val);
+    LinkClass *searchLink(char *data_val);
+
     GroupClass *mallocGroup(void);
+    void freeGroup(GroupClass *group_object_val);
+    GroupClass *searchGroup(char *data_val);
+
     SessionClass *searchLinkAndMallocSession(char *my_name_val);
     SessionClass *serachLinkAndSession(char *data_val);
 
