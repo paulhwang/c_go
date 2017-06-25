@@ -28,39 +28,9 @@ EngineClass::~EngineClass (void)
 
 GoBaseClass *EngineClass::mallocGoBase (void)
 {
-    int base_id = this->theGoBaseMgrObject->allocBaseId();
-    int base_index = this->theGoBaseMgrObject->allocBaseIndex();
-    if (base_index == -1) {
-        this->abend("mallocGoBase", "no space");
-        return 0;
-    }
-
-    GoBaseClass *base_object = new GoBaseClass(this->theGoBaseMgrObject, this, base_id, base_index);
-    this->theGoBaseMgrObject->theBaseTableArray[base_index] = base_object;
-
+    this->debug(true, "mallocGoBase", "");
+    GoBaseClass *base_object = new GoBaseClass(this->theGoBaseListMgrObject, this);
     return base_object;
-}
-
-GoBaseClass *EngineClass::searchGoBase (char *data_val)
-{
-    int base_id;
-    int base_index;
-
-    this->debug(true, "searchBase", data_val);
-
-    phwangDecodeIdIndex(data_val,
-                &base_id,
-                BASE_MGR_PROTOCOL_BASE_ID_SIZE,
-                &base_index,
-                BASE_MGR_PROTOCOL_BASE_INDEX_SIZE);
-
-    if (1) {
-        char s[LOGIT_BUF_SIZE];
-        sprintf(s, "base_id=%d base_index=%d", base_id, base_index);
-        this->logit("searchBase", s);
-    }
-
-    return this->theGoBaseMgrObject->getBaseByIdIndex(base_id, base_index);
 }
 
 void EngineClass::logit (char const* str0_val, char const* str1_val)

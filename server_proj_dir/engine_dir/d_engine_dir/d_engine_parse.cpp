@@ -45,7 +45,7 @@ void DEngineClass::processMallocBase(char *data_val)
     *data_ptr++ = THEME_ENGINE_PROTOCOL_RESPOND_IS_MALLOC_BASE;
     memcpy(data_ptr, data_val, ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);
     data_ptr += ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE;
-    memcpy(data_ptr, go_base_object->baseIdIndex(), BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE);
+    memcpy(data_ptr, go_base_object->goBaseIdIndex(), BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE);
     data_ptr += BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE;
     *data_ptr = 0;
     this->transmitFunction(downlink_data);

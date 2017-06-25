@@ -21,11 +21,8 @@
 class BaseMgrClass;
 class EngineClass;
 
-class GoBaseClass {
+class GoBaseClass : public ListEntryClass {
     EngineClass *theEngineObject___;
-    int theBaseId;
-    int theBaseIndex;
-    char theBaseIdIndex[BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE + 4];
     char theRoomIdIndex[ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE + 4];
 
     GoEngineClass* theEngineObject;
@@ -42,16 +39,16 @@ protected:
     friend class DEngineClass;
     friend class BaseMgrClass;
 
-    char *baseIdIndex(void) {return this->theBaseIdIndex;}
     void setRoomIdIndex(char *room_id_index_val) {memcpy(this->theRoomIdIndex, room_id_index_val, ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE); this->theRoomIdIndex[ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE] = 0;}
 
   public:
-    GoBaseClass(BaseMgrClass* base_mgr_object_val, EngineClass *engine_object_val, int base_id_val, int base_index_val);
+    GoBaseClass(void *list_mgr_object_val, EngineClass *engine_object_val);
     ~GoBaseClass(void);
 
     char const* objectName(void) {return "GoBaseClass";}
-    int goBaseId(void) {return this->theBaseId;}
-    int goBaseIndex(void) {return this->theBaseIndex;}
+    int goBaseId(void) {return this->theEntryId;}
+    int goBaseIndex(void) {return this->theEntryIndex;}
+    char *goBaseIdIndex(void) {return this->theEntryIdIndex;}
     GoEngineClass* engineObject(void) {return this->theEngineObject;}
     GoBoardClass* boardObject(void) {return this->theBoardObject;}
     GoPortClass* portObject(void) {return this->thePortObject;}

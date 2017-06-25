@@ -9,13 +9,13 @@
 #include "go_base_class.h"
 #include "../engine_class.h"
 
-GoBaseClass::GoBaseClass (BaseMgrClass* base_mgr_object_val, EngineClass *engine_object_val, int base_id_val, int base_index_val):
-        //ListEntryClass(list_mgr_object_val),
+GoBaseClass::GoBaseClass (void* list_mgr_object_val, EngineClass *engine_object_val):
+        ListEntryClass(list_mgr_object_val),
         theEngineObject___(engine_object_val)
 {
-    this->theBaseId = base_id_val;
-    this->theBaseIndex = base_index_val;
-    phwangEncodeIdIndex(this->theBaseIdIndex, this->theBaseId, BASE_MGR_PROTOCOL_BASE_ID_SIZE, this->theBaseIndex, BASE_MGR_PROTOCOL_BASE_INDEX_SIZE);
+    //this->theBaseId = base_id_val;
+    //this->theBaseIndex = base_index_val;
+    //phwangEncodeIdIndex(this->theBaseIdIndex, this->theBaseId, BASE_MGR_PROTOCOL_BASE_ID_SIZE, this->theBaseIndex, BASE_MGR_PROTOCOL_BASE_INDEX_SIZE);
 
     this->theConfigObject = new GoConfigClass(this);
     this->theBoardObject = new GoBoardClass(this);
@@ -23,7 +23,7 @@ GoBaseClass::GoBaseClass (BaseMgrClass* base_mgr_object_val, EngineClass *engine
     this->thePortObject = new GoPortClass(this);
     this->theGameObject = new GoGameClass(this);
 
-    this->debug(true, "GoBaseClass", this->theBaseIdIndex);
+    this->debug(true, "GoBaseClass", this->goBaseIdIndex());
 }
 
 GoBaseClass::~GoBaseClass (void)
