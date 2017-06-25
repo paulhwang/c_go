@@ -10,14 +10,12 @@
 #include "d_fabric_dir/d_fabric_class.h"
 #include "group_mgr_dir/group_mgr_class.h"
 #include "group_mgr_dir/group_class.h"
-#include "link_mgr_dir/link_mgr_class.h"
 #include "link_mgr_dir/link_class.h"
 
 FabricClass::FabricClass (void)
 {
     memset(this, 0, sizeof(FabricClass));
     this->theUFabricObject = new UFabricClass(this);
-    this->theLinkMgrObject = new LinkMgrClass(this);
     this->theGroupMgrObject = new GroupMgrClass(this);
     this->theDFabricObject = new DFabricClass(this);
     this->theLinkListMgrObject = phwangMallocListMgr("LINK", LINK_MGR_PROTOCOL_LINK_ID_SIZE, LINK_MGR_PROTOCOL_LINK_INDEX_SIZE, 100);
@@ -30,23 +28,14 @@ FabricClass::~FabricClass (void)
 {
     this->theDFabricObject->~DFabricClass(); 
     this->theGroupMgrObject->~GroupMgrClass(); 
-    this->theLinkMgrObject->~LinkMgrClass(); 
     this->theUFabricObject->~UFabricClass(); 
 }
 
 LinkClass *FabricClass::mallocLink (char const *data_val)
 {
     this->debug(true, "mallocLink", data_val);
-
-    int link_id = this->theLinkMgrObject->allocLinkId();
-    int link_index = this->theLinkMgrObject->allocLinkIndex();
-    if (link_index != -1) {
-        this->theLinkMgrObject->theLinkTableArray[link_index] = new LinkClass(this->theLinkListMgrObject, this, link_id, link_index, data_val);
-        return this->theLinkMgrObject->theLinkTableArray[link_index];
-    }
-    else {
-        return 0;
-    }
+    LinkClass *link = new LinkClass(this->theLinkListMgrObject, this, data_val);
+    return link;
 }
 
 void FabricClass::freeLink (LinkClass *link_object_val)

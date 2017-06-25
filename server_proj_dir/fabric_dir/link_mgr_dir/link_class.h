@@ -44,7 +44,7 @@ protected:
     char *linkIdIndex(void) {return this->theEntryIdIndex;}
 
 public:
-    LinkClass(void *list_mgr_object_val, FabricClass *fabric_object_val, int link_id_val, int link_index_val, char const* link_name_val);
+    LinkClass(void *list_mgr_object_val, FabricClass *fabric_object_val, char const* link_name_val);
     ~LinkClass(void);
     char const* objectName(void) {return "LinkClass";}
 };
