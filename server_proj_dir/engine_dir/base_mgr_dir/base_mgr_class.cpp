@@ -42,21 +42,6 @@ int BaseMgrClass::allocBaseId (void)
     return this->theGlobalBaseId;
 }
 
-GoBaseClass *BaseMgrClass::mallocGoBase (void)
-{
-    int base_id = this->allocBaseId();
-    int base_index = this->allocBaseIndex();
-    if (base_index == -1) {
-        this->abend("mallocGoBase", "no space");
-        return 0;
-    }
-
-    GoBaseClass *base_object = new GoBaseClass(this, this->theEngineObject, base_id, base_index);
-    this->theBaseTableArray[base_index] = base_object;
-
-    return base_object;
-}
-
 GoBaseClass *BaseMgrClass::searchBase (char *data_val)
 {
     int base_id;

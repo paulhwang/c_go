@@ -34,7 +34,7 @@ void DEngineClass::processMallocBase(char *data_val)
 
     this->debug(true, "processMallocBase", data_val);
 
-    GoBaseClass *go_base_object = this->theEngineObject->goBaseMgrObject()->mallocGoBase();
+    GoBaseClass *go_base_object = this->theEngineObject->mallocGoBase();
     if (!go_base_object) {
         this->abend("processMallocBase", "null go_base");
         return;

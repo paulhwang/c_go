@@ -42,7 +42,6 @@ public:
 
     int allocBaseId(void);
     int allocBaseIndex(void);
-    GoBaseClass *mallocGoBase(void);
 
     int theGlobalBaseId;
     GoBaseClass *theBaseTableArray[BASE_MGR_BASE_ARRAY_SIZE + 4];
