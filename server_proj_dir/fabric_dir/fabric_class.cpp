@@ -10,6 +10,7 @@
 #include "d_fabric_dir/d_fabric_class.h"
 #include "group_mgr_dir/group_mgr_class.h"
 #include "link_mgr_dir/link_mgr_class.h"
+#include "link_mgr_dir/link_class.h"
 
 FabricClass::FabricClass (void)
 {
@@ -30,6 +31,21 @@ FabricClass::~FabricClass (void)
     this->theGroupMgrObject->~GroupMgrClass(); 
     this->theLinkMgrObject->~LinkMgrClass(); 
     this->theUFabricObject->~UFabricClass(); 
+}
+
+LinkClass *FabricClass::mallocLink (char const *data_val)
+{
+    this->debug(true, "mallocLink", data_val);
+
+    int link_id = this->theLinkMgrObject->allocLinkId();
+    int link_index = this->theLinkMgrObject->allocLinkIndex();
+    if (link_index != -1) {
+        this->theLinkMgrObject->theLinkTableArray[link_index] = new LinkClass(this->theLinkMgrObject, this, link_id, link_index, data_val);
+        return this->theLinkMgrObject->theLinkTableArray[link_index];
+    }
+    else {
+        return 0;
+    }
 }
 
 void FabricClass::logit (char const* str0_val, char const* str1_val)
