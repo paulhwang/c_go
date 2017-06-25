@@ -8,7 +8,6 @@
 #include "fabric_class.h"
 #include "u_fabric_dir/u_fabric_class.h"
 #include "d_fabric_dir/d_fabric_class.h"
-#include "group_mgr_dir/group_mgr_class.h"
 #include "group_mgr_dir/group_class.h"
 #include "link_mgr_dir/link_class.h"
 
@@ -16,7 +15,6 @@ FabricClass::FabricClass (void)
 {
     memset(this, 0, sizeof(FabricClass));
     this->theUFabricObject = new UFabricClass(this);
-    this->theGroupMgrObject = new GroupMgrClass(this);
     this->theDFabricObject = new DFabricClass(this);
     this->theLinkListMgrObject = phwangMallocListMgr("LINK", LINK_MGR_PROTOCOL_LINK_ID_SIZE, LINK_MGR_PROTOCOL_LINK_INDEX_SIZE, 100);
     this->theGroupListMgrObject = phwangMallocListMgr("GROUP", GROUP_MGR_PROTOCOL_GROUP_ID_SIZE, GROUP_MGR_PROTOCOL_GROUP_INDEX_SIZE, 500);
@@ -27,7 +25,6 @@ FabricClass::FabricClass (void)
 FabricClass::~FabricClass (void)
 {
     this->theDFabricObject->~DFabricClass(); 
-    this->theGroupMgrObject->~GroupMgrClass(); 
     this->theUFabricObject->~UFabricClass(); 
 }
 

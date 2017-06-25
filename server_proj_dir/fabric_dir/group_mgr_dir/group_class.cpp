@@ -7,7 +7,6 @@
 #include "../../../phwang_dir/phwang.h"
 #include "../../../phwang_dir/list_mgr_dir/list_mgr_class.h"
 #include "group_class.h"
-#include "group_mgr_class.h"
 #include "../fabric_class.h"
 
 GroupClass::GroupClass (void *list_mgr_object_val, FabricClass *fabric_object_val):
@@ -65,12 +64,12 @@ void GroupClass::logit (char const* str0_val, char const* str1_val)
 {
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", this->objectName(), str0_val);
-    this->theGroupMgrObject->groupMgrLogit(s, str1_val);
+    phwangLogit(s, str1_val);
 }
 
 void GroupClass::abend (char const* str0_val, char const* str1_val)
 {
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", this->objectName(), str0_val);
-    this->theGroupMgrObject->groupMgrAbend(s, str1_val);
+    phwangAbend(s, str1_val);
 }
