@@ -11,7 +11,6 @@
 #include "d_theme_class.h"
 #include "../theme_class.h"
 #include "../u_theme_dir/u_theme_class.h"
-#include "../room_mgr_dir/room_mgr_class.h"
 #include "../room_mgr_dir/room_class.h"
 
 void DThemeClass::exportedparseFunction (char *data_val)
@@ -51,7 +50,7 @@ void DThemeClass::processMallocRoom (char *data_val)
 
     uplink_data = data_ptr = (char *) malloc(ROOM_MGR_DATA_BUFFER_SIZE + 4);
     *data_ptr++ = THEME_ENGINE_PROTOCOL_COMMAND_IS_MALLOC_BASE;
-    memcpy(data_ptr, room->theRoomIdIndex, ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);
+    memcpy(data_ptr, room->roomIdIndex(), ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);
     data_ptr += ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE;
     *data_ptr = 0;
     this->theThemeObject->uThemeObject()->transmitFunction(uplink_data);

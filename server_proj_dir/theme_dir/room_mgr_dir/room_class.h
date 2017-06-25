@@ -15,13 +15,9 @@ class SessionClass;
 class IdIndexListClass;
 class ThemeClass;
 
-class RoomClass {
+class RoomClass : public ListEntryClass {
 #define ROOM_CLASS_GROUP_ARRAY_SIZE 32
     ThemeClass *theThemeObject;
-    RoomMgrClass *theRoomMgrObject;
-    int theRoomId;
-    int theRoomIndex;
-    char theRoomIdIndex[ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE + 4];
     char theBaseIdIndex[BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE + 4];
     char *theGroupTableArray[ROOM_CLASS_GROUP_ARRAY_SIZE];
     int theMaxGroupTableArrayIndex;
@@ -35,15 +31,15 @@ protected:
     friend class DThemeClass;
     friend class RoomMgrClass;
 
-    int roomId(void) {return this->theRoomId;}
-    int roomIndex(void) {return this->theRoomIndex;}
-    char *roomIdIndex(void) {return this->theRoomIdIndex;}
+    int roomId(void) {return this->theEntryId;}
+    int roomIndex(void) {return this->theEntryIndex;}
+    char *roomIdIndex(void) {return this->theEntryIdIndex;}
     void setBaseIdIndex(char *base_id_index_val) {memcpy(this->theBaseIdIndex, base_id_index_val, BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE); this->theBaseIdIndex[BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE] = 0;}
     void insertGroup(char *group_id_index_val);
     void removeGroup(char *group_id_index_val);
 
 public:
-    RoomClass(RoomMgrClass *room_mgr_object_val, ThemeClass *theme_object_val, int room_id_val, int room_index_val, char *group_id_index_val);
+    RoomClass(void *list_mgr_object_val, ThemeClass *theme_object_val, char *group_id_index_val);
     ~RoomClass(void);
     char const* objectName(void) {return "RoomClass";}
 };
