@@ -36,7 +36,6 @@ public:
 
     FabricClass *fabricObject(void) {return this->theFabricObject;}
 
-    LinkClass *mallocLink(char const *my_name_val);
     void freeLink(LinkClass *link_object_val);
     SessionClass *mallocSession(char *my_name_val);
     LinkClass *searchLink(char *data_val);

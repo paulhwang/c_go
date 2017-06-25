@@ -44,22 +44,6 @@ int LinkMgrClass::allocLinkIndex (void)
     return -1;
 }
 
-LinkClass *LinkMgrClass::mallocLink (char const *data_val)
-{
-    if (1) {
-        this->logit("mallocLink", data_val);
-    }
-    int link_id = this->allocLinkId();
-    int link_index = this->allocLinkIndex();
-    if (link_index != -1) {
-        this->theLinkTableArray[link_index] = new LinkClass(this, this->theFabricObject, link_id, link_index, data_val);
-        return this->theLinkTableArray[link_index];
-    }
-    else {
-        return 0;
-    }
-}
-
 SessionClass *LinkMgrClass::mallocSession (char *data_val)
 {
     int link_id;

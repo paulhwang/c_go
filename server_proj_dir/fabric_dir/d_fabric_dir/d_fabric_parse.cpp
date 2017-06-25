@@ -49,7 +49,7 @@ void DFabricClass::processMallocLink (char *data_val)
     char *data_buf = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
     data_buf[0] = WEB_FABRIC_PROTOCOL_RESPOND_IS_MALLOC_LINK;
 
-    LinkClass *link = this->theFabricObject->linkMgrObject()->mallocLink(data_val);
+    LinkClass *link = this->theFabricObject->mallocLink(data_val);
     if (!link) {
         this->abend("processMallocLink", "null link");
         strcpy(data_buf + 1, "null link");
