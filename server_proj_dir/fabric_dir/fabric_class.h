@@ -40,7 +40,7 @@ protected:
 
     LinkClass *mallocLink(char const *my_name_val);
     void freeLink(LinkClass *link_object_val);
-    LinkClass *searchLink(char *data_val);
+    LinkClass *searchLink(char *data_val) {return (LinkClass *) phwangListMgrSearchEntry(this->theLinkListMgrObject, data_val);}
 
     GroupClass *mallocGroup(void);
     void freeGroup(GroupClass *group_object_val);

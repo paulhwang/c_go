@@ -41,7 +41,7 @@ LinkClass *FabricClass::mallocLink (char const *data_val)
     int link_id = this->theLinkMgrObject->allocLinkId();
     int link_index = this->theLinkMgrObject->allocLinkIndex();
     if (link_index != -1) {
-        this->theLinkMgrObject->theLinkTableArray[link_index] = new LinkClass(this->theLinkMgrObject, this, link_id, link_index, data_val);
+        this->theLinkMgrObject->theLinkTableArray[link_index] = new LinkClass(this->theLinkListMgrObject, this, link_id, link_index, data_val);
         return this->theLinkMgrObject->theLinkTableArray[link_index];
     }
     else {
@@ -55,30 +55,6 @@ void FabricClass::freeLink (LinkClass *link_object_val)
         return;
     }
     link_object_val->~LinkClass();
-}
-
-LinkClass *FabricClass::searchLink (char *data_val)
-{
-    int link_id;
-    int link_index;
-    if (1) {
-        this->logit("searchLink", data_val);
-    }
-
-    phwangDecodeIdIndex(data_val,
-                &link_id,
-                LINK_MGR_PROTOCOL_LINK_ID_SIZE,
-                &link_index,
-                LINK_MGR_PROTOCOL_LINK_INDEX_SIZE);
-    //data_val += LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE;
-
-    if (1) {
-        char s[LOGIT_BUF_SIZE];
-        sprintf(s, "link_id=%d link_index=%d", link_id, link_index);
-        this->logit("searchLink", s);
-    }
-
-    return this->theLinkMgrObject->getLinkByIdIndex(link_id, link_index);
 }
 
 GroupClass *FabricClass::mallocGroup (void)

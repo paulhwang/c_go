@@ -13,7 +13,7 @@ class SessionMgrClass;
 class SessionClass;
 class FabricClass;
 
-class LinkClass {
+class LinkClass : public ListEntryClass {
 #define  LINK_CLASS_LINK_NAME_BUF_SIZE 32
     FabricClass *theFabricObject;
     LinkMgrClass *theLinkMgrObject;
@@ -39,12 +39,12 @@ protected:
     void *sessionListMgrObject(void) {return this->theSessionListMgrObject;}
     SessionClass *searchSession(char *data_val) {return (SessionClass *) phwangListMgrSearchEntry(this->theSessionListMgrObject, data_val);}
 
-    int linkId(void) {return this->theLinkId;}
-    int linkIndex(void) {return this->theLinkIndex;}
-    char *linkIdIndex(void) {return this->theLinkIdIndex;}
+    int linkId(void) {return this->theEntryId;}
+    int linkIndex(void) {return this->theEntryIndex;}
+    char *linkIdIndex(void) {return this->theEntryIdIndex;}
 
 public:
-    LinkClass(LinkMgrClass *link_mgr_object_val, FabricClass *fabric_object_val, int link_id_val, int link_index_val, char const* link_name_val);
+    LinkClass(void *list_mgr_object_val, FabricClass *fabric_object_val, int link_id_val, int link_index_val, char const* link_name_val);
     ~LinkClass(void);
     char const* objectName(void) {return "LinkClass";}
 };
