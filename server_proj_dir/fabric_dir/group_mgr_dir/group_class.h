@@ -5,6 +5,7 @@
 */
 
 #pragma once
+#include "../../../phwang_dir/list_mgr_dir/list_entry_class.h"
 #include "../../protocol_dir/group_mgr_protocol.h"
 #include "../../protocol_dir/room_mgr_protocol.h"
 #include "../../protocol_dir/session_mgr_protocol.h"

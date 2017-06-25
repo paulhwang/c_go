@@ -5,6 +5,7 @@
 */
 
 #pragma once
+#include "../../../phwang_dir/list_mgr_dir/list_entry_class.h"
 #include "../../protocol_dir/link_mgr_protocol.h"
 
 class LinkMgrClass;

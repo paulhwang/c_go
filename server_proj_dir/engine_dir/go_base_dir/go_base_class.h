@@ -6,6 +6,7 @@
 
 #pragma once
 
+#include "../../../phwang_dir/list_mgr_dir/list_entry_class.h"
 #include "../../../phwang_dir/phwang.h"
 #include "../base_mgr_dir/base_mgr_class.h"
 #include "go_define.h"
