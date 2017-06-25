@@ -12,10 +12,6 @@ GoBaseClass::GoBaseClass (void* list_mgr_object_val, EngineClass *engine_object_
         ListEntryClass(list_mgr_object_val),
         theEngineObject___(engine_object_val)
 {
-    //this->theBaseId = base_id_val;
-    //this->theBaseIndex = base_index_val;
-    //phwangEncodeIdIndex(this->theBaseIdIndex, this->theBaseId, BASE_MGR_PROTOCOL_BASE_ID_SIZE, this->theBaseIndex, BASE_MGR_PROTOCOL_BASE_INDEX_SIZE);
-
     this->theConfigObject = new GoConfigClass(this);
     this->theBoardObject = new GoBoardClass(this);
     this->theEngineObject = new GoEngineClass(this);
