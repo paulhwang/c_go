@@ -11,9 +11,6 @@
 #include "../fabric_class.h"
 
 class FabricClass;
-class LinkMgrClass;
-class GroupMgrClass;
-class SessionClass;
 
 class DFabricClass {
     FabricClass *theFabricObject;
@@ -32,8 +29,6 @@ class DFabricClass {
 protected:
     friend class UFabricClass;
 
-    LinkMgrClass  *linkMgrObject(void)  {return this->theFabricObject->theLinkMgrObject;}
-    GroupMgrClass *groupMgrObject(void) {return this->theFabricObject->theGroupMgrObject;}
     void transmitFunction(char *data_val);
    
 public:

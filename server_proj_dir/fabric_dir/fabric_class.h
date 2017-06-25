@@ -6,8 +6,6 @@
 
 #pragma once
 
-class LinkMgrClass;
-class GroupMgrClass;
 class UFabricClass;
 class DFabricClass;
 class LinkClass;
@@ -15,8 +13,6 @@ class GroupClass;
 class SessionClass;
 
 class FabricClass {
-    LinkMgrClass *theLinkMgrObject;
-    GroupMgrClass *theGroupMgrObject;
     UFabricClass *theUFabricObject;
     DFabricClass *theDFabricObject;
     void *theLinkListMgrObject;
@@ -27,14 +23,9 @@ class FabricClass {
     void abend(char const* str0_val, char const* str1_val);
 
 protected:
-    friend class LinkMgrClass;
-    friend class SessionMgrClass;
-    friend class GroupMgrClass;
     friend class UFabricClass;
     friend class DFabricClass;
 
-    LinkMgrClass *linkMgrObject(void) {return this->theLinkMgrObject;}
-    GroupMgrClass *groupMgrObject(void) {return this->theGroupMgrObject;}
     UFabricClass *uFabricObject(void) {return this->theUFabricObject;}
     DFabricClass *dFabricObject(void) {return this->theDFabricObject;}
 
