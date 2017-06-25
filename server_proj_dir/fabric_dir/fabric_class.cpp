@@ -18,10 +18,10 @@ FabricClass::FabricClass (void)
     this->theLinkMgrObject = new LinkMgrClass(this);
     this->theGroupMgrObject = new GroupMgrClass(this);
     this->theDFabricObject = new DFabricClass(this);
+    this->theLinkListMgrObject = phwangMallocListMgr("LINK", LINK_MGR_PROTOCOL_LINK_ID_SIZE, LINK_MGR_PROTOCOL_LINK_INDEX_SIZE, 100);
+    this->theGroupListMgrObject = phwangMallocListMgr("GROUP", GROUP_MGR_PROTOCOL_GROUP_ID_SIZE, GROUP_MGR_PROTOCOL_GROUP_INDEX_SIZE, 500);
 
-    if (1) {
-        this->logit("FabricClass", "init");
-    }
+    this->debug(true, "FabricClass", "init");
 }
 
 FabricClass::~FabricClass (void)

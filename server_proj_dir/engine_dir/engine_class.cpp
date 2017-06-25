@@ -14,6 +14,7 @@ EngineClass::EngineClass (void)
     memset(this, 0, sizeof(EngineClass));
     this->theDEngineObject = new DEngineClass(this);
     this->theGoBaseMgrObject = new BaseMgrClass(this);
+    this->theGoBaseListMgrObject = phwangMallocListMgr("GO_BASE", BASE_MGR_PROTOCOL_BASE_ID_SIZE, BASE_MGR_PROTOCOL_BASE_INDEX_SIZE, 900);
 
     this->debug(true, "EngineClass", "init");
 }

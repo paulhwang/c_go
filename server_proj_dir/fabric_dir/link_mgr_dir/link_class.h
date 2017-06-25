@@ -19,7 +19,6 @@ class LinkClass {
     int theLinkIndex;
     char theLinkIdIndex[LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + 4];
     char theLinkName[LINK_CLASS_LINK_NAME_BUF_SIZE + 4];
-    //SessionMgrClass *theSessionMgrObject;
     void *theSessionListMgrObject;
 
     void debug(int on_off_val, char const* str0_val, char const* str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
@@ -33,7 +32,6 @@ protected:
     friend class UFabricClass;
 
     LinkMgrClass *linkMgrObject(void) {return this->theLinkMgrObject;}
-    //SessionMgrClass *sessionMgrObject(void) {return this->theSessionMgrObject;}
     SessionClass *mallocSession(void);
     void *sessionListMgrObject(void) {return this->theSessionListMgrObject;}
     SessionClass *searchSession(char *data_val) {return (SessionClass *) phwangListMgrSearchEntry(this->theSessionListMgrObject, data_val);}

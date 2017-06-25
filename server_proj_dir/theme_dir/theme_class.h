@@ -18,6 +18,7 @@ class ThemeClass {
 
     UThemeClass *theUThemeObject;
     DThemeClass *theDThemeObject;
+    void *theRoomListMgrObject;
 
     RoomMgrClass *theRoomMgrObject;
     RoomClass *theRoomTableArray[GAME_SERVER_ROOM_ARRAY_SIZE];
