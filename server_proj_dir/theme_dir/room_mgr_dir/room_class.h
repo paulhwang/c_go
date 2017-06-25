@@ -12,6 +12,7 @@
 class RoomMgrClass;
 class SessionClass;
 class IdIndexListClass;
+class ThemeClass;
 
 class RoomClass {
 #define ROOM_CLASS_GROUP_ARRAY_SIZE 32
@@ -41,7 +42,7 @@ protected:
     void removeGroup(char *group_id_index_val);
 
 public:
-    RoomClass(RoomMgrClass *room_mgr_object_val, int room_id_val, int room_index_val, char *group_id_index_val);
+    RoomClass(RoomMgrClass *room_mgr_object_val, ThemeClass *theme_object_val, int room_id_val, int room_index_val, char *group_id_index_val);
     ~RoomClass(void);
     char const* objectName(void) {return "RoomClass";}
 };

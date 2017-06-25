@@ -50,7 +50,7 @@ GroupClass *GroupMgrClass::mallocGroup (void)
     int group_id = this->allocGroupId();
     int group_index = this->allocGroupIndex();
     if (group_index != -1) {
-        GroupClass *group = new GroupClass(this, group_id, group_index);
+        GroupClass *group = new GroupClass(this, this->theFabricObject, group_id, group_index);
         this->theGroupTableArray[group_index] = group;
         return group;
     }

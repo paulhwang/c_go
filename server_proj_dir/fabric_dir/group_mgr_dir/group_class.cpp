@@ -8,8 +8,9 @@
 #include "../../../phwang_dir/list_mgr_dir/list_mgr_class.h"
 #include "group_class.h"
 #include "group_mgr_class.h"
+#include "../fabric_class.h"
 
-GroupClass::GroupClass (GroupMgrClass *group_mgr_object_val, int group_id_val, int group_index_val)
+GroupClass::GroupClass (GroupMgrClass *group_mgr_object_val, FabricClass *fabric_object_val, int group_id_val, int group_index_val)
 {
     memset(this, 0, sizeof(GroupClass));
     this->theGroupMgrObject = group_mgr_object_val;

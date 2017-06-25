@@ -51,7 +51,7 @@ GoBaseClass *BaseMgrClass::mallocGoBase (void)
         return 0;
     }
 
-    GoBaseClass *base_object = new GoBaseClass(this, base_id, base_index);
+    GoBaseClass *base_object = new GoBaseClass(this, this->theEngineObject, base_id, base_index);
     this->theBaseTableArray[base_index] = base_object;
 
     return base_object;

@@ -11,6 +11,7 @@
 
 class GroupMgrClass;
 class SessionClass;
+class FabricClass;
 
 class GroupClass {
 #define GROUP_CLASS_SESSION_ARRAY_SIZE 32
@@ -40,7 +41,7 @@ protected:
     void removeSession(SessionClass *session_object_val);
 
 public:
-    GroupClass(GroupMgrClass *group_mgr_object_val, int group_id_val, int group_index_val);
+    GroupClass(GroupMgrClass *group_mgr_object_val, FabricClass *fabric_object_val, int group_id_val, int group_index_val);
     ~GroupClass(void);
     char const* objectName(void) {return "GroupClass";}
 };

@@ -8,8 +8,9 @@
 #include "../../../phwang_dir/id_index_list_dir/id_index_list_class.h"
 #include "room_class.h"
 #include "room_mgr_class.h"
+#include "../theme_class.h"
 
-RoomClass::RoomClass (RoomMgrClass *room_mgr_object_val, int room_id_val, int room_index_val, char *group_id_index_val)
+RoomClass::RoomClass (RoomMgrClass *room_mgr_object_val, ThemeClass *theme_object_val, int room_id_val, int room_index_val, char *group_id_index_val)
 {
     memset(this, 0, sizeof(RoomClass));
     this->theRoomMgrObject = room_mgr_object_val;

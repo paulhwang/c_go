@@ -18,6 +18,7 @@
 #include "go_group_list_class.h"
 #include "go_move_class.h"
 class BaseMgrClass;
+class EngineClass;
 
 class GoBaseClass {
     int theBaseId;
@@ -44,7 +45,7 @@ protected:
     void setRoomIdIndex(char *room_id_index_val) {memcpy(this->theRoomIdIndex, room_id_index_val, ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE); this->theRoomIdIndex[ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE] = 0;}
 
   public:
-    GoBaseClass(BaseMgrClass* base_mgr_object_val, int base_id_val, int base_index_val);
+    GoBaseClass(BaseMgrClass* base_mgr_object_val, EngineClass *engine_object_val, int base_id_val, int base_index_val);
     ~GoBaseClass(void);
 
     char const* objectName(void) {return "GoBaseClass";}
