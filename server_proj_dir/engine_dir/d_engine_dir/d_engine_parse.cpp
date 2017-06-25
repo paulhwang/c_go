@@ -9,7 +9,6 @@
 #include "../../protocol_dir/base_mgr_protocol.h"
 #include "d_engine_class.h"
 #include "../engine_class.h"
-#include "../base_mgr_dir/base_mgr_class.h"
 
 void DEngineClass::exportedparseFunction (char *data_val)
 {

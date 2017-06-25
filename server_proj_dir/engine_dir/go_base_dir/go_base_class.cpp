@@ -5,7 +5,6 @@
 */
 
 #include "../../../phwang_dir/phwang.h"
-#include "../base_mgr_dir/base_mgr_class.h"
 #include "go_base_class.h"
 #include "../engine_class.h"
 
