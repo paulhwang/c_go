@@ -76,7 +76,7 @@ void DFabricClass::processMallocSession (char *data_val)
         return;
     }
 
-    SessionClass *session = this->linkMgrObject()->mallocSession(data_val);
+    SessionClass *session = this->theFabricObject->mallocSession(data_val);
     if (!session) {
         this->abend("processMallocSession", "null session");
         data_buf[0] = WEB_FABRIC_PROTOCOL_RESPOND_IS_MALLOC_SESSION;
