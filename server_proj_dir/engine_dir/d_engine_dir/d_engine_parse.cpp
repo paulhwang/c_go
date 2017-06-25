@@ -55,7 +55,7 @@ void DEngineClass::processTransferData(char *data_val)
 {
     this->debug(true, "processTransferData", data_val);
 
-    GoBaseClass *base_object = this->theEngineObject->goBaseMgrObject()->searchBase(data_val);
+    GoBaseClass *base_object = this->theEngineObject->searchGoBase(data_val);
     if (!base_object) {
         this->abend("processTransferData", "null base_object");
         /* TBD */

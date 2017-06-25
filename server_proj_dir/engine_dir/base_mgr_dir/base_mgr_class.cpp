@@ -42,28 +42,6 @@ int BaseMgrClass::allocBaseId (void)
     return this->theGlobalBaseId;
 }
 
-GoBaseClass *BaseMgrClass::searchBase (char *data_val)
-{
-    int base_id;
-    int base_index;
-
-    this->debug(true, "searchBase", data_val);
-
-    phwangDecodeIdIndex(data_val,
-                &base_id,
-                BASE_MGR_PROTOCOL_BASE_ID_SIZE,
-                &base_index,
-                BASE_MGR_PROTOCOL_BASE_INDEX_SIZE);
-
-    if (1) {
-        char s[LOGIT_BUF_SIZE];
-        sprintf(s, "base_id=%d base_index=%d", base_id, base_index);
-        this->logit("searchBase", s);
-    }
-
-    return this->getBaseByIdIndex(base_id, base_index);
-}
-
 GoBaseClass *BaseMgrClass::getBaseByIdIndex (int base_id_val, int base_index_val)
 {
     if (base_id_val > BASE_MGR_MAX_GLOBAL_BASE_ID) {

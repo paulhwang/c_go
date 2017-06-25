@@ -28,6 +28,7 @@ protected:
     BaseMgrClass *goBaseMgrObject(void) {return this->theGoBaseMgrObject;}
 
     GoBaseClass *mallocGoBase(void);
+    GoBaseClass *searchGoBase(char *data_val);
 
 public:
     EngineClass(void);
