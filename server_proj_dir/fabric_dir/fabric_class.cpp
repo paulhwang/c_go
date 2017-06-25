@@ -49,6 +49,23 @@ LinkClass *FabricClass::mallocLink (char const *data_val)
     }
 }
 
+GroupClass *FabricClass::mallocGroup (void)
+{
+    if (1) {
+        this->logit("mallocGroup", "");
+    }
+    int group_id = this->theGroupMgrObject->allocGroupId();
+    int group_index = this->theGroupMgrObject->allocGroupIndex();
+    if (group_index != -1) {
+        GroupClass *group = new GroupClass(this->theGroupMgrObject, this, group_id, group_index);
+        this->theGroupMgrObject->theGroupTableArray[group_index] = group;
+        return group;
+    }
+    else {
+        /* TBD */
+    }
+}
+
 SessionClass *FabricClass::mallocSession (char *data_val)
 {
     int link_id;
@@ -78,21 +95,14 @@ SessionClass *FabricClass::mallocSession (char *data_val)
     return link->mallocSession();
 }
 
-GroupClass *FabricClass::mallocGroup (void)
+SessionClass *FabricClass::serachSession (char *data_val)
 {
-    if (1) {
-        this->logit("mallocGroup", "");
+    LinkClass *link = this->theLinkMgrObject->searchLink(data_val);
+    if (!link) {
+        return 0;
     }
-    int group_id = this->theGroupMgrObject->allocGroupId();
-    int group_index = this->theGroupMgrObject->allocGroupIndex();
-    if (group_index != -1) {
-        GroupClass *group = new GroupClass(this->theGroupMgrObject, this, group_id, group_index);
-        this->theGroupMgrObject->theGroupTableArray[group_index] = group;
-        return group;
-    }
-    else {
-        /* TBD */
-    }
+
+    return link->searchSession(data_val + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE);
 }
 
 void FabricClass::logit (char const* str0_val, char const* str1_val)
