@@ -38,7 +38,6 @@ public:
 
     void freeLink(LinkClass *link_object_val);
     LinkClass *searchLink(char *data_val);
-    SessionClass *serachSession(char *data_val);
 
     int allocLinkId(void);
     int allocLinkIndex(void);

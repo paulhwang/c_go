@@ -68,16 +68,6 @@ LinkClass *LinkMgrClass::searchLink (char *data_val)
     return this->getLinkByIdIndex(link_id, link_index);
 }
 
-SessionClass *LinkMgrClass::serachSession (char *data_val)
-{
-    LinkClass *link = searchLink(data_val);
-    if (!link) {
-        return 0;
-    }
-
-    return link->searchSession(data_val + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE);
-}
-
 LinkClass *LinkMgrClass::getLinkByIdIndex (int link_id_val, int link_index_val)
 {
     if (link_id_val > LINK_MGR_MAX_GLOBAL_LINK_ID) {

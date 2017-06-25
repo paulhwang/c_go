@@ -104,7 +104,7 @@ void DFabricClass::processTransferSessionData (char *data_val)
 
     this->debug(true, "processPutSessionData", data_val);
 
-    SessionClass *session = this->linkMgrObject()->serachSession(data_val);
+    SessionClass *session = this->theFabricObject->serachSession(data_val);
     if (!session) {
         downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
         *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_TRANSFER_SESSION_DATA;
