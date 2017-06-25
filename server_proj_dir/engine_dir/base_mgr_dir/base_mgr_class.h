@@ -19,12 +19,6 @@ class BaseMgrClass {
 #define BASE_MGR_MAX_GLOBAL_BASE_ID 9999
 
     EngineClass *theEngineObject;
-    int theGlobalBaseId;
-    GoBaseClass *theBaseTableArray[BASE_MGR_BASE_ARRAY_SIZE + 4];
-
-    int allocBaseId(void);
-    int allocBaseIndex(void);
-    GoBaseClass *mallocGoBase(void);
 
     void debug(int on_off_val, char const* str0_val, char const* str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
     void logit(char const* str0_val, char const* str1_val);
@@ -45,4 +39,11 @@ public:
 
     void baseMgrLogit(char const* str0_val, char const* str1_val);
     void baseMgrAbend(char const* str0_val, char const* str1_val);
+
+    int allocBaseId(void);
+    int allocBaseIndex(void);
+    GoBaseClass *mallocGoBase(void);
+
+    int theGlobalBaseId;
+    GoBaseClass *theBaseTableArray[BASE_MGR_BASE_ARRAY_SIZE + 4];
 };

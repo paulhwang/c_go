@@ -8,6 +8,7 @@
 
 class DEngineClass;
 class BaseMgrClass;
+class GoBaseClass;
 
 class EngineClass {
     DEngineClass *theDEngineObject;
@@ -25,6 +26,8 @@ protected:
 
     DEngineClass *dEngineObject(void) {return this->theDEngineObject;}
     BaseMgrClass *goBaseMgrObject(void) {return this->theGoBaseMgrObject;}
+
+    GoBaseClass *mallocGoBase(void);
 
 public:
     EngineClass(void);
