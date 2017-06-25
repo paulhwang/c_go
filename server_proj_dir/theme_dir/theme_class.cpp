@@ -9,6 +9,7 @@
 #include "u_theme_dir/u_theme_class.h"
 #include "d_theme_dir/d_theme_class.h"
 #include "room_mgr_dir/room_mgr_class.h"
+#include "room_mgr_dir/room_class.h"
 
 ThemeClass::ThemeClass (void)
 {
@@ -26,6 +27,22 @@ ThemeClass::~ThemeClass (void)
     this->theDThemeObject->~DThemeClass();
     this->theRoomMgrObject->~RoomMgrClass();
     this->theUThemeObject->~UThemeClass();
+}
+
+RoomClass *ThemeClass::mallocRoom (char *room_id_index_val)
+{
+    this->debug(true, "mallocGroup", "");
+
+    int room_id = this->theRoomMgrObject->allocRoomId();
+    int room_index = this->theRoomMgrObject->allocRoomIndex();
+    if (room_index != -1) {
+        RoomClass *room = new RoomClass(this->theRoomMgrObject, this, room_id, room_index, room_id_index_val);
+        this->theRoomMgrObject->theRoomTableArray[room_index] = room;
+        return room;
+    }
+    else {
+        /* TBD */
+    }
 }
 
 void ThemeClass::insertRoom (RoomClass *group_object_val)

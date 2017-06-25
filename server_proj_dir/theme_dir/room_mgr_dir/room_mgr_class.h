@@ -13,6 +13,17 @@ class RoomMgrClass {
 #define ROOM_MGR_ROOM_ARRAY_SIZE 1000
 #define ROOM_MGR_MAX_GLOBAL_ROOM_ID 9999
 
+public:
+    RoomMgrClass(ThemeClass *theme_object_val);
+    ~RoomMgrClass(void);
+    char const* objectName(void) {return "RoomMgrClass";}
+
+    RoomClass *mallocRoom(char *group_id_index_val);
+    void freeRoom(RoomClass *group_object_val);
+
+    void groupMgrLogit(char const* str0_val, char const* str1_val);
+    void groupMgrAbend(char const* str0_val, char const* str1_val);
+
     ThemeClass *theThemeObject;
     int theGlobalRoomId;
     RoomClass *theRoomTableArray[ROOM_MGR_ROOM_ARRAY_SIZE + 4];
@@ -25,20 +36,8 @@ class RoomMgrClass {
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
 
-protected:
     friend class UThemeClass;
     friend class DThemeClass;
 
     RoomClass *searchRoom(char *data_val);
-
-public:
-    RoomMgrClass(ThemeClass *theme_object_val);
-    ~RoomMgrClass(void);
-    char const* objectName(void) {return "RoomMgrClass";}
-
-    RoomClass *mallocRoom(char *group_id_index_val);
-    void freeRoom(RoomClass *group_object_val);
-
-    void groupMgrLogit(char const* str0_val, char const* str1_val);
-    void groupMgrAbend(char const* str0_val, char const* str1_val);
 };

@@ -36,6 +36,8 @@ protected:
     DThemeClass *dThemeObject(void) {return this->theDThemeObject;}
     RoomMgrClass *roomMgrObject(void) {return this->theRoomMgrObject;}
 
+    RoomClass *mallocRoom(char *group_id_index_val);
+
 public:
     ThemeClass(void);
     ~ThemeClass(void);
