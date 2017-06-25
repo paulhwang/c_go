@@ -98,6 +98,28 @@ GroupClass *FabricClass::mallocGroup (void)
     }
 }
 
+GroupClass *FabricClass::searchGroup (char *data_val)
+{
+    int group_id;
+    int group_index;
+
+    this->debug(true, "searchGroup", data_val);
+
+    phwangDecodeIdIndex(data_val,
+                &group_id,
+                GROUP_MGR_PROTOCOL_GROUP_ID_SIZE,
+                &group_index,
+                GROUP_MGR_PROTOCOL_GROUP_INDEX_SIZE);
+
+    if (1) {
+        char s[LOGIT_BUF_SIZE];
+        sprintf(s, "group_id=%d group_index=%d", group_id, group_index);
+        this->logit("searchGroup", s);
+    }
+
+    return this->theGroupMgrObject->getGroupByIdIndex(group_id, group_index);
+}
+
 SessionClass *FabricClass::searchLinkAndMallocSession (char *data_val)
 {
     int link_id;
