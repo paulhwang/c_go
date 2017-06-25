@@ -42,28 +42,6 @@ int GroupMgrClass::allocGroupIndex (void)
     return -1;
 }
 
-GroupClass *GroupMgrClass::searchGroup (char *data_val)
-{
-    int group_id;
-    int group_index;
-
-    this->debug(true, "searchGroup", data_val);
-
-    phwangDecodeIdIndex(data_val,
-                &group_id,
-                GROUP_MGR_PROTOCOL_GROUP_ID_SIZE,
-                &group_index,
-                GROUP_MGR_PROTOCOL_GROUP_INDEX_SIZE);
-
-    if (1) {
-        char s[LOGIT_BUF_SIZE];
-        sprintf(s, "group_id=%d group_index=%d", group_id, group_index);
-        this->logit("searchGroup", s);
-    }
-
-    return this->getGroupByIdIndex(group_id, group_index);
-}
-
 GroupClass *GroupMgrClass::getGroupByIdIndex (int group_id_val, int group_index_val)
 {
     if (group_id_val > GROUP_MGR_MAX_GLOBAL_GROUP_ID) {

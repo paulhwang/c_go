@@ -40,7 +40,7 @@ void UFabricClass::processMallocRoomResponse(char *data_val)
 
     this->debug(true, "processMallocRoomResponse", data_val);
 
-    GroupClass *group = this->theFabricObject->groupMgrObject()->searchGroup(data_val);
+    GroupClass *group = this->theFabricObject->searchGroup(data_val);
     if (group) {
         group->setRoomIdIndex(data_val + GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE);
         SessionClass *session = group->theSessionTableArray[0];
@@ -58,7 +58,7 @@ void UFabricClass::processTransferDataResponse(char *data_val)
 
     this->debug(true, "processTransferDataResponse", data_val);
 
-    GroupClass *group = this->theFabricObject->groupMgrObject()->searchGroup(data_val);
+    GroupClass *group = this->theFabricObject->searchGroup(data_val);
     if (!group) {
         this->abend("processTransferDataResponse", "null group");
         return;
