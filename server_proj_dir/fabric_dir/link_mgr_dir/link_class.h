@@ -14,6 +14,7 @@ class FabricClass;
 
 class LinkClass {
 #define  LINK_CLASS_LINK_NAME_BUF_SIZE 32
+    FabricClass *theFabricObject;
     LinkMgrClass *theLinkMgrObject;
     int theLinkId;
     int theLinkIndex;

@@ -21,6 +21,7 @@ class BaseMgrClass;
 class EngineClass;
 
 class GoBaseClass {
+    EngineClass *thetheEngineObject;
     int theBaseId;
     int theBaseIndex;
     char theBaseIdIndex[BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE + 4];

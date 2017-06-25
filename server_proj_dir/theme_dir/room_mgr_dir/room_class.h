@@ -16,7 +16,7 @@ class ThemeClass;
 
 class RoomClass {
 #define ROOM_CLASS_GROUP_ARRAY_SIZE 32
-
+    ThemeClass *theThemeObject;
     RoomMgrClass *theRoomMgrObject;
     int theRoomId;
     int theRoomIndex;

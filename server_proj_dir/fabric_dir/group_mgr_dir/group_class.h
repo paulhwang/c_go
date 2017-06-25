@@ -15,7 +15,7 @@ class FabricClass;
 
 class GroupClass {
 #define GROUP_CLASS_SESSION_ARRAY_SIZE 32
-
+    FabricClass *theFabricObject;
     GroupMgrClass *theGroupMgrObject;
     int theGroupId;
     int theGroupIndex;
