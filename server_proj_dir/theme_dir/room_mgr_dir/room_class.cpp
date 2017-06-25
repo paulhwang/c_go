@@ -13,12 +13,6 @@ RoomClass::RoomClass (void *list_mgr_object_val, ThemeClass *theme_object_val, c
         ListEntryClass(list_mgr_object_val),
         theThemeObject(theme_object_val)
 {
-    //memset(this, 0, sizeof(RoomClass));
-    //this->theRoomMgrObject = room_mgr_object_val;
-    //this->theRoomId = room_id_val;
-    //this->theRoomIndex = room_index_val;
-    //phwangEncodeIdIndex(this->theRoomIdIndex, this->theRoomId, ROOM_MGR_PROTOCOL_ROOM_ID_SIZE, this->theRoomIndex, ROOM_MGR_PROTOCOL_ROOM_INDEX_SIZE);
-
     this->theMaxGroupTableArrayIndex = 0;
     this->insertGroup(group_id_index_val);
 
