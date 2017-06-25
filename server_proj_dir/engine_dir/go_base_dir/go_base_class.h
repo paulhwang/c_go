@@ -50,8 +50,8 @@ protected:
     ~GoBaseClass(void);
 
     char const* objectName(void) {return "GoBaseClass";}
-    int baseId(void) {return this->theBaseId;}
-    int baseIndex(void) {return this->theBaseIndex;}
+    int goBaseId(void) {return this->theBaseId;}
+    int goBaseIndex(void) {return this->theBaseIndex;}
     GoEngineClass* engineObject(void) {return this->theEngineObject;}
     GoBoardClass* boardObject(void) {return this->theBoardObject;}
     GoPortClass* portObject(void) {return this->thePortObject;}

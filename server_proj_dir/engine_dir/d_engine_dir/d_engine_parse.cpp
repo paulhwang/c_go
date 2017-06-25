@@ -64,7 +64,7 @@ void DEngineClass::processTransferData(char *data_val)
 
     if (1) {
         char s[LOGIT_BUF_SIZE];
-        sprintf(s, "baseId=%d baseIndex=%d", base_object->baseId(), base_object->baseIndex());
+        sprintf(s, "baseId=%d baseIndex=%d", base_object->goBaseId(), base_object->goBaseIndex());
         this->logit("processTransferData", s);
     }
 

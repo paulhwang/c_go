@@ -60,7 +60,7 @@ GoBaseClass *BaseMgrClass::getBaseByIdIndex (int base_id_val, int base_index_val
         return 0;
     }
 
-    if (base->baseId() != base_id_val){
+    if (base->goBaseId() != base_id_val){
         this->abend("getBaseByIdIndex", "base id does not match");
         return 0;
     }
