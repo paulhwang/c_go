@@ -10,7 +10,9 @@
 #include "link_mgr_class.h"
 #include "../fabric_class.h"
   
-LinkClass::LinkClass (LinkMgrClass *link_mgr_object_val, FabricClass *fabric_object_val, int link_id_val, int link_index_val, char const* link_name_val)
+LinkClass::LinkClass (LinkMgrClass *link_mgr_object_val, FabricClass *fabric_object_val, int link_id_val, int link_index_val, char const* link_name_val):
+        //ListEntryClass(list_mgr_object_val),
+        theFabricObject(fabric_object_val)
 {
     memset(this, 0, sizeof(LinkClass));
     this->theLinkMgrObject = link_mgr_object_val;

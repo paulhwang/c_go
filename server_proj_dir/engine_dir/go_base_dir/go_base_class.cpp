@@ -9,7 +9,9 @@
 #include "go_base_class.h"
 #include "../engine_class.h"
 
-GoBaseClass::GoBaseClass (BaseMgrClass* base_mgr_object_val, EngineClass *engine_object_val, int base_id_val, int base_index_val)
+GoBaseClass::GoBaseClass (BaseMgrClass* base_mgr_object_val, EngineClass *engine_object_val, int base_id_val, int base_index_val):
+        //ListEntryClass(list_mgr_object_val),
+        thetheEngineObject(engine_object_val)
 {
     this->theBaseId = base_id_val;
     this->theBaseIndex = base_index_val;
