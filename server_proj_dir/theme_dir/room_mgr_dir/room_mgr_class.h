@@ -18,7 +18,6 @@ public:
     ~RoomMgrClass(void);
     char const* objectName(void) {return "RoomMgrClass";}
 
-    RoomClass *mallocRoom(char *group_id_index_val);
     void freeRoom(RoomClass *group_object_val);
 
     void groupMgrLogit(char const* str0_val, char const* str1_val);

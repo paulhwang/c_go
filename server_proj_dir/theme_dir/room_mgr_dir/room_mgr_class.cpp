@@ -42,23 +42,6 @@ int RoomMgrClass::allocRoomIndex (void)
     return -1;
 }
 
-RoomClass *RoomMgrClass::mallocRoom (char *room_id_index_val)
-{
-    if (1) {
-        this->logit("mallocGroup", "");
-    }
-    int room_id = this->allocRoomId();
-    int room_index = this->allocRoomIndex();
-    if (room_index != -1) {
-        RoomClass *room = new RoomClass(this, this->theThemeObject, room_id, room_index, room_id_index_val);
-        this->theRoomTableArray[room_index] = room;
-        return room;
-    }
-    else {
-        /* TBD */
-    }
-}
-
 RoomClass *RoomMgrClass::searchRoom (char *data_val)
 {
     int room_id;

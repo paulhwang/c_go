@@ -39,7 +39,7 @@ void DThemeClass::processMallocRoom (char *data_val)
 
     this->debug(true, "processMallocRoom", data_val);
 
-    RoomClass *room = this->theThemeObject->roomMgrObject()->mallocRoom(data_val);
+    RoomClass *room = this->theThemeObject->mallocRoom(data_val);
     if (!room) {
         this->abend("processMallocRoom", "null room");
         downlink_data = data_ptr = (char *) malloc(ROOM_MGR_DATA_BUFFER_SIZE + 4);
