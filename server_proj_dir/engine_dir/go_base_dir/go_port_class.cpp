@@ -11,6 +11,7 @@
 #include "go_port_class.h"
 #include "../engine_class.h"
 #include "../d_engine_dir/d_engine_class.h"
+#include "../../protocol_dir/base_mgr_protocol.h"
 
 #define GO_PROTOCOL_CODE_SIZE 7
 #define GO_PROTOCOL_CODE_PROPOSE      "Propose"

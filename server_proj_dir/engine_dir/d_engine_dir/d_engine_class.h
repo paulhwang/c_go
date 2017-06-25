@@ -5,6 +5,7 @@
 */
 
 #pragma once
+#include "../go_base_dir/go_base_class.h"
 
 class EngineClass;
 class GoBaseClass;
