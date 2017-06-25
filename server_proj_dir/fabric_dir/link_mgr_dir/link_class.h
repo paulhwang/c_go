@@ -10,6 +10,7 @@
 class LinkMgrClass;
 class SessionMgrClass;
 class SessionClass;
+class FabricClass;
 
 class LinkClass {
 #define  LINK_CLASS_LINK_NAME_BUF_SIZE 32
@@ -42,7 +43,7 @@ protected:
     char *linkIdIndex(void) {return this->theLinkIdIndex;}
 
 public:
-    LinkClass(LinkMgrClass *link_mgr_object_val, int link_id_val, int link_index_val, char const* link_name_val);
+    LinkClass(LinkMgrClass *link_mgr_object_val, FabricClass *fabric_object_val, int link_id_val, int link_index_val, char const* link_name_val);
     ~LinkClass(void);
     char const* objectName(void) {return "LinkClass";}
 };

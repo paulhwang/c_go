@@ -8,8 +8,9 @@
 #include "link_class.h"
 #include "session_class.h"
 #include "link_mgr_class.h"
-
-LinkClass::LinkClass (LinkMgrClass *link_mgr_object_val, int link_id_val, int link_index_val, char const* link_name_val)
+#include "../fabric_class.h"
+  
+LinkClass::LinkClass (LinkMgrClass *link_mgr_object_val, FabricClass *fabric_object_val, int link_id_val, int link_index_val, char const* link_name_val)
 {
     memset(this, 0, sizeof(LinkClass));
     this->theLinkMgrObject = link_mgr_object_val;

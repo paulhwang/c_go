@@ -52,7 +52,7 @@ LinkClass *LinkMgrClass::mallocLink (char const *data_val)
     int link_id = this->allocLinkId();
     int link_index = this->allocLinkIndex();
     if (link_index != -1) {
-        this->theLinkTableArray[link_index] = new LinkClass(this, link_id, link_index, data_val);
+        this->theLinkTableArray[link_index] = new LinkClass(this, this->theFabricObject, link_id, link_index, data_val);
         return this->theLinkTableArray[link_index];
     }
     else {
