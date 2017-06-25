@@ -9,6 +9,7 @@
 #include "u_fabric_dir/u_fabric_class.h"
 #include "d_fabric_dir/d_fabric_class.h"
 #include "group_mgr_dir/group_mgr_class.h"
+#include "group_mgr_dir/group_class.h"
 #include "link_mgr_dir/link_mgr_class.h"
 #include "link_mgr_dir/link_class.h"
 
@@ -45,6 +46,23 @@ LinkClass *FabricClass::mallocLink (char const *data_val)
     }
     else {
         return 0;
+    }
+}
+
+GroupClass *FabricClass::mallocGroup (void)
+{
+    if (1) {
+        this->logit("mallocGroup", "");
+    }
+    int group_id = this->theGroupMgrObject->allocGroupId();
+    int group_index = this->theGroupMgrObject->allocGroupIndex();
+    if (group_index != -1) {
+        GroupClass *group = new GroupClass(this->theGroupMgrObject, this, group_id, group_index);
+        this->theGroupMgrObject->theGroupTableArray[group_index] = group;
+        return group;
+    }
+    else {
+        /* TBD */
     }
 }
 

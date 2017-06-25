@@ -13,6 +13,17 @@ class GroupMgrClass {
 #define GROUP_MGR_GROUP_ARRAY_SIZE 1000
 #define GROUP_MGR_MAX_GLOBAL_GROUP_ID 9999
 
+public:
+    GroupMgrClass(FabricClass *fabric_object_val);
+    ~GroupMgrClass(void);
+    char const* objectName(void) {return "GroupMgrClass";}
+
+    GroupClass *mallocGroup(void);
+    void freeGroup(GroupClass *group_object_val);
+
+    void groupMgrLogit(char const* str0_val, char const* str1_val);
+    void groupMgrAbend(char const* str0_val, char const* str1_val);
+
     FabricClass *theFabricObject;
     int theGlobalGroupId;
     GroupClass *theGroupTableArray[GROUP_MGR_GROUP_ARRAY_SIZE + 4];
@@ -25,19 +36,7 @@ class GroupMgrClass {
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
 
-protected:
     friend class UFabricClass;
 
     GroupClass *searchGroup(char *data_val);
-
-public:
-    GroupMgrClass(FabricClass *fabric_object_val);
-    ~GroupMgrClass(void);
-    char const* objectName(void) {return "GroupMgrClass";}
-
-    GroupClass *mallocGroup(void);
-    void freeGroup(GroupClass *group_object_val);
-
-    void groupMgrLogit(char const* str0_val, char const* str1_val);
-    void groupMgrAbend(char const* str0_val, char const* str1_val);
 };

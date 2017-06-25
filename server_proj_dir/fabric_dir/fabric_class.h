@@ -11,6 +11,7 @@ class GroupMgrClass;
 class UFabricClass;
 class DFabricClass;
 class LinkClass;
+class GroupClass;
 
 class FabricClass {
     LinkMgrClass *theLinkMgrObject;
@@ -37,6 +38,7 @@ protected:
     DFabricClass *dFabricObject(void) {return this->theDFabricObject;}
 
     LinkClass *mallocLink(char const *my_name_val);
+    GroupClass *mallocGroup(void);
 
 public:
     FabricClass(void);
