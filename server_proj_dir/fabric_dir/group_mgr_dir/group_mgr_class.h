@@ -18,8 +18,6 @@ public:
     ~GroupMgrClass(void);
     char const* objectName(void) {return "GroupMgrClass";}
 
-    void freeGroup(GroupClass *group_object_val);
-
     void groupMgrLogit(char const* str0_val, char const* str1_val);
     void groupMgrAbend(char const* str0_val, char const* str1_val);
 

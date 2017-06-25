@@ -39,7 +39,7 @@ void UThemeClass::processMallocBaseResponse(char *data_val)
 
     this->debug(true, "processMallocBaseResponse", data_val);
 
-    RoomClass *room = this->theThemeObject->roomMgrObject()->searchRoom(data_val);
+    RoomClass *room = this->theThemeObject->searchRoom(data_val);
     if (!room) {
         this->abend("processMallocBaseResponse", "null room");
         return;
@@ -64,7 +64,7 @@ void UThemeClass::processTransferDataResponse(char *data_val)
 
     this->debug(true, "processTransferDataResponse", data_val);
 
-    RoomClass *room = this->theThemeObject->roomMgrObject()->searchRoom(data_val);
+    RoomClass *room = this->theThemeObject->searchRoom(data_val);
     if (!room) {
         this->abend("processTransferDataResponse", "null room");
         return;

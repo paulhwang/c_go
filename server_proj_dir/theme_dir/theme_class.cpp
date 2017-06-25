@@ -71,6 +71,28 @@ void ThemeClass::removeRoom (RoomClass *group_object_val)
     this->abend("removeGroup", "not found");
 }
 
+RoomClass *ThemeClass::searchRoom (char *data_val)
+{
+    int room_id;
+    int room_index;
+
+    this->debug(true, "searchRoom", data_val);
+
+    phwangDecodeIdIndex(data_val,
+                &room_id,
+                ROOM_MGR_PROTOCOL_ROOM_ID_SIZE,
+                &room_index,
+                ROOM_MGR_PROTOCOL_ROOM_INDEX_SIZE);
+
+    if (1) {
+        char s[LOGIT_BUF_SIZE];
+        sprintf(s, "room_id=%d room_index=%d", room_id, room_index);
+        this->logit("searchRoom", s);
+    }
+
+    return this->theRoomMgrObject->getRoomByIdIndex(room_id, room_index);
+}
+
 void ThemeClass::logit (char const* str0_val, char const* str1_val)
 {
     char s[LOGIT_BUF_SIZE];

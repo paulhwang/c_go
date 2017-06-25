@@ -18,8 +18,6 @@ public:
     ~RoomMgrClass(void);
     char const* objectName(void) {return "RoomMgrClass";}
 
-    void freeRoom(RoomClass *group_object_val);
-
     void groupMgrLogit(char const* str0_val, char const* str1_val);
     void groupMgrAbend(char const* str0_val, char const* str1_val);
 
@@ -34,9 +32,4 @@ public:
     void debug(int on_off_val, char const* str0_val, char const* str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
-
-    friend class UThemeClass;
-    friend class DThemeClass;
-
-    RoomClass *searchRoom(char *data_val);
 };

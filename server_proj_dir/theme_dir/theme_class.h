@@ -37,6 +37,8 @@ protected:
     RoomMgrClass *roomMgrObject(void) {return this->theRoomMgrObject;}
 
     RoomClass *mallocRoom(char *group_id_index_val);
+    void freeRoom(RoomClass *group_object_val);
+    RoomClass *searchRoom(char *data_val);
 
 public:
     ThemeClass(void);

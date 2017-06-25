@@ -65,7 +65,7 @@ void DThemeClass::processTransferData (char *data_val)
 
     this->debug(true, "processTransferData", data_val);
 
-    RoomClass *room = this->theThemeObject->roomMgrObject()->searchRoom(data_val);
+    RoomClass *room = this->theThemeObject->searchRoom(data_val);
     if (!room) {
         this->abend("processTransferData", "null room");
         downlink_data = data_ptr = (char *) malloc(ROOM_MGR_DATA_BUFFER_SIZE + 4);

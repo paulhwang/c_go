@@ -42,28 +42,6 @@ int RoomMgrClass::allocRoomIndex (void)
     return -1;
 }
 
-RoomClass *RoomMgrClass::searchRoom (char *data_val)
-{
-    int room_id;
-    int room_index;
-
-    this->debug(true, "searchRoom", data_val);
-
-    phwangDecodeIdIndex(data_val,
-                &room_id,
-                ROOM_MGR_PROTOCOL_ROOM_ID_SIZE,
-                &room_index,
-                ROOM_MGR_PROTOCOL_ROOM_INDEX_SIZE);
-
-    if (1) {
-        char s[LOGIT_BUF_SIZE];
-        sprintf(s, "room_id=%d room_index=%d", room_id, room_index);
-        this->logit("searchRoom", s);
-    }
-
-    return this->getRoomByIdIndex(room_id, room_index);
-}
-
 RoomClass *RoomMgrClass::getRoomByIdIndex (int room_id_val, int room_index_val)
 {
     if (room_id_val > ROOM_MGR_MAX_GLOBAL_ROOM_ID) {
