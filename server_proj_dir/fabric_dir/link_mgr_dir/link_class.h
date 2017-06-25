@@ -32,6 +32,7 @@ protected:
     friend class SessionMgrClass;
     friend class DFabricClass;
     friend class UFabricClass;
+    friend class FabricClass;
 
     LinkMgrClass *linkMgrObject(void) {return this->theLinkMgrObject;}
     SessionClass *mallocSession(void);

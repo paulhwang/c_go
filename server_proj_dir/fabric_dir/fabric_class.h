@@ -12,6 +12,7 @@ class UFabricClass;
 class DFabricClass;
 class LinkClass;
 class GroupClass;
+class SessionClass;
 
 class FabricClass {
     LinkMgrClass *theLinkMgrObject;
@@ -38,6 +39,7 @@ protected:
     DFabricClass *dFabricObject(void) {return this->theDFabricObject;}
 
     LinkClass *mallocLink(char const *my_name_val);
+    SessionClass *mallocSession(char *my_name_val);
     GroupClass *mallocGroup(void);
 
 public:
