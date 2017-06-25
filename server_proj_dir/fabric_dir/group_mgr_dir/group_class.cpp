@@ -10,15 +10,15 @@
 #include "group_mgr_class.h"
 #include "../fabric_class.h"
 
-GroupClass::GroupClass (GroupMgrClass *group_mgr_object_val, FabricClass *fabric_object_val, int group_id_val, int group_index_val):
-        //ListEntryClass(list_mgr_object_val),
+GroupClass::GroupClass (void *list_mgr_object_val, FabricClass *fabric_object_val):
+        ListEntryClass(list_mgr_object_val),
         theFabricObject(fabric_object_val)
 {
-    memset(this, 0, sizeof(GroupClass));
-    this->theGroupMgrObject = group_mgr_object_val;
-    this->theGroupId = group_id_val;
-    this->theGroupIndex = group_index_val;
-    phwangEncodeIdIndex(this->theGroupIdIndex, this->theGroupId, GROUP_MGR_PROTOCOL_GROUP_ID_SIZE, this->theGroupIndex, GROUP_MGR_PROTOCOL_GROUP_INDEX_SIZE);
+    //memset(this, 0, sizeof(GroupClass));
+    //this->theGroupMgrObject = group_mgr_object_val;
+    //this->theGroupId = group_id_val;
+    //this->theGroupIndex = group_index_val;
+    //phwangEncodeIdIndex(this->theGroupIdIndex, this->theGroupId, GROUP_MGR_PROTOCOL_GROUP_ID_SIZE, this->theGroupIndex, GROUP_MGR_PROTOCOL_GROUP_INDEX_SIZE);
     this->theMaxSessionTableArrayIndex = 0;
 
     this->debug(true, "GroupClass", this->theGroupIdIndex);

@@ -48,41 +48,9 @@ void FabricClass::freeLink (LinkClass *link_object_val)
 
 GroupClass *FabricClass::mallocGroup (void)
 {
-    if (1) {
-        this->logit("mallocGroup", "");
-    }
-    int group_id = this->theGroupMgrObject->allocGroupId();
-    int group_index = this->theGroupMgrObject->allocGroupIndex();
-    if (group_index != -1) {
-        GroupClass *group = new GroupClass(this->theGroupMgrObject, this, group_id, group_index);
-        this->theGroupMgrObject->theGroupTableArray[group_index] = group;
-        return group;
-    }
-    else {
-        /* TBD */
-    }
-}
-
-GroupClass *FabricClass::searchGroup (char *data_val)
-{
-    int group_id;
-    int group_index;
-
-    this->debug(true, "searchGroup", data_val);
-
-    phwangDecodeIdIndex(data_val,
-                &group_id,
-                GROUP_MGR_PROTOCOL_GROUP_ID_SIZE,
-                &group_index,
-                GROUP_MGR_PROTOCOL_GROUP_INDEX_SIZE);
-
-    if (1) {
-        char s[LOGIT_BUF_SIZE];
-        sprintf(s, "group_id=%d group_index=%d", group_id, group_index);
-        this->logit("searchGroup", s);
-    }
-
-    return this->theGroupMgrObject->getGroupByIdIndex(group_id, group_index);
+    this->debug(true, "mallocGroup", "");
+    GroupClass *group = new GroupClass(this->theGroupListMgrObject, this);
+    return group;
 }
 
 SessionClass *FabricClass::searchLinkAndMallocSession (char *data_val)

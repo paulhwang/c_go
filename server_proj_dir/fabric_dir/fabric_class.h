@@ -44,7 +44,7 @@ protected:
 
     GroupClass *mallocGroup(void);
     void freeGroup(GroupClass *group_object_val);
-    GroupClass *searchGroup(char *data_val);
+    GroupClass *searchGroup(char *data_val) {return (GroupClass *) phwangListMgrSearchEntry(this->theGroupListMgrObject, data_val);}
 
     SessionClass *searchLinkAndMallocSession(char *my_name_val);
     SessionClass *serachLinkAndSession(char *data_val);

@@ -14,7 +14,7 @@ class GroupMgrClass;
 class SessionClass;
 class FabricClass;
 
-class GroupClass {
+class GroupClass : public ListEntryClass {
 #define GROUP_CLASS_SESSION_ARRAY_SIZE 32
     FabricClass *theFabricObject;
     GroupMgrClass *theGroupMgrObject;
@@ -34,15 +34,15 @@ protected:
     friend class UFabricClass;
     friend class GroupMgrClass;
 
-    int groupId(void) {return this->theGroupId;}
-    int groupIndex(void) {return this->theGroupIndex;}
+    int groupId(void) {return this->theEntryId;}
+    int groupIndex(void) {return this->theEntryIndex;}
     char *roomIdIndex(void) {return this->theRoomIdIndex;}
     void setRoomIdIndex(char *val) {memcpy(this->theRoomIdIndex, val, ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);}
     void insertSession(SessionClass *session_object_val);
     void removeSession(SessionClass *session_object_val);
 
 public:
-    GroupClass(GroupMgrClass *group_mgr_object_val, FabricClass *fabric_object_val, int group_id_val, int group_index_val);
+    GroupClass(void *list_mgr_object_val, FabricClass *fabric_object_val);
     ~GroupClass(void);
     char const* objectName(void) {return "GroupClass";}
 };
