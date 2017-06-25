@@ -76,7 +76,7 @@ void DFabricClass::processMallocSession (char *data_val)
         return;
     }
 
-    SessionClass *session = this->theFabricObject->mallocSession(data_val);
+    SessionClass *session = this->theFabricObject->searchLinkAndMallocSession(data_val);
     if (!session) {
         this->abend("processMallocSession", "null session");
         data_buf[0] = WEB_FABRIC_PROTOCOL_RESPOND_IS_MALLOC_SESSION;
@@ -104,7 +104,7 @@ void DFabricClass::processTransferSessionData (char *data_val)
 
     this->debug(true, "processPutSessionData", data_val);
 
-    SessionClass *session = this->theFabricObject->serachSession(data_val);
+    SessionClass *session = this->theFabricObject->serachLinkAndSession(data_val);
     if (!session) {
         downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
         *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_TRANSFER_SESSION_DATA;

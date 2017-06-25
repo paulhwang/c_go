@@ -66,7 +66,7 @@ GroupClass *FabricClass::mallocGroup (void)
     }
 }
 
-SessionClass *FabricClass::mallocSession (char *data_val)
+SessionClass *FabricClass::searchLinkAndMallocSession (char *data_val)
 {
     int link_id;
     int link_index;
@@ -95,7 +95,7 @@ SessionClass *FabricClass::mallocSession (char *data_val)
     return link->mallocSession();
 }
 
-SessionClass *FabricClass::serachSession (char *data_val)
+SessionClass *FabricClass::serachLinkAndSession (char *data_val)
 {
     LinkClass *link = this->theLinkMgrObject->searchLink(data_val);
     if (!link) {

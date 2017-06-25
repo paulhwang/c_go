@@ -40,8 +40,8 @@ protected:
 
     LinkClass *mallocLink(char const *my_name_val);
     GroupClass *mallocGroup(void);
-    SessionClass *mallocSession(char *my_name_val);
-    SessionClass *serachSession(char *data_val);
+    SessionClass *searchLinkAndMallocSession(char *my_name_val);
+    SessionClass *serachLinkAndSession(char *data_val);
 
 public:
     FabricClass(void);
