@@ -7,7 +7,6 @@
 #include "../../../phwang_dir/phwang.h"
 #include "link_class.h"
 #include "session_class.h"
-#include "link_mgr_class.h"
 #include "../fabric_class.h"
   
 LinkClass::LinkClass (void *list_mgr_object_val, FabricClass *fabric_object_val, int link_id_val, int link_index_val, char const* link_name_val):
@@ -46,11 +45,11 @@ SessionClass *LinkClass::mallocSession (void)
 void LinkClass::logit (char const* str0_val, char const* str1_val) {
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", this->objectName(), str0_val);
-    this->theLinkMgrObject->linkMgrLogit(s, str1_val);
+    phwangLogit(s, str1_val);
 }
 
 void LinkClass::abend (char const* str0_val, char const* str1_val) {
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", this->objectName(), str0_val);
-    this->theLinkMgrObject->linkMgrAbend(s, str1_val);
+    phwangAbend(s, str1_val);
 }

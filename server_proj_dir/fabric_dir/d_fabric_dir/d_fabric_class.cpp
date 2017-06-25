@@ -9,7 +9,6 @@
 #include "../../protocol_dir/net_port_protocol.h"
 #include "../fabric_class.h"
 #include "../u_fabric_dir/u_fabric_class.h"
-#include "../link_mgr_dir/link_mgr_class.h"
 
 DFabricClass::DFabricClass (FabricClass *fabric_object_val)
 {
