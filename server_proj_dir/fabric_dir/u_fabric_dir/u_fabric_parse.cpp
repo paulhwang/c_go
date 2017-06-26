@@ -42,6 +42,7 @@ void UFabricClass::processMallocRoomResponse(char *data_val)
     GroupClass *group = this->theFabricObject->searchGroup(data_val);
     if (group) {
         group->setRoomIdIndex(data_val + GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE);
+        group->theSessionTableArray = phwangArrayMgrGetArrayTable(this->theSessionArrayMgr);
         SessionClass *session = group->theSessionTableArray1[0];
         output_data = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
         output_data[0] = WEB_FABRIC_PROTOCOL_RESPOND_IS_MALLOC_SESSION;
