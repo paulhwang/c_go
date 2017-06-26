@@ -10,6 +10,7 @@
 #include "phwang_class.h"
 #include "queue_dir/queue_class.h"
 #include "list_mgr_dir/list_mgr_class.h"
+#include "array_mgr_dir/array_mgr_class.h"
 #include "net_dir/tp_server_class.h"
 #include "net_dir/tp_transfer_class.h"
 
@@ -104,6 +105,21 @@ void *PhwangClass::mallocListMgr (char *caller_name_val, int id_size_val, int in
     return list_mgr;
 }
 
+void PhwangClass::freeListMgr(void *list_mgr_val)
+{
+    if (!list_mgr_val) {
+        phwangAbend("freeListMgr", "null list_mgr_val");
+        return;
+    }
+
+    if (strcmp(((ListMgrClass *) list_mgr_val)->objectName(), "ListMgrClass")) {
+        phwangAbend("freeListMgr", "wrong object");
+        return;
+    }
+
+    return ((ListMgrClass *) list_mgr_val)->~ListMgrClass();
+}
+
 void *PhwangClass::listMgrSearchEntry(void *list_mgr_val, char *data_val)
 {
     if (!list_mgr_val) {
@@ -117,6 +133,30 @@ void *PhwangClass::listMgrSearchEntry(void *list_mgr_val, char *data_val)
     }
 
     return ((ListMgrClass *) list_mgr_val)->searchEntry(data_val);
+}
+
+/**************************************************************************************************************/
+/**************************************************************************************************************/
+/**************************************************************************************************************/
+
+void *PhwangClass::mallocArrayMgr(char *caller_name_val, int id_size_val, int index_size_val, int global_entry_id_val)
+{
+
+}
+
+void PhwangClass::freeArrayMgr(void *array_mgr_val)
+{
+    if (!array_mgr_val) {
+        phwangAbend("freeArrayMgr", "null array_mgr_val");
+        return;
+    }
+
+    if (strcmp(((ArrayMgrClass *) array_mgr_val)->objectName(), "ArrayMgrClass")) {
+        phwangAbend("freeArrayMgr", "wrong object");
+        return;
+    }
+
+    return ((ArrayMgrClass *) array_mgr_val)->~ArrayMgrClass();
 }
 
 /**************************************************************************************************************/
