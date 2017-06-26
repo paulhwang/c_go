@@ -46,7 +46,7 @@ protected:
     char const* objectName(void) {return "GoBaseClass";}
 
     char *goBaseIdIndex(void) {return this->theEntryIdIndex;}
-    GoFightClass* engineObject(void) {return this->theFightObject;}
+    GoFightClass* fightObject(void) {return this->theFightObject;}
     GoBoardClass* boardObject(void) {return this->theBoardObject;}
     GoPortClass* portObject(void) {return this->thePortObject;}
     GoConfigClass* configObject(void) {return this->theConfigObject;}
