@@ -8,10 +8,11 @@
 #include "go_base_class.h"
 #include "go_config_class.h"
 
-GoConfigClass::GoConfigClass (GoBaseClass* base_object_val) {
-    this->theBaseObject = base_object_val;
-    this->theBoardSize = 19;//////////////////////
-
+GoConfigClass::GoConfigClass (GoBaseClass* base_object_val):
+    theBaseObject(base_object_val),
+    theBoardSize(19),
+    theHandicapPoint(0)
+{
     this->debug(true, "GoConfigClass", "init");
 }
 

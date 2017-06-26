@@ -147,8 +147,9 @@ void GoGameClass::receiveSpecialMoveFromOpponent (char const *data_val)
 void GoGameClass::processBackwardMove (void)
 {
     this->debug(true, "processBackwardMove", "");
+
     this->thePassReceived = 0;
-    if (this->theTotalMoves <= 0) {///this->theBaseObject->configObject()->handicapPoint()) {
+    if (this->theTotalMoves <= this->theBaseObject->configObject()->handicapPoint()) {
         return;
     }
     this->theTotalMoves--;
@@ -157,20 +158,23 @@ void GoGameClass::processBackwardMove (void)
 
 void GoGameClass::processDoubleBackwardMove (void)
 {
-    //this.debug(true, "goProcessBackwardMoveFromUi", "");
+    this->debug(true, "processDoubleBackwardMove", "");
+
     this->thePassReceived = 0;
-    if (this->theTotalMoves <= 0) {//this->theBaseObject->configObject()->handicapPoint()) {
+    if (this->theTotalMoves <= this->theBaseObject->configObject()->handicapPoint()) {
         return;
     }
-    this->theTotalMoves = 0;//(this->theBaseObject->configObject()->handicapPoint());
+    this->theTotalMoves = this->theBaseObject->configObject()->handicapPoint();
     this->processTheWholeMoveList();
 }
 
 void GoGameClass::processForwardMove (void)
 {
+    this->debug(true, "processForwardMove", "");
+
     this->thePassReceived = 0;
     if (this->theTotalMoves > this->theMaxMove) {
-        //this.abend("processForwardMove", "totalMoves=" + this.totalMoves_() + " maxMove=" + this.naxMove_());
+        this->abend("processForwardMove", "totalMoves > maxMove=");
         return;
     }
     if (this->theTotalMoves == this->theMaxMove) {
@@ -182,15 +186,17 @@ void GoGameClass::processForwardMove (void)
 
 void GoGameClass::processDoubleForwardMove (void)
 {
+    this->debug(true, "processDoubleForwardMove", "");
+
     this->thePassReceived = 0;
     if (this->theTotalMoves > this->theMaxMove) {
-        //this.abend("processDoubleForwardMove", "totalMoves=" + this.totalMoves() + " maxMove=" + this.maxMove_());
+        this->abend("processDoubleForwardMove", "totalMoves > maxMove=");
         return;
     }
     if (this->theTotalMoves == this->theMaxMove) {
         return;
     }
-    this->setTotalMoves(this->theMaxMove);
+    this->theTotalMoves = this->theMaxMove;
     this->processTheWholeMoveList();
 }
 
@@ -200,11 +206,9 @@ void GoGameClass::processTheWholeMoveList (void)
     this->fightObject()->resetEngineObjectData();
     this->resetGameObjectPartialData();
 
-    //this->debug(true, "processTheWholeMoveLst", "totalMoves=" + this.totalMoves());
-    GoMoveClass *move;
     int i = 0;
     while (i < this->theTotalMoves) {
-        move = this->theMovesArray[i];
+        GoMoveClass *move = this->theMovesArray[i];
         this->theBaseObject->fightObject()->enterWar(move);
         this->theNextColor = this->getOppositeColor(move->myColor());
         i += 1;
