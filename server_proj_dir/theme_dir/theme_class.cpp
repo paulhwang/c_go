@@ -15,7 +15,7 @@ ThemeClass::ThemeClass (void)
     memset(this, 0, sizeof(ThemeClass));
     this->theUThemeObject = new UThemeClass(this);
     this->theDThemeObject = new DThemeClass(this);
-    this->theRoomListMgrObject = phwangMallocListMgr("ROOM", ROOM_MGR_PROTOCOL_ROOM_ID_SIZE, ROOM_MGR_PROTOCOL_ROOM_INDEX_SIZE, 700);
+    this->theRoomListMgrObject = phwangListMgrMalloc("ROOM", ROOM_MGR_PROTOCOL_ROOM_ID_SIZE, ROOM_MGR_PROTOCOL_ROOM_INDEX_SIZE, 700);
 
     this->debug(true, "ThemeClass", "init");
 }

@@ -13,12 +13,6 @@ LinkClass::LinkClass (void *list_mgr_object_val, FabricClass *fabric_object_val,
         ListEntryClass(list_mgr_object_val),
         theFabricObject(fabric_object_val)
 {
-    //memset(this, 0, sizeof(LinkClass));
-    //this->theLinkMgrObject = link_mgr_object_val;
-    //this->theLinkId = link_id_val;
-    //this->theLinkIndex = link_index_val;
-    //phwangEncodeIdIndex(this->theLinkIdIndex, this->theLinkId, LINK_MGR_PROTOCOL_LINK_ID_SIZE, this->theLinkIndex, LINK_MGR_PROTOCOL_LINK_INDEX_SIZE);
-
     if (strlen(link_name_val) <= LINK_CLASS_LINK_NAME_BUF_SIZE) {
         strcpy(this->theLinkName, link_name_val);
     }
@@ -26,7 +20,7 @@ LinkClass::LinkClass (void *list_mgr_object_val, FabricClass *fabric_object_val,
         memcpy(this->theLinkName, link_name_val, LINK_CLASS_LINK_NAME_BUF_SIZE);
         this->theLinkName[LINK_CLASS_LINK_NAME_BUF_SIZE] = 0;
     }
-    this->theSessionListMgrObject = phwangMallocListMgr("SESSION", SESSION_MGR_PROTOCOL_SESSION_ID_SIZE, SESSION_MGR_PROTOCOL_SESSION_INDEX_SIZE, 300);
+    this->theSessionListMgrObject = phwangListMgrMalloc("SESSION", SESSION_MGR_PROTOCOL_SESSION_ID_SIZE, SESSION_MGR_PROTOCOL_SESSION_INDEX_SIZE, 300);
 
     this->debug(true, "LinkClass", this->theLinkIdIndex);
 }

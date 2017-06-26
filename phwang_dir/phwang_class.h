@@ -31,15 +31,15 @@ class PhwangClass {
     void *dequeue(void *queue_val);
 
     /* list_mgr */
-    void *mallocListMgr(char const *caller_name_val, int id_size_val, int index_size_val, int global_entry_id_val);
+    void *listMgrMalloc(char const *caller_name_val, int id_size_val, int index_size_val, int global_entry_id_val);
     void listMgrFree(void *list_mgr_val);
     void *listMgrSearchEntry(void *list_mgr_val, char *data_val);
 
-    /* list_mgr */
-    void *mallocArrayMgr(char const *caller_name_val, char array_type_val, int array_size_val);
+    /* array_mgr */
+    void *arrayMgrMalloc(char const *caller_name_val, char array_type_val, int array_size_val);
     void arrayMgrFree(void *array_mgr_val);
-    void insertArrayMgrElement(void *array_mgr_val, void *element_val);
-    void removeArrayMgrElement(void *array_mgr_val, void *element_val);
+    void arrayMgrInsertElement(void *array_mgr_val, void *element_val);
+    void arrayMgrRemoveElement(void *array_mgr_val, void *element_val);
 
     /* tp */
     void *mallocTpServer (

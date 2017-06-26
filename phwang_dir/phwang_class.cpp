@@ -99,7 +99,7 @@ void *PhwangClass::mallocQueue (int max_size_val)
 /**************************************************************************************************************/
 /**************************************************************************************************************/
 
-void *PhwangClass::mallocListMgr (char const *caller_name_val, int id_size_val, int index_size_val, int global_entry_id_val)
+void *PhwangClass::listMgrMalloc (char const *caller_name_val, int id_size_val, int index_size_val, int global_entry_id_val)
 {
     ListMgrClass *list_mgr = new ListMgrClass(caller_name_val, id_size_val, index_size_val, global_entry_id_val);
     return list_mgr;
@@ -139,7 +139,7 @@ void *PhwangClass::listMgrSearchEntry(void *list_mgr_val, char *data_val)
 /**************************************************************************************************************/
 /**************************************************************************************************************/
 
-void *PhwangClass::mallocArrayMgr(char const *caller_name_val, char array_type_val, int array_size_val)
+void *PhwangClass::arrayMgrMalloc(char const *caller_name_val, char array_type_val, int array_size_val)
 {
     ArrayMgrClass *array_mgr = new ArrayMgrClass(caller_name_val, array_type_val, array_size_val);
     return array_mgr;
@@ -160,30 +160,30 @@ void PhwangClass::arrayMgrFree(void *array_mgr_val)
     ((ArrayMgrClass *) array_mgr_val)->~ArrayMgrClass();
 }
 
-void PhwangClass::insertArrayMgrElement(void *array_mgr_val, void *element_val)
+void PhwangClass::arrayMgrInsertElement(void *array_mgr_val, void *element_val)
 {
     if (!array_mgr_val) {
-        phwangAbend("insertArrayMgrElement", "null array_mgr_val");
+        phwangAbend("arrayMgrInsertElement", "null array_mgr_val");
         return;
     }
 
     if (strcmp(((ArrayMgrClass *) array_mgr_val)->objectName(), "ArrayMgrClass")) {
-        phwangAbend("insertArrayMgrElement", "wrong object");
+        phwangAbend("arrayMgrInsertElement", "wrong object");
         return;
     }
 
     ((ArrayMgrClass *) array_mgr_val)->insertElement(element_val);
 }
 
-void PhwangClass::removeArrayMgrElement(void *array_mgr_val, void *element_val)
+void PhwangClass::arrayMgrRemoveElement(void *array_mgr_val, void *element_val)
 {
     if (!array_mgr_val) {
-        phwangAbend("removeArrayMgrElement", "null array_mgr_val");
+        phwangAbend("arrayMgrRemoveElement", "null array_mgr_val");
         return;
     }
 
     if (strcmp(((ArrayMgrClass *) array_mgr_val)->objectName(), "ArrayMgrClass")) {
-        phwangAbend("removeArrayMgrElement", "wrong object");
+        phwangAbend("arrayMgrRemoveElement", "wrong object");
         return;
     }
 
