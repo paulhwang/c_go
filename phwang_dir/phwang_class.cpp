@@ -105,15 +105,15 @@ void *PhwangClass::mallocListMgr (char const *caller_name_val, int id_size_val, 
     return list_mgr;
 }
 
-void PhwangClass::freeListMgr(void *list_mgr_val)
+void PhwangClass::listMgrFree(void *list_mgr_val)
 {
     if (!list_mgr_val) {
-        phwangAbend("freeListMgr", "null list_mgr_val");
+        phwangAbend("listMgrFree", "null list_mgr_val");
         return;
     }
 
     if (strcmp(((ListMgrClass *) list_mgr_val)->objectName(), "ListMgrClass")) {
-        phwangAbend("freeListMgr", "wrong object");
+        phwangAbend("listMgrFree", "wrong object");
         return;
     }
 
@@ -145,15 +145,15 @@ void *PhwangClass::mallocArrayMgr(char const *caller_name_val, char array_type_v
     return array_mgr;
 }
 
-void PhwangClass::freeArrayMgr(void *array_mgr_val)
+void PhwangClass::arrayMgrFree(void *array_mgr_val)
 {
     if (!array_mgr_val) {
-        phwangAbend("freeArrayMgr", "null array_mgr_val");
+        phwangAbend("arrayMgrFree", "null array_mgr_val");
         return;
     }
 
     if (strcmp(((ArrayMgrClass *) array_mgr_val)->objectName(), "ArrayMgrClass")) {
-        phwangAbend("freeArrayMgr", "wrong object");
+        phwangAbend("arrayMgrFree", "wrong object");
         return;
     }
 
