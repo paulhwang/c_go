@@ -13,7 +13,7 @@ GroupClass::GroupClass (void *list_mgr_object_val, FabricClass *fabric_object_va
         ListEntryClass(list_mgr_object_val),
         theFabricObject(fabric_object_val)
 {
-    this->theSessionArrayMgr = phwangArrayMgrMalloc(this->objectName(), 'p', 10);
+    this->theSessionArrayMgr = phwangArrayMgrMalloc(this->objectName(), 'o', 10);
 
     this->debug(true, "GroupClass", this->groupIdIndex());
 }

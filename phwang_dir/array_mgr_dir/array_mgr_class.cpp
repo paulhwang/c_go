@@ -29,16 +29,16 @@ void ArrayMgrClass::allocArrayTable (void)
     int size;
 
     switch (this->theArrayType) {
-        case 'o': 
-        case 'p': 
+        case 'o': // object
+        case 's': // string
             size = sizeof(ptr);
             break;
 
-        case 'i':
+        case 'i': // integer
             size = sizeof(i);
             break;
 
-        case 'c':
+        case 'c': // char
             size = sizeof(c);
             break;
 
@@ -58,7 +58,7 @@ void *ArrayMgrClass::getArrayTable (int *array_size_ptr)
 
     switch (this->theArrayType) {
         case 'o': 
-        case 'p': 
+        case 's': 
             return this->thePointerArrayTable;
 
         case 'i':
