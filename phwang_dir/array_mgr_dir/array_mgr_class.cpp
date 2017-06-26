@@ -22,18 +22,23 @@ ArrayMgrClass::~ArrayMgrClass (void)
 
 void ArrayMgrClass::insertElement(void *element_val)
 {
+    this->insertPointerElement(element_val);
+}
+
+void ArrayMgrClass::insertPointerElement(void *element_val)
+{
     int i = 0;
-    while (i < this->theMaxSessionTableArrayIndex) {
-        if (!this->theSessionTableArray[i]) {
-            this->theSessionTableArray[i] = session_object_val;
+    while (i < this->theArraySize) {
+        if (!this->thePointerArrayTable[i]) {
+            this->thePointerArrayTable[i] = element_val;
             return;
         }
         i++;
     }
 
-    if (this->theMaxSessionTableArrayIndex < GROUP_CLASS_SESSION_ARRAY_SIZE) {
-        this->theSessionTableArray[this->theMaxSessionTableArrayIndex] = session_object_val;
-        this->theMaxSessionTableArrayIndex++;
+    if (this->theArraySize < this->theMaxArraySize) {
+        this->thePointerArrayTable[this->theArraySize] = element_val;
+        this->theArraySize++;
         return;
     }
 
@@ -42,7 +47,20 @@ void ArrayMgrClass::insertElement(void *element_val)
 
 void ArrayMgrClass::removeElement(void *element_val)
 {
+    this->removePointerElement(element_val);
+}
 
+void ArrayMgrClass::removePointerElement(void *element_val)
+{
+    int i = 0;
+    while (i < this->theMaxArraySize) {
+        if (this->thePointerArrayTable[i] == element_val) {
+            this->thePointerArrayTable[i] = 0;
+            return;
+        }
+        i++;
+    }
+    this->abend("removeElement", "not found");
 }
 
 void ArrayMgrClass::logit (char const* str0_val, char const* str1_val)
