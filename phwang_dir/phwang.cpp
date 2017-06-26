@@ -102,14 +102,19 @@ void phwangArrayMgrFree (void *array_mgr_val)
     thePhwangObject->arrayMgrFree(array_mgr_val);
 }
 
-void  phwangArrayMgrInsertElement(void *array_mgr_val, void *element_val)
+void phwangArrayMgrInsertElement (void *array_mgr_val, void *element_val)
 {
     thePhwangObject->arrayMgrInsertElement(array_mgr_val, element_val);
 }
 
-void  phwangArrayMgrRemoveElement(void *array_mgr_val, void *element_val)
+void phwangArrayMgrRemoveElement (void *array_mgr_val, void *element_val)
 {
     thePhwangObject->arrayMgrRemoveElement(array_mgr_val, element_val);
+}
+
+void *phwangArrayMgrGetArrayTable (void *array_mgr_val)
+{
+    thePhwangObject->arrayMgrGetArrayTable(array_mgr_val);
 }
 
 /* tp */
