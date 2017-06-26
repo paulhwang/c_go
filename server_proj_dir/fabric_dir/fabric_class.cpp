@@ -9,7 +9,7 @@
 #include "u_fabric_dir/u_fabric_class.h"
 #include "d_fabric_dir/d_fabric_class.h"
 #include "group_class.h"
-#include "link_mgr_dir/link_class.h"
+#include "link_class.h"
 
 FabricClass::FabricClass (void)
 {

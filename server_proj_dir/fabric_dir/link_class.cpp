@@ -4,10 +4,10 @@
   File name: link_class.cpp
 */
 
-#include "../../../phwang_dir/phwang.h"
+#include "../../phwang_dir/phwang.h"
 #include "link_class.h"
 #include "session_class.h"
-#include "../fabric_class.h"
+#include "fabric_class.h"
   
 LinkClass::LinkClass (void *list_mgr_object_val, FabricClass *fabric_object_val, char const* link_name_val):
         ListEntryClass(list_mgr_object_val),

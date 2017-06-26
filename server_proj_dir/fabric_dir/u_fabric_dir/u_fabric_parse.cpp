@@ -12,8 +12,8 @@
 #include "u_fabric_class.h"
 #include "../fabric_class.h"
 #include "../d_fabric_dir/d_fabric_class.h"
-#include "../link_mgr_dir/link_class.h"
-#include "../link_mgr_dir/session_class.h"
+#include "../link_class.h"
+#include "../session_class.h"
 #include "../group_class.h"
 
 void UFabricClass::exportedParseFunction(char *data_val)

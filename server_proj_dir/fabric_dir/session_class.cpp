@@ -4,7 +4,7 @@
   File name: session_class.cpp
 */
 
-#include "../../../phwang_dir/phwang.h"
+#include "../../phwang_dir/phwang.h"
 #include "session_class.h"
 
 SessionClass::SessionClass (void *list_mgr_object_val, LinkClass *link_object_val):
