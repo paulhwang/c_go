@@ -9,7 +9,6 @@
 #include "../protocol_dir/session_mgr_protocol.h"
 
 class LinkClass;
-class SessionMgrClass;
 class GroupClass;
 
 class SessionClass : public ListEntryClass {
@@ -25,10 +24,7 @@ class SessionClass : public ListEntryClass {
 protected:
     friend class UFabricClass;
     friend class DFabricClass;
-    friend class SessionMgrClass;
 
-    int sessionId(void) {return this->theEntryId;}
-    int sessionIndex(void) {return this->theEntryIndex;}
     char *sessionIdIndex(void) {return this->theEntryIdIndex;}
     GroupClass *groupObject(void) {return this->theGroupObject;}
 

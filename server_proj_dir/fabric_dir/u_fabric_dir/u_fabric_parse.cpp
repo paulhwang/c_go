@@ -47,7 +47,7 @@ void UFabricClass::processMallocRoomResponse(char *data_val)
         SessionClass *session = group->theSessionTableArray[0];
         output_data = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
         output_data[0] = WEB_FABRIC_PROTOCOL_RESPOND_IS_MALLOC_SESSION;
-        phwangEncodeIdIndex(output_data + 1, session->sessionId(), SESSION_MGR_PROTOCOL_SESSION_ID_SIZE, session->sessionIndex(), SESSION_MGR_PROTOCOL_SESSION_INDEX_SIZE);
+        strcpy(output_data + 1, session->sessionIdIndex());
         this->theFabricObject->dFabricObject()->transmitFunction(output_data);
     }
 }

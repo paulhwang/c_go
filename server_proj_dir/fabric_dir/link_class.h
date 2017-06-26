@@ -22,8 +22,6 @@ class LinkClass : public ListEntryClass {
     void abend(char const* str0_val, char const* str1_val);
 
 protected:
-    friend class LinkMgrClass;
-    friend class SessionMgrClass;
     friend class DFabricClass;
     friend class UFabricClass;
     friend class FabricClass;
