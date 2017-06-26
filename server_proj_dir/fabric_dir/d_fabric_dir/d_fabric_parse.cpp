@@ -16,7 +16,7 @@
 #include "../u_fabric_dir/u_fabric_class.h"
 #include "../link_mgr_dir/link_class.h"
 #include "../link_mgr_dir/session_class.h"
-#include "../group_mgr_dir/group_class.h"
+#include "../group_class.h"
 
 void DFabricClass::exportedparseFunction (char *data_val)
 {
