@@ -24,42 +24,24 @@
 GoPortClass::GoPortClass (GoBaseClass* base_object_val) {
     this->theBaseObject = base_object_val;
 
-    if (1) {
-        this->logit("GoPortClass", "init");
-    }
+    this->debug(true, "GoPortClass", "init");
 }
 
 GoPortClass::~GoPortClass (void) {
-}
-
-char const* GoPortClass::objectName (void) {
-    return "GoPortClass";
-}
-
-GoBaseClass* GoPortClass::baseObject (void) {
-    return this->theBaseObject;
-}
-
-GoBoardClass* GoPortClass::boardObject (void) {
-    return this->baseObject()->boardObject();
-}
-
-GoGameClass* GoPortClass::gameObject (void) {
-    return this->baseObject()->gameObject();
 }
 
 void GoPortClass::transmitBoardData (void) {
     char *board_data = (char *) malloc(BASE_MGR_DATA_BUFFER_SIZE);
     board_data[0] = BASE_MGR_PROTOCOL_RESPOND_IS_TRANSFER_DATA;
     board_data[1] = BASE_MGR_PROTOCOL_GAME_NAME_IS_GO;
-    this->boardObject()->encodeBoard(board_data);
+    this->theBaseObject->boardObject()->encodeBoard(board_data);
 
     if (1) {
         char s[LOGIT_BUF_SIZE];
         sprintf(s, "board_data=%s", board_data);
         this->logit("transmitBoardData", s);
     }
-    this->baseObject()->engineObject___()->dEngineObject()->processTransferDataResponse(this->baseObject(), board_data);
+    this->theBaseObject->engineObject___()->dEngineObject()->processTransferDataResponse(this->theBaseObject, board_data);
 }
 
 void GoPortClass::receiveStringData (char const* str_val) {
@@ -105,12 +87,12 @@ void GoPortClass::aMoveIsPlayed (char const* str_val) {
 
     }
     else {
-        GoMoveClass* move = new GoMoveClass(this->baseObject(), str_val, 0, 0, 0, 0);
-        if (move->turnIndex() != this->gameObject()->totalMoves() + 1) {
+        GoMoveClass* move = new GoMoveClass(this->theBaseObject, str_val, 0, 0, 0, 0);
+        if (move->turnIndex() != this->theBaseObject->gameObject()->totalMoves() + 1) {
             this->logit("aMoveIsPlayed", "duplicated move received *****************");
         }
         else {
-            this->gameObject()->addNewMoveAndFight(move);
+            this->theBaseObject->gameObject()->addNewMoveAndFight(move);
       }
       this->transmitBoardData();
     }
@@ -128,12 +110,12 @@ void GoPortClass::aSpecialMoveIsPlayed (char const* str_val) {
 void GoPortClass::logit (char const* str0_val, char const* str1_val) {
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", this->objectName(), str0_val);
-    this->baseObject()->goBaseLogit(s, str1_val);
+    this->theBaseObject->goBaseLogit(s, str1_val);
 }
 
 void GoPortClass::abend (char const* str0_val, char const* str1_val) {
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", this->objectName(), str0_val);
-    this->baseObject()->goBaseAbend(s, str1_val);
+    this->theBaseObject->goBaseAbend(s, str1_val);
 }
 
