@@ -52,6 +52,21 @@ void ArrayMgrClass::allocArrayTable (void)
     this->thePointerArrayTable = (void **) malloc(size);
 }
 
+void *ArrayMgrClass::getArrayTable (void)
+{
+    switch (this->theArrayType) {
+        case 'o': 
+        case 'p': 
+            return this->thePointerArrayTable;
+
+        case 'i':
+        case 'c':
+        default:
+            this->abend("getArrayTable", "bad type");
+            return 0;
+    }
+}
+
 void ArrayMgrClass::insertElement(void *element_val)
 {
     this->insertPointerElement(element_val);
