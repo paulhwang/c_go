@@ -76,17 +76,27 @@ void ArrayMgrClass::insertElement(void *element_val)
 
 void ArrayMgrClass::insertPointerElement(void *element_val)
 {
+    void *data;
+
+    if (this->theArrayType == 's') {
+        char *data = (char *) malloc(strlen((char *) element_val) + 4);
+        strcpy(data, (char *) element_val);
+    }
+    else {
+        data = element_val;
+    }
+
     int i = 0;
     while (i < this->theArraySize) {
         if (!this->thePointerArrayTable[i]) {
-            this->thePointerArrayTable[i] = element_val;
+            this->thePointerArrayTable[i] = data;
             return;
         }
         i++;
     }
 
     if (this->theArraySize < this->theMaxArraySize) {
-        this->thePointerArrayTable[this->theArraySize] = element_val;
+        this->thePointerArrayTable[this->theArraySize] = data;
         this->theArraySize++;
         return;
     }
@@ -101,6 +111,10 @@ void ArrayMgrClass::removeElement(void *element_val)
 
 void ArrayMgrClass::removePointerElement(void *element_val)
 {
+    if (this->theArrayType == 's') {
+        free(element_val);
+    }
+
     int i = 0;
     while (i < this->theMaxArraySize) {
         if (this->thePointerArrayTable[i] == element_val) {
