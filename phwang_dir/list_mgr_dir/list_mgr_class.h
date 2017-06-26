@@ -41,6 +41,4 @@ public:
     ListMgrClass(char *caller_name_val, int id_size_val, int index_size_val, int global_entry_id_val);
     ~ListMgrClass(void);
     char const* objectName(void) {return "ListMgrClass";}
-
-
 };
