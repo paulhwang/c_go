@@ -25,7 +25,7 @@ class GoBaseClass : public ListEntryClass {
     EngineClass *theEngineObject___;
     char theRoomIdIndex[ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE + 4];
 
-    GoEngineClass* theEngineObject;
+    GoFightClass* theEngineObject;
     GoBoardClass* theBoardObject;
     GoPortClass* thePortObject;
     GoConfigClass* theConfigObject;
@@ -46,7 +46,7 @@ protected:
     char const* objectName(void) {return "GoBaseClass";}
 
     char *goBaseIdIndex(void) {return this->theEntryIdIndex;}
-    GoEngineClass* engineObject(void) {return this->theEngineObject;}
+    GoFightClass* engineObject(void) {return this->theEngineObject;}
     GoBoardClass* boardObject(void) {return this->theBoardObject;}
     GoPortClass* portObject(void) {return this->thePortObject;}
     GoConfigClass* configObject(void) {return this->theConfigObject;}

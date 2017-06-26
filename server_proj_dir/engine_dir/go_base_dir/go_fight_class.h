@@ -13,7 +13,7 @@ class GoMoveClass;
 
 #define GO_GROUP_LIST_ARRAY_SIZE 7
 
-class GoEngineClass {
+class GoFightClass {
     GoBaseClass *theBaseObject;
     int theGroupListCount;
     GoGroupListClass* theGroupListArray[GO_GROUP_LIST_ARRAY_SIZE];
@@ -43,9 +43,9 @@ class GoEngineClass {
     void abend(char const *str0_val, char const *str1_val);
 
 public:
-    GoEngineClass(GoBaseClass* base_object_val);
-    ~GoEngineClass(void) {}
-    char const* objectName(void) {return "GoEngineClass";}
+    GoFightClass(GoBaseClass* base_object_val);
+    ~GoFightClass(void) {}
+    char const* objectName(void) {return "GoFightClass";}
 
     void enterWar(GoMoveClass* move_val);
     void resetEngineObjectData(void);

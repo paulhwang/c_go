@@ -8,62 +8,60 @@
 #include "go_base_class.h"
 #include "go_fight_class.h"
 
-GoEngineClass::GoEngineClass (GoBaseClass* base_object_val):
+GoFightClass::GoFightClass (GoBaseClass* base_object_val):
         theBaseObject(base_object_val)
 {
     this->resetEngineObjectData();
 
-    if (1) {
-        this->logit("GoEngineClass", "init");
-    }
+    this->debug(true, "GoFightClass", "init");
 }
 
-GoBoardClass* GoEngineClass::boardObject (void)
+GoBoardClass* GoFightClass::boardObject (void)
 {
   return this->baseObject()->boardObject();
 }
 
-GoGroupListClass* GoEngineClass::emptyGroupList (void)
+GoGroupListClass* GoFightClass::emptyGroupList (void)
 {
     return this->theGroupListArray[0];
 }
 
-GoGroupListClass* GoEngineClass::blackGroupList (void)
+GoGroupListClass* GoFightClass::blackGroupList (void)
 {
     return this->theGroupListArray[1];
 }
 
-GoGroupListClass* GoEngineClass::whiteGroupList (void)
+GoGroupListClass* GoFightClass::whiteGroupList (void)
 {
     return this->theGroupListArray[2];
 }
 
-GoGroupListClass* GoEngineClass::blackDeadGroupList (void)
+GoGroupListClass* GoFightClass::blackDeadGroupList (void)
 {
     return this->theGroupListArray[3];
 }
 
-GoGroupListClass* GoEngineClass::whiteDeadGroupList (void)
+GoGroupListClass* GoFightClass::whiteDeadGroupList (void)
 {
     return this->theGroupListArray[4];
 }
 
-GoGroupListClass* GoEngineClass::blackEmptyGroupList (void)
+GoGroupListClass* GoFightClass::blackEmptyGroupList (void)
 {
     return this->theGroupListArray[5];
 }
 
-GoGroupListClass* GoEngineClass::whiteEmptyGroupList (void)
+GoGroupListClass* GoFightClass::whiteEmptyGroupList (void)
 {
     return this->theGroupListArray[6];
 }
 
-void GoEngineClass::clearLastDeadStone (void)
+void GoFightClass::clearLastDeadStone (void)
 {
     this->theLastDeadStone = 0;
 }
 
-void GoEngineClass::enterWar (GoMoveClass* move_val)
+void GoFightClass::enterWar (GoMoveClass* move_val)
 {
     if (1) {
         char s[LOGIT_BUF_SIZE];
@@ -95,7 +93,7 @@ void GoEngineClass::enterWar (GoMoveClass* move_val)
     this->abendEngine();
 }
 
-GoGroupClass* GoEngineClass::insertStoneToGroupList (GoMoveClass* move_val)
+GoGroupClass* GoFightClass::insertStoneToGroupList (GoMoveClass* move_val)
 {
     GoGroupListClass* g_list;
 
@@ -122,7 +120,7 @@ GoGroupClass* GoEngineClass::insertStoneToGroupList (GoMoveClass* move_val)
 
 }
 
-int GoEngineClass::killOtherColorGroups(GoMoveClass* move_val, GoGroupClass* group_val)
+int GoFightClass::killOtherColorGroups(GoMoveClass* move_val, GoGroupClass* group_val)
 {
     int count;
     this->clearLastDeadStone();
@@ -133,26 +131,26 @@ int GoEngineClass::killOtherColorGroups(GoMoveClass* move_val, GoGroupClass* gro
     return count;
 }
 
-int GoEngineClass::killOtherColorGroup(GoGroupClass* group, int x_val, int y_val)
+int GoFightClass::killOtherColorGroup(GoGroupClass* group, int x_val, int y_val)
 {
     return 0;
 }
 
-void GoEngineClass::resetMarkedGroupLists (void)
+void GoFightClass::resetMarkedGroupLists (void)
 {
     this->theGroupListArray[3] = new GoGroupListClass(this, 3, GO_BLACK_STONE, true, "black", "gray");
     this->theGroupListArray[4] = new GoGroupListClass(this, 4, GO_WHITE_STONE, true, "white", "gray");
     this->boardObject()->resetMarkedBoardObjectData();
 }
 
-void GoEngineClass::resetEmptyGroupLists (void)
+void GoFightClass::resetEmptyGroupLists (void)
 {
     this->theGroupListArray[0] = new GoGroupListClass(this, 0, GO_EMPTY_STONE, false, 0, 0);
     this->theGroupListArray[5] = new GoGroupListClass(this, 5, GO_EMPTY_STONE, false, 0, "black");
     this->theGroupListArray[6] = new GoGroupListClass(this, 6, GO_EMPTY_STONE, false, 0, "white");
 }
 
-void GoEngineClass::resetEngineObjectData (void)
+void GoFightClass::resetEngineObjectData (void)
 {
     this->theGroupListCount = GO_GROUP_LIST_ARRAY_SIZE;
     //this.theGroupListArray = [this.groupListCount()];
@@ -168,17 +166,17 @@ void GoEngineClass::resetEngineObjectData (void)
     this->theWhiteCaptureStones = 0;
 }
 
-void GoEngineClass::abendEngine (void)
+void GoFightClass::abendEngine (void)
 {
 }
 
-void GoEngineClass::logit (char const *str0_val, char const *str1_val) {
+void GoFightClass::logit (char const *str0_val, char const *str1_val) {
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", this->objectName(), str0_val);
     this->theBaseObject->goBaseLogit(s, str1_val);
 }
 
-void GoEngineClass::abend (char const *str0_val, char const *str1_val) {
+void GoFightClass::abend (char const *str0_val, char const *str1_val) {
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", this->objectName(), str0_val);
     this->theBaseObject->goBaseAbend(s, str1_val);

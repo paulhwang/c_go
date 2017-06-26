@@ -14,7 +14,7 @@ GoBaseClass::GoBaseClass (void* list_mgr_object_val, EngineClass *engine_object_
 {
     this->theConfigObject = new GoConfigClass(this);
     this->theBoardObject = new GoBoardClass(this);
-    this->theEngineObject = new GoEngineClass(this);
+    this->theEngineObject = new GoFightClass(this);
     this->thePortObject = new GoPortClass(this);
     this->theGameObject = new GoGameClass(this);
 

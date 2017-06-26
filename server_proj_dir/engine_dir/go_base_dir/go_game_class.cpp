@@ -16,7 +16,7 @@ GoGameClass::GoGameClass (GoBaseClass* base_object_val):
     this->debug(true, "GoGameClass", "init");
 }
 
-GoEngineClass* GoGameClass::engineObject (void)
+GoFightClass* GoGameClass::engineObject (void)
 {
     return this->baseObject()->engineObject();
 }

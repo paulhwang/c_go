@@ -21,7 +21,7 @@ class GoGameClass
     int thePassReceived;
     int theGameIsOver;
 
-    GoEngineClass* engineObject(void);
+    GoFightClass* engineObject(void);
     char getOppositeColor(char color_val);
     void insertMoveToMoveList(GoMoveClass* move_val);
     void resetGameObjectData(void);

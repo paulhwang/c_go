@@ -10,7 +10,7 @@
 
 class GoGroupListClass
 {
-    GoEngineClass *theEngineObject;
+    GoFightClass *theEngineObject;
     int theGroupCount;
     GoGroupClass *theListArray[400];
 
@@ -25,7 +25,7 @@ class GoGroupListClass
     void abend(char const *str0_val, char const *str1_val);
 
 public:
-    GoGroupListClass(GoEngineClass* engine_val,
+    GoGroupListClass(GoFightClass* engine_val,
                        int index_val,
                        int color_val,
                        int dead_val,
@@ -34,7 +34,7 @@ public:
     ~GoGroupListClass(void);
     char const* objectName(void) {return "GoGroupListClass";}
  
-    GoEngineClass* engineObject(void) {return this->theEngineObject;}
+    GoFightClass* engineObject(void) {return this->theEngineObject;}
     GoBaseClass* baseObject(void) {return this->theEngineObject->baseObject();}
 
 

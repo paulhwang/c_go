@@ -8,7 +8,7 @@
 #include "go_base_class.h"
 #include "go_group_list_class.h"
 
-GoGroupListClass::GoGroupListClass (GoEngineClass* engine_val,
+GoGroupListClass::GoGroupListClass (GoFightClass* engine_val,
                                     int index_val,
                                     int color_val,
                                     int dead_val,
