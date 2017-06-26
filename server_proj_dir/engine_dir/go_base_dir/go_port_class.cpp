@@ -35,7 +35,7 @@ void GoPortClass::transmitBoardData (void) {
 
     this->debug(true, "transmitBoardData", board_data);
 
-    this->theBaseObject->engineObject___()->dEngineObject()->processTransferDataResponse(this->theBaseObject, board_data);
+    this->theBaseObject->engineObject()->dEngineObject()->processTransferDataResponse(this->theBaseObject, board_data);
 }
 
 void GoPortClass::receiveStringData (char const *str_val) {

@@ -22,7 +22,7 @@
 class EngineClass;
 
 class GoBaseClass : public ListEntryClass {
-    EngineClass *theEngineObject___;
+    EngineClass *theEngineObject;
     char theRoomIdIndex[ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE + 4];
 
     GoFightClass* theFightObject;
@@ -52,7 +52,7 @@ protected:
     GoConfigClass* configObject(void) {return this->theConfigObject;}
     GoGameClass* gameObject(void) {return this->theGameObject;}
 
-    EngineClass *engineObject___(void) {return this->theEngineObject___;}
+    EngineClass *engineObject(void) {return this->theEngineObject;}
 
     void goBaseLogit(char const* str0_val, char const* str1_val) {phwangLogit(str0_val, str1_val);}
     void goBaseAbend(char const* str0_val, char const* str1_val) {phwangAbend(str0_val, str1_val);}

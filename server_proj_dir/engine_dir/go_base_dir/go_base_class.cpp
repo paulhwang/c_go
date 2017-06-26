@@ -10,7 +10,7 @@
 
 GoBaseClass::GoBaseClass (void* list_mgr_object_val, EngineClass *engine_object_val):
         ListEntryClass(list_mgr_object_val),
-        theEngineObject___(engine_object_val)
+        theEngineObject(engine_object_val)
 {
     this->theConfigObject = new GoConfigClass(this);
     this->theBoardObject = new GoBoardClass(this);
