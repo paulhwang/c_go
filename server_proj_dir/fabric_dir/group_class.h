@@ -29,8 +29,6 @@ protected:
     friend class UFabricClass;
     friend class GroupMgrClass;
 
-    int groupId(void) {return this->theEntryId;}
-    int groupIndex(void) {return this->theEntryIndex;}
     char *groupIdIndex(void) {return this->theEntryIdIndex;}
     char *roomIdIndex(void) {return this->theRoomIdIndex;}
     void setRoomIdIndex(char *val) {memcpy(this->theRoomIdIndex, val, ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);}
