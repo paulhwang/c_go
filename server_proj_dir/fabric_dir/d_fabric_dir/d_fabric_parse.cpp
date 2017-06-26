@@ -87,9 +87,7 @@ void DFabricClass::processMallocSession (char *data_val)
     session->bindGroup(group);
 
     data_buf[0] = FABRIC_THEME_PROTOCOL_COMMAND_IS_MALLOC_ROOM;
-    phwangEncodeIdIndex(data_buf + 1,
-                        group->groupId(), GROUP_MGR_PROTOCOL_GROUP_ID_SIZE,
-                        group->groupIndex(), GROUP_MGR_PROTOCOL_GROUP_INDEX_SIZE);
+    strcpy(data_buf + 1, group->groupIdIndex());
 
     this->theFabricObject->uFabricObject()->transmitFunction(data_buf);
 }

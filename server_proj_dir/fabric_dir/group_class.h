@@ -10,14 +10,12 @@
 #include "../protocol_dir/room_mgr_protocol.h"
 #include "../protocol_dir/session_mgr_protocol.h"
 
-class GroupMgrClass;
 class SessionClass;
 class FabricClass;
 
 class GroupClass : public ListEntryClass {
 #define GROUP_CLASS_SESSION_ARRAY_SIZE 32
     FabricClass *theFabricObject;
-    GroupMgrClass *theGroupMgrObject;
     char theRoomIdIndex[ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE + 4];
     void *theSessionArrayMgr;
     SessionClass **theSessionTableArray;
