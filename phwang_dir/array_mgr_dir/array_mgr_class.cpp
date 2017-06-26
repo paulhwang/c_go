@@ -52,8 +52,10 @@ void ArrayMgrClass::allocArrayTable (void)
     this->thePointerArrayTable = (void **) malloc(size);
 }
 
-void *ArrayMgrClass::getArrayTable (void)
+void *ArrayMgrClass::getArrayTable (int *array_size_ptr)
 {
+    *array_size_ptr = this->theArraySize;
+
     switch (this->theArrayType) {
         case 'o': 
         case 'p': 

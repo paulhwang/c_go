@@ -40,7 +40,7 @@ class PhwangClass {
     void  arrayMgrFree(void *array_mgr_val);
     void  arrayMgrInsertElement(void *array_mgr_val, void *element_val);
     void  arrayMgrRemoveElement(void *array_mgr_val, void *element_val);
-    void *arrayMgrGetArrayTable(void *array_mgr_val);
+    void *arrayMgrGetArrayTable(void *array_mgr_val, int *array_size_ptr);
 
     /* tp */
     void *mallocTpServer (

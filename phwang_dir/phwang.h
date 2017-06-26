@@ -41,7 +41,7 @@ void *phwangArrayMgrMalloc(char const *caller_name_val, char array_type_val, int
 void  phwangArrayMgrFree(void *array_mgr_val);
 void  phwangArrayMgrInsertElement(void *array_mgr_val, void *element_val);
 void  phwangArrayMgrRemoveElement(void *array_mgr_val, void *element_val);
-void *phwangArrayMgrGetArrayTable(void *array_mgr_val);
+void *phwangArrayMgrGetArrayTable(void *array_mgr_val, int *array_size_ptr);
 
 /* tp */
 void *phwangMallocTpServer(

@@ -24,7 +24,7 @@ class ArrayMgrClass {
 protected:
     friend class PhwangClass;
 
-    void *getArrayTable(void);
+    void *getArrayTable(int *array_size_ptr);
     void insertElement(void *element_val);
     void removeElement(void *element_val);
 

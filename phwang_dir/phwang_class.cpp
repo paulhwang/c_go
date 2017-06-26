@@ -190,7 +190,7 @@ void PhwangClass::arrayMgrRemoveElement(void *array_mgr_val, void *element_val)
     ((ArrayMgrClass *) array_mgr_val)->removeElement(element_val);
 }
 
-void *PhwangClass::arrayMgrGetArrayTable(void *array_mgr_val)
+void *PhwangClass::arrayMgrGetArrayTable(void *array_mgr_val, int *array_size_ptr)
 {
     if (!array_mgr_val) {
         phwangAbend("arrayMgrGetArrayTable", "null array_mgr_val");
@@ -202,7 +202,7 @@ void *PhwangClass::arrayMgrGetArrayTable(void *array_mgr_val)
         return 0;
     }
 
-    return ((ArrayMgrClass *) array_mgr_val)->getArrayTable();
+    return ((ArrayMgrClass *) array_mgr_val)->getArrayTable(array_size_ptr);
 }
 
 /**************************************************************************************************************/
