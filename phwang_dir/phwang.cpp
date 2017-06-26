@@ -83,7 +83,7 @@ void *phwangListMgrMalloc (char const *caller_name_val, int id_size_val, int ind
 
 void phwangListMgrFree (void *list_mgr_val)
 {
-    return thePhwangObject->listMgrFree(list_mgr_val);
+    thePhwangObject->listMgrFree(list_mgr_val);
 }
 
 void *phwangListMgrSearchEntry(void *list_mgr_val, char *data_val)
@@ -92,9 +92,24 @@ void *phwangListMgrSearchEntry(void *list_mgr_val, char *data_val)
 }
 
 /* array_mgr */
+void *phwangArrayMgrMalloc(char const *caller_name_val, char array_type_val, int array_size_val)
+{
+    return thePhwangObject->arrayMgrMalloc(caller_name_val, array_type_val, array_size_val);
+}
+
 void phwangArrayMgrFree (void *array_mgr_val)
 {
-    return thePhwangObject->arrayMgrFree(array_mgr_val);
+    thePhwangObject->arrayMgrFree(array_mgr_val);
+}
+
+void  phwangArrayMgrInsertElement(void *array_mgr_val, void *element_val)
+{
+    thePhwangObject->arrayMgrInsertElement(array_mgr_val, element_val);
+}
+
+void  phwangArrayMgrRemoveElement(void *array_mgr_val, void *element_val)
+{
+    thePhwangObject->arrayMgrRemoveElement(array_mgr_val, element_val);
 }
 
 /* tp */

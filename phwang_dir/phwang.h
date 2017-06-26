@@ -37,7 +37,10 @@ void  phwangListMgrFree(void *list_mgr_val);
 void *phwangListMgrSearchEntry(void *list_mgr_val, char *data_val);
 
 /* array_mgr */
-void phwangArrayMgrFree (void *array_mgr_val);
+void *phwangArrayMgrMalloc(char const *caller_name_val, char array_type_val, int array_size_val);
+void  phwangArrayMgrFree(void *array_mgr_val);
+void  phwangArrayMgrInsertElement(void *array_mgr_val, void *element_val);
+void  phwangArrayMgrRemoveElement(void *array_mgr_val, void *element_val);
 
 /* tp */
 void *phwangMallocTpServer(
