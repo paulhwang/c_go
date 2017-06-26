@@ -14,7 +14,7 @@ RoomClass::RoomClass (void *list_mgr_object_val, ThemeClass *theme_object_val, c
         theThemeObject(theme_object_val)
 {
     this->theGroupArrayMgr = phwangArrayMgrMalloc(this->objectName(), 's', 10);
-    this->theMaxGroupTableArrayIndex = 0;
+    //this->theMaxGroupTableArrayIndex = 0;
     this->insertGroup(group_id_index_val);
 
     this->debug(true, "RoomClass", this->roomIdIndex());
@@ -26,8 +26,11 @@ RoomClass::~RoomClass (void)
 
 void RoomClass::insertGroup (char *group_id_index_val)
 {
-    phwangArrayMgrInsertElement(this->theGroupArrayMgr, group_id_index_val);
-
+    char buf[GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE + 4];
+    memcpy(buf, group_id_index_val, GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE);
+    buf[GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE] = 0;
+    phwangArrayMgrInsertElement(this->theGroupArrayMgr, buf);
+/*
     char *buf = (char *) malloc(GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE + 4);
     memcpy(buf, group_id_index_val, GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE);
     buf[GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE] = 0;
@@ -49,12 +52,13 @@ void RoomClass::insertGroup (char *group_id_index_val)
 
     free(buf);
     this->abend("insertGroup", "table is full");
+*/
 }
 
 void RoomClass::removeGroup (char *group_id_index_val)
 {
     phwangArrayMgrRemoveElement(this->theGroupArrayMgr, group_id_index_val);
-
+/*
     int i = 0;
     while (i < ROOM_CLASS_GROUP_ARRAY_SIZE) {
         if (!memcmp(this->theGroupTableArray1[i], group_id_index_val, GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE)) {
@@ -65,6 +69,7 @@ void RoomClass::removeGroup (char *group_id_index_val)
         i++;
     }
     this->abend("removeGroup", "not found");
+*/
 }
 
 void RoomClass::logit (char const* str0_val, char const* str1_val)

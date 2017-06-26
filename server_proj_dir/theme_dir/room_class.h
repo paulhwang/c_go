@@ -18,8 +18,9 @@ class RoomClass : public ListEntryClass {
 #define ROOM_CLASS_GROUP_ARRAY_SIZE 32
     ThemeClass *theThemeObject;
     char theBaseIdIndex[BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE + 4];
-    char *theGroupTableArray1[ROOM_CLASS_GROUP_ARRAY_SIZE];
-    int theMaxGroupTableArrayIndex;
+    //char *theGroupTableArray1[ROOM_CLASS_GROUP_ARRAY_SIZE];
+    //int theMaxGroupTableArrayIndex;
+    char **theGroupTableArray;
     void *theGroupArrayMgr;
 
     void debug(int on_off_val, char const* str0_val, char const* str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};

@@ -79,8 +79,10 @@ void ArrayMgrClass::insertPointerElement(void *element_val)
     void *data;
 
     if (this->theArrayType == 's') {
-        char *data = (char *) malloc(strlen((char *) element_val) + 4);
-        strcpy(data, (char *) element_val);
+        int len = strlen((char *) element_val);
+        data = malloc(len + 4);
+        strcpy((char *) data, (char *) element_val);
+        this->logit("insertPointerElement", (char *) data);
     }
     else {
         data = element_val;
@@ -101,7 +103,7 @@ void ArrayMgrClass::insertPointerElement(void *element_val)
         return;
     }
 
-    this->abend("insertElement", "table is full");
+    this->abend("insertPointerElement", "table is full");
 }
 
 void ArrayMgrClass::removeElement(void *element_val)
@@ -123,7 +125,7 @@ void ArrayMgrClass::removePointerElement(void *element_val)
         }
         i++;
     }
-    this->abend("removeElement", "not found");
+    this->abend("removePointerElement", "not found");
 }
 
 void ArrayMgrClass::logit (char const* str0_val, char const* str1_val)

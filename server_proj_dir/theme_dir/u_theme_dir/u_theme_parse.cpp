@@ -35,6 +35,7 @@ void UThemeClass::processMallocBaseResponse(char *data_val)
 {
     char *downlink_data;
     char *data_ptr;
+    int group_array_size;
 
     this->debug(true, "processMallocBaseResponse", data_val);
 
@@ -48,7 +49,8 @@ void UThemeClass::processMallocBaseResponse(char *data_val)
     room->setBaseIdIndex(data_val);
     downlink_data = data_ptr = (char *) malloc(ROOM_MGR_DATA_BUFFER_SIZE + 4);
     *data_ptr++ = FABRIC_THEME_PROTOCOL_RESPOND_IS_MALLOC_ROOM;
-    memcpy(data_ptr, room->theGroupTableArray1[0], GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE);
+    room->theGroupTableArray = (char **) phwangArrayMgrGetArrayTable(room->theGroupArrayMgr, &group_array_size);
+    memcpy(data_ptr, room->theGroupTableArray[0], GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE);
     data_ptr += GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE;
     memcpy(data_ptr, room->roomIdIndex(), ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);
     data_ptr += ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE;
@@ -60,6 +62,7 @@ void UThemeClass::processTransferDataResponse(char *data_val)
 {
     char *downlink_data;
     char *data_ptr;
+    int group_array_size;
 
     this->debug(true, "processTransferDataResponse", data_val);
 
@@ -70,12 +73,13 @@ void UThemeClass::processTransferDataResponse(char *data_val)
     }
     data_val += ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE;
 
+    room->theGroupTableArray = (char **) phwangArrayMgrGetArrayTable(room->theGroupArrayMgr, &group_array_size);
     int i = 0;
-    while (i < room->theMaxGroupTableArrayIndex) {
-        if (room->theGroupTableArray1[i]) {
+    while (i < group_array_size) {
+        if (room->theGroupTableArray[i]) {
             downlink_data = data_ptr = (char *) malloc(ROOM_MGR_DATA_BUFFER_SIZE + 4);
             *data_ptr++ = FABRIC_THEME_PROTOCOL_RESPOND_IS_TRANSFER_DATA;
-            memcpy(data_ptr, room->theGroupTableArray1[i], GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE);
+            memcpy(data_ptr, room->theGroupTableArray[i], GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE);
             data_ptr += GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE;
             strcpy(data_ptr, data_val);
             this->theThemeObject->dThemeObject()->transmitFunction(downlink_data);
