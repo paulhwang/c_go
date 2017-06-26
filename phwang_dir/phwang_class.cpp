@@ -117,7 +117,7 @@ void PhwangClass::freeListMgr(void *list_mgr_val)
         return;
     }
 
-    return ((ListMgrClass *) list_mgr_val)->~ListMgrClass();
+    ((ListMgrClass *) list_mgr_val)->~ListMgrClass();
 }
 
 void *PhwangClass::listMgrSearchEntry(void *list_mgr_val, char *data_val)
@@ -139,9 +139,10 @@ void *PhwangClass::listMgrSearchEntry(void *list_mgr_val, char *data_val)
 /**************************************************************************************************************/
 /**************************************************************************************************************/
 
-void *PhwangClass::mallocArrayMgr(char *caller_name_val, int id_size_val, int index_size_val, int global_entry_id_val)
+void *PhwangClass::mallocArrayMgr(char *caller_name_val, char array_type_val, int array_size_val)
 {
-
+    ArrayMgrClass *array_mgr = new ArrayMgrClass(caller_name_val, array_type_val, array_size_val);
+    return array_mgr;
 }
 
 void PhwangClass::freeArrayMgr(void *array_mgr_val)
@@ -156,7 +157,37 @@ void PhwangClass::freeArrayMgr(void *array_mgr_val)
         return;
     }
 
-    return ((ArrayMgrClass *) array_mgr_val)->~ArrayMgrClass();
+    ((ArrayMgrClass *) array_mgr_val)->~ArrayMgrClass();
+}
+
+void PhwangClass::insertArrayMgrElement(void *array_mgr_val, void *element_val)
+{
+    if (!array_mgr_val) {
+        phwangAbend("insertArrayMgrElement", "null array_mgr_val");
+        return;
+    }
+
+    if (strcmp(((ArrayMgrClass *) array_mgr_val)->objectName(), "ArrayMgrClass")) {
+        phwangAbend("insertArrayMgrElement", "wrong object");
+        return;
+    }
+
+    ((ArrayMgrClass *) array_mgr_val)->insertElement(element_val);
+}
+
+void PhwangClass::removeArrayMgrElement(void *array_mgr_val, void *element_val)
+{
+    if (!array_mgr_val) {
+        phwangAbend("removeArrayMgrElement", "null array_mgr_val");
+        return;
+    }
+
+    if (strcmp(((ArrayMgrClass *) array_mgr_val)->objectName(), "ArrayMgrClass")) {
+        phwangAbend("removeArrayMgrElement", "wrong object");
+        return;
+    }
+
+    ((ArrayMgrClass *) array_mgr_val)->removeElement(element_val);
 }
 
 /**************************************************************************************************************/

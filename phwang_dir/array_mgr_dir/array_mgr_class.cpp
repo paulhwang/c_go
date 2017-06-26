@@ -19,6 +19,16 @@ ArrayMgrClass::~ArrayMgrClass (void)
 {
 }
 
+void ArrayMgrClass::insertElement(void *element_val)
+{
+
+}
+
+void ArrayMgrClass::removeElement(void *element_val)
+{
+
+}
+
 void ArrayMgrClass::logit (char const* str0_val, char const* str1_val)
 {
     char s[LOGIT_BUF_SIZE];

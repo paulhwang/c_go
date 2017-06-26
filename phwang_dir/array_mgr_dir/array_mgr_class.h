@@ -18,6 +18,9 @@ class ArrayMgrClass {
 protected:
     friend class PhwangClass;
 
+    void insertElement(void *element_val);
+    void removeElement(void *element_val);
+
 public:
     ArrayMgrClass(char *caller_name_val, char array_type_val, int array_size_val);
     ~ArrayMgrClass(void);
