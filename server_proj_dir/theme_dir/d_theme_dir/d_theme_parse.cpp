@@ -11,7 +11,7 @@
 #include "d_theme_class.h"
 #include "../theme_class.h"
 #include "../u_theme_dir/u_theme_class.h"
-#include "../room_mgr_dir/room_class.h"
+#include "../room_class.h"
 
 void DThemeClass::exportedparseFunction (char *data_val)
 {

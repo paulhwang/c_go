@@ -12,7 +12,7 @@
 #include "u_theme_class.h"
 #include "../theme_class.h"
 #include "../d_theme_dir/d_theme_class.h"
-#include "../room_mgr_dir/room_class.h"
+#include "../room_class.h"
 
 void UThemeClass::exportedparseFunction(char *data_val)
 {
