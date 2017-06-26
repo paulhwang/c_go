@@ -13,11 +13,43 @@ ArrayMgrClass::ArrayMgrClass(char const *caller_name_val, char array_type_val, i
         theMaxArraySize(max_array_size_val),
         theArraySize(0)
 {
+    this->allocArrayTable();
     this->debug(true, "ArrayMgrClass", "init");
 }
 
 ArrayMgrClass::~ArrayMgrClass (void)
 {
+}
+
+void ArrayMgrClass::allocArrayTable (void)
+{
+    void *ptr;
+    int i;
+    char c;
+    int size;
+
+    switch (this->theArrayType) {
+        case 'o': 
+        case 'p': 
+            size = sizeof(ptr);
+            break;
+
+        case 'i':
+            size = sizeof(i);
+            break;
+
+        case 'c':
+            size = sizeof(c);
+            break;
+
+        default:
+            this->abend("allocArrayTable", "bad type");
+            size = 16;
+            break;
+    }
+
+    size *= this->theMaxArraySize;
+    this->thePointerArrayTable = (void **) malloc(size);
 }
 
 void ArrayMgrClass::insertElement(void *element_val)

@@ -13,6 +13,7 @@ class ArrayMgrClass {
     int theArraySize;
     void **thePointerArrayTable;
 
+    void allocArrayTable(void);
     void insertPointerElement(void *element_val);
     void removePointerElement(void *element_val);
 

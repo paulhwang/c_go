@@ -13,7 +13,7 @@ GroupClass::GroupClass (void *list_mgr_object_val, FabricClass *fabric_object_va
         ListEntryClass(list_mgr_object_val),
         theFabricObject(fabric_object_val)
 {
-    this->theSessionArray = phwangArrayMgrMalloc(this->objectName(), 'p', 32);
+    this->theSessionArray = phwangArrayMgrMalloc(this->objectName(), 'p', 10);
     this->theMaxSessionTableArrayIndex = 0;
 
     this->debug(true, "GroupClass", this->groupIdIndex());
@@ -26,6 +26,8 @@ GroupClass::~GroupClass (void)
 
 void GroupClass::insertSession (SessionClass *session_object_val)
 {
+    phwangArrayMgrInsertElement(this->theSessionArray, session_object_val);
+
     int i = 0;
     while (i < this->theMaxSessionTableArrayIndex) {
         if (!this->theSessionTableArray[i]) {
@@ -46,6 +48,8 @@ void GroupClass::insertSession (SessionClass *session_object_val)
 
 void GroupClass::removeSession (SessionClass *session_object_val)
 {
+    phwangArrayMgrRemoveElement(this->theSessionArray, session_object_val);
+
     int i = 0;
     while (i < GROUP_CLASS_SESSION_ARRAY_SIZE) {
         if (this->theSessionTableArray[i] == session_object_val) {
