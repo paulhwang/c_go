@@ -21,8 +21,6 @@ class GoBoardClass {
     void setBoardArray(int x_val, int y_val, char data_val);
     void setMarkedBoardArray(int x_val, int y_val, char data_val);
 
-    void resetBoardObjectData (void);
-
     void debug(int on_off_val, char const *str0_val, char const *str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
     void logit(char const *str0_val, char const *str1_val);
     void abend(char const *str0_val, char const *str1_val);
@@ -35,4 +33,6 @@ public:
     void resetMarkedBoardObjectData(void);
     void addStoneToBoard(int x_val, int y_val, char color_val);
     void encodeBoard(char* buf_ptr);
+
+    void resetBoardObjectData (void);
 };

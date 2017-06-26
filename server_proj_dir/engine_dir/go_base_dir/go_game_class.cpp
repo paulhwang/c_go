@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include "go_base_class.h"
 #include "go_game_class.h"
+//#include "go_move_class.h"
 
 GoGameClass::GoGameClass (GoBaseClass* base_object_val):
         theBaseObject(base_object_val)
@@ -85,6 +86,90 @@ void GoGameClass::resetGameObjectPartialData (void)
     this->theNextColor = GO_BLACK_STONE;
     this->thePassReceived = false;
     this->theGameIsOver = false;
+}
+
+void GoGameClass::receiveSpecialMoveFromOpponent (char const *data_val)
+{
+    this->debug(true, "receiveSpecialMoveFromOpponent", data_val);
+
+    if (!strcmp(data_val, "FORWARD")) {
+        //this.processForwardMove();
+        //this.portObject().transmitBoardData();
+        return;
+    }
+
+    if (!strcmp(data_val, "DOUBLE_FORWARD")) {
+        //this.processDoubleForwardMove();
+        //this.portObject().transmitBoardData();
+        return;
+    }
+
+    if (!strcmp(data_val, "BACKWARD")) {
+        this->processBackwardMove();
+        this->theBaseObject->portObject()->transmitBoardData();
+        return;
+    }
+
+    if (!strcmp(data_val, "DOUBLE_BACKWARD")) {
+        //this->processDoubleBackwardMove();
+        //this->theBaseObject->portObject()->transmitBoardData();
+        return;
+    }
+
+    if (!strcmp(data_val, "PASS")) {
+        //this.processPassMove();
+        //this.portObject().transmitBoardData();
+        return;
+    }
+
+    if (!strcmp(data_val, "RESIGN")) {
+        //this.processResignMove();
+        return;
+    }
+
+    if (!strcmp(data_val, "BACK_TO_PLAY")) {
+        //this.processBackToPlayMove();
+        return;
+    }
+
+    if (!strcmp(data_val, "CONFIRM")) {
+        //this.processConfirmMove();
+        //this.portObject().transmitBoardData();
+        return;
+    }
+
+    if (!strcmp(data_val, "PLAY_ANOTHER_GAME")) {
+        //this.processPlayAnotherGameMove();
+        return;
+    }
+}
+
+void GoGameClass::processBackwardMove (void)
+{
+    this->debug(true, "processBackwardMove", "");
+    this->thePassReceived = 0;
+    if (this->theTotalMoves <= 0) {///this->theBaseObject->configObject()->handicapPoint()) {
+        return;
+    }
+    this->theTotalMoves--;
+    this->processTheWholeMoveList();
+}
+
+void GoGameClass::processTheWholeMoveList (void)
+{
+    this->theBaseObject->boardObject()->resetBoardObjectData();
+    this->fightObject()->resetEngineObjectData();
+    this->resetGameObjectPartialData();
+
+    //this->debug(true, "processTheWholeMoveLst", "totalMoves=" + this.totalMoves());
+    GoMoveClass *move;
+    int i = 0;
+    while (i < this->theTotalMoves) {
+        move = this->theMovesArray[i];
+        this->theBaseObject->fightObject()->enterWar(move);
+        this->theNextColor = this->getOppositeColor(move->myColor());
+        i += 1;
+    }
 }
 
 void GoGameClass::logit (char const *str0_val, char const *str1_val) {

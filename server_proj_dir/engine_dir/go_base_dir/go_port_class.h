@@ -12,7 +12,6 @@ class GoGameClass;
 class GoPortClass {
     GoBaseClass *theBaseObject;
 
-    void transmitBoardData (void);
     void aMoveIsPlayed(char const *str_val);
     void aSpecialMoveIsPlayed(char const *str_val);
 
@@ -29,4 +28,6 @@ public:
     GoPortClass(GoBaseClass* base_object_val);
     ~GoPortClass(void) {}
     char const* objectName(void) {return "GoPortClass";}
+
+    void transmitBoardData (void);
 };

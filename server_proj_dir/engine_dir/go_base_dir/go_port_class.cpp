@@ -86,7 +86,7 @@ void GoPortClass::aMoveIsPlayed (char const *str_val) {
 
 void GoPortClass::aSpecialMoveIsPlayed (char const *str_val) {
     this->debug(true, "aSpecialMoveIsPlayed", str_val);
-
+    this->theBaseObject->gameObject()->receiveSpecialMoveFromOpponent(str_val);
 }
 
 void GoPortClass::logit (char const *str0_val, char const *str1_val) {
