@@ -6,13 +6,13 @@
 
 #pragma once
 #include "go_base_class.h"
-#include "go_engine_class.h"
+#include "go_fight_class.h"
 
 class GoGroupListClass
 {
     GoEngineClass *theEngineObject;
     int theGroupCount;
-    GoGroupClass* theListArray[400];
+    GoGroupClass *theListArray[400];
 
     int groupCount(void);
     void incrementGroupCount(void);

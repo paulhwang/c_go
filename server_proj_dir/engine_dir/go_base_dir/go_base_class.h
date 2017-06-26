@@ -11,7 +11,7 @@
 #include "../../../phwang_dir/list_mgr_dir/list_entry_class.h"
 #include "go_define.h"
 #include "go_board_class.h"
-#include "go_engine_class.h"
+#include "go_fight_class.h"
 #include "go_port_class.h"
 #include "go_config_class.h"
 #include "go_game_class.h"
@@ -31,9 +31,9 @@ class GoBaseClass : public ListEntryClass {
     GoConfigClass* theConfigObject;
     GoGameClass* theGameObject;
 
-    void debug(int on_off_val, char const* str0_val, char const* str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
-    void logit(char const* str0_val, char const* str1_val);
-    void abend(char const* str0_val, char const* str1_val);
+    void debug(int on_off_val, char const *str0_val, char const *str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
+    void logit(char const *str0_val, char const *str1_val);
+    void abend(char const *str0_val, char const *str1_val);
 
 protected:
     friend class DEngineClass;
@@ -43,8 +43,8 @@ protected:
   public:
     GoBaseClass(void *list_mgr_object_val, EngineClass *engine_object_val);
     ~GoBaseClass(void);
-
     char const* objectName(void) {return "GoBaseClass";}
+
     char *goBaseIdIndex(void) {return this->theEntryIdIndex;}
     GoEngineClass* engineObject(void) {return this->theEngineObject;}
     GoBoardClass* boardObject(void) {return this->theBoardObject;}

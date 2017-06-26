@@ -6,7 +6,7 @@
 
 #include <stdio.h>
 #include "go_base_class.h"
-#include "go_engine_class.h"
+#include "go_fight_class.h"
 
 GoEngineClass::GoEngineClass (GoBaseClass* base_object_val):
         theBaseObject(base_object_val)
