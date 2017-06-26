@@ -8,14 +8,12 @@
 #include "go_base_class.h"
 #include "go_board_class.h"
 
-GoBoardClass::GoBoardClass (GoBaseClass* base_object_val) {
-    this->theBaseObject = base_object_val;
+GoBoardClass::GoBoardClass (GoBaseClass* base_object_val):
+        theBaseObject(base_object_val)
+{
     this->resetBoardObjectData();
 
     this->debug(true, "init", "");
-}
-
-GoBoardClass::~GoBoardClass (void) {
 }
 
 char GoBoardClass::boardArray (int x_val, int y_val)

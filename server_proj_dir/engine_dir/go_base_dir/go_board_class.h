@@ -29,7 +29,7 @@ class GoBoardClass {
 
 public:
     GoBoardClass(GoBaseClass* the_base_object);
-    ~GoBoardClass(void);
+    ~GoBoardClass(void) {}
     char const* objectName(void) {return "GoBoardClass";}
 
     void resetMarkedBoardObjectData(void);

@@ -9,9 +9,9 @@
 #include "go_group_list_class.h"
 #include "go_group_class.h"
 
-GoGroupClass::GoGroupClass (GoGroupListClass* group_list_object_var) {
-    this->theGroupListObject = group_list_object_var;
-
+GoGroupClass::GoGroupClass (GoGroupListClass* group_list_object_var):
+        theGroupListObject(group_list_object_var)
+{
     this->debug(true, "GoGroupClass", "init");
 }
 

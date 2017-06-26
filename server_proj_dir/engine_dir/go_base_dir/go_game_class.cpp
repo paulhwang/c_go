@@ -8,18 +8,12 @@
 #include "go_base_class.h"
 #include "go_game_class.h"
 
-GoGameClass::GoGameClass (GoBaseClass* base_object_val)
+GoGameClass::GoGameClass (GoBaseClass* base_object_val):
+        theBaseObject(base_object_val)
 {
-    this->theBaseObject = base_object_val;
     this->resetGameObjectData();
 
-    if (1) {
-        this->logit("GoGameClass", "init");
-    }
-}
-
-GoGameClass::~GoGameClass (void)
-{
+    this->debug(true, "GoGameClass", "init");
 }
 
 GoEngineClass* GoGameClass::engineObject (void)
@@ -93,17 +87,14 @@ void GoGameClass::resetGameObjectPartialData (void)
     this->theGameIsOver = false;
 }
 
-void GoGameClass::logit (char const* str0_val, char const* str1_val)
-{
+void GoGameClass::logit (char const *str0_val, char const *str1_val) {
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", this->objectName(), str0_val);
-    this->baseObject()->goBaseLogit(s, str1_val);
+    this->theBaseObject->goBaseLogit(s, str1_val);
 }
 
-void GoGameClass::abend (char const* str0_val, char const* str1_val)
-{
+void GoGameClass::abend (char const *str0_val, char const *str1_val) {
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", this->objectName(), str0_val);
-    this->baseObject()->goBaseAbend(s, str1_val);
+    this->theBaseObject->goBaseAbend(s, str1_val);
 }
-

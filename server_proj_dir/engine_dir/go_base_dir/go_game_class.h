@@ -7,9 +7,9 @@
 #pragma once
 
 class GoMoveClass;
+#include "go_base_class.h"
 
 #define GO_MAX_MOVES_ARRAY_SIZE 1024
-#include "go_base_class.h"
 
 class GoGameClass
 {
@@ -44,17 +44,18 @@ class GoGameClass
     void setGameIsOver(void) {theGameIsOver = true;}
     void clearGameIsOver(void) {theGameIsOver = false;}
 
-    void logit(char const* str0_val, char const* str1_val);
-    void abend(char const* str0_val, char const* str1_val);
+    void debug(int on_off_val, char const *str0_val, char const *str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
+    void logit(char const *str0_val, char const *str1_val);
+    void abend(char const *str0_val, char const *str1_val);
 
 public:
     GoGameClass(GoBaseClass* the_base_object);
-    ~GoGameClass(void);
+    ~GoGameClass(void) {}
+    char const* objectName(void) {return "GoGameClass";}
 
     void addNewMoveAndFight(GoMoveClass *move_val);
 
     int totalMoves(void) {return theTotalMoves;}
 
     GoBaseClass* baseObject(void) {return theBaseObject;}
-    char const* objectName(void) {return "GoGameClass";}
 };
