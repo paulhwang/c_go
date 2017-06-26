@@ -19,8 +19,9 @@ class GroupClass : public ListEntryClass {
     FabricClass *theFabricObject;
     GroupMgrClass *theGroupMgrObject;
     char theRoomIdIndex[ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE + 4];
-    void *theSessionArray;
-    SessionClass *theSessionTableArray[GROUP_CLASS_SESSION_ARRAY_SIZE];
+    void *theSessionArrayMgr;
+    SessionClass **theSessionTableArray;
+    SessionClass *theSessionTableArray1[GROUP_CLASS_SESSION_ARRAY_SIZE];
     int theMaxSessionTableArrayIndex;
 
     void debug(int on_off_val, char const* str0_val, char const* str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
