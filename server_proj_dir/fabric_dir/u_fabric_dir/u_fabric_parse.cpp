@@ -66,8 +66,8 @@ void UFabricClass::processTransferDataResponse(char *data_val)
     data_val += GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE;
 
     int i = 0;
+    group->theSessionTableArray = (SessionClass **) phwangArrayMgrGetArrayTable(group->theSessionArrayMgr);
     while (i < group->theMaxSessionTableArrayIndex) {
-        group->theSessionTableArray = (SessionClass **) phwangArrayMgrGetArrayTable(group->theSessionArrayMgr);
         SessionClass *session = group->theSessionTableArray1[i];
         if (session) {
             downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
