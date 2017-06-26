@@ -92,9 +92,9 @@ void *phwangListMgrSearchEntry(void *list_mgr_val, char *data_val)
 }
 
 /* array_mgr */
-void *phwangArrayMgrMalloc(char const *caller_name_val, char array_type_val, int array_size_val)
+void *phwangArrayMgrMalloc(char const *caller_name_val, char array_type_val, int max_array_size_val)
 {
-    return thePhwangObject->arrayMgrMalloc(caller_name_val, array_type_val, array_size_val);
+    return thePhwangObject->arrayMgrMalloc(caller_name_val, array_type_val, max_array_size_val);
 }
 
 void phwangArrayMgrFree (void *array_mgr_val)
