@@ -10,7 +10,6 @@
 #include "../protocol_dir/group_mgr_protocol.h"
 #include "../protocol_dir/base_mgr_protocol.h"
 
-class RoomMgrClass;
 class SessionClass;
 class IdIndexListClass;
 class ThemeClass;
@@ -29,10 +28,7 @@ class RoomClass : public ListEntryClass {
 protected:
     friend class UThemeClass;
     friend class DThemeClass;
-    friend class RoomMgrClass;
 
-    int roomId(void) {return this->theEntryId;}
-    int roomIndex(void) {return this->theEntryIndex;}
     char *roomIdIndex(void) {return this->theEntryIdIndex;}
     void setBaseIdIndex(char *base_id_index_val) {memcpy(this->theBaseIdIndex, base_id_index_val, BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE); this->theBaseIdIndex[BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE] = 0;}
     void insertGroup(char *group_id_index_val);

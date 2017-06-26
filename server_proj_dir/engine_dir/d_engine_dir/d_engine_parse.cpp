@@ -62,11 +62,7 @@ void DEngineClass::processTransferData(char *data_val)
         return;
     }
 
-    if (1) {
-        char s[LOGIT_BUF_SIZE];
-        sprintf(s, "baseId=%d baseIndex=%d", base_object->goBaseId(), base_object->goBaseIndex());
-        this->logit("processTransferData", s);
-    }
+    this->debug(true, "processTransferData", base_object->goBaseIdIndex());
 
     base_object->portObject()->receiveStringData(data_val + ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);
 }

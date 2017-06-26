@@ -18,7 +18,7 @@
 #include "go_group_class.h"
 #include "go_group_list_class.h"
 #include "go_move_class.h"
-class BaseMgrClass;
+
 class EngineClass;
 
 class GoBaseClass : public ListEntryClass {
@@ -37,7 +37,6 @@ class GoBaseClass : public ListEntryClass {
 
 protected:
     friend class DEngineClass;
-    friend class BaseMgrClass;
 
     void setRoomIdIndex(char *room_id_index_val) {memcpy(this->theRoomIdIndex, room_id_index_val, ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE); this->theRoomIdIndex[ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE] = 0;}
 
@@ -46,8 +45,6 @@ protected:
     ~GoBaseClass(void);
 
     char const* objectName(void) {return "GoBaseClass";}
-    int goBaseId(void) {return this->theEntryId;}
-    int goBaseIndex(void) {return this->theEntryIndex;}
     char *goBaseIdIndex(void) {return this->theEntryIdIndex;}
     GoEngineClass* engineObject(void) {return this->theEngineObject;}
     GoBoardClass* boardObject(void) {return this->theBoardObject;}
