@@ -7,7 +7,7 @@
 #pragma once
 
 class ArrayMgrClass {
-    char *theCallerName;
+    char const *theCallerName;
     char theArrayType;
     int theArraySize;
 
@@ -22,7 +22,7 @@ protected:
     void removeElement(void *element_val);
 
 public:
-    ArrayMgrClass(char *caller_name_val, char array_type_val, int array_size_val);
+    ArrayMgrClass(char const *caller_name_val, char array_type_val, int array_size_val);
     ~ArrayMgrClass(void);
     char const* objectName(void) {return "ArrayMgrClass";}
 };

@@ -76,7 +76,7 @@ void *phwangDequeue (void *queue_val)
 }
 
 /* list_mgr */
-void *phwangMallocListMgr (char *caller_name_val, int id_size_val, int index_size_val, int global_entry_id_val)
+void *phwangMallocListMgr (char const *caller_name_val, int id_size_val, int index_size_val, int global_entry_id_val)
 {
     return thePhwangObject->mallocListMgr(caller_name_val, id_size_val, index_size_val, global_entry_id_val);
 }

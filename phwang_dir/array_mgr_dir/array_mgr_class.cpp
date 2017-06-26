@@ -7,7 +7,7 @@
 #include "../../phwang_dir/phwang.h"
 #include "array_mgr_class.h"
 
-ArrayMgrClass::ArrayMgrClass(char *caller_name_val, char array_type_val, int array_size_val):
+ArrayMgrClass::ArrayMgrClass(char const *caller_name_val, char array_type_val, int array_size_val):
         theCallerName(caller_name_val),
         theArrayType(array_type_val),
         theArraySize(array_size_val)

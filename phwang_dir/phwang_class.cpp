@@ -99,7 +99,7 @@ void *PhwangClass::mallocQueue (int max_size_val)
 /**************************************************************************************************************/
 /**************************************************************************************************************/
 
-void *PhwangClass::mallocListMgr (char *caller_name_val, int id_size_val, int index_size_val, int global_entry_id_val)
+void *PhwangClass::mallocListMgr (char const *caller_name_val, int id_size_val, int index_size_val, int global_entry_id_val)
 {
     ListMgrClass *list_mgr = new ListMgrClass(caller_name_val, id_size_val, index_size_val, global_entry_id_val);
     return list_mgr;
@@ -139,7 +139,7 @@ void *PhwangClass::listMgrSearchEntry(void *list_mgr_val, char *data_val)
 /**************************************************************************************************************/
 /**************************************************************************************************************/
 
-void *PhwangClass::mallocArrayMgr(char *caller_name_val, char array_type_val, int array_size_val)
+void *PhwangClass::mallocArrayMgr(char const *caller_name_val, char array_type_val, int array_size_val)
 {
     ArrayMgrClass *array_mgr = new ArrayMgrClass(caller_name_val, array_type_val, array_size_val);
     return array_mgr;

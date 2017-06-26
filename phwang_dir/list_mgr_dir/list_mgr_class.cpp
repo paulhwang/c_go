@@ -8,7 +8,7 @@
 #include "list_mgr_class.h"
 #include "list_entry_class.h"
 
-ListMgrClass::ListMgrClass (char *caller_name_val, int id_size_val, int index_size_val, int global_entry_id_val):
+ListMgrClass::ListMgrClass (char const *caller_name_val, int id_size_val, int index_size_val, int global_entry_id_val):
         theCallerName(caller_name_val),
         theIdSize(id_size_val),
         theIndexSize(index_size_val),

@@ -32,7 +32,7 @@ void phwangEnqueue(void *queue_val, void *data_val);
 void *phwangDequeue(void *queue_val);
 
 /* list_mgr */
-void *phwangMallocListMgr(char *caller_name_val, int id_size_val, int index_size_val, int global_entry_id_val);
+void *phwangMallocListMgr(char const *caller_name_val, int id_size_val, int index_size_val, int global_entry_id_val);
 void *phwangListMgrSearchEntry(void *list_mgr_val, char *data_val);
 
 /* tp */
