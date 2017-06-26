@@ -18,10 +18,8 @@ class GroupClass : public ListEntryClass {
 #define GROUP_CLASS_SESSION_ARRAY_SIZE 32
     FabricClass *theFabricObject;
     GroupMgrClass *theGroupMgrObject;
-    int theGroupId;
-    int theGroupIndex;
-    char theGroupIdIndex[GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE + 4];
     char theRoomIdIndex[ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE + 4];
+    void *theSessionArray;
     SessionClass *theSessionTableArray[GROUP_CLASS_SESSION_ARRAY_SIZE];
     int theMaxSessionTableArrayIndex;
 
@@ -36,6 +34,7 @@ protected:
 
     int groupId(void) {return this->theEntryId;}
     int groupIndex(void) {return this->theEntryIndex;}
+    char *groupIdIndex(void) {return this->theEntryIdIndex;}
     char *roomIdIndex(void) {return this->theRoomIdIndex;}
     void setRoomIdIndex(char *val) {memcpy(this->theRoomIdIndex, val, ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);}
     void insertSession(SessionClass *session_object_val);

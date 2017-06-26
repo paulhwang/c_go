@@ -13,13 +13,15 @@ GroupClass::GroupClass (void *list_mgr_object_val, FabricClass *fabric_object_va
         ListEntryClass(list_mgr_object_val),
         theFabricObject(fabric_object_val)
 {
+    this->theSessionArray = phwangArrayMgrMalloc(this->objectName(), 'p', 32);
     this->theMaxSessionTableArrayIndex = 0;
 
-    this->debug(true, "GroupClass", this->theGroupIdIndex);
+    this->debug(true, "GroupClass", this->groupIdIndex());
 }
 
 GroupClass::~GroupClass (void)
 {
+    phwangArrayMgrFree(this->theSessionArray);
 }
 
 void GroupClass::insertSession (SessionClass *session_object_val)
