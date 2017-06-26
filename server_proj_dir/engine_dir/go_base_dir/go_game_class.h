@@ -45,6 +45,9 @@ class GoGameClass
     void clearGameIsOver(void) {theGameIsOver = false;}
 
     void processBackwardMove(void);
+    void processDoubleBackwardMove(void);
+    void processForwardMove(void);
+    void processDoubleForwardMove(void);
     void processTheWholeMoveList(void);
 
     void debug(int on_off_val, char const *str0_val, char const *str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};

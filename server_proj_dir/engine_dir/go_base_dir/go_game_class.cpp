@@ -93,14 +93,14 @@ void GoGameClass::receiveSpecialMoveFromOpponent (char const *data_val)
     this->debug(true, "receiveSpecialMoveFromOpponent", data_val);
 
     if (!strcmp(data_val, "FORWARD")) {
-        //this.processForwardMove();
-        //this.portObject().transmitBoardData();
+        this->processForwardMove();
+        this->theBaseObject->portObject()->transmitBoardData();
         return;
     }
 
     if (!strcmp(data_val, "DOUBLE_FORWARD")) {
-        //this.processDoubleForwardMove();
-        //this.portObject().transmitBoardData();
+        this->processDoubleForwardMove();
+        this->theBaseObject->portObject()->transmitBoardData();
         return;
     }
 
@@ -111,8 +111,8 @@ void GoGameClass::receiveSpecialMoveFromOpponent (char const *data_val)
     }
 
     if (!strcmp(data_val, "DOUBLE_BACKWARD")) {
-        //this->processDoubleBackwardMove();
-        //this->theBaseObject->portObject()->transmitBoardData();
+        this->processDoubleBackwardMove();
+        this->theBaseObject->portObject()->transmitBoardData();
         return;
     }
 
@@ -152,6 +152,45 @@ void GoGameClass::processBackwardMove (void)
         return;
     }
     this->theTotalMoves--;
+    this->processTheWholeMoveList();
+}
+
+void GoGameClass::processDoubleBackwardMove (void)
+{
+    //this.debug(true, "goProcessBackwardMoveFromUi", "");
+    this->thePassReceived = 0;
+    if (this->theTotalMoves <= 0) {//this->theBaseObject->configObject()->handicapPoint()) {
+        return;
+    }
+    this->theTotalMoves = 0;//(this->theBaseObject->configObject()->handicapPoint());
+    this->processTheWholeMoveList();
+}
+
+void GoGameClass::processForwardMove (void)
+{
+    this->thePassReceived = 0;
+    if (this->theTotalMoves > this->theMaxMove) {
+        //this.abend("processForwardMove", "totalMoves=" + this.totalMoves_() + " maxMove=" + this.naxMove_());
+        return;
+    }
+    if (this->theTotalMoves == this->theMaxMove) {
+        return;
+    }
+    this->theTotalMoves++;
+    this->processTheWholeMoveList();
+}
+
+void GoGameClass::processDoubleForwardMove (void)
+{
+    this->thePassReceived = 0;
+    if (this->theTotalMoves > this->theMaxMove) {
+        //this.abend("processDoubleForwardMove", "totalMoves=" + this.totalMoves() + " maxMove=" + this.maxMove_());
+        return;
+    }
+    if (this->theTotalMoves == this->theMaxMove) {
+        return;
+    }
+    this->setTotalMoves(this->theMaxMove);
     this->processTheWholeMoveList();
 }
 
