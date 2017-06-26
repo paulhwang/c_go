@@ -22,7 +22,7 @@ LinkClass::LinkClass (void *list_mgr_object_val, FabricClass *fabric_object_val,
     }
     this->theSessionListMgrObject = phwangListMgrMalloc("SESSION", SESSION_MGR_PROTOCOL_SESSION_ID_SIZE, SESSION_MGR_PROTOCOL_SESSION_INDEX_SIZE, 300);
 
-    this->debug(true, "LinkClass", this->theLinkIdIndex);
+    this->debug(true, "LinkClass", this->linkIdIndex());
 }
 
 LinkClass::~LinkClass (void)

@@ -8,18 +8,12 @@
 #include "../../phwang_dir/list_mgr_dir/list_entry_class.h"
 #include "../protocol_dir/link_mgr_protocol.h"
 
-class LinkMgrClass;
-class SessionMgrClass;
 class SessionClass;
 class FabricClass;
 
 class LinkClass : public ListEntryClass {
 #define  LINK_CLASS_LINK_NAME_BUF_SIZE 32
     FabricClass *theFabricObject;
-    LinkMgrClass *theLinkMgrObject;
-    int theLinkId;
-    int theLinkIndex;
-    char theLinkIdIndex[LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + 4];
     char theLinkName[LINK_CLASS_LINK_NAME_BUF_SIZE + 4];
     void *theSessionListMgrObject;
 
@@ -34,13 +28,10 @@ protected:
     friend class UFabricClass;
     friend class FabricClass;
 
-    LinkMgrClass *linkMgrObject(void) {return this->theLinkMgrObject;}
     SessionClass *mallocSession(void);
     void *sessionListMgrObject(void) {return this->theSessionListMgrObject;}
     SessionClass *searchSession(char *data_val) {return (SessionClass *) phwangListMgrSearchEntry(this->theSessionListMgrObject, data_val);}
 
-    int linkId(void) {return this->theEntryId;}
-    int linkIndex(void) {return this->theEntryIndex;}
     char *linkIdIndex(void) {return this->theEntryIdIndex;}
 
 public:

@@ -55,7 +55,7 @@ void DFabricClass::processMallocLink (char *data_val)
         return;
     }
 
-    phwangEncodeIdIndex(data_buf + 1, link->linkId(), LINK_MGR_PROTOCOL_LINK_ID_SIZE, link->linkIndex(), LINK_MGR_PROTOCOL_LINK_INDEX_SIZE);
+    strcpy(data_buf + 1, link->linkIdIndex());
     this->transmitFunction(data_buf);
 }
 
