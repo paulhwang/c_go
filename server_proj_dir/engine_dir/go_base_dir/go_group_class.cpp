@@ -12,18 +12,7 @@
 GoGroupClass::GoGroupClass (GoGroupListClass* group_list_object_var) {
     this->theGroupListObject = group_list_object_var;
 
-    if (1) {
-        this->logit("GoGroupClass", "init");
-   }
-}
-
-GoGroupClass::~GoGroupClass (void)
-{
-}
-
-char const* GoGroupClass::objectName (void)
-{
-  return "GoGroupClass";
+    this->debug(true, "GoGroupClass", "init");
 }
 
 int GoGroupClass::maxX (void)
@@ -179,15 +168,14 @@ int GoGroupClass::groupHasAir (void)
     return false;
 }
 
-void GoGroupClass::logit (char const* str0_val, char const* str1_val) {
-  char s[LOGIT_BUF_SIZE];
-  sprintf(s, "%s::%s", this->objectName(), str0_val);
-  this->baseObject()->goBaseLogit(s, str1_val);
+void GoGroupClass::logit (char const *str0_val, char const *str1_val) {
+    char s[LOGIT_BUF_SIZE];
+    sprintf(s, "%s::%s", this->objectName(), str0_val);
+    this->baseObject()->goBaseLogit(s, str1_val);
 }
 
-void GoGroupClass::abend (char const* str0_val, char const* str1_val) {
-  char s[LOGIT_BUF_SIZE];
-  sprintf(s, "%s::%s", this->objectName(), str0_val);
-  this->baseObject()->goBaseAbend(s, str1_val);
+void GoGroupClass::abend (char const *str0_val, char const *str1_val) {
+    char s[LOGIT_BUF_SIZE];
+    sprintf(s, "%s::%s", this->objectName(), str0_val);
+    this->baseObject()->goBaseAbend(s, str1_val);
 }
-

@@ -4,30 +4,12 @@
   File name: go_group_list_class.h
 */
 
-#ifndef __GO_GROUP_LST_CLASS_H__
-#define __GO_GROUP_LST_CLASS_H__
-
+#pragma once
+#include "go_base_class.h"
 #include "go_engine_class.h"
 
 class GoGroupListClass
 {
-public:
-    GoGroupListClass(GoEngineClass* engine_val,
-                       int index_val,
-                       int color_val,
-                       int dead_val,
-                       char const* big_stone_val,
-                       char const* small_stone_val);
-    ~GoGroupListClass(void);
-
-    char const* objectName(void);
-    GoEngineClass* engineObject(void);
-    GoBaseClass* baseObject(void);
-
-    void insertGroupToGroupList(GoGroupClass* group_val);
-    GoGroupClass* findCandidateGroup(int x_val, int y_val);
-
-private:
     GoEngineClass *theEngineObject;
     int theGroupCount;
     GoGroupClass* theListArray[400];
@@ -38,7 +20,24 @@ private:
     GoGroupClass* listArray(int index_val);
     void setListArray(int index_val, GoGroupClass* data_val);
 
-    void logit(char const* str0_val, char const* str1_val);
-    void abend(char const* str0_val, char const* str1_val);
+    void debug(int on_off_val, char const *str0_val, char const *str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
+    void logit(char const *str0_val, char const *str1_val);
+    void abend(char const *str0_val, char const *str1_val);
+
+public:
+    GoGroupListClass(GoEngineClass* engine_val,
+                       int index_val,
+                       int color_val,
+                       int dead_val,
+                       char const* big_stone_val,
+                       char const* small_stone_val);
+    ~GoGroupListClass(void);
+    char const* objectName(void) {return "GoGroupListClass";}
+ 
+    GoEngineClass* engineObject(void) {return this->theEngineObject;}
+    GoBaseClass* baseObject(void) {return this->theEngineObject->baseObject();}
+
+
+    void insertGroupToGroupList(GoGroupClass* group_val);
+    GoGroupClass* findCandidateGroup(int x_val, int y_val);
 };
-#endif

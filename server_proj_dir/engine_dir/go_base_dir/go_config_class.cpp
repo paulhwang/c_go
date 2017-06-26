@@ -9,15 +9,10 @@
 #include "go_config_class.h"
 
 GoConfigClass::GoConfigClass (GoBaseClass* base_object_val) {
-  this->theBaseObject = base_object_val;
-  this->theBoardSize = 19;//////////////////////
+    this->theBaseObject = base_object_val;
+    this->theBoardSize = 19;//////////////////////
 
-  if (1) {
-    this->logit("GoConfigClass", "init");
-  }
-}
-
-GoConfigClass::~GoConfigClass (void) {
+    this->debug(true, "GoConfigClass", "init");
 }
 
 int GoConfigClass::isValidCoordinates (int x_val, int y_val)
@@ -27,18 +22,17 @@ int GoConfigClass::isValidCoordinates (int x_val, int y_val)
 
 int GoConfigClass::isValidCoordinate (int coordinate_val)
 {
-    return (0 <= coordinate_val) && (coordinate_val < this->boardSize());
+    return (0 <= coordinate_val) && (coordinate_val < this->theBoardSize);
 }
 
-void GoConfigClass::logit (char const* str0_val, char const* str1_val) {
-  char s[LOGIT_BUF_SIZE];
-  sprintf(s, "%s::%s", this->objectName(), str0_val);
-  this->baseObject()->goBaseLogit(s, str1_val);
+void GoConfigClass::logit (char const *str0_val, char const *str1_val) {
+    char s[LOGIT_BUF_SIZE];
+    sprintf(s, "%s::%s", this->objectName(), str0_val);
+    this->theBaseObject->goBaseLogit(s, str1_val);
 }
 
-void GoConfigClass::abend (char const* str0_val, char const* str1_val) {
-  char s[LOGIT_BUF_SIZE];
-  sprintf(s, "%s::%s", this->objectName(), str0_val);
-  this->baseObject()->goBaseAbend(s, str1_val);
+void GoConfigClass::abend (char const *str0_val, char const *str1_val) {
+    char s[LOGIT_BUF_SIZE];
+    sprintf(s, "%s::%s", this->objectName(), str0_val);
+    this->theBaseObject->goBaseAbend(s, str1_val);
 }
-

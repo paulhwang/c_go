@@ -13,31 +13,11 @@ GoGroupListClass::GoGroupListClass (GoEngineClass* engine_val,
                                     int color_val,
                                     int dead_val,
                                     char const* big_stone_val,
-                                    char const* small_stone_val)
+                                    char const* small_stone_val):
+    theEngineObject(engine_val),
+    theGroupCount(0)
 {
-  this->theEngineObject = engine_val;
-  this->theGroupCount = 0;
-
-  if (1) {
-    this->logit("GoGroupListClass", "init");
-  }
-}
-
-GoGroupListClass::~GoGroupListClass (void)
-{
-}
-
-char const* GoGroupListClass::objectName (void)
-{
-  return "GoGroupListClass";
-}
-
-GoEngineClass* GoGroupListClass::engineObject () {
-  return this->theEngineObject;
-}
-
-GoBaseClass* GoGroupListClass::baseObject () {
-  return this->engineObject()->baseObject();
+    this->debug(true, "GoGroupListClass", "init");
 }
 
 int GoGroupListClass::groupCount (void)
@@ -85,15 +65,14 @@ GoGroupClass* GoGroupListClass::findCandidateGroup (int x_val, int y_val)
     return 0;
 }
 
-void GoGroupListClass::logit (char const* str0_val, char const* str1_val) {
-  char s[LOGIT_BUF_SIZE];
-  sprintf(s, "%s::%s", this->objectName(), str0_val);
-  this->baseObject()->goBaseLogit(s, str1_val);
+void GoGroupListClass::logit (char const *str0_val, char const *str1_val) {
+    char s[LOGIT_BUF_SIZE];
+    sprintf(s, "%s::%s", this->objectName(), str0_val);
+    this->baseObject()->goBaseLogit(s, str1_val);
 }
 
-void GoGroupListClass::abend (char const* str0_val, char const* str1_val) {
-  char s[LOGIT_BUF_SIZE];
-  sprintf(s, "%s::%s", this->objectName(), str0_val);
-  this->baseObject()->goBaseAbend(s, str1_val);
+void GoGroupListClass::abend (char const *str0_val, char const *str1_val) {
+    char s[LOGIT_BUF_SIZE];
+    sprintf(s, "%s::%s", this->objectName(), str0_val);
+    this->baseObject()->goBaseAbend(s, str1_val);
 }
-
