@@ -8,48 +8,23 @@
 #include "go_base_class.h"
 #include "go_group_list_class.h"
 
-GoGroupListClass::GoGroupListClass (GoFightClass* engine_val,
+GoGroupListClass::GoGroupListClass (GoFightClass* fight_object_val,
                                     int index_val,
                                     int color_val,
                                     int dead_val,
                                     char const* big_stone_val,
                                     char const* small_stone_val):
-    theEngineObject(engine_val),
+    theFightObject(fight_object_val),
     theGroupCount(0)
 {
     this->debug(true, "GoGroupListClass", "init");
 }
 
-int GoGroupListClass::groupCount (void)
-{
-    return this->theGroupCount;
-}
-
-void GoGroupListClass::incrementGroupCount (void)
-{
-    this->theGroupCount += 1;
-}
-
-void GoGroupListClass::decrementGroupCount (void)
-{
-    this->theGroupCount -= 1;
-}
-
-GoGroupClass* GoGroupListClass::listArray (int index_val)
-{
-    return this->theListArray[index_val];
-}
-
-void GoGroupListClass::setListArray (int index_val, GoGroupClass* data_val)
-{
-    this->theListArray[index_val] = data_val;
-}
-
 void GoGroupListClass::insertGroupToGroupList (GoGroupClass* group_val)
 {
-    this->setListArray(this->groupCount(), group_val);
-    group_val->setIndexNumber(this->groupCount());
-    this->incrementGroupCount();
+    this->theListArray[this->theGroupCount] = group_val;
+    group_val->setIndexNumber(this->theGroupCount);
+    this->theGroupCount++;
     group_val->setGroupListObject(this);
 }
 
@@ -80,11 +55,11 @@ void GoGroupListClass::removeGroupFromGroupList (GoGroupClass *group_val)
 void GoGroupListClass::logit (char const *str0_val, char const *str1_val) {
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", this->objectName(), str0_val);
-    this->baseObject()->goBaseLogit(s, str1_val);
+    this->theFightObject->baseObject()->goBaseLogit(s, str1_val);
 }
 
 void GoGroupListClass::abend (char const *str0_val, char const *str1_val) {
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", this->objectName(), str0_val);
-    this->baseObject()->goBaseAbend(s, str1_val);
+    this->theFightObject->baseObject()->goBaseAbend(s, str1_val);
 }

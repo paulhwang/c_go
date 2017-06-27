@@ -66,11 +66,6 @@ void GoGroupClass::setGroupListObject (GoGroupListClass* group_list_val)
     this->theGroupListObject = group_list_val;
 }
 
-GoBaseClass* GoGroupClass::baseObject (void)
-{
-    return this->groupListObject()->baseObject();
-}
-
 int GoGroupClass::indexNumber (void)
 {
     return this->theIndexNumber;
@@ -183,11 +178,11 @@ void GoGroupClass::removeDeadStoneFromBoard (void)
 void GoGroupClass::logit (char const *str0_val, char const *str1_val) {
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", this->objectName(), str0_val);
-    this->baseObject()->goBaseLogit(s, str1_val);
+    this->theGroupListObject->fightObject()->baseObject()->goBaseLogit(s, str1_val);
 }
 
 void GoGroupClass::abend (char const *str0_val, char const *str1_val) {
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", this->objectName(), str0_val);
-    this->baseObject()->goBaseAbend(s, str1_val);
+    this->theGroupListObject->fightObject()->baseObject()->goBaseAbend(s, str1_val);
 }

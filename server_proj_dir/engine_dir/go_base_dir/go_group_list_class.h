@@ -10,15 +10,9 @@
 
 class GoGroupListClass
 {
-    GoFightClass *theEngineObject;
+    GoFightClass *theFightObject;
     int theGroupCount;
     GoGroupClass *theListArray[400];
-
-    int groupCount(void);
-    void incrementGroupCount(void);
-    void decrementGroupCount(void);
-    GoGroupClass* listArray(int index_val);
-    void setListArray(int index_val, GoGroupClass* data_val);
 
     void debug(int on_off_val, char const *str0_val, char const *str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
     void logit(char const *str0_val, char const *str1_val);
@@ -26,7 +20,9 @@ class GoGroupListClass
 
 protected:
     friend class GoFightClass;
+    friend class GoGroupClass;
 
+    GoFightClass *fightObject(void) {return this->theFightObject;}
     void removeGroupFromGroupList(GoGroupClass *group_val);
 
 public:
@@ -39,8 +35,7 @@ public:
     ~GoGroupListClass(void);
     char const* objectName(void) {return "GoGroupListClass";}
  
-    GoFightClass *fightObject(void) {return this->theEngineObject;}
-    GoBaseClass* baseObject(void) {return this->theEngineObject->baseObject();}
+    //GoBaseClass* baseObject(void) {return this->theEngineObject->baseObject();}
 
 
     void insertGroupToGroupList(GoGroupClass* group_val);

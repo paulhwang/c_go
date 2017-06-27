@@ -55,7 +55,6 @@ public:
 
     GoGroupListClass* groupListObject();
     void setGroupListObject(GoGroupListClass* group_list_val);
-    GoBaseClass* baseObject();
 
     void setIndexNumber(int val);
     int isCandidateGroup(int x_val, int y_val);
