@@ -53,7 +53,7 @@ void GoGroupListClass::insertGroupToGroupList (GoGroupClass* group_val)
     group_val->setGroupListObject(this);
 }
 
-GoGroupClass* GoGroupListClass::findCandidateGroup (int x_val, int y_val)
+GoGroupClass *GoGroupListClass::findCandidateGroup (int x_val, int y_val)
 {
     int i = 0;
     while (i < this->groupCount()) {
@@ -63,6 +63,20 @@ GoGroupClass* GoGroupListClass::findCandidateGroup (int x_val, int y_val)
         i += 1;
     }
     return 0;
+}
+
+void GoGroupListClass::removeGroupFromGroupList (GoGroupClass *group_val)
+{
+    /*
+        this.decrementGroupCount();
+
+        if (group_val.indexNumber() != this.groupCount()) {
+            this.listArray(this.groupCount()).setIndexNumber(group_val.indexNumber());
+            this.setListArray(group_val.indexNumber(), this.listArray(this.groupCount()));
+        }
+
+        this.setListArray(this.groupCount(), null);
+        */
 }
 
 void GoGroupListClass::logit (char const *str0_val, char const *str1_val) {

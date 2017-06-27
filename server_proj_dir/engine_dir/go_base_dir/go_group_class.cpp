@@ -153,6 +153,22 @@ int GoGroupClass::groupHasAir (void)
     return false;
 }
 
+void GoGroupClass::removeDeadStoneFromBoard (void)
+{
+    int i = this->theMinX;
+    while (i <= this->theMaxX) {
+        int j = this->theMinY;
+         while (j <= this->theMaxY) {
+             if (this->theExistMatrix[i][j]) {
+                this->theGroupListObject->fightObject()->baseObject()->boardObject()->setBoardArray(i, j, GO_EMPTY_STONE);
+                //this.debug(false, "removeDeadStoneFromBoard", "(" + i + "," + j + ")");
+            }
+            j += 1;
+        }
+        i += 1;
+    }
+}
+
 void GoGroupClass::logit (char const *str0_val, char const *str1_val) {
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", this->objectName(), str0_val);

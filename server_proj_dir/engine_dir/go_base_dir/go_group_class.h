@@ -45,6 +45,7 @@ protected:
 
     void insertStoneToGroup(int x_val, int y_val, int dead_val);
     int groupHasAir(void);
+    void removeDeadStoneFromBoard(void);
 
 public:
     GoGroupClass(GoGroupListClass *group_list_object_val);

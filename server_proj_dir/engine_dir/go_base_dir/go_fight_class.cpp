@@ -137,15 +137,13 @@ GoGroupClass *GoFightClass::getGroupByCoordinate (int x_val, int y_val, char col
 
 void GoFightClass::removeDeadGroup (GoGroupClass *group)
 {
-    /*
-        group.removeDeadStoneFromBoard();
-        if (group.myColor() === this.GO().BLACK_STONE()) {
-            this.blackGroupList().removeOneDeadGroup(group);
-        } else {
-            this.whiteGroupList().removeOneDeadGroup(group);
-        }
-*/
+    group->removeDeadStoneFromBoard();
+    if (group->myColor() == GO_BLACK_STONE) {
+        this->blackGroupList()->removeGroupFromGroupList(group);
+    } else {
+        this->whiteGroupList()->removeGroupFromGroupList(group);
     }
+}
 
 void GoFightClass::markLastDeadInfo (GoGroupClass *group_val)
 {

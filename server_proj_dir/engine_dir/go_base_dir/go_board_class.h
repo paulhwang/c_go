@@ -28,6 +28,8 @@ protected:
     friend class GoPortClass;
     friend class GoGroupClass;
 
+
+    void setBoardArray(int x_val, int y_val, char data_val) {this->theBoardArray[x_val][y_val] = data_val;}
     void addBlackCapturedStones(int val) {this->theBlackCapturedStones += val;}
     void addWhiteCapturedStones(int val) {this->theWhiteCapturedStones += val;}
     void resetBoardObjectData (void);
