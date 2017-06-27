@@ -13,23 +13,7 @@ GoGameClass::GoGameClass (GoBaseClass* base_object_val):
     theBaseObject(base_object_val)
 {
     this->resetGameObjectData();
-
     this->debug(true, "GoGameClass", "init");
-}
-
-GoFightClass* GoGameClass::fightObject (void)
-{
-    return this->baseObject()->fightObject();
-}
-
-GoMoveClass* GoGameClass::movesArray (int index_val)
-{
-    return this->theMovesArray[index_val];
-}
-
-void GoGameClass::setMovesArray (int index_val, GoMoveClass* val)
-{
-    this->theMovesArray[index_val] = val;
 }
 
 char GoGameClass::getOppositeColor (char color_val)
@@ -42,7 +26,7 @@ char GoGameClass::getOppositeColor (char color_val)
             return GO_BLACK_STONE;
 
         default:
-            this->abend("getOppositeColor", "color=" + color_val);
+            this->abend("getOppositeColor", "bad color");
             return GO_EMPTY_STONE;
     }
 }
@@ -51,14 +35,14 @@ void GoGameClass::addNewMoveAndFight (GoMoveClass *move_val)
 {
     this->debug(true, "addNewMoveAndFight", move_val->moveInfo());
 
-    if (this->gameIsOver()) {
+    if (this->theGameIsOver) {
         this->abend("addNewMoveAndFight", "two pass have entered");
         return;
     }
 
     this->thePassReceived = 0;
     this->insertMoveToMoveList(move_val);
-    this->fightObject()->enterWar(move_val);
+    this->theBaseObject->fightObject()->enterWar(move_val);
     this->theNextColor = this->getOppositeColor(move_val->myColor());
 }
 
@@ -73,15 +57,17 @@ void GoGameClass::resetGameObjectData (void)
 {
     this->theMaxMove = 0;
     this->theTotalMoves = 0;
-    //this.theMovesArray = [];
+    for (int i = 0; i < GO_GAME_CLASS_MAX_MOVES_ARRAY_SIZE; i++) {
+        this->theMovesArray[i] = 0;
+    }
     this->resetGameObjectPartialData();
 }
 
 void GoGameClass::resetGameObjectPartialData (void)
 {
     this->theNextColor = GO_BLACK_STONE;
-    this->thePassReceived = false;
-    this->theGameIsOver = false;
+    this->thePassReceived = 0;
+    this->theGameIsOver = 0;
 }
 
 void GoGameClass::receiveSpecialMoveFromOpponent (char const *data_val)
@@ -199,7 +185,7 @@ void GoGameClass::processDoubleForwardMove (void)
 void GoGameClass::processTheWholeMoveList (void)
 {
     this->theBaseObject->boardObject()->resetBoardObjectData();
-    this->fightObject()->resetEngineObjectData();
+    this->theBaseObject->fightObject()->resetEngineObjectData();
     this->resetGameObjectPartialData();
 
     int i = 0;
