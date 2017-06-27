@@ -65,8 +65,37 @@ void GoBoardClass::resetBoardObjectData (void) {
     this->theWhiteCapturedStones = 0;
 }
 
-void GoBoardClass::resetMarkedBoardObjectData (void) {
+void GoBoardClass::resetMarkedBoardObjectData (void)
+{
 
+}
+
+int GoBoardClass::stoneHasAir (int x_val, int y_val)
+{
+    if (this->isEmptySpace(x_val, y_val - 1)) {
+        return true;
+    }
+    if (this->isEmptySpace(x_val, y_val + 1)) {
+        return true;
+    }
+    if (this->isEmptySpace(x_val - 1, y_val)) {
+        return true;
+    }
+    if (this->isEmptySpace(x_val + 1, y_val)) {
+        return true;
+    }
+    return false;
+}
+
+int GoBoardClass::isEmptySpace (int x_val, int y_val)
+{
+    if (!this->theBaseObject->configObject()->isValidCoordinates(x_val, y_val)) {
+        return false;
+    }
+    if (this->theBoardArray[x_val][y_val] != GO_EMPTY_STONE) {
+        return false;
+    }
+    return true;
 }
 
 void GoBoardClass::logit (char const *str0_val, char const *str1_val) {

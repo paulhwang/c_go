@@ -28,7 +28,7 @@ void GoFightClass::enterBattle (GoMoveClass* move_val)
     int dead_count = this->killOtherColorGroups(move_val, group);
 
     if (!group->groupHasAir()) {
-    //    this->removeDeadGroup(group);
+        this->removeDeadGroup(group);
     }
 
     if (dead_count != 0) {

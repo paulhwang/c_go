@@ -34,7 +34,7 @@ public:
     ~GoGroupListClass(void);
     char const* objectName(void) {return "GoGroupListClass";}
  
-    GoFightClass* engineObject(void) {return this->theEngineObject;}
+    GoFightClass *fightObject(void) {return this->theEngineObject;}
     GoBaseClass* baseObject(void) {return this->theEngineObject->baseObject();}
 
 

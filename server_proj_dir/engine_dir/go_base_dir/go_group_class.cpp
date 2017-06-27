@@ -141,15 +141,11 @@ int GoGroupClass::groupHasAir (void)
     while (i <= this->maxX()) {
         int j = this->minY();
         while (j <= this->maxY()) {
-          /*
-            if (this.existMatrix(i, j)) {
-                //goDebug("GoGroupObject.groupHasAir", "(" + i + "," + j + ")");
-                if (this.engineObject().stoneHasAir(i, j)) {
-                    //goDebug("GoGroupObject.groupHasAir", "(" + i + "," + j + ")");
+            if (this->theExistMatrix[i][j]) {
+                if (this->theGroupListObject->fightObject()->baseObject()->boardObject()->stoneHasAir(i, j)) {
                     return true;
                 }
             }
-            */
             j += 1;
         }
         i += 1;

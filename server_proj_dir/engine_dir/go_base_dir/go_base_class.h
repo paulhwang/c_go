@@ -42,6 +42,7 @@ protected:
     friend class GoConfigClass;
     friend class GoBoardClass;
     friend class GoPortClass;
+    friend class GoGroupClass;
 
     EngineClass *engineObject(void) {return this->theEngineObject;}
     GoFightClass *fightObject(void) {return this->theFightObject;}

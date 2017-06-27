@@ -44,6 +44,7 @@ class GoFightClass {
 protected:
     friend class GoGameClass;
     friend class GoGroupListClass;
+    friend class GoGroupClass;
 
     GoBaseClass *baseObject(void) {return this->theBaseObject;}
     void enterBattle(GoMoveClass *move_val);
