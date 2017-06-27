@@ -12,12 +12,7 @@ GoBoardClass::GoBoardClass (GoBaseClass *base_object_val):
     theBaseObject(base_object_val)
 {
     this->resetBoardObjectData();
-
-    this->debug(true, "init", "");
-}
-
-void GoBoardClass::resetMarkedBoardObjectData (void) {
-
+    this->debug(false, "GoBoardClass", "init");
 }
 
 void GoBoardClass::addStoneToBoard (int x_val, int y_val, char color_val)
@@ -68,6 +63,10 @@ void GoBoardClass::resetBoardObjectData (void) {
     }
     this->theBlackCapturedStone = 0;
     this->theWhiteCapturedStone = 0;
+}
+
+void GoBoardClass::resetMarkedBoardObjectData (void) {
+
 }
 
 void GoBoardClass::logit (char const *str0_val, char const *str1_val) {

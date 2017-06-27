@@ -17,8 +17,6 @@ class GoFightClass {
     GoBaseClass *theBaseObject;
     int theGroupListCount;
     GoGroupListClass* theGroupListArray[GO_GROUP_LIST_ARRAY_SIZE];
-    int theBlackCaptureStones;
-    int theWhiteCaptureStones;
     char* theCaptureCount;
     char* theLastDeadStone;
 

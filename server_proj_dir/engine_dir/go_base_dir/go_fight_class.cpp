@@ -152,6 +152,8 @@ void GoFightClass::resetEmptyGroupLists (void)
 
 void GoFightClass::resetEngineObjectData (void)
 {
+    this->theBaseObject->boardObject()->resetBoardObjectData();
+
     this->theGroupListCount = GO_GROUP_LIST_ARRAY_SIZE;
     //this.theGroupListArray = [this.groupListCount()];
     this->theGroupListArray[1] = new GoGroupListClass(this, 1, GO_BLACK_STONE, false, 0, 0);
@@ -161,9 +163,6 @@ void GoFightClass::resetEngineObjectData (void)
 
     this->theCaptureCount = 0;
     this->theLastDeadStone = 0;
-
-    this->theBlackCaptureStones = 0;
-    this->theWhiteCaptureStones = 0;
 }
 
 void GoFightClass::abendEngine (void)
