@@ -56,9 +56,9 @@ void GoGroupListClass::insertGroupToGroupList (GoGroupClass* group_val)
 GoGroupClass *GoGroupListClass::findCandidateGroup (int x_val, int y_val)
 {
     int i = 0;
-    while (i < this->groupCount()) {
-        if (this->listArray(i)->isCandidateGroup(x_val, y_val)) {
-            return this->listArray(i);
+    while (i < this->theGroupCount) {
+        if (this->theListArray[i]->isCandidateGroup(x_val, y_val)) {
+            return this->theListArray[i];
         }
         i += 1;
     }

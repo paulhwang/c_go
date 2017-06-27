@@ -112,26 +112,37 @@ void GoGroupClass::insertStoneToGroup (int x_val, int y_val, int dead_val)
     this->theDeadMatrix[x_val][y_val] = dead_val;
 }
 
+int isNeighborStone (int x1_val, int y1_val, int x2_val, int y2_val)
+{
+    if (x1_val == x2_val) {
+        if ((y1_val + 1 == y2_val) || (y1_val - 1 == y2_val)) {
+            return true;
+        }
+    }
+    if (y1_val == y2_val) {
+        if ((x1_val + 1 == x2_val) || (x1_val - 1 == x2_val)) {
+            return true;
+        }
+    }
+    return false;
+}
+
 int GoGroupClass::isCandidateGroup (int x_val, int y_val)
 {
-    int i, j;
-
-  /*
-        i = this.minX();
-        while (i <=  this.maxX()) {
-            j = this.minY();
-            while (j <=  this.maxY()) {
-                if (this.existMatrix(i, j)) {
-                    this.debug(false, "isCandidateGroup", "(" + x_val + "," + y_val + ") (" + i + "," + j + ")");
-                    if (this.GO().isNeighborStone(i, j, x_val, y_val)) {
-                        return true;
-                    }
+    int i = this->theMinX;
+    while (i <= this->theMaxX) {
+        int j = this->theMinY;
+        while (j <= this->theMaxY) {
+            if (this->theExistMatrix[i][j]) {
+                //this.debug(false, "isCandidateGroup", "(" + x_val + "," + y_val + ") (" + i + "," + j + ")");
+                if (isNeighborStone(i, j, x_val, y_val)) {
+                    return true;
                 }
-                j += 1;
             }
-            i += 1;
+            j += 1;
         }
-        */
+        i += 1;
+    }
     return false;
 }
 
