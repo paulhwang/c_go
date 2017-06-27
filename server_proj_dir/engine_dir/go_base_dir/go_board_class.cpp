@@ -30,23 +30,24 @@ void GoBoardClass::addStoneToBoard (int x_val, int y_val, char color_val)
     this->theBoardArray[x_val][y_val] = color_val;
 }
 
-void GoBoardClass::encodeBoard (char *buf_ptr) {
+char *GoBoardClass::encodeBoard (void) {
 this->theBoardArray[0][0] = GO_BLACK_STONE;
 
-    char *buf_ptr0 = buf_ptr;
+    char *buf_ptr = this->theBoardInfo;
     int board_size = this->theBaseObject->configObject()->boardSize();
     int i = 0;
     while (i < board_size) {
         int j = 0;
         while (j < board_size) {
-            *buf_ptr0++ = this->theBoardArray[i][j];
+            *buf_ptr++ = this->theBoardArray[i][j];
             j += 1;
         }
         i += 1;
     }
-    *buf_ptr0 = 0;
+    *buf_ptr = 0;
 
-    this->debug(true, "encodeBoard", buf_ptr);
+    this->debug(true, "encodeBoard", this->theBoardInfo);
+    return this->theBoardInfo;
 }
 
 void GoBoardClass::resetBoardObjectData (void) {

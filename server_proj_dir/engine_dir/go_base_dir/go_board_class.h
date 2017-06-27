@@ -12,6 +12,7 @@ class GoBoardClass {
     GoBaseClass *theBaseObject;
     char theBoardArray[19][19];
     char theMarkedBoardArray[19][19];
+    char theBoardInfo[19 * 19 + 3 * 2 + 16];
 
     void debug(int on_off_val, char const *str0_val, char const *str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
     void logit(char const *str0_val, char const *str1_val);
@@ -25,7 +26,7 @@ protected:
     void resetBoardObjectData (void);
     void resetMarkedBoardObjectData(void);
     void addStoneToBoard(int x_val, int y_val, char color_val);
-    void encodeBoard(char *buf_ptr);
+    char *encodeBoard(void);
 
 public:
     GoBoardClass(GoBaseClass *the_base_object);

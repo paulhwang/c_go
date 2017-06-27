@@ -28,14 +28,8 @@ GoPortClass::GoPortClass (GoBaseClass *base_object_val):
 }
 
 void GoPortClass::transmitBoardData (void) {
-    char *board_data = (char *) malloc(BASE_MGR_DATA_BUFFER_SIZE);
-    board_data[0] = BASE_MGR_PROTOCOL_RESPOND_IS_TRANSFER_DATA;
-    board_data[1] = BASE_MGR_PROTOCOL_GAME_NAME_IS_GO;
-    this->theBaseObject->boardObject()->encodeBoard(board_data);
-
-    this->debug(true, "transmitBoardData", board_data);
-
-    this->theBaseObject->engineObject()->dEngineObject()->processTransferDataResponse(this->theBaseObject, board_data);
+    this->debug(true, "transmitBoardData", this->theBaseObject->boardObject()->encodeBoard());
+    this->theBaseObject->engineObject()->dEngineObject()->processTransferDataResponse(this->theBaseObject, this->theBaseObject->boardObject()->encodeBoard());
 }
 
 void GoPortClass::receiveStringData (char const *str_val) {
