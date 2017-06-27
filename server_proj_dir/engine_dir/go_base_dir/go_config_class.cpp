@@ -8,22 +8,12 @@
 #include "go_base_class.h"
 #include "go_config_class.h"
 
-GoConfigClass::GoConfigClass (GoBaseClass* base_object_val):
+GoConfigClass::GoConfigClass (GoBaseClass *base_object_val):
     theBaseObject(base_object_val),
     theBoardSize(19),
     theHandicapPoint(0)
 {
     this->debug(true, "GoConfigClass", "init");
-}
-
-int GoConfigClass::isValidCoordinates (int x_val, int y_val)
-{
-    return this->isValidCoordinate(x_val) && this->isValidCoordinate(y_val) ;
-}
-
-int GoConfigClass::isValidCoordinate (int coordinate_val)
-{
-    return (0 <= coordinate_val) && (coordinate_val < this->theBoardSize);
 }
 
 void GoConfigClass::logit (char const *str0_val, char const *str1_val) {
