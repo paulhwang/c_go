@@ -56,11 +56,6 @@ void GoGroupClass::setMinY (int val)
     this->theMinY = val;
 }
 
-int GoGroupClass::indexNumber (void)
-{
-    return this->theIndexNumber;
-}
-
 void GoGroupClass::setIndexNumber (int val)
 {
     this->theIndexNumber = val;

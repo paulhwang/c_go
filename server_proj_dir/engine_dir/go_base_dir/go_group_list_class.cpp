@@ -44,9 +44,9 @@ void GoGroupListClass::removeGroupFromGroupList (GoGroupClass *group_val)
 {
     this->theGroupCount;
 
-    if (group_val->indexNumber() != this->theGroupCount) {
-        this->theListArray[this->theGroupCount]->setIndexNumber(group_val->indexNumber());
-        this->theListArray[group_val->indexNumber()] = this->theListArray[this->theGroupCount];
+    if (group_val->theIndexNumber != this->theGroupCount) {
+        this->theListArray[this->theGroupCount]->setIndexNumber(group_val->theIndexNumber);
+        this->theListArray[group_val->theIndexNumber] = this->theListArray[this->theGroupCount];
     }
 
     this->theListArray[this->theGroupCount] = 0;
