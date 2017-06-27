@@ -13,6 +13,7 @@ class GoMoveClass {
     int theY;
     char theMyColor;
     int theTurnIndex;
+    char theMoveInfo[32];
 
     void moveObjectDecode(char const *str_val);
 
@@ -20,13 +21,19 @@ class GoMoveClass {
     void logit(char const *str0_val, char const *str1_val);
     void abend(char const *str0_val, char const *str1_val);
 
-public:
-    GoMoveClass(GoBaseClass *base_object_val, char const *str_val, int x_val, int y_val, char color_val, int turn_val);
-    ~GoMoveClass(void) {}
-    char const* objectName(void) {return "GoMoveClass";}
+protected:
+    friend class GoGameClass;
+    friend class GoFightClass;
+    friend class GoPortClass;
 
     int xX(void) {return this->theX;}
     int yY(void) {return this->theY;}
     char myColor(void) {return this->theMyColor;}
     int turnIndex(void) {return this->theTurnIndex;}
+    char *moveInfo(void) {return this->theMoveInfo;}
+
+public:
+    GoMoveClass(GoBaseClass *base_object_val, char const *encoded_move_val);
+    ~GoMoveClass(void) {}
+    char const* objectName(void) {return "GoMoveClass";}
 };

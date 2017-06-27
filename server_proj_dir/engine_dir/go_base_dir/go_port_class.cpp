@@ -73,7 +73,7 @@ void GoPortClass::aMoveIsPlayed (char const *str_val) {
 
     }
     else {
-        GoMoveClass *move = new GoMoveClass(this->theBaseObject, str_val, 0, 0, 0, 0);
+        GoMoveClass *move = new GoMoveClass(this->theBaseObject, str_val);
         if (move->turnIndex() != this->theBaseObject->gameObject()->totalMoves() + 1) {
             this->logit("aMoveIsPlayed", "duplicated move received *****************");
         }
