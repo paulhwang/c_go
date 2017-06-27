@@ -46,7 +46,6 @@ protected:
     int stoneCount(void) {return this->theStoneCount;}
     int myColor(void) {return this->theMyColor;}
     int hisColor(void) {return this->theHisColor;}
-    //int indexNumber(void);
     void setGroupListObject(GoGroupListClass *group_list_val) {this->theGroupListObject = group_list_val;}
 
     void insertStoneToGroup(int x_val, int y_val, int dead_val);
@@ -57,5 +56,4 @@ public:
     GoGroupClass(GoGroupListClass *group_list_object_val);
     ~GoGroupClass() {}
     char const *objectName() {return "GoGroupClass";}
-
 };
