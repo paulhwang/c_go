@@ -9,7 +9,8 @@
 #include "go_fight_class.h"
 
 GoFightClass::GoFightClass (GoBaseClass* base_object_val):
-    theBaseObject(base_object_val)
+    theBaseObject(base_object_val),
+    theAbendEngineOn(0)
 {
     this->resetEngineObjectData();
     this->debug(true, "GoFightClass", "init");
@@ -189,6 +190,67 @@ void GoFightClass::resetEngineObjectData (void)
 
 void GoFightClass::abendEngine (void)
 {
+    if (!this->theAbendEngineOn) {
+        return;
+    }
+    this->debug(false, "abendEngine", "is ON ***");
+
+    int stones_count = 0;
+    int i = 0;
+    while (i < GO_FIGHT_CLASS_GROUP_LIST_ARRAY_SIZE) {
+        GoGroupListClass *group_list = this->theGroupListArray[i];
+        //group_list->abendGroupList();
+        //stones_count += group_list->totalStoneCount();
+        i += 1;
+    }
+
+    /* check if a stone exist in both black and white group_lists */
+    int black_stone_count = 0;
+    int white_stone_count = 0;
+    int board_size = this->theBaseObject->configObject()->boardSize();
+    int x = 0;
+
+    while (x < board_size) {
+        int y = 0;
+        while (y < board_size) {
+/*
+                if (this.blackGroupList().stoneExistWithinMe(x, y)) {
+                    if (this.whiteGroupList().stoneExistWithinMe(x, y)) {
+                        this.abend("abendEngine", "(" + x + "," + y + ")");
+                    }
+                    black_stone_count += 1;
+                }
+                if (this.whiteGroupList().stoneExistWithinMe(x, y)) {
+                   white_stone_count += 1;
+                }
+                y += 1;
+*/
+        }
+        x += 1;
+    }
+
+    if (this->blackGroupList()->totalStoneCount() != black_stone_count) {
+        this->abend("abendEngine", "black_stone count does not match");
+    }
+    if (this->whiteGroupList()->totalStoneCount() != white_stone_count) {
+        this->abend("abendEngine", "black_stone count does not match");
+    }
+/*
+
+        //this.goLog("abendEngine", this.gameObject().gameIsOver());
+        if (this.gameObject().gameIsOver()) {
+            if (this.boardSize() * this.boardSize() !== stones_count) {
+                this.abend("abendEngine", "stones_count=" + stones_count);
+            }
+        }
+*/
+    this->emptyGroupList()->abendGroupList();
+    this->blackGroupList()->abendGroupList();
+    this->whiteGroupList()->abendGroupList();
+    this->blackDeadGroupList()->abendGroupList();
+    this->whiteDeadGroupList()->abendGroupList();
+    this->blackEmptyGroupList()->abendGroupList();
+    this->whiteEmptyGroupList()->abendGroupList();
 }
 
 void GoFightClass::logit (char const *str0_val, char const *str1_val) {

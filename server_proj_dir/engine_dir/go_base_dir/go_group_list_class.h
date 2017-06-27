@@ -22,10 +22,12 @@ protected:
     friend class GoFightClass;
     friend class GoGroupClass;
 
+    int totalStoneCount(void);
     GoFightClass *fightObject(void) {return this->theFightObject;}
     void insertGroupToGroupList(GoGroupClass *group_val);
     void removeGroupFromGroupList(GoGroupClass *group_val);
     GoGroupClass *findCandidateGroup(int x_val, int y_val);
+    void abendGroupList(void);
 
 public:
     GoGroupListClass(GoFightClass *fight_object_val,

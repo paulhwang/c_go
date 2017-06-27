@@ -14,6 +14,7 @@ class GoMoveClass;
 class GoFightClass {
 #define GO_FIGHT_CLASS_GROUP_LIST_ARRAY_SIZE 7
     GoBaseClass *theBaseObject;
+    int theAbendEngineOn;
     GoGroupListClass *theGroupListArray[GO_FIGHT_CLASS_GROUP_LIST_ARRAY_SIZE];
     char *theCaptureCount;
     char *theLastDeadStone;
