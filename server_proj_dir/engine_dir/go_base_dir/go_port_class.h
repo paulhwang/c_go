@@ -5,9 +5,8 @@
 */
 
 #pragma once
-#include "go_base_class.h"
 
-class GoGameClass;
+class GoBaseClass;
 
 class GoPortClass {
     GoBaseClass *theBaseObject;
@@ -21,13 +20,13 @@ class GoPortClass {
 
 protected:
     friend class DEngineClass;
+    friend class GoGameClass;
 
     void receiveStringData(char const *str_val);
+    void transmitBoardData (void);
 
 public:
-    GoPortClass(GoBaseClass* base_object_val);
+    GoPortClass(GoBaseClass *base_object_val);
     ~GoPortClass(void) {}
-    char const* objectName(void) {return "GoPortClass";}
-
-    void transmitBoardData (void);
+    char const *objectName(void) {return "GoPortClass";}
 };
