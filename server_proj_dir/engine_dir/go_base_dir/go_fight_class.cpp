@@ -112,14 +112,14 @@ int GoFightClass::killOtherColorGroup(GoGroupClass *group, int x_val, int y_val)
 
 GoGroupClass *GoFightClass::getGroupByCoordinate (int x_val, int y_val, char color_val)
 {
-/*
         //goDebug("GoEngineObject.getGroupByCoordinate", color_val);
-        var g_list;
-        if ((color_val === this.GO().BLACK_STONE()) || (color_val === this.GO().MARKED_DEAD_BLACK_STONE())) {
-            g_list = this.blackGroupList();
+        GoGroupListClass *g_list;
+        if ((color_val == GO_BLACK_STONE) || (color_val == GO_MARKED_DEAD_BLACK_STONE)) {
+            g_list = this->blackGroupList();
         } else {
-            g_list = this.whiteGroupList();
+            g_list = this->whiteGroupList();
         }
+/*
 
         //goDebug("GoEngineObject.getGroupByCoordinate", "groupCount=" + g_list.groupCount());
         var i = 0;
