@@ -25,11 +25,11 @@ class GoBaseClass : public ListEntryClass {
     EngineClass *theEngineObject;
     char theRoomIdIndex[ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE + 4];
 
-    GoFightClass* theFightObject;
-    GoBoardClass* theBoardObject;
-    GoPortClass* thePortObject;
-    GoConfigClass* theConfigObject;
-    GoGameClass* theGameObject;
+    GoFightClass *theFightObject;
+    GoBoardClass *theBoardObject;
+    GoPortClass *thePortObject;
+    GoConfigClass *theConfigObject;
+    GoGameClass *theGameObject;
 
     void debug(int on_off_val, char const *str0_val, char const *str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
     void logit(char const *str0_val, char const *str1_val);
@@ -37,23 +37,27 @@ class GoBaseClass : public ListEntryClass {
 
 protected:
     friend class DEngineClass;
-
-    void setRoomIdIndex(char *room_id_index_val) {memcpy(this->theRoomIdIndex, room_id_index_val, ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE); this->theRoomIdIndex[ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE] = 0;}
-
-  public:
-    GoBaseClass(void *list_mgr_object_val, EngineClass *engine_object_val);
-    ~GoBaseClass(void);
-    char const* objectName(void) {return "GoBaseClass";}
-
-    char *goBaseIdIndex(void) {return this->theEntryIdIndex;}
-    GoFightClass* fightObject(void) {return this->theFightObject;}
-    GoBoardClass* boardObject(void) {return this->theBoardObject;}
-    GoPortClass* portObject(void) {return this->thePortObject;}
-    GoConfigClass* configObject(void) {return this->theConfigObject;}
-    GoGameClass* gameObject(void) {return this->theGameObject;}
+    friend class GoGameClass;
+    friend class GoFightClass;
+    friend class GoConfigClass;
+    friend class GoBoardClass;
+    friend class GoPortClass;
 
     EngineClass *engineObject(void) {return this->theEngineObject;}
+    GoFightClass *fightObject(void) {return this->theFightObject;}
+    GoBoardClass *boardObject(void) {return this->theBoardObject;}
+    GoPortClass *portObject(void) {return this->thePortObject;}
+    GoConfigClass *configObject(void) {return this->theConfigObject;}
+    GoGameClass *gameObject(void) {return this->theGameObject;}
 
-    void goBaseLogit(char const* str0_val, char const* str1_val) {phwangLogit(str0_val, str1_val);}
-    void goBaseAbend(char const* str0_val, char const* str1_val) {phwangAbend(str0_val, str1_val);}
+    char *goBaseIdIndex(void) {return this->theEntryIdIndex;}
+    void setRoomIdIndex(char *room_id_index_val) {memcpy(this->theRoomIdIndex, room_id_index_val, ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE); this->theRoomIdIndex[ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE] = 0;}
+
+public:
+    GoBaseClass(void *list_mgr_object_val, EngineClass *engine_object_val);
+    ~GoBaseClass(void);
+    char const *objectName(void) {return "GoBaseClass";}
+
+    void goBaseLogit(char const *str0_val, char const *str1_val) {phwangLogit(str0_val, str1_val);}
+    void goBaseAbend(char const *str0_val, char const *str1_val) {phwangAbend(str0_val, str1_val);}
 };
