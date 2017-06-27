@@ -44,6 +44,12 @@ this->theBoardArray[0][0] = GO_BLACK_STONE;
         }
         i += 1;
     }
+
+    phwangEncodeNumber(buf_ptr, this->theBlackCapturedStone, 3);
+    buf_ptr += 3;
+    phwangEncodeNumber(buf_ptr, this->theWhiteCapturedStone, 3);
+    buf_ptr += 3;
+
     *buf_ptr = 0;
 
     this->debug(true, "encodeBoard", this->theBoardInfo);
@@ -62,6 +68,8 @@ void GoBoardClass::resetBoardObjectData (void) {
         }
         i += 1;
     }
+    this->theBlackCapturedStone = 0;
+    this->theWhiteCapturedStone = 0;
 }
 
 void GoBoardClass::logit (char const *str0_val, char const *str1_val) {
