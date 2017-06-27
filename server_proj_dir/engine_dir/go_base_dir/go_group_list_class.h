@@ -5,8 +5,8 @@
 */
 
 #pragma once
-#include "go_base_class.h"
-#include "go_fight_class.h"
+
+class GoFightClass;
 
 class GoGroupListClass
 {

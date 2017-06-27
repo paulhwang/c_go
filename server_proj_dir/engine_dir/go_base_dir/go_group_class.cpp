@@ -16,46 +16,6 @@ GoGroupClass::GoGroupClass (GoGroupListClass *group_list_object_val):
     this->debug(true, "GoGroupClass", "init");
 }
 
-int GoGroupClass::maxX (void)
-{
-    return this->theMaxX;
-}
-
-int GoGroupClass::minX (void)
-{
-    return this->theMinX;
-}
-
-int GoGroupClass::maxY (void)
-{
-    return this->theMaxY;
-}
-
-int GoGroupClass::minY (void)
-{
-    return this->theMinY;
-}
-
-void GoGroupClass::setMaxX (int val)
-{
-    this->theMaxX = val;
-}
-
-void GoGroupClass::setMinX (int val)
-{
-    this->theMinX = val;
-}
-
-void GoGroupClass::setMaxY (int val)
-{
-    this->theMaxY = val;
-}
-
-void GoGroupClass::setMinY (int val)
-{
-    this->theMinY = val;
-}
-
 void GoGroupClass::setIndexNumber (int val)
 {
     this->theIndexNumber = val;
@@ -128,10 +88,10 @@ int GoGroupClass::isCandidateGroup (int x_val, int y_val)
 
 int GoGroupClass::groupHasAir (void)
 {
-    int i = this->minX();
-    while (i <= this->maxX()) {
-        int j = this->minY();
-        while (j <= this->maxY()) {
+    int i = this->theMinX;
+    while (i <= this->theMaxX) {
+        int j = this->theMinY;
+        while (j <= this->theMaxY) {
             if (this->theExistMatrix[i][j]) {
                 if (this->theGroupListObject->fightObject()->baseObject()->boardObject()->stoneHasAir(i, j)) {
                     return true;

@@ -5,7 +5,6 @@
 */
 
 #pragma once
-#include "go_base_class.h"
 
 class GoGroupListClass;
 
@@ -21,15 +20,6 @@ class GoGroupClass {
     int theStoneCount;
     char theMyColor;
     char theHisColor;
-
-    int maxX (void);
-    int minX (void);
-    int maxY (void);
-    int minY (void);
-    void setMaxX(int val);
-    void setMinX(int val);
-    void setMaxY(int val);
-    void setMinY(int val);
 
     void setIndexNumber(int val);
     void resetMarkedBoardObjectData();
