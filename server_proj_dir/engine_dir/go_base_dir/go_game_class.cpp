@@ -35,7 +35,14 @@ void GoGameClass::addNewMoveAndFight (GoMoveClass *move_val)
 {
     this->debug(true, "addNewMoveAndFight", move_val->moveInfo());
 
+    if (move_val->turnIndex() != this->theTotalMoves + 1) {
+        this->logit("addNewMoveAndFight", "duplicated move received *****************");
+        free(move_val);
+        return;
+    }
+
     if (this->theGameIsOver) {
+        free(move_val);
         this->abend("addNewMoveAndFight", "two pass have entered");
         return;
     }

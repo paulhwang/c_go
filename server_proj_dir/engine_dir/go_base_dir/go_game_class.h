@@ -7,12 +7,11 @@
 #pragma once
 
 class GoMoveClass;
-#include "go_base_class.h"
-
-#define GO_GAME_CLASS_MAX_MOVES_ARRAY_SIZE 1024
+class GoBaseClass;
 
 class GoGameClass
 {
+#define GO_GAME_CLASS_MAX_MOVES_ARRAY_SIZE 1024
     GoBaseClass *theBaseObject;
     GoMoveClass *theMovesArray[GO_GAME_CLASS_MAX_MOVES_ARRAY_SIZE];
     int theTotalMoves;
@@ -43,9 +42,7 @@ protected:
     void receiveSpecialMoveFromOpponent(char const *data_val);
 
 public:
-    GoGameClass(GoBaseClass* the_base_object);
+    GoGameClass(GoBaseClass *the_base_object);
     ~GoGameClass(void) {}
     char const *objectName(void) {return "GoGameClass";}
-
-    int totalMoves(void) {return theTotalMoves;}
 };

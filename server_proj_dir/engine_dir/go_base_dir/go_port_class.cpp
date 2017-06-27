@@ -64,19 +64,9 @@ void GoPortClass::receiveInputData (char const *str_val) {
 void GoPortClass::aMoveIsPlayed (char const *str_val) {
     this->debug(true, "aMoveIsPlayed", str_val);
 
-    if (0) {
-
-    }
-    else {
-        GoMoveClass *move = new GoMoveClass(this->theBaseObject, str_val);
-        if (move->turnIndex() != this->theBaseObject->gameObject()->totalMoves() + 1) {
-            this->logit("aMoveIsPlayed", "duplicated move received *****************");
-        }
-        else {
-            this->theBaseObject->gameObject()->addNewMoveAndFight(move);
-      }
-      this->transmitBoardData();
-    }
+    GoMoveClass *move = new GoMoveClass(this->theBaseObject, str_val);
+    this->theBaseObject->gameObject()->addNewMoveAndFight(move);
+    this->transmitBoardData();
 }
 
 void GoPortClass::aSpecialMoveIsPlayed (char const *str_val) {
