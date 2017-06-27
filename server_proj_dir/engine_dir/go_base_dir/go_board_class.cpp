@@ -8,32 +8,12 @@
 #include "go_base_class.h"
 #include "go_board_class.h"
 
-GoBoardClass::GoBoardClass (GoBaseClass* base_object_val):
-        theBaseObject(base_object_val)
+GoBoardClass::GoBoardClass (GoBaseClass *base_object_val):
+    theBaseObject(base_object_val)
 {
     this->resetBoardObjectData();
 
     this->debug(true, "init", "");
-}
-
-char GoBoardClass::boardArray (int x_val, int y_val)
-{
-    return this->theBoardArray[x_val][y_val];
-}
-
-char GoBoardClass::markedBoardArray (int x_val, int y_val)
-{
-    return this->theMarkedBoardArray[x_val][y_val];
-}
-
-void GoBoardClass::setBoardArray (int x_val, int y_val, char data_val)
-{
-    this->theBoardArray[x_val][y_val] = data_val;
-}
-
-void GoBoardClass::setMarkedBoardArray (int x_val, int y_val, char data_val)
-{
-    this->theMarkedBoardArray[x_val][y_val] = data_val;
 }
 
 void GoBoardClass::resetMarkedBoardObjectData (void) {
@@ -47,14 +27,14 @@ void GoBoardClass::addStoneToBoard (int x_val, int y_val, char color_val)
         return;
     }
 
-    this->setBoardArray(x_val, y_val, color_val);
+    this->theBoardArray[x_val][y_val] = color_val;
 }
 
-void GoBoardClass::encodeBoard (char* buf_ptr) {
+void GoBoardClass::encodeBoard (char *buf_ptr) {
+this->theBoardArray[0][0] = GO_BLACK_STONE;
+
     char *buf_ptr0 = buf_ptr;
     int board_size = this->theBaseObject->configObject()->boardSize();
-
-    this->theBoardArray[0][0] = GO_BLACK_STONE;
     int i = 0;
     while (i < board_size) {
         int j = 0;
@@ -66,16 +46,11 @@ void GoBoardClass::encodeBoard (char* buf_ptr) {
     }
     *buf_ptr0 = 0;
 
-    if (0) {
-        char s[LOGIT_BUF_SIZE];
-        sprintf(s, "data=%s", buf_ptr);
-        this->logit("encodeBoard", s);
-    }
+    this->debug(true, "encodeBoard", buf_ptr);
 }
 
 void GoBoardClass::resetBoardObjectData (void) {
     int board_size = this->theBaseObject->configObject()->boardSize();
-
     int i = 0;
     while (i < board_size) {
         int j = 0;

@@ -5,7 +5,8 @@
 */
 
 #pragma once
-#include "go_base_class.h"
+
+class GoBaseClass;
 
 class GoMoveClass {
     GoBaseClass *theBaseObject;

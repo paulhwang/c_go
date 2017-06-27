@@ -9,7 +9,7 @@
 #include "go_fight_class.h"
 
 GoFightClass::GoFightClass (GoBaseClass* base_object_val):
-        theBaseObject(base_object_val)
+    theBaseObject(base_object_val)
 {
     this->resetEngineObjectData();
 

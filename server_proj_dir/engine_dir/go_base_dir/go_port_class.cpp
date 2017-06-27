@@ -22,7 +22,7 @@
 #define GO_PROTOCOL_CODE_BOARD_DATA   "Board  "
 
 GoPortClass::GoPortClass (GoBaseClass* base_object_val):
-        theBaseObject(base_object_val)
+    theBaseObject(base_object_val)
 {
     this->debug(true, "GoPortClass", "init");
 }
