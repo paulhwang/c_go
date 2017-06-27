@@ -16,11 +16,6 @@ GoFightClass::GoFightClass (GoBaseClass* base_object_val):
     this->debug(true, "GoFightClass", "init");
 }
 
-GoBoardClass* GoFightClass::boardObject (void)
-{
-  return this->baseObject()->boardObject();
-}
-
 GoGroupListClass* GoFightClass::emptyGroupList (void)
 {
     return this->theGroupListArray[0];
@@ -61,12 +56,12 @@ void GoFightClass::clearLastDeadStone (void)
     this->theLastDeadStone = 0;
 }
 
-void GoFightClass::enterWar (GoMoveClass* move_val)
+void GoFightClass::enterBattle (GoMoveClass* move_val)
 {
     if (1) {
         char s[LOGIT_BUF_SIZE];
         sprintf(s, "move_val: (%i, %i, %i, %i)", move_val->xX(), move_val->yY(), move_val->myColor(), move_val->turnIndex());
-        this->logit("enterWar", s);
+        this->logit("enterBattle", s);
     }
 
     GoGroupClass* group = this->insertStoneToGroupList(move_val);
@@ -74,7 +69,7 @@ void GoFightClass::enterWar (GoMoveClass* move_val)
         return;
     }
 
-    this->boardObject()->addStoneToBoard(move_val->xX(), move_val->yY(), move_val->myColor());
+    this->theBaseObject->boardObject()->addStoneToBoard(move_val->xX(), move_val->yY(), move_val->myColor());
     int dead_count = this->killOtherColorGroups(move_val, group);
 
     if (!group->groupHasAir()) {
@@ -87,7 +82,7 @@ void GoFightClass::enterWar (GoMoveClass* move_val)
         } else if (move_val->myColor() == GO_WHITE_STONE) {
             //this->addWhiteCaptureStones(dead_count);
         } else {
-            this->abend("enterWar", "bad color=");
+            this->abend("enterBattle", "bad color=");
         }
     }
     this->abendEngine();
@@ -140,7 +135,7 @@ void GoFightClass::resetMarkedGroupLists (void)
 {
     this->theGroupListArray[3] = new GoGroupListClass(this, 3, GO_BLACK_STONE, true, "black", "gray");
     this->theGroupListArray[4] = new GoGroupListClass(this, 4, GO_WHITE_STONE, true, "white", "gray");
-    this->boardObject()->resetMarkedBoardObjectData();
+    this->theBaseObject->boardObject()->resetMarkedBoardObjectData();
 }
 
 void GoFightClass::resetEmptyGroupLists (void)
@@ -154,8 +149,6 @@ void GoFightClass::resetEngineObjectData (void)
 {
     this->theBaseObject->boardObject()->resetBoardObjectData();
 
-    this->theGroupListCount = GO_GROUP_LIST_ARRAY_SIZE;
-    //this.theGroupListArray = [this.groupListCount()];
     this->theGroupListArray[1] = new GoGroupListClass(this, 1, GO_BLACK_STONE, false, 0, 0);
     this->theGroupListArray[2] = new GoGroupListClass(this, 2, GO_WHITE_STONE, false, 0, 0);
     this->resetMarkedGroupLists();

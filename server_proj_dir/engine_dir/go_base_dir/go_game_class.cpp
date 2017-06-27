@@ -49,7 +49,7 @@ void GoGameClass::addNewMoveAndFight (GoMoveClass *move_val)
 
     this->thePassReceived = 0;
     this->insertMoveToMoveList(move_val);
-    this->theBaseObject->fightObject()->enterWar(move_val);
+    this->theBaseObject->fightObject()->enterBattle(move_val);
     this->theNextColor = this->getOppositeColor(move_val->myColor());
 }
 
@@ -198,7 +198,7 @@ void GoGameClass::processTheWholeMoveList (void)
     int i = 0;
     while (i < this->theTotalMoves) {
         GoMoveClass *move = this->theMovesArray[i];
-        this->theBaseObject->fightObject()->enterWar(move);
+        this->theBaseObject->fightObject()->enterBattle(move);
         this->theNextColor = this->getOppositeColor(move->myColor());
         i += 1;
     }

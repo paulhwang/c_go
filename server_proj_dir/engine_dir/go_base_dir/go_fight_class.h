@@ -5,20 +5,18 @@
 */
 
 #pragma once
-#include "go_base_class.h"
 
+class GoBaseClass;
 class GoGroupClass;
 class GoGroupListClass;
 class GoMoveClass;
 
-#define GO_GROUP_LIST_ARRAY_SIZE 7
-
 class GoFightClass {
+#define GO_FIGHT_CLASS_GROUP_LIST_ARRAY_SIZE 7
     GoBaseClass *theBaseObject;
-    int theGroupListCount;
-    GoGroupListClass* theGroupListArray[GO_GROUP_LIST_ARRAY_SIZE];
-    char* theCaptureCount;
-    char* theLastDeadStone;
+    GoGroupListClass *theGroupListArray[GO_FIGHT_CLASS_GROUP_LIST_ARRAY_SIZE];
+    char *theCaptureCount;
+    char *theLastDeadStone;
 
     GoGroupListClass* emptyGroupList(void);
     GoGroupListClass* blackGroupList(void);
@@ -29,9 +27,11 @@ class GoFightClass {
     GoGroupListClass* whiteEmptyGroupList(void);
     void clearLastDeadStone(void);
 
-    GoGroupClass* insertStoneToGroupList(GoMoveClass* move_val);
-    int killOtherColorGroups(GoMoveClass* move_val, GoGroupClass* group_val);
-    int killOtherColorGroup(GoGroupClass* group, int x_val, int y_val);
+
+    void resetEngineObjectData(void);
+    GoGroupClass *insertStoneToGroupList(GoMoveClass *move_val);
+    int killOtherColorGroups(GoMoveClass *move_val, GoGroupClass *group_val);
+    int killOtherColorGroup(GoGroupClass *group, int x_val, int y_val);
     void resetMarkedGroupLists(void);
     void resetEmptyGroupLists(void);
     void abendEngine(void);
@@ -40,14 +40,15 @@ class GoFightClass {
     void logit(char const *str0_val, char const *str1_val);
     void abend(char const *str0_val, char const *str1_val);
 
+protected:
+    friend class GoGameClass;
+    friend class GoGroupListClass;
+
+    GoBaseClass *baseObject(void) {return this->theBaseObject;}
+    void enterBattle(GoMoveClass *move_val);
+
 public:
-    GoFightClass(GoBaseClass* base_object_val);
+    GoFightClass(GoBaseClass *base_object_val);
     ~GoFightClass(void) {}
-    char const* objectName(void) {return "GoFightClass";}
-
-    void enterWar(GoMoveClass* move_val);
-    void resetEngineObjectData(void);
-
-    GoBoardClass* boardObject(void);
-    GoBaseClass* baseObject(void) {return theBaseObject;}
+    char const *objectName(void) {return "GoFightClass";}
 };
