@@ -1,7 +1,7 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: go_engine_class.cpp
+  File name: go_figth_class.cpp
 */
 
 #include <stdio.h>
@@ -12,57 +12,12 @@ GoFightClass::GoFightClass (GoBaseClass* base_object_val):
     theBaseObject(base_object_val)
 {
     this->resetEngineObjectData();
-
     this->debug(true, "GoFightClass", "init");
-}
-
-GoGroupListClass* GoFightClass::emptyGroupList (void)
-{
-    return this->theGroupListArray[0];
-}
-
-GoGroupListClass* GoFightClass::blackGroupList (void)
-{
-    return this->theGroupListArray[1];
-}
-
-GoGroupListClass* GoFightClass::whiteGroupList (void)
-{
-    return this->theGroupListArray[2];
-}
-
-GoGroupListClass* GoFightClass::blackDeadGroupList (void)
-{
-    return this->theGroupListArray[3];
-}
-
-GoGroupListClass* GoFightClass::whiteDeadGroupList (void)
-{
-    return this->theGroupListArray[4];
-}
-
-GoGroupListClass* GoFightClass::blackEmptyGroupList (void)
-{
-    return this->theGroupListArray[5];
-}
-
-GoGroupListClass* GoFightClass::whiteEmptyGroupList (void)
-{
-    return this->theGroupListArray[6];
-}
-
-void GoFightClass::clearLastDeadStone (void)
-{
-    this->theLastDeadStone = 0;
 }
 
 void GoFightClass::enterBattle (GoMoveClass* move_val)
 {
-    if (1) {
-        char s[LOGIT_BUF_SIZE];
-        sprintf(s, "move_val: (%i, %i, %i, %i)", move_val->xX(), move_val->yY(), move_val->myColor(), move_val->turnIndex());
-        this->logit("enterBattle", s);
-    }
+     this->debug(true, "enterBattle", move_val->moveInfo());
 
     GoGroupClass* group = this->insertStoneToGroupList(move_val);
     if (!group) {
@@ -117,8 +72,9 @@ GoGroupClass* GoFightClass::insertStoneToGroupList (GoMoveClass* move_val)
 
 int GoFightClass::killOtherColorGroups(GoMoveClass* move_val, GoGroupClass* group_val)
 {
+    this->theLastDeadStone = 0;
+
     int count;
-    this->clearLastDeadStone();
     count = this->killOtherColorGroup(group_val, move_val->xX() - 1, move_val->yY());
     count += this->killOtherColorGroup(group_val, move_val->xX() + 1, move_val->yY());
     count += this->killOtherColorGroup(group_val, move_val->xX(), move_val->yY() - 1);

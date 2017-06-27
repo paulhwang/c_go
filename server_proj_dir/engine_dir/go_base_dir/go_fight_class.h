@@ -1,7 +1,7 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: go_engine_class.h
+  File name: go_figth_class.h
 */
 
 #pragma once
@@ -18,15 +18,13 @@ class GoFightClass {
     char *theCaptureCount;
     char *theLastDeadStone;
 
-    GoGroupListClass* emptyGroupList(void);
-    GoGroupListClass* blackGroupList(void);
-    GoGroupListClass* whiteGroupList(void);
-    GoGroupListClass* blackDeadGroupList(void);
-    GoGroupListClass* whiteDeadGroupList(void);
-    GoGroupListClass* blackEmptyGroupList(void);
-    GoGroupListClass* whiteEmptyGroupList(void);
-    void clearLastDeadStone(void);
-
+    GoGroupListClass *emptyGroupList(void) {return this->theGroupListArray[0];}
+    GoGroupListClass *blackGroupList(void) {return this->theGroupListArray[1];}
+    GoGroupListClass *whiteGroupList(void) {return this->theGroupListArray[2];}
+    GoGroupListClass *blackDeadGroupList(void) {return this->theGroupListArray[3];}
+    GoGroupListClass *whiteDeadGroupList(void) {return this->theGroupListArray[4];}
+    GoGroupListClass *blackEmptyGroupList(void) {return this->theGroupListArray[5];}
+    GoGroupListClass *whiteEmptyGroupList(void) {return this->theGroupListArray[6];}
 
     void resetEngineObjectData(void);
     GoGroupClass *insertStoneToGroupList(GoMoveClass *move_val);
