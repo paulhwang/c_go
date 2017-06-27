@@ -32,32 +32,33 @@ void GoPortClass::transmitBoardData (void) {
     this->theBaseObject->engineObject()->dEngineObject()->processTransferDataResponse(this->theBaseObject, this->theBaseObject->boardObject()->encodeBoard());
 }
 
-void GoPortClass::receiveStringData (char const *str_val) {
+void GoPortClass::receiveInputData (char const *str_val) {
     char code[GO_PROTOCOL_CODE_SIZE + 4];
     char data[32];
 
-    this->debug(true, "receiveStringData", str_val);
+    this->debug(true, "receiveInputData", str_val);
 
     if (!str_val) {
-        this->abend("receiveStringData", "null input");
+        this->abend("receiveInputData", "null input");
         return;
     }
 
     memcpy(code, str_val, GO_PROTOCOL_CODE_SIZE);
     code[GO_PROTOCOL_CODE_SIZE] = 0;
     strcpy(data, str_val + GO_PROTOCOL_CODE_SIZE);
-    this->logit("receiveStringData", code);
-    this->logit("receiveStringData", data);
+
+    this->debug(true, "receiveInputData", code);
+    this->debug(true, "receiveInputData", data);
 
     if (!strcmp(code, GO_PROTOCOL_CODE_MOVE_DATA)) {
         this->aMoveIsPlayed(data);
         return;
     }
-
-    if (!strcmp(code, GO_PROTOCOL_CODE_SPECIAL_MOVE)) {
+    else if (!strcmp(code, GO_PROTOCOL_CODE_SPECIAL_MOVE)) {
         this->aSpecialMoveIsPlayed(data);
         return;
     }
+    this->abend("receiveInputData", code);
 };
 
 void GoPortClass::aMoveIsPlayed (char const *str_val) {

@@ -64,7 +64,7 @@ void DEngineClass::processTransferData(char *data_val)
 
     this->debug(true, "processTransferData", base_object->goBaseIdIndex());
 
-    base_object->portObject()->receiveStringData(data_val + ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);
+    base_object->portObject()->receiveInputData(data_val + ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);
 }
 
 void DEngineClass::processTransferDataResponse(GoBaseClass *base_object_val, char *data_val)

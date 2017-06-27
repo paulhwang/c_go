@@ -22,7 +22,7 @@ protected:
     friend class DEngineClass;
     friend class GoGameClass;
 
-    void receiveStringData(char const *str_val);
+    void receiveInputData(char const *str_val);
     void transmitBoardData (void);
 
 public:
