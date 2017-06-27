@@ -64,9 +64,9 @@ void GoGameClass::addNewMoveAndFight (GoMoveClass *move_val)
 
 void GoGameClass::insertMoveToMoveList (GoMoveClass* move_val)
 {
-    this->setMovesArray(this->totalMoves(), move_val);
-    this->incrementTotalMoves();
-    this->setMaxMove(this->totalMoves());
+    this->theMovesArray[this->theTotalMoves] = move_val;
+    this->theTotalMoves++;
+    this->theMaxMove = this->theTotalMoves;
 }
 
 void GoGameClass::resetGameObjectData (void)
