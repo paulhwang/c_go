@@ -22,7 +22,6 @@ class GoGroupClass {
     char theMyColor;
     char theHisColor;
 
-    int indexNumber(void);
     int maxX (void);
     int minX (void);
     int maxY (void);
@@ -38,10 +37,12 @@ class GoGroupClass {
 
 protected:
     friend GoFightClass;
+    friend GoGroupListClass;
 
     int stoneCount(void) {return this->theStoneCount;}
     int myColor(void) {return this->theMyColor;}
     int hisColor(void) {return this->theHisColor;}
+    int indexNumber(void);
 
     void insertStoneToGroup(int x_val, int y_val, int dead_val);
     int groupHasAir(void);

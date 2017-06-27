@@ -67,16 +67,14 @@ GoGroupClass *GoGroupListClass::findCandidateGroup (int x_val, int y_val)
 
 void GoGroupListClass::removeGroupFromGroupList (GoGroupClass *group_val)
 {
-    /*
-        this.decrementGroupCount();
+    this->theGroupCount;
 
-        if (group_val.indexNumber() != this.groupCount()) {
-            this.listArray(this.groupCount()).setIndexNumber(group_val.indexNumber());
-            this.setListArray(group_val.indexNumber(), this.listArray(this.groupCount()));
-        }
+    if (group_val->indexNumber() != this->theGroupCount) {
+        this->theListArray[this->theGroupCount]->setIndexNumber(group_val->indexNumber());
+        this->theListArray[group_val->indexNumber()] = this->theListArray[this->theGroupCount];
+    }
 
-        this.setListArray(this.groupCount(), null);
-        */
+    this->theListArray[this->theGroupCount] = 0;
 }
 
 void GoGroupListClass::logit (char const *str0_val, char const *str1_val) {

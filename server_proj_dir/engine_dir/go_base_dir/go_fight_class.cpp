@@ -112,26 +112,24 @@ int GoFightClass::killOtherColorGroup(GoGroupClass *group, int x_val, int y_val)
 
 GoGroupClass *GoFightClass::getGroupByCoordinate (int x_val, int y_val, char color_val)
 {
-        //goDebug("GoEngineObject.getGroupByCoordinate", color_val);
-        GoGroupListClass *g_list;
-        if ((color_val == GO_BLACK_STONE) || (color_val == GO_MARKED_DEAD_BLACK_STONE)) {
-            g_list = this->blackGroupList();
-        } else {
-            g_list = this->whiteGroupList();
-        }
-/*
+    //goDebug("GoEngineObject.getGroupByCoordinate", color_val);
+    GoGroupListClass *g_list;
+    if ((color_val == GO_BLACK_STONE) || (color_val == GO_MARKED_DEAD_BLACK_STONE)) {
+        g_list = this->blackGroupList();
+    } else {
+        g_list = this->whiteGroupList();
+    }
 
-        //goDebug("GoEngineObject.getGroupByCoordinate", "groupCount=" + g_list.groupCount());
-        var i = 0;
-        while (i < g_list.groupCount()) {
+    //goDebug("GoEngineObject.getGroupByCoordinate", "groupCount=" + g_list.groupCount());
+    int i = 0;
+    while (i < g_list->theGroupCount) {
+        //goDebug("GoEngineObject.getGroupByCoordinate", "i=" + i);
+        if (g_list->theListArray[i]->theExistMatrix[x_val][y_val]) {
             //goDebug("GoEngineObject.getGroupByCoordinate", "i=" + i);
-            if (g_list.listArray(i).existMatrix(x_val, y_val)) {
-                //goDebug("GoEngineObject.getGroupByCoordinate", "i=" + i);
-                return g_list.listArray(i);
-            }
-            i += 1;
+            return g_list->theListArray[i];
         }
-*/
+        i += 1;
+    }
     return 0;
 }
 
