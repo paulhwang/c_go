@@ -49,21 +49,17 @@ char GoGameClass::getOppositeColor (char color_val)
 
 void GoGameClass::addNewMoveAndFight (GoMoveClass *move_val)
 {
-    if (1) {
-        char s[LOGIT_BUF_SIZE];
-        sprintf(s, "move_val: (%i, %i, %i, %i)", move_val->xX(), move_val->yY(), move_val->myColor(), move_val->turnIndex());
-        this->logit("addNewMoveAndFight", s);
-    }
+    this->debug(true, "addNewMoveAndFight", move_val->moveInfo());
 
     if (this->gameIsOver()) {
-        this->logit("addNewMoveAndFight", "two pass have entered");
+        this->abend("addNewMoveAndFight", "two pass have entered");
         return;
     }
 
-    this->clearPassReceived();
+    this->thePassReceived = 0;
     this->insertMoveToMoveList(move_val);
     this->fightObject()->enterWar(move_val);
-    this->setNextColor(this->getOppositeColor(move_val->myColor()));
+    this->theNextColor = this->getOppositeColor(move_val->myColor());
 }
 
 void GoGameClass::insertMoveToMoveList (GoMoveClass* move_val)
