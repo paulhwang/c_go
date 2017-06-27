@@ -31,6 +31,10 @@ class GoGroupClass {
     void setMaxY(int val);
     void setMinY(int val);
 
+    void setIndexNumber(int val);
+    void resetMarkedBoardObjectData();
+    int isCandidateGroup(int x_val, int y_val);
+
     void debug(int on_off_val, char const *str0_val, char const *str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
     void logit(char const *str0_val, char const *str1_val);
     void abend(char const *str0_val, char const *str1_val);
@@ -43,6 +47,7 @@ protected:
     int myColor(void) {return this->theMyColor;}
     int hisColor(void) {return this->theHisColor;}
     int indexNumber(void);
+    void setGroupListObject(GoGroupListClass *group_list_val) {this->theGroupListObject = group_list_val;}
 
     void insertStoneToGroup(int x_val, int y_val, int dead_val);
     int groupHasAir(void);
@@ -51,12 +56,6 @@ protected:
 public:
     GoGroupClass(GoGroupListClass *group_list_object_val);
     ~GoGroupClass() {}
-    char const* objectName() {return "GoGroupClass";}
+    char const *objectName() {return "GoGroupClass";}
 
-    GoGroupListClass* groupListObject();
-    void setGroupListObject(GoGroupListClass* group_list_val);
-
-    void setIndexNumber(int val);
-    int isCandidateGroup(int x_val, int y_val);
-    void resetMarkedBoardObjectData();
 };

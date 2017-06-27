@@ -23,21 +23,17 @@ protected:
     friend class GoGroupClass;
 
     GoFightClass *fightObject(void) {return this->theFightObject;}
+    void insertGroupToGroupList(GoGroupClass *group_val);
     void removeGroupFromGroupList(GoGroupClass *group_val);
+    GoGroupClass *findCandidateGroup(int x_val, int y_val);
 
 public:
-    GoGroupListClass(GoFightClass* engine_val,
+    GoGroupListClass(GoFightClass *fight_object_val,
                        int index_val,
                        int color_val,
                        int dead_val,
-                       char const* big_stone_val,
-                       char const* small_stone_val);
+                       char const *big_stone_val,
+                       char const *small_stone_val);
     ~GoGroupListClass(void);
-    char const* objectName(void) {return "GoGroupListClass";}
- 
-    //GoBaseClass* baseObject(void) {return this->theEngineObject->baseObject();}
-
-
-    void insertGroupToGroupList(GoGroupClass* group_val);
-    GoGroupClass* findCandidateGroup(int x_val, int y_val);
+    char const *objectName(void) {return "GoGroupListClass";}
 };
