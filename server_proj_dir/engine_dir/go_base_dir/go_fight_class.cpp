@@ -71,17 +71,98 @@ int GoFightClass::killOtherColorGroups(GoMoveClass* move_val, GoGroupClass* grou
     this->theLastDeadStone = 0;
 
     int count;
-    count = this->killOtherColorGroup(group_val, move_val->xX() - 1, move_val->yY());
+    count =  this->killOtherColorGroup(group_val, move_val->xX() - 1, move_val->yY());
     count += this->killOtherColorGroup(group_val, move_val->xX() + 1, move_val->yY());
-    count += this->killOtherColorGroup(group_val, move_val->xX(), move_val->yY() - 1);
-    count += this->killOtherColorGroup(group_val, move_val->xX(), move_val->yY() + 1);
+    count += this->killOtherColorGroup(group_val, move_val->xX(),     move_val->yY() - 1);
+    count += this->killOtherColorGroup(group_val, move_val->xX(),     move_val->yY() + 1);
     return count;
 }
 
-int GoFightClass::killOtherColorGroup(GoGroupClass* group, int x_val, int y_val)
+int GoFightClass::killOtherColorGroup(GoGroupClass *group, int x_val, int y_val)
 {
+    GoGroupClass *his_group;
+
+    if (!this->theBaseObject->configObject()->isValidCoordinates(x_val, y_val)) {
+        return 0;
+    }
+
+    if (this->theBaseObject->boardObject()->theBoardArray[x_val][y_val] != group->hisColor()) {
+        return 0;
+    }
+
+    his_group = this->getGroupByCoordinate(x_val, y_val, group->hisColor());
+    if (!his_group) {
+        this->abend("killOtherColorGroup", "null his_group");
+        return 0;
+    }
+
+    if (his_group->groupHasAir()) {
+        return 0;
+    }
+
+    int dead_count = his_group->stoneCount();
+    if ((group->stoneCount() == 1) && (his_group->stoneCount() == 1)) {
+        this->markLastDeadInfo(his_group);
+    }
+
+    this->removeDeadGroup(his_group);
+
+    return dead_count;
+}
+
+GoGroupClass *GoFightClass::getGroupByCoordinate (int x_val, int y_val, char color_val)
+{
+/*
+        //goDebug("GoEngineObject.getGroupByCoordinate", color_val);
+        var g_list;
+        if ((color_val === this.GO().BLACK_STONE()) || (color_val === this.GO().MARKED_DEAD_BLACK_STONE())) {
+            g_list = this.blackGroupList();
+        } else {
+            g_list = this.whiteGroupList();
+        }
+
+        //goDebug("GoEngineObject.getGroupByCoordinate", "groupCount=" + g_list.groupCount());
+        var i = 0;
+        while (i < g_list.groupCount()) {
+            //goDebug("GoEngineObject.getGroupByCoordinate", "i=" + i);
+            if (g_list.listArray(i).existMatrix(x_val, y_val)) {
+                //goDebug("GoEngineObject.getGroupByCoordinate", "i=" + i);
+                return g_list.listArray(i);
+            }
+            i += 1;
+        }
+*/
     return 0;
 }
+
+void GoFightClass::removeDeadGroup (GoGroupClass *group)
+{
+    /*
+        group.removeDeadStoneFromBoard();
+        if (group.myColor() === this.GO().BLACK_STONE()) {
+            this.blackGroupList().removeOneDeadGroup(group);
+        } else {
+            this.whiteGroupList().removeOneDeadGroup(group);
+        }
+*/
+    }
+
+void GoFightClass::markLastDeadInfo (GoGroupClass *group_val)
+{
+    /*
+        this.setLastDeadStone(group_val.maxX(), group_val.maxY());
+
+        if (group_val.maxX() !== group_val.minX()) {
+            this.abend("markLastDeadInfo", "x: " + group_val.maxX() + "!=" + group_val.minX() + " count=" + group_val.stoneCount());
+        }
+        if (group_val.maxY() !== group_val.minY()) {
+            this.abend("markLastDeadInfo", "y: " + group_val.maxY() + "!=" + group_val.minY() + " count=" + group_val.stoneCount());
+        }
+        if (!group_val.existMatrix(group_val.maxX(), group_val.maxY())) {
+            this.abend("markLastDeadInfo", "exist_matrix");
+        }
+*/
+    }
 
 void GoFightClass::resetMarkedGroupLists (void)
 {

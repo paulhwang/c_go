@@ -11,11 +11,16 @@ class GoGroupListClass;
 
 class GoGroupClass {
     GoGroupListClass *theGroupListObject;
+    int theExistMatrix[19][19];
+    int theDeadMatrix[19][19];
     int theIndexNumber;
     int theMaxX;
     int theMinX;
     int theMaxY;
     int theMinY;
+    int theStoneCount;
+    char theMyColor;
+    char theHisColor;
 
     int indexNumber(void);
     int maxX (void);
@@ -31,8 +36,18 @@ class GoGroupClass {
     void logit(char const *str0_val, char const *str1_val);
     void abend(char const *str0_val, char const *str1_val);
 
+protected:
+    friend GoFightClass;
+
+    int stoneCount(void) {return this->theStoneCount;}
+    int myColor(void) {return this->theMyColor;}
+    int hisColor(void) {return this->theHisColor;}
+
+    void insertStoneToGroup(int x_val, int y_val, int dead_val);
+    int groupHasAir(void);
+
 public:
-    GoGroupClass(GoGroupListClass* group_list_object_var);
+    GoGroupClass(GoGroupListClass *group_list_object_val);
     ~GoGroupClass() {}
     char const* objectName() {return "GoGroupClass";}
 
@@ -41,8 +56,6 @@ public:
     GoBaseClass* baseObject();
 
     void setIndexNumber(int val);
-    void insertStoneToGroup(int x_val, int y_val, int dead_val);
     int isCandidateGroup(int x_val, int y_val);
-    int groupHasAir(void);
     void resetMarkedBoardObjectData();
 };

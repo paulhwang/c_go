@@ -30,6 +30,9 @@ class GoFightClass {
     GoGroupClass *insertStoneToGroupList(GoMoveClass *move_val);
     int killOtherColorGroups(GoMoveClass *move_val, GoGroupClass *group_val);
     int killOtherColorGroup(GoGroupClass *group, int x_val, int y_val);
+    GoGroupClass *getGroupByCoordinate(int x_val, int y_val, char color_val);
+    void removeDeadGroup(GoGroupClass *group);
+    void markLastDeadInfo(GoGroupClass *group_val);
     void resetMarkedGroupLists(void);
     void resetEmptyGroupLists(void);
     void abendEngine(void);

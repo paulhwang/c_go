@@ -22,6 +22,7 @@ class GoConfigClass {
 protected:
     friend class GoBoardClass;
     friend class GoGameClass;
+    friend class GoFightClass;
 
     int boardSize(void) {return this->theBoardSize;}
     int handicapPoint(void) {return this->theHandicapPoint;}
