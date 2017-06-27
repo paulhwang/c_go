@@ -12,7 +12,7 @@ GoMoveClass::GoMoveClass (GoBaseClass *base_object_val, char const *encoded_move
     theBaseObject(base_object_val)
 {
     this->moveObjectDecode(encoded_move_val);
-    this->debug(true, "GoMoveClass", this->theMoveInfo);
+    this->debug(false, "GoMoveClass", this->theMoveInfo);
 }
 
 void GoMoveClass::moveObjectDecode (char const *str_val)

@@ -33,7 +33,7 @@ char GoGameClass::getOppositeColor (char color_val)
 
 void GoGameClass::addNewMoveAndFight (GoMoveClass *move_val)
 {
-    this->debug(true, "addNewMoveAndFight", move_val->moveInfo());
+    this->debug(false, "addNewMoveAndFight", move_val->moveInfo());
 
     if (move_val->turnIndex() != this->theTotalMoves + 1) {
         this->logit("addNewMoveAndFight", "duplicated move received *****************");
@@ -43,7 +43,7 @@ void GoGameClass::addNewMoveAndFight (GoMoveClass *move_val)
 
     if (this->theGameIsOver) {
         free(move_val);
-        this->abend("addNewMoveAndFight", "two pass have entered");
+        this->abend("addNewMoveAndFight", "theGameIsOver");
         return;
     }
 

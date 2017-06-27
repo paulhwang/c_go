@@ -38,9 +38,9 @@ char *GoBoardClass::encodeBoard (void) {
         i += 1;
     }
 
-    phwangEncodeNumber(buf_ptr, this->theBlackCapturedStone, 3);
+    phwangEncodeNumber(buf_ptr, this->theBlackCapturedStones, 3);
     buf_ptr += 3;
-    phwangEncodeNumber(buf_ptr, this->theWhiteCapturedStone, 3);
+    phwangEncodeNumber(buf_ptr, this->theWhiteCapturedStones, 3);
     buf_ptr += 3;
 
     *buf_ptr = 0;
@@ -61,8 +61,8 @@ void GoBoardClass::resetBoardObjectData (void) {
         }
         i += 1;
     }
-    this->theBlackCapturedStone = 0;
-    this->theWhiteCapturedStone = 0;
+    this->theBlackCapturedStones = 0;
+    this->theWhiteCapturedStones = 0;
 }
 
 void GoBoardClass::resetMarkedBoardObjectData (void) {

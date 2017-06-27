@@ -17,9 +17,9 @@ GoFightClass::GoFightClass (GoBaseClass* base_object_val):
 
 void GoFightClass::enterBattle (GoMoveClass* move_val)
 {
-     this->debug(true, "enterBattle", move_val->moveInfo());
+    this->debug(true, "enterBattle", move_val->moveInfo());
 
-    GoGroupClass* group = this->insertStoneToGroupList(move_val);
+    GoGroupClass *group = this->insertStoneToGroupList(move_val);
     if (!group) {
         return;
     }
@@ -33,11 +33,11 @@ void GoFightClass::enterBattle (GoMoveClass* move_val)
 
     if (dead_count != 0) {
         if (move_val->myColor() == GO_BLACK_STONE) {
-            //this->addBlackCaptureStones(dead_count);
+            this->theBaseObject->boardObject()->addBlackCapturedStones(dead_count);
         } else if (move_val->myColor() == GO_WHITE_STONE) {
-            //this->addWhiteCaptureStones(dead_count);
+            this->theBaseObject->boardObject()->addWhiteCapturedStones(dead_count);
         } else {
-            this->abend("enterBattle", "bad color=");
+            this->abend("enterBattle", "bad color");
         }
     }
     this->abendEngine();
@@ -45,7 +45,7 @@ void GoFightClass::enterBattle (GoMoveClass* move_val)
 
 GoGroupClass* GoFightClass::insertStoneToGroupList (GoMoveClass* move_val)
 {
-    GoGroupListClass* g_list;
+    GoGroupListClass *g_list;
 
     if (move_val->myColor() == GO_BLACK_STONE) {
         g_list = this->blackGroupList();
@@ -53,21 +53,17 @@ GoGroupClass* GoFightClass::insertStoneToGroupList (GoMoveClass* move_val)
     else if (move_val->myColor() == GO_WHITE_STONE) {
         g_list = this->whiteGroupList();
     } else {
-        char s[LOGIT_BUF_SIZE];
-        sprintf(s, "move_val: (%i, %i, %i, %i)", move_val->xX(), move_val->yY(), move_val->myColor(), move_val->turnIndex());
-        this->abend("insertStoneToGroupList", s);
+        this->abend("insertStoneToGroupList", move_val->moveInfo());
         return 0;
     }
 
-    GoGroupClass* group = g_list->findCandidateGroup(move_val->xX(), move_val->yY());
+    GoGroupClass *group = g_list->findCandidateGroup(move_val->xX(), move_val->yY());
     if (!group) {
         group = new GoGroupClass(g_list);
         group->insertStoneToGroup(move_val->xX(), move_val->yY(), false);
         g_list->insertGroupToGroupList(group);
-        //g_list.printGroupList();
         return group;
     }
-
 }
 
 int GoFightClass::killOtherColorGroups(GoMoveClass* move_val, GoGroupClass* group_val)
