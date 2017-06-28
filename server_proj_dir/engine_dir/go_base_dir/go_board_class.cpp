@@ -63,6 +63,8 @@ void GoBoardClass::resetBoardObjectData (void) {
     }
     this->theBlackCapturedStones = 0;
     this->theWhiteCapturedStones = 0;
+    this->theLastDeadX = 19;
+    this->theLastDeadY = 19;
 }
 
 void GoBoardClass::resetMarkedBoardObjectData (void)

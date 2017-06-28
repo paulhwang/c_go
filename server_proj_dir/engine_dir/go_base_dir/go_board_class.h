@@ -15,6 +15,8 @@ class GoBoardClass {
     char theBoardOutputBuffer[19 * 19 + 3 * 2 + 16];
     int theBlackCapturedStones;
     int theWhiteCapturedStones;
+    int theLastDeadX;
+    int theLastDeadY;
 
     int isEmptySpace(int x_val, int y_val);
 
@@ -32,7 +34,9 @@ protected:
     void setBoardArray(int x_val, int y_val, int data_val) {this->theBoardArray[x_val][y_val] = data_val;}
     void addBlackCapturedStones(int val) {this->theBlackCapturedStones += val;}
     void addWhiteCapturedStones(int val) {this->theWhiteCapturedStones += val;}
-    void resetBoardObjectData (void);
+    void setLastDeadStone(int x_val, int y_val) {this->theLastDeadX = x_val; theLastDeadY = y_val;}
+    void clearLastDeadStone(void) {this->theLastDeadX = 19; theLastDeadY = 19;}
+    void resetBoardObjectData(void);
     void resetMarkedBoardObjectData(void);
     void addStoneToBoard(int x_val, int y_val, int color_val);
     char *encodeBoard(void);
