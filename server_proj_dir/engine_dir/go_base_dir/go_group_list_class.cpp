@@ -12,11 +12,21 @@ GoGroupListClass::GoGroupListClass (GoFightClass* fight_object_val,
                                     int index_val,
                                     int color_val,
                                     int dead_val,
-                                    char const* big_stone_val,
-                                    char const* small_stone_val):
+                                    char const *big_stone_val,
+                                    char const *small_stone_val):
     theFightObject(fight_object_val),
-    theGroupCount(0)
+    theIndexNumber(index_val),
+    theMyColor(color_val),
+    theIsDead(dead_val),
+    theBigStoneColor(big_stone_val),
+    theSmallStoneColor(small_stone_val),
+    theGroupCount(0),
+    theIsMarkedDead(0)
 {
+    this->theHisColor = (this->theMyColor == GO_EMPTY_STONE)
+        ? GO_EMPTY_STONE
+        : getOppositeColor(this->theMyColor);
+
     this->debug(true, "GoGroupListClass", "init");
 }
 

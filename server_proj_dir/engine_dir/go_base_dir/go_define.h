@@ -4,8 +4,7 @@
   File name: go_define.h
 */
 
-#ifndef __GO_DEFINE_H__
-#define __GO_DEFINE_H__
+#pragma once
 
 #define GO_EMPTY_STONE '0'
 #define GO_BLACK_STONE '1'
@@ -21,4 +20,18 @@
 //#define THE_MARKED_EMPTY_BLACK_STONE = (this.THE_BLACK_STONE + this.THE_MARK_EMPTY_STONE_DIFF);
 //#define THE_MARKED_EMPTY_WHITE_STONE = (this.THE_WHITE_STONE + this.THE_MARK_EMPTY_STONE_DIFF);
 
-#endif
+
+inline char getOppositeColor (char color_val)
+{
+    switch (color_val) {
+        case GO_BLACK_STONE:
+            return GO_WHITE_STONE;
+
+        case GO_WHITE_STONE:
+            return GO_BLACK_STONE;
+
+        default:
+            phwangAbend("getOppositeColor", "bad color");
+            return GO_EMPTY_STONE;
+    }
+}

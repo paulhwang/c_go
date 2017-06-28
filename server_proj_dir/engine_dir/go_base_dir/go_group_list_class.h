@@ -11,6 +11,13 @@ class GoFightClass;
 class GoGroupListClass
 {
     GoFightClass *theFightObject;
+    int theIndexNumber;
+    char theMyColor;
+    char theHisColor;
+    int theIsDead;
+    char const *theBigStoneColor;
+    char const *theSmallStoneColor;
+    int theIsMarkedDead;
     int theGroupCount;
     GoGroupClass *theListArray[400];
 
