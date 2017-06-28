@@ -194,15 +194,16 @@ void GoFightClass::abendEngine (void)
     }
     this->debug(false, "abendEngine", "is ON ***");
 
+    /*
     int stones_count = 0;
     int i = 0;
     while (i < GO_FIGHT_CLASS_GROUP_LIST_ARRAY_SIZE) {
         GoGroupListClass *group_list = this->theGroupListArray[i];
-        //group_list->abendGroupList();
-        //stones_count += group_list->totalStoneCount();
+        stones_count += group_list->theTotalStoneCount;
         i += 1;
     }
-
+    */
+    
     /* check if a stone exist in both black and white group_lists */
     int black_stone_count = 0;
     int white_stone_count = 0;

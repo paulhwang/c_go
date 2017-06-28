@@ -87,6 +87,41 @@ int GoGroupListClass::stoneExistWithinMe (int x_val, int y_val)
 
 void GoGroupListClass::abendGroupList (void)
 {
+    /*
+        var d;
+        if (this.isDead()) {
+            d = "d* ";
+        } else {
+            d = "*";
+        }
+
+        this.debug(false, "abendGroupList", "" + this.indexNumber() + " color=" + this.myColor() + " count=" + this.groupCount() + ":" + this.totalStoneCount());
+ */
+    int i = 0;
+    while (i < this->theGroupCount) {
+        GoGroupClass *group = this->theGroupArray[i];
+         if (!group) {
+            this->abend("abendGroupList", "null group" );
+            return;
+        }
+        if (group->theGroupListObject != this) {
+            this->abend("abendGroupList", "groupListObject");
+            return;
+        }
+        if (group->theIndexNumber != i) {
+            this->abend("abendGroupList", "index ");
+            return;
+        }
+
+        group->abendGroup();
+
+        int j = i + 1;
+        while (j < this->theGroupCount) {
+            group->abendOnGroupConflict(this->theGroupArray[j]);
+            j = j + 1;
+        }
+        i += 1;
+    }
 
 }
 

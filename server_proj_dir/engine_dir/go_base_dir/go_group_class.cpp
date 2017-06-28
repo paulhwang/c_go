@@ -127,6 +127,38 @@ void GoGroupClass::removeDeadStoneFromBoard (void)
     }
 }
 
+void GoGroupClass::abendGroup (void)
+{
+    int count = 0;
+    int board_size = this->theGroupListObject->fightObject()->baseObject()->configObject()->boardSize();
+    for (int i = 0; i < board_size; i++) {
+        for (int j = 0; j < board_size; j++) {
+            if (this->theExistMatrix[i][j]) {
+                 count++;
+            }
+        }
+    }
+    if (this->theStoneCount != count) {
+        this->abend("abendGroup", "stone count");
+    }
+}
+
+void GoGroupClass::abendOnGroupConflict (GoGroupClass *other_group_val)
+{
+   int board_size = this->theGroupListObject->fightObject()->baseObject()->configObject()->boardSize();
+    for (int i = 0; i < board_size; i++) {
+        for (int j = 0; j < board_size; j++) {
+            if (this->theExistMatrix[i][j]) {
+                if (other_group_val->theExistMatrix[i][j]) {
+                    this->abend("abendOnGroupConflict", "stone  exists in 2 groups");
+                    //this->abend("abendOnGroupConflict", "stone (" + i + "," + j + ") exists in 2 groups: (" + this.myColor() + ":" + this.indexNumber() + ":" + this.stoneCount() + ") ("
+                    //    + other_group_val.myColor() + ":" + other_group_val.indexNumber() + ":" + other_group_val.stoneCount() + ")");
+                }
+            }
+        }
+    }
+}
+
 void GoGroupClass::logit (char const *str0_val, char const *str1_val) {
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", this->objectName(), str0_val);
