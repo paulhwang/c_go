@@ -143,20 +143,18 @@ void GoFightClass::removeDeadGroup (GoGroupClass *group)
 
 void GoFightClass::markLastDeadInfo (GoGroupClass *group_val)
 {
-    /*
-        this.setLastDeadStone(group_val.maxX(), group_val.maxY());
+    this->theBaseObject->boardObject()->setLastDeadStone(group_val->theMaxX, group_val->theMaxY);
 
-        if (group_val.maxX() !== group_val.minX()) {
-            this.abend("markLastDeadInfo", "x: " + group_val.maxX() + "!=" + group_val.minX() + " count=" + group_val.stoneCount());
-        }
-        if (group_val.maxY() !== group_val.minY()) {
-            this.abend("markLastDeadInfo", "y: " + group_val.maxY() + "!=" + group_val.minY() + " count=" + group_val.stoneCount());
-        }
-        if (!group_val.existMatrix(group_val.maxX(), group_val.maxY())) {
-            this.abend("markLastDeadInfo", "exist_matrix");
-        }
-*/
+    if (group_val->theMaxX != group_val->theMinX) {
+        this->abend("markLastDeadInfo", "bad x");
     }
+    if (group_val->theMaxY != group_val->theMinY) {
+         this->abend("markLastDeadInfo", "bad y");
+    }
+    if (!group_val->theExistMatrix[group_val->theMaxX][group_val->theMaxY]) {
+        this->abend("markLastDeadInfo", "exist_matrix");
+    }
+}
 
 void GoFightClass::resetMarkedGroupLists (void)
 {

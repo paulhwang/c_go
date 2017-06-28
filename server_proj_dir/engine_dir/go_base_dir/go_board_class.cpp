@@ -28,20 +28,21 @@ void GoBoardClass::addStoneToBoard (int x_val, int y_val, int color_val)
 char *GoBoardClass::encodeBoard (void) {
     char *buf_ptr = this->theBoardOutputBuffer;
     int board_size = this->theBaseObject->configObject()->boardSize();
-    int i = 0;
-    while (i < board_size) {
-        int j = 0;
-        while (j < board_size) {
+    for (int i = 0; i < board_size; i++) {
+        for (int j = 0; j < board_size; j++) {
             *buf_ptr++ = this->theBoardArray[i][j] + '0';
-            j += 1;
         }
-        i += 1;
     }
 
     phwangEncodeNumber(buf_ptr, this->theBlackCapturedStones, 3);
     buf_ptr += 3;
     phwangEncodeNumber(buf_ptr, this->theWhiteCapturedStones, 3);
     buf_ptr += 3;
+
+    phwangEncodeNumber(buf_ptr, this->theLastDeadX, 2);
+    buf_ptr += 2;
+    phwangEncodeNumber(buf_ptr, this->theLastDeadY, 2);
+    buf_ptr += 2;
 
     *buf_ptr = 0;
 
@@ -51,15 +52,11 @@ char *GoBoardClass::encodeBoard (void) {
 
 void GoBoardClass::resetBoardObjectData (void) {
     int board_size = this->theBaseObject->configObject()->boardSize();
-    int i = 0;
-    while (i < board_size) {
-        int j = 0;
-        while (j < board_size) {
+    for (int i = 0; i < board_size; i++) {
+        for (int j = 0; j < board_size; j++) {
             this->theBoardArray[i][j] = GO_EMPTY_STONE;
             this->theMarkedBoardArray[i][j] = GO_EMPTY_STONE;
-            j += 1;
         }
-        i += 1;
     }
     this->theBlackCapturedStones = 0;
     this->theWhiteCapturedStones = 0;
