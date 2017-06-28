@@ -121,14 +121,12 @@ GoGroupClass *GoFightClass::getGroupByCoordinate (int x_val, int y_val, int colo
     }
 
     //goDebug("GoEngineObject.getGroupByCoordinate", "groupCount=" + g_list.groupCount());
-    int i = 0;
-    while (i < g_list->theGroupCount) {
+    for (int i = 0; i < g_list->theGroupCount; i++) {
         //goDebug("GoEngineObject.getGroupByCoordinate", "i=" + i);
         if (g_list->theGroupArray[i]->theExistMatrix[x_val][y_val]) {
             //goDebug("GoEngineObject.getGroupByCoordinate", "i=" + i);
             return g_list->theGroupArray[i];
         }
-        i += 1;
     }
     return 0;
 }
@@ -203,7 +201,7 @@ void GoFightClass::abendEngine (void)
         i += 1;
     }
     */
-    
+
     /* check if a stone exist in both black and white group_lists */
     int black_stone_count = 0;
     int white_stone_count = 0;
