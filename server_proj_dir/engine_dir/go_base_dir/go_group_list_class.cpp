@@ -63,13 +63,11 @@ GoGroupClass *GoGroupListClass::findCandidateGroup (int x_val, int y_val)
 
 void GoGroupListClass::removeGroupFromGroupList (GoGroupClass *group_val)
 {
-    this->theGroupCount;
-
+    this->theGroupCount--;
     if (group_val->theIndexNumber != this->theGroupCount) {
         this->theListArray[this->theGroupCount]->setIndexNumber(group_val->theIndexNumber);
         this->theListArray[group_val->theIndexNumber] = this->theListArray[this->theGroupCount];
     }
-
     this->theListArray[this->theGroupCount] = 0;
 }
 
