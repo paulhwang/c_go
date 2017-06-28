@@ -10,7 +10,7 @@
 
 GoFightClass::GoFightClass (GoBaseClass* base_object_val):
     theBaseObject(base_object_val),
-    theAbendEngineOn(0)
+    theAbendEngineOn(1)
 {
     this->resetEngineObjectData();
     this->debug(true, "GoFightClass", "init");
@@ -212,27 +212,29 @@ void GoFightClass::abendEngine (void)
     while (x < board_size) {
         int y = 0;
         while (y < board_size) {
-/*
-                if (this.blackGroupList().stoneExistWithinMe(x, y)) {
-                    if (this.whiteGroupList().stoneExistWithinMe(x, y)) {
-                        this.abend("abendEngine", "(" + x + "," + y + ")");
-                    }
-                    black_stone_count += 1;
+            if (this->blackGroupList()->stoneExistWithinMe(x, y)) {
+                if (this->whiteGroupList()->stoneExistWithinMe(x, y)) {
+                    this->abend("abendEngine", "balck exist in wrong group list");
                 }
-                if (this.whiteGroupList().stoneExistWithinMe(x, y)) {
-                   white_stone_count += 1;
-                }
-                y += 1;
-*/
+                black_stone_count += 1;
+            }
+            if (this->whiteGroupList()->stoneExistWithinMe(x, y)) {
+                white_stone_count += 1;
+            }
+            y += 1;
         }
         x += 1;
     }
 
     if (this->blackGroupList()->totalStoneCount() != black_stone_count) {
+        printf("abendEngine   %d\n", this->blackGroupList()->totalStoneCount());
+        printf("abendEngine   %d\n", black_stone_count);
         this->abend("abendEngine", "black_stone count does not match");
     }
     if (this->whiteGroupList()->totalStoneCount() != white_stone_count) {
-        this->abend("abendEngine", "black_stone count does not match");
+        printf("abendEngine   %d\n", this->whiteGroupList()->totalStoneCount());
+        printf("abendEngine   %d\n", white_stone_count);
+        this->abend("abendEngine", "white count does not match");
     }
 /*
 
