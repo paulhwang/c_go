@@ -69,7 +69,7 @@ GoGroupClass* GoFightClass::insertStoneToGroupList (GoMoveClass* move_val)
 
 int GoFightClass::killOtherColorGroups(GoMoveClass* move_val, GoGroupClass* group_val)
 {
-    this->theLastDeadStone = 0;
+    this->theBaseObject->boardObject()->clearLastDeadStone();
 
     int count;
     count =  this->killOtherColorGroup(group_val, move_val->xX() - 1, move_val->yY());

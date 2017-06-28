@@ -17,7 +17,7 @@ class GoFightClass {
     int theAbendEngineOn;
     GoGroupListClass *theGroupListArray[GO_FIGHT_CLASS_GROUP_LIST_ARRAY_SIZE];
     char *theCaptureCount;
-    char *theLastDeadStone;
+    char *theLastDeadStone;////////////////to be removed
 
     GoGroupListClass *emptyGroupList(void) {return this->theGroupListArray[0];}
     GoGroupListClass *blackGroupList(void) {return this->theGroupListArray[1];}
