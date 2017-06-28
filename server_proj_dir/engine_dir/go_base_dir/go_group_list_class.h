@@ -10,6 +10,7 @@ class GoFightClass;
 
 class GoGroupListClass
 {
+#define GO_GROUP_LIST_CLASS_GROUP_ARRAY_SIZE 400
     GoFightClass *theFightObject;
     int theIndexNumber;
     int theMyColor;
@@ -19,7 +20,7 @@ class GoGroupListClass
     char const *theSmallStoneColor;
     int theIsMarkedDead;
     int theGroupCount;
-    GoGroupClass *theListArray[400];
+    GoGroupClass *theGroupArray[GO_GROUP_LIST_CLASS_GROUP_ARRAY_SIZE];
 
     void debug(int on_off_val, char const *str0_val, char const *str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
     void logit(char const *str0_val, char const *str1_val);

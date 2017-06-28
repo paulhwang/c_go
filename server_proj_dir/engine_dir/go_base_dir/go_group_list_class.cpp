@@ -35,7 +35,7 @@ int GoGroupListClass::totalStoneCount (void)
     int count = 0;
     int i = 0;
     while (i < this->theGroupCount) {
-        count += this->theListArray[i]->theStoneCount;
+        count += this->theGroupArray[i]->theStoneCount;
         i += 1;
     }
     return count;
@@ -43,7 +43,7 @@ int GoGroupListClass::totalStoneCount (void)
 
 void GoGroupListClass::insertGroupToGroupList (GoGroupClass* group_val)
 {
-    this->theListArray[this->theGroupCount] = group_val;
+    this->theGroupArray[this->theGroupCount] = group_val;
     group_val->setIndexNumber(this->theGroupCount);
     this->theGroupCount++;
     group_val->setGroupListObject(this);
@@ -53,8 +53,8 @@ GoGroupClass *GoGroupListClass::findCandidateGroup (int x_val, int y_val)
 {
     int i = 0;
     while (i < this->theGroupCount) {
-        if (this->theListArray[i]->isCandidateGroup(x_val, y_val)) {
-            return this->theListArray[i];
+        if (this->theGroupArray[i]->isCandidateGroup(x_val, y_val)) {
+            return this->theGroupArray[i];
         }
         i += 1;
     }
@@ -65,10 +65,10 @@ void GoGroupListClass::removeGroupFromGroupList (GoGroupClass *group_val)
 {
     this->theGroupCount--;
     if (group_val->theIndexNumber != this->theGroupCount) {
-        this->theListArray[this->theGroupCount]->setIndexNumber(group_val->theIndexNumber);
-        this->theListArray[group_val->theIndexNumber] = this->theListArray[this->theGroupCount];
+        this->theGroupArray[this->theGroupCount]->setIndexNumber(group_val->theIndexNumber);
+        this->theGroupArray[group_val->theIndexNumber] = this->theGroupArray[this->theGroupCount];
     }
-    this->theListArray[this->theGroupCount] = 0;
+    this->theGroupArray[this->theGroupCount] = 0;
 }
 
 void GoGroupListClass::abendGroupList (void)

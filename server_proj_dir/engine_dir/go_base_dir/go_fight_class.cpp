@@ -124,9 +124,9 @@ GoGroupClass *GoFightClass::getGroupByCoordinate (int x_val, int y_val, int colo
     int i = 0;
     while (i < g_list->theGroupCount) {
         //goDebug("GoEngineObject.getGroupByCoordinate", "i=" + i);
-        if (g_list->theListArray[i]->theExistMatrix[x_val][y_val]) {
+        if (g_list->theGroupArray[i]->theExistMatrix[x_val][y_val]) {
             //goDebug("GoEngineObject.getGroupByCoordinate", "i=" + i);
-            return g_list->theListArray[i];
+            return g_list->theGroupArray[i];
         }
         i += 1;
     }
