@@ -16,21 +16,6 @@ GoGameClass::GoGameClass (GoBaseClass* base_object_val):
     this->debug(true, "GoGameClass", "init");
 }
 
-char GoGameClass::getOppositeColor (char color_val)
-{
-    switch (color_val) {
-        case GO_BLACK_STONE:
-            return GO_WHITE_STONE;
-
-        case GO_WHITE_STONE:
-            return GO_BLACK_STONE;
-
-        default:
-            this->abend("getOppositeColor", "bad color");
-            return GO_EMPTY_STONE;
-    }
-}
-
 void GoGameClass::addNewMoveAndFight (GoMoveClass *move_val)
 {
     this->debug(false, "addNewMoveAndFight", move_val->moveInfo());
@@ -50,7 +35,7 @@ void GoGameClass::addNewMoveAndFight (GoMoveClass *move_val)
     this->thePassReceived = 0;
     this->insertMoveToMoveList(move_val);
     this->theBaseObject->fightObject()->enterBattle(move_val);
-    this->theNextColor = this->getOppositeColor(move_val->myColor());
+    this->theNextColor = GolbalGoGetOppositeColor(move_val->myColor());
 }
 
 void GoGameClass::insertMoveToMoveList (GoMoveClass* move_val)
@@ -199,7 +184,7 @@ void GoGameClass::processTheWholeMoveList (void)
     while (i < this->theTotalMoves) {
         GoMoveClass *move = this->theMovesArray[i];
         this->theBaseObject->fightObject()->enterBattle(move);
-        this->theNextColor = this->getOppositeColor(move->myColor());
+        this->theNextColor = GolbalGoGetOppositeColor(move->myColor());
         i += 1;
     }
 }

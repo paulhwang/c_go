@@ -21,7 +21,7 @@
 //#define THE_MARKED_EMPTY_WHITE_STONE = (this.THE_WHITE_STONE + this.THE_MARK_EMPTY_STONE_DIFF);
 
 
-inline char getOppositeColor (char color_val)
+inline char GolbalGoGetOppositeColor (char color_val)
 {
     switch (color_val) {
         case GO_BLACK_STONE:
@@ -31,7 +31,7 @@ inline char getOppositeColor (char color_val)
             return GO_BLACK_STONE;
 
         default:
-            phwangAbend("getOppositeColor", "bad color");
+            phwangAbend("GolbalGoGetOppositeColor", "bad color");
             return GO_EMPTY_STONE;
     }
 }
