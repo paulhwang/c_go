@@ -18,8 +18,8 @@ class GoGroupClass {
     int theMaxY;
     int theMinY;
     int theStoneCount;
-    char theMyColor;
-    char theHisColor;
+    int theMyColor;
+    int theHisColor;
 
     void setIndexNumber(int val);
     void resetMarkedBoardObjectData();

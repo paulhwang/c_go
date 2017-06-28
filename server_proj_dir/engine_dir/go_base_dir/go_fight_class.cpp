@@ -93,6 +93,8 @@ int GoFightClass::killOtherColorGroup(GoGroupClass *group, int x_val, int y_val)
 
     his_group = this->getGroupByCoordinate(x_val, y_val, group->hisColor());
     if (!his_group) {
+        printf("***killOtherColorGroup group->myColor()=%d\n", group->myColor());
+        printf("***killOtherColorGroup group->hisColor()=%d\n", group->hisColor());
         this->abend("killOtherColorGroup", "null his_group");
         return 0;
     }
@@ -111,7 +113,7 @@ int GoFightClass::killOtherColorGroup(GoGroupClass *group, int x_val, int y_val)
     return dead_count;
 }
 
-GoGroupClass *GoFightClass::getGroupByCoordinate (int x_val, int y_val, char color_val)
+GoGroupClass *GoFightClass::getGroupByCoordinate (int x_val, int y_val, int color_val)
 {
     //goDebug("GoEngineObject.getGroupByCoordinate", color_val);
     GoGroupListClass *g_list;

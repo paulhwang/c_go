@@ -15,7 +15,7 @@ GoBoardClass::GoBoardClass (GoBaseClass *base_object_val):
     this->debug(false, "GoBoardClass", "init");
 }
 
-void GoBoardClass::addStoneToBoard (int x_val, int y_val, char color_val)
+void GoBoardClass::addStoneToBoard (int x_val, int y_val, int color_val)
 {
     if (!this->theBaseObject->configObject()->isValidCoordinates(x_val, y_val)) {
         this->abend("addStoneToBoard", "bad coordinate");
@@ -32,7 +32,7 @@ char *GoBoardClass::encodeBoard (void) {
     while (i < board_size) {
         int j = 0;
         while (j < board_size) {
-            *buf_ptr++ = this->theBoardArray[i][j];
+            *buf_ptr++ = this->theBoardArray[i][j] + '0';
             j += 1;
         }
         i += 1;

@@ -12,8 +12,8 @@ class GoGroupListClass
 {
     GoFightClass *theFightObject;
     int theIndexNumber;
-    char theMyColor;
-    char theHisColor;
+    int theMyColor;
+    int theHisColor;
     int theIsDead;
     char const *theBigStoneColor;
     char const *theSmallStoneColor;

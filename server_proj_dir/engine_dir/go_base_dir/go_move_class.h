@@ -12,7 +12,7 @@ class GoMoveClass {
     GoBaseClass *theBaseObject;
     int theX;
     int theY;
-    char theMyColor;
+    int theMyColor;
     int theTurnIndex;
     char theMoveInfo[32];
 
@@ -29,7 +29,7 @@ protected:
 
     int xX(void) {return this->theX;}
     int yY(void) {return this->theY;}
-    char myColor(void) {return this->theMyColor;}
+    int myColor(void) {return this->theMyColor;}
     int turnIndex(void) {return this->theTurnIndex;}
     char *moveInfo(void) {return this->theMoveInfo;}
 

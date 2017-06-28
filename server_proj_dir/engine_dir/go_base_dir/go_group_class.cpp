@@ -11,8 +11,15 @@
 
 GoGroupClass::GoGroupClass (GoGroupListClass *group_list_object_val):
     theGroupListObject(group_list_object_val),
+    theIndexNumber(theGroupListObject->theGroupCount),
+    theMyColor(theGroupListObject->theMyColor),
     theStoneCount(0)
 {
+    this->theHisColor = (this->theMyColor == GO_EMPTY_STONE)
+        ? GO_EMPTY_STONE
+        : GolbalGoGetOppositeColor(this->theMyColor);
+  //       this.theExistMatrix = this.createMatrix(this.boardSize());
+ //       this.theDeadMatrix = this.createMatrix(this.boardSize());
     this->debug(true, "GoGroupClass", "init");
 }
 

@@ -23,12 +23,12 @@ void GoMoveClass::moveObjectDecode (char const *str_val)
     this->theX += (*str_val++ - '0');
     this->theY = (*str_val++ - '0') * 10;
     this->theY += (*str_val++ - '0');
-    this->theMyColor = *str_val++;
+    this->theMyColor = *str_val++ - '0';
     this->theTurnIndex = (*str_val++ - '0') * 100;
     this->theTurnIndex += (*str_val++ - '0') * 10;
     this->theTurnIndex += (*str_val - '0');
 
-    sprintf(this->theMoveInfo, "(%i, %i) %c, %i", this->theX, this->theY, this->theMyColor, this->theTurnIndex);
+    sprintf(this->theMoveInfo, "(%i, %i) %i, %i", this->theX, this->theY, this->theMyColor, this->theTurnIndex);
 }
 
 void GoMoveClass::logit (char const *str0_val, char const *str1_val) {
