@@ -27,6 +27,11 @@ void GoBoardClass::addStoneToBoard (int x_val, int y_val, int color_val)
 
 char *GoBoardClass::encodeBoard (void) {
     char *buf_ptr = this->theBoardOutputBuffer;
+
+    phwangEncodeNumber(buf_ptr, this->theBaseObject->gameObject()->totalMoves(), 3);
+    buf_ptr += 3;
+    *buf_ptr++ = this->theBaseObject->gameObject()->nextColor();
+
     int board_size = this->theBaseObject->configObject()->boardSize();
     for (int i = 0; i < board_size; i++) {
         for (int j = 0; j < board_size; j++) {

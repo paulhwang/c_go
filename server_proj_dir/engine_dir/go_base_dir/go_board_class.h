@@ -12,7 +12,7 @@ class GoBoardClass {
     GoBaseClass *theBaseObject;
     int theBoardArray[19][19];
     int theMarkedBoardArray[19][19];
-    char theBoardOutputBuffer[19 * 19 + 3 * 2 + 16];
+    char theBoardOutputBuffer[3 + 1 + 19 * 19 + 3 * 2 + 2 * 2 + 16];
     int theBlackCapturedStones;
     int theWhiteCapturedStones;
     int theLastDeadX;

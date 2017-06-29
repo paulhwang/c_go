@@ -16,7 +16,7 @@ class GoGameClass
     GoMoveClass *theMovesArray[GO_GAME_CLASS_MAX_MOVES_ARRAY_SIZE];
     int theTotalMoves;
     int theMaxMove;
-    char theNextColor;
+    int theNextColor;
     int thePassReceived;
     int theGameIsOver;
 
@@ -37,7 +37,10 @@ class GoGameClass
 
 protected:
     friend class GoPortClass;
+    friend class GoBoardClass;
 
+    int totalMoves(void) {return this->theTotalMoves;}
+    int nextColor(void) {return this->theNextColor;}
     void receiveSpecialMoveFromOpponent(char const *data_val);
 
 public:
