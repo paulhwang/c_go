@@ -30,7 +30,8 @@ char *GoBoardClass::encodeBoard (void) {
 
     phwangEncodeNumber(buf_ptr, this->theBaseObject->gameObject()->totalMoves(), 3);
     buf_ptr += 3;
-    *buf_ptr++ = this->theBaseObject->gameObject()->nextColor();
+    phwangEncodeNumber(buf_ptr, this->theBaseObject->gameObject()->nextColor(), 1);
+    buf_ptr++;
 
     int board_size = this->theBaseObject->configObject()->boardSize();
     for (int i = 0; i < board_size; i++) {
