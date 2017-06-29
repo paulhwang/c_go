@@ -91,6 +91,50 @@ int GoGroupClass::isCandidateGroup (int x_val, int y_val)
     return false;
 }
 
+void GoGroupClass::mergeWithOtherGroup (GoGroupClass *group2)
+{
+    this->debug(false, "mergeWithOtherGroup", "");
+    int i = group2->theMinX;
+    while (i <= group2->theMaxX) {
+        int j = group2->theMinY;
+        while (j <= group2->theMaxY) {
+            if (group2->theExistMatrix[i][j]) {
+                //this.debug(false, "mergeWithOtherGroup", "i=" + i + " j=" + j);
+                if (this->theExistMatrix[i][j]) {
+                    this->abend("mergeWithOtherGroup", "already exist");
+                }
+                this->theExistMatrix[i][j] = group2->theExistMatrix[i][j];
+                this->theStoneCount++;
+
+                group2->theExistMatrix[i][j] = 0;
+                group2->theStoneCount--;
+            }
+            j += 1;
+        }
+        i += 1;
+    }
+    if (group2->theStoneCount) {
+        this->abend("mergeWithOtherGroup", "theStoneCount");
+    }
+
+    if (this->theMaxX < group2->theMaxX) {
+        this->theMaxX = group2->theMaxX;
+    }
+    if (this->theMinX > group2->theMinX) {
+        this->theMinX = group2->theMinX;
+    }
+    if (this->theMaxY < group2->theMaxY) {
+        this->theMaxY = group2->theMaxY;
+    }
+    if (this->theMinY > group2->theMinY) {
+        this->theMinY = group2->theMinY;
+    }
+
+    if (group2->theGroupListObject->theGroupArray[group2->theIndexNumber] != group2) {
+        this->abend("mergeWithOtherGroup", "group2");
+    }
+}
+
 int GoGroupClass::groupHasAir (void)
 {
     int i = this->theMinX;

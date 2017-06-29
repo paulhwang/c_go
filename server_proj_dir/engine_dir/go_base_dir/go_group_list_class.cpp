@@ -61,6 +61,20 @@ GoGroupClass *GoGroupListClass::findCandidateGroup (int x_val, int y_val)
     return 0;
 }
 
+GoGroupClass *GoGroupListClass::findOtherCandidateGroup (GoGroupClass *group_val, int x_val, int y_val)
+{
+    int i = 0;
+    while (i < this->theGroupCount) {
+        if (this->theGroupArray[i] != group_val) {
+            if (this->theGroupArray[i]->isCandidateGroup(x_val, y_val)) {
+                return this->theGroupArray[i];
+            }
+        }
+        i += 1;
+    }
+    return 0;
+}
+
 void GoGroupListClass::removeGroupFromGroupList (GoGroupClass *group_val)
 {
     this->theGroupCount--;
@@ -83,7 +97,6 @@ int GoGroupListClass::stoneExistWithinMe (int x_val, int y_val)
     }
     return false;
 }
-
 
 void GoGroupListClass::abendGroupList (void)
 {

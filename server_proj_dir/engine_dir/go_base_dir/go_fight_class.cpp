@@ -66,6 +66,24 @@ GoGroupClass* GoFightClass::insertStoneToGroupList (GoMoveClass* move_val)
         g_list->insertGroupToGroupList(group);
         return group;
     }
+
+    group->insertStoneToGroup(move_val->xX(), move_val->yY(), false);
+
+    int dummy_count = 0;
+    GoGroupClass *group2;
+    while (1) {
+        group2 = g_list->findOtherCandidateGroup(group, move_val->xX(), move_val->yY());
+        if (!group2) {
+            break;
+        }
+        dummy_count += 1;
+        group->mergeWithOtherGroup(group2);
+        g_list->removeGroupFromGroupList(group2);
+    }
+    if (dummy_count > 3) {
+        this->abend("insertStoneToGroupList", "dummy_count");
+    }
+    return group;
 }
 
 int GoFightClass::killOtherColorGroups(GoMoveClass* move_val, GoGroupClass* my_group_val)
@@ -203,11 +221,13 @@ void GoFightClass::abendEngine (void)
     for (int x = 0; x < board_size; x++) {
         for (int y = 0; y < board_size; y++) {
             if (this->theBaseObject->boardObject()->theBoardArray[x][y] == GO_BLACK_STONE) {
+                black_stone_count++;
                 if (!this->blackGroupList()->stoneExistWithinMe(x, y)) {
                     this->abend("abendEngine", "black stone does not exist in blackGroupList");
                 }
             }
             else if (this->theBaseObject->boardObject()->theBoardArray[x][y] == GO_WHITE_STONE) {
+                white_stone_count++;
                 if (!this->whiteGroupList()->stoneExistWithinMe(x, y)) {
                     this->abend("abendEngine", "white stone does not exist in whiteGroupList");
                 }
@@ -220,10 +240,12 @@ void GoFightClass::abendEngine (void)
         }
     }
 
+    int black_stone_count1 = 0;
+    int white_stone_count1 = 0;
     for (int x = 0; x < board_size; x++) {
         for (int y = 0; y < board_size; y++) {
             if (this->blackGroupList()->stoneExistWithinMe(x, y)) {
-                black_stone_count += 1;
+                black_stone_count1++;
 
                 if (this->theBaseObject->boardObject()->theBoardArray[x][y] != GO_BLACK_STONE) {
                     this->abend("abendEngine", "black stone does not exist in theBoardArray");
@@ -234,13 +256,20 @@ void GoFightClass::abendEngine (void)
                 }
             }
             if (this->whiteGroupList()->stoneExistWithinMe(x, y)) {
-                white_stone_count += 1;
+                white_stone_count1++;
 
                 if (this->theBaseObject->boardObject()->theBoardArray[x][y] != GO_WHITE_STONE) {
                     this->abend("abendEngine", "black stone does not exist in theBoardArray");
                 }
             }
         }
+    }
+
+    if (black_stone_count != black_stone_count1) {
+        this->abend("abendEngine", "black_stone_count does not match");
+    }
+    if (white_stone_count != white_stone_count1) {
+        this->abend("abendEngine", "white_stone_count does not match");
     }
 
     if (this->blackGroupList()->totalStoneCount() != black_stone_count) {

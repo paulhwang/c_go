@@ -35,6 +35,7 @@ protected:
     void insertGroupToGroupList(GoGroupClass *group_val);
     void removeGroupFromGroupList(GoGroupClass *group_val);
     GoGroupClass *findCandidateGroup(int x_val, int y_val);
+    GoGroupClass *findOtherCandidateGroup(GoGroupClass *group_val, int x_val, int y_val);
     int stoneExistWithinMe(int x_val, int y_val);
     void abendGroupList(void);
 

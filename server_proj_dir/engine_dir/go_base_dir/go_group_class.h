@@ -39,6 +39,7 @@ protected:
     void setGroupListObject(GoGroupListClass *group_list_val) {this->theGroupListObject = group_list_val;}
 
     void insertStoneToGroup(int x_val, int y_val, int dead_val);
+    void mergeWithOtherGroup(GoGroupClass *group2);
     int groupHasAir(void);
     void removeDeadStoneFromBoard(void);
     void abendGroup(void);
