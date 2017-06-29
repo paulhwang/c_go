@@ -37,7 +37,7 @@ protected:
 }
 
 public:
-    GroupClass(void *list_mgr_object_val, FabricClass *fabric_object_val);
+    GroupClass(void *list_mgr_object_val, FabricClass *fabric_object_val, char *theme_data_val);
     ~GroupClass(void);
     char const* objectName(void) {return "GroupClass";}
 };

@@ -33,7 +33,7 @@ protected:
     void freeLink(LinkClass *link_object_val);
     LinkClass *searchLink(char *data_val) {return (LinkClass *) phwangListMgrSearchEntry(this->theLinkListMgrObject, data_val);}
 
-    GroupClass *mallocGroup(void);
+    GroupClass *mallocGroup(char *theme_data_val);
     void freeGroup(GroupClass *group_object_val);
     GroupClass *searchGroup(char *data_val) {return (GroupClass *) phwangListMgrSearchEntry(this->theGroupListMgrObject, data_val);}
 

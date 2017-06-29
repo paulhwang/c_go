@@ -43,10 +43,10 @@ void FabricClass::freeLink (LinkClass *link_object_val)
     link_object_val->~LinkClass();
 }
 
-GroupClass *FabricClass::mallocGroup (void)
+GroupClass *FabricClass::mallocGroup (char *theme_data_val)
 {
     this->debug(true, "mallocGroup", "");
-    GroupClass *group = new GroupClass(this->theGroupListMgrObject, this);
+    GroupClass *group = new GroupClass(this->theGroupListMgrObject, this, theme_data_val);
     return group;
 }
 
