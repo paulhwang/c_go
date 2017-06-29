@@ -55,7 +55,7 @@ protected:
     void setRoomIdIndex(char *room_id_index_val) {memcpy(this->theRoomIdIndex, room_id_index_val, ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE); this->theRoomIdIndex[ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE] = 0;}
 
 public:
-    GoBaseClass(void *list_mgr_object_val, EngineClass *engine_object_val);
+    GoBaseClass(void *list_mgr_object_val, EngineClass *engine_object_val, char *config_info_val);
     ~GoBaseClass(void);
     char const *objectName(void) {return "GoBaseClass";}
 

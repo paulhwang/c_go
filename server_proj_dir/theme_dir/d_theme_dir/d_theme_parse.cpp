@@ -47,12 +47,13 @@ void DThemeClass::processMallocRoom (char *data_val)
         this->transmitFunction(downlink_data);
         return;
     }
+    data_val += GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE;
 
     uplink_data = data_ptr = (char *) malloc(ROOM_MGR_DATA_BUFFER_SIZE + 4);
     *data_ptr++ = THEME_ENGINE_PROTOCOL_COMMAND_IS_MALLOC_BASE;
     memcpy(data_ptr, room->roomIdIndex(), ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);
     data_ptr += ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE;
-    *data_ptr = 0;
+    strcpy(data_ptr, data_val);
     this->theThemeObject->uThemeObject()->transmitFunction(uplink_data);
 }
 

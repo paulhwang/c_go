@@ -8,12 +8,17 @@
 #include "go_base_class.h"
 #include "go_config_class.h"
 
-GoConfigClass::GoConfigClass (GoBaseClass *base_object_val):
-    theBaseObject(base_object_val),
-    theBoardSize(19),
-    theHandicapPoint(0)
+GoConfigClass::GoConfigClass (GoBaseClass *base_object_val, char *config_info_val):
+    theBaseObject(base_object_val)
 {
-    this->debug(true, "GoConfigClass", "init");
+    if (memcmp(config_info_val, "GO", 2)) {
+        this->abend("GoConfigClass", "not GO");
+    }
+
+    this->theBoardSize = phwangDecodeNumber(config_info_val + 2, 2);
+    this->theHandicapPoint = phwangDecodeNumber(config_info_val + 4, 2);
+    this->theKomi = phwangDecodeNumber(config_info_val + 6, 2);
+    this->debug(true, "GoConfigClass", config_info_val);
 }
 
 void GoConfigClass::logit (char const *str0_val, char const *str1_val) {

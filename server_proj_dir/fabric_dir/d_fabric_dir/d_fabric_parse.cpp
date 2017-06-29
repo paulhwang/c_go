@@ -93,7 +93,9 @@ void DFabricClass::processMallocSession (char *data_val)
 
     uplink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
     *data_ptr++ = FABRIC_THEME_PROTOCOL_COMMAND_IS_MALLOC_ROOM;
-    strcpy(data_ptr, group->groupIdIndex());
+    memcpy(data_ptr, group->groupIdIndex(), GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE);
+    data_ptr += GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE;
+    strcpy(data_ptr, data_val);
     this->theFabricObject->uFabricObject()->transmitFunction(uplink_data);
 }
 

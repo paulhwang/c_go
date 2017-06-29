@@ -27,7 +27,7 @@ protected:
     DEngineClass *dEngineObject(void) {return this->theDEngineObject;}
     BaseMgrClass *goBaseMgrObject(void) {return this->theGoBaseMgrObject;}
 
-    GoBaseClass *mallocGoBase(void);
+    GoBaseClass *mallocGoBase(char *config_info_val);
     GoBaseClass *searchGoBase(char *data_val) {return (GoBaseClass *) phwangListMgrSearchEntry(this->theGoBaseListMgrObject, data_val);}
 
 public:

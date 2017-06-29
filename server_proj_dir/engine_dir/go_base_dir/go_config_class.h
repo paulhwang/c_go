@@ -12,6 +12,7 @@ class GoConfigClass {
     GoBaseClass *theBaseObject;
     int theBoardSize;
     int theHandicapPoint;
+    int theKomi;
 
     int isValidCoordinate(int coordinate_val) {return (0 <= coordinate_val) && (coordinate_val < this->theBoardSize);}
 
@@ -30,7 +31,7 @@ protected:
     int isValidCoordinates(int x_val, int y_val) {return this->isValidCoordinate(x_val) && this->isValidCoordinate(y_val);}
 
 public:
-    GoConfigClass(GoBaseClass *the_base_object);
+    GoConfigClass(GoBaseClass *the_base_object, char *config_info_val);
     ~GoConfigClass(void) {}
     char const *objectName(void) {return "GoConfigClass";}
 };
