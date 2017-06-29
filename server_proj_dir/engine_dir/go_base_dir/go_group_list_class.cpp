@@ -30,13 +30,21 @@ GoGroupListClass::GoGroupListClass (GoFightClass* fight_object_val,
     this->debug(true, "GoGroupListClass", "init");
 }
 
+GoGroupListClass::~GoGroupListClass(void)
+{
+    for (int i = 0; i < this->theGroupCount; i++) {
+        if (this->theGroupArray[i]) {
+            this->theGroupArray[i]->~GoGroupClass();
+            this->theGroupArray[i] = 0;
+        }
+    }
+}
+
 int GoGroupListClass::totalStoneCount (void)
 {
     int count = 0;
-    int i = 0;
-    while (i < this->theGroupCount) {
+    for (int i = 0; i < this->theGroupCount; i++) {
         count += this->theGroupArray[i]->theStoneCount;
-        i += 1;
     }
     return count;
 }

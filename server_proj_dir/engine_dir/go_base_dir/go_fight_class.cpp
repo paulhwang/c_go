@@ -16,6 +16,16 @@ GoFightClass::GoFightClass (GoBaseClass* base_object_val):
     this->debug(true, "GoFightClass", "init");
 }
 
+GoFightClass::~GoFightClass(void)
+{
+    for (int i = 0; i < GO_FIGHT_CLASS_GROUP_LIST_ARRAY_SIZE; i++) {
+        if (this->theGroupListArray[i]) {
+            this->theGroupListArray[i]->~GoGroupListClass();
+            this->theGroupListArray[i] = 0;
+        }
+    }
+}
+
 void GoFightClass::enterBattle (GoMoveClass* move_val)
 {
     this->debug(true, "enterBattle", move_val->moveInfo());

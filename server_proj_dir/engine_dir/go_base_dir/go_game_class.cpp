@@ -16,6 +16,16 @@ GoGameClass::GoGameClass (GoBaseClass* base_object_val):
     this->debug(true, "GoGameClass", "init");
 }
 
+GoGameClass::~GoGameClass(void)
+{
+    for (int i = 0; i < this->theMaxMove; i++) {
+        if (this->theMovesArray[i]) {
+            this->theMovesArray[i]->~GoMoveClass();
+            this->theMovesArray[i] = 0;
+        }
+    }
+}
+
 void GoGameClass::addNewMoveAndFight (GoMoveClass *move_val)
 {
     this->debug(false, "addNewMoveAndFight", move_val->moveInfo());

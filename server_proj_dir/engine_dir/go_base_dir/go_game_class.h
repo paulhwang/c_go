@@ -45,6 +45,6 @@ protected:
 
 public:
     GoGameClass(GoBaseClass *the_base_object);
-    ~GoGameClass(void) {}
+    ~GoGameClass(void);
     char const *objectName(void) {return "GoGameClass";}
 };

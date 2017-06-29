@@ -52,6 +52,6 @@ protected:
 
 public:
     GoFightClass(GoBaseClass *base_object_val);
-    ~GoFightClass(void) {}
+    ~GoFightClass(void);
     char const *objectName(void) {return "GoFightClass";}
 };
