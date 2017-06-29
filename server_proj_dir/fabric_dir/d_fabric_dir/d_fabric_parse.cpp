@@ -67,14 +67,13 @@ void DFabricClass::processMallocSession (char *data_val)
 
     this->logit("processMallocSession", data_val);
 
-    char *data_buf = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
-
     SessionClass *session = this->theFabricObject->searchLinkAndMallocSession(data_val);
     if (!session) {
         this->abend("processMallocSession", "null session");
-        data_buf[0] = WEB_FABRIC_PROTOCOL_RESPOND_IS_MALLOC_SESSION;
-        strcpy(data_buf + 1, "null session");
-        this->transmitFunction(data_buf);
+        downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
+        *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_MALLOC_SESSION;
+        strcpy(data_ptr, "null session");
+        this->transmitFunction(downlink_data);
         return;
     }
     data_val += LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE;
@@ -82,9 +81,10 @@ void DFabricClass::processMallocSession (char *data_val)
     GroupClass *group = this->theFabricObject->mallocGroup(data_val);
     if (!group) {
         this->abend("processMallocSession", "null group");
-        data_buf[0] = WEB_FABRIC_PROTOCOL_RESPOND_IS_MALLOC_SESSION;
-        strcpy(data_buf + 1, "null group");
-        this->transmitFunction(data_buf);
+        downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
+        *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_MALLOC_SESSION;
+        strcpy(data_ptr, "null group");
+        this->transmitFunction(downlink_data);
         return;
     }
 
