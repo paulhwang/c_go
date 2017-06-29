@@ -20,16 +20,17 @@ void GoFightClass::enterBattle (GoMoveClass* move_val)
 {
     this->debug(true, "enterBattle", move_val->moveInfo());
 
-    GoGroupClass *group = this->insertStoneToGroupList(move_val);
-    if (!group) {
+    this->theBaseObject->boardObject()->addStoneToBoard(move_val->xX(), move_val->yY(), move_val->myColor());
+    GoGroupClass *my_group = this->insertStoneToGroupList(move_val);
+    if (!my_group) {
+        this->abend("enterBattle", "fail in insertStoneToGroupList");
         return;
     }
 
-    this->theBaseObject->boardObject()->addStoneToBoard(move_val->xX(), move_val->yY(), move_val->myColor());
-    int dead_count = this->killOtherColorGroups(move_val, group);
+    int dead_count = this->killOtherColorGroups(move_val, my_group);
 
-    if (!group->groupHasAir()) {
-        this->removeDeadGroup(group);
+    if (!my_group->groupHasAir()) {
+        this->removeDeadGroup(my_group);
     }
 
     if (dead_count != 0) {
@@ -69,8 +70,6 @@ GoGroupClass* GoFightClass::insertStoneToGroupList (GoMoveClass* move_val)
 
 int GoFightClass::killOtherColorGroups(GoMoveClass* move_val, GoGroupClass* group_val)
 {
-    this->theBaseObject->boardObject()->clearLastDeadStone();
-
     int count;
     count =  this->killOtherColorGroup(group_val, move_val->xX() - 1, move_val->yY());
     count += this->killOtherColorGroup(group_val, move_val->xX() + 1, move_val->yY());

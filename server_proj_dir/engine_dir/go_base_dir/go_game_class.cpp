@@ -33,6 +33,7 @@ void GoGameClass::addNewMoveAndFight (GoMoveClass *move_val)
     }
 
     this->thePassReceived = 0;
+    this->theBaseObject->boardObject()->clearLastDeadStone();
     this->insertMoveToMoveList(move_val);
     this->theBaseObject->fightObject()->enterBattle(move_val);
     this->theNextColor = GolbalGoGetOppositeColor(move_val->myColor());
