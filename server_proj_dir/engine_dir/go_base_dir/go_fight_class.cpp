@@ -68,17 +68,17 @@ GoGroupClass* GoFightClass::insertStoneToGroupList (GoMoveClass* move_val)
     }
 }
 
-int GoFightClass::killOtherColorGroups(GoMoveClass* move_val, GoGroupClass* group_val)
+int GoFightClass::killOtherColorGroups(GoMoveClass* move_val, GoGroupClass* my_group_val)
 {
     int count;
-    count =  this->killOtherColorGroup(group_val, move_val->xX() - 1, move_val->yY());
-    count += this->killOtherColorGroup(group_val, move_val->xX() + 1, move_val->yY());
-    count += this->killOtherColorGroup(group_val, move_val->xX(),     move_val->yY() - 1);
-    count += this->killOtherColorGroup(group_val, move_val->xX(),     move_val->yY() + 1);
+    count =  this->killOtherColorGroup(my_group_val, move_val->xX() - 1, move_val->yY());
+    count += this->killOtherColorGroup(my_group_val, move_val->xX() + 1, move_val->yY());
+    count += this->killOtherColorGroup(my_group_val, move_val->xX(),     move_val->yY() - 1);
+    count += this->killOtherColorGroup(my_group_val, move_val->xX(),     move_val->yY() + 1);
     return count;
 }
 
-int GoFightClass::killOtherColorGroup(GoGroupClass *group, int x_val, int y_val)
+int GoFightClass::killOtherColorGroup(GoGroupClass *my_group_val, int x_val, int y_val)
 {
     GoGroupClass *his_group;
 
@@ -86,11 +86,11 @@ int GoFightClass::killOtherColorGroup(GoGroupClass *group, int x_val, int y_val)
         return 0;
     }
 
-    if (this->theBaseObject->boardObject()->theBoardArray[x_val][y_val] != group->hisColor()) {
+    if (this->theBaseObject->boardObject()->theBoardArray[x_val][y_val] != my_group_val->hisColor()) {
         return 0;
     }
 
-    his_group = this->getGroupByCoordinate(x_val, y_val, group->hisColor());
+    his_group = this->getGroupByCoordinate(x_val, y_val, my_group_val->hisColor());
     if (!his_group) {
         this->abend("killOtherColorGroup", "null his_group");
         return 0;
@@ -101,7 +101,7 @@ int GoFightClass::killOtherColorGroup(GoGroupClass *group, int x_val, int y_val)
     }
 
     int dead_count = his_group->stoneCount();
-    if ((group->stoneCount() == 1) && (his_group->stoneCount() == 1)) {
+    if ((my_group_val->stoneCount() == 1) && (his_group->stoneCount() == 1)) {
         this->markLastDeadInfo(his_group);
     }
 
@@ -111,7 +111,6 @@ int GoFightClass::killOtherColorGroup(GoGroupClass *group, int x_val, int y_val)
 
 GoGroupClass *GoFightClass::getGroupByCoordinate (int x_val, int y_val, int color_val)
 {
-    //goDebug("GoEngineObject.getGroupByCoordinate", color_val);
     GoGroupListClass *g_list;
     if ((color_val == GO_BLACK_STONE) || (color_val == GO_MARKED_DEAD_BLACK_STONE)) {
         g_list = this->blackGroupList();
@@ -119,11 +118,8 @@ GoGroupClass *GoFightClass::getGroupByCoordinate (int x_val, int y_val, int colo
         g_list = this->whiteGroupList();
     }
 
-    //goDebug("GoEngineObject.getGroupByCoordinate", "groupCount=" + g_list.groupCount());
     for (int i = 0; i < g_list->theGroupCount; i++) {
-        //goDebug("GoEngineObject.getGroupByCoordinate", "i=" + i);
         if (g_list->theGroupArray[i]->theExistMatrix[x_val][y_val]) {
-            //goDebug("GoEngineObject.getGroupByCoordinate", "i=" + i);
             return g_list->theGroupArray[i];
         }
     }
@@ -209,13 +205,22 @@ void GoFightClass::abendEngine (void)
         int y = 0;
         while (y < board_size) {
             if (this->blackGroupList()->stoneExistWithinMe(x, y)) {
+                black_stone_count += 1;
+
+                if (this->theBaseObject->boardObject()->theBoardArray[x][y] != GO_BLACK_STONE) {
+                    this->abend("abendEngine", "black stone not exist theBoardArray");
+                }
+
                 if (this->whiteGroupList()->stoneExistWithinMe(x, y)) {
                     this->abend("abendEngine", "balck exist in wrong group list");
                 }
-                black_stone_count += 1;
             }
             if (this->whiteGroupList()->stoneExistWithinMe(x, y)) {
                 white_stone_count += 1;
+
+                if (this->theBaseObject->boardObject()->theBoardArray[x][y] != GO_WHITE_STONE) {
+                    this->abend("abendEngine", "black stone not exist theBoardArray");
+                }
             }
             y += 1;
         }
