@@ -32,6 +32,11 @@ void DFabricClass::exportedparseFunction (char *data_val)
         return;
     }
 
+    if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_GET_NAME_LIST) {
+        this->processGetNameList(data_val + 1);
+        return;
+    }
+
     if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_MALLOC_SESSION) {
         this->processMallocSession(data_val + 1);
         return;
@@ -50,7 +55,7 @@ void DFabricClass::processMallocLink (char *data_val)
     char *downlink_data;
     char *data_ptr;
 
-    this->logit("processMallocLink", data_val);
+    this->debug(true, "processMallocLink", data_val);
 
     LinkClass *link = this->theFabricObject->mallocLink(data_val);
     if (!link) {
@@ -73,7 +78,7 @@ void DFabricClass::processGetLinkData (char *data_val)
     char *downlink_data;
     char *data_ptr;
 
-    this->logit("processGetLinkData", data_val);
+    this->debug(true, "processGetLinkData", data_val);
 
     LinkClass *link = this->theFabricObject->searchLink(data_val);
     if (!link) {
@@ -84,6 +89,34 @@ void DFabricClass::processGetLinkData (char *data_val)
         this->transmitFunction(downlink_data);
         return;
     }
+    downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
+    *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA;
+    *data_ptr++ = link->theNameListChanged;
+    link->theNameListChanged = 'd';
+    *data_ptr = 0;
+    this->transmitFunction(downlink_data);
+}
+
+void DFabricClass::processGetNameList (char *data_val)
+{
+    char *downlink_data;
+    char *data_ptr;
+
+    this->debug(true, "processGetNameList", data_val);
+
+    LinkClass *link = this->theFabricObject->searchLink(data_val);
+    if (!link) {
+        this->abend("processGetNameList", "link does not exist");
+        downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
+        *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_NAME_LIST;
+        strcpy(data_ptr, "link does not exist");
+        this->transmitFunction(downlink_data);
+        return;
+    }
+    downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
+    *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_NAME_LIST;
+    *data_ptr = 0;
+    this->transmitFunction(downlink_data);
 }
 
 void DFabricClass::processMallocSession (char *data_val)
@@ -92,7 +125,7 @@ void DFabricClass::processMallocSession (char *data_val)
     char *uplink_data;
     char *data_ptr;
 
-    this->logit("processMallocSession", data_val);
+    this->debug(true, "processMallocSession", data_val);
 
     SessionClass *session = this->theFabricObject->searchLinkAndMallocSession(data_val);
     if (!session) {

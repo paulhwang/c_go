@@ -19,7 +19,8 @@ class DFabricClass {
 
     void startNetServer(void);
     void processMallocLink(char *data_val);
-    void processGetLinkData (char *data_val);
+    void processGetLinkData(char *data_val);
+    void processGetNameList(char *data_val);
     void processMallocSession(char *data_val);
     void processTransferSessionData(char *data_val);
 

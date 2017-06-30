@@ -11,7 +11,8 @@
   
 LinkClass::LinkClass (void *list_mgr_object_val, FabricClass *fabric_object_val, char const* link_name_val):
         ListEntryClass(list_mgr_object_val),
-        theFabricObject(fabric_object_val)
+        theFabricObject(fabric_object_val),
+        theNameListChanged('D')
 {
     if (strlen(link_name_val) <= LINK_CLASS_LINK_NAME_BUF_SIZE) {
         strcpy(this->theLinkName, link_name_val);
