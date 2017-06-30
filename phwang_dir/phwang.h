@@ -26,6 +26,7 @@ void phwangEncodeIdIndex(char *str_val, int id_val, int id_size_val, int index_v
 void phwangDecodeIdIndex(char *str_val, int *id_ptr_val, int id_size_val, int *index_ptr_val, int index_size_val);
 
 /* queue */
+void *phwangMallocSuspendedQueue(int size_val);
 void *phwangMallocQueue(int size_val);
 void  phwangFreeQueue(void *queue_val);
 void  phwangEnqueue(void *queue_val, void *data_val);

@@ -72,6 +72,18 @@ void DFabricClass::processGetLinkData (char *data_val)
 {
     char *downlink_data;
     char *data_ptr;
+
+    this->logit("processGetLinkData", data_val);
+
+    LinkClass *link = this->theFabricObject->searchLink(data_val);
+    if (!link) {
+        this->abend("processGetLinkData", "link does not exist");
+        downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
+        *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA;
+        strcpy(data_ptr, "link does not exist");
+        this->transmitFunction(downlink_data);
+        return;
+    }
 }
 
 void DFabricClass::processMallocSession (char *data_val)

@@ -20,8 +20,8 @@ TpTransferClass::TpTransferClass (int socket_val,
     this->theReceiveCallback = receive_callback_val;
     this->theReceiveObject = receive_object_val;
 
-    this->theReceiveQueue = phwangMallocQueue(TP_TRANSFER_CLASS_RECEIVE_QUEUE_SIZE);
-    this->theTransmitQueue = phwangMallocQueue(TP_TRANSFER_CLASS_TRANSMIT_QUEUE_SIZE);
+    this->theReceiveQueue = phwangMallocSuspendedQueue(TP_TRANSFER_CLASS_RECEIVE_QUEUE_SIZE);
+    this->theTransmitQueue = phwangMallocSuspendedQueue(TP_TRANSFER_CLASS_TRANSMIT_QUEUE_SIZE);
 
     this->debug(true, "TpTransferClass", "init");
 }

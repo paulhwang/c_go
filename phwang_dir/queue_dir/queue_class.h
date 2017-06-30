@@ -13,7 +13,7 @@ class SuspendClass;
 class QueueClass
 {
   //enum GETAC_MARKER_DEFINE_ marker_head;
-
+    int theDoSuspend;
     int theQueueSize;
     QueueEntryClass *theQueueHead;
     QueueEntryClass *theQueueTail;
@@ -46,7 +46,7 @@ protected:
     void *dequeueData(void);
 
 public:
-    QueueClass(int max_size_val);
+    QueueClass(int do_suspend_val, int max_size_val);
     ~QueueClass(void);
     char const *objectName(void) {return "QueueClass";}
 

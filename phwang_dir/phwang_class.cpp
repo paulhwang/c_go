@@ -89,9 +89,9 @@ void PhwangClass::decodeIdIndex (char *str_val, int *id_ptr_val, int id_size_val
     *index_ptr_val = decodeNumber(str_val + id_size_val, index_size_val);
 }
 
-void *PhwangClass::mallocQueue (int max_size_val)
+void *PhwangClass::mallocQueue (int do_suspend_val, int max_size_val)
 {
-    QueueClass *queue = new QueueClass(max_size_val);
+    QueueClass *queue = new QueueClass(do_suspend_val, max_size_val);
     return queue;
 }
 

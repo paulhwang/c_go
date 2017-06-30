@@ -55,9 +55,14 @@ void phwangDecodeIdIndex (char *str_val, int *id_ptr_val, int id_size_val, int *
 }
 
 /* queue */
+void *phwangMallocSuspendedQueue (int size_val)
+{
+    return thePhwangObject->mallocQueue(1, size_val);
+}
+
 void *phwangMallocQueue (int size_val)
 {
-    return thePhwangObject->mallocQueue(size_val);
+    return thePhwangObject->mallocQueue(0, size_val);
 }
 
 void phwangFreeQueue (void *queue_val)

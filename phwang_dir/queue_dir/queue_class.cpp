@@ -16,11 +16,18 @@
 //#include "getac_def_component.h"
 //#include "getac_def_marker.h"
 
-QueueClass::QueueClass(int max_size_val)
+QueueClass::QueueClass(int do_suspend_val, int max_size_val):
+    theDoSuspend(do_suspend_val),
+    theMaxQueueSize(max_size_val)
+
 {
     memset(this, 0, sizeof(*this));
-    this->theMaxQueueSize = max_size_val;
-    this->theSuspendObject = new SuspendClass();
+    if (this->theDoSuspend) {
+        this->theSuspendObject = new SuspendClass();
+    }
+    else {
+        this->theSuspendObject = 0;
+    }
     this->theMutex = (pthread_mutex_t *) malloc(sizeof(pthread_mutex_t));
     pthread_mutex_init(this->theMutex, NULL);
 
@@ -32,7 +39,9 @@ QueueClass::~QueueClass(void)
     if (this->theQueueSize) {
         //abend(GATEWAY_LOG_TYPE_RFID, MTC_ERR_MISC, __LINE__, __FUNCTION__);
     }
-    delete this->theSuspendObject;
+    if (this->theSuspendObject) {
+        delete this->theSuspendObject;
+    }
     free(this->theMutex);
 }
 
@@ -54,7 +63,9 @@ void QueueClass::enqueueData (void *data_val)
         entry->data = data_val;
     }
     this->enqueueEntry(entry);
-    this->theSuspendObject->signal();
+    if (this->theSuspendObject) {
+        this->theSuspendObject->signal();
+    }
 }
 
 void *QueueClass::dequeueData (void)
@@ -69,7 +80,9 @@ void *QueueClass::dequeueData (void)
             return data;
         }
         else {
-            this->theSuspendObject->wait();
+            if (this->theSuspendObject) {
+                this->theSuspendObject->wait();
+            }
         }
     }
 }
