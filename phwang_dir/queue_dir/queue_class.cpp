@@ -21,13 +21,17 @@ QueueClass::QueueClass(int do_suspend_val, int max_size_val):
     theMaxQueueSize(max_size_val)
 
 {
-    memset(this, 0, sizeof(*this));
+    if (!this->theMaxQueueSize) {
+        this->theMaxQueueSize = QUEUE_CLASS_DEFAULT_MAX_QUEUE_SIZE;
+    }
+
     if (this->theDoSuspend) {
         this->theSuspendObject = new SuspendClass();
     }
     else {
         this->theSuspendObject = 0;
     }
+
     this->theMutex = (pthread_mutex_t *) malloc(sizeof(pthread_mutex_t));
     pthread_mutex_init(this->theMutex, NULL);
 

@@ -12,6 +12,7 @@ class SuspendClass;
 
 class QueueClass
 {
+#define QUEUE_CLASS_DEFAULT_MAX_QUEUE_SIZE 256
   //enum GETAC_MARKER_DEFINE_ marker_head;
     int theDoSuspend;
     int theQueueSize;
