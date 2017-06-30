@@ -22,7 +22,7 @@ LinkClass::LinkClass (void *list_mgr_object_val, FabricClass *fabric_object_val,
     }
     this->theSessionListMgrObject = phwangListMgrMalloc("SESSION", SESSION_MGR_PROTOCOL_SESSION_ID_SIZE, SESSION_MGR_PROTOCOL_SESSION_INDEX_SIZE, 300);
     this->thePendingSessionSetupQueue = phwangMallocQueue(0);
-    
+
     this->debug(true, "LinkClass", this->linkIdIndex());
 }
 
@@ -37,13 +37,25 @@ SessionClass *LinkClass::mallocSession (void)
     return session;
 }
 
-void LinkClass::logit (char const* str0_val, char const* str1_val) {
+
+void LinkClass::setPendingSessionSetup (char *session_id_index_val, char *topic_data_val)
+{
+    char *buf, *data_ptr;
+
+    buf = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE);
+    memcpy(data_ptr, session_id_index_val, SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE);
+    data_ptr += SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE;
+    strcpy(data_ptr, topic_data_val);
+    phwangEnqueue(this->thePendingSessionSetupQueue, buf);
+}
+
+void LinkClass::logit (char const *str0_val, char const *str1_val) {
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", this->objectName(), str0_val);
     phwangLogit(s, str1_val);
 }
 
-void LinkClass::abend (char const* str0_val, char const* str1_val) {
+void LinkClass::abend (char const *str0_val, char const *str1_val) {
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", this->objectName(), str0_val);
     phwangAbend(s, str1_val);
