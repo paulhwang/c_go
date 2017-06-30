@@ -27,6 +27,11 @@ void DFabricClass::exportedparseFunction (char *data_val)
         return;
     }
 
+    if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_GET_LINK_DATA) {
+        this->processGetLinkData(data_val + 1);
+        return;
+    }
+
     if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_MALLOC_SESSION) {
         this->processMallocSession(data_val + 1);
         return;
@@ -61,6 +66,12 @@ void DFabricClass::processMallocLink (char *data_val)
     *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_MALLOC_LINK;
     strcpy(data_ptr, link->linkIdIndex());
     this->transmitFunction(downlink_data);
+}
+
+void DFabricClass::processGetLinkData (char *data_val)
+{
+    char *downlink_data;
+    char *data_ptr;
 }
 
 void DFabricClass::processMallocSession (char *data_val)
@@ -109,7 +120,7 @@ void DFabricClass::processTransferSessionData (char *data_val)
     char *uplink_data;
     char *data_ptr;
 
-    this->debug(true, "processPutSessionData", data_val);
+    this->debug(true, "processTransferSessionData", data_val);
 
     SessionClass *session = this->theFabricObject->serachLinkAndSession(data_val);
     if (!session) {
@@ -117,7 +128,7 @@ void DFabricClass::processTransferSessionData (char *data_val)
         *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_TRANSFER_SESSION_DATA;
         strcpy(data_ptr, "null session");
         this->transmitFunction(downlink_data);
-        this->abend("processPutSessionData", "null session");
+        this->abend("processTransferSessionData", "null session");
         return;
     }
 
@@ -127,7 +138,7 @@ void DFabricClass::processTransferSessionData (char *data_val)
         *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_TRANSFER_SESSION_DATA;
         strcpy(data_ptr, "null room");
         this->transmitFunction(downlink_data);
-        this->abend("processPutSessionData", "null room");
+        this->abend("processTransferSessionData", "null room");
         return;
     }
 
