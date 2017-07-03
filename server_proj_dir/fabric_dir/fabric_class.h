@@ -27,6 +27,9 @@ class FabricClass {
 protected:
     friend class UFabricClass;
     friend class DFabricClass;
+    friend class NameListClass;
+
+    void *linkListMgrObject(void) {return this->theLinkListMgrObject;}
 
     UFabricClass *uFabricObject(void) {return this->theUFabricObject;}
     DFabricClass *dFabricObject(void) {return this->theDFabricObject;}

@@ -17,6 +17,7 @@ class ListMgrClass {
     int theIdIndexSize;
     int theGlobalEntryId;
     int theMaxIdIndexTableIndex;
+    int theMaxIndex;
     ListEntryClass *theEntryTableArray[LIST_MGR_ID_INDEX_ARRAY_SIZE];
 
     int allocEntryId(void);

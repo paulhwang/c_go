@@ -13,7 +13,8 @@ ListMgrClass::ListMgrClass (char const *caller_name_val, int id_size_val, int in
         theIdSize(id_size_val),
         theIndexSize(index_size_val),
         theGlobalEntryId(global_entry_id_val),
-        theMaxIdIndexTableIndex(0)
+        theMaxIdIndexTableIndex(0),
+        theMaxIndex(0)
 {
     this->debug(true, "ListMgrClass", "init");
 }
@@ -36,6 +37,9 @@ int ListMgrClass::allocEntryIndex (void)
     int index = 0;
     while (index < LIST_MGR_ID_INDEX_ARRAY_SIZE) {
         if (!this->theEntryTableArray[index]) {
+            if (index > this->theMaxIndex) {
+                this->theMaxIndex = index;
+            }
             return index;
         }
         index++;
