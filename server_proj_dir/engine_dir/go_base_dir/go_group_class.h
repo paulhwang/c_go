@@ -19,6 +19,7 @@ class GoGroupClass {
     int theStoneCount;
     int theMyColor;
     int theHisColor;
+    int theExistMatrix[19][19];
 
     void resetMarkedBoardObjectData();
 
@@ -32,6 +33,7 @@ public:
     char const *objectName() {return "GoGroupClass";}
 
     GoGroupListClass *groupListObject(void) {return this->theGroupListObject;}
+    void setGroupListObject(GoGroupListClass *group_list_val) {this->theGroupListObject = group_list_val;}
     int maxX(void) {return this->theMaxX;}
     int minX(void) {return this->theMinX;}
     int maxY(void) {return this->theMaxY;}
@@ -41,7 +43,7 @@ public:
     int stoneCount(void) {return this->theStoneCount;}
     int myColor(void) {return this->theMyColor;}
     int hisColor(void) {return this->theHisColor;}
-    void setGroupListObject(GoGroupListClass *group_list_val) {this->theGroupListObject = group_list_val;}
+    int existMatrix(int x_val, int y_val) {return this->theExistMatrix[x_val][y_val];}
 
     void insertStoneToGroup(int x_val, int y_val, int dead_val);
     int isCandidateGroup(int x_val, int y_val);
@@ -50,6 +52,4 @@ public:
     void removeDeadStoneFromBoard(void);
     void abendGroup(void);
     void abendOnGroupConflict(GoGroupClass *other_group_val);
-
-    int theExistMatrix[19][19];
 };

@@ -98,7 +98,7 @@ int GoGroupListClass::stoneExistWithinMe (int x_val, int y_val)
     int i = 0;
     while (i < this->theGroupCount) {
         GoGroupClass *group = this->theGroupArray[i];
-        if (group->theExistMatrix[x_val][y_val]) {
+        if (group->existMatrix(x_val, y_val)) {
             return true;
         }
         i += 1;

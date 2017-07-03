@@ -147,7 +147,7 @@ GoGroupClass *GoFightClass::getGroupByCoordinate (int x_val, int y_val, int colo
     }
 
     for (int i = 0; i < g_list->groupCount(); i++) {
-        if (g_list->groupArray(i)->theExistMatrix[x_val][y_val]) {
+        if (g_list->groupArray(i)->existMatrix(x_val, y_val)) {
             return g_list->groupArray(i);
         }
     }
@@ -174,7 +174,7 @@ void GoFightClass::markLastDeadInfo (GoGroupClass *group_val)
     if (group_val->maxY() != group_val->minY()) {
          this->abend("markLastDeadInfo", "bad y");
     }
-    if (!group_val->theExistMatrix[group_val->maxX()][group_val->maxY()]) {
+    if (!group_val->existMatrix(group_val->maxX(), group_val->maxY())) {
         this->abend("markLastDeadInfo", "exist_matrix");
     }
 }
