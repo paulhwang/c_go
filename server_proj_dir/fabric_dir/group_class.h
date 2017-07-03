@@ -24,20 +24,18 @@ class GroupClass : public ListEntryClass {
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
 
-protected:
-    friend class DFabricClass;
-    friend class UFabricClass;
-    friend class GroupMgrClass;
-
-    char *groupIdIndex(void) {return this->theEntryIdIndex;}
-    char *roomIdIndex(void) {return this->theRoomIdIndex;}
-    void setRoomIdIndex(char *val) {memcpy(this->theRoomIdIndex, val, ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);}
-    void insertSession(SessionClass *session_object_val) {phwangArrayMgrInsertElement(this->theSessionArrayMgr, session_object_val);}
-    void removeSession(SessionClass *session_object_val) {phwangArrayMgrRemoveElement(this->theSessionArrayMgr, session_object_val);
-}
-
 public:
     GroupClass(void *list_mgr_object_val, FabricClass *fabric_object_val, char *theme_data_val);
     ~GroupClass(void);
     char const* objectName(void) {return "GroupClass";}
+
+    char *groupIdIndex(void) {return this->theEntryIdIndex;}
+    char *roomIdIndex(void) {return this->theRoomIdIndex;}
+    void *sessionArrayMgr(void) {return this->theSessionArrayMgr;}
+    SessionClass **sessionTableArray(void) {return this->theSessionTableArray;}
+    void setSessionTableArray(SessionClass **val) {this->theSessionTableArray = val;}
+
+    void setRoomIdIndex(char *val) {memcpy(this->theRoomIdIndex, val, ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);}
+    void insertSession(SessionClass *session_object_val) {phwangArrayMgrInsertElement(this->theSessionArrayMgr, session_object_val);}
+    void removeSession(SessionClass *session_object_val) {phwangArrayMgrRemoveElement(this->theSessionArrayMgr, session_object_val);}
 };

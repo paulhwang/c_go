@@ -43,8 +43,8 @@ void UFabricClass::processMallocRoomResponse(char *data_val)
     GroupClass *group = this->theFabricObject->searchGroup(data_val);
     if (group) {
         group->setRoomIdIndex(data_val + GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE);
-        group->theSessionTableArray = (SessionClass **) phwangArrayMgrGetArrayTable(group->theSessionArrayMgr, &session_array_size);
-        SessionClass *session = group->theSessionTableArray[0];
+        group->setSessionTableArray((SessionClass **) phwangArrayMgrGetArrayTable(group->sessionArrayMgr(), &session_array_size));
+        SessionClass *session = group->sessionTableArray()[0];
         output_data = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
         output_data[0] = WEB_FABRIC_PROTOCOL_RESPOND_IS_MALLOC_SESSION;
         strcpy(output_data + 1, session->sessionIdIndex());
@@ -68,13 +68,13 @@ void UFabricClass::processTransferDataResponse(char *data_val)
     data_val += GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE;
 
     int i = 0;
-    group->theSessionTableArray = (SessionClass **) phwangArrayMgrGetArrayTable(group->theSessionArrayMgr, &session_array_size);
+    group->setSessionTableArray((SessionClass **) phwangArrayMgrGetArrayTable(group->sessionArrayMgr(), &session_array_size));
     while (i < session_array_size) {
-        SessionClass *session = group->theSessionTableArray[i];
+        SessionClass *session = group->sessionTableArray()[i];
         if (session) {
             downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
             *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_TRANSFER_SESSION_DATA;
-            memcpy(data_ptr, session->theLinkObject->linkIdIndex(), LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE);
+            memcpy(data_ptr, session->linkObject()->linkIdIndex(), LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE);
             data_ptr += LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE;
             memcpy(data_ptr, session->sessionIdIndex(), SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE);
             data_ptr += SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE;
