@@ -11,6 +11,7 @@
 #include "group_class.h"
 #include "link_class.h"
 #include "name_list_class.h"
+#include "aaa.h"
 
 FabricClass::FabricClass (void)
 {
@@ -45,6 +46,22 @@ void FabricClass::freeLink (LinkClass *link_object_val)
     }
     link_object_val->~LinkClass();
     this->theNameListObject->updateNameList();
+}
+
+LinkClass *FabricClass::searchLinkByName (char *name_val)
+{
+    int max_index = phwnagListMgrGetMaxIndex(this->theLinkListMgrObject);
+    LinkClass **link_entry_array = (LinkClass **) phwangListMgrGetEntryTableArray(this->theLinkListMgrObject);
+
+    for (int i = max_index ; i >= 0; i--) {
+        if (link_entry_array[i]) {
+            if (!strcmp(link_entry_array[i]->theLinkName, name_val)) {
+                printf("searchLinkByName %s===========23\n", link_entry_array[i]->theLinkName);
+                return link_entry_array[i];
+            }
+        }
+    }
+    return 0;
 }
 
 GroupClass *FabricClass::mallocGroup (char *theme_data_val)

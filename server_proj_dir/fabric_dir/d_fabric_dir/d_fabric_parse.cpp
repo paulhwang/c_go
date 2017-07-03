@@ -165,7 +165,28 @@ void DFabricClass::processMallocSession (char *data_val)
     data_ptr += GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE;
     strcpy(data_ptr, data_val);
     this->theFabricObject->uFabricObject()->transmitFunction(uplink_data);
+    data_val += 8;/////////////////////////////////////////////////////////////
+
+    if (strcmp(data_val, session->linkObject()->linkName())) {
+        LinkClass *his_link = this->theFabricObject->searchLinkByName(data_val);
+        if (!his_link) {
+            this->abend("processMallocSession", "null his_link");
+            ////////////////TBD
+            return;
+        }
+
+        SessionClass *his_session = his_link->mallocSession();
+        if (!his_session) {
+            this->abend("processMallocSession", "null his_session");
+            ////////////////TBD
+            return;
+        }
+
+        group->insertSession(his_session);
+        his_session->bindGroup(group);
+    }
 }
+
 
 void DFabricClass::processTransferSessionData (char *data_val)
 {

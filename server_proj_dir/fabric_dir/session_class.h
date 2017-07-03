@@ -26,6 +26,7 @@ protected:
     friend class DFabricClass;
 
     char *sessionIdIndex(void) {return this->theEntryIdIndex;}
+    LinkClass *linkObject(void) {return this->theLinkObject;}
     GroupClass *groupObject(void) {return this->theGroupObject;}
 
 public:

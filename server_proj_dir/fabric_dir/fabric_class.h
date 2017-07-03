@@ -38,12 +38,14 @@ protected:
     LinkClass *mallocLink(char const *my_name_val);
     void freeLink(LinkClass *link_object_val);
     LinkClass *searchLink(char *data_val) {return (LinkClass *) phwangListMgrSearchEntry(this->theLinkListMgrObject, data_val);}
+    LinkClass *searchLinkByName(char *name_val);
 
     GroupClass *mallocGroup(char *theme_data_val);
     void freeGroup(GroupClass *group_object_val);
     GroupClass *searchGroup(char *data_val) {return (GroupClass *) phwangListMgrSearchEntry(this->theGroupListMgrObject, data_val);}
 
-    SessionClass *searchLinkAndMallocSession(char *my_name_val);
+    SessionClass *searchLinkAndMallocSession(char *data_val);
+    SessionClass *searchLinkByNameAndMallocSession(char *name_val);
     SessionClass *serachLinkAndSession(char *data_val);
 
 public:
