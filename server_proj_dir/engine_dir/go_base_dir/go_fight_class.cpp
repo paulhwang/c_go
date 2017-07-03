@@ -114,7 +114,7 @@ int GoFightClass::killOtherColorGroup(GoGroupClass *my_group_val, int x_val, int
         return 0;
     }
 
-    if (this->theBaseObject->boardObject()->theBoardArray[x_val][y_val] != my_group_val->hisColor()) {
+    if (this->theBaseObject->boardObject()->boardArray(x_val, y_val) != my_group_val->hisColor()) {
         return 0;
     }
 
@@ -230,19 +230,19 @@ void GoFightClass::abendEngine (void)
 
     for (int x = 0; x < board_size; x++) {
         for (int y = 0; y < board_size; y++) {
-            if (this->theBaseObject->boardObject()->theBoardArray[x][y] == GO_BLACK_STONE) {
+            if (this->theBaseObject->boardObject()->boardArray(x, y) == GO_BLACK_STONE) {
                 black_stone_count++;
                 if (!this->blackGroupList()->stoneExistWithinMe(x, y)) {
                     this->abend("abendEngine", "black stone does not exist in blackGroupList");
                 }
             }
-            else if (this->theBaseObject->boardObject()->theBoardArray[x][y] == GO_WHITE_STONE) {
+            else if (this->theBaseObject->boardObject()->boardArray(x, y) == GO_WHITE_STONE) {
                 white_stone_count++;
                 if (!this->whiteGroupList()->stoneExistWithinMe(x, y)) {
                     this->abend("abendEngine", "white stone does not exist in whiteGroupList");
                 }
             }
-            else if (this->theBaseObject->boardObject()->theBoardArray[x][y] == GO_EMPTY_STONE) {
+            else if (this->theBaseObject->boardObject()->boardArray(x, y) == GO_EMPTY_STONE) {
             }
             else {
                 this->abend("abendEngine", "bad color in theBoardArray");
@@ -257,7 +257,7 @@ void GoFightClass::abendEngine (void)
             if (this->blackGroupList()->stoneExistWithinMe(x, y)) {
                 black_stone_count1++;
 
-                if (this->theBaseObject->boardObject()->theBoardArray[x][y] != GO_BLACK_STONE) {
+                if (this->theBaseObject->boardObject()->boardArray(x, y) != GO_BLACK_STONE) {
                     this->abend("abendEngine", "black stone does not exist in theBoardArray");
                 }
 
@@ -268,7 +268,7 @@ void GoFightClass::abendEngine (void)
             if (this->whiteGroupList()->stoneExistWithinMe(x, y)) {
                 white_stone_count1++;
 
-                if (this->theBaseObject->boardObject()->theBoardArray[x][y] != GO_WHITE_STONE) {
+                if (this->theBaseObject->boardObject()->boardArray(x, y) != GO_WHITE_STONE) {
                     this->abend("abendEngine", "black stone does not exist in theBoardArray");
                 }
             }

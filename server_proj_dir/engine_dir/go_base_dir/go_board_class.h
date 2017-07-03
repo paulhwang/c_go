@@ -24,12 +24,12 @@ class GoBoardClass {
     void logit(char const *str0_val, char const *str1_val);
     void abend(char const *str0_val, char const *str1_val);
 
-protected:
-    friend class GoGameClass;
-    friend class GoFightClass;
-    friend class GoPortClass;
-    friend class GoGroupClass;
+public:
+    GoBoardClass(GoBaseClass *the_base_object);
+    ~GoBoardClass(void) {}
+    char const *objectName(void) {return "GoBoardClass";}
 
+    int boardArray(int x_val, int y_val) {return this->theBoardArray[x_val][y_val];}
 
     void setBoardArray(int x_val, int y_val, int data_val) {this->theBoardArray[x_val][y_val] = data_val;}
     void addBlackCapturedStones(int val) {this->theBlackCapturedStones += val;}
@@ -41,9 +41,4 @@ protected:
     void addStoneToBoard(int x_val, int y_val, int color_val);
     char *encodeBoard(void);
     int stoneHasAir(int x_val, int y_val);
-
-public:
-    GoBoardClass(GoBaseClass *the_base_object);
-    ~GoBoardClass(void) {}
-    char const *objectName(void) {return "GoBoardClass";}
 };
