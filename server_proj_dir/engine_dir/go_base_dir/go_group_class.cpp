@@ -12,7 +12,7 @@
 GoGroupClass::GoGroupClass (GoGroupListClass *group_list_object_val):
     theGroupListObject(group_list_object_val),
     theIndexNumber(theGroupListObject->groupCount()),
-    theMyColor(theGroupListObject->theMyColor),
+    theMyColor(theGroupListObject->myColor()),
     theStoneCount(0)
 {
     this->theHisColor = (this->theMyColor == GO_EMPTY_STONE)

@@ -12,6 +12,9 @@ class GoGroupListClass
 {
 #define GO_GROUP_LIST_CLASS_GROUP_ARRAY_SIZE 400
     GoFightClass *theFightObject;
+    int theIndexNumber;
+    int theMyColor;
+    int theHisColor;
     int theIsDead;
     char const *theBigStoneColor;
     char const *theSmallStoneColor;
@@ -33,6 +36,7 @@ public:
     char const *objectName(void) {return "GoGroupListClass";}
 
     GoFightClass *fightObject(void) {return this->theFightObject;}
+    int myColor(void) {return this->theMyColor;}
     int groupCount(void) {return this->theGroupCount;}
 
     int totalStoneCount(void);
@@ -43,8 +47,5 @@ public:
     int stoneExistWithinMe(int x_val, int y_val);
     void abendGroupList(void);
 
-    int theIndexNumber;
-    int theMyColor;
-    int theHisColor;
     GoGroupClass *theGroupArray[GO_GROUP_LIST_CLASS_GROUP_ARRAY_SIZE];
 };
