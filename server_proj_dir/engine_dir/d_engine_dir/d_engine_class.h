@@ -22,17 +22,13 @@ class DEngineClass {
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
 
-protected:
-    friend class GoPortClass;
-    friend class BaseMgrClass;
-
-    void transmitFunction(char *data_val);
-    void processTransferDataResponse(GoBaseClass *base_object_val, char *data_val);
-
 public:
     DEngineClass(EngineClass *engine_object_val);
     ~DEngineClass(void);
     char const* objectName(void) {return "DEngineClass";}
+
+    void transmitFunction(char *data_val);
+    void processTransferDataResponse(GoBaseClass *base_object_val, char *data_val);
 
     /* exports */
     void exportedparseFunction(char *data_val);

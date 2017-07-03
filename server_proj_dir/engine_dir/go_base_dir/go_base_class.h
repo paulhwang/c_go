@@ -35,14 +35,10 @@ class GoBaseClass : public ListEntryClass {
     void logit(char const *str0_val, char const *str1_val);
     void abend(char const *str0_val, char const *str1_val);
 
-protected:
-    friend class DEngineClass;
-    friend class GoGameClass;
-    friend class GoFightClass;
-    friend class GoConfigClass;
-    friend class GoBoardClass;
-    friend class GoPortClass;
-    friend class GoGroupClass;
+public:
+    GoBaseClass(void *list_mgr_object_val, EngineClass *engine_object_val, char *config_info_val);
+    ~GoBaseClass(void);
+    char const *objectName(void) {return "GoBaseClass";}
 
     EngineClass *engineObject(void) {return this->theEngineObject;}
     GoFightClass *fightObject(void) {return this->theFightObject;}
@@ -50,14 +46,10 @@ protected:
     GoPortClass *portObject(void) {return this->thePortObject;}
     GoConfigClass *configObject(void) {return this->theConfigObject;}
     GoGameClass *gameObject(void) {return this->theGameObject;}
+    char *roomIdIndex(void) {return this->theRoomIdIndex;}
 
     char *goBaseIdIndex(void) {return this->theEntryIdIndex;}
     void setRoomIdIndex(char *room_id_index_val) {memcpy(this->theRoomIdIndex, room_id_index_val, ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE); this->theRoomIdIndex[ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE] = 0;}
-
-public:
-    GoBaseClass(void *list_mgr_object_val, EngineClass *engine_object_val, char *config_info_val);
-    ~GoBaseClass(void);
-    char const *objectName(void) {return "GoBaseClass";}
 
     void goBaseLogit(char const *str0_val, char const *str1_val) {phwangLogit(str0_val, str1_val);}
     void goBaseAbend(char const *str0_val, char const *str1_val) {phwangAbend(str0_val, str1_val);}

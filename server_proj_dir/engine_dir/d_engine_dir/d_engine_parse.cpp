@@ -74,7 +74,7 @@ void DEngineClass::processTransferDataResponse(GoBaseClass *base_object_val, cha
 
     downlink_data = data_ptr = (char *) malloc(BASE_MGR_DATA_BUFFER_SIZE + 4);
     *data_ptr++ = THEME_ENGINE_PROTOCOL_RESPOND_IS_TRANSFER_DATA;
-    memcpy(data_ptr, base_object_val->theRoomIdIndex, ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);
+    memcpy(data_ptr, base_object_val->roomIdIndex(), ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);
     data_ptr += ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE;
     strcpy(data_ptr, data_val);
     this->transmitFunction(downlink_data);
