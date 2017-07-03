@@ -11,7 +11,7 @@
   
 NameListClass::NameListClass (FabricClass *fabric_object_val):
 	theFabricObject(fabric_object_val),
-    theNameListIndex(0)
+    theNameListTag(0)
 {
 
     this->debug(true, "NameListClass", "init");
@@ -29,9 +29,18 @@ void NameListClass::updateNameList(void)
     char *ptr = this->theNameList;
     int name_len;
 
+    this->theNameListTag++;
+    if (this->theNameListTag == 1000) {
+        this->theNameListTag = 1;
+    }
+
     for (int i = 0 ; i <= max_index; i++) {
         if (link_entry_array[i]) {
-            if (ptr != this->theNameList) {
+            if (ptr == this->theNameList) {
+                phwangEncodeNumber(ptr, this->theNameListTag, 3);
+                ptr += 3;
+            }
+            else {
                 *ptr++ = ',';
             }
             *ptr++ = '"';
@@ -43,14 +52,13 @@ void NameListClass::updateNameList(void)
     }
     *ptr = 0;
 
-	this->theNameListIndex++;
 
-	this->debug(true, "updateNameList", this->theNameList);
+    this->debug(true, "updateNameList", this->theNameList);
 }
 
-char *NameListClass::getNameList(int index_val)
+char *NameListClass::getNameList(int tag_val)
 {
-	if (this->theNameListIndex == index_val) {
+	if (this->theNameListTag == tag_val) {
 		return 0;
 	}
 	return this->theNameList;
