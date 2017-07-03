@@ -38,7 +38,6 @@ SessionClass *LinkClass::mallocSession (void)
     return session;
 }
 
-
 void LinkClass::setPendingSessionSetup (char *session_id_index_val, char *topic_data_val)
 {
     char *buf, *data_ptr;
