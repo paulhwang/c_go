@@ -11,10 +11,12 @@ class DFabricClass;
 class LinkClass;
 class GroupClass;
 class SessionClass;
+class NameListClass;
 
 class FabricClass {
     UFabricClass *theUFabricObject;
     DFabricClass *theDFabricObject;
+    NameListClass *theNameListObject;
     void *theLinkListMgrObject;
     void *theGroupListMgrObject;
 
