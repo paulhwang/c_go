@@ -11,7 +11,7 @@
 
 GoGroupClass::GoGroupClass (GoGroupListClass *group_list_object_val):
     theGroupListObject(group_list_object_val),
-    theIndexNumber(theGroupListObject->theGroupCount),
+    theIndexNumber(theGroupListObject->groupCount()),
     theMyColor(theGroupListObject->theMyColor),
     theStoneCount(0)
 {
