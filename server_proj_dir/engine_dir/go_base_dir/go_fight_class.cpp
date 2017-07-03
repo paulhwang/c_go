@@ -166,15 +166,15 @@ void GoFightClass::removeDeadGroup (GoGroupClass *group)
 
 void GoFightClass::markLastDeadInfo (GoGroupClass *group_val)
 {
-    this->theBaseObject->boardObject()->setLastDeadStone(group_val->theMaxX, group_val->theMaxY);
+    this->theBaseObject->boardObject()->setLastDeadStone(group_val->maxX(), group_val->maxY());
 
-    if (group_val->theMaxX != group_val->theMinX) {
+    if (group_val->maxX() != group_val->minX()) {
         this->abend("markLastDeadInfo", "bad x");
     }
-    if (group_val->theMaxY != group_val->theMinY) {
+    if (group_val->maxY() != group_val->minY()) {
          this->abend("markLastDeadInfo", "bad y");
     }
-    if (!group_val->theExistMatrix[group_val->theMaxX][group_val->theMaxY]) {
+    if (!group_val->theExistMatrix[group_val->maxX()][group_val->maxY()]) {
         this->abend("markLastDeadInfo", "exist_matrix");
     }
 }

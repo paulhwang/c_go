@@ -10,6 +10,10 @@ class GoGroupListClass;
 
 class GoGroupClass {
     GoGroupListClass *theGroupListObject;
+    int theMaxX;
+    int theMinX;
+    int theMaxY;
+    int theMinY;
     int theDeadMatrix[19][19];
     int theIndexNumber;
     int theStoneCount;
@@ -28,6 +32,10 @@ public:
     char const *objectName() {return "GoGroupClass";}
 
     GoGroupListClass *groupListObject(void) {return this->theGroupListObject;}
+    int maxX(void) {return this->theMaxX;}
+    int minX(void) {return this->theMinX;}
+    int maxY(void) {return this->theMaxY;}
+    int minY(void) {return this->theMinY;}
     int indexNumber(void) {return this->theIndexNumber;}
     void setIndexNumber(int val) {this->theIndexNumber = val;}
     int stoneCount(void) {return this->theStoneCount;}
@@ -43,9 +51,5 @@ public:
     void abendGroup(void);
     void abendOnGroupConflict(GoGroupClass *other_group_val);
 
-    int theMaxX;
-    int theMinX;
-    int theMaxY;
-    int theMinY;
     int theExistMatrix[19][19];
 };
