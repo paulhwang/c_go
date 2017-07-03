@@ -93,8 +93,7 @@ void DFabricClass::processGetLinkData (char *data_val)
     downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
     *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA;
     phwangEncodeNumber(data_ptr, this->theFabricObject->nameListObject()->nameListTag(), NAME_LIST_CLASS_NAME_LIST_TAG_SIZE);
-    *data_ptr++ = link->theNameListChanged;
-    link->theNameListChanged = 'd';
+    data_ptr += NAME_LIST_CLASS_NAME_LIST_TAG_SIZE;
     *data_ptr = 0;
     this->transmitFunction(downlink_data);
 }
@@ -115,9 +114,16 @@ void DFabricClass::processGetNameList (char *data_val)
         this->transmitFunction(downlink_data);
         return;
     }
+
+    int name_list_tag = phwangDecodeNumber(data_val, NAME_LIST_CLASS_NAME_LIST_TAG_SIZE);
+    data_val += 3;
+    char *name_list = this->theFabricObject->nameListObject()->getNameList(name_list_tag);
+
     downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
     *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_NAME_LIST;
-    *data_ptr = 0;
+    if (name_list) {
+        strcpy(data_ptr, name_list);
+    }
     this->transmitFunction(downlink_data);
 }
 
