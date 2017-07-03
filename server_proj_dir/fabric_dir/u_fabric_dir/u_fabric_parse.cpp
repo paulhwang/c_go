@@ -44,7 +44,7 @@ void UFabricClass::processMallocRoomResponse(char *data_val)
     if (group) {
         group->setRoomIdIndex(data_val + GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE);
         group->setSessionTableArray((SessionClass **) phwangArrayMgrGetArrayTable(group->sessionArrayMgr(), &session_array_size));
-        SessionClass *session = group->sessionTableArray()[0];
+        SessionClass *session = group->sessionTableArray(0);
         output_data = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
         output_data[0] = WEB_FABRIC_PROTOCOL_RESPOND_IS_MALLOC_SESSION;
         strcpy(output_data + 1, session->sessionIdIndex());
@@ -70,7 +70,7 @@ void UFabricClass::processTransferDataResponse(char *data_val)
     int i = 0;
     group->setSessionTableArray((SessionClass **) phwangArrayMgrGetArrayTable(group->sessionArrayMgr(), &session_array_size));
     while (i < session_array_size) {
-        SessionClass *session = group->sessionTableArray()[i];
+        SessionClass *session = group->sessionTableArray(i);
         if (session) {
             downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
             *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_TRANSFER_SESSION_DATA;

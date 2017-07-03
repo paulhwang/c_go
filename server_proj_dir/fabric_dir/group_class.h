@@ -32,7 +32,7 @@ public:
     char *groupIdIndex(void) {return this->theEntryIdIndex;}
     char *roomIdIndex(void) {return this->theRoomIdIndex;}
     void *sessionArrayMgr(void) {return this->theSessionArrayMgr;}
-    SessionClass **sessionTableArray(void) {return this->theSessionTableArray;}
+    SessionClass *sessionTableArray(int index_val) {return this->theSessionTableArray[index_val];}
     void setSessionTableArray(SessionClass **val) {this->theSessionTableArray = val;}
 
     void setRoomIdIndex(char *val) {memcpy(this->theRoomIdIndex, val, ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);}
