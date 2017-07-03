@@ -24,16 +24,15 @@ class FabricClass {
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
 
-protected:
-    friend class UFabricClass;
-    friend class DFabricClass;
-    friend class NameListClass;
-
-    void *linkListMgrObject(void) {return this->theLinkListMgrObject;}
+public:
+    FabricClass(void);
+    ~FabricClass(void);
+    char const* objectName(void) {return "FabricClass";}
 
     UFabricClass *uFabricObject(void) {return this->theUFabricObject;}
     DFabricClass *dFabricObject(void) {return this->theDFabricObject;}
     NameListClass *nameListObject(void) {return this->theNameListObject;}
+    void *linkListMgrObject(void) {return this->theLinkListMgrObject;}
 
     LinkClass *mallocLink(char const *my_name_val);
     void freeLink(LinkClass *link_object_val);
@@ -47,9 +46,4 @@ protected:
     SessionClass *searchLinkAndMallocSession(char *data_val);
     SessionClass *searchLinkByNameAndMallocSession(char *name_val);
     SessionClass *serachLinkAndSession(char *data_val);
-
-public:
-    FabricClass(void);
-    ~FabricClass(void);
-    char const* objectName(void) {return "FabricClass";}
 };

@@ -25,11 +25,10 @@ private:
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
 
-protected:
-    friend class DFabricClass;
-    friend class UFabricClass;
-    friend class FabricClass;
-    friend class NameListClass;
+public:
+    LinkClass(void *list_mgr_object_val, FabricClass *fabric_object_val, char const* link_name_val);
+    ~LinkClass(void);
+    char const* objectName(void) {return "LinkClass";}
 
     char *linkName(void) {return this->theLinkName;}
     char *linkIdIndex(void) {return this->theEntryIdIndex;}
@@ -39,9 +38,4 @@ protected:
     SessionClass *searchSession(char *data_val) {return (SessionClass *) phwangListMgrSearchEntry(this->theSessionListMgrObject, data_val);}
     char *getPendingSessionSetup(void) {return (char *) phwangDequeue(thePendingSessionSetupQueue);}
     void setPendingSessionSetup(char *session_id_index_val, char *topic_data_val);
-
-public:
-    LinkClass(void *list_mgr_object_val, FabricClass *fabric_object_val, char const* link_name_val);
-    ~LinkClass(void);
-    char const* objectName(void) {return "LinkClass";}
 };

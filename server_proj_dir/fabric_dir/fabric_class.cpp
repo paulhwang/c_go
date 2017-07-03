@@ -11,7 +11,6 @@
 #include "group_class.h"
 #include "link_class.h"
 #include "name_list_class.h"
-#include "aaa.h"
 
 FabricClass::FabricClass (void)
 {
@@ -55,8 +54,7 @@ LinkClass *FabricClass::searchLinkByName (char *name_val)
 
     for (int i = max_index ; i >= 0; i--) {
         if (link_entry_array[i]) {
-            if (!strcmp(link_entry_array[i]->theLinkName, name_val)) {
-                printf("searchLinkByName %s===========23\n", link_entry_array[i]->theLinkName);
+            if (!strcmp(link_entry_array[i]->linkName(), name_val)) {
                 return link_entry_array[i];
             }
         }
