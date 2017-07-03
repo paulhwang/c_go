@@ -34,7 +34,7 @@ public:
     char *baseIdIndex(void) {return this->theBaseIdIndex;}
     void setBaseIdIndex(char *base_id_index_val) {memcpy(this->theBaseIdIndex, base_id_index_val, BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE); this->theBaseIdIndex[BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE] = 0;}
     void *groupArrayMgr(void) {return this->theGroupArrayMgr;}
-    char **groupTableArray(void) {return this->theGroupTableArray;}
+    char *groupTableArray(int index_val) {return this->theGroupTableArray[index_val];}
     void setGroupTableArray(char ** val) {this->theGroupTableArray = val;}
 
     void insertGroup(char *group_id_index_val);
