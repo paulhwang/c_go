@@ -9,6 +9,8 @@
 class FabricClass;
 
 class NameListClass {
+#define NAME_LIST_CLASS_NAME_LIST_TAG_SIZE 3
+#define NAME_LIST_CLASS_MAX_NAME_LIST_TAG 999
 #define NAME_LIST_CLASS_NAME_LIST_BUFFER_SIZE 1024
 
     FabricClass *theFabricObject;
@@ -21,6 +23,9 @@ class NameListClass {
 
 protected:
     friend class FabricClass;
+    friend class DFabricClass;
+
+    int nameListTag(void) {return this->theNameListTag;}
 
     void updateNameList(void);
     char *getNameList(int tag_val);

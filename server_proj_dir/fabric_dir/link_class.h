@@ -29,14 +29,14 @@ protected:
     friend class FabricClass;
     friend class NameListClass;
 
+    char *linkName(void) {return this->theLinkName;}
+    char *linkIdIndex(void) {return this->theEntryIdIndex;}
+
     SessionClass *mallocSession(void);
     void *sessionListMgrObject(void) {return this->theSessionListMgrObject;}
     SessionClass *searchSession(char *data_val) {return (SessionClass *) phwangListMgrSearchEntry(this->theSessionListMgrObject, data_val);}
     char *getPendingSessionSetup(void) {return (char *) phwangDequeue(thePendingSessionSetupQueue);}
     void setPendingSessionSetup(char *session_id_index_val, char *topic_data_val);
-
-    char *linkName(void) {return this->theLinkName;}
-    char *linkIdIndex(void) {return this->theEntryIdIndex;}
 
 public:
     LinkClass(void *list_mgr_object_val, FabricClass *fabric_object_val, char const* link_name_val);

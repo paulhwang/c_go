@@ -33,6 +33,7 @@ protected:
 
     UFabricClass *uFabricObject(void) {return this->theUFabricObject;}
     DFabricClass *dFabricObject(void) {return this->theDFabricObject;}
+    NameListClass *nameListObject(void) {return this->theNameListObject;}
 
     LinkClass *mallocLink(char const *my_name_val);
     void freeLink(LinkClass *link_object_val);

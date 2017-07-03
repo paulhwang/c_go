@@ -30,15 +30,15 @@ void NameListClass::updateNameList(void)
     int name_len;
 
     this->theNameListTag++;
-    if (this->theNameListTag == 1000) {
+    if (this->theNameListTag > NAME_LIST_CLASS_MAX_NAME_LIST_TAG) {
         this->theNameListTag = 1;
     }
 
     for (int i = 0 ; i <= max_index; i++) {
         if (link_entry_array[i]) {
             if (ptr == this->theNameList) {
-                phwangEncodeNumber(ptr, this->theNameListTag, 3);
-                ptr += 3;
+                phwangEncodeNumber(ptr, this->theNameListTag, NAME_LIST_CLASS_NAME_LIST_TAG_SIZE);
+                ptr += NAME_LIST_CLASS_NAME_LIST_TAG_SIZE;
             }
             else {
                 *ptr++ = ',';

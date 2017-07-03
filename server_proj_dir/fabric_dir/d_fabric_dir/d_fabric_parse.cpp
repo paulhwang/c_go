@@ -17,6 +17,7 @@
 #include "../link_class.h"
 #include "../session_class.h"
 #include "../group_class.h"
+#include "../name_list_class.h"
 
 void DFabricClass::exportedparseFunction (char *data_val)
 {
@@ -91,6 +92,7 @@ void DFabricClass::processGetLinkData (char *data_val)
     }
     downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
     *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA;
+    phwangEncodeNumber(data_ptr, this->theFabricObject->nameListObject()->nameListTag(), NAME_LIST_CLASS_NAME_LIST_TAG_SIZE);
     *data_ptr++ = link->theNameListChanged;
     link->theNameListChanged = 'd';
     *data_ptr = 0;
