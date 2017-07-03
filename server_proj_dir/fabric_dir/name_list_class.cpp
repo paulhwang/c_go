@@ -34,7 +34,7 @@ void NameListClass::updateNameList(void)
         this->theNameListTag = 1;
     }
 
-    for (int i = 0 ; i <= max_index; i++) {
+    for (int i = max_index ; i >= 0; i--) {
         if (link_entry_array[i]) {
             if (ptr == this->theNameList) {
                 phwangEncodeNumber(ptr, this->theNameListTag, NAME_LIST_CLASS_NAME_LIST_TAG_SIZE);
