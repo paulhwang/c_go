@@ -26,18 +26,12 @@ class UFabricClass {
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
 
-protected:
-    friend class LinkMgrClass;
-    friend class SessionMgrClass;
-    friend class GroupMgrClass;
-    friend class DFabricClass;
-
-    void transmitFunction(char *data_val);
-
 public:
     UFabricClass(FabricClass *fabric_object_val);
     ~UFabricClass(void);
     char const* objectName(void) {return "UFabricClass";}
+
+    void transmitFunction(char *data_val);
 
     /* exports */
     void exportedParseFunction(char *data_val);

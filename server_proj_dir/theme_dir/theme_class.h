@@ -27,10 +27,10 @@ class ThemeClass {
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
 
-protected:
-    friend class UThemeClass;
-    friend class DThemeClass;
-    friend class RoomMgrClass;
+public:
+    ThemeClass(void);
+    ~ThemeClass(void);
+    char const* objectName(void) {return "ThemeClass";}
 
     UThemeClass *uThemeObject(void) {return this->theUThemeObject;}
     DThemeClass *dThemeObject(void) {return this->theDThemeObject;}
@@ -39,16 +39,10 @@ protected:
     RoomClass *mallocRoom(char *group_id_index_val);
     void freeRoom(RoomClass *group_object_val);
     RoomClass *searchRoom(char *data_val) {return (RoomClass *) phwangListMgrSearchEntry(this->theRoomListMgrObject, data_val);}
-
-public:
-    ThemeClass(void);
-    ~ThemeClass(void);
-    char const* objectName(void) {return "ThemeClass";}
+    void insertRoom(RoomClass *room_object_val);
+    void removeRoom(RoomClass *room_object_val);
 
     /* exports */
     void receiveData(char* data_val);
     void transmitData(char *data_val);
-
-    void insertRoom(RoomClass *room_object_val);
-    void removeRoom(RoomClass *room_object_val);
 };

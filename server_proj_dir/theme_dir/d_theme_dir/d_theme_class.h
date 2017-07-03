@@ -26,16 +26,12 @@ class DThemeClass {
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
 
-protected:
-    friend class UThemeClass;
-    friend class RoomMgrClass;
-
-    void transmitFunction(char *data_val);
-
 public:
     DThemeClass(ThemeClass *theme_object_val);
     ~DThemeClass(void);
     char const* objectName(void) {return "DThemeClass";}
+
+    void transmitFunction(char *data_val);
 
     /* exports */
     void exportedparseFunction(char *data_val);

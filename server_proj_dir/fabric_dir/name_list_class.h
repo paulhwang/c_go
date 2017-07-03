@@ -21,17 +21,13 @@ class NameListClass {
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
 
-protected:
-    friend class FabricClass;
-    friend class DFabricClass;
+public:
+    NameListClass(FabricClass *fabric_object_val);
+    ~NameListClass(void);
+    char const* objectName(void) {return "NameListClass";}
 
     int nameListTag(void) {return this->theNameListTag;}
 
     void updateNameList(void);
     char *getNameList(int tag_val);
-
-public:
-    NameListClass(FabricClass *fabric_object_val);
-    ~NameListClass(void);
-    char const* objectName(void) {return "NameListClass";}
 };
