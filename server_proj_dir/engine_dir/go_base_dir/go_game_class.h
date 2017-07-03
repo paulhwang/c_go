@@ -29,22 +29,19 @@ class GoGameClass
     void processForwardMove(void);
     void processDoubleForwardMove(void);
     void processTheWholeMoveList(void);
-    void addNewMoveAndFight(GoMoveClass *move_val);
 
     void debug(int on_off_val, char const *str0_val, char const *str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
     void logit(char const *str0_val, char const *str1_val);
     void abend(char const *str0_val, char const *str1_val);
 
-protected:
-    friend class GoPortClass;
-    friend class GoBoardClass;
-
-    int totalMoves(void) {return this->theTotalMoves;}
-    int nextColor(void) {return this->theNextColor;}
-    void receiveSpecialMoveFromOpponent(char const *data_val);
-
 public:
     GoGameClass(GoBaseClass *the_base_object);
     ~GoGameClass(void);
     char const *objectName(void) {return "GoGameClass";}
+
+    int totalMoves(void) {return this->theTotalMoves;}
+    int nextColor(void) {return this->theNextColor;}
+
+    void addNewMoveAndFight(GoMoveClass *move_val);
+    void receiveSpecialMoveFromOpponent(char const *data_val);
 };

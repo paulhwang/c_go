@@ -20,18 +20,12 @@ class GoConfigClass {
     void logit(char const *str0_val, char const *str1_val);
     void abend(char const *str0_val, char const *str1_val);
 
-protected:
-    friend class GoBoardClass;
-    friend class GoGameClass;
-    friend class GoFightClass;
-    friend class GoGroupClass;
-
-    int boardSize(void) {return this->theBoardSize;}
-    int handicapPoint(void) {return this->theHandicapPoint;}
-    int isValidCoordinates(int x_val, int y_val) {return this->isValidCoordinate(x_val) && this->isValidCoordinate(y_val);}
-
 public:
     GoConfigClass(GoBaseClass *the_base_object, char *config_info_val);
     ~GoConfigClass(void) {}
     char const *objectName(void) {return "GoConfigClass";}
+
+    int boardSize(void) {return this->theBoardSize;}
+    int handicapPoint(void) {return this->theHandicapPoint;}
+    int isValidCoordinates(int x_val, int y_val) {return this->isValidCoordinate(x_val) && this->isValidCoordinate(y_val);}
 };

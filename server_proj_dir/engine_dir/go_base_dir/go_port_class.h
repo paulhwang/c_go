@@ -18,15 +18,11 @@ class GoPortClass {
     void logit(char const *str0_val, char const *str1_val);
     void abend(char const *str0_val, char const *str1_val);
 
-protected:
-    friend class DEngineClass;
-    friend class GoGameClass;
-
-    void receiveInputData(char const *str_val);
-    void transmitBoardData (void);
-
 public:
     GoPortClass(GoBaseClass *base_object_val);
     ~GoPortClass(void) {}
     char const *objectName(void) {return "GoPortClass";}
+
+    void receiveInputData(char const *str_val);
+    void transmitBoardData (void);
 };

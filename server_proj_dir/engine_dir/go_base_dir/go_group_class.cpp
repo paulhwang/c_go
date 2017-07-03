@@ -21,11 +21,6 @@ GoGroupClass::GoGroupClass (GoGroupListClass *group_list_object_val):
     this->debug(true, "GoGroupClass", "init");
 }
 
-void GoGroupClass::setIndexNumber (int val)
-{
-    this->theIndexNumber = val;
-}
-
 void GoGroupClass::insertStoneToGroup (int x_val, int y_val, int dead_val)
 {
     if (this->theExistMatrix[x_val][ y_val]) {

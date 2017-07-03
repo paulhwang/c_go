@@ -44,7 +44,7 @@ int GoGroupListClass::totalStoneCount (void)
 {
     int count = 0;
     for (int i = 0; i < this->theGroupCount; i++) {
-        count += this->theGroupArray[i]->theStoneCount;
+        count += this->theGroupArray[i]->stoneCount();
     }
     return count;
 }
@@ -86,9 +86,9 @@ GoGroupClass *GoGroupListClass::findOtherCandidateGroup (GoGroupClass *group_val
 void GoGroupListClass::removeGroupFromGroupList (GoGroupClass *group_val)
 {
     this->theGroupCount--;
-    if (group_val->theIndexNumber != this->theGroupCount) {
-        this->theGroupArray[this->theGroupCount]->setIndexNumber(group_val->theIndexNumber);
-        this->theGroupArray[group_val->theIndexNumber] = this->theGroupArray[this->theGroupCount];
+    if (group_val->indexNumber() != this->theGroupCount) {
+        this->theGroupArray[this->theGroupCount]->setIndexNumber(group_val->indexNumber());
+        this->theGroupArray[group_val->indexNumber()] = this->theGroupArray[this->theGroupCount];
     }
     this->theGroupArray[this->theGroupCount] = 0;
 }
@@ -125,11 +125,11 @@ void GoGroupListClass::abendGroupList (void)
             this->abend("abendGroupList", "null group" );
             return;
         }
-        if (group->theGroupListObject != this) {
+        if (group->groupListObject() != this) {
             this->abend("abendGroupList", "groupListObject");
             return;
         }
-        if (group->theIndexNumber != i) {
+        if (group->indexNumber() != i) {
             this->abend("abendGroupList", "index ");
             return;
         }

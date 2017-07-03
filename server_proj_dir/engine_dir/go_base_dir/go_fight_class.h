@@ -27,7 +27,6 @@ class GoFightClass {
     GoGroupListClass *blackEmptyGroupList(void) {return this->theGroupListArray[5];}
     GoGroupListClass *whiteEmptyGroupList(void) {return this->theGroupListArray[6];}
 
-    void resetEngineObjectData(void);
     GoGroupClass *insertStoneToGroupList(GoMoveClass *move_val);
     int killOtherColorGroups(GoMoveClass *move_val, GoGroupClass *group_val);
     int killOtherColorGroup(GoGroupClass *group, int x_val, int y_val);
@@ -42,16 +41,13 @@ class GoFightClass {
     void logit(char const *str0_val, char const *str1_val);
     void abend(char const *str0_val, char const *str1_val);
 
-protected:
-    friend class GoGameClass;
-    friend class GoGroupListClass;
-    friend class GoGroupClass;
-
-    GoBaseClass *baseObject(void) {return this->theBaseObject;}
-    void enterBattle(GoMoveClass *move_val);
-
 public:
     GoFightClass(GoBaseClass *base_object_val);
     ~GoFightClass(void);
     char const *objectName(void) {return "GoFightClass";}
+
+    GoBaseClass *baseObject(void) {return this->theBaseObject;}
+    void enterBattle(GoMoveClass *move_val);
+
+    void resetEngineObjectData(void);
 };

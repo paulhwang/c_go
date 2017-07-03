@@ -22,19 +22,14 @@ class GoMoveClass {
     void logit(char const *str0_val, char const *str1_val);
     void abend(char const *str0_val, char const *str1_val);
 
-protected:
-    friend class GoGameClass;
-    friend class GoFightClass;
-    friend class GoPortClass;
+public:
+    GoMoveClass(GoBaseClass *base_object_val, char const *encoded_move_val);
+    ~GoMoveClass(void) {}
+    char const* objectName(void) {return "GoMoveClass";}
 
     int xX(void) {return this->theX;}
     int yY(void) {return this->theY;}
     int myColor(void) {return this->theMyColor;}
     int turnIndex(void) {return this->theTurnIndex;}
     char *moveInfo(void) {return this->theMoveInfo;}
-
-public:
-    GoMoveClass(GoBaseClass *base_object_val, char const *encoded_move_val);
-    ~GoMoveClass(void) {}
-    char const* objectName(void) {return "GoMoveClass";}
 };
