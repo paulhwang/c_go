@@ -125,7 +125,7 @@ void GoGroupClass::mergeWithOtherGroup (GoGroupClass *group2)
         this->theMinY = group2->theMinY;
     }
 
-    if (group2->theGroupListObject->theGroupArray[group2->theIndexNumber] != group2) {
+    if (group2->theGroupListObject->groupArray(group2->theIndexNumber) != group2) {
         this->abend("mergeWithOtherGroup", "group2");
     }
 }

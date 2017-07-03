@@ -147,8 +147,8 @@ GoGroupClass *GoFightClass::getGroupByCoordinate (int x_val, int y_val, int colo
     }
 
     for (int i = 0; i < g_list->groupCount(); i++) {
-        if (g_list->theGroupArray[i]->theExistMatrix[x_val][y_val]) {
-            return g_list->theGroupArray[i];
+        if (g_list->groupArray(i)->theExistMatrix[x_val][y_val]) {
+            return g_list->groupArray(i);
         }
     }
     return 0;
