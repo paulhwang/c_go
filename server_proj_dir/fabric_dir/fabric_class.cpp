@@ -34,6 +34,7 @@ LinkClass *FabricClass::mallocLink (char const *data_val)
 {
     this->debug(true, "mallocLink", data_val);
     LinkClass *link = new LinkClass(this->theLinkListMgrObject, this, data_val);
+    this->theNameListObject->updateNameList();
     return link;
 }
 
@@ -43,6 +44,7 @@ void FabricClass::freeLink (LinkClass *link_object_val)
         return;
     }
     link_object_val->~LinkClass();
+    this->theNameListObject->updateNameList();
 }
 
 GroupClass *FabricClass::mallocGroup (char *theme_data_val)

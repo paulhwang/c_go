@@ -20,8 +20,10 @@ class NameListClass {
     void abend(char const* str0_val, char const* str1_val);
 
 protected:
+    friend class FabricClass;
 
-    char *nameList(void);
+    void updateNameList(void);
+    //char *nameList(void);
 
 public:
     NameListClass(FabricClass *fabric_object_val);

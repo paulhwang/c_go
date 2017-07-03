@@ -19,6 +19,11 @@ NameListClass::~NameListClass (void)
 {
 }
 
+void NameListClass::updateNameList(void)
+{
+
+}
+
 void NameListClass::logit (char const *str0_val, char const *str1_val) {
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", this->objectName(), str0_val);
