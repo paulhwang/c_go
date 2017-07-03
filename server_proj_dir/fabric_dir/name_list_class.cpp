@@ -21,6 +21,11 @@ NameListClass::~NameListClass (void)
 
 void NameListClass::updateNameList(void)
 {
+	this->theNameListIndex++;
+}
+
+char *NameListClass::getNameList(int index_val)
+{
 
 }
 

@@ -23,7 +23,7 @@ protected:
     friend class FabricClass;
 
     void updateNameList(void);
-    //char *nameList(void);
+    char *getNameList(int index_val);
 
 public:
     NameListClass(FabricClass *fabric_object_val);
