@@ -34,6 +34,8 @@ class PhwangClass {
     void *listMgrMalloc(char const *caller_name_val, int id_size_val, int index_size_val, int global_entry_id_val);
     void  listMgrFree(void *list_mgr_val);
     void *listMgrSearchEntry(void *list_mgr_val, char *data_val);
+    int   listMgrGetMaxIndex(void *list_mgr_val);
+    void *listMgrGetEntryTableArray(void *list_mgr_val);
 
     /* array_mgr */
     void *arrayMgrMalloc(char const *caller_name_val, char array_type_val, int max_array_size_val);

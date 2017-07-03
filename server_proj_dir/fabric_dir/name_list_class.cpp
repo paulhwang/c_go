@@ -7,6 +7,7 @@
 #include "../../phwang_dir/phwang.h"
 #include "name_list_class.h"
 #include "fabric_class.h"
+#include "link_class.h"
   
 NameListClass::NameListClass (FabricClass *fabric_object_val):
 	theFabricObject(fabric_object_val),
@@ -23,12 +24,14 @@ NameListClass::~NameListClass (void)
 void NameListClass::updateNameList(void)
 {
     void *link_list_mgr = this->theFabricObject->linkListMgrObject();
-    int max_index = 0;
-    LinkClass **link_entry_array;
+    int max_index = phwnagListMgrGetMaxIndex(link_list_mgr);
+    LinkClass **link_entry_array = (LinkClass **) phwangListMgrGetEntryTableArray(link_list_mgr);
 
-    for (int i = 0 ; i < max_index; i++) {
-        //if (!link_entry_array[i]) {
-        //}
+    for (int i = 0 ; i <= max_index; i++) {
+        	printf("++++=================%d==============3\n", i);
+        if (link_entry_array[i]) {
+        	printf("++++=================%s==============4\n", link_entry_array[i]->linkName());
+        }
     }
 
 	this->theNameListIndex++;

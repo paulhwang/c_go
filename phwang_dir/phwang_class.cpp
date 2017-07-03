@@ -135,6 +135,36 @@ void *PhwangClass::listMgrSearchEntry(void *list_mgr_val, char *data_val)
     return ((ListMgrClass *) list_mgr_val)->searchEntry(data_val);
 }
 
+int PhwangClass::listMgrGetMaxIndex (void *list_mgr_val)
+{
+    if (!list_mgr_val) {
+        phwangAbend("listMgrSearchEntry", "null list_mgr_val");
+        return 0;
+    }
+
+    if (strcmp(((ListMgrClass *) list_mgr_val)->objectName(), "ListMgrClass")) {
+        phwangAbend("listMgrSearchEntry", "wrong object");
+        return 0;
+    }
+
+    return ((ListMgrClass *) list_mgr_val)->maxIndex();
+}
+
+void *PhwangClass::listMgrGetEntryTableArray (void *list_mgr_val)
+{
+    if (!list_mgr_val) {
+        phwangAbend("listMgrSearchEntry", "null list_mgr_val");
+        return 0;
+    }
+
+    if (strcmp(((ListMgrClass *) list_mgr_val)->objectName(), "ListMgrClass")) {
+        phwangAbend("listMgrSearchEntry", "wrong object");
+        return 0;
+    }
+
+    return ((ListMgrClass *) list_mgr_val)->entryTableArray();
+}
+
 /**************************************************************************************************************/
 /**************************************************************************************************************/
 /**************************************************************************************************************/

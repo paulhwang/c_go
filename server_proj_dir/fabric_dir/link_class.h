@@ -27,6 +27,7 @@ protected:
     friend class DFabricClass;
     friend class UFabricClass;
     friend class FabricClass;
+    friend class NameListClass;
 
     SessionClass *mallocSession(void);
     void *sessionListMgrObject(void) {return this->theSessionListMgrObject;}
@@ -34,6 +35,7 @@ protected:
     char *getPendingSessionSetup(void) {return (char *) phwangDequeue(thePendingSessionSetupQueue);}
     void setPendingSessionSetup(char *session_id_index_val, char *topic_data_val);
 
+    char *linkName(void) {return this->theLinkName;}
     char *linkIdIndex(void) {return this->theEntryIdIndex;}
 
 public:

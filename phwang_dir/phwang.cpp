@@ -91,9 +91,19 @@ void phwangListMgrFree (void *list_mgr_val)
     thePhwangObject->listMgrFree(list_mgr_val);
 }
 
-void *phwangListMgrSearchEntry(void *list_mgr_val, char *data_val)
+void *phwangListMgrSearchEntry (void *list_mgr_val, char *data_val)
 {
     return thePhwangObject->listMgrSearchEntry(list_mgr_val, data_val);
+}
+
+int phwnagListMgrGetMaxIndex (void *list_mgr_val)
+{
+    return thePhwangObject->listMgrGetMaxIndex(list_mgr_val);
+}
+
+void *phwangListMgrGetEntryTableArray (void *list_mgr_val)
+{
+    return thePhwangObject->listMgrGetEntryTableArray(list_mgr_val);
 }
 
 /* array_mgr */

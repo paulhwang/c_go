@@ -33,6 +33,8 @@ protected:
     friend class ListEntryClass;
     friend class PhwangClass;
 
+    int maxIndex(void) {return this->theMaxIndex;}
+    ListEntryClass **entryTableArray(void) {return this->theEntryTableArray;}
     void insertEntry(ListEntryClass * entry_val);
     ListEntryClass *mallocEntry(void);
     void freeEntry(ListEntryClass *list_entry_object_val);
