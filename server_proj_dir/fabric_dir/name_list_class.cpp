@@ -26,15 +26,26 @@ void NameListClass::updateNameList(void)
     void *link_list_mgr = this->theFabricObject->linkListMgrObject();
     int max_index = phwnagListMgrGetMaxIndex(link_list_mgr);
     LinkClass **link_entry_array = (LinkClass **) phwangListMgrGetEntryTableArray(link_list_mgr);
+    char *ptr = this->theNameList;
+    int name_len;
 
     for (int i = 0 ; i <= max_index; i++) {
-        	printf("++++=================%d==============3\n", i);
         if (link_entry_array[i]) {
-        	printf("++++=================%s==============4\n", link_entry_array[i]->linkName());
+            if (ptr != this->theNameList) {
+                *ptr++ = ',';
+            }
+            *ptr++ = '"';
+            name_len = strlen(link_entry_array[i]->linkName());
+            memcpy(ptr, link_entry_array[i]->linkName(), name_len);
+            ptr += name_len;
+            *ptr++ = '"';
         }
     }
+    *ptr = 0;
 
 	this->theNameListIndex++;
+
+	this->debug(true, "updateNameList", this->theNameList);
 }
 
 char *NameListClass::getNameList(int index_val)
