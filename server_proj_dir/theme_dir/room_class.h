@@ -30,7 +30,7 @@ public:
     ~RoomClass(void);
     char const* objectName(void) {return "RoomClass";}
 
-    char *roomIdIndex(void) {return this->theEntryIdIndex;}
+    char *roomIdIndex(void) {return this->entryIdIndex();}
     char *baseIdIndex(void) {return this->theBaseIdIndex;}
     void setBaseIdIndex(char *base_id_index_val) {memcpy(this->theBaseIdIndex, base_id_index_val, BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE); this->theBaseIdIndex[BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE] = 0;}
     void *groupArrayMgr(void) {return this->theGroupArrayMgr;}

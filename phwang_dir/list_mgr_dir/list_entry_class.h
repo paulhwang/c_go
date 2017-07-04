@@ -12,6 +12,7 @@ class ListEntryClass {
     ListMgrClass *theListMgrObject;
     int theEntryId;
     int theEntryIndex;
+    char *theEntryIdIndex;
 
     void debug(int on_off_val, char const* str0_val, char const* str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
     void logit(char const* str0_val, char const* str1_val);
@@ -27,6 +28,4 @@ public:
     int entryIndex(void) {return this->theEntryIndex;}
     void setEntryIndex(int val) {this->theEntryIndex = val;}
     char *entryIdIndex(void) {return this->theEntryIdIndex;}
-
-    char *theEntryIdIndex;
 };

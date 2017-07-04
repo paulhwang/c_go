@@ -31,7 +31,7 @@ public:
     char const* objectName(void) {return "LinkClass";}
 
     char *linkName(void) {return this->theLinkName;}
-    char *linkIdIndex(void) {return this->theEntryIdIndex;}
+    char *linkIdIndex(void) {return this->entryIdIndex();}
 
     SessionClass *mallocSession(void);
     void *sessionListMgrObject(void) {return this->theSessionListMgrObject;}

@@ -47,8 +47,7 @@ public:
     GoConfigClass *configObject(void) {return this->theConfigObject;}
     GoGameClass *gameObject(void) {return this->theGameObject;}
     char *roomIdIndex(void) {return this->theRoomIdIndex;}
-
-    char *goBaseIdIndex(void) {return this->theEntryIdIndex;}
+    char *goBaseIdIndex(void) {return this->entryIdIndex();}
     void setRoomIdIndex(char *room_id_index_val) {memcpy(this->theRoomIdIndex, room_id_index_val, ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE); this->theRoomIdIndex[ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE] = 0;}
 
     void goBaseLogit(char const *str0_val, char const *str1_val) {phwangLogit(str0_val, str1_val);}

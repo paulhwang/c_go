@@ -24,7 +24,7 @@ public:
     ~SessionClass(void);
     char const* objectName(void) {return "SessionClass";}
 
-    char *sessionIdIndex(void) {return this->theEntryIdIndex;}
+    char *sessionIdIndex(void) {return this->entryIdIndex();}
     LinkClass *linkObject(void) {return this->theLinkObject;}
     GroupClass *groupObject(void) {return this->theGroupObject;}
 

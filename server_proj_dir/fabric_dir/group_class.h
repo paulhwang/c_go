@@ -29,7 +29,7 @@ public:
     ~GroupClass(void);
     char const* objectName(void) {return "GroupClass";}
 
-    char *groupIdIndex(void) {return this->theEntryIdIndex;}
+    char *groupIdIndex(void) {return this->entryIdIndex();}
     char *roomIdIndex(void) {return this->theRoomIdIndex;}
     void *sessionArrayMgr(void) {return this->theSessionArrayMgr;}
     SessionClass *sessionTableArray(int index_val) {return this->theSessionTableArray[index_val];}
