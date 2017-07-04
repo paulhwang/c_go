@@ -43,6 +43,11 @@ void DFabricClass::exportedparseFunction (char *data_val)
         return;
     }
 
+    if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_MALLOC_SESSION_REPLY) {
+        this->processMallocSessionReply(data_val + 1);
+        return;
+    }
+
     if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_TRANSFER_SESSION_DATA) {
         this->processTransferSessionData(data_val + 1);
         return;
@@ -203,6 +208,24 @@ void DFabricClass::processMallocSession (char *data_val)
     }
 }
 
+void DFabricClass::processMallocSessionReply (char *data_val)
+{
+    this->debug(true, "processMallocSessionReply", data_val);
+
+    char *link_and_session_id_index_val = data_val;
+    char *end_val = link_and_session_id_index_val + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE;
+
+    char *downlink_data;
+    char *data_ptr;
+
+    downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
+    *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_MALLOC_SESSION_REPLY;
+    memcpy(data_ptr, link_and_session_id_index_val, LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE);
+    data_ptr += LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE;
+    *data_ptr = 0;
+
+    this->transmitFunction(downlink_data);
+}
 
 void DFabricClass::processTransferSessionData (char *data_val)
 {
