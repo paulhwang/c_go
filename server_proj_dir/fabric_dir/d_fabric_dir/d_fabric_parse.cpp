@@ -100,12 +100,15 @@ void DFabricClass::processGetLinkData (char *data_val)
 
 void DFabricClass::processGetNameList (char *data_val)
 {
+    this->debug(true, "processGetNameList", data_val);
+
+    char *link_id_index_val = data_val;
+    char *name_list_tag_val = link_id_index_val + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE;
+    char *end_val = name_list_tag_val + 3;
     char *downlink_data;
     char *data_ptr;
 
-    this->debug(true, "processGetNameList", data_val);
-
-    LinkClass *link = this->theFabricObject->searchLink(data_val);
+    LinkClass *link = this->theFabricObject->searchLink(link_id_index_val);
     if (!link) {
         this->abend("processGetNameList", "link does not exist");
         downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
@@ -115,8 +118,7 @@ void DFabricClass::processGetNameList (char *data_val)
         return;
     }
 
-    int name_list_tag = phwangDecodeNumber(data_val, NAME_LIST_CLASS_NAME_LIST_TAG_SIZE);
-    data_val += 3;
+    int name_list_tag = phwangDecodeNumber(name_list_tag_val, NAME_LIST_CLASS_NAME_LIST_TAG_SIZE);
     char *name_list = this->theFabricObject->nameListObject()->getNameList(name_list_tag);
 
     downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
@@ -129,14 +131,14 @@ void DFabricClass::processGetNameList (char *data_val)
 
 void DFabricClass::processMallocSession (char *data_val)
 {
-    char *downlink_data;
-    char *uplink_data;
-    char *data_ptr;
+    this->debug(true, "processMallocSession", data_val);
+
     char *link_id_index_val = data_val;
     char *theme_info_val = link_id_index_val + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE;
     char *his_name_val = theme_info_val + 8;
-
-    this->debug(true, "processMallocSession", data_val);
+    char *downlink_data;
+    char *uplink_data;
+    char *data_ptr;
 
     SessionClass *session = this->theFabricObject->searchLinkAndMallocSession(link_id_index_val);
     if (!session) {
@@ -147,7 +149,6 @@ void DFabricClass::processMallocSession (char *data_val)
         this->transmitFunction(downlink_data);
         return;
     }
-    data_val += LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE;
 
     GroupClass *group = this->theFabricObject->mallocGroup(theme_info_val);
     if (!group) {
@@ -168,7 +169,6 @@ void DFabricClass::processMallocSession (char *data_val)
     data_ptr += GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE;
     strcpy(data_ptr, theme_info_val);
     this->theFabricObject->uFabricObject()->transmitFunction(uplink_data);
-    data_val += 8;/////////////////////////////////////////////////////////////
 
     if (strcmp(his_name_val, session->linkObject()->linkName())) {
         LinkClass *his_link = this->theFabricObject->searchLinkByName(his_name_val);
