@@ -29,19 +29,18 @@ class ListMgrClass {
     void logit(char const* str0_val, char const* str1_val);
     void abend(char const* str0_val, char const* str1_val);
 
-protected:
-    friend class ListEntryClass;
-    friend class PhwangClass;
-
-    int maxIndex(void) {return this->theMaxIndex;}
-    ListEntryClass **entryTableArray(void) {return this->theEntryTableArray;}
-    void insertEntry(ListEntryClass * entry_val);
-    ListEntryClass *mallocEntry(void);
-    void freeEntry(ListEntryClass *list_entry_object_val);
-    ListEntryClass *searchEntry(char *data_val);
-
 public:
     ListMgrClass(char const *caller_name_val, int id_size_val, int index_size_val, int global_entry_id_val);
     ~ListMgrClass(void);
     char const* objectName(void) {return "ListMgrClass";}
+
+    int idSize(void) {return this->theIdSize;}
+    int indexSize(void) {return this->theIndexSize;}
+    int maxIndex(void) {return this->theMaxIndex;}
+    ListEntryClass **entryTableArray(void) {return this->theEntryTableArray;}
+
+    void insertEntry(ListEntryClass * entry_val);
+    ListEntryClass *mallocEntry(void);
+    void freeEntry(ListEntryClass *list_entry_object_val);
+    ListEntryClass *searchEntry(char *data_val);
 };
