@@ -76,12 +76,14 @@ void DFabricClass::processMallocLink (char *data_val)
 
 void DFabricClass::processGetLinkData (char *data_val)
 {
+    this->debug(true, "processGetLinkData", data_val);
+
+    char *link_id_index_val = data_val;
+    char *end_val = link_id_index_val + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE;
     char *downlink_data;
     char *data_ptr;
 
-    this->debug(true, "processGetLinkData", data_val);
-
-    LinkClass *link = this->theFabricObject->searchLink(data_val);
+    LinkClass *link = this->theFabricObject->searchLink(link_id_index_val);
     if (!link) {
         this->abend("processGetLinkData", "link does not exist");
         downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
@@ -194,13 +196,16 @@ void DFabricClass::processMallocSession (char *data_val)
 
 void DFabricClass::processTransferSessionData (char *data_val)
 {
+    this->debug(true, "processTransferSessionData", data_val);
+
+    char *link_and_session_id_index_val = data_val;
+    char *end_val = link_and_session_id_index_val + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE;
+
     char *downlink_data;
     char *uplink_data;
     char *data_ptr;
 
-    this->debug(true, "processTransferSessionData", data_val);
-
-    SessionClass *session = this->theFabricObject->serachLinkAndSession(data_val);
+    SessionClass *session = this->theFabricObject->serachLinkAndSession(link_and_session_id_index_val);
     if (!session) {
         downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
         *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_TRANSFER_SESSION_DATA;
@@ -224,6 +229,6 @@ void DFabricClass::processTransferSessionData (char *data_val)
     *data_ptr++ = FABRIC_THEME_PROTOCOL_COMMAND_IS_TRANSFER_DATA;
     memcpy(data_ptr, room, ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);
     data_ptr += ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE;
-    strcpy(data_ptr, data_val + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE);
+    strcpy(data_ptr, link_and_session_id_index_val + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE);
     this->theFabricObject->uFabricObject()->transmitFunction(uplink_data);
 }
