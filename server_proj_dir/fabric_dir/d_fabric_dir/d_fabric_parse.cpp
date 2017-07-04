@@ -132,10 +132,13 @@ void DFabricClass::processMallocSession (char *data_val)
     char *downlink_data;
     char *uplink_data;
     char *data_ptr;
+    char *link_id_index_val = data_val;
+    char *theme_info_val = link_id_index_val + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE;
+    char *his_name_val = theme_info_val + 8;
 
     this->debug(true, "processMallocSession", data_val);
 
-    SessionClass *session = this->theFabricObject->searchLinkAndMallocSession(data_val);
+    SessionClass *session = this->theFabricObject->searchLinkAndMallocSession(link_id_index_val);
     if (!session) {
         this->abend("processMallocSession", "null session");
         downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
@@ -146,7 +149,7 @@ void DFabricClass::processMallocSession (char *data_val)
     }
     data_val += LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE;
 
-    GroupClass *group = this->theFabricObject->mallocGroup(data_val);
+    GroupClass *group = this->theFabricObject->mallocGroup(theme_info_val);
     if (!group) {
         this->abend("processMallocSession", "null group");
         downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
@@ -163,12 +166,12 @@ void DFabricClass::processMallocSession (char *data_val)
     *data_ptr++ = FABRIC_THEME_PROTOCOL_COMMAND_IS_MALLOC_ROOM;
     memcpy(data_ptr, group->groupIdIndex(), GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE);
     data_ptr += GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE;
-    strcpy(data_ptr, data_val);
+    strcpy(data_ptr, theme_info_val);
     this->theFabricObject->uFabricObject()->transmitFunction(uplink_data);
     data_val += 8;/////////////////////////////////////////////////////////////
 
-    if (strcmp(data_val, session->linkObject()->linkName())) {
-        LinkClass *his_link = this->theFabricObject->searchLinkByName(data_val);
+    if (strcmp(his_name_val, session->linkObject()->linkName())) {
+        LinkClass *his_link = this->theFabricObject->searchLinkByName(his_name_val);
         if (!his_link) {
             this->abend("processMallocSession", "null his_link");
             ////////////////TBD
@@ -184,6 +187,7 @@ void DFabricClass::processMallocSession (char *data_val)
 
         group->insertSession(his_session);
         his_session->bindGroup(group);
+        his_link->setPendingSessionSetup(his_session->sessionIdIndex(), "");
     }
 }
 
