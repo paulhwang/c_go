@@ -97,6 +97,15 @@ void DFabricClass::processGetLinkData (char *data_val)
     phwangEncodeNumber(data_ptr, this->theFabricObject->nameListObject()->nameListTag(), NAME_LIST_CLASS_NAME_LIST_TAG_SIZE);
     data_ptr += NAME_LIST_CLASS_NAME_LIST_TAG_SIZE;
     *data_ptr = 0;
+
+/*
+    char *pending_session = link->getPendingSessionSetup();
+    if (pending_session) {
+        *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_PENDING_SESSION;
+        strcpy(data_ptr, pending_session);
+    }
+*/
+    
     this->transmitFunction(downlink_data);
 }
 
@@ -189,7 +198,10 @@ void DFabricClass::processMallocSession (char *data_val)
 
         group->insertSession(his_session);
         his_session->bindGroup(group);
-        his_link->setPendingSessionSetup(his_session->sessionIdIndex(), "");
+        char *theme_data = (char *) malloc (32);
+        memcpy(theme_data, theme_info_val, 8);
+        theme_data[8] = 0;
+        his_link->setPendingSessionSetup(his_session->sessionIdIndex(), theme_data);
     }
 }
 
