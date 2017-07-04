@@ -13,8 +13,10 @@ ListEntryClass::ListEntryClass (void *list_mgr_object):
         theEntryId(0),
         theEntryIndex(0)
 {
-    //memset(this, 0, sizeof(ListEntryClass));
-    this->theEntryIdIndex = (char *) malloc(this->theListMgrObject->idSize() + this->theListMgrObject->indexSize() + 4);
+    if (this->theListMgrObject->idSize() + this->theListMgrObject->indexSize() > LIST_ENTRY_CLASS_ID_INDEX_BUFFER_SIZE) {
+        this->abend("ListEntryClass", "buffer too small");
+    }
+
     this->theListMgrObject->insertEntry(this);
     phwangEncodeIdIndex(this->theEntryIdIndex, this->theEntryId, this->theListMgrObject->idSize(), this->theEntryIndex, this->theListMgrObject->indexSize());
 
@@ -23,7 +25,6 @@ ListEntryClass::ListEntryClass (void *list_mgr_object):
 
 ListEntryClass::~ListEntryClass (void)
 {
-    free(this->theEntryIdIndex);
 }
 
 void ListEntryClass::logit (char const* str0_val, char const* str1_val)
