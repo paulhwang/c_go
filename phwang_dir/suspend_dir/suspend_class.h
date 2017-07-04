@@ -13,13 +13,10 @@ class SuspendClass
     pthread_mutex_t *mutex;
     pthread_cond_t *cond;
 
-protected:
-	friend class QueueClass;
-
-    void wait(void);
-    void signal(void);
-
 public:
     SuspendClass(void);
     ~SuspendClass(void);
+
+    void wait(void);
+    void signal(void);
 };

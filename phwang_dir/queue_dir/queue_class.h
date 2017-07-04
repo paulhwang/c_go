@@ -35,21 +35,18 @@ class QueueClass
     void flush_queue(void);
     void delete_entry(QueueEntryClass *del_entry);
 
-    void debug(int on_off_val, char const* str0_val, char const* str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
-    void logit(char const* str0_val, char const* str1_val);
-    void abend(char const* str0_val, char const* str1_val);
-
-protected:
-    friend class PhwangClass;
-    
-    void initQueue(void);
-    void enqueueData(void *data_val);
-    void *dequeueData(void);
+    void debug(int on_off_val, char const *str0_val, char const *str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
+    void logit(char const *str0_val, char const *str1_val);
+    void abend(char const *str0_val, char const *str1_val);
 
 public:
     QueueClass(int do_suspend_val, int max_size_val);
     ~QueueClass(void);
     char const *objectName(void) {return "QueueClass";}
+    
+    void initQueue(void);
+    void enqueueData(void *data_val);
+    void *dequeueData(void);
 
   /* always at the tail of this class */
   //enum GETAC_MARKER_DEFINE_ marker_tail;

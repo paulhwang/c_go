@@ -22,7 +22,6 @@ class ListMgrClass {
 
     int allocEntryId(void);
     int allocEntryIndex(void);
-
     ListEntryClass *getEntryByIdIndex(int entry_id_val, int link_index_val);
 
     void debug(int on_off_val, char const *str0_val, char const *str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};

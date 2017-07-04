@@ -27,14 +27,9 @@ class TpServerClass {
     char const *theWho;
     pthread_t theServerThread;
 
-    void debug(int on_off_val, char const* str0_val, char const* str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
-    void logit(char const* str0_val, char const* str1_val);
-    void abend(char const* str0_val, char const* str1_val);
-
-protected:
-    friend class PhwangClass;
-    
-    void startServerThread(void);
+    void debug(int on_off_val, char const *str0_val, char const *str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
+    void logit(char const *str0_val, char const *str1_val);
+    void abend(char const *str0_val, char const *str1_val);
 
 public:
     TpServerClass(void *caller_object_val,
@@ -48,4 +43,5 @@ public:
     char const *objectName(void) {return "TpServerClass";}
 
     void serverThreadFunction(void *data_val);
+    void startServerThread(void);
 };
