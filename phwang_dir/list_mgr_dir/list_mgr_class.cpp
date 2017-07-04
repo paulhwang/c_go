@@ -53,11 +53,11 @@ void ListMgrClass::insertEntry (ListEntryClass * entry_val)
 {
     this->debug(true, "InsertEntry", "");
 
-    entry_val->theEntryId = this->allocEntryId();
-    entry_val->theEntryIndex = this->allocEntryIndex();
-    if (entry_val->theEntryIndex != -1) {
-        phwangEncodeIdIndex(entry_val->theEntryIdIndex, entry_val->theEntryId, this->theIdSize, entry_val->theEntryIndex, this->theIndexSize);
-        this->theEntryTableArray[entry_val->theEntryIndex] = entry_val;
+    entry_val->setEntryId(this->allocEntryId());
+    entry_val->setEntryIndex(this->allocEntryIndex());
+    if (entry_val->entryIndex() != -1) {
+        phwangEncodeIdIndex(entry_val->entryIdIndex(), entry_val->entryId(), this->theIdSize, entry_val->entryIndex(), this->theIndexSize);
+        this->theEntryTableArray[entry_val->entryIndex()] = entry_val;
         return;
     }
 
@@ -105,7 +105,7 @@ ListEntryClass *ListMgrClass::getEntryByIdIndex (int entry_id_val, int link_inde
         return 0;
     }
 
-    if (entry->theEntryId != entry_id_val){
+    if (entry->entryId() != entry_id_val){
         this->abend("getEntryByIdIndex", "entry id does not match");
         return 0;
     }
