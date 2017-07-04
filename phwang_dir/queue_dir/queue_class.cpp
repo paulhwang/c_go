@@ -87,6 +87,9 @@ void *QueueClass::dequeueData (void)
             if (this->theSuspendObject) {
                 this->theSuspendObject->wait();
             }
+            else {
+                return 0;
+            }
         }
     }
 }
