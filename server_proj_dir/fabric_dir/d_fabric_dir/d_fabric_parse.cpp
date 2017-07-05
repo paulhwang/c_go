@@ -48,8 +48,13 @@ void DFabricClass::exportedparseFunction (char *data_val)
         return;
     }
 
-    if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_TRANSFER_SESSION_DATA) {
-        this->processTransferSessionData(data_val + 1);
+    if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_PUT_SESSION_DATA) {
+        this->processPutSessionData(data_val + 1);
+        return;
+    }
+
+    if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_GET_SESSION_DATA) {
+        this->processGetSessionData(data_val + 1);
         return;
     }
 
@@ -227,9 +232,9 @@ void DFabricClass::processMallocSessionReply (char *data_val)
     this->transmitFunction(downlink_data);
 }
 
-void DFabricClass::processTransferSessionData (char *data_val)
+void DFabricClass::processPutSessionData (char *data_val)
 {
-    this->debug(true, "processTransferSessionData", data_val);
+    this->debug(true, "processPutSessionData", data_val);
 
     char *link_and_session_id_index_val = data_val;
     char *end_val = link_and_session_id_index_val + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE;
@@ -241,20 +246,20 @@ void DFabricClass::processTransferSessionData (char *data_val)
     SessionClass *session = this->theFabricObject->serachLinkAndSession(link_and_session_id_index_val);
     if (!session) {
         downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
-        *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_TRANSFER_SESSION_DATA;
+        *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_PUT_SESSION_DATA;
         strcpy(data_ptr, "null session");
         this->transmitFunction(downlink_data);
-        this->abend("processTransferSessionData", "null session");
+        this->abend("processPutSessionData", "null session");
         return;
     }
 
     char *room = session->groupObject()->roomIdIndex();
     if (!room) {
         downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
-        *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_TRANSFER_SESSION_DATA;
+        *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_PUT_SESSION_DATA;
         strcpy(data_ptr, "null room");
         this->transmitFunction(downlink_data);
-        this->abend("processTransferSessionData", "null room");
+        this->abend("processPutSessionData", "null room");
         return;
     }
 
@@ -269,11 +274,42 @@ void DFabricClass::processTransferSessionData (char *data_val)
     return;
     /* send the response down */
     downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
-    *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_TRANSFER_SESSION_DATA;
+    *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_PUT_SESSION_DATA;
     memcpy(data_ptr, session->linkObject()->linkIdIndex(), LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE);
     data_ptr += LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE;
     memcpy(data_ptr, session->sessionIdIndex(), SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE);
     data_ptr += SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE;
     strcpy(data_ptr, "job is done");
     this->transmitFunction(downlink_data);
+}
+
+void DFabricClass::processGetSessionData (char *data_val)
+{
+    char *link_and_session_id_index_val = data_val;
+    char *end_val = link_and_session_id_index_val + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE;
+
+    this->debug(true, "processGetSessionData", data_val);
+
+    char *downlink_data;
+    char *data_ptr;
+
+    SessionClass *session = this->theFabricObject->serachLinkAndSession(link_and_session_id_index_val);
+    if (!session) {
+        downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
+        *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_PUT_SESSION_DATA;
+        strcpy(data_ptr, "null session");
+        this->transmitFunction(downlink_data);
+        this->abend("processPutSessionData", "null session");
+        return;
+    }
+
+    char *data = session->getPendingDownLinkData();
+    downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
+    *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_SESSION_DATA;
+    memcpy(data_ptr, session->linkObject()->linkIdIndex(), LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE);
+    data_ptr += LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE;
+    memcpy(data_ptr, session->sessionIdIndex(), SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE);
+    data_ptr += SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE;
+    strcpy(data_ptr, data);
+    this->theFabricObject->dFabricObject()->transmitFunction(downlink_data);
 }
