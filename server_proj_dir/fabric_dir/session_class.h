@@ -14,6 +14,7 @@ class GroupClass;
 class SessionClass : public ListEntryClass {
     LinkClass *theLinkObject;
     GroupClass *theGroupObject;
+    void *thePendingDownLinkDataQueue;
 
     void debug(int on_off_val, char const *str0_val, char const *str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
     void logit(char const *str0_val, char const *str1_val);
@@ -29,4 +30,5 @@ public:
     GroupClass *groupObject(void) {return this->theGroupObject;}
 
     void bindGroup(GroupClass *group_object_val) {this->theGroupObject = group_object_val;}
+    void enqueuePendingDownLinkData(char *data_val);
 };

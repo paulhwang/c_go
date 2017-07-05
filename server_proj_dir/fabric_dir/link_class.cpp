@@ -29,6 +29,7 @@ LinkClass::LinkClass (void *list_mgr_object_val, FabricClass *fabric_object_val,
 
 LinkClass::~LinkClass (void)
 {
+    phwangFreeQueue(this->thePendingSessionSetupQueue);
 }
 
 SessionClass *LinkClass::mallocSession (void)

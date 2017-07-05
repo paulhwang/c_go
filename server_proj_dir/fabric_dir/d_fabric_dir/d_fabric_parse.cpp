@@ -258,10 +258,22 @@ void DFabricClass::processTransferSessionData (char *data_val)
         return;
     }
 
+    /* transfer data up */
     uplink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
     *data_ptr++ = FABRIC_THEME_PROTOCOL_COMMAND_IS_TRANSFER_DATA;
     memcpy(data_ptr, room, ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);
     data_ptr += ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE;
     strcpy(data_ptr, link_and_session_id_index_val + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE);
     this->theFabricObject->uFabricObject()->transmitFunction(uplink_data);
+
+    return;
+    /* send the response down */
+    downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
+    *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_TRANSFER_SESSION_DATA;
+    memcpy(data_ptr, session->linkObject()->linkIdIndex(), LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE);
+    data_ptr += LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE;
+    memcpy(data_ptr, session->sessionIdIndex(), SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE);
+    data_ptr += SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE;
+    strcpy(data_ptr, "job is done");
+    this->transmitFunction(downlink_data);
 }
