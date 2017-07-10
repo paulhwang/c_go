@@ -21,8 +21,9 @@ void PhwangClass::logit (char const* str0_val, char const* str1_val)
 
 void PhwangClass::abend (char const* str0_val, char const* str1_val)
 {
-    phwangLogit(str0_val, str1_val);
     phwangLogit("*****Abend*****", str0_val);
+    phwangLogit(str0_val, str1_val);
+    phwangLogit("*****Abend*****", str1_val);
     int *junk = 0;
     *junk = 0;
 }
@@ -107,7 +108,9 @@ void PhwangClass::listMgrFree(void *list_mgr_val)
     }
 
     if (strcmp(((ListMgrClass *) list_mgr_val)->objectName(), "ListMgrClass")) {
-        phwangAbend("listMgrFree", "wrong object");
+        char s[LOGIT_BUF_SIZE];
+        sprintf(s, "wrong object: objectName=%s", ((ListMgrClass *) list_mgr_val)->objectName());
+        phwangAbend("listMgrFree", s);
         return;
     }
 
@@ -122,7 +125,9 @@ void *PhwangClass::listMgrSearchEntry(void *list_mgr_val, char *data_val)
     }
 
     if (strcmp(((ListMgrClass *) list_mgr_val)->objectName(), "ListMgrClass")) {
-        phwangAbend("listMgrSearchEntry", "wrong object");
+        char s[LOGIT_BUF_SIZE];
+        sprintf(s, "wrong object: objectName=%s", ((ListMgrClass *) list_mgr_val)->objectName());
+        phwangAbend("listMgrSearchEntry", s);
         return 0;
     }
 
@@ -132,12 +137,14 @@ void *PhwangClass::listMgrSearchEntry(void *list_mgr_val, char *data_val)
 int PhwangClass::listMgrGetMaxIndex (void *list_mgr_val)
 {
     if (!list_mgr_val) {
-        phwangAbend("listMgrSearchEntry", "null list_mgr_val");
+        phwangAbend("listMgrGetMaxIndex", "null list_mgr_val");
         return 0;
     }
 
     if (strcmp(((ListMgrClass *) list_mgr_val)->objectName(), "ListMgrClass")) {
-        phwangAbend("listMgrSearchEntry", "wrong object");
+        char s[LOGIT_BUF_SIZE];
+        sprintf(s, "wrong object: objectName=%s", ((ListMgrClass *) list_mgr_val)->objectName());
+        phwangAbend("listMgrGetMaxIndex", s);
         return 0;
     }
 
@@ -147,12 +154,14 @@ int PhwangClass::listMgrGetMaxIndex (void *list_mgr_val)
 void *PhwangClass::listMgrGetEntryTableArray (void *list_mgr_val)
 {
     if (!list_mgr_val) {
-        phwangAbend("listMgrSearchEntry", "null list_mgr_val");
+        phwangAbend("listMgrGetEntryTableArray", "null list_mgr_val");
         return 0;
     }
 
     if (strcmp(((ListMgrClass *) list_mgr_val)->objectName(), "ListMgrClass")) {
-        phwangAbend("listMgrSearchEntry", "wrong object");
+        char s[LOGIT_BUF_SIZE];
+        sprintf(s, "wrong object: objectName=%s", ((ListMgrClass *) list_mgr_val)->objectName());
+        phwangAbend("listMgrGetEntryTableArray", s);
         return 0;
     }
 

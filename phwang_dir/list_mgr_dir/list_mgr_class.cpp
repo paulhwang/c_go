@@ -16,6 +16,11 @@ ListMgrClass::ListMgrClass (char const *caller_name_val, int id_size_val, int in
         theMaxIdIndexTableIndex(0),
         theMaxIndex(0)
 {
+    strcpy(this->theObjectName, "ListMgrClass");
+    for (int i = 0; i < LIST_MGR_ID_INDEX_ARRAY_SIZE; i++) {
+        theEntryTableArray[i] = 0;
+    }
+
     this->debug(true, "ListMgrClass", "init");
 }
 
@@ -34,22 +39,20 @@ int ListMgrClass::allocEntryId (void)
 
 int ListMgrClass::allocEntryIndex (void)
 {
-    int index = 0;
-    while (index < LIST_MGR_ID_INDEX_ARRAY_SIZE) {
-        if (!this->theEntryTableArray[index]) {
-            if (index > this->theMaxIndex) {
-                this->theMaxIndex = index;
+    for (int i = 0; i < LIST_MGR_ID_INDEX_ARRAY_SIZE; i++) {
+        if (!this->theEntryTableArray[i]) {
+            if (i > this->theMaxIndex) {
+                this->theMaxIndex = i;
             }
-            return index;
+            return i;
         }
-        index++;
     }
 
     this->abend("allocEntryIndex", "out of entry_index");
     return -1;
 }
 
-void ListMgrClass::insertEntry (ListEntryClass * entry_val)
+void ListMgrClass::insertEntry (ListEntryClass *entry_val)
 {
     this->debug(true, "InsertEntry", "");
 
@@ -101,12 +104,16 @@ ListEntryClass *ListMgrClass::getEntryByIdIndex (int entry_id_val, int link_inde
 
     ListEntryClass *entry = this->theEntryTableArray[link_index_val];
     if (!entry) {
-        this->abend("getEntryByIdIndex", "null entry");
+        char s[LOGIT_BUF_SIZE];
+        sprintf(s, "null entry: entry_id_val=%d link_index_val=%d", entry_id_val, link_index_val);
+        this->abend("getEntryByIdIndex", s);
         return 0;
     }
 
     if (entry->entryId() != entry_id_val){
-        this->abend("getEntryByIdIndex", "entry id does not match");
+        char s[LOGIT_BUF_SIZE];
+        sprintf(s, "entry id not match: entryId=%d entry_id_val=%d", entry->entryId(), entry_id_val);
+        this->abend("getEntryByIdIndex", s);
         return 0;
     }
 

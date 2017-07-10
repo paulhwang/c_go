@@ -5,6 +5,7 @@
 */
 
 #include "../../phwang_dir/phwang.h"
+#include "../../phwang_dir/list_mgr_dir/list_mgr_class.h"
 #include "fabric_class.h"
 #include "u_fabric_dir/u_fabric_class.h"
 #include "d_fabric_dir/d_fabric_class.h"
@@ -19,6 +20,7 @@ FabricClass::FabricClass (void)
     this->theNameListObject = new NameListClass(this);
     this->theLinkListMgrObject = phwangListMgrMalloc("LINK", LINK_MGR_PROTOCOL_LINK_ID_SIZE, LINK_MGR_PROTOCOL_LINK_INDEX_SIZE, 100);
     this->theGroupListMgrObject = phwangListMgrMalloc("GROUP", GROUP_MGR_PROTOCOL_GROUP_ID_SIZE, GROUP_MGR_PROTOCOL_GROUP_INDEX_SIZE, 500);
+    printf("7777777777777777777theLinkListMgrObject: objectName=%s\n", ((ListMgrClass *) this->theLinkListMgrObject)->objectName());
 
     this->debug(true, "FabricClass", "init");
 }
