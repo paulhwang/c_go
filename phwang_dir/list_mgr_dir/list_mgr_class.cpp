@@ -109,13 +109,13 @@ ListEntryClass *ListMgrClass::getEntryByIdIndex (int entry_id_val, int link_inde
     if (!entry) {
         char s[LOGIT_BUF_SIZE];
         sprintf(s, "null entry: entry_id_val=%d link_index_val=%d theEntryCount=%d extra_data_val=%s", entry_id_val, link_index_val, this->theEntryCount, (char *)extra_data_val);
-        this->abend("getEntryByIdIndex", s);
+        this->logit("getEntryByIdIndex", s);
         return 0;
     }
 
     if (entry->entryId() != entry_id_val){
         char s[LOGIT_BUF_SIZE];
-        sprintf(s, "entry id not match: entryId=%d entry_id_val=%d", entry->entryId(), entry_id_val);
+        sprintf(s, "entry id not match: entryId=%d entry_id_val=%d extra_data_val=%s", entry->entryId(), entry_id_val, (char *)extra_data_val);
         this->abend("getEntryByIdIndex", s);
         return 0;
     }
