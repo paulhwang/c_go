@@ -75,7 +75,7 @@ void ListMgrClass::freeEntry (ListEntryClass *list_entry_object_val)
 
 }
 
-ListEntryClass *ListMgrClass::searchEntry (char *data_val)
+ListEntryClass *ListMgrClass::searchEntry (char *data_val, void *extra_data_val)
 {
     int entry_id;
     int entry_index;
@@ -90,10 +90,10 @@ ListEntryClass *ListMgrClass::searchEntry (char *data_val)
         this->logit("searchEntry", s);
     }
 
-    return this->getEntryByIdIndex(entry_id, entry_index);
+    return this->getEntryByIdIndex(entry_id, entry_index, extra_data_val);
 }
 
-ListEntryClass *ListMgrClass::getEntryByIdIndex (int entry_id_val, int link_index_val)
+ListEntryClass *ListMgrClass::getEntryByIdIndex (int entry_id_val, int link_index_val, void *extra_data_val)
 {
     if (entry_id_val > LIST_MGR_MAX_GLOBAL_LIST_ID) {
         this->abend("getEntryByIdIndex", "entry_id_val too big");
@@ -108,7 +108,7 @@ ListEntryClass *ListMgrClass::getEntryByIdIndex (int entry_id_val, int link_inde
     ListEntryClass *entry = this->theEntryTableArray[link_index_val];
     if (!entry) {
         char s[LOGIT_BUF_SIZE];
-        sprintf(s, "null entry: entry_id_val=%d link_index_val=%d theEntryCount=%d", entry_id_val, link_index_val, this->theEntryCount);
+        sprintf(s, "null entry: entry_id_val=%d link_index_val=%d theEntryCount=%d extra_data_val=%s", entry_id_val, link_index_val, this->theEntryCount, (char *)extra_data_val);
         this->abend("getEntryByIdIndex", s);
         return 0;
     }

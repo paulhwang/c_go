@@ -24,7 +24,7 @@ class ListMgrClass {
 
     int allocEntryId(void);
     int allocEntryIndex(void);
-    ListEntryClass *getEntryByIdIndex(int entry_id_val, int link_index_val);
+    ListEntryClass *getEntryByIdIndex(int entry_id_val, int link_index_val, void *extra_data_val);
 
     void debug(int on_off_val, char const *str0_val, char const *str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
     void logit(char const *str0_val, char const *str1_val);
@@ -43,5 +43,5 @@ public:
     void insertEntry(ListEntryClass * entry_val);
     ListEntryClass *mallocEntry(void);
     void freeEntry(ListEntryClass *list_entry_object_val);
-    ListEntryClass *searchEntry(char *data_val);
+    ListEntryClass *searchEntry(char *data_val, void *extra_data_val);
 };

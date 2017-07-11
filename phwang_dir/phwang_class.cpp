@@ -117,7 +117,7 @@ void PhwangClass::listMgrFree(void *list_mgr_val)
     ((ListMgrClass *) list_mgr_val)->~ListMgrClass();
 }
 
-void *PhwangClass::listMgrSearchEntry(void *list_mgr_val, char *data_val)
+void *PhwangClass::listMgrSearchEntry(void *list_mgr_val, char *data_val, void *extra_data_val)
 {
     if (!list_mgr_val) {
         phwangAbend("listMgrSearchEntry", "null list_mgr_val");
@@ -131,7 +131,7 @@ void *PhwangClass::listMgrSearchEntry(void *list_mgr_val, char *data_val)
         return 0;
     }
 
-    return ((ListMgrClass *) list_mgr_val)->searchEntry(data_val);
+    return ((ListMgrClass *) list_mgr_val)->searchEntry(data_val, extra_data_val);
 }
 
 int PhwangClass::listMgrGetMaxIndex (void *list_mgr_val)

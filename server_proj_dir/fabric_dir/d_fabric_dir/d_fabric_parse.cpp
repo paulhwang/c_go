@@ -95,7 +95,7 @@ void DFabricClass::processGetLinkData (char *data_val)
     char *downlink_data;
     char *data_ptr;
 
-    LinkClass *link = this->theFabricObject->searchLink(link_id_index_val);
+    LinkClass *link = this->theFabricObject->searchLink(link_id_index_val, data_val - 1);
     if (!link) {
         this->abend("processGetLinkData", "link does not exist");
         downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
@@ -129,7 +129,7 @@ void DFabricClass::processGetNameList (char *data_val)
     char *downlink_data;
     char *data_ptr;
 
-    LinkClass *link = this->theFabricObject->searchLink(link_id_index_val);
+    LinkClass *link = this->theFabricObject->searchLink(link_id_index_val, data_val - 1);
     if (!link) {
         this->abend("processGetNameList", "link does not exist");
         downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
