@@ -13,6 +13,7 @@ ListMgrClass::ListMgrClass (char const *caller_name_val, int id_size_val, int in
         theIdSize(id_size_val),
         theIndexSize(index_size_val),
         theGlobalEntryId(global_entry_id_val),
+        theEntryCount(0),
         theMaxIdIndexTableIndex(0),
         theMaxIndex(0)
 {
@@ -44,6 +45,7 @@ int ListMgrClass::allocEntryIndex (void)
             if (i > this->theMaxIndex) {
                 this->theMaxIndex = i;
             }
+            this->theEntryCount++;
             return i;
         }
     }
@@ -54,7 +56,7 @@ int ListMgrClass::allocEntryIndex (void)
 
 void ListMgrClass::insertEntry (ListEntryClass *entry_val)
 {
-    this->debug(true, "InsertEntry", "");
+    this->debug(true, "====================InsertEntry", "");
 
     entry_val->setEntryId(this->allocEntryId());
     entry_val->setEntryIndex(this->allocEntryIndex());
@@ -69,6 +71,7 @@ void ListMgrClass::insertEntry (ListEntryClass *entry_val)
 
 void ListMgrClass::freeEntry (ListEntryClass *list_entry_object_val)
 {
+    this->theEntryCount--;
 
 }
 
@@ -77,11 +80,11 @@ ListEntryClass *ListMgrClass::searchEntry (char *data_val)
     int entry_id;
     int entry_index;
 
-    this->debug(true, "searchEntry", data_val);
+    this->debug(false, "searchEntry", data_val);
 
     phwangDecodeIdIndex(data_val, &entry_id, this->theIdSize, &entry_index, this->theIndexSize);
 
-    if (1) {
+    if (0) {
         char s[LOGIT_BUF_SIZE];
         sprintf(s, "entry_id=%d entry_index=%d", entry_id, entry_index);
         this->logit("searchEntry", s);
@@ -105,7 +108,7 @@ ListEntryClass *ListMgrClass::getEntryByIdIndex (int entry_id_val, int link_inde
     ListEntryClass *entry = this->theEntryTableArray[link_index_val];
     if (!entry) {
         char s[LOGIT_BUF_SIZE];
-        sprintf(s, "null entry: entry_id_val=%d link_index_val=%d", entry_id_val, link_index_val);
+        sprintf(s, "null entry: entry_id_val=%d link_index_val=%d theEntryCount=%d", entry_id_val, link_index_val, this->theEntryCount);
         this->abend("getEntryByIdIndex", s);
         return 0;
     }

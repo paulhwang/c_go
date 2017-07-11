@@ -5,8 +5,9 @@
 */
 
 #include "../../../phwang_dir/phwang.h"
-#include "d_fabric_class.h"
 #include "../../protocol_dir/net_port_protocol.h"
+#include "../../protocol_dir/web_fabric_protocol.h"
+#include "d_fabric_class.h"
 #include "../fabric_class.h"
 #include "../u_fabric_dir/u_fabric_class.h"
 
@@ -34,7 +35,9 @@ void DFabricClass::exportedNetAcceptFunction (void *tp_transfer_object_val)
 }
 
 void dFabricTpReceiveDataFunction (void *d_fabric_object_val, void *data_val) {
-    phwangLogit("Golbal::dFabricTpReceiveDataFunction", (char *) data_val);
+    if (*((char *)data_val) != WEB_FABRIC_PROTOCOL_COMMAND_IS_GET_LINK_DATA) {
+        phwangLogit("Golbal::dFabricTpReceiveDataFunction", (char *) data_val);
+    }
     ((DFabricClass *) d_fabric_object_val)->exportedparseFunction((char *) data_val);
 }
 

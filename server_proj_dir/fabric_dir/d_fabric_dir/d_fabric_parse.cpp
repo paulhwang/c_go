@@ -21,7 +21,9 @@
 
 void DFabricClass::exportedparseFunction (char *data_val)
 {
-    this->logit("exportedparseFunction", data_val);
+    if (*data_val != WEB_FABRIC_PROTOCOL_COMMAND_IS_GET_LINK_DATA) {
+        this->logit("exportedparseFunction", data_val);
+    }
 
     if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_MALLOC_LINK) {
         this->processMallocLink(data_val + 1);
@@ -86,7 +88,7 @@ void DFabricClass::processMallocLink (char *data_val)
 
 void DFabricClass::processGetLinkData (char *data_val)
 {
-    this->debug(true, "processGetLinkData", data_val);
+    this->debug(false, "processGetLinkData", data_val);
 
     char *link_id_index_val = data_val;
     char *end_val = link_id_index_val + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE;

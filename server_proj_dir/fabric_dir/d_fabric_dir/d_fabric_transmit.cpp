@@ -5,11 +5,14 @@
 */
 
 #include "../../../phwang_dir/phwang.h"
+#include "../../protocol_dir/web_fabric_protocol.h"
 #include "d_fabric_class.h"
 
 void DFabricClass::transmitFunction (char *data_val)
 {
-    this->logit("transmitFunction", data_val);
+	if (*data_val != WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA) {
+    	this->debug(true, "transmitFunction", data_val);
+    }
 
     if (!this->theTpTransferObject) {
         this->abend("transmitFunction", "null theTpTransferObject");
