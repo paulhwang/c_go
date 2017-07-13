@@ -6,10 +6,11 @@
 
 #pragma once
 
+#include "../protocol_dir/web_fabric_protocol.h"
 class FabricClass;
 
 class NameListClass {
-#define NAME_LIST_CLASS_NAME_LIST_TAG_SIZE 3
+#define NAME_LIST_CLASS_NAME_LIST_TAG_SIZE WEB_FABRIC_PROTOCOL_NAME_LIST_TAG_SIZE
 #define NAME_LIST_CLASS_MAX_NAME_LIST_TAG 999
 #define NAME_LIST_CLASS_NAME_LIST_BUFFER_SIZE 1024
 

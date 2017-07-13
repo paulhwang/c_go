@@ -106,8 +106,8 @@ void DFabricClass::processGetLinkData (char *data_val)
     downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
     *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA;
     *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_NAME_LIST;
-    phwangEncodeNumber(data_ptr, this->theFabricObject->nameListObject()->nameListTag(), NAME_LIST_CLASS_NAME_LIST_TAG_SIZE);
-    data_ptr += NAME_LIST_CLASS_NAME_LIST_TAG_SIZE;
+    phwangEncodeNumber(data_ptr, this->theFabricObject->nameListObject()->nameListTag(), WEB_FABRIC_PROTOCOL_NAME_LIST_TAG_SIZE);
+    data_ptr += WEB_FABRIC_PROTOCOL_NAME_LIST_TAG_SIZE;
     *data_ptr = 0;
 
     char *pending_session = link->getPendingSessionSetup();
