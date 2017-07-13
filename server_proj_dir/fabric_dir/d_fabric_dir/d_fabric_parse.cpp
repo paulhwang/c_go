@@ -97,15 +97,15 @@ void DFabricClass::processGetLinkData (char *data_val)
 
     LinkClass *link = this->theFabricObject->searchLink(link_id_index_val, data_val - 1);
     if (!link) {
-        this->abend("processGetLinkData", "link does not exist");
+        this->logit("+++++++++++++ABEND::processGetLinkData", "link does not exist");
         downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
         *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA;
-        strcpy(data_ptr, "link does not exist");
         this->transmitFunction(downlink_data);
         return;
     }
     downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
     *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA;
+    *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_NAME_LIST;
     phwangEncodeNumber(data_ptr, this->theFabricObject->nameListObject()->nameListTag(), NAME_LIST_CLASS_NAME_LIST_TAG_SIZE);
     data_ptr += NAME_LIST_CLASS_NAME_LIST_TAG_SIZE;
     *data_ptr = 0;
