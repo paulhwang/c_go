@@ -18,12 +18,12 @@ void UThemeClass::exportedparseFunction(char *data_val)
 {
     this->debug(true, "exportedparseFunction", data_val);
 
-    if (*data_val == THEME_ENGINE_PROTOCOL_RESPOND_IS_MALLOC_BASE) {
+    if (*data_val == THEME_ENGINE_PROTOCOL_RESPOND_IS_SETUP_BASE) {
         this->processMallocBaseResponse(data_val + 1);
         return;
     }
 
-    if (*data_val == THEME_ENGINE_PROTOCOL_RESPOND_IS_TRANSFER_DATA) {
+    if (*data_val == THEME_ENGINE_PROTOCOL_RESPOND_IS_PUT_BASE_DATA) {
         this->processTransferDataResponse(data_val + 1);
         return;
     }

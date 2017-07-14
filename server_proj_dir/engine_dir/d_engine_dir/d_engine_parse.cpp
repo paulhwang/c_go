@@ -14,12 +14,12 @@ void DEngineClass::exportedparseFunction (char *data_val)
 {
     this->debug(true, "exportedparseFunction", data_val);
 
-    if (*data_val == THEME_ENGINE_PROTOCOL_COMMAND_IS_MALLOC_BASE) {
+    if (*data_val == THEME_ENGINE_PROTOCOL_COMMAND_IS_SETUP_BASE) {
         this->processMallocBase(data_val + 1);
         return;
     }
 
-    if (*data_val == THEME_ENGINE_PROTOCOL_COMMAND_IS_TRANSFER_DATA) {
+    if (*data_val == THEME_ENGINE_PROTOCOL_COMMAND_IS_PUT_BASE_DATA) {
         this->processTransferData(data_val + 1);
         return;
     }
@@ -42,7 +42,7 @@ void DEngineClass::processMallocBase(char *data_val)
     go_base_object->setRoomIdIndex(data_val);
 
     downlink_data = data_ptr = (char *) malloc(BASE_MGR_DATA_BUFFER_SIZE + 4);
-    *data_ptr++ = THEME_ENGINE_PROTOCOL_RESPOND_IS_MALLOC_BASE;
+    *data_ptr++ = THEME_ENGINE_PROTOCOL_RESPOND_IS_SETUP_BASE;
     memcpy(data_ptr, data_val, ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);
     data_ptr += ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE;
     memcpy(data_ptr, go_base_object->goBaseIdIndex(), BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE);
@@ -73,7 +73,7 @@ void DEngineClass::processTransferDataResponse(GoBaseClass *base_object_val, cha
     char *data_ptr;
 
     downlink_data = data_ptr = (char *) malloc(BASE_MGR_DATA_BUFFER_SIZE + 4);
-    *data_ptr++ = THEME_ENGINE_PROTOCOL_RESPOND_IS_TRANSFER_DATA;
+    *data_ptr++ = THEME_ENGINE_PROTOCOL_RESPOND_IS_PUT_BASE_DATA;
     memcpy(data_ptr, base_object_val->roomIdIndex(), ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);
     data_ptr += ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE;
     strcpy(data_ptr, data_val);
