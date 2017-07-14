@@ -12,7 +12,7 @@ class GoBoardClass {
     GoBaseClass *theBaseObject;
     int theBoardArray[19][19];
     int theMarkedBoardArray[19][19];
-    char theBoardOutputBuffer[3 + 1 + 19 * 19 + 3 * 2 + 2 * 2 + 16];
+    char theBoardOutputBuffer[3 + 1 + 19 * 19 + 3 * 2 + 2 * 2 + 64];
     int theBlackCapturedStones;
     int theWhiteCapturedStones;
     int theLastDeadX;
@@ -31,6 +31,7 @@ public:
 
     int boardArray(int x_val, int y_val) {return this->theBoardArray[x_val][y_val];}
 
+    char *boardOutputBuffer() {return this->theBoardOutputBuffer;}
     void setBoardArray(int x_val, int y_val, int data_val) {this->theBoardArray[x_val][y_val] = data_val;}
     void addBlackCapturedStones(int val) {this->theBlackCapturedStones += val;}
     void addWhiteCapturedStones(int val) {this->theWhiteCapturedStones += val;}
@@ -39,6 +40,6 @@ public:
     void resetBoardObjectData(void);
     void resetMarkedBoardObjectData(void);
     void addStoneToBoard(int x_val, int y_val, int color_val);
-    char *encodeBoard(void);
+    void encodeBoard(void);
     int stoneHasAir(int x_val, int y_val);
 };

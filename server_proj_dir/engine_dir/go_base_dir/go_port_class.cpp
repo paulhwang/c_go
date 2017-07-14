@@ -30,8 +30,9 @@ GoPortClass::GoPortClass (GoBaseClass *base_object_val):
 }
 
 void GoPortClass::transmitBoardData (void) {
-    this->debug(true, "transmitBoardData", this->theBaseObject->boardObject()->encodeBoard());
-    this->theBaseObject->engineObject()->dEngineObject()->processPutBaseDataResponse(this->theBaseObject, this->theBaseObject->boardObject()->encodeBoard());
+    this->theBaseObject->boardObject()->encodeBoard();
+    this->debug(true, "transmitBoardData", this->theBaseObject->boardObject()->boardOutputBuffer());
+    this->theBaseObject->engineObject()->dEngineObject()->processPutBaseDataResponse(this->theBaseObject, this->theBaseObject->boardObject()->boardOutputBuffer());
 }
 
 void GoPortClass::receiveInputData (char const *str_val) {

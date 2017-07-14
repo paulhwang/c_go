@@ -25,7 +25,7 @@ void GoBoardClass::addStoneToBoard (int x_val, int y_val, int color_val)
     this->theBoardArray[x_val][y_val] = color_val;
 }
 
-char *GoBoardClass::encodeBoard (void) {
+void GoBoardClass::encodeBoard (void) {
     char *buf_ptr = this->theBoardOutputBuffer;
 
     phwangEncodeNumber(buf_ptr, this->theBaseObject->gameObject()->totalMoves(), 3);
@@ -52,8 +52,7 @@ char *GoBoardClass::encodeBoard (void) {
 
     *buf_ptr = 0;
 
-    this->debug(true, "encodeBoard", this->theBoardOutputBuffer);
-    return this->theBoardOutputBuffer;
+    this->debug(false, "encodeBoard", this->theBoardOutputBuffer);
 }
 
 void GoBoardClass::resetBoardObjectData (void) {
