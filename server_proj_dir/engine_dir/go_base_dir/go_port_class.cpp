@@ -14,6 +14,14 @@
 #include "../../protocol_dir/base_mgr_protocol.h"
 
 #define GO_PROTOCOL_MOVE_COMMAND 'M'
+#define GO_PROTOCOL_PASS_COMMAND 'P'
+#define GO_PROTOCOL_BACKWARD_COMMAND 'b'
+#define GO_PROTOCOL_DOUBLE_BACKWARD_COMMAND 'B'
+#define GO_PROTOCOL_FORWARD_COMMAND 'f'
+#define GO_PROTOCOL_DOUBLE_FORWARD_COMMAND 'F'
+#define GO_PROTOCOL_RESIGN_COMMAND 'R'
+#define GO_PROTOCOL_CONFIRM_COMMAND 'C'
+#define GO_PROTOCOL_CONTINUE_COMMAND 'c'
 
 #define GO_PROTOCOL_CODE_SIZE 7
 #define GO_PROTOCOL_CODE_PROPOSE      "Propose"
@@ -45,27 +53,39 @@ void GoPortClass::receiveInputData (char const *str_val) {
         return;
     }
 
-    if (*str_val == GO_PROTOCOL_MOVE_COMMAND) {
-        this->aMoveIsPlayed(str_val + 1);
-        return;
-    }
+    switch (*str_val) {
+        case GO_PROTOCOL_MOVE_COMMAND:
+            this->aMoveIsPlayed(str_val + 1);
+            return;
 
-    memcpy(code, str_val, GO_PROTOCOL_CODE_SIZE);
-    code[GO_PROTOCOL_CODE_SIZE] = 0;
-    strcpy(data, str_val + GO_PROTOCOL_CODE_SIZE);
+        case GO_PROTOCOL_BACKWARD_COMMAND:
+            this->theBaseObject->gameObject()->processBackwardMove();
+            this->theBaseObject->portObject()->transmitBoardData();
+            return;
 
-    this->debug(true, "receiveInputData", code);
-    this->debug(true, "receiveInputData", data);
+        case GO_PROTOCOL_DOUBLE_BACKWARD_COMMAND:
+            this->theBaseObject->gameObject()->processDoubleBackwardMove();
+            this->theBaseObject->portObject()->transmitBoardData();
+            return;
 
-    if (!strcmp(code, GO_PROTOCOL_CODE_MOVE_DATA)) {
-        this->aMoveIsPlayed(data);
-        return;
+        case GO_PROTOCOL_FORWARD_COMMAND:
+            this->theBaseObject->gameObject()->processForwardMove();
+            this->theBaseObject->portObject()->transmitBoardData();
+            return;
+
+        case GO_PROTOCOL_DOUBLE_FORWARD_COMMAND:
+            this->theBaseObject->gameObject()->processDoubleForwardMove();
+            this->theBaseObject->portObject()->transmitBoardData();
+            return;
+
+        case GO_PROTOCOL_PASS_COMMAND:
+        case GO_PROTOCOL_RESIGN_COMMAND:
+        case GO_PROTOCOL_CONFIRM_COMMAND:
+        case GO_PROTOCOL_CONTINUE_COMMAND:
+
+        default:
+            this->abend("receiveInputData", str_val);
     }
-    else if (!strcmp(code, GO_PROTOCOL_CODE_SPECIAL_MOVE)) {
-        this->aSpecialMoveIsPlayed(data);
-        return;
-    }
-    this->abend("receiveInputData", code);
 };
 
 void GoPortClass::aMoveIsPlayed (char const *str_val) {

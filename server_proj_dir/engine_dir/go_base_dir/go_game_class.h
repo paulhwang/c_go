@@ -24,10 +24,6 @@ class GoGameClass
     void resetGameObjectData(void);
     void resetGameObjectPartialData(void);
 
-    void processBackwardMove(void);
-    void processDoubleBackwardMove(void);
-    void processForwardMove(void);
-    void processDoubleForwardMove(void);
     void processTheWholeMoveList(void);
 
     void debug(int on_off_val, char const *str0_val, char const *str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
@@ -44,4 +40,8 @@ public:
 
     void addNewMoveAndFight(GoMoveClass *move_val);
     void receiveSpecialMoveFromOpponent(char const *data_val);
+    void processBackwardMove(void);
+    void processDoubleBackwardMove(void);
+    void processForwardMove(void);
+    void processDoubleForwardMove(void);
 };
