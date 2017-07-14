@@ -19,29 +19,29 @@ void UThemeClass::exportedparseFunction(char *data_val)
     this->debug(true, "exportedparseFunction", data_val);
 
     if (*data_val == THEME_ENGINE_PROTOCOL_RESPOND_IS_SETUP_BASE) {
-        this->processMallocBaseResponse(data_val + 1);
+        this->processSetupBaseResponse(data_val + 1);
         return;
     }
 
     if (*data_val == THEME_ENGINE_PROTOCOL_RESPOND_IS_PUT_BASE_DATA) {
-        this->processTransferDataResponse(data_val + 1);
+        this->processPutBaseDataResponse(data_val + 1);
         return;
     }
 
     this->abend("exportedparseFunction", data_val);
 }
 
-void UThemeClass::processMallocBaseResponse(char *data_val)
+void UThemeClass::processSetupBaseResponse(char *data_val)
 {
     char *downlink_data;
     char *data_ptr;
     int group_array_size;
 
-    this->debug(true, "processMallocBaseResponse", data_val);
+    this->debug(true, "processSetupBaseResponse", data_val);
 
     RoomClass *room = this->theThemeObject->searchRoom(data_val);
     if (!room) {
-        this->abend("processMallocBaseResponse", "null room");
+        this->abend("processSetupBaseResponse", "null room");
         return;
     }
 
@@ -58,17 +58,17 @@ void UThemeClass::processMallocBaseResponse(char *data_val)
     this->theThemeObject->dThemeObject()->transmitFunction(downlink_data);
 }
 
-void UThemeClass::processTransferDataResponse(char *data_val)
+void UThemeClass::processPutBaseDataResponse(char *data_val)
 {
     char *downlink_data;
     char *data_ptr;
     int group_array_size;
 
-    this->debug(true, "processTransferDataResponse", data_val);
+    this->debug(true, "processPutBaseDataResponse", data_val);
 
     RoomClass *room = this->theThemeObject->searchRoom(data_val);
     if (!room) {
-        this->abend("processTransferDataResponse", "null room");
+        this->abend("processPutBaseDataResponse", "null room");
         return;
     }
     data_val += ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE;
