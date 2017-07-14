@@ -110,6 +110,24 @@ void DFabricClass::processGetLinkData (char *data_val)
     data_ptr += WEB_FABRIC_PROTOCOL_NAME_LIST_TAG_SIZE;
     *data_ptr = 0;
 
+    int max_session_table_array_index = phwnagListMgrGetMaxIndex(link->sessionListMgrObject());
+    SessionClass **session_table_array = (SessionClass **) phwangListMgrGetEntryTableArray(link->sessionListMgrObject());
+    for (int i = 0; i <= max_session_table_array_index; i++) {
+        SessionClass *session = session_table_array[i];
+        if (session) {
+            char *pending_downlink_data = session->getPendingDownLinkData();
+            if (pending_downlink_data) {
+                *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_PENDING_DATA;
+                session->enqueuePendingDownLinkData(pending_downlink_data);
+                strcpy(data_ptr, link->linkIdIndex());
+                data_ptr += 8;
+                strcpy(data_ptr, session->sessionIdIndex());
+                data_ptr += 8;
+                this->debug(true, "==================processGetLinkData", downlink_data);
+            }
+        }
+    }
+
     char *pending_session = link->getPendingSessionSetup();
     if (pending_session) {
         *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_PENDING_SESSION;
