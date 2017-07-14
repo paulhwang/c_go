@@ -23,14 +23,6 @@
 #define GO_PROTOCOL_CONFIRM_COMMAND 'C'
 #define GO_PROTOCOL_CONTINUE_COMMAND 'c'
 
-#define GO_PROTOCOL_CODE_SIZE 7
-#define GO_PROTOCOL_CODE_PROPOSE      "Propose"
-#define GO_PROTOCOL_CODE_ACCEPT       "Accept "
-#define GO_PROTOCOL_CODE_CONFIRM      "Confirm"
-#define GO_PROTOCOL_CODE_MOVE_DATA    "Move   "
-#define GO_PROTOCOL_CODE_SPECIAL_MOVE "Special"
-#define GO_PROTOCOL_CODE_BOARD_DATA   "Board  "
-
 GoPortClass::GoPortClass (GoBaseClass *base_object_val):
     theBaseObject(base_object_val)
 {
@@ -43,15 +35,7 @@ void GoPortClass::transmitBoardData (void) {
 }
 
 void GoPortClass::receiveInputData (char const *str_val) {
-    char code[GO_PROTOCOL_CODE_SIZE + 4];
-    char data[32];
-
     this->debug(true, "receiveInputData", str_val);
-
-    if (!str_val) {
-        this->abend("receiveInputData", "null input");
-        return;
-    }
 
     switch (*str_val) {
         case GO_PROTOCOL_MOVE_COMMAND:
