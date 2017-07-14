@@ -132,6 +132,7 @@ void DFabricClass::processGetLinkData (char *data_val)
     if (pending_session) {
         *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_PENDING_SESSION;
         strcpy(data_ptr, pending_session);
+        this->debug(true, "==================processGetLinkData", downlink_data);
     }
 
     this->transmitFunction(downlink_data);
