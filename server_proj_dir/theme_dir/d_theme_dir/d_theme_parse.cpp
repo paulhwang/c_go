@@ -17,12 +17,12 @@ void DThemeClass::exportedparseFunction (char *data_val)
 {
     this->debug(true, "exportedparseFunction", data_val);
 
-    if (*data_val == FABRIC_THEME_PROTOCOL_COMMAND_IS_MALLOC_ROOM) {
+    if (*data_val == FABRIC_THEME_PROTOCOL_COMMAND_IS_SETUP_ROOM) {
         this->processMallocRoom(data_val + 1);
         return;
     }
 
-    if (*data_val == FABRIC_THEME_PROTOCOL_COMMAND_IS_TRANSFER_DATA) {
+    if (*data_val == FABRIC_THEME_PROTOCOL_COMMAND_IS_PUT_ROOM_DATA) {
         this->processTransferData(data_val + 1);
         return;
     }
@@ -42,7 +42,7 @@ void DThemeClass::processMallocRoom (char *data_val)
     if (!room) {
         this->abend("processMallocRoom", "null room");
         downlink_data = data_ptr = (char *) malloc(ROOM_MGR_DATA_BUFFER_SIZE + 4);
-        *data_ptr++ = FABRIC_THEME_PROTOCOL_RESPOND_IS_MALLOC_ROOM;
+        *data_ptr++ = FABRIC_THEME_PROTOCOL_RESPOND_IS_SETUP_ROOM;
         strcpy(data_ptr, "null room");
         this->transmitFunction(downlink_data);
         return;
@@ -69,7 +69,7 @@ void DThemeClass::processTransferData (char *data_val)
     if (!room) {
         this->abend("processTransferData", "null room");
         downlink_data = data_ptr = (char *) malloc(ROOM_MGR_DATA_BUFFER_SIZE + 4);
-        *data_ptr++ = FABRIC_THEME_PROTOCOL_RESPOND_IS_TRANSFER_DATA;
+        *data_ptr++ = FABRIC_THEME_PROTOCOL_RESPOND_IS_PUT_ROOM_DATA;
         strcpy(data_ptr, "null room");
         this->transmitFunction(downlink_data);
         return;

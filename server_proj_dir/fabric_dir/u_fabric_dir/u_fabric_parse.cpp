@@ -20,12 +20,12 @@ void UFabricClass::exportedParseFunction(char *data_val)
 {
     this->debug(true, "exportedParseFunction", data_val);
 
-    if (*data_val == FABRIC_THEME_PROTOCOL_RESPOND_IS_MALLOC_ROOM) {
+    if (*data_val == FABRIC_THEME_PROTOCOL_RESPOND_IS_SETUP_ROOM) {
         this->processMallocRoomResponse(data_val + 1);
         return;
     }
 
-    if (*data_val == FABRIC_THEME_PROTOCOL_RESPOND_IS_TRANSFER_DATA) {
+    if (*data_val == FABRIC_THEME_PROTOCOL_RESPOND_IS_PUT_ROOM_DATA) {
         this->processTransferDataResponse(data_val + 1);
         return;
     }
