@@ -18,29 +18,29 @@ void DThemeClass::exportedparseFunction (char *data_val)
     this->debug(true, "exportedparseFunction", data_val);
 
     if (*data_val == FABRIC_THEME_PROTOCOL_COMMAND_IS_SETUP_ROOM) {
-        this->processMallocRoom(data_val + 1);
+        this->processSetupRoom(data_val + 1);
         return;
     }
 
     if (*data_val == FABRIC_THEME_PROTOCOL_COMMAND_IS_PUT_ROOM_DATA) {
-        this->processTransferData(data_val + 1);
+        this->processPutRoomData(data_val + 1);
         return;
     }
 
     this->abend("exportedparseFunction", data_val);
 }
 
-void DThemeClass::processMallocRoom (char *data_val)
+void DThemeClass::processSetupRoom (char *data_val)
 {
     char *downlink_data;
     char *uplink_data;
     char *data_ptr;
 
-    this->debug(true, "processMallocRoom", data_val);
+    this->debug(true, "processSetupRoom", data_val);
 
     RoomClass *room = this->theThemeObject->mallocRoom(data_val);
     if (!room) {
-        this->abend("processMallocRoom", "null room");
+        this->abend("processSetupRoom", "null room");
         downlink_data = data_ptr = (char *) malloc(ROOM_MGR_DATA_BUFFER_SIZE + 4);
         *data_ptr++ = FABRIC_THEME_PROTOCOL_RESPOND_IS_SETUP_ROOM;
         strcpy(data_ptr, "null room");
@@ -57,17 +57,17 @@ void DThemeClass::processMallocRoom (char *data_val)
     this->theThemeObject->uThemeObject()->transmitFunction(uplink_data);
 }
 
-void DThemeClass::processTransferData (char *data_val)
+void DThemeClass::processPutRoomData (char *data_val)
 {
     char *downlink_data;
     char *uplink_data;
     char *data_ptr;
 
-    this->debug(true, "processTransferData", data_val);
+    this->debug(true, "processPutRoomData", data_val);
 
     RoomClass *room = this->theThemeObject->searchRoom(data_val);
     if (!room) {
-        this->abend("processTransferData", "null room");
+        this->abend("processPutRoomData", "null room");
         downlink_data = data_ptr = (char *) malloc(ROOM_MGR_DATA_BUFFER_SIZE + 4);
         *data_ptr++ = FABRIC_THEME_PROTOCOL_RESPOND_IS_PUT_ROOM_DATA;
         strcpy(data_ptr, "null room");
