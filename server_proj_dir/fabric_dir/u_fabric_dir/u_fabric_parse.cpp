@@ -21,24 +21,24 @@ void UFabricClass::exportedParseFunction(char *data_val)
     this->debug(true, "exportedParseFunction", data_val);
 
     if (*data_val == FABRIC_THEME_PROTOCOL_RESPOND_IS_SETUP_ROOM) {
-        this->processMallocRoomResponse(data_val + 1);
+        this->processSetupRoomResponse(data_val + 1);
         return;
     }
 
     if (*data_val == FABRIC_THEME_PROTOCOL_RESPOND_IS_PUT_ROOM_DATA) {
-        this->processTransferDataResponse(data_val + 1);
+        this->processPutRoomDataResponse(data_val + 1);
         return;
     }
 
     this->abend("exportedParseFunction", data_val);
 }
 
-void UFabricClass::processMallocRoomResponse(char *data_val)
+void UFabricClass::processSetupRoomResponse(char *data_val)
 {
 	char *output_data;
     int session_array_size;
 
-    this->debug(true, "processMallocRoomResponse", data_val);
+    this->debug(true, "processSetupRoomResponse", data_val);
 
     GroupClass *group = this->theFabricObject->searchGroup(data_val);
     if (group) {
@@ -52,17 +52,17 @@ void UFabricClass::processMallocRoomResponse(char *data_val)
     }
 }
 
-void UFabricClass::processTransferDataResponse(char *data_val)
+void UFabricClass::processPutRoomDataResponse(char *data_val)
 {
     char *downlink_data;
     char *data_ptr;
     int session_array_size;
 
-    this->debug(true, "processTransferDataResponse", data_val);
+    this->debug(true, "processPutRoomDataResponse", data_val);
 
     GroupClass *group = this->theFabricObject->searchGroup(data_val);
     if (!group) {
-        this->abend("processTransferDataResponse", "null group");
+        this->abend("processPutRoomDataResponse", "null group");
         return;
     }
     data_val += GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE;
