@@ -35,11 +35,14 @@ void GoPortClass::transmitBoardData (void) {
 }
 
 void GoPortClass::receiveInputData (char const *str_val) {
+    GoMoveClass *move;
     this->debug(true, "receiveInputData", str_val);
 
     switch (*str_val) {
         case GO_PROTOCOL_MOVE_COMMAND:
-            this->aMoveIsPlayed(str_val + 1);
+            move = new GoMoveClass(this->theBaseObject, str_val + 1);
+            this->theBaseObject->gameObject()->addNewMoveAndFight(move);
+            this->transmitBoardData();
             return;
 
         case GO_PROTOCOL_BACKWARD_COMMAND:
@@ -71,19 +74,6 @@ void GoPortClass::receiveInputData (char const *str_val) {
             this->abend("receiveInputData", str_val);
     }
 };
-
-void GoPortClass::aMoveIsPlayed (char const *str_val) {
-    this->debug(true, "aMoveIsPlayed", str_val);
-
-    GoMoveClass *move = new GoMoveClass(this->theBaseObject, str_val);
-    this->theBaseObject->gameObject()->addNewMoveAndFight(move);
-    this->transmitBoardData();
-}
-
-void GoPortClass::aSpecialMoveIsPlayed (char const *str_val) {
-    this->debug(true, "aSpecialMoveIsPlayed", str_val);
-    this->theBaseObject->gameObject()->receiveSpecialMoveFromOpponent(str_val);
-}
 
 void GoPortClass::logit (char const *str0_val, char const *str1_val) {
     char s[LOGIT_BUF_SIZE];
