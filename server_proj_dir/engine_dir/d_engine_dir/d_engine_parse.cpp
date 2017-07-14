@@ -15,28 +15,28 @@ void DEngineClass::exportedparseFunction (char *data_val)
     this->debug(true, "exportedparseFunction", data_val);
 
     if (*data_val == THEME_ENGINE_PROTOCOL_COMMAND_IS_SETUP_BASE) {
-        this->processMallocBase(data_val + 1);
+        this->processSetupBase(data_val + 1);
         return;
     }
 
     if (*data_val == THEME_ENGINE_PROTOCOL_COMMAND_IS_PUT_BASE_DATA) {
-        this->processTransferData(data_val + 1);
+        this->processPutBaseData(data_val + 1);
         return;
     }
 
     this->abend("exportedparseFunction", data_val);
 }
 
-void DEngineClass::processMallocBase(char *data_val)
+void DEngineClass::processSetupBase(char *data_val)
 {
     char *downlink_data;
     char *data_ptr;
 
-    this->debug(true, "processMallocBase", data_val);
+    this->debug(true, "processSetupBase", data_val);
 
     GoBaseClass *go_base_object = this->theEngineObject->mallocGoBase(data_val + ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);
     if (!go_base_object) {
-        this->abend("processMallocBase", "null go_base");
+        this->abend("processSetupBase", "null go_base");
         return;
     }
     go_base_object->setRoomIdIndex(data_val);
@@ -51,18 +51,18 @@ void DEngineClass::processMallocBase(char *data_val)
     this->transmitFunction(downlink_data);
 }
 
-void DEngineClass::processTransferData(char *data_val)
+void DEngineClass::processPutBaseData(char *data_val)
 {
-    this->debug(true, "processTransferData", data_val);
+    this->debug(true, "processPutBaseData", data_val);
 
     GoBaseClass *base_object = this->theEngineObject->searchGoBase(data_val);
     if (!base_object) {
-        this->abend("processTransferData", "null base_object");
+        this->abend("processPutBaseData", "null base_object");
         /* TBD */
         return;
     }
 
-    this->debug(true, "processTransferData", base_object->goBaseIdIndex());
+    this->debug(true, "processPutBaseData", base_object->goBaseIdIndex());
 
     base_object->portObject()->receiveInputData(data_val + ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);
 }
