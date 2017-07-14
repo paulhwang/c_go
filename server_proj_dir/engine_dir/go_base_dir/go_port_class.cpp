@@ -13,6 +13,8 @@
 #include "../d_engine_dir/d_engine_class.h"
 #include "../../protocol_dir/base_mgr_protocol.h"
 
+#define GO_PROTOCOL_MOVE_COMMAND 'M'
+
 #define GO_PROTOCOL_CODE_SIZE 7
 #define GO_PROTOCOL_CODE_PROPOSE      "Propose"
 #define GO_PROTOCOL_CODE_ACCEPT       "Accept "
@@ -40,6 +42,11 @@ void GoPortClass::receiveInputData (char const *str_val) {
 
     if (!str_val) {
         this->abend("receiveInputData", "null input");
+        return;
+    }
+
+    if (*str_val == GO_PROTOCOL_MOVE_COMMAND) {
+        this->aMoveIsPlayed(str_val + 1);
         return;
     }
 
