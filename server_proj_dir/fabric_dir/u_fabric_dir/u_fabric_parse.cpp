@@ -73,6 +73,7 @@ void UFabricClass::processPutRoomDataResponse(char *data_val)
         if (session) {
             session->enqueuePendingDownLinkData(data_val);
 
+            if (0) {
             downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
             *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_PUT_SESSION_DATA;
             memcpy(data_ptr, session->linkObject()->linkIdIndex(), LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE);
@@ -81,6 +82,7 @@ void UFabricClass::processPutRoomDataResponse(char *data_val)
             data_ptr += SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE;
             strcpy(data_ptr, data_val);
             this->theFabricObject->dFabricObject()->transmitFunction(downlink_data);
+            }
         }
     }
 }
