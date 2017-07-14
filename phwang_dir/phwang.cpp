@@ -18,17 +18,22 @@ void phwangInit (void)
 }
 
 /* logit */
-void phwangLogit (char const* str0_val, char const* str1_val)
+void phwangDebug (int on_off_val, char const *str0_val, char const *str1_val)
+{
+    thePhwangObject->debug(on_off_val, str0_val, str1_val);
+}
+
+void phwangLogit (char const *str0_val, char const *str1_val)
 {
     thePhwangObject->logit(str0_val, str1_val);
 }
 
-void phwangAbend (char const* str0_val, char const* str1_val)
+void phwangAbend (char const *str0_val, char const *str1_val)
 {
     thePhwangObject->abend(str0_val, str1_val);
 }
 
-void phwangPrintBoard (char const* data_val, int board_size_val)
+void phwangPrintBoard (char const *data_val, int board_size_val)
 {
     thePhwangObject->printBoard(data_val, board_size_val);
 }

@@ -16,7 +16,7 @@
 
 void UThemeClass::exportedparseFunction(char *data_val)
 {
-    this->debug(true, "exportedparseFunction", data_val);
+    this->debug(false, "exportedparseFunction", data_val);
 
     if (*data_val == THEME_ENGINE_PROTOCOL_RESPOND_IS_SETUP_BASE) {
         this->processSetupBaseResponse(data_val + 1);

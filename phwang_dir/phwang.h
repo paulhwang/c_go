@@ -15,9 +15,10 @@
 void phwangInit(void);
 
 /* logit */
-void phwangLogit(char const* str0_val, char const* str1_val);
-void phwangAbend(char const* str0_val, char const* str1_val);
-void phwangPrintBoard(char const* data_val, int board_size_val);
+void phwangDebug(int on_off_val, char const *str0_val, char const *str1_val);
+void phwangLogit(char const *str0_val, char const *str1_val);
+void phwangAbend(char const *str0_val, char const *str1_val);
+void phwangPrintBoard(char const *data_val, int board_size_val);
 
 /* encode */
 void phwangEncodeNumber(char *str_val, int number_val, int size_val);

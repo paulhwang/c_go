@@ -14,9 +14,10 @@ class PhwangClass {
     ~PhwangClass(void){}
 
     /* logit */
-    void logit(char const* str0_val, char const* str1_val);
-    void abend(char const* str0_val, char const* str1_val);
-    void printBoard(char const* data_val, int board_size_val);
+    void debug(int on_off_val, char const *str0_val, char const *str1_val) {if (on_off_val) this->logit(str0_val, str1_val);}
+    void logit(char const *str0_val, char const *str1_val);
+    void abend(char const *str0_val, char const *str1_val);
+    void printBoard(char const *data_val, int board_size_val);
 
     /* encode */
     void encodeNumber(char *str_val, int number_val, int size_val);

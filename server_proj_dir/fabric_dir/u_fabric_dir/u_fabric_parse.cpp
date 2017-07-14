@@ -18,7 +18,7 @@
 
 void UFabricClass::exportedParseFunction(char *data_val)
 {
-    this->debug(true, "exportedParseFunction", data_val);
+    this->debug(false, "exportedParseFunction", data_val);
 
     if (*data_val == FABRIC_THEME_PROTOCOL_RESPOND_IS_SETUP_ROOM) {
         this->processSetupRoomResponse(data_val + 1);
