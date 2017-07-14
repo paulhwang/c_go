@@ -175,7 +175,7 @@ void DFabricClass::processSetupSession (char *data_val)
 
     char *link_id_index_val = data_val;
     char *theme_info_val = link_id_index_val + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE;
-    char *his_name_val = theme_info_val + 8;
+    char *his_name_val = theme_info_val + 8 + 1;
     char *downlink_data;
     char *uplink_data;
     char *data_ptr;
