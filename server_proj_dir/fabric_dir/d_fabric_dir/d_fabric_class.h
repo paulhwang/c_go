@@ -18,11 +18,11 @@ class DFabricClass {
     void *theTpTransferObject;
 
     void startNetServer(void);
-    void processMallocLink(char *data_val);
+    void processSetupLink(char *data_val);
     void processGetLinkData(char *data_val);
     void processGetNameList(char *data_val);
-    void processMallocSession(char *data_val);
-    void processMallocSessionReply(char *data_val);
+    void processSetupSession(char *data_val);
+    void processSetupSessionReply(char *data_val);
     void processPutSessionData(char *data_val);
     void processGetSessionData(char *data_val);
 

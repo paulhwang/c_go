@@ -26,7 +26,7 @@ void DFabricClass::exportedparseFunction (char *data_val)
     }
 
     if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_MALLOC_LINK) {
-        this->processMallocLink(data_val + 1);
+        this->processSetupLink(data_val + 1);
         return;
     }
 
@@ -41,12 +41,12 @@ void DFabricClass::exportedparseFunction (char *data_val)
     }
 
     if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_MALLOC_SESSION) {
-        this->processMallocSession(data_val + 1);
+        this->processSetupSession(data_val + 1);
         return;
     }
 
     if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_MALLOC_SESSION_REPLY) {
-        this->processMallocSessionReply(data_val + 1);
+        this->processSetupSessionReply(data_val + 1);
         return;
     }
 
@@ -63,16 +63,16 @@ void DFabricClass::exportedparseFunction (char *data_val)
     this->abend("exportedparseFunction", data_val);
 }
 
-void DFabricClass::processMallocLink (char *data_val)
+void DFabricClass::processSetupLink (char *data_val)
 {
     char *downlink_data;
     char *data_ptr;
 
-    this->debug(true, "processMallocLink", data_val);
+    this->debug(true, "processSetupLink", data_val);
 
     LinkClass *link = this->theFabricObject->mallocLink(data_val);
     if (!link) {
-        this->abend("processMallocLink", "null link");
+        this->abend("processSetupLink", "null link");
         downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
         *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_MALLOC_LINK;
         strcpy(data_ptr, "null link");
@@ -150,9 +150,9 @@ void DFabricClass::processGetNameList (char *data_val)
     this->transmitFunction(downlink_data);
 }
 
-void DFabricClass::processMallocSession (char *data_val)
+void DFabricClass::processSetupSession (char *data_val)
 {
-    this->debug(true, "processMallocSession", data_val);
+    this->debug(true, "processSetupSession", data_val);
 
     char *link_id_index_val = data_val;
     char *theme_info_val = link_id_index_val + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE;
@@ -163,7 +163,7 @@ void DFabricClass::processMallocSession (char *data_val)
 
     SessionClass *session = this->theFabricObject->searchLinkAndMallocSession(link_id_index_val);
     if (!session) {
-        this->abend("processMallocSession", "null session");
+        this->abend("processSetupSession", "null session");
         downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
         *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_MALLOC_SESSION;
         strcpy(data_ptr, "null session");
@@ -173,7 +173,7 @@ void DFabricClass::processMallocSession (char *data_val)
 
     GroupClass *group = this->theFabricObject->mallocGroup(theme_info_val);
     if (!group) {
-        this->abend("processMallocSession", "null group");
+        this->abend("processSetupSession", "null group");
         downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
         *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_MALLOC_SESSION;
         strcpy(data_ptr, "null group");
@@ -194,14 +194,14 @@ void DFabricClass::processMallocSession (char *data_val)
     if (strcmp(his_name_val, session->linkObject()->linkName())) {
         LinkClass *his_link = this->theFabricObject->searchLinkByName(his_name_val);
         if (!his_link) {
-            this->abend("processMallocSession", "null his_link");
+            this->abend("processSetupSession", "null his_link");
             ////////////////TBD
             return;
         }
 
         SessionClass *his_session = his_link->mallocSession();
         if (!his_session) {
-            this->abend("processMallocSession", "null his_session");
+            this->abend("processSetupSession", "null his_session");
             ////////////////TBD
             return;
         }
@@ -215,9 +215,9 @@ void DFabricClass::processMallocSession (char *data_val)
     }
 }
 
-void DFabricClass::processMallocSessionReply (char *data_val)
+void DFabricClass::processSetupSessionReply (char *data_val)
 {
-    this->debug(true, "processMallocSessionReply", data_val);
+    this->debug(true, "processSetupSessionReply", data_val);
 
     char *link_and_session_id_index_val = data_val;
     char *end_val = link_and_session_id_index_val + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE;
