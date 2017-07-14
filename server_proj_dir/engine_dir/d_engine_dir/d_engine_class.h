@@ -28,7 +28,7 @@ public:
     char const* objectName(void) {return "DEngineClass";}
 
     void transmitFunction(char *data_val);
-    void processTransferDataResponse(GoBaseClass *base_object_val, char *data_val);
+    void processPutBaseDataResponse(GoBaseClass *base_object_val, char *data_val);
 
     /* exports */
     void exportedparseFunction(char *data_val);

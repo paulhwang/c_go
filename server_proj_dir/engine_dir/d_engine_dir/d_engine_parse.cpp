@@ -67,7 +67,7 @@ void DEngineClass::processPutBaseData(char *data_val)
     base_object->portObject()->receiveInputData(data_val + ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);
 }
 
-void DEngineClass::processTransferDataResponse(GoBaseClass *base_object_val, char *data_val)
+void DEngineClass::processPutBaseDataResponse(GoBaseClass *base_object_val, char *data_val)
 {
     char *downlink_data;
     char *data_ptr;
