@@ -27,7 +27,7 @@ void DEngineClass::exportedparseFunction (char *data_val)
     this->abend("exportedparseFunction", data_val);
 }
 
-void DEngineClass::processSetupBase(char *data_val)
+void DEngineClass::processSetupBase(char const *data_val)
 {
     char *downlink_data;
     char *data_ptr;
@@ -51,7 +51,7 @@ void DEngineClass::processSetupBase(char *data_val)
     this->transmitFunction(downlink_data);
 }
 
-void DEngineClass::processPutBaseData(char *data_val)
+void DEngineClass::processPutBaseData(char const *data_val)
 {
     this->debug(true, "processPutBaseData", data_val);
 
@@ -67,7 +67,7 @@ void DEngineClass::processPutBaseData(char *data_val)
     base_object->portObject()->receiveInputData(data_val + ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);
 }
 
-void DEngineClass::processPutBaseDataResponse(GoBaseClass *base_object_val, char *data_val)
+void DEngineClass::processPutBaseDataResponse(GoBaseClass *base_object_val, char const *data_val)
 {
     char *downlink_data;
     char *data_ptr;

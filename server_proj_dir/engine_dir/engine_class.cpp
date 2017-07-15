@@ -24,7 +24,7 @@ EngineClass::~EngineClass (void)
     this->theDEngineObject->~DEngineClass();
 }
 
-GoBaseClass *EngineClass::mallocGoBase (char *config_info_val)
+GoBaseClass *EngineClass::mallocGoBase (char const *config_info_val)
 {
     this->debug(true, "mallocGoBase", "");
     GoBaseClass *base_object = new GoBaseClass(this->theGoBaseListMgrObject, this, config_info_val);

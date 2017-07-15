@@ -43,5 +43,5 @@ public:
     void insertEntry(ListEntryClass * entry_val);
     ListEntryClass *mallocEntry(void);
     void freeEntry(ListEntryClass *list_entry_object_val);
-    ListEntryClass *searchEntry(char *data_val, void *extra_data_val);
+    ListEntryClass *searchEntry(char const *data_val, void *extra_data_val);
 };

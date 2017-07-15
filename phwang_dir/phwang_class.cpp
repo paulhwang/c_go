@@ -63,7 +63,7 @@ void PhwangClass::encodeNumber (char *str_val, int number_val, int size_val)
     }
 }
 
-int PhwangClass::decodeNumber (char *str_val, int size_val)
+int PhwangClass::decodeNumber (char const *str_val, int size_val)
 {
     int number = 0;
     int factor = 1;
@@ -84,7 +84,7 @@ void PhwangClass::encodeIdIndex (char *str_val, int id_val, int id_size_val, int
     encodeNumber(str_val + id_size_val, index_val, index_size_val);
 }
 
-void PhwangClass::decodeIdIndex (char *str_val, int *id_ptr_val, int id_size_val, int *index_ptr_val, int index_size_val)
+void PhwangClass::decodeIdIndex (char const *str_val, int *id_ptr_val, int id_size_val, int *index_ptr_val, int index_size_val)
 {
     *id_ptr_val = decodeNumber(str_val, id_size_val);
     *index_ptr_val = decodeNumber(str_val + id_size_val, index_size_val);
@@ -117,7 +117,7 @@ void PhwangClass::listMgrFree(void *list_mgr_val)
     ((ListMgrClass *) list_mgr_val)->~ListMgrClass();
 }
 
-void *PhwangClass::listMgrSearchEntry(void *list_mgr_val, char *data_val, void *extra_data_val)
+void *PhwangClass::listMgrSearchEntry(void *list_mgr_val, char const *data_val, void *extra_data_val)
 {
     if (!list_mgr_val) {
         phwangAbend("listMgrSearchEntry", "null list_mgr_val");

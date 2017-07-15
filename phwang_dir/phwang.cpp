@@ -44,7 +44,7 @@ void phwangEncodeNumber (char *str_val, int number_val, int size_val)
     thePhwangObject->encodeNumber(str_val, number_val, size_val);
 }
 
-int phwangDecodeNumber (char *str_val, int size_val)
+int phwangDecodeNumber (char const *str_val, int size_val)
 {
     return thePhwangObject->decodeNumber(str_val, size_val);
 }
@@ -54,7 +54,7 @@ void phwangEncodeIdIndex (char *str_val, int id_val, int id_size_val, int index_
     thePhwangObject->encodeIdIndex(str_val, id_val, id_size_val, index_val, index_size_val);
 }
 
-void phwangDecodeIdIndex (char *str_val, int *id_ptr_val, int id_size_val, int *index_ptr_val, int index_size_val)
+void phwangDecodeIdIndex (char const *str_val, int *id_ptr_val, int id_size_val, int *index_ptr_val, int index_size_val)
 {
     thePhwangObject->decodeIdIndex(str_val, id_ptr_val, id_size_val, index_ptr_val, index_size_val);
 }
@@ -96,7 +96,7 @@ void phwangListMgrFree (void *list_mgr_val)
     thePhwangObject->listMgrFree(list_mgr_val);
 }
 
-void *phwangListMgrSearchEntry (void *list_mgr_val, char *data_val, void *extra_data_val)
+void *phwangListMgrSearchEntry (void *list_mgr_val, char const *data_val, void *extra_data_val)
 {
     return thePhwangObject->listMgrSearchEntry(list_mgr_val, data_val, extra_data_val);
 }

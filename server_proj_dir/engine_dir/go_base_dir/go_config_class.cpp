@@ -8,7 +8,7 @@
 #include "go_base_class.h"
 #include "go_config_class.h"
 
-GoConfigClass::GoConfigClass (GoBaseClass *base_object_val, char *config_info_val):
+GoConfigClass::GoConfigClass (GoBaseClass *base_object_val, char const *config_info_val):
     theBaseObject(base_object_val)
 {
     if (memcmp(config_info_val, "GO", 2)) {

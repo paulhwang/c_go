@@ -21,9 +21,9 @@ class PhwangClass {
 
     /* encode */
     void encodeNumber(char *str_val, int number_val, int size_val);
-    int decodeNumber(char *str_val, int size_val);
+    int decodeNumber(char const *str_val, int size_val);
     void encodeIdIndex(char *str_val, int id_val, int id_size_val, int index_val, int index_size_val);
-    void decodeIdIndex(char *str_val, int *id_ptr_val, int id_size_val, int *index_ptr_val, int index_size_val);
+    void decodeIdIndex(char const *str_val, int *id_ptr_val, int id_size_val, int *index_ptr_val, int index_size_val);
 
     /* queue */
     void *mallocQueue(int do_suspend_val, int max_size_val);
@@ -34,7 +34,7 @@ class PhwangClass {
     /* list_mgr */
     void *listMgrMalloc(char const *caller_name_val, int id_size_val, int index_size_val, int global_entry_id_val);
     void  listMgrFree(void *list_mgr_val);
-    void *listMgrSearchEntry(void *list_mgr_val, char *data_val, void *extra_data_val);
+    void *listMgrSearchEntry(void *list_mgr_val, char const *data_val, void *extra_data_val);
     int   listMgrGetMaxIndex(void *list_mgr_val);
     void *listMgrGetEntryTableArray(void *list_mgr_val);
 

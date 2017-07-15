@@ -22,9 +22,9 @@ void phwangPrintBoard(char const *data_val, int board_size_val);
 
 /* encode */
 void phwangEncodeNumber(char *str_val, int number_val, int size_val);
-int phwangDecodeNumber(char *str_val, int size_val);
+int phwangDecodeNumber(char const *str_val, int size_val);
 void phwangEncodeIdIndex(char *str_val, int id_val, int id_size_val, int index_val, int index_size_val);
-void phwangDecodeIdIndex(char *str_val, int *id_ptr_val, int id_size_val, int *index_ptr_val, int index_size_val);
+void phwangDecodeIdIndex(char const *str_val, int *id_ptr_val, int id_size_val, int *index_ptr_val, int index_size_val);
 
 /* queue */
 void *phwangMallocSuspendedQueue(int size_val);
@@ -36,7 +36,7 @@ void *phwangDequeue(void *queue_val);
 /* list_mgr */
 void *phwangListMgrMalloc(char const *caller_name_val, int id_size_val, int index_size_val, int global_entry_id_val);
 void  phwangListMgrFree(void *list_mgr_val);
-void *phwangListMgrSearchEntry(void *list_mgr_val, char *data_val, void *extra_data_val);
+void *phwangListMgrSearchEntry(void *list_mgr_val, char const *data_val, void *extra_data_val);
 int   phwnagListMgrGetMaxIndex(void *list_mgr_val);
 void *phwangListMgrGetEntryTableArray(void *list_mgr_val);
 

@@ -21,7 +21,7 @@ class GoConfigClass {
     void abend(char const *str0_val, char const *str1_val);
 
 public:
-    GoConfigClass(GoBaseClass *the_base_object, char *config_info_val);
+    GoConfigClass(GoBaseClass *the_base_object, char const *config_info_val);
     ~GoConfigClass(void) {}
     char const *objectName(void) {return "GoConfigClass";}
 

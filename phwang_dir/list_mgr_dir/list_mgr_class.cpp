@@ -75,7 +75,7 @@ void ListMgrClass::freeEntry (ListEntryClass *list_entry_object_val)
 
 }
 
-ListEntryClass *ListMgrClass::searchEntry (char *data_val, void *extra_data_val)
+ListEntryClass *ListMgrClass::searchEntry (char const *data_val, void *extra_data_val)
 {
     int entry_id;
     int entry_index;
