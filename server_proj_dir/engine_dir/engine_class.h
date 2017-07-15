@@ -22,7 +22,7 @@ class EngineClass {
 public:
     EngineClass(void);
     ~EngineClass(void);
-    char const* objectName(void) {return "EngineClass";}
+    char const *objectName(void) {return "EngineClass";}
 
     DEngineClass *dEngineObject(void) {return this->theDEngineObject;}
     BaseMgrClass *goBaseMgrObject(void) {return this->theGoBaseMgrObject;}

@@ -15,6 +15,10 @@ MainClass::MainClass(void)
     this->theFabricObject = new FabricClass();
     this->theGoThemeObject = new ThemeClass();
     this->theEngineObject = new EngineClass();
+
+    while (1) {
+        sleep(60);
+    }
 }
 
 MainClass::~MainClass(void)
