@@ -19,9 +19,10 @@ MainClass::MainClass(void)
 
 MainClass::~MainClass(void)
 {
-    this->theEngineObject->~EngineClass(); 
-    this->theGoThemeObject->~ThemeClass(); 
-    this->theFabricObject->~FabricClass(); 
+    this->theEngineObject->~EngineClass();
+    this->theGoThemeObject->~ThemeClass();
+    this->theFabricObject->~FabricClass();
+    this->debug(true, "~MainClass", "exit");
 }
 
 void MainClass::startThreads (void)

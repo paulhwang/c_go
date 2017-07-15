@@ -30,6 +30,7 @@ FabricClass::~FabricClass (void)
     this->theDFabricObject->~DFabricClass(); 
     this->theUFabricObject->~UFabricClass(); 
     this->theNameListObject->~NameListClass();
+    this->debug(true, "~FabricClass", "exit");
 }
 
 LinkClass *FabricClass::mallocLink (char const *data_val)

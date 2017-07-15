@@ -24,6 +24,7 @@ ThemeClass::~ThemeClass (void)
 {
     this->theDThemeObject->~DThemeClass();
     this->theUThemeObject->~UThemeClass();
+    this->debug(true, "~ThemeClass", "exit");
 }
 
 RoomClass *ThemeClass::mallocRoom (char *room_id_index_val)

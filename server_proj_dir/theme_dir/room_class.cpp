@@ -21,6 +21,7 @@ RoomClass::RoomClass (void *list_mgr_object_val, ThemeClass *theme_object_val, c
 
 RoomClass::~RoomClass (void)
 {
+    this->debug(true, "~MainClass", "exit");
 }
 
 void RoomClass::insertGroup (char *group_id_index_val)

@@ -22,6 +22,7 @@ EngineClass::EngineClass (void)
 EngineClass::~EngineClass (void)
 {
     this->theDEngineObject->~DEngineClass();
+    this->debug(true, "~EngineClass", "exit");
 }
 
 GoBaseClass *EngineClass::mallocGoBase (char const *config_info_val)
