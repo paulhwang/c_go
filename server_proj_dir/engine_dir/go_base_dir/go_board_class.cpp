@@ -5,6 +5,7 @@
 */
 
 #include <stdio.h>
+#include "go_protocol_define.h"
 #include "go_base_class.h"
 #include "go_board_class.h"
 
@@ -28,6 +29,7 @@ void GoBoardClass::addStoneToBoard (int x_val, int y_val, int color_val)
 void GoBoardClass::encodeBoard (void) {
     char *buf_ptr = this->theBoardOutputBuffer;
 
+    *buf_ptr++ = GO_PROTOCOL_GAME_INFO;
     phwangEncodeNumber(buf_ptr, this->theBaseObject->gameObject()->totalMoves(), 3);
     buf_ptr += 3;
     phwangEncodeNumber(buf_ptr, this->theBaseObject->gameObject()->nextColor(), 1);
