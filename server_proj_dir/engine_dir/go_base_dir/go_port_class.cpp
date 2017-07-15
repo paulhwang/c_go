@@ -7,24 +7,12 @@
 #include <stdio.h>
 #include <string.h>
 #include <malloc.h>
+#include "go_protocol_define.h"
 #include "go_base_class.h"
 #include "go_port_class.h"
 #include "../engine_class.h"
 #include "../d_engine_dir/d_engine_class.h"
 #include "../../protocol_dir/base_mgr_protocol.h"
-
-#define GO_PROTOCOL_GAME_INFO 'G'
-#define GO_PROTOCOL_TIME_INFO 'T'
-#define GO_PROTOCOL_CHAT_INFO 'C'
-#define GO_PROTOCOL_MOVE_COMMAND 'M'
-#define GO_PROTOCOL_PASS_COMMAND 'P'
-#define GO_PROTOCOL_BACKWARD_COMMAND 'b'
-#define GO_PROTOCOL_DOUBLE_BACKWARD_COMMAND 'B'
-#define GO_PROTOCOL_FORWARD_COMMAND 'f'
-#define GO_PROTOCOL_DOUBLE_FORWARD_COMMAND 'F'
-#define GO_PROTOCOL_RESIGN_COMMAND 'R'
-#define GO_PROTOCOL_CONFIRM_COMMAND 'C'
-#define GO_PROTOCOL_CONTINUE_COMMAND 'c'
 
 GoPortClass::GoPortClass (GoBaseClass *base_object_val):
     theBaseObject(base_object_val)
@@ -50,6 +38,8 @@ void GoPortClass::receiveInputData (char const *str_val) {
             this->parseGameData(str_val + 1);
             return;
 
+        case GO_PROTOCOL_TIME_INFO:
+        case GO_PROTOCOL_CHAT_INFO:
         default:
             this->abend("receiveInputData", str_val);
             return;
