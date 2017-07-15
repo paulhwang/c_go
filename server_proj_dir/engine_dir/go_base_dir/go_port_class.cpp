@@ -13,6 +13,9 @@
 #include "../d_engine_dir/d_engine_class.h"
 #include "../../protocol_dir/base_mgr_protocol.h"
 
+#define GO_PROTOCOL_GAME_INFO 'G'
+#define GO_PROTOCOL_TIME_INFO 'T'
+#define GO_PROTOCOL_CHAT_INFO 'C'
 #define GO_PROTOCOL_MOVE_COMMAND 'M'
 #define GO_PROTOCOL_PASS_COMMAND 'P'
 #define GO_PROTOCOL_BACKWARD_COMMAND 'b'
@@ -36,9 +39,21 @@ void GoPortClass::transmitBoardData (void) {
 }
 
 void GoPortClass::receiveInputData (char const *str_val) {
-    GoMoveClass *move;
     this->debug(true, "receiveInputData", str_val);
 
+    switch (*str_val) {
+        case GO_PROTOCOL_GAME_INFO:
+            this->parseGameData(str_val + 1);
+            return;
+
+        default:
+            this->abend("receiveInputData", str_val);
+            return;
+    }
+}
+
+void GoPortClass::parseGameData (char const *str_val) {
+    GoMoveClass *move;
     switch (*str_val) {
         case GO_PROTOCOL_MOVE_COMMAND:
             move = new GoMoveClass(this->theBaseObject, str_val + 1);
@@ -72,9 +87,10 @@ void GoPortClass::receiveInputData (char const *str_val) {
         case GO_PROTOCOL_CONTINUE_COMMAND:
 
         default:
-            this->abend("receiveInputData", str_val);
+            this->abend("parseGameData", str_val);
+            return;
     }
-};
+}
 
 void GoPortClass::logit (char const *str0_val, char const *str1_val) {
     char s[LOGIT_BUF_SIZE];
