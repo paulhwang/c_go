@@ -186,3 +186,9 @@ void phwangTpTransmit (void *tp_transfer_object_val, char *data_val)
 {
     thePhwangObject->tpTransmit(tp_transfer_object_val, data_val);
 }
+
+/* register */
+void phwangRegisterProgramProcess(int *register_tag_ptr_val, char *program_name_val, unsigned short port_val)
+{
+    thePhwangObject->registerProgramProcess(register_tag_ptr_val, program_name_val, port_val);
+}

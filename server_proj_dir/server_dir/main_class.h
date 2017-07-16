@@ -23,6 +23,4 @@ class MainClass {
     MainClass(void);
     ~MainClass(void);
     char const *objectName(void) {return "MainClass";}
-
-    void startThreads(void);
 };

@@ -419,3 +419,11 @@ void PhwangClass::tpTransmit (void *tp_transfer_object_val, char *data_val)
 
     ((TpTransferClass *) tp_transfer_object_val)->exportTransmitData(data_val);
 }
+
+void PhwangClass::registerProgramProcess(int *register_tag_ptr_val, char *program_name_val, unsigned short port_val)
+{
+    *register_tag_ptr_val = 1;
+    while (*register_tag_ptr_val) {
+        sleep(10);
+    }
+}

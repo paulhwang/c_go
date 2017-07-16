@@ -15,10 +15,6 @@ MainClass::MainClass(void)
     this->theFabricObject = new FabricClass();
     this->theGoThemeObject = new ThemeClass();
     this->theEngineObject = new EngineClass();
-
-    while (1) {
-        sleep(60);
-    }
 }
 
 MainClass::~MainClass(void)
@@ -27,10 +23,6 @@ MainClass::~MainClass(void)
     this->theGoThemeObject->~ThemeClass();
     this->theFabricObject->~FabricClass();
     this->debug(true, "~MainClass", "exit");
-}
-
-void MainClass::startThreads (void)
-{
 }
 
 void MainClass::logit (char const* str0_val, char const* str1_val)
