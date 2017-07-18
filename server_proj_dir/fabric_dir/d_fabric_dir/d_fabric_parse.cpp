@@ -228,8 +228,8 @@ void DFabricClass::processSetupSession (char *data_val)
         group->insertSession(his_session);
         his_session->bindGroup(group);
         char *theme_data = (char *) malloc (32);
-        memcpy(theme_data, theme_info_val, 8);
-        theme_data[8] = 0;
+        memcpy(theme_data, theme_info_val, 9);
+        theme_data[9] = 0;
         his_link->setPendingSessionSetup(his_session->sessionIdIndex(), theme_data);
     }
 }
