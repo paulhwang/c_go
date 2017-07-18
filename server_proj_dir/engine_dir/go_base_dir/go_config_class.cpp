@@ -11,10 +11,11 @@
 GoConfigClass::GoConfigClass (GoBaseClass *base_object_val, char const *config_info_val):
     theBaseObject(base_object_val)
 {
-    if (memcmp(config_info_val, "GO", 2)) {
+    if (memcmp(config_info_val, "G", 1)) {
         this->abend("GoConfigClass", "not GO");
     }
 
+    config_info_val += 2;
     this->theBoardSize = phwangDecodeNumber(config_info_val + 2, 2);
     this->theHandicapPoint = phwangDecodeNumber(config_info_val + 4, 2);
     this->theKomi = phwangDecodeNumber(config_info_val + 6, 2);

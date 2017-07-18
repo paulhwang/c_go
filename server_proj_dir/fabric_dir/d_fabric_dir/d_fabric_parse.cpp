@@ -46,7 +46,7 @@ void DFabricClass::exportedparseFunction (char *data_val)
     }
 
     if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_MALLOC_SESSION_REPLY) {
-        this->processSetupSessionReply(data_val + 1);
+        this->processSetupSession2(data_val + 1);
         return;
     }
 
@@ -175,7 +175,7 @@ void DFabricClass::processSetupSession (char *data_val)
 
     char *link_id_index_val = data_val;
     char *theme_info_val = link_id_index_val + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE;
-    char *his_name_val = theme_info_val + 8 + 1;
+    char *his_name_val = theme_info_val + 10 + 1;
     char *downlink_data;
     char *uplink_data;
     char *data_ptr;
@@ -234,9 +234,9 @@ void DFabricClass::processSetupSession (char *data_val)
     }
 }
 
-void DFabricClass::processSetupSessionReply (char *data_val)
+void DFabricClass::processSetupSession2 (char *data_val)
 {
-    this->debug(true, "processSetupSessionReply", data_val);
+    this->debug(true, "processSetupSession2", data_val);
 
     char *link_and_session_id_index_val = data_val;
     char *end_val = link_and_session_id_index_val + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE;

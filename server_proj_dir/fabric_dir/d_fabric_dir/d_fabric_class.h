@@ -22,7 +22,7 @@ class DFabricClass {
     void processGetLinkData(char *data_val);
     void processGetNameList(char *data_val);
     void processSetupSession(char *data_val);
-    void processSetupSessionReply(char *data_val);
+    void processSetupSession2(char *data_val);
     void processPutSessionData(char *data_val);
     void processGetSessionData(char *data_val);
 
