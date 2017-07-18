@@ -175,7 +175,8 @@ void DFabricClass::processSetupSession (char *data_val)
 
     char *link_id_index_val = data_val;
     char *theme_info_val = link_id_index_val + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE;
-    char *his_name_val = theme_info_val + 10 + 1;
+    int theme_len = phwangDecodeNumber(theme_info_val + 1, 3);
+    char *his_name_val = theme_info_val + theme_len;
     char *downlink_data;
     char *uplink_data;
     char *data_ptr;
@@ -210,28 +211,30 @@ void DFabricClass::processSetupSession (char *data_val)
     strcpy(data_ptr, theme_info_val);
     this->theFabricObject->uFabricObject()->transmitFunction(uplink_data);
 
-    if (strcmp(his_name_val, session->linkObject()->linkName())) {
-        LinkClass *his_link = this->theFabricObject->searchLinkByName(his_name_val);
-        if (!his_link) {
-            this->abend("processSetupSession", "null his_link");
-            ////////////////TBD
-            return;
-        }
-
-        SessionClass *his_session = his_link->mallocSession();
-        if (!his_session) {
-            this->abend("processSetupSession", "null his_session");
-            ////////////////TBD
-            return;
-        }
-
-        group->insertSession(his_session);
-        his_session->bindGroup(group);
-        char *theme_data = (char *) malloc (32);
-        memcpy(theme_data, theme_info_val, 9);
-        theme_data[9] = 0;
-        his_link->setPendingSessionSetup(his_session->sessionIdIndex(), theme_data);
+    if (!strcmp(his_name_val, session->linkObject()->linkName())) {
+        return;
     }
+
+    LinkClass *his_link = this->theFabricObject->searchLinkByName(his_name_val);
+    if (!his_link) {
+        this->abend("processSetupSession", "null his_link");
+        ////////////////TBD
+        return;
+    }
+
+    SessionClass *his_session = his_link->mallocSession();
+    if (!his_session) {
+        this->abend("processSetupSession", "null his_session");
+        ////////////////TBD
+        return;
+    }
+
+    group->insertSession(his_session);
+    his_session->bindGroup(group);
+    char *theme_data = (char *) malloc (32);
+    memcpy(theme_data, theme_info_val, theme_len);
+    theme_data[theme_len] = 0;
+    his_link->setPendingSessionSetup(his_session->sessionIdIndex(), theme_data);
 }
 
 void DFabricClass::processSetupSession2 (char *data_val)
