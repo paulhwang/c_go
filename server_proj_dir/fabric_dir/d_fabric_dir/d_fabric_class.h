@@ -33,7 +33,7 @@ class DFabricClass {
 public:
     DFabricClass(FabricClass *fabric_object_val);
     ~DFabricClass(void);
-    char const* objectName(void) {return "DFabricClass";}
+    char const *objectName(void) {return "DFabricClass";}
 
     void transmitFunction(char *data_val);
 
