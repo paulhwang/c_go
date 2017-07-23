@@ -7,6 +7,7 @@
 #include "../../../phwang_dir/phwang.h"
 #include "../../protocol_dir/theme_engine_protocol.h"
 #include "../../protocol_dir/base_mgr_protocol.h"
+#include "../../protocol_dir/web_fabric_protocol.h"
 #include "d_engine_class.h"
 #include "../engine_class.h"
 
@@ -29,25 +30,34 @@ void DEngineClass::exportedparseFunction (char *data_val)
 
 void DEngineClass::processSetupBase(char const *data_val)
 {
+    this->debug(true, "processSetupBase", data_val);
+
+    char const *ajax_id = data_val;
+    char const *room_id_index_val = ajax_id + WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;
+
     char *downlink_data;
     char *data_ptr;
 
-    this->debug(true, "processSetupBase", data_val);
-
-    GoBaseClass *go_base_object = this->theEngineObject->mallocGoBase(data_val + ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);
+    GoBaseClass *go_base_object = this->theEngineObject->mallocGoBase(room_id_index_val + ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);
     if (!go_base_object) {
         this->abend("processSetupBase", "null go_base");
         return;
     }
-    go_base_object->setRoomIdIndex(data_val);
+    go_base_object->setRoomIdIndex(room_id_index_val);
 
     downlink_data = data_ptr = (char *) malloc(BASE_MGR_DATA_BUFFER_SIZE + 4);
     *data_ptr++ = THEME_ENGINE_PROTOCOL_RESPOND_IS_SETUP_BASE;
-    memcpy(data_ptr, data_val, ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);
+
+    memcpy(data_ptr, ajax_id, WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE);
+    data_ptr += WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;
+
+    memcpy(data_ptr, room_id_index_val, ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);
     data_ptr += ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE;
+
     memcpy(data_ptr, go_base_object->goBaseIdIndex(), BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE);
     data_ptr += BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE;
     *data_ptr = 0;
+
     this->transmitFunction(downlink_data);
 }
 

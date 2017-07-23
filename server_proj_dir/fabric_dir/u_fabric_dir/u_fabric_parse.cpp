@@ -35,20 +35,30 @@ void UFabricClass::exportedParseFunction(char *data_val)
 
 void UFabricClass::processSetupRoomResponse(char *data_val)
 {
+    this->debug(true, "processSetupRoomResponse", data_val);
+
+    char *ajax_id = data_val;
+    char *group_id_index_val = ajax_id + WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;
+
+    char *downlink_data;
+    char *data_ptr;
 	char *output_data;
     int session_array_size;
 
-    this->debug(true, "processSetupRoomResponse", data_val);
-
-    GroupClass *group = this->theFabricObject->searchGroup(data_val);
+    GroupClass *group = this->theFabricObject->searchGroup(group_id_index_val);
     if (group) {
-        group->setRoomIdIndex(data_val + GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE);
+        group->setRoomIdIndex(group_id_index_val + GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE);
         group->setSessionTableArray((SessionClass **) phwangArrayMgrGetArrayTable(group->sessionArrayMgr(), &session_array_size));
         SessionClass *session = group->sessionTableArray(0);
-        output_data = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
-        output_data[0] = WEB_FABRIC_PROTOCOL_RESPOND_IS_MALLOC_SESSION;
-        strcpy(output_data + 1, session->sessionIdIndex());
-        this->theFabricObject->dFabricObject()->transmitFunction(output_data);
+
+        downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
+        *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_MALLOC_SESSION;
+
+        memcpy(data_ptr, ajax_id, WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE);
+        data_ptr += WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;
+
+        strcpy(data_ptr, session->sessionIdIndex());
+        this->theFabricObject->dFabricObject()->transmitFunction(downlink_data);
     }
 }
 

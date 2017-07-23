@@ -9,6 +9,7 @@
 #include "../../protocol_dir/fabric_theme_protocol.h"
 #include "../../protocol_dir/room_mgr_protocol.h"
 #include "../../protocol_dir/group_mgr_protocol.h"
+#include "../../protocol_dir/web_fabric_protocol.h"
 #include "u_theme_class.h"
 #include "../theme_class.h"
 #include "../d_theme_dir/d_theme_class.h"
@@ -33,25 +34,34 @@ void UThemeClass::exportedparseFunction(char *data_val)
 
 void UThemeClass::processSetupBaseResponse(char *data_val)
 {
+    this->debug(true, "processSetupBaseResponse", data_val);
+
+    char *ajax_id = data_val;
+    char *room_id_index_val = ajax_id + WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;
+
     char *downlink_data;
     char *data_ptr;
     int group_array_size;
 
-    this->debug(true, "processSetupBaseResponse", data_val);
-
-    RoomClass *room = this->theThemeObject->searchRoom(data_val);
+    RoomClass *room = this->theThemeObject->searchRoom(room_id_index_val);
     if (!room) {
         this->abend("processSetupBaseResponse", "null room");
         return;
     }
 
-    data_val += ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE;
+    data_val += WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE + ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE;
     room->setBaseIdIndex(data_val);
+
     downlink_data = data_ptr = (char *) malloc(ROOM_MGR_DATA_BUFFER_SIZE + 4);
     *data_ptr++ = FABRIC_THEME_PROTOCOL_RESPOND_IS_SETUP_ROOM;
+
+    memcpy(data_ptr, ajax_id, WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE);
+    data_ptr += WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;
+
     room->setGroupTableArray((char **) phwangArrayMgrGetArrayTable(room->groupArrayMgr(), &group_array_size));
     memcpy(data_ptr, room->groupTableArray(0), GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE);
     data_ptr += GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE;
+
     memcpy(data_ptr, room->roomIdIndex(), ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);
     data_ptr += ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE;
     *data_ptr = 0;
