@@ -15,4 +15,6 @@ public:
     TestClass(void);
     ~TestClass(void);
     char const *objectName(void) {return "TestClass";}
+
+    void startTest(void);
 };

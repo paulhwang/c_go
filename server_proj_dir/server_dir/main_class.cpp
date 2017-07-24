@@ -8,7 +8,6 @@
 #include "../fabric_dir/fabric_class.h"
 #include "../engine_dir/engine_class.h"
 #include "../theme_dir/theme_class.h"
-#include "../test_dir/test_class.h"
 #include "main_class.h"
 
 MainClass::MainClass(void)
@@ -16,12 +15,10 @@ MainClass::MainClass(void)
     this->theFabricObject = new FabricClass();
     this->theGoThemeObject = new ThemeClass();
     this->theEngineObject = new EngineClass();
-    this->theTestObject = new TestClass();
 }
 
 MainClass::~MainClass(void)
 {
-    this->theTestObject->~TestClass();
     this->theEngineObject->~EngineClass();
     this->theGoThemeObject->~ThemeClass();
     this->theFabricObject->~FabricClass();
