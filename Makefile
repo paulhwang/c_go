@@ -19,6 +19,7 @@ SERVER_DIR   = $(SERVER_PROJ_DIR)/server_dir
 FABRIC_DIR   = $(SERVER_PROJ_DIR)/fabric_dir
 THEME_DIR    = $(SERVER_PROJ_DIR)/theme_dir
 ENGINE_DIR   = $(SERVER_PROJ_DIR)/engine_dir
+TEST_DIR     = $(SERVER_PROJ_DIR)/test_dir
 D_FABRIC_DIR  = $(FABRIC_DIR)/d_fabric_dir
 U_FABRIC_DIR  = $(FABRIC_DIR)/u_fabric_dir
 D_THEME_DIR  = $(THEME_DIR)/d_theme_dir
@@ -49,7 +50,8 @@ THEME_OBJS = $(U_THEME_OBJS)  $(D_THEME_OBJS) $(THEME_DIR)/theme_class.o $(THEME
 GO_BASE_OBJS = $(GO_BASE_DIR)/go_base_class.o $(GO_BASE_DIR)/go_game_class.o $(GO_BASE_DIR)/go_fight_class.o $(GO_BASE_DIR)/go_board_class.o $(GO_BASE_DIR)/go_move_class.o $(GO_BASE_DIR)/go_port_class.o $(GO_BASE_DIR)/go_config_class.o $(GO_BASE_DIR)/go_group_class.o $(GO_BASE_DIR)/go_group_list_class.o
 D_ENGINE_OBJS = $(D_ENGINE_DIR)/d_engine_class.o $(D_ENGINE_DIR)/d_engine_transmit.o $(D_ENGINE_DIR)/d_engine_parse.o 
 ENGINE_OBJS = $(D_ENGINE_OBJS) $(GO_BASE_OBJS) $(ENGINE_DIR)/engine_class.o 
-SERVER_PROJ_OBJS = $(SERVER_OBJS) $(FABRIC_OBJS) $(THEME_OBJS) $(ENGINE_OBJS)
+TEST_OBJS = $(TEST_DIR)/test_class.o 
+SERVER_PROJ_OBJS = $(SERVER_OBJS) $(FABRIC_OBJS) $(THEME_OBJS) $(ENGINE_OBJS) $(TEST_OBJS)
 
 CLIENT_OBJS = $(CLIENT_DIR)/go_client.o
 CLIENT_PROJ_OBJS = $(CLIENT_OBJS)
