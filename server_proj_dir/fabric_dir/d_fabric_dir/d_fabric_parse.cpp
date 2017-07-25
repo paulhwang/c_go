@@ -19,7 +19,7 @@
 #include "../group_class.h"
 #include "../name_list_class.h"
 
-void DFabricClass::exportedparseFunction (char *data_val)
+void DFabricClass::exportedparseFunction (void *tp_transfer_object_val, char *data_val)
 {
     if (*data_val != WEB_FABRIC_PROTOCOL_COMMAND_IS_GET_LINK_DATA) {
         this->logit("exportedparseFunction", data_val);

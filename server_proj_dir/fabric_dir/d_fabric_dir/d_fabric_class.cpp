@@ -38,7 +38,7 @@ void dFabricTpReceiveDataFunction (void *tp_transfer_object_val, void *d_fabric_
     if (*((char *)data_val) != WEB_FABRIC_PROTOCOL_COMMAND_IS_GET_LINK_DATA) {
         phwangLogit("Golbal::dFabricTpReceiveDataFunction", (char *) data_val);
     }
-    ((DFabricClass *) d_fabric_object_val)->exportedparseFunction((char *) data_val);
+    ((DFabricClass *) d_fabric_object_val)->exportedparseFunction(tp_transfer_object_val, (char *) data_val);
 }
 
 void DFabricClass::startNetServer (void)
