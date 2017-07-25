@@ -11,7 +11,7 @@
 
 TestClass::TestClass(void)
 {
-    //this->startNetConnect();
+    this->startNetConnect();
     this->debug(true, "init__", "");
 }
 
@@ -31,7 +31,7 @@ void TestClass::startNetConnect (void)
 
 void TestClass::startTest(void)
 {
-    for (int i = 1; i < 1; i++) {
+    for (int i = 1; i < 3; i++) {
         char *buf = (char *) malloc(128);
         int j = 0;
         buf[j++] = 'L';
@@ -40,7 +40,7 @@ void TestClass::startTest(void)
         buf[j++] = 'x';
         phwangEncodeNumber(&buf[j], i * 2, 3);
         this->transmitFunction(buf);
-        sleep(5);
+        sleep(1);
     }
 }
 

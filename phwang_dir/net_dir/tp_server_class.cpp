@@ -96,21 +96,24 @@ void TpServerClass::serverThreadFunction (void *data_val)
         return;
     }
 
-    this->logit("serverThreadFunction", "listening");
-    listen(s, BACKLOG);
+    while (1) {
+        this->logit("serverThreadFunction", "listening");
+        listen(s, BACKLOG);
 
-    this->logit("serverThreadFunction", "accepting");
-    if ((data_socket = accept(s, (struct sockaddr *)&address, (socklen_t*)&addrlen)) < 0) {
-        this->logit("serverThreadFunction", "accept error");
-        return;
+        this->logit("serverThreadFunction", "accepting");
+        if ((data_socket = accept(s, (struct sockaddr *)&address, (socklen_t*)&addrlen)) < 0) {
+            this->logit("serverThreadFunction", "accept error");
+            return;
+        }
+
+        this->logit("serverThreadFunction", "accepted");
+        this->logit("serverThreadFunction", this->theWho);
+
+        TpTransferClass *tp_transfer_object = new TpTransferClass(data_socket, this->theReceiveCallbackFunc, this->theCallerObject);
+        tp_transfer_object->startThreads();
+        this->theAcceptCallbackFunc(this->theCallerObject, tp_transfer_object);
     }
 
-    this->logit("serverThreadFunction", "accepted");
-    this->logit("serverThreadFunction", this->theWho);
-
-    TpTransferClass *tp_transfer_object = new TpTransferClass(data_socket, this->theReceiveCallbackFunc, this->theCallerObject);
-    tp_transfer_object->startThreads();
-    this->theAcceptCallbackFunc(this->theCallerObject, tp_transfer_object);
     free(data_val);
 }
 
