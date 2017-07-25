@@ -11,7 +11,8 @@
 
 TestClass::TestClass(void)
 {
-    this->startNetConnect();
+    //this->startNetConnect();
+    this->debug(true, "init__", "");
 }
 
 TestClass::~TestClass(void)
@@ -30,6 +31,17 @@ void TestClass::startNetConnect (void)
 
 void TestClass::startTest(void)
 {
+    for (int i = 1; i < 1; i++) {
+        char *buf = (char *) malloc(128);
+        int j = 0;
+        buf[j++] = 'L';
+        phwangEncodeNumber(&buf[j], i, 3);
+        j += 3;
+        buf[j++] = 'x';
+        phwangEncodeNumber(&buf[j], i * 2, 3);
+        this->transmitFunction(buf);
+        sleep(5);
+    }
 }
 
 void TestClass::logit (char const *str0_val, char const *str1_val)
