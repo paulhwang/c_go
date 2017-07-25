@@ -26,17 +26,17 @@ void DFabricClass::exportedparseFunction (void *tp_transfer_object_val, char *da
     }
 
     if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_MALLOC_LINK) {
-        this->processSetupLink(data_val + 1);
+        this->processSetupLink(tp_transfer_object_val, data_val + 1);
         return;
     }
 
     if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_GET_LINK_DATA) {
-        this->processGetLinkData(data_val + 1);
+        this->processGetLinkData(tp_transfer_object_val, data_val + 1);
         return;
     }
 
     if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_GET_NAME_LIST) {
-        this->processGetNameList(data_val + 1);
+        this->processGetNameList(tp_transfer_object_val, data_val + 1);
         return;
     }
 
@@ -63,7 +63,7 @@ void DFabricClass::exportedparseFunction (void *tp_transfer_object_val, char *da
     this->abend("exportedparseFunction", data_val);
 }
 
-void DFabricClass::processSetupLink (char *data_val)
+void DFabricClass::processSetupLink (void *tp_transfer_object_val, char *data_val)
 {
     this->debug(true, "processSetupLink", data_val);
 
@@ -87,10 +87,10 @@ void DFabricClass::processSetupLink (char *data_val)
     memcpy(data_ptr, ajax_id, WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE);
     data_ptr += WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;
     strcpy(data_ptr, link->linkIdIndex());
-    this->transmitFunction(downlink_data);
+    this->transmitFunction1(tp_transfer_object_val, downlink_data);
 }
 
-void DFabricClass::processGetLinkData (char *data_val)
+void DFabricClass::processGetLinkData (void *tp_transfer_object_val, char *data_val)
 {
     this->debug(false, "processGetLinkData", data_val);
 
@@ -147,7 +147,7 @@ void DFabricClass::processGetLinkData (char *data_val)
     this->transmitFunction(downlink_data);
 }
 
-void DFabricClass::processGetNameList (char *data_val)
+void DFabricClass::processGetNameList (void *tp_transfer_object_val, char *data_val)
 {
     this->debug(true, "processGetNameList", data_val);
 

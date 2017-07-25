@@ -18,9 +18,9 @@ class DFabricClass {
     void *theTpTransferObject;
 
     void startNetServer(void);
-    void processSetupLink(char *data_val);
-    void processGetLinkData(char *data_val);
-    void processGetNameList(char *data_val);
+    void processSetupLink(void *tp_transfer_object_val, char *data_val);
+    void processGetLinkData(void *tp_transfer_object_val, char *data_val);
+    void processGetNameList(void *tp_transfer_object_val, char *data_val);
     void processSetupSession(char *data_val);
     void processSetupSession2(char *data_val);
     void processPutSessionData(char *data_val);
@@ -35,6 +35,7 @@ public:
     ~DFabricClass(void);
     char const *objectName(void) {return "DFabricClass";}
 
+    void transmitFunction1(void *tp_transfer_object_val, char *data_val);
     void transmitFunction(char *data_val);
 
     /* exports */
