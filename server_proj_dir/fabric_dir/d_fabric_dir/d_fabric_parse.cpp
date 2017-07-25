@@ -41,22 +41,22 @@ void DFabricClass::exportedparseFunction (void *tp_transfer_object_val, char *da
     }
 
     if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_MALLOC_SESSION) {
-        this->processSetupSession(data_val + 1);
+        this->processSetupSession(tp_transfer_object_val, data_val + 1);
         return;
     }
 
     if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_MALLOC_SESSION_REPLY) {
-        this->processSetupSession2(data_val + 1);
+        this->processSetupSession2(tp_transfer_object_val, data_val + 1);
         return;
     }
 
     if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_PUT_SESSION_DATA) {
-        this->processPutSessionData(data_val + 1);
+        this->processPutSessionData(tp_transfer_object_val, data_val + 1);
         return;
     }
 
     if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_GET_SESSION_DATA) {
-        this->processGetSessionData(data_val + 1);
+        this->processGetSessionData(tp_transfer_object_val, data_val + 1);
         return;
     }
 
@@ -144,7 +144,7 @@ void DFabricClass::processGetLinkData (void *tp_transfer_object_val, char *data_
         this->debug(true, "==================processGetLinkData", downlink_data);
     }
 
-    this->transmitFunction(downlink_data);
+    this->transmitFunction1(tp_transfer_object_val, downlink_data);
 }
 
 void DFabricClass::processGetNameList (void *tp_transfer_object_val, char *data_val)
@@ -182,10 +182,10 @@ void DFabricClass::processGetNameList (void *tp_transfer_object_val, char *data_
     if (name_list) {
         strcpy(data_ptr, name_list);
     }
-    this->transmitFunction(downlink_data);
+    this->transmitFunction1(tp_transfer_object_val, downlink_data);
 }
 
-void DFabricClass::processSetupSession (char *data_val)
+void DFabricClass::processSetupSession (void *tp_transfer_object_val, char *data_val)
 {
     this->debug(true, "processSetupSession", data_val);
 
@@ -258,7 +258,7 @@ void DFabricClass::processSetupSession (char *data_val)
     his_link->setPendingSessionSetup(his_session->sessionIdIndex(), theme_data);
 }
 
-void DFabricClass::processSetupSession2 (char *data_val)
+void DFabricClass::processSetupSession2 (void *tp_transfer_object_val, char *data_val)
 {
     this->debug(true, "processSetupSession2", data_val);
 
@@ -282,7 +282,7 @@ void DFabricClass::processSetupSession2 (char *data_val)
     this->transmitFunction(downlink_data);
 }
 
-void DFabricClass::processPutSessionData (char *data_val)
+void DFabricClass::processPutSessionData (void *tp_transfer_object_val, char *data_val)
 {
     this->debug(true, "processPutSessionData", data_val);
 
@@ -339,7 +339,7 @@ void DFabricClass::processPutSessionData (char *data_val)
     this->transmitFunction(downlink_data);
 }
 
-void DFabricClass::processGetSessionData (char *data_val)
+void DFabricClass::processGetSessionData (void *tp_transfer_object_val, char *data_val)
 {
     this->debug(true, "processGetSessionData", data_val);
 
@@ -377,5 +377,5 @@ void DFabricClass::processGetSessionData (char *data_val)
     data_ptr += SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE;
 
     strcpy(data_ptr, data);
-    this->theFabricObject->dFabricObject()->transmitFunction(downlink_data);
+    this->transmitFunction(downlink_data);
 }

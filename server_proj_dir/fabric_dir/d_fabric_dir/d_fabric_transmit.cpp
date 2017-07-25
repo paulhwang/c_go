@@ -19,7 +19,7 @@ void DFabricClass::transmitFunction1 (void *tp_transfer_object_val, char *data_v
         return;
     }
 
-    phwangTpTransmit(this->theTpTransferObject, data_val);
+    phwangTpTransmit(tp_transfer_object_val, data_val);
 }
 
 void DFabricClass::transmitFunction (char *data_val)

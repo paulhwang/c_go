@@ -13,8 +13,8 @@
 main (int argc, char **argv) {
     MainClass *mainObject = new MainClass();
     int register_tag;
+    sleep(10);
     TestClass *testObject = new TestClass();
-    sleep(1);
     testObject->startTest();
     phwangRegisterProgramProcess(&register_tag, argv[0], LINK_MGR_PROTOCOL_TRANSPORT_PORT_NUMBER);
 }
