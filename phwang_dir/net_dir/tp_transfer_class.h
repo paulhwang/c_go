@@ -12,7 +12,7 @@
 #define TP_TRANSFER_CLASS_RECEIVE_BUFFER_SIZE 1024
 
 class TpTransferClass {
-    void (*theReceiveCallback)(void *, void *);
+    void (*theReceiveCallback)(void *, void *, void *);
     void *theReceiveObject;
     int theSocket;
 
@@ -31,7 +31,7 @@ class TpTransferClass {
     void abend(char const *str0_val, char const *str1_val);
 
 public:
-    TpTransferClass(int socket_val, void (*receive_callback_val)(void *, void *), void *receive_object_val);
+    TpTransferClass(int socket_val, void (*receive_callback_val)(void *, void *, void *), void *receive_object_val);
     ~TpTransferClass(void);
     char const *objectName(void) {return "TpTransferClass";}
 
@@ -41,7 +41,7 @@ public:
     void transmitThreadFunction(int socket_val);
 
     int socket(void) {return this->theSocket;}
-    void (*receiveCallback(void))(void *, void *) {return this->theReceiveCallback;}
+    void (*receiveCallback(void))(void *, void *, void *) {return this->theReceiveCallback;}
 
     /* exports */
     void exportTransmitData(void *data_val);

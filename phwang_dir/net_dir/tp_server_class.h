@@ -21,7 +21,7 @@ class TpServerClass {
     void *theCallerObject;
     unsigned short thePort;
     void (*theAcceptCallbackFunc)(void *, void *);
-    void (*theReceiveCallbackFunc)(void *, void *);
+    void (*theReceiveCallbackFunc)(void *, void *, void *);
     void *theAcceptCallbackParameter;
     void *theReceiveCallbackParameter;
     char const *theWho;
@@ -36,7 +36,7 @@ public:
             unsigned short port_val,
             void (*accept_callback_func_val)(void *, void *),
             void *accept_callback_parameter_val,
-            void (*receive_callback_func_val)(void *, void *),
+            void (*receive_callback_func_val)(void *, void *, void *),
             void *receive_callback_parameter_val,
             char const *who_val);
     ~TpServerClass(void);

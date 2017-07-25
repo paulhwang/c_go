@@ -23,7 +23,7 @@ TpServerClass::TpServerClass (
                     unsigned short port_val,
                     void (*accept_callback_func_val)(void *, void *),
                     void *accept_callback_parameter_val,
-                    void (*receive_callback_func_val)(void *, void *),
+                    void (*receive_callback_func_val)(void *, void *, void *),
                     void *receive_callback_parameter_val,
                     char const *who_val)
 

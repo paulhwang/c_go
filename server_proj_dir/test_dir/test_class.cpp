@@ -19,7 +19,7 @@ TestClass::~TestClass(void)
 {
 }
 
-void testObjectReceiveDataFromTransport (void *test_object_val, void *data_val) {
+void testObjectReceiveDataFromTransport (void *tp_transfer_object_val, void *test_object_val, void *data_val) {
     phwangLogit("Golbal::testObjectReceiveDataFromTransport", (char *) data_val);
     ((TestClass *) test_object_val)->exportedparseFunction((char *) data_val);
 }

@@ -65,7 +65,7 @@ ALL_CLIENT_OBJS	= $(PHWANG_OBJS) $(CLIENT_PROJ_OBJS)
 UTILS_OBJLIBS = lib_utils.a
 GO_ROOT_OBJLIBS	= lib_root.a lib_go_base.a lib_base_mgr.a
 
-all:	$(SERVER) $(CLIENT)
+all:	$(SERVER) 
 
 $(SERVER): $(ALL_SERVER_OBJS) 
 	$(CC) -o $(SERVER) $(ALL_SERVER_OBJS) -lstdc++ -pthread

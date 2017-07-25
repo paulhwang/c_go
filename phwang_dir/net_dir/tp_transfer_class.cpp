@@ -13,7 +13,7 @@
 #include "tp_transfer_class.h"
 
 TpTransferClass::TpTransferClass (int socket_val,
-                                  void (*receive_callback_val)(void *, void *),
+                                  void (*receive_callback_val)(void *, void *, void *),
                                   void *receive_object_val)
 {
     this->theSocket = socket_val;

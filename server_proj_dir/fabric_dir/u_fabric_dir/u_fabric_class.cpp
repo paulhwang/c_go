@@ -33,7 +33,7 @@ void UFabricClass::exportedNetAcceptFunction (void *tp_transfer_object_val)
     this->theTpTransferObject = tp_transfer_object_val;
 }
 
-void uFabricTpReceiveDataFunction (void *u_fabric_object_val, void *data_val) {
+void uFabricTpReceiveDataFunction (void *tp_transfer_object_val, void *u_fabric_object_val, void *data_val) {
     phwangDebug(false, "Golbal::uFabricTpReceiveDataFunction", (char *) data_val);
     ((UFabricClass *) u_fabric_object_val)->exportedParseFunction((char *) data_val);
 }

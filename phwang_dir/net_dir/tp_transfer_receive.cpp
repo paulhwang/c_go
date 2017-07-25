@@ -66,7 +66,7 @@ void TpTransferClass::receiveThreadFunction2 (void)
         if (data) {
             this->debug(false, "receiveThreadFunction2", data);
 
-            this->receiveCallback()(this->theReceiveObject, data);
+            this->receiveCallback()(this, this->theReceiveObject, data);
         }
     }
 }
