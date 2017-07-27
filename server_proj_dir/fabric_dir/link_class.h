@@ -40,4 +40,5 @@ public:
     char *getPendingSessionSetup(void) {return (char *) phwangDequeue(this->thePendingSessionSetupQueue);}
     char *getPendingSessionSetup3(void) {return (char *) phwangDequeue(this->thePendingSessionSetupQueue3);}
     void setPendingSessionSetup(char *session_id_index_val, char *topic_data_val);
+    void setPendingSessionSetup3(char *session_id_index_val, char *topic_data_val);
 };

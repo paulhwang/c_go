@@ -40,15 +40,26 @@ SessionClass *LinkClass::mallocSession (void)
     return session;
 }
 
-void LinkClass::setPendingSessionSetup (char *session_id_index_val, char *topic_data_val)
+void LinkClass::setPendingSessionSetup (char *session_id_index_val, char *theme_data_val)
 {
     char *buf, *data_ptr;
 
     buf = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE);
     memcpy(data_ptr, session_id_index_val, SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE);
     data_ptr += SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE;
-    strcpy(data_ptr, topic_data_val);
+    strcpy(data_ptr, theme_data_val);
     phwangEnqueue(this->thePendingSessionSetupQueue, buf);
+}
+
+void LinkClass::setPendingSessionSetup3 (char *session_id_index_val, char *theme_data_val)
+{
+    char *buf, *data_ptr;
+
+    buf = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE);
+    memcpy(data_ptr, session_id_index_val, SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE);
+    data_ptr += SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE;
+    strcpy(data_ptr, theme_data_val);
+    phwangEnqueue(this->thePendingSessionSetupQueue3, buf);
 }
 
 void LinkClass::logit (char const *str0_val, char const *str1_val) {

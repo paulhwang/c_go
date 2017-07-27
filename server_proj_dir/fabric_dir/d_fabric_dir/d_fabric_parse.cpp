@@ -249,6 +249,8 @@ void DFabricClass::processSetupSession (void *tp_transfer_object_val, char *data
     strcpy(data_ptr, theme_info_val);
     this->theFabricObject->uFabricObject()->transmitFunction(uplink_data);
 
+    link->setPendingSessionSetup3(session->sessionIdIndex(), "");
+
     if (!strcmp(his_name_val, session->linkObject()->linkName())) {
         return;
     }
