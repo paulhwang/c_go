@@ -51,6 +51,7 @@ void UFabricClass::processSetupRoomResponse(char *data_val)
         group->setSessionTableArray((SessionClass **) phwangArrayMgrGetArrayTable(group->sessionArrayMgr(), &session_array_size));
         SessionClass *session = group->sessionTableArray(0);
 
+/*
         downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
         *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_SETUP_SESSION;
 
@@ -59,6 +60,7 @@ void UFabricClass::processSetupRoomResponse(char *data_val)
 
         strcpy(data_ptr, session->sessionIdIndex());
         this->theFabricObject->dFabricObject()->transmitFunction(downlink_data);
+*/
     }
 }
 

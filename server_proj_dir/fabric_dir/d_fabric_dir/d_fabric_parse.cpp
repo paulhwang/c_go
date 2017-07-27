@@ -256,6 +256,13 @@ void DFabricClass::processSetupSession (void *tp_transfer_object_val, char *data
 
     link->setPendingSessionSetup3(session->sessionIdIndex(), "");
 
+    downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
+    *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_SETUP_SESSION;
+    memcpy(data_ptr, ajax_id, WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE);
+    data_ptr += WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;
+    strcpy(data_ptr, session->sessionIdIndex());
+    this->transmitFunction(downlink_data);
+
     if (!strcmp(his_name_val, session->linkObject()->linkName())) {
         return;
     }
