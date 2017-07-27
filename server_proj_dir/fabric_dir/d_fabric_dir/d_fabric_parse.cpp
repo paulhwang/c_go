@@ -40,13 +40,18 @@ void DFabricClass::exportedparseFunction (void *tp_transfer_object_val, char *da
         return;
     }
 
-    if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_MALLOC_SESSION) {
+    if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_SETUP_SESSION) {
         this->processSetupSession(tp_transfer_object_val, data_val + 1);
         return;
     }
 
-    if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_MALLOC_SESSION_REPLY) {
+    if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_SETUP_SESSION2) {
         this->processSetupSession2(tp_transfer_object_val, data_val + 1);
+        return;
+    }
+
+    if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_SETUP_SESSION3) {
+        this->processSetupSession3(tp_transfer_object_val, data_val + 1);
         return;
     }
 
@@ -146,7 +151,7 @@ void DFabricClass::processGetLinkData (void *tp_transfer_object_val, char *data_
 
     char *pending_session3 = link->getPendingSessionSetup3();
     if (pending_session3) {
-        *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_PENDING_SESSION_3;
+        *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_PENDING_SESSION3;
         strcpy(data_ptr, pending_session3);
         this->debug(true, "==================processGetLinkData", downlink_data);
     }
@@ -209,7 +214,7 @@ void DFabricClass::processSetupSession (void *tp_transfer_object_val, char *data
     if (!link) {
         this->abend("processSetupSession", "link does not exist");
         downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
-        *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_MALLOC_SESSION;
+        *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_SETUP_SESSION;
         strcpy(data_ptr, "link does not exist");
         this->transmitFunction(downlink_data);
         return;
@@ -219,7 +224,7 @@ void DFabricClass::processSetupSession (void *tp_transfer_object_val, char *data
     if (!session) {
         this->abend("processSetupSession", "null session");
         downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
-        *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_MALLOC_SESSION;
+        *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_SETUP_SESSION;
         strcpy(data_ptr, "null session");
         this->transmitFunction(downlink_data);
         return;
@@ -229,7 +234,7 @@ void DFabricClass::processSetupSession (void *tp_transfer_object_val, char *data
     if (!group) {
         this->abend("processSetupSession", "null group");
         downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
-        *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_MALLOC_SESSION;
+        *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_SETUP_SESSION;
         strcpy(data_ptr, "null group");
         this->transmitFunction(downlink_data);
         return;
@@ -289,7 +294,31 @@ void DFabricClass::processSetupSession2 (void *tp_transfer_object_val, char *dat
     char *data_ptr;
 
     downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
-    *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_MALLOC_SESSION_REPLY;
+    *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_SETUP_SESSION2;
+
+    memcpy(data_ptr, ajax_id, WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE);
+    data_ptr += WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;
+
+    memcpy(data_ptr, link_and_session_id_index_val, LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE);
+    data_ptr += LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE;
+    *data_ptr = 0;
+
+    this->transmitFunction1(tp_transfer_object_val, downlink_data);
+}
+
+void DFabricClass::processSetupSession3 (void *tp_transfer_object_val, char *data_val)
+{
+    this->debug(true, "processSetupSession3", data_val);
+
+    char *ajax_id = data_val;
+    char *link_and_session_id_index_val = data_val + WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;
+    char *end_val = link_and_session_id_index_val + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE;
+
+    char *downlink_data;
+    char *data_ptr;
+
+    downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
+    *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_SETUP_SESSION3;
 
     memcpy(data_ptr, ajax_id, WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE);
     data_ptr += WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;

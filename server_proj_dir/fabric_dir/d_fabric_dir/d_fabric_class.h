@@ -23,6 +23,7 @@ class DFabricClass {
     void processGetNameList(void *tp_transfer_object_val, char *data_val);
     void processSetupSession(void *tp_transfer_object_val, char *data_val);
     void processSetupSession2(void *tp_transfer_object_val, char *data_val);
+    void processSetupSession3(void *tp_transfer_object_val, char *data_val);
     void processPutSessionData(void *tp_transfer_object_val, char *data_val);
     void processGetSessionData(void *tp_transfer_object_val, char *data_val);
 
