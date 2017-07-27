@@ -144,6 +144,13 @@ void DFabricClass::processGetLinkData (void *tp_transfer_object_val, char *data_
         this->debug(true, "==================processGetLinkData", downlink_data);
     }
 
+    char *pending_session3 = link->getPendingSessionSetup3();
+    if (pending_session3) {
+        *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_PENDING_SESSION_3;
+        strcpy(data_ptr, pending_session3);
+        this->debug(true, "==================processGetLinkData", downlink_data);
+    }
+
     this->transmitFunction1(tp_transfer_object_val, downlink_data);
 }
 
@@ -197,6 +204,16 @@ void DFabricClass::processSetupSession (void *tp_transfer_object_val, char *data
     char *downlink_data;
     char *uplink_data;
     char *data_ptr;
+
+    LinkClass *link = this->theFabricObject->searchLink(link_id_index_val, data_val - 1);
+    if (!link) {
+        this->abend("processSetupSession", "link does not exist");
+        downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
+        *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_MALLOC_SESSION;
+        strcpy(data_ptr, "link does not exist");
+        this->transmitFunction(downlink_data);
+        return;
+    }
 
     SessionClass *session = this->theFabricObject->searchLinkAndMallocSession(link_id_index_val);
     if (!session) {
@@ -279,7 +296,7 @@ void DFabricClass::processSetupSession2 (void *tp_transfer_object_val, char *dat
     data_ptr += LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE;
     *data_ptr = 0;
 
-    this->transmitFunction(downlink_data);
+    this->transmitFunction1(tp_transfer_object_val, downlink_data);
 }
 
 void DFabricClass::processPutSessionData (void *tp_transfer_object_val, char *data_val)
@@ -336,7 +353,7 @@ void DFabricClass::processPutSessionData (void *tp_transfer_object_val, char *da
     data_ptr += SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE;
 
     strcpy(data_ptr, "job is done");
-    this->transmitFunction(downlink_data);
+    this->transmitFunction1(tp_transfer_object_val, downlink_data);
 }
 
 void DFabricClass::processGetSessionData (void *tp_transfer_object_val, char *data_val)
@@ -377,5 +394,5 @@ void DFabricClass::processGetSessionData (void *tp_transfer_object_val, char *da
     data_ptr += SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE;
 
     strcpy(data_ptr, data);
-    this->transmitFunction(downlink_data);
+    this->transmitFunction1(tp_transfer_object_val, downlink_data);
 }

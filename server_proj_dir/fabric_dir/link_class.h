@@ -18,6 +18,7 @@ private:
     char theLinkName[LINK_CLASS_LINK_NAME_BUF_SIZE + 4];
     void *theSessionListMgrObject;
     void *thePendingSessionSetupQueue;
+    void *thePendingSessionSetupQueue3;
     char theNameListChanged;
     int aaa;
 
@@ -37,5 +38,6 @@ public:
     void *sessionListMgrObject(void) {return this->theSessionListMgrObject;}
     SessionClass *searchSession(char *data_val) {return (SessionClass *) phwangListMgrSearchEntry(this->theSessionListMgrObject, data_val, 0);}
     char *getPendingSessionSetup(void) {return (char *) phwangDequeue(this->thePendingSessionSetupQueue);}
+    char *getPendingSessionSetup3(void) {return (char *) phwangDequeue(this->thePendingSessionSetupQueue3);}
     void setPendingSessionSetup(char *session_id_index_val, char *topic_data_val);
 };
