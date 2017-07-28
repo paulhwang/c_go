@@ -236,20 +236,19 @@ void DFabricClass::processSetupSession (void *tp_transfer_object_val, char *data
     else {
         LinkClass *his_link = this->theFabricObject->searchLinkByName(his_name_val);
         if (!his_link) {
-            this->abend("processSetupSession", "null his_link");
-            ////////////////TBD
+            this->errorProcessSetupSession("his_link does not exist");
             return;
         }
 
         SessionClass *his_session = his_link->mallocSession();
         if (!his_session) {
-            this->abend("processSetupSession", "null his_session");
-            ////////////////TBD
+            this->errorProcessSetupSession("null his_session");
             return;
         }
 
         group->insertSession(his_session);
         his_session->bindGroup(group);
+
         char *theme_data = (char *) malloc (32);
         memcpy(theme_data, theme_info_val, theme_len);
         theme_data[theme_len] = 0;
