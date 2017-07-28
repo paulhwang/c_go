@@ -224,20 +224,37 @@ void DFabricClass::processSetupSession (void *tp_transfer_object_val, char *data
 
     GroupClass *group = this->theFabricObject->mallocGroup(theme_info_val);
     if (!group) {
-        this->abend("processSetupSession", "null group");
-        downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
-        *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_SETUP_SESSION;
-        strcpy(data_ptr, "null group");
-        this->transmitFunction(downlink_data);
+        this->errorProcessSetupSession("null group");
         return;
     }
-
     group->insertSession(session);
     session->bindGroup(group);
 
-    this->mallocRoom(group, theme_info_val);
+    if (!strcmp(his_name_val, session->linkObject()->linkName())) {
+        this->mallocRoom(group, theme_info_val);
+    }
+    else {
+        LinkClass *his_link = this->theFabricObject->searchLinkByName(his_name_val);
+        if (!his_link) {
+            this->abend("processSetupSession", "null his_link");
+            ////////////////TBD
+            return;
+        }
 
-    //link->setPendingSessionSetup3(session->sessionIdIndex(), "");
+        SessionClass *his_session = his_link->mallocSession();
+        if (!his_session) {
+            this->abend("processSetupSession", "null his_session");
+            ////////////////TBD
+            return;
+        }
+
+        group->insertSession(his_session);
+        his_session->bindGroup(group);
+        char *theme_data = (char *) malloc (32);
+        memcpy(theme_data, theme_info_val, theme_len);
+        theme_data[theme_len] = 0;
+        his_link->setPendingSessionSetup(his_session->sessionIdIndex(), theme_data);
+    }
 
     downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
     *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_SETUP_SESSION;
@@ -245,31 +262,6 @@ void DFabricClass::processSetupSession (void *tp_transfer_object_val, char *data
     data_ptr += WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;
     strcpy(data_ptr, session->sessionIdIndex());
     this->transmitFunction(downlink_data);
-
-    if (!strcmp(his_name_val, session->linkObject()->linkName())) {
-        return;
-    }
-
-    LinkClass *his_link = this->theFabricObject->searchLinkByName(his_name_val);
-    if (!his_link) {
-        this->abend("processSetupSession", "null his_link");
-        ////////////////TBD
-        return;
-    }
-
-    SessionClass *his_session = his_link->mallocSession();
-    if (!his_session) {
-        this->abend("processSetupSession", "null his_session");
-        ////////////////TBD
-        return;
-    }
-
-    group->insertSession(his_session);
-    his_session->bindGroup(group);
-    char *theme_data = (char *) malloc (32);
-    memcpy(theme_data, theme_info_val, theme_len);
-    theme_data[theme_len] = 0;
-    his_link->setPendingSessionSetup(his_session->sessionIdIndex(), theme_data);
 }
 
 void DFabricClass::errorProcessSetupSession (char const *err_msg_val)
