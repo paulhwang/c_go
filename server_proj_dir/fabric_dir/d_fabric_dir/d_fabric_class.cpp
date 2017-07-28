@@ -31,7 +31,6 @@ void dFabricTpServerAcceptFunction (void *d_fabric_object_val, void *tp_transfer
 
 void DFabricClass::exportedNetAcceptFunction (void *tp_transfer_object_val)
 {
-    this->theTpTransferObject = tp_transfer_object_val;
 }
 
 void dFabricTpReceiveDataFunction (void *tp_transfer_object_val, void *d_fabric_object_val, void *data_val) {

@@ -15,7 +15,6 @@ class FabricClass;
 class DFabricClass {
     FabricClass *theFabricObject;
     void *theTpServerObject;
-    void *theTpTransferObject;
 
     void startNetServer(void);
     void processSetupLink(void *tp_transfer_object_val, char *data_val);
@@ -44,7 +43,7 @@ public:
     ~DFabricClass(void);
     char const *objectName(void) {return "DFabricClass";}
 
-    void transmitFunction1(void *tp_transfer_object_val, char *data_val);
+    void transmitFunction(void *tp_transfer_object_val, char *data_val);
 
     /* exports */
     void exportedNetAcceptFunction(void *tp_transfer_object_val);
