@@ -302,6 +302,12 @@ void DFabricClass::processSetupSession2 (void *tp_transfer_object_val, char *dat
     char *downlink_data;
     char *data_ptr;
 
+    LinkClass *link = this->theFabricObject->searchLink(link_id_index_val, data_val - 1);
+    if (!link) {
+        this->errorProcessSetupSession2("link does not exist");
+        return;
+    }
+
     downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
     *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_SETUP_SESSION2;
 
@@ -315,6 +321,19 @@ void DFabricClass::processSetupSession2 (void *tp_transfer_object_val, char *dat
     *data_ptr = 0;
 
     this->transmitFunction1(tp_transfer_object_val, downlink_data);
+}
+
+void DFabricClass::errorProcessSetupSession2 (char const *err_msg_val)
+{
+    char *downlink_data;
+    char *data_ptr;
+
+    this->abend("errorProcessSetupSession2", err_msg_val);
+
+    downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
+    *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_SETUP_SESSION;
+    strcpy(data_ptr, err_msg_val);
+    this->transmitFunction(downlink_data);
 }
 
 void DFabricClass::processSetupSession3 (void *tp_transfer_object_val, char *data_val)
