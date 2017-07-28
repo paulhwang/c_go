@@ -43,6 +43,7 @@ LinkClass *FabricClass::mallocLink (char const *data_val)
 
 void FabricClass::freeLink (LinkClass *link_object_val)
 {
+    this->debug(true, "freeLink", link_object_val->linkIdIndex());
     if (!link_object_val) {
         return;
     }

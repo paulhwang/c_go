@@ -31,17 +31,46 @@ void TestClass::startNetConnect (void)
 
 void TestClass::startTest(void)
 {
-    for (int i = 1; i < 3; i++) {
-        char *buf = (char *) malloc(128);
-        int j = 0;
-        buf[j++] = 'L';
-        phwangEncodeNumber(&buf[j], i, 3);
-        j += 3;
-        buf[j++] = 'x';
-        phwangEncodeNumber(&buf[j], i * 2, 3);
-        this->transmitFunction(buf);
-        sleep(1);
+    int ajax_id = 1;
+    char name[32];
+
+    for (int i = 0; i < 3; i++) {
+        this->createName(i, name);
+        this->setupLink(ajax_id, name);
+        this->incrementAjaxId(&ajax_id);
+        sleep(5);
     }
+}
+
+void TestClass::incrementAjaxId(int *ajax_id_ptr_val)
+{
+    (*ajax_id_ptr_val)++;
+    if (*ajax_id_ptr_val >= 1000) {
+        *ajax_id_ptr_val = 1;
+    }
+}
+
+char *TestClass::createName(int number_val, char *name_buf_val)
+{
+    char *data_ptr;
+    data_ptr = name_buf_val;
+    strcpy(data_ptr, "Name");
+    data_ptr += strlen(name_buf_val);
+    phwangEncodeNumber(data_ptr, number_val, 3);
+    data_ptr += 3;
+    *data_ptr = 0;
+}
+
+void TestClass::setupLink(int ajax_id_val, char *name_val)
+{
+    char *data_ptr;
+    char *uplink_data = data_ptr = (char *) malloc(128);
+    int j = 0;
+    *data_ptr++ = 'L';
+    phwangEncodeNumber(data_ptr, ajax_id_val, 3);
+    data_ptr += 3;
+    strcpy(data_ptr, name_val);
+    this->transmitFunction(uplink_data);
 }
 
 void TestClass::logit (char const *str0_val, char const *str1_val)

@@ -119,6 +119,15 @@ void DFabricClass::processFreeLink (void *tp_transfer_object_val, char *data_val
         this->errorProcessFreeLink(tp_transfer_object_val, "link does not exist");
         return;
     }
+    this->theFabricObject->freeLink(link);
+
+    char *data_ptr;
+    char *downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
+    *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_FREE_LINK;
+    memcpy(data_ptr, ajax_id, WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE);
+    data_ptr += WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;
+    strcpy(data_ptr, link->linkIdIndex());
+    this->transmitFunction(tp_transfer_object_val, downlink_data);
 }
 
 void DFabricClass::errorProcessFreeLink (void *tp_transfer_object_val, char const *err_msg_val)
