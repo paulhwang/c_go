@@ -48,8 +48,11 @@ void UFabricClass::processSetupRoomResponse(char *data_val)
     if (group) {
         group->setRoomIdIndex(group_id_index_val + GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE);
         group->setSessionTableArray((SessionClass **) phwangArrayMgrGetArrayTable(group->sessionArrayMgr(), &session_array_size));
-        SessionClass *session = group->sessionTableArray(0);
-        session->linkObject()->setPendingSessionSetup3(session->sessionIdIndex(), "");
+        printf("++++++++++++++++++++++++++++++++++++++++++++%d\n", session_array_size);
+        for (int i = 0; i < session_array_size; i++) {
+            SessionClass *session = group->sessionTableArray(0);
+            session->linkObject()->setPendingSessionSetup3(session->sessionIdIndex(), "");
+        }
     }
 }
 
