@@ -72,17 +72,6 @@ GroupClass *FabricClass::mallocGroup (char *theme_data_val)
     return group;
 }
 
-SessionClass *FabricClass::searchLinkAndMallocSession (char *data_val)
-{
-    LinkClass *link = this->searchLink(data_val, 0);
-    if (!link) {
-        this->abend("searchLinkAndMallocSession", "null link");
-        return 0;
-    }
-
-    return link->mallocSession();
-}
-
 SessionClass *FabricClass::serachLinkAndSession (char *data_val)
 {
     LinkClass *link = this->searchLink(data_val, 0);

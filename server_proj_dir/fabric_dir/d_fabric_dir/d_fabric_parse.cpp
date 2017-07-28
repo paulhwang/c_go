@@ -216,7 +216,7 @@ void DFabricClass::processSetupSession (void *tp_transfer_object_val, char *data
         return;
     }
 
-    SessionClass *session = this->theFabricObject->searchLinkAndMallocSession(link_id_index_val);
+    SessionClass *session = link->mallocSession();
     if (!session) {
         this->errorProcessSetupSession("null session");
         return;

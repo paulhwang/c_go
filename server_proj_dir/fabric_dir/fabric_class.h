@@ -43,7 +43,6 @@ public:
     void freeGroup(GroupClass *group_object_val);
     GroupClass *searchGroup(char *data_val) {return (GroupClass *) phwangListMgrSearchEntry(this->theGroupListMgrObject, data_val, 0);}
 
-    SessionClass *searchLinkAndMallocSession(char *data_val);
     SessionClass *searchLinkByNameAndMallocSession(char *name_val);
     SessionClass *serachLinkAndSession(char *data_val);
 };
