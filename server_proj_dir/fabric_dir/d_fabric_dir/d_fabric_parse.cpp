@@ -229,9 +229,9 @@ void DFabricClass::processSetupSession (void *tp_transfer_object_val, char *data
     }
     group->insertSession(session);
     session->bindGroup(group);
+    this->mallocRoom(group, theme_info_val);
 
     if (!strcmp(his_name_val, session->linkObject()->linkName())) {
-        this->mallocRoom(group, theme_info_val);
     }
     else {
         LinkClass *his_link = this->theFabricObject->searchLinkByName(his_name_val);

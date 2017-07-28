@@ -27,6 +27,7 @@ class DFabricClass {
     void processPutSessionData(void *tp_transfer_object_val, char *data_val);
     void processGetSessionData(void *tp_transfer_object_val, char *data_val);
     void errorProcessSetupSession(char const *err_msg_val);
+    void errorProcessSetupSession2(char const *err_msg_val);
     void mallocRoom(GroupClass *group_val, char *theme_info_val);
 
     void debug(int on_off_val, char const *str0_val, char const *str1_val) {if (on_off_val) this->logit(str0_val, str1_val);}
