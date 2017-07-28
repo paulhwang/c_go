@@ -25,8 +25,13 @@ void DFabricClass::exportedparseFunction (void *tp_transfer_object_val, char *da
         this->logit("exportedparseFunction", data_val);
     }
 
-    if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_MALLOC_LINK) {
+    if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_SETUP_LINK) {
         this->processSetupLink(tp_transfer_object_val, data_val + 1);
+        return;
+    }
+
+    if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_FREE_LINK) {
+        this->processFreeLink(tp_transfer_object_val, data_val + 1);
         return;
     }
 
@@ -83,7 +88,7 @@ void DFabricClass::processSetupLink (void *tp_transfer_object_val, char *data_va
 
     char *data_ptr;
     char *downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
-    *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_MALLOC_LINK;
+    *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_SETUP_LINK;
     memcpy(data_ptr, ajax_id, WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE);
     data_ptr += WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;
     strcpy(data_ptr, link->linkIdIndex());
@@ -96,7 +101,33 @@ void DFabricClass::errorProcessSetupLink (void *tp_transfer_object_val, char con
 
     char *data_ptr;
     char *downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
-    *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_MALLOC_LINK;
+    *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_SETUP_LINK;
+    strcpy(data_ptr, err_msg_val);
+    this->transmitFunction(tp_transfer_object_val, downlink_data);
+}
+
+void DFabricClass::processFreeLink (void *tp_transfer_object_val, char *data_val)
+{
+    this->debug(false, "processFreeLink", data_val);
+
+    char *ajax_id = data_val;
+    char *link_id_index_val = ajax_id + WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;
+    char *end_val = link_id_index_val + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE;
+
+    LinkClass *link = this->theFabricObject->searchLink(link_id_index_val, data_val - 1);
+    if (!link) {
+        this->errorProcessFreeLink(tp_transfer_object_val, "link does not exist");
+        return;
+    }
+}
+
+void DFabricClass::errorProcessFreeLink (void *tp_transfer_object_val, char const *err_msg_val)
+{
+    this->abend("errorProcessFreeLink", err_msg_val);
+
+    char *data_ptr;
+    char *downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
+    *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_FREE_LINK;
     strcpy(data_ptr, err_msg_val);
     this->transmitFunction(tp_transfer_object_val, downlink_data);
 }
@@ -363,6 +394,14 @@ void DFabricClass::processSetupSession3 (void *tp_transfer_object_val, char *dat
     data_ptr += LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE;
     *data_ptr = 0;
     this->transmitFunction(tp_transfer_object_val, downlink_data);
+}
+
+void DFabricClass::processFreeSession (void *tp_transfer_object_val, char *data_val)
+{
+}
+
+void DFabricClass::errorProcessFreeSession (void *tp_transfer_object_val, char const *err_msg_val)
+{
 }
 
 void DFabricClass::processPutSessionData (void *tp_transfer_object_val, char *data_val)

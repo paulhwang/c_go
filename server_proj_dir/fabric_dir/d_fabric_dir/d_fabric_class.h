@@ -18,18 +18,22 @@ class DFabricClass {
 
     void startNetServer(void);
     void processSetupLink(void *tp_transfer_object_val, char *data_val);
+    void processFreeLink(void *tp_transfer_object_val, char *data_val);
     void processGetLinkData(void *tp_transfer_object_val, char *data_val);
     void processGetNameList(void *tp_transfer_object_val, char *data_val);
     void processSetupSession(void *tp_transfer_object_val, char *data_val);
     void processSetupSession2(void *tp_transfer_object_val, char *data_val);
     void processSetupSession3(void *tp_transfer_object_val, char *data_val);
+    void processFreeSession(void *tp_transfer_object_val, char *data_val);
     void processPutSessionData(void *tp_transfer_object_val, char *data_val);
     void processGetSessionData(void *tp_transfer_object_val, char *data_val);
+    void errorProcessFreeLink(void *tp_transfer_object_val, char const *err_msg_val);
     void errorProcessSetupLink(void *tp_transfer_object_val, char const *err_msg_val);
     void errorProcessGetLinkData(void *tp_transfer_object_val, char const *err_msg_val);
     void errorProcessGetNameList(void *tp_transfer_object_val, char const *err_msg_val);
     void errorProcessSetupSession(void *tp_transfer_object_val, char const *err_msg_val);
     void errorProcessSetupSession2(void *tp_transfer_object_val, char const *err_msg_val);
+    void errorProcessFreeSession(void *tp_transfer_object_val, char const *err_msg_val);
     void errorProcessPutSessionData(void *tp_transfer_object_val, char const *err_msg_val);
     void errorProcessGetSessionData(void *tp_transfer_object_val, char const *err_msg_val);
     void mallocRoom(GroupClass *group_val, char *theme_info_val);
