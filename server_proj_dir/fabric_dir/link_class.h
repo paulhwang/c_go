@@ -14,7 +14,7 @@ class FabricClass;
 
 class LinkClass : public ListEntryClass {
 #define LINK_CLASS_LINK_NAME_BUF_SIZE 32
-#define LINK_CLASS_KEEP_ALIVE_TIMEOUT 600
+#define LINK_CLASS_KEEP_ALIVE_TIMEOUT 60
 private:
     FabricClass *theFabricObject;
     char theLinkName[LINK_CLASS_LINK_NAME_BUF_SIZE + 4];
@@ -45,5 +45,5 @@ public:
     void setPendingSessionSetup(char *session_id_index_val, char *topic_data_val);
     void setPendingSessionSetup3(char *session_id_index_val, char *topic_data_val);
     void resetKeepAliveTime(void) {this->theKeepAliveTime = time((time_t *) 0);}
-    int checkKeepAliveTimer(void) {return (time((time_t *) 0) - this->theKeepAliveTime) > LINK_CLASS_KEEP_ALIVE_TIMEOUT;}
+    int keepAliveTimerExpired(void) {return (time((time_t *) 0) - this->theKeepAliveTime) > LINK_CLASS_KEEP_ALIVE_TIMEOUT;}
 };

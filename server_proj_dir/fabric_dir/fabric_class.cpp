@@ -61,6 +61,16 @@ void FabricClass::watchDogThreadFunction (void)
 
 void FabricClass::linkKeepAliveExamine (void)
 {
+    int max_index = phwnagListMgrGetMaxIndex(this->theLinkListMgrObject);
+    LinkClass **link_entry_array = (LinkClass **) phwangListMgrGetEntryTableArray(this->theLinkListMgrObject);
+
+    for (int i = max_index ; i >= 0; i--) {
+        if (link_entry_array[i]) {
+            if (link_entry_array[i]->keepAliveTimerExpired()) {
+                this->debug(false, "linkKeepAliveExamine(***expired)", link_entry_array[i]->linkName());
+            }
+        }
+    }
 
 }
 
