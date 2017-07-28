@@ -229,9 +229,10 @@ void DFabricClass::processSetupSession (void *tp_transfer_object_val, char *data
     }
     group->insertSession(session);
     session->bindGroup(group);
-    this->mallocRoom(group, theme_info_val);
+
 
     if (!strcmp(his_name_val, session->linkObject()->linkName())) {
+        this->mallocRoom(group, theme_info_val);
     }
     else {
         LinkClass *his_link = this->theFabricObject->searchLinkByName(his_name_val);
@@ -297,7 +298,7 @@ void DFabricClass::processSetupSession2 (void *tp_transfer_object_val, char *dat
     char *ajax_id = data_val;
     char *link_id_index_val = data_val + WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;
     char *session_id_index_val = link_id_index_val + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE;
-    char *end_val = session_id_index_val + SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE;
+    char *theme_info_val = session_id_index_val + SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE;
 
     char *downlink_data;
     char *data_ptr;
@@ -307,6 +308,15 @@ void DFabricClass::processSetupSession2 (void *tp_transfer_object_val, char *dat
         this->errorProcessSetupSession2("link does not exist");
         return;
     }
+
+    SessionClass *session = link->searchSession(session_id_index_val);
+    if (!session) {
+        this->errorProcessSetupSession2("session does not exist");
+        return;
+    }
+
+    GroupClass *group = session->groupObject();
+    this->mallocRoom(group, theme_info_val);
 
     downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
     *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_SETUP_SESSION2;
@@ -331,7 +341,7 @@ void DFabricClass::errorProcessSetupSession2 (char const *err_msg_val)
     this->abend("errorProcessSetupSession2", err_msg_val);
 
     downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
-    *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_SETUP_SESSION;
+    *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_SETUP_SESSION2;
     strcpy(data_ptr, err_msg_val);
     this->transmitFunction(downlink_data);
 }
