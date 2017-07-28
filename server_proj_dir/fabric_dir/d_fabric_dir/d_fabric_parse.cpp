@@ -289,7 +289,7 @@ void DFabricClass::processSetupSession (void *tp_transfer_object_val, char *data
     memcpy(data_ptr, ajax_id, WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE);
     data_ptr += WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;
     strcpy(data_ptr, session->sessionIdIndex());
-    this->transmitFunction(downlink_data);
+    this->transmitFunction1(tp_transfer_object_val, downlink_data);
 }
 
 void DFabricClass::errorProcessSetupSession (void *tp_transfer_object_val, char const *err_msg_val)

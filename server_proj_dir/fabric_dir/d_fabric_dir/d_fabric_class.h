@@ -45,7 +45,6 @@ public:
     char const *objectName(void) {return "DFabricClass";}
 
     void transmitFunction1(void *tp_transfer_object_val, char *data_val);
-    void transmitFunction(char *data_val);
 
     /* exports */
     void exportedNetAcceptFunction(void *tp_transfer_object_val);
