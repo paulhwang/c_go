@@ -235,7 +235,6 @@ void DFabricClass::processSetupSession (void *tp_transfer_object_val, char *data
     int theme_len = phwangDecodeNumber(theme_info_val + 1, 3);
     char *his_name_val = theme_info_val + theme_len;
     char *downlink_data;
-    char *uplink_data;
     char *data_ptr;
 
     LinkClass *link = this->theFabricObject->searchLink(link_id_index_val, data_val - 1);
@@ -257,7 +256,6 @@ void DFabricClass::processSetupSession (void *tp_transfer_object_val, char *data
     }
     group->insertSession(session);
     session->bindGroup(group);
-
 
     if (!strcmp(his_name_val, session->linkObject()->linkName())) {
         this->mallocRoom(group, theme_info_val);
