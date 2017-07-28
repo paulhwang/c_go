@@ -245,7 +245,7 @@ void DFabricClass::processSetupSession (void *tp_transfer_object_val, char *data
 
     this->mallocRoom(group, theme_info_val);
 
-    link->setPendingSessionSetup3(session->sessionIdIndex(), "");
+    //link->setPendingSessionSetup3(session->sessionIdIndex(), "");
 
     downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
     *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_SETUP_SESSION;
