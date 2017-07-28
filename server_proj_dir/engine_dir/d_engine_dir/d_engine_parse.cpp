@@ -32,8 +32,7 @@ void DEngineClass::processSetupBase(char const *data_val)
 {
     this->debug(true, "processSetupBase", data_val);
 
-    char const *ajax_id = data_val;
-    char const *room_id_index_val = ajax_id + WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;
+    char const *room_id_index_val = data_val;
 
     char *downlink_data;
     char *data_ptr;
