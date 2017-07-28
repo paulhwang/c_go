@@ -8,7 +8,6 @@
 #include "../../protocol_dir/fabric_theme_protocol.h"
 #include "../../protocol_dir/theme_engine_protocol.h"
 #include "../../protocol_dir/room_mgr_protocol.h"
-#include "../../protocol_dir/web_fabric_protocol.h"
 #include "d_theme_class.h"
 #include "../theme_class.h"
 #include "../u_theme_dir/u_theme_class.h"
@@ -35,8 +34,7 @@ void DThemeClass::processSetupRoom (char *data_val)
 {
     this->debug(true, "processSetupRoom", data_val);
 
-    char *ajax_id = data_val;
-    char *group_id_index_val = ajax_id + WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;
+    char *group_id_index_val = data_val;
 
     char *downlink_data;
     char *uplink_data;
@@ -51,7 +49,7 @@ void DThemeClass::processSetupRoom (char *data_val)
         this->transmitFunction(downlink_data);
         return;
     }
-    data_val += WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE + GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE;
+    data_val += GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE;
 
     uplink_data = data_ptr = (char *) malloc(ROOM_MGR_DATA_BUFFER_SIZE + 4);
     *data_ptr++ = THEME_ENGINE_PROTOCOL_COMMAND_IS_SETUP_BASE;

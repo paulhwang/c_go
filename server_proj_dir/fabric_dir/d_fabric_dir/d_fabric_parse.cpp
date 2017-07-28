@@ -284,20 +284,14 @@ void DFabricClass:: mallocRoom (GroupClass *group_val, char *theme_info_val)
 {
     char *uplink_data;
     char *data_ptr;
-    char ajax_id[4];
-    strcpy(ajax_id, "abc");
 
     uplink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
     *data_ptr++ = FABRIC_THEME_PROTOCOL_COMMAND_IS_SETUP_ROOM;
-
-    memcpy(data_ptr, ajax_id, WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE);
-    data_ptr += WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;
 
     memcpy(data_ptr, group_val->groupIdIndex(), GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE);
     data_ptr += GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE;
     strcpy(data_ptr, theme_info_val);
     this->theFabricObject->uFabricObject()->transmitFunction(uplink_data);
-
 }
 
 void DFabricClass::processSetupSession2 (void *tp_transfer_object_val, char *data_val)
