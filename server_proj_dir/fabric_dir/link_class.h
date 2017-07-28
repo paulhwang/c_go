@@ -5,6 +5,7 @@
 */
 
 #pragma once
+#include <time.h>
 #include "../../phwang_dir/list_mgr_dir/list_entry_class.h"
 #include "../protocol_dir/link_mgr_protocol.h"
 
@@ -12,7 +13,8 @@ class SessionClass;
 class FabricClass;
 
 class LinkClass : public ListEntryClass {
-#define  LINK_CLASS_LINK_NAME_BUF_SIZE 32
+#define LINK_CLASS_LINK_NAME_BUF_SIZE 32
+#define LINK_CLASS_KEEP_ALIVE_TIMEOUT 600
 private:
     FabricClass *theFabricObject;
     char theLinkName[LINK_CLASS_LINK_NAME_BUF_SIZE + 4];
@@ -20,6 +22,7 @@ private:
     void *thePendingSessionSetupQueue;
     void *thePendingSessionSetupQueue3;
     char theNameListChanged;
+    time_t theKeepAliveTime;
     int aaa;
 
     void debug(int on_off_val, char const *str0_val, char const *str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
@@ -41,4 +44,6 @@ public:
     char *getPendingSessionSetup3(void) {return (char *) phwangDequeue(this->thePendingSessionSetupQueue3);}
     void setPendingSessionSetup(char *session_id_index_val, char *topic_data_val);
     void setPendingSessionSetup3(char *session_id_index_val, char *topic_data_val);
+    void resetKeepAliveTime(void) {this->theKeepAliveTime = time((time_t *) 0);}
+    int checkKeepAliveTimer(void) {return (time((time_t *) 0) - this->theKeepAliveTime) > LINK_CLASS_KEEP_ALIVE_TIMEOUT;}
 };

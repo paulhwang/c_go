@@ -154,6 +154,7 @@ void DFabricClass::processGetLinkData (void *tp_transfer_object_val, char *data_
         this->errorProcessGetLinkData(tp_transfer_object_val, "link does not exist");
         return;
     }
+    link->resetKeepAliveTime();
 
     char *data_ptr;
     char *downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
