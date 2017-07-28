@@ -37,8 +37,7 @@ void UFabricClass::processSetupRoomResponse(char *data_val)
 {
     this->debug(true, "processSetupRoomResponse", data_val);
 
-    char *ajax_id = data_val;
-    char *group_id_index_val = ajax_id + WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;
+    char *group_id_index_val = data_val;
 
     char *downlink_data;
     char *data_ptr;
