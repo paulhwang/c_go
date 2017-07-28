@@ -39,6 +39,7 @@ void  phwangListMgrFree(void *list_mgr_val);
 void *phwangListMgrSearchEntry(void *list_mgr_val, char const *data_val, void *extra_data_val);
 int   phwnagListMgrGetMaxIndex(void *list_mgr_val);
 void *phwangListMgrGetEntryTableArray(void *list_mgr_val);
+void *phwangListMgrFreeEntry(void *list_mgr_val, void *entry_val);
 
 /* array_mgr */
 void *phwangArrayMgrMalloc(char const *caller_name_val, char array_type_val, int array_size_val);

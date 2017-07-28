@@ -71,8 +71,8 @@ void ListMgrClass::insertEntry (ListEntryClass *entry_val)
 
 void ListMgrClass::freeEntry (ListEntryClass *list_entry_object_val)
 {
+    this->theEntryTableArray[list_entry_object_val->entryIndex()] = 0;
     this->theEntryCount--;
-
 }
 
 ListEntryClass *ListMgrClass::searchEntry (char const *data_val, void *extra_data_val)

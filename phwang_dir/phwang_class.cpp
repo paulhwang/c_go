@@ -100,7 +100,7 @@ void *PhwangClass::listMgrMalloc (char const *caller_name_val, int id_size_val, 
     return list_mgr;
 }
 
-void PhwangClass::listMgrFree(void *list_mgr_val)
+void PhwangClass::listMgrFree (void *list_mgr_val)
 {
     if (!list_mgr_val) {
         phwangAbend("listMgrFree", "null list_mgr_val");
@@ -115,6 +115,23 @@ void PhwangClass::listMgrFree(void *list_mgr_val)
     }
 
     ((ListMgrClass *) list_mgr_val)->~ListMgrClass();
+}
+
+void PhwangClass::listMgrFreeEntry (void *list_mgr_val, void *entry_val)
+{
+    if (!list_mgr_val) {
+        phwangAbend("listMgrFreeEntry", "null list_mgr_val");
+        return;
+    }
+
+    if (strcmp(((ListMgrClass *) list_mgr_val)->objectName(), "ListMgrClass")) {
+        char s[LOGIT_BUF_SIZE];
+        sprintf(s, "wrong object: objectName=%s", ((ListMgrClass *) list_mgr_val)->objectName());
+        phwangAbend("listMgrFreeEntry", s);
+        return;
+    }
+
+    ((ListMgrClass *) list_mgr_val)->freeEntry((ListEntryClass *) entry_val);
 }
 
 void *PhwangClass::listMgrSearchEntry(void *list_mgr_val, char const *data_val, void *extra_data_val)
