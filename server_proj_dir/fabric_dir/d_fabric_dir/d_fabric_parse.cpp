@@ -212,19 +212,19 @@ void DFabricClass::processSetupSession (void *tp_transfer_object_val, char *data
 
     LinkClass *link = this->theFabricObject->searchLink(link_id_index_val, data_val - 1);
     if (!link) {
-        this->errorProcessSetupSession("link does not exist");
+        this->errorProcessSetupSession(tp_transfer_object_val, "link does not exist");
         return;
     }
 
     SessionClass *session = link->mallocSession();
     if (!session) {
-        this->errorProcessSetupSession("null session");
+        this->errorProcessSetupSession(tp_transfer_object_val, "null session");
         return;
     }
 
     GroupClass *group = this->theFabricObject->mallocGroup(theme_info_val);
     if (!group) {
-        this->errorProcessSetupSession("null group");
+        this->errorProcessSetupSession(tp_transfer_object_val, "null group");
         return;
     }
     group->insertSession(session);
@@ -237,13 +237,13 @@ void DFabricClass::processSetupSession (void *tp_transfer_object_val, char *data
     else {
         LinkClass *his_link = this->theFabricObject->searchLinkByName(his_name_val);
         if (!his_link) {
-            this->errorProcessSetupSession("his_link does not exist");
+            this->errorProcessSetupSession(tp_transfer_object_val, "his_link does not exist");
             return;
         }
 
         SessionClass *his_session = his_link->mallocSession();
         if (!his_session) {
-            this->errorProcessSetupSession("null his_session");
+            this->errorProcessSetupSession(tp_transfer_object_val, "null his_session");
             return;
         }
 
@@ -264,7 +264,7 @@ void DFabricClass::processSetupSession (void *tp_transfer_object_val, char *data
     this->transmitFunction(downlink_data);
 }
 
-void DFabricClass::errorProcessSetupSession (char const *err_msg_val)
+void DFabricClass::errorProcessSetupSession (void *tp_transfer_object_val, char const *err_msg_val)
 {
     char *downlink_data;
     char *data_ptr;
@@ -274,7 +274,7 @@ void DFabricClass::errorProcessSetupSession (char const *err_msg_val)
     downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
     *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_SETUP_SESSION;
     strcpy(data_ptr, err_msg_val);
-    this->transmitFunction(downlink_data);
+    this->transmitFunction1(tp_transfer_object_val, downlink_data);
 }
 
 void DFabricClass::mallocRoom (GroupClass *group_val, char *theme_info_val)
@@ -305,13 +305,13 @@ void DFabricClass::processSetupSession2 (void *tp_transfer_object_val, char *dat
 
     LinkClass *link = this->theFabricObject->searchLink(link_id_index_val, data_val - 1);
     if (!link) {
-        this->errorProcessSetupSession2("link does not exist");
+        this->errorProcessSetupSession2(tp_transfer_object_val, "link does not exist");
         return;
     }
 
     SessionClass *session = link->searchSession(session_id_index_val);
     if (!session) {
-        this->errorProcessSetupSession2("session does not exist");
+        this->errorProcessSetupSession2(tp_transfer_object_val, "session does not exist");
         return;
     }
 
@@ -320,10 +320,8 @@ void DFabricClass::processSetupSession2 (void *tp_transfer_object_val, char *dat
 
     downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
     *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_SETUP_SESSION2;
-
     memcpy(data_ptr, ajax_id, WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE);
     data_ptr += WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;
-
     memcpy(data_ptr, link_id_index_val, LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE);
     data_ptr += LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE;
     memcpy(data_ptr, session_id_index_val, SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE);
@@ -333,7 +331,7 @@ void DFabricClass::processSetupSession2 (void *tp_transfer_object_val, char *dat
     this->transmitFunction1(tp_transfer_object_val, downlink_data);
 }
 
-void DFabricClass::errorProcessSetupSession2 (char const *err_msg_val)
+void DFabricClass::errorProcessSetupSession2 (void *tp_transfer_object_val, char const *err_msg_val)
 {
     char *downlink_data;
     char *data_ptr;
@@ -343,7 +341,7 @@ void DFabricClass::errorProcessSetupSession2 (char const *err_msg_val)
     downlink_data = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE + 4);
     *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_SETUP_SESSION2;
     strcpy(data_ptr, err_msg_val);
-    this->transmitFunction(downlink_data);
+    this->transmitFunction1(tp_transfer_object_val, downlink_data);
 }
 
 void DFabricClass::processSetupSession3 (void *tp_transfer_object_val, char *data_val)
