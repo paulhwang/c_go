@@ -34,10 +34,13 @@ void TestClass::startTest(void)
     int ajax_id = 1;
     char name[32];
 
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 100; i++) {
         this->createName(i, name);
         this->setupLink(ajax_id, name);
         this->incrementAjaxId(&ajax_id);
+        if (i == 99) {
+            i = 0;
+        }
         sleep(5);
     }
 }

@@ -29,9 +29,9 @@ void phwangDecodeIdIndex(char const *str_val, int *id_ptr_val, int id_size_val, 
 /* queue */
 void *phwangMallocSuspendedQueue(int size_val);
 void *phwangMallocQueue(int size_val);
-void  phwangFreeQueue(void *queue_val);
+void  phwangFreeQueue(void *queue_val, char const *who_val);
 void  phwangEnqueue(void *queue_val, void *data_val);
-void *phwangDequeue(void *queue_val);
+void *phwangDequeue(void *queue_val, char const *who_val);
 
 /* list_mgr */
 void *phwangListMgrMalloc(char const *caller_name_val, int id_size_val, int index_size_val, int global_entry_id_val);

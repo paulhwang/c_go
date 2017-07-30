@@ -20,17 +20,17 @@ void phwangInit (void)
 /* logit */
 void phwangDebug (int on_off_val, char const *str0_val, char const *str1_val)
 {
-    thePhwangObject->debug(on_off_val, str0_val, str1_val);
+    thePhwangObject->phwangDebug(on_off_val, str0_val, str1_val);
 }
 
 void phwangLogit (char const *str0_val, char const *str1_val)
 {
-    thePhwangObject->logit(str0_val, str1_val);
+    thePhwangObject->phwangLogit(str0_val, str1_val);
 }
 
 void phwangAbend (char const *str0_val, char const *str1_val)
 {
-    thePhwangObject->abend(str0_val, str1_val);
+    thePhwangObject->phwangAbend(str0_val, str1_val);
 }
 
 void phwangPrintBoard (char const *data_val, int board_size_val)
@@ -70,8 +70,14 @@ void *phwangMallocQueue (int size_val)
     return thePhwangObject->mallocQueue(false, size_val);
 }
 
-void phwangFreeQueue (void *queue_val)
+void phwangFreeQueue (void *queue_val, char const *who_val)
 {
+    if (!queue_val) {
+        phwangLogit("phwangFreeQueue", who_val);
+        phwangAbend("phwangFreeQueue", "null queue_val");
+        //return 0;
+    }
+
     thePhwangObject->freeQueue(queue_val);
 }
 
@@ -80,8 +86,14 @@ void phwangEnqueue (void *queue_val, void *data_val)
     thePhwangObject->enqueue(queue_val, data_val);
 }
 
-void *phwangDequeue (void *queue_val)
+void *phwangDequeue (void *queue_val, char const *who_val)
 {
+    if (!queue_val) {
+        phwangLogit("phwangDequeue", who_val);
+        phwangAbend("phwangDequeue", "null queue_val");
+        //return 0;
+    }
+
     return thePhwangObject->dequeue(queue_val);
 }
 

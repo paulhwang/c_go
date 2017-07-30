@@ -30,6 +30,6 @@ public:
     GroupClass *groupObject(void) {return this->theGroupObject;}
 
     void bindGroup(GroupClass *group_object_val) {this->theGroupObject = group_object_val;}
-    char *getPendingDownLinkData(void) {return (char *) phwangDequeue(this->thePendingDownLinkDataQueue);}
+    char *getPendingDownLinkData(void) {return (char *) phwangDequeue(this->thePendingDownLinkDataQueue, "SessionClass::getPendingDownLinkData()");}
     void enqueuePendingDownLinkData(char *data_val);
 };

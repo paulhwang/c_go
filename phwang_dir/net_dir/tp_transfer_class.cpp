@@ -45,7 +45,7 @@ void TpTransferClass::exportTransmitData (void *data_val)
 void TpTransferClass::transmitThreadFunction(int socket_val)
 {
     while (1) {
-        void *data = phwangDequeue(this->theTransmitQueue);
+        void *data = phwangDequeue(this->theTransmitQueue, "TpTransferClass::transmitThreadFunction()");
         if (data) {
             char *str_data = (char *) data;
 

@@ -18,7 +18,7 @@ SessionClass::SessionClass (void *list_mgr_object_val, LinkClass *link_object_va
 
 SessionClass::~SessionClass (void)
 {
-    phwangFreeQueue(this->thePendingDownLinkDataQueue);
+    phwangFreeQueue(this->thePendingDownLinkDataQueue, "SessionClass::~SessionClass()");
 }
 
 void SessionClass::enqueuePendingDownLinkData(char *data_val)

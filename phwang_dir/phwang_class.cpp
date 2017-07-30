@@ -14,18 +14,30 @@
 #include "net_dir/tp_server_class.h"
 #include "net_dir/tp_transfer_class.h"
 
-void PhwangClass::logit (char const* str0_val, char const* str1_val)
+void PhwangClass::phwangLogit (char const* str0_val, char const* str1_val)
 {
     printf("%s() %s\n", str0_val, str1_val);
 }
 
-void PhwangClass::abend (char const* str0_val, char const* str1_val)
+void PhwangClass::phwangAbend (char const* str0_val, char const* str1_val)
 {
     phwangLogit("*****Abend*****", str0_val);
     phwangLogit(str0_val, str1_val);
     phwangLogit("*****Abend*****", str1_val);
     int *junk = 0;
     *junk = 0;
+}
+
+void PhwangClass::logit (char const *str0_val, char const *str1_val) {
+    char s[LOGIT_BUF_SIZE];
+    sprintf(s, "%s::%s", this->objectName(), str0_val);
+    this->phwangLogit(s, str1_val);
+}
+
+void PhwangClass::abend (char const *str0_val, char const *str1_val) {
+    char s[LOGIT_BUF_SIZE];
+    sprintf(s, "%s::%s", this->objectName(), str0_val);
+    this->phwangAbend(s, str1_val);
 }
 
 void PhwangClass::printBoard (char const* data_val, int board_size_val)
@@ -268,12 +280,12 @@ void *PhwangClass::mallocQueue (int do_suspend_val, int max_size_val)
 void PhwangClass::freeQueue (void *queue_val)
 {
     if (!queue_val) {
-        phwangAbend("freeQueue", "null queue_val");
+        this->abend("freeQueue", "null queue_val");
         return;
     }
 
     if (strcmp(((QueueClass *) queue_val)->objectName(), "QueueClass")) {
-        phwangAbend("freeQueue", "wrong object");
+        this->abend("freeQueue", "wrong object");
         return;
     }
 
@@ -283,12 +295,12 @@ void PhwangClass::freeQueue (void *queue_val)
 void PhwangClass::enqueue (void *queue_val, void *data_val)
 {
     if (!queue_val) {
-        phwangAbend("enqueue", "null queue_val");
+        this->abend("enqueue", "null queue_val");
         return;
     }
 
     if (strcmp(((QueueClass *) queue_val)->objectName(), "QueueClass")) {
-        phwangAbend("enqueue", "wrong object");
+        this->abend("enqueue", "wrong object");
         return;
     }
 
@@ -298,12 +310,12 @@ void PhwangClass::enqueue (void *queue_val, void *data_val)
 void *PhwangClass::dequeue (void *queue_val)
 {
     if (!queue_val) {
-        phwangAbend("dequeue", "null queue_val");
+        this->abend("dequeue", "null queue_val");
         return 0;
     }
 
     if (strcmp(((QueueClass *) queue_val)->objectName(), "QueueClass")) {
-        phwangAbend("dequeue", "wrong object");
+        this->abend("dequeue", "wrong object");
         return 0;
     }
 

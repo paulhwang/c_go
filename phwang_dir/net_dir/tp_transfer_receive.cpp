@@ -62,7 +62,7 @@ void TpTransferClass::receiveThreadFunction2 (void)
     this->debug(false, "receiveThreadFunction2", "starts");
 
     while (1) {
-        char *data = (char *) phwangDequeue(this->theReceiveQueue);
+        char *data = (char *) phwangDequeue(this->theReceiveQueue, "TpTransferClass::receiveThreadFunction2()");
         if (data) {
             this->debug(false, "receiveThreadFunction2", data);
 

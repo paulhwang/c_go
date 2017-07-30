@@ -32,7 +32,7 @@ private:
 public:
     LinkClass(void *list_mgr_object_val, FabricClass *fabric_object_val, char const* link_name_val);
     ~LinkClass(void);
-    char const* objectName(void) {return "LinkClass";}
+    char const *objectName(void) {return "LinkClass";}
 
     char *linkName(void) {return this->theLinkName;}
     char *linkIdIndex(void) {return this->entryIdIndex();}
@@ -40,8 +40,8 @@ public:
     SessionClass *mallocSession(void);
     void *sessionListMgrObject(void) {return this->theSessionListMgrObject;}
     SessionClass *searchSession(char *data_val) {return (SessionClass *) phwangListMgrSearchEntry(this->theSessionListMgrObject, data_val, 0);}
-    char *getPendingSessionSetup(void) {return (char *) phwangDequeue(this->thePendingSessionSetupQueue);}
-    char *getPendingSessionSetup3(void) {return (char *) phwangDequeue(this->thePendingSessionSetupQueue3);}
+    char *getPendingSessionSetup(void) {return (char *) phwangDequeue(this->thePendingSessionSetupQueue, "LinkClass::getPendingSessionSetup()");}
+    char *getPendingSessionSetup3(void) {return (char *) phwangDequeue(this->thePendingSessionSetupQueue3, "LinkClass::getPendingSessionSetup3()");}
     void setPendingSessionSetup(char *session_id_index_val, char *topic_data_val);
     void setPendingSessionSetup3(char *session_id_index_val, char *topic_data_val);
     void resetKeepAliveTime(void) {this->theKeepAliveTime = time((time_t *) 0);}

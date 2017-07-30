@@ -9,14 +9,19 @@
 #define LOGIT_BUF_SIZE 512
 
 class PhwangClass {
- public:
-    PhwangClass(void){}
-    ~PhwangClass(void){}
-
-    /* logit */
-    void debug(int on_off_val, char const *str0_val, char const *str1_val) {if (on_off_val) this->logit(str0_val, str1_val);}
+    void debug(int on_off_val, char const *str0_val, char const *str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
     void logit(char const *str0_val, char const *str1_val);
     void abend(char const *str0_val, char const *str1_val);
+
+public:
+    PhwangClass(void){}
+    ~PhwangClass(void){}
+    char const *objectName(void) {return "PhwangClasss";}
+
+    /* logit */
+    void phwangDebug(int on_off_val, char const *str0_val, char const *str1_val) {if (on_off_val) this->phwangLogit(str0_val, str1_val);}
+    void phwangLogit(char const *str0_val, char const *str1_val);
+    void phwangAbend(char const *str0_val, char const *str1_val);
     void printBoard(char const *data_val, int board_size_val);
 
     /* encode */
