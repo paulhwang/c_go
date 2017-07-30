@@ -65,13 +65,11 @@ void FabricClass::linkKeepAliveExamine (void)
     LinkClass **link_entry_array = (LinkClass **) phwangListMgrGetEntryTableArray(this->theLinkListMgrObject);
 
     for (int i = max_index ; i >= 0; i--) {
-        if (link_entry_array[i]) {
-            if (link_entry_array[i]->keepAliveTimerExpired()) {
-                LinkClass *link = link_entry_array[i];
-                this->debug(true, "linkKeepAliveExamine(***expired)", link->linkName());
-                phwangListMgrFreeEntry(this->theLinkListMgrObject, link);
-                link->~LinkClass();
-            }
+        LinkClass *link = link_entry_array[i];
+        if (link && link->keepAliveTime() && link->keepAliveTimerExpired()) {
+            this->debug(true, "linkKeepAliveExamine(***expired)", link->linkName());
+            phwangListMgrFreeEntry(this->theLinkListMgrObject, link);
+            link->~LinkClass();
         }
     }
 

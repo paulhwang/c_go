@@ -36,6 +36,7 @@ public:
 
     char *linkName(void) {return this->theLinkName;}
     char *linkIdIndex(void) {return this->entryIdIndex();}
+    time_t keepAliveTime(void) {return this->theKeepAliveTime;}
 
     SessionClass *mallocSession(void);
     void *sessionListMgrObject(void) {return this->theSessionListMgrObject;}
