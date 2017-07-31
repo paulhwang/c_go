@@ -41,7 +41,7 @@ public:
     void  listMgrFree(void *list_mgr_val);
     void  listMgrFreeEntry(void *list_mgr_val, void *entry_val);
     void *listMgrSearchEntry(void *list_mgr_val, char const *data_val, void *extra_data_val);
-    int   listMgrGetMaxIndex(void *list_mgr_val);
+    int   listMgrGetMaxIndex(void *list_mgr_val, char const *who_val);
     void *listMgrGetEntryTableArray(void *list_mgr_val);
 
     /* array_mgr */

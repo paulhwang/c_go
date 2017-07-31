@@ -31,7 +31,7 @@ void TestClass::startNetConnect (void)
 
 void TestClass::startTestThreads(void)
 {
-    for (int i = 0; i < 9; i++) {
+    for (int i = 0; i < 3; i++) {
         this->startTestThread();
     }
 }

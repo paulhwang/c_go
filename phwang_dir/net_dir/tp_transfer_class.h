@@ -15,6 +15,7 @@ class TpTransferClass {
     void (*theReceiveCallback)(void *, void *, void *);
     void *theReceiveObject;
     int theSocket;
+    int theIndex;
 
     pthread_t theReceiveThread;
     pthread_t theReceiveThread2;
@@ -41,11 +42,12 @@ public:
     void transmitThreadFunction(int socket_val);
 
     int socket(void) {return this->theSocket;}
+    int index(void) {return this->theIndex;}
     void (*receiveCallback(void))(void *, void *, void *) {return this->theReceiveCallback;}
 
     /* exports */
     void exportTransmitData(void *data_val);
-    void startThreads(void);
+    void startThreads(int index_val);
 };
 
 typedef struct {

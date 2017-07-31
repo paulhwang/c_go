@@ -12,7 +12,7 @@ class FabricClass;
 class NameListClass {
 #define NAME_LIST_CLASS_NAME_LIST_TAG_SIZE WEB_FABRIC_PROTOCOL_NAME_LIST_TAG_SIZE
 #define NAME_LIST_CLASS_MAX_NAME_LIST_TAG 999
-#define NAME_LIST_CLASS_NAME_LIST_BUFFER_SIZE 1024
+#define NAME_LIST_CLASS_NAME_LIST_BUFFER_SIZE 10240
 
     FabricClass *theFabricObject;
     int theNameListTag;
@@ -25,7 +25,7 @@ class NameListClass {
 public:
     NameListClass(FabricClass *fabric_object_val);
     ~NameListClass(void);
-    char const* objectName(void) {return "NameListClass";}
+    char const *objectName(void) {return "NameListClass";}
 
     int nameListTag(void) {return this->theNameListTag;}
 

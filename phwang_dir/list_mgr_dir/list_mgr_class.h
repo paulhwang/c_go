@@ -5,6 +5,7 @@
 */
 
 #pragma once
+#include <pthread.h>
 
 class ListEntryClass;
 
@@ -21,6 +22,7 @@ class ListMgrClass {
     int theMaxIndex;
     int theEntryCount;
     ListEntryClass *theEntryTableArray[LIST_MGR_ID_INDEX_ARRAY_SIZE];
+    pthread_mutex_t theMutex;
 
     int allocEntryId(void);
     int allocEntryIndex(void);

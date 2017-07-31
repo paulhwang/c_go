@@ -115,14 +115,14 @@ void *PhwangClass::listMgrMalloc (char const *caller_name_val, int id_size_val, 
 void PhwangClass::listMgrFree (void *list_mgr_val)
 {
     if (!list_mgr_val) {
-        phwangAbend("listMgrFree", "null list_mgr_val");
+        this->abend("listMgrFree", "null list_mgr_val");
         return;
     }
 
     if (strcmp(((ListMgrClass *) list_mgr_val)->objectName(), "ListMgrClass")) {
         char s[LOGIT_BUF_SIZE];
         sprintf(s, "wrong object: objectName=%s", ((ListMgrClass *) list_mgr_val)->objectName());
-        phwangAbend("listMgrFree", s);
+        this->abend("listMgrFree", s);
         return;
     }
 
@@ -132,14 +132,14 @@ void PhwangClass::listMgrFree (void *list_mgr_val)
 void PhwangClass::listMgrFreeEntry (void *list_mgr_val, void *entry_val)
 {
     if (!list_mgr_val) {
-        phwangAbend("listMgrFreeEntry", "null list_mgr_val");
+        this->abend("listMgrFreeEntry", "null list_mgr_val");
         return;
     }
 
     if (strcmp(((ListMgrClass *) list_mgr_val)->objectName(), "ListMgrClass")) {
         char s[LOGIT_BUF_SIZE];
         sprintf(s, "wrong object: objectName=%s", ((ListMgrClass *) list_mgr_val)->objectName());
-        phwangAbend("listMgrFreeEntry", s);
+        this->abend("listMgrFreeEntry", s);
         return;
     }
 
@@ -149,31 +149,31 @@ void PhwangClass::listMgrFreeEntry (void *list_mgr_val, void *entry_val)
 void *PhwangClass::listMgrSearchEntry(void *list_mgr_val, char const *data_val, void *extra_data_val)
 {
     if (!list_mgr_val) {
-        phwangAbend("listMgrSearchEntry", "null list_mgr_val");
+        this->abend("listMgrSearchEntry", "null list_mgr_val");
         return 0;
     }
 
     if (strcmp(((ListMgrClass *) list_mgr_val)->objectName(), "ListMgrClass")) {
         char s[LOGIT_BUF_SIZE];
         sprintf(s, "wrong object: objectName=%s", ((ListMgrClass *) list_mgr_val)->objectName());
-        phwangAbend("listMgrSearchEntry", s);
+        this->abend("listMgrSearchEntry", s);
         return 0;
     }
 
     return ((ListMgrClass *) list_mgr_val)->searchEntry(data_val, extra_data_val);
 }
 
-int PhwangClass::listMgrGetMaxIndex (void *list_mgr_val)
+int PhwangClass::listMgrGetMaxIndex (void *list_mgr_val, char const *who_val)
 {
     if (!list_mgr_val) {
-        phwangAbend("listMgrGetMaxIndex", "null list_mgr_val");
+        this->abend("listMgrGetMaxIndex", "null list_mgr_val");
         return 0;
     }
 
     if (strcmp(((ListMgrClass *) list_mgr_val)->objectName(), "ListMgrClass")) {
         char s[LOGIT_BUF_SIZE];
-        sprintf(s, "wrong object: objectName=%s", ((ListMgrClass *) list_mgr_val)->objectName());
-        phwangAbend("listMgrGetMaxIndex", s);
+        sprintf(s, "wrong object: who=%s objectName=%s", who_val, ((ListMgrClass *) list_mgr_val)->objectName());
+        this->abend("listMgrGetMaxIndex", s);
         return 0;
     }
 
@@ -183,14 +183,14 @@ int PhwangClass::listMgrGetMaxIndex (void *list_mgr_val)
 void *PhwangClass::listMgrGetEntryTableArray (void *list_mgr_val)
 {
     if (!list_mgr_val) {
-        phwangAbend("listMgrGetEntryTableArray", "null list_mgr_val");
+        this->abend("listMgrGetEntryTableArray", "null list_mgr_val");
         return 0;
     }
 
     if (strcmp(((ListMgrClass *) list_mgr_val)->objectName(), "ListMgrClass")) {
         char s[LOGIT_BUF_SIZE];
         sprintf(s, "wrong object: objectName=%s", ((ListMgrClass *) list_mgr_val)->objectName());
-        phwangAbend("listMgrGetEntryTableArray", s);
+        this->abend("listMgrGetEntryTableArray", s);
         return 0;
     }
 
@@ -210,12 +210,12 @@ void *PhwangClass::arrayMgrMalloc(char const *caller_name_val, char array_type_v
 void PhwangClass::arrayMgrFree(void *array_mgr_val)
 {
     if (!array_mgr_val) {
-        phwangAbend("arrayMgrFree", "null array_mgr_val");
+        this->abend("arrayMgrFree", "null array_mgr_val");
         return;
     }
 
     if (strcmp(((ArrayMgrClass *) array_mgr_val)->objectName(), "ArrayMgrClass")) {
-        phwangAbend("arrayMgrFree", "wrong object");
+        this->abend("arrayMgrFree", "wrong object");
         return;
     }
 
@@ -225,12 +225,12 @@ void PhwangClass::arrayMgrFree(void *array_mgr_val)
 void PhwangClass::arrayMgrInsertElement(void *array_mgr_val, void *element_val)
 {
     if (!array_mgr_val) {
-        phwangAbend("arrayMgrInsertElement", "null array_mgr_val");
+        this->abend("arrayMgrInsertElement", "null array_mgr_val");
         return;
     }
 
     if (strcmp(((ArrayMgrClass *) array_mgr_val)->objectName(), "ArrayMgrClass")) {
-        phwangAbend("arrayMgrInsertElement", "wrong object");
+        this->abend("arrayMgrInsertElement", "wrong object");
         return;
     }
 
@@ -240,12 +240,12 @@ void PhwangClass::arrayMgrInsertElement(void *array_mgr_val, void *element_val)
 void PhwangClass::arrayMgrRemoveElement(void *array_mgr_val, void *element_val)
 {
     if (!array_mgr_val) {
-        phwangAbend("arrayMgrRemoveElement", "null array_mgr_val");
+        this->abend("arrayMgrRemoveElement", "null array_mgr_val");
         return;
     }
 
     if (strcmp(((ArrayMgrClass *) array_mgr_val)->objectName(), "ArrayMgrClass")) {
-        phwangAbend("arrayMgrRemoveElement", "wrong object");
+        this->abend("arrayMgrRemoveElement", "wrong object");
         return;
     }
 
@@ -255,12 +255,12 @@ void PhwangClass::arrayMgrRemoveElement(void *array_mgr_val, void *element_val)
 void *PhwangClass::arrayMgrGetArrayTable(void *array_mgr_val, int *array_size_ptr)
 {
     if (!array_mgr_val) {
-        phwangAbend("arrayMgrGetArrayTable", "null array_mgr_val");
+        this->abend("arrayMgrGetArrayTable", "null array_mgr_val");
         return 0;
     }
 
     if (strcmp(((ArrayMgrClass *) array_mgr_val)->objectName(), "ArrayMgrClass")) {
-        phwangAbend("arrayMgrGetArrayTable", "wrong object");
+        this->abend("arrayMgrGetArrayTable", "wrong object");
         return 0;
     }
 
@@ -362,10 +362,10 @@ void *PhwangClass::tpConnect (
     int s;
     struct sockaddr_in serv_addr;
     char buffer[1024] = {0};
-    phwangLogit(who_val, "tpConnectServiceFunction() start");
+    this->logit(who_val, "tpConnectServiceFunction() start");
 
     if ((s = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
-        phwangLogit(who_val, "tpConnectServiceFunction() open socket error");
+        this->logit(who_val, "tpConnectServiceFunction() open socket error");
         return 0;
     }
  
@@ -375,20 +375,20 @@ void *PhwangClass::tpConnect (
     serv_addr.sin_port = htons(port_val);
   
     if (inet_pton(AF_INET, "127.0.0.1", &serv_addr.sin_addr) <= 0) {
-        phwangLogit(who_val, "tpConnectServiceFunction() Invalid address/ Address not supported \n");
+        this->logit(who_val, "tpConnectServiceFunction() Invalid address/ Address not supported \n");
         return 0;
     }
   
-    phwangLogit(who_val, "tpConnectServiceFunction() connecting");
+    this->logit(who_val, "tpConnectServiceFunction() connecting");
     int retry_count = PHWANG_TP_CONNECT_RETRY_MAX_COUNT;
     while (retry_count) {
         if (connect(s, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0) {
             if (!retry_count--) {
-                phwangLogit(who_val, "tpConnectServiceFunction() Failed \n");
+                this->logit(who_val, "tpConnectServiceFunction() Failed \n");
                 return 0;
             }
             else {
-                phwangLogit(who_val, "tpConnectServiceFunction() retry-----");
+                this->logit(who_val, "tpConnectServiceFunction() retry-----");
                 sleep(1);
             }
         }
@@ -397,22 +397,22 @@ void *PhwangClass::tpConnect (
         }
     }
 
-    phwangLogit(who_val, "tpConnectServiceFunction() connected");
+    this->logit(who_val, "tpConnectServiceFunction() connected");
 
     TpTransferClass *tp_transfer_object = new TpTransferClass(s, receive_callback_val, receive_object_val);
-    tp_transfer_object->startThreads();
+    tp_transfer_object->startThreads(0);
     return tp_transfer_object;
 }
 
 void PhwangClass::freeTpServer (void *tp_server_object_val)
 {
     if (!tp_server_object_val) {
-        phwangAbend("phwangFreeTpTransfer", "null tp_server_object_val");
+        this->abend("phwangFreeTpTransfer", "null tp_server_object_val");
         return;
     }
 
     if (strcmp(((TpServerClass *) tp_server_object_val)->objectName(), "TpServerClass")) {
-        phwangAbend("phwangFreeTpTransfer", "wrong object");
+        this->abend("phwangFreeTpTransfer", "wrong object");
         return;
     }
 
@@ -422,12 +422,12 @@ void PhwangClass::freeTpServer (void *tp_server_object_val)
 void PhwangClass::freeTpTransfer (void *tp_transfer_object_val)
 {
     if (!tp_transfer_object_val) {
-        phwangAbend("phwangFreeTpTransfer", "null tp_transfer_object_val");
+        this->abend("phwangFreeTpTransfer", "null tp_transfer_object_val");
         return;
     }
 
     if (strcmp(((TpTransferClass *) tp_transfer_object_val)->objectName(), "TpTransferClass")) {
-        phwangAbend("phwangFreeTpTransfer", "wrong object");
+        this->abend("phwangFreeTpTransfer", "wrong object");
         return;
     }
 
@@ -437,12 +437,12 @@ void PhwangClass::freeTpTransfer (void *tp_transfer_object_val)
 void PhwangClass::tpTransmit (void *tp_transfer_object_val, char *data_val)
 {
     if (!tp_transfer_object_val) {
-        phwangAbend("phwangTpTransmit", "null tp_transfer_object_val");
+        this->abend("phwangTpTransmit", "null tp_transfer_object_val");
         return;
     }
 
     if (strcmp(((TpTransferClass *) tp_transfer_object_val)->objectName(), "TpTransferClass")) {
-        phwangAbend("phwangTpTransmit", "wrong object");
+        this->abend("phwangTpTransmit", "wrong object");
         return;
     }
 

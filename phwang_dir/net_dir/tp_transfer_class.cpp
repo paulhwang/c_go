@@ -30,8 +30,11 @@ TpTransferClass::~TpTransferClass (void)
 {
 }
 
-void TpTransferClass::startThreads()
+void TpTransferClass::startThreads (int index_val)
 {
+    printf("index_val=%d(((((((((((((((((((((((((((((((((((((((\n", index_val);
+    phwangLogit("TpTransferClass::startThreads", "((((((((((((((((((((((((((((((((((((((");
+    this->theIndex = index_val;
     this->startReceiveThread2();
     this->startReceiveThread(this->theSocket);
     this->startTransmitThread(this->theSocket);

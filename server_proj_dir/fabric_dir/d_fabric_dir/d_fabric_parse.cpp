@@ -166,7 +166,7 @@ void DFabricClass::processGetLinkData (void *tp_transfer_object_val, char *data_
     data_ptr += WEB_FABRIC_PROTOCOL_NAME_LIST_TAG_SIZE;
     *data_ptr = 0;
 
-    int max_session_table_array_index = phwnagListMgrGetMaxIndex(link->sessionListMgrObject());
+    int max_session_table_array_index = phwnagListMgrGetMaxIndex(link->sessionListMgrObject(), "DFabricClass::processGetLinkData()");
     SessionClass **session_table_array = (SessionClass **) phwangListMgrGetEntryTableArray(link->sessionListMgrObject());
     for (int i = 0; i <= max_session_table_array_index; i++) {
         SessionClass *session = session_table_array[i];

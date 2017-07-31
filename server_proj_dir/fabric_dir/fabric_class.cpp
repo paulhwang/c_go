@@ -36,7 +36,7 @@ FabricClass::~FabricClass (void)
 
 void FabricClass::linkKeepAliveExamine (void)
 {
-    int max_index = phwnagListMgrGetMaxIndex(this->theLinkListMgrObject);
+    int max_index = phwnagListMgrGetMaxIndex(this->theLinkListMgrObject, "FabricClass::linkKeepAliveExamine()");
     LinkClass **link_entry_array = (LinkClass **) phwangListMgrGetEntryTableArray(this->theLinkListMgrObject);
 
     for (int i = max_index ; i >= 0; i--) {
@@ -53,7 +53,18 @@ void FabricClass::linkKeepAliveExamine (void)
 LinkClass *FabricClass::mallocLink (char const *data_val)
 {
     this->debug(true, "mallocLink", data_val);
+
+    if (strcmp(((ListMgrClass *) this->linkListMgrObject())->objectName(), "ListMgrClass")) {
+        this->abend("mallocLink", "bad name 000");
+    }
+
+
     LinkClass *link = new LinkClass(this->theLinkListMgrObject, this, data_val);
+
+    if (strcmp(((ListMgrClass *) this->linkListMgrObject())->objectName(), "ListMgrClass")) {
+        this->abend("mallocLink", "bad name 111");
+    }
+
     this->theNameListObject->updateNameList();
     return link;
 }
@@ -64,13 +75,23 @@ void FabricClass::freeLink (LinkClass *link_object_val)
     if (!link_object_val) {
         return;
     }
+
+    if (strcmp(((ListMgrClass *) this->linkListMgrObject())->objectName(), "ListMgrClass")) {
+        this->abend("freeLink", "bad name 000");
+    }
+
     link_object_val->~LinkClass();
+
+    if (strcmp(((ListMgrClass *) this->linkListMgrObject())->objectName(), "ListMgrClass")) {
+        this->abend("freeLink", "bad name 111");
+    }
+
     this->theNameListObject->updateNameList();
 }
 
 LinkClass *FabricClass::searchLinkByName (char *name_val)
 {
-    int max_index = phwnagListMgrGetMaxIndex(this->theLinkListMgrObject);
+    int max_index = phwnagListMgrGetMaxIndex(this->theLinkListMgrObject, "FabricClass::searchLinkByName()");
     LinkClass **link_entry_array = (LinkClass **) phwangListMgrGetEntryTableArray(this->theLinkListMgrObject);
 
     for (int i = max_index ; i >= 0; i--) {

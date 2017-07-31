@@ -35,6 +35,7 @@ TpServerClass::TpServerClass (
     this->theAcceptCallbackParameter = accept_callback_parameter_val;
     this->theReceiveCallbackParameter = receive_callback_parameter_val;
     this->theWho = who_val;
+    this->theTpTransferObjectIndex = 1;
 
     if (1) {
         this->logit(who_val, "TpServerClass=====");
@@ -110,7 +111,8 @@ void TpServerClass::serverThreadFunction (void *data_val)
         this->logit("serverThreadFunction", this->theWho);
 
         TpTransferClass *tp_transfer_object = new TpTransferClass(data_socket, this->theReceiveCallbackFunc, this->theCallerObject);
-        tp_transfer_object->startThreads();
+        tp_transfer_object->startThreads(this->theTpTransferObjectIndex);
+        this->theTpTransferObjectIndex++;
         this->theAcceptCallbackFunc(this->theCallerObject, tp_transfer_object);
     }
 

@@ -37,7 +37,7 @@ void *phwangDequeue(void *queue_val, char const *who_val);
 void *phwangListMgrMalloc(char const *caller_name_val, int id_size_val, int index_size_val, int global_entry_id_val);
 void  phwangListMgrFree(void *list_mgr_val);
 void *phwangListMgrSearchEntry(void *list_mgr_val, char const *data_val, void *extra_data_val);
-int   phwnagListMgrGetMaxIndex(void *list_mgr_val);
+int   phwnagListMgrGetMaxIndex(void *list_mgr_val, char const *who_val);
 void *phwangListMgrGetEntryTableArray(void *list_mgr_val);
 void *phwangListMgrFreeEntry(void *list_mgr_val, void *entry_val);
 

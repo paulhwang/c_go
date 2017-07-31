@@ -113,9 +113,9 @@ void *phwangListMgrSearchEntry (void *list_mgr_val, char const *data_val, void *
     return thePhwangObject->listMgrSearchEntry(list_mgr_val, data_val, extra_data_val);
 }
 
-int phwnagListMgrGetMaxIndex (void *list_mgr_val)
+int phwnagListMgrGetMaxIndex (void *list_mgr_val, char const *who_val)
 {
-    return thePhwangObject->listMgrGetMaxIndex(list_mgr_val);
+    return thePhwangObject->listMgrGetMaxIndex(list_mgr_val, who_val);
 }
 
 void *phwangListMgrGetEntryTableArray (void *list_mgr_val)

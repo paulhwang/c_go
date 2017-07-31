@@ -15,7 +15,8 @@ ListMgrClass::ListMgrClass (char const *caller_name_val, int id_size_val, int in
         theGlobalEntryId(global_entry_id_val),
         theEntryCount(0),
         theMaxIdIndexTableIndex(0),
-        theMaxIndex(0)
+        theMaxIndex(0),
+        theMutex(PTHREAD_MUTEX_INITIALIZER)
 {
     strcpy(this->theObjectName, "ListMgrClass");
     for (int i = 0; i < LIST_MGR_ID_INDEX_ARRAY_SIZE; i++) {
@@ -58,21 +59,27 @@ void ListMgrClass::insertEntry (ListEntryClass *entry_val)
 {
     this->debug(true, "====================InsertEntry", "");
 
+    pthread_mutex_lock(&this->theMutex);
+
     entry_val->setEntryId(this->allocEntryId());
     entry_val->setEntryIndex(this->allocEntryIndex());
     if (entry_val->entryIndex() != -1) {
         phwangEncodeIdIndex(entry_val->entryIdIndex(), entry_val->entryId(), this->theIdSize, entry_val->entryIndex(), this->theIndexSize);
         this->theEntryTableArray[entry_val->entryIndex()] = entry_val;
-        return;
+    }
+    else {
+        this->abend("InsertEntry", "TBD");
     }
 
-    this->abend("InsertEntry", "TBD");
+    pthread_mutex_unlock(&this->theMutex);
 }
 
 void ListMgrClass::freeEntry (ListEntryClass *list_entry_object_val)
 {
+    pthread_mutex_lock(&this->theMutex);
     this->theEntryTableArray[list_entry_object_val->entryIndex()] = 0;
     this->theEntryCount--;
+    pthread_mutex_unlock(&this->theMutex);
 }
 
 ListEntryClass *ListMgrClass::searchEntry (char const *data_val, void *extra_data_val)
