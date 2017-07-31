@@ -29,20 +29,9 @@ void TestClass::startNetConnect (void)
     this->theTpTransferObject = phwangTpConnect(0, LINK_MGR_PROTOCOL_TRANSPORT_PORT_NUMBER, testObjectReceiveDataFromTransport, this, this->objectName());
 }
 
-void TestClass::startTest(void)
+void TestClass::startTestThreads(void)
 {
-    int ajax_id = 1;
-    char name[32];
-
-    for (int i = 0; i < 100; i++) {
-        this->createName(i, name);
-        this->setupLink(ajax_id, name);
-        this->incrementAjaxId(&ajax_id);
-        if (i == 99) {
-            i = 0;
-        }
-        sleep(5);
-    }
+    this->startTestThread();
 }
 
 void TestClass::incrementAjaxId(int *ajax_id_ptr_val)

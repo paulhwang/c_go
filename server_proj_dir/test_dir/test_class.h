@@ -13,6 +13,7 @@ class TestClass {
 
     void startNetConnect(void);
     void startTestThread (void);
+    void runTestCase1(void);
 
     void incrementAjaxId(int *ajax_id_ptr_val);
     char *createName(int number_val, char *name_buf_val);
@@ -31,6 +32,6 @@ public:
     void transmitFunction(char *data_val);
 
     /* exports */
-    void startTest(void);
+    void startTestThreads(void);
     void exportedparseFunction(char *data_val);
 };

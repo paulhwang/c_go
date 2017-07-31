@@ -27,7 +27,7 @@ void TestClass::testThreadFunction (void)
 {
     this->debug(false, "testThreadFunction", "");
     while (1) {
-        //this->linkKeepAliveExamine();
+        this->runTestCase1();
         sleep(1);
     }
 }

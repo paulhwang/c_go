@@ -15,7 +15,7 @@ main (int argc, char **argv) {
     int register_tag;
     sleep(10);
     TestClass *testObject = new TestClass();
-    testObject->startTest();
+    testObject->startTestThreads();
     phwangRegisterProgramProcess(&register_tag, argv[0], LINK_MGR_PROTOCOL_TRANSPORT_PORT_NUMBER);
 }
 
