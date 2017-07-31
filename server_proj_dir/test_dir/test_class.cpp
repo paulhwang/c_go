@@ -31,7 +31,9 @@ void TestClass::startNetConnect (void)
 
 void TestClass::startTestThreads(void)
 {
-    this->startTestThread();
+    for (int i = 0; i < 9; i++) {
+        this->startTestThread();
+    }
 }
 
 void TestClass::incrementAjaxId(int *ajax_id_ptr_val)

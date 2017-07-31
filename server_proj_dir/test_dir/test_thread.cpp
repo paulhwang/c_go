@@ -26,8 +26,5 @@ void TestClass::startTestThread (void)
 void TestClass::testThreadFunction (void)
 {
     this->debug(false, "testThreadFunction", "");
-    while (1) {
-        this->runTestCase1();
-        sleep(1);
-    }
+    this->runTestCase1();
 }
