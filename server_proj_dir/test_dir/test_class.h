@@ -5,12 +5,14 @@
 */
 
 #pragma once
+#include <pthread.h>
 
 class TestClass {
     void *theTpTransferObject;
+    pthread_t theTestThread;
 
     void startNetConnect(void);
-
+    void startTestThread (void);
 
     void incrementAjaxId(int *ajax_id_ptr_val);
     char *createName(int number_val, char *name_buf_val);
@@ -25,6 +27,7 @@ public:
     ~TestClass(void);
     char const *objectName(void) {return "TestClass";}
 
+    void testThreadFunction (void);
     void transmitFunction(char *data_val);
 
     /* exports */

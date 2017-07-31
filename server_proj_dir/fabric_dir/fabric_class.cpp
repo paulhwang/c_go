@@ -34,31 +34,6 @@ FabricClass::~FabricClass (void)
     this->debug(true, "~FabricClass", "exit");
 }
 
-void *FabricClassWatchDogThreadFunction (void *fabric_object_val)
-{
-    ((FabricClass *) fabric_object_val)->watchDogThreadFunction();
-}
-
-void FabricClass::startWatchDogThread (void)
-{
-    this->debug(false, "startWatchDogThread", "");
-
-    int r = pthread_create(&this->theWatchDogThread, 0, FabricClassWatchDogThreadFunction, this);
-    if (r) {
-        this->logit("startWatchDogThread", "fail");
-        return;
-    }
-}
-
-void FabricClass::watchDogThreadFunction (void)
-{
-    this->debug(false, "watchDogThreadFunction", "");
-    while (1) {
-        this->linkKeepAliveExamine();
-        sleep(1);
-    }
-}
-
 void FabricClass::linkKeepAliveExamine (void)
 {
     int max_index = phwnagListMgrGetMaxIndex(this->theLinkListMgrObject);

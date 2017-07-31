@@ -43,14 +43,14 @@ PHWANG_OBJS = $(PHWANG_DIR)/phwang.o $(PHWANG_DIR)/phwang_class.o $(JSON_OBJS) $
 SERVER_OBJS = $(SERVER_DIR)/go_server.o $(SERVER_DIR)/main_class.o
 D_FABRIC_OBJS = $(D_FABRIC_DIR)/d_fabric_class.o $(D_FABRIC_DIR)/d_fabric_transmit.o $(D_FABRIC_DIR)/d_fabric_parse.o
 U_FABRIC_OBJS = $(U_FABRIC_DIR)/u_fabric_class.o $(U_FABRIC_DIR)/u_fabric_transmit.o $(U_FABRIC_DIR)/u_fabric_parse.o 
-FABRIC_OBJS = $(U_FABRIC_OBJS) $(D_FABRIC_OBJS) $(FABRIC_DIR)/fabric_class.o $(FABRIC_DIR)/link_class.o $(FABRIC_DIR)/session_class.o $(FABRIC_DIR)/group_class.o $(FABRIC_DIR)/name_list_class.o 
+FABRIC_OBJS = $(U_FABRIC_OBJS) $(D_FABRIC_OBJS) $(FABRIC_DIR)/fabric_class.o $(FABRIC_DIR)/fabric_thread.o $(FABRIC_DIR)/link_class.o $(FABRIC_DIR)/session_class.o $(FABRIC_DIR)/group_class.o $(FABRIC_DIR)/name_list_class.o 
 D_THEME_OBJS = $(D_THEME_DIR)/d_theme_class.o $(D_THEME_DIR)/d_theme_transmit.o $(D_THEME_DIR)/d_theme_parse.o 
 U_THEME_OBJS = $(U_THEME_DIR)/u_theme_class.o $(U_THEME_DIR)/u_theme_transmit.o $(U_THEME_DIR)/u_theme_parse.o 
 THEME_OBJS = $(U_THEME_OBJS)  $(D_THEME_OBJS) $(THEME_DIR)/theme_class.o $(THEME_DIR)/room_class.o 
 GO_BASE_OBJS = $(GO_BASE_DIR)/go_base_class.o $(GO_BASE_DIR)/go_game_class.o $(GO_BASE_DIR)/go_fight_class.o $(GO_BASE_DIR)/go_board_class.o $(GO_BASE_DIR)/go_move_class.o $(GO_BASE_DIR)/go_port_class.o $(GO_BASE_DIR)/go_config_class.o $(GO_BASE_DIR)/go_group_class.o $(GO_BASE_DIR)/go_group_list_class.o
 D_ENGINE_OBJS = $(D_ENGINE_DIR)/d_engine_class.o $(D_ENGINE_DIR)/d_engine_transmit.o $(D_ENGINE_DIR)/d_engine_parse.o 
 ENGINE_OBJS = $(D_ENGINE_OBJS) $(GO_BASE_OBJS) $(ENGINE_DIR)/engine_class.o 
-TEST_OBJS = $(TEST_DIR)/test_class.o $(TEST_DIR)/test_transmit.o $(TEST_DIR)/test_parse.o 
+TEST_OBJS = $(TEST_DIR)/test_class.o $(TEST_DIR)/test_thread.o $(TEST_DIR)/test_transmit.o $(TEST_DIR)/test_parse.o 
 SERVER_PROJ_OBJS = $(SERVER_OBJS) $(FABRIC_OBJS) $(THEME_OBJS) $(ENGINE_OBJS) $(TEST_OBJS)
 
 CLIENT_OBJS = $(CLIENT_DIR)/go_client.o
