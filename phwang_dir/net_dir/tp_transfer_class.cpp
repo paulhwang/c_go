@@ -40,24 +40,6 @@ void TpTransferClass::startThreads (int index_val)
     this->startTransmitThread(this->theSocket);
 }
 
-void TpTransferClass::exportTransmitData (void *data_val)
-{
-    phwangEnqueue(this->theTransmitQueue, data_val);
-}
-
-void TpTransferClass::transmitThreadFunction(int socket_val)
-{
-    while (1) {
-        void *data = phwangDequeue(this->theTransmitQueue, "TpTransferClass::transmitThreadFunction()");
-        if (data) {
-            char *str_data = (char *) data;
-
-            this->debug(false, "transmitThreadFunction", (char *) str_data);
-            send(socket_val, str_data , strlen(str_data) , 0);
-        }
-    }
-}
-
 void TpTransferClass::logit (char const* str0_val, char const* str1_val)
 {
     char s[LOGIT_BUF_SIZE];

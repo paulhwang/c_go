@@ -25,7 +25,7 @@ void TestClass::runTestCase1(void)
         if (i == 99) {
             i = 0;
         }
-        printf("============================================================================================name=%s\n", name);
+        this->debug(true, "runTestCase1", name);
         sleep(5);
     }
 }
