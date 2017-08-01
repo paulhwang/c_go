@@ -19,12 +19,33 @@ void TpTransferClass::exportTransmitData (void *data_val)
 void TpTransferClass::transmitThreadFunction(int socket_val)
 {
     while (1) {
-        void *data = phwangDequeue(this->theTransmitQueue, "TpTransferClass::transmitThreadFunction()");
+        char *data = (char *) phwangDequeue(this->theTransmitQueue, "TpTransferClass::transmitThreadFunction()");
         if (data) {
-            char *str_data = (char *) data;
+            int length = strlen(data);
+            char *ptr;
+            char *buf = ptr = (char *) malloc(length + (1 + 5 + 1 + 1) + 16);
 
-            this->debug(false, "transmitThreadFunction", (char *) str_data);
-            send(socket_val, str_data , strlen(str_data) , 0);
+            if (length < 1000) {
+                *ptr++ = '{';
+                phwangEncodeNumber(ptr, length, 3);
+                ptr += 3;
+                strcpy(ptr, data);
+                ptr += length;
+                *ptr++ = '}';
+                *ptr = 0;
+            }
+            else {
+                *ptr++ = '[';
+                phwangEncodeNumber(ptr, length, 5);
+                ptr += 5;
+                strcpy(ptr, data);
+                ptr += length;
+                *ptr++ = ']';
+                *ptr = 0;
+            }
+            this->debug(false, "transmitThreadFunction", (char *) buf);
+            free(data);
+            send(socket_val, buf , strlen(buf) , 0);
         }
     }
 }

@@ -113,8 +113,8 @@ void QueueClass::enqueueEntry(QueueEntryClass *entry)
     return;
   }
     
-    entry->next = 0;  
     pthread_mutex_lock(this->theMutex);
+    entry->next = 0;  
     in_index++;
 
     if (!this->theQueueHead) {

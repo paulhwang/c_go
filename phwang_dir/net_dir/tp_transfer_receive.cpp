@@ -62,10 +62,31 @@ void TpTransferClass::receiveThreadFunction2 (void)
     this->debug(false, "receiveThreadFunction2", "starts");
 
     while (1) {
-        char *data = (char *) phwangDequeue(this->theReceiveQueue, "TpTransferClass::receiveThreadFunction2()");
-        if (data) {
-            this->debug(false, "receiveThreadFunction2", data);
+        char *raw_data = (char *) phwangDequeue(this->theReceiveQueue, "TpTransferClass::receiveThreadFunction2()");
+        if (raw_data) {
+            int raw_length = strlen(raw_data);
+            int length;
+            char *data;
+            this->debug(false, "receiveThreadFunction2", raw_data);
 
+            if (raw_data[0] == '{') {
+                length = raw_length - (1 + 3 + 1);
+                data = (char *) malloc(length + 16);
+                memcpy(data, &raw_data[1 + 3], length);
+                data[length] = 0;
+            }
+            else if (raw_data[0] == '[') {
+                length = raw_length - (1 + 5 + 1);
+                data = (char *) malloc(length + 16);
+                memcpy(data, &raw_data[1 + 5], length);
+                data[length] = 0;
+            }
+            else {
+                this->abend("receiveThreadFunction2: wrong header", raw_data);
+                continue;
+            }
+
+            free(raw_data);
             this->receiveCallback()(this, this->theReceiveObject, data);
         }
     }
