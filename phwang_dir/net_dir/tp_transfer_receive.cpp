@@ -16,7 +16,7 @@
 void TpTransferClass::receiveThreadFunction(int socket_val)
 {
     while (1) {
-        char *data = (char *) malloc(TP_TRANSFER_CLASS_RECEIVE_BUFFER_SIZE);
+        char *data = (char *) phwangMalloc(TP_TRANSFER_CLASS_RECEIVE_BUFFER_SIZE);
 
         int length = read(socket_val, data, TP_TRANSFER_CLASS_RECEIVE_BUFFER_SIZE);
         if (length > 0) {
@@ -86,7 +86,7 @@ void TpTransferClass::receiveThreadFunction2 (void)
                 continue;
             }
 
-            free(raw_data);
+            phwangFree(raw_data);
             this->receiveCallback()(this, this->theReceiveObject, data);
         }
     }
