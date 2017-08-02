@@ -15,7 +15,7 @@
 
 FabricClass::FabricClass (void)
 {
-    memset(this, 0, sizeof(FabricClass));
+    memset(this, 0, sizeof(*this));
     this->theUFabricObject = new UFabricClass(this);
     this->theDFabricObject = new DFabricClass(this);
     this->theNameListObject = new NameListClass(this);
@@ -123,14 +123,14 @@ SessionClass *FabricClass::serachLinkAndSession (char *data_val)
     return link->searchSession(data_val + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE);
 }
 
-void FabricClass::logit (char const* str0_val, char const* str1_val)
+void FabricClass::logit (char const *str0_val, char const *str1_val)
 {
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", this->objectName(), str0_val);
     phwangLogit(s, str1_val);
 }
 
-void FabricClass::abend (char const* str0_val, char const* str1_val)
+void FabricClass::abend (char const *str0_val, char const *str1_val)
 {
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", this->objectName(), str0_val);

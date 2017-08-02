@@ -10,7 +10,7 @@
 
 ListEntryClass::ListEntryClass (void *list_mgr_object)
 {
-    memset(this, 0, sizeof(ListEntryClass));
+    memset(this, 0, sizeof(*this));
     this->theListMgrObject = (ListMgrClass *) list_mgr_object;
     this->theEntryId = 0;
     this->theEntryIndex = 0;

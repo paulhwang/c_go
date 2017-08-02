@@ -11,7 +11,7 @@
 
 TestClass::TestClass(void)
 {
-    memset(this, 0, sizeof(TestClass));
+    memset(this, 0, sizeof(*this));
     this->startNetConnect();
     this->debug(true, "init__", "");
 }

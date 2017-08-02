@@ -13,7 +13,7 @@
 
 QueueClass::QueueClass(int do_suspend_val, int max_size_val)
 {
-    memset((char *) this, 0, sizeof (*this));
+    memset(this, 0, sizeof (*this));
     this->theMaxQueueSize = max_size_val;
 
     if (do_suspend_val) {
