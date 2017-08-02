@@ -33,14 +33,14 @@ void *tpTranferReceiveThreadFunction (void *data_val)
 {
     int socket = ((tp_transfer_thread_parameter *) data_val)->socket;
     TpTransferClass *tp_transfer_object = ((tp_transfer_thread_parameter *) data_val)->tp_transfer_object;
-    free(data_val);
+    phwangFree(data_val);
 
     tp_transfer_object->receiveThreadFunction(socket);
 }
 
 void TpTransferClass::startReceiveThread (int socket_val)
 {
-    tp_transfer_thread_parameter *data = (tp_transfer_thread_parameter *) malloc(sizeof(tp_transfer_thread_parameter));
+    tp_transfer_thread_parameter *data = (tp_transfer_thread_parameter *) phwangMalloc(sizeof(tp_transfer_thread_parameter));
     data->socket = socket_val;
     data->tp_transfer_object = this;
 

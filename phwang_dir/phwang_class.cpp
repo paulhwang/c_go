@@ -65,16 +65,31 @@ void PhwangClass::printBoard (char const* data_val, int board_size_val)
 /**************************************************************************************************************/
 /**************************************************************************************************************/
 
+#define PHWNAG_CLASS_MALLOC_MARKER "phwang"
+#define PHWNAG_CLASS_MALLOC_MARKER_SIZE 6
+#define PHWNAG_CLASS_MALLOC_HEADER_SIZE (PHWNAG_CLASS_MALLOC_MARKER_SIZE + 2)
+#define PHWNAG_CLASS_MALLOC_EXTRA_BUFFER_SIZE (PHWNAG_CLASS_MALLOC_HEADER_SIZE + 8)
+
+
 void *PhwangClass::phwangMalloc (int size_val)
 {
-    char *buf = (char *) malloc(size_val);
-
-    return buf;
+    char *buf = (char *) malloc(size_val + PHWNAG_CLASS_MALLOC_EXTRA_BUFFER_SIZE);
+    memcpy(buf, PHWNAG_CLASS_MALLOC_MARKER, PHWNAG_CLASS_MALLOC_MARKER_SIZE);
+    return buf + PHWNAG_CLASS_MALLOC_HEADER_SIZE;
 }
 
 void PhwangClass::phwangFree (void *data_val)
 {
-    char *buf = (char *) data_val;
+    if (!data_val) {
+        this->abend("phwangFree", "null data");
+        return;
+    }
+
+    char *buf = ((char *) data_val) - PHWNAG_CLASS_MALLOC_HEADER_SIZE;
+    if (memcmp(buf, PHWNAG_CLASS_MALLOC_MARKER, PHWNAG_CLASS_MALLOC_MARKER_SIZE)) {
+        this->abend("phwangFree", "bad data");
+        return;
+    }
 
     free(buf);
 }

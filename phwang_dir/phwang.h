@@ -20,6 +20,10 @@ void phwangLogit(char const *str0_val, char const *str1_val);
 void phwangAbend(char const *str0_val, char const *str1_val);
 void phwangPrintBoard(char const *data_val, int board_size_val);
 
+/* malloc and free */
+void *phwangMalloc(int size_val);
+void phwangFree(void *data_val);
+
 /* encode */
 void phwangEncodeNumber(char *str_val, int number_val, int size_val);
 int phwangDecodeNumber(char const *str_val, int size_val);

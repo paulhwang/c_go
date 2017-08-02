@@ -38,6 +38,17 @@ void phwangPrintBoard (char const *data_val, int board_size_val)
     thePhwangObject->printBoard(data_val, board_size_val);
 }
 
+/* malloc and free */
+void *phwangMalloc (int size_val)
+{
+    thePhwangObject->phwangMalloc(size_val);
+}
+
+void phwangFree (void *data_val)
+{
+    thePhwangObject->phwangFree(data_val);
+}
+
 /* encode */
 void phwangEncodeNumber (char *str_val, int number_val, int size_val)
 {
