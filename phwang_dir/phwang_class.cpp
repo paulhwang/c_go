@@ -65,6 +65,24 @@ void PhwangClass::printBoard (char const* data_val, int board_size_val)
 /**************************************************************************************************************/
 /**************************************************************************************************************/
 
+void *PhwangClass::phwangMalloc (int size_val)
+{
+    char *buf = (char *) malloc(size_val);
+
+    return buf;
+}
+
+void PhwangClass::phwangFree (void *data_val)
+{
+    char *buf = (char *) data_val;
+
+    free(buf);
+}
+
+/**************************************************************************************************************/
+/**************************************************************************************************************/
+/**************************************************************************************************************/
+
 void PhwangClass::encodeNumber (char *str_val, int number_val, int size_val)
 {
     str_val[size_val] = 0;
@@ -289,7 +307,7 @@ void PhwangClass::freeQueue (void *queue_val)
         return;
     }
 
-    delete queue_val;
+    delete (QueueClass *) queue_val;
 }
 
 void PhwangClass::enqueue (void *queue_val, void *data_val)
@@ -416,7 +434,7 @@ void PhwangClass::freeTpServer (void *tp_server_object_val)
         return;
     }
 
-    delete tp_server_object_val;
+    delete (TpServerClass *) tp_server_object_val;
 }
 
 void PhwangClass::freeTpTransfer (void *tp_transfer_object_val)
@@ -431,7 +449,7 @@ void PhwangClass::freeTpTransfer (void *tp_transfer_object_val)
         return;
     }
 
-    delete tp_transfer_object_val;
+    delete (TpTransferClass *) tp_transfer_object_val;
 }
 
 void PhwangClass::tpTransmit (void *tp_transfer_object_val, char *data_val)

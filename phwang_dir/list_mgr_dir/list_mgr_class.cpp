@@ -69,6 +69,7 @@ void ListMgrClass::insertEntry (ListEntryClass *entry_val)
 {
     this->debug(true, "====================InsertEntry", "");
 
+    this->abendListMgrClass("before insertEntry");
     pthread_mutex_lock(&this->theMutex);
 
     entry_val->setEntryId(this->allocEntryId());
@@ -82,13 +83,31 @@ void ListMgrClass::insertEntry (ListEntryClass *entry_val)
     }
 
     pthread_mutex_unlock(&this->theMutex);
+    this->abendListMgrClass("after insertEntry");
 }
 
 void ListMgrClass::removeEntry (ListEntryClass *list_entry_object_val)
 {
+    this->abendListMgrClass("before removeEntry");
     pthread_mutex_lock(&this->theMutex);
     this->theEntryTableArray[list_entry_object_val->entryIndex()] = 0;
     this->theEntryCount--;
+    pthread_mutex_unlock(&this->theMutex);
+    this->abendListMgrClass("after removeEntry");
+}
+
+void ListMgrClass::abendListMgrClass (char const *msg_val)
+{
+    pthread_mutex_lock(&this->theMutex);
+    int count = 0;
+    for (int i = 0; i < LIST_MGR_ID_INDEX_ARRAY_SIZE; i++) {
+        if (this->theEntryTableArray[i]) {
+            count++;
+        }
+    }
+    if (this->theEntryCount != count) {
+        this->abend("abendListMgrClass", "count not match");
+    }
     pthread_mutex_unlock(&this->theMutex);
 }
 

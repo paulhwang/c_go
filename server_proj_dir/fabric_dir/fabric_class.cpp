@@ -22,7 +22,6 @@ FabricClass::FabricClass (void)
     this->theLinkListMgrObject = phwangListMgrMalloc("LINK", LINK_MGR_PROTOCOL_LINK_ID_SIZE, LINK_MGR_PROTOCOL_LINK_INDEX_SIZE, 100);
     this->theGroupListMgrObject = phwangListMgrMalloc("GROUP", GROUP_MGR_PROTOCOL_GROUP_ID_SIZE, GROUP_MGR_PROTOCOL_GROUP_INDEX_SIZE, 500);
     this->startWatchDogThread();
-    printf("7777777777777777777theLinkListMgrObject: objectName=%s\n", ((ListMgrClass *) this->theLinkListMgrObject)->objectName());
 
     this->debug(true, "FabricClass", "init");
 }
