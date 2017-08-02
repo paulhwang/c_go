@@ -289,7 +289,7 @@ void PhwangClass::freeQueue (void *queue_val)
         return;
     }
 
-    ((QueueClass *) queue_val)->~QueueClass();
+    delete queue_val;
 }
 
 void PhwangClass::enqueue (void *queue_val, void *data_val)
@@ -416,7 +416,7 @@ void PhwangClass::freeTpServer (void *tp_server_object_val)
         return;
     }
 
-    ((TpServerClass *) tp_server_object_val)->~TpServerClass();
+    delete tp_server_object_val;
 }
 
 void PhwangClass::freeTpTransfer (void *tp_transfer_object_val)
@@ -431,7 +431,7 @@ void PhwangClass::freeTpTransfer (void *tp_transfer_object_val)
         return;
     }
 
-    ((TpTransferClass *) tp_transfer_object_val)->~TpTransferClass();
+    delete tp_transfer_object_val;
 }
 
 void PhwangClass::tpTransmit (void *tp_transfer_object_val, char *data_val)

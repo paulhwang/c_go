@@ -23,7 +23,7 @@ void TpTransferClass::transmitThreadFunction(int socket_val)
         if (data) {
             int length = strlen(data);
             char *ptr;
-            char *buf = ptr = (char *) malloc(length + (1 + 5 + 1 + 1) + 16);
+            char *buf = ptr = (char *) malloc(length + (1 + 5 + 1 + 1) + 32);
 
             if (length < 1000) {
                 *ptr++ = '{';
@@ -46,7 +46,6 @@ void TpTransferClass::transmitThreadFunction(int socket_val)
             this->debug(true, "transmitThreadFunction", (char *) data);
             this->debug(true, "transmitThreadFunction", (char *) buf);
             free(data);
-            printf("&&&&&&&&&&&&&&&&&&&&&& transmitThreadFunction Free\n");
             send(socket_val, buf , strlen(buf) , 0);
         }
     }

@@ -117,7 +117,7 @@ void TpServerClass::serverThreadFunction (void *data_val)
         this->theAcceptCallbackFunc(this->theCallerObject, tp_transfer_object);
     }
 
-    free(data_val);
+    //free(data_val);
 }
 
 void TpServerClass::logit (char const* str0_val, char const* str1_val)

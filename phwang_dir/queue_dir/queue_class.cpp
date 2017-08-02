@@ -34,9 +34,7 @@ QueueClass::QueueClass(int do_suspend_val, int max_size_val)
 
 QueueClass::~QueueClass(void)
 {
-    if (this->theSuspendObject) {
-        delete this->theSuspendObject;
-    }
+    delete this->theSuspendObject;
 }
 
 void QueueClass::enqueueData (void *data_val)
