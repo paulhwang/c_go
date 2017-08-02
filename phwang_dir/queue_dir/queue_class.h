@@ -21,17 +21,12 @@ class QueueClass
     int theMaxQueueSize;
     SuspendClass *theSuspendObject;
     pthread_mutex_t *theMutex;
-  //CRITICAL_SECTION cs_queue;
-    int in_index;
-    int out_index;
 
     void enqueueEntry(QueueEntryClass *entry);
     QueueEntryClass *dequeueEntry(void);
     int queueSize(void) {return this->theQueueSize;}
-    int inIndex(void) {return in_index;}
-    int outIndex(void) {return out_index;}
 
-    void check_queue_error(void);
+    void abendQueue(char const *msg_val);
     void flush_queue(void);
     void delete_entry(QueueEntryClass *del_entry);
 
@@ -47,7 +42,4 @@ public:
     void initQueue(void);
     void enqueueData(void *data_val);
     void *dequeueData(void);
-
-  /* always at the tail of this class */
-  //enum GETAC_MARKER_DEFINE_ marker_tail;
 };

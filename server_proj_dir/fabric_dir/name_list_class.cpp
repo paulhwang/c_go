@@ -10,10 +10,11 @@
 #include "link_class.h"
 #include "../../phwang_dir/list_mgr_dir/list_mgr_class.h"
 
-NameListClass::NameListClass (FabricClass *fabric_object_val):
-	theFabricObject(fabric_object_val),
-    theNameListTag(0)
+NameListClass::NameListClass (FabricClass *fabric_object_val)
 {
+    memset(this, 0, sizeof(NameListClass));
+    this->theFabricObject = fabric_object_val;
+    this->theNameListTag = 0;
 
     this->debug(true, "NameListClass", "init");
 }

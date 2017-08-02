@@ -11,6 +11,7 @@ TpTransferClass::TpTransferClass (int socket_val,
                                   void (*receive_callback_val)(void *, void *, void *),
                                   void *receive_object_val)
 {
+    memset(this, 0, sizeof(TpTransferClass));
     this->theSocket = socket_val;
     this->theReceiveCallback = receive_callback_val;
     this->theReceiveObject = receive_object_val;

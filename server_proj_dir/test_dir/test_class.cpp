@@ -11,6 +11,7 @@
 
 TestClass::TestClass(void)
 {
+    memset(this, 0, sizeof(TestClass));
     this->startNetConnect();
     this->debug(true, "init__", "");
 }
@@ -31,7 +32,7 @@ void TestClass::startNetConnect (void)
 
 void TestClass::startTestThreads(void)
 {
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 0; i++) {
         this->startTestThread();
     }
 }

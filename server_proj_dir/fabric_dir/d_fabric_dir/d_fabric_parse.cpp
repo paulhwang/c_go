@@ -21,52 +21,64 @@
 
 void DFabricClass::exportedparseFunction (void *tp_transfer_object_val, char *data_val)
 {
+printf("=========================exportedparseFunction===========before\n");
     if (*data_val != WEB_FABRIC_PROTOCOL_COMMAND_IS_GET_LINK_DATA) {
         this->logit("exportedparseFunction", data_val);
     }
 
     if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_SETUP_LINK) {
         this->processSetupLink(tp_transfer_object_val, data_val + 1);
+printf("=========================exportedparseFunction===========2\n");
         return;
     }
 
     if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_FREE_LINK) {
         this->processFreeLink(tp_transfer_object_val, data_val + 1);
+printf("=========================exportedparseFunction===========3\n");
         return;
     }
 
     if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_GET_LINK_DATA) {
+printf("==================exportedparseFunction=======link data before\n");
         this->processGetLinkData(tp_transfer_object_val, data_val + 1);
+printf("==================exportedparseFunction=======link data after\n");
         return;
     }
 
     if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_GET_NAME_LIST) {
+printf("=========================exportedparseFunction=======name before\n");
         this->processGetNameList(tp_transfer_object_val, data_val + 1);
+printf("=========================exportedparseFunction=======name after\n");
         return;
     }
 
     if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_SETUP_SESSION) {
         this->processSetupSession(tp_transfer_object_val, data_val + 1);
+printf("=========================exportedparseFunction===========6\n");
         return;
     }
 
     if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_SETUP_SESSION2) {
         this->processSetupSession2(tp_transfer_object_val, data_val + 1);
+printf("=========================exportedparseFunction===========7\n");
         return;
     }
 
     if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_SETUP_SESSION3) {
         this->processSetupSession3(tp_transfer_object_val, data_val + 1);
+printf("=========================exportedparseFunction===========8\n");
         return;
     }
 
     if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_PUT_SESSION_DATA) {
         this->processPutSessionData(tp_transfer_object_val, data_val + 1);
+printf("=========================exportedparseFunction===========9\n");
         return;
     }
 
     if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_GET_SESSION_DATA) {
         this->processGetSessionData(tp_transfer_object_val, data_val + 1);
+printf("=========================exportedparseFunction===========10\n");
         return;
     }
 
@@ -166,13 +178,19 @@ void DFabricClass::processGetLinkData (void *tp_transfer_object_val, char *data_
     data_ptr += WEB_FABRIC_PROTOCOL_NAME_LIST_TAG_SIZE;
     *data_ptr = 0;
 
+printf("==================processGetLinkData=======2\n");
+
     int max_session_table_array_index = phwnagListMgrGetMaxIndex(link->sessionListMgrObject(), "DFabricClass::processGetLinkData()");
     SessionClass **session_table_array = (SessionClass **) phwangListMgrGetEntryTableArray(link->sessionListMgrObject());
     for (int i = 0; i <= max_session_table_array_index; i++) {
         SessionClass *session = session_table_array[i];
+printf("==================processGetLinkData=======30\n");
         if (session) {
+printf("==================processGetLinkData=======3\n");
             char *pending_downlink_data = session->getPendingDownLinkData();
+printf("==================processGetLinkData=======35\n");
             if (pending_downlink_data) {
+printf("==================processGetLinkData=======4\n");
                 *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_PENDING_DATA;
                 session->enqueuePendingDownLinkData(pending_downlink_data);
                 strcpy(data_ptr, link->linkIdIndex());
@@ -183,6 +201,7 @@ void DFabricClass::processGetLinkData (void *tp_transfer_object_val, char *data_
             }
         }
     }
+printf("==================processGetLinkData=======6\n");
 
     char *pending_session = link->getPendingSessionSetup();
     if (pending_session) {
@@ -190,6 +209,7 @@ void DFabricClass::processGetLinkData (void *tp_transfer_object_val, char *data_
         strcpy(data_ptr, pending_session);
         this->debug(true, "==================processGetLinkData getPendingSessionSetup", downlink_data);
     }
+printf("==================processGetLinkData=======7\n");
 
     char *pending_session3 = link->getPendingSessionSetup3();
     if (pending_session3) {
@@ -197,8 +217,10 @@ void DFabricClass::processGetLinkData (void *tp_transfer_object_val, char *data_
         strcpy(data_ptr, pending_session3);
         this->debug(true, "==================processGetLinkData getPendingSessionSetup3", downlink_data);
     }
+printf("==================processGetLinkData=======8\n");
 
     this->transmitFunction(tp_transfer_object_val, downlink_data);
+printf("==================processGetLinkData=======9\n");
 }
 
 void DFabricClass::errorProcessGetLinkData (void *tp_transfer_object_val, char const *err_msg_val)

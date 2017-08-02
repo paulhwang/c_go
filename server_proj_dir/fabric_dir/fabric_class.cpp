@@ -15,6 +15,7 @@
 
 FabricClass::FabricClass (void)
 {
+    memset(this, 0, sizeof(FabricClass));
     this->theUFabricObject = new UFabricClass(this);
     this->theDFabricObject = new DFabricClass(this);
     this->theNameListObject = new NameListClass(this);

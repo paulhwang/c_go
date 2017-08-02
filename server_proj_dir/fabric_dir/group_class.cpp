@@ -14,6 +14,7 @@ GroupClass::GroupClass (void *list_mgr_object_val, FabricClass *fabric_object_va
         theFabricObject(fabric_object_val)
 {
     this->theSessionArrayMgr = phwangArrayMgrMalloc(this->objectName(), 'o', 10);
+    this->theSessionTableArray = 0;
 
     this->debug(true, "GroupClass", this->groupIdIndex());
 }

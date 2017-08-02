@@ -7,20 +7,16 @@
 #include <string.h>
 #include <stdlib.h>
 #include "../phwang.h"
-//#include "stdafx.h"
-//#include "getac_aggr_include.h"/* Put this file immediately after stdafx.h */
-//#include "mitac_rfid_engine_common_include.h"
 #include "queue_class.h"
 #include "queue_entry_class.h"
 #include "../suspend_dir/suspend_class.h"
-//#include "getac_def_component.h"
-//#include "getac_def_marker.h"
 
-QueueClass::QueueClass(int do_suspend_val, int max_size_val):
-    theDoSuspend(do_suspend_val),
-    theMaxQueueSize(max_size_val)
-
+QueueClass::QueueClass(int do_suspend_val, int max_size_val)
 {
+    memset((char *) this, 0, sizeof (*this));
+    this->theDoSuspend = do_suspend_val;
+    this->theMaxQueueSize = max_size_val;
+
     if (!this->theMaxQueueSize) {
         this->theMaxQueueSize = QUEUE_CLASS_DEFAULT_MAX_QUEUE_SIZE;
     }
@@ -34,15 +30,10 @@ QueueClass::QueueClass(int do_suspend_val, int max_size_val):
 
     this->theMutex = (pthread_mutex_t *) malloc(sizeof(pthread_mutex_t));
     pthread_mutex_init(this->theMutex, NULL);
-
-    //this->marker_head = this->marker_tail = GETAC_MARKER_UTIL_QUE_ENT;
 }
 
 QueueClass::~QueueClass(void)
 {
-    if (this->theQueueSize) {
-        //abend(GATEWAY_LOG_TYPE_RFID, MTC_ERR_MISC, __LINE__, __FUNCTION__);
-    }
     if (this->theSuspendObject) {
         delete this->theSuspendObject;
     }
@@ -58,15 +49,26 @@ void QueueClass::enqueueData (void *data_val)
 {
     this->debug(false, "enqueueData", (char *) data_val);
 
+    /* queue is too big */
+    if (this->theMaxQueueSize && (this->theQueueSize > this->theMaxQueueSize)) {
+        delete data_val;
+        this->abend("enqueueData", "queue full");
+        return;
+    }
+
     QueueEntryClass *entry = new QueueEntryClass();
     if (!entry) {
         this->abend("enqueueData", "fail to create new QueueEntryClass");
         return;
     }
-    else {
-        entry->data = data_val;
-    }
+    entry->data = data_val;
+
+    this->abendQueue("enqueueData begin");
+    pthread_mutex_lock(this->theMutex);
     this->enqueueEntry(entry);
+    pthread_mutex_unlock(this->theMutex);
+    this->abendQueue("enqueueData end");
+
     if (this->theSuspendObject) {
         this->theSuspendObject->signal();
     }
@@ -77,8 +79,11 @@ void *QueueClass::dequeueData (void)
     while (1) {
         QueueEntryClass *entry = this->dequeueEntry();
         if (entry) {
+printf("***************QueueClass::dequeueData****** 2\n");
             void *data = entry->data;
+printf("***************QueueClass::dequeueData****** 3\n");
             this->delete_entry(entry);
+printf("***************QueueClass::dequeueData****** 4\n");
 
             this->debug(false, "dequeueData", (char *) data);
             return data;
@@ -96,40 +101,20 @@ void *QueueClass::dequeueData (void)
 
 void QueueClass::enqueueEntry(QueueEntryClass *entry)
 {
-  if (!this) {
-    //abend(GATEWAY_LOG_TYPE_RFID, MTC_ERR_MISC, __LINE__, __FUNCTION__);
-    return;
-  }
- 
-  if (!entry) {
-    //abend(GATEWAY_LOG_TYPE_RFID, MTC_ERR_MISC, __LINE__, __FUNCTION__);
-    return;
-  }
-
-  /* queue is too big */
-  if (this->theMaxQueueSize && this->theMaxQueueSize && (this->theQueueSize > this->theMaxQueueSize)) {
-    delete_entry(entry);
-    //abend(GATEWAY_LOG_TYPE_RFID, MTC_ERR_MISC, __LINE__, __FUNCTION__);
-    return;
-  }
-    
-    pthread_mutex_lock(this->theMutex);
-    entry->next = 0;  
-    in_index++;
-
     if (!this->theQueueHead) {
+        entry->next = 0;  
         entry->prev = 0;
         this->theQueueHead = entry;
         this->theQueueTail = entry;
         this->theQueueSize = 1; 
     }
     else {        
+        entry->next = 0;  
         entry->prev = this->theQueueTail;
         this->theQueueTail->next = entry;
         this->theQueueTail = entry;
         this->theQueueSize++;
     }
-    pthread_mutex_unlock(this->theMutex);
 }
 
 QueueEntryClass *QueueClass::dequeueEntry(void)
@@ -140,7 +125,8 @@ QueueEntryClass *QueueClass::dequeueEntry(void)
         return 0;
     }
 
-    out_index = in_index;
+    this->abendQueue("dequeueEntry begin");
+
     pthread_mutex_lock(this->theMutex);
 
     if (this->theQueueSize == 1) {
@@ -148,6 +134,8 @@ QueueEntryClass *QueueClass::dequeueEntry(void)
         this->theQueueHead = this->theQueueTail = 0;
         this->theQueueSize = 0;
         pthread_mutex_unlock(this->theMutex);
+
+        this->abendQueue("dequeueEntry end1");
         return entry;
     }
 
@@ -156,32 +144,46 @@ QueueEntryClass *QueueClass::dequeueEntry(void)
     this->theQueueHead->prev = 0;
     this->theQueueSize--;
     pthread_mutex_unlock(this->theMutex);
+
+    this->abendQueue("dequeueEntry end2");
     return entry;
 }
 
-void QueueClass::check_queue_error(void)
+void QueueClass::abendQueue (char const *msg_val)
 {
-#if MITAC_RFID_DEBUG_HEAP
     QueueEntryClass *entry;
-    int length = 0;
+    int length;
  
     if (!this) {
         return;
     }
  
     pthread_mutex_lock(this->theMutex);
+    length = 0;
     entry = this->theQueueHead;
     while (entry) {
         length++;
         entry = entry->next;
     }
  
-    if (length != queue_size) {
-        abend(GATEWAY_LOG_TYPE_RFID, MTC_ERR_MISC, __LINE__, __FUNCTION__);
+    if (length != this->theQueueSize) {
+        printf("%s length=%d %d\n", msg_val, length, this->theQueueSize);
+        this->abend("abendQueue", "from head: bad length");
+    }
+
+    length = 0;
+    entry = this->theQueueTail;
+    while (entry) {
+        length++;
+        entry = entry->prev;
+    }
+ 
+    if (length != this->theQueueSize) {
+        printf("%s length=%d %d\n", msg_val, length, this->theQueueSize);
+        this->abend("abendQueue", "from tail: bad length");
     }
 
     pthread_mutex_unlock(this->theMutex);
-#endif
 }
 
 void QueueClass::flush_queue(void)

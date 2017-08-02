@@ -8,16 +8,18 @@
 #include "list_mgr_class.h"
 #include "list_entry_class.h"
 
-ListMgrClass::ListMgrClass (char const *caller_name_val, int id_size_val, int index_size_val, int global_entry_id_val):
-        theCallerName(caller_name_val),
-        theIdSize(id_size_val),
-        theIndexSize(index_size_val),
-        theGlobalEntryId(global_entry_id_val),
-        theEntryCount(0),
-        theMaxIdIndexTableIndex(0),
-        theMaxIndex(0),
-        theMutex(PTHREAD_MUTEX_INITIALIZER)
+ListMgrClass::ListMgrClass (char const *caller_name_val, int id_size_val, int index_size_val, int global_entry_id_val)
 {
+    memset(this, 0, sizeof(ListMgrClass));
+    this->theCallerName = caller_name_val;
+    this->theIdSize = id_size_val;
+    this->theIndexSize = index_size_val;
+    this->theGlobalEntryId = global_entry_id_val;
+    this->theEntryCount = 0;
+    this->theMaxIdIndexTableIndex = 0;
+    this->theMaxIndex = 0;
+    this->theMutex = PTHREAD_MUTEX_INITIALIZER;
+
     strcpy(this->theObjectName, "ListMgrClass");
     for (int i = 0; i < LIST_MGR_ID_INDEX_ARRAY_SIZE; i++) {
         theEntryTableArray[i] = 0;

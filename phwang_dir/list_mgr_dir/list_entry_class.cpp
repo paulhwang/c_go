@@ -8,11 +8,13 @@
 #include "list_entry_class.h"
 #include "list_mgr_class.h"
 
-ListEntryClass::ListEntryClass (void *list_mgr_object):
-        theListMgrObject((ListMgrClass *) list_mgr_object),
-        theEntryId(0),
-        theEntryIndex(0)
+ListEntryClass::ListEntryClass (void *list_mgr_object)
 {
+    memset(this, 0, sizeof(ListEntryClass));
+    this->theListMgrObject = (ListMgrClass *) list_mgr_object;
+    this->theEntryId = 0;
+    this->theEntryIndex = 0;
+
     if (this->theListMgrObject->idSize() + this->theListMgrObject->indexSize() > LIST_ENTRY_CLASS_ID_INDEX_BUFFER_SIZE) {
         this->abend("ListEntryClass", "buffer too small");
     }

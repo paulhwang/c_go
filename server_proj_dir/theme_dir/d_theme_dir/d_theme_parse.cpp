@@ -18,12 +18,16 @@ void DThemeClass::exportedparseFunction (char *data_val)
     this->debug(true, "exportedparseFunction", data_val);
 
     if (*data_val == FABRIC_THEME_PROTOCOL_COMMAND_IS_SETUP_ROOM) {
+printf("#####################exportedparseFunction===========before1\n");
         this->processSetupRoom(data_val + 1);
+printf("#####################exportedparseFunction===========before2\n");
         return;
     }
 
     if (*data_val == FABRIC_THEME_PROTOCOL_COMMAND_IS_PUT_ROOM_DATA) {
+printf("#####################exportedparseFunction===========before3\n");
         this->processPutRoomData(data_val + 1);
+printf("#####################exportedparseFunction===========before4\n");
         return;
     }
 

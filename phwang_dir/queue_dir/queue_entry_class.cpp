@@ -4,6 +4,7 @@
   File name:queue_entry_class.cpp
 */
 
+#include "../phwang.h"
 //#include "stdafx.h"
 //#include "getac_aggr_include.h"/* Put this file immediately after stdafx.h */
 //#include "mitac_rfid_engine_common_include.h"
@@ -14,7 +15,7 @@
 QueueEntryClass::QueueEntryClass(void)
 {
   //this->marker_head = GETAC_MARKER_UTIL_QUE_MGR;
-  this->data = 0;
+    memset((char *) this, 0, sizeof (QueueEntryClass));
 }
 
 QueueEntryClass::~QueueEntryClass(void)

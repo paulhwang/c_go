@@ -16,5 +16,7 @@ void DThemeClass::transmitFunction (char *data_val)
         return;
     }
 
+printf("###############DThemeClass::transmitFunction before##################\n");
     phwangTpTransmit(this->theTpTransferObject, data_val);
+printf("###############DThemeClass::transmitFunction after##################\n");
 }

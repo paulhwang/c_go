@@ -9,7 +9,8 @@
 
 SessionClass::SessionClass (void *list_mgr_object_val, LinkClass *link_object_val):
         ListEntryClass(list_mgr_object_val),
-        theLinkObject(link_object_val)
+        theLinkObject(link_object_val),
+        theGroupObject(0)
 {
     this->thePendingDownLinkDataQueue = phwangMallocQueue(0);
 

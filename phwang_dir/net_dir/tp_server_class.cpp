@@ -28,6 +28,7 @@ TpServerClass::TpServerClass (
                     char const *who_val)
 
 {
+    memset(this, 0, sizeof(TpServerClass));
     this->theCallerObject = caller_object_val;
     this->thePort = port_val;
     this->theAcceptCallbackFunc = accept_callback_func_val;

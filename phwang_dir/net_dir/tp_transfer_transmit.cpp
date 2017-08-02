@@ -43,8 +43,10 @@ void TpTransferClass::transmitThreadFunction(int socket_val)
                 *ptr++ = ']';
                 *ptr = 0;
             }
-            this->debug(false, "transmitThreadFunction", (char *) buf);
+            this->debug(true, "transmitThreadFunction", (char *) data);
+            this->debug(true, "transmitThreadFunction", (char *) buf);
             free(data);
+            printf("&&&&&&&&&&&&&&&&&&&&&& transmitThreadFunction Free\n");
             send(socket_val, buf , strlen(buf) , 0);
         }
     }

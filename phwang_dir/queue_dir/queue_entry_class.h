@@ -18,10 +18,9 @@ class QueueEntryClass
 
   QueueEntryClass *next;
   QueueEntryClass *prev;
+  void *data;
 
   void deleteQueueEntry(void);
-
-  void *data;
 
 public:
   QueueEntryClass(void);
