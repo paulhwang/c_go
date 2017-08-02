@@ -43,7 +43,7 @@ void QueueClass::enqueueData (void *data_val)
 
     /* queue is too big */
     if (this->theMaxQueueSize && (this->theQueueSize > this->theMaxQueueSize)) {
-        phwangFree(data_val);
+        phwangFree(data_val, "QueueClass::enqueueData");
         this->abend("enqueueData", "queue full");
         return;
     }
@@ -199,7 +199,7 @@ void QueueClass::flushQueue(void)
     entry = this->theQueueHead;
     while (entry) {
         entry_next = entry->next;
-        phwangFree(entry->data);
+        phwangFree(entry->data, "QueueClass::flushQueue");
         delete entry;
         this->theQueueSize--;
         entry = entry_next;

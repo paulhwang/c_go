@@ -47,7 +47,7 @@ void DThemeClass::processSetupRoom (char *data_val)
     RoomClass *room = this->theThemeObject->mallocRoom(group_id_index_val);
     if (!room) {
         this->abend("processSetupRoom", "null room");
-        downlink_data = data_ptr = (char *) malloc(ROOM_MGR_DATA_BUFFER_SIZE + 4);
+        downlink_data = data_ptr = (char *) phwangMalloc(ROOM_MGR_DATA_BUFFER_SIZE + 4);
         *data_ptr++ = FABRIC_THEME_PROTOCOL_RESPOND_IS_SETUP_ROOM;
         strcpy(data_ptr, "null room");
         this->transmitFunction(downlink_data);
@@ -55,7 +55,7 @@ void DThemeClass::processSetupRoom (char *data_val)
     }
     data_val += GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE;
 
-    uplink_data = data_ptr = (char *) malloc(ROOM_MGR_DATA_BUFFER_SIZE + 4);
+    uplink_data = data_ptr = (char *) phwangMalloc(ROOM_MGR_DATA_BUFFER_SIZE + 4);
     *data_ptr++ = THEME_ENGINE_PROTOCOL_COMMAND_IS_SETUP_BASE;
 
     memcpy(data_ptr, room->roomIdIndex(), ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);
@@ -76,14 +76,14 @@ void DThemeClass::processPutRoomData (char *data_val)
     RoomClass *room = this->theThemeObject->searchRoom(data_val);
     if (!room) {
         this->abend("processPutRoomData", "null room");
-        downlink_data = data_ptr = (char *) malloc(ROOM_MGR_DATA_BUFFER_SIZE + 4);
+        downlink_data = data_ptr = (char *) phwangMalloc(ROOM_MGR_DATA_BUFFER_SIZE + 4);
         *data_ptr++ = FABRIC_THEME_PROTOCOL_RESPOND_IS_PUT_ROOM_DATA;
         strcpy(data_ptr, "null room");
         this->transmitFunction(downlink_data);
         return;
     }
 
-    uplink_data = data_ptr = (char *) malloc(ROOM_MGR_DATA_BUFFER_SIZE + 4);
+    uplink_data = data_ptr = (char *) phwangMalloc(ROOM_MGR_DATA_BUFFER_SIZE + 4);
     *data_ptr++ = THEME_ENGINE_PROTOCOL_COMMAND_IS_PUT_BASE_DATA;
     memcpy(data_ptr, room->baseIdIndex(), BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE);
     data_ptr += BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE;

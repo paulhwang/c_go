@@ -45,7 +45,7 @@ void TpTransferClass::transmitThreadFunction(int socket_val)
             }
             this->debug(true, "transmitThreadFunction", (char *) data);
             this->debug(true, "transmitThreadFunction", (char *) buf);
-            free(data);
+            phwangFree(data, "TpTransferClass::transmitThreadFunction");
             send(socket_val, buf , strlen(buf) , 0);
         }
     }
@@ -55,7 +55,7 @@ void *tpTransferTransmitThreadFunction (void *data_val)
 {
     int socket = ((tp_transfer_thread_parameter *) data_val)->socket;
     TpTransferClass *tp_transfer_object = ((tp_transfer_thread_parameter *) data_val)->tp_transfer_object;
-    phwangFree(data_val);
+    phwangFree(data_val, "tpTransferTransmitThreadFunction");
 
     tp_transfer_object->transmitThreadFunction(socket);
 }

@@ -40,7 +40,7 @@ void dFabricTpReceiveDataFunction (void *tp_transfer_object_val, void *d_fabric_
         phwangLogit("Golbal::dFabricTpReceiveDataFunction", (char *) data_val);
     }
     ((DFabricClass *) d_fabric_object_val)->exportedparseFunction(tp_transfer_object_val, (char *) data_val);
-    phwangFree(data_val);
+    phwangFree(data_val, "dFabricTpReceiveDataFunction");
 }
 
 void DFabricClass::startNetServer (void)

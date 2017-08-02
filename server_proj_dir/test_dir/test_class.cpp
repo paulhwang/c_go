@@ -32,7 +32,7 @@ void TestClass::startNetConnect (void)
 
 void TestClass::startTestThreads(void)
 {
-    for (int i = 0; i < 8; i++) {
+    for (int i = 0; i < 0; i++) {
         this->startTestThread();
     }
 }
@@ -59,7 +59,7 @@ char *TestClass::createName(int number_val, char *name_buf_val)
 void TestClass::setupLink(int ajax_id_val, char *name_val)
 {
     char *data_ptr;
-    char *uplink_data = data_ptr = (char *) malloc(128);
+    char *uplink_data = data_ptr = (char *) phwangMalloc(128);
     int j = 0;
     *data_ptr++ = 'L';
     phwangEncodeNumber(data_ptr, ajax_id_val, 3);

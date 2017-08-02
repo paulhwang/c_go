@@ -33,7 +33,7 @@ void *tpTranferReceiveThreadFunction (void *data_val)
 {
     int socket = ((tp_transfer_thread_parameter *) data_val)->socket;
     TpTransferClass *tp_transfer_object = ((tp_transfer_thread_parameter *) data_val)->tp_transfer_object;
-    phwangFree(data_val);
+    phwangFree(data_val, "tpTranferReceiveThreadFunction");
 
     tp_transfer_object->receiveThreadFunction(socket);
 }
@@ -86,7 +86,7 @@ void TpTransferClass::receiveThreadFunction2 (void)
                 continue;
             }
 
-            phwangFree(raw_data);
+            phwangFree(raw_data, "TpTransferClass::receiveThreadFunction2");
             this->receiveCallback()(this, this->theReceiveObject, data);
         }
     }

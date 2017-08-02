@@ -44,9 +44,9 @@ void *phwangMalloc (int size_val)
     thePhwangObject->phwangMalloc(size_val);
 }
 
-void phwangFree (void *data_val)
+void phwangFree (void *data_val, char const *who_val)
 {
-    thePhwangObject->phwangFree(data_val);
+    thePhwangObject->phwangFree(data_val, who_val);
 }
 
 /* encode */

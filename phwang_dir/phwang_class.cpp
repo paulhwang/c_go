@@ -14,16 +14,26 @@
 #include "net_dir/tp_server_class.h"
 #include "net_dir/tp_transfer_class.h"
 
-void PhwangClass::phwangLogit (char const* str0_val, char const* str1_val)
+void PhwangClass::phwangLogit (char const *str0_val, char const *str1_val)
 {
     printf("%s() %s\n", str0_val, str1_val);
 }
 
-void PhwangClass::phwangAbend (char const* str0_val, char const* str1_val)
+void PhwangClass::phwangLogit3 (char const *str0_val, char const *str1_val, char const *str2_val)
 {
-    phwangLogit("*****Abend*****", str0_val);
-    phwangLogit(str0_val, str1_val);
-    phwangLogit("*****Abend*****", str1_val);
+    printf("%s() %s {%s}\n", str0_val, str1_val, str2_val);
+}
+
+void PhwangClass::phwangAbend (char const *str0_val, char const *str1_val)
+{
+    printf("*****abend*****%s() %s\n", str0_val, str1_val);
+    int *junk = 0;
+    *junk = 0;
+}
+
+void PhwangClass::phwangAbend3 (char const *str0_val, char const *str1_val, char const *str2_val)
+{
+    printf("*****abend*****%s() %s, %s\n", str0_val, str1_val, str2_val);
     int *junk = 0;
     *junk = 0;
 }
@@ -38,6 +48,12 @@ void PhwangClass::abend (char const *str0_val, char const *str1_val) {
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", this->objectName(), str0_val);
     this->phwangAbend(s, str1_val);
+}
+
+void PhwangClass::abend3 (char const *str0_val, char const *str1_val, char const *str2_val) {
+    char s[LOGIT_BUF_SIZE];
+    sprintf(s, "%s::%s", this->objectName(), str0_val);
+    this->phwangAbend3(s, str1_val, str2_val);
 }
 
 void PhwangClass::printBoard (char const* data_val, int board_size_val)
@@ -78,16 +94,16 @@ void *PhwangClass::phwangMalloc (int size_val)
     return buf + PHWNAG_CLASS_MALLOC_HEADER_SIZE;
 }
 
-void PhwangClass::phwangFree (void *data_val)
+void PhwangClass::phwangFree (void *data_val, char const *who_val)
 {
     if (!data_val) {
-        this->abend("phwangFree", "null data");
+        this->abend3("phwangFree", "null data", who_val);
         return;
     }
 
     char *buf = ((char *) data_val) - PHWNAG_CLASS_MALLOC_HEADER_SIZE;
     if (memcmp(buf, PHWNAG_CLASS_MALLOC_MARKER, PHWNAG_CLASS_MALLOC_MARKER_SIZE)) {
-        this->abend("phwangFree", "bad data");
+        this->abend3("phwangFree", "bad data", who_val);
         return;
     }
 

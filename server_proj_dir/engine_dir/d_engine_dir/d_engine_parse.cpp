@@ -43,7 +43,7 @@ void DEngineClass::processSetupBase(char const *data_val)
     }
     go_base_object->setRoomIdIndex(room_id_index_val);
 
-    downlink_data = data_ptr = (char *) malloc(BASE_MGR_DATA_BUFFER_SIZE + 4);
+    downlink_data = data_ptr = (char *) phwangMalloc(BASE_MGR_DATA_BUFFER_SIZE + 4);
     *data_ptr++ = THEME_ENGINE_PROTOCOL_RESPOND_IS_SETUP_BASE;
 
     memcpy(data_ptr, room_id_index_val, ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);
@@ -77,7 +77,7 @@ void DEngineClass::processPutBaseDataResponse(GoBaseClass *base_object_val, char
     char *downlink_data;
     char *data_ptr;
 
-    downlink_data = data_ptr = (char *) malloc(BASE_MGR_DATA_BUFFER_SIZE + 4);
+    downlink_data = data_ptr = (char *) phwangMalloc(BASE_MGR_DATA_BUFFER_SIZE + 4);
     *data_ptr++ = THEME_ENGINE_PROTOCOL_RESPOND_IS_PUT_BASE_DATA;
     memcpy(data_ptr, base_object_val->roomIdIndex(), ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);
     data_ptr += ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE;
