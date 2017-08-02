@@ -27,8 +27,9 @@ QueueClass::QueueClass(int do_suspend_val, int max_size_val)
         this->theMaxQueueSize = QUEUE_CLASS_DEFAULT_MAX_QUEUE_SIZE;
     }
 
-    this->theMutex = (pthread_mutex_t *) malloc(sizeof(pthread_mutex_t));
-    pthread_mutex_init(this->theMutex, NULL);
+    if (pthread_mutex_init(&this->theMutex, NULL) != 0) {
+        this->abend("QueueClass", "pthread_mutex_init fail");
+    }
 }
 
 QueueClass::~QueueClass(void)
@@ -36,7 +37,6 @@ QueueClass::~QueueClass(void)
     if (this->theSuspendObject) {
         delete this->theSuspendObject;
     }
-    free(this->theMutex);
 }
 
 void QueueClass::enqueueData (void *data_val)
@@ -58,9 +58,9 @@ void QueueClass::enqueueData (void *data_val)
     entry->data = data_val;
 
     this->abendQueue("enqueueData begin");
-    pthread_mutex_lock(this->theMutex);
+    pthread_mutex_lock(&this->theMutex);
     this->enqueueEntry(entry);
-    pthread_mutex_unlock(this->theMutex);
+    pthread_mutex_unlock(&this->theMutex);
     this->abendQueue("enqueueData end");
 
     if (this->theSuspendObject) {
@@ -79,9 +79,9 @@ void *QueueClass::dequeueData (void)
         }
         else {
             this->abendQueue("dequeueData begin");
-            pthread_mutex_lock(this->theMutex);
+            pthread_mutex_lock(&this->theMutex);
             QueueEntryClass *entry = this->dequeueEntry();
-            pthread_mutex_unlock(this->theMutex);
+            pthread_mutex_unlock(&this->theMutex);
             this->abendQueue("dequeueData end");
 
             if (entry) {
@@ -165,7 +165,7 @@ void QueueClass::abendQueue (char const *msg_val)
         }
     }
 
-    pthread_mutex_lock(this->theMutex);
+    pthread_mutex_lock(&this->theMutex);
     length = 0;
     entry = this->theQueueHead;
     while (entry) {
@@ -190,14 +190,14 @@ void QueueClass::abendQueue (char const *msg_val)
         this->abend("abendQueue", "from tail: bad length");
     }
 
-    pthread_mutex_unlock(this->theMutex);
+    pthread_mutex_unlock(&this->theMutex);
 }
 
 void QueueClass::flushQueue(void)
 {
     QueueEntryClass *entry, *entry_next; 
  
-    pthread_mutex_lock(this->theMutex);
+    pthread_mutex_lock(&this->theMutex);
     entry = this->theQueueHead;
     while (entry) {
         entry_next = entry->next;
@@ -212,7 +212,7 @@ void QueueClass::flushQueue(void)
         this->abend("flushQueue", "theQueueSize");
     }
 
-    pthread_mutex_unlock(this->theMutex);
+    pthread_mutex_unlock(&this->theMutex);
 }
 
 void QueueClass::logit (char const* str0_val, char const* str1_val)

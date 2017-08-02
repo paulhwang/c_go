@@ -18,7 +18,7 @@ class QueueClass
     QueueEntryClass *theQueueHead;
     QueueEntryClass *theQueueTail;
     int theMaxQueueSize;
-    pthread_mutex_t *theMutex;
+    pthread_mutex_t theMutex;
 
     void enqueueEntry(QueueEntryClass *entry);
     QueueEntryClass *dequeueEntry(void);

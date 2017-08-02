@@ -12,15 +12,20 @@
 
 NameListClass::NameListClass (FabricClass *fabric_object_val)
 {
-    memset(this, 0, sizeof(NameListClass));
+    memset(this, 0, sizeof(*this));
     this->theFabricObject = fabric_object_val;
     this->theNameListTag = 0;
+    strcpy(this->theObjectName, "NameListClass");
 
     this->debug(true, "NameListClass", "init");
 }
 
 NameListClass::~NameListClass (void)
 {
+    if (strcmp(this->objectName(), "NameListClass")) {
+        this->abend("~NameListClass", this->objectName());
+    }
+    strcpy(this->theObjectName, "NameListClassDummy");
 }
 
 void NameListClass::updateNameList (void)
