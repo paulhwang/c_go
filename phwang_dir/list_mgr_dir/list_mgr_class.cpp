@@ -18,7 +18,11 @@ ListMgrClass::ListMgrClass (char const *caller_name_val, int id_size_val, int in
     this->theEntryCount = 0;
     this->theMaxIdIndexTableIndex = 0;
     this->theMaxIndex = 0;
-    this->theMutex = PTHREAD_MUTEX_INITIALIZER;
+    //this->theMutex = PTHREAD_MUTEX_INITIALIZER;
+
+    if (pthread_mutex_init(&this->theMutex, NULL) != 0) {
+        this->abend("ListMgrClass", "pthread_mutex_init fail");
+    }
 
     strcpy(this->theObjectName, "ListMgrClass");
     for (int i = 0; i < LIST_MGR_ID_INDEX_ARRAY_SIZE; i++) {
@@ -80,7 +84,7 @@ void ListMgrClass::insertEntry (ListEntryClass *entry_val)
     pthread_mutex_unlock(&this->theMutex);
 }
 
-void ListMgrClass::freeEntry (ListEntryClass *list_entry_object_val)
+void ListMgrClass::removeEntry (ListEntryClass *list_entry_object_val)
 {
     pthread_mutex_lock(&this->theMutex);
     this->theEntryTableArray[list_entry_object_val->entryIndex()] = 0;

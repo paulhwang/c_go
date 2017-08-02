@@ -129,21 +129,21 @@ void PhwangClass::listMgrFree (void *list_mgr_val)
     ((ListMgrClass *) list_mgr_val)->~ListMgrClass();
 }
 
-void PhwangClass::listMgrFreeEntry (void *list_mgr_val, void *entry_val)
+void PhwangClass::listMgrRemoveEntry (void *list_mgr_val, void *entry_val)
 {
     if (!list_mgr_val) {
-        this->abend("listMgrFreeEntry", "null list_mgr_val");
+        this->abend("listMgrRemoveEntry", "null list_mgr_val");
         return;
     }
 
     if (strcmp(((ListMgrClass *) list_mgr_val)->objectName(), "ListMgrClass")) {
         char s[LOGIT_BUF_SIZE];
         sprintf(s, "wrong object: objectName=%s", ((ListMgrClass *) list_mgr_val)->objectName());
-        this->abend("listMgrFreeEntry", s);
+        this->abend("listMgrRemoveEntry", s);
         return;
     }
 
-    ((ListMgrClass *) list_mgr_val)->freeEntry((ListEntryClass *) entry_val);
+    ((ListMgrClass *) list_mgr_val)->removeEntry((ListEntryClass *) entry_val);
 }
 
 void *PhwangClass::listMgrSearchEntry(void *list_mgr_val, char const *data_val, void *extra_data_val)

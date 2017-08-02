@@ -123,9 +123,9 @@ void *phwangListMgrGetEntryTableArray (void *list_mgr_val)
     return thePhwangObject->listMgrGetEntryTableArray(list_mgr_val);
 }
 
-void *phwangListMgrFreeEntry (void *list_mgr_val, void *entry_val)
+void *phwangListMgrRemoveEntry (void *list_mgr_val, void *entry_val)
 {
-    thePhwangObject->listMgrFreeEntry(list_mgr_val, entry_val);
+    thePhwangObject->listMgrRemoveEntry(list_mgr_val, entry_val);
 }
 
 /* array_mgr */

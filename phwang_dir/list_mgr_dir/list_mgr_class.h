@@ -43,7 +43,6 @@ public:
     ListEntryClass **entryTableArray(void) {return this->theEntryTableArray;}
 
     void insertEntry(ListEntryClass * entry_val);
-    ListEntryClass *mallocEntry(void);
-    void freeEntry(ListEntryClass *list_entry_object_val);
+    void removeEntry(ListEntryClass *list_entry_object_val);
     ListEntryClass *searchEntry(char const *data_val, void *extra_data_val);
 };
