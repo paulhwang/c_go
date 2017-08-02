@@ -14,18 +14,17 @@
 QueueClass::QueueClass(int do_suspend_val, int max_size_val)
 {
     memset((char *) this, 0, sizeof (*this));
-    this->theDoSuspend = do_suspend_val;
     this->theMaxQueueSize = max_size_val;
 
-    if (!this->theMaxQueueSize) {
-        this->theMaxQueueSize = QUEUE_CLASS_DEFAULT_MAX_QUEUE_SIZE;
-    }
-
-    if (this->theDoSuspend) {
+    if (do_suspend_val) {
         this->theSuspendObject = new SuspendClass();
     }
     else {
         this->theSuspendObject = 0;
+    }
+
+    if (!this->theMaxQueueSize) {
+        this->theMaxQueueSize = QUEUE_CLASS_DEFAULT_MAX_QUEUE_SIZE;
     }
 
     this->theMutex = (pthread_mutex_t *) malloc(sizeof(pthread_mutex_t));
@@ -38,11 +37,6 @@ QueueClass::~QueueClass(void)
         delete this->theSuspendObject;
     }
     free(this->theMutex);
-}
-
-void QueueClass::initQueue (void)
-{
-  //InitializeCriticalSectionAndSpinCount(&cs_queue, 0);
 }
 
 void QueueClass::enqueueData (void *data_val)
@@ -77,23 +71,27 @@ void QueueClass::enqueueData (void *data_val)
 void *QueueClass::dequeueData (void)
 {
     while (1) {
-        QueueEntryClass *entry = this->dequeueEntry();
-        if (entry) {
-printf("***************QueueClass::dequeueData****** 2\n");
-            void *data = entry->data;
-printf("***************QueueClass::dequeueData****** 3\n");
-            this->delete_entry(entry);
-printf("***************QueueClass::dequeueData****** 4\n");
-
-            this->debug(false, "dequeueData", (char *) data);
-            return data;
+        if (!this->theQueueHead) {
+            if (!this->theSuspendObject) {
+                return 0;
+            }
+            this->theSuspendObject->wait();
         }
         else {
-            if (this->theSuspendObject) {
-                this->theSuspendObject->wait();
-            }
-            else {
-                return 0;
+            this->abendQueue("dequeueData begin");
+            pthread_mutex_lock(this->theMutex);
+            QueueEntryClass *entry = this->dequeueEntry();
+            pthread_mutex_unlock(this->theMutex);
+            this->abendQueue("dequeueData end");
+
+            if (entry) {
+                void *data = entry->data;
+                printf("***************QueueClass::dequeueData****** before\n");
+                delete entry;
+                printf("***************QueueClass::dequeueData****** after\n");
+
+                this->debug(false, "dequeueData", (char *) data);
+                return data;
             }
         }
     }
@@ -121,21 +119,15 @@ QueueEntryClass *QueueClass::dequeueEntry(void)
 {
     QueueEntryClass *entry;
 
-    if (!this->theQueueHead) {
+    if (this->theQueueSize == 0) {
+        this->abend("dequeueEntry", "theQueueSize == 0");
         return 0;
     }
-
-    this->abendQueue("dequeueEntry begin");
-
-    pthread_mutex_lock(this->theMutex);
 
     if (this->theQueueSize == 1) {
         entry = this->theQueueHead;
         this->theQueueHead = this->theQueueTail = 0;
         this->theQueueSize = 0;
-        pthread_mutex_unlock(this->theMutex);
-
-        this->abendQueue("dequeueEntry end1");
         return entry;
     }
 
@@ -143,9 +135,7 @@ QueueEntryClass *QueueClass::dequeueEntry(void)
     this->theQueueHead = this->theQueueHead->next;
     this->theQueueHead->prev = 0;
     this->theQueueSize--;
-    pthread_mutex_unlock(this->theMutex);
 
-    this->abendQueue("dequeueEntry end2");
     return entry;
 }
 
@@ -155,9 +145,23 @@ void QueueClass::abendQueue (char const *msg_val)
     int length;
  
     if (!this) {
+        this->abend("abendQueue", "null this");
         return;
     }
  
+    if (this->theQueueSize == 0) {
+        if (this->theQueueHead || this->theQueueTail) {
+            this->abend("abendQueue", "theQueueSize == 0");
+            return;
+        }
+    }
+    else {
+        if (!this->theQueueHead) {
+            this->abend("abendQueue", "null theQueueHead");
+            return;
+        }
+    }
+
     pthread_mutex_lock(this->theMutex);
     length = 0;
     entry = this->theQueueHead;
@@ -186,7 +190,7 @@ void QueueClass::abendQueue (char const *msg_val)
     pthread_mutex_unlock(this->theMutex);
 }
 
-void QueueClass::flush_queue(void)
+void QueueClass::flushQueue(void)
 {
     QueueEntryClass *entry, *entry_next; 
  
@@ -194,22 +198,18 @@ void QueueClass::flush_queue(void)
     entry = this->theQueueHead;
     while (entry) {
         entry_next = entry->next;
-        delete_entry(entry);
+        delete entry->data;
+        delete entry;
         this->theQueueSize--;
         entry = entry_next;
     }
     this->theQueueHead = this->theQueueTail = 0;
  
     if (this->theQueueSize) {
-        //abend(GATEWAY_LOG_TYPE_RFID, MTC_ERR_MISC, __LINE__, __FUNCTION__);
+        this->abend("flushQueue", "theQueueSize");
     }
 
     pthread_mutex_unlock(this->theMutex);
-}
-
-void QueueClass::delete_entry(QueueEntryClass *del_entry)
-{
-    delete del_entry;
 }
 
 void QueueClass::logit (char const* str0_val, char const* str1_val)

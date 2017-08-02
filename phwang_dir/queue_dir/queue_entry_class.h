@@ -8,13 +8,7 @@
 
 class QueueEntryClass
 {
-/***************************************************************/
-/* DO NOT ADD FRIEND INTO THIS CLASS UNLESS YOU GET PERMISSION */
   friend class QueueClass;
-/* DO NOT ADD FRIEND INTO THIS CLASS UNLESS YOU GET PERMISSION */
-/***************************************************************/
-
-  //enum GETAC_MARKER_DEFINE_ marker_head;
 
   QueueEntryClass *next;
   QueueEntryClass *prev;
