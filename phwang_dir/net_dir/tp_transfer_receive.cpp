@@ -71,13 +71,13 @@ void TpTransferClass::receiveThreadFunction2 (void)
 
             if (raw_data[0] == '{') {
                 length = raw_length - (1 + 3 + 1);
-                data = (char *) malloc(length + 32);
+                data = (char *) phwangMalloc(length + 32);
                 memcpy(data, &raw_data[1 + 3], length);
                 data[length] = 0;
             }
             else if (raw_data[0] == '[') {
                 length = raw_length - (1 + 5 + 1);
-                data = (char *) malloc(length + 32);
+                data = (char *) phwangMalloc(length + 32);
                 memcpy(data, &raw_data[1 + 5], length);
                 data[length] = 0;
             }
