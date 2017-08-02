@@ -37,6 +37,7 @@ void UThemeClass::exportedNetAcceptFunction (void *tp_transfer_object_val)
 void uThemeTpReceiveDataFunction (void *tp_transfer_object_val, void *game_server_object_val, void *data_val) {
     phwangDebug(false, "Golbal::uThemeTpReceiveDataFunction", (char *) data_val);
     ((UThemeClass *) game_server_object_val)->exportedparseFunction((char *) data_val);
+    phwangFree(data_val);
 }
 
 void UThemeClass::startNetServer (void)
