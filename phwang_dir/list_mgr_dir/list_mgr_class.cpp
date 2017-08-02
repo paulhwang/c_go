@@ -30,6 +30,10 @@ ListMgrClass::ListMgrClass (char const *caller_name_val, int id_size_val, int in
 
 ListMgrClass::~ListMgrClass (void)
 {
+    if (strcmp(this->objectName(), "ListMgrClass")) {
+        this->abend("~ListMgrClass", this->objectName());
+    }
+    strcpy(this->theObjectName, "ListMgrClassDummy");
 }
 
 int ListMgrClass::allocEntryId (void)

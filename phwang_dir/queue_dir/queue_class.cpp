@@ -85,6 +85,9 @@ void *QueueClass::dequeueData (void)
             this->abendQueue("dequeueData end");
 
             if (entry) {
+                if (strcmp(entry->objectName(), "QueueEntryClass")) {
+                    this->abend("dequeueData", "bad objectName");
+                }
                 void *data = entry->data;
                 printf("***************QueueClass::dequeueData****** before\n");
                 delete entry;
