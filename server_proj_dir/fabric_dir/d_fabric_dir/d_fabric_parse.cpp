@@ -21,64 +21,52 @@
 
 void DFabricClass::exportedparseFunction (void *tp_transfer_object_val, char *data_val)
 {
-printf("=========================exportedparseFunction===========before\n");
     if (*data_val != WEB_FABRIC_PROTOCOL_COMMAND_IS_GET_LINK_DATA) {
         this->logit("exportedparseFunction", data_val);
     }
 
     if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_SETUP_LINK) {
         this->processSetupLink(tp_transfer_object_val, data_val + 1);
-printf("=========================exportedparseFunction===========2\n");
         return;
     }
 
     if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_FREE_LINK) {
         this->processFreeLink(tp_transfer_object_val, data_val + 1);
-printf("=========================exportedparseFunction===========3\n");
         return;
     }
 
     if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_GET_LINK_DATA) {
-printf("==================exportedparseFunction=======link data before\n");
         this->processGetLinkData(tp_transfer_object_val, data_val + 1);
-printf("==================exportedparseFunction=======link data after\n");
         return;
     }
 
     if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_GET_NAME_LIST) {
-printf("=========================exportedparseFunction=======name before\n");
         this->processGetNameList(tp_transfer_object_val, data_val + 1);
-printf("=========================exportedparseFunction=======name after\n");
         return;
     }
 
     if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_SETUP_SESSION) {
         this->processSetupSession(tp_transfer_object_val, data_val + 1);
-printf("=========================exportedparseFunction===========6\n");
         return;
     }
 
     if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_SETUP_SESSION2) {
         this->processSetupSession2(tp_transfer_object_val, data_val + 1);
-printf("=========================exportedparseFunction===========7\n");
         return;
     }
 
     if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_SETUP_SESSION3) {
         this->processSetupSession3(tp_transfer_object_val, data_val + 1);
-printf("=========================exportedparseFunction===========8\n");
         return;
     }
 
     if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_PUT_SESSION_DATA) {
         this->processPutSessionData(tp_transfer_object_val, data_val + 1);
-printf("=========================exportedparseFunction===========9\n");
         return;
     }
 
     if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_GET_SESSION_DATA) {
         this->processGetSessionData(tp_transfer_object_val, data_val + 1);
-printf("=========================exportedparseFunction===========10\n");
         return;
     }
 

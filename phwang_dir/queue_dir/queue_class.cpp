@@ -87,9 +87,7 @@ void *QueueClass::dequeueData (void)
                     this->abend("dequeueData", "bad objectName");
                 }
                 void *data = entry->data;
-                printf("***************QueueClass::dequeueData****** before\n");
                 delete entry;
-                printf("***************QueueClass::dequeueData****** after\n");
 
                 this->debug(false, "dequeueData", (char *) data);
                 return data;
