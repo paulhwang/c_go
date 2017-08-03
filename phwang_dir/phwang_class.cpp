@@ -83,15 +83,14 @@ void PhwangClass::printBoard (char const* data_val, int board_size_val)
 
 #define PHWNAG_CLASS_MALLOC_MARKER "phwang"
 #define PHWNAG_CLASS_MALLOC_MARKER_SIZE 6
-#define PHWNAG_CLASS_MALLOC_HEADER_SIZE (PHWNAG_CLASS_MALLOC_MARKER_SIZE + 2)
-#define PHWNAG_CLASS_MALLOC_EXTRA_BUFFER_SIZE (PHWNAG_CLASS_MALLOC_HEADER_SIZE + 8)
-
+#define PHWNAG_CLASS_MALLOC_EXTRA_BUFFER_SIZE (PHWNAG_CLASS_MALLOC_MARKER_SIZE * 2 + 8)
 
 void *PhwangClass::phwangMalloc (int size_val)
 {
     char *buf = (char *) malloc(size_val + PHWNAG_CLASS_MALLOC_EXTRA_BUFFER_SIZE);
     memcpy(buf, PHWNAG_CLASS_MALLOC_MARKER, PHWNAG_CLASS_MALLOC_MARKER_SIZE);
-    return buf + PHWNAG_CLASS_MALLOC_HEADER_SIZE;
+    memcpy(buf + PHWNAG_CLASS_MALLOC_MARKER_SIZE + size_val, PHWNAG_CLASS_MALLOC_MARKER, PHWNAG_CLASS_MALLOC_MARKER_SIZE);
+    return buf + PHWNAG_CLASS_MALLOC_MARKER_SIZE;
 }
 
 void PhwangClass::phwangFree (void *data_val, char const *who_val)
@@ -101,9 +100,9 @@ void PhwangClass::phwangFree (void *data_val, char const *who_val)
         return;
     }
 
-    char *buf = ((char *) data_val) - PHWNAG_CLASS_MALLOC_HEADER_SIZE;
+    char *buf = ((char *) data_val) - PHWNAG_CLASS_MALLOC_MARKER_SIZE;
     if (memcmp(buf, PHWNAG_CLASS_MALLOC_MARKER, PHWNAG_CLASS_MALLOC_MARKER_SIZE)) {
-        this->abend3("phwangFree", "bad data", who_val);
+        this->abend3("phwangFree", "tail data", who_val);
         return;
     }
 
