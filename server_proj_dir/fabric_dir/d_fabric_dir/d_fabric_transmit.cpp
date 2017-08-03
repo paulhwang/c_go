@@ -14,7 +14,5 @@ void DFabricClass::transmitFunction (void *tp_transfer_object_val, char *data_va
       this->debug(true, "transmitFunction", data_val);
     }
 
-printf("=========DFabricClass::transmitFunction===================before\n");
     phwangTpTransmit(tp_transfer_object_val, data_val);
-printf("=========DFabricClass::transmitFunction===================after\n");
 }

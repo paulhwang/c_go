@@ -15,12 +15,10 @@ QueueEntryClass::QueueEntryClass (void)
 
 QueueEntryClass::~QueueEntryClass (void)
 {
-    printf("+++++++++++QueueEntryClass::~QueueEntryClass before\n");
     if (strcmp(this->objectName(), "QueueEntryClass")) {
         this->abend("~QueueEntryClass", this->objectName());
     }
     strcpy(this->theObjectName, "QueueEntryClassDummy");
-    printf("+++++++++++QueueEntryClass::~QueueEntryClass after\n");
 }
 
 void QueueEntryClass::deleteQueueEntry (void)
