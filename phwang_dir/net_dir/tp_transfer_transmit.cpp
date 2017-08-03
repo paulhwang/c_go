@@ -62,7 +62,7 @@ void *tpTransferTransmitThreadFunction (void *data_val)
 
 void TpTransferClass::startTransmitThread (int socket_val)
 {
-    tp_transfer_thread_parameter *data = (tp_transfer_thread_parameter *) phwangMalloc(sizeof(tp_transfer_thread_parameter));
+    tp_transfer_thread_parameter *data = (tp_transfer_thread_parameter *) phwangMalloc(sizeof(tp_transfer_thread_parameter), "TpTh");
     data->socket = socket_val;
     data->tp_transfer_object = this;
 

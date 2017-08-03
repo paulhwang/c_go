@@ -39,9 +39,9 @@ void phwangPrintBoard (char const *data_val, int board_size_val)
 }
 
 /* malloc and free */
-void *phwangMalloc (int size_val)
+void *phwangMalloc (int size_val, char const *who_val)
 {
-    thePhwangObject->phwangMalloc(size_val);
+    thePhwangObject->phwangMalloc(size_val, who_val);
 }
 
 void phwangFree (void *data_val, char const *who_val)

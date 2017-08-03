@@ -16,7 +16,7 @@
 void TpTransferClass::receiveThreadFunction(int socket_val)
 {
     while (1) {
-        char *data = (char *) phwangMalloc(TP_TRANSFER_CLASS_RECEIVE_BUFFER_SIZE);
+        char *data = (char *) phwangMalloc(TP_TRANSFER_CLASS_RECEIVE_BUFFER_SIZE, "TpR1");
 
         int length = read(socket_val, data, TP_TRANSFER_CLASS_RECEIVE_BUFFER_SIZE);
         if (length > 0) {
@@ -40,7 +40,7 @@ void *tpTranferReceiveThreadFunction (void *data_val)
 
 void TpTransferClass::startReceiveThread (int socket_val)
 {
-    tp_transfer_thread_parameter *data = (tp_transfer_thread_parameter *) phwangMalloc(sizeof(tp_transfer_thread_parameter));
+    tp_transfer_thread_parameter *data = (tp_transfer_thread_parameter *) phwangMalloc(sizeof(tp_transfer_thread_parameter), "TpRh");
     data->socket = socket_val;
     data->tp_transfer_object = this;
 
@@ -71,13 +71,13 @@ void TpTransferClass::receiveThreadFunction2 (void)
 
             if (raw_data[0] == '{') {
                 length = raw_length - (1 + 3 + 1);
-                data = (char *) phwangMalloc(length + 32);
+                data = (char *) phwangMalloc(length + 32, "TpR3");
                 memcpy(data, &raw_data[1 + 3], length);
                 data[length] = 0;
             }
             else if (raw_data[0] == '[') {
                 length = raw_length - (1 + 5 + 1);
-                data = (char *) phwangMalloc(length + 32);
+                data = (char *) phwangMalloc(length + 32, "TpR5");
                 memcpy(data, &raw_data[1 + 5], length);
                 data[length] = 0;
             }
