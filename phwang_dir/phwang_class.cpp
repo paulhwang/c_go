@@ -84,7 +84,8 @@ void PhwangClass::printBoard (char const* data_val, int board_size_val)
 #define PHWNAG_CLASS_MALLOC_MARKER "phwang"
 #define PHWNAG_CLASS_MALLOC_MARKER_SIZE 6
 #define PHWNAG_CLASS_MALLOC_LENGTH_SIZE 4
-#define PHWNAG_CLASS_MALLOC_HEADER_SIZE (PHWNAG_CLASS_MALLOC_MARKER_SIZE + PHWNAG_CLASS_MALLOC_LENGTH_SIZE)
+#define PHWNAG_CLASS_MALLOC_WHO_SIZE (4 + 1)
+#define PHWNAG_CLASS_MALLOC_HEADER_SIZE (PHWNAG_CLASS_MALLOC_MARKER_SIZE + PHWNAG_CLASS_MALLOC_LENGTH_SIZE + PHWNAG_CLASS_MALLOC_WHO_SIZE)
 #define PHWNAG_CLASS_MALLOC_TAILER_SIZE PHWNAG_CLASS_MALLOC_MARKER_SIZE
 #define PHWNAG_CLASS_MALLOC_EXTRA_BUFFER_SIZE (PHWNAG_CLASS_MALLOC_HEADER_SIZE + PHWNAG_CLASS_MALLOC_TAILER_SIZE + 8)
 
@@ -93,6 +94,7 @@ void *PhwangClass::phwangMalloc (int size_val, char const *who_val)
     char *buf = (char *) malloc(size_val + PHWNAG_CLASS_MALLOC_EXTRA_BUFFER_SIZE);
     memcpy(buf, PHWNAG_CLASS_MALLOC_MARKER, PHWNAG_CLASS_MALLOC_MARKER_SIZE);
     this->encodeNumber(buf + PHWNAG_CLASS_MALLOC_MARKER_SIZE, size_val, PHWNAG_CLASS_MALLOC_LENGTH_SIZE);
+    strcpy(buf + PHWNAG_CLASS_MALLOC_MARKER_SIZE + PHWNAG_CLASS_MALLOC_LENGTH_SIZE, who_val);
     memcpy(buf + PHWNAG_CLASS_MALLOC_HEADER_SIZE + size_val, PHWNAG_CLASS_MALLOC_MARKER, PHWNAG_CLASS_MALLOC_MARKER_SIZE);
     return buf + PHWNAG_CLASS_MALLOC_HEADER_SIZE;
 }
@@ -107,14 +109,14 @@ void PhwangClass::phwangFree (void *data_val, char const *who_val)
     char *buf = ((char *) data_val) - PHWNAG_CLASS_MALLOC_HEADER_SIZE;
 
     if (memcmp(buf, PHWNAG_CLASS_MALLOC_MARKER, PHWNAG_CLASS_MALLOC_MARKER_SIZE)) {
-        this->abend3("phwangFree", "head data", who_val);
+        this->abend3("phwangFree Head", who_val, buf + PHWNAG_CLASS_MALLOC_MARKER_SIZE + PHWNAG_CLASS_MALLOC_LENGTH_SIZE);
         return;
     }
 
     int length = this->decodeNumber(buf + PHWNAG_CLASS_MALLOC_MARKER_SIZE, PHWNAG_CLASS_MALLOC_LENGTH_SIZE);
 
     if (memcmp(data_val + length, PHWNAG_CLASS_MALLOC_MARKER, PHWNAG_CLASS_MALLOC_MARKER_SIZE)) {
-        this->abend3("phwangFree", "tail data", who_val);
+        this->abend3("phwangFree Tail", who_val, buf + PHWNAG_CLASS_MALLOC_MARKER_SIZE + PHWNAG_CLASS_MALLOC_LENGTH_SIZE);
         return;
     }
 

@@ -147,6 +147,9 @@ void DFabricClass::errorProcessFreeLink (void *tp_transfer_object_val, char cons
     this->transmitFunction(tp_transfer_object_val, downlink_data);
 }
 
+#define D_FABRIC_CLASS_PROCESSS_GET_LINK_DATA_DOWN_LINK_PENDING_DATA_SIZE (1 + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + LINK_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE)
+#define D_FABRIC_CLASS_PROCESSS_GET_LINK_DATA_DOWN_LINK_DATA_SIZE (1 + WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + 1 + WEB_FABRIC_PROTOCOL_NAME_LIST_TAG_SIZE + 1)
+#define D_FABRIC_CLASS_PROCESSS_GET_LINK_DATA_DOWN_LINK_PENDING_SESSION_SIZE (1 + WEB_FABRIC_PROTOCOL_NAME_LIST_TAG_SIZE)
 void DFabricClass::processGetLinkData (void *tp_transfer_object_val, char *data_val)
 {
     this->debug(false, "processGetLinkData", data_val);
@@ -182,9 +185,9 @@ void DFabricClass::processGetLinkData (void *tp_transfer_object_val, char *data_
                 *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_PENDING_DATA;
                 session->enqueuePendingDownLinkData(pending_downlink_data);
                 strcpy(data_ptr, link->linkIdIndex());
-                data_ptr += 8;
+                data_ptr += LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE;
                 strcpy(data_ptr, session->sessionIdIndex());
-                data_ptr += 8;
+                data_ptr += LINK_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE;
                 this->debug(true, "==================processGetLinkData getPendingDownLinkData", downlink_data);
             }
         }
