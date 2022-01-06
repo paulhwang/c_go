@@ -1,7 +1,7 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: go_server.cpp
+  File name: server_main.cpp
 */
 
 #include <unistd.h>
