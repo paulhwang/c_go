@@ -1,7 +1,7 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: main_class.h
+  File name: server_root_class.h
 */
 
 #pragma once
