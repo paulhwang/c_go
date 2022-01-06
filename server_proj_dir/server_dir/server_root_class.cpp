@@ -10,29 +10,29 @@
 #include "../theme_dir/theme_class.h"
 #include "server_root_class.h"
 
-MainClass::MainClass(void)
+ServerRootClass::ServerRootClass(void)
 {
     this->theFabricObject = new FabricClass();
     this->theGoThemeObject = new ThemeClass();
     this->theEngineObject = new EngineClass();
 }
 
-MainClass::~MainClass(void)
+ServerRootClass::~ServerRootClass(void)
 {
     this->theEngineObject->~EngineClass();
     this->theGoThemeObject->~ThemeClass();
     this->theFabricObject->~FabricClass();
-    this->debug(true, "~MainClass", "exit");
+    this->debug(true, "~ServerRootClass", "exit");
 }
 
-void MainClass::logit (char const *str0_val, char const *str1_val)
+void ServerRootClass::logit (char const *str0_val, char const *str1_val)
 {
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", this->objectName(), str0_val);
     phwangLogit(s, str1_val);
 }
 
-void MainClass::abend (char const *str0_val, char const *str1_val)
+void ServerRootClass::abend (char const *str0_val, char const *str1_val)
 {
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", this->objectName(), str0_val);

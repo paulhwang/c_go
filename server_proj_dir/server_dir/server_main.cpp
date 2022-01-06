@@ -10,8 +10,8 @@
 #include "server_root_class.h"
 #include "../test_dir/test_class.h"
 
-main (int argc, char **argv) {
-    MainClass *mainObject = new MainClass();
+main (int argc, char** argv) {
+    ServerRootClass* serverRootObject = new ServerRootClass();
     int register_tag;
     sleep(10);
     //TestClass *testObject = new TestClass();

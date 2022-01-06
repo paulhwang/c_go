@@ -11,7 +11,7 @@ class ThemeClass;
 class EngineClass;
 class TestClass;
 
-class MainClass {
+class ServerRootClass {
     FabricClass *theFabricObject;
     ThemeClass *theGoThemeObject;
     EngineClass *theEngineObject;
@@ -22,7 +22,7 @@ class MainClass {
     void abend(char const *str0_val, char const *str1_val);
 
   public:
-    MainClass(void);
-    ~MainClass(void);
-    char const *objectName(void) {return "MainClass";}
+    ServerRootClass(void);
+    ~ServerRootClass(void);
+    char const *objectName(void) {return "ServerRootClass";}
 };
