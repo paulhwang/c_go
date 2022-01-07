@@ -10,14 +10,14 @@
 #include "../theme_dir/theme_class.h"
 #include "server_root_class.h"
 
-ServerRootClass::ServerRootClass(void)
+ServerRootClass::ServerRootClass (void)
 {
     this->theFabricObject = new FabricClass();
     this->theGoThemeObject = new ThemeClass();
     this->theEngineObject = new EngineClass();
 }
 
-ServerRootClass::~ServerRootClass(void)
+ServerRootClass::~ServerRootClass (void)
 {
     this->theEngineObject->~EngineClass();
     this->theGoThemeObject->~ThemeClass();
