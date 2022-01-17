@@ -114,7 +114,12 @@ void TpServerClass::serverThreadFunction (void *data_val)
 
         listen(s, BACKLOG);
 
-        this->logit("serverThreadFunction", "accepting");
+        if (1) { /* debug */
+            char s[128];
+            sprintf(s, "accepting for (%s)", this->theWho);
+            this->logit("serverThreadFunction", s);
+        }
+
         if ((data_socket = accept(s, (struct sockaddr *)&address, (socklen_t*)&addrlen)) < 0) {
             this->logit("serverThreadFunction", "accept error");
             return;
