@@ -39,8 +39,9 @@ TpServerClass::TpServerClass (
     this->theTpTransferObjectIndex = 1;
 
     if (1) {
-        this->logit(who_val, "TpServerClass=====");
-        this->logit("TpServerClass", "init");
+        char s[128];
+        sprintf(s, "init by (%s)", who_val);
+        this->debug(1, "TpServerClass", s);
     }
 }
 
@@ -120,14 +121,15 @@ void TpServerClass::serverThreadFunction (void *data_val)
     //free(data_val);
 }
 
-void TpServerClass::logit (char const* str0_val, char const* str1_val)
+
+void TpServerClass::logit (char const *str0_val, char const *str1_val)
 {
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", this->objectName(), str0_val);
     phwangLogit(s, str1_val);
 }
 
-void TpServerClass::abend (char const* str0_val, char const* str1_val)
+void TpServerClass::abend (char const *str0_val, char const *str1_val)
 {
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", this->objectName(), str0_val);
