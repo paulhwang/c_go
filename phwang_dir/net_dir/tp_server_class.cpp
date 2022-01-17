@@ -38,7 +38,7 @@ TpServerClass::TpServerClass (
     this->theWho = who_val;
     this->theTpTransferObjectIndex = 1;
 
-    if (1) { /* debug */
+    if (0) { /* debug */
         char s[128];
         sprintf(s, "init by (%s)", who_val);
         this->logit("TpServerClass", s);
@@ -80,7 +80,11 @@ void TpServerClass::serverThreadFunction (void *data_val)
     int addrlen = sizeof(address);
     char buffer[1024] = {0};
 
-    this->logit("serverThreadFunction", "start");
+    if (0) { /* debug */
+        char s[128];
+        sprintf(s, "starts for (%s)", this->theWho);
+        this->logit("serverThreadFunction", s);
+    }
 
     if ((s = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
         this->logit("serverThreadFunction", "open socket error");
@@ -102,7 +106,12 @@ void TpServerClass::serverThreadFunction (void *data_val)
     }
 
     while (1) {
-        this->logit("serverThreadFunction", "listening");
+        if (1) { /* debug */
+            char s[128];
+            sprintf(s, "listening for (%s)", this->theWho);
+            this->logit("serverThreadFunction", s);
+        }
+
         listen(s, BACKLOG);
 
         this->logit("serverThreadFunction", "accepting");
