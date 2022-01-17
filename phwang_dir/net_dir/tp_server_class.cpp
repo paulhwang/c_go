@@ -38,10 +38,10 @@ TpServerClass::TpServerClass (
     this->theWho = who_val;
     this->theTpTransferObjectIndex = 1;
 
-    if (1) {
+    if (1) { /* debug */
         char s[128];
         sprintf(s, "init by (%s)", who_val);
-        this->debug(1, "TpServerClass", s);
+        this->logit("TpServerClass", s);
     }
 }
 
@@ -56,8 +56,10 @@ void *transportServerThreadFunction (void *tp_server_object_val)
 
 void TpServerClass::startServerThread (void)
 {
-    if (0) {
-        this->logit("startServerThread", "");
+    if (0) { /* debug */
+        char s[128];
+        sprintf(s, "for (%s)", this->theWho);
+        this->logit("startServerThread", s);
     }
 
     int r = pthread_create(&this->theServerThread, 0, transportServerThreadFunction, this);
