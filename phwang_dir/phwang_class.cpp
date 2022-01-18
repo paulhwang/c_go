@@ -475,7 +475,7 @@ void *PhwangClass::tpConnect (
         this->logit("tpConnect", s);
     }
 
-    TpTransferClass *tp_transfer_object = new TpTransferClass(s, receive_callback_val, receive_object_val);
+    TpTransferClass *tp_transfer_object = new TpTransferClass(s, receive_callback_val, receive_object_val, who_val);
     tp_transfer_object->startThreads(0);
     return tp_transfer_object;
 }

@@ -16,6 +16,7 @@ class TpTransferClass {
     void *theReceiveObject;
     int theSocket;
     int theIndex;
+    char const *theWho;
 
     pthread_t theReceiveThread;
     pthread_t theReceiveThread2;
@@ -32,7 +33,7 @@ class TpTransferClass {
     void abend(char const *str0_val, char const *str1_val);
 
 public:
-    TpTransferClass(int socket_val, void (*receive_callback_val)(void *, void *, void *), void *receive_object_val);
+    TpTransferClass(int socket_val, void (*receive_callback_val)(void *, void *, void *), void *receive_object_val, char const *who_val);
     ~TpTransferClass(void);
     char const *objectName(void) {return "TpTransferClass";}
 

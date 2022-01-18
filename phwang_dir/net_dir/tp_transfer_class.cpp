@@ -9,17 +9,23 @@
 
 TpTransferClass::TpTransferClass (int socket_val,
                                   void (*receive_callback_val)(void *, void *, void *),
-                                  void *receive_object_val)
+                                  void *receive_object_val,
+                                  char const *who_val)
 {
     memset(this, 0, sizeof(*this));
     this->theSocket = socket_val;
     this->theReceiveCallback = receive_callback_val;
     this->theReceiveObject = receive_object_val;
+    this->theWho = who_val;
 
     this->theReceiveQueue = phwangMallocSuspendedQueue(TP_TRANSFER_CLASS_RECEIVE_QUEUE_SIZE);
     this->theTransmitQueue = phwangMallocSuspendedQueue(TP_TRANSFER_CLASS_TRANSMIT_QUEUE_SIZE);
 
-    this->debug(true, "TpTransferClass", "init");
+    if (1) { /* debug */
+        char s[128];
+        sprintf(s, "init for (%s)", this->theWho);
+        this->logit("TpTransferClass", s);
+    }
 }
 
 TpTransferClass::~TpTransferClass (void)

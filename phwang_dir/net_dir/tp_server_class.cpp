@@ -128,7 +128,7 @@ void TpServerClass::serverThreadFunction (void *data_val)
         this->logit("serverThreadFunction", "accepted");
         this->logit("serverThreadFunction", this->theWho);
 
-        TpTransferClass *tp_transfer_object = new TpTransferClass(data_socket, this->theReceiveCallbackFunc, this->theCallerObject);
+        TpTransferClass *tp_transfer_object = new TpTransferClass(data_socket, this->theReceiveCallbackFunc, this->theCallerObject, this->theWho);
         tp_transfer_object->startThreads(this->theTpTransferObjectIndex);
         this->theTpTransferObjectIndex++;
         this->theAcceptCallbackFunc(this->theCallerObject, tp_transfer_object);
