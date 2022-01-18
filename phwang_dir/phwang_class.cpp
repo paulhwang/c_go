@@ -424,10 +424,15 @@ void *PhwangClass::tpConnect (
     int s;
     struct sockaddr_in serv_addr;
     char buffer[1024] = {0};
-    this->logit(who_val, "tpConnectServiceFunction() start");
+
+    if (0) { /* debug */
+        char s[128];
+        sprintf(s, "starts for (%s)", who_val);
+        this->logit("tpConnect", s);
+    }
 
     if ((s = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
-        this->logit(who_val, "tpConnectServiceFunction() open socket error");
+        this->logit(who_val, "tpConnect() open socket error");
         return 0;
     }
  
@@ -437,20 +442,25 @@ void *PhwangClass::tpConnect (
     serv_addr.sin_port = htons(port_val);
   
     if (inet_pton(AF_INET, "127.0.0.1", &serv_addr.sin_addr) <= 0) {
-        this->logit(who_val, "tpConnectServiceFunction() Invalid address/ Address not supported \n");
+        this->logit(who_val, "tpConnect() Invalid address/ Address not supported \n");
         return 0;
     }
   
-    this->logit(who_val, "tpConnectServiceFunction() connecting");
+    if (1) { /* debug */
+        char s[128];
+        sprintf(s, "connecing for (%s)", who_val);
+        this->logit("tpConnect", s);
+    }
+
     int retry_count = PHWANG_TP_CONNECT_RETRY_MAX_COUNT;
     while (retry_count) {
         if (connect(s, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0) {
             if (!retry_count--) {
-                this->logit(who_val, "tpConnectServiceFunction() Failed \n");
+                this->logit(who_val, "tpConnect() Failed \n");
                 return 0;
             }
             else {
-                this->logit(who_val, "tpConnectServiceFunction() retry-----");
+                this->logit(who_val, "tpConnect() retry-----");
                 sleep(1);
             }
         }
@@ -459,7 +469,11 @@ void *PhwangClass::tpConnect (
         }
     }
 
-    this->logit(who_val, "tpConnectServiceFunction() connected");
+    if (1) { /* debug */
+        char s[128];
+        sprintf(s, "connected for (%s)", who_val);
+        this->logit("tpConnect", s);
+    }
 
     TpTransferClass *tp_transfer_object = new TpTransferClass(s, receive_callback_val, receive_object_val);
     tp_transfer_object->startThreads(0);
