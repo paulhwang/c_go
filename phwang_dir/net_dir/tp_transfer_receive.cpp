@@ -15,12 +15,19 @@
 
 void TpTransferClass::receiveThreadFunction(int socket_val)
 {
+    char const *func_name_ = "receiveThreadFunction";
+
     while (1) {
         char *data = (char *) phwangMalloc(TP_TRANSFER_CLASS_RECEIVE_BUFFER_SIZE, "TpR1");
 
         int length = read(socket_val, data, TP_TRANSFER_CLASS_RECEIVE_BUFFER_SIZE);
         if (length > 0) {
-            this->debug(false, "receiveThreadFunction", data);
+            if (1) { /* debug */
+                char s[128];
+                sprintf(s, "(%s) data=%s", this->theWho, data);
+                this->logit(func_name_, s);
+            }
+
             phwangEnqueue(this->theReceiveQueue, data);
         }
         else {
@@ -59,7 +66,7 @@ void TpTransferClass::startReceiveThread (int socket_val)
 
 void TpTransferClass::receiveThreadFunction2 (void)
 {
-    this->debug(false, "receiveThreadFunction2", "starts");
+    char const *func_name_ = "receiveThreadFunction2";
 
     while (1) {
         char *raw_data = (char *) phwangDequeue(this->theReceiveQueue, "TpTransferClass::receiveThreadFunction2()");
@@ -67,7 +74,12 @@ void TpTransferClass::receiveThreadFunction2 (void)
             int raw_length = strlen(raw_data);
             int length;
             char *data;
-            this->debug(false, "receiveThreadFunction2", raw_data);
+
+            if (1) { /* debug */
+                char s[128];
+                sprintf(s, "(%s) data=%s", this->theWho, raw_data);
+                this->logit(func_name_, s);
+            }
 
             if (raw_data[0] == '{') {
                 length = raw_length - (1 + 3 + 1);
