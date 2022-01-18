@@ -18,6 +18,8 @@ void TpTransferClass::exportTransmitData (void *data_val)
 
 void TpTransferClass::transmitThreadFunction(int socket_val)
 {
+    char const *func_name_ = "transmitThreadFunction";
+
     while (1) {
         char *data = (char *) phwangDequeue(this->theTransmitQueue, "TpTransferClass::transmitThreadFunction()");
         if (data) {
@@ -43,8 +45,18 @@ void TpTransferClass::transmitThreadFunction(int socket_val)
                 *ptr++ = ']';
                 *ptr = 0;
             }
-            this->debug(true, "transmitThreadFunction", (char *) data);
-            this->debug(true, "transmitThreadFunction", (char *) buf);
+
+            if (1) { /* debug */
+                char s[128];
+                sprintf(s, "for (%s) data=%s", this->theWho, data);
+                this->logit(func_name_, s);
+            }
+            if (1) { /* debug */
+                char s[128];
+                sprintf(s, "for (%s) buf=%s", this->theWho, buf);
+                this->logit(func_name_, s);
+            }
+
             phwangFree(data, "TpTransferClass::transmitThreadFunction");
             send(socket_val, buf , strlen(buf) , 0);
         }
