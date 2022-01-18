@@ -71,6 +71,7 @@ void TpServerClass::startServerThread (void)
 
 void TpServerClass::serverThreadFunction (void *data_val)
 {
+    char const *func_name_ = "serverThreadFunction";
     char localhost[MAXHOSTNAME + 1];
     struct servent *sp;
     int s, data_socket;
@@ -83,16 +84,16 @@ void TpServerClass::serverThreadFunction (void *data_val)
     if (0) { /* debug */
         char s[128];
         sprintf(s, "starts for (%s)", this->theWho);
-        this->logit("serverThreadFunction", s);
+        this->logit(func_name_, s);
     }
 
     if ((s = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
-        this->logit("serverThreadFunction", "open socket error");
+        this->logit(func_name_, "open socket error");
         return;
     }
 
     if (setsockopt(s, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &opt, sizeof(opt))) {
-        this->logit("serverThreadFunction", "setsockopt error");
+        this->logit(func_name_, "setsockopt error");
         return;
     }
 
@@ -101,15 +102,15 @@ void TpServerClass::serverThreadFunction (void *data_val)
     address.sin_port = htons(this->thePort);
 
     if (bind(s, (struct sockaddr *)&address, sizeof(address)) < 0) {
-        this->logit("serverThreadFunction", "bind error");
+        this->logit(func_name_, "bind error");
         return;
     }
 
     while (1) {
-        if (1) { /* debug */
+        if (0) { /* debug */
             char s[128];
             sprintf(s, "listening for (%s)", this->theWho);
-            this->logit("serverThreadFunction", s);
+            this->logit(func_name_, s);
         }
 
         listen(s, BACKLOG);
@@ -117,16 +118,19 @@ void TpServerClass::serverThreadFunction (void *data_val)
         if (1) { /* debug */
             char s[128];
             sprintf(s, "accepting for (%s)", this->theWho);
-            this->logit("serverThreadFunction", s);
+            this->logit(func_name_, s);
         }
 
         if ((data_socket = accept(s, (struct sockaddr *)&address, (socklen_t*)&addrlen)) < 0) {
-            this->logit("serverThreadFunction", "accept error");
+            this->logit(func_name_, "accept error");
             return;
         }
 
-        this->logit("serverThreadFunction", "accepted");
-        this->logit("serverThreadFunction", this->theWho);
+        if (1) { /* debug */
+            char s[128];
+            sprintf(s, "accepted for (%s)", this->theWho);
+            this->logit(func_name_, s);
+        }
 
         TpTransferClass *tp_transfer_object = new TpTransferClass(data_socket, this->theReceiveCallbackFunc, this->theCallerObject, this->theWho);
         tp_transfer_object->startThreads(this->theTpTransferObjectIndex);
