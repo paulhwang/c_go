@@ -18,6 +18,7 @@ void *globalTpConnect (
                     void *receive_object_val,
                     char const *who_val)
 {
+    char const *func_name_ = "globalTpConnect";
     int s;
     struct sockaddr_in serv_addr;
     char buffer[1024] = {0};
@@ -25,7 +26,7 @@ void *globalTpConnect (
     if (0) { /* debug */
         char s[128];
         sprintf(s, "starts for (%s)", who_val);
-        phwangLogit("tpConnect", s);
+        phwangLogit(func_name_, s);
     }
 
     if ((s = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
@@ -46,7 +47,7 @@ void *globalTpConnect (
     if (1) { /* debug */
         char s[128];
         sprintf(s, "connecing for (%s)", who_val);
-        phwangLogit("tpConnect", s);
+        phwangLogit(func_name_, s);
     }
 
     int retry_count = PHWANG_TP_CONNECT_RETRY_MAX_COUNT;
@@ -69,7 +70,7 @@ void *globalTpConnect (
     if (1) { /* debug */
         char s[128];
         sprintf(s, "connected for (%s)", who_val);
-        phwangLogit("tpConnect", s);
+        phwangLogit(func_name_, s);
     }
 
     TpTransferClass *tp_transfer_object = new TpTransferClass(s, receive_callback_val, receive_object_val, who_val);
