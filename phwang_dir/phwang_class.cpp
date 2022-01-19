@@ -13,6 +13,7 @@
 #include "array_mgr_dir/array_mgr_class.h"
 #include "net_dir/tp_server_class.h"
 #include "net_dir/tp_transfer_class.h"
+#include "net_dir/tp_connect.h"
 
 void PhwangClass::phwangLogit (char const *str0_val, char const *str1_val)
 {
@@ -412,8 +413,6 @@ void *PhwangClass::mallocTpServer (
     return tp_server_object;
 }
 
-#define PHWANG_TP_CONNECT_RETRY_MAX_COUNT 30
-
 void *PhwangClass::tpConnect (
                     unsigned long ip_addr_val, 
                     unsigned short port_val, 
@@ -421,63 +420,12 @@ void *PhwangClass::tpConnect (
                     void *receive_object_val,
                     char const *who_val)
 {
-    int s;
-    struct sockaddr_in serv_addr;
-    char buffer[1024] = {0};
-
-    if (0) { /* debug */
-        char s[128];
-        sprintf(s, "starts for (%s)", who_val);
-        this->logit("tpConnect", s);
-    }
-
-    if ((s = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
-        this->logit(who_val, "tpConnect() open socket error");
-        return 0;
-    }
- 
-    memset(&serv_addr, '0', sizeof(serv_addr));
-  
-    serv_addr.sin_family = AF_INET;
-    serv_addr.sin_port = htons(port_val);
-  
-    if (inet_pton(AF_INET, "127.0.0.1", &serv_addr.sin_addr) <= 0) {
-        this->logit(who_val, "tpConnect() Invalid address/ Address not supported \n");
-        return 0;
-    }
-  
-    if (1) { /* debug */
-        char s[128];
-        sprintf(s, "connecing for (%s)", who_val);
-        this->logit("tpConnect", s);
-    }
-
-    int retry_count = PHWANG_TP_CONNECT_RETRY_MAX_COUNT;
-    while (retry_count) {
-        if (connect(s, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0) {
-            if (!retry_count--) {
-                this->logit(who_val, "tpConnect() Failed \n");
-                return 0;
-            }
-            else {
-                this->logit(who_val, "tpConnect() retry-----");
-                sleep(1);
-            }
-        }
-        else {
-            break;
-        }
-    }
-
-    if (1) { /* debug */
-        char s[128];
-        sprintf(s, "connected for (%s)", who_val);
-        this->logit("tpConnect", s);
-    }
-
-    TpTransferClass *tp_transfer_object = new TpTransferClass(s, receive_callback_val, receive_object_val, who_val);
-    tp_transfer_object->startThreads(0);
-    return tp_transfer_object;
+    return globalTpConnect (
+                ip_addr_val, 
+                port_val, 
+                receive_callback_val, 
+                receive_object_val,
+                who_val);
 }
 
 void PhwangClass::freeTpServer (void *tp_server_object_val)

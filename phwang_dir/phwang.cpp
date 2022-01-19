@@ -6,7 +6,6 @@
 
 #include "phwang.h"
 #include "phwang_class.h"
-#include "./net_dir/tp_connect.h"
 
 PhwangClass *thePhwangObject = 0;
 
@@ -193,7 +192,7 @@ void *phwangTpConnect (
                 void *receive_object_val,
                 char const *who_val)
 {
-    return globalTpConnect (
+    return thePhwangObject->tpConnect (
                 ip_addr_val, 
                 port_val, 
                 receive_callback_val, 
