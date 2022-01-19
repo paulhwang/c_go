@@ -7,9 +7,11 @@
 #pragma once
 #include <pthread.h>
 
+#define TP_TRANSFER_CLASS_SMALL_DATA_LENGTH_SIZE 3
+#define TP_TRANSFER_CLASS_BIG_DATA_LENGTH_SIZE 5
+#define TP_TRANSFER_CLASS_RECEIVE_BUFFER_SIZE 1024
 #define TP_TRANSFER_CLASS_TRANSMIT_QUEUE_SIZE 1000
 #define TP_TRANSFER_CLASS_RECEIVE_QUEUE_SIZE 1000
-#define TP_TRANSFER_CLASS_RECEIVE_BUFFER_SIZE 1024
 
 class TpTransferClass {
     void (*theReceiveCallback)(void *, void *, void *);

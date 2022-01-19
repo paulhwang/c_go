@@ -18,13 +18,15 @@ void TpTransferClass::receiveThreadFunction(int socket_val)
     char const *func_name_ = "receiveThreadFunction";
 
     while (1) {
-        char *data = (char *) phwangMalloc(TP_TRANSFER_CLASS_RECEIVE_BUFFER_SIZE, "TpR1");
+        char *data = (char *) phwangMalloc(TP_TRANSFER_CLASS_RECEIVE_BUFFER_SIZE + 32, "TpR1");
 
         int length = read(socket_val, data, TP_TRANSFER_CLASS_RECEIVE_BUFFER_SIZE);
         if (length > 0) {
+            data[length] = 0;
+            
             if (1) { /* debug */
                 char s[128];
-                sprintf(s, "(%s) data=%s", this->theWho, data);
+                sprintf(s, "(%s) data=%s len=%d", this->theWho, data, length);
                 this->logit(func_name_, s);
             }
 
@@ -73,6 +75,7 @@ void TpTransferClass::receiveThreadFunction2 (void)
         if (raw_data) {
             int raw_length = strlen(raw_data);
             int length;
+            int length1;
             char *data;
 
             if (1) { /* debug */
@@ -82,15 +85,30 @@ void TpTransferClass::receiveThreadFunction2 (void)
             }
 
             if (raw_data[0] == '{') {
-                length = raw_length - (1 + 3 + 1);
+                length = raw_length - (1 + TP_TRANSFER_CLASS_SMALL_DATA_LENGTH_SIZE + 1);
+                length1 = phwangDecodeNumber(&raw_data[1], TP_TRANSFER_CLASS_SMALL_DATA_LENGTH_SIZE);
+                if (length != length1) {
+                    char s[128];
+                    sprintf(s, "(%s) length not match!!! data=%s len=%d %d", this->theWho, raw_data, length, length1);
+                    this->abend(func_name_, s);
+                }
+
                 data = (char *) phwangMalloc(length + 32, "TpR3");
-                memcpy(data, &raw_data[1 + 3], length);
+                memcpy(data, &raw_data[1 + TP_TRANSFER_CLASS_SMALL_DATA_LENGTH_SIZE], length);
                 data[length] = 0;
-            }
+             }
             else if (raw_data[0] == '[') {
-                length = raw_length - (1 + 5 + 1);
+                length = raw_length - (1 + TP_TRANSFER_CLASS_BIG_DATA_LENGTH_SIZE + 1);
+                length1 = phwangDecodeNumber(&raw_data[1], TP_TRANSFER_CLASS_BIG_DATA_LENGTH_SIZE);
+                if (length != length1) {
+                    char s[128];
+                    sprintf(s, "(%s) length not match!!! data=%s len=%d %d", this->theWho, raw_data, length, length1);
+                    this->abend(func_name_, s);
+                }
+
+
                 data = (char *) phwangMalloc(length + 32, "TpR5");
-                memcpy(data, &raw_data[1 + 5], length);
+                memcpy(data, &raw_data[1 + TP_TRANSFER_CLASS_BIG_DATA_LENGTH_SIZE], length);
                 data[length] = 0;
             }
             else {
