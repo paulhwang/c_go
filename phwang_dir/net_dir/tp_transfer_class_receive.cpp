@@ -24,7 +24,7 @@ void TpTransferClass::receiveThreadFunction(int socket_val)
         if (length > 0) {
             data[length] = 0;
             
-            if (1) { /* debug */
+            if (0) { /* debug */
                 char s[128];
                 sprintf(s, "(%s) data=%s len=%d", this->theWho, data, length);
                 this->logit(func_name_, s);

@@ -23,6 +23,11 @@ void DFabricClass::exportedparseFunction (void *tp_transfer_object_val, char *da
 {
     if (*data_val != WEB_FABRIC_PROTOCOL_COMMAND_IS_GET_LINK_DATA) {
         this->logit("exportedparseFunction", data_val);
+        if (1) { /* debug */
+            char s[128];
+            sprintf(s, "data=%s", data_val);
+            this->logit("exportedparseFunction", s);
+        }
     }
 
     if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_SETUP_LINK) {
