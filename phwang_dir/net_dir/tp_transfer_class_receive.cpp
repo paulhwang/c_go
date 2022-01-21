@@ -78,7 +78,7 @@ void TpTransferClass::receiveThreadFunction2 (void)
             int length1;
             char *data;
 
-            if (1) { /* debug */
+            if (0) { /* debug */
                 char s[128];
                 sprintf(s, "(%s) data=%s", this->theWho, raw_data);
                 this->logit(func_name_, s);

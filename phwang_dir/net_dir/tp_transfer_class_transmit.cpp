@@ -51,7 +51,7 @@ void TpTransferClass::transmitThreadFunction(int socket_val)
                 sprintf(s, "(%s) data=%s", this->theWho, data);
                 this->logit(func_name_, s);
             }
-            if (1) { /* debug */
+            if (0) { /* debug */
                 char s[128];
                 sprintf(s, "(%s) buf=%s", this->theWho, buf);
                 this->logit(func_name_, s);
