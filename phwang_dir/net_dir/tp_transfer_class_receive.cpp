@@ -114,7 +114,7 @@ void TpTransferClass::receiveThreadFunction2 (void)
             else {
                 if (1) { /* debug */
                     char s[128];
-                    sprintf(s, "(%s) data=%s len=$d", this->theWho, raw_data, strlen(raw_data));
+                    sprintf(s, "(%s) data=%s len=%d", this->theWho, raw_data, strlen(raw_data));
                     this->logit(func_name_, s);
                 }
                 this->abend("receiveThreadFunction2: wrong header", raw_data);
