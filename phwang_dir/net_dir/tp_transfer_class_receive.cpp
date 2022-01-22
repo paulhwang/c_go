@@ -30,6 +30,16 @@ void TpTransferClass::receiveThreadFunction(int socket_val)
                 this->logit(func_name_, s);
             }
 
+            if ((*data != '{') && (*data != '[')) {
+                if (1) { /* debug */
+                    char s[2000];
+                    sprintf(s, "(%s) data=%s len=%d", this->theWho, data, length);
+                    this->logit(func_name_, s);
+                }
+                this->abend("receiveThreadFunction: wrong header", data);
+                continue;
+            }
+
             phwangEnqueue(this->theReceiveQueue, data);
         }
         else {
@@ -113,7 +123,7 @@ void TpTransferClass::receiveThreadFunction2 (void)
             }
             else {
                 if (1) { /* debug */
-                    char s[128];
+                    char s[2000];
                     sprintf(s, "(%s) data=%s len=%d", this->theWho, raw_data, strlen(raw_data));
                     this->logit(func_name_, s);
                 }
