@@ -41,7 +41,7 @@ void uFabricTpReceiveDataFunction (void *tp_transfer_object_val, void *u_fabric_
 
 void UFabricClass::startNetServer (void)
 {
-    this->theTpServerObject = phwangMallocTpServer(this, GROUP_ROOM_PROTOCOL_TRANSPORT_PORT_NUMBER, uFabricTpServerAcceptFunction, this, uFabricTpReceiveDataFunction, this, this->objectName());
+    this->theTpServerObject = phwangMallocTpServer(this, FABRIC_THEME_PROTOCOL_TRANSPORT_PORT_NUMBER, uFabricTpServerAcceptFunction, this, uFabricTpReceiveDataFunction, this, this->objectName());
 }
 
 void UFabricClass::logit (char const* str0_val, char const* str1_val)

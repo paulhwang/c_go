@@ -30,7 +30,7 @@ void dThemeReceiveDataFromTransport (void *tp_transfer_object_val, void *game_d_
 
 void DThemeClass::startNetConnect (void)
 {
-    this->theTpTransferObject = phwangTpConnect(0, GROUP_ROOM_PROTOCOL_TRANSPORT_PORT_NUMBER, dThemeReceiveDataFromTransport, this, this->objectName());
+    this->theTpTransferObject = phwangTpConnect(0, FABRIC_THEME_PROTOCOL_TRANSPORT_PORT_NUMBER, dThemeReceiveDataFromTransport, this, this->objectName());
 }
 
 void DThemeClass::logit (char const* str0_val, char const* str1_val)
