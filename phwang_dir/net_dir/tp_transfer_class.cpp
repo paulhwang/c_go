@@ -17,13 +17,14 @@ TpTransferClass::TpTransferClass (int socket_val,
     this->theReceiveCallback = receive_callback_val;
     this->theReceiveObject = receive_object_val;
     this->theWho = who_val;
+    this->setMaxDataSize();
 
     this->theReceiveQueue = phwangMallocSuspendedQueue(TP_TRANSFER_CLASS_RECEIVE_QUEUE_SIZE);
     this->theTransmitQueue = phwangMallocSuspendedQueue(TP_TRANSFER_CLASS_TRANSMIT_QUEUE_SIZE);
 
     if (1) { /* debug */
         char s[128];
-        sprintf(s, "init for (%s)", this->theWho);
+        sprintf(s, "init for (%s) %d", this->theWho, this->maxDataSize());
         this->logit("TpTransferClass", s);
     }
 }

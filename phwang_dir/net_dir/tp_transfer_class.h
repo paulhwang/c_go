@@ -19,6 +19,7 @@ class TpTransferClass {
     int theSocket;
     int theIndex;
     char const *theWho;
+    int theMaxDataSize;
 
     pthread_t theReceiveThread;
     pthread_t theReceiveThread2;
@@ -26,9 +27,12 @@ class TpTransferClass {
     void *theTransmitQueue;
     void *theReceiveQueue;
 
+    void setMaxDataSize(void) {this->theMaxDataSize = 1; for (int i = 0; i < TP_TRANSFER_CLASS_SMALL_DATA_LENGTH_SIZE; i++) this->theMaxDataSize *= 10; this->theMaxDataSize -= 1;}
     void startReceiveThread(int socket_val);
     void startReceiveThread2(void);
     void startTransmitThread(int socket_val);
+
+    int maxDataSize(void) {return this->theMaxDataSize;};
 
     void debug(int on_off_val, char const *str0_val, char const *str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
     void logit(char const *str0_val, char const *str1_val);
