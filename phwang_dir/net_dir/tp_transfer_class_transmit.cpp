@@ -23,11 +23,17 @@ void TpTransferClass::transmitThreadFunction(int socket_val)
     while (1) {
         char *data = (char *) phwangDequeue(this->theTransmitQueue, "TpTransferClass::transmitThreadFunction()");
         if (data) {
+            if (0) { /* debug */
+                char s[128];
+                sprintf(s, "(%s) data=%s", this->theWho, data);
+                this->logit(func_name_, s);
+            }
+
             int length = strlen(data);
             char *ptr;
             char *buf = ptr = (char *) malloc(length + (1 + TP_TRANSFER_CLASS_DATA_LENGTH_SIZE + 1 + 1) + 32);
 
-            if (length < 1000) {
+            if (length < 1400) {
                 *ptr++ = '{';
                 phwangEncodeNumber(ptr, length, TP_TRANSFER_CLASS_DATA_LENGTH_SIZE);
                 ptr += TP_TRANSFER_CLASS_DATA_LENGTH_SIZE;
@@ -35,21 +41,25 @@ void TpTransferClass::transmitThreadFunction(int socket_val)
                 ptr += length;
                 *ptr++ = '}';
                 *ptr = 0;
-            }
 
-            if (0) { /* debug */
-                char s[128];
-                sprintf(s, "(%s) data=%s", this->theWho, data);
-                this->logit(func_name_, s);
+                if (0) { /* debug */
+                    char s[128];
+                    sprintf(s, "(%s) buf=%s", this->theWho, buf);
+                    this->logit(func_name_, s);
+                }
+
+                send(socket_val, buf , strlen(buf) , 0);
             }
-            if (0) { /* debug */
-                char s[128];
-                sprintf(s, "(%s) buf=%s", this->theWho, buf);
-                this->logit(func_name_, s);
+            else {
+                if (1) { /* debug */
+                    char s[128];
+                    sprintf(s, "(%s) length=%d", this->theWho, length);
+                    this->logit(func_name_, s);
+                }
+                this->abend(func_name_, "*****LENGTH TOO BIG*****");
             }
 
             phwangFree(data, "TpTransferClass::transmitThreadFunction");
-            send(socket_val, buf , strlen(buf) , 0);
         }
     }
 }
