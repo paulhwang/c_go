@@ -23,7 +23,7 @@ void *globalTpConnect (
     struct sockaddr_in serv_addr;
     char buffer[1024] = {0};
 
-    if (0) { /* debug */
+    if (1) { /* debug */
         char s[128];
         sprintf(s, "starts for (%s)", who_val);
         phwangLogit(func_name_, s);

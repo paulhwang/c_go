@@ -30,6 +30,7 @@ void dThemeReceiveDataFromTransport (void *tp_transfer_object_val, void *game_d_
 
 void DThemeClass::startNetConnect (void)
 {
+    printf("DThemeClass::startNetConnect() aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n");
     this->theTpTransferObject = phwangTpConnect(0, FABRIC_THEME_PROTOCOL_TRANSPORT_PORT_NUMBER, dThemeReceiveDataFromTransport, this, this->objectName());
 }
 
