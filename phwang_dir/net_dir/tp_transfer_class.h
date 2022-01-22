@@ -7,8 +7,7 @@
 #pragma once
 #include <pthread.h>
 
-#define TP_TRANSFER_CLASS_SMALL_DATA_LENGTH_SIZE 3
-#define TP_TRANSFER_CLASS_BIG_DATA_LENGTH_SIZE 5
+#define TP_TRANSFER_CLASS_DATA_LENGTH_SIZE 4
 #define TP_TRANSFER_CLASS_RECEIVE_BUFFER_SIZE 1024
 #define TP_TRANSFER_CLASS_TRANSMIT_QUEUE_SIZE 1000
 #define TP_TRANSFER_CLASS_RECEIVE_QUEUE_SIZE 1000
@@ -27,7 +26,7 @@ class TpTransferClass {
     void *theTransmitQueue;
     void *theReceiveQueue;
 
-    void setMaxDataSize(void) {this->theMaxDataSize = 1; for (int i = 0; i < TP_TRANSFER_CLASS_SMALL_DATA_LENGTH_SIZE; i++) this->theMaxDataSize *= 10; this->theMaxDataSize -= 1;}
+    void setMaxDataSize(void) {this->theMaxDataSize = 1; for (int i = 0; i < TP_TRANSFER_CLASS_DATA_LENGTH_SIZE; i++) this->theMaxDataSize *= 10; this->theMaxDataSize -= 1;}
     void startReceiveThread(int socket_val);
     void startReceiveThread2(void);
     void startTransmitThread(int socket_val);

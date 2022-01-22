@@ -25,24 +25,15 @@ void TpTransferClass::transmitThreadFunction(int socket_val)
         if (data) {
             int length = strlen(data);
             char *ptr;
-            char *buf = ptr = (char *) malloc(length + (1 + TP_TRANSFER_CLASS_BIG_DATA_LENGTH_SIZE + 1 + 1) + 32);
+            char *buf = ptr = (char *) malloc(length + (1 + TP_TRANSFER_CLASS_DATA_LENGTH_SIZE + 1 + 1) + 32);
 
             if (length < 1000) {
                 *ptr++ = '{';
-                phwangEncodeNumber(ptr, length, TP_TRANSFER_CLASS_SMALL_DATA_LENGTH_SIZE);
-                ptr += TP_TRANSFER_CLASS_SMALL_DATA_LENGTH_SIZE;
+                phwangEncodeNumber(ptr, length, TP_TRANSFER_CLASS_DATA_LENGTH_SIZE);
+                ptr += TP_TRANSFER_CLASS_DATA_LENGTH_SIZE;
                 strcpy(ptr, data);
                 ptr += length;
                 *ptr++ = '}';
-                *ptr = 0;
-            }
-            else {
-                *ptr++ = '[';
-                phwangEncodeNumber(ptr, length, TP_TRANSFER_CLASS_BIG_DATA_LENGTH_SIZE);
-                ptr += TP_TRANSFER_CLASS_BIG_DATA_LENGTH_SIZE;
-                strcpy(ptr, data);
-                ptr += length;
-                *ptr++ = ']';
                 *ptr = 0;
             }
 
