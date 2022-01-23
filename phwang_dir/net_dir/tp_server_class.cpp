@@ -11,6 +11,7 @@
 #include <unistd.h>
 #include <netdb.h>
 #include <pwd.h>
+#include "tp_phwang_logo.h"
 #include "tp_transfer_class.h"
 #include "../../phwang_dir/phwang.h"
 #include "tp_server_class.h"
@@ -128,8 +129,31 @@ void TpServerClass::serverThreadFunction (void *data_val)
 
         if (1) { /* debug */
             char s[128];
-            sprintf(s, "accepted for (%s)", this->theWho);
+            sprintf(s, "ccepted for (%s) port=%d", this->theWho, this->thePort);
             this->logit(func_name_, s);
+        }
+
+        char data[strlen(TP_PHWANG_LOGO) + 16];
+        int length = read(data_socket, data, strlen(TP_PHWANG_LOGO) + 8);
+        if (length >= 0) {
+            data[length] = 0;
+        }
+        if (length != strlen(TP_PHWANG_LOGO)) {
+            if (1) { /* debug */
+                char s[128];
+                sprintf(s, "#####check logo length (%s) port=%d data_length=%d", this->theWho, this->thePort, length);
+                this->logit(func_name_, s);
+            }
+            continue;
+        }
+
+        if (strcmp(data, TP_PHWANG_LOGO)) {
+            if (1) { /* debug */
+                char s[128];
+                sprintf(s, "#####check logo (%s) port=%d data_length=%d data=%s", this->theWho, this->thePort, length, data);
+                this->logit(func_name_, s);
+            }
+            continue;
         }
 
         TpTransferClass *tp_transfer_object = new TpTransferClass(data_socket, this->theReceiveCallbackFunc, this->theCallerObject, this->theWho);

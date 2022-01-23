@@ -7,6 +7,7 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include "../../phwang_dir/phwang.h"
+#include "tp_phwang_logo.h"
 #include "./tp_transfer_class.h"
 
 #define PHWANG_TP_CONNECT_RETRY_MAX_COUNT 30
@@ -72,6 +73,8 @@ void *globalTpConnect (
         sprintf(s, "connected for (%s)", who_val);
         phwangLogit(func_name_, s);
     }
+
+    send(s, TP_PHWANG_LOGO , strlen(TP_PHWANG_LOGO) , 0);
 
     TpTransferClass *tp_transfer_object = new TpTransferClass(s, receive_callback_val, receive_object_val, who_val);
     tp_transfer_object->startThreads(0);
