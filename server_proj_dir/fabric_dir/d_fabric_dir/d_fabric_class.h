@@ -12,10 +12,14 @@
 
 class FabricClass;
 
+#define FABRIC_SERVER_TIME_STAMP_LENGTH_SIZE 8
+
 class DFabricClass {
     FabricClass *theFabricObject;
     void *theTpServerObject;
+    char theTimeStampString[FABRIC_SERVER_TIME_STAMP_LENGTH_SIZE + 16];
 
+    void setTimeStampString(void);
     void startNetServer(void);
     void processSetupLink(void *tp_transfer_object_val, char *data_val);
     void processFreeLink(void *tp_transfer_object_val, char *data_val);
@@ -38,6 +42,7 @@ class DFabricClass {
     void errorProcessGetSessionData(void *tp_transfer_object_val, char const *ajax_id_val, char const *err_msg_val);
     void mallocRoom(GroupClass *group_val, char *theme_info_val);
 
+    char *timeStampString(void) {return this->theTimeStampString;}
     void debug(int on_off_val, char const *str0_val, char const *str1_val) {if (on_off_val) this->logit(str0_val, str1_val);}
     void logit(char const *str0_val, char const *str1_val);
     void abend(char const *str0_val, char const *str1_val);

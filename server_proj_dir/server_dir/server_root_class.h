@@ -11,16 +11,12 @@ class ThemeClass;
 class EngineClass;
 class TestClass;
 
-#define FABRIC_SERVER_TIME_STAMP_LENGTH_SIZE 8
-
 class ServerRootClass {
     FabricClass *theFabricObject;
     ThemeClass *theGoThemeObject;
     EngineClass *theEngineObject;
     TestClass *theTestObject;
-    char theTimeStampString[FABRIC_SERVER_TIME_STAMP_LENGTH_SIZE + 16];
 
-    void setTimeStampString(void);
     void debug(int on_off_val, char const *str0_val, char const *str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
     void logit(char const *str0_val, char const *str1_val);
     void abend(char const *str0_val, char const *str1_val);
@@ -29,5 +25,4 @@ class ServerRootClass {
     ServerRootClass(void);
     ~ServerRootClass(void);
     char const *objectName(void) {return "ServerRootClass";}
-    char *timeStampString(void) {return this->theTimeStampString;}
 };

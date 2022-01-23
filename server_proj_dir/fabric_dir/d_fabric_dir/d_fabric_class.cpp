@@ -4,6 +4,7 @@
   File name: d_fabric_class.cpp
 */
 
+#include <sys/socket.h>
 #include "../../../phwang_dir/phwang.h"
 #include "../../../phwang_dir/net_dir/tp_transfer_class.h"
 #include "../../protocol_dir/net_port_protocol.h"
@@ -16,6 +17,7 @@ DFabricClass::DFabricClass (FabricClass *fabric_object_val)
 {
     memset(this, 0, sizeof(DFabricClass));
     this->theFabricObject = fabric_object_val;
+    this->setTimeStampString();
     this->startNetServer();
 
     this->debug(true, "DFabricClass", "init");
@@ -32,6 +34,7 @@ void dFabricTpServerAcceptFunction (void *d_fabric_object_val, void *tp_transfer
 
 void DFabricClass::exportedNetAcceptFunction (void *tp_transfer_object_val)
 {
+    send(((TpTransferClass *)tp_transfer_object_val)->socket(), this->timeStampString() , strlen(this->timeStampString()) , 0);
 }
 
 void dFabricTpReceiveDataFunction (void *tp_transfer_object_val, void *d_fabric_object_val, void *data_val) {
@@ -49,6 +52,14 @@ void dFabricTpReceiveDataFunction (void *tp_transfer_object_val, void *d_fabric_
 void DFabricClass::startNetServer (void)
 {
     this->theTpServerObject = phwangMallocTpServer(this, HTTP_FABRIC_PROTOCOL_TRANSPORT_PORT_NUMBER, dFabricTpServerAcceptFunction, this, dFabricTpReceiveDataFunction, this, this->objectName());
+}
+
+void DFabricClass::setTimeStampString (void)
+{
+    time_t seconds = time(NULL);
+    int time_stamp = (int) ((seconds - 1642858200) / 60);
+    phwangEncodeNumber(this->theTimeStampString, time_stamp, FABRIC_SERVER_TIME_STAMP_LENGTH_SIZE);
+    this->debug(true, "setTimeStampString", this->timeStampString());
 }
 
 void DFabricClass::logit (char const *str0_val, char const *str1_val)
