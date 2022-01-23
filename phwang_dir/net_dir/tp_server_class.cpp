@@ -138,21 +138,13 @@ void TpServerClass::serverThreadFunction (void *data_val)
         if (length >= 0) {
             data[length] = 0;
         }
-        if (length != strlen(TP_PHWANG_LOGO)) {
-            if (1) { /* debug */
-                char s[128];
-                sprintf(s, "#####check logo length (%s) port=%d data_length=%d", this->theWho, this->thePort, length);
-                this->logit(func_name_, s);
-            }
-            continue;
-        }
-
-        if (strcmp(data, TP_PHWANG_LOGO)) {
+        if ((length != strlen(TP_PHWANG_LOGO)) || (strcmp(data, TP_PHWANG_LOGO))) {
             if (1) { /* debug */
                 char s[128];
                 sprintf(s, "#####check logo (%s) port=%d data_length=%d data=%s", this->theWho, this->thePort, length, data);
                 this->logit(func_name_, s);
             }
+            close(data_socket);
             continue;
         }
 
