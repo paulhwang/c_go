@@ -42,7 +42,11 @@ void FabricClass::linkKeepAliveExamine (void)
     for (int i = max_index ; i >= 0; i--) {
         LinkClass *link = link_entry_array[i];
         if (link && link->keepAliveTime() && link->keepAliveTimerExpired()) {
-            this->debug(true, "linkKeepAliveExamine(***expired)", link->linkName());
+            if (1) { /* debug */
+                char s[128];
+                sprintf(s, "(***link expired***) linkName=%s linkIdIndex=%s", link->linkName(), link->linkIdIndex());
+                this->logit("linkKeepAliveExamine", s);
+            }
             phwangListMgrRemoveEntry(this->theLinkListMgrObject, link);
             delete link;
         }
