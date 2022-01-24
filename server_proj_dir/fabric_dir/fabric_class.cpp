@@ -36,6 +36,10 @@ FabricClass::~FabricClass (void)
 
 void FabricClass::linkKeepAliveExamine (void)
 {
+    if (1) {
+        return;
+    }
+    
     int max_index = phwnagListMgrGetMaxIndex(this->theLinkListMgrObject, "FabricClass::linkKeepAliveExamine()");
     LinkClass **link_entry_array = (LinkClass **) phwangListMgrGetEntryTableArray(this->theLinkListMgrObject);
 
