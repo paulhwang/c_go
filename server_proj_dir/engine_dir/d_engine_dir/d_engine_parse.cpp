@@ -10,9 +10,11 @@
 #include "d_engine_class.h"
 #include "../engine_class.h"
 
-void DEngineClass::exportedparseFunction (char *data_val)
+void DEngineClass::exportedParseFunction (char *data_val)
 {
-    this->debug(true, "exportedparseFunction", data_val);
+    if (1) { /* debug */
+        this->logit("exportedParseFunction", data_val);
+    }
 
     if (*data_val == THEME_ENGINE_PROTOCOL_COMMAND_IS_SETUP_BASE) {
         this->processSetupBase(data_val + 1);
@@ -24,12 +26,14 @@ void DEngineClass::exportedparseFunction (char *data_val)
         return;
     }
 
-    this->abend("exportedparseFunction", data_val);
+    this->abend("exportedParseFunction", data_val);
 }
 
 void DEngineClass::processSetupBase(char const *data_val)
 {
-    this->debug(true, "processSetupBase", data_val);
+    if (1) { /* debug */
+        this->logit("processSetupBase", data_val);
+    }
 
     char const *room_id_index_val = data_val;
 
@@ -58,7 +62,9 @@ void DEngineClass::processSetupBase(char const *data_val)
 
 void DEngineClass::processPutBaseData(char const *data_val)
 {
-    this->debug(true, "processPutBaseData", data_val);
+    if (1) { /* debug */
+        this->logit("processPutBaseData", data_val);
+    }
 
     GoBaseClass *base_object = this->theEngineObject->searchGoBase(data_val);
     if (!base_object) {
@@ -67,7 +73,7 @@ void DEngineClass::processPutBaseData(char const *data_val)
         return;
     }
 
-    this->debug(true, "processPutBaseData", base_object->goBaseIdIndex());
+    //this->debug(true, "processPutBaseData", base_object->goBaseIdIndex());
 
     base_object->portObject()->receiveInputData(data_val + ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);
 }

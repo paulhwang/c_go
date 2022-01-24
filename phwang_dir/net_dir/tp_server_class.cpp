@@ -141,7 +141,7 @@ void TpServerClass::serverThreadFunction (void *data_val)
         if ((length != strlen(TP_PHWANG_LOGO)) || (strcmp(data, TP_PHWANG_LOGO))) {
             if (1) { /* debug */
                 char s[128];
-                sprintf(s, "###attack (%s) port=%d data_length=%d data=%s", this->theWho, this->thePort, length, data);
+                sprintf(s, "### Attack: (%s) port=%d data_length=%d data=%s", this->theWho, this->thePort, length, data);
                 this->logit(func_name_, s);
             }
             close(data_socket);

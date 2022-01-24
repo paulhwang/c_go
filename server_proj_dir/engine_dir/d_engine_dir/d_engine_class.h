@@ -31,5 +31,5 @@ public:
     void processPutBaseDataResponse(GoBaseClass *base_object_val, char const *data_val);
 
     /* exports */
-    void exportedparseFunction(char *data_val);
+    void exportedParseFunction(char *data_val);
 };
