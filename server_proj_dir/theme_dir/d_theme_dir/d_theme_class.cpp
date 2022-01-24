@@ -23,7 +23,10 @@ DThemeClass::~DThemeClass (void)
 }
 
 void dThemeReceiveDataFromTransport (void *tp_transfer_object_val, void *game_d_server_object_val, void *data_val) {
-    phwangLogit("Golbal::dThemeReceiveDataFromTransport", (char *) data_val);
+    if (1) { /* debug */
+        phwangLogit("Golbal::dThemeReceiveDataFromTransport", (char *) data_val);
+    }
+
     ((DThemeClass *) game_d_server_object_val)->exportedparseFunction((char *) data_val);
     phwangFree(data_val, "dThemeReceiveDataFromTransport");
 }
