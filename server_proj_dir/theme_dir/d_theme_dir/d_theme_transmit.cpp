@@ -9,14 +9,14 @@
 
 void DThemeClass::transmitFunction (char *data_val)
 {
-    this->debug(true, "transmitFunction", data_val);
+    if (1) { /* debug */
+        this->logit("transmitFunction", data_val);
+    }
 
     if (!this->theTpTransferObject) {
         this->abend("transmitFunction", "null theTpTransferObject");
         return;
     }
 
-printf("###############DThemeClass::transmitFunction before##################\n");
     phwangTpTransmit(this->theTpTransferObject, data_val);
-printf("###############DThemeClass::transmitFunction after##################\n");
 }

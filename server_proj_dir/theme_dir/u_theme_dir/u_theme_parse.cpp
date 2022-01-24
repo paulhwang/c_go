@@ -14,9 +14,11 @@
 #include "../d_theme_dir/d_theme_class.h"
 #include "../room_class.h"
 
-void UThemeClass::exportedparseFunction(char *data_val)
+void UThemeClass::exportedParseFunction(char *data_val)
 {
-    this->debug(false, "exportedparseFunction", data_val);
+    if (1) { /* debug */
+        this->logit("exportedParseFunction", data_val);
+    }
 
     if (*data_val == THEME_ENGINE_PROTOCOL_RESPOND_IS_SETUP_BASE) {
         this->processSetupBaseResponse(data_val + 1);
@@ -28,12 +30,14 @@ void UThemeClass::exportedparseFunction(char *data_val)
         return;
     }
 
-    this->abend("exportedparseFunction", data_val);
+    this->abend("exportedParseFunction", data_val);
 }
 
 void UThemeClass::processSetupBaseResponse(char *data_val)
 {
-    this->debug(true, "processSetupBaseResponse", data_val);
+    if (1) { /* debug */
+        this->logit("processSetupBaseResponse", data_val);
+    }
 
     char *room_id_index_val = data_val;
 
@@ -69,7 +73,9 @@ void UThemeClass::processPutBaseDataResponse(char *data_val)
     char *data_ptr;
     int group_array_size;
 
-    this->debug(true, "processPutBaseDataResponse", data_val);
+    if (1) { /* debug */
+        this->logit("processPutBaseDataResponse", data_val);
+    }
 
     RoomClass *room = this->theThemeObject->searchRoom(data_val);
     if (!room) {
