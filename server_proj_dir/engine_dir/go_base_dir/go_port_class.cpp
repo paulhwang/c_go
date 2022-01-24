@@ -17,12 +17,18 @@
 GoPortClass::GoPortClass (GoBaseClass *base_object_val):
     theBaseObject(base_object_val)
 {
-    this->debug(true, "GoPortClass", "init");
+    if (1) { /* debug */
+        this->logit("GoPortClass", "init");
+    }
 }
 
 void GoPortClass::transmitBoardData (void) {
     this->theBaseObject->boardObject()->encodeBoard();
-    this->debug(true, "transmitBoardData", this->theBaseObject->boardObject()->boardOutputBuffer());
+
+    if (1) { /* debug */
+        this->logit("transmitBoardData", this->theBaseObject->boardObject()->boardOutputBuffer());
+    }
+
     this->transmitOutputData(this->theBaseObject->boardObject()->boardOutputBuffer());
 }
 
@@ -31,7 +37,9 @@ void GoPortClass::transmitOutputData (char const *data_val) {
 }
 
 void GoPortClass::receiveInputData (char const *str_val) {
-    this->debug(true, "receiveInputData", str_val);
+    if (1) { /* debug */
+        this->logit("receiveInputData", str_val);
+    }
 
     switch (*str_val) {
         case GO_PROTOCOL_GAME_INFO:
