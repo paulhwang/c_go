@@ -34,5 +34,5 @@ public:
     void transmitFunction(char *data_val);
 
     /* exports */
-    void exportedparseFunction(char *data_val);
+    void exportedParseFunction(char *data_val);
 };

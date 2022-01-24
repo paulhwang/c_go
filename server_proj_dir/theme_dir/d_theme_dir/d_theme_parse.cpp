@@ -13,9 +13,11 @@
 #include "../u_theme_dir/u_theme_class.h"
 #include "../room_class.h"
 
-void DThemeClass::exportedparseFunction (char *data_val)
+void DThemeClass::exportedParseFunction (char *data_val)
 {
-    this->debug(true, "exportedparseFunction", data_val);
+    if (1) { /* debug */
+        this->logit("exportedParseFunction", data_val);
+    }
 
     if (*data_val == FABRIC_THEME_PROTOCOL_COMMAND_IS_SETUP_ROOM) {
         this->processSetupRoom(data_val + 1);
@@ -27,7 +29,7 @@ void DThemeClass::exportedparseFunction (char *data_val)
         return;
     }
 
-    this->abend("exportedparseFunction", data_val);
+    this->abend("exportedParseFunction", data_val);
 }
 
 void DThemeClass::processSetupRoom (char *data_val)
