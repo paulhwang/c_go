@@ -25,7 +25,10 @@ UThemeClass::~UThemeClass (void)
 }
 
 void uThemeTpServerAcceptFunction (void *game_server_object_val, void *tp_transfer_object_val) {
-    phwangDebug(true, "Golbal::uThemeTpServerAcceptFunction", "");
+    if (1) { /* debug */
+        phwangLogit("Golbal::uThemeTpServerAcceptFunction", "");
+    }
+
     ((UThemeClass *) game_server_object_val)->exportedNetAcceptFunction(tp_transfer_object_val);
 }
 
@@ -35,7 +38,10 @@ void UThemeClass::exportedNetAcceptFunction (void *tp_transfer_object_val)
 }
 
 void uThemeTpReceiveDataFunction (void *tp_transfer_object_val, void *game_server_object_val, void *data_val) {
-    phwangDebug(false, "Golbal::uThemeTpReceiveDataFunction", (char *) data_val);
+    if (1) { /* debug */
+        phwangLogit("Golbal::uThemeTpReceiveDataFunction", (char *) data_val);
+    }
+
     ((UThemeClass *) game_server_object_val)->exportedparseFunction((char *) data_val);
     phwangFree(data_val, "uThemeTpReceiveDataFunction");
 }

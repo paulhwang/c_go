@@ -25,7 +25,7 @@ GoPortClass::GoPortClass (GoBaseClass *base_object_val):
 void GoPortClass::transmitBoardData (void) {
     this->theBaseObject->boardObject()->encodeBoard();
 
-    if (1) { /* debug */
+    if (0) { /* debug */
         this->logit("transmitBoardData", this->theBaseObject->boardObject()->boardOutputBuffer());
     }
 

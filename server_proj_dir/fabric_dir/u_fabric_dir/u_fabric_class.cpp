@@ -14,7 +14,7 @@ UFabricClass::UFabricClass (FabricClass *fabric_object_val)
     this->theFabricObject = fabric_object_val;
     this->startNetServer();
 
-    if (1) {
+    if (1) { /* debug */
         this->logit("UFabricClass", "init");
     }
 }
@@ -24,7 +24,10 @@ UFabricClass::~UFabricClass (void)
 }
 
 void uFabricTpServerAcceptFunction (void *u_fabric_object_val, void *tp_transfer_object_val) {
-    phwangDebug(true, "Golbal::uFabricTpServerAcceptFunction", "");
+    if (1) { /* debug */
+        phwangLogit("Golbal::uFabricTpServerAcceptFunction", "");
+    }
+
     ((UFabricClass *) u_fabric_object_val)->exportedNetAcceptFunction(tp_transfer_object_val);
 }
 
@@ -34,7 +37,10 @@ void UFabricClass::exportedNetAcceptFunction (void *tp_transfer_object_val)
 }
 
 void uFabricTpReceiveDataFunction (void *tp_transfer_object_val, void *u_fabric_object_val, void *data_val) {
-    phwangDebug(false, "Golbal::uFabricTpReceiveDataFunction", (char *) data_val);
+    if (1) { /* debug */
+        phwangLogit("Golbal::uFabricTpReceiveDataFunction", (char *) data_val);
+    }
+
     ((UFabricClass *) u_fabric_object_val)->exportedParseFunction((char *) data_val);
     phwangFree(data_val, "uFabricTpReceiveDataFunction");
 }
