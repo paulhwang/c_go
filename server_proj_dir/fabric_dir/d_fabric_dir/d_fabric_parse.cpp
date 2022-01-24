@@ -19,13 +19,13 @@
 #include "../group_class.h"
 #include "../name_list_class.h"
 
-void DFabricClass::exportedparseFunction (void *tp_transfer_object_val, char *data_val)
+void DFabricClass::exportedParseFunction (void *tp_transfer_object_val, char *data_val)
 {
-    if (*data_val != WEB_FABRIC_PROTOCOL_COMMAND_IS_GET_LINK_DATA) {
-        if (1) { /* debug */
+    if (1) { /* debug */
+        if (*data_val != WEB_FABRIC_PROTOCOL_COMMAND_IS_GET_LINK_DATA) {
             char s[128];
-            sprintf(s, "data=%s", data_val);
-            this->logit("exportedparseFunction", s);
+            sprintf(s, "%s", data_val);
+            this->logit("exportedParseFunction", s);
         }
     }
 
@@ -74,7 +74,7 @@ void DFabricClass::exportedparseFunction (void *tp_transfer_object_val, char *da
         return;
     }
 
-    this->abend("exportedparseFunction", data_val);
+    this->abend("exportedParseFunction", data_val);
 }
 
 #define D_FABRIC_CLASS_PROCESSS_SETUP_LINK_DOWN_LINK_DATA_SIZE (1 + WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + 1)

@@ -56,5 +56,5 @@ public:
 
     /* exports */
     void exportedNetAcceptFunction(void *tp_transfer_object_val);
-    void exportedparseFunction(void *tp_transfer_object_val, char *data_val);
+    void exportedParseFunction(void *tp_transfer_object_val, char *data_val);
 };
