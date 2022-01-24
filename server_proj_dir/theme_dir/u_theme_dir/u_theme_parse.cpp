@@ -73,7 +73,7 @@ void UThemeClass::processPutBaseDataResponse(char *data_val)
     char *data_ptr;
     int group_array_size;
 
-    if (1) { /* debug */
+    if (0) { /* debug */
         this->logit("processPutBaseDataResponse", data_val);
     }
 

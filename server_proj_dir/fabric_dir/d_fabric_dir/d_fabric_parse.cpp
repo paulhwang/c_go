@@ -192,7 +192,12 @@ void DFabricClass::processGetLinkData (void *tp_transfer_object_val, char *data_
                 data_ptr += LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE;
                 strcpy(data_ptr, session->sessionIdIndex());
                 data_ptr += LINK_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE;
-                this->debug(true, "==================processGetLinkData getPendingDownLinkData", downlink_data);
+
+                if (1) { /* debug */
+                    char s[128];
+                    sprintf(s, "Pending data exist: %s", downlink_data);
+                    this->logit("processGetLinkData", s);
+                }
             }
         }
     }
