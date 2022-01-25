@@ -14,6 +14,7 @@
 #include "net_dir/tp_server_class.h"
 #include "net_dir/tp_transfer_class.h"
 #include "net_dir/tp_connect.h"
+#include "db_dir/db_postgre.h"
 
 void PhwangClass::phwangLogit (char const *str0_val, char const *str1_val)
 {
@@ -471,6 +472,16 @@ void PhwangClass::tpTransmit (void *tp_transfer_object_val, char *data_val)
     }
 
     ((TpTransferClass *) tp_transfer_object_val)->exportTransmitData(data_val);
+}
+
+void PhwangClass::createDbDb(char *db_val)
+{
+    createPostgreDb(db_val);
+}
+
+void PhwangClass::createDbTable(char *table_val)
+{
+    createPostgreTable(table_val);
 }
 
 void PhwangClass::registerProgramProcess(int *register_tag_ptr_val, char *program_name_val, unsigned short port_val)

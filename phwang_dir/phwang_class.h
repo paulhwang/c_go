@@ -78,6 +78,10 @@ public:
     void freeTpTransfer(void *tp_transfer_object_val);
     void tpTransmit(void *tp_transfer_object_val, char *data_val);
 
+    /* db */
+    void createDbDb(char *db_val);
+    void createDbTable(char *table_val);
+
     /* register */
     void registerProgramProcess(int *register_tag_ptr_val, char *program_name_val, unsigned short port_val);
 };

@@ -23,6 +23,10 @@ void DbRootClass::createDbs (void)
 
 void DbRootClass::createLoginDb (void)
 {
+    //int lib_ver = PQlibVersion();
+
+    printf("********************************Version of libpq: \n");
+    //printf("Version of libpq: %d\n", lib_ver);
 
 }
 
