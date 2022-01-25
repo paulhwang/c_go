@@ -70,7 +70,7 @@ GO_ROOT_OBJLIBS	= lib_root.a lib_go_base.a lib_base_mgr.a
 all:	$(SERVER) 
 
 $(SERVER): $(ALL_SERVER_OBJS) 
-	$(CC) -o $(SERVER) $(ALL_SERVER_OBJS) -lstdc++ -pthread
+	$(CC) -o $(SERVER) $(ALL_SERVER_OBJS) -lstdc++ -pthread -L/usr/lib/postgresql/12/lib -lpq
 
 $(CLIENT): $(ALL_CLIENT_OBJS) 
 	$(CC) -o $(CLIENT) $(ALL_CLIENT_OBJS) -lstdc++ -pthread
