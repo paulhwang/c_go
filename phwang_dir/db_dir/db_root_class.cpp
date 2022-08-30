@@ -102,12 +102,29 @@ void DbRootClass::insertAccount (char const *str_val) {
     
     PQclear(res);    
 
-   res = PQexec(this->goConnect(), "INSERT INTO Accounts VALUES(2, 'phwang','p123')");
+    res = PQexec(this->goConnect(), "INSERT INTO Accounts VALUES(2, 'phwang','p123')");
         
     if (PQresultStatus(res) != PGRES_COMMAND_OK) 
         do_exit(this->goConnect(), res);     
     
     PQclear(res);    
+
+    res = PQexec(this->goConnect(), "SELECT name FROM accounts;");
+
+    if (PQresultStatus(res) != PGRES_TUPLES_OK) {
+        do_exit(this->goConnect(), res);
+    }
+
+    int i = 0;
+    while (1) {
+        char *data = PQgetvalue(res, i , 0);
+        if (!data)
+            break;
+        printf("data=%s\n", data);
+        i++;
+    }
+
+    PQclear(res);
 }
 
 void DbRootClass::createCarTable(void) {
