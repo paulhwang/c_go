@@ -9,6 +9,9 @@
 #include "db_test_class.h"
 #include "db_class.h"
 
+SqlClass *DbTestClass::sqlObject(void) {return this->dbObject()->sqlObject();}
+void *DbTestClass::sqlConnect(void) {return this->dbObject()->sqlConnect();}
+
 DbTestClass::DbTestClass (DbClass *db_object_val)
 {
     memset(this, 0, sizeof(*this));
@@ -23,26 +26,11 @@ DbTestClass::~DbTestClass (void)
 {
 }
 
-SqlClass *DbTestClass::sqlObject(void)
-{
-    return this->dbObject()->sqlObject();
-}
-
-void *DbTestClass::sqlConnect(void)
-{
-    return this->dbObject()->sqlConnect();
-}
-
 void DbTestClass::testDb(void)
 {
     this->createTables();
     this->insertAccount();
     this->insertCar();
-}
-
-void *DbTestClass::connectGoDb (void)
-{
-    return this->sqlObject()->connectDb("phwang", "go_db");
 }
 
 void DbTestClass::createTables (void) {
