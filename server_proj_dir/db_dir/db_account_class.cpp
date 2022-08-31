@@ -19,19 +19,27 @@ DbAccountClass::DbAccountClass (DbClass *db_object_val)
 
     this->theDbObject = db_object_val;
 
-    this->initAccount();
+    this->createAccountTableInDatabase();
+
     this->listAccount();
+    this->developTest();
 }
 
 DbAccountClass::~DbAccountClass (void)
 {
 }
 
-int db_account_class_do_init_account = 0;
-
-void DbAccountClass::initAccount(void)
+void DbAccountClass::developTest(void)
 {
-    if (!db_account_class_do_init_account) {
+}
+
+/************************DO NOT MODIFY IT*******************/
+int db_account_class_do_create_account_table_in_database = 0;
+/************************DO NOT MODIFY IT*******************/
+
+void DbAccountClass::createAccountTableInDatabase(void)
+{
+    if (!db_account_class_do_create_account_table_in_database) {
         return;
     }
 
@@ -64,6 +72,11 @@ void DbAccountClass::listAccount (void) {
     }
 
     this->sqlObject()->doPQclear(res);
+}
+
+int DbAccountClass::checkPassword (char const *password_val)
+{
+    return 0;
 }
 
 void DbAccountClass::logit (char const* str0_val, char const* str1_val)
