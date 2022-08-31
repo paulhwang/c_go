@@ -9,37 +9,21 @@
 #include "db_class.h"
 #include "db_account_class.h"
 
-DbAccountClass::DbAccountClass (void)
+SqlClass *DbAccountClass::sqlObject(void) {return this->dbObject()->sqlObject();}
+void *DbAccountClass::sqlConnect(void) {return this->dbObject()->sqlConnect();}
+
+DbAccountClass::DbAccountClass (DbClass *db_object_val)
 {
     memset(this, 0, sizeof(*this));
     this->debug(false, "DbAccountClass", "init");
 
-    this->theSqlObject = new SqlClass();
-    if (this->initDb() == -1) {
-        //tbd
-    }
+    this->theDbObject = db_object_val;
 
-    this->initAccount();
     this->listAccount();
 }
 
 DbAccountClass::~DbAccountClass (void)
 {
-}
-
-int DbAccountClass::initDb(void)
-{
-    this->theSqlConnect = this->connectGoDb();
-    if (this->sqlConnect() == 0) {
-        this->abend("DbClass", "fail to connnect to go_db");
-        return -1;
-    }
-    return 0;
-}
-
-void *DbAccountClass::connectGoDb (void)
-{
-    return this->sqlObject()->connectDb("phwang", "go_db");
 }
 
 int db_account_class_do_init_account = 0;

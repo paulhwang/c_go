@@ -7,29 +7,27 @@
 #pragma once
 
 class SqlClass;
-class DbTestClass;
+//class DbTestClass;
 
 class DbAccountClass {
     SqlClass *theSqlObject;
-    DbTestClass *theDbTestObject;
+    DbClass *theDbObject;
     void *theSqlConnect;
 
-    DbTestClass *dbTestObject(void) {return this->theDbTestObject;}
+    DbClass *dbObject(void) {return this->theDbObject;}
+    SqlClass *sqlObject(void);
+    void *sqlConnect(void);
 
-    int initDb(void);
     void initAccount(void);
     void listAccount (void);
-    void *connectGoDb(void);
 
     void debug(int on_off_val, char const *str0_val, char const *str1_val) {if (on_off_val) this->logit(str0_val, str1_val);}
     void logit(char const *str0_val, char const *str1_val);
     void abend(char const *str0_val, char const *str1_val);
    
 public:
-    DbAccountClass(void);
+    DbAccountClass(DbClass *db_object_val);
     ~DbAccountClass(void);
 
-    SqlClass *sqlObject(void) {return this->theSqlObject;}
-    void *sqlConnect(void) {return this->theSqlConnect;}
     char const *objectName(void) {return "DbAccountClass";}
 };
