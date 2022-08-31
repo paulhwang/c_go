@@ -21,7 +21,6 @@ DbAccountClass::DbAccountClass (DbClass *db_object_val)
 
     this->createAccountTableInDatabase();
 
-    this->listAccount();
     this->developTest();
 }
 
@@ -31,6 +30,8 @@ DbAccountClass::~DbAccountClass (void)
 
 void DbAccountClass::developTest(void)
 {
+    //this->listAccount();
+    this->checkPassword("phwang", "phwang");
 }
 
 /************************DO NOT MODIFY IT*******************/
@@ -67,10 +68,14 @@ void DbAccountClass::listAccount (void) {
 
     int count = this->sqlObject()->getPQntuples(res);
     for (int i = 0; i < count; i++) {
-        char *data1 = this->sqlObject()->getTuplesValue(res, i, 0);
-        this->debug(true, "listAccount", data1);
-        char *data2 = this->sqlObject()->getTuplesValue(res, i, 1);
-        this->debug(true, "listAccount", data2);
+        char *account_name = this->sqlObject()->getTuplesValue(res, i, 0);
+        char *password = this->sqlObject()->getTuplesValue(res, i, 1);
+
+        if (1) { //debug
+            char buf[256];
+            sprintf(buf, "account_name=%s, password=%s", account_name, password);
+            this->logit("listAccount", buf);
+        }
     }
 
     this->sqlObject()->doPQclear(res);
@@ -78,7 +83,40 @@ void DbAccountClass::listAccount (void) {
 
 int DbAccountClass::checkPassword (char const *account_name_val, char const *password_val)
 {
-    return 0;
+    void *res;
+    res = this->sqlObject()->selectFrom(this->sqlConnect(), "name, password");
+    if (!res) {
+        -1;
+    }
+
+    int count = this->sqlObject()->getPQntuples(res);
+    for (int i = 0; i < count; i++) {
+        char *account_name = this->sqlObject()->getTuplesValue(res, i, 0);
+        char *password = this->sqlObject()->getTuplesValue(res, i, 1);
+
+        if (0) { //debug
+            char buf[256];
+            sprintf(buf, "account_name=%s, password=%s", account_name, password);
+            this->logit("checkPassword", buf);
+        }
+
+        if (!strcmp(account_name, account_name_val)) {
+            if (!strcmp(password, password_val)) {
+                this->sqlObject()->doPQclear(res);
+                this->debug(true, "checkPassword", "match");
+                return 0;
+            }
+            else {
+                this->sqlObject()->doPQclear(res);
+                this->debug(true, "checkPassword", "not match");
+                return -1;
+            }
+        }
+    }
+
+    this->sqlObject()->doPQclear(res);
+    this->debug(true, "checkPassword", "not found");
+    return -2;
 }
 
 void DbAccountClass::logit (char const* str0_val, char const* str1_val)
