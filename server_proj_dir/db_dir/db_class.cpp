@@ -19,12 +19,16 @@ DbClass::DbClass (void)
         //tbd
     }
 
+    this->initAccount();
+    this->listAccount();
     this->testDb();
 }
 
 DbClass::~DbClass (void)
 {
 }
+
+int db_class_do_init_account = 0;
 
 int DbClass::initDb(void)
 {
@@ -39,6 +43,43 @@ int DbClass::initDb(void)
 void *DbClass::connectGoDb (void)
 {
     return this->sqlObject()->connectDb("phwang", "go_db");
+}
+
+void DbClass::initAccount(void)
+{
+    if (!db_class_do_init_account) {
+        return;
+    }
+
+    int result = this->sqlObject()->dropTableIfExist(this->sqlConnect(), "accounts");
+    if (result == -1) {
+        return;
+    }
+
+    this->sqlObject()->createTable2(this->sqlConnect(), "accounts", "name VARCHAR(20)", "password VARCHAR(20)");
+
+    this->sqlObject()->insertAccount (this->sqlConnect(), "accounts", "1, 'admin','p001'");
+    this->sqlObject()->insertAccount (this->sqlConnect(), "accounts", "2, 'phwang','p002'");
+    this->sqlObject()->insertAccount (this->sqlConnect(), "accounts", "3, 'paul','p003'");
+}
+
+void DbClass::listAccount (void) {
+    void *res;
+    res = this->sqlObject()->selectFrom(this->sqlConnect());
+    if (!res) {
+        return;
+    }
+
+    int i = 0;
+    while (1) {
+        char *data = this->sqlObject()->getTuplesValue(res, i , 0);
+        if (!data)
+            break;
+        printf("data=%s\n", data);
+        i++;
+    }
+
+    this->sqlObject()->pQclear(res);
 }
 
 void DbClass::testDb(void)

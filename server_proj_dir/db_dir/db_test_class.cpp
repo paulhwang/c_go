@@ -18,8 +18,6 @@ DbTestClass::DbTestClass (DbClass *db_object_val)
     this->debug(false, "DbTestClass", "init");
 
     this->theDbObject = db_object_val;
-
-    this->testDb();
 }
 
 DbTestClass::~DbTestClass (void)
@@ -28,48 +26,8 @@ DbTestClass::~DbTestClass (void)
 
 void DbTestClass::testDb(void)
 {
-    this->createTables();
-    this->insertAccount();
-    this->insertCar();
-}
-
-void DbTestClass::createTables (void) {
-    this->createAccountTable();
     this->createCarTable();
-}
-
-int DbTestClass::createAccountTable (void)
-{
-    int result = this->sqlObject()->dropTableIfExist(this->sqlConnect(), "accounts");
-    if (result == -1) {
-        return result;
-    }
-
-    return this->sqlObject()->createTable2(this->sqlConnect(), "accounts", "name VARCHAR(20)", "password VARCHAR(20)");
-}
-
-
-void DbTestClass::insertAccount (void) {
-    this->sqlObject()->insertAccount (this->sqlConnect(), "accounts", "1, 'admin','p001'");
-    this->sqlObject()->insertAccount (this->sqlConnect(), "accounts", "2, 'phwang','p002'");
-    this->sqlObject()->insertAccount (this->sqlConnect(), "accounts", "3, 'paul','p003'");
-
-    void *res;
-    res = this->sqlObject()->selectFrom(this->sqlConnect());
-    if (!res) {
-        return;
-    }
-
-    int i = 0;
-    while (1) {
-        char *data = this->sqlObject()->getTuplesValue(res, i , 0);
-        if (!data)
-            break;
-        printf("data=%s\n", data);
-        i++;
-    }
-
-    this->sqlObject()->pQclear(res);
+    this->insertCar();
 }
 
 int DbTestClass::createCarTable (void) {
