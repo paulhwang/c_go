@@ -7,18 +7,17 @@
 #pragma once
 
 class SqlClass;
+class DbAccountClass;
 class DbTestClass;
 
 class DbClass {
     SqlClass *theSqlObject;
+    DbAccountClass *theDbAccountObject;
     DbTestClass *theDbTestObject;
     void *theSqlConnect;
 
+    DbAccountClass *dbAccountObject(void) {return this->theDbAccountObject;}
     DbTestClass *dbTestObject(void) {return this->theDbTestObject;}
-
-    void initAccount(void);
-    void listAccount (void);
-    void testDb(void);
 
     void debug(int on_off_val, char const *str0_val, char const *str1_val) {if (on_off_val) this->logit(str0_val, str1_val);}
     void logit(char const *str0_val, char const *str1_val);
