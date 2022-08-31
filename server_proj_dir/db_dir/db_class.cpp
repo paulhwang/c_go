@@ -15,14 +15,15 @@ DbClass::DbClass (void)
 
     this->theSqlObject = new SqlClass();
 
-    this->theGoConnect = this->connectGoDb();
-    if (this->goConnect() == 0) {
+    this->theSqlConnect = this->connectGoDb();
+    if (this->sqlConnect() == 0) {
         this->abend("connectDbs", "fail to connnect to go_db");
         return;
     }
 
-    this->createTables(this->theGoConnect);
-    this->insertAccount(this->theGoConnect);
+    this->createTables();
+    this->insertAccount(this->sqlConnect());
+    this->insertCar(this->sqlConnect());
 
 }
 
@@ -43,12 +44,12 @@ PGconn *DbClass::connectGoDb (void)
     return this->sqlObject()->connectDb("phwang", "go_db");
 }
 
-void DbClass::createTables (PGconn *conn_val) {
-    this->createAccountTable(conn_val);
-    this->createCarTable(conn_val);
+void DbClass::createTables (void) {
+    this->createAccountTable(this->sqlConnect());
+    this->createCarTable(this->sqlConnect());
 }
 
-void DbClass::createAccountTable (PGconn *conn_val)
+int DbClass::createAccountTable (PGconn *conn_val)
 {
     this->logit("createAccountTable", "");
     PGresult *res = PQexec(conn_val, "DROP TABLE IF EXISTS Accounts");
@@ -59,14 +60,7 @@ void DbClass::createAccountTable (PGconn *conn_val)
     
     PQclear(res);
     
-    res = PQexec(conn_val, "CREATE TABLE Accounts(Id INTEGER PRIMARY KEY," \
-        "Name VARCHAR(20), Password VARCHAR(20))");
-
-    if (PQresultStatus(res) != PGRES_COMMAND_OK) {
-        do_exit(conn_val, res); 
-    }
-    
-    PQclear(res);
+    return this->sqlObject()->createTable(this->sqlConnect(), "accounts", "name VARCHAR(20)", "password VARCHAR(20)");
 }
 
 
@@ -114,7 +108,7 @@ void DbClass::insertAccount (PGconn *conn_val) {
     PQclear(res);
 }
 
-void DbClass::createCarTable(PGconn *conn_val) {
+int DbClass::createCarTable (PGconn *conn_val) {
     this->logit("createCarTable", "");
 
     PGresult *res = PQexec(conn_val, "DROP TABLE IF EXISTS Cars");
@@ -124,17 +118,12 @@ void DbClass::createCarTable(PGconn *conn_val) {
     }
     
     PQclear(res);
-    
-    res = PQexec(conn_val, "CREATE TABLE Cars(Id INTEGER PRIMARY KEY," \
-        "Name VARCHAR(20), Price INT)");
-        
-    if (PQresultStatus(res) != PGRES_COMMAND_OK) {
-        do_exit(conn_val, res); 
-    }
-    
-    PQclear(res);
-    
-    res = PQexec(conn_val, "INSERT INTO Cars VALUES(1,'Audi',52642)");
+
+    return this->sqlObject()->createTable(this->sqlConnect(), "cars", "name VARCHAR(20)", "password INT");
+}
+
+void DbClass::insertCar (PGconn *conn_val) {
+    PGresult *res = PQexec(conn_val, "INSERT INTO Cars VALUES(1,'Audi',52642)");
         
     if (PQresultStatus(res) != PGRES_COMMAND_OK) 
         do_exit(conn_val, res);     
@@ -195,7 +184,7 @@ void DbClass::createCarTable(PGconn *conn_val) {
         do_exit(conn_val, res);   
     }
     
-    PQclear(res);  
+    PQclear(res);
 }
 
 void DbClass::logit (char const* str0_val, char const* str1_val)
