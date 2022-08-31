@@ -64,22 +64,22 @@ void DbClass::insertAccount (void) {
     this->sqlObject()->insertAccount (this->sqlConnect(), "accounts", "2, 'phwang','p002'");
     this->sqlObject()->insertAccount (this->sqlConnect(), "accounts", "3, 'paul','p003'");
 
-    PGresult *res = PQexec(this->sqlConnect(), "SELECT name FROM accounts;");
-
-    if (PQresultStatus(res) != PGRES_TUPLES_OK) {
-        do_exit(this->sqlConnect(), res);
+    PGresult *res;
+    res = this->sqlObject()->selectFrom(this->sqlConnect());
+    if (!res) {
+        return;
     }
 
     int i = 0;
     while (1) {
-        char *data = PQgetvalue(res, i , 0);
+        char *data = this->sqlObject()->getTuplesValue(res, i , 0);
         if (!data)
             break;
         printf("data=%s\n", data);
         i++;
     }
 
-    PQclear(res);
+    this->sqlObject()->pQclear(res);
 }
 
 int DbClass::createCarTable (void) {

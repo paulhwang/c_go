@@ -115,6 +115,32 @@ void SqlClass::insertAccount (PGconn *conn_val, char const *table_name_val, char
     PQclear(res);    
 }
 
+PGresult *SqlClass::selectFrom (PGconn *conn_val) {
+    PGresult *res = PQexec(conn_val, "SELECT name FROM accounts;");
+
+    if (PQresultStatus(res) != PGRES_TUPLES_OK) {
+        this->errPQexec(conn_val, res);
+        return 0;
+    }
+    return res;
+}
+
+char *SqlClass::getTuplesValue(PGresult *res_val, int row_number_val, int column_number_val)
+{
+    char *data = PQgetvalue(res_val, row_number_val , column_number_val);
+    if (!data) {
+        return 0;
+    }
+
+    printf("data=%s\n", data);
+    return data;
+}
+
+void SqlClass::pQclear(PGresult *res_val)
+{
+    PQclear(res_val);    
+}
+
 void SqlClass::logit (char const* str0_val, char const* str1_val)
 {
     char s[LOGIT_BUF_SIZE];
