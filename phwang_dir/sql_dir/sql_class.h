@@ -19,13 +19,6 @@ public:
 
     char const *objectName(void) {return "SqlClass";}
 
-    void createTables (PGconn *conn_val);
-    void insertAccount(PGconn *conn_val);
-
-    void createAccountTable(PGconn *conn_val);
-    void createCarTable(PGconn *conn_val);
-
-
     /* exports */
     PGconn *connectDb(char const *user_val, char const *dbname_val);
     void disconnectDb (PGconn *conn_val);
