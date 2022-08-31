@@ -7,12 +7,15 @@
 #pragma once
 
 class SqlClass;
+class DbClass;
 
 class DbTestClass {
     SqlClass *theSqlObject;
+    DbClass *theDbObject;
     void *theSqlConnect;
 
     SqlClass *sqlObject(void) {return this->theSqlObject;}
+    DbClass *dbObject() {return this->theDbObject;}
     void *sqlConnect(void) {return this->theSqlConnect;}
 
     int initDb(void);
@@ -30,7 +33,7 @@ class DbTestClass {
     void abend(char const *str0_val, char const *str1_val);
    
 public:
-    DbTestClass(void);
+    DbTestClass(DbClass *db_object_val);
     ~DbTestClass(void);
 
     char const *objectName(void) {return "DbTestClass";}

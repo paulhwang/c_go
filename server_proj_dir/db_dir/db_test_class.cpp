@@ -8,11 +8,12 @@
 #include "../../phwang_dir/sql_dir/sql_class.h"
 #include "db_test_class.h"
 
-DbTestClass::DbTestClass (void)
+DbTestClass::DbTestClass (DbClass *db_object_val)
 {
     memset(this, 0, sizeof(*this));
     this->debug(false, "DbTestClass", "init");
 
+    this->theDbObject = db_object_val;
     this->theSqlObject = new SqlClass();
     if (this->initDb() == -1) {
         //tbd

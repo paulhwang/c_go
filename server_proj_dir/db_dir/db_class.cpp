@@ -7,6 +7,7 @@
 #include "../../phwang_dir/phwang.h"
 #include "../../phwang_dir/sql_dir/sql_class.h"
 #include "db_class.h"
+#include "db_test_class.h"
 
 DbClass::DbClass (void)
 {
@@ -17,6 +18,7 @@ DbClass::DbClass (void)
     if (this->init_db() == -1) {
         //tbd
     }
+    this->theDbTestObject = new DbTestClass(this);
     this->test_db();
 }
 

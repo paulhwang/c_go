@@ -7,12 +7,15 @@
 #pragma once
 
 class SqlClass;
+class DbTestClass;
 
 class DbClass {
     SqlClass *theSqlObject;
+    DbTestClass *theDbTestObject;
     void *theSqlConnect;
 
     SqlClass *sqlObject(void) {return this->theSqlObject;}
+    DbTestClass *dbTestObject(void) {return this->theDbTestObject;}
     void *sqlConnect(void) {return this->theSqlConnect;}
 
     int init_db(void);
