@@ -45,22 +45,40 @@ void do_exit(PGconn *conn, PGresult *res) {
     PQfinish(conn);    
 }
 
-PGconn *SqlClass::connectGoDb (void)
+PGconn *SqlClass::connectDb (char const *conn_param_val)
 {
-    int lib_ver = PQlibVersion();
+    char buf[128];
 
-    printf("Version of libpq: %d\n", lib_ver);
+    if (1) { // debug
+        int lib_ver = PQlibVersion();
+        sprintf(buf, "Version of libpq: %d", lib_ver);
+        this->logit("connectDb", buf);
+    }
 
-    PGconn *conn = PQconnectdb("user=phwang dbname=go_db");
+    PGconn *conn = PQconnectdb(conn_param_val);
     if (PQstatus(conn) == CONNECTION_BAD) {
-        
-        fprintf(stderr, "Connection to database failed: %s\n", PQerrorMessage(this->goConnect()));
+        sprintf(buf, "Connection to database failed: %s\n", PQerrorMessage(this->goConnect()));
+        this->logit("connectDb", buf);
         do_exit0(conn);
         return 0;
     }
 
-    int ver = PQserverVersion(conn);
-    printf("Server version: %d\n", ver);
+    if (1) { // debug
+        int ver = PQserverVersion(conn);
+        sprintf(buf, "Server version: %d", ver);
+        this->logit("connectDb", buf);
+    }
+
+    return conn;
+}
+
+PGconn *SqlClass::connectGoDb (void)
+{
+    PGconn *conn = this->connectDb("user=phwang dbname=go_db");
+
+    if (!conn) {
+        return 0;
+    }
 
     char *user = PQuser(conn);
     char *db_name = PQdb(conn);

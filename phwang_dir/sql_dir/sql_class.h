@@ -27,8 +27,10 @@ public:
     ~SqlClass(void);
 
     char const *objectName(void) {return "SqlClass";}
+    
     PGconn *goConnect(void) {return this->theGoConnect;}
 
 
     /* exports */
+    PGconn *connectDb(char const *conn_param_val);
 };
