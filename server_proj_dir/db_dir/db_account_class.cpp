@@ -84,6 +84,11 @@ void DbAccountClass::listAccount (void) {
     this->sqlObject()->doPQclear(res);
 }
 
+void DbAccountClass::insertAccountEntry(DbAccountEntryClass *entry_val)
+{
+
+}
+
 int DbAccountClass::checkAccountNameExist (char const *account_name_val)
 {
     void *res;
