@@ -1,7 +1,7 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: db_util_class.cpp
+  File name: sql_class.cpp
 */
 
 #include "../phwang.h"
@@ -15,11 +15,6 @@ SqlClass::SqlClass (void)
 
 SqlClass::~SqlClass (void)
 {
-}
-
-void do_exit0(PGconn *conn) {
-    
-    PQfinish(conn);
 }
 
 PGconn *SqlClass::connectDb (char const *user_val, char const *dbname_val)
@@ -36,7 +31,7 @@ PGconn *SqlClass::connectDb (char const *user_val, char const *dbname_val)
     if (PQstatus(conn) == CONNECTION_BAD) {
         sprintf(buf, "Connection to database failed: %s\n", PQerrorMessage(conn));
         this->logit("connectDb", buf);
-        do_exit0(conn);
+        this->disconnectDb(conn);
         return 0;
     }
 

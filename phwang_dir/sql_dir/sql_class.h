@@ -1,7 +1,7 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: db_util_class.h
+  File name: sql_class.h
 */
 
 #pragma once
