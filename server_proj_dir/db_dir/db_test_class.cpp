@@ -7,6 +7,7 @@
 #include "../../phwang_dir/phwang.h"
 #include "../../phwang_dir/sql_dir/sql_class.h"
 #include "db_test_class.h"
+#include "db_class.h"
 
 DbTestClass::DbTestClass (DbClass *db_object_val)
 {
@@ -14,10 +15,7 @@ DbTestClass::DbTestClass (DbClass *db_object_val)
     this->debug(false, "DbTestClass", "init");
 
     this->theDbObject = db_object_val;
-    this->theSqlObject = new SqlClass();
-    if (this->initDb() == -1) {
-        //tbd
-    }
+
     this->testDb();
 }
 
@@ -25,14 +23,14 @@ DbTestClass::~DbTestClass (void)
 {
 }
 
-int DbTestClass::initDb(void)
+SqlClass *DbTestClass::sqlObject(void)
 {
-    this->theSqlConnect = this->connectGoDb();
-    if (this->sqlConnect() == 0) {
-        this->abend("initDb", "fail to connnect to go_db");
-        return -1;
-    }
-    return 0;
+    return this->dbObject()->sqlObject();
+}
+
+void *DbTestClass::sqlConnect(void)
+{
+    return this->dbObject()->sqlConnect();
 }
 
 void DbTestClass::testDb(void)

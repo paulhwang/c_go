@@ -14,9 +14,7 @@ class DbClass {
     DbTestClass *theDbTestObject;
     void *theSqlConnect;
 
-    SqlClass *sqlObject(void) {return this->theSqlObject;}
     DbTestClass *dbTestObject(void) {return this->theDbTestObject;}
-    void *sqlConnect(void) {return this->theSqlConnect;}
 
     int init_db(void);
     void test_db(void);
@@ -36,5 +34,7 @@ public:
     DbClass(void);
     ~DbClass(void);
 
+    SqlClass *sqlObject(void) {return this->theSqlObject;}
+    void *sqlConnect(void) {return this->theSqlConnect;}
     char const *objectName(void) {return "DbClass";}
 };

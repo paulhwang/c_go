@@ -10,15 +10,12 @@ class SqlClass;
 class DbClass;
 
 class DbTestClass {
-    SqlClass *theSqlObject;
     DbClass *theDbObject;
-    void *theSqlConnect;
 
-    SqlClass *sqlObject(void) {return this->theSqlObject;}
     DbClass *dbObject() {return this->theDbObject;}
-    void *sqlConnect(void) {return this->theSqlConnect;}
+    SqlClass *sqlObject(void);
+    void *sqlConnect(void);
 
-    int initDb(void);
     void testDb(void);
     void *connectGoDb(void);
     void createTables (void);
