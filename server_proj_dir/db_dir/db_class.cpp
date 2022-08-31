@@ -28,8 +28,6 @@ DbClass::~DbClass (void)
 {
 }
 
-int db_class_do_init_account = 0;
-
 int DbClass::initDb(void)
 {
     this->theSqlConnect = this->connectGoDb();
@@ -45,6 +43,8 @@ void *DbClass::connectGoDb (void)
     return this->sqlObject()->connectDb("phwang", "go_db");
 }
 
+int db_class_do_init_account = 0;
+
 void DbClass::initAccount(void)
 {
     if (!db_class_do_init_account) {
@@ -58,9 +58,12 @@ void DbClass::initAccount(void)
 
     this->sqlObject()->createTable2(this->sqlConnect(), "accounts", "name VARCHAR(20)", "password VARCHAR(20)");
 
-    this->sqlObject()->insertAccount (this->sqlConnect(), "accounts", "1, 'admin','p001'");
-    this->sqlObject()->insertAccount (this->sqlConnect(), "accounts", "2, 'phwang','p002'");
-    this->sqlObject()->insertAccount (this->sqlConnect(), "accounts", "3, 'paul','p003'");
+    this->sqlObject()->insertAccount (this->sqlConnect(), "accounts", "1, 'admin','admin'");
+    this->sqlObject()->insertAccount (this->sqlConnect(), "accounts", "2, 'phwang','phwang'");
+    this->sqlObject()->insertAccount (this->sqlConnect(), "accounts", "3, 'ikolre','ikolre'");
+    this->sqlObject()->insertAccount (this->sqlConnect(), "accounts", "4, 'guest','a'");
+    this->sqlObject()->insertAccount (this->sqlConnect(), "accounts", "5, 'BigBrave','bigbrave'");
+    this->sqlObject()->insertAccount (this->sqlConnect(), "accounts", "6, 'paul','paul'");
 }
 
 void DbClass::listAccount (void) {
@@ -73,9 +76,10 @@ void DbClass::listAccount (void) {
     int i = 0;
     while (1) {
         char *data = this->sqlObject()->getTuplesValue(res, i , 0);
-        if (!data)
+        if (!data) {
             break;
-        printf("data=%s\n", data);
+        }
+        this->debug(true, "listAccount", data);
         i++;
     }
 

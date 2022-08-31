@@ -140,7 +140,7 @@ char *SqlClass::getTuplesValue(void *res_val, int row_number_val, int column_num
         return 0;
     }
 
-    printf("data=%s\n", data);
+    this->debug(false, "getTuplesValue", data);
     return data;
 }
 
