@@ -69,7 +69,7 @@ void SqlClass::errPQexec(PGconn *conn_val, PGresult *res_val) {
 int SqlClass::createTable2 (void *conn_val, char const *table_name_val, char const *val1, char const *val2)
 {
     char buf[256];
-    this->debug(true, "createTable", table_name_val);
+    this->debug(false, "createTable2", table_name_val);
 
     PGconn *conn = (PGconn *) conn_val;
     sprintf(buf, "CREATE TABLE %s(Id INTEGER PRIMARY KEY, %s, %s)", table_name_val, val1, val2);
@@ -88,7 +88,7 @@ int SqlClass::createTable2 (void *conn_val, char const *table_name_val, char con
 int SqlClass::dropTableIfExist (void *conn_val, char const *table_name_val)
 {
     char buf[256];
-    this->debug(true, "dropTableIfExist", table_name_val);
+    this->debug(false, "dropTableIfExist", table_name_val);
 
     PGconn *conn = (PGconn *) conn_val;
     sprintf(buf, "DROP TABLE IF EXISTS %s", table_name_val);
@@ -132,6 +132,12 @@ PGresult *SqlClass::selectFrom (void *conn_val) {
     return res;
 }
 
+int SqlClass::getPQntuples(void *res_val)
+{
+    PGresult *res = (PGresult *) res_val;
+    return PQntuples(res);
+}
+
 int SqlClass::getPQfsize(void *res_val, int column_number_val)
 {
     PGresult *res = (PGresult *) res_val;
@@ -150,7 +156,7 @@ char *SqlClass::getTuplesValue(void *res_val, int row_number_val, int column_num
     return data;
 }
 
-void SqlClass::pQclear(void *res_val)
+void SqlClass::doPQclear(void *res_val)
 {
     PGresult *res = (PGresult *) res_val;
     PQclear(res);    

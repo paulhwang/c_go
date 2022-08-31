@@ -28,7 +28,8 @@ public:
     int dropTableIfExist(void *conn_val, char const *table_name_val);
     void insertAccount (void *conn_val, char const *table_val, char const *values_val);
     PGresult *selectFrom (void *conn_val);
-    char *getTuplesValue(void *res_val, int row_number_val, int column_number_val);
+    int getPQntuples(void *res_val);
     int getPQfsize(void *res_val, int column_number_val);
-    void pQclear(void *res_val);
+    char *getTuplesValue(void *res_val, int row_number_val, int column_number_val);
+    void doPQclear(void *res_val);
 };
