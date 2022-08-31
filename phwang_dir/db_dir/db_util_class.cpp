@@ -1,14 +1,14 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: db_root.cpp
+  File name: db_util_class.cpp
 */
 
 #include "../phwang.h"
-#include "db_root_class.h"
+#include "db_util_class.h"
 #include "/usr/include/postgresql/libpq-fe.h"
 
-DbRootClass::DbRootClass (void)
+DbUtilClass::DbUtilClass (void)
 {
     this->theGoConnect = this->connectGoDb();
     if (this->goConnect() == 0) {
@@ -20,12 +20,12 @@ DbRootClass::DbRootClass (void)
     this->insertAccount(0);
 }
 
-DbRootClass::~DbRootClass (void)
+DbUtilClass::~DbUtilClass (void)
 {
     PQfinish(this->goConnect());
 }
  
-void DbRootClass::createTables (void) {
+void DbUtilClass::createTables (void) {
     this->createAccountTable();
     this->createCarTable();
 }
@@ -43,7 +43,7 @@ void do_exit(PGconn *conn, PGresult *res) {
     PQfinish(conn);    
 }
 
-PGconn *DbRootClass::connectGoDb (void)
+PGconn *DbUtilClass::connectGoDb (void)
 {
     int lib_ver = PQlibVersion();
 
@@ -70,7 +70,7 @@ PGconn *DbRootClass::connectGoDb (void)
     return conn;
 }
 
-void DbRootClass::createAccountTable (void)
+void DbUtilClass::createAccountTable (void)
 {
     this->logit("createAccountTable", "");
     PGresult *res = PQexec(this->goConnect(), "DROP TABLE IF EXISTS Accounts");
@@ -92,7 +92,7 @@ void DbRootClass::createAccountTable (void)
 }
 
 
-void DbRootClass::insertAccount (char const *str_val) {
+void DbUtilClass::insertAccount (char const *str_val) {
     PGresult *res;
 
     res = PQexec(this->goConnect(), "INSERT INTO Accounts VALUES(1, 'admin','pp123')");
@@ -108,6 +108,15 @@ void DbRootClass::insertAccount (char const *str_val) {
         do_exit(this->goConnect(), res);     
     
     PQclear(res);    
+
+/*
+    res = PQexec(this->goConnect(), "INSERT INTO Accounts VALUES(3, 'paul','password_val')");
+        
+    if (PQresultStatus(res) != PGRES_COMMAND_OK) 
+        do_exit(this->goConnect(), res);     
+    
+    PQclear(res);    
+*/
 
     res = PQexec(this->goConnect(), "SELECT name FROM accounts;");
 
@@ -127,7 +136,7 @@ void DbRootClass::insertAccount (char const *str_val) {
     PQclear(res);
 }
 
-void DbRootClass::createCarTable(void) {
+void DbUtilClass::createCarTable(void) {
     this->logit("createCarTable", "");
 
     PGresult *res = PQexec(this->goConnect(), "DROP TABLE IF EXISTS Cars");
@@ -211,14 +220,14 @@ void DbRootClass::createCarTable(void) {
     PQclear(res);  
 }
 
-void DbRootClass::logit (char const* str0_val, char const* str1_val)
+void DbUtilClass::logit (char const* str0_val, char const* str1_val)
 {
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", this->objectName(), str0_val);
     phwangLogit(s, str1_val);
 }
 
-void DbRootClass::abend (char const* str0_val, char const* str1_val)
+void DbUtilClass::abend (char const* str0_val, char const* str1_val)
 {
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", this->objectName(), str0_val);

@@ -1,14 +1,14 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: db_root.h
+  File name: db_util_class.h
 */
 
 #pragma once
 
 #include "/usr/include/postgresql/libpq-fe.h"
 
-class DbRootClass {
+class DbUtilClass {
     PGconn *theGoConnect;
 
     PGconn *connectGoDb(void);
@@ -23,10 +23,10 @@ class DbRootClass {
     void abend(char const *str0_val, char const *str1_val);
    
 public:
-    DbRootClass(void);
-    ~DbRootClass(void);
+    DbUtilClass(void);
+    ~DbUtilClass(void);
 
-    char const *objectName(void) {return "DbRootClass";}
+    char const *objectName(void) {return "DbUtilClass";}
     PGconn *goConnect(void) {return this->theGoConnect;}
 
 
