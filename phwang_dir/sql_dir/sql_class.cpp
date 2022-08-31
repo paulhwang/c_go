@@ -62,7 +62,7 @@ void do_exit111(PGconn *conn, PGresult *res) {
     PQfinish(conn);    
 }
 
-int SqlClass::createTable (PGconn *conn_val, char const *table_name_val, char const *val1, char const *val2)
+int SqlClass::createTable2 (PGconn *conn_val, char const *table_name_val, char const *val1, char const *val2)
 {
     char buf[256];
     this->debug(true, "createTable", table_name_val);
@@ -77,6 +77,23 @@ int SqlClass::createTable (PGconn *conn_val, char const *table_name_val, char co
     }
 
     PQclear(res);
+    return 0;
+}
+
+int SqlClass::dropTableIfExist (PGconn *conn_val, char const *table_name_val)
+{
+    char buf[256];
+    this->logit("dropTableIfExist", table_name_val);
+
+    sprintf(buf, "DROP TABLE IF EXISTS %s", table_name_val);
+    PGresult *res = PQexec(conn_val, buf);
+    
+    if (PQresultStatus(res) != PGRES_COMMAND_OK) {
+        do_exit111(conn_val, res);
+    }
+    
+    PQclear(res);
+
     return 0;
 }
 

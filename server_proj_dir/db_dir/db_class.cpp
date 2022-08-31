@@ -52,15 +52,13 @@ void DbClass::createTables (void) {
 int DbClass::createAccountTable (PGconn *conn_val)
 {
     this->logit("createAccountTable", "");
-    PGresult *res = PQexec(conn_val, "DROP TABLE IF EXISTS Accounts");
-    
-    if (PQresultStatus(res) != PGRES_COMMAND_OK) {
-        do_exit(conn_val, res);
+
+    int result = this->sqlObject()->dropTableIfExist(conn_val, "accounts");
+    if (result == -1) {
+        return result;
     }
-    
-    PQclear(res);
-    
-    return this->sqlObject()->createTable(this->sqlConnect(), "accounts", "name VARCHAR(20)", "password VARCHAR(20)");
+
+    return this->sqlObject()->createTable2(this->sqlConnect(), "accounts", "name VARCHAR(20)", "password VARCHAR(20)");
 }
 
 
@@ -111,15 +109,12 @@ void DbClass::insertAccount (PGconn *conn_val) {
 int DbClass::createCarTable (PGconn *conn_val) {
     this->logit("createCarTable", "");
 
-    PGresult *res = PQexec(conn_val, "DROP TABLE IF EXISTS Cars");
-    
-    if (PQresultStatus(res) != PGRES_COMMAND_OK) {
-        do_exit(conn_val, res);
+    int result = this->sqlObject()->dropTableIfExist(conn_val, "cars");
+    if (result == -1) {
+        return result;
     }
-    
-    PQclear(res);
 
-    return this->sqlObject()->createTable(this->sqlConnect(), "cars", "name VARCHAR(20)", "password INT");
+    return this->sqlObject()->createTable2(this->sqlConnect(), "cars", "name VARCHAR(20)", "price INT");
 }
 
 void DbClass::insertCar (PGconn *conn_val) {

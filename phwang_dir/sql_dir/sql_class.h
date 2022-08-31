@@ -22,5 +22,6 @@ public:
     /* exports */
     PGconn *connectDb(char const *user_val, char const *dbname_val);
     void disconnectDb (PGconn *conn_val);
-    int createTable (PGconn *conn_val, char const *table_name_val, char const *val1, char const *val2);
+    int createTable2(PGconn *conn_val, char const *table_name_val, char const *val1, char const *val2);
+    int dropTableIfExist(PGconn *conn_val, char const *table_name_val);
 };
