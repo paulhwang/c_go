@@ -64,7 +64,7 @@ void DbClass::insertAccount (void) {
     this->sqlObject()->insertAccount (this->sqlConnect(), "accounts", "2, 'phwang','p002'");
     this->sqlObject()->insertAccount (this->sqlConnect(), "accounts", "3, 'paul','p003'");
 
-    PGresult *res;
+    void *res;
     res = this->sqlObject()->selectFrom(this->sqlConnect());
     if (!res) {
         return;

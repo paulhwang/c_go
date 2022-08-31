@@ -132,9 +132,10 @@ PGresult *SqlClass::selectFrom (void *conn_val) {
     return res;
 }
 
-char *SqlClass::getTuplesValue(PGresult *res_val, int row_number_val, int column_number_val)
+char *SqlClass::getTuplesValue(void *res_val, int row_number_val, int column_number_val)
 {
-    char *data = PQgetvalue(res_val, row_number_val , column_number_val);
+    PGresult *res = (PGresult *) res_val;
+    char *data = PQgetvalue(res, row_number_val , column_number_val);
     if (!data) {
         return 0;
     }
@@ -143,9 +144,10 @@ char *SqlClass::getTuplesValue(PGresult *res_val, int row_number_val, int column
     return data;
 }
 
-void SqlClass::pQclear(PGresult *res_val)
+void SqlClass::pQclear(void *res_val)
 {
-    PQclear(res_val);    
+    PGresult *res = (PGresult *) res_val;
+    PQclear(res);    
 }
 
 void SqlClass::logit (char const* str0_val, char const* str1_val)

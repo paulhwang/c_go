@@ -28,6 +28,6 @@ public:
     int dropTableIfExist(void *conn_val, char const *table_name_val);
     void insertAccount (void *conn_val, char const *table_val, char const *values_val);
     PGresult *selectFrom (void *conn_val);
-    char *getTuplesValue(PGresult *res_val, int row_number_val, int column_number_val);
-    void pQclear(PGresult *res_val);
+    char *getTuplesValue(void *res_val, int row_number_val, int column_number_val);
+    void pQclear(void *res_val);
 };
