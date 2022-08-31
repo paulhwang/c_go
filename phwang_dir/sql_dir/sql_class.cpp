@@ -121,9 +121,12 @@ void SqlClass::insertAccount (void *conn_val, char const *table_name_val, char c
     PQclear(res);    
 }
 
-PGresult *SqlClass::selectFrom (void *conn_val) {
+PGresult *SqlClass::selectFrom (void *conn_val, char const *column_val) {
     PGconn *conn = (PGconn *) conn_val;
-    PGresult *res = PQexec(conn, "SELECT name FROM accounts;");
+    char buf[256];
+
+    sprintf(buf, "SELECT %s FROM accounts;", column_val);
+    PGresult *res = PQexec(conn, buf);
 
     if (PQresultStatus(res) != PGRES_TUPLES_OK) {
         this->errPQexec(conn, res);

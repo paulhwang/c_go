@@ -60,21 +60,23 @@ void DbAccountClass::createAccountTableInDatabase(void)
 
 void DbAccountClass::listAccount (void) {
     void *res;
-    res = this->sqlObject()->selectFrom(this->sqlConnect());
+    res = this->sqlObject()->selectFrom(this->sqlConnect(), "name, password");
     if (!res) {
         return;
     }
 
     int count = this->sqlObject()->getPQntuples(res);
     for (int i = 0; i < count; i++) {
-        char *data = this->sqlObject()->getTuplesValue(res, i, 0);
-        this->debug(true, "listAccount", data);
+        char *data1 = this->sqlObject()->getTuplesValue(res, i, 0);
+        this->debug(true, "listAccount", data1);
+        char *data2 = this->sqlObject()->getTuplesValue(res, i, 1);
+        this->debug(true, "listAccount", data2);
     }
 
     this->sqlObject()->doPQclear(res);
 }
 
-int DbAccountClass::checkPassword (char const *password_val)
+int DbAccountClass::checkPassword (char const *account_name_val, char const *password_val)
 {
     return 0;
 }
