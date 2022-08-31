@@ -8,6 +8,7 @@
 #include "../../phwang_dir/sql_dir/sql_class.h"
 #include "db_class.h"
 #include "db_account_class.h"
+#include "db_account_entry_class.h"
 
 SqlClass *DbAccountClass::sqlObject(void) {return this->dbObject()->sqlObject();}
 void *DbAccountClass::sqlConnect(void) {return this->dbObject()->sqlConnect();}
@@ -30,7 +31,7 @@ DbAccountClass::~DbAccountClass (void)
 
 void DbAccountClass::developTest(void)
 {
-    //this->listAccount();
+    this->listAccount();
     this->checkAccountNameExist("phwang");
     this->checkAccountNameExist("phwangaaa");
     this->checkPassword("phwang", "phwang");
@@ -38,8 +39,15 @@ void DbAccountClass::developTest(void)
 }
 
 /************************DO NOT MODIFY IT*******************/
-int db_account_class_do_create_account_table_in_database = 0;
+int db_account_class_do_create_account_table_in_database = 1;
 /************************DO NOT MODIFY IT*******************/
+
+char *mallocConstStrBuf (char const * str_val)
+{
+    char *buf = (char *) malloc(strlen("str_val") + 1);
+    strcpy(buf, str_val);
+    return buf;
+}
 
 void DbAccountClass::createAccountTableInDatabase(void)
 {
@@ -54,12 +62,35 @@ void DbAccountClass::createAccountTableInDatabase(void)
 
     this->sqlObject()->createTable2(this->sqlConnect(), "accounts", "name VARCHAR(20)", "password VARCHAR(20)");
 
-    this->sqlObject()->insertAccount (this->sqlConnect(), "accounts", "1, 'admin','admin'");
-    this->sqlObject()->insertAccount (this->sqlConnect(), "accounts", "2, 'phwang','phwang'");
-    this->sqlObject()->insertAccount (this->sqlConnect(), "accounts", "3, 'ikolre','ikolre'");
-    this->sqlObject()->insertAccount (this->sqlConnect(), "accounts", "4, 'guest','a'");
-    this->sqlObject()->insertAccount (this->sqlConnect(), "accounts", "5, 'BigBrave','bigbrave'");
-    this->sqlObject()->insertAccount (this->sqlConnect(), "accounts", "6, 'paul','paul'");
+    DbAccountEntryClass *entry = new DbAccountEntryClass();
+    entry->setAccountName(mallocConstStrBuf("admin"));
+    entry->setPassword(mallocConstStrBuf("adminpassword"));
+    this->insertAccountEntry(entry);
+
+    entry = new DbAccountEntryClass();
+    entry->setAccountName(mallocConstStrBuf("phwang"));
+    entry->setPassword(mallocConstStrBuf("phwangpassword"));
+    this->insertAccountEntry(entry);
+
+    entry = new DbAccountEntryClass();
+    entry->setAccountName(mallocConstStrBuf("ikolre"));
+    entry->setPassword(mallocConstStrBuf("ikolrepassword"));
+    this->insertAccountEntry(entry);
+
+    entry = new DbAccountEntryClass();
+    entry->setAccountName(mallocConstStrBuf("guest"));
+    entry->setPassword(mallocConstStrBuf("guestpassword"));
+    this->insertAccountEntry(entry);
+
+    entry = new DbAccountEntryClass();
+    entry->setAccountName(mallocConstStrBuf("BigBrave"));
+    entry->setPassword(mallocConstStrBuf("bigbrave"));
+    this->insertAccountEntry(entry);
+
+    entry = new DbAccountEntryClass();
+    entry->setAccountName(mallocConstStrBuf("paul"));
+    entry->setPassword(mallocConstStrBuf("paulpassword"));
+    this->insertAccountEntry(entry);
 }
 
 void DbAccountClass::listAccount (void) {
@@ -86,7 +117,14 @@ void DbAccountClass::listAccount (void) {
 
 void DbAccountClass::insertAccountEntry(DbAccountEntryClass *entry_val)
 {
+    char buf[516];
+    this->incrementAccountIndex();
+    sprintf(buf, "%d, '%s','%s'", this->accountIndex(), entry_val->accountName(), entry_val->password());
+    //printf("buf=%s", buf);
 
+    this->sqlObject()->insertAccount (this->sqlConnect(), "accounts", buf);
+
+    delete entry_val;
 }
 
 int DbAccountClass::checkAccountNameExist (char const *account_name_val)

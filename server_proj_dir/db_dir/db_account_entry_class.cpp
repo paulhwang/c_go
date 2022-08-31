@@ -15,6 +15,12 @@ DbAccountEntryClass::DbAccountEntryClass (void)
 
 DbAccountEntryClass::~DbAccountEntryClass (void)
 {
+    if (this->theAccountName) {
+        free(this->theAccountName);
+    }
+    if (this->thePassword) {
+        free(this->thePassword);
+    }
 }
 
 void DbAccountEntryClass::logit (char const* str0_val, char const* str1_val)

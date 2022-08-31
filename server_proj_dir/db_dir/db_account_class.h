@@ -14,10 +14,13 @@ class DbAccountClass {
     SqlClass *theSqlObject;
     DbClass *theDbObject;
     void *theSqlConnect;
+    int theAccountIndex;
 
     DbClass *dbObject(void) {return this->theDbObject;}
     SqlClass *sqlObject(void);
     void *sqlConnect(void);
+    int accountIndex(void) {return this->theAccountIndex;}
+    void incrementAccountIndex(void) {this->theAccountIndex++;}
 
     void createAccountTableInDatabase(void);
     void listAccount (void);
