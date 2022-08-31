@@ -9,7 +9,6 @@
 #include "/usr/include/postgresql/libpq-fe.h"
 
 class SqlClass {
-
     void errPQexec(PGconn *conn_val, PGresult *res_val);
 
     void debug(int on_off_val, char const *str0_val, char const *str1_val) {if (on_off_val) this->logit(str0_val, str1_val);}
@@ -27,4 +26,5 @@ public:
     void disconnectDb (PGconn *conn_val);
     int createTable2(PGconn *conn_val, char const *table_name_val, char const *val1, char const *val2);
     int dropTableIfExist(PGconn *conn_val, char const *table_name_val);
+    void insertAccount (PGconn *conn_val, char const *table_val, char const *values_val);
 };

@@ -19,8 +19,8 @@ class DbClass {
 
     PGconn *connectGoDb(void);
     void createTables (void);
-    void insertAccount(PGconn *conn_val);
-    void insertCar(PGconn *conn_val);
+    void insertAccount(void);
+    void insertCar(void);
 
     int createAccountTable(void);
     int createCarTable(void);

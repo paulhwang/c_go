@@ -22,9 +22,8 @@ DbClass::DbClass (void)
     }
 
     this->createTables();
-    this->insertAccount(this->sqlConnect());
-    this->insertCar(this->sqlConnect());
-
+    this->insertAccount();
+    this->insertCar();
 }
 
 DbClass::~DbClass (void)
@@ -60,36 +59,15 @@ int DbClass::createAccountTable (void)
 }
 
 
-void DbClass::insertAccount (PGconn *conn_val) {
-    PGresult *res;
+void DbClass::insertAccount (void) {
+    this->sqlObject()->insertAccount (this->sqlConnect(), "accounts", "1, 'admin','p001'");
+    this->sqlObject()->insertAccount (this->sqlConnect(), "accounts", "2, 'phwang','p002'");
+    this->sqlObject()->insertAccount (this->sqlConnect(), "accounts", "3, 'paul','p003'");
 
-    res = PQexec(conn_val, "INSERT INTO Accounts VALUES(1, 'admin','pp123')");
-        
-    if (PQresultStatus(res) != PGRES_COMMAND_OK) 
-        do_exit(conn_val, res);     
-    
-    PQclear(res);    
-
-    res = PQexec(conn_val, "INSERT INTO Accounts VALUES(2, 'phwang','p123')");
-        
-    if (PQresultStatus(res) != PGRES_COMMAND_OK) 
-        do_exit(conn_val, res);     
-    
-    PQclear(res);    
-
-/*
-    res = PQexec(this->goConnect(), "INSERT INTO Accounts VALUES(3, 'paul','password_val')");
-        
-    if (PQresultStatus(res) != PGRES_COMMAND_OK) 
-        do_exit(this->goConnect(), res);     
-    
-    PQclear(res);    
-*/
-
-    res = PQexec(conn_val, "SELECT name FROM accounts;");
+    PGresult *res = PQexec(this->sqlConnect(), "SELECT name FROM accounts;");
 
     if (PQresultStatus(res) != PGRES_TUPLES_OK) {
-        do_exit(conn_val, res);
+        do_exit(this->sqlConnect(), res);
     }
 
     int i = 0;
@@ -113,69 +91,15 @@ int DbClass::createCarTable (void) {
     return this->sqlObject()->createTable2(this->sqlConnect(), "cars", "name VARCHAR(20)", "price INT");
 }
 
-void DbClass::insertCar (PGconn *conn_val) {
-    PGresult *res = PQexec(conn_val, "INSERT INTO Cars VALUES(1,'Audi',52642)");
-        
-    if (PQresultStatus(res) != PGRES_COMMAND_OK) 
-        do_exit(conn_val, res);     
-    
-    PQclear(res);    
-    
-    res = PQexec(conn_val, "INSERT INTO Cars VALUES(2,'Mercedes',57127)");
-        
-    if (PQresultStatus(res) != PGRES_COMMAND_OK) {
-        do_exit(conn_val, res);   
-    }
-    
-    PQclear(res);    
-    
-    res = PQexec(conn_val, "INSERT INTO Cars VALUES(3,'Skoda',9000)");
-        
-    if (PQresultStatus(res) != PGRES_COMMAND_OK) {
-        do_exit(conn_val, res);   
-    }
-    
-    PQclear(res);  
-    
-    res = PQexec(conn_val, "INSERT INTO Cars VALUES(4,'Volvo',29000)");
-        
-    if (PQresultStatus(res) != PGRES_COMMAND_OK) {
-        do_exit(conn_val, res);   
-    }
-    
-    PQclear(res);      
-    
-    res = PQexec(conn_val, "INSERT INTO Cars VALUES(5,'Bentley',350000)");
-        
-    if (PQresultStatus(res) != PGRES_COMMAND_OK) {
-        do_exit(conn_val, res);   
-    }
-    
-    PQclear(res);  
-    
-    res = PQexec(conn_val, "INSERT INTO Cars VALUES(6,'Citroen',21000)");
-        
-    if (PQresultStatus(res) != PGRES_COMMAND_OK) {
-        do_exit(conn_val, res);   
-    }
-    
-    PQclear(res);  
-    
-    res = PQexec(conn_val, "INSERT INTO Cars VALUES(7,'Hummer',41400)");
-        
-    if (PQresultStatus(res) != PGRES_COMMAND_OK) {
-        do_exit(conn_val, res);   
-    }
-    
-    PQclear(res);  
-    
-    res = PQexec(conn_val, "INSERT INTO Cars VALUES(8,'Volkswagen',21600)");
-        
-    if (PQresultStatus(res) != PGRES_COMMAND_OK) {
-        do_exit(conn_val, res);   
-    }
-    
-    PQclear(res);
+void DbClass::insertCar (void) {
+    this->sqlObject()->insertAccount (this->sqlConnect(), "cars", "1,'Audi',52642");
+    this->sqlObject()->insertAccount (this->sqlConnect(), "cars", "2,'Mercedes',57127");
+    this->sqlObject()->insertAccount (this->sqlConnect(), "cars", "3,'Skoda',9000");
+    this->sqlObject()->insertAccount (this->sqlConnect(), "cars", "4,'Volvo',29000");
+    this->sqlObject()->insertAccount (this->sqlConnect(), "cars", "5,'Bentley',350000");
+    this->sqlObject()->insertAccount (this->sqlConnect(), "cars", "6,'Citroen',21000");
+    this->sqlObject()->insertAccount (this->sqlConnect(), "cars", "7,'Hummer',41400");
+    this->sqlObject()->insertAccount (this->sqlConnect(), "cars", "8,'Volkswagen',21600");
 }
 
 void DbClass::logit (char const* str0_val, char const* str1_val)

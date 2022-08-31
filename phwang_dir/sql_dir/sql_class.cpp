@@ -86,7 +86,7 @@ int SqlClass::createTable2 (PGconn *conn_val, char const *table_name_val, char c
 int SqlClass::dropTableIfExist (PGconn *conn_val, char const *table_name_val)
 {
     char buf[256];
-    this->logit("dropTableIfExist", table_name_val);
+    this->debug(true, "dropTableIfExist", table_name_val);
 
     sprintf(buf, "DROP TABLE IF EXISTS %s", table_name_val);
     PGresult *res = PQexec(conn_val, buf);
@@ -98,6 +98,21 @@ int SqlClass::dropTableIfExist (PGconn *conn_val, char const *table_name_val)
     PQclear(res);
 
     return 0;
+}
+
+void SqlClass::insertAccount (PGconn *conn_val, char const *table_name_val, char const *values_val) {
+    char buf[256];
+    sprintf(buf, "INSERT INTO %s VALUES(%s)", table_name_val, values_val);
+    this->debug(true, "insertAccount", buf);
+
+    sprintf(buf, "INSERT INTO %s VALUES(%s)", table_name_val, values_val);
+    PGresult *res = PQexec(conn_val, buf);
+        
+    if (PQresultStatus(res) != PGRES_COMMAND_OK) {
+        this->errPQexec(conn_val, res);
+    }
+
+    PQclear(res);    
 }
 
 void SqlClass::logit (char const* str0_val, char const* str1_val)
