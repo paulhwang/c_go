@@ -15,18 +15,18 @@ DbClass::DbClass (void)
     this->debug(false, "DbClass", "init");
 
     this->theSqlObject = new SqlClass();
-    if (this->init_db() == -1) {
+    if (this->initDb() == -1) {
         //tbd
     }
     this->theDbTestObject = new DbTestClass(this);
-    this->test_db();
+    this->dbTestObject()->testDb();
 }
 
 DbClass::~DbClass (void)
 {
 }
 
-int DbClass::init_db(void)
+int DbClass::initDb(void)
 {
     this->theSqlConnect = this->connectGoDb();
     if (this->sqlConnect() == 0) {
@@ -34,13 +34,6 @@ int DbClass::init_db(void)
         return -1;
     }
     return 0;
-}
-
-void DbClass::test_db(void)
-{
-    this->createTables();
-    this->insertAccount();
-    this->insertCar();
 }
 
 void *DbClass::connectGoDb (void)

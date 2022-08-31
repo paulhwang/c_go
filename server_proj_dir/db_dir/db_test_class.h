@@ -16,7 +16,6 @@ class DbTestClass {
     SqlClass *sqlObject(void);
     void *sqlConnect(void);
 
-    void testDb(void);
     void *connectGoDb(void);
     void createTables (void);
     void insertAccount(void);
@@ -34,4 +33,6 @@ public:
     ~DbTestClass(void);
 
     char const *objectName(void) {return "DbTestClass";}
+    
+    void testDb(void);
 };

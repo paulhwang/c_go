@@ -16,8 +16,7 @@ class DbClass {
 
     DbTestClass *dbTestObject(void) {return this->theDbTestObject;}
 
-    int init_db(void);
-    void test_db(void);
+    int initDb(void);
     void *connectGoDb(void);
     void createTables (void);
     void insertAccount(void);
