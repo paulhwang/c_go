@@ -5,7 +5,7 @@
 */
 
 #include "../../phwang_dir/phwang.h"
-#include "../../phwang_dir/sql_dir/db_util_class.h"
+#include "../../phwang_dir/sql_dir/sql_class.h"
 #include "db_class.h"
 
 DbClass::DbClass (void)
@@ -13,7 +13,7 @@ DbClass::DbClass (void)
     memset(this, 0, sizeof(*this));
     this->debug(true, "DbClass", "init");
 
-    this->theSqlObject = new DbUtilClass();
+    this->theSqlObject = new SqlClass();
 }
 
 DbClass::~DbClass (void)

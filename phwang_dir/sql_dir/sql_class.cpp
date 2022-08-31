@@ -5,11 +5,13 @@
 */
 
 #include "../phwang.h"
-#include "db_util_class.h"
+#include "sql_class.h"
 #include "/usr/include/postgresql/libpq-fe.h"
 
-DbUtilClass::DbUtilClass (void)
+SqlClass::SqlClass (void)
 {
+    memset(this, 0, sizeof(*this));
+
     this->theGoConnect = this->connectGoDb();
     if (this->goConnect() == 0) {
         this->abend("connectDbs", "fail to connnect to go_db");
@@ -20,12 +22,12 @@ DbUtilClass::DbUtilClass (void)
     this->insertAccount(0);
 }
 
-DbUtilClass::~DbUtilClass (void)
+SqlClass::~SqlClass (void)
 {
     PQfinish(this->goConnect());
 }
  
-void DbUtilClass::createTables (void) {
+void SqlClass::createTables (void) {
     this->createAccountTable();
     this->createCarTable();
 }
@@ -43,7 +45,7 @@ void do_exit(PGconn *conn, PGresult *res) {
     PQfinish(conn);    
 }
 
-PGconn *DbUtilClass::connectGoDb (void)
+PGconn *SqlClass::connectGoDb (void)
 {
     int lib_ver = PQlibVersion();
 
@@ -70,7 +72,7 @@ PGconn *DbUtilClass::connectGoDb (void)
     return conn;
 }
 
-void DbUtilClass::createAccountTable (void)
+void SqlClass::createAccountTable (void)
 {
     this->logit("createAccountTable", "");
     PGresult *res = PQexec(this->goConnect(), "DROP TABLE IF EXISTS Accounts");
@@ -92,7 +94,7 @@ void DbUtilClass::createAccountTable (void)
 }
 
 
-void DbUtilClass::insertAccount (char const *str_val) {
+void SqlClass::insertAccount (char const *str_val) {
     PGresult *res;
 
     res = PQexec(this->goConnect(), "INSERT INTO Accounts VALUES(1, 'admin','pp123')");
@@ -136,7 +138,7 @@ void DbUtilClass::insertAccount (char const *str_val) {
     PQclear(res);
 }
 
-void DbUtilClass::createCarTable(void) {
+void SqlClass::createCarTable(void) {
     this->logit("createCarTable", "");
 
     PGresult *res = PQexec(this->goConnect(), "DROP TABLE IF EXISTS Cars");
@@ -220,14 +222,14 @@ void DbUtilClass::createCarTable(void) {
     PQclear(res);  
 }
 
-void DbUtilClass::logit (char const* str0_val, char const* str1_val)
+void SqlClass::logit (char const* str0_val, char const* str1_val)
 {
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", this->objectName(), str0_val);
     phwangLogit(s, str1_val);
 }
 
-void DbUtilClass::abend (char const* str0_val, char const* str1_val)
+void SqlClass::abend (char const* str0_val, char const* str1_val)
 {
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", this->objectName(), str0_val);

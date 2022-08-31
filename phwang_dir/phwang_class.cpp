@@ -14,7 +14,7 @@
 #include "net_dir/tp_server_class.h"
 #include "net_dir/tp_transfer_class.h"
 #include "net_dir/tp_connect.h"
-#include "sql_dir/db_postgre.h"
+#include "sql_dir/sql_postgre.h"
 
 void PhwangClass::phwangLogit (char const *str0_val, char const *str1_val)
 {

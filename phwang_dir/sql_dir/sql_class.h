@@ -8,7 +8,7 @@
 
 #include "/usr/include/postgresql/libpq-fe.h"
 
-class DbUtilClass {
+class SqlClass {
     PGconn *theGoConnect;
 
     PGconn *connectGoDb(void);
@@ -23,10 +23,10 @@ class DbUtilClass {
     void abend(char const *str0_val, char const *str1_val);
    
 public:
-    DbUtilClass(void);
-    ~DbUtilClass(void);
+    SqlClass(void);
+    ~SqlClass(void);
 
-    char const *objectName(void) {return "DbUtilClass";}
+    char const *objectName(void) {return "SqlClass";}
     PGconn *goConnect(void) {return this->theGoConnect;}
 
 
