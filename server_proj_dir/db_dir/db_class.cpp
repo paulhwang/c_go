@@ -15,7 +15,7 @@ DbClass::DbClass (void)
 
     this->theSqlObject = new SqlClass();
 
-    this->theGoConnect = this->sqlObject()->connectGoDb();
+    this->theGoConnect = this->connectGoDb();
     if (this->goConnect() == 0) {
         this->abend("connectDbs", "fail to connnect to go_db");
         return;
@@ -28,6 +28,11 @@ DbClass::DbClass (void)
 
 DbClass::~DbClass (void)
 {
+}
+
+PGconn *DbClass::connectGoDb (void)
+{
+    return this->sqlObject()->connectDb("phwang", "go_db");
 }
 
 void DbClass::logit (char const* str0_val, char const* str1_val)

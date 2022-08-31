@@ -19,7 +19,6 @@ public:
 
     char const *objectName(void) {return "SqlClass";}
 
-    PGconn *connectGoDb(void);
     void createTables (PGconn *conn_val);
     void insertAccount(PGconn *conn_val);
 

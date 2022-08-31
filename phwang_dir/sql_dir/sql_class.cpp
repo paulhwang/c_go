@@ -72,11 +72,6 @@ void do_exit(PGconn *conn, PGresult *res) {
     PQfinish(conn);    
 }
 
-PGconn *SqlClass::connectGoDb (void)
-{
-    return this->connectDb("phwang", "go_db");
-}
-
 void SqlClass::createAccountTable (PGconn *conn_val)
 {
     this->logit("createAccountTable", "");
