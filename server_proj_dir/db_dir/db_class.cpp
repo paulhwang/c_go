@@ -15,8 +15,10 @@ DbClass::DbClass (void)
     this->debug(false, "DbClass", "init");
 
     this->theSqlObject = new SqlClass();
-    if (this->initDb() == -1) {
-        //tbd
+    this->theSqlConnect = this->sqlObject()->connectDb("phwang", "go_db");
+    if (this->sqlConnect() == 0) {
+        this->abend("DbClass", "fail to connnect to go_db");
+        return;
     }
 
     this->initAccount();
@@ -26,21 +28,6 @@ DbClass::DbClass (void)
 
 DbClass::~DbClass (void)
 {
-}
-
-int DbClass::initDb(void)
-{
-    this->theSqlConnect = this->connectGoDb();
-    if (this->sqlConnect() == 0) {
-        this->abend("DbClass", "fail to connnect to go_db");
-        return -1;
-    }
-    return 0;
-}
-
-void *DbClass::connectGoDb (void)
-{
-    return this->sqlObject()->connectDb("phwang", "go_db");
 }
 
 int db_class_do_init_account = 0;

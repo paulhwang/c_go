@@ -7,7 +7,7 @@
 #pragma once
 
 class SqlClass;
-//class DbTestClass;
+//class DbClass;
 
 class DbAccountClass {
     SqlClass *theSqlObject;

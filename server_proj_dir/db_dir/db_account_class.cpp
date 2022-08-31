@@ -19,6 +19,7 @@ DbAccountClass::DbAccountClass (DbClass *db_object_val)
 
     this->theDbObject = db_object_val;
 
+    this->initAccount();
     this->listAccount();
 }
 
