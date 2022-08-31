@@ -45,13 +45,13 @@ PGconn *DbClass::connectGoDb (void)
 }
 
 void DbClass::createTables (void) {
-    this->createAccountTable(this->sqlConnect());
-    this->createCarTable(this->sqlConnect());
+    this->createAccountTable();
+    this->createCarTable();
 }
 
-int DbClass::createAccountTable (PGconn *conn_val)
+int DbClass::createAccountTable (void)
 {
-    int result = this->sqlObject()->dropTableIfExist(conn_val, "accounts");
+    int result = this->sqlObject()->dropTableIfExist(this->sqlConnect(), "accounts");
     if (result == -1) {
         return result;
     }
@@ -104,8 +104,8 @@ void DbClass::insertAccount (PGconn *conn_val) {
     PQclear(res);
 }
 
-int DbClass::createCarTable (PGconn *conn_val) {
-    int result = this->sqlObject()->dropTableIfExist(conn_val, "cars");
+int DbClass::createCarTable (void) {
+    int result = this->sqlObject()->dropTableIfExist(this->sqlConnect(), "cars");
     if (result == -1) {
         return result;
     }
