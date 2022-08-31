@@ -11,15 +11,6 @@
 SqlClass::SqlClass (void)
 {
     memset(this, 0, sizeof(*this));
-
-    this->theGoConnect = this->connectGoDb();
-    if (this->goConnect() == 0) {
-        this->abend("connectDbs", "fail to connnect to go_db");
-        return;
-    }
-
-    this->createTables(this->theGoConnect);
-    this->insertAccount(this->theGoConnect);
 }
 
 SqlClass::~SqlClass (void)

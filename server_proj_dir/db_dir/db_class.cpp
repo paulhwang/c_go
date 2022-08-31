@@ -14,6 +14,16 @@ DbClass::DbClass (void)
     this->debug(true, "DbClass", "init");
 
     this->theSqlObject = new SqlClass();
+
+    this->theGoConnect = this->sqlObject()->connectGoDb();
+    if (this->goConnect() == 0) {
+        this->abend("connectDbs", "fail to connnect to go_db");
+        return;
+    }
+
+    this->sqlObject()->createTables(this->theGoConnect);
+    this->sqlObject()->insertAccount(this->theGoConnect);
+
 }
 
 DbClass::~DbClass (void)
