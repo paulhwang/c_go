@@ -5,7 +5,6 @@
 */
 
 #include "../../phwang_dir/phwang.h"
-#include "../../phwang_dir/sql_dir/db_util_class.h"
 #include "../db_dir/db_class.h"
 #include "../fabric_dir/fabric_class.h"
 #include "../engine_dir/engine_class.h"
@@ -15,7 +14,6 @@
 ServerRootClass::ServerRootClass (void)
 {
     this->theDbObject = new DbClass();
-    this->theDbUtilObject = new DbUtilClass();
     this->theFabricObject = new FabricClass();
     this->theGoThemeObject = new ThemeClass();
     this->theEngineObject = new EngineClass();

@@ -10,6 +10,10 @@
 
 DbClass::DbClass (void)
 {
+    memset(this, 0, sizeof(*this));
+    this->debug(true, "DbClass", "init");
+
+    this->theSqlObject = new DbUtilClass();
 }
 
 DbClass::~DbClass (void)
