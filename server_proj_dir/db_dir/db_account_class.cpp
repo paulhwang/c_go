@@ -31,7 +31,10 @@ DbAccountClass::~DbAccountClass (void)
 void DbAccountClass::developTest(void)
 {
     //this->listAccount();
+    this->checkAccountNameExist("phwang");
+    this->checkAccountNameExist("phwangaaa");
     this->checkPassword("phwang", "phwang");
+    this->checkPassword("phwang", "phwangaaa");
 }
 
 /************************DO NOT MODIFY IT*******************/
@@ -79,6 +82,32 @@ void DbAccountClass::listAccount (void) {
     }
 
     this->sqlObject()->doPQclear(res);
+}
+
+int DbAccountClass::checkAccountNameExist (char const *account_name_val)
+{
+    void *res;
+    res = this->sqlObject()->selectFrom(this->sqlConnect(), "name");
+    if (!res) {
+        -1;
+    }
+
+    int count = this->sqlObject()->getPQntuples(res);
+    for (int i = 0; i < count; i++) {
+        char *account_name = this->sqlObject()->getTuplesValue(res, i, 0);
+ 
+        this->debug(false, "checkAccountNameExist", account_name);
+
+        if (!strcmp(account_name, account_name_val)) {
+            this->sqlObject()->doPQclear(res);
+            this->debug(true, "checkAccountNameExist", "found");
+            return 0;
+        }
+    }
+
+    this->sqlObject()->doPQclear(res);
+    this->debug(true, "checkAccountNameExist", "not found");
+    return -2;
 }
 
 int DbAccountClass::checkPassword (char const *account_name_val, char const *password_val)

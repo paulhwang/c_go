@@ -32,5 +32,6 @@ public:
 
     char const *objectName(void) {return "DbAccountClass";}
 
+    int checkAccountNameExist (char const *account_name_val);
     int checkPassword(char const *account_name_val, char const *password_val);
 };
