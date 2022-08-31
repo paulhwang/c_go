@@ -73,6 +73,8 @@ void DbClass::listAccount (void) {
         return;
     }
 
+    int ii = this->sqlObject()->getPQfsize(res, 0);
+    printf("*******ii=%d\n", ii);
     int i = 0;
     while (1) {
         char *data = this->sqlObject()->getTuplesValue(res, i , 0);

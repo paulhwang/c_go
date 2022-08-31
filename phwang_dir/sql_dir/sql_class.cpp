@@ -132,6 +132,12 @@ PGresult *SqlClass::selectFrom (void *conn_val) {
     return res;
 }
 
+int SqlClass::getPQfsize(void *res_val, int column_number_val)
+{
+    PGresult *res = (PGresult *) res_val;
+    return PQfsize(res, column_number_val);
+}
+
 char *SqlClass::getTuplesValue(void *res_val, int row_number_val, int column_number_val)
 {
     PGresult *res = (PGresult *) res_val;
