@@ -14,20 +14,31 @@ DbClass::DbClass (void)
     this->debug(false, "DbClass", "init");
 
     this->theSqlObject = new SqlClass();
-
-    this->theSqlConnect = this->connectGoDb();
-    if (this->sqlConnect() == 0) {
-        this->abend("connectDbs", "fail to connnect to go_db");
-        return;
+    if (this->init_db() == -1) {
+        //tbd
     }
-
-    this->createTables();
-    this->insertAccount();
-    this->insertCar();
+    this->test_db();
 }
 
 DbClass::~DbClass (void)
 {
+}
+
+int DbClass::init_db(void)
+{
+    this->theSqlConnect = this->connectGoDb();
+    if (this->sqlConnect() == 0) {
+        this->abend("DbClass", "fail to connnect to go_db");
+        return -1;
+    }
+    return 0;
+}
+
+void DbClass::test_db(void)
+{
+    this->createTables();
+    this->insertAccount();
+    this->insertCar();
 }
 
 void do_exit(PGconn *conn, PGresult *res) {

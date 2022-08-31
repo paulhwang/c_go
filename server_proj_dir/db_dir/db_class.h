@@ -15,6 +15,8 @@ class DbClass {
     SqlClass *sqlObject(void) {return this->theSqlObject;}
     void *sqlConnect(void) {return this->theSqlConnect;}
 
+    int init_db(void);
+    void test_db(void);
     void *connectGoDb(void);
     void createTables (void);
     void insertAccount(void);
