@@ -11,7 +11,7 @@
 DbClass::DbClass (void)
 {
     memset(this, 0, sizeof(*this));
-    this->debug(true, "DbClass", "init");
+    this->debug(false, "DbClass", "init");
 
     this->theSqlObject = new SqlClass();
 
@@ -51,8 +51,6 @@ void DbClass::createTables (void) {
 
 int DbClass::createAccountTable (PGconn *conn_val)
 {
-    this->logit("createAccountTable", "");
-
     int result = this->sqlObject()->dropTableIfExist(conn_val, "accounts");
     if (result == -1) {
         return result;
@@ -107,8 +105,6 @@ void DbClass::insertAccount (PGconn *conn_val) {
 }
 
 int DbClass::createCarTable (PGconn *conn_val) {
-    this->logit("createCarTable", "");
-
     int result = this->sqlObject()->dropTableIfExist(conn_val, "cars");
     if (result == -1) {
         return result;

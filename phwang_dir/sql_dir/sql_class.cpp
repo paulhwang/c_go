@@ -21,7 +21,7 @@ PGconn *SqlClass::connectDb (char const *user_val, char const *dbname_val)
 {
     char buf[128];
 
-    if (true) { // debug
+    if (false) { // debug
         sprintf(buf, "Version of libpq: %d", PQlibVersion());
         this->logit("connectDb", buf);
     }
@@ -54,12 +54,15 @@ void SqlClass::disconnectDb (PGconn *conn_val)
     PQfinish(conn_val);
 }
 
-void do_exit111(PGconn *conn, PGresult *res) {
-    
-    fprintf(stderr, "%s\n", PQerrorMessage(conn));    
+void SqlClass::errPQexec(PGconn *conn_val, PGresult *res_val) {
+    if (true) { // debug
+        char buf[256];
+        sprintf(buf, "%s\n", PQerrorMessage(conn_val));
+        this->logit("errPQexec", buf);
+    }
 
-    PQclear(res);
-    PQfinish(conn);    
+    PQclear(res_val);
+    PQfinish(conn_val);    
 }
 
 int SqlClass::createTable2 (PGconn *conn_val, char const *table_name_val, char const *val1, char const *val2)
@@ -71,7 +74,7 @@ int SqlClass::createTable2 (PGconn *conn_val, char const *table_name_val, char c
     PGresult *res = PQexec(conn_val, buf);
 
     if (PQresultStatus(res) != PGRES_COMMAND_OK) {
-        do_exit111(conn_val, res);
+        this->errPQexec(conn_val, res);
         PQclear(res);
         return -1;
     }
@@ -89,7 +92,7 @@ int SqlClass::dropTableIfExist (PGconn *conn_val, char const *table_name_val)
     PGresult *res = PQexec(conn_val, buf);
     
     if (PQresultStatus(res) != PGRES_COMMAND_OK) {
-        do_exit111(conn_val, res);
+        this->errPQexec(conn_val, res);
     }
     
     PQclear(res);
