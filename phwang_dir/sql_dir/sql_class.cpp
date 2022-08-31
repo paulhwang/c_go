@@ -15,25 +15,11 @@ SqlClass::SqlClass (void)
 
 SqlClass::~SqlClass (void)
 {
-    PQfinish(this->goConnect());
-}
- 
-void SqlClass::createTables (PGconn *conn_val) {
-    this->createAccountTable(conn_val);
-    this->createCarTable(conn_val);
 }
 
 void do_exit0(PGconn *conn) {
     
     PQfinish(conn);
-}
-
-void do_exit(PGconn *conn, PGresult *res) {
-    
-    fprintf(stderr, "%s\n", PQerrorMessage(conn));    
-
-    PQclear(res);
-    PQfinish(conn);    
 }
 
 PGconn *SqlClass::connectDb (char const *user_val, char const *dbname_val)
@@ -48,7 +34,7 @@ PGconn *SqlClass::connectDb (char const *user_val, char const *dbname_val)
     sprintf(buf, "user=%s dbname=%s", user_val, dbname_val);
     PGconn *conn = PQconnectdb(buf);
     if (PQstatus(conn) == CONNECTION_BAD) {
-        sprintf(buf, "Connection to database failed: %s\n", PQerrorMessage(this->goConnect()));
+        sprintf(buf, "Connection to database failed: %s\n", PQerrorMessage(conn));
         this->logit("connectDb", buf);
         do_exit0(conn);
         return 0;
@@ -66,6 +52,24 @@ PGconn *SqlClass::connectDb (char const *user_val, char const *dbname_val)
     }
 
     return conn;
+}
+
+void SqlClass::disconnectDb (PGconn *conn_val)
+{
+    PQfinish(conn_val);
+}
+
+void SqlClass::createTables (PGconn *conn_val) {
+    this->createAccountTable(conn_val);
+    this->createCarTable(conn_val);
+}
+
+void do_exit(PGconn *conn, PGresult *res) {
+    
+    fprintf(stderr, "%s\n", PQerrorMessage(conn));    
+
+    PQclear(res);
+    PQfinish(conn);    
 }
 
 PGconn *SqlClass::connectGoDb (void)
