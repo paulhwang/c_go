@@ -7,6 +7,7 @@
 #pragma once
 
 class DbUtilClass;
+class DbClass;
 class FabricClass;
 class ThemeClass;
 class EngineClass;
@@ -14,6 +15,7 @@ class TestClass;
 
 class ServerRootClass {
     DbUtilClass *theDbUtilObject;
+    DbClass *theDbObject;
     FabricClass *theFabricObject;
     ThemeClass *theGoThemeObject;
     EngineClass *theEngineObject;
