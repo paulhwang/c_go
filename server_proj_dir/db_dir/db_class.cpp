@@ -38,7 +38,7 @@ void do_exit(PGconn *conn, PGresult *res) {
     PQfinish(conn);    
 }
 
-PGconn *DbClass::connectGoDb (void)
+void *DbClass::connectGoDb (void)
 {
     return this->sqlObject()->connectDb("phwang", "go_db");
 }

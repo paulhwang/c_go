@@ -49,9 +49,10 @@ PGconn *SqlClass::connectDb (char const *user_val, char const *dbname_val)
     return conn;
 }
 
-void SqlClass::disconnectDb (PGconn *conn_val)
+void SqlClass::disconnectDb (void *conn_val)
 {
-    PQfinish(conn_val);
+    PGconn *conn = (PGconn *) conn_val;
+    PQfinish(conn);
 }
 
 void SqlClass::errPQexec(PGconn *conn_val, PGresult *res_val) {
@@ -65,16 +66,17 @@ void SqlClass::errPQexec(PGconn *conn_val, PGresult *res_val) {
     PQfinish(conn_val);    
 }
 
-int SqlClass::createTable2 (PGconn *conn_val, char const *table_name_val, char const *val1, char const *val2)
+int SqlClass::createTable2 (void *conn_val, char const *table_name_val, char const *val1, char const *val2)
 {
     char buf[256];
     this->debug(true, "createTable", table_name_val);
 
+    PGconn *conn = (PGconn *) conn_val;
     sprintf(buf, "CREATE TABLE %s(Id INTEGER PRIMARY KEY, %s, %s)", table_name_val, val1, val2);
-    PGresult *res = PQexec(conn_val, buf);
+    PGresult *res = PQexec(conn, buf);
 
     if (PQresultStatus(res) != PGRES_COMMAND_OK) {
-        this->errPQexec(conn_val, res);
+        this->errPQexec(conn, res);
         PQclear(res);
         return -1;
     }
@@ -83,16 +85,17 @@ int SqlClass::createTable2 (PGconn *conn_val, char const *table_name_val, char c
     return 0;
 }
 
-int SqlClass::dropTableIfExist (PGconn *conn_val, char const *table_name_val)
+int SqlClass::dropTableIfExist (void *conn_val, char const *table_name_val)
 {
     char buf[256];
     this->debug(true, "dropTableIfExist", table_name_val);
 
+    PGconn *conn = (PGconn *) conn_val;
     sprintf(buf, "DROP TABLE IF EXISTS %s", table_name_val);
-    PGresult *res = PQexec(conn_val, buf);
+    PGresult *res = PQexec(conn, buf);
     
     if (PQresultStatus(res) != PGRES_COMMAND_OK) {
-        this->errPQexec(conn_val, res);
+        this->errPQexec(conn, res);
     }
     
     PQclear(res);
@@ -100,26 +103,30 @@ int SqlClass::dropTableIfExist (PGconn *conn_val, char const *table_name_val)
     return 0;
 }
 
-void SqlClass::insertAccount (PGconn *conn_val, char const *table_name_val, char const *values_val) {
+void SqlClass::insertAccount (void *conn_val, char const *table_name_val, char const *values_val) {
     char buf[256];
-    sprintf(buf, "INSERT INTO %s VALUES(%s)", table_name_val, values_val);
-    this->debug(true, "insertAccount", buf);
+    if (true) { //debug
+        sprintf(buf, "INSERT INTO %s VALUES(%s)", table_name_val, values_val);
+        this->debug(true, "insertAccount", buf);
+    }
 
+    PGconn *conn = (PGconn *) conn_val;
     sprintf(buf, "INSERT INTO %s VALUES(%s)", table_name_val, values_val);
-    PGresult *res = PQexec(conn_val, buf);
+    PGresult *res = PQexec(conn, buf);
         
     if (PQresultStatus(res) != PGRES_COMMAND_OK) {
-        this->errPQexec(conn_val, res);
+        this->errPQexec(conn, res);
     }
 
     PQclear(res);    
 }
 
-PGresult *SqlClass::selectFrom (PGconn *conn_val) {
-    PGresult *res = PQexec(conn_val, "SELECT name FROM accounts;");
+PGresult *SqlClass::selectFrom (void *conn_val) {
+    PGconn *conn = (PGconn *) conn_val;
+    PGresult *res = PQexec(conn, "SELECT name FROM accounts;");
 
     if (PQresultStatus(res) != PGRES_TUPLES_OK) {
-        this->errPQexec(conn_val, res);
+        this->errPQexec(conn, res);
         return 0;
     }
     return res;

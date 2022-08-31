@@ -8,16 +8,14 @@
 
 class SqlClass;
 
-#include "/usr/include/postgresql/libpq-fe.h"
-
 class DbClass {
     SqlClass *theSqlObject;
-    PGconn *theSqlConnect;
+    void *theSqlConnect;
 
     SqlClass *sqlObject(void) {return this->theSqlObject;}
-    PGconn *sqlConnect(void) {return this->theSqlConnect;}
+    void *sqlConnect(void) {return this->theSqlConnect;}
 
-    PGconn *connectGoDb(void);
+    void *connectGoDb(void);
     void createTables (void);
     void insertAccount(void);
     void insertCar(void);
