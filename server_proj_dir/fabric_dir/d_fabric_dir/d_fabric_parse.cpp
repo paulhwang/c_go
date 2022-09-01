@@ -80,7 +80,6 @@ void DFabricClass::exportedParseFunction (void *tp_transfer_object_val, char *da
 }
 
 #define D_FABRIC_CLASS_FAKE_LINK_ID_INDEX "99990000"
-#define D_FABRIC_CLASS_PROCESSS_SETUP_LINK_DOWN_LINK_DATA_SIZE (1 + WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + 1)
 void DFabricClass::processSetupLink (void *tp_transfer_object_val, char *data_val)
 {
     this->debug(true, "processSetupLink", data_val);
@@ -102,7 +101,6 @@ void DFabricClass::processSetupLink (void *tp_transfer_object_val, char *data_va
     }
 
     int check_password_result = this->dbObject()->dbAccountObject()->checkPassword(my_name, password);
-    //check_password_result = 0;
     if (check_password_result) {
         char *check_password_result_str;
         switch (check_password_result) {
@@ -119,7 +117,7 @@ void DFabricClass::processSetupLink (void *tp_transfer_object_val, char *data_va
                 this->abend("processSetupLink", "check_password_result");
                 break;
         }
-        this->errorProcessSetupLink(tp_transfer_object_val, ajax_id, D_FABRIC_CLASS_FAKE_LINK_ID_INDEX, check_password_result_str);
+        this->sendSetupLinkResponce(tp_transfer_object_val, ajax_id, D_FABRIC_CLASS_FAKE_LINK_ID_INDEX, check_password_result_str);
         free(my_name);
         free(password);
         return;
@@ -128,39 +126,30 @@ void DFabricClass::processSetupLink (void *tp_transfer_object_val, char *data_va
     LinkClass *link = this->theFabricObject->mallocLink(my_name);
     if (!link) {
         this->abend("processSetupLink", "null link");
-        this->errorProcessSetupLink(tp_transfer_object_val, ajax_id, D_FABRIC_CLASS_FAKE_LINK_ID_INDEX, "null link");
+        this->sendSetupLinkResponce(tp_transfer_object_val, ajax_id, D_FABRIC_CLASS_FAKE_LINK_ID_INDEX, "null link");
         free(my_name);
         free(password);
         return;
     }
 
-    char *result = "succeed";
-    char *data_ptr;
-    char *downlink_data = data_ptr = (char *) phwangMalloc(D_FABRIC_CLASS_PROCESSS_SETUP_LINK_DOWN_LINK_DATA_SIZE + strlen(result), "DFSL");
-    *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_SETUP_LINK;
-    memcpy(data_ptr, ajax_id, WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE);
-    data_ptr += WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;
-    strcpy(data_ptr, link->linkIdIndex());
-    data_ptr += LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE;
-    strcpy(data_ptr, result);
-    this->transmitFunction(tp_transfer_object_val, downlink_data);
+    this->sendSetupLinkResponce(tp_transfer_object_val, ajax_id, link->linkIdIndex(), "succeed");
     free(my_name);
     free(password);
 }
 
-#define D_FABRIC_CLASS_PROCESSS_SETUP_LINK_ERROR_DOWN_LINK_DATA_SIZE (1 + WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE+ 1)
-void DFabricClass::errorProcessSetupLink (void *tp_transfer_object_val, char const *ajax_id_val, char const *link_id_index_val, char const *err_msg_val)
+#define D_FABRIC_CLASS_PROCESSS_SETUP_LINK_DOWN_LINK_DATA_SIZE (1 + WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + 1)
+void DFabricClass::sendSetupLinkResponce (void *tp_transfer_object_val, char const *ajax_id_val, char const *link_id_index_val, char const *result_val)
 {
-    this->debug(true, "errorProcessSetupLink", err_msg_val);
+    this->debug(true, "sendSetupLinkResponce", result_val);
 
     char *data_ptr;
-    char *downlink_data = data_ptr = (char *) phwangMalloc(D_FABRIC_CLASS_PROCESSS_SETUP_LINK_ERROR_DOWN_LINK_DATA_SIZE + strlen(err_msg_val), "DFsl");
+    char *downlink_data = data_ptr = (char *) phwangMalloc(D_FABRIC_CLASS_PROCESSS_SETUP_LINK_DOWN_LINK_DATA_SIZE + strlen(result_val), "DFSL");
     *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_SETUP_LINK;
     memcpy(data_ptr, ajax_id_val, WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE);
     data_ptr += WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;
     strcpy(data_ptr, link_id_index_val);
     data_ptr += LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE;
-    strcpy(data_ptr, err_msg_val);
+    strcpy(data_ptr, result_val);
     this->transmitFunction(tp_transfer_object_val, downlink_data);
 }
 
