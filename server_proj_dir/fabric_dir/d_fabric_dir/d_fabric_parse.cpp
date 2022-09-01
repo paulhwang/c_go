@@ -77,13 +77,33 @@ void DFabricClass::exportedParseFunction (void *tp_transfer_object_val, char *da
     this->abend("exportedParseFunction", data_val);
 }
 
+char *decodeString1 (char const *input_val)
+{
+    int length = *input_val - 48;
+    char *buf = (char *) malloc(length + 1);
+    memcpy(buf, input_val + 1, length);
+    buf[length] = 0;
+    return buf;
+}
+
 #define D_FABRIC_CLASS_PROCESSS_SETUP_LINK_DOWN_LINK_DATA_SIZE (1 + WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + 1)
 void DFabricClass::processSetupLink (void *tp_transfer_object_val, char *data_val)
 {
     this->debug(true, "processSetupLink", data_val);
 
     char *ajax_id = data_val;
-    char *my_name = ajax_id + WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;
+
+    char *encoded_my_name = ajax_id + WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;
+    char *my_name = decodeString1(encoded_my_name);
+
+    char *encoded_password = encoded_my_name + strlen(my_name) + 1;
+    char *password = decodeString1(encoded_password);
+
+    if (1) { /* debug */
+        char buf[256];
+        sprintf(buf, "my_name=%s password=%s\n", my_name, password);
+        this->logit("processSetupLink", buf);
+    }
 
     LinkClass *link = this->theFabricObject->mallocLink(my_name);
     if (!link) {
@@ -98,6 +118,8 @@ void DFabricClass::processSetupLink (void *tp_transfer_object_val, char *data_va
     data_ptr += WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;
     strcpy(data_ptr, link->linkIdIndex());
     this->transmitFunction(tp_transfer_object_val, downlink_data);
+    free(my_name);
+    free(password);
 }
 
 #define D_FABRIC_CLASS_PROCESSS_SETUP_LINK_ERROR_DOWN_LINK_DATA_SIZE (1 + WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE + 1)

@@ -35,7 +35,7 @@ void DbAccountClass::developTest(void)
     this->checkAccountNameExist("phwang");
     this->checkAccountNameExist("phwangaaa");
     this->checkPassword("phwang", "phwang");
-    this->checkPassword("phwang", "phwangaaa");
+    this->checkPassword("phwang", "phwangpassword");
 }
 
 /************************DO NOT MODIFY IT*******************/
