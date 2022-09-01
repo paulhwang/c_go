@@ -158,7 +158,7 @@ int DbAccountClass::checkPassword (char const *account_name_val, char const *pas
     void *res;
     res = this->sqlObject()->selectFrom(this->sqlConnect(), "name, password");
     if (!res) {
-        -1;
+        -3;
     }
 
     int count = this->sqlObject()->getPQntuples(res);

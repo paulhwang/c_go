@@ -115,6 +115,7 @@ void DFabricClass::processSetupLink (void *tp_transfer_object_val, char *data_va
                 check_password_result_str = "empty table";
                 break;
             default:
+                this->abend("processSetupLink", "check_password_result");
                 break;
         }
         this->errorProcessSetupLink(tp_transfer_object_val, ajax_id, check_password_result_str);
@@ -132,12 +133,15 @@ void DFabricClass::processSetupLink (void *tp_transfer_object_val, char *data_va
         return;
     }
 
+    char *result = "succeed";
     char *data_ptr;
-    char *downlink_data = data_ptr = (char *) phwangMalloc(D_FABRIC_CLASS_PROCESSS_SETUP_LINK_DOWN_LINK_DATA_SIZE, "DFSL");
+    char *downlink_data = data_ptr = (char *) phwangMalloc(D_FABRIC_CLASS_PROCESSS_SETUP_LINK_DOWN_LINK_DATA_SIZE + strlen(result), "DFSL");
     *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_SETUP_LINK;
     memcpy(data_ptr, ajax_id, WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE);
     data_ptr += WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;
     strcpy(data_ptr, link->linkIdIndex());
+    data_ptr += LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE;
+    strcpy(data_ptr, result);
     this->transmitFunction(tp_transfer_object_val, downlink_data);
     free(my_name);
     free(password);
