@@ -18,6 +18,8 @@
 #include "../session_class.h"
 #include "../group_class.h"
 #include "../name_list_class.h"
+#include "../../db_dir/db_class.h"
+#include "../../db_dir/db_account_class.h"
 
 void DFabricClass::exportedParseFunction (void *tp_transfer_object_val, char *data_val)
 {
@@ -105,7 +107,9 @@ void DFabricClass::processSetupLink (void *tp_transfer_object_val, char *data_va
         this->logit("processSetupLink", buf);
     }
 
-    //this->dbAccoutObject()->checkPassword(my_name, password);
+    if (this->dbObject()->dbAccountObject()->checkPassword(my_name, password)) {
+        this->debug(true, "processSetupLink", "password not match");
+    }
 
     LinkClass *link = this->theFabricObject->mallocLink(my_name);
     if (!link) {

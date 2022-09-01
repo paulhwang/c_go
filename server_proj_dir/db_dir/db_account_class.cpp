@@ -64,32 +64,32 @@ void DbAccountClass::createAccountTableInDatabase(void)
 
     DbAccountEntryClass *entry = new DbAccountEntryClass();
     entry->setAccountName(mallocConstStrBuf("admin"));
-    entry->setPassword(mallocConstStrBuf("adminpassword"));
+    entry->setPassword(mallocConstStrBuf("ap"));
     this->insertAccountEntry(entry);
 
     entry = new DbAccountEntryClass();
     entry->setAccountName(mallocConstStrBuf("phwang"));
-    entry->setPassword(mallocConstStrBuf("phwangpassword"));
+    entry->setPassword(mallocConstStrBuf("pp"));
     this->insertAccountEntry(entry);
 
     entry = new DbAccountEntryClass();
     entry->setAccountName(mallocConstStrBuf("ikolre"));
-    entry->setPassword(mallocConstStrBuf("ikolrepassword"));
+    entry->setPassword(mallocConstStrBuf("ip"));
     this->insertAccountEntry(entry);
 
     entry = new DbAccountEntryClass();
     entry->setAccountName(mallocConstStrBuf("guest"));
-    entry->setPassword(mallocConstStrBuf("guestpassword"));
+    entry->setPassword(mallocConstStrBuf("gp"));
     this->insertAccountEntry(entry);
 
     entry = new DbAccountEntryClass();
     entry->setAccountName(mallocConstStrBuf("BigBrave"));
-    entry->setPassword(mallocConstStrBuf("bigbrave"));
+    entry->setPassword(mallocConstStrBuf("bp"));
     this->insertAccountEntry(entry);
 
     entry = new DbAccountEntryClass();
     entry->setAccountName(mallocConstStrBuf("paul"));
-    entry->setPassword(mallocConstStrBuf("paulpassword"));
+    entry->setPassword(mallocConstStrBuf("pp"));
     this->insertAccountEntry(entry);
 }
 

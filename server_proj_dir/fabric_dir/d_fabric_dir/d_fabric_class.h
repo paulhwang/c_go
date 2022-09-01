@@ -19,6 +19,8 @@ class DFabricClass {
     void *theTpServerObject;
     char theTimeStampString[FABRIC_SERVER_TIME_STAMP_LENGTH_SIZE + 16];
 
+    DbClass *dbObject(void) {return theFabricObject->dbObject();}
+    
     void setTimeStampString(void);
     void startNetServer(void);
     void processSetupLink(void *tp_transfer_object_val, char *data_val);

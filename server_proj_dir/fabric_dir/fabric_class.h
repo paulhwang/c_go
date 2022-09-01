@@ -16,9 +16,9 @@ class SessionClass;
 class NameListClass;
 
 class FabricClass {
+    DbClass *theDbObject;
     UFabricClass *theUFabricObject;
     DFabricClass *theDFabricObject;
-    DbClass *theDbObject;
     NameListClass *theNameListObject;
     void *theLinkListMgrObject;
     void *theGroupListMgrObject;
@@ -36,6 +36,7 @@ public:
     ~FabricClass(void);
     char const *objectName(void) {return "FabricClass";}
 
+    DbClass *dbObject(void) {return this->theDbObject;}
     UFabricClass *uFabricObject(void) {return this->theUFabricObject;}
     DFabricClass *dFabricObject(void) {return this->theDFabricObject;}
     NameListClass *nameListObject(void) {return this->theNameListObject;}
