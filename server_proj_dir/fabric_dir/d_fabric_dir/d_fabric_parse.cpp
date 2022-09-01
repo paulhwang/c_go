@@ -81,23 +81,39 @@ void DFabricClass::exportedParseFunction (void *tp_transfer_object_val, char *da
 
 char *PHdecodeString (char const *input_val, int *input_size_val)
 {
-    char type = *input_val++;
-    int length;
+    int length = 0;
+    int head_size = 2;
     char *buf;
 
-    switch (type) {
-        case '1':
-            length = *input_val - 48;
-            buf = (char *) malloc(length + 1);
-            memcpy(buf, input_val + 1, length);
-            buf[length] = 0;
-            *input_size_val = length + 2;
-            break;
-
-        case '2':
-            break;
-
+    switch (*input_val++) {
+        case '5':
+            length = length * 10 + *input_val - 48;
+            input_val++;
+            head_size++;
+ 
+        case '4':
+            length = length * 10 + *input_val - 48;
+            input_val++;
+            head_size++;
+ 
         case '3':
+            length = length * 10 + *input_val - 48;
+            input_val++;
+            head_size++;
+ 
+        case '2':
+            length = length * 10 + *input_val - 48;
+            input_val++;
+            head_size++;
+
+       case '1':
+            length = length * 10 + *input_val - 48;
+            input_val++;
+            
+            buf = (char *) malloc(length + 1);
+            memcpy(buf, input_val, length);
+            buf[length] = 0;
+            *input_size_val = length + head_size;
             break;
 
         default:
