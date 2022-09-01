@@ -79,12 +79,30 @@ void DFabricClass::exportedParseFunction (void *tp_transfer_object_val, char *da
     this->abend("exportedParseFunction", data_val);
 }
 
-char *decodeString1 (char const *input_val)
+char *PHdecodeString (char const *input_val, int *input_size_val)
 {
-    int length = *input_val - 48;
-    char *buf = (char *) malloc(length + 1);
-    memcpy(buf, input_val + 1, length);
-    buf[length] = 0;
+    char type = *input_val++;
+    int length;
+    char *buf;
+
+    switch (type) {
+        case '1':
+            length = *input_val - 48;
+            buf = (char *) malloc(length + 1);
+            memcpy(buf, input_val + 1, length);
+            buf[length] = 0;
+            *input_size_val = length + 2;
+            break;
+
+        case '2':
+            break;
+
+        case '3':
+            break;
+
+        default:
+            break;
+    }
     return buf;
 }
 
@@ -96,15 +114,21 @@ void DFabricClass::processSetupLink (void *tp_transfer_object_val, char *data_va
     char *ajax_id = data_val;
 
     char *encoded_my_name = ajax_id + WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;
-    char *my_name = decodeString1(encoded_my_name);
+    int my_name_size;
+    char *my_name = PHdecodeString(encoded_my_name, &my_name_size);
 
-    char *encoded_password = encoded_my_name + strlen(my_name) + 1;
-    char *password = decodeString1(encoded_password);
+    char *encoded_password = encoded_my_name + my_name_size;
+    int password_size;
+    char *password = PHdecodeString(encoded_password, &password_size);
 
     if (1) { /* debug */
         char buf[256];
         sprintf(buf, "my_name=%s password=%s\n", my_name, password);
         this->logit("processSetupLink", buf);
+
+        //free(my_name);
+        //free(password);
+        //return;
     }
 
     if (this->dbObject()->dbAccountObject()->checkPassword(my_name, password)) {
