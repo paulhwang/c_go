@@ -105,6 +105,8 @@ void DFabricClass::processSetupLink (void *tp_transfer_object_val, char *data_va
         this->logit("processSetupLink", buf);
     }
 
+    //this->dbAccoutObject()->checkPassword(my_name, password);
+
     LinkClass *link = this->theFabricObject->mallocLink(my_name);
     if (!link) {
         this->errorProcessSetupLink(tp_transfer_object_val, ajax_id, "null link");

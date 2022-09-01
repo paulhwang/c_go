@@ -9,6 +9,7 @@
 
 class UFabricClass;
 class DFabricClass;
+class DbClass;
 class LinkClass;
 class GroupClass;
 class SessionClass;
@@ -17,6 +18,7 @@ class NameListClass;
 class FabricClass {
     UFabricClass *theUFabricObject;
     DFabricClass *theDFabricObject;
+    DbClass *theDbObject;
     NameListClass *theNameListObject;
     void *theLinkListMgrObject;
     void *theGroupListMgrObject;

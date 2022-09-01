@@ -10,7 +10,7 @@
 #include "db_account_class.h"
 #include "db_test_class.h"
 
-DbClass::DbClass (void)
+DbClass::DbClass (FabricClass *fabric_object_val)
 {
     memset(this, 0, sizeof(*this));
     this->debug(false, "DbClass", "init");

@@ -39,7 +39,7 @@ void DbAccountClass::developTest(void)
 }
 
 /************************DO NOT MODIFY IT*******************/
-int db_account_class_do_create_account_table_in_database = 1;
+int db_account_class_do_create_account_table_in_database = 0;
 /************************DO NOT MODIFY IT*******************/
 
 char *mallocConstStrBuf (char const * str_val)

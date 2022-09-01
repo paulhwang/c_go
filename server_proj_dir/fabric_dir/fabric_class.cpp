@@ -12,10 +12,12 @@
 #include "group_class.h"
 #include "link_class.h"
 #include "name_list_class.h"
+#include "../db_dir/db_class.h"
 
 FabricClass::FabricClass (void)
 {
     memset(this, 0, sizeof(*this));
+    this->theDbObject = new DbClass(this);
     this->theUFabricObject = new UFabricClass(this);
     this->theDFabricObject = new DFabricClass(this);
     this->theNameListObject = new NameListClass(this);
@@ -31,6 +33,7 @@ FabricClass::~FabricClass (void)
     this->theDFabricObject->~DFabricClass(); 
     this->theUFabricObject->~UFabricClass(); 
     this->theNameListObject->~NameListClass();
+    this->theDbObject->~DbClass();
     this->debug(true, "~FabricClass", "exit");
 }
 

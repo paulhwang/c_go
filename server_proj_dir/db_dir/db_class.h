@@ -9,6 +9,7 @@
 class SqlClass;
 class DbAccountClass;
 class DbTestClass;
+class FabricClass;
 
 class DbClass {
     SqlClass *theSqlObject;
@@ -24,7 +25,7 @@ class DbClass {
     void abend(char const *str0_val, char const *str1_val);
    
 public:
-    DbClass(void);
+    DbClass(FabricClass *fabric_object_val);
     ~DbClass(void);
 
     SqlClass *sqlObject(void) {return this->theSqlObject;}

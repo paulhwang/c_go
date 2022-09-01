@@ -6,14 +6,12 @@
 
 #pragma once
 
-class DbClass;
 class FabricClass;
 class ThemeClass;
 class EngineClass;
 class TestClass;
 
 class ServerRootClass {
-    DbClass *theDbObject;
     FabricClass *theFabricObject;
     ThemeClass *theGoThemeObject;
     EngineClass *theEngineObject;
