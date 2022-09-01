@@ -29,6 +29,7 @@ void phwangEncodeNumber(char *str_val, int number_val, int size_val);
 int phwangDecodeNumber(char const *str_val, int size_val);
 void phwangEncodeIdIndex(char *str_val, int id_val, int id_size_val, int index_val, int index_size_val);
 void phwangDecodeIdIndex(char const *str_val, int *id_ptr_val, int id_size_val, int *index_ptr_val, int index_size_val);
+char *phwangDecodeString(char const *input_val, int *input_size_val);
 
 /* queue */
 void *phwangMallocSuspendedQueue(int size_val);

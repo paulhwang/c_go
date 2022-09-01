@@ -79,49 +79,6 @@ void DFabricClass::exportedParseFunction (void *tp_transfer_object_val, char *da
     this->abend("exportedParseFunction", data_val);
 }
 
-char *PHdecodeString (char const *input_val, int *input_size_val)
-{
-    int length = 0;
-    int head_size = 2;
-    char *buf;
-
-    switch (*input_val++) {
-        case '5':
-            length = length * 10 + *input_val - 48;
-            input_val++;
-            head_size++;
- 
-        case '4':
-            length = length * 10 + *input_val - 48;
-            input_val++;
-            head_size++;
- 
-        case '3':
-            length = length * 10 + *input_val - 48;
-            input_val++;
-            head_size++;
- 
-        case '2':
-            length = length * 10 + *input_val - 48;
-            input_val++;
-            head_size++;
-
-       case '1':
-            length = length * 10 + *input_val - 48;
-            input_val++;
-            
-            buf = (char *) malloc(length + 1);
-            memcpy(buf, input_val, length);
-            buf[length] = 0;
-            *input_size_val = length + head_size;
-            break;
-
-        default:
-            break;
-    }
-    return buf;
-}
-
 #define D_FABRIC_CLASS_PROCESSS_SETUP_LINK_DOWN_LINK_DATA_SIZE (1 + WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + 1)
 void DFabricClass::processSetupLink (void *tp_transfer_object_val, char *data_val)
 {
@@ -131,11 +88,11 @@ void DFabricClass::processSetupLink (void *tp_transfer_object_val, char *data_va
 
     char *encoded_my_name = ajax_id + WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;
     int my_name_size;
-    char *my_name = PHdecodeString(encoded_my_name, &my_name_size);
+    char *my_name = phwangDecodeString(encoded_my_name, &my_name_size);
 
     char *encoded_password = encoded_my_name + my_name_size;
     int password_size;
-    char *password = PHdecodeString(encoded_password, &password_size);
+    char *password = phwangDecodeString(encoded_password, &password_size);
 
     if (1) { /* debug */
         char buf[256];

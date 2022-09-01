@@ -70,6 +70,49 @@ void phwangDecodeIdIndex (char const *str_val, int *id_ptr_val, int id_size_val,
     thePhwangObject->decodeIdIndex(str_val, id_ptr_val, id_size_val, index_ptr_val, index_size_val);
 }
 
+char *phwangDecodeString (char const *input_val, int *input_size_val)
+{
+    int length = 0;
+    int head_size = 2;
+    char *buf;
+
+    switch (*input_val++) {
+        case '5':
+            length = length * 10 + *input_val - 48;
+            input_val++;
+            head_size++;
+ 
+        case '4':
+            length = length * 10 + *input_val - 48;
+            input_val++;
+            head_size++;
+ 
+        case '3':
+            length = length * 10 + *input_val - 48;
+            input_val++;
+            head_size++;
+ 
+        case '2':
+            length = length * 10 + *input_val - 48;
+            input_val++;
+            head_size++;
+
+       case '1':
+            length = length * 10 + *input_val - 48;
+            input_val++;
+            
+            buf = (char *) malloc(length + 1);
+            memcpy(buf, input_val, length);
+            buf[length] = 0;
+            *input_size_val = length + head_size;
+            break;
+
+        default:
+            break;
+    }
+    return buf;
+}
+
 /* queue */
 void *phwangMallocSuspendedQueue (int size_val)
 {
