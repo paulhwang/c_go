@@ -98,19 +98,37 @@ void DFabricClass::processSetupLink (void *tp_transfer_object_val, char *data_va
         char buf[256];
         sprintf(buf, "my_name=%s password=%s\n", my_name, password);
         this->logit("processSetupLink", buf);
-
-        //free(my_name);
-        //free(password);
-        //return;
     }
 
-    if (this->dbObject()->dbAccountObject()->checkPassword(my_name, password)) {
-        this->debug(true, "processSetupLink", "password not match");
+    int check_password_result = this->dbObject()->dbAccountObject()->checkPassword(my_name, password);
+    check_password_result = 0;
+    if (check_password_result) {
+        char *check_password_result_str;
+        switch (check_password_result) {
+            case -1:
+                check_password_result_str = "password not match";
+                break;
+            case -2:
+                check_password_result_str = "name not founc";
+                break;
+            case -3:
+                check_password_result_str = "empty table";
+                break;
+            default:
+                break;
+        }
+        this->errorProcessSetupLink(tp_transfer_object_val, ajax_id, check_password_result_str);
+        free(my_name);
+        free(password);
+        return;
     }
 
     LinkClass *link = this->theFabricObject->mallocLink(my_name);
     if (!link) {
+        this->abend("processSetupLink", "null link");
         this->errorProcessSetupLink(tp_transfer_object_val, ajax_id, "null link");
+        free(my_name);
+        free(password);
         return;
     }
 
@@ -128,7 +146,7 @@ void DFabricClass::processSetupLink (void *tp_transfer_object_val, char *data_va
 #define D_FABRIC_CLASS_PROCESSS_SETUP_LINK_ERROR_DOWN_LINK_DATA_SIZE (1 + WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE + 1)
 void DFabricClass::errorProcessSetupLink (void *tp_transfer_object_val, char const *ajax_id_val, char const *err_msg_val)
 {
-    this->abend("errorProcessSetupLink", err_msg_val);
+    this->debug(true, "errorProcessSetupLink", err_msg_val);
 
     char *data_ptr;
     char *downlink_data = data_ptr = (char *) phwangMalloc(D_FABRIC_CLASS_PROCESSS_SETUP_LINK_ERROR_DOWN_LINK_DATA_SIZE + strlen(err_msg_val), "DFsl");
