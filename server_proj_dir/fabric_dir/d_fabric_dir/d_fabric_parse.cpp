@@ -109,14 +109,11 @@ void DFabricClass::processSignUpRequest (void *tp_transfer_object_val, char *dat
     }
 
     int result = this->dbObject()->dbAccountObject()->checkAccountNameExist(my_name);
-    if (result) {
+    if (result != DbAccountClass::DB_ACCOUNT_NAME_NOT_EXIST) {
         char const *result_str;
         switch (result) {
             case DbAccountClass::DB_ACCOUNT_NAME_EXIST:
                 result_str = "name exist";
-                break;
-            case DbAccountClass::DB_ACCOUNT_NAME_NOT_EXIST:
-                result_str = "name not found";
                 break;
             case DbAccountClass::DB_ACCOUNT_SELECT_FAIL:
                 result_str = "select fail";
