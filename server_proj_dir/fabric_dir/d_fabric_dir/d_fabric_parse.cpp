@@ -108,24 +108,24 @@ void DFabricClass::processSignUpRequest (void *tp_transfer_object_val, char *dat
         this->logit("processSignUpRequest", buf);
     }
 
-    int check_password_result = this->dbObject()->dbAccountObject()->checkPassword(my_name, password);
-    if (check_password_result) {
-        char const *check_password_result_str;
-        switch (check_password_result) {
-            case -1:
-                check_password_result_str = "password not match";
+    int result = this->dbObject()->dbAccountObject()->checkAccountNameExist(my_name);
+    if (result) {
+        char const *result_str;
+        switch (result) {
+            case DbAccountClass::DB_ACCOUNT_NAME_EXIST:
+                result_str = "name exist";
                 break;
-            case -2:
-                check_password_result_str = "name not found";
+            case DbAccountClass::DB_ACCOUNT_NAME_NOT_EXIST:
+                result_str = "name not found";
                 break;
-            case -3:
-                check_password_result_str = "empty table";
+            case DbAccountClass::DB_ACCOUNT_SELECT_FAIL:
+                result_str = "select fail";
                 break;
             default:
-                this->abend("processSignUpRequest", "check_password_result");
+                this->abend("processSignUpRequest", "result_str");
                 break;
         }
-        this->sendSignUpResponce(tp_transfer_object_val, ajax_id, check_password_result_str);
+        this->sendSignUpResponce(tp_transfer_object_val, ajax_id, result_str);
         free(my_name);
         free(password);
         free(email);
@@ -173,24 +173,24 @@ void DFabricClass::processSetupLink (void *tp_transfer_object_val, char *data_va
         this->logit("processSetupLink", buf);
     }
 
-    int check_password_result = this->dbObject()->dbAccountObject()->checkPassword(my_name, password);
-    if (check_password_result) {
-        char const*check_password_result_str;
-        switch (check_password_result) {
-            case -1:
-                check_password_result_str = "password not match";
+    int result = this->dbObject()->dbAccountObject()->checkPassword(my_name, password);
+    if (result != DbAccountClass::DB_ACCOUNT_PASSWORD_MATCH) {
+        char const*result_str;
+        switch (result) {
+            case DbAccountClass::DB_ACCOUNT_PASSWORD_NOT_MATCH:
+                result_str = "password not match";
                 break;
-            case -2:
-                check_password_result_str = "name not found";
+            case DbAccountClass::DB_ACCOUNT_NAME_NOT_EXIST:
+                result_str = "name not exist";
                 break;
-            case -3:
-                check_password_result_str = "empty table";
+            case DbAccountClass::DB_ACCOUNT_SELECT_FAIL:
+                result_str = "select fail";
                 break;
             default:
                 this->abend("processSetupLink", "check_password_result");
                 break;
         }
-        this->sendSetupLinkResponce(tp_transfer_object_val, ajax_id, D_FABRIC_CLASS_FAKE_LINK_ID_INDEX, check_password_result_str);
+        this->sendSetupLinkResponce(tp_transfer_object_val, ajax_id, D_FABRIC_CLASS_FAKE_LINK_ID_INDEX, result_str);
         free(my_name);
         free(password);
         return;

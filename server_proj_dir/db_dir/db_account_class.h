@@ -39,4 +39,12 @@ public:
     void insertAccountEntry(DbAccountEntryClass *entry_val);
     int checkAccountNameExist (char const *account_name_val);
     int checkPassword(char const *account_name_val, char const *password_val);
+
+    int const static DB_ACCOUNT_SUCCEED            = 0;
+    int const static DB_ACCOUNT_SELECT_FAIL        = 1;
+    int const static DB_ACCOUNT_EMPTY_TABLE        = 2;
+    int const static DB_ACCOUNT_NAME_EXIST         = 3;
+    int const static DB_ACCOUNT_NAME_NOT_EXIST     = 4;
+    int const static DB_ACCOUNT_PASSWORD_MATCH     = 5;
+    int const static DB_ACCOUNT_PASSWORD_NOT_MATCH = 6;
 };

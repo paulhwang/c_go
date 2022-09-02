@@ -132,7 +132,7 @@ int DbAccountClass::checkAccountNameExist (char const *account_name_val)
     void *res;
     res = this->sqlObject()->selectFrom(this->sqlConnect(), "name");
     if (!res) {
-        -1;
+        DB_ACCOUNT_SELECT_FAIL;
     }
 
     int count = this->sqlObject()->getPQntuples(res);
@@ -144,13 +144,13 @@ int DbAccountClass::checkAccountNameExist (char const *account_name_val)
         if (!strcmp(account_name, account_name_val)) {
             this->sqlObject()->doPQclear(res);
             this->debug(true, "checkAccountNameExist", "found");
-            return 0;
+            return DB_ACCOUNT_NAME_EXIST;
         }
     }
 
     this->sqlObject()->doPQclear(res);
     this->debug(true, "checkAccountNameExist", "not found");
-    return -2;
+    return DB_ACCOUNT_NAME_NOT_EXIST;
 }
 
 int DbAccountClass::checkPassword (char const *account_name_val, char const *password_val)
@@ -158,7 +158,7 @@ int DbAccountClass::checkPassword (char const *account_name_val, char const *pas
     void *res;
     res = this->sqlObject()->selectFrom(this->sqlConnect(), "name, password");
     if (!res) {
-        -3;
+        DB_ACCOUNT_SELECT_FAIL;
     }
 
     int count = this->sqlObject()->getPQntuples(res);
@@ -176,19 +176,19 @@ int DbAccountClass::checkPassword (char const *account_name_val, char const *pas
             if (!strcmp(password, password_val)) {
                 this->sqlObject()->doPQclear(res);
                 this->debug(true, "checkPassword", "match");
-                return 0;
+                return DB_ACCOUNT_PASSWORD_MATCH;
             }
             else {
                 this->sqlObject()->doPQclear(res);
                 this->debug(true, "checkPassword", "not match");
-                return -1;
+                return DB_ACCOUNT_PASSWORD_NOT_MATCH;
             }
         }
     }
 
     this->sqlObject()->doPQclear(res);
     this->debug(true, "checkPassword", "not found");
-    return -2;
+    return DB_ACCOUNT_NAME_NOT_EXIST;
 }
 
 void DbAccountClass::logit (char const* str0_val, char const* str1_val)
