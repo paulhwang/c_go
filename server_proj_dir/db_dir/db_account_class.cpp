@@ -64,33 +64,35 @@ void DbAccountClass::createAccountTableInDatabase(void)
 
     DbAccountEntryClass *entry = new DbAccountEntryClass();
     entry->setAccountName(mallocConstStrBuf("admin"));
-    entry->setPassword(mallocConstStrBuf("ap"));
+    entry->setPassword(mallocConstStrBuf("admin_password"));
     this->insertAccountEntry(entry);
 
     entry = new DbAccountEntryClass();
     entry->setAccountName(mallocConstStrBuf("phwang"));
-    entry->setPassword(mallocConstStrBuf("pp"));
+    entry->setPassword(mallocConstStrBuf("a"));
     this->insertAccountEntry(entry);
 
     entry = new DbAccountEntryClass();
     entry->setAccountName(mallocConstStrBuf("ikolre"));
-    entry->setPassword(mallocConstStrBuf("ip"));
+    entry->setPassword(mallocConstStrBuf("ikolre_password"));
     this->insertAccountEntry(entry);
 
     entry = new DbAccountEntryClass();
     entry->setAccountName(mallocConstStrBuf("guest"));
-    entry->setPassword(mallocConstStrBuf("gp"));
+    entry->setPassword(mallocConstStrBuf("guest_password"));
     this->insertAccountEntry(entry);
 
     entry = new DbAccountEntryClass();
     entry->setAccountName(mallocConstStrBuf("BigBrave"));
-    entry->setPassword(mallocConstStrBuf("bp"));
+    entry->setPassword(mallocConstStrBuf("bigbrave"));
     this->insertAccountEntry(entry);
 
     entry = new DbAccountEntryClass();
     entry->setAccountName(mallocConstStrBuf("paul"));
-    entry->setPassword(mallocConstStrBuf("paulpassword"));
+    entry->setPassword(mallocConstStrBuf("a"));
     this->insertAccountEntry(entry);
+
+    /****** the buf malloc by mallocConstStrBuf has been free by the insertAccountEntry ********/
 }
 
 void DbAccountClass::listAccount (void) {

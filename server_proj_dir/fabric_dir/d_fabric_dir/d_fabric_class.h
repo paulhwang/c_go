@@ -11,6 +11,7 @@
 #include "../fabric_class.h"
 
 class FabricClass;
+class DbAccountClass;
 
 #define FABRIC_SERVER_TIME_STAMP_LENGTH_SIZE 8
 
@@ -20,6 +21,7 @@ class DFabricClass {
     char theTimeStampString[FABRIC_SERVER_TIME_STAMP_LENGTH_SIZE + 16];
 
     DbClass *dbObject(void) {return theFabricObject->dbObject();}
+    DbAccountClass *dbAccountObject(void);
     
     void setTimeStampString(void);
     void startNetServer(void);

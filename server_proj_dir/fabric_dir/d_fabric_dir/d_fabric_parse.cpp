@@ -20,6 +20,9 @@
 #include "../name_list_class.h"
 #include "../../db_dir/db_class.h"
 #include "../../db_dir/db_account_class.h"
+#include "../../db_dir/db_account_entry_class.h"
+
+DbAccountClass *DFabricClass::dbAccountObject(void) {return theFabricObject->dbObject()->dbAccountObject();}
 
 void DFabricClass::exportedParseFunction (void *tp_transfer_object_val, char *data_val)
 {
@@ -90,11 +93,11 @@ void DFabricClass::processSignUpRequest (void *tp_transfer_object_val, char *dat
 
     char *ajax_id = data_val;
 
-    char *encoded_my_name = ajax_id + WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;
-    int my_name_size;
-    char *my_name = phwangDecodeString(encoded_my_name, &my_name_size);
+    char *encoded_account_name = ajax_id + WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;
+    int account_name_size;
+    char *account_name = phwangDecodeString(encoded_account_name, &account_name_size);
 
-    char *encoded_password = encoded_my_name + my_name_size;
+    char *encoded_password = encoded_account_name + account_name_size;
     int password_size;
     char *password = phwangDecodeString(encoded_password, &password_size);
 
@@ -104,11 +107,11 @@ void DFabricClass::processSignUpRequest (void *tp_transfer_object_val, char *dat
 
     if (1) { /* debug */
         char buf[256];
-        sprintf(buf, "my_name=%s password=%s email=%s\n", my_name, password, email);
+        sprintf(buf, "account_name=%s password=%s email=%s\n", account_name, password, email);
         this->logit("processSignUpRequest", buf);
     }
 
-    int result = this->dbObject()->dbAccountObject()->checkAccountNameExist(my_name);
+    int result = this->dbAccountObject()->checkAccountNameExist(account_name);
     if (result != DbAccountClass::DB_ACCOUNT_NAME_NOT_EXIST) {
         char const *result_str;
         switch (result) {
@@ -123,16 +126,26 @@ void DFabricClass::processSignUpRequest (void *tp_transfer_object_val, char *dat
                 break;
         }
         this->sendSignUpResponce(tp_transfer_object_val, ajax_id, result_str);
-        free(my_name);
+        free(account_name);
         free(password);
         free(email);
         return;
     }
 
+    DbAccountEntryClass *account_entry = new DbAccountEntryClass();
+    account_entry->setAccountName(account_name);
+    account_entry->setPassword(password);
+    account_entry->setEmail(email);
+    this->dbAccountObject()->insertAccountEntry(account_entry);
+
     this->sendSignUpResponce(tp_transfer_object_val, ajax_id, "succeed");
-    free(my_name);
+
+    /***
+    ---the buffers has been freed in the insertAccountEntry()---
+    free(account_name);
     free(password);
     free(email);
+    ***/
 }
 
 #define D_FABRIC_CLASS_PROCESSS_SIGN_UP_DOWN_LINK_DATA_SIZE (1 + WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + 1)
