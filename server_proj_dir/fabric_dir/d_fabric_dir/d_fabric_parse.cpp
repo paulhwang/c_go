@@ -31,6 +31,11 @@ void DFabricClass::exportedParseFunction (void *tp_transfer_object_val, char *da
         }
     }
 
+    if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_SIGN_UP) {
+        this->processSignUpRequest(tp_transfer_object_val, data_val + 1);
+        return;
+    }
+
     if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_SETUP_LINK) {
         this->processSetupLink(tp_transfer_object_val, data_val + 1);
         return;
@@ -80,6 +85,66 @@ void DFabricClass::exportedParseFunction (void *tp_transfer_object_val, char *da
 }
 
 #define D_FABRIC_CLASS_FAKE_LINK_ID_INDEX "99990000"
+void DFabricClass::processSignUpRequest (void *tp_transfer_object_val, char *data_val)
+{
+    this->debug(true, "processSignUpRequest", data_val);
+
+    char *ajax_id = data_val;
+
+    char *encoded_my_name = ajax_id + WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;
+    int my_name_size;
+    char *my_name = phwangDecodeString(encoded_my_name, &my_name_size);
+
+    char *encoded_password = encoded_my_name + my_name_size;
+    int password_size;
+    char *password = phwangDecodeString(encoded_password, &password_size);
+
+    if (1) { /* debug */
+        char buf[256];
+        sprintf(buf, "my_name=%s password=%s\n", my_name, password);
+        this->logit("processSignUpRequest", buf);
+    }
+
+    int check_password_result = this->dbObject()->dbAccountObject()->checkPassword(my_name, password);
+    if (check_password_result) {
+        char *check_password_result_str;
+        switch (check_password_result) {
+            case -1:
+                check_password_result_str = "password not match";
+                break;
+            case -2:
+                check_password_result_str = "name not found";
+                break;
+            case -3:
+                check_password_result_str = "empty table";
+                break;
+            default:
+                this->abend("processSignUpRequest", "check_password_result");
+                break;
+        }
+        this->sendSignUpResponce(tp_transfer_object_val, ajax_id, D_FABRIC_CLASS_FAKE_LINK_ID_INDEX, check_password_result_str);
+        free(my_name);
+        free(password);
+        return;
+    }
+}
+
+#define D_FABRIC_CLASS_PROCESSS_SIGN_UP_DOWN_LINK_DATA_SIZE (1 + WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + 1)
+void DFabricClass::sendSignUpResponce (void *tp_transfer_object_val, char const *ajax_id_val, char const *link_id_index_val, char const *result_val)
+{
+    this->debug(true, "signUpLinkResponce", result_val);
+
+    char *data_ptr;
+    char *downlink_data = data_ptr = (char *) phwangMalloc(D_FABRIC_CLASS_PROCESSS_SIGN_UP_DOWN_LINK_DATA_SIZE + strlen(result_val), "DFSL");
+    *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_SETUP_LINK;
+    memcpy(data_ptr, ajax_id_val, WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE);
+    data_ptr += WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;
+    strcpy(data_ptr, link_id_index_val);
+    data_ptr += LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE;
+    strcpy(data_ptr, result_val);
+    this->transmitFunction(tp_transfer_object_val, downlink_data);
+}
+
 void DFabricClass::processSetupLink (void *tp_transfer_object_val, char *data_val)
 {
     this->debug(true, "processSetupLink", data_val);
