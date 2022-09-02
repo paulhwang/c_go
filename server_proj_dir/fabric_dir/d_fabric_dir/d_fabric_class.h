@@ -34,7 +34,7 @@ class DFabricClass {
     void processFreeSession(void *tp_transfer_object_val, char *data_val);
     void processPutSessionData(void *tp_transfer_object_val, char *data_val);
     void processGetSessionData(void *tp_transfer_object_val, char *data_val);
-    void sendSignUpResponce(void *tp_transfer_object_val, char const *ajax_id_val, char const *link_id_index_val, char const *err_msg_val);
+    void sendSignUpResponce(void *tp_transfer_object_val, char const *ajax_id_val, char const *err_msg_val);
     void sendSetupLinkResponce(void *tp_transfer_object_val, char const *ajax_id_val, char const *link_id_index_val, char const *err_msg_val);
     void errorProcessFreeLink(void *tp_transfer_object_val, char const *ajax_id_val, char const *err_msg_val);
     void errorProcessGetLinkData(void *tp_transfer_object_val, char const *ajax_id_val, char const *err_msg_val);

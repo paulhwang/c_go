@@ -84,7 +84,6 @@ void DFabricClass::exportedParseFunction (void *tp_transfer_object_val, char *da
     this->abend("exportedParseFunction", data_val);
 }
 
-#define D_FABRIC_CLASS_FAKE_LINK_ID_INDEX "99990000"
 void DFabricClass::processSignUpRequest (void *tp_transfer_object_val, char *data_val)
 {
     this->debug(true, "processSignUpRequest", data_val);
@@ -99,15 +98,19 @@ void DFabricClass::processSignUpRequest (void *tp_transfer_object_val, char *dat
     int password_size;
     char *password = phwangDecodeString(encoded_password, &password_size);
 
+    char *encoded_email = encoded_password + password_size;
+    int email_size;
+    char *email = phwangDecodeString(encoded_email, &email_size);
+
     if (1) { /* debug */
         char buf[256];
-        sprintf(buf, "my_name=%s password=%s\n", my_name, password);
+        sprintf(buf, "my_name=%s password=%s email=%s\n", my_name, password, email);
         this->logit("processSignUpRequest", buf);
     }
 
     int check_password_result = this->dbObject()->dbAccountObject()->checkPassword(my_name, password);
     if (check_password_result) {
-        char *check_password_result_str;
+        char const *check_password_result_str;
         switch (check_password_result) {
             case -1:
                 check_password_result_str = "password not match";
@@ -122,15 +125,21 @@ void DFabricClass::processSignUpRequest (void *tp_transfer_object_val, char *dat
                 this->abend("processSignUpRequest", "check_password_result");
                 break;
         }
-        this->sendSignUpResponce(tp_transfer_object_val, ajax_id, D_FABRIC_CLASS_FAKE_LINK_ID_INDEX, check_password_result_str);
+        this->sendSignUpResponce(tp_transfer_object_val, ajax_id, check_password_result_str);
         free(my_name);
         free(password);
+        free(email);
         return;
     }
+
+    this->sendSignUpResponce(tp_transfer_object_val, ajax_id, "succeed");
+    free(my_name);
+    free(password);
+    free(email);
 }
 
 #define D_FABRIC_CLASS_PROCESSS_SIGN_UP_DOWN_LINK_DATA_SIZE (1 + WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + 1)
-void DFabricClass::sendSignUpResponce (void *tp_transfer_object_val, char const *ajax_id_val, char const *link_id_index_val, char const *result_val)
+void DFabricClass::sendSignUpResponce (void *tp_transfer_object_val, char const *ajax_id_val, char const *result_val)
 {
     this->debug(true, "signUpLinkResponce", result_val);
 
@@ -139,12 +148,11 @@ void DFabricClass::sendSignUpResponce (void *tp_transfer_object_val, char const 
     *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_SETUP_LINK;
     memcpy(data_ptr, ajax_id_val, WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE);
     data_ptr += WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;
-    strcpy(data_ptr, link_id_index_val);
-    data_ptr += LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE;
     strcpy(data_ptr, result_val);
     this->transmitFunction(tp_transfer_object_val, downlink_data);
 }
 
+#define D_FABRIC_CLASS_FAKE_LINK_ID_INDEX "99990000"
 void DFabricClass::processSetupLink (void *tp_transfer_object_val, char *data_val)
 {
     this->debug(true, "processSetupLink", data_val);
@@ -167,7 +175,7 @@ void DFabricClass::processSetupLink (void *tp_transfer_object_val, char *data_va
 
     int check_password_result = this->dbObject()->dbAccountObject()->checkPassword(my_name, password);
     if (check_password_result) {
-        char *check_password_result_str;
+        char const*check_password_result_str;
         switch (check_password_result) {
             case -1:
                 check_password_result_str = "password not match";
