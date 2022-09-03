@@ -77,27 +77,27 @@ void DFabricClass::exportedParseFunction (void *tp_transfer_object_val, char *da
             return;
 
         case WEB_FABRIC_PROTOCOL_COMMAND_IS_FREE_LINK:
-            this->processFreeLinkRequest(tp_transfer_object_val, rest_data, ajax_id);
+            this->processFreeLinkRequest(tp_transfer_object_val, rest_data, ajax_id, link);
             return;
 
         case WEB_FABRIC_PROTOCOL_COMMAND_IS_GET_LINK_DATA:
-            this->processGetLinkDataRequest(tp_transfer_object_val, rest_data, ajax_id);
+            this->processGetLinkDataRequest(tp_transfer_object_val, rest_data, ajax_id, link);
             return;
 
         case WEB_FABRIC_PROTOCOL_COMMAND_IS_GET_NAME_LIST:
-            this->processGetNameListRequest(tp_transfer_object_val, rest_data, ajax_id);
+            this->processGetNameListRequest(tp_transfer_object_val, rest_data, ajax_id, link);
             return;
 
         case WEB_FABRIC_PROTOCOL_COMMAND_IS_SETUP_SESSION:
-            this->processSetupSessionRequest(tp_transfer_object_val, rest_data, ajax_id);
+            this->processSetupSessionRequest(tp_transfer_object_val, rest_data, ajax_id, link);
             return;
 
         case WEB_FABRIC_PROTOCOL_COMMAND_IS_SETUP_SESSION2:
-            this->processSetupSession2Request(tp_transfer_object_val, rest_data, ajax_id);
+            this->processSetupSession2Request(tp_transfer_object_val, rest_data, ajax_id, link);
             return;
 
         case WEB_FABRIC_PROTOCOL_COMMAND_IS_SETUP_SESSION3:
-            this->processSetupSession3Request(tp_transfer_object_val, rest_data, ajax_id);
+            this->processSetupSession3Request(tp_transfer_object_val, rest_data, ajax_id, link);
             return;
 
         case WEB_FABRIC_PROTOCOL_COMMAND_IS_PUT_SESSION_DATA:
@@ -272,7 +272,7 @@ void DFabricClass::sendSetupLinkResponce (void *tp_transfer_object_val, char con
     this->transmitFunction(tp_transfer_object_val, downlink_data);
 }
 
-void DFabricClass::processFreeLinkRequest (void *tp_transfer_object_val, char *data_val, char const *ajax_id_val)
+void DFabricClass::processFreeLinkRequest (void *tp_transfer_object_val, char *data_val, char const *ajax_id_val, LinkClass *link_val)
 {
     this->debug(false, "processFreeLink", data_val);
 
@@ -311,7 +311,7 @@ void DFabricClass::errorProcessFreeLink (void *tp_transfer_object_val, char cons
 #define D_FABRIC_CLASS_PROCESSS_GET_LINK_DATA_DOWN_LINK_PENDING_DATA_SIZE (1 + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + LINK_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE)
 #define D_FABRIC_CLASS_PROCESSS_GET_LINK_DATA_DOWN_LINK_DATA_SIZE (1 + WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + 1 + WEB_FABRIC_PROTOCOL_NAME_LIST_TAG_SIZE + 1)
 #define D_FABRIC_CLASS_PROCESSS_GET_LINK_DATA_DOWN_LINK_PENDING_SESSION_SIZE (1 + WEB_FABRIC_PROTOCOL_NAME_LIST_TAG_SIZE)
-void DFabricClass::processGetLinkDataRequest (void *tp_transfer_object_val, char *data_val, char const *ajax_id_val)
+void DFabricClass::processGetLinkDataRequest (void *tp_transfer_object_val, char *data_val, char const *ajax_id_val, LinkClass *link_val)
 {
     this->debug(false, "processGetLinkData", data_val);
 
@@ -323,6 +323,7 @@ void DFabricClass::processGetLinkDataRequest (void *tp_transfer_object_val, char
         this->errorProcessGetLinkData(tp_transfer_object_val, ajax_id_val, "link does not exist");
         return;
     }
+    link = link_val;
     link->resetKeepAliveTime();
 
     char *data_ptr;
@@ -388,7 +389,7 @@ void DFabricClass::errorProcessGetLinkData (void *tp_transfer_object_val, char c
     this->transmitFunction(tp_transfer_object_val, downlink_data);
 }
 
-void DFabricClass::processGetNameListRequest (void *tp_transfer_object_val, char *data_val, char const *ajax_id_val)
+void DFabricClass::processGetNameListRequest (void *tp_transfer_object_val, char *data_val, char const *ajax_id_val, LinkClass *link_val)
 {
     this->debug(true, "processGetNameList", data_val);
 
@@ -430,7 +431,7 @@ void DFabricClass::errorProcessGetNameList (void *tp_transfer_object_val, char c
     this->transmitFunction(tp_transfer_object_val, downlink_data);
 }
 
-void DFabricClass::processSetupSessionRequest (void *tp_transfer_object_val, char *data_val, char const *ajax_id_val)
+void DFabricClass::processSetupSessionRequest (void *tp_transfer_object_val, char *data_val, char const *ajax_id_val, LinkClass *link_val)
 {
     this->debug(true, "processSetupSession", data_val);
 
@@ -517,7 +518,7 @@ void DFabricClass::mallocRoom (GroupClass *group_val, char *theme_info_val)
     this->theFabricObject->uFabricObject()->transmitFunction(uplink_data);
 }
 
-void DFabricClass::processSetupSession2Request (void *tp_transfer_object_val, char *data_val, char const *ajax_id_val)
+void DFabricClass::processSetupSession2Request (void *tp_transfer_object_val, char *data_val, char const *ajax_id_val, LinkClass *link_val)
 {
     this->debug(true, "processSetupSession2", data_val);
 
@@ -566,7 +567,7 @@ void DFabricClass::errorProcessSetupSession2 (void *tp_transfer_object_val, char
     this->transmitFunction(tp_transfer_object_val, downlink_data);
 }
 
-void DFabricClass::processSetupSession3Request (void *tp_transfer_object_val, char *data_val, char const *ajax_id_val)
+void DFabricClass::processSetupSession3Request (void *tp_transfer_object_val, char *data_val, char const *ajax_id_val, LinkClass *link_val)
 {
     this->debug(true, "processSetupSession3", data_val);
 

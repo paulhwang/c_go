@@ -27,12 +27,12 @@ class DFabricClass {
     void startNetServer(void);
     void processSignUpRequest(void *tp_transfer_object_val, char *data_val, char const *ajax_id_val);
     void processSetupLinkRequest(void *tp_transfer_object_val, char *data_val, char const *ajax_id_val);
-    void processFreeLinkRequest(void *tp_transfer_object_val, char *data_val, char const *ajax_id_val);
-    void processGetLinkDataRequest(void *tp_transfer_object_val, char *data_val, char const *ajax_id_val);
-    void processGetNameListRequest(void *tp_transfer_object_val, char *data_val, char const *ajax_id_val);
-    void processSetupSessionRequest(void *tp_transfer_object_val, char *data_val, char const *ajax_id_val);
-    void processSetupSession2Request(void *tp_transfer_object_val, char *data_val, char const *ajax_id_val);
-    void processSetupSession3Request(void *tp_transfer_object_val, char *data_val, char const *ajax_id_val);
+    void processFreeLinkRequest(void *tp_transfer_object_val, char *data_val, char const *ajax_id_val, LinkClass *link_val);
+    void processGetLinkDataRequest(void *tp_transfer_object_val, char *data_val, char const *ajax_id_val, LinkClass *link_val);
+    void processGetNameListRequest(void *tp_transfer_object_val, char *data_val, char const *ajax_id_val, LinkClass *link_val);
+    void processSetupSessionRequest(void *tp_transfer_object_val, char *data_val, char const *ajax_id_val, LinkClass *link_val);
+    void processSetupSession2Request(void *tp_transfer_object_val, char *data_val, char const *ajax_id_val, LinkClass *link_val);
+    void processSetupSession3Request(void *tp_transfer_object_val, char *data_val, char const *ajax_id_val, LinkClass *link_val);
     void processFreeSessionRequest(void *tp_transfer_object_val, char *data_val, char const *ajax_id_val);
     void processPutSessionDataRequest(void *tp_transfer_object_val, char *data_val, char const *ajax_id_val);
     void processGetSessionDataRequest(void *tp_transfer_object_val, char *data_val, char const *ajax_id_val);
