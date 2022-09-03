@@ -66,6 +66,7 @@ void DFabricClass::exportedParseFunction (void *tp_transfer_object_val, char *da
                 this->sendSearchLinkSessionFailResponse(command, tp_transfer_object_val, ajax_id);
                 return;
             }
+            rest_data += LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE;
             break;
 
         default:
@@ -591,23 +592,20 @@ void DFabricClass::processPutSessionDataRequest (void *tp_transfer_object_val, c
 {
     this->debug(true, "processPutSessionData", data_val);
 
-    char *link_and_session_id_index_val = data_val;
-    char *end_val = link_and_session_id_index_val + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE;
-
-    char *data_ptr;
-
     char *room = session_val->groupObject()->roomIdIndex();
     if (!room) {
         this->errorProcessPutSessionData(tp_transfer_object_val, ajax_id_val, "null room");
         return;
     }
 
+    char *data_ptr;
+
     /* transfer data up */
     char *uplink_data = data_ptr = (char *) phwangMalloc(LINK_MGR_DATA_BUFFER_SIZE + 4, "DFSU");
     *data_ptr++ = FABRIC_THEME_PROTOCOL_COMMAND_IS_PUT_ROOM_DATA;
     memcpy(data_ptr, room, ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);
     data_ptr += ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE;
-    strcpy(data_ptr, end_val);
+    strcpy(data_ptr, data_val);
     this->theFabricObject->uFabricObject()->transmitFunction(uplink_data);
 
     /* send the response down */
@@ -640,16 +638,11 @@ void DFabricClass::processGetSessionDataRequest (void *tp_transfer_object_val, c
 {
     this->debug(true, "processGetSessionData", data_val);
 
-    char *link_and_session_id_index_val = data_val;
-    char *end_val = link_and_session_id_index_val + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE;
-
     char *data = session_val->getPendingDownLinkData();
 
     char *data_ptr;
     char *downlink_data = data_ptr = (char *) phwangMalloc(LINK_MGR_DATA_BUFFER_SIZE + 4, "DFGS");
     *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_SESSION_DATA;
-    //downlink_data = data_ptr = (char *) phwangMalloc(LINK_MGR_DATA_BUFFER_SIZE + 4, "DFXX");
-    //*data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_NAME_LIST;
     strcpy(data_ptr, ajax_id_val);
     data_ptr += WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;
     memcpy(data_ptr, session_val->linkObject()->linkIdIndex(), LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE);
