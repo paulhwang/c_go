@@ -34,7 +34,17 @@ void DFabricClass::exportedParseFunction (void *tp_transfer_object_val, char *da
         }
     }
 
-    switch (*data_val++) {
+    char type = data_val[0];
+    char command = data_val[1];
+
+    /* get ajax_id */
+    char ajax_id[8];
+    memcpy(ajax_id, &data_val[2], WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE);
+    ajax_id[WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE] = 0;
+
+    char *data = &data_val[2 + WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE];
+
+    switch (type) {
         case '0':
             break;
 
@@ -49,63 +59,50 @@ void DFabricClass::exportedParseFunction (void *tp_transfer_object_val, char *da
             break;
     }
 
-    char ajax_id[8];
-    memcpy(ajax_id, data_val + 1, WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE);
-    ajax_id[WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE] = 0;
+    switch (command) {
+        case WEB_FABRIC_PROTOCOL_COMMAND_IS_SIGN_UP:
+            this->processSignUpRequest(tp_transfer_object_val, data, ajax_id);
+            return;
 
-    char *data = data_val + 1 + WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;
+        case WEB_FABRIC_PROTOCOL_COMMAND_IS_SETUP_LINK:
+            this->processSetupLinkRequest(tp_transfer_object_val, data, ajax_id);
+            return;
 
-    if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_SIGN_UP) {
-        this->processSignUpRequest(tp_transfer_object_val, data, ajax_id);
-        return;
+        case WEB_FABRIC_PROTOCOL_COMMAND_IS_FREE_LINK:
+            this->processFreeLinkRequest(tp_transfer_object_val, data, ajax_id);
+            return;
+
+        case WEB_FABRIC_PROTOCOL_COMMAND_IS_GET_LINK_DATA:
+            this->processGetLinkDataRequest(tp_transfer_object_val, data, ajax_id);
+            return;
+
+        case WEB_FABRIC_PROTOCOL_COMMAND_IS_GET_NAME_LIST:
+            this->processGetNameListRequest(tp_transfer_object_val, data, ajax_id);
+            return;
+
+        case WEB_FABRIC_PROTOCOL_COMMAND_IS_SETUP_SESSION:
+            this->processSetupSessionRequest(tp_transfer_object_val, data, ajax_id);
+            return;
+
+        case WEB_FABRIC_PROTOCOL_COMMAND_IS_SETUP_SESSION2:
+            this->processSetupSession2Request(tp_transfer_object_val, data, ajax_id);
+            return;
+
+        case WEB_FABRIC_PROTOCOL_COMMAND_IS_SETUP_SESSION3:
+            this->processSetupSession3Request(tp_transfer_object_val, data, ajax_id);
+            return;
+
+        case WEB_FABRIC_PROTOCOL_COMMAND_IS_PUT_SESSION_DATA:
+            this->processPutSessionDataRequest(tp_transfer_object_val, data, ajax_id);
+            return;
+
+        case WEB_FABRIC_PROTOCOL_COMMAND_IS_GET_SESSION_DATA:
+            this->processGetSessionDataRequest(tp_transfer_object_val, data, ajax_id);
+            return;
+
+        default:
+            this->abend("exportedParseFunction", data_val);
     }
-
-    if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_SETUP_LINK) {
-        this->processSetupLinkRequest(tp_transfer_object_val, data, ajax_id);
-        return;
-    }
-
-    if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_FREE_LINK) {
-        this->processFreeLinkRequest(tp_transfer_object_val, data_val + 1, ajax_id);
-        return;
-    }
-
-    if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_GET_LINK_DATA) {
-        this->processGetLinkDataRequest(tp_transfer_object_val, data_val + 1, ajax_id);
-        return;
-    }
-
-    if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_GET_NAME_LIST) {
-        this->processGetNameListRequest(tp_transfer_object_val, data_val + 1, ajax_id);
-        return;
-    }
-
-    if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_SETUP_SESSION) {
-        this->processSetupSessionRequest(tp_transfer_object_val, data, ajax_id);
-        return;
-    }
-
-    if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_SETUP_SESSION2) {
-        this->processSetupSession2Request(tp_transfer_object_val, data, ajax_id);
-        return;
-    }
-
-    if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_SETUP_SESSION3) {
-        this->processSetupSession3Request(tp_transfer_object_val, data, ajax_id);
-        return;
-    }
-
-    if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_PUT_SESSION_DATA) {
-        this->processPutSessionDataRequest(tp_transfer_object_val, data, ajax_id);
-        return;
-    }
-
-    if (*data_val == WEB_FABRIC_PROTOCOL_COMMAND_IS_GET_SESSION_DATA) {
-        this->processGetSessionDataRequest(tp_transfer_object_val, data, ajax_id);
-        return;
-    }
-
-    this->abend("exportedParseFunction", data_val);
 }
 
 void DFabricClass::processSignUpRequest (void *tp_transfer_object_val, char *data_val, char const *ajax_id_val)
@@ -258,13 +255,12 @@ void DFabricClass::processFreeLinkRequest (void *tp_transfer_object_val, char *d
 {
     this->debug(false, "processFreeLink", data_val);
 
-    char *ajax_id = data_val;
-    char *link_id_index_val = ajax_id + WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;
+    char *link_id_index_val = data_val;
     char *end_val = link_id_index_val + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE;
 
     LinkClass *link = this->theFabricObject->searchLink(link_id_index_val, data_val - 1);
     if (!link) {
-        this->errorProcessFreeLink(tp_transfer_object_val, ajax_id, "link does not exist");
+        this->errorProcessFreeLink(tp_transfer_object_val, ajax_id_val, "link does not exist");
         return;
     }
     this->theFabricObject->freeLink(link);
@@ -272,7 +268,7 @@ void DFabricClass::processFreeLinkRequest (void *tp_transfer_object_val, char *d
     char *data_ptr;
     char *downlink_data = data_ptr = (char *) phwangMalloc(LINK_MGR_DATA_BUFFER_SIZE + 4, "DFFL");
     *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_FREE_LINK;
-    memcpy(data_ptr, ajax_id, WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE);
+    strcpy(data_ptr, ajax_id_val);
     data_ptr += WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;
     strcpy(data_ptr, link->linkIdIndex());
     this->transmitFunction(tp_transfer_object_val, downlink_data);
@@ -298,13 +294,12 @@ void DFabricClass::processGetLinkDataRequest (void *tp_transfer_object_val, char
 {
     this->debug(false, "processGetLinkData", data_val);
 
-    char *ajax_id = data_val;
-    char *link_id_index_val = ajax_id + WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;
+    char *link_id_index_val = data_val;
     char *end_val = link_id_index_val + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE;
 
     LinkClass *link = this->theFabricObject->searchLink(link_id_index_val, data_val - 1);
     if (!link) {
-        this->errorProcessGetLinkData(tp_transfer_object_val, ajax_id, "link does not exist");
+        this->errorProcessGetLinkData(tp_transfer_object_val, ajax_id_val, "link does not exist");
         return;
     }
     link->resetKeepAliveTime();
@@ -312,7 +307,7 @@ void DFabricClass::processGetLinkDataRequest (void *tp_transfer_object_val, char
     char *data_ptr;
     char *downlink_data = data_ptr = (char *) phwangMalloc(LINK_MGR_DATA_BUFFER_SIZE + 4, "DFLD");
     *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA;
-    memcpy(data_ptr, ajax_id, WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE);
+    strcpy(data_ptr, ajax_id_val);
     data_ptr += WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;
     *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_NAME_LIST;
     phwangEncodeNumber(data_ptr, this->theFabricObject->nameListObject()->nameListTag(), WEB_FABRIC_PROTOCOL_NAME_LIST_TAG_SIZE);
@@ -376,14 +371,13 @@ void DFabricClass::processGetNameListRequest (void *tp_transfer_object_val, char
 {
     this->debug(true, "processGetNameList", data_val);
 
-    char *ajax_id = data_val;
-    char *link_id_index_val = ajax_id + WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;
+    char *link_id_index_val = data_val;
     char *name_list_tag_val = link_id_index_val + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE;
     char *end_val = name_list_tag_val + 3;
 
     LinkClass *link = this->theFabricObject->searchLink(link_id_index_val, data_val - 1);
     if (!link) {
-        this->errorProcessGetNameList(tp_transfer_object_val, ajax_id, "link does not exist");
+        this->errorProcessGetNameList(tp_transfer_object_val, ajax_id_val, "link does not exist");
         return;
     }
 
@@ -393,7 +387,7 @@ void DFabricClass::processGetNameListRequest (void *tp_transfer_object_val, char
     char *data_ptr;
     char *downlink_data = data_ptr = (char *) phwangMalloc(strlen(name_list) + LINK_MGR_DATA_BUFFER_SIZE + 4, "DFNl");
     *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_NAME_LIST;
-    memcpy(data_ptr, ajax_id, WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE);
+    strcpy(data_ptr, ajax_id_val);
     data_ptr += WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;
     *data_ptr = 0;
     if (name_list) {
