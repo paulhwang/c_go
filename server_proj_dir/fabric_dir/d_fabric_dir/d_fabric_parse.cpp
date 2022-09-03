@@ -77,18 +77,22 @@ void DFabricClass::exportedParseFunction (void *tp_transfer_object_val, char *da
             return;
 
         case WEB_FABRIC_PROTOCOL_COMMAND_IS_FREE_LINK:
+            rest_data += LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE;
             this->processFreeLinkRequest(tp_transfer_object_val, rest_data, ajax_id, link);
             return;
 
         case WEB_FABRIC_PROTOCOL_COMMAND_IS_GET_LINK_DATA:
+            rest_data += LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE;
             this->processGetLinkDataRequest(tp_transfer_object_val, rest_data, ajax_id, link);
             return;
 
         case WEB_FABRIC_PROTOCOL_COMMAND_IS_GET_NAME_LIST:
+            rest_data += LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE;
             this->processGetNameListRequest(tp_transfer_object_val, rest_data, ajax_id, link);
             return;
 
         case WEB_FABRIC_PROTOCOL_COMMAND_IS_SETUP_SESSION:
+            rest_data += LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE;
             this->processSetupSessionRequest(tp_transfer_object_val, rest_data, ajax_id, link);
             return;
 
@@ -276,23 +280,17 @@ void DFabricClass::processFreeLinkRequest (void *tp_transfer_object_val, char *d
 {
     this->debug(false, "processFreeLink", data_val);
 
-    char *link_id_index_val = data_val;
-    char *end_val = link_id_index_val + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE;
-
-    LinkClass *link = this->theFabricObject->searchLink(link_id_index_val, data_val - 1);
-    if (!link) {
-        this->errorProcessFreeLink(tp_transfer_object_val, ajax_id_val, "link does not exist");
-        return;
-    }
-    this->theFabricObject->freeLink(link);
+    char *end_val = data_val;
 
     char *data_ptr;
     char *downlink_data = data_ptr = (char *) phwangMalloc(LINK_MGR_DATA_BUFFER_SIZE + 4, "DFFL");
     *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_FREE_LINK;
     strcpy(data_ptr, ajax_id_val);
     data_ptr += WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;
-    strcpy(data_ptr, link->linkIdIndex());
+    strcpy(data_ptr, link_val->linkIdIndex());
     this->transmitFunction(tp_transfer_object_val, downlink_data);
+
+    this->theFabricObject->freeLink(link_val);
 }
 
 void DFabricClass::errorProcessFreeLink (void *tp_transfer_object_val, char const *ajax_id_val, char const *err_msg_val)
@@ -315,16 +313,7 @@ void DFabricClass::processGetLinkDataRequest (void *tp_transfer_object_val, char
 {
     this->debug(false, "processGetLinkData", data_val);
 
-    char *link_id_index_val = data_val;
-    char *end_val = link_id_index_val + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE;
-
-    LinkClass *link = this->theFabricObject->searchLink(link_id_index_val, data_val - 1);
-    if (!link) {
-        this->errorProcessGetLinkData(tp_transfer_object_val, ajax_id_val, "link does not exist");
-        return;
-    }
-    link = link_val;
-    link->resetKeepAliveTime();
+    link_val->resetKeepAliveTime();
 
     char *data_ptr;
     char *downlink_data = data_ptr = (char *) phwangMalloc(LINK_MGR_DATA_BUFFER_SIZE + 4, "DFLD");
@@ -336,8 +325,8 @@ void DFabricClass::processGetLinkDataRequest (void *tp_transfer_object_val, char
     data_ptr += WEB_FABRIC_PROTOCOL_NAME_LIST_TAG_SIZE;
     *data_ptr = 0;
 
-    int max_session_table_array_index = phwnagListMgrGetMaxIndex(link->sessionListMgrObject(), "DFabricClass::processGetLinkData()");
-    SessionClass **session_table_array = (SessionClass **) phwangListMgrGetEntryTableArray(link->sessionListMgrObject());
+    int max_session_table_array_index = phwnagListMgrGetMaxIndex(link_val->sessionListMgrObject(), "DFabricClass::processGetLinkData()");
+    SessionClass **session_table_array = (SessionClass **) phwangListMgrGetEntryTableArray(link_val->sessionListMgrObject());
     for (int i = 0; i <= max_session_table_array_index; i++) {
         SessionClass *session = session_table_array[i];
         if (session) {
@@ -345,7 +334,7 @@ void DFabricClass::processGetLinkDataRequest (void *tp_transfer_object_val, char
             if (pending_downlink_data) {
                 *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_PENDING_DATA;
                 session->enqueuePendingDownLinkData(pending_downlink_data);
-                strcpy(data_ptr, link->linkIdIndex());
+                strcpy(data_ptr, link_val->linkIdIndex());
                 data_ptr += LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE;
                 strcpy(data_ptr, session->sessionIdIndex());
                 data_ptr += LINK_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE;
@@ -359,14 +348,14 @@ void DFabricClass::processGetLinkDataRequest (void *tp_transfer_object_val, char
         }
     }
 
-    char *pending_session = link->getPendingSessionSetup();
+    char *pending_session = link_val->getPendingSessionSetup();
     if (pending_session) {
         *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_PENDING_SESSION;
         strcpy(data_ptr, pending_session);
         this->debug(true, "==================processGetLinkData getPendingSessionSetup", downlink_data);
     }
 
-    char *pending_session3 = link->getPendingSessionSetup3();
+    char *pending_session3 = link_val->getPendingSessionSetup3();
     if (pending_session3) {
         *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_PENDING_SESSION3;
         strcpy(data_ptr, pending_session3);
@@ -393,15 +382,8 @@ void DFabricClass::processGetNameListRequest (void *tp_transfer_object_val, char
 {
     this->debug(true, "processGetNameList", data_val);
 
-    char *link_id_index_val = data_val;
-    char *name_list_tag_val = link_id_index_val + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE;
+    char *name_list_tag_val = data_val;
     char *end_val = name_list_tag_val + 3;
-
-    LinkClass *link = this->theFabricObject->searchLink(link_id_index_val, data_val - 1);
-    if (!link) {
-        this->errorProcessGetNameList(tp_transfer_object_val, ajax_id_val, "link does not exist");
-        return;
-    }
 
     int name_list_tag = phwangDecodeNumber(name_list_tag_val, NAME_LIST_CLASS_NAME_LIST_TAG_SIZE);
     char *name_list = this->theFabricObject->nameListObject()->getNameList(name_list_tag);
@@ -435,18 +417,11 @@ void DFabricClass::processSetupSessionRequest (void *tp_transfer_object_val, cha
 {
     this->debug(true, "processSetupSession", data_val);
 
-    char *link_id_index_val = data_val;
-    char *theme_info_val = link_id_index_val + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE;
+    char *theme_info_val = data_val;
     int theme_len = phwangDecodeNumber(theme_info_val + 1, 3);
     char *his_name_val = theme_info_val + theme_len;
 
-    LinkClass *link = this->theFabricObject->searchLink(link_id_index_val, data_val - 1);
-    if (!link) {
-        this->errorProcessSetupSession(tp_transfer_object_val, ajax_id_val, "link does not exist");
-        return;
-    }
-
-    SessionClass *session = link->mallocSession();
+    SessionClass *session = link_val->mallocSession();
     if (!session) {
         this->errorProcessSetupSession(tp_transfer_object_val, ajax_id_val, "null session");
         return;
