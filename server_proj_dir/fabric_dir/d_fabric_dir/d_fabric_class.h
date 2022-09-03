@@ -47,6 +47,7 @@ class DFabricClass {
     void errorProcessPutSessionData(void *tp_transfer_object_val, char const *ajax_id_val, char const *err_msg_val);
     void errorProcessGetSessionData(void *tp_transfer_object_val, char const *ajax_id_val, char const *err_msg_val);
     void mallocRoom(GroupClass *group_val, char *theme_info_val);
+    void sendSearchLinkFailResponse (char const command_val, void *tp_transfer_object_val, char const *ajax_id_val);
 
     char *timeStampString(void) {return this->theTimeStampString;}
     void debug(int on_off_val, char const *str0_val, char const *str1_val) {if (on_off_val) this->logit(str0_val, str1_val);}

@@ -26,6 +26,9 @@ DbAccountClass *DFabricClass::dbAccountObject(void) {return theFabricObject->dbO
 
 void DFabricClass::exportedParseFunction (void *tp_transfer_object_val, char *data_val)
 {
+    LinkClass *link;
+    SessionClass *session;
+
     if (1) { /* debug */
         if (data_val[1] != WEB_FABRIC_PROTOCOL_COMMAND_IS_GET_LINK_DATA) {
             char s[128];
@@ -42,13 +45,18 @@ void DFabricClass::exportedParseFunction (void *tp_transfer_object_val, char *da
     memcpy(ajax_id, &data_val[2], WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE);
     ajax_id[WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE] = 0;
 
-    char *data = &data_val[2 + WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE];
+    char *rest_data = &data_val[2 + WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE];
 
     switch (type) {
         case '0':
             break;
 
         case '1':
+            link = this->theFabricObject->searchLink(rest_data, data_val);
+            if (!link) {
+                this->sendSearchLinkFailResponse(command, tp_transfer_object_val, ajax_id);
+                return;
+            }
             break;
 
         case '2':
@@ -61,48 +69,61 @@ void DFabricClass::exportedParseFunction (void *tp_transfer_object_val, char *da
 
     switch (command) {
         case WEB_FABRIC_PROTOCOL_COMMAND_IS_SIGN_UP:
-            this->processSignUpRequest(tp_transfer_object_val, data, ajax_id);
+            this->processSignUpRequest(tp_transfer_object_val, rest_data, ajax_id);
             return;
 
         case WEB_FABRIC_PROTOCOL_COMMAND_IS_SETUP_LINK:
-            this->processSetupLinkRequest(tp_transfer_object_val, data, ajax_id);
+            this->processSetupLinkRequest(tp_transfer_object_val, rest_data, ajax_id);
             return;
 
         case WEB_FABRIC_PROTOCOL_COMMAND_IS_FREE_LINK:
-            this->processFreeLinkRequest(tp_transfer_object_val, data, ajax_id);
+            this->processFreeLinkRequest(tp_transfer_object_val, rest_data, ajax_id);
             return;
 
         case WEB_FABRIC_PROTOCOL_COMMAND_IS_GET_LINK_DATA:
-            this->processGetLinkDataRequest(tp_transfer_object_val, data, ajax_id);
+            this->processGetLinkDataRequest(tp_transfer_object_val, rest_data, ajax_id);
             return;
 
         case WEB_FABRIC_PROTOCOL_COMMAND_IS_GET_NAME_LIST:
-            this->processGetNameListRequest(tp_transfer_object_val, data, ajax_id);
+            this->processGetNameListRequest(tp_transfer_object_val, rest_data, ajax_id);
             return;
 
         case WEB_FABRIC_PROTOCOL_COMMAND_IS_SETUP_SESSION:
-            this->processSetupSessionRequest(tp_transfer_object_val, data, ajax_id);
+            this->processSetupSessionRequest(tp_transfer_object_val, rest_data, ajax_id);
             return;
 
         case WEB_FABRIC_PROTOCOL_COMMAND_IS_SETUP_SESSION2:
-            this->processSetupSession2Request(tp_transfer_object_val, data, ajax_id);
+            this->processSetupSession2Request(tp_transfer_object_val, rest_data, ajax_id);
             return;
 
         case WEB_FABRIC_PROTOCOL_COMMAND_IS_SETUP_SESSION3:
-            this->processSetupSession3Request(tp_transfer_object_val, data, ajax_id);
+            this->processSetupSession3Request(tp_transfer_object_val, rest_data, ajax_id);
             return;
 
         case WEB_FABRIC_PROTOCOL_COMMAND_IS_PUT_SESSION_DATA:
-            this->processPutSessionDataRequest(tp_transfer_object_val, data, ajax_id);
+            this->processPutSessionDataRequest(tp_transfer_object_val, rest_data, ajax_id);
             return;
 
         case WEB_FABRIC_PROTOCOL_COMMAND_IS_GET_SESSION_DATA:
-            this->processGetSessionDataRequest(tp_transfer_object_val, data, ajax_id);
+            this->processGetSessionDataRequest(tp_transfer_object_val, rest_data, ajax_id);
             return;
 
         default:
             this->abend("exportedParseFunction", data_val);
     }
+}
+
+void DFabricClass::sendSearchLinkFailResponse (char const command_val, void *tp_transfer_object_val, char const *ajax_id_val)
+{
+    this->abend("sendSearchLinkFailResponse", "");
+
+    char *data_ptr;
+    char *downlink_data = data_ptr = (char *) phwangMalloc(LINK_MGR_DATA_BUFFER_SIZE + 4, "sendSearchLinkFailResponse");
+    *data_ptr++ = command_val;
+    strcpy(data_ptr, ajax_id_val);
+    data_ptr += WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;
+    strcpy(data_ptr, "link does not exist");
+    this->transmitFunction(tp_transfer_object_val, downlink_data);
 }
 
 void DFabricClass::processSignUpRequest (void *tp_transfer_object_val, char *data_val, char const *ajax_id_val)
