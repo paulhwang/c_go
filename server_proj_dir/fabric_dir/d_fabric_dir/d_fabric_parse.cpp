@@ -204,14 +204,24 @@ void DFabricClass::sendMmwReadDataResponce (void *tp_transfer_object_val, char c
 {
     this->debug(true, "sendMmwReadDataResponce", result_val);
 
+    char *encoded_result = encodeString(result_val);
+    int encoded_result_length = strlen(encoded_result);
+    char *encoded_data = encodeString(data_val);
+    int encoded_data_length = strlen(encoded_data);
     char *data_ptr;
-    char *downlink_data = data_ptr = (char *) phwangMalloc(D_FABRIC_CLASS_PROCESSS_MMW_READ_DATA_DOWN_LINK_DATA_SIZE + strlen(result_val), "DFSL");
+    char *downlink_data = data_ptr = (char *) phwangMalloc(D_FABRIC_CLASS_PROCESSS_MMW_READ_DATA_DOWN_LINK_DATA_SIZE + encoded_result_length + encoded_data_length, "DFSL");
     *data_ptr++ = FECommandClass::MMW_READ_DATA_RESPONSE;
     memcpy(data_ptr, ajax_id_val, WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE);
     data_ptr += WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;
-    strcpy(data_ptr, result_val);
-    data_ptr += strlen(result_val);
-    strcpy(data_ptr, data_val);
+
+    strcpy(data_ptr, encoded_result);
+    data_ptr += encoded_result_length;
+    free(encoded_result);
+
+    strcpy(data_ptr, encoded_data);
+    //data_ptr += encoded_data_length;
+    free(encoded_data);
+
     this->transmitFunction(tp_transfer_object_val, downlink_data);
 }
 
