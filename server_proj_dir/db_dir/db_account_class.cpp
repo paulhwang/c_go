@@ -60,36 +60,42 @@ void DbAccountClass::createAccountTableInDatabase(void)
         return;
     }
 
-    this->sqlObject()->createTable2(this->sqlConnect(), "accounts", "name VARCHAR(20)", "password VARCHAR(20)");
+    this->sqlObject()->createTable3(this->sqlConnect(), "accounts", "name VARCHAR(20)", "password VARCHAR(20)", "email VARCHAR(30)");
 
     DbAccountEntryClass *entry = new DbAccountEntryClass();
     entry->setAccountName(mallocConstStrBuf("admin"));
     entry->setPassword(mallocConstStrBuf("admin_password"));
+    entry->setEmail(mallocConstStrBuf("admin@phwang.com"));
     this->insertAccountEntry(entry);
 
     entry = new DbAccountEntryClass();
     entry->setAccountName(mallocConstStrBuf("phwang"));
     entry->setPassword(mallocConstStrBuf("a"));
+    entry->setEmail(mallocConstStrBuf("phwang@phwang.com"));
     this->insertAccountEntry(entry);
 
     entry = new DbAccountEntryClass();
     entry->setAccountName(mallocConstStrBuf("ikolre"));
     entry->setPassword(mallocConstStrBuf("ikolre_password"));
+    entry->setEmail(mallocConstStrBuf("ikolre@phwang.com"));
     this->insertAccountEntry(entry);
 
     entry = new DbAccountEntryClass();
     entry->setAccountName(mallocConstStrBuf("guest"));
     entry->setPassword(mallocConstStrBuf("guest_password"));
+    entry->setEmail(mallocConstStrBuf("guest@phwang.com"));
     this->insertAccountEntry(entry);
 
     entry = new DbAccountEntryClass();
     entry->setAccountName(mallocConstStrBuf("BigBrave"));
     entry->setPassword(mallocConstStrBuf("bigbrave"));
+    entry->setEmail(mallocConstStrBuf("bigbrave@phwang.com"));
     this->insertAccountEntry(entry);
 
     entry = new DbAccountEntryClass();
     entry->setAccountName(mallocConstStrBuf("paul"));
     entry->setPassword(mallocConstStrBuf("a"));
+    entry->setEmail(mallocConstStrBuf("paul@phwang.com"));
     this->insertAccountEntry(entry);
 
     /****** the buf malloc by mallocConstStrBuf has been free by the insertAccountEntry ********/
@@ -121,7 +127,7 @@ void DbAccountClass::insertAccountEntry(DbAccountEntryClass *entry_val)
 {
     char buf[516];
     this->incrementAccountIndex();
-    sprintf(buf, "%d, '%s','%s'", this->accountIndex(), entry_val->accountName(), entry_val->password());
+    sprintf(buf, "%d, '%s','%s','%s'", this->accountIndex(), entry_val->accountName(), entry_val->password(), entry_val->email());
     //printf("buf=%s", buf);
 
     this->sqlObject()->insertAccount (this->sqlConnect(), "accounts", buf);

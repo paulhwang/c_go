@@ -24,7 +24,9 @@ public:
     /* exports */
     PGconn *connectDb(char const *user_val, char const *dbname_val);
     void disconnectDb (void *conn_val);
+    int createTable(void *conn_val, char const *table_name_val, char const *data_val);
     int createTable2(void *conn_val, char const *table_name_val, char const *val1, char const *val2);
+    int createTable3(void *conn_val, char const *table_name_val, char const *val1, char const *val2, char const *val3);
     int dropTableIfExist(void *conn_val, char const *table_name_val);
     void insertAccount (void *conn_val, char const *table_val, char const *values_val);
     PGresult *selectFrom (void *conn_val, char const *column_val);

@@ -66,6 +66,25 @@ void SqlClass::errPQexec(PGconn *conn_val, PGresult *res_val) {
     PQfinish(conn_val);    
 }
 
+int SqlClass::createTable (void *conn_val, char const *table_name_val, char const *data_val)
+{
+    char buf[256];
+    this->debug(false, "createTable", table_name_val);
+
+    PGconn *conn = (PGconn *) conn_val;
+    sprintf(buf, "CREATE TABLE %s(Id INTEGER PRIMARY KEY, %s)", table_name_val, data_val);
+    PGresult *res = PQexec(conn, buf);
+
+    if (PQresultStatus(res) != PGRES_COMMAND_OK) {
+        this->errPQexec(conn, res);
+        PQclear(res);
+        return -1;
+    }
+
+    PQclear(res);
+    return 0;
+}
+
 int SqlClass::createTable2 (void *conn_val, char const *table_name_val, char const *val1, char const *val2)
 {
     char buf[256];
@@ -73,6 +92,25 @@ int SqlClass::createTable2 (void *conn_val, char const *table_name_val, char con
 
     PGconn *conn = (PGconn *) conn_val;
     sprintf(buf, "CREATE TABLE %s(Id INTEGER PRIMARY KEY, %s, %s)", table_name_val, val1, val2);
+    PGresult *res = PQexec(conn, buf);
+
+    if (PQresultStatus(res) != PGRES_COMMAND_OK) {
+        this->errPQexec(conn, res);
+        PQclear(res);
+        return -1;
+    }
+
+    PQclear(res);
+    return 0;
+}
+
+int SqlClass::createTable3 (void *conn_val, char const *table_name_val, char const *val1, char const *val2, char const *val3)
+{
+    char buf[256];
+    this->debug(false, "createTable3", table_name_val);
+
+    PGconn *conn = (PGconn *) conn_val;
+    sprintf(buf, "CREATE TABLE %s(Id INTEGER PRIMARY KEY, %s, %s, %s)", table_name_val, val1, val2, val3);
     PGresult *res = PQexec(conn, buf);
 
     if (PQresultStatus(res) != PGRES_COMMAND_OK) {
