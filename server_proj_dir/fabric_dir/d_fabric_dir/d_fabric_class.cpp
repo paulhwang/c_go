@@ -39,7 +39,7 @@ void DFabricClass::exportedNetAcceptFunction (void *tp_transfer_object_val)
 
 void dFabricTpReceiveDataFunction (void *tp_transfer_object_val, void *d_fabric_object_val, void *data_val) {
     if (0) { /* debug */
-        if (*((char *)data_val) != WEB_FABRIC_PROTOCOL_COMMAND_IS_GET_LINK_DATA) {
+        if (*((char *)data_val) != FECommandClass::GET_LINK_DATA_COMMAND) {
             char s[128];
             sprintf(s, "%s index=%d", (char *) data_val, ((TpTransferClass *) tp_transfer_object_val)->index());
             phwangLogit("Golbal::dFabricTpReceiveDataFunction", s);
