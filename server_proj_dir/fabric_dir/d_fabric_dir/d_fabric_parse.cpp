@@ -31,9 +31,7 @@ void DFabricClass::exportedParseFunction (void *tp_transfer_object_val, char *da
 
     if (1) { /* debug */
         if (data_val[1] != WEB_FABRIC_PROTOCOL_COMMAND_IS_GET_LINK_DATA) {
-            char s[128];
-            sprintf(s, "%s", data_val);
-            this->logit("exportedParseFunction", s);
+            this->logit("exportedParseFunction", data_val);
         }
     }
 
@@ -49,6 +47,19 @@ void DFabricClass::exportedParseFunction (void *tp_transfer_object_val, char *da
 
     switch (type) {
         case '0':
+            switch (command) {
+                case WEB_FABRIC_PROTOCOL_COMMAND_IS_SIGN_UP:
+                    this->processSignUpRequest(tp_transfer_object_val, rest_data, ajax_id);
+                    return;
+
+                case WEB_FABRIC_PROTOCOL_COMMAND_IS_SETUP_LINK:
+                    this->processSetupLinkRequest(tp_transfer_object_val, rest_data, ajax_id);
+                    return;
+
+                default:
+                    this->abend("exportedParseFunction0", data_val);
+                    return;
+            }
             break;
 
         case '1':
@@ -58,6 +69,36 @@ void DFabricClass::exportedParseFunction (void *tp_transfer_object_val, char *da
                 return;
             }
             rest_data += LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE;
+
+            switch (command) {
+                case WEB_FABRIC_PROTOCOL_COMMAND_IS_FREE_LINK:
+                    this->processFreeLinkRequest(tp_transfer_object_val, rest_data, ajax_id, link);
+                    return;
+
+                case WEB_FABRIC_PROTOCOL_COMMAND_IS_GET_LINK_DATA:
+                    this->processGetLinkDataRequest(tp_transfer_object_val, rest_data, ajax_id, link);
+                    return;
+
+                case WEB_FABRIC_PROTOCOL_COMMAND_IS_GET_NAME_LIST:
+                    this->processGetNameListRequest(tp_transfer_object_val, rest_data, ajax_id, link);
+                    return;
+
+                case WEB_FABRIC_PROTOCOL_COMMAND_IS_SETUP_SESSION:
+                    this->processSetupSessionRequest(tp_transfer_object_val, rest_data, ajax_id, link);
+                    return;
+
+                case WEB_FABRIC_PROTOCOL_COMMAND_IS_SETUP_SESSION2:
+                    this->processSetupSession2Request(tp_transfer_object_val, rest_data, ajax_id, link);
+                    return;
+
+                case WEB_FABRIC_PROTOCOL_COMMAND_IS_SETUP_SESSION3:
+                    this->processSetupSession3Request(tp_transfer_object_val, rest_data, ajax_id, link);
+                    return;
+
+                default:
+                    this->abend("exportedParseFunction1", data_val);
+                    return;
+            }
             break;
 
         case '2':
@@ -67,6 +108,24 @@ void DFabricClass::exportedParseFunction (void *tp_transfer_object_val, char *da
                 return;
             }
             rest_data += LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE;
+
+            switch (command) {
+                case WEB_FABRIC_PROTOCOL_COMMAND_IS_FREE_SESSION:
+                    this->processFreeSessionRequest(tp_transfer_object_val, rest_data, ajax_id, session);
+                    return;
+
+                case WEB_FABRIC_PROTOCOL_COMMAND_IS_PUT_SESSION_DATA:
+                    this->processPutSessionDataRequest(tp_transfer_object_val, rest_data, ajax_id, session);
+                    return;
+
+                case WEB_FABRIC_PROTOCOL_COMMAND_IS_GET_SESSION_DATA:
+                    this->processGetSessionDataRequest(tp_transfer_object_val, rest_data, ajax_id, session);
+                    return;
+
+                default:
+                    this->abend("exportedParseFunction2", data_val);
+            }
+
             break;
 
         default:
@@ -74,54 +133,6 @@ void DFabricClass::exportedParseFunction (void *tp_transfer_object_val, char *da
             break;
     }
 
-    switch (command) {
-        case WEB_FABRIC_PROTOCOL_COMMAND_IS_SIGN_UP:
-            this->processSignUpRequest(tp_transfer_object_val, rest_data, ajax_id);
-            return;
-
-        case WEB_FABRIC_PROTOCOL_COMMAND_IS_SETUP_LINK:
-            this->processSetupLinkRequest(tp_transfer_object_val, rest_data, ajax_id);
-            return;
-
-        case WEB_FABRIC_PROTOCOL_COMMAND_IS_FREE_LINK:
-            this->processFreeLinkRequest(tp_transfer_object_val, rest_data, ajax_id, link);
-            return;
-
-        case WEB_FABRIC_PROTOCOL_COMMAND_IS_GET_LINK_DATA:
-            this->processGetLinkDataRequest(tp_transfer_object_val, rest_data, ajax_id, link);
-            return;
-
-        case WEB_FABRIC_PROTOCOL_COMMAND_IS_GET_NAME_LIST:
-            this->processGetNameListRequest(tp_transfer_object_val, rest_data, ajax_id, link);
-            return;
-
-        case WEB_FABRIC_PROTOCOL_COMMAND_IS_SETUP_SESSION:
-            this->processSetupSessionRequest(tp_transfer_object_val, rest_data, ajax_id, link);
-            return;
-
-        case WEB_FABRIC_PROTOCOL_COMMAND_IS_SETUP_SESSION2:
-            this->processSetupSession2Request(tp_transfer_object_val, rest_data, ajax_id, link);
-            return;
-
-        case WEB_FABRIC_PROTOCOL_COMMAND_IS_SETUP_SESSION3:
-            this->processSetupSession3Request(tp_transfer_object_val, rest_data, ajax_id, link);
-            return;
-
-        case WEB_FABRIC_PROTOCOL_COMMAND_IS_FREE_SESSION:
-            this->processFreeSessionRequest(tp_transfer_object_val, rest_data, ajax_id, session);
-            return;
-
-        case WEB_FABRIC_PROTOCOL_COMMAND_IS_PUT_SESSION_DATA:
-            this->processPutSessionDataRequest(tp_transfer_object_val, rest_data, ajax_id, session);
-            return;
-
-        case WEB_FABRIC_PROTOCOL_COMMAND_IS_GET_SESSION_DATA:
-            this->processGetSessionDataRequest(tp_transfer_object_val, rest_data, ajax_id, session);
-            return;
-
-        default:
-            this->abend("exportedParseFunction", data_val);
-    }
 }
 
 void DFabricClass::sendSearchLinkFailResponse (char const command_val, void *tp_transfer_object_val, char const *ajax_id_val)
