@@ -56,6 +56,10 @@ void DFabricClass::exportedParseFunction (void *tp_transfer_object_val, char *da
                     this->processSetupLinkRequest(tp_transfer_object_val, rest_data, ajax_id);
                     return;
 
+                case WEB_FABRIC_PROTOCOL_COMMAND_IS_MMW_READ_DATA:
+                    this->processMmwReadDataRequest(tp_transfer_object_val, rest_data, ajax_id);
+                    return;
+
                 default:
                     this->abend("exportedParseFunction0", data_val);
                     return;
@@ -158,6 +162,79 @@ void DFabricClass::sendSearchLinkSessionFailResponse (char const command_val, vo
     strcpy(data_ptr, ajax_id_val);
     data_ptr += WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;
     strcpy(data_ptr, "link_session does not exist");
+    this->transmitFunction(tp_transfer_object_val, downlink_data);
+}
+
+void DFabricClass::processMmwReadDataRequest (void *tp_transfer_object_val, char *data_val, char const *ajax_id_val)
+{
+    this->debug(true, "processMmwReadDataRequest", data_val);
+
+    char *encoded_account_name = data_val;
+    int account_name_size;
+    char *account_name = phwangDecodeString(encoded_account_name, &account_name_size);
+
+    char *encoded_password = encoded_account_name + account_name_size;
+    int password_size;
+    char *password = phwangDecodeString(encoded_password, &password_size);
+
+    char *encoded_email = encoded_password + password_size;
+    int email_size;
+    char *email = phwangDecodeString(encoded_email, &email_size);
+
+    if (1) { /* debug */
+        char buf[256];
+        sprintf(buf, "account_name=%s password=%s email=%s\n", account_name, password, email);
+        this->logit("processMmwReadDataRequest", buf);
+    }
+
+    int result = this->dbAccountObject()->checkAccountNameExist(account_name);
+    if (result != DbAccountClass::DB_ACCOUNT_NAME_NOT_EXIST) {
+        char const *result_str;
+        switch (result) {
+            case DbAccountClass::DB_ACCOUNT_NAME_EXIST:
+                result_str = "name exist";
+                break;
+            case DbAccountClass::DB_ACCOUNT_SELECT_FAIL:
+                result_str = "select fail";
+                break;
+            default:
+                this->abend("processMmwReadDataRequest", "result_str");
+                break;
+        }
+        this->sendMmwReadDataResponce(tp_transfer_object_val, ajax_id_val, result_str);
+        free(account_name);
+        free(password);
+        free(email);
+        return;
+    }
+
+    DbAccountEntryClass *account_entry = new DbAccountEntryClass();
+    account_entry->setAccountName(account_name);
+    account_entry->setPassword(password);
+    account_entry->setEmail(email);
+    this->dbAccountObject()->insertAccountEntry(account_entry);
+
+    this->sendMmwReadDataResponce(tp_transfer_object_val, ajax_id_val, "succeed");
+
+    /***
+    ---the buffers has been freed in the insertAccountEntry()---
+    free(account_name);
+    free(password);
+    free(email);
+    ***/
+}
+
+#define D_FABRIC_CLASS_PROCESSS_SIGN_UP_DOWN_LINK_DATA_SIZE (1 + WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + 1)
+void DFabricClass::sendMmwReadDataResponce (void *tp_transfer_object_val, char const *ajax_id_val, char const *result_val)
+{
+    this->debug(true, "sendSignUpResponce", result_val);
+
+    char *data_ptr;
+    char *downlink_data = data_ptr = (char *) phwangMalloc(D_FABRIC_CLASS_PROCESSS_SIGN_UP_DOWN_LINK_DATA_SIZE + strlen(result_val), "DFSL");
+    *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_SETUP_LINK;
+    memcpy(data_ptr, ajax_id_val, WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE);
+    data_ptr += WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;
+    strcpy(data_ptr, result_val);
     this->transmitFunction(tp_transfer_object_val, downlink_data);
 }
 
