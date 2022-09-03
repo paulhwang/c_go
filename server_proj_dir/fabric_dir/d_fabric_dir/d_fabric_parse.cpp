@@ -596,12 +596,6 @@ void DFabricClass::processPutSessionDataRequest (void *tp_transfer_object_val, c
 
     char *data_ptr;
 
-    SessionClass *session = this->theFabricObject->serachLinkAndSession(link_and_session_id_index_val);
-    if (!session) {
-        this->errorProcessPutSessionData(tp_transfer_object_val, ajax_id_val, "null session");
-        return;
-    }
-
     char *room = session_val->groupObject()->roomIdIndex();
     if (!room) {
         this->errorProcessPutSessionData(tp_transfer_object_val, ajax_id_val, "null room");
@@ -613,7 +607,7 @@ void DFabricClass::processPutSessionDataRequest (void *tp_transfer_object_val, c
     *data_ptr++ = FABRIC_THEME_PROTOCOL_COMMAND_IS_PUT_ROOM_DATA;
     memcpy(data_ptr, room, ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);
     data_ptr += ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE;
-    strcpy(data_ptr, link_and_session_id_index_val + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE);
+    strcpy(data_ptr, end_val);
     this->theFabricObject->uFabricObject()->transmitFunction(uplink_data);
 
     /* send the response down */
@@ -648,12 +642,6 @@ void DFabricClass::processGetSessionDataRequest (void *tp_transfer_object_val, c
 
     char *link_and_session_id_index_val = data_val;
     char *end_val = link_and_session_id_index_val + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE;
-
-    SessionClass *session = this->theFabricObject->serachLinkAndSession(link_and_session_id_index_val);
-    if (!session) {
-        this->errorProcessGetSessionData(tp_transfer_object_val, ajax_id_val, "null session");
-        return;
-    }
 
     char *data = session_val->getPendingDownLinkData();
 
