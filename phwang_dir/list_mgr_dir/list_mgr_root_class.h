@@ -17,4 +17,11 @@ class ListMgrRootClass
 public:
     ListMgrRootClass(void);
     ~ListMgrRootClass(void);
+    
+    void *listMgrMalloc(char const *caller_name_val, int id_size_val, int index_size_val, int global_entry_id_val);
+    void  listMgrFree(void *list_mgr_val);
+    void  listMgrRemoveEntry(void *list_mgr_val, void *entry_val);
+    void *listMgrSearchEntry(void *list_mgr_val, char const *data_val, void *extra_data_val);
+    int   listMgrGetMaxIndex(void *list_mgr_val, char const *who_val);
+    void *listMgrGetEntryTableArray(void *list_mgr_val);
 };

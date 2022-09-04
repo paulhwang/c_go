@@ -12,15 +12,10 @@
 #include "encode_dir/encode_class.h"
 #include "malloc_dir/malloc_class.h"
 #include "object_dir/object_class.h"
-#include "net_dir/net_root_class.h"
-#include "queue_dir/queue_class.h"
 #include "queue_dir/queue_root_class.h"
-#include "list_mgr_dir/list_mgr_class.h"
-#include "array_mgr_dir/array_mgr_class.h"
-#include "net_dir/tp_server_class.h"
-#include "net_dir/tp_transfer_class.h"
-#include "net_dir/tp_connect.h"
-
+#include "net_dir/net_root_class.h"
+#include "list_mgr_dir/list_mgr_root_class.h"
+#include "array_mgr_dir/array_mgr_root_class.h"
 
 PhwangClass::PhwangClass (void)
 {
@@ -31,6 +26,8 @@ PhwangClass::PhwangClass (void)
     this->theEncodeObject = new EncodeClass();
     this->theQueueRootObject = new QueueRootClass();
     this->theNetRootObject = new NetRootClass();
+    this->theListMgrRootObject = new ListMgrRootClass();
+    this->theArrayMgrRootObject = new ArrayMgrRootClass();
 }
 
 PhwangClass::~PhwangClass (void)
@@ -76,171 +73,6 @@ void PhwangClass::printBoard (char const* data_val, int board_size_val)
             printf("\n");
         }
     }
-}
-
-/**************************************************************************************************************/
-/**************************************************************************************************************/
-/**************************************************************************************************************/
-
-void *PhwangClass::listMgrMalloc (char const *caller_name_val, int id_size_val, int index_size_val, int global_entry_id_val)
-{
-    ListMgrClass *list_mgr = new ListMgrClass(caller_name_val, id_size_val, index_size_val, global_entry_id_val);
-    return list_mgr;
-}
-
-void PhwangClass::listMgrFree (void *list_mgr_val)
-{
-    if (!list_mgr_val) {
-        this->abend("listMgrFree", "null list_mgr_val");
-        return;
-    }
-
-    if (strcmp(((ListMgrClass *) list_mgr_val)->objectName(), "ListMgrClass")) {
-        char s[LOGIT_BUF_SIZE];
-        sprintf(s, "wrong object: objectName=%s", ((ListMgrClass *) list_mgr_val)->objectName());
-        this->abend("listMgrFree", s);
-        return;
-    }
-
-    ((ListMgrClass *) list_mgr_val)->~ListMgrClass();
-}
-
-void PhwangClass::listMgrRemoveEntry (void *list_mgr_val, void *entry_val)
-{
-    if (!list_mgr_val) {
-        this->abend("listMgrRemoveEntry", "null list_mgr_val");
-        return;
-    }
-
-    if (strcmp(((ListMgrClass *) list_mgr_val)->objectName(), "ListMgrClass")) {
-        char s[LOGIT_BUF_SIZE];
-        sprintf(s, "wrong object: objectName=%s", ((ListMgrClass *) list_mgr_val)->objectName());
-        this->abend("listMgrRemoveEntry", s);
-        return;
-    }
-
-    ((ListMgrClass *) list_mgr_val)->removeEntry((ListEntryClass *) entry_val);
-}
-
-void *PhwangClass::listMgrSearchEntry(void *list_mgr_val, char const *data_val, void *extra_data_val)
-{
-    if (!list_mgr_val) {
-        this->abend("listMgrSearchEntry", "null list_mgr_val");
-        return 0;
-    }
-
-    if (strcmp(((ListMgrClass *) list_mgr_val)->objectName(), "ListMgrClass")) {
-        char s[LOGIT_BUF_SIZE];
-        sprintf(s, "wrong object: objectName=%s", ((ListMgrClass *) list_mgr_val)->objectName());
-        this->abend("listMgrSearchEntry", s);
-        return 0;
-    }
-
-    return ((ListMgrClass *) list_mgr_val)->searchEntry(data_val, extra_data_val);
-}
-
-int PhwangClass::listMgrGetMaxIndex (void *list_mgr_val, char const *who_val)
-{
-    if (!list_mgr_val) {
-        this->abend("listMgrGetMaxIndex", "null list_mgr_val");
-        return 0;
-    }
-
-    if (strcmp(((ListMgrClass *) list_mgr_val)->objectName(), "ListMgrClass")) {
-        char s[LOGIT_BUF_SIZE];
-        sprintf(s, "wrong object: who=%s objectName=%s", who_val, ((ListMgrClass *) list_mgr_val)->objectName());
-        this->abend("listMgrGetMaxIndex", s);
-        return 0;
-    }
-
-    return ((ListMgrClass *) list_mgr_val)->maxIndex();
-}
-
-void *PhwangClass::listMgrGetEntryTableArray (void *list_mgr_val)
-{
-    if (!list_mgr_val) {
-        this->abend("listMgrGetEntryTableArray", "null list_mgr_val");
-        return 0;
-    }
-
-    if (strcmp(((ListMgrClass *) list_mgr_val)->objectName(), "ListMgrClass")) {
-        char s[LOGIT_BUF_SIZE];
-        sprintf(s, "wrong object: objectName=%s", ((ListMgrClass *) list_mgr_val)->objectName());
-        this->abend("listMgrGetEntryTableArray", s);
-        return 0;
-    }
-
-    return ((ListMgrClass *) list_mgr_val)->entryTableArray();
-}
-
-/**************************************************************************************************************/
-/**************************************************************************************************************/
-/**************************************************************************************************************/
-
-void *PhwangClass::arrayMgrMalloc(char const *caller_name_val, char array_type_val, int array_size_val)
-{
-    ArrayMgrClass *array_mgr = new ArrayMgrClass(caller_name_val, array_type_val, array_size_val);
-    return array_mgr;
-}
-
-void PhwangClass::arrayMgrFree(void *array_mgr_val)
-{
-    if (!array_mgr_val) {
-        this->abend("arrayMgrFree", "null array_mgr_val");
-        return;
-    }
-
-    if (strcmp(((ArrayMgrClass *) array_mgr_val)->objectName(), "ArrayMgrClass")) {
-        this->abend("arrayMgrFree", "wrong object");
-        return;
-    }
-
-    ((ArrayMgrClass *) array_mgr_val)->~ArrayMgrClass();
-}
-
-void PhwangClass::arrayMgrInsertElement(void *array_mgr_val, void *element_val)
-{
-    if (!array_mgr_val) {
-        this->abend("arrayMgrInsertElement", "null array_mgr_val");
-        return;
-    }
-
-    if (strcmp(((ArrayMgrClass *) array_mgr_val)->objectName(), "ArrayMgrClass")) {
-        this->abend("arrayMgrInsertElement", "wrong object");
-        return;
-    }
-
-    ((ArrayMgrClass *) array_mgr_val)->insertElement(element_val);
-}
-
-void PhwangClass::arrayMgrRemoveElement(void *array_mgr_val, void *element_val)
-{
-    if (!array_mgr_val) {
-        this->abend("arrayMgrRemoveElement", "null array_mgr_val");
-        return;
-    }
-
-    if (strcmp(((ArrayMgrClass *) array_mgr_val)->objectName(), "ArrayMgrClass")) {
-        this->abend("arrayMgrRemoveElement", "wrong object");
-        return;
-    }
-
-    ((ArrayMgrClass *) array_mgr_val)->removeElement(element_val);
-}
-
-void *PhwangClass::arrayMgrGetArrayTable(void *array_mgr_val, int *array_size_ptr)
-{
-    if (!array_mgr_val) {
-        this->abend("arrayMgrGetArrayTable", "null array_mgr_val");
-        return 0;
-    }
-
-    if (strcmp(((ArrayMgrClass *) array_mgr_val)->objectName(), "ArrayMgrClass")) {
-        this->abend("arrayMgrGetArrayTable", "wrong object");
-        return 0;
-    }
-
-    return ((ArrayMgrClass *) array_mgr_val)->getArrayTable(array_size_ptr);
 }
 
 /**************************************************************************************************************/
