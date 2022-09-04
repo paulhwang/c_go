@@ -17,6 +17,7 @@ class PhwangClass {
     inline static char *ObjectName = "PhwangClass";
     inline static int ObjectCount = 0;
 
+    ObjectClass *theObjectObject;
     AbendClass *theAbendObject;
     EncodeClass *theEncodeObject;
     MallocClass *theMallocObject;
@@ -31,18 +32,12 @@ public:
     PhwangClass(void);
     ~PhwangClass(void);
 
-    ObjectClass *theObjectObject;
     AbendClass *abendObject(void) {return this->theAbendObject;}
     ObjectClass *objectObject(void) {return this->theObjectObject;}
     EncodeClass *encodeObject(void) {return this->theEncodeObject;}
     MallocClass *mallocObject(void) {return this->theMallocObject;}
 
-    /* logit */
-    void phwangDebug(int on_off_val, char const *str0_val, char const *str1_val) {if (on_off_val) this->phwangLogit(str0_val, str1_val);}
-    void phwangLogit(char const *str0_val, char const *str1_val);
-    void phwangLogit3(char const *str0_val, char const *str1_val, char const *str2_val);
-    void phwangAbend(char const *str0_val, char const *str1_val);
-    void phwangAbend3(char const *str0_val, char const *str1_val, char const *str2_val);
+    /* tbd */
     void printBoard(char const *data_val, int board_size_val);
 
     /* malloc and free */

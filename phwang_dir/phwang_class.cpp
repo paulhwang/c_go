@@ -35,46 +35,22 @@ PhwangClass::~PhwangClass (void)
 
 /*************************************************************/
 
-void PhwangClass::phwangLogit (char const *str0_val, char const *str1_val)
-{
-    printf("%s() %s\n", str0_val, str1_val);
-}
-
-void PhwangClass::phwangLogit3 (char const *str0_val, char const *str1_val, char const *str2_val)
-{
-    printf("%s() %s {%s}\n", str0_val, str1_val, str2_val);
-}
-
-void PhwangClass::phwangAbend (char const *str0_val, char const *str1_val)
-{
-    printf("*****abend*****%s() %s\n", str0_val, str1_val);
-    int *junk = 0;
-    *junk = 0;
-}
-
-void PhwangClass::phwangAbend3 (char const *str0_val, char const *str1_val, char const *str2_val)
-{
-    printf("*****abend*****%s() %s, %s\n", str0_val, str1_val, str2_val);
-    int *junk = 0;
-    *junk = 0;
-}
-
 void PhwangClass::logit (char const *str0_val, char const *str1_val) {
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", ObjectName, str0_val);
-    this->phwangLogit(s, str1_val);
+    this->abendObject()->phwangLogit(s, str1_val);
 }
 
 void PhwangClass::abend (char const *str0_val, char const *str1_val) {
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", ObjectName, str0_val);
-    this->phwangAbend(s, str1_val);
+    this->abendObject()->phwangAbend(s, str1_val);
 }
 
 void PhwangClass::abend3 (char const *str0_val, char const *str1_val, char const *str2_val) {
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", ObjectName, str0_val);
-    this->phwangAbend3(s, str1_val, str2_val);
+    this->abendObject()->phwangAbend3(s, str1_val, str2_val);
 }
 
 void PhwangClass::printBoard (char const* data_val, int board_size_val)

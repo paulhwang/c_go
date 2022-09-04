@@ -48,6 +48,7 @@ void phwangAbend (char const *str0_val, char const *str1_val)
     thePhwangObject->abendObject()->phwangAbend(str0_val, str1_val);
 }
 
+/* */
 void phwangPrintBoard (char const *data_val, int board_size_val)
 {
     thePhwangObject->printBoard(data_val, board_size_val);
