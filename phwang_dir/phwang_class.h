@@ -40,8 +40,8 @@ public:
     ObjectClass *objectObject(void) {return this->theObjectObject;}
     EncodeClass *encodeObject(void) {return this->theEncodeObject;}
     MallocClass *mallocObject(void) {return this->theMallocObject;}
-    QueueRootClass *QueueRootObject(void) {return this->theQueueRootObject;}
-    NetRootClass *NetRootObject(void) {return this->theNetRootObject;}
+    QueueRootClass *queueRootObject(void) {return this->theQueueRootObject;}
+    NetRootClass *netRootObject(void) {return this->theNetRootObject;}
 
     /* tbd */
     void printBoard(char const *data_val, int board_size_val);

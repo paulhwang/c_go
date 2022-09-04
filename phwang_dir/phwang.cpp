@@ -10,6 +10,8 @@
 #include "encode_dir/encode_class.h"
 #include "malloc_dir/malloc_class.h"
 #include "object_dir/object_class.h"
+#include "queue_dir/queue_root_class.h"
+#include "net_dir/net_root_class.h"
 
 PhwangClass *thePhwangObject = 0;
 
@@ -113,7 +115,7 @@ void *phwangMallocSuspendedQueue (int size_val)
 
 void *phwangMallocQueue (int size_val)
 {
-    return thePhwangObject->mallocQueue(false, size_val);
+    return thePhwangObject->queueRootObject()->mallocQueue(false, size_val);
 }
 
 void phwangFreeQueue (void *queue_val, char const *who_val)
@@ -124,12 +126,12 @@ void phwangFreeQueue (void *queue_val, char const *who_val)
         //return 0;
     }
 
-    thePhwangObject->freeQueue(queue_val);
+    thePhwangObject->queueRootObject()->freeQueue(queue_val);
 }
 
 void phwangEnqueue (void *queue_val, void *data_val)
 {
-    thePhwangObject->enqueue(queue_val, data_val);
+    thePhwangObject->queueRootObject()->enqueue(queue_val, data_val);
 }
 
 void *phwangDequeue (void *queue_val, char const *who_val)
@@ -140,7 +142,7 @@ void *phwangDequeue (void *queue_val, char const *who_val)
         //return 0;
     }
 
-    return thePhwangObject->dequeue(queue_val);
+    return thePhwangObject->queueRootObject()->dequeue(queue_val);
 }
 
 /* list_mgr */
