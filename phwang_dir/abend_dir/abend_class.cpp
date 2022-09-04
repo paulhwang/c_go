@@ -1,7 +1,7 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: abemd_class.cpp
+  File name: abend_class.cpp
 */
 
 #include "../phwang.h"

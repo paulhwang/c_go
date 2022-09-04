@@ -39,8 +39,8 @@ DIRS = $(PHWANG_DIR) $(SERVER_PROJ_DIR) $(CLIENT_PROJ_DIR)
 
 JSON_OBJS = $(JSON_DIR)/json_class.o 
 SUSPEND_OBJS = $(SUSPEND_DIR)/suspend_class.o 
-LIST_MGR_OBJS = $(LIST_MGR_DIR)/list_mgr_class.o $(LIST_MGR_DIR)/list_entry_class.o
-ARRAY_MGR_OBJS = $(ARRAY_MGR_DIR)/array_mgr_class.o
+LIST_MGR_OBJS = $(LIST_MGR_DIR)/list_mgr_root_class.o $(LIST_MGR_DIR)/list_mgr_class.o $(LIST_MGR_DIR)/list_entry_class.o
+ARRAY_MGR_OBJS = $(ARRAY_MGR_DIR)/array_mgr_root_class.o $(ARRAY_MGR_DIR)/array_mgr_class.o
 ID_INDEX_LIST_OBJS = $(ID_INDEX_LIST_DIR)/id_index_list_class.o 
 QUEUE_OBJS = $(QUEUE_DIR)/queue_root_class.o $(QUEUE_DIR)/queue_class.o $(QUEUE_DIR)/queue_entry_class.o
 NET_OBJS = $(NET_DIR)/net_root_class.o $(NET_DIR)/tp_server_class.o $(NET_DIR)/tp_transfer_class.o $(NET_DIR)/tp_transfer_class_transmit.o $(NET_DIR)/tp_transfer_class_receive.o  $(NET_DIR)/tp_connect.o 
