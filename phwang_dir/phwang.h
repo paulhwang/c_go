@@ -17,7 +17,9 @@ void phwangPhwangPhwang(void);
 /* logit */
 void phwangDebug(int on_off_val, char const *str0_val, char const *str1_val);
 void phwangLogit(char const *str0_val, char const *str1_val);
+void phwangLogit3(char const *str0_val, char const *str1_val, char const *str2_val);
 void phwangAbend(char const *str0_val, char const *str1_val);
+void phwangAbend3(char const *str0_val, char const *str1_val, char const *str2_val);
 void phwangPrintBoard(char const *data_val, int board_size_val);
 
 /* malloc and free */

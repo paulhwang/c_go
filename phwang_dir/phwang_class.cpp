@@ -106,14 +106,14 @@ void PhwangClass::phwangFree (void *data_val, char const *who_val)
     char *buf = ((char *) data_val) - PHWNAG_CLASS_MALLOC_HEADER_SIZE;
 
     if (memcmp(buf, PHWNAG_CLASS_MALLOC_MARKER, PHWNAG_CLASS_MALLOC_MARKER_SIZE)) {
-        this->abend3("phwangFree Head", who_val, buf + PHWNAG_CLASS_MALLOC_MARKER_SIZE + PHWNAG_CLASS_MALLOC_LENGTH_SIZE);
+        phwangAbend3("phwangFree Head", who_val, buf + PHWNAG_CLASS_MALLOC_MARKER_SIZE + PHWNAG_CLASS_MALLOC_LENGTH_SIZE);
         return;
     }
 
     int length = phwangDecodeNumber(buf + PHWNAG_CLASS_MALLOC_MARKER_SIZE, PHWNAG_CLASS_MALLOC_LENGTH_SIZE);
 
     if (memcmp(data_val + length, PHWNAG_CLASS_MALLOC_MARKER, PHWNAG_CLASS_MALLOC_MARKER_SIZE)) {
-        this->abend3("phwangFree Tail", who_val, buf + PHWNAG_CLASS_MALLOC_MARKER_SIZE + PHWNAG_CLASS_MALLOC_LENGTH_SIZE);
+        phwangAbend3("phwangFree Tail", who_val, buf + PHWNAG_CLASS_MALLOC_MARKER_SIZE + PHWNAG_CLASS_MALLOC_LENGTH_SIZE);
         return;
     }
 
