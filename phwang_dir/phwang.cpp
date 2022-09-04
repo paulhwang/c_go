@@ -6,9 +6,21 @@
 
 #include "phwang.h"
 #include "phwang_class.h"
+#include "abend_dir/abend_class.h"
+#include "encode_dir/encode_class.h"
+#include "malloc_dir/malloc_class.h"
 
 PhwangClass *thePhwangObject = 0;
 
+/* start phwang service */
+void phwangPhwangPhwang (void)
+{
+    if (!thePhwangObject) {
+        thePhwangObject = new PhwangClass();
+    }
+}
+
+/* object count */
 void phwangIncrementObjectCount(int *object_count_val, char *object_name_val, int max_object_count_val)
 {
     thePhwangObject->incrementObjectCount(object_count_val, object_name_val, max_object_count_val);
@@ -19,28 +31,20 @@ void phwangDecrementObjectCount(int *object_count_val)
     thePhwangObject->decrementObjectCount(object_count_val);
 }
 
-/* init */
-void phwangInit (void)
-{
-	if (!thePhwangObject) {
-		thePhwangObject = new PhwangClass();
-	}
-}
-
 /* logit */
 void phwangDebug (int on_off_val, char const *str0_val, char const *str1_val)
 {
-    thePhwangObject->phwangDebug(on_off_val, str0_val, str1_val);
+    thePhwangObject->abendObject()->phwangDebug(on_off_val, str0_val, str1_val);
 }
 
 void phwangLogit (char const *str0_val, char const *str1_val)
 {
-    thePhwangObject->phwangLogit(str0_val, str1_val);
+    thePhwangObject->abendObject()->phwangLogit(str0_val, str1_val);
 }
 
 void phwangAbend (char const *str0_val, char const *str1_val)
 {
-    thePhwangObject->phwangAbend(str0_val, str1_val);
+    thePhwangObject->abendObject()->phwangAbend(str0_val, str1_val);
 }
 
 void phwangPrintBoard (char const *data_val, int board_size_val)

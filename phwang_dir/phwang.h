@@ -12,7 +12,7 @@
 #include "phwang_class.h"
 
 /* init */
-void phwangInit(void);
+void phwangPhwangPhwang(void);
 
 /* logit */
 void phwangDebug(int on_off_val, char const *str0_val, char const *str1_val);

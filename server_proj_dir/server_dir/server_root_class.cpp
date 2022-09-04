@@ -12,6 +12,7 @@
 
 ServerRootClass::ServerRootClass (void)
 {
+    phwangPhwangPhwang();
     this->theFabricObject = new FabricClass();
     this->theGoThemeObject = new ThemeClass();
     this->theEngineObject = new EngineClass();

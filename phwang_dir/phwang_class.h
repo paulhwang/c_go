@@ -16,13 +16,8 @@ class PhwangClass {
     inline static char *ObjectName = "PhwangClass";
     inline static int ObjectCount = 0;
 
-    AbendClass *theAbendObject;
     EncodeClass *theEncodeObject;
     MallocClass *theMallocObject;
-
-    AbendClass *abendObject(void) {return this->theAbendObject;}
-    EncodeClass *encodeObject(void) {return this->theEncodeObject;}
-    MallocClass *mallocObject(void) {return this->theMallocObject;}
 
     void debug(int on_off_val, char const *str0_val, char const *str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
     void logit(char const *str0_val, char const *str1_val);
@@ -33,6 +28,11 @@ class PhwangClass {
 public:
     PhwangClass(void);
     ~PhwangClass(void);
+
+    AbendClass *theAbendObject;
+    AbendClass *abendObject(void) {return this->theAbendObject;}
+    EncodeClass *encodeObject(void) {return this->theEncodeObject;}
+    MallocClass *mallocObject(void) {return this->theMallocObject;}
 
     /* logit */
     void phwangDebug(int on_off_val, char const *str0_val, char const *str1_val) {if (on_off_val) this->phwangLogit(str0_val, str1_val);}
