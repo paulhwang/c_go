@@ -34,12 +34,16 @@ void ObjectClass::decrementObjectCount(int *object_count_val)
     }
 }
 
-void ObjectClass::logit (char const* str0_val, char const* str1_val)
+void ObjectClass::logit (char const *str0_val, char const *str1_val)
 {
-    phwangLogit(str0_val, str1_val);
+    char s[LOGIT_BUF_SIZE];
+    sprintf(s, "%s::%s", ObjectName, str0_val);
+    phwangLogit(s, str1_val);
 }
 
-void ObjectClass::abend (char const* str0_val, char const* str1_val)
+void ObjectClass::abend (char const *str0_val, char const *str1_val)
 {
-    phwangAbend(str0_val, str1_val);
+    char s[LOGIT_BUF_SIZE];
+    sprintf(s, "%s::%s", ObjectName, str0_val);
+    phwangAbend(s, str1_val);
 }

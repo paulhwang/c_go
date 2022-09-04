@@ -83,12 +83,16 @@ void *ArrayMgrRootClass::arrayMgrGetArrayTable(void *array_mgr_val, int *array_s
     return ((ArrayMgrClass *) array_mgr_val)->getArrayTable(array_size_ptr);
 }
 
-void ArrayMgrRootClass::logit (char const* str0_val, char const* str1_val)
+void ArrayMgrRootClass::logit (char const *str0_val, char const *str1_val)
 {
-    phwangLogit(str0_val, str1_val);
+    char s[LOGIT_BUF_SIZE];
+    sprintf(s, "%s::%s", ObjectName, str0_val);
+    phwangLogit(s, str1_val);
 }
 
-void ArrayMgrRootClass::abend (char const* str0_val, char const* str1_val)
+void ArrayMgrRootClass::abend (char const *str0_val, char const *str1_val)
 {
-    phwangAbend(str0_val, str1_val);
+    char s[LOGIT_BUF_SIZE];
+    sprintf(s, "%s::%s", ObjectName, str0_val);
+    phwangAbend(s, str1_val);
 }

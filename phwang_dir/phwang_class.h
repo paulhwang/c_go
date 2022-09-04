@@ -19,7 +19,6 @@ class ArrayMgrRootClass;
 
 class PhwangClass {
     inline static char *ObjectName = "PhwangClass";
-    inline static int ObjectCount = 0;
 
     ObjectClass *theObjectObject;
     AbendClass *theAbendObject;
