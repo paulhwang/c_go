@@ -61,25 +61,6 @@ public:
     void  arrayMgrRemoveElement(void *array_mgr_val, void *element_val);
     void *arrayMgrGetArrayTable(void *array_mgr_val, int *array_size_ptr);
 
-    /* tp */
-    void *mallocTpServer (
-            void *caller_object_val,
-            unsigned short port_val,
-            void (*accept_callback_func_val)(void *, void *),
-            void *accept_callback_parameter_val,
-            void (*receive_callback_func_val)(void *, void *, void *),
-            void *receive_callback_parameter_val,
-            char const *who_val);
-    void *tpConnect(
-            unsigned long ip_addr_val, 
-            unsigned short port_val, 
-            void (*receive_callback_val)(void *, void *, void *), 
-            void *receive_object_val,
-            char const *who_val);
-    void freeTpServer(void *tp_server_object_val);
-    void freeTpTransfer(void *tp_transfer_object_val);
-    void tpTransmit(void *tp_transfer_object_val, char *data_val);
-
     /* register */
     void registerProgramProcess(int *register_tag_ptr_val, char *program_name_val, unsigned short port_val);
 };

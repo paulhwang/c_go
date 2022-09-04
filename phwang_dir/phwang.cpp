@@ -212,7 +212,7 @@ void *phwangMallocTpServer (
                 void *receive_callback_parameter_val,
                 char const *who_val)
 {
-    return thePhwangObject->mallocTpServer (
+    return thePhwangObject->netRootObject()->mallocTpServer (
                 caller_object_val,
                 port_val,
                 accept_callback_func_val,
@@ -229,7 +229,7 @@ void *phwangTpConnect (
                 void *receive_object_val,
                 char const *who_val)
 {
-    return thePhwangObject->tpConnect (
+    return thePhwangObject->netRootObject()->tpConnect (
                 ip_addr_val, 
                 port_val, 
                 receive_callback_val, 
@@ -239,17 +239,17 @@ void *phwangTpConnect (
 
 void phwangFreeTpServer (void *tp_server_object_val)
 {
-    thePhwangObject->freeTpServer(tp_server_object_val);
+    thePhwangObject->netRootObject()->freeTpServer(tp_server_object_val);
 }
 
 void phwangFreeTpTransfer (void *tp_transfer_object_val)
 {
-    thePhwangObject->freeTpTransfer(tp_transfer_object_val);
+    thePhwangObject->netRootObject()->freeTpTransfer(tp_transfer_object_val);
 }
 
 void phwangTpTransmit (void *tp_transfer_object_val, char *data_val)
 {
-    thePhwangObject->tpTransmit(tp_transfer_object_val, data_val);
+    thePhwangObject->netRootObject()->tpTransmit(tp_transfer_object_val, data_val);
 }
 
 /* register */
