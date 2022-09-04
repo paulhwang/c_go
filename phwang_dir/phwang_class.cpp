@@ -90,7 +90,7 @@ void *PhwangClass::phwangMalloc (int size_val, char const *who_val)
 {
     char *buf = (char *) malloc(size_val + PHWNAG_CLASS_MALLOC_EXTRA_BUFFER_SIZE);
     memcpy(buf, PHWNAG_CLASS_MALLOC_MARKER, PHWNAG_CLASS_MALLOC_MARKER_SIZE);
-    this->encodeNumber(buf + PHWNAG_CLASS_MALLOC_MARKER_SIZE, size_val, PHWNAG_CLASS_MALLOC_LENGTH_SIZE);
+    phwangEncodeNumber(buf + PHWNAG_CLASS_MALLOC_MARKER_SIZE, size_val, PHWNAG_CLASS_MALLOC_LENGTH_SIZE);
     strcpy(buf + PHWNAG_CLASS_MALLOC_MARKER_SIZE + PHWNAG_CLASS_MALLOC_LENGTH_SIZE, who_val);
     memcpy(buf + PHWNAG_CLASS_MALLOC_HEADER_SIZE + size_val, PHWNAG_CLASS_MALLOC_MARKER, PHWNAG_CLASS_MALLOC_MARKER_SIZE);
     return buf + PHWNAG_CLASS_MALLOC_HEADER_SIZE;
@@ -110,7 +110,7 @@ void PhwangClass::phwangFree (void *data_val, char const *who_val)
         return;
     }
 
-    int length = this->decodeNumber(buf + PHWNAG_CLASS_MALLOC_MARKER_SIZE, PHWNAG_CLASS_MALLOC_LENGTH_SIZE);
+    int length = phwangDecodeNumber(buf + PHWNAG_CLASS_MALLOC_MARKER_SIZE, PHWNAG_CLASS_MALLOC_LENGTH_SIZE);
 
     if (memcmp(data_val + length, PHWNAG_CLASS_MALLOC_MARKER, PHWNAG_CLASS_MALLOC_MARKER_SIZE)) {
         this->abend3("phwangFree Tail", who_val, buf + PHWNAG_CLASS_MALLOC_MARKER_SIZE + PHWNAG_CLASS_MALLOC_LENGTH_SIZE);
@@ -118,47 +118,6 @@ void PhwangClass::phwangFree (void *data_val, char const *who_val)
     }
 
     free(buf);
-}
-
-/**************************************************************************************************************/
-/**************************************************************************************************************/
-/**************************************************************************************************************/
-
-void PhwangClass::encodeNumber (char *str_val, int number_val, int size_val)
-{
-    str_val[size_val] = 0;
-    while (size_val > 0) {
-        size_val--;
-        str_val[size_val] = '0' + number_val % 10;
-        number_val /= 10;
-    }
-}
-
-int PhwangClass::decodeNumber (char const *str_val, int size_val)
-{
-    int number = 0;
-    int factor = 1;
-
-    //printf("decodeNumber() input=%s\n", str_val);
-    while (size_val > 0) {
-        size_val--;
-        number += (str_val[size_val] - '0') * factor;
-        factor *= 10;
-    }
-    //printf("decodeNumber() output=%d\n", number);
-    return number;
-}
-
-void PhwangClass::encodeIdIndex (char *str_val, int id_val, int id_size_val, int index_val, int index_size_val)
-{
-    encodeNumber(str_val, id_val, id_size_val);
-    encodeNumber(str_val + id_size_val, index_val, index_size_val);
-}
-
-void PhwangClass::decodeIdIndex (char const *str_val, int *id_ptr_val, int id_size_val, int *index_ptr_val, int index_size_val)
-{
-    *id_ptr_val = decodeNumber(str_val, id_size_val);
-    *index_ptr_val = decodeNumber(str_val + id_size_val, index_size_val);
 }
 
 /**************************************************************************************************************/

@@ -44,12 +44,6 @@ public:
     void *phwangMalloc(int size_val, char const *who_val);
     void phwangFree(void *data_val, char const *who_val);
 
-    /* encode */
-    void encodeNumber(char *str_val, int number_val, int size_val);
-    int decodeNumber(char const *str_val, int size_val);
-    void encodeIdIndex(char *str_val, int id_val, int id_size_val, int index_val, int index_size_val);
-    void decodeIdIndex(char const *str_val, int *id_ptr_val, int id_size_val, int *index_ptr_val, int index_size_val);
-
     /* queue */
     void *mallocQueue(int do_suspend_val, int max_size_val);
     void freeQueue(void *queue_val);
