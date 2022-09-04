@@ -40,10 +40,6 @@ public:
     /* tbd */
     void printBoard(char const *data_val, int board_size_val);
 
-    /* malloc and free */
-    void *phwangMalloc(int size_val, char const *who_val);
-    void phwangFree(void *data_val, char const *who_val);
-
     /* queue */
     void *mallocQueue(int do_suspend_val, int max_size_val);
     void freeQueue(void *queue_val);

@@ -78,52 +78,6 @@ void PhwangClass::printBoard (char const* data_val, int board_size_val)
 /**************************************************************************************************************/
 /**************************************************************************************************************/
 
-#define PHWNAG_CLASS_MALLOC_MARKER "phwang"
-#define PHWNAG_CLASS_MALLOC_MARKER_SIZE 6
-#define PHWNAG_CLASS_MALLOC_LENGTH_SIZE 4
-#define PHWNAG_CLASS_MALLOC_WHO_SIZE (4 + 1)
-#define PHWNAG_CLASS_MALLOC_HEADER_SIZE (PHWNAG_CLASS_MALLOC_MARKER_SIZE + PHWNAG_CLASS_MALLOC_LENGTH_SIZE + PHWNAG_CLASS_MALLOC_WHO_SIZE)
-#define PHWNAG_CLASS_MALLOC_TAILER_SIZE PHWNAG_CLASS_MALLOC_MARKER_SIZE
-#define PHWNAG_CLASS_MALLOC_EXTRA_BUFFER_SIZE (PHWNAG_CLASS_MALLOC_HEADER_SIZE + PHWNAG_CLASS_MALLOC_TAILER_SIZE + 8)
-
-void *PhwangClass::phwangMalloc (int size_val, char const *who_val)
-{
-    char *buf = (char *) malloc(size_val + PHWNAG_CLASS_MALLOC_EXTRA_BUFFER_SIZE);
-    memcpy(buf, PHWNAG_CLASS_MALLOC_MARKER, PHWNAG_CLASS_MALLOC_MARKER_SIZE);
-    phwangEncodeNumber(buf + PHWNAG_CLASS_MALLOC_MARKER_SIZE, size_val, PHWNAG_CLASS_MALLOC_LENGTH_SIZE);
-    strcpy(buf + PHWNAG_CLASS_MALLOC_MARKER_SIZE + PHWNAG_CLASS_MALLOC_LENGTH_SIZE, who_val);
-    memcpy(buf + PHWNAG_CLASS_MALLOC_HEADER_SIZE + size_val, PHWNAG_CLASS_MALLOC_MARKER, PHWNAG_CLASS_MALLOC_MARKER_SIZE);
-    return buf + PHWNAG_CLASS_MALLOC_HEADER_SIZE;
-}
-
-void PhwangClass::phwangFree (void *data_val, char const *who_val)
-{
-    if (!data_val) {
-        this->abend3("phwangFree", "null data", who_val);
-        return;
-    }
-
-    char *buf = ((char *) data_val) - PHWNAG_CLASS_MALLOC_HEADER_SIZE;
-
-    if (memcmp(buf, PHWNAG_CLASS_MALLOC_MARKER, PHWNAG_CLASS_MALLOC_MARKER_SIZE)) {
-        phwangAbend3("phwangFree Head", who_val, buf + PHWNAG_CLASS_MALLOC_MARKER_SIZE + PHWNAG_CLASS_MALLOC_LENGTH_SIZE);
-        return;
-    }
-
-    int length = phwangDecodeNumber(buf + PHWNAG_CLASS_MALLOC_MARKER_SIZE, PHWNAG_CLASS_MALLOC_LENGTH_SIZE);
-
-    if (memcmp(data_val + length, PHWNAG_CLASS_MALLOC_MARKER, PHWNAG_CLASS_MALLOC_MARKER_SIZE)) {
-        phwangAbend3("phwangFree Tail", who_val, buf + PHWNAG_CLASS_MALLOC_MARKER_SIZE + PHWNAG_CLASS_MALLOC_LENGTH_SIZE);
-        return;
-    }
-
-    free(buf);
-}
-
-/**************************************************************************************************************/
-/**************************************************************************************************************/
-/**************************************************************************************************************/
-
 void *PhwangClass::listMgrMalloc (char const *caller_name_val, int id_size_val, int index_size_val, int global_entry_id_val)
 {
     ListMgrClass *list_mgr = new ListMgrClass(caller_name_val, id_size_val, index_size_val, global_entry_id_val);
