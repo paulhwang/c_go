@@ -9,7 +9,6 @@
 class EncodeClass
 {
     inline static char *ObjectName = "EncodeClass";
-    inline static int ObjectCount = 0;
 
     void debug(int on_off_val, char const *str0_val, char const *str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
     void logit(char const *str0_val, char const *str1_val);
@@ -18,4 +17,9 @@ class EncodeClass
 public:
     EncodeClass(void);
     ~EncodeClass(void);
+
+    void encodeNumber(char *str_val, int number_val, int size_val);
+    int decodeNumber(char const *str_val, int size_val);
+    void encodeIdIndex(char *str_val, int id_val, int id_size_val, int index_val, int index_size_val);
+    void decodeIdIndex(char const *str_val, int *id_ptr_val, int id_size_val, int *index_ptr_val, int index_size_val);
 };

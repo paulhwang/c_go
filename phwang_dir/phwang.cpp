@@ -68,22 +68,22 @@ void phwangFree (void *data_val, char const *who_val)
 /* encode */
 void phwangEncodeNumber (char *str_val, int number_val, int size_val)
 {
-    thePhwangObject->encodeNumber(str_val, number_val, size_val);
+    thePhwangObject->encodeObject()->encodeNumber(str_val, number_val, size_val);
 }
 
 int phwangDecodeNumber (char const *str_val, int size_val)
 {
-    return thePhwangObject->decodeNumber(str_val, size_val);
+    return thePhwangObject->encodeObject()->decodeNumber(str_val, size_val);
 }
 
 void phwangEncodeIdIndex (char *str_val, int id_val, int id_size_val, int index_val, int index_size_val)
 {
-    thePhwangObject->encodeIdIndex(str_val, id_val, id_size_val, index_val, index_size_val);
+    thePhwangObject->encodeObject()->encodeIdIndex(str_val, id_val, id_size_val, index_val, index_size_val);
 }
 
 void phwangDecodeIdIndex (char const *str_val, int *id_ptr_val, int id_size_val, int *index_ptr_val, int index_size_val)
 {
-    thePhwangObject->decodeIdIndex(str_val, id_ptr_val, id_size_val, index_ptr_val, index_size_val);
+    thePhwangObject->encodeObject()->decodeIdIndex(str_val, id_ptr_val, id_size_val, index_ptr_val, index_size_val);
 }
 
 char *encodeString (char const *input_str_val) {
