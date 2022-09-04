@@ -37,9 +37,6 @@ public:
     EncodeClass *encodeObject(void) {return this->theEncodeObject;}
     MallocClass *mallocObject(void) {return this->theMallocObject;}
 
-    /* init */
-    void initMyself(void);
-
     /* logit */
     void phwangDebug(int on_off_val, char const *str0_val, char const *str1_val) {if (on_off_val) this->phwangLogit(str0_val, str1_val);}
     void phwangLogit(char const *str0_val, char const *str1_val);

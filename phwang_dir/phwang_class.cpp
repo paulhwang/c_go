@@ -23,21 +23,14 @@
 PhwangClass::PhwangClass (void)
 {
     memset(this, 0, sizeof(*this));
-}
-
-PhwangClass::~PhwangClass (void)
-{
-    phwangDecrementObjectCount(&ObjectCount);
-}
-
-void PhwangClass::initMyself(void)
-{
     this->theObjectObject = new ObjectClass();
     this->theAbendObject = new AbendClass();
     this->theMallocObject = new MallocClass();
     this->theEncodeObject = new EncodeClass();
+}
 
-    phwangIncrementObjectCount(&ObjectCount, ObjectName, 1);
+PhwangClass::~PhwangClass (void)
+{
 }
 
 /*************************************************************/

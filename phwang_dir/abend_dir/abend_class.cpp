@@ -10,12 +10,10 @@
 AbendClass::AbendClass (void)
 {
     memset(this, 0, sizeof (*this));
-    phwangIncrementObjectCount(&ObjectCount, ObjectName, 1);
 }
 
 AbendClass::~AbendClass(void)
 {
-    phwangDecrementObjectCount(&ObjectCount);
 }
 
 void AbendClass::phwangLogit (char const *str0_val, char const *str1_val)

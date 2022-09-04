@@ -10,12 +10,10 @@
 ObjectClass::ObjectClass (void)
 {
     memset(this, 0, sizeof (*this));
-    //phwangIncrementObjectCount(&ObjectCount, ObjectName, 1);
 }
 
 ObjectClass::~ObjectClass(void)
 {
-    //phwangDecrementObjectCount(&ObjectCount);
 }
 
 void ObjectClass::incrementObjectCount(int *object_count_val, char *object_name_val, int max_object_count_val)

@@ -18,7 +18,6 @@ void phwangPhwangPhwang (void)
 {
     if (!thePhwangObject) {
         thePhwangObject = new PhwangClass();
-        thePhwangObject->initMyself();
     }
 }
 
