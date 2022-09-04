@@ -18,4 +18,7 @@ class ObjectClass
 public:
     ObjectClass(void);
     ~ObjectClass(void);
+
+    void incrementObjectCount(int *object_count_val, char *object_name_val, int max_object_count_val);
+    void decrementObjectCount(int *object_count_val);
 };

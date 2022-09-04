@@ -23,12 +23,6 @@
 PhwangClass::PhwangClass (void)
 {
     memset(this, 0, sizeof(*this));
-    phwangIncrementObjectCount(&ObjectCount, ObjectName, 1);
-
-    this->theAbendObject = new AbendClass();
-    this->theObjectObject = new ObjectClass();
-    this->theMallocObject = new MallocClass();
-    this->theEncodeObject = new EncodeClass();
 }
 
 PhwangClass::~PhwangClass (void)
@@ -36,24 +30,14 @@ PhwangClass::~PhwangClass (void)
     phwangDecrementObjectCount(&ObjectCount);
 }
 
-/*************************************************************/
-
-void PhwangClass::incrementObjectCount(int *object_count_val, char *object_name_val, int max_object_count_val)
+void PhwangClass::initMyself(void)
 {
-    (*object_count_val)++;
-    if (*object_count_val > max_object_count_val) {
-        printf("incrementObjectCount(), count=%d\n", *object_count_val);
-        phwangAbend("incrementObjectCount", object_name_val);
-    }
-}
+    this->theObjectObject = new ObjectClass();
+    this->theAbendObject = new AbendClass();
+    this->theMallocObject = new MallocClass();
+    this->theEncodeObject = new EncodeClass();
 
-void PhwangClass::decrementObjectCount(int *object_count_val)
-{
-    (*object_count_val)--;
-    if (*object_count_val < 0) {
-        printf("decrementObjectCount(), count=%d\n", *object_count_val);
-        phwangAbend("decrementObjectCount", "too small");
-    }
+    phwangIncrementObjectCount(&ObjectCount, ObjectName, 1);
 }
 
 /*************************************************************/

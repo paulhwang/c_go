@@ -18,7 +18,6 @@ class PhwangClass {
     inline static int ObjectCount = 0;
 
     AbendClass *theAbendObject;
-    ObjectClass *theObjectObject;
     EncodeClass *theEncodeObject;
     MallocClass *theMallocObject;
 
@@ -32,10 +31,14 @@ public:
     PhwangClass(void);
     ~PhwangClass(void);
 
+    ObjectClass *theObjectObject;
     AbendClass *abendObject(void) {return this->theAbendObject;}
     ObjectClass *objectObject(void) {return this->theObjectObject;}
     EncodeClass *encodeObject(void) {return this->theEncodeObject;}
     MallocClass *mallocObject(void) {return this->theMallocObject;}
+
+    /* init */
+    void initMyself(void);
 
     /* logit */
     void phwangDebug(int on_off_val, char const *str0_val, char const *str1_val) {if (on_off_val) this->phwangLogit(str0_val, str1_val);}
@@ -54,10 +57,6 @@ public:
     int decodeNumber(char const *str_val, int size_val);
     void encodeIdIndex(char *str_val, int id_val, int id_size_val, int index_val, int index_size_val);
     void decodeIdIndex(char const *str_val, int *id_ptr_val, int id_size_val, int *index_ptr_val, int index_size_val);
-
-    /* object_count */
-    void incrementObjectCount(int *object_count_val, char *object_name_val, int max_object_count_val);
-    void decrementObjectCount(int *object_count_val);
 
     /* queue */
     void *mallocQueue(int do_suspend_val, int max_size_val);

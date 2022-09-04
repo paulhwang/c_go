@@ -9,6 +9,7 @@
 #include "abend_dir/abend_class.h"
 #include "encode_dir/encode_class.h"
 #include "malloc_dir/malloc_class.h"
+#include "object_dir/object_class.h"
 
 PhwangClass *thePhwangObject = 0;
 
@@ -17,18 +18,19 @@ void phwangPhwangPhwang (void)
 {
     if (!thePhwangObject) {
         thePhwangObject = new PhwangClass();
+        thePhwangObject->initMyself();
     }
 }
 
 /* object count */
 void phwangIncrementObjectCount(int *object_count_val, char *object_name_val, int max_object_count_val)
 {
-    thePhwangObject->incrementObjectCount(object_count_val, object_name_val, max_object_count_val);
+    thePhwangObject->objectObject()->incrementObjectCount(object_count_val, object_name_val, max_object_count_val);
 }
 
 void phwangDecrementObjectCount(int *object_count_val)
 {
-    thePhwangObject->decrementObjectCount(object_count_val);
+    thePhwangObject->objectObject()->decrementObjectCount(object_count_val);
 }
 
 /* logit */
