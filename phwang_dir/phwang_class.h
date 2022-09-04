@@ -38,6 +38,10 @@ public:
     void encodeIdIndex(char *str_val, int id_val, int id_size_val, int index_val, int index_size_val);
     void decodeIdIndex(char const *str_val, int *id_ptr_val, int id_size_val, int *index_ptr_val, int index_size_val);
 
+    /* object_count */
+    void incrementObjectCount(int *object_count_val, char *object_name_val, int max_object_count_val);
+    void decrementObjectCount(int *object_count_val);
+
     /* queue */
     void *mallocQueue(int do_suspend_val, int max_size_val);
     void freeQueue(void *queue_val);

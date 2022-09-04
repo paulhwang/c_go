@@ -10,7 +10,7 @@
 DbAccountEntryClass::DbAccountEntryClass (void)
 {
     memset(this, 0, sizeof(*this));
-    this->incrementObjectCount();
+    phwangIncrementObjectCount(&ObjectCount, ObjectName, 3);
 }
 
 DbAccountEntryClass::~DbAccountEntryClass (void)
@@ -25,33 +25,19 @@ DbAccountEntryClass::~DbAccountEntryClass (void)
         free(this->theEmail);
     }
 
-    this->decrementObjectCount();
-
-}
-
-void DbAccountEntryClass::incrementObjectCount(void)
-{
-    DbAccountEntryClass::theObjectCount++;
-    if (DbAccountEntryClass::theObjectCount > 5) {
-        this->abend("incrementObjectCount", "too big");
-    }
-}
-
-void DbAccountEntryClass::decrementObjectCount(void)
-{
-    DbAccountEntryClass::theObjectCount--;
+    //phwangDecrementObjectCount(&ObjectCount);
 }
 
 void DbAccountEntryClass::logit (char const* str0_val, char const* str1_val)
 {
     char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
+    sprintf(s, "%s::%s", ObjectName, str0_val);
     phwangLogit(s, str1_val);
 }
 
 void DbAccountEntryClass::abend (char const* str0_val, char const* str1_val)
 {
     char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
+    sprintf(s, "%s::%s", ObjectName, str0_val);
     phwangAbend(s, str1_val);
 }

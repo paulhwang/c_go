@@ -32,6 +32,10 @@ void phwangDecodeIdIndex(char const *str_val, int *id_ptr_val, int id_size_val, 
 char *encodeString (char const *input_str_val);
 char *phwangDecodeString(char const *input_val, int *input_size_val);
 
+/* object_count */
+void phwangIncrementObjectCount(int *object_count_val, char *object_name_val, int max_object_count_val);
+void phwangDecrementObjectCount(int *object_count_val);
+
 /* queue */
 void *phwangMallocSuspendedQueue(int size_val);
 void *phwangMallocQueue(int size_val);

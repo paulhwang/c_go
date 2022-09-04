@@ -7,9 +7,8 @@
 #pragma once
 
 class DbAccountEntryClass {
-    inline static int theObjectCount = 0;
-    void incrementObjectCount(void);
-    void decrementObjectCount(void);
+    inline static char *ObjectName = "DbAccountDataClass";
+    inline static int ObjectCount = 0;
 
     char *theAccountName;
     char *thePassword;
@@ -23,7 +22,6 @@ public:
     DbAccountEntryClass(void);
     ~DbAccountEntryClass(void);
 
-    char const *objectName(void) {return "DbAccountDataClass";}
 
     char *accountName(void) {return this->theAccountName;}
     void setAccountName(char *account_name_val) {this->theAccountName = account_name_val;}

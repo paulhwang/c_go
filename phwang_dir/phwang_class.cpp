@@ -15,6 +15,28 @@
 #include "net_dir/tp_transfer_class.h"
 #include "net_dir/tp_connect.h"
 
+/*************************************************************/
+
+void PhwangClass::incrementObjectCount(int *object_count_val, char *object_name_val, int max_object_count_val)
+{
+    (*object_count_val)++;
+    if (*object_count_val > max_object_count_val) {
+        printf("incrementObjectCount(), count=%d\n", *object_count_val);
+        phwangAbend("incrementObjectCount", object_name_val);
+    }
+}
+
+void PhwangClass::decrementObjectCount(int *object_count_val)
+{
+    (*object_count_val)--;
+    if (*object_count_val < 0) {
+        printf("decrementObjectCount(), count=%d\n", *object_count_val);
+        phwangAbend("decrementObjectCount", "too small");
+    }
+}
+
+/*************************************************************/
+
 void PhwangClass::phwangLogit (char const *str0_val, char const *str1_val)
 {
     printf("%s() %s\n", str0_val, str1_val);
