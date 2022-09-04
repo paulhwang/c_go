@@ -12,6 +12,8 @@ class AbendClass;
 class EncodeClass;
 class MallocClass;
 class ObjectClass;
+class QueueRootClass;
+class NetRootClass;
 
 class PhwangClass {
     inline static char *ObjectName = "PhwangClass";
@@ -21,6 +23,8 @@ class PhwangClass {
     AbendClass *theAbendObject;
     EncodeClass *theEncodeObject;
     MallocClass *theMallocObject;
+    QueueRootClass *theQueueRootObject;
+    NetRootClass *theNetRootObject;
 
     void debug(int on_off_val, char const *str0_val, char const *str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
     void logit(char const *str0_val, char const *str1_val);
@@ -36,6 +40,8 @@ public:
     ObjectClass *objectObject(void) {return this->theObjectObject;}
     EncodeClass *encodeObject(void) {return this->theEncodeObject;}
     MallocClass *mallocObject(void) {return this->theMallocObject;}
+    QueueRootClass *QueueRootObject(void) {return this->theQueueRootObject;}
+    NetRootClass *NetRootObject(void) {return this->theNetRootObject;}
 
     /* tbd */
     void printBoard(char const *data_val, int board_size_val);

@@ -12,7 +12,9 @@
 #include "encode_dir/encode_class.h"
 #include "malloc_dir/malloc_class.h"
 #include "object_dir/object_class.h"
+#include "net_dir/net_root_class.h"
 #include "queue_dir/queue_class.h"
+#include "queue_dir/queue_root_class.h"
 #include "list_mgr_dir/list_mgr_class.h"
 #include "array_mgr_dir/array_mgr_class.h"
 #include "net_dir/tp_server_class.h"
@@ -27,6 +29,8 @@ PhwangClass::PhwangClass (void)
     this->theAbendObject = new AbendClass();
     this->theMallocObject = new MallocClass();
     this->theEncodeObject = new EncodeClass();
+    this->theQueueRootObject = new QueueRootClass();
+    this->theNetRootObject = new NetRootClass();
 }
 
 PhwangClass::~PhwangClass (void)
