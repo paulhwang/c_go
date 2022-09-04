@@ -110,7 +110,7 @@ char *phwangDecodeString (char const *input_val, int *input_size_val)
 /* queue */
 void *phwangMallocSuspendedQueue (int size_val)
 {
-    return thePhwangObject->mallocQueue(true, size_val);
+    return thePhwangObject->queueRootObject()->mallocQueue(true, size_val);
 }
 
 void *phwangMallocQueue (int size_val)

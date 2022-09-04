@@ -46,12 +46,6 @@ public:
     /* tbd */
     void printBoard(char const *data_val, int board_size_val);
 
-    /* queue */
-    void *mallocQueue(int do_suspend_val, int max_size_val);
-    void freeQueue(void *queue_val);
-    void enqueue(void *queue_val, void *data_val);
-    void *dequeue(void *queue_val);
-
     /* list_mgr */
     void *listMgrMalloc(char const *caller_name_val, int id_size_val, int index_size_val, int global_entry_id_val);
     void  listMgrFree(void *list_mgr_val);
