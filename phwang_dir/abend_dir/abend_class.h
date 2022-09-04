@@ -8,6 +8,9 @@
 
 class AbendClass
 {
+    inline static char *ObjectName = "AbendClass";
+    inline static int ObjectCount = 0;
+
     void debug(int on_off_val, char const *str0_val, char const *str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
     void logit(char const *str0_val, char const *str1_val);
     void logit3(char const *str0_val, char const *str1_val, char const *str2_val);
@@ -17,7 +20,6 @@ class AbendClass
 public:
     AbendClass(void);
     ~AbendClass(void);
-    char const *objectName(void) {return "AbendClass";}
 
     void phwangDebug(int on_off_val, char const *str0_val, char const *str1_val) {if (on_off_val) this->phwangLogit(str0_val, str1_val);}
     void phwangLogit(char const *str0_val, char const *str1_val);

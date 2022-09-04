@@ -10,10 +10,12 @@
 EncodeClass::EncodeClass (void)
 {
     memset(this, 0, sizeof (*this));
+    phwangIncrementObjectCount(&ObjectCount, ObjectName, 1);
 }
 
 EncodeClass::~EncodeClass(void)
 {
+    phwangDecrementObjectCount(&ObjectCount);
 }
 
 void EncodeClass::logit (char const* str0_val, char const* str1_val)

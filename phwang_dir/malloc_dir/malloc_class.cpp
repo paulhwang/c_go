@@ -10,10 +10,12 @@
 MallocClass::MallocClass (void)
 {
     memset(this, 0, sizeof (*this));
+    phwangIncrementObjectCount(&ObjectCount, ObjectName, 1);
 }
 
 MallocClass::~MallocClass(void)
 {
+    phwangDecrementObjectCount(&ObjectCount);
 }
 
 void MallocClass::logit (char const* str0_val, char const* str1_val)
