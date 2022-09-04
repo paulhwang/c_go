@@ -16,6 +16,9 @@ class DbAccountClass;
 #define FABRIC_SERVER_TIME_STAMP_LENGTH_SIZE 8
 
 class DFabricClass {
+    inline static char *ObjectName = "DFabricClass";
+    inline static int ObjectCount = 0;
+
     FabricClass *theFabricObject;
     void *theTpServerObject;
     char theTimeStampString[FABRIC_SERVER_TIME_STAMP_LENGTH_SIZE + 16];
@@ -60,7 +63,6 @@ class DFabricClass {
 public:
     DFabricClass(FabricClass *fabric_object_val);
     ~DFabricClass(void);
-    char const *objectName(void) {return "DFabricClass";}
 
     void transmitFunction(void *tp_transfer_object_val, char *data_val);
 

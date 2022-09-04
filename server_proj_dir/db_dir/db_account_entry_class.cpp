@@ -15,6 +15,8 @@ DbAccountEntryClass::DbAccountEntryClass (void)
 
 DbAccountEntryClass::~DbAccountEntryClass (void)
 {
+    phwangDecrementObjectCount(&ObjectCount);
+
     if (this->theAccountName) {
         free(this->theAccountName);
     }
@@ -24,8 +26,6 @@ DbAccountEntryClass::~DbAccountEntryClass (void)
     if (this->theEmail) {
         free(this->theEmail);
     }
-
-    //phwangDecrementObjectCount(&ObjectCount);
 }
 
 void DbAccountEntryClass::logit (char const* str0_val, char const* str1_val)

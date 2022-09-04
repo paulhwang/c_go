@@ -16,6 +16,8 @@
 DFabricClass::DFabricClass (FabricClass *fabric_object_val)
 {
     memset(this, 0, sizeof(DFabricClass));
+    phwangIncrementObjectCount(&ObjectCount, ObjectName, 1);
+
     this->theFabricObject = fabric_object_val;
     this->setTimeStampString();
     this->startNetServer();
@@ -25,6 +27,7 @@ DFabricClass::DFabricClass (FabricClass *fabric_object_val)
 
 DFabricClass::~DFabricClass (void)
 {
+    phwangDecrementObjectCount(&ObjectCount);
 }
 
 void dFabricTpServerAcceptFunction (void *d_fabric_object_val, void *tp_transfer_object_val) {
@@ -52,7 +55,7 @@ void dFabricTpReceiveDataFunction (void *tp_transfer_object_val, void *d_fabric_
 
 void DFabricClass::startNetServer (void)
 {
-    this->theTpServerObject = phwangMallocTpServer(this, HTTP_FABRIC_PROTOCOL_TRANSPORT_PORT_NUMBER, dFabricTpServerAcceptFunction, this, dFabricTpReceiveDataFunction, this, this->objectName());
+    this->theTpServerObject = phwangMallocTpServer(this, HTTP_FABRIC_PROTOCOL_TRANSPORT_PORT_NUMBER, dFabricTpServerAcceptFunction, this, dFabricTpReceiveDataFunction, this, ObjectName);
 }
 
 void DFabricClass::setTimeStampString (void)
@@ -66,13 +69,13 @@ void DFabricClass::setTimeStampString (void)
 void DFabricClass::logit (char const *str0_val, char const *str1_val)
 {
     char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
+    sprintf(s, "%s::%s", ObjectName, str0_val);
     phwangLogit(s, str1_val);
 }
 
 void DFabricClass::abend (char const *str0_val, char const *str1_val)
 {
     char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
+    sprintf(s, "%s::%s", ObjectName, str0_val);
     phwangAbend(s, str1_val);
 }

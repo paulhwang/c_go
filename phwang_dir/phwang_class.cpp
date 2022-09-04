@@ -8,12 +8,31 @@
 #include <arpa/inet.h>
 #include "phwang.h"
 #include "phwang_class.h"
+#include "abend_dir/abend_class.h"
+#include "encode_dir/encode_class.h"
+#include "malloc_dir/malloc_class.h"
 #include "queue_dir/queue_class.h"
 #include "list_mgr_dir/list_mgr_class.h"
 #include "array_mgr_dir/array_mgr_class.h"
 #include "net_dir/tp_server_class.h"
 #include "net_dir/tp_transfer_class.h"
 #include "net_dir/tp_connect.h"
+
+
+PhwangClass::PhwangClass (void)
+{
+    memset(this, 0, sizeof(*this));
+    phwangIncrementObjectCount(&ObjectCount, ObjectName, 1);
+
+    this->theAbendObject = new AbendClass();
+    this->theMallocObject = new MallocClass();
+    this->theEncodeObject = new EncodeClass();
+}
+
+PhwangClass::~PhwangClass (void)
+{
+    phwangDecrementObjectCount(&ObjectCount);
+}
 
 /*************************************************************/
 
@@ -63,19 +82,19 @@ void PhwangClass::phwangAbend3 (char const *str0_val, char const *str1_val, char
 
 void PhwangClass::logit (char const *str0_val, char const *str1_val) {
     char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
+    sprintf(s, "%s::%s", ObjectName, str0_val);
     this->phwangLogit(s, str1_val);
 }
 
 void PhwangClass::abend (char const *str0_val, char const *str1_val) {
     char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
+    sprintf(s, "%s::%s", ObjectName, str0_val);
     this->phwangAbend(s, str1_val);
 }
 
 void PhwangClass::abend3 (char const *str0_val, char const *str1_val, char const *str2_val) {
     char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
+    sprintf(s, "%s::%s", ObjectName, str0_val);
     this->phwangAbend3(s, str1_val, str2_val);
 }
 
