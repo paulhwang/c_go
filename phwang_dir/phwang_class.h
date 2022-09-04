@@ -11,11 +11,14 @@
 class AbendClass;
 class EncodeClass;
 class MallocClass;
+class ObjectClass;
 
 class PhwangClass {
     inline static char *ObjectName = "PhwangClass";
     inline static int ObjectCount = 0;
 
+    AbendClass *theAbendObject;
+    ObjectClass *theObjectObject;
     EncodeClass *theEncodeObject;
     MallocClass *theMallocObject;
 
@@ -29,8 +32,8 @@ public:
     PhwangClass(void);
     ~PhwangClass(void);
 
-    AbendClass *theAbendObject;
     AbendClass *abendObject(void) {return this->theAbendObject;}
+    ObjectClass *objectObject(void) {return this->theObjectObject;}
     EncodeClass *encodeObject(void) {return this->theEncodeObject;}
     MallocClass *mallocObject(void) {return this->theMallocObject;}
 

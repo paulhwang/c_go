@@ -11,6 +11,7 @@
 #include "abend_dir/abend_class.h"
 #include "encode_dir/encode_class.h"
 #include "malloc_dir/malloc_class.h"
+#include "object_dir/object_class.h"
 #include "queue_dir/queue_class.h"
 #include "list_mgr_dir/list_mgr_class.h"
 #include "array_mgr_dir/array_mgr_class.h"
@@ -25,6 +26,7 @@ PhwangClass::PhwangClass (void)
     phwangIncrementObjectCount(&ObjectCount, ObjectName, 1);
 
     this->theAbendObject = new AbendClass();
+    this->theObjectObject = new ObjectClass();
     this->theMallocObject = new MallocClass();
     this->theEncodeObject = new EncodeClass();
 }
