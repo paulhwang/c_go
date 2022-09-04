@@ -7,6 +7,10 @@
 #pragma once
 
 class DbAccountEntryClass {
+    inline static int theObjectCount = 0;
+    void incrementObjectCount(void);
+    void decrementObjectCount(void);
+
     char *theAccountName;
     char *thePassword;
     char *theEmail;

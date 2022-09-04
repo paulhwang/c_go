@@ -208,6 +208,7 @@ void DFabricClass::sendMmwReadDataResponce (void *tp_transfer_object_val, char c
     int encoded_result_length = strlen(encoded_result);
     char *encoded_data = encodeString(data_val);
     int encoded_data_length = strlen(encoded_data);
+
     char *data_ptr;
     char *downlink_data = data_ptr = (char *) phwangMalloc(D_FABRIC_CLASS_PROCESSS_MMW_READ_DATA_DOWN_LINK_DATA_SIZE + encoded_result_length + encoded_data_length, "DFSL");
     *data_ptr++ = FECommandClass::MMW_READ_DATA_RESPONSE;

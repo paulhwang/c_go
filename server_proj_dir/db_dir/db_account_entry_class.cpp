@@ -7,10 +7,10 @@
 #include "../../phwang_dir/phwang.h"
 #include "db_account_entry_class.h"
 
-
 DbAccountEntryClass::DbAccountEntryClass (void)
 {
     memset(this, 0, sizeof(*this));
+    this->incrementObjectCount();
 }
 
 DbAccountEntryClass::~DbAccountEntryClass (void)
@@ -24,6 +24,22 @@ DbAccountEntryClass::~DbAccountEntryClass (void)
     if (this->theEmail) {
         free(this->theEmail);
     }
+
+    this->decrementObjectCount();
+
+}
+
+void DbAccountEntryClass::incrementObjectCount(void)
+{
+    DbAccountEntryClass::theObjectCount++;
+    if (DbAccountEntryClass::theObjectCount > 5) {
+        this->abend("incrementObjectCount", "too big");
+    }
+}
+
+void DbAccountEntryClass::decrementObjectCount(void)
+{
+    DbAccountEntryClass::theObjectCount--;
 }
 
 void DbAccountEntryClass::logit (char const* str0_val, char const* str1_val)
