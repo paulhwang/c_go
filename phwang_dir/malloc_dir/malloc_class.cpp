@@ -29,13 +29,13 @@ void *MallocClass::phwangMalloc1 (int size_val, int who_val)
 {
     char who_str[PHWNAG_CLASS_MALLOC_WHO_TOTAL_SIZE];
     phwangEncodeNumber(who_str, who_val, PHWNAG_CLASS_MALLOC_WHO_SIZE);
+    who_str[PHWNAG_CLASS_MALLOC_WHO_SIZE] = 0;
+
     char *buf = (char *) malloc(size_val + PHWNAG_CLASS_MALLOC_EXTRA_BUFFER_SIZE);
-/*
     memcpy(buf, PHWNAG_CLASS_MALLOC_MARKER, PHWNAG_CLASS_MALLOC_MARKER_SIZE);
     phwangEncodeNumber(buf + PHWNAG_CLASS_MALLOC_MARKER_SIZE, size_val, PHWNAG_CLASS_MALLOC_LENGTH_SIZE);
-    strcpy(buf + PHWNAG_CLASS_MALLOC_MARKER_SIZE + PHWNAG_CLASS_MALLOC_LENGTH_SIZE, who_val);
+    strcpy(buf + PHWNAG_CLASS_MALLOC_MARKER_SIZE + PHWNAG_CLASS_MALLOC_LENGTH_SIZE, who_str);
     memcpy(buf + PHWNAG_CLASS_MALLOC_HEADER_SIZE + size_val, PHWNAG_CLASS_MALLOC_MARKER, PHWNAG_CLASS_MALLOC_MARKER_SIZE);
-*/
     return buf + PHWNAG_CLASS_MALLOC_HEADER_SIZE;
 }
 
