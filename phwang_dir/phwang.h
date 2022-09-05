@@ -19,11 +19,11 @@ void phwangPhwangPhwang(int debug_code_val);
 int phwangPthreadCreate(pthread_t *thread, const pthread_attr_t *attr, void *(*start_routine)(void *), void *arg);
 
 /* logit */
-void phwangDebug(int on_off_val, char const *str0_val, char const *str1_val);
-void phwangLogit(char const *str0_val, char const *str1_val);
-void phwangLogit3(char const *str0_val, char const *str1_val, char const *str2_val);
-void phwangAbend(char const *str0_val, char const *str1_val);
-void phwangAbend3(char const *str0_val, char const *str1_val, char const *str2_val);
+void phwangDebug(int on_off_val, char const *func_name_val, char const *str1_val);
+void phwangLogit(char const *func_name_val, char const *str1_val);
+void phwangLogit2(char const *func_name_val, char const *str1_val, char const *str2_val);
+void phwangAbend(char const *func_name_val, char const *str1_val);
+void phwangAbend2(char const *func_name_val, char const *str1_val, char const *str2_val);
 
 /* malloc and free */
 void *phwangMalloc(int size_val, int who_val);
