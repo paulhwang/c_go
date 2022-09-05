@@ -43,6 +43,6 @@ public:
     ~TpServerClass(void);
     char const *objectName(void) {return "TpServerClass";}
 
-    void serverThreadFunction(void *data_val);
+    void *serverThreadFunction(void *data_val);
     void startServerThread(void);
 };

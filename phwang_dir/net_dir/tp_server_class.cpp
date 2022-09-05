@@ -52,7 +52,7 @@ TpServerClass::~TpServerClass (void)
 
 void *transportServerThreadFunction (void *tp_server_object_val)
 {
-    ((TpServerClass *) tp_server_object_val)->serverThreadFunction(0);
+    return ((TpServerClass *) tp_server_object_val)->serverThreadFunction(0);
 }
 
 void TpServerClass::startServerThread (void)
@@ -63,14 +63,14 @@ void TpServerClass::startServerThread (void)
         this->logit("startServerThread", s);
     }
 
-    int r = pthread_create(&this->theServerThread, 0, transportServerThreadFunction, this);
+    int r = phwangPthreadCreate(&this->theServerThread, 0, transportServerThreadFunction, this);
     if (r) {
         printf("Error - startServerThread() return code: %d\n", r);
         return;
     }
 }
 
-void TpServerClass::serverThreadFunction (void *data_val)
+void *TpServerClass::serverThreadFunction (void *data_val)
 {
     char const *func_name_ = "serverThreadFunction";
     char localhost[MAXHOSTNAME + 1];
@@ -90,12 +90,12 @@ void TpServerClass::serverThreadFunction (void *data_val)
 
     if ((s = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
         this->logit(func_name_, "open socket error");
-        return;
+        return 0;
     }
 
     if (setsockopt(s, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &opt, sizeof(opt))) {
         this->logit(func_name_, "setsockopt error");
-        return;
+        return 0;
     }
 
     address.sin_family = AF_INET;
@@ -104,7 +104,7 @@ void TpServerClass::serverThreadFunction (void *data_val)
 
     if (bind(s, (struct sockaddr *)&address, sizeof(address)) < 0) {
         this->logit(func_name_, "bind error");
-        return;
+        return 0;
     }
 
     while (1) {
@@ -124,7 +124,7 @@ void TpServerClass::serverThreadFunction (void *data_val)
 
         if ((data_socket = accept(s, (struct sockaddr *)&address, (socklen_t*)&addrlen)) < 0) {
             this->logit(func_name_, "accept error");
-            return;
+            return 0;
         }
 
         if (1) { /* debug */
@@ -155,6 +155,7 @@ void TpServerClass::serverThreadFunction (void *data_val)
     }
 
     //free(data_val);
+    return 0;
 }
 
 
