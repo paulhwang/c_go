@@ -59,7 +59,7 @@ public:
     int const static MALLOC_ROOM = 5;
     int const static ENCODE_STRING = 6;
     int const static encodeNumberMalloc = 7;
-    int const static DECODE_STRING = 8;
+    int const static encodeStringMalloc = 8;
     int const static TEST_SETUP_LINK = 9;
     int const static DB_ACCOUNT_DEFAULT_NAME = 10;
     int const static MAX_INDEX = 10;

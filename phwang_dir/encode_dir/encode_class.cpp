@@ -61,21 +61,19 @@ int EncodeClass::decodeNumberNull (char const *str_val)
     return this->decodeNumber(str_val, strlen(str_val));
 }
 
+#define ENCODE_CLASS_ENCODE_STRING_MAX_LENGTH_SIZE 5
+#define ENCODE_CLASS_ENCODE_STRING_EXTRA_DATA_SIZE (1 + ENCODE_CLASS_ENCODE_STRING_MAX_LENGTH_SIZE + 1)
+
 int EncodeClass::getEncodeStringMallocSize (char const *str_val) {
-    return strlen(str_val) + 7; /* 1 + 5 * length + 1 */
+    return strlen(str_val) + ENCODE_CLASS_ENCODE_STRING_EXTRA_DATA_SIZE;
 }
 
 void EncodeClass::encodeString (char *output_buf_val, char const *input_str_val)
 {
-
-}
-
-char *EncodeClass::encodeStringMalloc (char const *input_str_val) {
     int length_size;
     int length = strlen(input_str_val);
-    char *buf = (char *) phwangMalloc(this->getEncodeStringMallocSize(input_str_val), MallocClass::ENCODE_STRING);
 
-    char *data_ptr = buf;
+    char *data_ptr = output_buf_val;
     if (length < 10) {
         data_ptr[0] = '1';
         length_size = 1;
@@ -101,6 +99,11 @@ char *EncodeClass::encodeStringMalloc (char const *input_str_val) {
     this->encodeNumber(data_ptr, length, length_size);
     data_ptr += length_size;
     strcpy(data_ptr, input_str_val);
+}
+
+char *EncodeClass::encodeStringMalloc (char const *input_str_val) {
+    char *buf = (char *) phwangMalloc(this->getEncodeStringMallocSize(input_str_val), MallocClass::encodeStringMalloc);
+    this->encodeString(buf, input_str_val);
     return buf;
 }
 
@@ -135,7 +138,7 @@ char *EncodeClass::decodeString (char const *input_val, int *input_size_val)
             length = length * 10 + *input_val - 48;
             input_val++;
             
-            buf = (char *) phwangMalloc(length + 1, MallocClass::DECODE_STRING);
+            buf = (char *) phwangMalloc(length + 1, MallocClass::encodeStringMalloc);
             memcpy(buf, input_val, length);
             buf[length] = 0;
             *input_size_val = length + head_size;
