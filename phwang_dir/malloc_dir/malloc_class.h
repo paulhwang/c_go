@@ -23,12 +23,18 @@ public:
     MallocClass(int debug_code_val);
     ~MallocClass(void);
     
-    int const static TP_TRANSMIT  = 0;
-    int const static TP_RECEIVE_THREAD = 7;
-    int const static TP_RECEIVE = 8;
-    int const static TP_RECEIVE2 = 9;
-    int const static ENCODE_STRING = 1;
-    int const static DECODE_STRING = 2;
+    int const static TP_RECEIVE_THREAD = 0;
+    int const static TP_RECEIVE = 1;
+    int const static TP_RECEIVE2 = 2;
+    int const static TP_TRANSMIT  = 3;
+    int const static UTHEME_BASE = 4;
+    int const static UTHEME_BASE_PUT_BASE_DATA = 4;
+    int const static DTHEME_PUT_ROOM_DATA1 = 4;
+    int const static DTHEME_PUT_ROOM_DATA2 = 4;
+    int const static DTHEME_SETUP_ROOM1 = 4;
+    int const static DTHEME_SETUP_ROOM2 = 4;
+    int const static DENGINE_SETUP_BASE = 4;
+    int const static DENGINE_PUT_BASE_DATA = 4;
     int const static BAD_LINK = 5;
     int const static BAD_SESSION = 5;
     int const static SIGN_UP = 5;
@@ -51,18 +57,11 @@ public:
     int const static GET_SESSION_DATA = 5;
     int const static GET_SESSION_DATA_ERROR = 5;
     int const static MALLOC_ROOM = 5;
-    int const static DB_ACCOUNT_DEFAULT_NAME = 3;
-    int const static UTHEME_BASE = 4;
-    int const static UTHEME_BASE_PUT_BASE_DATA = 4;
-    int const static DTHEME_PUT_ROOM_DATA1 = 4;
-    int const static DTHEME_PUT_ROOM_DATA2 = 4;
-    int const static DTHEME_SETUP_ROOM1 = 4;
-    int const static DTHEME_SETUP_ROOM2 = 4;
-    int const static DENGINE_SETUP_BASE = 4;
-    int const static DENGINE_PUT_BASE_DATA = 4;
-    int const static TEST_SETUP_LINK = 6;
+    int const static ENCODE_STRING = 6;
+    int const static DECODE_STRING = 7;
+    int const static TEST_SETUP_LINK = 8;
+    int const static DB_ACCOUNT_DEFAULT_NAME = 9;
     int const static MAX_INDEX = 10;
-
 
     void *phwangMalloc(int size_val, int who_val);
     void phwangFree(void *data_val);

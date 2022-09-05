@@ -27,18 +27,18 @@ void phwangPhwangPhwang (int debug_code_val)
     }
 }
 
-int phwangPthreadCreate(pthread_t *thread, const pthread_attr_t *attr, void *(*start_routine)(void *), void *arg)
+int phwangPthreadCreate (pthread_t *thread, const pthread_attr_t *attr, void *(*start_routine)(void *), void *arg)
 {
     return thePhwangObject->threadRootObject()->pthreadCreate(thread, attr, start_routine, arg);
 }
 
 /* object count */
-void phwangIncrementObjectCount(int *object_count_val, char const *object_name_val, int max_object_count_val)
+void phwangIncrementObjectCount (int *object_count_val, char const *object_name_val, int max_object_count_val)
 {
     thePhwangObject->objectObject()->incrementObjectCount(object_count_val, object_name_val, max_object_count_val);
 }
 
-void phwangDecrementObjectCount(int *object_count_val)
+void phwangDecrementObjectCount (int *object_count_val)
 {
     thePhwangObject->objectObject()->decrementObjectCount(object_count_val);
 }
@@ -255,8 +255,18 @@ void phwangTpTransmit (void *tp_transfer_object_val, char *data_val)
     thePhwangObject->netRootObject()->tpTransmit(tp_transfer_object_val, data_val);
 }
 
+int phwangReceiveThreadCount (void)
+{
+    return thePhwangObject->netRootObject()->receiveThreadCount();
+}
+
+void phwangIncrementReceiveThreadCount (void)
+{
+    thePhwangObject->netRootObject()->incrementReceiveThreadCount();
+}
+
 /* register */
-void phwangRegisterProgramProcess(int *register_tag_ptr_val, char *program_name_val, unsigned short port_val)
+void phwangRegisterProgramProcess (int *register_tag_ptr_val, char *program_name_val, unsigned short port_val)
 {
     thePhwangObject->registerProgramProcess(register_tag_ptr_val, program_name_val, port_val);
 }

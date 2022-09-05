@@ -18,6 +18,9 @@ void *TpTransferClass::receiveThreadFunction(int socket_val)
 {
     char const *func_name_ = "receiveThreadFunction";
 
+    phwangIncrementReceiveThreadCount();
+    printf("***receiveThreadFunction count=%i\n", phwangReceiveThreadCount());
+
     while (1) {
         char *data = (char *) phwangMalloc(TP_TRANSFER_CLASS_RECEIVE_BUFFER_SIZE + 32, MallocClass::TP_RECEIVE_THREAD);
 
@@ -38,12 +41,14 @@ void *TpTransferClass::receiveThreadFunction(int socket_val)
                     this->logit(func_name_, s);
                 }
                 this->abend("receiveThreadFunction: wrong header", data);
+                phwangFree(data);
                 continue;
             }
 
             phwangEnqueue(this->theReceiveQueue, data);
         }
         else {
+            phwangFree(data);
             usleep(10);
         }
     }

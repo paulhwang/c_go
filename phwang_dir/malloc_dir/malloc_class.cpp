@@ -100,9 +100,18 @@ void MallocClass::checkWhoTable (void)
     }
 
     for (int i = 0; i < MAX_INDEX; i++) {
-        if (this->theUserTable[i] > 1) {
+        int count = this->theUserTable[i];
+        switch (i) {
+            case 0:
+                count -= phwangReceiveThreadCount();
+                break;
+            default:
+                break;
+        }
+
+        if (count > 1) {
             char buf[16];
-            sprintf(buf, "%d=%d", i, this->theUserTable[i]);
+            sprintf(buf, "%d: %d", i, count);
             this->debug(true, "checkWhoTable", buf);
         }
     }
