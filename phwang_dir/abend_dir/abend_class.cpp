@@ -10,6 +10,7 @@
 AbendClass::AbendClass (int debug_code_val)
 {
     memset(this, 0, sizeof (*this));
+    this->theDebugCode = debug_code_val;
 }
 
 AbendClass::~AbendClass(void)

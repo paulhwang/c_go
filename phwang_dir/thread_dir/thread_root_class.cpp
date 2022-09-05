@@ -10,6 +10,7 @@
 ThreadRootClass::ThreadRootClass (int debug_code_val)
 {
     memset(this, 0, sizeof (*this));
+    this->theDebugCode = debug_code_val;
 }
 
 ThreadRootClass::~ThreadRootClass(void)

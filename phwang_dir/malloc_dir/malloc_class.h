@@ -11,6 +11,7 @@
 class MallocClass
 {
     char const *objectName(void) {return "MallocClass";}
+    int theDebugCode;
 
     int theUserTable[MALLOC_CLASS_USER_TABLE_SIZE];
 

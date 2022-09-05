@@ -11,6 +11,7 @@
 EncodeClass::EncodeClass (int debug_code_val)
 {
     memset(this, 0, sizeof (*this));
+    this->theDebugCode = debug_code_val;
 }
 
 EncodeClass::~EncodeClass(void)
