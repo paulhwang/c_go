@@ -36,6 +36,8 @@ char *phwangEncodeNumberMalloc(int number_val, int size_val);
 int   phwangDecodeNumber(char const *str_val, int size_val);
 int   phwangDecodeNumberNull(char const *str_val);
 
+int   phwangGetEncodeStringMallocSize(char const *str_val);
+void  phwangEncodeString (char *output_buf_val, char const *input_str_val);
 char *phwangEncodeStringMalloc(char const *input_str_val);
 char *phwangDecodeString(char const *input_val, int *input_size_val);
 

@@ -25,6 +25,8 @@ public:
     int decodeNumber(char const *str_val, int size_val);
     int decodeNumberNull(char const *str_val);
 
+    int getEncodeStringMallocSize(char const *str_val);
+    void encodeString (char *output_buf_val, char const *input_str_val);
     char *encodeStringMalloc(char const *input_str_val);
     char *decodeString(char const *input_val, int *input_size_val);
 

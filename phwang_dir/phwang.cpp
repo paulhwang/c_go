@@ -106,6 +106,16 @@ int phwangDecodeNumberNull (char const *str_val)
     return thePhwangObject->encodeObject()->decodeNumberNull(str_val);
 }
 
+int phwangGetEncodeStringMallocSize (char const *str_val)
+{
+    return thePhwangObject->encodeObject()->getEncodeStringMallocSize(str_val);
+}
+
+void  phwangEncodeString(char *output_buf_val, char const *input_str_val)
+{
+    thePhwangObject->encodeObject()->encodeString(output_buf_val, input_str_val);
+}
+
 char *phwangEncodeStringMalloc (char const *input_str_val) {
     return thePhwangObject->encodeObject()->encodeStringMalloc(input_str_val);
 }

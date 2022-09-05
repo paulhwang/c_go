@@ -61,10 +61,19 @@ int EncodeClass::decodeNumberNull (char const *str_val)
     return this->decodeNumber(str_val, strlen(str_val));
 }
 
+int EncodeClass::getEncodeStringMallocSize (char const *str_val) {
+    return strlen(str_val) + 7; /* 1 + 5 * length + 1 */
+}
+
+void EncodeClass::encodeString (char *output_buf_val, char const *input_str_val)
+{
+
+}
+
 char *EncodeClass::encodeStringMalloc (char const *input_str_val) {
     int length_size;
     int length = strlen(input_str_val);
-    char *buf = (char *) phwangMalloc(length + 7, MallocClass::ENCODE_STRING); /* 1 + 5 + length + 1 */
+    char *buf = (char *) phwangMalloc(this->getEncodeStringMallocSize(input_str_val), MallocClass::ENCODE_STRING);
 
     char *data_ptr = buf;
     if (length < 10) {
