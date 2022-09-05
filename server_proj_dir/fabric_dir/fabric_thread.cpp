@@ -16,7 +16,7 @@ void FabricClass::startWatchDogThread (void)
 {
     this->debug(false, "startWatchDogThread", "");
 
-    int r = pthread_create(&this->theWatchDogThread, 0, FabricClassWatchDogThreadFunction, this);
+    int r = phwangPthreadCreate(&this->theWatchDogThread, 0, FabricClassWatchDogThreadFunction, this);
     if (r) {
         this->logit("startWatchDogThread", "fail");
         return;

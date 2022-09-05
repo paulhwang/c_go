@@ -3,6 +3,7 @@
   Written by Paul Hwang
   File name: phwang.cpp
 */
+#include <pthread.h>
 
 #include "phwang.h"
 #include "phwang_class.h"
@@ -23,6 +24,14 @@ void phwangPhwangPhwang (void)
     if (!thePhwangObject) {
         thePhwangObject = new PhwangClass();
     }
+}
+
+int phwangPthreadCreate(pthread_t *thread,
+                          const pthread_attr_t *attr,
+                          void *(*start_routine)(void *),
+                          void *arg)
+{
+    return pthread_create(thread, attr, start_routine, arg);
 }
 
 /* object count */
