@@ -28,8 +28,8 @@ MallocClass::~MallocClass(void)
 
 void *MallocClass::phwangMalloc (int size_val, int who_val)
 {
-    printf("***Malloc %d %d %d %d %d %d\n", this->theUserTable[0], this->theUserTable[1], this->theUserTable[2],
-               this->theUserTable[3], this->theUserTable[4], this->theUserTable[5]);
+    printf("***Malloc %d %d %d %d %d %d %d\n", this->theUserTable[0], this->theUserTable[1], this->theUserTable[2],
+               this->theUserTable[3], this->theUserTable[4], this->theUserTable[5], this->theUserTable[6]);
     this->theUserTable[who_val]++;
 
     char who_str[PHWNAG_CLASS_MALLOC_WHO_TOTAL_SIZE];
