@@ -33,8 +33,6 @@ void *MallocClass::phwangMalloc (int size_val, int who_val)
         return malloc(size_val);
     }
 
-    printf("***Malloc %d %d %d %d %d %d %d\n", this->theUserTable[0], this->theUserTable[1], this->theUserTable[2],
-               this->theUserTable[3], this->theUserTable[4], this->theUserTable[5], this->theUserTable[6]);
     this->theUserTable[who_val]++;
 
     char who_str[PHWNAG_MALLOC_CLASS_WHO_TOTAL_SIZE];
@@ -60,26 +58,54 @@ void MallocClass::phwangFree (void *input_val)
         phwangAbend("phwangFree", "null data");
         return;
     }
+
     char *real_malloc_data = ((char *) input_val) - PHWNAG_MALLOC_CLASS_HEADER_SIZE;
     char *length_str = real_malloc_data + PHWNAG_MALLOC_CLASS_MARKER_SIZE;
     char *who_str = length_str + PHWNAG_MALLOC_CLASS_LENGTH_SIZE;
-    this->debug(true, "phwangFree", real_malloc_data);
+    this->debug(false, "phwangFree", real_malloc_data);
 
     if (memcmp(real_malloc_data, PHWNAG_MALLOC_CLASS_MARKER, PHWNAG_MALLOC_CLASS_MARKER_SIZE)) {
-        phwangAbend("phwangFree Head", real_malloc_data);
+        printf("phwangFree: data=%s\n", real_malloc_data);
+        phwangAbend("phwangFree", "header");
         return;
     }
+
     int length = phwangDecodeNumber(length_str, PHWNAG_MALLOC_CLASS_LENGTH_SIZE);
     int who_val = phwangDecodeNumber(who_str, PHWNAG_MALLOC_CLASS_WHO_SIZE);
-    printf("length=%d user=%d\n", length, who_val);
-    this->theUserTable[who_val]--;
+
+    if (1) {
+        char buf[64];
+        sprintf(buf, "length=%d user=%d\n", length, who_val);
+        this->debug(false, "phwangFree", buf);
+    }
 
     if (memcmp((char *) input_val + length, PHWNAG_MALLOC_CLASS_MARKER, PHWNAG_MALLOC_CLASS_MARKER_SIZE)) {
-        phwangAbend("phwangFree Tail", real_malloc_data);
+        printf("phwangFree: data=%s\n", real_malloc_data);
+        phwangAbend("phwangFree", "tailer");
         return;
     }
 
+    this->theUserTable[who_val]--;
     free(real_malloc_data);
+
+    this->checkWhoTable();
+}
+
+void MallocClass::checkWhoTable (void)
+{
+    if (0) {
+        printf("***checkWhoTable %d %d %d %d %d %d %d %d %d %d %d\n", this->theUserTable[0], this->theUserTable[1], this->theUserTable[2],
+               this->theUserTable[3], this->theUserTable[4], this->theUserTable[5], this->theUserTable[6],
+               this->theUserTable[7], this->theUserTable[8], this->theUserTable[9], this->theUserTable[10]);
+    }
+
+    for (int i = 0; i < MAX_INDEX; i++) {
+        if (this->theUserTable[i] > 1) {
+            char buf[16];
+            sprintf(buf, "%d=%d", i, this->theUserTable[i]);
+            this->debug(true, "checkWhoTable", buf);
+        }
+    }
 }
 
 void MallocClass::logit (char const *str0_val, char const *str1_val)
