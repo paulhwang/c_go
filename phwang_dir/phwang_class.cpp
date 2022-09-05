@@ -16,7 +16,7 @@
 #include "list_mgr_dir/list_mgr_root_class.h"
 #include "array_mgr_dir/array_mgr_root_class.h"
 
-PhwangClass::PhwangClass (void)
+PhwangClass::PhwangClass (int debug_code_val)
 {
     memset(this, 0, sizeof(*this));
     this->theObjectObject = new ObjectClass();
@@ -28,6 +28,9 @@ PhwangClass::PhwangClass (void)
     this->theThreadRootObject = new ThreadRootClass();
     this->theListMgrRootObject = new ListMgrRootClass();
     this->theArrayMgrRootObject = new ArrayMgrRootClass();
+
+    printf("debug_code=%d\n", debug_code_val);
+    this->debug(true, "PhwangClass", "");
 }
 
 PhwangClass::~PhwangClass (void)

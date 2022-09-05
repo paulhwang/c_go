@@ -20,10 +20,10 @@
 PhwangClass *thePhwangObject = 0;
 
 /* start phwang service */
-void phwangPhwangPhwang (void)
+void phwangPhwangPhwang (int debug_code_val)
 {
     if (!thePhwangObject) {
-        thePhwangObject = new PhwangClass();
+        thePhwangObject = new PhwangClass(debug_code_val);
     }
 }
 

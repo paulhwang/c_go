@@ -13,7 +13,7 @@
 #include "phwang_class.h"
 
 /* init */
-void phwangPhwangPhwang(void);
+void phwangPhwangPhwang(int debug_code_val);
 
 /* pthread */
 int phwangPthreadCreate(pthread_t *thread, const pthread_attr_t *attr, void *(*start_routine)(void *), void *arg);

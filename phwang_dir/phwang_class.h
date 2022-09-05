@@ -36,7 +36,7 @@ class PhwangClass {
     void abend(char const *str0_val, char const *str1_val);
 
 public:
-    PhwangClass(void);
+    PhwangClass(int debug_code_val);
     ~PhwangClass(void);
 
     AbendClass *abendObject(void) {return this->theAbendObject;}

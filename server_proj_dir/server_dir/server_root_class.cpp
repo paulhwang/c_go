@@ -10,9 +10,9 @@
 #include "../theme_dir/theme_class.h"
 #include "server_root_class.h"
 
-ServerRootClass::ServerRootClass (void)
+ServerRootClass::ServerRootClass (int debug_code_val)
 {
-    phwangPhwangPhwang();
+    phwangPhwangPhwang(debug_code_val);
     this->theFabricObject = new FabricClass();
     this->theGoThemeObject = new ThemeClass();
     this->theEngineObject = new EngineClass();

@@ -22,7 +22,7 @@ class ServerRootClass {
     void abend(char const *str0_val, char const *str1_val);
 
   public:
-    ServerRootClass(void);
+    ServerRootClass(int debug_code_val);
     ~ServerRootClass(void);
     char const *objectName(void) {return "ServerRootClass";}
 };

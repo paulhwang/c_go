@@ -11,7 +11,9 @@
 #include "../test_dir/test_class.h"
 
 int main (int argc, char** argv) {
-    ServerRootClass* serverRootObject = new ServerRootClass();
+    int debug_code = 255;
+
+    ServerRootClass* serverRootObject = new ServerRootClass(debug_code);
     int register_tag;
     sleep(10);
     //TestClass *testObject = new TestClass();
