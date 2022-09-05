@@ -28,7 +28,7 @@ void dEngineReceiveDataFromTransport (void *tp_transfer_object_val, void *game_d
     }
 
     ((DEngineClass *) game_d_server_object_val)->exportedParseFunction((char *) data_val);
-    phwangFree(data_val, "dEngineReceiveDataFromTransport");
+    phwangFree(data_val);
 }
 
 void DEngineClass::startNetConnect (void)

@@ -55,24 +55,24 @@ void *MallocClass::phwangMalloc (int size_val, char const *who_val)
     return buf + PHWNAG_CLASS_MALLOC_HEADER_SIZE;
 }
 
-void MallocClass::phwangFree (void *data_val, char const *who_val)
+void MallocClass::phwangFree (void *data_val)
 {
     if (!data_val) {
-        phwangAbend3("phwangFree", "null data", who_val);
+        phwangAbend("phwangFree", "null data");
         return;
     }
 
     char *buf = ((char *) data_val) - PHWNAG_CLASS_MALLOC_HEADER_SIZE;
 
     if (memcmp(buf, PHWNAG_CLASS_MALLOC_MARKER, PHWNAG_CLASS_MALLOC_MARKER_SIZE)) {
-        phwangAbend3("phwangFree Head", who_val, buf + PHWNAG_CLASS_MALLOC_MARKER_SIZE + PHWNAG_CLASS_MALLOC_LENGTH_SIZE);
+        phwangAbend("phwangFree Head", buf + PHWNAG_CLASS_MALLOC_MARKER_SIZE + PHWNAG_CLASS_MALLOC_LENGTH_SIZE);
         return;
     }
 
     int length = phwangDecodeNumber(buf + PHWNAG_CLASS_MALLOC_MARKER_SIZE, PHWNAG_CLASS_MALLOC_LENGTH_SIZE);
 
     if (memcmp((char *) data_val + length, PHWNAG_CLASS_MALLOC_MARKER, PHWNAG_CLASS_MALLOC_MARKER_SIZE)) {
-        phwangAbend3("phwangFree Tail", who_val, buf + PHWNAG_CLASS_MALLOC_MARKER_SIZE + PHWNAG_CLASS_MALLOC_LENGTH_SIZE);
+        phwangAbend("phwangFree Tail", buf + PHWNAG_CLASS_MALLOC_MARKER_SIZE + PHWNAG_CLASS_MALLOC_LENGTH_SIZE);
         return;
     }
 

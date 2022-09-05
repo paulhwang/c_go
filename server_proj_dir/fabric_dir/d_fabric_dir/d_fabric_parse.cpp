@@ -218,11 +218,11 @@ void DFabricClass::sendMmwReadDataResponce (void *tp_transfer_object_val, char c
 
     strcpy(data_ptr, encoded_result);
     data_ptr += encoded_result_length;
-    phwangFree(encoded_result, 0);
+    phwangFree(encoded_result);
 
     strcpy(data_ptr, encoded_data);
     //data_ptr += encoded_data_length;
-    phwangFree(encoded_data, 0);
+    phwangFree(encoded_data);
 
     this->transmitFunction(tp_transfer_object_val, downlink_data);
 }
@@ -264,9 +264,9 @@ void DFabricClass::processSignUpRequest (void *tp_transfer_object_val, char *dat
                 break;
         }
         this->sendSignUpResponce(tp_transfer_object_val, ajax_id_val, result_str);
-        phwangFree(account_name, 0);
-        phwangFree(password, 0);
-        phwangFree(email, 0);
+        phwangFree(account_name);
+        phwangFree(password);
+        phwangFree(email);
         return;
     }
 
@@ -338,8 +338,8 @@ void DFabricClass::processSetupLinkRequest (void *tp_transfer_object_val, char *
                 break;
         }
         this->sendSetupLinkResponce(tp_transfer_object_val, ajax_id_val, D_FABRIC_CLASS_FAKE_LINK_ID_INDEX, result_str);
-        phwangFree(my_name, 0);
-        phwangFree(password, 0);
+        phwangFree(my_name);
+        phwangFree(password);
         return;
     }
 
@@ -347,14 +347,14 @@ void DFabricClass::processSetupLinkRequest (void *tp_transfer_object_val, char *
     if (!link) {
         this->abend("processSetupLink", "null link");
         this->sendSetupLinkResponce(tp_transfer_object_val, ajax_id_val, D_FABRIC_CLASS_FAKE_LINK_ID_INDEX, "null link");
-        phwangFree(my_name, 0);
-        phwangFree(password, 0);
+        phwangFree(my_name);
+        phwangFree(password);
         return;
     }
 
     this->sendSetupLinkResponce(tp_transfer_object_val, ajax_id_val, link->linkIdIndex(), "succeed");
-    phwangFree(my_name, 0);
-    phwangFree(password, 0);
+    phwangFree(my_name);
+    phwangFree(password);
 }
 
 #define D_FABRIC_CLASS_PROCESSS_SETUP_LINK_DOWN_LINK_DATA_SIZE (1 + WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + 1)

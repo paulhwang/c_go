@@ -42,7 +42,7 @@ void uFabricTpReceiveDataFunction (void *tp_transfer_object_val, void *u_fabric_
     }
 
     ((UFabricClass *) u_fabric_object_val)->exportedParseFunction((char *) data_val);
-    phwangFree(data_val, "uFabricTpReceiveDataFunction");
+    phwangFree(data_val);
 }
 
 void UFabricClass::startNetServer (void)

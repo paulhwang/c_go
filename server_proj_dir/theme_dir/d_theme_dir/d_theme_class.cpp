@@ -30,7 +30,7 @@ void dThemeReceiveDataFromTransport (void *tp_transfer_object_val, void *game_d_
     }
 
     ((DThemeClass *) game_d_server_object_val)->exportedParseFunction((char *) data_val);
-    phwangFree(data_val, "dThemeReceiveDataFromTransport");
+    phwangFree(data_val);
 }
 
 void DThemeClass::startNetConnect (void)

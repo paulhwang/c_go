@@ -43,7 +43,7 @@ void uThemeTpReceiveDataFunction (void *tp_transfer_object_val, void *game_serve
     }
 
     ((UThemeClass *) game_server_object_val)->exportedParseFunction((char *) data_val);
-    phwangFree(data_val, "uThemeTpReceiveDataFunction");
+    phwangFree(data_val);
 }
 
 void UThemeClass::startNetServer (void)

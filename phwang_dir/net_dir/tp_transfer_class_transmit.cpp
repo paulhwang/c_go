@@ -59,7 +59,7 @@ void *TpTransferClass::transmitThreadFunction(int socket_val)
                 this->abend(func_name_, "*****LENGTH TOO BIG*****");
             }
 
-            phwangFree(data, "TpTransferClass::transmitThreadFunction");
+            phwangFree(data);
         }
     }
     return 0;
@@ -69,7 +69,7 @@ void *tpTransferTransmitThreadFunction (void *data_val)
 {
     int socket = ((tp_transfer_thread_parameter *) data_val)->socket;
     TpTransferClass *tp_transfer_object = ((tp_transfer_thread_parameter *) data_val)->tp_transfer_object;
-    phwangFree(data_val, "tpTransferTransmitThreadFunction");
+    phwangFree(data_val);
 
     return tp_transfer_object->transmitThreadFunction(socket);
 }

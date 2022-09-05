@@ -48,7 +48,7 @@ void dFabricTpReceiveDataFunction (void *tp_transfer_object_val, void *d_fabric_
     }
 
     ((DFabricClass *) d_fabric_object_val)->exportedParseFunction(tp_transfer_object_val, (char *) data_val);
-    phwangFree(data_val, "dFabricTpReceiveDataFunction");
+    phwangFree(data_val);
 }
 
 void DFabricClass::startNetServer (void)
