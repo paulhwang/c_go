@@ -173,7 +173,7 @@ void *phwangListMgrGetEntryTableArray (void *list_mgr_val)
     return thePhwangObject->listMgrRootObject()->listMgrGetEntryTableArray(list_mgr_val);
 }
 
-void *phwangListMgrRemoveEntry (void *list_mgr_val, void *entry_val)
+void phwangListMgrRemoveEntry (void *list_mgr_val, void *entry_val)
 {
     thePhwangObject->listMgrRootObject()->listMgrRemoveEntry(list_mgr_val, entry_val);
 }

@@ -41,23 +41,23 @@ void phwangDecrementObjectCount(int *object_count_val);
 /* queue */
 void *phwangMallocSuspendedQueue(int size_val);
 void *phwangMallocQueue(int size_val);
-void  phwangFreeQueue(void *queue_val, char const *who_val);
-void  phwangEnqueue(void *queue_val, void *data_val);
+void phwangFreeQueue(void *queue_val, char const *who_val);
+void phwangEnqueue(void *queue_val, void *data_val);
 void *phwangDequeue(void *queue_val, char const *who_val);
 
 /* list_mgr */
 void *phwangListMgrMalloc(char const *caller_name_val, int id_size_val, int index_size_val, int global_entry_id_val);
-void  phwangListMgrFree(void *list_mgr_val);
-void *phwangListMgrRemoveEntry(void *list_mgr_val, void *entry_val);
+void phwangListMgrFree(void *list_mgr_val);
+void phwangListMgrRemoveEntry(void *list_mgr_val, void *entry_val);
 void *phwangListMgrSearchEntry(void *list_mgr_val, char const *data_val, void *extra_data_val);
-int   phwnagListMgrGetMaxIndex(void *list_mgr_val, char const *who_val);
+int phwnagListMgrGetMaxIndex(void *list_mgr_val, char const *who_val);
 void *phwangListMgrGetEntryTableArray(void *list_mgr_val);
 
 /* array_mgr */
 void *phwangArrayMgrMalloc(char const *caller_name_val, char array_type_val, int array_size_val);
-void  phwangArrayMgrFree(void *array_mgr_val);
-void  phwangArrayMgrInsertElement(void *array_mgr_val, void *element_val);
-void  phwangArrayMgrRemoveElement(void *array_mgr_val, void *element_val);
+void phwangArrayMgrFree(void *array_mgr_val);
+void phwangArrayMgrInsertElement(void *array_mgr_val, void *element_val);
+void phwangArrayMgrRemoveElement(void *array_mgr_val, void *element_val);
 void *phwangArrayMgrGetArrayTable(void *array_mgr_val, int *array_size_ptr);
 
 /* tp */
