@@ -19,8 +19,8 @@ TpTransferClass::TpTransferClass (int socket_val,
     this->theWho = who_val;
     this->setMaxDataSize();
 
-    this->theReceiveQueue = phwangMallocSuspendedQueue(TP_TRANSFER_CLASS_RECEIVE_QUEUE_SIZE);
-    this->theTransmitQueue = phwangMallocSuspendedQueue(TP_TRANSFER_CLASS_TRANSMIT_QUEUE_SIZE);
+    this->theReceiveQueue = phwangMallocSuspendedQueue(TpTransferClass::RECEIVE_QUEUE_SIZE);
+    this->theTransmitQueue = phwangMallocSuspendedQueue(TpTransferClass::TRANSMIT_QUEUE_SIZE);
 
     if (1) { /* debug */
         char s[128];

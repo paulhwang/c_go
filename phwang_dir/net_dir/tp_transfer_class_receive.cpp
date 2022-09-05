@@ -22,9 +22,9 @@ void *TpTransferClass::receiveThreadFunction(int socket_val)
     printf("***receiveThreadFunction count=%i\n", phwangReceiveThreadCount());
 
     while (1) {
-        char *data = (char *) phwangMalloc(TP_TRANSFER_CLASS_RECEIVE_BUFFER_SIZE + 32, MallocClass::TP_RECEIVE_THREAD);
+        char *data = (char *) phwangMalloc(TpTransferClass::RECEIVE_BUFFER_SIZE + 32, MallocClass::TP_RECEIVE_THREAD);
 
-        int length = read(socket_val, data, TP_TRANSFER_CLASS_RECEIVE_BUFFER_SIZE);
+        int length = read(socket_val, data, TpTransferClass::RECEIVE_BUFFER_SIZE);
         if (length > 0) {
             data[length] = 0;
             
@@ -102,8 +102,8 @@ void *TpTransferClass::receiveThreadFunction2 (void)
             }
 
             if (raw_data[0] == '{') {
-                length = raw_length - (1 + TP_TRANSFER_CLASS_DATA_LENGTH_SIZE + 1);
-                length1 = phwangDecodeNumber(&raw_data[1], TP_TRANSFER_CLASS_DATA_LENGTH_SIZE);
+                length = raw_length - (1 + TpTransferClass::DATA_LENGTH_SIZE + 1);
+                length1 = phwangDecodeNumber(&raw_data[1], TpTransferClass::DATA_LENGTH_SIZE);
                 if (length != length1) {
                     char s[128];
                     sprintf(s, "(%s) length not match!!! data=%s len=%d %d", this->theWho, raw_data, length, length1);
@@ -111,7 +111,7 @@ void *TpTransferClass::receiveThreadFunction2 (void)
                 }
 
                 data = (char *) phwangMalloc(length + 32, MallocClass::TP_RECEIVE2);
-                memcpy(data, &raw_data[1 + TP_TRANSFER_CLASS_DATA_LENGTH_SIZE], length);
+                memcpy(data, &raw_data[1 + TpTransferClass::DATA_LENGTH_SIZE], length);
                 data[length] = 0;
              }
             else {
