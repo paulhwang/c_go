@@ -14,6 +14,7 @@ class MallocClass;
 class ObjectClass;
 class QueueRootClass;
 class NetRootClass;
+class ThreadRootClass;
 class ListMgrRootClass;
 class ArrayMgrRootClass;
 
@@ -26,6 +27,7 @@ class PhwangClass {
     MallocClass *theMallocObject;
     QueueRootClass *theQueueRootObject;
     NetRootClass *theNetRootObject;
+    ThreadRootClass *theThreadRootObject;
     ListMgrRootClass *theListMgrRootObject;
     ArrayMgrRootClass *theArrayMgrRootObject;
 
@@ -45,6 +47,7 @@ public:
     MallocClass *mallocObject(void) {return this->theMallocObject;}
     QueueRootClass *queueRootObject(void) {return this->theQueueRootObject;}
     NetRootClass *netRootObject(void) {return this->theNetRootObject;}
+    ThreadRootClass *threadRootObject(void) {return this->theThreadRootObject;}
     ListMgrRootClass *listMgrRootObject(void) {return this->theListMgrRootObject;}
     ArrayMgrRootClass *arrayMgrRootObject(void) {return this->theArrayMgrRootObject;}
 
