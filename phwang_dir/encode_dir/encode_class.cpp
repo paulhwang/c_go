@@ -57,7 +57,7 @@ void EncodeClass::decodeIdIndex (char const *str_val, int *id_ptr_val, int id_si
 char *EncodeClass::encodeString (char const *input_str_val) {
     int length_size;
     int length = strlen(input_str_val);
-    char *buf = (char *) phwangMalloc1(length + 7, MallocClass::ENCODE_STRING); /* 1 + 5 + length + 1 */
+    char *buf = (char *) phwangMalloc(length + 7, MallocClass::ENCODE_STRING); /* 1 + 5 + length + 1 */
 
     char *data_ptr = buf;
     if (length < 10) {
@@ -119,7 +119,7 @@ char *EncodeClass::decodeString (char const *input_val, int *input_size_val)
             length = length * 10 + *input_val - 48;
             input_val++;
             
-            buf = (char *) phwangMalloc1(length + 1, MallocClass::DECODE_STRING);
+            buf = (char *) phwangMalloc(length + 1, MallocClass::DECODE_STRING);
             memcpy(buf, input_val, length);
             buf[length] = 0;
             *input_size_val = length + head_size;

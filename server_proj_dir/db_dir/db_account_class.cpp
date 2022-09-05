@@ -45,7 +45,7 @@ int db_account_class_do_create_account_table_in_database = 1;
 
 char *mallocConstStrBuf (char const * str_val)
 {
-    char *buf = (char *) phwangMalloc1(strlen(str_val) + 1, MallocClass::DB_ACCOUNT_DEFAULT_NAME);
+    char *buf = (char *) phwangMalloc(strlen(str_val) + 1, MallocClass::DB_ACCOUNT_DEFAULT_NAME);
     strcpy(buf, str_val);
     return buf;
 }

@@ -62,7 +62,6 @@ public:
     int const static TEST_SETUP_LINK = 8;
 
 
-    void *phwangMalloc1(int size_val, int who_val);
-    void *phwangMalloc(int size_val, char const *who_val);
+    void *phwangMalloc(int size_val, int who_val);
     void phwangFree(void *data_val);
 };

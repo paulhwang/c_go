@@ -25,7 +25,7 @@ MallocClass::~MallocClass(void)
 #define PHWNAG_CLASS_MALLOC_TAILER_SIZE PHWNAG_CLASS_MALLOC_MARKER_SIZE
 #define PHWNAG_CLASS_MALLOC_EXTRA_BUFFER_SIZE (PHWNAG_CLASS_MALLOC_HEADER_SIZE + PHWNAG_CLASS_MALLOC_TAILER_SIZE + 8)
 
-void *MallocClass::phwangMalloc1 (int size_val, int who_val)
+void *MallocClass::phwangMalloc (int size_val, int who_val)
 {
     printf("***Malloc %d %d %d %d %d %d\n", this->theUserTable[0], this->theUserTable[1], this->theUserTable[2],
                this->theUserTable[3], this->theUserTable[4], this->theUserTable[5]);
@@ -39,18 +39,6 @@ void *MallocClass::phwangMalloc1 (int size_val, int who_val)
     memcpy(buf, PHWNAG_CLASS_MALLOC_MARKER, PHWNAG_CLASS_MALLOC_MARKER_SIZE);
     phwangEncodeNumber(buf + PHWNAG_CLASS_MALLOC_MARKER_SIZE, size_val, PHWNAG_CLASS_MALLOC_LENGTH_SIZE);
     strcpy(buf + PHWNAG_CLASS_MALLOC_MARKER_SIZE + PHWNAG_CLASS_MALLOC_LENGTH_SIZE, who_str);
-    memcpy(buf + PHWNAG_CLASS_MALLOC_HEADER_SIZE + size_val, PHWNAG_CLASS_MALLOC_MARKER, PHWNAG_CLASS_MALLOC_MARKER_SIZE);
-    return buf + PHWNAG_CLASS_MALLOC_HEADER_SIZE;
-}
-
-void *MallocClass::phwangMalloc (int size_val, char const *who_val)
-{
-    //printf("***Free %d %d %d %d\n", this->theUserTable[0], this->theUserTable[1], this->theUserTable[2], this->theUserTable[3]);
-
-    char *buf = (char *) malloc(size_val + PHWNAG_CLASS_MALLOC_EXTRA_BUFFER_SIZE);
-    memcpy(buf, PHWNAG_CLASS_MALLOC_MARKER, PHWNAG_CLASS_MALLOC_MARKER_SIZE);
-    phwangEncodeNumber(buf + PHWNAG_CLASS_MALLOC_MARKER_SIZE, size_val, PHWNAG_CLASS_MALLOC_LENGTH_SIZE);
-    strcpy(buf + PHWNAG_CLASS_MALLOC_MARKER_SIZE + PHWNAG_CLASS_MALLOC_LENGTH_SIZE, who_val);
     memcpy(buf + PHWNAG_CLASS_MALLOC_HEADER_SIZE + size_val, PHWNAG_CLASS_MALLOC_MARKER, PHWNAG_CLASS_MALLOC_MARKER_SIZE);
     return buf + PHWNAG_CLASS_MALLOC_HEADER_SIZE;
 }

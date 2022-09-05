@@ -55,7 +55,7 @@ void UThemeClass::processSetupBaseResponse(char *data_val)
     data_val += ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE;
     room->setBaseIdIndex(data_val);
 
-    downlink_data = data_ptr = (char *) phwangMalloc1(ROOM_MGR_DATA_BUFFER_SIZE + 4, MallocClass::UTHEME_BASE);
+    downlink_data = data_ptr = (char *) phwangMalloc(ROOM_MGR_DATA_BUFFER_SIZE + 4, MallocClass::UTHEME_BASE);
     *data_ptr++ = FABRIC_THEME_PROTOCOL_RESPOND_IS_SETUP_ROOM;
 
     room->setGroupTableArray((char **) phwangArrayMgrGetArrayTable(room->groupArrayMgr(), &group_array_size));
@@ -88,7 +88,7 @@ void UThemeClass::processPutBaseDataResponse(char *data_val)
     room->setGroupTableArray((char **) phwangArrayMgrGetArrayTable(room->groupArrayMgr(), &group_array_size));
     for (int i = 0; i < group_array_size; i++) {
         if (room->groupTableArray(i)) {
-            downlink_data = data_ptr = (char *) phwangMalloc1(ROOM_MGR_DATA_BUFFER_SIZE + 4, MallocClass::UTHEME_BASE_PUT_BASE_DATA);
+            downlink_data = data_ptr = (char *) phwangMalloc(ROOM_MGR_DATA_BUFFER_SIZE + 4, MallocClass::UTHEME_BASE_PUT_BASE_DATA);
             *data_ptr++ = FABRIC_THEME_PROTOCOL_RESPOND_IS_PUT_ROOM_DATA;
             memcpy(data_ptr, room->groupTableArray(i), GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE);
             data_ptr += GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE;

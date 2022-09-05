@@ -70,12 +70,7 @@ void phwangAbend3 (char const *str0_val, char const *str1_val, char const *str2_
 }
 
 /* malloc and free */
-void *phwangMalloc1 (int size_val, int who_val)
-{
-    return thePhwangObject->mallocObject()->phwangMalloc1(size_val, who_val);
-}
-
-void *phwangMalloc (int size_val, char const *who_val)
+void *phwangMalloc (int size_val, int who_val)
 {
     return thePhwangObject->mallocObject()->phwangMalloc(size_val, who_val);
 }

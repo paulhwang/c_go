@@ -60,7 +60,7 @@ void TestClass::createName(int number_val, char *name_buf_val)
 void TestClass::setupLink(int ajax_id_val, char *name_val)
 {
     char *data_ptr;
-    char *uplink_data = data_ptr = (char *) phwangMalloc1(128, MallocClass::TEST_SETUP_LINK);
+    char *uplink_data = data_ptr = (char *) phwangMalloc(128, MallocClass::TEST_SETUP_LINK);
     int j = 0;
     *data_ptr++ = 'L';
     phwangEncodeNumber(data_ptr, ajax_id_val, 3);
