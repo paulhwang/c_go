@@ -201,7 +201,7 @@ void phwangArrayMgrRemoveElement (void *array_mgr_val, void *element_val)
 
 void *phwangArrayMgrGetArrayTable (void *array_mgr_val, int *array_size_ptr)
 {
-    thePhwangObject->arrayMgrRootObject()->arrayMgrGetArrayTable(array_mgr_val, array_size_ptr);
+    return thePhwangObject->arrayMgrRootObject()->arrayMgrGetArrayTable(array_mgr_val, array_size_ptr);
 }
 
 /* tp */
