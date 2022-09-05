@@ -5,6 +5,7 @@
 */
 
 #include "../../phwang_dir/phwang.h"
+#include "../../phwang_dir/malloc_dir/malloc_class.h"
 #include "../protocol_dir/net_port_protocol.h"
 #include "../protocol_dir/web_fabric_protocol.h"
 #include "test_class.h"
@@ -59,7 +60,7 @@ void TestClass::createName(int number_val, char *name_buf_val)
 void TestClass::setupLink(int ajax_id_val, char *name_val)
 {
     char *data_ptr;
-    char *uplink_data = data_ptr = (char *) phwangMalloc(128, "TCSL");
+    char *uplink_data = data_ptr = (char *) phwangMalloc1(128, MallocClass::TEST_SETUP_LINK);
     int j = 0;
     *data_ptr++ = 'L';
     phwangEncodeNumber(data_ptr, ajax_id_val, 3);

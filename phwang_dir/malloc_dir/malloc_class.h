@@ -57,6 +57,9 @@ public:
     int const static DTHEME_PUT_ROOM_DATA2 = 8;
     int const static DTHEME_SETUP_ROOM1 = 8;
     int const static DTHEME_SETUP_ROOM2 = 8;
+    int const static DENGINE_SETUP_BASE = 8;
+    int const static DENGINE_PUT_BASE_DATA = 8;
+    int const static TEST_SETUP_LINK = 8;
 
 
     void *phwangMalloc1(int size_val, int who_val);
