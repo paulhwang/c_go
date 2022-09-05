@@ -49,9 +49,6 @@ public:
     ListMgrRootClass *listMgrRootObject(void) {return this->theListMgrRootObject;}
     ArrayMgrRootClass *arrayMgrRootObject(void) {return this->theArrayMgrRootObject;}
 
-    /* tbd */
-    void printBoard(char const *data_val, int board_size_val);
-
     /* register */
     void registerProgramProcess(int *register_tag_ptr_val, char *program_name_val, unsigned short port_val);
 };

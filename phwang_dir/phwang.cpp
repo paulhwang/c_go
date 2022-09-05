@@ -72,13 +72,12 @@ void phwangAbend3 (char const *str0_val, char const *str1_val, char const *str2_
     thePhwangObject->abendObject()->phwangAbend3(str0_val, str1_val, str2_val);
 }
 
-/* */
-void phwangPrintBoard (char const *data_val, int board_size_val)
+/* malloc and free */
+void *phwangMalloc1 (int size_val, int who_val)
 {
-    thePhwangObject->printBoard(data_val, board_size_val);
+    return thePhwangObject->mallocObject()->phwangMalloc1(size_val, who_val);
 }
 
-/* malloc and free */
 void *phwangMalloc (int size_val, char const *who_val)
 {
     return thePhwangObject->mallocObject()->phwangMalloc(size_val, who_val);

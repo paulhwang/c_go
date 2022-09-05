@@ -44,27 +44,6 @@ void PhwangClass::registerProgramProcess(int *register_tag_ptr_val, char *progra
     }
 }
 
-void PhwangClass::printBoard (char const* data_val, int board_size_val)
-{
-    int i = strlen(data_val);
-    while (i) {
-        if (*data_val == '0') {
-            printf(" +");
-        }
-        else if (*data_val == '1') {
-            printf(" *");
-        }
-        else if (*data_val == '2') {
-            printf(" O");
-        }
-        data_val++;
-        i--;
-        if (i % board_size_val == 0) {
-            printf("\n");
-        }
-    }
-}
-
 void PhwangClass::logit (char const *str0_val, char const *str1_val) {
     char s[LOGIT_BUF_SIZE];
     sprintf(s, "%s::%s", this->objectName(), str0_val);
