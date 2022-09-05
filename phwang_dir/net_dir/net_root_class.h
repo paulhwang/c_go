@@ -15,7 +15,7 @@ class NetRootClass
     void abend(char const *str0_val, char const *str1_val);
 
 public:
-    NetRootClass(void);
+    NetRootClass(int debug_code_val);
     ~NetRootClass(void);
     
     void *mallocTpServer (

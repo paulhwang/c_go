@@ -7,7 +7,7 @@
 #include "../phwang.h"
 #include "object_class.h"
 
-ObjectClass::ObjectClass (void)
+ObjectClass::ObjectClass (int debug_code_val)
 {
     memset(this, 0, sizeof (*this));
 }

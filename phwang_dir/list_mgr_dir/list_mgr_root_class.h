@@ -15,7 +15,7 @@ class ListMgrRootClass
     void abend(char const *str0_val, char const *str1_val);
 
 public:
-    ListMgrRootClass(void);
+    ListMgrRootClass(int debug_code_val);
     ~ListMgrRootClass(void);
     
     void *listMgrMalloc(char const *caller_name_val, int id_size_val, int index_size_val, int global_entry_id_val);

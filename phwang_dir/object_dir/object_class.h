@@ -15,7 +15,7 @@ class ObjectClass
     void abend(char const *str0_val, char const *str1_val);
 
 public:
-    ObjectClass(void);
+    ObjectClass(int debug_code_val);
     ~ObjectClass(void);
 
     void incrementObjectCount(int *object_count_val, char const *object_name_val, int max_object_count_val);

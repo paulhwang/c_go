@@ -8,7 +8,7 @@
 #include "queue_root_class.h"
 #include "queue_class.h"
 
-QueueRootClass::QueueRootClass (void)
+QueueRootClass::QueueRootClass (int debug_code_val)
 {
     memset(this, 0, sizeof (*this));
 }

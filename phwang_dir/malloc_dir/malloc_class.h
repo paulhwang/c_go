@@ -19,7 +19,7 @@ class MallocClass
     void abend(char const *str0_val, char const *str1_val);
 
 public:
-    MallocClass(void);
+    MallocClass(int debug_code_val);
     ~MallocClass(void);
     
     int const static TP_TRANSMIT  = 0;

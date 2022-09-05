@@ -8,7 +8,7 @@
 #include "array_mgr_root_class.h"
 #include "array_mgr_class.h"
 
-ArrayMgrRootClass::ArrayMgrRootClass (void)
+ArrayMgrRootClass::ArrayMgrRootClass (int debug_code_val)
 {
     memset(this, 0, sizeof (*this));
 }

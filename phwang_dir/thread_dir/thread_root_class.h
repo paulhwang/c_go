@@ -15,7 +15,7 @@ class ThreadRootClass
     void abend(char const *str0_val, char const *str1_val);
 
 public:
-    ThreadRootClass(void);
+    ThreadRootClass(int debug_code_val);
     ~ThreadRootClass(void);
 
     int pthreadCreate(pthread_t *thread, const pthread_attr_t *attr, void *(*start_routine)(void *), void *arg);

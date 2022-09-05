@@ -15,7 +15,7 @@ class EncodeClass
     void abend(char const *str0_val, char const *str1_val);
 
 public:
-    EncodeClass(void);
+    EncodeClass(int debug_code_val);
     ~EncodeClass(void);
 
     void encodeNumber(char *str_val, int number_val, int size_val);

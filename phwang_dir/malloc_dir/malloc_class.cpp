@@ -7,7 +7,7 @@
 #include "../phwang.h"
 #include "malloc_class.h"
 
-MallocClass::MallocClass (void)
+MallocClass::MallocClass (int debug_code_val)
 {
     memset(this, 0, sizeof (*this));
 }

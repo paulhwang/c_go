@@ -15,7 +15,7 @@ class ArrayMgrRootClass
     void abend(char const *str0_val, char const *str1_val);
 
 public:
-    ArrayMgrRootClass(void);
+    ArrayMgrRootClass(int debug_code_val);
     ~ArrayMgrRootClass(void);
     
     void *arrayMgrMalloc(char const *caller_name_val, char array_type_val, int max_array_size_val);

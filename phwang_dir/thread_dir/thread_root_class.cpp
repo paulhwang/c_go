@@ -7,7 +7,7 @@
 #include "../phwang.h"
 #include "thread_root_class.h"
 
-ThreadRootClass::ThreadRootClass (void)
+ThreadRootClass::ThreadRootClass (int debug_code_val)
 {
     memset(this, 0, sizeof (*this));
 }

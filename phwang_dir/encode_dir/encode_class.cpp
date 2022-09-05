@@ -8,7 +8,7 @@
 #include "../malloc_dir/malloc_class.h"
 #include "encode_class.h"
 
-EncodeClass::EncodeClass (void)
+EncodeClass::EncodeClass (int debug_code_val)
 {
     memset(this, 0, sizeof (*this));
 }

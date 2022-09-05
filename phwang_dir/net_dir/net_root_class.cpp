@@ -10,7 +10,7 @@
 #include "tp_transfer_class.h"
 #include "tp_connect.h"
 
-NetRootClass::NetRootClass (void)
+NetRootClass::NetRootClass (int debug_code_val)
 {
     memset(this, 0, sizeof (*this));
 }

@@ -8,7 +8,7 @@
 #include "list_mgr_root_class.h"
 #include "list_mgr_class.h"
 
-ListMgrRootClass::ListMgrRootClass (void)
+ListMgrRootClass::ListMgrRootClass (int debug_code_val)
 {
     memset(this, 0, sizeof (*this));
 }

@@ -19,15 +19,15 @@
 PhwangClass::PhwangClass (int debug_code_val)
 {
     memset(this, 0, sizeof(*this));
-    this->theObjectObject = new ObjectClass();
-    this->theAbendObject = new AbendClass();
-    this->theMallocObject = new MallocClass();
-    this->theEncodeObject = new EncodeClass();
-    this->theQueueRootObject = new QueueRootClass();
-    this->theNetRootObject = new NetRootClass();
-    this->theThreadRootObject = new ThreadRootClass();
-    this->theListMgrRootObject = new ListMgrRootClass();
-    this->theArrayMgrRootObject = new ArrayMgrRootClass();
+    this->theObjectObject = new ObjectClass(debug_code_val);
+    this->theAbendObject = new AbendClass(debug_code_val);
+    this->theMallocObject = new MallocClass(debug_code_val);
+    this->theEncodeObject = new EncodeClass(debug_code_val);
+    this->theQueueRootObject = new QueueRootClass(debug_code_val);
+    this->theNetRootObject = new NetRootClass(debug_code_val);
+    this->theThreadRootObject = new ThreadRootClass(debug_code_val);
+    this->theListMgrRootObject = new ListMgrRootClass(debug_code_val);
+    this->theArrayMgrRootObject = new ArrayMgrRootClass(debug_code_val);
 
     printf("debug_code=%d\n", debug_code_val);
     this->debug(true, "PhwangClass", "");

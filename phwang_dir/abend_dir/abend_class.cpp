@@ -7,7 +7,7 @@
 #include "../phwang.h"
 #include "abend_class.h"
 
-AbendClass::AbendClass (void)
+AbendClass::AbendClass (int debug_code_val)
 {
     memset(this, 0, sizeof (*this));
 }

@@ -15,7 +15,7 @@ class QueueRootClass
     void abend(char const *str0_val, char const *str1_val);
 
 public:
-    QueueRootClass(void);
+    QueueRootClass(int debug_code_val);
     ~QueueRootClass(void);
 
     void *mallocQueue(int do_suspend_val, int max_size_val);
