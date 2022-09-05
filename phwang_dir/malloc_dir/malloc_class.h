@@ -18,6 +18,10 @@ public:
     MallocClass(void);
     ~MallocClass(void);
     
+    int const static SIGN_UP  = 0;
+    int const static SIGN_IN  = 1;
+    int const static DATAGRAM  = 2;
+
     void *phwangMalloc1(int size_val, int who_val);
     void *phwangMalloc(int size_val, char const *who_val);
     void phwangFree(void *data_val, char const *who_val);

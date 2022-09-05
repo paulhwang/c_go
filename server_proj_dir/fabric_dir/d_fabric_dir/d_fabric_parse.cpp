@@ -5,6 +5,7 @@
 */
 
 #include "../../../phwang_dir/phwang.h"
+#include "../../../phwang_dir/malloc_dir/malloc_class.h"
 #include "../../protocol_dir/net_port_protocol.h"
 #include "../../protocol_dir/fabric_theme_protocol.h"
 #include "../../protocol_dir/session_mgr_protocol.h"
@@ -210,7 +211,7 @@ void DFabricClass::sendMmwReadDataResponce (void *tp_transfer_object_val, char c
     int encoded_data_length = strlen(encoded_data);
 
     char *data_ptr;
-    char *downlink_data = data_ptr = (char *) phwangMalloc(D_FABRIC_CLASS_PROCESSS_MMW_READ_DATA_DOWN_LINK_DATA_SIZE + encoded_result_length + encoded_data_length, "DFSL");
+    char *downlink_data = data_ptr = (char *) phwangMalloc1(D_FABRIC_CLASS_PROCESSS_MMW_READ_DATA_DOWN_LINK_DATA_SIZE + encoded_result_length + encoded_data_length, MallocClass::DATAGRAM);
     *data_ptr++ = FECommandClass::MMW_READ_DATA_RESPONSE;
     memcpy(data_ptr, ajax_id_val, WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE);
     data_ptr += WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;
@@ -291,7 +292,7 @@ void DFabricClass::sendSignUpResponce (void *tp_transfer_object_val, char const 
     this->debug(true, "sendSignUpResponce", result_val);
 
     char *data_ptr;
-    char *downlink_data = data_ptr = (char *) phwangMalloc(D_FABRIC_CLASS_PROCESSS_SIGN_UP_DOWN_LINK_DATA_SIZE + strlen(result_val), "DFSL");
+    char *downlink_data = data_ptr = (char *) phwangMalloc1(D_FABRIC_CLASS_PROCESSS_SIGN_UP_DOWN_LINK_DATA_SIZE + strlen(result_val), MallocClass::SIGN_UP);
     *data_ptr++ = FECommandClass::SETUP_LINK_RESPONSE;
     memcpy(data_ptr, ajax_id_val, WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE);
     data_ptr += WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;
@@ -362,7 +363,7 @@ void DFabricClass::sendSetupLinkResponce (void *tp_transfer_object_val, char con
     this->debug(false, "sendSetupLinkResponce", result_val);
 
     char *data_ptr;
-    char *downlink_data = data_ptr = (char *) phwangMalloc(D_FABRIC_CLASS_PROCESSS_SETUP_LINK_DOWN_LINK_DATA_SIZE + strlen(result_val), "DFSL");
+    char *downlink_data = data_ptr = (char *) phwangMalloc1(D_FABRIC_CLASS_PROCESSS_SETUP_LINK_DOWN_LINK_DATA_SIZE + strlen(result_val), MallocClass::SIGN_IN);
     *data_ptr++ = FECommandClass::SETUP_LINK_RESPONSE;
     strcpy(data_ptr, ajax_id_val);
     data_ptr += WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE;

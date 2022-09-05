@@ -26,7 +26,7 @@ void phwangAbend(char const *str0_val, char const *str1_val);
 void phwangAbend3(char const *str0_val, char const *str1_val, char const *str2_val);
 
 /* malloc and free */
-void *phwangMalloc(int size_val, int who_val);
+void *phwangMalloc1(int size_val, int who_val);
 void *phwangMalloc(int size_val, char const *who_val);
 void phwangFree(void *data_val, char const *who_val);
 
