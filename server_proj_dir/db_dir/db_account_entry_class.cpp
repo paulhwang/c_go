@@ -20,13 +20,13 @@ DbAccountEntryClass::~DbAccountEntryClass (void)
     phwangDecrementObjectCount(&ObjectCount);
 
     if (this->theAccountName) {
-        free(this->theAccountName);
+        phwangFree(this->theAccountName, 0);
     }
     if (this->thePassword) {
-        free(this->thePassword);
+        phwangFree(this->thePassword, 0);
     }
     if (this->theEmail) {
-        free(this->theEmail);
+        phwangFree(this->theEmail, 0);
     }
 }
 

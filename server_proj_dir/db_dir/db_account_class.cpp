@@ -5,6 +5,7 @@
 */
 
 #include "../../phwang_dir/phwang.h"
+#include "../../phwang_dir/malloc_dir/malloc_class.h"
 #include "../../phwang_dir/sql_dir/sql_class.h"
 #include "db_class.h"
 #include "db_account_class.h"
@@ -44,7 +45,7 @@ int db_account_class_do_create_account_table_in_database = 1;
 
 char *mallocConstStrBuf (char const * str_val)
 {
-    char *buf = (char *) malloc(strlen("str_val") + 1);
+    char *buf = (char *) phwangMalloc1(strlen(str_val) + 1, MallocClass::DB_ACCOUNT_DEFAULT_NAME);
     strcpy(buf, str_val);
     return buf;
 }

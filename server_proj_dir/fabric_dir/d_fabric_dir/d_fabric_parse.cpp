@@ -218,11 +218,11 @@ void DFabricClass::sendMmwReadDataResponce (void *tp_transfer_object_val, char c
 
     strcpy(data_ptr, encoded_result);
     data_ptr += encoded_result_length;
-    free(encoded_result);
+    phwangFree(encoded_result, 0);
 
     strcpy(data_ptr, encoded_data);
     //data_ptr += encoded_data_length;
-    free(encoded_data);
+    phwangFree(encoded_data, 0);
 
     this->transmitFunction(tp_transfer_object_val, downlink_data);
 }
@@ -264,9 +264,9 @@ void DFabricClass::processSignUpRequest (void *tp_transfer_object_val, char *dat
                 break;
         }
         this->sendSignUpResponce(tp_transfer_object_val, ajax_id_val, result_str);
-        free(account_name);
-        free(password);
-        free(email);
+        phwangFree(account_name, 0);
+        phwangFree(password, 0);
+        phwangFree(email, 0);
         return;
     }
 
@@ -338,8 +338,8 @@ void DFabricClass::processSetupLinkRequest (void *tp_transfer_object_val, char *
                 break;
         }
         this->sendSetupLinkResponce(tp_transfer_object_val, ajax_id_val, D_FABRIC_CLASS_FAKE_LINK_ID_INDEX, result_str);
-        free(my_name);
-        free(password);
+        phwangFree(my_name, 0);
+        phwangFree(password, 0);
         return;
     }
 
@@ -347,14 +347,14 @@ void DFabricClass::processSetupLinkRequest (void *tp_transfer_object_val, char *
     if (!link) {
         this->abend("processSetupLink", "null link");
         this->sendSetupLinkResponce(tp_transfer_object_val, ajax_id_val, D_FABRIC_CLASS_FAKE_LINK_ID_INDEX, "null link");
-        free(my_name);
-        free(password);
+        phwangFree(my_name, 0);
+        phwangFree(password, 0);
         return;
     }
 
     this->sendSetupLinkResponce(tp_transfer_object_val, ajax_id_val, link->linkIdIndex(), "succeed");
-    free(my_name);
-    free(password);
+    phwangFree(my_name, 0);
+    phwangFree(password, 0);
 }
 
 #define D_FABRIC_CLASS_PROCESSS_SETUP_LINK_DOWN_LINK_DATA_SIZE (1 + WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + 1)
