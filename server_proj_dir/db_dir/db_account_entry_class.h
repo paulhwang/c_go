@@ -7,7 +7,7 @@
 #pragma once
 
 class DbAccountEntryClass {
-    inline static char *ObjectName = "DbAccountDataClass";
+    char const *objectName(void) {return "DbAccountEntryClass";}
     inline static int ObjectCount = 0;
 
     char *theAccountName;

@@ -26,7 +26,7 @@ void phwangPhwangPhwang (void)
 }
 
 /* object count */
-void phwangIncrementObjectCount(int *object_count_val, char *object_name_val, int max_object_count_val)
+void phwangIncrementObjectCount(int *object_count_val, char const *object_name_val, int max_object_count_val)
 {
     thePhwangObject->objectObject()->incrementObjectCount(object_count_val, object_name_val, max_object_count_val);
 }

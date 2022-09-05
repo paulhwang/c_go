@@ -35,7 +35,7 @@ char *encodeString (char const *input_str_val);
 char *phwangDecodeString(char const *input_val, int *input_size_val);
 
 /* object_count */
-void phwangIncrementObjectCount(int *object_count_val, char *object_name_val, int max_object_count_val);
+void phwangIncrementObjectCount(int *object_count_val, char const *object_name_val, int max_object_count_val);
 void phwangDecrementObjectCount(int *object_count_val);
 
 /* queue */

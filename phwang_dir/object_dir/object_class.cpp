@@ -16,7 +16,7 @@ ObjectClass::~ObjectClass(void)
 {
 }
 
-void ObjectClass::incrementObjectCount(int *object_count_val, char *object_name_val, int max_object_count_val)
+void ObjectClass::incrementObjectCount(int *object_count_val, char const *object_name_val, int max_object_count_val)
 {
     (*object_count_val)++;
     if (*object_count_val > max_object_count_val) {
