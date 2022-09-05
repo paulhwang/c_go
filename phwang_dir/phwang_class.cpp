@@ -36,24 +36,12 @@ PhwangClass::~PhwangClass (void)
 {
 }
 
-/*************************************************************/
-
-void PhwangClass::logit (char const *str0_val, char const *str1_val) {
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
-    this->abendObject()->phwangLogit(s, str1_val);
-}
-
-void PhwangClass::abend (char const *str0_val, char const *str1_val) {
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
-    this->abendObject()->phwangAbend(s, str1_val);
-}
-
-void PhwangClass::abend3 (char const *str0_val, char const *str1_val, char const *str2_val) {
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
-    this->abendObject()->phwangAbend3(s, str1_val, str2_val);
+void PhwangClass::registerProgramProcess(int *register_tag_ptr_val, char *program_name_val, unsigned short port_val)
+{
+    *register_tag_ptr_val = 1;
+    while (*register_tag_ptr_val) {
+        sleep(10);
+    }
 }
 
 void PhwangClass::printBoard (char const* data_val, int board_size_val)
@@ -77,14 +65,14 @@ void PhwangClass::printBoard (char const* data_val, int board_size_val)
     }
 }
 
-/**************************************************************************************************************/
-/**************************************************************************************************************/
-/**************************************************************************************************************/
+void PhwangClass::logit (char const *str0_val, char const *str1_val) {
+    char s[LOGIT_BUF_SIZE];
+    sprintf(s, "%s::%s", this->objectName(), str0_val);
+    this->abendObject()->phwangLogit(s, str1_val);
+}
 
-void PhwangClass::registerProgramProcess(int *register_tag_ptr_val, char *program_name_val, unsigned short port_val)
-{
-    *register_tag_ptr_val = 1;
-    while (*register_tag_ptr_val) {
-        sleep(10);
-    }
+void PhwangClass::abend (char const *str0_val, char const *str1_val) {
+    char s[LOGIT_BUF_SIZE];
+    sprintf(s, "%s::%s", this->objectName(), str0_val);
+    this->abendObject()->phwangAbend(s, str1_val);
 }
