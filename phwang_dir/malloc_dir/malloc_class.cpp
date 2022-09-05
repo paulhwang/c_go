@@ -17,9 +17,10 @@ MallocClass::~MallocClass(void)
 {
 }
 
+//PHWANG_MALLOC_CLASS
 #define PHWNAG_CLASS_MALLOC_MARKER "phwang"
 #define PHWNAG_CLASS_MALLOC_MARKER_SIZE 6
-#define PHWNAG_CLASS_MALLOC_LENGTH_SIZE 4
+#define PHWNAG_CLASS_MALLOC_LENGTH_SIZE 5
 #define PHWNAG_CLASS_MALLOC_WHO_SIZE 4
 #define PHWNAG_CLASS_MALLOC_WHO_TOTAL_SIZE (PHWNAG_CLASS_MALLOC_WHO_SIZE + 1)
 #define PHWNAG_CLASS_MALLOC_HEADER_SIZE (PHWNAG_CLASS_MALLOC_MARKER_SIZE + PHWNAG_CLASS_MALLOC_LENGTH_SIZE + PHWNAG_CLASS_MALLOC_WHO_TOTAL_SIZE)
@@ -28,9 +29,9 @@ MallocClass::~MallocClass(void)
 
 void *MallocClass::phwangMalloc (int size_val, int who_val)
 {
+    this->theUserTable[who_val]++;
     printf("***Malloc %d %d %d %d %d %d %d\n", this->theUserTable[0], this->theUserTable[1], this->theUserTable[2],
                this->theUserTable[3], this->theUserTable[4], this->theUserTable[5], this->theUserTable[6]);
-    this->theUserTable[who_val]++;
 
     char who_str[PHWNAG_CLASS_MALLOC_WHO_TOTAL_SIZE];
     phwangEncodeNumber(who_str, who_val, PHWNAG_CLASS_MALLOC_WHO_SIZE);
@@ -44,28 +45,31 @@ void *MallocClass::phwangMalloc (int size_val, int who_val)
     return buf + PHWNAG_CLASS_MALLOC_HEADER_SIZE;
 }
 
-void MallocClass::phwangFree (void *data_val)
+void MallocClass::phwangFree (void *adjusted_malloc_val)
 {
-    if (!data_val) {
+    if (!adjusted_malloc_val) {
         phwangAbend("phwangFree", "null data");
         return;
     }
+    char *real_malloc_data = ((char *) adjusted_malloc_val) - PHWNAG_CLASS_MALLOC_HEADER_SIZE;
+    char *length_str = real_malloc_data + PHWNAG_CLASS_MALLOC_MARKER_SIZE;
+    char *user_code_str = length_str + PHWNAG_CLASS_MALLOC_LENGTH_SIZE;
+    this->debug(true, "phwangFree", real_malloc_data);
 
-    char *buf = ((char *) data_val) - PHWNAG_CLASS_MALLOC_HEADER_SIZE;
+    if (memcmp(real_malloc_data, PHWNAG_CLASS_MALLOC_MARKER, PHWNAG_CLASS_MALLOC_MARKER_SIZE)) {
+        phwangAbend("phwangFree Head", real_malloc_data);
+        return;
+    }
+    int length = phwangDecodeNumber(length_str, PHWNAG_CLASS_MALLOC_LENGTH_SIZE);
+    int user_code = phwangDecodeNumber(user_code_str, PHWNAG_CLASS_MALLOC_WHO_SIZE);
+    printf("length=%d user=%d\n", length, user_code);
 
-    if (memcmp(buf, PHWNAG_CLASS_MALLOC_MARKER, PHWNAG_CLASS_MALLOC_MARKER_SIZE)) {
-        phwangAbend("phwangFree Head", buf + PHWNAG_CLASS_MALLOC_MARKER_SIZE + PHWNAG_CLASS_MALLOC_LENGTH_SIZE);
+    if (memcmp((char *) adjusted_malloc_val + length, PHWNAG_CLASS_MALLOC_MARKER, PHWNAG_CLASS_MALLOC_MARKER_SIZE)) {
+        phwangAbend("phwangFree Tail", real_malloc_data);
         return;
     }
 
-    int length = phwangDecodeNumber(buf + PHWNAG_CLASS_MALLOC_MARKER_SIZE, PHWNAG_CLASS_MALLOC_LENGTH_SIZE);
-
-    if (memcmp((char *) data_val + length, PHWNAG_CLASS_MALLOC_MARKER, PHWNAG_CLASS_MALLOC_MARKER_SIZE)) {
-        phwangAbend("phwangFree Tail", buf + PHWNAG_CLASS_MALLOC_MARKER_SIZE + PHWNAG_CLASS_MALLOC_LENGTH_SIZE);
-        return;
-    }
-
-    free(buf);
+    free(real_malloc_data);
 }
 
 void MallocClass::logit (char const *str0_val, char const *str1_val)
