@@ -4,8 +4,6 @@
   File name: phwang_class.cpp
 */
 
-#include <sys/socket.h>
-#include <arpa/inet.h>
 #include "phwang.h"
 #include "phwang_class.h"
 #include "abend_dir/abend_class.h"
