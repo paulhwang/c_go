@@ -28,6 +28,7 @@ void phwangAbend3(char const *str0_val, char const *str1_val, char const *str2_v
 /* malloc and free */
 void *phwangMalloc(int size_val, int who_val);
 void  phwangFree(void *data_val);
+char *phwangMallocConstStrBuf(char const * str_val);
 
 /* encode */
 void  phwangEncodeNumber(char *str_val, int number_val, int size_val);

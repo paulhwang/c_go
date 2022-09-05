@@ -57,14 +57,14 @@ public:
     int const static GET_SESSION_DATA = 5;
     int const static GET_SESSION_DATA_ERROR = 5;
     int const static MALLOC_ROOM = 5;
-    int const static ENCODE_STRING1111111111111111111 = 6;
-    int const static encodeNumberMalloc = 7;
-    int const static encodeStringMalloc = 8;
-    int const static decodeStringMalloc = 9;
+    int const static encodeNumberMalloc = 6;
+    int const static encodeStringMalloc = 7;
+    int const static decodeStringMalloc = 8;
+    int const static mallocConstStrBuf_ = 9;
     int const static TEST_SETUP_LINK = 10;
-    int const static DB_ACCOUNT_DEFAULT_NAME = 11;
-    int const static MAX_INDEX = 11;
+    int const static MAX_INDEX = 20;
 
     void *phwangMalloc(int size_val, int who_val);
     void phwangFree(void *data_val);
+    char *mallocConstStrBuf(char const * str_val);
 };

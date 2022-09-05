@@ -80,6 +80,11 @@ void phwangFree (void *data_val)
     thePhwangObject->mallocObject()->phwangFree(data_val);
 }
 
+char *phwangMallocConstStrBuf (char const * str_val)
+{
+    return thePhwangObject->mallocObject()->mallocConstStrBuf(str_val);
+}
+
 /* encode */
 void phwangEncodeNumber (char *str_val, int number_val, int size_val)
 {

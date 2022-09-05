@@ -43,13 +43,6 @@ void DbAccountClass::developTest(void)
 int db_account_class_do_create_account_table_in_database = 1;
 /************************DO NOT MODIFY IT*******************/
 
-char *mallocConstStrBuf (char const * str_val)
-{
-    char *buf = (char *) phwangMalloc(strlen(str_val) + 1, MallocClass::DB_ACCOUNT_DEFAULT_NAME);
-    strcpy(buf, str_val);
-    return buf;
-}
-
 void DbAccountClass::createAccountTableInDatabase(void)
 {
     if (!db_account_class_do_create_account_table_in_database) {
@@ -64,42 +57,42 @@ void DbAccountClass::createAccountTableInDatabase(void)
     this->sqlObject()->createTable3(this->sqlConnect(), "accounts", "name VARCHAR(20)", "password VARCHAR(20)", "email VARCHAR(30)");
 
     DbAccountEntryClass *entry = new DbAccountEntryClass();
-    entry->setAccountName(mallocConstStrBuf("admin"));
-    entry->setPassword(mallocConstStrBuf("admin_password"));
-    entry->setEmail(mallocConstStrBuf("admin@phwang.com"));
+    entry->setAccountName(phwangMallocConstStrBuf("admin"));
+    entry->setPassword(phwangMallocConstStrBuf("admin_password"));
+    entry->setEmail(phwangMallocConstStrBuf("admin@phwang.com"));
     this->insertAccountEntry(entry);
 
     entry = new DbAccountEntryClass();
-    entry->setAccountName(mallocConstStrBuf("phwang"));
-    entry->setPassword(mallocConstStrBuf("a"));
-    entry->setEmail(mallocConstStrBuf("phwang@phwang.com"));
+    entry->setAccountName(phwangMallocConstStrBuf("phwang"));
+    entry->setPassword(phwangMallocConstStrBuf("a"));
+    entry->setEmail(phwangMallocConstStrBuf("phwang@phwang.com"));
     this->insertAccountEntry(entry);
 
     entry = new DbAccountEntryClass();
-    entry->setAccountName(mallocConstStrBuf("ikolre"));
-    entry->setPassword(mallocConstStrBuf("ikolre_password"));
-    entry->setEmail(mallocConstStrBuf("ikolre@phwang.com"));
+    entry->setAccountName(phwangMallocConstStrBuf("ikolre"));
+    entry->setPassword(phwangMallocConstStrBuf("ikolre_password"));
+    entry->setEmail(phwangMallocConstStrBuf("ikolre@phwang.com"));
     this->insertAccountEntry(entry);
 
     entry = new DbAccountEntryClass();
-    entry->setAccountName(mallocConstStrBuf("guest"));
-    entry->setPassword(mallocConstStrBuf("guest_password"));
-    entry->setEmail(mallocConstStrBuf("guest@phwang.com"));
+    entry->setAccountName(phwangMallocConstStrBuf("guest"));
+    entry->setPassword(phwangMallocConstStrBuf("guest_password"));
+    entry->setEmail(phwangMallocConstStrBuf("guest@phwang.com"));
     this->insertAccountEntry(entry);
 
     entry = new DbAccountEntryClass();
-    entry->setAccountName(mallocConstStrBuf("BigBrave"));
-    entry->setPassword(mallocConstStrBuf("bigbrave"));
-    entry->setEmail(mallocConstStrBuf("bigbrave@phwang.com"));
+    entry->setAccountName(phwangMallocConstStrBuf("BigBrave"));
+    entry->setPassword(phwangMallocConstStrBuf("bigbrave"));
+    entry->setEmail(phwangMallocConstStrBuf("bigbrave@phwang.com"));
     this->insertAccountEntry(entry);
 
     entry = new DbAccountEntryClass();
-    entry->setAccountName(mallocConstStrBuf("paul"));
-    entry->setPassword(mallocConstStrBuf("a"));
-    entry->setEmail(mallocConstStrBuf("paul@phwang.com"));
+    entry->setAccountName(phwangMallocConstStrBuf("paul"));
+    entry->setPassword(phwangMallocConstStrBuf("a"));
+    entry->setEmail(phwangMallocConstStrBuf("paul@phwang.com"));
     this->insertAccountEntry(entry);
 
-    /****** the buf malloc by mallocConstStrBuf has been free by the insertAccountEntry ********/
+    /****** the buf malloc by phwangMallocConstStrBuf has been free by the insertAccountEntry ********/
 }
 
 void DbAccountClass::listAccount (void) {

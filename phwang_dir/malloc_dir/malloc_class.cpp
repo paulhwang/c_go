@@ -117,6 +117,13 @@ void MallocClass::checkWhoTable (void)
     }
 }
 
+char *MallocClass::mallocConstStrBuf (char const * str_val)
+{
+    char *buf = (char *) phwangMalloc(strlen(str_val) + 1, MallocClass::mallocConstStrBuf_);
+    strcpy(buf, str_val);
+    return buf;
+}
+
 void MallocClass::logit (char const *str0_val, char const *str1_val)
 {
     char s[LOGIT_BUF_SIZE];
