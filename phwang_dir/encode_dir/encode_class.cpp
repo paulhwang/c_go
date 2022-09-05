@@ -28,6 +28,19 @@ void EncodeClass::encodeNumber (char *str_val, int number_val, int size_val)
     }
 }
 
+void EncodeClass::encodeNumberNull (char *str_val, int number_val, int size_val)
+{
+    this->encodeNumber(str_val, number_val, size_val);
+    str_val[size_val] = 0;
+}
+
+char *EncodeClass::encodeNumberMalloc (int number_val, int size_val)
+{
+    char *buf = (char *) phwangMalloc(size_val + 1, MallocClass::encodeNumberMalloc);
+    this->encodeNumberNull(buf, number_val, size_val);
+    return buf;
+}
+
 int EncodeClass::decodeNumber (char const *str_val, int size_val)
 {
     int number = 0;
@@ -43,19 +56,12 @@ int EncodeClass::decodeNumber (char const *str_val, int size_val)
     return number;
 }
 
-void EncodeClass::encodeIdIndex (char *str_val, int id_val, int id_size_val, int index_val, int index_size_val)
+int EncodeClass::decodeNumberNull (char const *str_val)
 {
-    this->encodeNumber(str_val, id_val, id_size_val);
-    this->encodeNumber(str_val + id_size_val, index_val, index_size_val);
+    return this->decodeNumber(str_val, strlen(str_val));
 }
 
-void EncodeClass::decodeIdIndex (char const *str_val, int *id_ptr_val, int id_size_val, int *index_ptr_val, int index_size_val)
-{
-    *id_ptr_val = this->decodeNumber(str_val, id_size_val);
-    *index_ptr_val = this->decodeNumber(str_val + id_size_val, index_size_val);
-}
-
-char *EncodeClass::encodeString (char const *input_str_val) {
+char *EncodeClass::encodeStringMalloc (char const *input_str_val) {
     int length_size;
     int length = strlen(input_str_val);
     char *buf = (char *) phwangMalloc(length + 7, MallocClass::ENCODE_STRING); /* 1 + 5 + length + 1 */
@@ -130,6 +136,18 @@ char *EncodeClass::decodeString (char const *input_val, int *input_size_val)
             break;
     }
     return buf;
+}
+
+void EncodeClass::encodeIdIndex (char *str_val, int id_val, int id_size_val, int index_val, int index_size_val)
+{
+    this->encodeNumber(str_val, id_val, id_size_val);
+    this->encodeNumber(str_val + id_size_val, index_val, index_size_val);
+}
+
+void EncodeClass::decodeIdIndex (char const *str_val, int *id_ptr_val, int id_size_val, int *index_ptr_val, int index_size_val)
+{
+    *id_ptr_val = this->decodeNumber(str_val, id_size_val);
+    *index_ptr_val = this->decodeNumber(str_val + id_size_val, index_size_val);
 }
 
 void EncodeClass::logit (char const *str0_val, char const *str1_val)

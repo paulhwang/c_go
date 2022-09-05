@@ -86,9 +86,33 @@ void phwangEncodeNumber (char *str_val, int number_val, int size_val)
     thePhwangObject->encodeObject()->encodeNumber(str_val, number_val, size_val);
 }
 
+void  phwangEncodeNumberNull (char *str_val, int number_val, int size_val)
+{
+    thePhwangObject->encodeObject()->encodeNumberNull(str_val, number_val, size_val);
+}
+
+char *phwangEncodeNumberMalloc (int number_val, int size_val)
+{
+    return thePhwangObject->encodeObject()->encodeNumberMalloc(number_val, size_val);
+}
+
 int phwangDecodeNumber (char const *str_val, int size_val)
 {
     return thePhwangObject->encodeObject()->decodeNumber(str_val, size_val);
+}
+
+int phwangDecodeNumberNull (char const *str_val)
+{
+    return thePhwangObject->encodeObject()->decodeNumberNull(str_val);
+}
+
+char *phwangEncodeStringMalloc (char const *input_str_val) {
+    return thePhwangObject->encodeObject()->encodeStringMalloc(input_str_val);
+}
+
+char *phwangDecodeString (char const *input_val, int *input_size_val)
+{
+    return thePhwangObject->encodeObject()->decodeString(input_val, input_size_val);
 }
 
 void phwangEncodeIdIndex (char *str_val, int id_val, int id_size_val, int index_val, int index_size_val)
@@ -99,15 +123,6 @@ void phwangEncodeIdIndex (char *str_val, int id_val, int id_size_val, int index_
 void phwangDecodeIdIndex (char const *str_val, int *id_ptr_val, int id_size_val, int *index_ptr_val, int index_size_val)
 {
     thePhwangObject->encodeObject()->decodeIdIndex(str_val, id_ptr_val, id_size_val, index_ptr_val, index_size_val);
-}
-
-char *encodeString (char const *input_str_val) {
-    return thePhwangObject->encodeObject()->encodeString(input_str_val);
-}
-
-char *phwangDecodeString (char const *input_val, int *input_size_val)
-{
-    return thePhwangObject->encodeObject()->decodeString(input_val, input_size_val);
 }
 
 /* queue */

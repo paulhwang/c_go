@@ -205,9 +205,9 @@ void DFabricClass::sendMmwReadDataResponce (void *tp_transfer_object_val, char c
 {
     this->debug(true, "sendMmwReadDataResponce", result_val);
 
-    char *encoded_result = encodeString(result_val);
+    char *encoded_result = phwangEncodeStringMalloc(result_val);
     int encoded_result_length = strlen(encoded_result);
-    char *encoded_data = encodeString(data_val);
+    char *encoded_data = phwangEncodeStringMalloc(data_val);
     int encoded_data_length = strlen(encoded_data);
 
     char *data_ptr;

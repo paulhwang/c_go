@@ -27,15 +27,20 @@ void phwangAbend3(char const *str0_val, char const *str1_val, char const *str2_v
 
 /* malloc and free */
 void *phwangMalloc(int size_val, int who_val);
-void phwangFree(void *data_val);
+void  phwangFree(void *data_val);
 
 /* encode */
-void phwangEncodeNumber(char *str_val, int number_val, int size_val);
-int phwangDecodeNumber(char const *str_val, int size_val);
-void phwangEncodeIdIndex(char *str_val, int id_val, int id_size_val, int index_val, int index_size_val);
-void phwangDecodeIdIndex(char const *str_val, int *id_ptr_val, int id_size_val, int *index_ptr_val, int index_size_val);
-char *encodeString (char const *input_str_val);
+void  phwangEncodeNumber(char *str_val, int number_val, int size_val);
+void  phwangEncodeNumberNull(char *str_val, int number_val, int size_val);
+char *phwangEncodeNumberMalloc(int number_val, int size_val);
+int   phwangDecodeNumber(char const *str_val, int size_val);
+int   phwangDecodeNumberNull(char const *str_val);
+
+char *phwangEncodeStringMalloc(char const *input_str_val);
 char *phwangDecodeString(char const *input_val, int *input_size_val);
+
+void  phwangEncodeIdIndex(char *str_val, int id_val, int id_size_val, int index_val, int index_size_val);
+void  phwangDecodeIdIndex(char const *str_val, int *id_ptr_val, int id_size_val, int *index_ptr_val, int index_size_val);
 
 /* object_count */
 void phwangIncrementObjectCount(int *object_count_val, char const *object_name_val, int max_object_count_val);
@@ -44,23 +49,23 @@ void phwangDecrementObjectCount(int *object_count_val);
 /* queue */
 void *phwangMallocSuspendedQueue(int size_val);
 void *phwangMallocQueue(int size_val);
-void phwangFreeQueue(void *queue_val, char const *who_val);
-void phwangEnqueue(void *queue_val, void *data_val);
+void  phwangFreeQueue(void *queue_val, char const *who_val);
+void  phwangEnqueue(void *queue_val, void *data_val);
 void *phwangDequeue(void *queue_val, char const *who_val);
 
 /* list_mgr */
 void *phwangListMgrMalloc(char const *caller_name_val, int id_size_val, int index_size_val, int global_entry_id_val);
-void phwangListMgrFree(void *list_mgr_val);
-void phwangListMgrRemoveEntry(void *list_mgr_val, void *entry_val);
+void  phwangListMgrFree(void *list_mgr_val);
+void  phwangListMgrRemoveEntry(void *list_mgr_val, void *entry_val);
 void *phwangListMgrSearchEntry(void *list_mgr_val, char const *data_val, void *extra_data_val);
-int phwnagListMgrGetMaxIndex(void *list_mgr_val, char const *who_val);
+int   phwnagListMgrGetMaxIndex(void *list_mgr_val, char const *who_val);
 void *phwangListMgrGetEntryTableArray(void *list_mgr_val);
 
 /* array_mgr */
 void *phwangArrayMgrMalloc(char const *caller_name_val, char array_type_val, int array_size_val);
-void phwangArrayMgrFree(void *array_mgr_val);
-void phwangArrayMgrInsertElement(void *array_mgr_val, void *element_val);
-void phwangArrayMgrRemoveElement(void *array_mgr_val, void *element_val);
+void  phwangArrayMgrFree(void *array_mgr_val);
+void  phwangArrayMgrInsertElement(void *array_mgr_val, void *element_val);
+void  phwangArrayMgrRemoveElement(void *array_mgr_val, void *element_val);
 void *phwangArrayMgrGetArrayTable(void *array_mgr_val, int *array_size_ptr);
 
 /* tp */
@@ -81,7 +86,7 @@ void *phwangTpConnect(
 void phwangFreeTpServer(void *tp_server_object_val);
 void phwangFreeTpTransfer(void *tp_transfer_object_val);
 void phwangTpTransmit(void *tp_transfer_object_val, char *data_val);
-int phwangReceiveThreadCount(void);
+int  phwangReceiveThreadCount(void);
 void phwangIncrementReceiveThreadCount(void);
 
 /* register */

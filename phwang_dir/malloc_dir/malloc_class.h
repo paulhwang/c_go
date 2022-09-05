@@ -58,9 +58,10 @@ public:
     int const static GET_SESSION_DATA_ERROR = 5;
     int const static MALLOC_ROOM = 5;
     int const static ENCODE_STRING = 6;
-    int const static DECODE_STRING = 7;
-    int const static TEST_SETUP_LINK = 8;
-    int const static DB_ACCOUNT_DEFAULT_NAME = 9;
+    int const static encodeNumberMalloc = 7;
+    int const static DECODE_STRING = 8;
+    int const static TEST_SETUP_LINK = 9;
+    int const static DB_ACCOUNT_DEFAULT_NAME = 10;
     int const static MAX_INDEX = 10;
 
     void *phwangMalloc(int size_val, int who_val);
