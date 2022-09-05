@@ -11,6 +11,7 @@
 #include <netdb.h>
 #include <pwd.h>
 #include "../../phwang_dir/phwang.h"
+#include "../../phwang_dir/malloc_dir/malloc_class.h"
 #include "tp_transfer_class.h"
 
 void *TpTransferClass::receiveThreadFunction(int socket_val)
@@ -18,7 +19,7 @@ void *TpTransferClass::receiveThreadFunction(int socket_val)
     char const *func_name_ = "receiveThreadFunction";
 
     while (1) {
-        char *data = (char *) phwangMalloc(TP_TRANSFER_CLASS_RECEIVE_BUFFER_SIZE + 32, "TpR1");
+        char *data = (char *) phwangMalloc1(TP_TRANSFER_CLASS_RECEIVE_BUFFER_SIZE + 32, MallocClass::TP_RECEIVE_THREAD);
 
         int length = read(socket_val, data, TP_TRANSFER_CLASS_RECEIVE_BUFFER_SIZE);
         if (length > 0) {
@@ -60,7 +61,7 @@ void *tpTranferReceiveThreadFunction (void *data_val)
 
 void TpTransferClass::startReceiveThread (int socket_val)
 {
-    tp_transfer_thread_parameter *data = (tp_transfer_thread_parameter *) phwangMalloc(sizeof(tp_transfer_thread_parameter), "TpRh");
+    tp_transfer_thread_parameter *data = (tp_transfer_thread_parameter *) phwangMalloc1(sizeof(tp_transfer_thread_parameter), MallocClass::TP_RECEIVE);
     data->socket = socket_val;
     data->tp_transfer_object = this;
 
@@ -104,7 +105,7 @@ void *TpTransferClass::receiveThreadFunction2 (void)
                     this->abend(func_name_, s);
                 }
 
-                data = (char *) phwangMalloc(length + 32, "TpR3");
+                data = (char *) phwangMalloc1(length + 32, MallocClass::TP_RECEIVE2);
                 memcpy(data, &raw_data[1 + TP_TRANSFER_CLASS_DATA_LENGTH_SIZE], length);
                 data[length] = 0;
              }

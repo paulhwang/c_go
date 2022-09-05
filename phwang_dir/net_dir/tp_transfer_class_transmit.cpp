@@ -9,6 +9,7 @@
 #include <pthread.h>
 #include <netinet/in.h>
 #include "../../phwang_dir/phwang.h"
+#include "../../phwang_dir/malloc_dir/malloc_class.h"
 #include "tp_transfer_class.h"
 
 void TpTransferClass::exportTransmitData (void *data_val)
@@ -76,7 +77,7 @@ void *tpTransferTransmitThreadFunction (void *data_val)
 
 void TpTransferClass::startTransmitThread (int socket_val)
 {
-    tp_transfer_thread_parameter *data = (tp_transfer_thread_parameter *) phwangMalloc(sizeof(tp_transfer_thread_parameter), "TpTh");
+    tp_transfer_thread_parameter *data = (tp_transfer_thread_parameter *) phwangMalloc1(sizeof(tp_transfer_thread_parameter), MallocClass::TP_TRANSMIT);
     data->socket = socket_val;
     data->tp_transfer_object = this;
 

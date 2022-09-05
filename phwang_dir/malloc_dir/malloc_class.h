@@ -22,13 +22,16 @@ public:
     MallocClass(void);
     ~MallocClass(void);
     
-    int const static ENCODE_STRING  = 0;
-    int const static DECODE_STRING  = 1;
-    int const static SIGN_UP  = 2;
-    int const static SIGN_IN  = 3;
-    int const static DATAGRAM  = 4;
-    int const static DB_ACCOUNT_DEFAULT_NAME = 5;
-    int const static MAXIMUM = 6;
+    int const static TP_TRANSMIT  = 0;
+    int const static TP_RECEIVE_THREAD  = 2;
+    int const static TP_RECEIVE  = 1;
+    int const static TP_RECEIVE2  = 2;
+    int const static ENCODE_STRING  = 3;
+    int const static DECODE_STRING  = 4;
+    int const static SIGN_UP  = 5;
+    int const static SIGN_IN  = 6;
+    int const static DATAGRAM  = 7;
+    int const static DB_ACCOUNT_DEFAULT_NAME = 8;
 
     void *phwangMalloc1(int size_val, int who_val);
     void *phwangMalloc(int size_val, char const *who_val);
