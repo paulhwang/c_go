@@ -43,7 +43,7 @@ public:
     char *getPendingSessionSetup(void) {return (char *) phwangDequeue(this->thePendingSessionSetupQueue, "LinkClass::getPendingSessionSetup()");}
     char *getPendingSessionSetup3(void) {return (char *) phwangDequeue(this->thePendingSessionSetupQueue3, "LinkClass::getPendingSessionSetup3()");}
     void setPendingSessionSetup(char *session_id_index_val, char *topic_data_val);
-    void setPendingSessionSetup3(char *session_id_index_val, char *topic_data_val);
+    void setPendingSessionSetup3(char *session_id_index_val, char const *topic_data_val);
     void resetKeepAliveTime(void) {this->theKeepAliveTime = time((time_t *) 0);}
     int keepAliveTimerExpired(void) {return (time((time_t *) 0) - this->theKeepAliveTime) > LINK_CLASS_KEEP_ALIVE_TIMEOUT;}
 };

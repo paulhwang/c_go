@@ -29,14 +29,14 @@ void *MallocClass::phwangMalloc1 (int size_val, int who_val)
 {
     char who_str[PHWNAG_CLASS_MALLOC_WHO_TOTAL_SIZE];
     phwangEncodeNumber(who_str, who_val, PHWNAG_CLASS_MALLOC_WHO_SIZE);
-/*
     char *buf = (char *) malloc(size_val + PHWNAG_CLASS_MALLOC_EXTRA_BUFFER_SIZE);
+/*
     memcpy(buf, PHWNAG_CLASS_MALLOC_MARKER, PHWNAG_CLASS_MALLOC_MARKER_SIZE);
     phwangEncodeNumber(buf + PHWNAG_CLASS_MALLOC_MARKER_SIZE, size_val, PHWNAG_CLASS_MALLOC_LENGTH_SIZE);
     strcpy(buf + PHWNAG_CLASS_MALLOC_MARKER_SIZE + PHWNAG_CLASS_MALLOC_LENGTH_SIZE, who_val);
     memcpy(buf + PHWNAG_CLASS_MALLOC_HEADER_SIZE + size_val, PHWNAG_CLASS_MALLOC_MARKER, PHWNAG_CLASS_MALLOC_MARKER_SIZE);
+*/
     return buf + PHWNAG_CLASS_MALLOC_HEADER_SIZE;
-    */
 }
 
 void *MallocClass::phwangMalloc (int size_val, char const *who_val)
@@ -65,7 +65,7 @@ void MallocClass::phwangFree (void *data_val, char const *who_val)
 
     int length = phwangDecodeNumber(buf + PHWNAG_CLASS_MALLOC_MARKER_SIZE, PHWNAG_CLASS_MALLOC_LENGTH_SIZE);
 
-    if (memcmp(data_val + length, PHWNAG_CLASS_MALLOC_MARKER, PHWNAG_CLASS_MALLOC_MARKER_SIZE)) {
+    if (memcmp((char *) data_val + length, PHWNAG_CLASS_MALLOC_MARKER, PHWNAG_CLASS_MALLOC_MARKER_SIZE)) {
         phwangAbend3("phwangFree Tail", who_val, buf + PHWNAG_CLASS_MALLOC_MARKER_SIZE + PHWNAG_CLASS_MALLOC_LENGTH_SIZE);
         return;
     }

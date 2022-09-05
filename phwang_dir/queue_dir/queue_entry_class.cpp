@@ -7,33 +7,23 @@
 #include "../phwang.h"
 #include "queue_entry_class.h"
 
+int QueueEntryClass::ObjectCount;
+
 QueueEntryClass::QueueEntryClass (void)
 {
     memset(this, 0, sizeof (*this));
     strcpy(this->theObjectName, "QueueEntryClass");
-    this->incrementObjectCount();
+    phwangIncrementObjectCount(&ObjectCount, this->objectName(), 3);
 }
 
 QueueEntryClass::~QueueEntryClass (void)
 {
+    phwangDecrementObjectCount(&ObjectCount);
+
     if (strcmp(this->objectName(), "QueueEntryClass")) {
         this->abend("~QueueEntryClass", this->objectName());
     }
     strcpy(this->theObjectName, "QueueEntryClassDummy");
-    this->decrementObjectCount();
-}
-
-void QueueEntryClass::incrementObjectCount(void)
-{
-    QueueEntryClass::theObjectCount++;
-    if (QueueEntryClass::theObjectCount > 5) {
-        this->abend("QueueEntryClass", "too big");
-    }
-}
-
-void QueueEntryClass::decrementObjectCount(void)
-{
-    QueueEntryClass::theObjectCount--;
 }
 
 void QueueEntryClass::deleteQueueEntry (void)

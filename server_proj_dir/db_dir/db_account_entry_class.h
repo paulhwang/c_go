@@ -8,7 +8,6 @@
 
 class DbAccountEntryClass {
     char const *objectName(void) {return "DbAccountEntryClass";}
-    inline static int ObjectCount = 0;
 
     char *theAccountName;
     char *thePassword;
@@ -21,6 +20,7 @@ class DbAccountEntryClass {
 public:
     DbAccountEntryClass(void);
     ~DbAccountEntryClass(void);
+    static int ObjectCount;
 
 
     char *accountName(void) {return this->theAccountName;}

@@ -53,7 +53,7 @@ void LinkClass::setPendingSessionSetup (char *session_id_index_val, char *theme_
     phwangEnqueue(this->thePendingSessionSetupQueue, buf);
 }
 
-void LinkClass::setPendingSessionSetup3 (char *session_id_index_val, char *theme_data_val)
+void LinkClass::setPendingSessionSetup3 (char *session_id_index_val, char const *theme_data_val)
 {
     char *buf, *data_ptr;
 

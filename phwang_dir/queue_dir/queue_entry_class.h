@@ -9,10 +9,7 @@
 class QueueEntryClass
 {
     friend class QueueClass;
-
-    inline static int theObjectCount = 0;
-    void incrementObjectCount(void);
-    void decrementObjectCount(void);
+    static int ObjectCount;
 
     char theObjectName[64];
     QueueEntryClass *next;

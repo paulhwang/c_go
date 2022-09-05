@@ -7,6 +7,8 @@
 #include "../../phwang_dir/phwang.h"
 #include "db_account_entry_class.h"
 
+int DbAccountEntryClass::ObjectCount = 0;
+
 DbAccountEntryClass::DbAccountEntryClass (void)
 {
     memset(this, 0, sizeof(*this));
