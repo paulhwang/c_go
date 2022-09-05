@@ -43,9 +43,9 @@ public:
     char const *objectName(void) {return "TpTransferClass";}
 
     /* callback */
-    void receiveThreadFunction(int socket_val);
-    void receiveThreadFunction2(void);
-    void transmitThreadFunction(int socket_val);
+    void *receiveThreadFunction(int socket_val);
+    void *receiveThreadFunction2(void);
+    void *transmitThreadFunction(int socket_val);
 
     int socket(void) {return this->theSocket;}
     int index(void) {return this->theIndex;}

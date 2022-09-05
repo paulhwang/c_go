@@ -9,22 +9,23 @@
 
 void *TestClassThreadFunction (void *fabric_object_val)
 {
-    ((TestClass *) fabric_object_val)->testThreadFunction();
+    return ((TestClass *) fabric_object_val)->testThreadFunction();
 }
 
 void TestClass::startTestThread (void)
 {
     this->debug(false, "startTestThread", "");
 
-    int r = pthread_create(&this->theTestThread, 0, TestClassThreadFunction, this);
+    int r = phwangPthreadCreate(&this->theTestThread, 0, TestClassThreadFunction, this);
     if (r) {
         this->logit("startTestThread", "fail");
         return;
     }
 }
 
-void TestClass::testThreadFunction (void)
+void *TestClass::testThreadFunction (void)
 {
     this->debug(false, "testThreadFunction", "");
     this->runTestCase1();
+    return 0;
 }

@@ -28,7 +28,7 @@ public:
     ~TestClass(void);
     char const *objectName(void) {return "TestClass";}
 
-    void testThreadFunction (void);
+    void *testThreadFunction(void);
     void transmitFunction(char *data_val);
 
     /* exports */

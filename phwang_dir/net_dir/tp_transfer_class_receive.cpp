@@ -13,7 +13,7 @@
 #include "../../phwang_dir/phwang.h"
 #include "tp_transfer_class.h"
 
-void TpTransferClass::receiveThreadFunction(int socket_val)
+void *TpTransferClass::receiveThreadFunction(int socket_val)
 {
     char const *func_name_ = "receiveThreadFunction";
 
@@ -46,6 +46,7 @@ void TpTransferClass::receiveThreadFunction(int socket_val)
             usleep(10);
         }
     }
+    return 0;
 }
 
 void *tpTranferReceiveThreadFunction (void *data_val)
@@ -54,7 +55,7 @@ void *tpTranferReceiveThreadFunction (void *data_val)
     TpTransferClass *tp_transfer_object = ((tp_transfer_thread_parameter *) data_val)->tp_transfer_object;
     phwangFree(data_val, "tpTranferReceiveThreadFunction");
 
-    tp_transfer_object->receiveThreadFunction(socket);
+    return tp_transfer_object->receiveThreadFunction(socket);
 }
 
 void TpTransferClass::startReceiveThread (int socket_val)
@@ -76,7 +77,7 @@ void TpTransferClass::startReceiveThread (int socket_val)
 /**************************************************************************************************************/
 /**************************************************************************************************************/
 
-void TpTransferClass::receiveThreadFunction2 (void)
+void *TpTransferClass::receiveThreadFunction2 (void)
 {
     char const *func_name_ = "receiveThreadFunction2";
 
@@ -121,18 +122,19 @@ void TpTransferClass::receiveThreadFunction2 (void)
             this->receiveCallback()(this, this->theReceiveObject, data);
         }
     }
+    return 0;
 }
 
 void *tpTranferReceiveThreadFunction2 (void *this_val)
 {
-    ((TpTransferClass *)this_val)->receiveThreadFunction2();
+    return ((TpTransferClass *)this_val)->receiveThreadFunction2();
 }
 
 void TpTransferClass::startReceiveThread2 (void)
 {
     this->debug(false, "startReceiveThread2", "create receiveThread");
 
-    int r = pthread_create(&this->theReceiveThread2, NULL, tpTranferReceiveThreadFunction2, this);
+    int r = phwangPthreadCreate(&this->theReceiveThread2, NULL, tpTranferReceiveThreadFunction2, this);
     if (r) {
         printf("Error - pthread_create() return code: %d\n", r);
         return;

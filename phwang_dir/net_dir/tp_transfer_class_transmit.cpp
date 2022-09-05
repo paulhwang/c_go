@@ -16,7 +16,7 @@ void TpTransferClass::exportTransmitData (void *data_val)
     phwangEnqueue(this->theTransmitQueue, data_val);
 }
 
-void TpTransferClass::transmitThreadFunction(int socket_val)
+void *TpTransferClass::transmitThreadFunction(int socket_val)
 {
     char const *func_name_ = "transmitThreadFunction";
 
@@ -62,6 +62,7 @@ void TpTransferClass::transmitThreadFunction(int socket_val)
             phwangFree(data, "TpTransferClass::transmitThreadFunction");
         }
     }
+    return 0;
 }
 
 void *tpTransferTransmitThreadFunction (void *data_val)
@@ -70,7 +71,7 @@ void *tpTransferTransmitThreadFunction (void *data_val)
     TpTransferClass *tp_transfer_object = ((tp_transfer_thread_parameter *) data_val)->tp_transfer_object;
     phwangFree(data_val, "tpTransferTransmitThreadFunction");
 
-    tp_transfer_object->transmitThreadFunction(socket);
+    return tp_transfer_object->transmitThreadFunction(socket);
 }
 
 void TpTransferClass::startTransmitThread (int socket_val)
@@ -81,7 +82,7 @@ void TpTransferClass::startTransmitThread (int socket_val)
 
     this->debug(false, "startTransmitThread", "");
 
-    int r = pthread_create(&this->theTransmitThread, 0, tpTransferTransmitThreadFunction, data);
+    int r = phwangPthreadCreate(&this->theTransmitThread, 0, tpTransferTransmitThreadFunction, data);
     if (r) {
         printf("Error - startTransmitThread() return code: %d\n", r);
         return;
