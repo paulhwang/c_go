@@ -16,6 +16,11 @@ ThreadRootClass::~ThreadRootClass(void)
 {
 }
 
+int ThreadRootClass::pthreadCreate(pthread_t *thread, const pthread_attr_t *attr, void *(*start_routine)(void *), void *arg)
+{
+    return pthread_create(thread, attr, start_routine, arg);
+}
+
 void ThreadRootClass::logit (char const *str0_val, char const *str1_val)
 {
     char s[LOGIT_BUF_SIZE];

@@ -16,10 +16,7 @@
 void phwangPhwangPhwang(void);
 
 /* pthread */
-int phwangPthreadCreate(pthread_t *thread,
-                          const pthread_attr_t *attr,
-                          void *(*start_routine)(void *),
-                          void *arg);
+int phwangPthreadCreate(pthread_t *thread, const pthread_attr_t *attr, void *(*start_routine)(void *), void *arg);
 
 /* logit */
 void phwangDebug(int on_off_val, char const *str0_val, char const *str1_val);

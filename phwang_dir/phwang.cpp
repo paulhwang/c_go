@@ -13,6 +13,7 @@
 #include "object_dir/object_class.h"
 #include "queue_dir/queue_root_class.h"
 #include "net_dir/net_root_class.h"
+#include "thread_dir/thread_root_class.h"
 #include "list_mgr_dir/list_mgr_root_class.h"
 #include "array_mgr_dir/array_mgr_root_class.h"
 
@@ -31,7 +32,7 @@ int phwangPthreadCreate(pthread_t *thread,
                           void *(*start_routine)(void *),
                           void *arg)
 {
-    return pthread_create(thread, attr, start_routine, arg);
+    return thePhwangObject->threadRootObject()->pthreadCreate(thread, attr, start_routine, arg);
 }
 
 /* object count */

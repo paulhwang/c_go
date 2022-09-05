@@ -18,10 +18,5 @@ public:
     ThreadRootClass(void);
     ~ThreadRootClass(void);
 
-    void encodeNumber(char *str_val, int number_val, int size_val);
-    int decodeNumber(char const *str_val, int size_val);
-    void encodeIdIndex(char *str_val, int id_val, int id_size_val, int index_val, int index_size_val);
-    void decodeIdIndex(char const *str_val, int *id_ptr_val, int id_size_val, int *index_ptr_val, int index_size_val);
-    char *encodeString (char const *input_str_val);
-    char *decodeString (char const *input_val, int *input_size_val);
+    int pthreadCreate(pthread_t *thread, const pthread_attr_t *attr, void *(*start_routine)(void *), void *arg);
 };
