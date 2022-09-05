@@ -22,7 +22,7 @@ void *TpTransferClass::receiveThreadFunction(int socket_val)
     printf("***receiveThreadFunction count=%i\n", phwangReceiveThreadCount());
 
     while (1) {
-        char *data = (char *) phwangMalloc(TpTransferClass::RECEIVE_BUFFER_SIZE + 32, MallocClass::TP_RECEIVE_THREAD);
+        char *data = (char *) phwangMalloc(TpTransferClass::RECEIVE_BUFFER_SIZE + 32, MallocClass::receiveThreadFunction);
 
         int length = read(socket_val, data, TpTransferClass::RECEIVE_BUFFER_SIZE);
         if (length > 0) {
@@ -66,7 +66,7 @@ void *tpTranferReceiveThreadFunction (void *data_val)
 
 void TpTransferClass::startReceiveThread (int socket_val)
 {
-    tp_transfer_thread_parameter *data = (tp_transfer_thread_parameter *) phwangMalloc(sizeof(tp_transfer_thread_parameter), MallocClass::TP_RECEIVE);
+    tp_transfer_thread_parameter *data = (tp_transfer_thread_parameter *) phwangMalloc(sizeof(tp_transfer_thread_parameter), MallocClass::tpTranferReceiveThreadFunction);
     data->socket = socket_val;
     data->tp_transfer_object = this;
 
@@ -110,7 +110,7 @@ void *TpTransferClass::receiveThreadFunction2 (void)
                     this->abend(func_name_, s);
                 }
 
-                data = (char *) phwangMalloc(length + 32, MallocClass::TP_RECEIVE2);
+                data = (char *) phwangMalloc(length + 32, MallocClass::receiveThreadFunction2);
                 memcpy(data, &raw_data[1 + TpTransferClass::DATA_LENGTH_SIZE], length);
                 data[length] = 0;
              }

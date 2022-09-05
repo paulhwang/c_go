@@ -174,7 +174,7 @@ void DFabricClass::processMmwReadDataRequest (void *tp_transfer_object_val, char
 
     char *encoded_data = input_data_val;
     int data_size;
-    char *data = phwangDecodeString(encoded_data, &data_size);
+    char *data = phwangDecodeStringMalloc(encoded_data, &data_size);
 
     if (1) { /* debug */
         char buf[256];
@@ -233,15 +233,15 @@ void DFabricClass::processSignUpRequest (void *tp_transfer_object_val, char *dat
 
     char *encoded_account_name = data_val;
     int account_name_size;
-    char *account_name = phwangDecodeString(encoded_account_name, &account_name_size);
+    char *account_name = phwangDecodeStringMalloc(encoded_account_name, &account_name_size);
 
     char *encoded_password = encoded_account_name + account_name_size;
     int password_size;
-    char *password = phwangDecodeString(encoded_password, &password_size);
+    char *password = phwangDecodeStringMalloc(encoded_password, &password_size);
 
     char *encoded_email = encoded_password + password_size;
     int email_size;
-    char *email = phwangDecodeString(encoded_email, &email_size);
+    char *email = phwangDecodeStringMalloc(encoded_email, &email_size);
 
     if (1) { /* debug */
         char buf[256];
@@ -308,11 +308,11 @@ void DFabricClass::processSetupLinkRequest (void *tp_transfer_object_val, char *
 
     char *encoded_my_name = data_val;
     int my_name_size;
-    char *my_name = phwangDecodeString(encoded_my_name, &my_name_size);
+    char *my_name = phwangDecodeStringMalloc(encoded_my_name, &my_name_size);
 
     char *encoded_password = encoded_my_name + my_name_size;
     int password_size;
-    char *password = phwangDecodeString(encoded_password, &password_size);
+    char *password = phwangDecodeStringMalloc(encoded_password, &password_size);
 
     if (1) { /* debug */
         char buf[256];

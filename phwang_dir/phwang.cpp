@@ -120,9 +120,9 @@ char *phwangEncodeStringMalloc (char const *input_str_val) {
     return thePhwangObject->encodeObject()->encodeStringMalloc(input_str_val);
 }
 
-char *phwangDecodeString (char const *input_val, int *input_size_val)
+char *phwangDecodeStringMalloc (char const *input_val, int *input_size_val)
 {
-    return thePhwangObject->encodeObject()->decodeString(input_val, input_size_val);
+    return thePhwangObject->encodeObject()->decodeStringMalloc(input_val, input_size_val);
 }
 
 void phwangEncodeIdIndex (char *str_val, int id_val, int id_size_val, int index_val, int index_size_val)

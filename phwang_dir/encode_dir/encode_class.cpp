@@ -107,7 +107,7 @@ char *EncodeClass::encodeStringMalloc (char const *input_str_val) {
     return buf;
 }
 
-char *EncodeClass::decodeString (char const *input_val, int *input_size_val)
+char *EncodeClass::decodeStringMalloc (char const *input_val, int *input_size_val)
 {
     int length = 0;
     int head_size = 2;
@@ -138,7 +138,7 @@ char *EncodeClass::decodeString (char const *input_val, int *input_size_val)
             length = length * 10 + *input_val - 48;
             input_val++;
             
-            buf = (char *) phwangMalloc(length + 1, MallocClass::encodeStringMalloc);
+            buf = (char *) phwangMalloc(length + 1, MallocClass::decodeStringMalloc);
             memcpy(buf, input_val, length);
             buf[length] = 0;
             *input_size_val = length + head_size;
