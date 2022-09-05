@@ -42,7 +42,7 @@ public:
     NameListClass *nameListObject(void) {return this->theNameListObject;}
     void *linkListMgrObject(void) {return this->theLinkListMgrObject;}
 
-    void watchDogThreadFunction(void);
+    void *watchDogThreadFunction(void);
 
     LinkClass *mallocLink(char const *my_name_val);
     void freeLink(LinkClass *link_object_val);

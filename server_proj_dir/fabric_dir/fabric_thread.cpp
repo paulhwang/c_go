@@ -9,7 +9,7 @@
 
 void *FabricClassWatchDogThreadFunction (void *fabric_object_val)
 {
-    ((FabricClass *) fabric_object_val)->watchDogThreadFunction();
+    return ((FabricClass *) fabric_object_val)->watchDogThreadFunction();
 }
 
 void FabricClass::startWatchDogThread (void)
@@ -23,11 +23,12 @@ void FabricClass::startWatchDogThread (void)
     }
 }
 
-void FabricClass::watchDogThreadFunction (void)
+void *FabricClass::watchDogThreadFunction (void)
 {
     this->debug(false, "watchDogThreadFunction", "");
     while (1) {
         this->linkKeepAliveExamine();
         sleep(1);
     }
+    return 0;
 }
