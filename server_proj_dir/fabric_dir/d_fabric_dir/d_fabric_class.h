@@ -16,8 +16,7 @@ class DbAccountClass;
 #define FABRIC_SERVER_TIME_STAMP_LENGTH_SIZE 8
 
 class DFabricClass {
-    inline static char *ObjectName = "DFabricClass";
-    inline static int ObjectCount = 0;
+    char const *objectName(void) {return "DFabricClass";}
 
     FabricClass *theFabricObject;
     void *theTpServerObject;

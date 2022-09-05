@@ -71,13 +71,13 @@ void *QueueRootClass::dequeue (void *queue_val)
 void QueueRootClass::logit (char const *str0_val, char const *str1_val)
 {
     char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", ObjectName, str0_val);
+    sprintf(s, "%s::%s", this->objectName(), str0_val);
     phwangLogit(s, str1_val);
 }
 
 void QueueRootClass::abend (char const *str0_val, char const *str1_val)
 {
     char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", ObjectName, str0_val);
+    sprintf(s, "%s::%s", this->objectName(), str0_val);
     phwangAbend(s, str1_val);
 }

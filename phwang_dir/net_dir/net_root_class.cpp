@@ -106,13 +106,13 @@ void NetRootClass::tpTransmit (void *tp_transfer_object_val, char *data_val)
 void NetRootClass::logit (char const *str0_val, char const *str1_val)
 {
     char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", ObjectName, str0_val);
+    sprintf(s, "%s::%s", this->objectName(), str0_val);
     phwangLogit(s, str1_val);
 }
 
 void NetRootClass::abend (char const *str0_val, char const *str1_val)
 {
     char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", ObjectName, str0_val);
+    sprintf(s, "%s::%s", this->objectName(), str0_val);
     phwangAbend(s, str1_val);
 }

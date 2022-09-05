@@ -45,7 +45,7 @@ void TestClass::incrementAjaxId(int *ajax_id_ptr_val)
     }
 }
 
-char *TestClass::createName(int number_val, char *name_buf_val)
+void TestClass::createName(int number_val, char *name_buf_val)
 {
     char *data_ptr;
     data_ptr = name_buf_val;

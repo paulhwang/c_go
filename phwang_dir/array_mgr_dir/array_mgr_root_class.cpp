@@ -86,13 +86,13 @@ void *ArrayMgrRootClass::arrayMgrGetArrayTable(void *array_mgr_val, int *array_s
 void ArrayMgrRootClass::logit (char const *str0_val, char const *str1_val)
 {
     char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", ObjectName, str0_val);
+    sprintf(s, "%s::%s", this->objectName(), str0_val);
     phwangLogit(s, str1_val);
 }
 
 void ArrayMgrRootClass::abend (char const *str0_val, char const *str1_val)
 {
     char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", ObjectName, str0_val);
+    sprintf(s, "%s::%s", this->objectName(), str0_val);
     phwangAbend(s, str1_val);
 }

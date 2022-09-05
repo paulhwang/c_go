@@ -42,18 +42,18 @@ void AbendClass::phwangAbend3 (char const *str0_val, char const *str1_val, char 
 
 void AbendClass::logit (char const *str0_val, char const *str1_val) {
     char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", ObjectName, str0_val);
+    sprintf(s, "%s::%s", this->objectName(), str0_val);
     this->phwangLogit(s, str1_val);
 }
 
 void AbendClass::abend (char const *str0_val, char const *str1_val) {
     char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", ObjectName, str0_val);
+    sprintf(s, "%s::%s", this->objectName(), str0_val);
     this->phwangAbend(s, str1_val);
 }
 
 void AbendClass::abend3 (char const *str0_val, char const *str1_val, char const *str2_val) {
     char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", ObjectName, str0_val);
+    sprintf(s, "%s::%s", this->objectName(), str0_val);
     this->phwangAbend3(s, str1_val, str2_val);
 }

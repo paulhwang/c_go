@@ -18,7 +18,7 @@ class ListMgrRootClass;
 class ArrayMgrRootClass;
 
 class PhwangClass {
-    inline static char *ObjectName = "PhwangClass";
+    char const *objectName(void) {return "PhwangClass";}
 
     ObjectClass *theObjectObject;
     AbendClass *theAbendObject;
