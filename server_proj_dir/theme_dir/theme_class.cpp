@@ -10,9 +10,11 @@
 #include "d_theme_dir/d_theme_class.h"
 #include "room_class.h"
 
-ThemeClass::ThemeClass (void)
+ThemeClass::ThemeClass (int debug_code_val)
 {
     memset(this, 0, sizeof(ThemeClass));
+    this->theDebugCode = debug_code_val;
+    
     this->theUThemeObject = new UThemeClass(this);
     this->theDThemeObject = new DThemeClass(this);
     this->theRoomListMgrObject = phwangListMgrMalloc("ROOM", ROOM_MGR_PROTOCOL_ROOM_ID_SIZE, ROOM_MGR_PROTOCOL_ROOM_INDEX_SIZE, 700);

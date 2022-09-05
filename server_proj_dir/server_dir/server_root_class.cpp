@@ -13,9 +13,9 @@
 ServerRootClass::ServerRootClass (int debug_code_val)
 {
     phwangPhwangPhwang(debug_code_val);
-    this->theFabricObject = new FabricClass();
-    this->theGoThemeObject = new ThemeClass();
-    this->theEngineObject = new EngineClass();
+    this->theFabricObject = new FabricClass(debug_code_val);
+    this->theGoThemeObject = new ThemeClass(debug_code_val);
+    this->theEngineObject = new EngineClass(debug_code_val);
 }
 
 ServerRootClass::~ServerRootClass (void)

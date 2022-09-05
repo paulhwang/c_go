@@ -16,6 +16,9 @@ class SessionClass;
 class NameListClass;
 
 class FabricClass {
+    char const *objectName(void) {return "FabricClass";}
+    int theDebugCode;
+    
     DbClass *theDbObject;
     UFabricClass *theUFabricObject;
     DFabricClass *theDFabricObject;
@@ -32,9 +35,8 @@ class FabricClass {
     void abend(char const *str0_val, char const *str1_val);
 
 public:
-    FabricClass(void);
+    FabricClass(int debug_code_val);
     ~FabricClass(void);
-    char const *objectName(void) {return "FabricClass";}
 
     DbClass *dbObject(void) {return this->theDbObject;}
     UFabricClass *uFabricObject(void) {return this->theUFabricObject;}

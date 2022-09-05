@@ -15,6 +15,8 @@ class DThemeClass;
 
 class ThemeClass {
 #define GAME_SERVER_ROOM_ARRAY_SIZE 32
+    char const* objectName(void) {return "ThemeClass";}
+    int theDebugCode;
 
     UThemeClass *theUThemeObject;
     DThemeClass *theDThemeObject;
@@ -28,9 +30,8 @@ class ThemeClass {
     void abend(char const* str0_val, char const* str1_val);
 
 public:
-    ThemeClass(void);
+    ThemeClass(int debug_code_val);
     ~ThemeClass(void);
-    char const* objectName(void) {return "ThemeClass";}
 
     UThemeClass *uThemeObject(void) {return this->theUThemeObject;}
     DThemeClass *dThemeObject(void) {return this->theDThemeObject;}

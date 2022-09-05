@@ -14,9 +14,11 @@
 #include "name_list_class.h"
 #include "../db_dir/db_class.h"
 
-FabricClass::FabricClass (void)
+FabricClass::FabricClass (int debug_code_val)
 {
     memset(this, 0, sizeof(*this));
+    this->theDebugCode = debug_code_val;
+    
     this->theDbObject = new DbClass(this);
     this->theUFabricObject = new UFabricClass(this);
     this->theDFabricObject = new DFabricClass(this);

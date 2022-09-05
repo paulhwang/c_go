@@ -11,6 +11,9 @@ class BaseMgrClass;
 class GoBaseClass;
 
 class EngineClass {
+    char const *objectName(void) {return "EngineClass";}
+    int theDebugCode;
+    
     DEngineClass *theDEngineObject;
     BaseMgrClass *theGoBaseMgrObject;
     void *theGoBaseListMgrObject;
@@ -20,9 +23,8 @@ class EngineClass {
     void abend(char const *str0_val, char const *str1_val);
 
 public:
-    EngineClass(void);
+    EngineClass(int debug_code_val);
     ~EngineClass(void);
-    char const *objectName(void) {return "EngineClass";}
 
     DEngineClass *dEngineObject(void) {return this->theDEngineObject;}
     BaseMgrClass *goBaseMgrObject(void) {return this->theGoBaseMgrObject;}

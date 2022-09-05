@@ -20,6 +20,7 @@ class ArrayMgrRootClass;
 
 class PhwangClass {
     char const *objectName(void) {return "PhwangClass";}
+    int theDebugCode;
 
     ObjectClass *theObjectObject;
     AbendClass *theAbendObject;
