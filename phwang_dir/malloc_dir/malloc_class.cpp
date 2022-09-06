@@ -5,6 +5,7 @@
 */
 
 #include "../phwang.h"
+#include "../abend_dir/abend_class.h"
 #include "malloc_class.h"
 
 MallocClass::MallocClass (int debug_code_val)
@@ -132,16 +133,23 @@ char *MallocClass::mallocConstStrBuf (char const * str_val)
     return buf;
 }
 
-void MallocClass::logit (char const *str0_val, char const *str1_val)
+void MallocClass::debug (int debug_on_val, char const *func_name_val, char const *str1_val)
 {
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
+    if (debug_on_val) {
+        char s[AbendClass::LogitBufSize];
+        sprintf(s, "%s::%s", this->objectName(), func_name_val);
+        phwangDebug(debug_on_val, s, str1_val);
+    }
+}
+
+void MallocClass::logit (char const *func_name_val, char const *str1_val) {
+    char s[AbendClass::LogitBufSize];
+    sprintf(s, "%s::%s", this->objectName(), func_name_val);
     phwangLogit(s, str1_val);
 }
 
-void MallocClass::abend (char const *str0_val, char const *str1_val)
-{
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
+void MallocClass::abend (char const *func_name_val, char const *str1_val) {
+    char s[AbendClass::LogitBufSize];
+    sprintf(s, "%s::%s", this->objectName(), func_name_val);
     phwangAbend(s, str1_val);
 }

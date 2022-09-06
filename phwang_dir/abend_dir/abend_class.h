@@ -8,7 +8,6 @@
 
 class AbendClass
 {
-    int const static LogitBufSize = 512;
     char const *objectName(void) {return "AbendClass";}
     int theDebugCode;
 
@@ -19,6 +18,7 @@ class AbendClass
 public:
     AbendClass(int debug_code_val);
     ~AbendClass(void);
+    int const static LogitBufSize = 512;
 
     void phwangDebug(int on_off_val, char const *func_name_val, char const *str1_val);
     void phwangDebug2(int on_off_val, char const *func_name_val, char const *str1_val, char const *str2_val);
