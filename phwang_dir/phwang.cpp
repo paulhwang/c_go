@@ -95,9 +95,9 @@ void phwangAbend2 (char const *func_name_val, char const *str1_val, char const *
     thePhwangObject->abendObject()->pAbend2(func_name_val, str1_val, str2_val);
 }
 
-void phwangComposeFuncName(char *buf_val, char const *func_name_val)
+void phwangComposeFuncName(char *buf_val, char const *object_name_val, char const *func_name_val)
 {
-    thePhwangObject->abendObject()->composeFuncName(buf_val, func_name_val);
+    thePhwangObject->abendObject()->composeFuncName(buf_val, object_name_val, func_name_val);
 }
 
 /* malloc and free */

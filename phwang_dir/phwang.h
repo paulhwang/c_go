@@ -34,7 +34,7 @@ void phwangLogitInt2(char const *func_name_val, char const *str1_val, int int1_v
 void phwangAbend(char const *func_name_val, char const *str1_val);
 void phwangAbend2(char const *func_name_val, char const *str1_val, char const *str2_val);
 
-void phwangComposeFuncName(char *buf_val, char const *func_name_val);
+void phwangComposeFuncName(char *buf_val, char const *object_name_val, char const *func_name_val);
 
 /* malloc and free */
 void *phwangMalloc(int size_val, int who_val);
