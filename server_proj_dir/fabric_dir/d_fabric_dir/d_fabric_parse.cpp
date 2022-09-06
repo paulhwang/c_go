@@ -30,10 +30,8 @@ void DFabricClass::exportedParseFunction (void *tp_transfer_object_val, char *da
     LinkClass *link;
     SessionClass *session;
 
-    if (1) { /* debug */
-        if (data_val[1] != FECommandClass::GET_LINK_DATA_COMMAND) {
-            this->logit("exportedParseFunction", data_val);
-        }
+    if (data_val[1] != FECommandClass::GET_LINK_DATA_COMMAND) {
+        this->debug(true, "exportedParseFunction", data_val);
     }
 
     char type = data_val[0];
@@ -285,11 +283,11 @@ void DFabricClass::processSignUpRequest (void *tp_transfer_object_val, char *dat
 #define D_FABRIC_CLASS_PROCESSS_SIGN_UP_DOWN_LINK_DATA_SIZE (1 + FECommandClass::AJAX_ID_SIZE + ListMgrProtocolClass::LINK_ID_INDEX_SIZE + 1)
 void DFabricClass::sendSignUpResponce (void *tp_transfer_object_val, char const *ajax_id_val, char const *result_val)
 {
-    this->debug(true, "sendSignUpResponce", result_val);
+    this->debug(false, "sendSignUpResponce", result_val);
 
     char *data_ptr;
     char *downlink_data = data_ptr = (char *) phwangMalloc(D_FABRIC_CLASS_PROCESSS_SIGN_UP_DOWN_LINK_DATA_SIZE + strlen(result_val), MallocClass::SIGN_UP);
-    *data_ptr++ = FECommandClass::SETUP_LINK_RESPONSE;
+    *data_ptr++ = FECommandClass::SIGN_UP_RESPONSE;
     memcpy(data_ptr, ajax_id_val, FECommandClass::AJAX_ID_SIZE);
     data_ptr += FECommandClass::AJAX_ID_SIZE;
     strcpy(data_ptr, result_val);
@@ -299,7 +297,7 @@ void DFabricClass::sendSignUpResponce (void *tp_transfer_object_val, char const 
 #define D_FABRIC_CLASS_FAKE_LINK_ID_INDEX "99990000"
 void DFabricClass::processSetupLinkRequest (void *tp_transfer_object_val, char *data_val, char const *ajax_id_val)
 {
-    this->debug(true, "processSetupLinkRequest", data_val);
+    this->debug(false, "processSetupLinkRequest", data_val);
 
     char *encoded_my_name = data_val;
     int my_name_size;
@@ -473,7 +471,7 @@ void DFabricClass::processGetNameListRequest (void *tp_transfer_object_val, char
     char *name_list_tag_val = data_val;
     char *end_val = name_list_tag_val + 3;
 
-    int name_list_tag = phwangDecodeNumber(name_list_tag_val, NAME_LIST_CLASS_NAME_LIST_TAG_SIZE);
+    int name_list_tag = phwangDecodeNumber(name_list_tag_val, FECommandClass::NAME_LIST_TAG_SIZE);
     char *name_list = this->theFabricObject->nameListObject()->getNameList(name_list_tag);
 
     char *data_ptr;
