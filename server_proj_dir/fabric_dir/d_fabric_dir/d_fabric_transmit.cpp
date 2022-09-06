@@ -5,7 +5,7 @@
 */
 
 #include "../../../phwang_dir/phwang.h"
-#include "../../protocol_dir/web_fabric_protocol.h"
+#include "../../protocol_dir/fe_command_class.h"
 #include "d_fabric_class.h"
 
 void DFabricClass::transmitFunction (void *tp_transfer_object_val, char *data_val)

@@ -11,7 +11,7 @@
 #include "../../protocol_dir/session_mgr_protocol.h"
 #include "../../protocol_dir/group_mgr_protocol.h"
 #include "../../protocol_dir/room_mgr_protocol.h"
-#include "../../protocol_dir/web_fabric_protocol.h"
+#include "../../protocol_dir/fe_command_class.h"
 #include "d_fabric_class.h"
 #include "../fabric_class.h"
 #include "../u_fabric_dir/u_fabric_class.h"

@@ -7,7 +7,6 @@
 #include "../../phwang_dir/phwang.h"
 #include "../../phwang_dir/malloc_dir/malloc_class.h"
 #include "../protocol_dir/net_port_protocol.h"
-#include "../protocol_dir/web_fabric_protocol.h"
 #include "test_class.h"
 
 TestClass::TestClass(void)
