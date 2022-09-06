@@ -90,7 +90,7 @@ void AbendClass::composeFuncName(char *buf_val, char const *object_name_val, cha
 
 void AbendClass::composeFuncNameExtra(char *buf_val, char const *object_name_val, char const *func_name_val, char const *extra_info_val)
 {
-    sprintf(buf_val, "%s::%s(%s)", object_name_val, func_name_val, extra_info_val);
+    sprintf(buf_val, "%s::%s[%s]", object_name_val, func_name_val, extra_info_val);
 }
 
 void AbendClass::debug (int debug_on_val, char const *func_name_val, char const *str1_val)
