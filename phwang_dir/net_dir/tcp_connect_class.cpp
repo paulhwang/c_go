@@ -37,8 +37,6 @@ void *TcpConnectClass::tcpConnect (
     struct sockaddr_in serv_addr;
     char buffer[1024] = {0};
 
-    this->debug(true, "tcpConnect", "starts");
-
     if ((s = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
         phwangLogit(who_val, "tpConnect() open socket error");
         return 0;
@@ -54,7 +52,7 @@ void *TcpConnectClass::tcpConnect (
         return 0;
     }
   
-    this->debug(true, "tcpConnect", "connecing");
+    this->debug(true, "tcpConnect", "connecting");
 
     int retry_count = PHWANG_TP_CONNECT_RETRY_MAX_COUNT;
     while (retry_count) {

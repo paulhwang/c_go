@@ -13,8 +13,11 @@
 ServerRootClass::ServerRootClass (int debug_code_val)
 {
     phwangPhwangPhwang(debug_code_val);
+    sleep(1);
     this->theFabricObject = new FabricClass(debug_code_val);
+    sleep(3);
     this->theGoThemeObject = new ThemeClass(debug_code_val);
+    sleep(3);
     this->theEngineObject = new EngineClass(debug_code_val);
 }
 
