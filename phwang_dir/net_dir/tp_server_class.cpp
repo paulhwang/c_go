@@ -14,6 +14,7 @@
 #include "tp_phwang_logo.h"
 #include "tp_transfer_class.h"
 #include "../../phwang_dir/phwang.h"
+#include "../../phwang_dir/abend_dir/abend_class.h"
 #include "tp_server_class.h"
 
 #define MAXHOSTNAME 32
@@ -158,18 +159,76 @@ void *TpServerClass::serverThreadFunction (void *data_val)
     return 0;
 }
 
-
-void TpServerClass::logit (char const *str0_val, char const *str1_val)
+void TpServerClass::debug (int debug_on_val, char const *func_name_val, char const *str1_val)
 {
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
+    if (debug_on_val) {
+        char s[AbendClass::LogitFuncNameBufSize];
+        phwangComposeFuncName(s, func_name_val);
+        phwangDebug(debug_on_val, s, str1_val);
+    }
+}
+
+void TpServerClass::debug2 (int debug_on_val, char const *func_name_val, char const *str1_val, char const *str2_val)
+{
+    if (debug_on_val) {
+        char s[AbendClass::LogitFuncNameBufSize];
+        phwangComposeFuncName(s, func_name_val);
+        phwangDebug2(debug_on_val, s, str1_val, str2_val);
+    }
+}
+
+void TpServerClass::debugInt(int debug_on_val, char const *func_name_val, char const *str1_val, int int1_val)
+{
+    if (debug_on_val) {
+        char s[AbendClass::LogitFuncNameBufSize];
+        phwangComposeFuncName(s, func_name_val);
+        phwangDebugInt(debug_on_val, s, str1_val, int1_val);
+    }
+}
+
+void TpServerClass::debugInt2(int debug_on_val, char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val)
+{
+    if (debug_on_val) {
+        char s[AbendClass::LogitFuncNameBufSize];
+        phwangComposeFuncName(s, func_name_val);
+        phwangDebugInt2(debug_on_val, s, str1_val, int1_val, str2_val, int2_val);
+    }
+}
+
+void TpServerClass::logit (char const *func_name_val, char const *str1_val) {
+    char s[AbendClass::LogitFuncNameBufSize];
+    phwangComposeFuncName(s, func_name_val);
     phwangLogit(s, str1_val);
 }
 
-void TpServerClass::abend (char const *str0_val, char const *str1_val)
+void TpServerClass::logit2 (char const *func_name_val, char const *str1_val, char const *str2_val) {
+    char s[AbendClass::LogitFuncNameBufSize];
+    phwangComposeFuncName(s, func_name_val);
+    phwangLogit2(s, str1_val, str2_val);
+}
+
+void TpServerClass::logitInt(char const *func_name_val, char const *str1_val, int int1_val)
 {
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
+    char s[AbendClass::LogitFuncNameBufSize];
+    phwangComposeFuncName(s, func_name_val);
+    phwangLogitInt(s, str1_val, int1_val);
+}
+
+void TpServerClass::logitInt2(char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val)
+{
+    char s[AbendClass::LogitFuncNameBufSize];
+    phwangComposeFuncName(s, func_name_val);
+    phwangLogitInt2(s, str1_val, int1_val, str2_val, int2_val);
+}
+
+void TpServerClass::abend (char const *func_name_val, char const *str1_val) {
+    char s[AbendClass::LogitFuncNameBufSize];
+    phwangComposeFuncName(s, func_name_val);
     phwangAbend(s, str1_val);
 }
 
+void TpServerClass::abend2 (char const *func_name_val, char const *str1_val, char const *str2_val) {
+    char s[AbendClass::LogitFuncNameBufSize];
+    phwangComposeFuncName(s, func_name_val);
+    phwangAbend2(s, str1_val, str2_val);
+}
