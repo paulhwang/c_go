@@ -86,7 +86,7 @@ void AbendClass::pAbend2 (char const *func_name_val, char const *str1_val, char 
 void AbendClass::debug (int debug_on_val, char const *func_name_val, char const *str1_val)
 {
     if (debug_on_val) {
-        char s[AbendClass::LogitBufSize];
+        char s[AbendClass::LogitFuncNameBufSize];
         sprintf(s, "%s::%s", this->objectName(), func_name_val);
         phwangDebug(debug_on_val, s, str1_val);
     }
@@ -95,16 +95,21 @@ void AbendClass::debug (int debug_on_val, char const *func_name_val, char const 
 void AbendClass::debug2 (int debug_on_val, char const *func_name_val, char const *str1_val, char const *str2_val)
 {
     if (debug_on_val) {
-        char s[AbendClass::LogitBufSize];
+        char s[AbendClass::LogitFuncNameBufSize];
         sprintf(s, "%s::%s", this->objectName(), func_name_val);
         phwangDebug2(debug_on_val, s, str1_val, str2_val);
     }
 }
 
+void AbendClass::composeFuncName(char *buf_val, char *func_name_val)
+{
+    sprintf(buf_val, "%s::%s", this->objectName(), func_name_val);
+}
+
 void AbendClass::debugInt(int debug_on_val, char const *func_name_val, char const *str1_val, int int1_val)
 {
     if (debug_on_val) {
-        char s[AbendClass::LogitBufSize];
+        char s[AbendClass::LogitFuncNameBufSize];
         sprintf(s, "%s::%s", this->objectName(), func_name_val);
         phwangDebugInt(debug_on_val, s, str1_val, int1_val);
     }
@@ -113,46 +118,46 @@ void AbendClass::debugInt(int debug_on_val, char const *func_name_val, char cons
 void AbendClass::debugInt2(int debug_on_val, char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val)
 {
     if (debug_on_val) {
-        char s[AbendClass::LogitBufSize];
+        char s[AbendClass::LogitFuncNameBufSize];
         sprintf(s, "%s::%s", this->objectName(), func_name_val);
         phwangDebugInt2(debug_on_val, s, str1_val, int1_val, str2_val, int2_val);
     }
 }
 
 void AbendClass::logit (char const *func_name_val, char const *str1_val) {
-    char s[AbendClass::LogitBufSize];
+    char s[AbendClass::LogitFuncNameBufSize];
     sprintf(s, "%s::%s", this->objectName(), func_name_val);
     phwangLogit(s, str1_val);
 }
 
 void AbendClass::logit2 (char const *func_name_val, char const *str1_val, char const *str2_val) {
-    char s[AbendClass::LogitBufSize];
+    char s[AbendClass::LogitFuncNameBufSize];
     sprintf(s, "%s::%s", this->objectName(), func_name_val);
     phwangLogit2(s, str1_val, str2_val);
 }
 
 void AbendClass::logitInt(char const *func_name_val, char const *str1_val, int int1_val)
 {
-    char s[AbendClass::LogitBufSize];
+    char s[AbendClass::LogitFuncNameBufSize];
     sprintf(s, "%s::%s", this->objectName(), func_name_val);
     phwangLogitInt(s, str1_val, int1_val);
 }
 
 void AbendClass::logitInt2(char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val)
 {
-    char s[AbendClass::LogitBufSize];
+    char s[AbendClass::LogitFuncNameBufSize];
     sprintf(s, "%s::%s", this->objectName(), func_name_val);
     phwangLogitInt2(s, str1_val, int1_val, str2_val, int2_val);
 }
 
 void AbendClass::abend (char const *func_name_val, char const *str1_val) {
-    char s[AbendClass::LogitBufSize];
+    char s[AbendClass::LogitFuncNameBufSize];
     sprintf(s, "%s::%s", this->objectName(), func_name_val);
     phwangAbend(s, str1_val);
 }
 
 void AbendClass::abend2 (char const *func_name_val, char const *str1_val, char const *str2_val) {
-    char s[AbendClass::LogitBufSize];
+    char s[AbendClass::LogitFuncNameBufSize];
     sprintf(s, "%s::%s", this->objectName(), func_name_val);
     phwangAbend2(s, str1_val, str2_val);
 }

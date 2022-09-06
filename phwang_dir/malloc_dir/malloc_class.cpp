@@ -132,7 +132,7 @@ char *MallocClass::mallocConstStrBuf (char const * str_val)
 void MallocClass::debug (int debug_on_val, char const *func_name_val, char const *str1_val)
 {
     if (debug_on_val) {
-        char s[AbendClass::LogitBufSize];
+        char s[AbendClass::LogitFuncNameBufSize];
         sprintf(s, "%s::%s", this->objectName(), func_name_val);
         phwangDebug(debug_on_val, s, str1_val);
     }
@@ -141,7 +141,7 @@ void MallocClass::debug (int debug_on_val, char const *func_name_val, char const
 void MallocClass::debug2 (int debug_on_val, char const *func_name_val, char const *str1_val, char const *str2_val)
 {
     if (debug_on_val) {
-        char s[AbendClass::LogitBufSize];
+        char s[AbendClass::LogitFuncNameBufSize];
         sprintf(s, "%s::%s", this->objectName(), func_name_val);
         phwangDebug2(debug_on_val, s, str1_val, str2_val);
     }
@@ -150,7 +150,7 @@ void MallocClass::debug2 (int debug_on_val, char const *func_name_val, char cons
 void MallocClass::debugInt(int debug_on_val, char const *func_name_val, char const *str1_val, int int1_val)
 {
     if (debug_on_val) {
-        char s[AbendClass::LogitBufSize];
+        char s[AbendClass::LogitFuncNameBufSize];
         sprintf(s, "%s::%s", this->objectName(), func_name_val);
         phwangDebugInt(debug_on_val, s, str1_val, int1_val);
     }
@@ -159,46 +159,46 @@ void MallocClass::debugInt(int debug_on_val, char const *func_name_val, char con
 void MallocClass::debugInt2(int debug_on_val, char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val)
 {
     if (debug_on_val) {
-        char s[AbendClass::LogitBufSize];
+        char s[AbendClass::LogitFuncNameBufSize];
         sprintf(s, "%s::%s", this->objectName(), func_name_val);
         phwangDebugInt2(debug_on_val, s, str1_val, int1_val, str2_val, int2_val);
     }
 }
 
 void MallocClass::logit (char const *func_name_val, char const *str1_val) {
-    char s[AbendClass::LogitBufSize];
+    char s[AbendClass::LogitFuncNameBufSize];
     sprintf(s, "%s::%s", this->objectName(), func_name_val);
     phwangLogit(s, str1_val);
 }
 
 void MallocClass::logit2 (char const *func_name_val, char const *str1_val, char const *str2_val) {
-    char s[AbendClass::LogitBufSize];
+    char s[AbendClass::LogitFuncNameBufSize];
     sprintf(s, "%s::%s", this->objectName(), func_name_val);
     phwangLogit2(s, str1_val, str2_val);
 }
 
 void MallocClass::logitInt(char const *func_name_val, char const *str1_val, int int1_val)
 {
-    char s[AbendClass::LogitBufSize];
+    char s[AbendClass::LogitFuncNameBufSize];
     sprintf(s, "%s::%s", this->objectName(), func_name_val);
     phwangLogitInt(s, str1_val, int1_val);
 }
 
 void MallocClass::logitInt2(char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val)
 {
-    char s[AbendClass::LogitBufSize];
+    char s[AbendClass::LogitFuncNameBufSize];
     sprintf(s, "%s::%s", this->objectName(), func_name_val);
     phwangLogitInt2(s, str1_val, int1_val, str2_val, int2_val);
 }
 
 void MallocClass::abend (char const *func_name_val, char const *str1_val) {
-    char s[AbendClass::LogitBufSize];
+    char s[AbendClass::LogitFuncNameBufSize];
     sprintf(s, "%s::%s", this->objectName(), func_name_val);
     phwangAbend(s, str1_val);
 }
 
 void MallocClass::abend2 (char const *func_name_val, char const *str1_val, char const *str2_val) {
-    char s[AbendClass::LogitBufSize];
+    char s[AbendClass::LogitFuncNameBufSize];
     sprintf(s, "%s::%s", this->objectName(), func_name_val);
     phwangAbend2(s, str1_val, str2_val);
 }
