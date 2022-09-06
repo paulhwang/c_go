@@ -15,9 +15,7 @@ UFabricClass::UFabricClass (FabricClass *fabric_object_val)
     this->theFabricObject = fabric_object_val;
     this->startNetServer();
 
-    if (1) { /* debug */
-        this->logit("UFabricClass", "init");
-    }
+    this->debug(false, "UFabricClass", "init");
 }
 
 UFabricClass::~UFabricClass (void)

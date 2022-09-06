@@ -17,7 +17,7 @@ NameListClass::NameListClass (FabricClass *fabric_object_val)
     this->theNameListTag = 0;
     strcpy(this->theObjectName, "NameListClass");
 
-    this->debug(true, "NameListClass", "init");
+    this->debug(false, "NameListClass", "init");
 }
 
 NameListClass::~NameListClass (void)

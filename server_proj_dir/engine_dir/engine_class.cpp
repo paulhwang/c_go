@@ -18,7 +18,7 @@ EngineClass::EngineClass (int debug_code_val)
     this->theDEngineObject = new DEngineClass(this);
     this->theGoBaseListMgrObject = phwangListMgrMalloc("GO_BASE", BASE_MGR_PROTOCOL_BASE_ID_SIZE, BASE_MGR_PROTOCOL_BASE_INDEX_SIZE, 900);
 
-    this->debug(true, "EngineClass", "init");
+    this->debug(false, "EngineClass", "init");
 }
 
 EngineClass::~EngineClass (void)

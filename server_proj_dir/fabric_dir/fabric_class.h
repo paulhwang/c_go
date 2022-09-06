@@ -7,6 +7,7 @@
 #pragma once
 #include <pthread.h>
 
+class MessengerClass;
 class UFabricClass;
 class DFabricClass;
 class DbClass;
@@ -20,6 +21,7 @@ class FabricClass {
     int theDebugCode;
     
     DbClass *theDbObject;
+    MessengerClass *theMessengerObject;
     UFabricClass *theUFabricObject;
     DFabricClass *theDFabricObject;
     NameListClass *theNameListObject;

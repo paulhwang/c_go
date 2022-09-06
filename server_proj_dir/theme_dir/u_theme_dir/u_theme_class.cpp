@@ -18,7 +18,7 @@ UThemeClass::UThemeClass (ThemeClass *theme_object_val)
     this->theThemeObject = theme_object_val;
     this->startNetServer();
 
-    this->debug(true, "UThemeClass", "init");
+    this->debug(false, "UThemeClass", "init");
 }
 
 UThemeClass::~UThemeClass (void)

@@ -16,7 +16,7 @@ DEngineClass::DEngineClass (EngineClass *engine_object_val)
 
     this->startNetConnect();
 
-    this->debug(true, "DEngineClass", "init");
+    this->debug(false, "DEngineClass", "init");
 }
 
 DEngineClass::~DEngineClass (void)

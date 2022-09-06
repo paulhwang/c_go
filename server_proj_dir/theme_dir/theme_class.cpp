@@ -19,7 +19,7 @@ ThemeClass::ThemeClass (int debug_code_val)
     this->theDThemeObject = new DThemeClass(this);
     this->theRoomListMgrObject = phwangListMgrMalloc("ROOM", ROOM_MGR_PROTOCOL_ROOM_ID_SIZE, ROOM_MGR_PROTOCOL_ROOM_INDEX_SIZE, 700);
 
-    this->debug(true, "ThemeClass", "init");
+    this->debug(false, "ThemeClass", "init");
 }
 
 ThemeClass::~ThemeClass (void)

@@ -16,9 +16,7 @@ DThemeClass::DThemeClass (ThemeClass *theme_object_val)
 
     this->startNetConnect();
 
-    if (1) { /* debug */
-        this->logit("DThemeClass", "init");
-    }
+    this->debug(false, "DThemeClass", "init");
 }
 
 DThemeClass::~DThemeClass (void)

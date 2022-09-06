@@ -7,6 +7,7 @@
 #include "../../phwang_dir/phwang.h"
 #include "../../phwang_dir/list_mgr_dir/list_mgr_class.h"
 #include "fabric_class.h"
+#include "messenger_dir/messenger_class.h"
 #include "u_fabric_dir/u_fabric_class.h"
 #include "d_fabric_dir/d_fabric_class.h"
 #include "group_class.h"
@@ -20,6 +21,7 @@ FabricClass::FabricClass (int debug_code_val)
     this->theDebugCode = debug_code_val;
     
     this->theDbObject = new DbClass(this);
+    this->theMessengerObject = new MessengerClass(this);
     this->theUFabricObject = new UFabricClass(this);
     this->theDFabricObject = new DFabricClass(this);
     this->theNameListObject = new NameListClass(this);
@@ -27,7 +29,7 @@ FabricClass::FabricClass (int debug_code_val)
     this->theGroupListMgrObject = phwangListMgrMalloc("GROUP", GROUP_MGR_PROTOCOL_GROUP_ID_SIZE, GROUP_MGR_PROTOCOL_GROUP_INDEX_SIZE, 500);
     this->startWatchDogThread();
 
-    this->debug(true, "FabricClass", "init");
+    this->debug(false, "FabricClass", "init");
 }
 
 FabricClass::~FabricClass (void)

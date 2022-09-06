@@ -120,13 +120,13 @@ int DbAccountClass::checkAccountNameExist (char const *account_name_val)
 
         if (!strcmp(account_name, account_name_val)) {
             this->sqlObject()->doPQclear(res);
-            this->debug(true, "checkAccountNameExist", "found");
+            this->debug(false, "checkAccountNameExist", "found");
             return DB_ACCOUNT_NAME_EXIST;
         }
     }
 
     this->sqlObject()->doPQclear(res);
-    this->debug(true, "checkAccountNameExist", "not found");
+    this->debug(false, "checkAccountNameExist", "not found");
     return DB_ACCOUNT_NAME_NOT_EXIST;
 }
 
@@ -143,7 +143,7 @@ int DbAccountClass::checkPassword (char const *account_name_val, char const *pas
         char *account_name = this->sqlObject()->getTuplesValue(res, i, 0);
         char *password = this->sqlObject()->getTuplesValue(res, i, 1);
 
-        this->debug2(true, "checkPassword", account_name, password);
+        this->debug2(false, "checkPassword", account_name, password);
 
         if (!strcmp(account_name, account_name_val)) {
             if (!strcmp(password, password_val)) {

@@ -22,7 +22,7 @@ DFabricClass::DFabricClass (FabricClass *fabric_object_val)
     this->setTimeStampString();
     this->startNetServer();
 
-    this->debug(true, "DFabricClass", "init");
+    this->debug(false, "DFabricClass", "init");
 }
 
 DFabricClass::~DFabricClass (void)
