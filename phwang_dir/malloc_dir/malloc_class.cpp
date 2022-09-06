@@ -17,8 +17,8 @@ MallocClass::~MallocClass(void)
 {
 }
 
-//PHWANG_MALLOC_CLASS
-#define PHWNAG_MALLOC_CLASS_MARKER "phwang"
+#define PHWNAG_MALLOC_CLASS_MARKER      "phwang"
+#define PHWNAG_MALLOC_CLASS_MARKER_FREE "-free-"
 #define PHWNAG_MALLOC_CLASS_MARKER_SIZE 6
 #define PHWNAG_MALLOC_CLASS_LENGTH_SIZE 5
 #define PHWNAG_MALLOC_CLASS_WHO_SIZE 4
@@ -65,9 +65,16 @@ void MallocClass::phwangFree (void *input_val)
     this->debug(false, "phwangFree", real_malloc_data);
 
     if (memcmp(real_malloc_data, PHWNAG_MALLOC_CLASS_MARKER, PHWNAG_MALLOC_CLASS_MARKER_SIZE)) {
-        printf("phwangFree: data=%s\n", real_malloc_data);
-        phwangAbend("phwangFree", "header");
-        return;
+        if (!memcmp(real_malloc_data, PHWNAG_MALLOC_CLASS_MARKER_FREE, PHWNAG_MALLOC_CLASS_MARKER_SIZE)) {
+            printf("phwangFree: data=%s\n", real_malloc_data);
+            phwangAbend("phwangFree", "free twice");
+            return;
+        }
+        else {
+            printf("phwangFree: data=%s\n", real_malloc_data);
+            phwangAbend("phwangFree", "header");
+            return;
+        }
     }
 
     int length = phwangDecodeNumber(length_str, PHWNAG_MALLOC_CLASS_LENGTH_SIZE);
@@ -86,6 +93,7 @@ void MallocClass::phwangFree (void *input_val)
     }
 
     this->theUserTable[who_val]--;
+    memcpy(real_malloc_data, PHWNAG_MALLOC_CLASS_MARKER_FREE, PHWNAG_MALLOC_CLASS_MARKER_SIZE);
     free(real_malloc_data);
 
     this->checkWhoTable();
