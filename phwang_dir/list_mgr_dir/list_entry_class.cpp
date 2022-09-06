@@ -22,7 +22,7 @@ ListEntryClass::ListEntryClass (void *list_mgr_object)
     this->theListMgrObject->insertEntry(this);
     phwangEncodeIdIndex(this->theEntryIdIndex, this->theEntryId, this->theListMgrObject->idSize(), this->theEntryIndex, this->theListMgrObject->indexSize());
 
-    this->debug(true, "ListEntryClass", this->theEntryIdIndex);
+    this->debug(false, "ListEntryClass", this->theEntryIdIndex);
 }
 
 ListEntryClass::~ListEntryClass (void)

@@ -67,7 +67,7 @@ int ListMgrClass::allocEntryIndex (void)
 
 void ListMgrClass::insertEntry (ListEntryClass *entry_val)
 {
-    this->debug(true, "====================InsertEntry", "");
+    this->debug(false, "insertEntry", "");
 
     this->abendListMgrClass("before insertEntry");
     pthread_mutex_lock(&this->theMutex);
