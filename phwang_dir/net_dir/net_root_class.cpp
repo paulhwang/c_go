@@ -9,6 +9,7 @@
 #include "tp_server_class.h"
 #include "tp_transfer_class.h"
 #include "tp_connect.h"
+#include "tcp_connect_class.h"
 
 NetRootClass::NetRootClass (int debug_code_val)
 {
@@ -51,12 +52,10 @@ void *NetRootClass::tpConnect (
                     void *receive_object_val,
                     char const *who_val)
 {
-    return globalTpConnect (
-                ip_addr_val, 
-                port_val, 
-                receive_callback_val, 
-                receive_object_val,
-                who_val);
+    TcpConnectClass *connect = new TcpConnectClass(who_val);
+    void *result = globalTpConnect(ip_addr_val, port_val, receive_callback_val, receive_object_val, who_val);
+    delete connect;
+    return result;
 }
 
 void NetRootClass::freeTpServer (void *tp_server_object_val)
