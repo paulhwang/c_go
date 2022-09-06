@@ -81,11 +81,7 @@ void MallocClass::phwangFree (void *input_val)
     int length = phwangDecodeNumber(length_str, PHWNAG_MALLOC_CLASS_LENGTH_SIZE);
     int who_val = phwangDecodeNumber(who_str, PHWNAG_MALLOC_CLASS_WHO_SIZE);
 
-    if (1) {
-        char buf[64];
-        sprintf(buf, "length=%d user=%d\n", length, who_val);
-        this->debug(false, "phwangFree", buf);
-    }
+    this->debugInt2(true, "phwangFree", "length=", length, "user=", who_val);
 
     if (memcmp((char *) input_val + length, PHWNAG_MALLOC_CLASS_MARKER, PHWNAG_MALLOC_CLASS_MARKER_SIZE)) {
         printf("phwangFree: data=%s\n", real_malloc_data);

@@ -62,7 +62,7 @@ void AbendClass::phwangLogitInt (char const *func_name_val, char const *str1_val
 
 void AbendClass::phwangLogitInt2 (char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val)
 {
-    printf("%s() %s=%d, %s=%d\n", func_name_val, str1_val, int2_val, str2_val, int2_val);
+    printf("%s() %s=%d, %s=%d\n", func_name_val, str1_val, int1_val, str2_val, int2_val);
 }
 
 void AbendClass::phwangAbend (char const *func_name_val, char const *str1_val)
