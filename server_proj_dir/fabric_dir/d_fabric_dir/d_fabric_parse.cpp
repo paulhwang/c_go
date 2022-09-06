@@ -417,7 +417,7 @@ void DFabricClass::processGetLinkDataRequest (void *tp_transfer_object_val, char
     *data_ptr++ = FECommandClass::GET_LINK_DATA_RESPONSE;
     strcpy(data_ptr, ajax_id_val);
     data_ptr += FECommandClass::AJAX_ID_SIZE;
-    *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_NAME_LIST;
+    *data_ptr++ = FECommandClass::RESPOND_IS_GET_LINK_DATA_NAME_LIST;
     phwangEncodeNumber(data_ptr, this->theFabricObject->nameListObject()->nameListTag(), FECommandClass::NAME_LIST_TAG_SIZE);
     data_ptr += FECommandClass::NAME_LIST_TAG_SIZE;
     *data_ptr = 0;
@@ -429,7 +429,7 @@ void DFabricClass::processGetLinkDataRequest (void *tp_transfer_object_val, char
         if (session) {
             char *pending_downlink_data = session->getPendingDownLinkData();
             if (pending_downlink_data) {
-                *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_PENDING_DATA;
+                *data_ptr++ = FECommandClass::RESPOND_IS_GET_LINK_DATA_PENDING_DATA;
                 session->enqueuePendingDownLinkData(pending_downlink_data);
                 strcpy(data_ptr, link_val->linkIdIndex());
                 data_ptr += ListMgrProtocolClass::LINK_ID_INDEX_SIZE;
@@ -447,14 +447,14 @@ void DFabricClass::processGetLinkDataRequest (void *tp_transfer_object_val, char
 
     char *pending_session = link_val->getPendingSessionSetup();
     if (pending_session) {
-        *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_PENDING_SESSION;
+        *data_ptr++ = FECommandClass::RESPOND_IS_GET_LINK_DATA_PENDING_SESSION;
         strcpy(data_ptr, pending_session);
         this->debug(true, "==================processGetLinkData getPendingSessionSetup", downlink_data);
     }
 
     char *pending_session3 = link_val->getPendingSessionSetup3();
     if (pending_session3) {
-        *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_PENDING_SESSION3;
+        *data_ptr++ = FECommandClass::RESPOND_IS_GET_LINK_DATA_PENDING_SESSION3;
         strcpy(data_ptr, pending_session3);
         this->debug(true, "==================processGetLinkData getPendingSessionSetup3", downlink_data);
     }

@@ -6,8 +6,6 @@
 
 #pragma once
 
-#define LINK_MGR_DATA_BUFFER_SIZE1 512
-
 class ListMgrProtocolClass {
 public:
     int const static LINK_MGR_DATA_BUFFER_SIZE = 512;

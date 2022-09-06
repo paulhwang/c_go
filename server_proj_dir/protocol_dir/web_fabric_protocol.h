@@ -6,11 +6,6 @@
 
 #pragma once
 
-#define WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_PENDING_SESSION 'S'
-#define WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_PENDING_SESSION3 'T'
-#define WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_PENDING_DATA 'D'
-#define WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_NAME_LIST 'N'
-
 class FECommandClass {
 public:
     int const static NAME_LIST_TAG_SIZE = 3;
@@ -40,4 +35,9 @@ public:
     char const static GET_SESSION_DATA_RESPONSE = 'G';
     char const static MMW_READ_DATA_COMMAND  = 'M';
     char const static MMW_READ_DATA_RESPONSE = 'm';
+
+    char const static RESPOND_IS_GET_LINK_DATA_PENDING_SESSION = 'S';
+    char const static RESPOND_IS_GET_LINK_DATA_PENDING_SESSION3 = 'T';
+    char const static RESPOND_IS_GET_LINK_DATA_PENDING_DATA = 'D';
+    char const static RESPOND_IS_GET_LINK_DATA_NAME_LIST = 'N';
 };
