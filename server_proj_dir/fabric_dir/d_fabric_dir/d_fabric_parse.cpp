@@ -241,7 +241,7 @@ void DFabricClass::processSignUpRequest (void *tp_transfer_object_val, char *dat
     int email_size;
     char *email = phwangDecodeStringMalloc(encoded_email, &email_size);
 
-    this->debug2(true, "processSignUpRequest", account_name, password);
+    this->debug2(false, "processSignUpRequest", account_name, password);
 
     int result = this->dbAccountObject()->checkAccountNameExist(account_name);
     if (result != DbAccountClass::DB_ACCOUNT_NAME_NOT_EXIST) {
@@ -466,7 +466,7 @@ void DFabricClass::errorProcessGetLinkData (void *tp_transfer_object_val, char c
 
 void DFabricClass::processGetNameListRequest (void *tp_transfer_object_val, char *data_val, char const *ajax_id_val, LinkClass *link_val)
 {
-    this->debug(true, "processGetNameList", data_val);
+    this->debug(false, "processGetNameList", data_val);
 
     char *name_list_tag_val = data_val;
     char *end_val = name_list_tag_val + 3;

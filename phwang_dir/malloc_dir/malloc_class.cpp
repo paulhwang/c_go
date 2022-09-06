@@ -114,10 +114,8 @@ void MallocClass::checkWhoTable (void)
                 break;
         }
 
-        if (count > 1) {
-            char buf[16];
-            sprintf(buf, "%d: %d", i, count);
-            this->debug(true, "checkWhoTable", buf);
+        if (count > 2) {
+            this->debugInt2(true, "checkWhoTable", "who=", i, " count=", count);
         }
     }
 }

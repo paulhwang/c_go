@@ -143,28 +143,24 @@ int DbAccountClass::checkPassword (char const *account_name_val, char const *pas
         char *account_name = this->sqlObject()->getTuplesValue(res, i, 0);
         char *password = this->sqlObject()->getTuplesValue(res, i, 1);
 
-        if (0) { //debug
-            char buf[256];
-            sprintf(buf, "account_name=%s, password=%s", account_name, password);
-            this->logit("checkPassword", buf);
-        }
+        this->debug2(true, "checkPassword", account_name, password);
 
         if (!strcmp(account_name, account_name_val)) {
             if (!strcmp(password, password_val)) {
                 this->sqlObject()->doPQclear(res);
-                this->debug(true, "checkPassword", "match");
+                this->debug(false, "checkPassword", "match");
                 return DB_ACCOUNT_PASSWORD_MATCH;
             }
             else {
                 this->sqlObject()->doPQclear(res);
-                this->debug(true, "checkPassword", "not match");
+                this->debug(false, "checkPassword", "not match");
                 return DB_ACCOUNT_PASSWORD_NOT_MATCH;
             }
         }
     }
 
     this->sqlObject()->doPQclear(res);
-    this->debug(true, "checkPassword", "not found");
+    this->debug(false, "checkPassword", "not found");
     return DB_ACCOUNT_NAME_NOT_EXIST;
 }
 
