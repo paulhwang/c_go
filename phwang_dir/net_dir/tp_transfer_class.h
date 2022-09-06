@@ -33,9 +33,16 @@ class TpTransferClass {
 
     int maxDataSize(void) {return this->theMaxDataSize;};
 
-    void debug(int on_off_val, char const *str0_val, char const *str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
-    void logit(char const *str0_val, char const *str1_val);
-    void abend(char const *str0_val, char const *str1_val);
+    void debug(int debug_on_val, char const *func_name_val, char const *str1_val);
+    void debug2(int debug_on_val, char const *func_name_val, char const *str1_val, char const *str2_val);
+    void debugInt(int debug_on_val, char const *func_name_val, char const *str1_val, int int1_val);
+    void debugInt2(int debug_on_val, char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val);
+    void logit(char const *func_name_val, char const *str1_val);
+    void logit2(char const *func_name_val, char const *str1_val, char const *str2_val);
+    void logitInt(char const *func_name_val, char const *str1_val, int int1_val);
+    void logitInt2(char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val);
+    void abend(char const *func_name_val, char const *str1_val);
+    void abend2(char const *func_name_val, char const *str1_val, char const *str2_val);
 
 public:
     TpTransferClass(int socket_val, void (*receive_callback_val)(void *, void *, void *), void *receive_object_val, char const *who_val);
