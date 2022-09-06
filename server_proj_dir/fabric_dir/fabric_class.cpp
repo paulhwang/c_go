@@ -23,7 +23,7 @@ FabricClass::FabricClass (int debug_code_val)
     this->theUFabricObject = new UFabricClass(this);
     this->theDFabricObject = new DFabricClass(this);
     this->theNameListObject = new NameListClass(this);
-    this->theLinkListMgrObject = phwangListMgrMalloc("LINK", ListMgrProtocolClass::LINK_ID_SIZE, LINK_MGR_PROTOCOL_LINK_INDEX_SIZE, 100);
+    this->theLinkListMgrObject = phwangListMgrMalloc("LINK", ListMgrProtocolClass::LINK_ID_SIZE, ListMgrProtocolClass::LINK_INDEX_SIZE, 100);
     this->theGroupListMgrObject = phwangListMgrMalloc("GROUP", GROUP_MGR_PROTOCOL_GROUP_ID_SIZE, GROUP_MGR_PROTOCOL_GROUP_INDEX_SIZE, 500);
     this->startWatchDogThread();
 
