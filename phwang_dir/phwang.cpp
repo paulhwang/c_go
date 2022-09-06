@@ -100,6 +100,11 @@ void phwangComposeFuncName(char *buf_val, char const *object_name_val, char cons
     thePhwangObject->abendObject()->composeFuncName(buf_val, object_name_val, func_name_val);
 }
 
+void phwangcomposeFuncNameExtra (char *buf_val, char const *object_name_val, char const *func_name_val, char const *extra_info_val)
+{
+    thePhwangObject->abendObject()->composeFuncNameExtra(buf_val, object_name_val, func_name_val, extra_info_val);
+}
+
 /* malloc and free */
 void *phwangMalloc (int size_val, int who_val)
 {
