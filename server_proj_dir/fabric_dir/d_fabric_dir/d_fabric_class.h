@@ -27,7 +27,7 @@ class DFabricClass {
     
     void setTimeStampString(void);
     void startNetServer(void);
-    void sendMmwReadDataResponce(void *tp_transfer_object_val, char const *ajax_id_val, char const *err_msg_val, char const *data_val);
+    void sendMessageResponce(void *tp_transfer_object_val, char const *ajax_id_val, char const *err_msg_val, char const *data_val);
     void processSignUpRequest(void *tp_transfer_object_val, char *data_val, char const *ajax_id_val);
     void processSetupLinkRequest(void *tp_transfer_object_val, char *data_val, char const *ajax_id_val);
     void processFreeLinkRequest(void *tp_transfer_object_val, char *data_val, char const *ajax_id_val, LinkClass *link_val);
@@ -39,7 +39,7 @@ class DFabricClass {
     void processFreeSessionRequest(void *tp_transfer_object_val, char *data_val, char const *ajax_id_val, SessionClass *session_val);
     void processPutSessionDataRequest(void *tp_transfer_object_val, char *data_val, char const *ajax_id_val, SessionClass *session_val);
     void processGetSessionDataRequest(void *tp_transfer_object_val, char *data_val, char const *ajax_id_val, SessionClass *session_val);
-    void processMmwReadDataRequest(void *tp_transfer_object_val, char *data_val, char const *ajax_id_val);
+    void processMessageRequest(void *tp_transfer_object_val, char *data_val, char const *ajax_id_val);
     void sendSignUpResponce(void *tp_transfer_object_val, char const *ajax_id_val, char const *err_msg_val);
     void sendSetupLinkResponce(void *tp_transfer_object_val, char const *ajax_id_val, char const *link_id_index_val, char const *err_msg_val);
     void errorProcessFreeLink(void *tp_transfer_object_val, char const *ajax_id_val, char const *err_msg_val);

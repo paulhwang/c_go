@@ -57,8 +57,8 @@ void DFabricClass::exportedParseFunction (void *tp_transfer_object_val, char *da
                     this->processSetupLinkRequest(tp_transfer_object_val, rest_data, ajax_id);
                     return;
 
-                case FECommandClass::MMW_READ_DATA_COMMAND:
-                    this->processMmwReadDataRequest(tp_transfer_object_val, rest_data, ajax_id);
+                case FECommandClass::MESSAGE_COMMAND:
+                    this->processMessageRequest(tp_transfer_object_val, rest_data, ajax_id);
                     return;
 
                 default:
@@ -166,9 +166,9 @@ void DFabricClass::sendSearchLinkSessionFailResponse (char const command_val, vo
     this->transmitFunction(tp_transfer_object_val, downlink_data);
 }
 
-void DFabricClass::processMmwReadDataRequest (void *tp_transfer_object_val, char *input_data_val, char const *ajax_id_val)
+void DFabricClass::processMessageRequest (void *tp_transfer_object_val, char *input_data_val, char const *ajax_id_val)
 {
-    this->debug(true, "processMmwReadDataRequest", input_data_val);
+    this->debug(true, "processMessageRequest", input_data_val);
 
     char act = *input_data_val++;
 
@@ -179,20 +179,20 @@ void DFabricClass::processMmwReadDataRequest (void *tp_transfer_object_val, char
     if (1) { /* debug */
         char buf[256];
         sprintf(buf, "act=%c data=%s\n", act, data);
-        this->logit("processMmwReadDataRequest", buf);
+        this->debug(true, "processMessageRequest", buf);
     }
 
     switch (act) {
         case 'I':
-            this->sendMmwReadDataResponce(tp_transfer_object_val, ajax_id_val, "succeed", "I_data");
+            this->sendMessageResponce(tp_transfer_object_val, ajax_id_val, "succeed", "I_data");
             break;
 
         case 'R':
-            this->sendMmwReadDataResponce(tp_transfer_object_val, ajax_id_val, "succeed", "R_data");
+            this->sendMessageResponce(tp_transfer_object_val, ajax_id_val, "succeed", "R_data");
             break;
 
         case 'W':
-            this->sendMmwReadDataResponce(tp_transfer_object_val, ajax_id_val, "succeed", "W_data");
+            this->sendMessageResponce(tp_transfer_object_val, ajax_id_val, "succeed", "W_data");
             break;
 
         default:
@@ -201,9 +201,9 @@ void DFabricClass::processMmwReadDataRequest (void *tp_transfer_object_val, char
 }
 
 #define D_FABRIC_CLASS_PROCESSS_MMW_READ_DATA_DOWN_LINK_DATA_SIZE (1 + FECommandClass::AJAX_ID_SIZE + ListMgrProtocolClass::LINK_ID_INDEX_SIZE + 1)
-void DFabricClass::sendMmwReadDataResponce (void *tp_transfer_object_val, char const *ajax_id_val, char const *result_val, char const *data_val)
+void DFabricClass::sendMessageResponce (void *tp_transfer_object_val, char const *ajax_id_val, char const *result_val, char const *data_val)
 {
-    this->debug(true, "sendMmwReadDataResponce", result_val);
+    this->debug(true, "sendMessageResponce", result_val);
 
     char *encoded_result = phwangEncodeStringMalloc(result_val);
     int encoded_result_length = strlen(encoded_result);
@@ -212,7 +212,7 @@ void DFabricClass::sendMmwReadDataResponce (void *tp_transfer_object_val, char c
 
     char *data_ptr;
     char *downlink_data = data_ptr = (char *) phwangMalloc(D_FABRIC_CLASS_PROCESSS_MMW_READ_DATA_DOWN_LINK_DATA_SIZE + encoded_result_length + encoded_data_length, MallocClass::DATAGRAM);
-    *data_ptr++ = FECommandClass::MMW_READ_DATA_RESPONSE;
+    *data_ptr++ = FECommandClass::MESSAGE_RESPONSE;
     memcpy(data_ptr, ajax_id_val, FECommandClass::AJAX_ID_SIZE);
     data_ptr += FECommandClass::AJAX_ID_SIZE;
 

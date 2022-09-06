@@ -33,8 +33,8 @@ public:
     char const static PUT_SESSION_DATA_RESPONSE = 'p';
     char const static GET_SESSION_DATA_COMMAND  = 'G';
     char const static GET_SESSION_DATA_RESPONSE = 'G';
-    char const static MMW_READ_DATA_COMMAND  = 'M';
-    char const static MMW_READ_DATA_RESPONSE = 'm';
+    char const static MESSAGE_COMMAND  = 'M';
+    char const static MESSAGE_RESPONSE = 'm';
 
     char const static RESPOND_IS_GET_LINK_DATA_PENDING_SESSION = 'S';
     char const static RESPOND_IS_GET_LINK_DATA_PENDING_SESSION3 = 'T';
