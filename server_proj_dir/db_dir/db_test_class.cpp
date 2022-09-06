@@ -40,14 +40,14 @@ int DbTestClass::createCarTable (void) {
 }
 
 void DbTestClass::insertCar (void) {
-    this->sqlObject()->insertAccount (this->sqlConnect(), "cars", "1,'Audi',52642");
-    this->sqlObject()->insertAccount (this->sqlConnect(), "cars", "2,'Mercedes',57127");
-    this->sqlObject()->insertAccount (this->sqlConnect(), "cars", "3,'Skoda',9000");
-    this->sqlObject()->insertAccount (this->sqlConnect(), "cars", "4,'Volvo',29000");
-    this->sqlObject()->insertAccount (this->sqlConnect(), "cars", "5,'Bentley',350000");
-    this->sqlObject()->insertAccount (this->sqlConnect(), "cars", "6,'Citroen',21000");
-    this->sqlObject()->insertAccount (this->sqlConnect(), "cars", "7,'Hummer',41400");
-    this->sqlObject()->insertAccount (this->sqlConnect(), "cars", "8,'Volkswagen',21600");
+    this->sqlObject()->insertInto (this->sqlConnect(), "cars", "1,'Audi',52642");
+    this->sqlObject()->insertInto (this->sqlConnect(), "cars", "2,'Mercedes',57127");
+    this->sqlObject()->insertInto (this->sqlConnect(), "cars", "3,'Skoda',9000");
+    this->sqlObject()->insertInto (this->sqlConnect(), "cars", "4,'Volvo',29000");
+    this->sqlObject()->insertInto (this->sqlConnect(), "cars", "5,'Bentley',350000");
+    this->sqlObject()->insertInto (this->sqlConnect(), "cars", "6,'Citroen',21000");
+    this->sqlObject()->insertInto (this->sqlConnect(), "cars", "7,'Hummer',41400");
+    this->sqlObject()->insertInto (this->sqlConnect(), "cars", "8,'Volkswagen',21600");
 }
 
 void DbTestClass::logit (char const* str0_val, char const* str1_val)
