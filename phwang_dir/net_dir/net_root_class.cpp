@@ -8,7 +8,7 @@
 #include "net_root_class.h"
 #include "tp_server_class.h"
 #include "tp_transfer_class.h"
-#include "tcp_connect_class.h"
+#include "tcp_dir/tcp_connect_class.h"
 
 NetRootClass::NetRootClass (int debug_code_val)
 {
