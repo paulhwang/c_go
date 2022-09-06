@@ -73,7 +73,6 @@ void TpServerClass::startServerThread (void)
 
 void *TpServerClass::serverThreadFunction (void *data_val)
 {
-    char const *func_name_ = "serverThreadFunction";
     char localhost[MAXHOSTNAME + 1];
     struct servent *sp;
     int s, data_socket;
@@ -86,16 +85,16 @@ void *TpServerClass::serverThreadFunction (void *data_val)
     if (0) { /* debug */
         char s[128];
         sprintf(s, "starts for (%s)", this->theWho);
-        this->logit(func_name_, s);
+        this->logit("serverThreadFunction", s);
     }
 
     if ((s = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
-        this->logit(func_name_, "open socket error");
+        this->logit("serverThreadFunction", "open socket error");
         return 0;
     }
 
     if (setsockopt(s, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &opt, sizeof(opt))) {
-        this->logit(func_name_, "setsockopt error");
+        this->logit("serverThreadFunction", "setsockopt error");
         return 0;
     }
 
@@ -104,7 +103,7 @@ void *TpServerClass::serverThreadFunction (void *data_val)
     address.sin_port = htons(this->thePort);
 
     if (bind(s, (struct sockaddr *)&address, sizeof(address)) < 0) {
-        this->logit(func_name_, "bind error");
+        this->logit("serverThreadFunction", "bind error");
         return 0;
     }
 
@@ -112,26 +111,22 @@ void *TpServerClass::serverThreadFunction (void *data_val)
         if (0) { /* debug */
             char s[128];
             sprintf(s, "listening for (%s)", this->theWho);
-            this->logit(func_name_, s);
+            this->logit("serverThreadFunction", s);
         }
 
         listen(s, BACKLOG);
 
-        if (1) { /* debug */
-            char s[128];
-            sprintf(s, "accepting for (%s)", this->theWho);
-            this->logit(func_name_, s);
-        }
+        this->debug(true, "serverThreadFunction", "accepting");
 
         if ((data_socket = accept(s, (struct sockaddr *)&address, (socklen_t*)&addrlen)) < 0) {
-            this->logit(func_name_, "accept error");
+            this->logit("serverThreadFunction", "accept error");
             return 0;
         }
 
         if (1) { /* debug */
             char s[128];
-            sprintf(s, "accepted for (%s) port=%d", this->theWho, this->thePort);
-            this->logit(func_name_, s);
+            sprintf(s, "accepted port=%d", this->thePort);
+            this->logit("serverThreadFunction", s);
         }
 
         char data[strlen(TP_PHWANG_LOGO) + 16];
@@ -143,7 +138,7 @@ void *TpServerClass::serverThreadFunction (void *data_val)
             if (1) { /* debug */
                 char s[128];
                 sprintf(s, "### Attack: (%s) port=%d data_length=%d data=%s", this->theWho, this->thePort, length, data);
-                this->logit(func_name_, s);
+                this->logit("serverThreadFunction", s);
             }
             close(data_socket);
             continue;
@@ -163,7 +158,7 @@ void TpServerClass::debug (int debug_on_val, char const *func_name_val, char con
 {
     if (debug_on_val) {
         char s[AbendClass::LogitFuncNameBufSize];
-        phwangComposeFuncName(s, this->objectName(), func_name_val);
+        this->composeFuncNameExtra(s, func_name_val);
         phwangDebug(debug_on_val, s, str1_val);
     }
 }
@@ -172,7 +167,7 @@ void TpServerClass::debug2 (int debug_on_val, char const *func_name_val, char co
 {
     if (debug_on_val) {
         char s[AbendClass::LogitFuncNameBufSize];
-        phwangComposeFuncName(s, this->objectName(), func_name_val);
+        this->composeFuncNameExtra(s, func_name_val);
         phwangDebug2(debug_on_val, s, str1_val, str2_val);
     }
 }
@@ -181,7 +176,7 @@ void TpServerClass::debugInt(int debug_on_val, char const *func_name_val, char c
 {
     if (debug_on_val) {
         char s[AbendClass::LogitFuncNameBufSize];
-        phwangComposeFuncName(s, this->objectName(), func_name_val);
+        this->composeFuncNameExtra(s, func_name_val);
         phwangDebugInt(debug_on_val, s, str1_val, int1_val);
     }
 }
@@ -190,45 +185,45 @@ void TpServerClass::debugInt2(int debug_on_val, char const *func_name_val, char 
 {
     if (debug_on_val) {
         char s[AbendClass::LogitFuncNameBufSize];
-        phwangComposeFuncName(s, this->objectName(), func_name_val);
+        this->composeFuncNameExtra(s, func_name_val);
         phwangDebugInt2(debug_on_val, s, str1_val, int1_val, str2_val, int2_val);
     }
 }
 
 void TpServerClass::logit (char const *func_name_val, char const *str1_val) {
     char s[AbendClass::LogitFuncNameBufSize];
-    phwangComposeFuncName(s, this->objectName(), func_name_val);
+    this->composeFuncNameExtra(s, func_name_val);
     phwangLogit(s, str1_val);
 }
 
 void TpServerClass::logit2 (char const *func_name_val, char const *str1_val, char const *str2_val) {
     char s[AbendClass::LogitFuncNameBufSize];
-    phwangComposeFuncName(s, this->objectName(), func_name_val);
+    this->composeFuncNameExtra(s, func_name_val);
     phwangLogit2(s, str1_val, str2_val);
 }
 
 void TpServerClass::logitInt(char const *func_name_val, char const *str1_val, int int1_val)
 {
     char s[AbendClass::LogitFuncNameBufSize];
-    phwangComposeFuncName(s, this->objectName(), func_name_val);
+    this->composeFuncNameExtra(s, func_name_val);
     phwangLogitInt(s, str1_val, int1_val);
 }
 
 void TpServerClass::logitInt2(char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val)
 {
     char s[AbendClass::LogitFuncNameBufSize];
-    phwangComposeFuncName(s, this->objectName(), func_name_val);
+    this->composeFuncNameExtra(s, func_name_val);
     phwangLogitInt2(s, str1_val, int1_val, str2_val, int2_val);
 }
 
 void TpServerClass::abend (char const *func_name_val, char const *str1_val) {
     char s[AbendClass::LogitFuncNameBufSize];
-    phwangComposeFuncName(s, this->objectName(), func_name_val);
+    this->composeFuncNameExtra(s, func_name_val);
     phwangAbend(s, str1_val);
 }
 
 void TpServerClass::abend2 (char const *func_name_val, char const *str1_val, char const *str2_val) {
     char s[AbendClass::LogitFuncNameBufSize];
-    phwangComposeFuncName(s, this->objectName(), func_name_val);
+    this->composeFuncNameExtra(s, func_name_val);
     phwangAbend2(s, str1_val, str2_val);
 }

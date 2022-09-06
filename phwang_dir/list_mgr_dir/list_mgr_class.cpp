@@ -30,7 +30,7 @@ ListMgrClass::ListMgrClass (char const *caller_name_val, int id_size_val, int in
         theEntryTableArray[i] = 0;
     }
 
-    this->debug(true, "ListMgrClass", "init");
+    this->debug(false, "ListMgrClass", "init");
 }
 
 ListMgrClass::~ListMgrClass (void)
