@@ -23,16 +23,15 @@ UFabricClass::~UFabricClass (void)
 }
 
 void uFabricTpServerAcceptFunction (void *u_fabric_object_val, void *tp_transfer_object_val) {
-    phwangDebug(true, "*****Golbal::uFabricTpServerAcceptFunction", "accepted (http client)");
-    if (!tp_transfer_object_val) {
-        phwangAbend("Golbal::uFabricTpServerAcceptFunction", "null tp_transfer_object_val");
-    }
-
     ((UFabricClass *) u_fabric_object_val)->exportedNetAcceptFunction(tp_transfer_object_val);
 }
 
 void UFabricClass::exportedNetAcceptFunction (void *tp_transfer_object_val)
 {
+    if (!tp_transfer_object_val) {
+        this->abend("exportedNetAcceptFunction", "null tp_transfer_object_val");
+        return;
+    }
     this->theTpTransferObject = tp_transfer_object_val;
 }
 

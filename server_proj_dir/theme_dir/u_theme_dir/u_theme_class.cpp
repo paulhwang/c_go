@@ -26,16 +26,16 @@ UThemeClass::~UThemeClass (void)
 }
 
 void uThemeTpServerAcceptFunction (void *game_server_object_val, void *tp_transfer_object_val) {
-    phwangDebug(true, "*****Golbal::uThemeTpServerAcceptFunction", "accepted (http client)");
-    if (!tp_transfer_object_val) {
-        phwangAbend("Golbal::uThemeTpServerAcceptFunction", "null tp_transfer_object_val");
-    }
-
     ((UThemeClass *) game_server_object_val)->exportedNetAcceptFunction(tp_transfer_object_val);
 }
 
 void UThemeClass::exportedNetAcceptFunction (void *tp_transfer_object_val)
 {
+    if (!tp_transfer_object_val) {
+        this->abend("exportedNetAcceptFunction", "null tp_transfer_object_val");
+        return;
+    }
+
     this->theTpTransferObject = tp_transfer_object_val;
 }
 

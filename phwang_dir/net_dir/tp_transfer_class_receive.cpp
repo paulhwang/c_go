@@ -19,7 +19,6 @@ void *TpTransferClass::receiveThreadFunction(int socket_val)
     char const *func_name_ = "receiveThreadFunction";
 
     phwangIncrementReceiveThreadCount();
-    printf("***receiveThreadFunction count=%i\n", phwangReceiveThreadCount());
 
     while (1) {
         char *data = (char *) phwangMalloc(TpTransferClass::RECEIVE_BUFFER_SIZE + 32, MallocClass::receiveThreadFunction);

@@ -32,11 +32,7 @@ TpTransferClass::~TpTransferClass (void)
 
 void TpTransferClass::startThreads (int index_val)
 {
-    if (1) { /* debug */
-        char s[128];
-        sprintf(s, "threads started for (%s) index=%i", this->theWho, index_val);
-        this->debugInt(true, "startThreads", "index=", index_val);
-    }
+    this->debugInt(true, "startThreads", "index", index_val);
 
     this->theIndex = index_val;
     this->startReceiveThread2();
