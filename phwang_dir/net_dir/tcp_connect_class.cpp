@@ -16,7 +16,7 @@ TcpConnectClass::TcpConnectClass (char const *who_val)
 {
     memset(this, 0, sizeof(*this));
     this->theWho = who_val;
-    this->debug(true, "TcpConnectClass", "init");
+    this->debug(false, "TcpConnectClass", "init");
 }
 
 TcpConnectClass::~TcpConnectClass (void)
@@ -33,16 +33,11 @@ void *TcpConnectClass::tcpConnect (
                     void *receive_object_val,
                     char const *who_val)
 {
-    char const *func_name_ = "globalTpConnect";
     int s;
     struct sockaddr_in serv_addr;
     char buffer[1024] = {0};
 
-    if (1) { /* debug */
-        char s[128];
-        sprintf(s, "starts for (%s)", who_val);
-        phwangLogit(func_name_, s);
-    }
+    this->debug(true, "tcpConnect", "starts");
 
     if ((s = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
         phwangLogit(who_val, "tpConnect() open socket error");
@@ -59,11 +54,7 @@ void *TcpConnectClass::tcpConnect (
         return 0;
     }
   
-    if (1) { /* debug */
-        char s[128];
-        sprintf(s, "connecing for (%s)", who_val);
-        phwangLogit(func_name_, s);
-    }
+    this->debug(true, "tcpConnect", "connecing");
 
     int retry_count = PHWANG_TP_CONNECT_RETRY_MAX_COUNT;
     while (retry_count) {
@@ -82,11 +73,7 @@ void *TcpConnectClass::tcpConnect (
         }
     }
 
-    if (1) { /* debug */
-        char s[128];
-        sprintf(s, "connected for (%s)", who_val);
-        phwangLogit(func_name_, s);
-    }
+    this->debug(true, "tcpConnect", "connected");
 
     send(s, TP_PHWANG_LOGO , strlen(TP_PHWANG_LOGO) , 0);
 

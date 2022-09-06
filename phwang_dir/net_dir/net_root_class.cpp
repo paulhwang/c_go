@@ -53,7 +53,7 @@ void *NetRootClass::tpConnect (
                     char const *who_val)
 {
     TcpConnectClass *connect = new TcpConnectClass(who_val);
-    void *result = globalTpConnect(ip_addr_val, port_val, receive_callback_val, receive_object_val, who_val);
+    void *result = connect->tcpConnect(ip_addr_val, port_val, receive_callback_val, receive_object_val, who_val);
     delete connect;
     return result;
 }
