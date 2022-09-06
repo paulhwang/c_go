@@ -12,9 +12,9 @@
 #include <netdb.h>
 #include <pwd.h>
 #include "tp_phwang_logo.h"
-#include "tp_transfer_class.h"
 #include "../../phwang_dir/phwang.h"
 #include "../../phwang_dir/abend_dir/abend_class.h"
+#include "tp_transfer_class.h"
 #include "tp_server_class.h"
 
 #define MAXHOSTNAME 32

@@ -21,7 +21,7 @@ TcpConnectClass::TcpConnectClass (char const *who_val)
 
 TcpConnectClass::~TcpConnectClass (void)
 {
-    this->debug(true, "~TcpConnectClass", "exit");
+    this->debug(false, "~TcpConnectClass", "exit");
 }
 
 #define PHWANG_TP_CONNECT_RETRY_MAX_COUNT 30

@@ -23,11 +23,7 @@ TpTransferClass::TpTransferClass (int socket_val,
     this->theReceiveQueue = phwangMallocSuspendedQueue(TpTransferClass::RECEIVE_QUEUE_SIZE);
     this->theTransmitQueue = phwangMallocSuspendedQueue(TpTransferClass::TRANSMIT_QUEUE_SIZE);
 
-    if (1) { /* debug */
-        char s[128];
-        sprintf(s, "init for (%s) %d", this->theWho, this->maxDataSize());
-        this->logit("TpTransferClass", s);
-    }
+    this->debug(true, "TpTransferClass", "init");
 }
 
 TpTransferClass::~TpTransferClass (void)
@@ -39,7 +35,7 @@ void TpTransferClass::startThreads (int index_val)
     if (1) { /* debug */
         char s[128];
         sprintf(s, "threads started for (%s) index=%i", this->theWho, index_val);
-        this->logit("startThreads", s);
+        this->debugInt(true, "startThreads", "index=", index_val);
     }
 
     this->theIndex = index_val;
@@ -52,7 +48,7 @@ void TpTransferClass::debug (int debug_on_val, char const *func_name_val, char c
 {
     if (debug_on_val) {
         char s[AbendClass::LogitFuncNameBufSize];
-        phwangComposeFuncName(s, this->objectName(), func_name_val);
+        this->composeFuncNameExtra(s, func_name_val);
         phwangDebug(debug_on_val, s, str1_val);
     }
 }
@@ -61,7 +57,7 @@ void TpTransferClass::debug2 (int debug_on_val, char const *func_name_val, char 
 {
     if (debug_on_val) {
         char s[AbendClass::LogitFuncNameBufSize];
-        phwangComposeFuncName(s, this->objectName(), func_name_val);
+        this->composeFuncNameExtra(s, func_name_val);
         phwangDebug2(debug_on_val, s, str1_val, str2_val);
     }
 }
@@ -70,7 +66,7 @@ void TpTransferClass::debugInt(int debug_on_val, char const *func_name_val, char
 {
     if (debug_on_val) {
         char s[AbendClass::LogitFuncNameBufSize];
-        phwangComposeFuncName(s, this->objectName(), func_name_val);
+        this->composeFuncNameExtra(s, func_name_val);
         phwangDebugInt(debug_on_val, s, str1_val, int1_val);
     }
 }
@@ -79,45 +75,45 @@ void TpTransferClass::debugInt2(int debug_on_val, char const *func_name_val, cha
 {
     if (debug_on_val) {
         char s[AbendClass::LogitFuncNameBufSize];
-        phwangComposeFuncName(s, this->objectName(), func_name_val);
+        this->composeFuncNameExtra(s, func_name_val);
         phwangDebugInt2(debug_on_val, s, str1_val, int1_val, str2_val, int2_val);
     }
 }
 
 void TpTransferClass::logit (char const *func_name_val, char const *str1_val) {
     char s[AbendClass::LogitFuncNameBufSize];
-    phwangComposeFuncName(s, this->objectName(), func_name_val);
+    this->composeFuncNameExtra(s, func_name_val);
     phwangLogit(s, str1_val);
 }
 
 void TpTransferClass::logit2 (char const *func_name_val, char const *str1_val, char const *str2_val) {
     char s[AbendClass::LogitFuncNameBufSize];
-    phwangComposeFuncName(s, this->objectName(), func_name_val);
+    this->composeFuncNameExtra(s, func_name_val);
     phwangLogit2(s, str1_val, str2_val);
 }
 
 void TpTransferClass::logitInt(char const *func_name_val, char const *str1_val, int int1_val)
 {
     char s[AbendClass::LogitFuncNameBufSize];
-    phwangComposeFuncName(s, this->objectName(), func_name_val);
+    this->composeFuncNameExtra(s, func_name_val);
     phwangLogitInt(s, str1_val, int1_val);
 }
 
 void TpTransferClass::logitInt2(char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val)
 {
     char s[AbendClass::LogitFuncNameBufSize];
-    phwangComposeFuncName(s, this->objectName(), func_name_val);
+    this->composeFuncNameExtra(s, func_name_val);
     phwangLogitInt2(s, str1_val, int1_val, str2_val, int2_val);
 }
 
 void TpTransferClass::abend (char const *func_name_val, char const *str1_val) {
     char s[AbendClass::LogitFuncNameBufSize];
-    phwangComposeFuncName(s, this->objectName(), func_name_val);
+    this->composeFuncNameExtra(s, func_name_val);
     phwangAbend(s, str1_val);
 }
 
 void TpTransferClass::abend2 (char const *func_name_val, char const *str1_val, char const *str2_val) {
     char s[AbendClass::LogitFuncNameBufSize];
-    phwangComposeFuncName(s, this->objectName(), func_name_val);
+    this->composeFuncNameExtra(s, func_name_val);
     phwangAbend2(s, str1_val, str2_val);
 }
