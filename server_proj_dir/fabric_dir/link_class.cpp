@@ -46,7 +46,7 @@ void LinkClass::setPendingSessionSetup (char *session_id_index_val, char *theme_
 {
     char *buf, *data_ptr;
 
-    buf = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE);
+    buf = data_ptr = (char *) malloc(ListMgrProtocolClass::LINK_MGR_DATA_BUFFER_SIZE);
     memcpy(data_ptr, session_id_index_val, SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE);
     data_ptr += SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE;
     strcpy(data_ptr, theme_data_val);
@@ -57,7 +57,7 @@ void LinkClass::setPendingSessionSetup3 (char *session_id_index_val, char const 
 {
     char *buf, *data_ptr;
 
-    buf = data_ptr = (char *) malloc(LINK_MGR_DATA_BUFFER_SIZE);
+    buf = data_ptr = (char *) malloc(ListMgrProtocolClass::LINK_MGR_DATA_BUFFER_SIZE);
     memcpy(data_ptr, session_id_index_val, SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE);
     data_ptr += SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE;
     strcpy(data_ptr, theme_data_val);
