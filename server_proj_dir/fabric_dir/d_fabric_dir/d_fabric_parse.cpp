@@ -229,7 +229,7 @@ void DFabricClass::sendMessageResponce (void *tp_transfer_object_val, char const
 
 void DFabricClass::processSignUpRequest (void *tp_transfer_object_val, char *data_val, char const *ajax_id_val)
 {
-    this->debug(true, "processSignUpRequest", data_val);
+    this->debug(false, "processSignUpRequest", data_val);
 
     char *encoded_account_name = data_val;
     int account_name_size;
@@ -243,11 +243,7 @@ void DFabricClass::processSignUpRequest (void *tp_transfer_object_val, char *dat
     int email_size;
     char *email = phwangDecodeStringMalloc(encoded_email, &email_size);
 
-    if (1) { /* debug */
-        char buf[256];
-        sprintf(buf, "account_name=%s password=%s email=%s\n", account_name, password, email);
-        this->logit("processSignUpRequest", buf);
-    }
+    this->debug2(true, "processSignUpRequest", account_name, password);
 
     int result = this->dbAccountObject()->checkAccountNameExist(account_name);
     if (result != DbAccountClass::DB_ACCOUNT_NAME_NOT_EXIST) {
@@ -303,8 +299,7 @@ void DFabricClass::sendSignUpResponce (void *tp_transfer_object_val, char const 
 #define D_FABRIC_CLASS_FAKE_LINK_ID_INDEX "99990000"
 void DFabricClass::processSetupLinkRequest (void *tp_transfer_object_val, char *data_val, char const *ajax_id_val)
 {
-    this->debug(true, "processSetupLink", data_val);
-    this->debug(true, "processSetupLink", ajax_id_val);
+    this->debug(true, "processSetupLinkRequest", data_val);
 
     char *encoded_my_name = data_val;
     int my_name_size;
@@ -314,11 +309,7 @@ void DFabricClass::processSetupLinkRequest (void *tp_transfer_object_val, char *
     int password_size;
     char *password = phwangDecodeStringMalloc(encoded_password, &password_size);
 
-    if (1) { /* debug */
-        char buf[256];
-        sprintf(buf, "my_name=%s password=%s\n", my_name, password);
-        this->logit("processSetupLink", buf);
-    }
+    this->debug2(false, "processSetupLink", my_name, password);
 
     int result = this->dbObject()->dbAccountObject()->checkPassword(my_name, password);
     if (result != DbAccountClass::DB_ACCOUNT_PASSWORD_MATCH) {

@@ -52,7 +52,7 @@ void AbendClass::pLogit (char const *func_name_val, char const *str1_val)
 
 void AbendClass::pLogit2 (char const *func_name_val, char const *str1_val, char const *str2_val)
 {
-    printf("%s() %s, %s\n", func_name_val, str1_val, str2_val);
+    printf("%s() %s %s\n", func_name_val, str1_val, str2_val);
 }
 
 void AbendClass::pLogitInt (char const *func_name_val, char const *str1_val, int int1_val)
@@ -62,7 +62,7 @@ void AbendClass::pLogitInt (char const *func_name_val, char const *str1_val, int
 
 void AbendClass::pLogitInt2 (char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val)
 {
-    printf("%s() %s=%d, %s=%d\n", func_name_val, str1_val, int1_val, str2_val, int2_val);
+    printf("%s() %s=%d %s=%d\n", func_name_val, str1_val, int1_val, str2_val, int2_val);
 }
 
 void AbendClass::pAbend (char const *func_name_val, char const *str1_val)
@@ -77,7 +77,7 @@ void AbendClass::pAbend (char const *func_name_val, char const *str1_val)
 void AbendClass::pAbend2 (char const *func_name_val, char const *str1_val, char const *str2_val)
 {
     printf("*****ABEND******************************************\n");
-    printf("%s(), %s\n", func_name_val, str1_val, str2_val);
+    printf("%s(), %s %s\n", func_name_val, str1_val, str2_val);
     printf("*****ABEND******************************************\n");
     int *junk = 0;
     *junk = 0;
