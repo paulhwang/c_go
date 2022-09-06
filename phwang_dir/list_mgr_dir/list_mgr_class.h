@@ -39,6 +39,7 @@ class ListMgrClass {
     void logitInt2(char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val);
     void abend(char const *func_name_val, char const *str1_val);
     void abend2(char const *func_name_val, char const *str1_val, char const *str2_val);
+    void composeFuncNameExtra(char *buf_val, char const *func_name_val) {phwangComposeFuncNameExtra(buf_val, this->objectName(), func_name_val, this->theCallerName);}
 
 public:
     ListMgrClass(char const *caller_name_val, int id_size_val, int index_size_val, int global_entry_id_val);
