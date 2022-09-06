@@ -24,6 +24,7 @@ void phwangPhwangPhwang (int debug_code_val)
 {
     if (!thePhwangObject) {
         thePhwangObject = new PhwangClass(debug_code_val);
+        thePhwangObject->initObjects();
     }
 }
 
@@ -46,52 +47,52 @@ void phwangDecrementObjectCount (int *object_count_val)
 /* logit */
 void phwangDebug (int on_off_val, char const *func_name_val, char const *str1_val)
 {
-    thePhwangObject->abendObject()->phwangDebug(on_off_val, func_name_val, str1_val);
+    thePhwangObject->abendObject()->pDebug(on_off_val, func_name_val, str1_val);
 }
 
 void phwangDebug2 (int on_off_val, char const *func_name_val, char const *str1_val, char const *str2_val)
 {
-    thePhwangObject->abendObject()->phwangDebug2(on_off_val, func_name_val, str1_val, str2_val);
+    thePhwangObject->abendObject()->pDebug2(on_off_val, func_name_val, str1_val, str2_val);
 }
 
 void phwangDebugInt (int on_off_val, char const *func_name_val, char const *str1_val, int int1_val)
 {
-    thePhwangObject->abendObject()->phwangDebugInt(on_off_val, func_name_val, str1_val, int1_val);
+    thePhwangObject->abendObject()->pDebugInt(on_off_val, func_name_val, str1_val, int1_val);
 }
 
 void phwangDebugInt2 (int on_off_val, char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val)
 {
-    thePhwangObject->abendObject()->phwangDebugInt2(on_off_val, func_name_val, str1_val, int1_val, str2_val, int2_val);
+    thePhwangObject->abendObject()->pDebugInt2(on_off_val, func_name_val, str1_val, int1_val, str2_val, int2_val);
 }
 
 void phwangLogit (char const *func_name_val, char const *str1_val)
 {
-    thePhwangObject->abendObject()->phwangLogit(func_name_val, str1_val);
+    thePhwangObject->abendObject()->pLogit(func_name_val, str1_val);
 }
 
 void phwangLogit2 (char const *func_name_val, char const *str1_val, char const *str2_val)
 {
-    thePhwangObject->abendObject()->phwangLogit2(func_name_val, str1_val, str2_val);
+    thePhwangObject->abendObject()->pLogit2(func_name_val, str1_val, str2_val);
 }
 
 void phwangLogitInt (char const *func_name_val, char const *str1_val, int int1_val)
 {
-    thePhwangObject->abendObject()->phwangLogitInt(func_name_val, str1_val, int1_val);
+    thePhwangObject->abendObject()->pLogitInt(func_name_val, str1_val, int1_val);
 }
 
 void phwangLogitInt2 (char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val)
 {
-    thePhwangObject->abendObject()->phwangLogitInt2(func_name_val, str1_val, int1_val, str2_val, int2_val);
+    thePhwangObject->abendObject()->pLogitInt2(func_name_val, str1_val, int1_val, str2_val, int2_val);
 }
 
 void phwangAbend (char const *func_name_val, char const *str1_val)
 {
-    thePhwangObject->abendObject()->phwangAbend(func_name_val, str1_val);
+    thePhwangObject->abendObject()->pAbend(func_name_val, str1_val);
 }
 
 void phwangAbend2 (char const *func_name_val, char const *str1_val, char const *str2_val)
 {
-    thePhwangObject->abendObject()->phwangAbend2(func_name_val, str1_val, str2_val);
+    thePhwangObject->abendObject()->pAbend2(func_name_val, str1_val, str2_val);
 }
 
 /* malloc and free */

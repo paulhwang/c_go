@@ -20,23 +20,25 @@ PhwangClass::PhwangClass (int debug_code_val)
 {
     memset(this, 0, sizeof(*this));
     this->theDebugCode = debug_code_val;
-
-    this->theObjectObject = new ObjectClass(debug_code_val);
-    this->theAbendObject = new AbendClass(debug_code_val);
-    this->theMallocObject = new MallocClass(debug_code_val);
-    this->theEncodeObject = new EncodeClass(debug_code_val);
-    this->theQueueRootObject = new QueueRootClass(debug_code_val);
-    this->theNetRootObject = new NetRootClass(debug_code_val);
-    this->theThreadRootObject = new ThreadRootClass(debug_code_val);
-    this->theListMgrRootObject = new ListMgrRootClass(debug_code_val);
-    this->theArrayMgrRootObject = new ArrayMgrRootClass(debug_code_val);
-
-    printf("debug_code=%d\n", debug_code_val);
-    this->debug(true, "PhwangClass", "");
 }
 
 PhwangClass::~PhwangClass (void)
 {
+}
+
+void PhwangClass::initObjects (void)
+{
+    this->theObjectObject = new ObjectClass(this->debugCode());
+    this->theAbendObject = new AbendClass(this->debugCode());
+    this->theMallocObject = new MallocClass(this->debugCode());
+    this->theEncodeObject = new EncodeClass(this->debugCode());
+    this->theQueueRootObject = new QueueRootClass(this->debugCode());
+    this->theNetRootObject = new NetRootClass(this->debugCode());
+    this->theThreadRootObject = new ThreadRootClass(this->debugCode());
+    this->theListMgrRootObject = new ListMgrRootClass(this->debugCode());
+    this->theArrayMgrRootObject = new ArrayMgrRootClass(this->debugCode());
+
+    this->debugInt(false, "PhwangClass", "debugCode=", this->debugCode());
 }
 
 void PhwangClass::registerProgramProcess(int *register_tag_ptr_val, char *program_name_val, unsigned short port_val)
@@ -47,14 +49,76 @@ void PhwangClass::registerProgramProcess(int *register_tag_ptr_val, char *progra
     }
 }
 
-void PhwangClass::logit (char const *str0_val, char const *str1_val) {
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
-    this->abendObject()->phwangLogit(s, str1_val);
+void PhwangClass::debug (int debug_on_val, char const *func_name_val, char const *str1_val)
+{
+    if (debug_on_val) {
+        char s[AbendClass::LogitBufSize];
+        sprintf(s, "%s::%s", this->objectName(), func_name_val);
+        phwangDebug(debug_on_val, s, str1_val);
+    }
 }
 
-void PhwangClass::abend (char const *str0_val, char const *str1_val) {
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
-    this->abendObject()->phwangAbend(s, str1_val);
+void PhwangClass::debug2 (int debug_on_val, char const *func_name_val, char const *str1_val, char const *str2_val)
+{
+    if (debug_on_val) {
+        char s[AbendClass::LogitBufSize];
+        sprintf(s, "%s::%s", this->objectName(), func_name_val);
+        phwangDebug2(debug_on_val, s, str1_val, str2_val);
+    }
+}
+
+void PhwangClass::debugInt(int debug_on_val, char const *func_name_val, char const *str1_val, int int1_val)
+{
+    if (debug_on_val) {
+        char s[AbendClass::LogitBufSize];
+        sprintf(s, "%s::%s", this->objectName(), func_name_val);
+        phwangDebugInt(debug_on_val, s, str1_val, int1_val);
+    }
+}
+
+void PhwangClass::debugInt2(int debug_on_val, char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val)
+{
+    if (debug_on_val) {
+        char s[AbendClass::LogitBufSize];
+        sprintf(s, "%s::%s", this->objectName(), func_name_val);
+        phwangDebugInt2(debug_on_val, s, str1_val, int1_val, str2_val, int2_val);
+    }
+}
+
+void PhwangClass::logit (char const *func_name_val, char const *str1_val) {
+    char s[AbendClass::LogitBufSize];
+    sprintf(s, "%s::%s", this->objectName(), func_name_val);
+    phwangLogit(s, str1_val);
+}
+
+void PhwangClass::logit2 (char const *func_name_val, char const *str1_val, char const *str2_val) {
+    char s[AbendClass::LogitBufSize];
+    sprintf(s, "%s::%s", this->objectName(), func_name_val);
+    phwangLogit2(s, str1_val, str2_val);
+}
+
+void PhwangClass::logitInt(char const *func_name_val, char const *str1_val, int int1_val)
+{
+    char s[AbendClass::LogitBufSize];
+    sprintf(s, "%s::%s", this->objectName(), func_name_val);
+    phwangLogitInt(s, str1_val, int1_val);
+}
+
+void PhwangClass::logitInt2(char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val)
+{
+    char s[AbendClass::LogitBufSize];
+    sprintf(s, "%s::%s", this->objectName(), func_name_val);
+    phwangLogitInt2(s, str1_val, int1_val, str2_val, int2_val);
+}
+
+void PhwangClass::abend (char const *func_name_val, char const *str1_val) {
+    char s[AbendClass::LogitBufSize];
+    sprintf(s, "%s::%s", this->objectName(), func_name_val);
+    phwangAbend(s, str1_val);
+}
+
+void PhwangClass::abend2 (char const *func_name_val, char const *str1_val, char const *str2_val) {
+    char s[AbendClass::LogitBufSize];
+    sprintf(s, "%s::%s", this->objectName(), func_name_val);
+    phwangAbend2(s, str1_val, str2_val);
 }
