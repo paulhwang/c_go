@@ -28,12 +28,13 @@ public:
 
     void pAbend(char const *func_name_val, char const *str1_val);
     void pAbend2(char const *func_name_val, char const *str1_val, char const *str2_val);
+    
+    void composeFuncName(char *buf_val, char const *func_name_val);
 
 private:
     char const *objectName(void) {return "AbendClass";}
     int theDebugCode;
 
-    void composeFuncName(char *buf_val, char *func_name_val);
     void debug(int debug_on_val, char const *func_name_val, char const *str1_val);
     void debug2(int debug_on_val, char const *func_name_val, char const *str1_val, char const *str2_val);
     void debugInt(int debug_on_val, char const *func_name_val, char const *str1_val, int int1_val);
