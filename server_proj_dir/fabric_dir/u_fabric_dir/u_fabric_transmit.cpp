@@ -12,7 +12,7 @@ void UFabricClass::transmitFunction (char *data_val)
     this->logit("transmitFunction", data_val);
 
     if (!this->theTpTransferObject) {
-        this->abend("transmitFunction", "null theTpTransferObject");
+        this->abend("transmitFunction", "null theTpTransferObject!\n   The reason could be the connnection from ThemeServer has not been accepted");
         return;
     }
 

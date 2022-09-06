@@ -30,7 +30,11 @@ DFabricClass::~DFabricClass (void)
 }
 
 void dFabricTpServerAcceptFunction (void *d_fabric_object_val, void *tp_transfer_object_val) {
-    phwangLogit("Golbal::dFabricTpServerAcceptFunction", "accepted (http client)");
+    phwangDebug(true, "*****Golbal::dFabricTpServerAcceptFunction", "accepted (http client)");
+    if (!tp_transfer_object_val) {
+        phwangAbend("Golbal::dFabricTpServerAcceptFunction", "null tp_transfer_object_val");
+    }
+
     ((DFabricClass *) d_fabric_object_val)->exportedNetAcceptFunction(tp_transfer_object_val);
 }
 
