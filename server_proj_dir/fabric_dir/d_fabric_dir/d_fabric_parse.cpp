@@ -418,8 +418,8 @@ void DFabricClass::processGetLinkDataRequest (void *tp_transfer_object_val, char
     strcpy(data_ptr, ajax_id_val);
     data_ptr += FECommandClass::AJAX_ID_SIZE;
     *data_ptr++ = WEB_FABRIC_PROTOCOL_RESPOND_IS_GET_LINK_DATA_NAME_LIST;
-    phwangEncodeNumber(data_ptr, this->theFabricObject->nameListObject()->nameListTag(), WEB_FABRIC_PROTOCOL_NAME_LIST_TAG_SIZE);
-    data_ptr += WEB_FABRIC_PROTOCOL_NAME_LIST_TAG_SIZE;
+    phwangEncodeNumber(data_ptr, this->theFabricObject->nameListObject()->nameListTag(), FECommandClass::NAME_LIST_TAG_SIZE);
+    data_ptr += FECommandClass::NAME_LIST_TAG_SIZE;
     *data_ptr = 0;
 
     int max_session_table_array_index = phwnagListMgrGetMaxIndex(link_val->sessionListMgrObject(), "DFabricClass::processGetLinkData()");
