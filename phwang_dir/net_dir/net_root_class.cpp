@@ -29,7 +29,7 @@ void *NetRootClass::mallocTpServer (
                         void *receive_callback_parameter_val,
                         char const *who_val)
 {
-    TpServerClass *tp_server_object = new TpServerClass(
+    TcpServerClass *tp_server_object = new TcpServerClass(
                     caller_object_val,
                     port_val,
                     accept_callback_func_val,
@@ -64,12 +64,12 @@ void NetRootClass::freeTpServer (void *tp_server_object_val)
         return;
     }
 
-    if (strcmp(((TpServerClass *) tp_server_object_val)->objectName(), "TpServerClass")) {
+    if (strcmp(((TcpServerClass *) tp_server_object_val)->objectName(), "TcpServerClass")) {
         this->abend("phwangFreeTpTransfer", "wrong object");
         return;
     }
 
-    delete (TpServerClass *) tp_server_object_val;
+    delete (TcpServerClass *) tp_server_object_val;
 }
 
 void NetRootClass::freeTpTransfer (void *tp_transfer_object_val)

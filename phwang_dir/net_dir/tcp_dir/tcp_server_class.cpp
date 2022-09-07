@@ -19,7 +19,7 @@
 #define MAXHOSTNAME 32
 #define BACKLOG 5
 
-TpServerClass::TpServerClass (
+TcpServerClass::TcpServerClass (
                     void *caller_object_val,
                     unsigned short port_val,
                     void (*accept_callback_func_val)(void *, void *),
@@ -39,19 +39,19 @@ TpServerClass::TpServerClass (
     this->theWho = who_val;
     this->theTpTransferObjectIndex = 1;
 
-    this->debug(false, "TpServerClass", "init");
+    this->debug(false, "TcpServerClass", "init");
 }
 
-TpServerClass::~TpServerClass (void)
+TcpServerClass::~TcpServerClass (void)
 {
 }
 
 void *transportServerThreadFunction (void *tp_server_object_val)
 {
-    return ((TpServerClass *) tp_server_object_val)->serverThreadFunction(0);
+    return ((TcpServerClass *) tp_server_object_val)->serverThreadFunction(0);
 }
 
-void TpServerClass::startServerThread (void)
+void TcpServerClass::startServerThread (void)
 {
     this->debug(false, "startServerThread", "");
 
@@ -62,7 +62,7 @@ void TpServerClass::startServerThread (void)
     }
 }
 
-void *TpServerClass::serverThreadFunction (void *data_val)
+void *TcpServerClass::serverThreadFunction (void *data_val)
 {
     char localhost[MAXHOSTNAME + 1];
     struct servent *sp;
@@ -145,7 +145,7 @@ void *TpServerClass::serverThreadFunction (void *data_val)
     return 0;
 }
 
-void TpServerClass::debug (int debug_on_val, char const *func_name_val, char const *str1_val)
+void TcpServerClass::debug (int debug_on_val, char const *func_name_val, char const *str1_val)
 {
     if (debug_on_val) {
         char s[AbendClass::LogitFuncNameBufSize];
@@ -154,7 +154,7 @@ void TpServerClass::debug (int debug_on_val, char const *func_name_val, char con
     }
 }
 
-void TpServerClass::debug2 (int debug_on_val, char const *func_name_val, char const *str1_val, char const *str2_val)
+void TcpServerClass::debug2 (int debug_on_val, char const *func_name_val, char const *str1_val, char const *str2_val)
 {
     if (debug_on_val) {
         char s[AbendClass::LogitFuncNameBufSize];
@@ -163,7 +163,7 @@ void TpServerClass::debug2 (int debug_on_val, char const *func_name_val, char co
     }
 }
 
-void TpServerClass::debugInt(int debug_on_val, char const *func_name_val, char const *str1_val, int int1_val)
+void TcpServerClass::debugInt(int debug_on_val, char const *func_name_val, char const *str1_val, int int1_val)
 {
     if (debug_on_val) {
         char s[AbendClass::LogitFuncNameBufSize];
@@ -172,7 +172,7 @@ void TpServerClass::debugInt(int debug_on_val, char const *func_name_val, char c
     }
 }
 
-void TpServerClass::debugInt2(int debug_on_val, char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val)
+void TcpServerClass::debugInt2(int debug_on_val, char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val)
 {
     if (debug_on_val) {
         char s[AbendClass::LogitFuncNameBufSize];
@@ -181,39 +181,39 @@ void TpServerClass::debugInt2(int debug_on_val, char const *func_name_val, char 
     }
 }
 
-void TpServerClass::logit (char const *func_name_val, char const *str1_val) {
+void TcpServerClass::logit (char const *func_name_val, char const *str1_val) {
     char s[AbendClass::LogitFuncNameBufSize];
     this->composeFuncNameExtra(s, func_name_val);
     phwangLogit(s, str1_val);
 }
 
-void TpServerClass::logit2 (char const *func_name_val, char const *str1_val, char const *str2_val) {
+void TcpServerClass::logit2 (char const *func_name_val, char const *str1_val, char const *str2_val) {
     char s[AbendClass::LogitFuncNameBufSize];
     this->composeFuncNameExtra(s, func_name_val);
     phwangLogit2(s, str1_val, str2_val);
 }
 
-void TpServerClass::logitInt(char const *func_name_val, char const *str1_val, int int1_val)
+void TcpServerClass::logitInt(char const *func_name_val, char const *str1_val, int int1_val)
 {
     char s[AbendClass::LogitFuncNameBufSize];
     this->composeFuncNameExtra(s, func_name_val);
     phwangLogitInt(s, str1_val, int1_val);
 }
 
-void TpServerClass::logitInt2(char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val)
+void TcpServerClass::logitInt2(char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val)
 {
     char s[AbendClass::LogitFuncNameBufSize];
     this->composeFuncNameExtra(s, func_name_val);
     phwangLogitInt2(s, str1_val, int1_val, str2_val, int2_val);
 }
 
-void TpServerClass::abend (char const *func_name_val, char const *str1_val) {
+void TcpServerClass::abend (char const *func_name_val, char const *str1_val) {
     char s[AbendClass::LogitFuncNameBufSize];
     this->composeFuncNameExtra(s, func_name_val);
     phwangAbend(s, str1_val);
 }
 
-void TpServerClass::abend2 (char const *func_name_val, char const *str1_val, char const *str2_val) {
+void TcpServerClass::abend2 (char const *func_name_val, char const *str1_val, char const *str2_val) {
     char s[AbendClass::LogitFuncNameBufSize];
     this->composeFuncNameExtra(s, func_name_val);
     phwangAbend2(s, str1_val, str2_val);

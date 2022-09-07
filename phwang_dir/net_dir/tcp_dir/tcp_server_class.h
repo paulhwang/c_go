@@ -17,7 +17,7 @@ typedef struct {
     TpTransferClass *tp_transfer_object;
 } StartServerOutputStruct;
 
-class TpServerClass {
+class TcpServerClass {
     void *theCallerObject;
     unsigned short thePort;
     void (*theAcceptCallbackFunc)(void *, void *);
@@ -41,15 +41,15 @@ class TpServerClass {
     void composeFuncNameExtra(char *buf_val, char const *func_name_val) {phwangComposeFuncNameExtra(buf_val, this->objectName(), func_name_val, this->theWho);}
 
 public:
-    TpServerClass(void *caller_object_val,
+    TcpServerClass(void *caller_object_val,
             unsigned short port_val,
             void (*accept_callback_func_val)(void *, void *),
             void *accept_callback_parameter_val,
             void (*receive_callback_func_val)(void *, void *, void *),
             void *receive_callback_parameter_val,
             char const *who_val);
-    ~TpServerClass(void);
-    char const *objectName(void) {return "TpServerClass";}
+    ~TcpServerClass(void);
+    char const *objectName(void) {return "TcpServerClass";}
 
     void *serverThreadFunction(void *data_val);
     void startServerThread(void);
