@@ -21,6 +21,6 @@ public:
 
     void *mallocQueue(int do_suspend_val, int max_size_val);
     void freeQueue(void *queue_val);
-    void enqueue(void *queue_val, void *data_val);
+    int enqueue(void *queue_val, void *data_val);
     void *dequeue(void *queue_val);
 };

@@ -198,9 +198,9 @@ void phwangFreeQueue (void *queue_val, char const *who_val)
     thePhwangObject->queueRootObject()->freeQueue(queue_val);
 }
 
-void phwangEnqueue (void *queue_val, void *data_val)
+int phwangEnqueue (void *queue_val, void *data_val)
 {
-    thePhwangObject->queueRootObject()->enqueue(queue_val, data_val);
+    return thePhwangObject->queueRootObject()->enqueue(queue_val, data_val);
 }
 
 void *phwangDequeue (void *queue_val, char const *who_val)

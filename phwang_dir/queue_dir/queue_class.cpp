@@ -37,21 +37,20 @@ QueueClass::~QueueClass(void)
     delete this->theSuspendObject;
 }
 
-void QueueClass::enqueueData (void *data_val)
+int QueueClass::enqueueData (void *data_val)
 {
     this->debug(false, "enqueueData", (char *) data_val);
 
     /* queue is too big */
     if (this->theMaxQueueSize && (this->theQueueSize > this->theMaxQueueSize)) {
-        phwangFree(data_val);
         this->abend("enqueueData", "queue full");
-        return;
+        return QueueClass::ENQUEUE_FULL;
     }
 
     QueueEntryClass *entry = new QueueEntryClass();
     if (!entry) {
         this->abend("enqueueData", "fail to create new QueueEntryClass");
-        return;
+        return QueueClass::ENQUEUE_NEW_ENTRY_FAIL;
     }
     entry->data = data_val;
 
@@ -64,6 +63,8 @@ void QueueClass::enqueueData (void *data_val)
     if (this->theSuspendObject) {
         this->theSuspendObject->signal();
     }
+
+    return QueueClass::ENQUEUE_SUCCEED;
 }
 
 void *QueueClass::dequeueData (void)

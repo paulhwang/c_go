@@ -39,19 +39,19 @@ void QueueRootClass::freeQueue (void *queue_val)
     delete (QueueClass *) queue_val;
 }
 
-void QueueRootClass::enqueue (void *queue_val, void *data_val)
+int QueueRootClass::enqueue (void *queue_val, void *data_val)
 {
     if (!queue_val) {
         this->abend("enqueue", "null queue_val");
-        return;
+        return QueueClass::ENQUEUE_NULL;
     }
 
     if (strcmp(((QueueClass *) queue_val)->objectName(), "QueueClass")) {
         this->abend("enqueue", "wrong object");
-        return;
+        return QueueClass::ENQUEUE_INVALID_CLASS;
     }
 
-    ((QueueClass *) queue_val)->enqueueData(data_val);
+    return ((QueueClass *) queue_val)->enqueueData(data_val);
 }
 
 void *QueueRootClass::dequeue (void *queue_val)

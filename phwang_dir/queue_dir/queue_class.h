@@ -13,6 +13,14 @@ class SuspendClass;
 class QueueClass
 {
 #define QUEUE_CLASS_DEFAULT_MAX_QUEUE_SIZE 256
+public:
+    static const int ENQUEUE_SUCCEED = 0;
+    static const int ENQUEUE_NULL = 1;
+    static const int ENQUEUE_INVALID_CLASS = 2;
+    static const int ENQUEUE_FULL = 3;
+    static const int ENQUEUE_NEW_ENTRY_FAIL = 4;
+
+private:
     SuspendClass *theSuspendObject;
     int theQueueSize;
     QueueEntryClass *theQueueHead;
@@ -36,6 +44,6 @@ public:
     ~QueueClass(void);
     char const *objectName(void) {return "QueueClass";}
     
-    void enqueueData(void *data_val);
+    int enqueueData(void *data_val);
     void *dequeueData(void);
 };

@@ -40,7 +40,7 @@ void phwangComposeFuncNameExtra(char *buf_val, char const *object_name_val, char
 /* malloc and free */
 void *phwangMalloc(int size_val, int who_val);
 void  phwangFree(void *data_val);
-char *phwangMallocConstStrBuf(char const * str_val);
+char *phwangMallocConstStrBuf(char const *str_val);
 
 /* encode */
 void  phwangEncodeNumber(char *str_val, int number_val, int size_val);
@@ -65,7 +65,7 @@ void phwangDecrementObjectCount(int *object_count_val);
 void *phwangMallocSuspendedQueue(int size_val);
 void *phwangMallocQueue(int size_val);
 void  phwangFreeQueue(void *queue_val, char const *who_val);
-void  phwangEnqueue(void *queue_val, void *data_val);
+int   phwangEnqueue(void *queue_val, void *data_val);
 void *phwangDequeue(void *queue_val, char const *who_val);
 
 /* list_mgr */
