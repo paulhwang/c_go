@@ -19,7 +19,7 @@ public:
     ArrayMgrRootClass(int debug_code_val);
     ~ArrayMgrRootClass(void);
     
-    void *arrayMgrMalloc(char const *caller_name_val, char array_type_val, int max_array_size_val);
+    void *arrayMgrMalloc(char const *who_val, char array_type_val, int max_array_size_val);
     void  arrayMgrFree(void *array_mgr_val);
     void  arrayMgrInsertElement(void *array_mgr_val, void *element_val);
     void  arrayMgrRemoveElement(void *array_mgr_val, void *element_val);

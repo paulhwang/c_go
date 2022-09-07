@@ -7,8 +7,8 @@
 #include "../../phwang_dir/phwang.h"
 #include "array_mgr_class.h"
 
-ArrayMgrClass::ArrayMgrClass(char const *caller_name_val, char array_type_val, int max_array_size_val):
-        theCallerName(caller_name_val),
+ArrayMgrClass::ArrayMgrClass(char const *who_val, char array_type_val, int max_array_size_val):
+        theWho(who_val),
         theArrayType(array_type_val),
         theMaxArraySize(max_array_size_val),
         theArraySize(0)
@@ -131,13 +131,13 @@ void ArrayMgrClass::removePointerElement(void *element_val)
 void ArrayMgrClass::logit (char const* str0_val, char const* str1_val)
 {
     char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s(%s)::%s", this->objectName(), this->theCallerName, str0_val);
+    sprintf(s, "%s(%s)::%s", this->objectName(), this->theWho, str0_val);
     phwangLogit(s, str1_val);
 }
 
 void ArrayMgrClass::abend (char const* str0_val, char const* str1_val)
 {
     char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s(%s)::%s", this->objectName(), this->theCallerName, str0_val);
+    sprintf(s, "%s(%s)::%s", this->objectName(), this->theWho, str0_val);
     phwangAbend(s, str1_val);
 }

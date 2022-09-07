@@ -18,9 +18,9 @@ ListMgrRootClass::~ListMgrRootClass(void)
 {
 }
 
-void *ListMgrRootClass::listMgrMalloc (char const *caller_name_val, int id_size_val, int index_size_val, int global_entry_id_val)
+void *ListMgrRootClass::listMgrMalloc (char const *who_val, int id_size_val, int index_size_val, int global_entry_id_val)
 {
-    ListMgrClass *list_mgr = new ListMgrClass(caller_name_val, id_size_val, index_size_val, global_entry_id_val);
+    ListMgrClass *list_mgr = new ListMgrClass(who_val, id_size_val, index_size_val, global_entry_id_val);
     return list_mgr;
 }
 

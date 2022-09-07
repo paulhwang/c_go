@@ -18,9 +18,9 @@ ArrayMgrRootClass::~ArrayMgrRootClass(void)
 {
 }
 
-void *ArrayMgrRootClass::arrayMgrMalloc(char const *caller_name_val, char array_type_val, int array_size_val)
+void *ArrayMgrRootClass::arrayMgrMalloc(char const *who_val, char array_type_val, int array_size_val)
 {
-    ArrayMgrClass *array_mgr = new ArrayMgrClass(caller_name_val, array_type_val, array_size_val);
+    ArrayMgrClass *array_mgr = new ArrayMgrClass(who_val, array_type_val, array_size_val);
     return array_mgr;
 }
 

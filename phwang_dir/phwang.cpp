@@ -215,9 +215,9 @@ void *phwangDequeue (void *queue_val, char const *who_val)
 }
 
 /* list_mgr */
-void *phwangListMgrMalloc (char const *caller_name_val, int id_size_val, int index_size_val, int global_entry_id_val)
+void *phwangListMgrMalloc (char const *who_val, int id_size_val, int index_size_val, int global_entry_id_val)
 {
-    return thePhwangObject->listMgrRootObject()->listMgrMalloc(caller_name_val, id_size_val, index_size_val, global_entry_id_val);
+    return thePhwangObject->listMgrRootObject()->listMgrMalloc(who_val, id_size_val, index_size_val, global_entry_id_val);
 }
 
 void phwangListMgrFree (void *list_mgr_val)
@@ -246,9 +246,9 @@ void phwangListMgrRemoveEntry (void *list_mgr_val, void *entry_val)
 }
 
 /* array_mgr */
-void *phwangArrayMgrMalloc(char const *caller_name_val, char array_type_val, int max_array_size_val)
+void *phwangArrayMgrMalloc(char const *who_val, char array_type_val, int max_array_size_val)
 {
-    return thePhwangObject->arrayMgrRootObject()->arrayMgrMalloc(caller_name_val, array_type_val, max_array_size_val);
+    return thePhwangObject->arrayMgrRootObject()->arrayMgrMalloc(who_val, array_type_val, max_array_size_val);
 }
 
 void phwangArrayMgrFree (void *array_mgr_val)

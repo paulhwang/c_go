@@ -7,7 +7,7 @@
 #pragma once
 
 class ArrayMgrClass {
-    char const *theCallerName;
+    char const *theWho;
     char theArrayType;
     int theMaxArraySize;
     int theArraySize;
@@ -22,7 +22,7 @@ class ArrayMgrClass {
     void abend(char const *str0_val, char const *str1_val);
 
 public:
-    ArrayMgrClass(char const *caller_name_val, char array_type_val, int max_array_size_val);
+    ArrayMgrClass(char const *who_val, char array_type_val, int max_array_size_val);
     ~ArrayMgrClass(void);
     char const* objectName(void) {return "ArrayMgrClass";}
 
