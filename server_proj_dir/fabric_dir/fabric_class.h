@@ -41,6 +41,7 @@ public:
     ~FabricClass(void);
 
     DbClass *dbObject(void) {return this->theDbObject;}
+    MessengerClass *messengerObject(void) {return this->theMessengerObject;}
     UFabricClass *uFabricObject(void) {return this->theUFabricObject;}
     DFabricClass *dFabricObject(void) {return this->theDFabricObject;}
     NameListClass *nameListObject(void) {return this->theNameListObject;}

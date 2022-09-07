@@ -23,7 +23,7 @@ class DbAccountClass {
     void incrementAccountIndex(void) {this->theAccountIndex++;}
 
     void createAccountTableInDatabase(void);
-    void createAccount(char *name_val, char *psword_val, char *email_val);
+    void createAccount(char const *name_val, char const *psword_val, char const *email_val);
     void listAccount (void);
     void developTest(void);
 

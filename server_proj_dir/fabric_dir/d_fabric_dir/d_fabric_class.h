@@ -24,7 +24,8 @@ class DFabricClass {
 
     DbClass *dbObject(void) {return theFabricObject->dbObject();}
     DbAccountClass *dbAccountObject(void);
-    
+    MessengerClass *messengerObject(void) {return this->theFabricObject->messengerObject();}
+
     void setTimeStampString(void);
     void startNetServer(void);
     void sendMessageResponce(void *tp_transfer_object_val, char const *ajax_id_val, char const *err_msg_val, char const *data_val);

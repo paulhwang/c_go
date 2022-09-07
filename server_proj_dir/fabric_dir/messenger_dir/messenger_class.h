@@ -31,4 +31,8 @@ class MessengerClass {
 public:
     MessengerClass(FabricClass *fabric_object_val);
     ~MessengerClass(void);
+
+    void initMessenger(void);
+    char *getMessage(void);
+    void putMessage(char const *info_val);
 };

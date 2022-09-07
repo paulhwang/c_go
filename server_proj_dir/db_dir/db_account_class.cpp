@@ -65,7 +65,7 @@ void DbAccountClass::createAccountTableInDatabase(void)
     this->createAccount("paul", "a", "paul@phwang.com");
 }
 
-void DbAccountClass::createAccount(char *name_val, char *psword_val, char *email_val)
+void DbAccountClass::createAccount(char const *name_val, char const *psword_val, char const *email_val)
 {
     DbAccountEntryClass *entry = new DbAccountEntryClass();
     entry->setAccountName(phwangMallocConstStrBuf(name_val));

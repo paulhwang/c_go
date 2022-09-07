@@ -15,6 +15,7 @@
 #include "d_fabric_class.h"
 #include "../fabric_class.h"
 #include "../u_fabric_dir/u_fabric_class.h"
+#include "../messenger_dir/messenger_class.h"
 #include "../link_class.h"
 #include "../session_class.h"
 #include "../group_class.h"
@@ -173,6 +174,7 @@ void DFabricClass::processMessageRequest (void *tp_transfer_object_val, char *in
     char *encoded_data = input_data_val;
     int data_size;
     char *data = phwangDecodeStringMalloc(encoded_data, &data_size);
+    char *output_data;
 
     if (1) { /* debug */
         char buf[256];
@@ -182,14 +184,17 @@ void DFabricClass::processMessageRequest (void *tp_transfer_object_val, char *in
 
     switch (act) {
         case 'I':
+            this->messengerObject()->initMessenger();
             this->sendMessageResponce(tp_transfer_object_val, ajax_id_val, "succeed", "I_data");
             break;
 
         case 'R':
+            output_data = this->messengerObject()->getMessage();
             this->sendMessageResponce(tp_transfer_object_val, ajax_id_val, "succeed", "R_data");
             break;
 
         case 'W':
+            this->messengerObject()->putMessage(0);
             this->sendMessageResponce(tp_transfer_object_val, ajax_id_val, "succeed", "W_data");
             break;
 

@@ -20,6 +20,22 @@ MessengerClass::~MessengerClass (void)
 {
 }
 
+void MessengerClass::initMessenger (void)
+{
+    this->debug(true, "initMessenger", "init");
+}
+
+char *MessengerClass::getMessage (void)
+{
+    this->debug(true, "getMessage", "");
+    return 0;
+}
+
+void MessengerClass::putMessage (char const *info_val)
+{
+    this->debug2(true, "putMessage", "data=", info_val);
+}
+
 void MessengerClass::debug (int debug_on_val, char const *func_name_val, char const *str1_val)
 {
     if (debug_on_val) {
