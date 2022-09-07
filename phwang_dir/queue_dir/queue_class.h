@@ -21,6 +21,7 @@ public:
     static const int ENQUEUE_NEW_ENTRY_FAIL = 4;
 
 private:
+    char const *theWho;
     SuspendClass *theSuspendObject;
     int theQueueSize;
     QueueEntryClass *theQueueHead;
@@ -40,10 +41,11 @@ private:
     void abend(char const *str0_val, char const *str1_val);
 
 public:
-    QueueClass(int do_suspend_val, int max_size_val);
+    QueueClass(int do_suspend_val, int max_size_val, char const *who_val);
     ~QueueClass(void);
     char const *objectName(void) {return "QueueClass";}
     
+    char const *who(void) {return this->theWho;}
     int enqueueData(void *data_val);
     void *dequeueData(void);
 };

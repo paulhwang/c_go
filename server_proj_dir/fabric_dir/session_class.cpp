@@ -12,7 +12,7 @@ SessionClass::SessionClass (void *list_mgr_object_val, LinkClass *link_object_va
         theLinkObject(link_object_val),
         theGroupObject(0)
 {
-    this->thePendingDownLinkDataQueue = phwangMallocQueue(0);
+    this->thePendingDownLinkDataQueue = phwangMallocQueue(0, this->objectName());
 
     this->debug(true, "SessionClass", this->sessionIdIndex());
 }

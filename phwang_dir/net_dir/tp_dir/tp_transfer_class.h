@@ -14,12 +14,14 @@ class TpTransferClass {
     const static int RECEIVE_BUFFER_SIZE = 2048;
     const static int TRANSMIT_QUEUE_SIZE = 1024;
     const static int RECEIVE_QUEUE_SIZE  = 1024;
+    static int ObjectCount;
 
     void (*theReceiveCallback)(void *, void *, void *);
     void *theReceiveObject;
     int theSocket;
     int theIndex;
     char const *theWho;
+    char *theWhoForQueue;
     int theMaxDataSize;
 
     pthread_t theReceiveThread;
@@ -51,6 +53,7 @@ public:
     TpTransferClass(int socket_val, void (*receive_callback_val)(void *, void *, void *), void *receive_object_val, char const *who_val);
     ~TpTransferClass(void);
     char const *objectName(void) {return "TpTransferClass";}
+    static int objectCount(void);
 
     /* callback */
     void *receiveThreadFunction(int socket_val);

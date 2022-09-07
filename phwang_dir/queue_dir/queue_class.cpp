@@ -11,9 +11,10 @@
 #include "queue_entry_class.h"
 #include "../suspend_dir/suspend_class.h"
 
-QueueClass::QueueClass(int do_suspend_val, int max_size_val)
+QueueClass::QueueClass(int do_suspend_val, int max_size_val, char const *who_val)
 {
     memset(this, 0, sizeof (*this));
+    this->theWho = who_val;
     this->theMaxQueueSize = max_size_val;
 
     if (do_suspend_val) {
@@ -30,6 +31,8 @@ QueueClass::QueueClass(int do_suspend_val, int max_size_val)
     if (pthread_mutex_init(&this->theMutex, NULL) != 0) {
         this->abend("QueueClass", "pthread_mutex_init fail");
     }
+
+    this->debug(true, "QueueClass", "init");
 }
 
 QueueClass::~QueueClass(void)

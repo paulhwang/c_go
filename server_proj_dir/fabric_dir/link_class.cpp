@@ -23,8 +23,8 @@ LinkClass::LinkClass (void *list_mgr_object_val, FabricClass *fabric_object_val,
     }
     this->theSessionListMgrObject = phwangListMgrMalloc("SESSION", SESSION_MGR_PROTOCOL_SESSION_ID_SIZE, SESSION_MGR_PROTOCOL_SESSION_INDEX_SIZE, 300);
     this->resetKeepAliveTime();
-    this->thePendingSessionSetupQueue = phwangMallocQueue(0);
-    this->thePendingSessionSetupQueue3 = phwangMallocQueue(0);
+    this->thePendingSessionSetupQueue = phwangMallocQueue(0, this->objectName());
+    this->thePendingSessionSetupQueue3 = phwangMallocQueue(0, this->objectName());
 
     this->debug(true, "LinkClass", this->linkIdIndex());
 }

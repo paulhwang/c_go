@@ -6,6 +6,7 @@
 
 #include "../phwang.h"
 #include "../abend_dir/abend_class.h"
+#include "../net_dir/tp_dir/tp_transfer_class.h"
 #include "malloc_class.h"
 
 MallocClass::MallocClass (int debug_code_val)
@@ -107,8 +108,14 @@ void MallocClass::checkWhoTable (void)
     for (int i = 0; i < MAX_INDEX; i++) {
         int count = this->theUserTable[i];
         switch (i) {
-            case 0:
+            case MallocClass::receiveThreadFunction:
                 count -= phwangReceiveThreadCount();
+                break;
+            case MallocClass::TpTransferClassQueue:
+                count -= TpTransferClass::objectCount();
+                if (count != 0) {
+                    this->abend("checkWhoTable", "TpTransferClassQueue");
+                }
                 break;
             default:
                 break;

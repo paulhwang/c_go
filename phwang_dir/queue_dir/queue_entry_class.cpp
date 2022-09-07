@@ -13,12 +13,12 @@ QueueEntryClass::QueueEntryClass (void)
 {
     memset(this, 0, sizeof (*this));
     strcpy(this->theObjectName, "QueueEntryClass");
-    phwangIncrementObjectCount(&ObjectCount, this->objectName(), 3);
+    phwangIncrementObjectCount(&QueueEntryClass::ObjectCount, this->objectName(), 3);
 }
 
 QueueEntryClass::~QueueEntryClass (void)
 {
-    phwangDecrementObjectCount(&ObjectCount);
+    phwangDecrementObjectCount(&QueueEntryClass::ObjectCount);
 
     if (strcmp(this->objectName(), "QueueEntryClass")) {
         this->abend("~QueueEntryClass", this->objectName());

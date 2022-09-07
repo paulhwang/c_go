@@ -178,14 +178,14 @@ void phwangDecodeIdIndex (char const *str_val, int *id_ptr_val, int id_size_val,
 }
 
 /* queue */
-void *phwangMallocSuspendedQueue (int size_val)
+void *phwangMallocSuspendedQueue (int size_val, char const *who_val)
 {
-    return thePhwangObject->queueRootObject()->mallocQueue(true, size_val);
+    return thePhwangObject->queueRootObject()->mallocQueue(true, size_val, who_val);
 }
 
-void *phwangMallocQueue (int size_val)
+void *phwangMallocQueue (int size_val, char const *who_val)
 {
-    return thePhwangObject->queueRootObject()->mallocQueue(false, size_val);
+    return thePhwangObject->queueRootObject()->mallocQueue(false, size_val, who_val);
 }
 
 void phwangFreeQueue (void *queue_val, char const *who_val)
@@ -203,7 +203,7 @@ int phwangEnqueue (void *queue_val, void *data_val)
 {
     int result = thePhwangObject->queueRootObject()->enqueue(queue_val, data_val);
     if (result != QueueClass::ENQUEUE_SUCCEED) {
-        phwangLogitInt("phwangEnqueue", "fail_code=", result);
+        phwangLogitInt("phwangEnqueue", "***fail_code=", result);
     }
     return result;
 }

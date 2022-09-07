@@ -6,7 +6,12 @@
 
 #include "../../../phwang_dir/phwang.h"
 #include "../../../phwang_dir/abend_dir/abend_class.h"
+#include "../../../phwang_dir/malloc_dir/malloc_class.h"
 #include "tp_transfer_class.h"
+
+int TpTransferClass::ObjectCount;
+
+int TpTransferClass::objectCount(void) {return TpTransferClass::ObjectCount;}
 
 TpTransferClass::TpTransferClass (int socket_val,
                                   void (*receive_callback_val)(void *, void *, void *),
@@ -14,20 +19,25 @@ TpTransferClass::TpTransferClass (int socket_val,
                                   char const *who_val)
 {
     memset(this, 0, sizeof(*this));
+    phwangIncrementObjectCount(&TpTransferClass::ObjectCount, this->objectName(), 5);
     this->theSocket = socket_val;
     this->theReceiveCallback = receive_callback_val;
     this->theReceiveObject = receive_object_val;
     this->theWho = who_val;
     this->setMaxDataSize();
 
-    this->theReceiveQueue = phwangMallocSuspendedQueue(TpTransferClass::RECEIVE_QUEUE_SIZE);
-    this->theTransmitQueue = phwangMallocSuspendedQueue(TpTransferClass::TRANSMIT_QUEUE_SIZE);
+    this->theWhoForQueue = (char *) phwangMalloc(strlen(this->objectName()) + strlen(this->theWho), MallocClass::TpTransferClassQueue);
+
+    this->theReceiveQueue = phwangMallocSuspendedQueue(TpTransferClass::RECEIVE_QUEUE_SIZE, this->theWhoForQueue);
+    this->theTransmitQueue = phwangMallocSuspendedQueue(TpTransferClass::TRANSMIT_QUEUE_SIZE, this->theWhoForQueue);
 
     this->debug(true, "TpTransferClass", "init");
 }
 
 TpTransferClass::~TpTransferClass (void)
 {
+    phwangDecrementObjectCount(&TpTransferClass::ObjectCount);
+    phwangFree(this->theWhoForQueue);
 }
 
 void TpTransferClass::startThreads (int index_val)

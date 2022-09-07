@@ -18,9 +18,10 @@ QueueRootClass::~QueueRootClass(void)
 {
 }
 
-void *QueueRootClass::mallocQueue (int do_suspend_val, int max_size_val)
+void *QueueRootClass::mallocQueue (int do_suspend_val, int max_size_val, char const *who_val)
 {
-    QueueClass *queue = new QueueClass(do_suspend_val, max_size_val);
+    QueueClass *queue = new QueueClass(do_suspend_val, max_size_val, who_val);
+    this->theNumberOfQueue++;
     return queue;
 }
 
@@ -36,6 +37,7 @@ void QueueRootClass::freeQueue (void *queue_val)
         return;
     }
 
+    this->theNumberOfQueue--;
     delete (QueueClass *) queue_val;
 }
 

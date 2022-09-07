@@ -16,7 +16,7 @@ MmwClass::MmwClass (FabricClass *fabric_object_val)
     memset(this, 0, sizeof(*this));
     this->theFabricObject = fabric_object_val;
 
-    this->theInputQueue = phwangMallocSuspendedQueue(MMW_CLASS_INPUT_QUEUE_SIZE);
+    this->theInputQueue = phwangMallocSuspendedQueue(MMW_CLASS_INPUT_QUEUE_SIZE, this->objectName());
 
     this->theMmwInputObject = new MmwInputClass(this);
     this->startInputThread();
