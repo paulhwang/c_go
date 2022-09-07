@@ -60,7 +60,7 @@ PHWANG_OBJS = $(PHWANG_DIR)/phwang.o $(PHWANG_DIR)/phwang_class.o $(JSON_OBJS) $
 
 SERVER_OBJS = $(SERVER_DIR)/server_main.o $(SERVER_DIR)/server_root_class.o
 DB_OBJS = $(DB_DIR)/db_class.o $(DB_DIR)/db_account_class.o $(DB_DIR)/db_account_entry_class.o $(DB_DIR)/db_test_class.o
-MESSENGER_OBJS = $(MESSENGER_DIR)/messenger_class.o
+MESSENGER_OBJS = $(MESSENGER_DIR)/messenger_class.o $(MESSENGER_DIR)/mmw_frame_class.o $(MESSENGER_DIR)/mmw_input_class.o $(MESSENGER_DIR)/mmw_thread_class.o $(MESSENGER_DIR)/mmw_class.o
 D_FABRIC_OBJS = $(D_FABRIC_DIR)/d_fabric_class.o $(D_FABRIC_DIR)/d_fabric_transmit.o $(D_FABRIC_DIR)/d_fabric_parse.o
 U_FABRIC_OBJS = $(U_FABRIC_DIR)/u_fabric_class.o $(U_FABRIC_DIR)/u_fabric_transmit.o $(U_FABRIC_DIR)/u_fabric_parse.o 
 FABRIC_OBJS = $(MESSENGER_OBJS) $(U_FABRIC_OBJS) $(D_FABRIC_OBJS) $(FABRIC_DIR)/fabric_class.o $(FABRIC_DIR)/fabric_thread.o $(FABRIC_DIR)/link_class.o $(FABRIC_DIR)/session_class.o $(FABRIC_DIR)/group_class.o $(FABRIC_DIR)/name_list_class.o 
