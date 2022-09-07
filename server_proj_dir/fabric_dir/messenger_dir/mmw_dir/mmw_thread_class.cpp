@@ -4,8 +4,8 @@
   File name: mmw_thread.cpp
 */
 
-#include "../../../phwang_dir/phwang.h"
-#include "../../../phwang_dir/abend_dir/abend_class.h"
+#include "../../../../phwang_dir/phwang.h"
+#include "../../../../phwang_dir/abend_dir/abend_class.h"
 #include "mmw_class.h"
 #include "mmw_input_class.h"
 #include "mmw_frame_class.h"
