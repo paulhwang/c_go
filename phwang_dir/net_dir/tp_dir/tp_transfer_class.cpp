@@ -4,8 +4,8 @@
   File name: tp_transfer_class.cpp
 */
 
-#include "../../phwang_dir/phwang.h"
-#include "../../phwang_dir/abend_dir/abend_class.h"
+#include "../../../phwang_dir/phwang.h"
+#include "../../../phwang_dir/abend_dir/abend_class.h"
 #include "tp_transfer_class.h"
 
 TpTransferClass::TpTransferClass (int socket_val,

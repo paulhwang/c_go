@@ -6,7 +6,7 @@
 
 #include "../phwang.h"
 #include "net_root_class.h"
-#include "tp_transfer_class.h"
+#include "tp_dir/tp_transfer_class.h"
 #include "tcp_dir/tcp_server_class.h"
 #include "tcp_dir/tcp_connect_class.h"
 

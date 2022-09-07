@@ -8,8 +8,8 @@
 #include <stdlib.h>
 #include <pthread.h>
 #include <netinet/in.h>
-#include "../../phwang_dir/phwang.h"
-#include "../../phwang_dir/malloc_dir/malloc_class.h"
+#include "../../../phwang_dir/phwang.h"
+#include "../../../phwang_dir/malloc_dir/malloc_class.h"
 #include "tp_transfer_class.h"
 
 void TpTransferClass::exportTransmitData (void *data_val)
