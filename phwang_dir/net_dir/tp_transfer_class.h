@@ -7,6 +7,8 @@
 #pragma once
 #include <pthread.h>
 
+#define TP_PHWANG_LOGO "phwang168"
+
 class TpTransferClass {
     const static int DATA_LENGTH_SIZE = 4;
     const static int RECEIVE_BUFFER_SIZE = 2048;
