@@ -10,6 +10,7 @@
 #include "abend_dir/abend_class.h"
 #include "encode_dir/encode_class.h"
 #include "malloc_dir/malloc_class.h"
+#include "queue_dir/queue_class.h"
 #include "object_dir/object_class.h"
 #include "queue_dir/queue_root_class.h"
 #include "net_dir/net_root_class.h"
@@ -200,7 +201,11 @@ void phwangFreeQueue (void *queue_val, char const *who_val)
 
 int phwangEnqueue (void *queue_val, void *data_val)
 {
-    return thePhwangObject->queueRootObject()->enqueue(queue_val, data_val);
+    int result = thePhwangObject->queueRootObject()->enqueue(queue_val, data_val);
+    if (result != QueueClass::ENQUEUE_SUCCEED) {
+        phwangLogitInt("phwangEnqueue", "fail_code=", result);
+    }
+    return result;
 }
 
 void *phwangDequeue (void *queue_val, char const *who_val)
