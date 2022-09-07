@@ -8,12 +8,14 @@
 #include "../../phwang_dir/abend_dir/abend_class.h"
 #include "array_mgr_class.h"
 
-ArrayMgrClass::ArrayMgrClass(char const *who_val, char array_type_val, int max_array_size_val):
-        theWho(who_val),
-        theArrayType(array_type_val),
-        theMaxArraySize(max_array_size_val),
-        theArraySize(0)
+ArrayMgrClass::ArrayMgrClass(char const *who_val, char array_type_val, int max_array_size_val)
 {
+    memset(this, 0, sizeof(ArrayMgrClass));
+    this->theWho = who_val;
+    this->theArrayType = array_type_val;
+    this->theMaxArraySize = max_array_size_val;
+    this->theArraySize = 0;
+
     this->allocArrayTable();
     this->debug(true, "ArrayMgrClass", "init");
 }
