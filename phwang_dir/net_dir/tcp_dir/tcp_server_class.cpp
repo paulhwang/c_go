@@ -37,7 +37,7 @@ TcpServerClass::TcpServerClass (
     this->theAcceptCallbackParameter = accept_callback_parameter_val;
     this->theReceiveCallbackParameter = receive_callback_parameter_val;
     this->theWho = who_val;
-    this->theTpTransferObjectIndex = 1;
+    this->theTpTransferObjectIndex = TpTransferClass::SERVER_INDEX;
 
     this->debug(false, "TcpServerClass", "init");
 }

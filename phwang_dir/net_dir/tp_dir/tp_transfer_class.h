@@ -10,10 +10,16 @@
 #define TP_PHWANG_LOGO "phwang168"
 
 class TpTransferClass {
+public:
+    const static int CLIENT_INDEX  = 0;
+    const static int SERVER_INDEX  = 1;
+
+private:
     const static int DATA_LENGTH_SIZE = 4;
     const static int RECEIVE_BUFFER_SIZE = 2048;
     const static int TRANSMIT_QUEUE_SIZE = 1024;
     const static int RECEIVE_QUEUE_SIZE  = 1024;
+
     static int ObjectCount;
 
     void (*theReceiveCallback)(void *, void *, void *);
