@@ -21,7 +21,8 @@ class TpTransferClass {
     int theSocket;
     int theIndex;
     char const *theWho;
-    char *theWhoForQueue;
+    char *theWhoReceiveQueue;
+    char *theWhoTransmitQueue;
     int theMaxDataSize;
 
     pthread_t theReceiveThread;

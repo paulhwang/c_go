@@ -26,10 +26,19 @@ TpTransferClass::TpTransferClass (int socket_val,
     this->theWho = who_val;
     this->setMaxDataSize();
 
-    this->theWhoForQueue = (char *) phwangMalloc(strlen(this->objectName()) + strlen(this->theWho), MallocClass::TpTransferClassQueue);
+    this->theWhoReceiveQueue = (char *) phwangMalloc(strlen(this->objectName()) + strlen(this->theWho) + 32, MallocClass::TpTransferClassQueue);
+    strcpy(this->theWhoReceiveQueue, this->objectName());
+    strcat(this->theWhoReceiveQueue, ":");
+    strcat(this->theWhoReceiveQueue, this->theWho);
+    strcat(this->theWhoReceiveQueue, ":Transmit");
+    this->theReceiveQueue = phwangMallocSuspendedQueue(TpTransferClass::RECEIVE_QUEUE_SIZE, this->theWhoReceiveQueue);
 
-    this->theReceiveQueue = phwangMallocSuspendedQueue(TpTransferClass::RECEIVE_QUEUE_SIZE, this->theWhoForQueue);
-    this->theTransmitQueue = phwangMallocSuspendedQueue(TpTransferClass::TRANSMIT_QUEUE_SIZE, this->theWhoForQueue);
+    this->theWhoTransmitQueue = (char *) phwangMalloc(strlen(this->objectName()) + strlen(this->theWho) + 32, MallocClass::TpTransferClassQueue);
+    strcpy(this->theWhoTransmitQueue, this->objectName());
+    strcat(this->theWhoTransmitQueue, ":");
+    strcat(this->theWhoTransmitQueue, this->theWho);
+    strcat(this->theWhoTransmitQueue, ":Receive");
+    this->theTransmitQueue = phwangMallocSuspendedQueue(TpTransferClass::TRANSMIT_QUEUE_SIZE, this->theWhoTransmitQueue);
 
     this->debug(true, "TpTransferClass", "init");
 }
@@ -37,7 +46,8 @@ TpTransferClass::TpTransferClass (int socket_val,
 TpTransferClass::~TpTransferClass (void)
 {
     phwangDecrementObjectCount(&TpTransferClass::ObjectCount);
-    phwangFree(this->theWhoForQueue);
+    phwangFree(this->theWhoTransmitQueue);
+    phwangFree(this->theWhoReceiveQueue);
 }
 
 void TpTransferClass::startThreads (int index_val)

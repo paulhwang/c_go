@@ -7,6 +7,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "../phwang.h"
+#include "../abend_dir/abend_class.h"
 #include "queue_class.h"
 #include "queue_entry_class.h"
 #include "../suspend_dir/suspend_class.h"
@@ -215,12 +216,76 @@ void QueueClass::flushQueue(void)
     pthread_mutex_unlock(&this->theMutex);
 }
 
-void QueueClass::logit (char const* str0_val, char const* str1_val)
+void QueueClass::debug (int debug_on_val, char const *func_name_val, char const *str1_val)
 {
-    phwangLogit(str0_val, str1_val);
+    if (debug_on_val) {
+        char s[AbendClass::LogitFuncNameBufSize];
+        this->composeFuncNameExtra(s, func_name_val);
+        phwangDebug(debug_on_val, s, str1_val);
+    }
 }
 
-void QueueClass::abend (char const* str0_val, char const* str1_val)
+void QueueClass::debug2 (int debug_on_val, char const *func_name_val, char const *str1_val, char const *str2_val)
 {
-    phwangAbend(str0_val, str1_val);
+    if (debug_on_val) {
+        char s[AbendClass::LogitFuncNameBufSize];
+        this->composeFuncNameExtra(s, func_name_val);
+        phwangDebug2(debug_on_val, s, str1_val, str2_val);
+    }
+}
+
+void QueueClass::debugInt(int debug_on_val, char const *func_name_val, char const *str1_val, int int1_val)
+{
+    if (debug_on_val) {
+        char s[AbendClass::LogitFuncNameBufSize];
+        this->composeFuncNameExtra(s, func_name_val);
+        phwangDebugInt(debug_on_val, s, str1_val, int1_val);
+    }
+}
+
+void QueueClass::debugInt2(int debug_on_val, char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val)
+{
+    if (debug_on_val) {
+        char s[AbendClass::LogitFuncNameBufSize];
+        this->composeFuncNameExtra(s, func_name_val);
+        phwangDebugInt2(debug_on_val, s, str1_val, int1_val, str2_val, int2_val);
+    }
+}
+
+void QueueClass::logit (char const *func_name_val, char const *str1_val) {
+    char s[AbendClass::LogitFuncNameBufSize];
+    this->composeFuncNameExtra(s, func_name_val);
+    phwangLogit(s, str1_val);
+}
+
+void QueueClass::logit2 (char const *func_name_val, char const *str1_val, char const *str2_val) {
+    char s[AbendClass::LogitFuncNameBufSize];
+    this->composeFuncNameExtra(s, func_name_val);
+    phwangLogit2(s, str1_val, str2_val);
+}
+
+void QueueClass::logitInt(char const *func_name_val, char const *str1_val, int int1_val)
+{
+    char s[AbendClass::LogitFuncNameBufSize];
+    this->composeFuncNameExtra(s, func_name_val);
+    phwangLogitInt(s, str1_val, int1_val);
+}
+
+void QueueClass::logitInt2(char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val)
+{
+    char s[AbendClass::LogitFuncNameBufSize];
+    this->composeFuncNameExtra(s, func_name_val);
+    phwangLogitInt2(s, str1_val, int1_val, str2_val, int2_val);
+}
+
+void QueueClass::abend (char const *func_name_val, char const *str1_val) {
+    char s[AbendClass::LogitFuncNameBufSize];
+    this->composeFuncNameExtra(s, func_name_val);
+    phwangAbend(s, str1_val);
+}
+
+void QueueClass::abend2 (char const *func_name_val, char const *str1_val, char const *str2_val) {
+    char s[AbendClass::LogitFuncNameBufSize];
+    this->composeFuncNameExtra(s, func_name_val);
+    phwangAbend2(s, str1_val, str2_val);
 }

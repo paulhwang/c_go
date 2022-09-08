@@ -112,8 +112,9 @@ void MallocClass::checkWhoTable (void)
                 count -= phwangReceiveThreadCount();
                 break;
             case MallocClass::TpTransferClassQueue:
-                count -= TpTransferClass::objectCount();
+                count -= TpTransferClass::objectCount() * 2;
                 if (count != 0) {
+                    printf("=%d =%d\n", count, TpTransferClass::objectCount() * 2);
                     this->abend("checkWhoTable", "TpTransferClassQueue");
                 }
                 break;
