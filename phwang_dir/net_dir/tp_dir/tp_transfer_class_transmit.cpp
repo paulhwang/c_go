@@ -22,11 +22,7 @@ void *TpTransferClass::transmitThreadFunction(int socket_val)
     while (1) {
         char *data = (char *) phwangDequeue(this->theTransmitQueue, "TpTransferClass::transmitThreadFunction()");
         if (data) {
-            if (0) { /* debug */
-                char s[128];
-                sprintf(s, "(%s) data=%s", this->theWho, data);
-                this->debug(false, "transmitThreadFunction", s);
-            }
+            this->debug2(false, "transmitThreadFunction", "data=", data);
 
             int length = strlen(data);
             char *ptr;
@@ -46,11 +42,7 @@ void *TpTransferClass::transmitThreadFunction(int socket_val)
                 send(socket_val, buf , strlen(buf) , 0);
             }
             else {
-                if (1) { /* debug */
-                    char s[128];
-                    sprintf(s, "(%s) length=%d", this->theWho, length);
-                    this->debug(true, "transmitThreadFunction", s);
-                }
+                this->debugInt(true, "transmitThreadFunction", "length=", length);
                 this->abend("transmitThreadFunction", "*****LENGTH TOO BIG*****");
             }
 
