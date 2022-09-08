@@ -70,7 +70,6 @@ public:
     int const static decodeStringMalloc = 8;
     int const static mallocConstStrBuf_ = 9;
     int const static TEST_SETUP_LINK = 10;
-    int const static TpTransferClassQueue =11;
 
     int const static MAX_INDEX = 20;
 

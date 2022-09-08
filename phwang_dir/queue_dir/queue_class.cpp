@@ -33,7 +33,7 @@ QueueClass::QueueClass(int do_suspend_val, int max_size_val, char const *who_val
         this->abend("QueueClass", "pthread_mutex_init fail");
     }
 
-    this->debug(true, "QueueClass", "init");
+    this->debug(false, "QueueClass", "init");
 }
 
 QueueClass::~QueueClass(void)
