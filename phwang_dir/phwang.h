@@ -10,6 +10,7 @@
 #include <unistd.h>
 #include <malloc.h>
 #include <pthread.h>
+#include <atomic>
 #include "phwang_class.h"
 
 /* init */
@@ -60,6 +61,8 @@ void  phwangDecodeIdIndex(char const *str_val, int *id_ptr_val, int id_size_val,
 /* object_count */
 void phwangIncrementObjectCount(int *object_count_val, char const *object_name_val, int max_object_count_val);
 void phwangDecrementObjectCount(int *object_count_val);
+void phwangIncrementAtomicCount(std::atomic<int> *count_val, char const *who_val, int max_count_val);
+void phwangDecrementAtomicCount(std::atomic<int> *count_val, char const *who_val);
 
 /* queue */
 void *phwangMallocSuspendedQueue(int size_val, char const *who_val);
