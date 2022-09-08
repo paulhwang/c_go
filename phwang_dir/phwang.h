@@ -59,8 +59,6 @@ void  phwangEncodeIdIndex(char *str_val, int id_val, int id_size_val, int index_
 void  phwangDecodeIdIndex(char const *str_val, int *id_ptr_val, int id_size_val, int *index_ptr_val, int index_size_val);
 
 /* object_count */
-void phwangIncrementObjectCount1(int *object_count_val, char const *object_name_val, int max_object_count_val);
-void phwangDecrementObjectCount(int *object_count_val);
 void phwangIncrementAtomicCount(std::atomic<int> *count_val, char const *who_val, int max_count_val);
 void phwangDecrementAtomicCount(std::atomic<int> *count_val, char const *who_val);
 

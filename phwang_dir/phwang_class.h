@@ -11,7 +11,6 @@
 class AbendClass;
 class EncodeClass;
 class MallocClass;
-class ObjectClass;
 class QueueRootClass;
 class NetRootClass;
 class ThreadRootClass;
@@ -22,7 +21,6 @@ class PhwangClass {
     char const *objectName(void) {return "PhwangClass";}
     int theDebugCode;
 
-    ObjectClass *theObjectObject;
     AbendClass *theAbendObject;
     EncodeClass *theEncodeObject;
     MallocClass *theMallocObject;
@@ -51,7 +49,6 @@ public:
     int debugCode(void) {return this->theDebugCode;}
 
     AbendClass *abendObject(void) {return this->theAbendObject;}
-    ObjectClass *objectObject(void) {return this->theObjectObject;}
     EncodeClass *encodeObject(void) {return this->theEncodeObject;}
     MallocClass *mallocObject(void) {return this->theMallocObject;}
     QueueRootClass *queueRootObject(void) {return this->theQueueRootObject;}

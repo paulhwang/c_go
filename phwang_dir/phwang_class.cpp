@@ -9,7 +9,6 @@
 #include "abend_dir/abend_class.h"
 #include "encode_dir/encode_class.h"
 #include "malloc_dir/malloc_class.h"
-#include "object_dir/object_class.h"
 #include "queue_dir/queue_root_class.h"
 #include "net_dir/net_root_class.h"
 #include "thread_dir/thread_root_class.h"
@@ -28,7 +27,6 @@ PhwangClass::~PhwangClass (void)
 
 void PhwangClass::initObjects (void)
 {
-    this->theObjectObject = new ObjectClass(this->debugCode());
     this->theAbendObject = new AbendClass(this->debugCode());
     this->theMallocObject = new MallocClass(this->debugCode());
     this->theEncodeObject = new EncodeClass(this->debugCode());
