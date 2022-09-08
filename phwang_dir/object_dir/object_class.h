@@ -6,6 +6,8 @@
 
 #pragma once
 
+#include <atomic>
+
 class ObjectClass
 {
     char const *objectName(void) {return "ObjectClass";}
@@ -19,6 +21,8 @@ public:
     ObjectClass(int debug_code_val);
     ~ObjectClass(void);
 
-    void incrementObjectCount(int *object_count_val, char const *object_name_val, int max_object_count_val);
+    void incrementObjectCount(int *object_count_val, char const *who_val, int max_object_count_val);
     void decrementObjectCount(int *object_count_val);
+    void incrementAtomicCount(std::atomic<int> *count_val, char const *object_name_val, int max_count_val);
+    void decrementAtomicCount(std::atomic<int> *count_val);
 };

@@ -7,7 +7,8 @@
 #include "../phwang.h"
 #include "queue_entry_class.h"
 
-int QueueEntryClass::ObjectCount;
+int QueueEntryClass::ObjectCount = 0;
+std::atomic<int> x(0);
 
 QueueEntryClass::QueueEntryClass (void)
 {

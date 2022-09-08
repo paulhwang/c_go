@@ -35,6 +35,24 @@ void ObjectClass::decrementObjectCount(int *object_count_val)
     }
 }
 
+void ObjectClass::incrementAtomicCount(std::atomic<int> *count_val, char const *who_val, int max_count_val)
+{
+    (*count_val)++;
+    if (*count_val > max_count_val) {
+        printf("incrementAtomicCount(), count=%d\n", (*count_val).load());
+        phwangAbend("incrementAtomicCount", who_val);
+    }
+}
+
+void ObjectClass::decrementAtomicCount(std::atomic<int> *count_val)
+{
+    (*count_val)--;
+    if (*count_val < 0) {
+        printf("decrementAtomicCount(), count=%d\n", (*count_val).load());
+        phwangAbend("decrementAtomicCount", "too small");
+    }
+}
+
 void ObjectClass::logit (char const *str0_val, char const *str1_val)
 {
     char s[LOGIT_BUF_SIZE];
