@@ -16,8 +16,6 @@
 
 void *TpTransferClass::receiveThreadFunction2 (void)
 {
-    char const *func_name_ = "receiveThreadFunction2";
-
     while (1) {
         char *raw_data = (char *) phwangDequeue(this->theReceiveQueue, "TpTransferClass::receiveThreadFunction2()");
         if (raw_data) {
@@ -29,7 +27,7 @@ void *TpTransferClass::receiveThreadFunction2 (void)
             if (0) { /* debug */
                 char s[128];
                 sprintf(s, "(%s) data=%s", this->theWho, raw_data);
-                this->logit(func_name_, s);
+                this->debug(true, "receiveThreadFunction2", s);
             }
 
             if (raw_data[0] == '{') {
@@ -38,7 +36,7 @@ void *TpTransferClass::receiveThreadFunction2 (void)
                 if (length != length1) {
                     char s[128];
                     sprintf(s, "(%s) length not match!!! data=%s len=%d %d", this->theWho, raw_data, length, length1);
-                    this->abend(func_name_, s);
+                    this->abend("receiveThreadFunction2", s);
                 }
 
                 data = (char *) phwangMalloc(length + 32, MallocClass::receiveThreadFunction2);
@@ -49,7 +47,7 @@ void *TpTransferClass::receiveThreadFunction2 (void)
                 if (1) { /* debug */
                     char s[2000];
                     sprintf(s, "(%s) data=%s len=%lu", this->theWho, raw_data, strlen(raw_data));
-                    this->logit(func_name_, s);
+                    this->debug(true, "receiveThreadFunction2", s);
                 }
                 this->abend("receiveThreadFunction2: wrong header", raw_data);
                 continue;

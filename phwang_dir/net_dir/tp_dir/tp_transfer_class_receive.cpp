@@ -16,8 +16,6 @@
 
 void *TpTransferClass::receiveThreadFunction(int socket_val)
 {
-    char const *func_name_ = "receiveThreadFunction";
-
     phwangIncrementReceiveThreadCount();
 
     while (1) {
@@ -30,14 +28,14 @@ void *TpTransferClass::receiveThreadFunction(int socket_val)
             if (0) { /* debug */
                 char s[128];
                 sprintf(s, "(%s) data=%s len=%d", this->theWho, data, length);
-                this->logit(func_name_, s);
+                this->debug(true, "receiveThreadFunction", s);
             }
 
             if ((*data != '{') && (*data != '[')) {
                 if (1) { /* debug */
                     char s[2000];
                     sprintf(s, "(%s) data=%s len=%d", this->theWho, data, length);
-                    this->logit(func_name_, s);
+                    this->debug(true, "receiveThreadFunction", s);
                 }
                 this->abend("receiveThreadFunction: wrong header", data);
                 phwangFree(data);
