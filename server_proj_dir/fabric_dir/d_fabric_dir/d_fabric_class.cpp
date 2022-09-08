@@ -30,7 +30,6 @@ DFabricClass::~DFabricClass (void)
 }
 
 void dFabricTpServerAcceptFunction (void *d_fabric_object_val, void *tp_transfer_object_val) {
-    phwangDebug(true, "*****Golbal::dFabricTpServerAcceptFunction", "accepted (http client)");
     if (!tp_transfer_object_val) {
         phwangAbend("Golbal::dFabricTpServerAcceptFunction", "null tp_transfer_object_val");
     }
@@ -44,12 +43,8 @@ void DFabricClass::exportedNetAcceptFunction (void *tp_transfer_object_val)
 }
 
 void dFabricTpReceiveDataFunction (void *tp_transfer_object_val, void *d_fabric_object_val, void *data_val) {
-    if (0) { /* debug */
-        if (*((char *)data_val) != FECommandClass::GET_LINK_DATA_COMMAND) {
-            char s[128];
-            sprintf(s, "%s index=%d", (char *) data_val, ((TpTransferClass *) tp_transfer_object_val)->index());
-            phwangLogit("Golbal::dFabricTpReceiveDataFunction", s);
-        }
+    if (*((char *)(data_val + 1)) != FECommandClass::GET_LINK_DATA_COMMAND) {
+        phwangDebugInt2(false,"Golbal::dFabricTpReceiveDataFunction", (char *) data_val, 99999, "index", ((TpTransferClass *) tp_transfer_object_val)->index());
     }
 
     ((DFabricClass *) d_fabric_object_val)->exportedParseFunction(tp_transfer_object_val, (char *) data_val);
