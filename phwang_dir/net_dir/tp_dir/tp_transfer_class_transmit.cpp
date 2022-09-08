@@ -19,15 +19,13 @@ void TpTransferClass::exportTransmitData (void *data_val)
 
 void *TpTransferClass::transmitThreadFunction(int socket_val)
 {
-    char const *func_name_ = "transmitThreadFunction";
-
     while (1) {
         char *data = (char *) phwangDequeue(this->theTransmitQueue, "TpTransferClass::transmitThreadFunction()");
         if (data) {
             if (0) { /* debug */
                 char s[128];
                 sprintf(s, "(%s) data=%s", this->theWho, data);
-                this->logit(func_name_, s);
+                this->debug(false, "transmitThreadFunction", s);
             }
 
             int length = strlen(data);
@@ -43,11 +41,7 @@ void *TpTransferClass::transmitThreadFunction(int socket_val)
                 *ptr++ = '}';
                 *ptr = 0;
 
-                if (0) { /* debug */
-                    char s[128];
-                    sprintf(s, "(%s) buf=%s", this->theWho, buf);
-                    this->logit(func_name_, s);
-                }
+                this->debug(false, "transmitThreadFunction", buf);
 
                 send(socket_val, buf , strlen(buf) , 0);
             }
@@ -55,9 +49,9 @@ void *TpTransferClass::transmitThreadFunction(int socket_val)
                 if (1) { /* debug */
                     char s[128];
                     sprintf(s, "(%s) length=%d", this->theWho, length);
-                    this->logit(func_name_, s);
+                    this->debug(true, "transmitThreadFunction", s);
                 }
-                this->abend(func_name_, "*****LENGTH TOO BIG*****");
+                this->abend("transmitThreadFunction", "*****LENGTH TOO BIG*****");
             }
 
             phwangFree(data);
