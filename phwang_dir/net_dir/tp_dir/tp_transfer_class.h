@@ -6,6 +6,7 @@
 
 #pragma once
 #include <pthread.h>
+#include <atomic>
 
 #define TP_PHWANG_LOGO "phwang168"
 
@@ -20,7 +21,7 @@ private:
     const static int TRANSMIT_QUEUE_SIZE = 1024;
     const static int RECEIVE_QUEUE_SIZE  = 1024;
 
-    static int ObjectCount;
+    static std::atomic<int> ObjectCount;
 
     void (*theReceiveCallback)(void *, void *, void *);
     void *theReceiveObject;

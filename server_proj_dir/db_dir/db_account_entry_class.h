@@ -6,6 +6,8 @@
 
 #pragma once
 
+#include <atomic>
+
 class DbAccountEntryClass {
     char const *objectName(void) {return "DbAccountEntryClass";}
 
@@ -20,8 +22,7 @@ class DbAccountEntryClass {
 public:
     DbAccountEntryClass(void);
     ~DbAccountEntryClass(void);
-    static int ObjectCount;
-
+    static std::atomic<int> ObjectCount;
 
     char *accountName(void) {return this->theAccountName;}
     void setAccountName(char *account_name_val) {this->theAccountName = account_name_val;}

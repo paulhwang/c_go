@@ -9,7 +9,7 @@
 #include "../../../phwang_dir/malloc_dir/malloc_class.h"
 #include "tp_transfer_class.h"
 
-int TpTransferClass::ObjectCount;
+std::atomic<int> TpTransferClass::ObjectCount(0);
 
 int TpTransferClass::objectCount(void) {return TpTransferClass::ObjectCount;}
 
@@ -19,7 +19,7 @@ TpTransferClass::TpTransferClass (int socket_val,
                                   char const *who_val)
 {
     memset(this, 0, sizeof(*this));
-    phwangIncrementObjectCount(&TpTransferClass::ObjectCount, this->objectName(), 5);
+    phwangIncrementAtomicCount(&TpTransferClass::ObjectCount, this->objectName(), 5);
     this->theSocket = socket_val;
     this->theReceiveCallback = receive_callback_val;
     this->theReceiveObject = receive_object_val;
@@ -43,7 +43,7 @@ TpTransferClass::TpTransferClass (int socket_val,
 
 TpTransferClass::~TpTransferClass (void)
 {
-    phwangDecrementObjectCount(&TpTransferClass::ObjectCount);
+    phwangDecrementAtomicCount(&TpTransferClass::ObjectCount, this->theWhoForReceiveQueue);
 }
 
 void TpTransferClass::startThreads (int index_val)

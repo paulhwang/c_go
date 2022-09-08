@@ -7,17 +7,17 @@
 #include "../../phwang_dir/phwang.h"
 #include "db_account_entry_class.h"
 
-int DbAccountEntryClass::ObjectCount = 0;
+std::atomic<int> DbAccountEntryClass::ObjectCount(0);
 
 DbAccountEntryClass::DbAccountEntryClass (void)
 {
     memset(this, 0, sizeof(*this));
-    phwangIncrementObjectCount(&ObjectCount, this->objectName(), 3);
+    phwangIncrementAtomicCount(&ObjectCount, this->objectName(), 3);
 }
 
 DbAccountEntryClass::~DbAccountEntryClass (void)
 {
-    phwangDecrementObjectCount(&ObjectCount);
+    phwangDecrementAtomicCount(&ObjectCount, this->objectName());
 
     if (this->theAccountName) {
         phwangFree(this->theAccountName);
