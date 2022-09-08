@@ -11,8 +11,7 @@
 class QueueEntryClass
 {
     friend class QueueClass;
-    static int ObjectCount;
-    static std::atomic<int> x;
+    static std::atomic<int> ObjectCount;
 
     char theObjectName[64];
     QueueEntryClass *next;

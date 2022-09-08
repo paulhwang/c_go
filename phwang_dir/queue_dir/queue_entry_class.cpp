@@ -7,19 +7,18 @@
 #include "../phwang.h"
 #include "queue_entry_class.h"
 
-int QueueEntryClass::ObjectCount = 0;
-std::atomic<int> x(0);
+std::atomic<int> QueueEntryClass::ObjectCount(0);
 
 QueueEntryClass::QueueEntryClass (void)
 {
     memset(this, 0, sizeof (*this));
     strcpy(this->theObjectName, "QueueEntryClass");
-    phwangIncrementObjectCount(&QueueEntryClass::ObjectCount, this->objectName(), 3);
+    phwangIncrementAtomicCount(&QueueEntryClass::ObjectCount, this->objectName(), 3);
 }
 
 QueueEntryClass::~QueueEntryClass (void)
 {
-    phwangDecrementObjectCount(&QueueEntryClass::ObjectCount);
+    phwangDecrementAtomicCount(&QueueEntryClass::ObjectCount, this->objectName());
 
     if (strcmp(this->objectName(), "QueueEntryClass")) {
         this->abend("~QueueEntryClass", this->objectName());
