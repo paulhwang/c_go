@@ -28,8 +28,6 @@ class TcpServerClass {
     pthread_t theServerThread;
     int theTpTransferObjectIndex;
 
-    void composeFuncNameExtra(char *buf_val, char const *func_name_val) {phwangComposeFuncNameExtra(buf_val, this->objectName(), func_name_val, this->theWho);}
-
 public:
     TcpServerClass(void *caller_object_val,
             unsigned short port_val,

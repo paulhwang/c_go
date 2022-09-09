@@ -107,7 +107,7 @@ void *TcpServerClass::serverThreadFunction (void *data_val)
 
         listen(s, BACKLOG);
 
-        phwangDebugWS(true, "TcpServerClass::serverThreadFunction", this->theWho, "accepting");
+        phwangDebugWS(false, "TcpServerClass::serverThreadFunction", this->theWho, "accepting");
 
         if ((data_socket = accept(s, (struct sockaddr *)&address, (socklen_t*)&addrlen)) < 0) {
             phwangLogitWS("TcpServerClass::serverThreadFunction", this->theWho, "accept error");
@@ -117,7 +117,7 @@ void *TcpServerClass::serverThreadFunction (void *data_val)
         if (1) { /* debug */
             char s[128];
             sprintf(s, "accepted port=%d", this->thePort);
-            phwangLogitWS("TcpServerClass::serverThreadFunction", this->theWho, s);
+            phwangDebugWS(true, "TcpServerClass::serverThreadFunction", this->theWho, s);
         }
 
         char data[strlen(TP_PHWANG_LOGO) + 16];
