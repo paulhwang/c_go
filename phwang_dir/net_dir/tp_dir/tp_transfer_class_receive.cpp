@@ -14,7 +14,7 @@
 #include "../../../phwang_dir/malloc_dir/malloc_class.h"
 #include "tp_transfer_class.h"
 
-void *TpTransferClass::receiveThreadFunction(int socket_val)
+void *TpTransferClass::receiveThreadFunction (int socket_val)
 {
     phwangIncrementReceiveThreadCount();
 
@@ -28,16 +28,16 @@ void *TpTransferClass::receiveThreadFunction(int socket_val)
             if (0) { /* debug */
                 char s[128];
                 sprintf(s, "(%s) data=%s len=%d", this->theWho, data, length);
-                this->debug(true, "receiveThreadFunction", s);
+                phwangDebugWS(true, "TpTransferClass::receiveThreadFunction", this->theWho, s);
             }
 
             if ((*data != '{') && (*data != '[')) {
                 if (1) { /* debug */
                     char s[2000];
                     sprintf(s, "(%s) data=%s len=%d", this->theWho, data, length);
-                    this->debug(true, "receiveThreadFunction", s);
+                    phwangDebugWS(true, "TpTransferClass::receiveThreadFunction", this->theWho, s);
                 }
-                this->abend("receiveThreadFunction: wrong header", data);
+                this->abend("TpTransferClass::receiveThreadFunction: wrong header", data);
                 phwangFree(data);
                 continue;
             }
@@ -67,11 +67,11 @@ void TpTransferClass::startReceiveThread (int socket_val)
     data->socket = socket_val;
     data->tp_transfer_object = this;
 
-    this->debug(false, "startReceiveThread", "");
+    phwangDebugWS(false, "TpTransferClass::startReceiveThread", this->theWho, "");
 
     int r = pthread_create(&this->theReceiveThread, 0, tpTranferReceiveThreadFunction, data);
     if (r) {
-        printf("Error - startReceiveThread() return code: %d\n", r);
+        printf("Error - TpTransferClass::startReceiveThread() return code: %d\n", r);
         return;
     }
 }

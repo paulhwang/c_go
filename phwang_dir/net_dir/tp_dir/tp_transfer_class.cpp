@@ -38,7 +38,7 @@ TpTransferClass::TpTransferClass (int socket_val,
     strcat(this->theWhoForTransmitQueue, ":Receive");
     this->theTransmitQueue = phwangMallocSuspendedQueue(TpTransferClass::TRANSMIT_QUEUE_SIZE, this->theWhoForTransmitQueue);
 
-    this->debug(true, "TpTransferClass", "init");
+    phwangDebugWS(true, "TpTransferClass::TpTransferClass", this->theWho, "init");
 }
 
 TpTransferClass::~TpTransferClass (void)
@@ -48,30 +48,12 @@ TpTransferClass::~TpTransferClass (void)
 
 void TpTransferClass::startThreads (int index_val)
 {
-    this->debugInt(true, "startThreads", "index", index_val);
+    phwangDebugWSI(true, "TpTransferClass::startThreads", this->theWho, "index", index_val);
 
     this->theIndex = index_val;
     this->startReceiveThread2();
     this->startReceiveThread(this->theSocket);
     this->startTransmitThread(this->theSocket);
-}
-
-void TpTransferClass::debug (int debug_on_val, char const *func_name_val, char const *str1_val)
-{
-    if (debug_on_val) {
-        char s[AbendClass::LogitFuncNameBufSize];
-        this->composeFuncNameExtra(s, func_name_val);
-        phwangDebug(debug_on_val, s, str1_val);
-    }
-}
-
-void TpTransferClass::debug2 (int debug_on_val, char const *func_name_val, char const *str1_val, char const *str2_val)
-{
-    if (debug_on_val) {
-        char s[AbendClass::LogitFuncNameBufSize];
-        this->composeFuncNameExtra(s, func_name_val);
-        phwangDebug2(debug_on_val, s, str1_val, str2_val);
-    }
 }
 
 void TpTransferClass::debugInt(int debug_on_val, char const *func_name_val, char const *str1_val, int int1_val)

@@ -27,7 +27,7 @@ void *TpTransferClass::receiveThreadFunction2 (void)
             if (0) { /* debug */
                 char s[128];
                 sprintf(s, "(%s) data=%s", this->theWho, raw_data);
-                this->debug(true, "receiveThreadFunction2", s);
+                phwangDebugWS(true, "TpTransferClass::receiveThreadFunction2", this->theWho, s);
             }
 
             if (raw_data[0] == '{') {
@@ -47,9 +47,9 @@ void *TpTransferClass::receiveThreadFunction2 (void)
                 if (1) { /* debug */
                     char s[2000];
                     sprintf(s, "(%s) data=%s len=%lu", this->theWho, raw_data, strlen(raw_data));
-                    this->debug(true, "receiveThreadFunction2", s);
+                    phwangDebugWS(true, "TpTransferClass::receiveThreadFunction2", this->theWho, s);
                 }
-                this->abend("receiveThreadFunction2: wrong header", raw_data);
+                this->abend("TpTransferClass::receiveThreadFunction2: wrong header", raw_data);
                 continue;
             }
 
@@ -67,7 +67,7 @@ void *tpTranferReceiveThreadFunction2 (void *this_val)
 
 void TpTransferClass::startReceiveThread2 (void)
 {
-    this->debug(false, "startReceiveThread2", "create receiveThread");
+    phwangDebugWS(false, "TpTransferClass::startReceiveThread2", this->theWho, "create receiveThread");
 
     int r = phwangPthreadCreate(&this->theReceiveThread2, NULL, tpTranferReceiveThreadFunction2, this);
     if (r) {

@@ -17,12 +17,12 @@ void TpTransferClass::exportTransmitData (void *data_val)
     phwangEnqueue(this->theTransmitQueue, data_val);
 }
 
-void *TpTransferClass::transmitThreadFunction(int socket_val)
+void *TpTransferClass::transmitThreadFunction (int socket_val)
 {
     while (1) {
         char *data = (char *) phwangDequeue(this->theTransmitQueue, "TpTransferClass::transmitThreadFunction()");
         if (data) {
-            this->debug2(false, "transmitThreadFunction", "data=", data);
+            phwangDebugWSS(false, "TpTransferClass::transmitThreadFunction", this->theWho, "data=", data);
 
             int length = strlen(data);
             char *ptr;
@@ -37,13 +37,13 @@ void *TpTransferClass::transmitThreadFunction(int socket_val)
                 *ptr++ = '}';
                 *ptr = 0;
 
-                this->debug(false, "transmitThreadFunction", buf);
+                phwangDebugWS(false, "TpTransferClass::transmitThreadFunction", this->theWho, buf);
 
                 send(socket_val, buf , strlen(buf) , 0);
             }
             else {
-                this->debugInt(true, "transmitThreadFunction", "length=", length);
-                this->abend("transmitThreadFunction", "*****LENGTH TOO BIG*****");
+                this->debugInt(true, "TpTransferClass::transmitThreadFunction", "length=", length);
+                this->abend("TpTransferClass::transmitThreadFunction", "*****LENGTH TOO BIG*****");
             }
 
             phwangFree(data);
@@ -67,7 +67,7 @@ void TpTransferClass::startTransmitThread (int socket_val)
     data->socket = socket_val;
     data->tp_transfer_object = this;
 
-    this->debug(false, "startTransmitThread", "");
+    phwangDebugWS(false, "TpTransferClass::startTransmitThread", this->theWho, "");
 
     int r = phwangPthreadCreate(&this->theTransmitThread, 0, tpTransferTransmitThreadFunction, data);
     if (r) {

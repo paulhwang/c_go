@@ -45,8 +45,6 @@ private:
 
     int maxDataSize(void) {return this->theMaxDataSize;};
 
-    void debug(int debug_on_val, char const *func_name_val, char const *str1_val);
-    void debug2(int debug_on_val, char const *func_name_val, char const *str1_val, char const *str2_val);
     void debugInt(int debug_on_val, char const *func_name_val, char const *str1_val, int int1_val);
     void debugInt2(int debug_on_val, char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val);
     void logit(char const *func_name_val, char const *str1_val);
