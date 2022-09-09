@@ -74,6 +74,16 @@ void phwangAbend2 (char const *func_name_val, char const *str1_val, char const *
     *junk = 0;
 }
 
+void phwangComposeFuncName(char *buf_val, char const *object_name_val, char const *func_name_val)
+{
+    sprintf(buf_val, "%s::%s", object_name_val, func_name_val);
+}
+
+void phwangComposeFuncNameExtra(char *buf_val, char const *object_name_val, char const *func_name_val, char const *extra_info_val)
+{
+    sprintf(buf_val, "%s::%s[%s]", object_name_val, func_name_val, extra_info_val);
+}
+
 /* atomic */
 void phwangIncrementAtomicCount (std::atomic<int> *count_val, char const *who_val, int max_count_val)
 {
