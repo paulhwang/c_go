@@ -36,7 +36,7 @@ void *TpTransferClass::receiveThreadFunction2 (void)
                 if (length != length1) {
                     char s[128];
                     sprintf(s, "(%s) length not match!!! data=%s len=%d %d", this->theWho, raw_data, length, length1);
-                    this->abend("receiveThreadFunction2", s);
+                    phwangAbendWS("TpTransferClass::receiveThreadFunction2", this->theWho, s);
                 }
 
                 data = (char *) phwangMalloc(length + 32, MallocClass::receiveThreadFunction2);
@@ -49,7 +49,7 @@ void *TpTransferClass::receiveThreadFunction2 (void)
                     sprintf(s, "(%s) data=%s len=%lu", this->theWho, raw_data, strlen(raw_data));
                     phwangDebugWS(true, "TpTransferClass::receiveThreadFunction2", this->theWho, s);
                 }
-                this->abend("TpTransferClass::receiveThreadFunction2: wrong header", raw_data);
+                phwangAbendWS("TpTransferClass::receiveThreadFunction2: wrong header", this->theWho, raw_data);
                 continue;
             }
 

@@ -37,7 +37,7 @@ void *TpTransferClass::receiveThreadFunction (int socket_val)
                     sprintf(s, "(%s) data=%s len=%d", this->theWho, data, length);
                     phwangDebugWS(true, "TpTransferClass::receiveThreadFunction", this->theWho, s);
                 }
-                this->abend("TpTransferClass::receiveThreadFunction: wrong header", data);
+                phwangAbendS("TpTransferClass::receiveThreadFunction: wrong header", data);
                 phwangFree(data);
                 continue;
             }

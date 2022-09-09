@@ -146,7 +146,7 @@ void phwangAbendS (char const *func_name_val, char const *str1_val)
     *junk = 0;
 }
 
-void phwangAbendWS (char const *func_name_val, char const who_val, char const *str1_val)
+void phwangAbendWS (char const *func_name_val, char const *who_val, char const *str1_val)
 {
     printf("*****ABEND******************************************\n");
     printf("%s:%s() %s\n", func_name_val, who_val, str1_val);

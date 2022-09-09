@@ -42,8 +42,8 @@ void *TpTransferClass::transmitThreadFunction (int socket_val)
                 send(socket_val, buf , strlen(buf) , 0);
             }
             else {
-                this->debugInt(true, "TpTransferClass::transmitThreadFunction", "length=", length);
-                this->abend("TpTransferClass::transmitThreadFunction", "*****LENGTH TOO BIG*****");
+                phwangDebugWSI(true, "TpTransferClass::transmitThreadFunction", this->theWho, "length=", length);
+                phwangAbendWS("TpTransferClass::transmitThreadFunction", this->theWho, "*****LENGTH TOO BIG*****");
             }
 
             phwangFree(data);
