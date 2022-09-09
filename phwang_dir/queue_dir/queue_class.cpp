@@ -12,7 +12,7 @@
 #include "queue_entry_class.h"
 #include "../suspend_dir/suspend_class.h"
 
-QueueClass::QueueClass(int do_suspend_val, int max_size_val, char const *who_val)
+QueueClass::QueueClass (int do_suspend_val, int max_size_val, char const *who_val)
 {
     memset(this, 0, sizeof (*this));
     this->theWho = who_val;
@@ -30,30 +30,30 @@ QueueClass::QueueClass(int do_suspend_val, int max_size_val, char const *who_val
     }
 
     if (pthread_mutex_init(&this->theMutex, NULL) != 0) {
-        this->abend("QueueClass", "pthread_mutex_init fail");
+        phwangAbendWS("QueueClass::QueueClass", this->theWho, "pthread_mutex_init fail");
     }
 
-    this->debug(false, "QueueClass", "init");
+    phwangDebugWS(false, "QueueClass::QueueClass", this->theWho, "init");
 }
 
-QueueClass::~QueueClass(void)
+QueueClass::~QueueClass (void)
 {
     delete this->theSuspendObject;
 }
 
 int QueueClass::enqueueData (void *data_val)
 {
-    this->debug(false, "enqueueData", (char *) data_val);
+    phwangDebugWS(false, "QueueClass::enqueueData", this->theWho, (char *) data_val);
 
     /* queue is too big */
     if (this->theMaxQueueSize && (this->theQueueSize > this->theMaxQueueSize)) {
-        this->abend("enqueueData", "queue full");
+        phwangAbendWS("QueueClass::enqueueData", this->theWho, "queue full");
         return QueueClass::ENQUEUE_FULL;
     }
 
     QueueEntryClass *entry = new QueueEntryClass();
     if (!entry) {
-        this->abend("enqueueData", "fail to create new QueueEntryClass");
+        phwangAbendWS("QueueClass::enqueueData", this->theWho, "fail to create new QueueEntryClass");
         return QueueClass::ENQUEUE_NEW_ENTRY_FAIL;
     }
     entry->data = data_val;
@@ -89,19 +89,19 @@ void *QueueClass::dequeueData (void)
 
             if (entry) {
                 if (strcmp(entry->objectName(), "QueueEntryClass")) {
-                    this->abend("dequeueData", "bad objectName");
+                    phwangAbendWS("QueueClass::dequeueData", this->theWho, "bad objectName");
                 }
                 void *data = entry->data;
                 delete entry;
 
-                this->debug(false, "dequeueData", (char *) data);
+                phwangDebugWS(false, "QueueClass::dequeueData", this->theWho, (char *) data);
                 return data;
             }
         }
     }
 }
 
-void QueueClass::enqueueEntry(QueueEntryClass *entry)
+void QueueClass::enqueueEntry (QueueEntryClass *entry)
 {
     if (!this->theQueueHead) {
         entry->next = 0;  
@@ -119,12 +119,12 @@ void QueueClass::enqueueEntry(QueueEntryClass *entry)
     }
 }
 
-QueueEntryClass *QueueClass::dequeueEntry(void)
+QueueEntryClass *QueueClass::dequeueEntry (void)
 {
     QueueEntryClass *entry;
 
     if (this->theQueueSize == 0) {
-        this->abend("dequeueEntry", "theQueueSize == 0");
+        phwangAbendWS("QueueClass::dequeueEntry", this->theWho, "theQueueSize == 0");
         return 0;
     }
 
@@ -149,19 +149,19 @@ void QueueClass::abendQueue (char const *msg_val)
     int length;
  
     if (!this) {
-        this->abend("abendQueue", "null this");
+        phwangAbendWS("QueueClass::abendQueue", this->theWho, "null this");
         return;
     }
  
     if (this->theQueueSize == 0) {
         if (this->theQueueHead || this->theQueueTail) {
-            this->abend("abendQueue", "theQueueSize == 0");
+            phwangAbendWS("QueueClass::abendQueue", this->theWho, "theQueueSize == 0");
             return;
         }
     }
     else {
         if (!this->theQueueHead) {
-            this->abend("abendQueue", "null theQueueHead");
+            phwangAbendWS("QueueClass::abendQueue", this->theWho, "null theQueueHead");
             return;
         }
     }
@@ -176,7 +176,7 @@ void QueueClass::abendQueue (char const *msg_val)
  
     if (length != this->theQueueSize) {
         printf("%s length=%d %d\n", msg_val, length, this->theQueueSize);
-        this->abend("abendQueue", "from head: bad length");
+        phwangAbendWS("QueueClass::abendQueue", this->theWho, "from head: bad length");
     }
 
     length = 0;
@@ -188,13 +188,13 @@ void QueueClass::abendQueue (char const *msg_val)
  
     if (length != this->theQueueSize) {
         printf("%s length=%d %d\n", msg_val, length, this->theQueueSize);
-        this->abend("abendQueue", "from tail: bad length");
+        phwangAbendWS("QueueClass::abendQueue", this->theWho, "from tail: bad length");
     }
 
     pthread_mutex_unlock(&this->theMutex);
 }
 
-void QueueClass::flushQueue(void)
+void QueueClass::flushQueue (void)
 {
     QueueEntryClass *entry, *entry_next; 
  
@@ -210,82 +210,8 @@ void QueueClass::flushQueue(void)
     this->theQueueHead = this->theQueueTail = 0;
  
     if (this->theQueueSize) {
-        this->abend("flushQueue", "theQueueSize");
+        phwangAbendWS("QueueClass::flushQueue", this->theWho, "theQueueSize");
     }
 
     pthread_mutex_unlock(&this->theMutex);
-}
-
-void QueueClass::debug (int debug_on_val, char const *func_name_val, char const *str1_val)
-{
-    if (debug_on_val) {
-        char s[AbendClass::LogitFuncNameBufSize];
-        this->composeFuncNameExtra(s, func_name_val);
-        phwangDebug(debug_on_val, s, str1_val);
-    }
-}
-
-void QueueClass::debug2 (int debug_on_val, char const *func_name_val, char const *str1_val, char const *str2_val)
-{
-    if (debug_on_val) {
-        char s[AbendClass::LogitFuncNameBufSize];
-        this->composeFuncNameExtra(s, func_name_val);
-        phwangDebug2(debug_on_val, s, str1_val, str2_val);
-    }
-}
-
-void QueueClass::debugInt(int debug_on_val, char const *func_name_val, char const *str1_val, int int1_val)
-{
-    if (debug_on_val) {
-        char s[AbendClass::LogitFuncNameBufSize];
-        this->composeFuncNameExtra(s, func_name_val);
-        phwangDebugInt(debug_on_val, s, str1_val, int1_val);
-    }
-}
-
-void QueueClass::debugInt2(int debug_on_val, char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val)
-{
-    if (debug_on_val) {
-        char s[AbendClass::LogitFuncNameBufSize];
-        this->composeFuncNameExtra(s, func_name_val);
-        phwangDebugInt2(debug_on_val, s, str1_val, int1_val, str2_val, int2_val);
-    }
-}
-
-void QueueClass::logit (char const *func_name_val, char const *str1_val) {
-    char s[AbendClass::LogitFuncNameBufSize];
-    this->composeFuncNameExtra(s, func_name_val);
-    phwangLogit(s, str1_val);
-}
-
-void QueueClass::logit2 (char const *func_name_val, char const *str1_val, char const *str2_val) {
-    char s[AbendClass::LogitFuncNameBufSize];
-    this->composeFuncNameExtra(s, func_name_val);
-    phwangLogit2(s, str1_val, str2_val);
-}
-
-void QueueClass::logitInt(char const *func_name_val, char const *str1_val, int int1_val)
-{
-    char s[AbendClass::LogitFuncNameBufSize];
-    this->composeFuncNameExtra(s, func_name_val);
-    phwangLogitInt(s, str1_val, int1_val);
-}
-
-void QueueClass::logitInt2(char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val)
-{
-    char s[AbendClass::LogitFuncNameBufSize];
-    this->composeFuncNameExtra(s, func_name_val);
-    phwangLogitInt2(s, str1_val, int1_val, str2_val, int2_val);
-}
-
-void QueueClass::abend (char const *func_name_val, char const *str1_val) {
-    char s[AbendClass::LogitFuncNameBufSize];
-    this->composeFuncNameExtra(s, func_name_val);
-    phwangAbend(s, str1_val);
-}
-
-void QueueClass::abend2 (char const *func_name_val, char const *str1_val, char const *str2_val) {
-    char s[AbendClass::LogitFuncNameBufSize];
-    this->composeFuncNameExtra(s, func_name_val);
-    phwangAbend2(s, str1_val, str2_val);
 }
