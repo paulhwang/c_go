@@ -107,7 +107,7 @@ void *TcpServerClass::serverThreadFunction (void *data_val)
 
         listen(s, BACKLOG);
 
-        this->debug(true, "serverThreadFunction", "accepting");
+        phwangDebugWS(true, "TcpServerClass::serverThreadFunction", this->theWho, "accepting");
 
         if ((data_socket = accept(s, (struct sockaddr *)&address, (socklen_t*)&addrlen)) < 0) {
             this->logit("serverThreadFunction", "accept error");

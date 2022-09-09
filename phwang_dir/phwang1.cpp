@@ -8,6 +8,16 @@
 
 int phwang_debug_on_off_switch = 1;
 
+void phwangLogitS (char const *func_name_val, char const *str1_val)
+{
+    printf("%s() %s\n", func_name_val, str1_val);
+}
+
+void phwangLogitWS (char const *func_name_val, char const *who_val, char const *str1_val)
+{
+    printf("%s:%s() %s\n", func_name_val, who_val, str1_val);
+}
+
 void phwangLogit (char const *func_name_val, char const *str1_val)
 {
     printf("%s() %s\n", func_name_val, str1_val);
@@ -27,6 +37,20 @@ void phwangLogitInt2 (char const *func_name_val, char const *str1_val, int int1_
 {
     printf("%s() %s=%d %s=%d\n", func_name_val, str1_val, int1_val, str2_val, int2_val);
 }
+
+void phwangDebugS (int on_off_val, char const *func_name_val, char const *str1_val)
+{
+    if (phwang_debug_on_off_switch && on_off_val) {
+        phwangLogitS(func_name_val, str1_val);
+    }
+};
+
+void phwangDebugWS (int on_off_val, char const *func_name_val, char const *who_val, char const *str1_val)
+{
+    if (phwang_debug_on_off_switch && on_off_val) {
+        phwangLogitWS(func_name_val, who_val, str1_val);
+    }
+};
 
 void phwangDebug (int on_off_val, char const *func_name_val, char const *str1_val)
 {
@@ -60,6 +84,24 @@ void phwangAbend (char const *func_name_val, char const *str1_val)
 {
     printf("*****ABEND******************************************\n");
     printf("%s() %s\n", func_name_val, str1_val);
+    printf("*****ABEND******************************************\n");
+    int *junk = 0;
+    *junk = 0;
+}
+
+void phwangAbendS (char const *func_name_val, char const *str1_val)
+{
+    printf("*****ABEND******************************************\n");
+    printf("%s() %s\n", func_name_val, str1_val);
+    printf("*****ABEND******************************************\n");
+    int *junk = 0;
+    *junk = 0;
+}
+
+void phwangAbendWS (char const *func_name_val, char const who_val, char const *str1_val)
+{
+    printf("*****ABEND******************************************\n");
+    printf("%s:%s() %s\n", func_name_val, who_val, str1_val);
     printf("*****ABEND******************************************\n");
     int *junk = 0;
     *junk = 0;
