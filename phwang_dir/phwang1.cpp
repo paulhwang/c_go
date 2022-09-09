@@ -8,29 +8,14 @@
 
 int phwang_debug_on_off_switch = 1;
 
-void phwangLogitS (char const *class_val, char const *func_name_val, char const *str1_val)
-{
-    printf("%s:%s() %s\n", class_val, func_name_val, str1_val);
-}
-
 void phwangLogit (char const *func_name_val, char const *str1_val)
 {
     printf("%s() %s\n", func_name_val, str1_val);
 }
 
-void phwangLogitSS (char const *class_val, char const *func_name_val, char const *str1_val, char const *str2_val)
-{
-    printf("%s() %s %s\n", class_val, func_name_val, str1_val, str2_val);
-}
-
 void phwangLogit2 (char const *func_name_val, char const *str1_val, char const *str2_val)
 {
     printf("%s() %s %s\n", func_name_val, str1_val, str2_val);
-}
-
-void phwangLogitSI (char const *class_val, char const *func_name_val, char const *str1_val, int int1_val)
-{
-    printf("%s:%s() %s=%d\n", class_val, func_name_val, str1_val, int1_val);
 }
 
 void phwangLogitInt (char const *func_name_val, char const *str1_val, int int1_val)
@@ -43,24 +28,10 @@ void phwangLogitInt2 (char const *func_name_val, char const *str1_val, int int1_
     printf("%s() %s=%d %s=%d\n", func_name_val, str1_val, int1_val, str2_val, int2_val);
 }
 
-void phwangDebugS (int on_off_val, char const *class_val, char const *func_name_val, char const *str1_val)
-{
-    if (phwang_debug_on_off_switch && on_off_val) {
-        phwangLogitS(class_val, func_name_val, str1_val);
-    }
-};
-
 void phwangDebug (int on_off_val, char const *func_name_val, char const *str1_val)
 {
     if (phwang_debug_on_off_switch && on_off_val) {
         phwangLogit(func_name_val, str1_val);
-    }
-};
-
-void phwangDebugSS (int on_off_val, char const *class_val, char const *func_name_val, char const *str1_val, char const *str2_val)
-{
-    if (phwang_debug_on_off_switch && on_off_val) {
-        phwangLogitSS(func_name_val, class_val, str1_val, str2_val);
     }
 };
 
@@ -70,13 +41,6 @@ void phwangDebug2 (int on_off_val, char const *func_name_val, char const *str1_v
         phwangLogit2(func_name_val, str1_val, str2_val);
     }
 };
-
-void phwangDebugSI (int on_off_val, char const *class_val, char const *func_name_val, char const *str1_val, int int1_val)
-{
-    if (phwang_debug_on_off_switch && on_off_val) {
-        phwangLogitSI(class_val, func_name_val, str1_val, int1_val);
-    }
-}
 
 void phwangDebugInt (int on_off_val, char const *func_name_val, char const *str1_val, int int1_val)
 {

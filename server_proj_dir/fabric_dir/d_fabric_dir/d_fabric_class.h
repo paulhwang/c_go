@@ -56,15 +56,6 @@ class DFabricClass {
     void sendSearchLinkSessionFailResponse (char const command_val, void *tp_transfer_object_val, char const *ajax_id_val);
 
     char *timeStampString(void) {return this->theTimeStampString;}
-
-    void debug2(int debug_on_val, char const *func_name_val, char const *str1_val, char const *str2_val);
-    void debugInt(int debug_on_val, char const *func_name_val, char const *str1_val, int int1_val);
-    void debugInt2(int debug_on_val, char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val);
-    void logit(char const *func_name_val, char const *str1_val);
-    void logit2(char const *func_name_val, char const *str1_val, char const *str2_val);
-    void logitInt(char const *func_name_val, char const *str1_val, int int1_val);
-    void logitInt2(char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val);
-    void abend2(char const *func_name_val, char const *str1_val, char const *str2_val);
    
 public:
     DFabricClass(FabricClass *fabric_object_val);
