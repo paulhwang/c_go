@@ -10,10 +10,11 @@
 #include "fabric_class.h"
   
 LinkClass::LinkClass (void *list_mgr_object_val, FabricClass *fabric_object_val, char const* link_name_val):
-        ListEntryClass(list_mgr_object_val),
-        theFabricObject(fabric_object_val),
-        theNameListChanged('D')
+        ListEntryClass(list_mgr_object_val)
 {
+    this->theFabricObject = fabric_object_val;
+    this->theNameListChanged = 'D';
+
     if (strlen(link_name_val) <= LINK_CLASS_LINK_NAME_BUF_SIZE) {
         strcpy(this->theLinkName, link_name_val);
     }
@@ -26,7 +27,7 @@ LinkClass::LinkClass (void *list_mgr_object_val, FabricClass *fabric_object_val,
     this->thePendingSessionSetupQueue = phwangMallocQueue(0, this->objectName());
     this->thePendingSessionSetupQueue3 = phwangMallocQueue(0, this->objectName());
 
-    this->debug(true, "LinkClass", this->linkIdIndex());
+    phwangDebugSS(true, "LinkClass::LinkClass", this->theLinkName, this->linkIdIndex());
 }
 
 LinkClass::~LinkClass (void)

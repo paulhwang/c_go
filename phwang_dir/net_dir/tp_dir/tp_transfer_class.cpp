@@ -38,7 +38,7 @@ TpTransferClass::TpTransferClass (int socket_val,
     strcat(this->theWhoForTransmitQueue, ":Receive");
     this->theTransmitQueue = phwangMallocSuspendedQueue(TpTransferClass::TRANSMIT_QUEUE_SIZE, this->theWhoForTransmitQueue);
 
-    phwangDebugWS(true, "TpTransferClass::TpTransferClass", this->theWho, "init");
+    phwangDebugWS(false, "TpTransferClass::TpTransferClass", this->theWho, "init");
 }
 
 TpTransferClass::~TpTransferClass (void)

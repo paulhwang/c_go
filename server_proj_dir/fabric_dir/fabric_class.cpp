@@ -67,7 +67,7 @@ void FabricClass::linkKeepAliveExamine (void)
 
 LinkClass *FabricClass::mallocLink (char const *data_val)
 {
-    this->debug(true, "mallocLink", data_val);
+    phwangDebugSS(false, "FabricClass::mallocLink", "data", data_val);
 
     if (strcmp(((ListMgrClass *) this->linkListMgrObject())->objectName(), "ListMgrClass")) {
         this->abend("mallocLink", "bad name 000");
