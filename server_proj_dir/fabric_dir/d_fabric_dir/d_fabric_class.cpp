@@ -22,7 +22,7 @@ DFabricClass::DFabricClass (FabricClass *fabric_object_val)
     this->setTimeStampString();
     this->startNetServer();
 
-    this->debug(false, "DFabricClass", "init");
+    phwangDebug(true, "DFabricClass::DFabricClass", "init");
 }
 
 DFabricClass::~DFabricClass (void)
@@ -62,10 +62,10 @@ void DFabricClass::setTimeStampString (void)
     time_t seconds = time(NULL);
     int time_stamp = (int) ((seconds - 1642858200) / 60);
     phwangEncodeNumber(this->theTimeStampString, time_stamp, FABRIC_SERVER_TIME_STAMP_LENGTH_SIZE);
-    this->debug(true, "setTimeStampString", this->timeStampString());
+    phwangDebug(false, "DFabricClass::setTimeStampString", this->timeStampString());
 }
 
-void DFabricClass::debug (int debug_on_val, char const *func_name_val, char const *str1_val)
+void DFabricClass::debug111 (int debug_on_val, char const *func_name_val, char const *str1_val)
 {
     if (debug_on_val) {
         char s[AbendClass::LogitFuncNameBufSize];

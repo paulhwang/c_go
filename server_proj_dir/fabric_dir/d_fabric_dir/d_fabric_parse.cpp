@@ -32,7 +32,7 @@ void DFabricClass::exportedParseFunction (void *tp_transfer_object_val, char *da
     SessionClass *session;
 
     if (data_val[1] != FECommandClass::GET_LINK_DATA_COMMAND) {
-        this->debug(true, "exportedParseFunction", data_val);
+        phwangDebug(true, "DFabricClass::exportedParseFunction", data_val);
     }
 
     char type = data_val[0];
@@ -167,7 +167,7 @@ void DFabricClass::sendSearchLinkSessionFailResponse (char const command_val, vo
 
 void DFabricClass::processMessageRequest (void *tp_transfer_object_val, char *input_data_val, char const *ajax_id_val)
 {
-    this->debug(true, "processMessageRequest", input_data_val);
+    phwangDebug(true, "DFabricClass::processMessageRequest", input_data_val);
 
     char act = *input_data_val++;
 
@@ -179,7 +179,7 @@ void DFabricClass::processMessageRequest (void *tp_transfer_object_val, char *in
     if (1) { /* debug */
         char buf[256];
         sprintf(buf, "act=%c data=%s\n", act, data);
-        this->debug(true, "processMessageRequest", buf);
+        phwangDebug(true, "DFabricClass::processMessageRequest", buf);
     }
 
     switch (act) {
@@ -190,7 +190,7 @@ void DFabricClass::processMessageRequest (void *tp_transfer_object_val, char *in
 
         case 'R':
             output_data = this->messengerObject()->getMessage();
-            this->debug(true, "processMessageRequest", output_data);
+            phwangDebug(true, "DFabricClass::processMessageRequest", output_data);
             this->sendMessageResponce(tp_transfer_object_val, ajax_id_val, "succeed", output_data);
             break;
 
@@ -207,7 +207,7 @@ void DFabricClass::processMessageRequest (void *tp_transfer_object_val, char *in
 #define D_FABRIC_CLASS_PROCESSS_MMW_READ_DATA_DOWN_LINK_DATA_SIZE (1 + FECommandClass::AJAX_ID_SIZE + ListMgrProtocolClass::LINK_ID_INDEX_SIZE + 1)
 void DFabricClass::sendMessageResponce (void *tp_transfer_object_val, char const *ajax_id_val, char const *result_val, char const *data_val)
 {
-    this->debug(true, "sendMessageResponce", result_val);
+    phwangDebug(true, "DFabricClass::sendMessageResponce", result_val);
 
     char *encoded_result = phwangEncodeStringMalloc(result_val);
     int encoded_result_length = strlen(encoded_result);
@@ -233,7 +233,7 @@ void DFabricClass::sendMessageResponce (void *tp_transfer_object_val, char const
 
 void DFabricClass::processSignUpRequest (void *tp_transfer_object_val, char *data_val, char const *ajax_id_val)
 {
-    this->debug(false, "processSignUpRequest", data_val);
+    phwangDebug(false, "DFabricClass::processSignUpRequest", data_val);
 
     char *encoded_account_name = data_val;
     int account_name_size;
@@ -289,7 +289,7 @@ void DFabricClass::processSignUpRequest (void *tp_transfer_object_val, char *dat
 #define D_FABRIC_CLASS_PROCESSS_SIGN_UP_DOWN_LINK_DATA_SIZE (1 + FECommandClass::AJAX_ID_SIZE + ListMgrProtocolClass::LINK_ID_INDEX_SIZE + 1)
 void DFabricClass::sendSignUpResponce (void *tp_transfer_object_val, char const *ajax_id_val, char const *result_val)
 {
-    this->debug(false, "sendSignUpResponce", result_val);
+    phwangDebug(false, "DFabricClass::sendSignUpResponce", result_val);
 
     char *data_ptr;
     char *downlink_data = data_ptr = (char *) phwangMalloc(D_FABRIC_CLASS_PROCESSS_SIGN_UP_DOWN_LINK_DATA_SIZE + strlen(result_val), MallocClass::SIGN_UP);
@@ -303,7 +303,7 @@ void DFabricClass::sendSignUpResponce (void *tp_transfer_object_val, char const 
 #define D_FABRIC_CLASS_FAKE_LINK_ID_INDEX "99990000"
 void DFabricClass::processSetupLinkRequest (void *tp_transfer_object_val, char *data_val, char const *ajax_id_val)
 {
-    this->debug(false, "processSetupLinkRequest", data_val);
+    phwangDebug(false, "DFabricClass::processSetupLinkRequest", data_val);
 
     char *encoded_my_name = data_val;
     int my_name_size;
@@ -355,7 +355,7 @@ void DFabricClass::processSetupLinkRequest (void *tp_transfer_object_val, char *
 #define D_FABRIC_CLASS_PROCESSS_SETUP_LINK_DOWN_LINK_DATA_SIZE (1 + FECommandClass::AJAX_ID_SIZE + ListMgrProtocolClass::LINK_ID_INDEX_SIZE + 1)
 void DFabricClass::sendSetupLinkResponce (void *tp_transfer_object_val, char const *ajax_id_val, char const *link_id_index_val, char const *result_val)
 {
-    this->debug(false, "sendSetupLinkResponce", result_val);
+    phwangDebug(false, "DFabricClass::sendSetupLinkResponce", result_val);
 
     char *data_ptr;
     char *downlink_data = data_ptr = (char *) phwangMalloc(D_FABRIC_CLASS_PROCESSS_SETUP_LINK_DOWN_LINK_DATA_SIZE + strlen(result_val), MallocClass::SIGN_IN);
@@ -370,7 +370,7 @@ void DFabricClass::sendSetupLinkResponce (void *tp_transfer_object_val, char con
 
 void DFabricClass::processFreeLinkRequest (void *tp_transfer_object_val, char *data_val, char const *ajax_id_val, LinkClass *link_val)
 {
-    this->debug(false, "processFreeLink", data_val);
+    phwangDebug(false, "DFabricClass::processFreeLinkRequest", data_val);
 
     char *end_val = data_val;
 
@@ -403,7 +403,7 @@ void DFabricClass::errorProcessFreeLink (void *tp_transfer_object_val, char cons
 #define D_FABRIC_CLASS_PROCESSS_GET_LINK_DATA_DOWN_LINK_PENDING_SESSION_SIZE (1 + WEB_FABRIC_PROTOCOL_NAME_LIST_TAG_SIZE)
 void DFabricClass::processGetLinkDataRequest (void *tp_transfer_object_val, char *data_val, char const *ajax_id_val, LinkClass *link_val)
 {
-    this->debug(false, "processGetLinkData", data_val);
+    phwangDebug(false, "DFabricClass::processGetLinkDataRequest", data_val);
 
     link_val->resetKeepAliveTime();
 
@@ -444,14 +444,14 @@ void DFabricClass::processGetLinkDataRequest (void *tp_transfer_object_val, char
     if (pending_session) {
         *data_ptr++ = FECommandClass::RESPOND_IS_GET_LINK_DATA_PENDING_SESSION;
         strcpy(data_ptr, pending_session);
-        this->debug(true, "==================processGetLinkData getPendingSessionSetup", downlink_data);
+        this->debug2(true, "==================processGetLinkData", "getPendingSessionSetup ", downlink_data);
     }
 
     char *pending_session3 = link_val->getPendingSessionSetup3();
     if (pending_session3) {
         *data_ptr++ = FECommandClass::RESPOND_IS_GET_LINK_DATA_PENDING_SESSION3;
         strcpy(data_ptr, pending_session3);
-        this->debug(true, "==================processGetLinkData getPendingSessionSetup3", downlink_data);
+        this->debug2(true, "==================processGetLinkData", "getPendingSessionSetup3 ", downlink_data);
     }
 
     this->transmitFunction(tp_transfer_object_val, downlink_data);
@@ -472,7 +472,7 @@ void DFabricClass::errorProcessGetLinkData (void *tp_transfer_object_val, char c
 
 void DFabricClass::processGetNameListRequest (void *tp_transfer_object_val, char *data_val, char const *ajax_id_val, LinkClass *link_val)
 {
-    this->debug(false, "processGetNameList", data_val);
+    phwangDebug(false, "DFabricClass::processGetNameListRequest", data_val);
 
     char *name_list_tag_val = data_val;
     char *end_val = name_list_tag_val + 3;
@@ -507,7 +507,7 @@ void DFabricClass::errorProcessGetNameList (void *tp_transfer_object_val, char c
 
 void DFabricClass::processSetupSessionRequest (void *tp_transfer_object_val, char *data_val, char const *ajax_id_val, LinkClass *link_val)
 {
-    this->debug(true, "processSetupSession", data_val);
+    phwangDebug(true, "DFabricClass::processSetupSessionRequest", data_val);
 
     char *theme_info_val = data_val;
     int theme_len = phwangDecodeNumber(theme_info_val + 1, 3);
@@ -587,7 +587,7 @@ void DFabricClass::mallocRoom (GroupClass *group_val, char *theme_info_val)
 
 void DFabricClass::processSetupSession2Request (void *tp_transfer_object_val, char *data_val, char const *ajax_id_val, LinkClass *link_val)
 {
-    this->debug(true, "processSetupSession2", data_val);
+    phwangDebug(true, "DFabricClass::processSetupSession2Request", data_val);
 
     char *link_id_index_val = data_val;
     char *session_id_index_val = link_id_index_val + ListMgrProtocolClass::LINK_ID_INDEX_SIZE;
@@ -636,7 +636,7 @@ void DFabricClass::errorProcessSetupSession2 (void *tp_transfer_object_val, char
 
 void DFabricClass::processSetupSession3Request (void *tp_transfer_object_val, char *data_val, char const *ajax_id_val, LinkClass *link_val)
 {
-    this->debug(true, "processSetupSession3", data_val);
+    phwangDebug(true, "DFabricClass::processSetupSession3Reques", data_val);
 
     char *link_and_session_id_index_val = data_val;
     char *end_val = link_and_session_id_index_val + ListMgrProtocolClass::LINK_ID_INDEX_SIZE + SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE;
@@ -662,7 +662,7 @@ void DFabricClass::errorProcessFreeSession (void *tp_transfer_object_val, char c
 
 void DFabricClass::processPutSessionDataRequest (void *tp_transfer_object_val, char *data_val, char const *ajax_id_val, SessionClass *session_val)
 {
-    this->debug(true, "processPutSessionData", data_val);
+    phwangDebug(true, "DFabricClass::processPutSessionDataRequest", data_val);
 
     char *room = session_val->groupObject()->roomIdIndex();
     if (!room) {
@@ -708,7 +708,7 @@ void DFabricClass::errorProcessPutSessionData (void *tp_transfer_object_val, cha
 
 void DFabricClass::processGetSessionDataRequest (void *tp_transfer_object_val, char *data_val, char const *ajax_id_val, SessionClass *session_val)
 {
-    this->debug(true, "processGetSessionData", data_val);
+    phwangDebug(true, "DFabricClass::processGetSessionDataRequest", data_val);
 
     char *data = session_val->getPendingDownLinkData();
 

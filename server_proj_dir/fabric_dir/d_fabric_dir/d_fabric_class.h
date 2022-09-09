@@ -57,7 +57,7 @@ class DFabricClass {
 
     char *timeStampString(void) {return this->theTimeStampString;}
 
-    void debug(int debug_on_val, char const *func_name_val, char const *str1_val);
+    void debug111(int debug_on_val, char const *func_name_val, char const *str1_val);
     void debug2(int debug_on_val, char const *func_name_val, char const *str1_val, char const *str2_val);
     void debugInt(int debug_on_val, char const *func_name_val, char const *str1_val, int int1_val);
     void debugInt2(int debug_on_val, char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val);

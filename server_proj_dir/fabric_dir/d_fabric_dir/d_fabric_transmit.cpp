@@ -11,7 +11,7 @@
 void DFabricClass::transmitFunction (void *tp_transfer_object_val, char *data_val)
 {
   if (*data_val != FECommandClass::GET_LINK_DATA_RESPONSE) {
-      this->debug(true, "transmitFunction", data_val);
+      phwangDebug(true, "DFabricClass::transmitFunction", data_val);
     }
 
     phwangTpTransmit(tp_transfer_object_val, data_val);

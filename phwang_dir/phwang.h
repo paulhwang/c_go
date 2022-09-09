@@ -20,19 +20,29 @@ void phwangPhwangPhwang(int debug_code_val);
 int phwangPthreadCreate(pthread_t *thread, const pthread_attr_t *attr, void *(*start_routine)(void *), void *arg);
 
 /* logit */
+void phwangLogitS(char const *class_val, char const *func_name_val, char const *str1_val);
+void phwangLogit(char const *func_name_val, char const *str1_val);
+
+void phwangLogitSS (char const *class_val, char const *func_name_val, char const *str1_val, char const *str2_val);
+void phwangLogit2(char const *func_name_val, char const *str1_val, char const *str2_val);
+
+void phwangLogitSI (char const *class_val, char const *func_name_val, char const *str1_val, int int1_val);
+void phwangLogitInt(char const *func_name_val, char const *str1_val, int int1_val);
+
+void phwangLogitInt2(char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val);
+
+void phwangDebugS(int on_off_val, char const *class_val, char const *func_name_val, char const *str1_val);
 void phwangDebug(int on_off_val, char const *func_name_val, char const *str1_val);
+
+void phwangDebugSS (int on_off_val, char const *class_val, char const *func_name_val, char const *str1_val, char const *str2_val);
 void phwangDebug2(int on_off_val, char const *func_name_val, char const *str1_val, char const *str2_val);
 
 void phwangDebugInt(int on_off_val, char const *func_name_val, char const *str1_val, int int1_val);
+
 void phwangDebugInt2(int on_off_val, char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val);
 
-void phwangLogit(char const *func_name_val, char const *str1_val);
-void phwangLogit2(char const *func_name_val, char const *str1_val, char const *str2_val);
-
-void phwangLogitInt(char const *func_name_val, char const *str1_val, int int1_val);
-void phwangLogitInt2(char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val);
-
 void phwangAbend(char const *func_name_val, char const *str1_val);
+
 void phwangAbend2(char const *func_name_val, char const *str1_val, char const *str2_val);
 
 void phwangComposeFuncName(char *buf_val, char const *object_name_val, char const *func_name_val);
