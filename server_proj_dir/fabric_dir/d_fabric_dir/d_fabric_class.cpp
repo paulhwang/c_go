@@ -65,15 +65,6 @@ void DFabricClass::setTimeStampString (void)
     phwangDebug(false, "DFabricClass::setTimeStampString", this->timeStampString());
 }
 
-void DFabricClass::debug111 (int debug_on_val, char const *func_name_val, char const *str1_val)
-{
-    if (debug_on_val) {
-        char s[AbendClass::LogitFuncNameBufSize];
-        phwangComposeFuncName(s, this->objectName(), func_name_val);
-        phwangDebug(debug_on_val, s, str1_val);
-    }
-}
-
 void DFabricClass::debug2 (int debug_on_val, char const *func_name_val, char const *str1_val, char const *str2_val)
 {
     if (debug_on_val) {
@@ -125,12 +116,6 @@ void DFabricClass::logitInt2(char const *func_name_val, char const *str1_val, in
     char s[AbendClass::LogitFuncNameBufSize];
     phwangComposeFuncName(s, this->objectName(), func_name_val);
     phwangLogitInt2(s, str1_val, int1_val, str2_val, int2_val);
-}
-
-void DFabricClass::abend (char const *func_name_val, char const *str1_val) {
-    char s[AbendClass::LogitFuncNameBufSize];
-    phwangComposeFuncName(s, this->objectName(), func_name_val);
-    phwangAbend(s, str1_val);
 }
 
 void DFabricClass::abend2 (char const *func_name_val, char const *str1_val, char const *str2_val) {
