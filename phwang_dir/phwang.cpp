@@ -33,25 +33,6 @@ int phwangPthreadCreate (pthread_t *thread, const pthread_attr_t *attr, void *(*
     return thePhwangObject->threadRootObject()->pthreadCreate(thread, attr, start_routine, arg);
 }
 
-/* atomic */
-void phwangIncrementAtomicCount (std::atomic<int> *count_val, char const *who_val, int max_count_val)
-{
-    (*count_val)++;
-    if (*count_val > max_count_val) {
-        printf("phwangIncrementAtomicCount(), count=%d\n", (*count_val).load());
-        phwangAbend("phwangIncrementAtomicCount", who_val);
-    }
-}
-
-void phwangDecrementAtomicCount (std::atomic<int> *count_val, char const *who_val)
-{
-    (*count_val)--;
-    if (*count_val < 0) {
-        printf("phwangDecrementAtomicCount(), count=%d\n", (*count_val).load());
-        phwangAbend("phwangDecrementAtomicCount", who_val);
-    }
-}
-
 /* logit */
 void phwangDebug (int on_off_val, char const *func_name_val, char const *str1_val)
 {

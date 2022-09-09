@@ -57,7 +57,7 @@ ENCODE_OBJS = $(ENCODE_DIR)/encode_class.o
 ABEND_OBJS = $(ABEND_DIR)/abend_class.o
 THREAD_OBJS = $(THREAD_DIR)/thread_root_class.o 
 OBJECT_OBJS = $(OBJECT_DIR)/object_class.o
-PHWANG_OBJS = $(PHWANG_DIR)/phwang.o $(PHWANG_DIR)/phwang_class.o $(JSON_OBJS) $(SUSPEND_OBJS) $(LIST_MGR_OBJS) $(ARRAY_MGR_OBJS) $(ID_INDEX_LIST_OBJS) $(QUEUE_OBJS) $(NET_OBJS) $(SQL_OBJS) $(MALLOC_OBJS) $(ENCODE_OBJS) $(ABEND_OBJS) $(THREAD_OBJS)
+PHWANG_OBJS = $(PHWANG_DIR)/phwang.o $(PHWANG_DIR)/phwang1.o $(PHWANG_DIR)/phwang_class.o $(JSON_OBJS) $(SUSPEND_OBJS) $(LIST_MGR_OBJS) $(ARRAY_MGR_OBJS) $(ID_INDEX_LIST_OBJS) $(QUEUE_OBJS) $(NET_OBJS) $(SQL_OBJS) $(MALLOC_OBJS) $(ENCODE_OBJS) $(ABEND_OBJS) $(THREAD_OBJS)
 
 SERVER_OBJS = $(SERVER_DIR)/server_main.o $(SERVER_DIR)/server_root_class.o
 DB_OBJS = $(DB_DIR)/db_class.o $(DB_DIR)/db_account_class.o $(DB_DIR)/db_account_entry_class.o $(DB_DIR)/db_test_class.o
