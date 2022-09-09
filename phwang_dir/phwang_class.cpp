@@ -113,9 +113,3 @@ void PhwangClass::abend (char const *func_name_val, char const *str1_val) {
     phwangComposeFuncName(s, this->objectName(), func_name_val);
     phwangAbend(s, str1_val);
 }
-
-void PhwangClass::abend2 (char const *func_name_val, char const *str1_val, char const *str2_val) {
-    char s[AbendClass::LogitFuncNameBufSize];
-    phwangComposeFuncName(s, this->objectName(), func_name_val);
-    phwangAbend2(s, str1_val, str2_val);
-}
