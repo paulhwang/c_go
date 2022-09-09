@@ -4,6 +4,7 @@
   File name: mmw_input_class.cpp
 */
 
+#include <errno.h>
 #include "../../../../phwang_dir/phwang.h"
 #include "../../../../phwang_dir/abend_dir/abend_class.h"
 #include "mmw_input_class.h"
@@ -100,8 +101,11 @@ void MmwInputClass::readLine (char *line_buf_val, int *eof_val) {
 
 int MmwInputClass::openFile (char const *filename_val, char const *mode_val)
 {
+    int errno;
+
     this->theFpInput = fopen(filename_val, mode_val);
     if (this->theFpInput == 0) {
+        printf("***errno=%d\n", errno);
         this->logit("openFile", "cannot open file");
         return -1;
     }
