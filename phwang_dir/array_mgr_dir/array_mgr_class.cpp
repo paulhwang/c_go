@@ -17,7 +17,7 @@ ArrayMgrClass::ArrayMgrClass(char const *who_val, char array_type_val, int max_a
     this->theArraySize = 0;
 
     this->allocArrayTable();
-    this->debug(true, "ArrayMgrClass", "init");
+    phwangDebugWS(false, "ArrayMgrClass::ArrayMgrClass", this->theWho, "init");
 }
 
 ArrayMgrClass::~ArrayMgrClass (void)
@@ -46,7 +46,7 @@ void ArrayMgrClass::allocArrayTable (void)
             break;
 
         default:
-            this->abend("allocArrayTable", "bad type");
+            phwangAbendWS("ArrayMgrClass::allocArrayTable", this->theWho, "bad type");
             size = 16;
             break;
     }
@@ -67,17 +67,17 @@ void *ArrayMgrClass::getArrayTable (int *array_size_ptr)
         case 'i':
         case 'c':
         default:
-            this->abend("getArrayTable", "bad type");
+            phwangAbendWS("ArrayMgrClass::getArrayTable", this->theWho, "bad type");
             return 0;
     }
 }
 
-void ArrayMgrClass::insertElement(void *element_val)
+void ArrayMgrClass::insertElement (void *element_val)
 {
     this->insertPointerElement(element_val);
 }
 
-void ArrayMgrClass::insertPointerElement(void *element_val)
+void ArrayMgrClass::insertPointerElement (void *element_val)
 {
     void *data;
 
@@ -85,7 +85,7 @@ void ArrayMgrClass::insertPointerElement(void *element_val)
         int len = strlen((char *) element_val);
         data = malloc(len + 4);
         strcpy((char *) data, (char *) element_val);
-        this->logit("insertPointerElement", (char *) data);
+        phwangLogitWS("ArrayMgrClass::insertPointerElement", this->theWho, (char *) data);
     }
     else {
         data = element_val;
@@ -106,15 +106,15 @@ void ArrayMgrClass::insertPointerElement(void *element_val)
         return;
     }
 
-    this->abend("insertPointerElement", "table is full");
+    phwangAbendWS("ArrayMgrClass::insertPointerElement", this->theWho, "table is full");
 }
 
-void ArrayMgrClass::removeElement(void *element_val)
+void ArrayMgrClass::removeElement (void *element_val)
 {
     this->removePointerElement(element_val);
 }
 
-void ArrayMgrClass::removePointerElement(void *element_val)
+void ArrayMgrClass::removePointerElement (void *element_val)
 {
     if (this->theArrayType == 's') {
         free(element_val);
@@ -128,79 +128,5 @@ void ArrayMgrClass::removePointerElement(void *element_val)
         }
         i++;
     }
-    this->abend("removePointerElement", "not found");
-}
-
-void ArrayMgrClass::debug (int debug_on_val, char const *func_name_val, char const *str1_val)
-{
-    if (debug_on_val) {
-        char s[AbendClass::LogitFuncNameBufSize];
-        this->composeFuncNameExtra(s, func_name_val);
-        phwangDebug(debug_on_val, s, str1_val);
-    }
-}
-
-void ArrayMgrClass::debug2 (int debug_on_val, char const *func_name_val, char const *str1_val, char const *str2_val)
-{
-    if (debug_on_val) {
-        char s[AbendClass::LogitFuncNameBufSize];
-        this->composeFuncNameExtra(s, func_name_val);
-        phwangDebug2(debug_on_val, s, str1_val, str2_val);
-    }
-}
-
-void ArrayMgrClass::debugInt(int debug_on_val, char const *func_name_val, char const *str1_val, int int1_val)
-{
-    if (debug_on_val) {
-        char s[AbendClass::LogitFuncNameBufSize];
-        this->composeFuncNameExtra(s, func_name_val);
-        phwangDebugInt(debug_on_val, s, str1_val, int1_val);
-    }
-}
-
-void ArrayMgrClass::debugInt2(int debug_on_val, char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val)
-{
-    if (debug_on_val) {
-        char s[AbendClass::LogitFuncNameBufSize];
-        this->composeFuncNameExtra(s, func_name_val);
-        phwangDebugInt2(debug_on_val, s, str1_val, int1_val, str2_val, int2_val);
-    }
-}
-
-void ArrayMgrClass::logit (char const *func_name_val, char const *str1_val) {
-    char s[AbendClass::LogitFuncNameBufSize];
-    this->composeFuncNameExtra(s, func_name_val);
-    phwangLogit(s, str1_val);
-}
-
-void ArrayMgrClass::logit2 (char const *func_name_val, char const *str1_val, char const *str2_val) {
-    char s[AbendClass::LogitFuncNameBufSize];
-    this->composeFuncNameExtra(s, func_name_val);
-    phwangLogit2(s, str1_val, str2_val);
-}
-
-void ArrayMgrClass::logitInt(char const *func_name_val, char const *str1_val, int int1_val)
-{
-    char s[AbendClass::LogitFuncNameBufSize];
-    this->composeFuncNameExtra(s, func_name_val);
-    phwangLogitInt(s, str1_val, int1_val);
-}
-
-void ArrayMgrClass::logitInt2(char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val)
-{
-    char s[AbendClass::LogitFuncNameBufSize];
-    this->composeFuncNameExtra(s, func_name_val);
-    phwangLogitInt2(s, str1_val, int1_val, str2_val, int2_val);
-}
-
-void ArrayMgrClass::abend (char const *func_name_val, char const *str1_val) {
-    char s[AbendClass::LogitFuncNameBufSize];
-    this->composeFuncNameExtra(s, func_name_val);
-    phwangAbend(s, str1_val);
-}
-
-void ArrayMgrClass::abend2 (char const *func_name_val, char const *str1_val, char const *str2_val) {
-    char s[AbendClass::LogitFuncNameBufSize];
-    this->composeFuncNameExtra(s, func_name_val);
-    phwangAbend2(s, str1_val, str2_val);
+    phwangAbendWS("ArrayMgrClass::removePointerElement", this->theWho, "not found");
 }
