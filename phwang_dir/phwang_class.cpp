@@ -27,7 +27,6 @@ PhwangClass::~PhwangClass (void)
 
 void PhwangClass::initObjects (void)
 {
-    this->theAbendObject = new AbendClass(this->debugCode());
     this->theMallocObject = new MallocClass(this->debugCode());
     this->theEncodeObject = new EncodeClass(this->debugCode());
     this->theQueueRootObject = new QueueRootClass(this->debugCode());
