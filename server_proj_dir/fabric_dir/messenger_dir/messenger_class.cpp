@@ -24,13 +24,14 @@ MessengerClass::~MessengerClass (void)
 void MessengerClass::initMessenger (void)
 {
     this->debug(true, "initMessenger", "init");
-    new MmwClass(this->fabricObject());
+    this->theMmwObject = new MmwClass(this->fabricObject());
 }
 
 char *MessengerClass::getMessage (void)
 {
-    this->debug(true, "getMessage", "");
-    return 0;
+    char *data = this->theMmwObject->readInputData();
+    this->debug(true, "getMessage", data);
+    return data;
 }
 
 void MessengerClass::putMessage (char const *info_val)

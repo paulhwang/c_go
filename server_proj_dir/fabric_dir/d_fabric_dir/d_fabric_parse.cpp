@@ -190,7 +190,8 @@ void DFabricClass::processMessageRequest (void *tp_transfer_object_val, char *in
 
         case 'R':
             output_data = this->messengerObject()->getMessage();
-            this->sendMessageResponce(tp_transfer_object_val, ajax_id_val, "succeed", "R_data");
+            this->debug(true, "processMessageRequest", output_data);
+            this->sendMessageResponce(tp_transfer_object_val, ajax_id_val, "succeed", output_data);
             break;
 
         case 'W':

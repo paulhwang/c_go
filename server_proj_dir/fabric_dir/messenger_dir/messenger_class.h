@@ -11,11 +11,13 @@
 //#include "../fabric_class.h"
 
 class FabricClass;
+class MmwClass;
 
 class MessengerClass {
     char const *objectName(void) {return "MessengerClass";}
 
     FabricClass *theFabricObject;
+    MmwClass *theMmwObject;
 
     void debug(int debug_on_val, char const *func_name_val, char const *str1_val);
     void debug2(int debug_on_val, char const *func_name_val, char const *str1_val, char const *str2_val);
