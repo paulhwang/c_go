@@ -33,6 +33,16 @@ void phwangLogitWSS (char const *func_name_val, char const *who_val, char const 
     printf("%s:%s() %s %s\n", func_name_val, who_val, str1_val, str2_val);
 }
 
+void phwangLogitSI (char const *func_name_val, char const *str1_val, char const *str2_val)
+{
+    printf("%s() %s %s\n", func_name_val, str1_val, str2_val);
+}
+
+void phwangLogitWSI (char const *func_name_val, char const *who_val, char const *str1_val, char const *str2_val)
+{
+    printf("%s:%s() %s %s\n", func_name_val, who_val, str1_val, str2_val);
+}
+
 void phwangLogit2 (char const *func_name_val, char const *str1_val, char const *str2_val)
 {
     printf("%s() %s %s\n", func_name_val, str1_val, str2_val);
@@ -51,6 +61,26 @@ void phwangLogitWSI (char const *func_name_val, char const *who_val, char const 
 void phwangLogitInt (char const *func_name_val, char const *str1_val, int int1_val)
 {
     printf("%s() %s=%d\n", func_name_val, str1_val, int1_val);
+}
+
+void phwangLogitSISS (char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, char const *str3_val)
+{
+    printf("%s() %s=%d %s=%s\n", func_name_val, str1_val, int1_val, str2_val, str3_val);
+}
+
+void phwangLogitWSISS (char const *func_name_val, char const *who_val, char const *str1_val, int int1_val, char const *str2_val, char const *str3_val)
+{
+    printf("%s:%s() %s=%d %s=%s\n", func_name_val, who_val, str1_val, int1_val, str2_val, str3_val);
+}
+
+void phwangLogitSISI (char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val)
+{
+    printf("%s() %s=%d %s=%d\n", func_name_val, str1_val, int1_val, str2_val, int2_val);
+}
+
+void phwangLogitWSISI (char const *func_name_val, char const *who_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val)
+{
+    printf("%s:%s() %s=%d %s=%d\n", func_name_val, who_val, str1_val, int1_val, str2_val, int2_val);
 }
 
 void phwangLogitInt2 (char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val)
@@ -118,6 +148,34 @@ void phwangDebugInt (int on_off_val, char const *func_name_val, char const *str1
 {
     if (phwang_debug_on_off_switch && on_off_val) {
         phwangLogitInt(func_name_val, str1_val, int1_val);
+    }
+}
+
+void phwangDebugSISS (int on_off_val, char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, char const *str3_val)
+{
+    if (phwang_debug_on_off_switch && on_off_val) {
+        phwangLogitSISS(func_name_val, str1_val, int1_val, str2_val, str3_val);
+    }
+}
+
+void phwangDebugWSISS (int on_off_val, char const *func_name_val, char const *who_val, char const *str1_val, int int1_val, char const *str2_val, char const *str3_val)
+{
+    if (phwang_debug_on_off_switch && on_off_val) {
+        phwangLogitWSISS(func_name_val, who_val, str1_val, int1_val, str2_val, str3_val);
+    }
+}
+
+void phwangDebugSISI (int on_off_val, char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val)
+{
+    if (phwang_debug_on_off_switch && on_off_val) {
+        phwangLogitSISI(func_name_val, str1_val, int1_val, str2_val, int2_val);
+    }
+}
+
+void phwangDebugWSISI (int on_off_val, char const *func_name_val, char const *who_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val)
+{
+    if (phwang_debug_on_off_switch && on_off_val) {
+        phwangLogitWSISI(func_name_val, who_val, str1_val, int1_val, str2_val, int2_val);
     }
 }
 

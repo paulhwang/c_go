@@ -25,11 +25,7 @@ void *TpTransferClass::receiveThreadFunction (int socket_val)
         if (length > 0) {
             data[length] = 0;
             
-            if (0) { /* debug */
-                char s[128];
-                sprintf(s, "(%s) data=%s len=%d", this->theWho, data, length);
-                phwangDebugWS(true, "TpTransferClass::receiveThreadFunction", this->theWho, s);
-            }
+            phwangDebugWSISS(false, "TpTransferClass::receiveThreadFunction", this->theWho, "len=", length, " data=", data);
 
             if ((*data != '{') && (*data != '[')) {
                 if (1) { /* debug */

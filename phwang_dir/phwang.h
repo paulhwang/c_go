@@ -32,6 +32,9 @@ void phwangLogitSI(char const *func_name_val, char const *str1_val, int int1_val
 void phwangLogitWSI(char const *func_name_val, char const *who_val, char const *str1_val, int int1_val);
 void phwangLogitInt(char const *func_name_val, char const *str1_val, int int1_val);
 
+void phwangLogitSISS(char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, char const *str3_val);
+void phwangLogitWSISS(char const *func_name_val, char const *who_val, char const *str1_val, int int1_val, char const *str2_val, char const *str3_val);
+
 void phwangLogitSISI(char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val);
 void phwangLogitWSISI(char const *func_name_val, char const *who_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val);
 void phwangLogitInt2(char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val);
@@ -47,6 +50,9 @@ void phwangDebug2(int on_off_val, char const *func_name_val, char const *str1_va
 void phwangDebugSI(int on_off_val, char const *func_name_val, char const *str1_val, int int1_val);
 void phwangDebugWSI(int on_off_val, char const *func_name_val, char const *who_val, char const *str1_val, int int1_val);
 void phwangDebugInt(int on_off_val, char const *func_name_val, char const *str1_val, int int1_val);
+
+void phwangDebugSISS(int on_off_val, char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, char const *str3_val);
+void phwangDebugWSISS(int on_off_val, char const *func_name_val, char const *who_val, char const *str1_val, int int1_val, char const *str2_val, char const *str3_val);
 
 void phwangDebugSISI(int on_off_val, char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val);
 void phwangDebugWSISI(int on_off_val, char const *func_name_val, char const *who_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val);
