@@ -22,7 +22,7 @@ DFabricClass::DFabricClass (FabricClass *fabric_object_val)
     this->setTimeStampString();
     this->startNetServer();
 
-    phwangDebug(true, "DFabricClass::DFabricClass", "init");
+    phwangDebugS(false, "DFabricClass::DFabricClass", "init");
 }
 
 DFabricClass::~DFabricClass (void)
@@ -31,7 +31,7 @@ DFabricClass::~DFabricClass (void)
 
 void dFabricTpServerAcceptFunction (void *d_fabric_object_val, void *tp_transfer_object_val) {
     if (!tp_transfer_object_val) {
-        phwangAbend("Golbal::dFabricTpServerAcceptFunction", "null tp_transfer_object_val");
+        phwangAbendS("Golbal::dFabricTpServerAcceptFunction", "null tp_transfer_object_val");
     }
 
     ((DFabricClass *) d_fabric_object_val)->exportedNetAcceptFunction(tp_transfer_object_val);
@@ -62,5 +62,5 @@ void DFabricClass::setTimeStampString (void)
     time_t seconds = time(NULL);
     int time_stamp = (int) ((seconds - 1642858200) / 60);
     phwangEncodeNumber(this->theTimeStampString, time_stamp, FABRIC_SERVER_TIME_STAMP_LENGTH_SIZE);
-    phwangDebug(false, "DFabricClass::setTimeStampString", this->timeStampString());
+    phwangDebugS(false, "DFabricClass::setTimeStampString", this->timeStampString());
 }

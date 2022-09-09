@@ -76,16 +76,16 @@ void *TcpServerClass::serverThreadFunction (void *data_val)
     if (0) { /* debug */
         char s[128];
         sprintf(s, "starts for (%s)", this->theWho);
-        this->logit("serverThreadFunction", s);
+        phwangLogitWS("TcpServerClass::serverThreadFunction", this->theWho, s);
     }
 
     if ((s = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
-        this->logit("serverThreadFunction", "open socket error");
+        phwangLogitWS("TcpServerClass::serverThreadFunction", this->theWho, "open socket error");
         return 0;
     }
 
     if (setsockopt(s, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &opt, sizeof(opt))) {
-        this->logit("serverThreadFunction", "setsockopt error");
+        phwangLogitWS("TcpServerClass::serverThreadFunction", this->theWho, "setsockopt error");
         return 0;
     }
 
@@ -94,7 +94,7 @@ void *TcpServerClass::serverThreadFunction (void *data_val)
     address.sin_port = htons(this->thePort);
 
     if (bind(s, (struct sockaddr *)&address, sizeof(address)) < 0) {
-        this->logit("serverThreadFunction", "bind error");
+        phwangLogitWS("TcpServerClass::serverThreadFunction", this->theWho, "bind error");
         return 0;
     }
 
@@ -102,7 +102,7 @@ void *TcpServerClass::serverThreadFunction (void *data_val)
         if (0) { /* debug */
             char s[128];
             sprintf(s, "listening for (%s)", this->theWho);
-            this->logit("serverThreadFunction", s);
+            phwangLogitWS("TcpServerClass::serverThreadFunction", this->theWho, s);
         }
 
         listen(s, BACKLOG);
@@ -110,14 +110,14 @@ void *TcpServerClass::serverThreadFunction (void *data_val)
         phwangDebugWS(true, "TcpServerClass::serverThreadFunction", this->theWho, "accepting");
 
         if ((data_socket = accept(s, (struct sockaddr *)&address, (socklen_t*)&addrlen)) < 0) {
-            this->logit("serverThreadFunction", "accept error");
+            phwangLogitWS("TcpServerClass::serverThreadFunction", this->theWho, "accept error");
             return 0;
         }
 
         if (1) { /* debug */
             char s[128];
             sprintf(s, "accepted port=%d", this->thePort);
-            this->logit("serverThreadFunction", s);
+            phwangLogitWS("TcpServerClass::serverThreadFunction", this->theWho, s);
         }
 
         char data[strlen(TP_PHWANG_LOGO) + 16];
@@ -129,7 +129,7 @@ void *TcpServerClass::serverThreadFunction (void *data_val)
             if (1) { /* debug */
                 char s[128];
                 sprintf(s, "### Attack: (%s) port=%d data_length=%d data=%s", this->theWho, this->thePort, length, data);
-                this->logit("serverThreadFunction", s);
+                phwangLogitWS("TcpServerClass::serverThreadFunction", this->theWho, s);
             }
             close(data_socket);
             continue;
@@ -143,60 +143,4 @@ void *TcpServerClass::serverThreadFunction (void *data_val)
 
     //free(data_val);
     return 0;
-}
-
-void TcpServerClass::debugInt(int debug_on_val, char const *func_name_val, char const *str1_val, int int1_val)
-{
-    if (debug_on_val) {
-        char s[AbendClass::LogitFuncNameBufSize];
-        this->composeFuncNameExtra(s, func_name_val);
-        phwangDebugInt(debug_on_val, s, str1_val, int1_val);
-    }
-}
-
-void TcpServerClass::debugInt2(int debug_on_val, char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val)
-{
-    if (debug_on_val) {
-        char s[AbendClass::LogitFuncNameBufSize];
-        this->composeFuncNameExtra(s, func_name_val);
-        phwangDebugInt2(debug_on_val, s, str1_val, int1_val, str2_val, int2_val);
-    }
-}
-
-void TcpServerClass::logit (char const *func_name_val, char const *str1_val) {
-    char s[AbendClass::LogitFuncNameBufSize];
-    this->composeFuncNameExtra(s, func_name_val);
-    phwangLogit(s, str1_val);
-}
-
-void TcpServerClass::logit2 (char const *func_name_val, char const *str1_val, char const *str2_val) {
-    char s[AbendClass::LogitFuncNameBufSize];
-    this->composeFuncNameExtra(s, func_name_val);
-    phwangLogit2(s, str1_val, str2_val);
-}
-
-void TcpServerClass::logitInt(char const *func_name_val, char const *str1_val, int int1_val)
-{
-    char s[AbendClass::LogitFuncNameBufSize];
-    this->composeFuncNameExtra(s, func_name_val);
-    phwangLogitInt(s, str1_val, int1_val);
-}
-
-void TcpServerClass::logitInt2(char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val)
-{
-    char s[AbendClass::LogitFuncNameBufSize];
-    this->composeFuncNameExtra(s, func_name_val);
-    phwangLogitInt2(s, str1_val, int1_val, str2_val, int2_val);
-}
-
-void TcpServerClass::abend (char const *func_name_val, char const *str1_val) {
-    char s[AbendClass::LogitFuncNameBufSize];
-    this->composeFuncNameExtra(s, func_name_val);
-    phwangAbend(s, str1_val);
-}
-
-void TcpServerClass::abend2 (char const *func_name_val, char const *str1_val, char const *str2_val) {
-    char s[AbendClass::LogitFuncNameBufSize];
-    this->composeFuncNameExtra(s, func_name_val);
-    phwangAbend2(s, str1_val, str2_val);
 }
