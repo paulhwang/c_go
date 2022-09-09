@@ -39,7 +39,7 @@ TcpServerClass::TcpServerClass (
     this->theWho = who_val;
     this->theTpTransferObjectIndex = TpTransferClass::SERVER_INDEX;
 
-    this->debug(false, "TcpServerClass", "init");
+    phwangDebugWS(false, "TcpServerClass::TcpServerClass", this->theWho, "init");
 }
 
 TcpServerClass::~TcpServerClass (void)
@@ -53,7 +53,7 @@ void *transportServerThreadFunction (void *tp_server_object_val)
 
 void TcpServerClass::startServerThread (void)
 {
-    this->debug(false, "startServerThread", "");
+    phwangDebugWS(false, "TcpServerClass::startServerThread", this->theWho, "start");
 
     int r = phwangPthreadCreate(&this->theServerThread, 0, transportServerThreadFunction, this);
     if (r) {
@@ -143,24 +143,6 @@ void *TcpServerClass::serverThreadFunction (void *data_val)
 
     //free(data_val);
     return 0;
-}
-
-void TcpServerClass::debug (int debug_on_val, char const *func_name_val, char const *str1_val)
-{
-    if (debug_on_val) {
-        char s[AbendClass::LogitFuncNameBufSize];
-        this->composeFuncNameExtra(s, func_name_val);
-        phwangDebug(debug_on_val, s, str1_val);
-    }
-}
-
-void TcpServerClass::debug2 (int debug_on_val, char const *func_name_val, char const *str1_val, char const *str2_val)
-{
-    if (debug_on_val) {
-        char s[AbendClass::LogitFuncNameBufSize];
-        this->composeFuncNameExtra(s, func_name_val);
-        phwangDebug2(debug_on_val, s, str1_val, str2_val);
-    }
 }
 
 void TcpServerClass::debugInt(int debug_on_val, char const *func_name_val, char const *str1_val, int int1_val)
