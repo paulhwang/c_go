@@ -7,6 +7,7 @@
 #include "../../../phwang_dir/phwang.h"
 #include "../../../phwang_dir/abend_dir/abend_class.h"
 #include "messenger_class.h"
+#include "mmw_dir/mmw_class.h"
 #include "../fabric_class.h"
 
 MessengerClass::MessengerClass (FabricClass *fabric_object_val)
@@ -23,6 +24,7 @@ MessengerClass::~MessengerClass (void)
 void MessengerClass::initMessenger (void)
 {
     this->debug(true, "initMessenger", "init");
+    new MmwClass(this->fabricObject());
 }
 
 char *MessengerClass::getMessage (void)

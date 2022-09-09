@@ -30,7 +30,7 @@ void MmwClass::inputThreadFunction (void)
 {
     this->debug(false, "inputThreadFunction", "");
 
-    int open_result = this->mmwInputObject()->openFile("../data/mmw_data.txt", "r");
+    int open_result = this->mmwInputObject()->openFile("../data_dir/mmw_data_dir/mmw_data.txt", "r");
     if (open_result == -1) {
         this->logit("openFile", "cannot open file");
         return;

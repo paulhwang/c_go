@@ -13,7 +13,7 @@ QueueEntryClass::QueueEntryClass (void)
 {
     memset(this, 0, sizeof (*this));
     strcpy(this->theObjectName, "QueueEntryClass");
-    phwangIncrementAtomicCount(&QueueEntryClass::ObjectCount, this->objectName(), 3);
+    phwangIncrementAtomicCount(&QueueEntryClass::ObjectCount, this->objectName(), 2000);
 }
 
 QueueEntryClass::~QueueEntryClass (void)
