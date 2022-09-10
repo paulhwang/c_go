@@ -59,9 +59,6 @@ void phwangAbend(char const *func_name_val, char const *str1_val);
 void phwangAbendSS(char const *func_name_val, char const *str1_val, char const *str2_val);
 void phwangAbendWSS(char const *func_name_val, char const *who_val, char const *str1_val, char const *str2_val);
 
-void phwangComposeFuncName(char *buf_val, char const *object_name_val, char const *func_name_val);
-void phwangComposeFuncNameExtra(char *buf_val, char const *object_name_val, char const *func_name_val, char const *extra_info_val);
-
 /* malloc and free */
 void *phwangMalloc(int size_val, int who_val);
 void  phwangFree(void *data_val);
