@@ -14,18 +14,18 @@ void *FabricClassWatchDogThreadFunction (void *fabric_object_val)
 
 void FabricClass::startWatchDogThread (void)
 {
-    this->debug(false, "startWatchDogThread", "");
+    phwangDebugS(false, "FabricClass::startWatchDogThread", "");
 
     int r = phwangPthreadCreate(&this->theWatchDogThread, 0, FabricClassWatchDogThreadFunction, this);
     if (r) {
-        this->logit("startWatchDogThread", "fail");
+        phwangLogitS("FabricClass::startWatchDogThread", "fail");
         return;
     }
 }
 
 void *FabricClass::watchDogThreadFunction (void)
 {
-    this->debug(false, "watchDogThreadFunction", "");
+    phwangDebugS(false, "abricClass::watchDogThreadFunction", "");
     while (1) {
         this->linkKeepAliveExamine();
         sleep(1);

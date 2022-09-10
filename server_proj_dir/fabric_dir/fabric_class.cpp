@@ -29,7 +29,7 @@ FabricClass::FabricClass (int debug_code_val)
     this->theGroupListMgrObject = phwangListMgrMalloc("GROUP", GROUP_MGR_PROTOCOL_GROUP_ID_SIZE, GROUP_MGR_PROTOCOL_GROUP_INDEX_SIZE, 500);
     this->startWatchDogThread();
 
-    this->debug(false, "FabricClass", "init");
+    phwangDebugS(false, "FabricClass::FabricClass", "init");
 }
 
 FabricClass::~FabricClass (void)
@@ -38,7 +38,7 @@ FabricClass::~FabricClass (void)
     this->theUFabricObject->~UFabricClass(); 
     this->theNameListObject->~NameListClass();
     this->theDbObject->~DbClass();
-    this->debug(true, "~FabricClass", "exit");
+    phwangDebugS(true, "~FabricClass::~FabricClass", "exit");
 }
 
 void FabricClass::linkKeepAliveExamine (void)
@@ -56,7 +56,7 @@ void FabricClass::linkKeepAliveExamine (void)
             if (1) { /* debug */
                 char s[128];
                 sprintf(s, "(***link expired***) linkName=%s linkIdIndex=%s", link->linkName(), link->linkIdIndex());
-                this->logit("linkKeepAliveExamine", s);
+                phwangLogitS("FabricClass::linkKeepAliveExamine", s);
             }
             phwangListMgrRemoveEntry(this->theLinkListMgrObject, link);
             delete link;
@@ -70,14 +70,14 @@ LinkClass *FabricClass::mallocLink (char const *data_val)
     phwangDebugSS(false, "FabricClass::mallocLink", "data", data_val);
 
     if (strcmp(((ListMgrClass *) this->linkListMgrObject())->objectName(), "ListMgrClass")) {
-        this->abend("mallocLink", "bad name 000");
+        phwangAbendS("abricClass::mallocLink", "bad name 000");
     }
 
 
     LinkClass *link = new LinkClass(this->theLinkListMgrObject, this, data_val);
 
     if (strcmp(((ListMgrClass *) this->linkListMgrObject())->objectName(), "ListMgrClass")) {
-        this->abend("mallocLink", "bad name 111");
+        phwangAbendS("abricClass::mallocLink", "bad name 111");
     }
 
     this->theNameListObject->updateNameList();
@@ -86,19 +86,19 @@ LinkClass *FabricClass::mallocLink (char const *data_val)
 
 void FabricClass::freeLink (LinkClass *link_object_val)
 {
-    this->debug(true, "freeLink", link_object_val->linkIdIndex());
+    phwangDebugS(true, "FabricClass::freeLink", link_object_val->linkIdIndex());
     if (!link_object_val) {
         return;
     }
 
     if (strcmp(((ListMgrClass *) this->linkListMgrObject())->objectName(), "ListMgrClass")) {
-        this->abend("freeLink", "bad name 000");
+        phwangAbendS("FabricClass::freeLink", "bad name 000");
     }
 
     link_object_val->~LinkClass();
 
     if (strcmp(((ListMgrClass *) this->linkListMgrObject())->objectName(), "ListMgrClass")) {
-        this->abend("freeLink", "bad name 111");
+        phwangAbendS("FabricClass::freeLink", "bad name 111");
     }
 
     this->theNameListObject->updateNameList();
@@ -121,7 +121,7 @@ LinkClass *FabricClass::searchLinkByName (char *name_val)
 
 GroupClass *FabricClass::mallocGroup (char *theme_data_val)
 {
-    this->debug(true, "mallocGroup", "");
+    phwangDebugS(true, "FabricClass::mallocGroup", "");
     GroupClass *group = new GroupClass(this->theGroupListMgrObject, this, theme_data_val);
     return group;
 }
@@ -130,23 +130,9 @@ SessionClass *FabricClass::serachLinkAndSession (char *data_val)
 {
     LinkClass *link = this->searchLink(data_val, 0);
     if (!link) {
-        this->abend("serachLinkAndSession", "null link");
+        phwangAbendS("FabricClass::serachLinkAndSession", "null link");
         return 0;
     }
 
     return link->searchSession(data_val + ListMgrProtocolClass::LINK_ID_INDEX_SIZE);
-}
-
-void FabricClass::logit (char const *str0_val, char const *str1_val)
-{
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
-    phwangLogit(s, str1_val);
-}
-
-void FabricClass::abend (char const *str0_val, char const *str1_val)
-{
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
-    phwangAbend(s, str1_val);
 }
