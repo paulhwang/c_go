@@ -33,6 +33,10 @@ RoomClass *ThemeClass::mallocRoom (char *room_id_index_val)
 {
     phwangDebugS(true, "ThemeClass::mallocRoom", "");
     RoomClass *room = new RoomClass(this->theRoomListMgrObject, this, room_id_index_val);
+    if (!room) {
+        phwangAbendS("ThemeClass::mallocRoom", "fail_to_malloc_room");
+        return 0;
+    }
     return room;
 }
 

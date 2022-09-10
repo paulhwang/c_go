@@ -16,7 +16,7 @@ RoomClass::RoomClass (void *list_mgr_object_val, ThemeClass *theme_object_val, c
     this->theGroupArrayMgr = phwangArrayMgrMalloc(this->objectName(), 's', 10);
     this->insertGroup(group_id_index_val);
 
-    phwangDebugS(true, "RoomClass::RoomClass", this->roomIdIndex());
+    phwangDebugSS(true, "RoomClass::RoomClass", "new_room:", this->roomIdIndex());
 }
 
 RoomClass::~RoomClass (void)
