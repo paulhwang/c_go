@@ -40,4 +40,8 @@ public:
     char const static RESPOND_IS_GET_LINK_DATA_PENDING_SESSION3 = 'T';
     char const static RESPOND_IS_GET_LINK_DATA_PENDING_DATA = 'D';
     char const static RESPOND_IS_GET_LINK_DATA_NAME_LIST = 'N';
+
+    char const static *FAKE_LINK_ID_INDEX;
+    char const static *FAKE_SESSION_ID_INDEX;
+
 };
