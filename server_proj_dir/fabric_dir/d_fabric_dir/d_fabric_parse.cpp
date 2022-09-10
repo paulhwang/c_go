@@ -9,7 +9,6 @@
 #include "../../protocol_dir/net_port_protocol.h"
 #include "../../protocol_dir/ft_command_class.h"
 #include "../../protocol_dir/session_mgr_protocol.h"
-#include "../../protocol_dir/group_mgr_protocol.h"
 #include "../../protocol_dir/fe_command_class.h"
 #include "d_fabric_class.h"
 #include "../fabric_class.h"

@@ -7,7 +7,6 @@
 #pragma once
 
 #include <pthread.h>
-#include "../../protocol_dir/group_mgr_protocol.h"
 
 #define U_FABRIC_RECEIVE_QUEUE_SIZE 100
 

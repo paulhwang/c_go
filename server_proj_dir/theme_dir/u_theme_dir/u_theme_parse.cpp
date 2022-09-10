@@ -8,7 +8,6 @@
 #include "../../../phwang_dir/malloc_dir/malloc_class.h"
 #include "../../protocol_dir/te_command_class.h"
 #include "../../protocol_dir/ft_command_class.h"
-#include "../../protocol_dir/group_mgr_protocol.h"
 #include "u_theme_class.h"
 #include "../theme_class.h"
 #include "../d_theme_dir/d_theme_class.h"
