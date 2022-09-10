@@ -8,6 +8,7 @@
 #include "link_class.h"
 #include "session_class.h"
 #include "fabric_class.h"
+#include "../protocol_dir/fe_command_class.h"
   
 LinkClass::LinkClass (void *list_mgr_object_val, FabricClass *fabric_object_val, char const* link_name_val):
         ListEntryClass(list_mgr_object_val)
@@ -50,7 +51,7 @@ void LinkClass::setPendingSessionSetup (char *session_id_index_val, char *theme_
 {
     char *buf, *data_ptr;
 
-    buf = data_ptr = (char *) malloc(ListMgrProtocolClass::LINK_MGR_DATA_BUFFER_SIZE);
+    buf = data_ptr = (char *) malloc(FECommandClass::LINK_MGR_DATA_BUFFER_SIZE);
     memcpy(data_ptr, session_id_index_val, SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE);
     data_ptr += SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE;
     strcpy(data_ptr, theme_data_val);
@@ -61,7 +62,7 @@ void LinkClass::setPendingSessionSetup3 (char *session_id_index_val, char const 
 {
     char *buf, *data_ptr;
 
-    buf = data_ptr = (char *) malloc(ListMgrProtocolClass::LINK_MGR_DATA_BUFFER_SIZE);
+    buf = data_ptr = (char *) malloc(FECommandClass::LINK_MGR_DATA_BUFFER_SIZE);
     memcpy(data_ptr, session_id_index_val, SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE);
     data_ptr += SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE;
     strcpy(data_ptr, theme_data_val);
