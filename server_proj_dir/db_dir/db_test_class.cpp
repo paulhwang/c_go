@@ -15,7 +15,7 @@ void *DbTestClass::sqlConnect(void) {return this->dbObject()->sqlConnect();}
 DbTestClass::DbTestClass (DbClass *db_object_val)
 {
     memset(this, 0, sizeof(*this));
-    this->debug(false, "DbTestClass", "init");
+    phwangDebugS(false, "DbTestClass::DbTestClass", "init");
 
     this->theDbObject = db_object_val;
 }
@@ -48,18 +48,4 @@ void DbTestClass::insertCar (void) {
     this->sqlObject()->insertInto (this->sqlConnect(), "cars", "6,'Citroen',21000");
     this->sqlObject()->insertInto (this->sqlConnect(), "cars", "7,'Hummer',41400");
     this->sqlObject()->insertInto (this->sqlConnect(), "cars", "8,'Volkswagen',21600");
-}
-
-void DbTestClass::logit (char const* str0_val, char const* str1_val)
-{
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
-    phwangLogit(s, str1_val);
-}
-
-void DbTestClass::abend (char const* str0_val, char const* str1_val)
-{
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
-    phwangAbend(s, str1_val);
 }

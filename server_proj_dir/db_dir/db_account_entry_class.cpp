@@ -29,17 +29,3 @@ DbAccountEntryClass::~DbAccountEntryClass (void)
         phwangFree(this->theEmail);
     }
 }
-
-void DbAccountEntryClass::logit (char const* str0_val, char const* str1_val)
-{
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
-    phwangLogit(s, str1_val);
-}
-
-void DbAccountEntryClass::abend (char const* str0_val, char const* str1_val)
-{
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
-    phwangAbend(s, str1_val);
-}

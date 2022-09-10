@@ -18,7 +18,7 @@ void *DbAccountClass::sqlConnect(void) {return this->dbObject()->sqlConnect();}
 DbAccountClass::DbAccountClass (DbClass *db_object_val)
 {
     memset(this, 0, sizeof(*this));
-    this->debug(false, "DbAccountClass", "init");
+    phwangDebugS(false, "DbAccountClass::DbAccountClass", "init");
 
     this->theDbObject = db_object_val;
 
@@ -86,7 +86,7 @@ void DbAccountClass::listAccount (void) {
     for (int i = 0; i < count; i++) {
         char *account_name = this->sqlObject()->getTuplesValue(res, i, 0);
         char *password = this->sqlObject()->getTuplesValue(res, i, 1);
-        this->debug2(false, "listAccount", account_name, password);
+        phwangDebugSS(false, "DbAccountClass::listAccount", account_name, password);
     }
 
     this->sqlObject()->doPQclear(res);
@@ -116,17 +116,17 @@ int DbAccountClass::checkAccountNameExist (char const *account_name_val)
     for (int i = 0; i < count; i++) {
         char *account_name = this->sqlObject()->getTuplesValue(res, i, 0);
  
-        this->debug(false, "checkAccountNameExist", account_name);
+        phwangDebugS(false, "DbAccountClass::checkAccountNameExist", account_name);
 
         if (!strcmp(account_name, account_name_val)) {
             this->sqlObject()->doPQclear(res);
-            this->debug(false, "checkAccountNameExist", "found");
+            phwangDebugS(false, "DbAccountClass::checkAccountNameExist", "found");
             return DB_ACCOUNT_NAME_EXIST;
         }
     }
 
     this->sqlObject()->doPQclear(res);
-    this->debug(false, "checkAccountNameExist", "not found");
+    phwangDebugS(false, "DbAccountClass::checkAccountNameExist", "not found");
     return DB_ACCOUNT_NAME_NOT_EXIST;
 }
 
@@ -143,97 +143,23 @@ int DbAccountClass::checkPassword (char const *account_name_val, char const *pas
         char *account_name = this->sqlObject()->getTuplesValue(res, i, 0);
         char *password = this->sqlObject()->getTuplesValue(res, i, 1);
 
-        this->debug2(false, "checkPassword", account_name, password);
+        phwangDebugSS(false, "DbAccountClass::checkPassword", account_name, password);
 
         if (!strcmp(account_name, account_name_val)) {
             if (!strcmp(password, password_val)) {
                 this->sqlObject()->doPQclear(res);
-                this->debug(false, "checkPassword", "match");
+                phwangDebugS(false, "DbAccountClass::checkPassword", "match");
                 return DB_ACCOUNT_PASSWORD_MATCH;
             }
             else {
                 this->sqlObject()->doPQclear(res);
-                this->debug(false, "checkPassword", "not match");
+                phwangDebugS(false, "DbAccountClass::checkPassword", "not match");
                 return DB_ACCOUNT_PASSWORD_NOT_MATCH;
             }
         }
     }
 
     this->sqlObject()->doPQclear(res);
-    this->debug(false, "checkPassword", "not found");
+    phwangDebugS(false, "DbAccountClass::checkPassword", "not found");
     return DB_ACCOUNT_NAME_NOT_EXIST;
-}
-
-void DbAccountClass::debug (int debug_on_val, char const *func_name_val, char const *str1_val)
-{
-    if (debug_on_val) {
-        char s[AbendClass::LogitFuncNameBufSize];
-        phwangComposeFuncName(s, this->objectName(), func_name_val);
-        phwangDebug(debug_on_val, s, str1_val);
-    }
-}
-
-void DbAccountClass::debug2 (int debug_on_val, char const *func_name_val, char const *str1_val, char const *str2_val)
-{
-    if (debug_on_val) {
-        char s[AbendClass::LogitFuncNameBufSize];
-        phwangComposeFuncName(s, this->objectName(), func_name_val);
-        phwangDebug2(debug_on_val, s, str1_val, str2_val);
-    }
-}
-
-void DbAccountClass::debugInt(int debug_on_val, char const *func_name_val, char const *str1_val, int int1_val)
-{
-    if (debug_on_val) {
-        char s[AbendClass::LogitFuncNameBufSize];
-        phwangComposeFuncName(s, this->objectName(), func_name_val);
-        phwangDebugInt(debug_on_val, s, str1_val, int1_val);
-    }
-}
-
-void DbAccountClass::debugInt2(int debug_on_val, char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val)
-{
-    if (debug_on_val) {
-        char s[AbendClass::LogitFuncNameBufSize];
-        phwangComposeFuncName(s, this->objectName(), func_name_val);
-        phwangDebugInt2(debug_on_val, s, str1_val, int1_val, str2_val, int2_val);
-    }
-}
-
-void DbAccountClass::logit (char const *func_name_val, char const *str1_val) {
-    char s[AbendClass::LogitFuncNameBufSize];
-    phwangComposeFuncName(s, this->objectName(), func_name_val);
-    phwangLogit(s, str1_val);
-}
-
-void DbAccountClass::logit2 (char const *func_name_val, char const *str1_val, char const *str2_val) {
-    char s[AbendClass::LogitFuncNameBufSize];
-    phwangComposeFuncName(s, this->objectName(), func_name_val);
-    phwangLogit2(s, str1_val, str2_val);
-}
-
-void DbAccountClass::logitInt(char const *func_name_val, char const *str1_val, int int1_val)
-{
-    char s[AbendClass::LogitFuncNameBufSize];
-    phwangComposeFuncName(s, this->objectName(), func_name_val);
-    phwangLogitInt(s, str1_val, int1_val);
-}
-
-void DbAccountClass::logitInt2(char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val)
-{
-    char s[AbendClass::LogitFuncNameBufSize];
-    phwangComposeFuncName(s, this->objectName(), func_name_val);
-    phwangLogitInt2(s, str1_val, int1_val, str2_val, int2_val);
-}
-
-void DbAccountClass::abend (char const *func_name_val, char const *str1_val) {
-    char s[AbendClass::LogitFuncNameBufSize];
-    phwangComposeFuncName(s, this->objectName(), func_name_val);
-    phwangAbend(s, str1_val);
-}
-
-void DbAccountClass::abend2 (char const *func_name_val, char const *str1_val, char const *str2_val) {
-    char s[AbendClass::LogitFuncNameBufSize];
-    phwangComposeFuncName(s, this->objectName(), func_name_val);
-    phwangAbend2(s, str1_val, str2_val);
 }

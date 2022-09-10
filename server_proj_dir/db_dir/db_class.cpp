@@ -13,7 +13,7 @@
 DbClass::DbClass (FabricClass *fabric_object_val)
 {
     memset(this, 0, sizeof(*this));
-    this->debug(false, "DbClass", "init");
+    phwangDebugS(false, "DbClass::DbClass", "init");
 
     /* sql */
     this->theSqlObject = new SqlClass();
@@ -21,7 +21,7 @@ DbClass::DbClass (FabricClass *fabric_object_val)
     /* connect */
     this->theSqlConnect = this->sqlObject()->connectDb("phwang", "go_db");
     if (this->sqlConnect() == 0) {
-        this->abend("DbClass", "fail to connnect to go_db");
+        phwangAbendS("DbClass::DbClass", "fail to connnect to go_db");
         return;
     }
 
@@ -35,18 +35,4 @@ DbClass::DbClass (FabricClass *fabric_object_val)
 
 DbClass::~DbClass (void)
 {
-}
-
-void DbClass::logit (char const* str0_val, char const* str1_val)
-{
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
-    phwangLogit(s, str1_val);
-}
-
-void DbClass::abend (char const* str0_val, char const* str1_val)
-{
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
-    phwangAbend(s, str1_val);
 }
