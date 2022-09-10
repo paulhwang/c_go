@@ -73,8 +73,11 @@ LinkClass *FabricClass::mallocLink (char const *data_val)
         phwangAbendS("abricClass::mallocLink", "bad name 000");
     }
 
-
     LinkClass *link = new LinkClass(this->theLinkListMgrObject, this, data_val);
+    if (!link) {
+        phwangAbendS("FabricClass::mallocLink", "fail_to_malloc_link");
+        return 0;
+    }
 
     if (strcmp(((ListMgrClass *) this->linkListMgrObject())->objectName(), "ListMgrClass")) {
         phwangAbendS("abricClass::mallocLink", "bad name 111");
@@ -121,8 +124,11 @@ LinkClass *FabricClass::searchLinkByName (char *name_val)
 
 GroupClass *FabricClass::mallocGroup (char *theme_data_val)
 {
-    phwangDebugS(true, "FabricClass::mallocGroup", "");
     GroupClass *group = new GroupClass(this->theGroupListMgrObject, this, theme_data_val);
+    if (!group) {
+        phwangAbendS("FabricClass::mallocGroup", "fail_to_malloc_group");
+        return 0;
+    }
     return group;
 }
 

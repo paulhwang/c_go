@@ -16,7 +16,7 @@ GroupClass::GroupClass (void *list_mgr_object_val, FabricClass *fabric_object_va
     this->theSessionArrayMgr = phwangArrayMgrMalloc(this->objectName(), 'o', 10);
     this->theSessionTableArray = 0;
 
-    phwangDebugS(true, "GroupClass::GroupClass", this->groupIdIndex());
+    phwangDebugSS(true, "GroupClass::GroupClass", "new_group:", this->groupIdIndex());
 }
 
 GroupClass::~GroupClass (void)

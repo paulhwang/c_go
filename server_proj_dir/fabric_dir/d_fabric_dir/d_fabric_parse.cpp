@@ -521,16 +521,17 @@ void DFabricClass::processSetupSessionRequest (void *tp_transfer_object_val, cha
 
     int theme_len = phwangDecodeNumber(theme_info_val + 1, 3);
     char *his_name_val = theme_info_val + theme_len;
+    phwangDebugSS(false, "DFabricClass::processSetupSessionRequest", "his_name_val=", his_name_val);
 
     SessionClass *session = link_val->mallocSession();
     if (!session) {
-        this->errorProcessSetupSession(tp_transfer_object_val, ajax_id_val, "null session");
+        this->errorProcessSetupSession(tp_transfer_object_val, ajax_id_val, "malloc_session_fail");
         return;
     }
 
     GroupClass *group = this->theFabricObject->mallocGroup(theme_info_val);
     if (!group) {
-        this->errorProcessSetupSession(tp_transfer_object_val, ajax_id_val, "null group");
+        this->errorProcessSetupSession(tp_transfer_object_val, ajax_id_val, "malloc_group_fail");
         return;
     }
     group->insertSession(session);

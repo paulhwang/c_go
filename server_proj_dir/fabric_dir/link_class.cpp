@@ -27,7 +27,7 @@ LinkClass::LinkClass (void *list_mgr_object_val, FabricClass *fabric_object_val,
     this->thePendingSessionSetupQueue = phwangMallocQueue(0, this->objectName());
     this->thePendingSessionSetupQueue3 = phwangMallocQueue(0, this->objectName());
 
-    phwangDebugSS(true, "LinkClass::LinkClass", this->theLinkName, this->linkIdIndex());
+    phwangDebugSSS(true, "LinkClass::LinkClass", "new_link:", this->theLinkName, this->linkIdIndex());
 }
 
 LinkClass::~LinkClass (void)
@@ -38,8 +38,11 @@ LinkClass::~LinkClass (void)
 
 SessionClass *LinkClass::mallocSession (void)
 {
-    phwangDebugS(true, "LinkClass::mallocSession", "");
     SessionClass *session = new SessionClass(this->theSessionListMgrObject, this);
+    if (!session) {
+        phwangAbendS("LinkClass::mallocSession", "fail_to_malloc_session");
+        return 0;
+    }
     return session;
 }
 

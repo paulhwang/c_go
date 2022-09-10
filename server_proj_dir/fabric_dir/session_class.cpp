@@ -14,7 +14,7 @@ SessionClass::SessionClass (void *list_mgr_object_val, LinkClass *link_object_va
 {
     this->thePendingDownLinkDataQueue = phwangMallocQueue(0, this->objectName());
 
-    phwangDebugS(true, "SessionClass::SessionClass", this->sessionIdIndex());
+    phwangDebugSS(true, "SessionClass::SessionClass", "new_session:", this->sessionIdIndex());
 }
 
 SessionClass::~SessionClass (void)

@@ -28,6 +28,16 @@ void phwangLogitWSS (char const *func_name_val, char const *who_val, char const 
     printf("%s:%s() %s %s\n", func_name_val, who_val, str1_val, str2_val);
 }
 
+void phwangLogitSSS (char const *func_name_val, char const *str1_val, char const *str2_val, char const *str3_val)
+{
+    printf("%s() %s %s %s\n", func_name_val, str1_val, str2_val, str3_val);
+}
+
+void phwangLogitWSSS (char const *func_name_val, char const *who_val, char const *str1_val, char const *str2_val, char const *str3_val)
+{
+    printf("%s:%s() %s %s %s\n", func_name_val, who_val, str1_val, str2_val, str3_val);
+}
+
 void phwangLogitSI (char const *func_name_val, char const *str1_val, char const *str2_val)
 {
     printf("%s() %s %s\n", func_name_val, str1_val, str2_val);
@@ -93,6 +103,20 @@ void phwangDebugWSS (int on_off_val, char const *func_name_val, char const *who_
 {
     if (phwang_debug_on_off_switch && on_off_val) {
         phwangLogitWSS(func_name_val, who_val, str1_val, str2_val);
+    }
+};
+
+void phwangDebugSSS (int on_off_val, char const *func_name_val, char const *str1_val, char const *str2_val, char const *str3_val)
+{
+    if (phwang_debug_on_off_switch && on_off_val) {
+        phwangLogitSSS(func_name_val, str1_val, str2_val, str3_val);
+    }
+};
+
+void phwangDebugWSSS (int on_off_val, char const *func_name_val, char const *who_val, char const *str1_val, char const *str2_val, char const *str3_val)
+{
+    if (phwang_debug_on_off_switch && on_off_val) {
+        phwangLogitWSSS(func_name_val, who_val, str1_val, str2_val, str3_val);
     }
 };
 
