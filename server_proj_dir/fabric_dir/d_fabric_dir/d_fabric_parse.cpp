@@ -8,7 +8,6 @@
 #include "../../../phwang_dir/malloc_dir/malloc_class.h"
 #include "../../protocol_dir/net_port_protocol.h"
 #include "../../protocol_dir/ft_command_class.h"
-#include "../../protocol_dir/session_mgr_protocol.h"
 #include "../../protocol_dir/fe_command_class.h"
 #include "d_fabric_class.h"
 #include "../fabric_class.h"
@@ -109,7 +108,7 @@ void DFabricClass::exportedParseFunction (void *tp_transfer_object_val, char *da
                 this->sendSearchLinkSessionFailResponse(command, tp_transfer_object_val, ajax_id);
                 return;
             }
-            rest_data += FECommandClass::LINK_ID_INDEX_SIZE + SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE;
+            rest_data += FECommandClass::LINK_ID_INDEX_SIZE + FECommandClass::SESSION_ID_INDEX_SIZE;
 
             switch (command) {
                 case FECommandClass::FREE_SESSION_COMMAND:
@@ -610,7 +609,7 @@ void DFabricClass::processSetupSession2Request (void *tp_transfer_object_val, ch
 
     char *link_id_index_val = data_val;
     char *session_id_index_val = link_id_index_val + FECommandClass::LINK_ID_INDEX_SIZE;
-    char *theme_info_val = session_id_index_val + SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE;
+    char *theme_info_val = session_id_index_val + FECommandClass::SESSION_ID_INDEX_SIZE;
 
     LinkClass *link = this->theFabricObject->searchLink(link_id_index_val, data_val - 1);
     if (!link) {
@@ -634,8 +633,8 @@ void DFabricClass::processSetupSession2Request (void *tp_transfer_object_val, ch
     data_ptr += FECommandClass::AJAX_ID_SIZE;
     memcpy(data_ptr, link_id_index_val, FECommandClass::LINK_ID_INDEX_SIZE);
     data_ptr += FECommandClass::LINK_ID_INDEX_SIZE;
-    memcpy(data_ptr, session_id_index_val, SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE);
-    data_ptr += SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE;
+    memcpy(data_ptr, session_id_index_val, FECommandClass::SESSION_ID_INDEX_SIZE);
+    data_ptr += FECommandClass::SESSION_ID_INDEX_SIZE;
     *data_ptr = 0;
     this->transmitFunction(tp_transfer_object_val, downlink_data);
 }
@@ -658,15 +657,15 @@ void DFabricClass::processSetupSession3Request (void *tp_transfer_object_val, ch
     phwangDebugS(true, "DFabricClass::processSetupSession3Reques", data_val);
 
     char *link_and_session_id_index_val = data_val;
-    char *end_val = link_and_session_id_index_val + FECommandClass::LINK_ID_INDEX_SIZE + SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE;
+    char *end_val = link_and_session_id_index_val + FECommandClass::LINK_ID_INDEX_SIZE + FECommandClass::SESSION_ID_INDEX_SIZE;
 
     char *data_ptr;
     char *downlink_data = data_ptr = (char *) phwangMalloc(FECommandClass::DOWNLINK_DATA_BUFFER_SIZE, MallocClass::SETUP_SESSION3);
     *data_ptr++ = FECommandClass::SETUP_SESSION3_RESPONSE;
     strcpy(data_ptr, ajax_id_val);
     data_ptr += FECommandClass::AJAX_ID_SIZE;
-    memcpy(data_ptr, link_and_session_id_index_val, FECommandClass::LINK_ID_INDEX_SIZE + SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE);
-    data_ptr += FECommandClass::LINK_ID_INDEX_SIZE + SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE;
+    memcpy(data_ptr, link_and_session_id_index_val, FECommandClass::LINK_ID_INDEX_SIZE + FECommandClass::SESSION_ID_INDEX_SIZE);
+    data_ptr += FECommandClass::LINK_ID_INDEX_SIZE + FECommandClass::SESSION_ID_INDEX_SIZE;
     *data_ptr = 0;
     this->transmitFunction(tp_transfer_object_val, downlink_data);
 }
@@ -706,8 +705,8 @@ void DFabricClass::processPutSessionDataRequest (void *tp_transfer_object_val, c
     data_ptr += FECommandClass::AJAX_ID_SIZE;
     memcpy(data_ptr, session_val->linkObject()->linkIdIndex(), FECommandClass::LINK_ID_INDEX_SIZE);
     data_ptr += FECommandClass::LINK_ID_INDEX_SIZE;
-    memcpy(data_ptr, session_val->sessionIdIndex(), SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE);
-    data_ptr += SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE;
+    memcpy(data_ptr, session_val->sessionIdIndex(), FECommandClass::SESSION_ID_INDEX_SIZE);
+    data_ptr += FECommandClass::SESSION_ID_INDEX_SIZE;
     strcpy(data_ptr, "job is done");
     this->transmitFunction(tp_transfer_object_val, downlink_data);
 }
@@ -738,8 +737,8 @@ void DFabricClass::processGetSessionDataRequest (void *tp_transfer_object_val, c
     data_ptr += FECommandClass::AJAX_ID_SIZE;
     memcpy(data_ptr, session_val->linkObject()->linkIdIndex(), FECommandClass::LINK_ID_INDEX_SIZE);
     data_ptr += FECommandClass::LINK_ID_INDEX_SIZE;
-    memcpy(data_ptr, session_val->sessionIdIndex(), SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE);
-    data_ptr += SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE;
+    memcpy(data_ptr, session_val->sessionIdIndex(), FECommandClass::SESSION_ID_INDEX_SIZE);
+    data_ptr += FECommandClass::SESSION_ID_INDEX_SIZE;
     strcpy(data_ptr, data);
     this->transmitFunction(tp_transfer_object_val, downlink_data);
 }
