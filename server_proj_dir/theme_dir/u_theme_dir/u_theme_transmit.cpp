@@ -9,10 +9,10 @@
 
 void UThemeClass::transmitFunction (char *data_val)
 {
-    this->logit("transmitFunction", data_val);
+    phwangLogitS("UThemeClass::transmitFunction", data_val);
 
     if (!this->theTpTransferObject) {
-        this->abend("transmitFunction", "null theTpTransferObject!\n   The reason could be the connnection from ThemeServer has not been accepted");
+        phwangAbendS("UThemeClass::transmitFunction", "null theTpTransferObject!\n   The reason could be the connnection from ThemeServer has not been accepted");
         return;
     }
 

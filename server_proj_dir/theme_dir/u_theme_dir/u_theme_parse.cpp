@@ -15,10 +15,10 @@
 #include "../d_theme_dir/d_theme_class.h"
 #include "../room_class.h"
 
-void UThemeClass::exportedParseFunction(char *data_val)
+void UThemeClass::exportedParseFunction (char *data_val)
 {
     if (1) { /* debug */
-        this->logit("exportedParseFunction", data_val);
+        phwangLogitS("UThemeClass::exportedParseFunction", data_val);
     }
 
     if (*data_val == THEME_ENGINE_PROTOCOL_RESPOND_IS_SETUP_BASE) {
@@ -31,13 +31,13 @@ void UThemeClass::exportedParseFunction(char *data_val)
         return;
     }
 
-    this->abend("exportedParseFunction", data_val);
+    phwangAbend("UThemeClass::exportedParseFunction", data_val);
 }
 
-void UThemeClass::processSetupBaseResponse(char *data_val)
+void UThemeClass::processSetupBaseResponse (char *data_val)
 {
     if (1) { /* debug */
-        this->logit("processSetupBaseResponse", data_val);
+        phwangLogitS("UThemeClass::processSetupBaseResponse", data_val);
     }
 
     char *room_id_index_val = data_val;
@@ -48,7 +48,7 @@ void UThemeClass::processSetupBaseResponse(char *data_val)
 
     RoomClass *room = this->theThemeObject->searchRoom(room_id_index_val);
     if (!room) {
-        this->abend("processSetupBaseResponse", "null room");
+        phwangAbendS("UThemeClass::processSetupBaseResponse", "null room");
         return;
     }
 
@@ -68,19 +68,19 @@ void UThemeClass::processSetupBaseResponse(char *data_val)
     this->theThemeObject->dThemeObject()->transmitFunction(downlink_data);
 }
 
-void UThemeClass::processPutBaseDataResponse(char *data_val)
+void UThemeClass::processPutBaseDataResponse (char *data_val)
 {
     char *downlink_data;
     char *data_ptr;
     int group_array_size;
 
     if (0) { /* debug */
-        this->logit("processPutBaseDataResponse", data_val);
+        phwangLogitS("UThemeClass::processPutBaseDataResponse", data_val);
     }
 
     RoomClass *room = this->theThemeObject->searchRoom(data_val);
     if (!room) {
-        this->abend("processPutBaseDataResponse", "null room");
+        phwangAbendS("UThemeClass::processPutBaseDataResponse", "null room");
         return;
     }
     data_val += ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE;
