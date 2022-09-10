@@ -18,17 +18,19 @@ void DThemeClass::exportedParseFunction (char *data_val)
 {
     phwangDebugS(true, "DThemeClass::exportedParseFunction", data_val);
 
-    if (*data_val == FABRIC_THEME_PROTOCOL_COMMAND_IS_SETUP_ROOM) {
-        this->processSetupRoom(data_val + 1);
-        return;
-    }
+    switch (*data_val) {
+        case FT_Command_Class::SETUP_ROOM_COMMAND:
+            this->processSetupRoom(data_val + 1);
+            return;
 
-    if (*data_val == FABRIC_THEME_PROTOCOL_COMMAND_IS_PUT_ROOM_DATA) {
-        this->processPutRoomData(data_val + 1);
-        return;
-    }
+        case FT_Command_Class::PUT_ROOM_DATA_COMMAND:
+            this->processPutRoomData(data_val + 1);
+            return;
 
-    phwangAbendS("DThemeClass::exportedParseFunction", data_val);
+        default:
+            phwangAbendS("DThemeClass::exportedParseFunction", data_val);
+            return;
+    }
 }
 
 void DThemeClass::processSetupRoom (char *data_val)
