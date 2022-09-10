@@ -14,7 +14,7 @@
 void DEngineClass::exportedParseFunction (char *data_val)
 {
     if (1) { /* debug */
-        this->logit("exportedParseFunction", data_val);
+        phwangLogitS("DEngineClass::exportedParseFunction", data_val);
     }
 
     if (*data_val == THEME_ENGINE_PROTOCOL_COMMAND_IS_SETUP_BASE) {
@@ -27,13 +27,13 @@ void DEngineClass::exportedParseFunction (char *data_val)
         return;
     }
 
-    this->abend("exportedParseFunction", data_val);
+    phwangAbendS("DEngineClass::exportedParseFunction", data_val);
 }
 
-void DEngineClass::processSetupBase(char const *data_val)
+void DEngineClass::processSetupBase (char const *data_val)
 {
     if (1) { /* debug */
-        this->logit("processSetupBase", data_val);
+        phwangLogitS("DEngineClass::processSetupBase", data_val);
     }
 
     char const *room_id_index_val = data_val;
@@ -43,7 +43,7 @@ void DEngineClass::processSetupBase(char const *data_val)
 
     GoBaseClass *go_base_object = this->theEngineObject->mallocGoBase(room_id_index_val + ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);
     if (!go_base_object) {
-        this->abend("processSetupBase", "null go_base");
+        phwangAbendS("DEngineClass::processSetupBase", "null go_base");
         return;
     }
     go_base_object->setRoomIdIndex(room_id_index_val);
@@ -61,15 +61,15 @@ void DEngineClass::processSetupBase(char const *data_val)
     this->transmitFunction(downlink_data);
 }
 
-void DEngineClass::processPutBaseData(char const *data_val)
+void DEngineClass::processPutBaseData (char const *data_val)
 {
     if (1) { /* debug */
-        this->logit("processPutBaseData", data_val);
+        phwangLogitS("DEngineClass::processPutBaseData", data_val);
     }
 
     GoBaseClass *base_object = this->theEngineObject->searchGoBase(data_val);
     if (!base_object) {
-        this->abend("processPutBaseData", "null base_object");
+        phwangAbendS("DEngineClass::processPutBaseData", "null base_object");
         /* TBD */
         return;
     }
@@ -79,7 +79,7 @@ void DEngineClass::processPutBaseData(char const *data_val)
     base_object->portObject()->receiveInputData(data_val + ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);
 }
 
-void DEngineClass::processPutBaseDataResponse(GoBaseClass *base_object_val, char const *data_val)
+void DEngineClass::processPutBaseDataResponse (GoBaseClass *base_object_val, char const *data_val)
 {
     char *downlink_data;
     char *data_ptr;

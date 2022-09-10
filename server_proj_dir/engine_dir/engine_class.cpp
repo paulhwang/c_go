@@ -18,32 +18,18 @@ EngineClass::EngineClass (int debug_code_val)
     this->theDEngineObject = new DEngineClass(this);
     this->theGoBaseListMgrObject = phwangListMgrMalloc("GO_BASE", BASE_MGR_PROTOCOL_BASE_ID_SIZE, BASE_MGR_PROTOCOL_BASE_INDEX_SIZE, 900);
 
-    this->debug(false, "EngineClass", "init");
+    phwangDebugS(false, "EngineClass::EngineClass", "init");
 }
 
 EngineClass::~EngineClass (void)
 {
     this->theDEngineObject->~DEngineClass();
-    this->debug(true, "~EngineClass", "exit");
+    phwangDebugS(true, "EngineClass::~EngineClass", "exit");
 }
 
 GoBaseClass *EngineClass::mallocGoBase (char const *config_info_val)
 {
-    this->debug(true, "mallocGoBase", "");
+    phwangDebugS(true, "EngineClass::mallocGoBase", "");
     GoBaseClass *base_object = new GoBaseClass(this->theGoBaseListMgrObject, this, config_info_val);
     return base_object;
-}
-
-void EngineClass::logit (char const* str0_val, char const* str1_val)
-{
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
-    phwangLogit(s, str1_val);
-}
-
-void EngineClass::abend (char const* str0_val, char const* str1_val)
-{
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
-    phwangAbend(s, str1_val);
 }

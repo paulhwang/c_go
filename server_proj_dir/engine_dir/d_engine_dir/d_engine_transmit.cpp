@@ -9,10 +9,10 @@
 
 void DEngineClass::transmitFunction (char *data_val)
 {
-    this->logit("transmitFunction", data_val);
+    phwangLogitS("DEngineClass::transmitFunction", data_val);
 
     if (!this->theTpTransferObject) {
-        this->abend("transmitFunction", "null theTpTransferObject");
+        phwangAbendS("DEngineClass::transmitFunction", "null theTpTransferObject");
         return;
     }
 
