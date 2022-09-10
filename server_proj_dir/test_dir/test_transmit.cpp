@@ -9,10 +9,10 @@
 
 void TestClass::transmitFunction (char *data_val)
 {
-    this->debug(true, "transmitFunction", data_val);
+    phwangDebugS(true, "TestClass::transmitFunction", data_val);
 
     if (!this->theTpTransferObject) {
-        this->abend("transmitFunction", "null theTpTransferObject");
+        phwangAbendS("TestClass::transmitFunction", "null theTpTransferObject");
         return;
     }
 

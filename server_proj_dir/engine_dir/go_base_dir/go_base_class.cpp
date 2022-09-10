@@ -18,7 +18,7 @@ GoBaseClass::GoBaseClass (void *list_mgr_object_val, EngineClass *engine_object_
     this->thePortObject = new GoPortClass(this);
     this->theGameObject = new GoGameClass(this);
 
-    this->debug(true, "GoBaseClass", this->goBaseIdIndex());
+    phwangDebugS(true, "GoBaseClass::GoBaseClass", this->goBaseIdIndex());
 }
 
 GoBaseClass::~GoBaseClass (void)
@@ -28,18 +28,4 @@ GoBaseClass::~GoBaseClass (void)
     this->theFightObject->~GoFightClass();
     this->thePortObject->~GoPortClass();
     this->theGameObject->~GoGameClass();
-}
-
-void GoBaseClass::logit (char const *str0_val, char const *str1_val)
-{
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
-    this->goBaseLogit(s, str1_val);
-}
-
-void GoBaseClass::abend (char const *str0_val, char const *str1_val)
-{
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
-    this->goBaseAbend(s, str1_val);
 }

@@ -10,5 +10,5 @@
 
 void TestClass::exportedparseFunction (char *data_val)
 {
-    this->debug(true, "exportedparseFunction", data_val);
+    phwangDebugS(true, "TestClass::exportedparseFunction", data_val);
 }

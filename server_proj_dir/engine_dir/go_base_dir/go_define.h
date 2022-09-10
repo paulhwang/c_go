@@ -28,7 +28,7 @@ inline int GolbalGoGetOppositeColor (int color_val)
             return GO_BLACK_STONE;
 
         default:
-            phwangAbend("GolbalGoGetOppositeColor", "bad color");
+            phwangAbendS("GolbalGoGetOppositeColor", "bad color");
             return GO_EMPTY_STONE;
     }
 }

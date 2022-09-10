@@ -9,19 +9,19 @@
 #include "../protocol_dir/net_port_protocol.h"
 #include "test_class.h"
 
-TestClass::TestClass(void)
+TestClass::TestClass (void)
 {
     memset(this, 0, sizeof(*this));
     this->startNetConnect();
-    this->debug(true, "init__", "");
+    phwangDebugS(true, "TestClass::TestClass", "init");
 }
 
-TestClass::~TestClass(void)
+TestClass::~TestClass (void)
 {
 }
 
 void testObjectReceiveDataFromTransport (void *tp_transfer_object_val, void *test_object_val, void *data_val) {
-    phwangLogit("Golbal::testObjectReceiveDataFromTransport", (char *) data_val);
+    phwangLogitS("Golbal::testObjectReceiveDataFromTransport", (char *) data_val);
     ((TestClass *) test_object_val)->exportedparseFunction((char *) data_val);
 }
 
@@ -66,18 +66,4 @@ void TestClass::setupLink(int ajax_id_val, char *name_val)
     data_ptr += 3;
     strcpy(data_ptr, name_val);
     this->transmitFunction(uplink_data);
-}
-
-void TestClass::logit (char const *str0_val, char const *str1_val)
-{
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
-    phwangLogit(s, str1_val);
-}
-
-void TestClass::abend (char const *str0_val, char const *str1_val)
-{
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
-    phwangAbend(s, str1_val);
 }

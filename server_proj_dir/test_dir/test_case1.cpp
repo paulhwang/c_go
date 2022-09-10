@@ -10,7 +10,7 @@
 
 int theTestCase1NameIndex = 0;
 
-void TestClass::runTestCase1(void)
+void TestClass::runTestCase1 (void)
 {
     int ajax_id = 1;
     char name[32];
@@ -24,7 +24,7 @@ void TestClass::runTestCase1(void)
         if (i == 99) {
             i = 0;
         }
-        this->debug(true, "runTestCase1", name);
+        phwangDebugS(true, "TestClass::runTestCase1", name);
         sleep(5);
     }
 }

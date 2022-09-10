@@ -14,18 +14,18 @@ void *TestClassThreadFunction (void *fabric_object_val)
 
 void TestClass::startTestThread (void)
 {
-    this->debug(false, "startTestThread", "");
+    phwangDebugS(false, "TestClass::startTestThread", "");
 
     int r = phwangPthreadCreate(&this->theTestThread, 0, TestClassThreadFunction, this);
     if (r) {
-        this->logit("startTestThread", "fail");
+        phwangLogitS("TestClass::startTestThread", "fail");
         return;
     }
 }
 
 void *TestClass::testThreadFunction (void)
 {
-    this->debug(false, "testThreadFunction", "");
+    phwangDebugS(false, "TestClass::testThreadFunction", "");
     this->runTestCase1();
     return 0;
 }

@@ -22,7 +22,7 @@ int phwangPthreadCreate(pthread_t *thread, const pthread_attr_t *attr, void *(*s
 /* logit */
 void phwangLogitS(char const *func_name_val, char const *str1_val);
 void phwangLogitWS(char const *func_name_val, char const *who_val, char const *str1_val);
-void phwangLogit(char const *func_name_val, char const *str1_val);
+//void phwangLogit(char const *func_name_val, char const *str1_val);
 
 void phwangLogitSS(char const *func_name_val, char const *str1_val, char const *str2_val);
 void phwangLogitWSS(char const *func_name_val, char const *who_val, char const *str1_val, char const *str2_val);
@@ -38,7 +38,7 @@ void phwangLogitWSISI(char const *func_name_val, char const *who_val, char const
 
 void phwangDebugS(int on_off_val, char const *func_name_val, char const *str1_val);
 void phwangDebugWS(int on_off_val, char const *func_name_val, char const *who_val, char const *str1_val);
-void phwangDebug(int on_off_val, char const *func_name_val, char const *str1_val);
+//void phwangDebug(int on_off_val, char const *func_name_val, char const *str1_val);
 
 void phwangDebugSS(int on_off_val, char const *func_name_val, char const *str1_val, char const *str2_val);
 void phwangDebugWSS(int on_off_val, char const *func_name_val, char const *who_val, char const *str1_val, char const *str2_val);
@@ -54,7 +54,7 @@ void phwangDebugWSISI(int on_off_val, char const *func_name_val, char const *who
 
 void phwangAbendS(char const *func_name_val, char const *str1_val);
 void phwangAbendWS(char const *func_name_val, char const *who_val, char const *str1_val);
-void phwangAbend(char const *func_name_val, char const *str1_val);
+//void phwangAbend(char const *func_name_val, char const *str1_val);
 
 void phwangAbendSS(char const *func_name_val, char const *str1_val, char const *str2_val);
 void phwangAbendWSS(char const *func_name_val, char const *who_val, char const *str1_val, char const *str2_val);

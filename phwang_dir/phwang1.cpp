@@ -18,11 +18,6 @@ void phwangLogitWS (char const *func_name_val, char const *who_val, char const *
     printf("%s:%s() %s\n", func_name_val, who_val, str1_val);
 }
 
-void phwangLogit (char const *func_name_val, char const *str1_val)
-{
-    printf("%s() %s\n", func_name_val, str1_val);
-}
-
 void phwangLogitSS (char const *func_name_val, char const *str1_val, char const *str2_val)
 {
     printf("%s() %s %s\n", func_name_val, str1_val, str2_val);
@@ -87,13 +82,6 @@ void phwangDebugWS (int on_off_val, char const *func_name_val, char const *who_v
     }
 };
 
-void phwangDebug (int on_off_val, char const *func_name_val, char const *str1_val)
-{
-    if (phwang_debug_on_off_switch && on_off_val) {
-        phwangLogit(func_name_val, str1_val);
-    }
-};
-
 void phwangDebugSS (int on_off_val, char const *func_name_val, char const *str1_val, char const *str2_val)
 {
     if (phwang_debug_on_off_switch && on_off_val) {
@@ -150,15 +138,6 @@ void phwangDebugWSISI (int on_off_val, char const *func_name_val, char const *wh
     }
 }
 
-void phwangAbend (char const *func_name_val, char const *str1_val)
-{
-    printf("*****ABEND******************************************\n");
-    printf("%s() %s\n", func_name_val, str1_val);
-    printf("*****ABEND******************************************\n");
-    int *junk = 0;
-    *junk = 0;
-}
-
 void phwangAbendS (char const *func_name_val, char const *str1_val)
 {
     printf("*****ABEND******************************************\n");
@@ -183,7 +162,7 @@ void phwangIncrementAtomicCount (std::atomic<int> *count_val, char const *who_va
     (*count_val)++;
     if (*count_val > max_count_val) {
         printf("phwangIncrementAtomicCount(), count=%d\n", (*count_val).load());
-        phwangAbend("phwangIncrementAtomicCount", who_val);
+        phwangAbendS("phwangIncrementAtomicCount", who_val);
     }
 }
 
@@ -192,6 +171,6 @@ void phwangDecrementAtomicCount (std::atomic<int> *count_val, char const *who_va
     (*count_val)--;
     if (*count_val < 0) {
         printf("phwangDecrementAtomicCount(), count=%d\n", (*count_val).load());
-        phwangAbend("phwangDecrementAtomicCount", who_val);
+        phwangAbendS("phwangDecrementAtomicCount", who_val);
     }
 }
