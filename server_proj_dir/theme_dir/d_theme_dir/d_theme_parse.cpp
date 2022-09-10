@@ -47,7 +47,7 @@ void DThemeClass::processSetupRoom (char *data_val)
     if (!room) {
         phwangAbendS("DThemeClass::processSetupRoom", "null room");
         downlink_data = data_ptr = (char *) phwangMalloc(ROOM_MGR_DATA_BUFFER_SIZE + 4, MallocClass::DTHEME_SETUP_ROOM1);
-        *data_ptr++ = FABRIC_THEME_PROTOCOL_RESPOND_IS_SETUP_ROOM;
+        *data_ptr++ = FT_Command_Class::SETUP_ROOM_RESPONSE;
         strcpy(data_ptr, "null room");
         this->transmitFunction(downlink_data);
         return;
@@ -76,7 +76,7 @@ void DThemeClass::processPutRoomData (char *data_val)
     if (!room) {
         phwangAbendS("DThemeClass::processPutRoomData", "null room");
         downlink_data = data_ptr = (char *) phwangMalloc(ROOM_MGR_DATA_BUFFER_SIZE + 4, MallocClass::DTHEME_PUT_ROOM_DATA1);
-        *data_ptr++ = FABRIC_THEME_PROTOCOL_RESPOND_IS_PUT_ROOM_DATA;
+        *data_ptr++ = FT_Command_Class::PUT_ROOM_DATA_RESPONSE;
         strcpy(data_ptr, "null room");
         this->transmitFunction(downlink_data);
         return;

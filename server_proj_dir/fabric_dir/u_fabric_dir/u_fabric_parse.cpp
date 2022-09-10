@@ -19,12 +19,12 @@ void UFabricClass::exportedParseFunction (char *data_val)
 {
     phwangDebugS(true, "UFabricClass::exportedParseFunction", data_val);
 
-    if (*data_val == FABRIC_THEME_PROTOCOL_RESPOND_IS_SETUP_ROOM) {
+    if (*data_val == FT_Command_Class::SETUP_ROOM_RESPONSE) {
         this->processSetupRoomResponse(data_val + 1);
         return;
     }
 
-    if (*data_val == FABRIC_THEME_PROTOCOL_RESPOND_IS_PUT_ROOM_DATA) {
+    if (*data_val == FT_Command_Class::PUT_ROOM_DATA_RESPONSE) {
         this->processPutRoomDataResponse(data_val + 1);
         return;
     }
