@@ -45,7 +45,6 @@ void phwangDebug(int on_off_val, char const *func_name_val, char const *str1_val
 
 void phwangDebugSS(int on_off_val, char const *func_name_val, char const *str1_val, char const *str2_val);
 void phwangDebugWSS(int on_off_val, char const *func_name_val, char const *who_val, char const *str1_val, char const *str2_val);
-void phwangDebug2(int on_off_val, char const *func_name_val, char const *str1_val, char const *str2_val);
 
 void phwangDebugSI(int on_off_val, char const *func_name_val, char const *str1_val, int int1_val);
 void phwangDebugWSI(int on_off_val, char const *func_name_val, char const *who_val, char const *str1_val, int int1_val);
@@ -64,7 +63,6 @@ void phwangAbend(char const *func_name_val, char const *str1_val);
 
 void phwangAbendSS(char const *func_name_val, char const *str1_val, char const *str2_val);
 void phwangAbendWSS(char const *func_name_val, char const *who_val, char const *str1_val, char const *str2_val);
-void phwangAbend2(char const *func_name_val, char const *str1_val, char const *str2_val);
 
 void phwangComposeFuncName(char *buf_val, char const *object_name_val, char const *func_name_val);
 void phwangComposeFuncNameExtra(char *buf_val, char const *object_name_val, char const *func_name_val, char const *extra_info_val);

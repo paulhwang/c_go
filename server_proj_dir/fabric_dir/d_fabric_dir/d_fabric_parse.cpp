@@ -247,7 +247,7 @@ void DFabricClass::processSignUpRequest (void *tp_transfer_object_val, char *dat
     int email_size;
     char *email = phwangDecodeStringMalloc(encoded_email, &email_size);
 
-    phwangDebug2(false, "DFabricClass::processSignUpRequest", account_name, password);
+    phwangDebugSS(false, "DFabricClass::processSignUpRequest", account_name, password);
 
     int result = this->dbAccountObject()->checkAccountNameExist(account_name);
     if (result != DbAccountClass::DB_ACCOUNT_NAME_NOT_EXIST) {
@@ -313,7 +313,7 @@ void DFabricClass::processSetupLinkRequest (void *tp_transfer_object_val, char *
     int password_size;
     char *password = phwangDecodeStringMalloc(encoded_password, &password_size);
 
-    phwangDebug2(false, "DFabricClass::processSetupLinkRequest", my_name, password);
+    phwangDebugSS(false, "DFabricClass::processSetupLinkRequest", my_name, password);
 
     int result = this->dbObject()->dbAccountObject()->checkPassword(my_name, password);
     if (result != DbAccountClass::DB_ACCOUNT_PASSWORD_MATCH) {
@@ -444,14 +444,14 @@ void DFabricClass::processGetLinkDataRequest (void *tp_transfer_object_val, char
     if (pending_session) {
         *data_ptr++ = FECommandClass::RESPOND_IS_GET_LINK_DATA_PENDING_SESSION;
         strcpy(data_ptr, pending_session);
-        phwangDebug2(true, "DFabricClass::processGetLinkDataRequest", "getPendingSessionSetup ", downlink_data);
+        phwangDebugSS(true, "DFabricClass::processGetLinkDataRequest", "getPendingSessionSetup ", downlink_data);
     }
 
     char *pending_session3 = link_val->getPendingSessionSetup3();
     if (pending_session3) {
         *data_ptr++ = FECommandClass::RESPOND_IS_GET_LINK_DATA_PENDING_SESSION3;
         strcpy(data_ptr, pending_session3);
-        phwangDebug2(true, "DFabricClass::processGetLinkDataRequest", "getPendingSessionSetup3 ", downlink_data);
+        phwangDebugSS(true, "DFabricClass::processGetLinkDataRequest", "getPendingSessionSetup3 ", downlink_data);
     }
 
     this->transmitFunction(tp_transfer_object_val, downlink_data);
