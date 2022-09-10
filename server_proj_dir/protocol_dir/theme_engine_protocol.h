@@ -1,12 +1,15 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: fabric_engine_protocol.h
+  File name: theme_engine_protocol.h
 */
 
 #pragma once
 
-#define THEME_ENGINE_PROTOCOL_COMMAND_IS_SETUP_BASE 'B'
-#define THEME_ENGINE_PROTOCOL_RESPOND_IS_SETUP_BASE 'b'
-#define THEME_ENGINE_PROTOCOL_COMMAND_IS_PUT_BASE_DATA 'D'
-#define THEME_ENGINE_PROTOCOL_RESPOND_IS_PUT_BASE_DATA 'd'
+class TE_Command_Class {
+public:
+    char const static SETUP_BASE_COMMAND  = 'B';
+    char const static SETUP_BASE_RESPONSE = 'b';
+    char const static PUT_BASE_DATA_COMMAND  = 'D';
+    char const static PUT_BASE_DATA_RESPONSE = 'd';
+};

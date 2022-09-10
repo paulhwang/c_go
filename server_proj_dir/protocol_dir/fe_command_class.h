@@ -1,7 +1,7 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: web_fabric_protocol.h
+  File name: fe_command_class.h
 */
 
 #pragma once

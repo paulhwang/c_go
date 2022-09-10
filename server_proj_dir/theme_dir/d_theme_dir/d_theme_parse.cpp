@@ -53,7 +53,7 @@ void DThemeClass::processSetupRoom (char *data_val)
     data_val += GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE;
 
     uplink_data = data_ptr = (char *) phwangMalloc(ROOM_MGR_DATA_BUFFER_SIZE + 4, MallocClass::DTHEME_SETUP_ROOM2);
-    *data_ptr++ = THEME_ENGINE_PROTOCOL_COMMAND_IS_SETUP_BASE;
+    *data_ptr++ = TE_Command_Class::SETUP_BASE_COMMAND;
 
     memcpy(data_ptr, room->roomIdIndex(), ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);
     data_ptr += ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE;
@@ -81,7 +81,7 @@ void DThemeClass::processPutRoomData (char *data_val)
     }
 
     uplink_data = data_ptr = (char *) phwangMalloc(ROOM_MGR_DATA_BUFFER_SIZE + 4, MallocClass::DTHEME_PUT_ROOM_DATA2);
-    *data_ptr++ = THEME_ENGINE_PROTOCOL_COMMAND_IS_PUT_BASE_DATA;
+    *data_ptr++ = TE_Command_Class::PUT_BASE_DATA_COMMAND;
     memcpy(data_ptr, room->baseIdIndex(), BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE);
     data_ptr += BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE;
     strcpy(data_ptr, data_val + ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);

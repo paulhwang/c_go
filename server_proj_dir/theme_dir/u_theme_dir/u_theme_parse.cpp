@@ -21,12 +21,12 @@ void UThemeClass::exportedParseFunction (char *data_val)
         phwangLogitS("UThemeClass::exportedParseFunction", data_val);
     }
 
-    if (*data_val == THEME_ENGINE_PROTOCOL_RESPOND_IS_SETUP_BASE) {
+    if (*data_val == TE_Command_Class::SETUP_BASE_RESPONSE) {
         this->processSetupBaseResponse(data_val + 1);
         return;
     }
 
-    if (*data_val == THEME_ENGINE_PROTOCOL_RESPOND_IS_PUT_BASE_DATA) {
+    if (*data_val == TE_Command_Class::PUT_BASE_DATA_RESPONSE) {
         this->processPutBaseDataResponse(data_val + 1);
         return;
     }

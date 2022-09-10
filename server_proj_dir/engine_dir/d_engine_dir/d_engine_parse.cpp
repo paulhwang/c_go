@@ -13,21 +13,21 @@
 
 void DEngineClass::exportedParseFunction (char *data_val)
 {
-    if (1) { /* debug */
-        phwangLogitS("DEngineClass::exportedParseFunction", data_val);
-    }
+    phwangDebugS(true, "DEngineClass::exportedParseFunction", data_val);
 
-    if (*data_val == THEME_ENGINE_PROTOCOL_COMMAND_IS_SETUP_BASE) {
-        this->processSetupBase(data_val + 1);
-        return;
-    }
+    switch (*data_val) {
+        case TE_Command_Class::SETUP_BASE_COMMAND:
+            this->processSetupBase(data_val + 1);
+            return;
 
-    if (*data_val == THEME_ENGINE_PROTOCOL_COMMAND_IS_PUT_BASE_DATA) {
-        this->processPutBaseData(data_val + 1);
-        return;
-    }
+        case TE_Command_Class::PUT_BASE_DATA_COMMAND:
+            this->processPutBaseData(data_val + 1);
+            return;
 
-    phwangAbendS("DEngineClass::exportedParseFunction", data_val);
+        default:
+            phwangAbendS("DEngineClass::exportedParseFunction", data_val);
+            return;
+    }
 }
 
 void DEngineClass::processSetupBase (char const *data_val)
@@ -49,7 +49,7 @@ void DEngineClass::processSetupBase (char const *data_val)
     go_base_object->setRoomIdIndex(room_id_index_val);
 
     downlink_data = data_ptr = (char *) phwangMalloc(BASE_MGR_DATA_BUFFER_SIZE + 4, MallocClass::DENGINE_SETUP_BASE);
-    *data_ptr++ = THEME_ENGINE_PROTOCOL_RESPOND_IS_SETUP_BASE;
+    *data_ptr++ = TE_Command_Class::SETUP_BASE_RESPONSE;
 
     memcpy(data_ptr, room_id_index_val, ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);
     data_ptr += ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE;
@@ -85,7 +85,7 @@ void DEngineClass::processPutBaseDataResponse (GoBaseClass *base_object_val, cha
     char *data_ptr;
 
     downlink_data = data_ptr = (char *) phwangMalloc(BASE_MGR_DATA_BUFFER_SIZE + 4, MallocClass::DENGINE_PUT_BASE_DATA);
-    *data_ptr++ = THEME_ENGINE_PROTOCOL_RESPOND_IS_PUT_BASE_DATA;
+    *data_ptr++ = TE_Command_Class::PUT_BASE_DATA_RESPONSE;
     memcpy(data_ptr, base_object_val->roomIdIndex(), ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);
     data_ptr += ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE;
     strcpy(data_ptr, data_val);
