@@ -7,7 +7,6 @@
 #pragma once
 
 #include <pthread.h>
-#include "../../protocol_dir/link_mgr_protocol.h"
 #include "../fabric_class.h"
 
 class FabricClass;
