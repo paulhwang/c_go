@@ -6,8 +6,8 @@
 
 #include "../../../phwang_dir/phwang.h"
 #include "../../../phwang_dir/malloc_dir/malloc_class.h"
-#include "../../protocol_dir/fabric_theme_protocol.h"
-#include "../../protocol_dir/theme_engine_protocol.h"
+#include "../../protocol_dir/ft_command_class.h"
+#include "../../protocol_dir/te_command_class.h"
 #include "../../protocol_dir/room_mgr_protocol.h"
 #include "d_theme_class.h"
 #include "../theme_class.h"
