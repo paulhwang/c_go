@@ -57,30 +57,30 @@ void *NetRootClass::tpConnect (
     return result;
 }
 
-void NetRootClass::freeTpServer (void *tp_server_object_val)
+void NetRootClass::freeTcpServer (void *tcp_server_object_val)
 {
-    if (!tp_server_object_val) {
-        this->abend("phwangFreeTpTransfer", "null tp_server_object_val");
+    if (!tcp_server_object_val) {
+        phwangAbendS("NetRootClass::freeTcpServer", "null tp_server_object_val");
         return;
     }
 
-    if (strcmp(((TcpServerClass *) tp_server_object_val)->objectName(), "TcpServerClass")) {
-        this->abend("phwangFreeTpTransfer", "wrong object");
+    if (strcmp(((TcpServerClass *) tcp_server_object_val)->objectName(), "TcpServerClass")) {
+        phwangAbendS("NetRootClass::freeTcpServer", "wrong object");
         return;
     }
 
-    delete (TcpServerClass *) tp_server_object_val;
+    delete (TcpServerClass *) tcp_server_object_val;
 }
 
 void NetRootClass::freeTpTransfer (void *tp_transfer_object_val)
 {
     if (!tp_transfer_object_val) {
-        this->abend("phwangFreeTpTransfer", "null tp_transfer_object_val");
+        phwangAbendS("phwangFreeTpTransfer", "null tp_transfer_object_val");
         return;
     }
 
     if (strcmp(((TpTransferClass *) tp_transfer_object_val)->objectName(), "TpTransferClass")) {
-        this->abend("phwangFreeTpTransfer", "wrong object");
+        phwangAbendS("phwangFreeTpTransfer", "wrong object");
         return;
     }
 
@@ -90,28 +90,14 @@ void NetRootClass::freeTpTransfer (void *tp_transfer_object_val)
 void NetRootClass::tpTransmit (void *tp_transfer_object_val, char *data_val)
 {
     if (!tp_transfer_object_val) {
-        this->abend("phwangTpTransmit", "null tp_transfer_object_val");
+        phwangAbendS("NetRootClass::tpTransmit", "null tp_transfer_object_val");
         return;
     }
 
     if (strcmp(((TpTransferClass *) tp_transfer_object_val)->objectName(), "TpTransferClass")) {
-        this->abend("phwangTpTransmit", "wrong object");
+        phwangAbendS("NetRootClass::tpTransmit", "wrong object");
         return;
     }
 
     ((TpTransferClass *) tp_transfer_object_val)->exportTransmitData(data_val);
-}
-
-void NetRootClass::logit (char const *str0_val, char const *str1_val)
-{
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
-    phwangLogit(s, str1_val);
-}
-
-void NetRootClass::abend (char const *str0_val, char const *str1_val)
-{
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
-    phwangAbend(s, str1_val);
 }

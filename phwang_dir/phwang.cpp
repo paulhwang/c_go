@@ -238,9 +238,9 @@ void *phwangTpConnect (
                 who_val);
 }
 
-void phwangFreeTpServer (void *tp_server_object_val)
+void phwangFreeTcpServer (void *tcp_server_object_val)
 {
-    thePhwangObject->netRootObject()->freeTpServer(tp_server_object_val);
+    thePhwangObject->netRootObject()->freeTcpServer(tcp_server_object_val);
 }
 
 void phwangFreeTpTransfer (void *tp_transfer_object_val)

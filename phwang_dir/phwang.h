@@ -130,7 +130,7 @@ void *phwangTpConnect(
                 void (*receive_callback_val)(void *, void *, void *),
                 void *receive_object_val,
                 char const *who_val);
-void phwangFreeTpServer(void *tp_server_object_val);
+void phwangFreeTcpServer(void *tcp_server_object_val);
 void phwangFreeTpTransfer(void *tp_transfer_object_val);
 void phwangTpTransmit(void *tp_transfer_object_val, char *data_val);
 int  phwangReceiveThreadCount(void);
