@@ -130,7 +130,7 @@ int phwangEnqueue (void *queue_val, void *data_val)
 {
     int result = thePhwangObject->queueRootObject()->enqueue(queue_val, data_val);
     if (result != QueueClass::ENQUEUE_SUCCEED) {
-        phwangLogitInt("phwangEnqueue", "***fail_code=", result);
+        phwangLogitSI("phwangEnqueue", "***fail_code=", result);
     }
     return result;
 }

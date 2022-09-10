@@ -45,7 +45,7 @@ void DFabricClass::exportedNetAcceptFunction (void *tp_transfer_object_val)
 void dFabricTpReceiveDataFunction (void *tp_transfer_object_val, void *d_fabric_object_val, void *data_val) {
     char *data_str_val = (char *) data_val;
     if (data_str_val[1] != FECommandClass::GET_LINK_DATA_COMMAND) {
-        phwangDebugInt2(false,"Golbal::dFabricTpReceiveDataFunction", (char *) data_val, 99999, "index", ((TpTransferClass *) tp_transfer_object_val)->index());
+        phwangDebugSISI(false,"Golbal::dFabricTpReceiveDataFunction", (char *) data_val, 99999, "index", ((TpTransferClass *) tp_transfer_object_val)->index());
     }
 
     ((DFabricClass *) d_fabric_object_val)->exportedParseFunction(tp_transfer_object_val, (char *) data_val);
