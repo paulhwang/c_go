@@ -17,13 +17,13 @@ NameListClass::NameListClass (FabricClass *fabric_object_val)
     this->theNameListTag = 0;
     strcpy(this->theObjectName, "NameListClass");
 
-    this->debug(false, "NameListClass", "init");
+    phwangDebugS(false, "NameListClass::NameListClass", "init");
 }
 
 NameListClass::~NameListClass (void)
 {
     if (strcmp(this->objectName(), "NameListClass")) {
-        this->abend("~NameListClass", this->objectName());
+        phwangAbendS("NameListClass::~NameListClass", this->objectName());
     }
     strcpy(this->theObjectName, "NameListClassDummy");
 }
@@ -64,28 +64,16 @@ void NameListClass::updateNameList (void)
 
     if (name_list_size > NAME_LIST_CLASS_NAME_LIST_BUFFER_SIZE) {
         printf("name_list_size=%d\n", name_list_size);
-        this->abend("updateNameList", "buffer too small");
+        phwangAbendS("NameListClass::updateNameList", "buffer too small");
     }
 
-    this->debug(true, "updateNameList", this->theNameList);
+    phwangDebugS(true, "NameListClass::updateNameList", this->theNameList);
 }
 
-char *NameListClass::getNameList(int tag_val)
+char *NameListClass::getNameList (int tag_val)
 {
 	if (this->theNameListTag == tag_val) {
 		return 0;
 	}
 	return this->theNameList;
-}
-
-void NameListClass::logit (char const *str0_val, char const *str1_val) {
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
-    phwangLogit(s, str1_val);
-}
-
-void NameListClass::abend (char const *str0_val, char const *str1_val) {
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
-    phwangAbend(s, str1_val);
 }

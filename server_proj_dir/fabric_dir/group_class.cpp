@@ -16,24 +16,10 @@ GroupClass::GroupClass (void *list_mgr_object_val, FabricClass *fabric_object_va
     this->theSessionArrayMgr = phwangArrayMgrMalloc(this->objectName(), 'o', 10);
     this->theSessionTableArray = 0;
 
-    this->debug(true, "GroupClass", this->groupIdIndex());
+    phwangDebugS(true, "GroupClass::GroupClass", this->groupIdIndex());
 }
 
 GroupClass::~GroupClass (void)
 {
     phwangArrayMgrFree(this->theSessionArrayMgr);
-}
-
-void GroupClass::logit (char const* str0_val, char const* str1_val)
-{
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
-    phwangLogit(s, str1_val);
-}
-
-void GroupClass::abend (char const* str0_val, char const* str1_val)
-{
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
-    phwangAbend(s, str1_val);
 }

@@ -14,7 +14,7 @@ SessionClass::SessionClass (void *list_mgr_object_val, LinkClass *link_object_va
 {
     this->thePendingDownLinkDataQueue = phwangMallocQueue(0, this->objectName());
 
-    this->debug(true, "SessionClass", this->sessionIdIndex());
+    phwangDebugS(true, "SessionClass::SessionClass", this->sessionIdIndex());
 }
 
 SessionClass::~SessionClass (void)
@@ -27,16 +27,4 @@ void SessionClass::enqueuePendingDownLinkData(char *data_val)
     char *buf = (char *) malloc(strlen(data_val) + 4);
     strcpy(buf, data_val);
     phwangEnqueue(this->thePendingDownLinkDataQueue, buf);
-}
-
-void SessionClass::logit (char const* str0_val, char const* str1_val) {
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
-    phwangLogit(s, str1_val);
-}
-
-void SessionClass::abend (char const* str0_val, char const* str1_val) {
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
-    phwangAbend(s, str1_val);
 }

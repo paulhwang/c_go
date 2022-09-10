@@ -18,7 +18,7 @@ IdIndexListClass::IdIndexListClass (void *caller_object_val, int id_size_val, in
     this->theGlobalEntryId = 0;
     this->theMaxIdIndexTableIndex = 0;
 
-    this->debug(true, "IdIndexListClass", "init");
+    phwangDebugS(true, "IdIndexListClass::IdIndexListClass", "init");
 }
 
 IdIndexListClass::~IdIndexListClass (void)
@@ -47,7 +47,7 @@ void IdIndexListClass::insertIdIndex (char *id_index_val)
     }
 
     free(buf);
-    this->abend("insertIdIndex", "theIdIndexTableArray is full");
+    phwangAbendS("IdIndexListClass::insertIdIndex", "theIdIndexTableArray is full");
 }
 
 void IdIndexListClass::removeIdIndex (char *id_index_val)
@@ -61,19 +61,5 @@ void IdIndexListClass::removeIdIndex (char *id_index_val)
         }
         i++;
     }
-    this->abend("removeIdIndex", "not found");
-}
-
-void IdIndexListClass::logit (char const* str0_val, char const* str1_val)
-{
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
-    phwangLogit(s, str1_val);
-}
-
-void IdIndexListClass::abend (char const* str0_val, char const* str1_val)
-{
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
-    phwangAbend(s, str1_val);
+    phwangAbendS("IdIndexListClass::removeIdIndex", "not found");
 }

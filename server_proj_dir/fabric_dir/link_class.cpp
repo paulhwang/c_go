@@ -38,7 +38,7 @@ LinkClass::~LinkClass (void)
 
 SessionClass *LinkClass::mallocSession (void)
 {
-    this->debug(true, "mallocSession", "");
+    phwangDebugS(true, "LinkClass::mallocSession", "");
     SessionClass *session = new SessionClass(this->theSessionListMgrObject, this);
     return session;
 }
@@ -63,16 +63,4 @@ void LinkClass::setPendingSessionSetup3 (char *session_id_index_val, char const 
     data_ptr += SESSION_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE;
     strcpy(data_ptr, theme_data_val);
     phwangEnqueue(this->thePendingSessionSetupQueue3, buf);
-}
-
-void LinkClass::logit (char const *str0_val, char const *str1_val) {
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
-    phwangLogit(s, str1_val);
-}
-
-void LinkClass::abend (char const *str0_val, char const *str1_val) {
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
-    phwangAbend(s, str1_val);
 }

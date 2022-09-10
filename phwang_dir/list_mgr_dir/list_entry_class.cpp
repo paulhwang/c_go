@@ -16,29 +16,15 @@ ListEntryClass::ListEntryClass (void *list_mgr_object)
     this->theEntryIndex = 0;
 
     if (this->theListMgrObject->idSize() + this->theListMgrObject->indexSize() > LIST_ENTRY_CLASS_ID_INDEX_BUFFER_SIZE) {
-        this->abend("ListEntryClass", "buffer too small");
+        phwangAbendS("ListEntryClass::ListEntryClass", "buffer too small");
     }
 
     this->theListMgrObject->insertEntry(this);
     phwangEncodeIdIndex(this->theEntryIdIndex, this->theEntryId, this->theListMgrObject->idSize(), this->theEntryIndex, this->theListMgrObject->indexSize());
 
-    this->debug(false, "ListEntryClass", this->theEntryIdIndex);
+    phwangDebugS(false, "ListEntryClass::ListEntryClass", this->theEntryIdIndex);
 }
 
 ListEntryClass::~ListEntryClass (void)
 {
-}
-
-void ListEntryClass::logit (char const* str0_val, char const* str1_val)
-{
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
-    phwangLogit(s, str1_val);
-}
-
-void ListEntryClass::abend (char const* str0_val, char const* str1_val)
-{
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
-    phwangAbend(s, str1_val);
 }

@@ -118,8 +118,8 @@ void *phwangMallocQueue (int size_val, char const *who_val)
 void phwangFreeQueue (void *queue_val, char const *who_val)
 {
     if (!queue_val) {
-        phwangLogit("phwangFreeQueue", who_val);
-        phwangAbend("phwangFreeQueue", "null queue_val");
+        phwangLogitS("phwangFreeQueue", who_val);
+        phwangAbendS("phwangFreeQueue", "null queue_val");
         //return 0;
     }
 
@@ -138,8 +138,8 @@ int phwangEnqueue (void *queue_val, void *data_val)
 void *phwangDequeue (void *queue_val, char const *who_val)
 {
     if (!queue_val) {
-        phwangLogit("phwangDequeue", who_val);
-        phwangAbend("phwangDequeue", "null queue_val");
+        phwangLogitS("phwangDequeue", who_val);
+        phwangAbendS("phwangDequeue", "null queue_val");
         //return 0;
     }
 

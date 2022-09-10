@@ -15,10 +15,6 @@ class ListEntryClass {
     int theEntryIndex;
     char theEntryIdIndex[LIST_ENTRY_CLASS_ID_INDEX_BUFFER_SIZE];
 
-    void debug(int on_off_val, char const *str0_val, char const *str1_val) {if (on_off_val) this->logit(str0_val, str1_val);};
-    void logit(char const *str0_val, char const *str1_val);
-    void abend(char const *str0_val, char const *str1_val);
-
 public:
     ListEntryClass(void *list_mgr_object);
     ~ListEntryClass(void);
