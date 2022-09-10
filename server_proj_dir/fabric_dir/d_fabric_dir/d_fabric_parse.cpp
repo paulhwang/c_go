@@ -599,8 +599,8 @@ void DFabricClass::mallocRoom (GroupClass *group_val, char *theme_info_val)
     char *data_ptr;
     char *uplink_data = data_ptr = (char *) phwangMalloc(FECommandClass::DOWNLINK_DATA_BUFFER_SIZE, MallocClass::MALLOC_ROOM);
     *data_ptr++ = FT_Command_Class::SETUP_ROOM_COMMAND;
-    memcpy(data_ptr, group_val->groupIdIndex(), GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE);
-    data_ptr += GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE;
+    memcpy(data_ptr, group_val->groupIdIndex(), FT_Command_Class::GROUP_ID_INDEX_SIZE);
+    data_ptr += FT_Command_Class::GROUP_ID_INDEX_SIZE;
     strcpy(data_ptr, theme_info_val);
     this->theFabricObject->uFabricObject()->transmitFunction(uplink_data);
 }

@@ -18,4 +18,8 @@ public:
     int const static ROOM_ID_SIZE = 4;
     int const static ROOM_INDEX_SIZE = 4;
     int const static ROOM_ID_INDEX_SIZE = ROOM_ID_SIZE + ROOM_INDEX_SIZE;
+
+    int const static GROUP_ID_SIZE = 4;
+    int const static GROUP_INDEX_SIZE = 4;
+    int const static GROUP_ID_INDEX_SIZE = GROUP_ID_SIZE + GROUP_INDEX_SIZE;
 };

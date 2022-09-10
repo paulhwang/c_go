@@ -51,7 +51,7 @@ void DThemeClass::processSetupRoom (char *data_val)
         this->transmitFunction(downlink_data);
         return;
     }
-    data_val += GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE;
+    data_val += FT_Command_Class::GROUP_ID_INDEX_SIZE;
 
     uplink_data = data_ptr = (char *) phwangMalloc(FT_Command_Class::FT_DATA_BUFFER_SIZE + 4, MallocClass::DTHEME_SETUP_ROOM2);
     *data_ptr++ = TE_Command_Class::SETUP_BASE_COMMAND;

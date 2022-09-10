@@ -6,6 +6,7 @@
 
 #include "../../phwang_dir/phwang.h"
 #include "../../phwang_dir/id_index_list_dir/id_index_list_class.h"
+#include "../protocol_dir/ft_command_class.h"
 #include "room_class.h"
 #include "theme_class.h"
 
@@ -26,16 +27,16 @@ RoomClass::~RoomClass (void)
 
 void RoomClass::insertGroup (char *group_id_index_val)
 {
-    char buf[GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE + 4];
-    memcpy(buf, group_id_index_val, GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE);
-    buf[GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE] = 0;
+    char buf[FT_Command_Class::GROUP_ID_INDEX_SIZE + 4];
+    memcpy(buf, group_id_index_val, FT_Command_Class::GROUP_ID_INDEX_SIZE);
+    buf[FT_Command_Class::GROUP_ID_INDEX_SIZE] = 0;
     phwangArrayMgrInsertElement(this->theGroupArrayMgr, buf);
 }
 
 void RoomClass::removeGroup (char *group_id_index_val)
 {
-    char buf[GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE + 4];
-    memcpy(buf, group_id_index_val, GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE);
-    buf[GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE] = 0;
+    char buf[FT_Command_Class::GROUP_ID_INDEX_SIZE + 4];
+    memcpy(buf, group_id_index_val, FT_Command_Class::GROUP_ID_INDEX_SIZE);
+    buf[FT_Command_Class::GROUP_ID_INDEX_SIZE] = 0;
     phwangArrayMgrRemoveElement(this->theGroupArrayMgr, buf);
 }
