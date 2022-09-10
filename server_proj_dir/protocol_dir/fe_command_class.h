@@ -8,6 +8,8 @@
 
 class FECommandClass {
 public:
+    int const static DOWNLINK_DATA_BUFFER_SIZE = 512 + 16;
+
     int const static NAME_LIST_TAG_SIZE = 3;
     int const static AJAX_ID_SIZE = 3;
 
@@ -43,8 +45,6 @@ public:
 
     char const static *FAKE_LINK_ID_INDEX;
     char const static *FAKE_SESSION_ID_INDEX;
-
-    int const static LINK_MGR_DATA_BUFFER_SIZE = 512;
 
     int const static LINK_ID_SIZE = 4;
     int const static LINK_INDEX_SIZE = 4;
