@@ -8,7 +8,6 @@
 
 #define LOGIT_BUF_SIZE 512
 
-class EncodeClass;
 class MallocClass;
 class QueueRootClass;
 class NetRootClass;
@@ -20,7 +19,6 @@ class PhwangClass {
     char const *objectName(void) {return "PhwangClass";}
     int theDebugCode;
 
-    EncodeClass *theEncodeObject;
     MallocClass *theMallocObject;
     QueueRootClass *theQueueRootObject;
     NetRootClass *theNetRootObject;
@@ -35,7 +33,6 @@ public:
     void initObjects (void);
     int debugCode(void) {return this->theDebugCode;}
 
-    EncodeClass *encodeObject(void) {return this->theEncodeObject;}
     MallocClass *mallocObject(void) {return this->theMallocObject;}
     QueueRootClass *queueRootObject(void) {return this->theQueueRootObject;}
     NetRootClass *netRootObject(void) {return this->theNetRootObject;}

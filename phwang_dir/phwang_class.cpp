@@ -6,7 +6,6 @@
 
 #include "phwang.h"
 #include "phwang_class.h"
-#include "encode_dir/encode_class.h"
 #include "malloc_dir/malloc_class.h"
 #include "queue_dir/queue_root_class.h"
 #include "net_dir/net_root_class.h"
@@ -27,7 +26,6 @@ PhwangClass::~PhwangClass (void)
 void PhwangClass::initObjects (void)
 {
     this->theMallocObject = new MallocClass(this->debugCode());
-    this->theEncodeObject = new EncodeClass(this->debugCode());
     this->theQueueRootObject = new QueueRootClass(this->debugCode());
     this->theNetRootObject = new NetRootClass(this->debugCode());
     this->theThreadRootObject = new ThreadRootClass(this->debugCode());
