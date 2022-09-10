@@ -7,7 +7,6 @@
 #include <string.h>
 #include <stdlib.h>
 #include "../phwang.h"
-#include "../abend_dir/abend_class.h"
 #include "queue_class.h"
 #include "queue_entry_class.h"
 #include "../suspend_dir/suspend_class.h"

@@ -5,7 +5,6 @@
 */
 
 #include "../phwang.h"
-#include "../abend_dir/abend_class.h"
 #include "sql_class.h"
 #include "/usr/include/postgresql/libpq-fe.h"
 

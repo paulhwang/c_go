@@ -6,7 +6,6 @@
 
 #include "phwang.h"
 #include "phwang_class.h"
-#include "abend_dir/abend_class.h"
 #include "encode_dir/encode_class.h"
 #include "malloc_dir/malloc_class.h"
 #include "queue_dir/queue_root_class.h"

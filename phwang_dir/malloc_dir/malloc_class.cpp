@@ -5,7 +5,6 @@
 */
 
 #include "../phwang.h"
-#include "../abend_dir/abend_class.h"
 #include "../net_dir/tp_dir/tp_transfer_class.h"
 #include "malloc_class.h"
 

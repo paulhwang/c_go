@@ -7,7 +7,6 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include "../../../phwang_dir/phwang.h"
-#include "../../../phwang_dir/abend_dir/abend_class.h"
 #include "tcp_connect_class.h"
 #include "../tp_dir/tp_transfer_class.h"
 

@@ -5,7 +5,6 @@
 */
 
 #include "../../phwang_dir/phwang.h"
-#include "../../phwang_dir/abend_dir/abend_class.h"
 #include "list_mgr_class.h"
 #include "list_entry_class.h"
 
