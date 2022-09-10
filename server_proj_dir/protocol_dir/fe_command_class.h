@@ -54,5 +54,6 @@ public:
     int const static SESSION_INDEX_SIZE = 4;
     int const static SESSION_ID_INDEX_SIZE = SESSION_ID_SIZE + SESSION_INDEX_SIZE;
 
-    int const static PROCESSS_SETUP_LINK_DOWN_LINK_DATA_SIZE = (1 + AJAX_ID_SIZE + LINK_ID_INDEX_SIZE + 1);
+    int const static SIGN_UP_DOWNLINK_DATA_SIZE    = 1 + AJAX_ID_SIZE + LINK_ID_INDEX_SIZE + 1;
+    int const static SETUP_LINK_DOWNLINK_DATA_SIZE = 1 + AJAX_ID_SIZE + LINK_ID_INDEX_SIZE + 1;
 };

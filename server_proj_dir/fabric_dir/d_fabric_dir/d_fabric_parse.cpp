@@ -286,13 +286,12 @@ void DFabricClass::processSignUpRequest (void *tp_transfer_object_val, char *dat
     ***/
 }
 
-#define D_FABRIC_CLASS_PROCESSS_SIGN_UP_DOWN_LINK_DATA_SIZE (1 + FECommandClass::AJAX_ID_SIZE + FECommandClass::LINK_ID_INDEX_SIZE + 1)
 void DFabricClass::sendSignUpResponce (void *tp_transfer_object_val, char const *ajax_id_val, char const *result_val)
 {
     phwangDebugS(false, "DFabricClass::sendSignUpResponce", result_val);
 
     char *data_ptr;
-    char *downlink_data = data_ptr = (char *) phwangMalloc(D_FABRIC_CLASS_PROCESSS_SIGN_UP_DOWN_LINK_DATA_SIZE + strlen(result_val), MallocClass::SIGN_UP);
+    char *downlink_data = data_ptr = (char *) phwangMalloc(FECommandClass::SIGN_UP_DOWNLINK_DATA_SIZE + strlen(result_val), MallocClass::SIGN_UP);
     *data_ptr++ = FECommandClass::SIGN_UP_RESPONSE;
     memcpy(data_ptr, ajax_id_val, FECommandClass::AJAX_ID_SIZE);
     data_ptr += FECommandClass::AJAX_ID_SIZE;
@@ -351,13 +350,12 @@ void DFabricClass::processSetupLinkRequest (void *tp_transfer_object_val, char *
     phwangFree(password);
 }
 
-#define D_FABRIC_CLASS_PROCESSS_SETUP_LINK_DOWN_LINK_DATA_SIZE (1 + FECommandClass::AJAX_ID_SIZE + FECommandClass::LINK_ID_INDEX_SIZE + 1)
 void DFabricClass::sendSetupLinkResponce (void *tp_transfer_object_val, char const *ajax_id_val, char const *link_id_index_val, char const *result_val)
 {
     phwangDebugS(false, "DFabricClass::sendSetupLinkResponce", result_val);
 
     char *data_ptr;
-    char *downlink_data = data_ptr = (char *) phwangMalloc(D_FABRIC_CLASS_PROCESSS_SETUP_LINK_DOWN_LINK_DATA_SIZE + strlen(result_val), MallocClass::SIGN_IN);
+    char *downlink_data = data_ptr = (char *) phwangMalloc(FECommandClass::SETUP_LINK_DOWNLINK_DATA_SIZE + strlen(result_val), MallocClass::SIGN_IN);
     *data_ptr++ = FECommandClass::SETUP_LINK_RESPONSE;
     strcpy(data_ptr, ajax_id_val);
     data_ptr += FECommandClass::AJAX_ID_SIZE;
