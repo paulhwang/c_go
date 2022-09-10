@@ -21,7 +21,7 @@ QueueEntryClass::~QueueEntryClass (void)
     phwangDecrementAtomicCount(&QueueEntryClass::ObjectCount, this->objectName());
 
     if (strcmp(this->objectName(), "QueueEntryClass")) {
-        this->abend("~QueueEntryClass", this->objectName());
+        phwangAbendS("QueueEntryClass::~QueueEntryClass", this->objectName());
     }
     strcpy(this->theObjectName, "QueueEntryClassDummy");
 }
@@ -29,18 +29,4 @@ QueueEntryClass::~QueueEntryClass (void)
 void QueueEntryClass::deleteQueueEntry (void)
 {
     delete this;
-}
-
-void QueueEntryClass::logit (char const *str0_val, char const *str1_val)
-{
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
-    phwangLogit(s, str1_val);
-}
-
-void QueueEntryClass::abend (char const *str0_val, char const *str1_val)
-{
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
-    phwangAbend(s, str1_val);
 }
