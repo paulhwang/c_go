@@ -57,24 +57,24 @@ void MallocClass::phwangFree (void *input_val)
     }
 
     if (!input_val) {
-        phwangAbend("phwangFree", "null data");
+        phwangAbendS("MallocClass::phwangFree", "null data");
         return;
     }
 
     char *real_malloc_data = ((char *) input_val) - PHWNAG_MALLOC_CLASS_HEADER_SIZE;
     char *length_str = real_malloc_data + PHWNAG_MALLOC_CLASS_MARKER_SIZE;
     char *who_str = length_str + PHWNAG_MALLOC_CLASS_LENGTH_SIZE;
-    this->debug(false, "phwangFree", real_malloc_data);
+    phwangDebugS(false, "MallocClass::phwangFree", real_malloc_data);
 
     if (memcmp(real_malloc_data, PHWNAG_MALLOC_CLASS_MARKER, PHWNAG_MALLOC_CLASS_MARKER_SIZE)) {
         if (!memcmp(real_malloc_data, PHWNAG_MALLOC_CLASS_MARKER_FREE, PHWNAG_MALLOC_CLASS_MARKER_SIZE)) {
             printf("phwangFree: data=%s\n", real_malloc_data);
-            phwangAbend("phwangFree", "free twice");
+            phwangAbendS("MallocClass::phwangFree", "free twice");
             return;
         }
         else {
             printf("phwangFree: data=%s\n", real_malloc_data);
-            phwangAbend("phwangFree", "header");
+            phwangAbendS("MallocClass::phwangFree", "header");
             return;
         }
     }
@@ -82,11 +82,11 @@ void MallocClass::phwangFree (void *input_val)
     int length = phwangDecodeNumber(length_str, PHWNAG_MALLOC_CLASS_LENGTH_SIZE);
     int who_val = phwangDecodeNumber(who_str, PHWNAG_MALLOC_CLASS_WHO_SIZE);
 
-    this->debugInt2(false, "phwangFree", "length=", length, "user=", who_val);
+    phwangDebugSISI(false, "MallocClass::phwangFree", "length=", length, "user=", who_val);
 
     if (memcmp((char *) input_val + length, PHWNAG_MALLOC_CLASS_MARKER, PHWNAG_MALLOC_CLASS_MARKER_SIZE)) {
-        printf("phwangFree: data=%s\n", real_malloc_data);
-        phwangAbend("phwangFree", "tailer");
+        printf("MallocClass::phwangFree: data=%s\n", real_malloc_data);
+        phwangAbendS("MallocClass::phwangFree", "tailer");
         return;
     }
 
@@ -116,7 +116,7 @@ void MallocClass::checkWhoTable (void)
         }
 
         if (count > 2) {
-            this->debugInt2(true, "checkWhoTable", "who=", i, " count=", count);
+            phwangDebugSISI(true, "MallocClass::checkWhoTable", "who=", i, " count=", count);
         }
     }
 }
@@ -126,78 +126,4 @@ char *MallocClass::mallocConstStrBuf (char const * str_val)
     char *buf = (char *) phwangMalloc(strlen(str_val) + 1, MallocClass::mallocConstStrBuf_);
     strcpy(buf, str_val);
     return buf;
-}
-
-void MallocClass::debug (int debug_on_val, char const *func_name_val, char const *str1_val)
-{
-    if (debug_on_val) {
-        char s[AbendClass::LogitFuncNameBufSize];
-        phwangComposeFuncName(s, this->objectName(), func_name_val);
-        phwangDebug(debug_on_val, s, str1_val);
-    }
-}
-
-void MallocClass::debug2 (int debug_on_val, char const *func_name_val, char const *str1_val, char const *str2_val)
-{
-    if (debug_on_val) {
-        char s[AbendClass::LogitFuncNameBufSize];
-        phwangComposeFuncName(s, this->objectName(), func_name_val);
-        phwangDebug2(debug_on_val, s, str1_val, str2_val);
-    }
-}
-
-void MallocClass::debugInt(int debug_on_val, char const *func_name_val, char const *str1_val, int int1_val)
-{
-    if (debug_on_val) {
-        char s[AbendClass::LogitFuncNameBufSize];
-        phwangComposeFuncName(s, this->objectName(), func_name_val);
-        phwangDebugInt(debug_on_val, s, str1_val, int1_val);
-    }
-}
-
-void MallocClass::debugInt2(int debug_on_val, char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val)
-{
-    if (debug_on_val) {
-        char s[AbendClass::LogitFuncNameBufSize];
-        phwangComposeFuncName(s, this->objectName(), func_name_val);
-        phwangDebugInt2(debug_on_val, s, str1_val, int1_val, str2_val, int2_val);
-    }
-}
-
-void MallocClass::logit (char const *func_name_val, char const *str1_val) {
-    char s[AbendClass::LogitFuncNameBufSize];
-    phwangComposeFuncName(s, this->objectName(), func_name_val);
-    phwangLogit(s, str1_val);
-}
-
-void MallocClass::logit2 (char const *func_name_val, char const *str1_val, char const *str2_val) {
-    char s[AbendClass::LogitFuncNameBufSize];
-    phwangComposeFuncName(s, this->objectName(), func_name_val);
-    phwangLogit2(s, str1_val, str2_val);
-}
-
-void MallocClass::logitInt(char const *func_name_val, char const *str1_val, int int1_val)
-{
-    char s[AbendClass::LogitFuncNameBufSize];
-    phwangComposeFuncName(s, this->objectName(), func_name_val);
-    phwangLogitInt(s, str1_val, int1_val);
-}
-
-void MallocClass::logitInt2(char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val)
-{
-    char s[AbendClass::LogitFuncNameBufSize];
-    phwangComposeFuncName(s, this->objectName(), func_name_val);
-    phwangLogitInt2(s, str1_val, int1_val, str2_val, int2_val);
-}
-
-void MallocClass::abend (char const *func_name_val, char const *str1_val) {
-    char s[AbendClass::LogitFuncNameBufSize];
-    phwangComposeFuncName(s, this->objectName(), func_name_val);
-    phwangAbend(s, str1_val);
-}
-
-void MallocClass::abend2 (char const *func_name_val, char const *str1_val, char const *str2_val) {
-    char s[AbendClass::LogitFuncNameBufSize];
-    phwangComposeFuncName(s, this->objectName(), func_name_val);
-    phwangAbend2(s, str1_val, str2_val);
 }
