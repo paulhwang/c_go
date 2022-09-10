@@ -43,11 +43,6 @@ void phwangLogitWSI (char const *func_name_val, char const *who_val, char const 
     printf("%s:%s() %s %s\n", func_name_val, who_val, str1_val, str2_val);
 }
 
-void phwangLogit2 (char const *func_name_val, char const *str1_val, char const *str2_val)
-{
-    printf("%s() %s %s\n", func_name_val, str1_val, str2_val);
-}
-
 void phwangLogitSI (char const *func_name_val, char const *str1_val, int int1_val)
 {
     printf("%s() %s=%d\n", func_name_val, str1_val, int1_val);
@@ -56,11 +51,6 @@ void phwangLogitSI (char const *func_name_val, char const *str1_val, int int1_va
 void phwangLogitWSI (char const *func_name_val, char const *who_val, char const *str1_val, int int1_val)
 {
     printf("%s:%s() %s=%d\n", func_name_val, who_val, str1_val, int1_val);
-}
-
-void phwangLogitInt (char const *func_name_val, char const *str1_val, int int1_val)
-{
-    printf("%s() %s=%d\n", func_name_val, str1_val, int1_val);
 }
 
 void phwangLogitSISS (char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, char const *str3_val)
@@ -81,11 +71,6 @@ void phwangLogitSISI (char const *func_name_val, char const *str1_val, int int1_
 void phwangLogitWSISI (char const *func_name_val, char const *who_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val)
 {
     printf("%s:%s() %s=%d %s=%d\n", func_name_val, who_val, str1_val, int1_val, str2_val, int2_val);
-}
-
-void phwangLogitInt2 (char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val)
-{
-    printf("%s() %s=%d %s=%d\n", func_name_val, str1_val, int1_val, str2_val, int2_val);
 }
 
 void phwangDebugS (int on_off_val, char const *func_name_val, char const *str1_val)
@@ -123,13 +108,6 @@ void phwangDebugWSS (int on_off_val, char const *func_name_val, char const *who_
     }
 };
 
-void phwangDebug2 (int on_off_val, char const *func_name_val, char const *str1_val, char const *str2_val)
-{
-    if (phwang_debug_on_off_switch && on_off_val) {
-        phwangLogit2(func_name_val, str1_val, str2_val);
-    }
-};
-
 void phwangDebugSI (int on_off_val, char const *func_name_val, char const *str1_val, int int1_val)
 {
     if (phwang_debug_on_off_switch && on_off_val) {
@@ -141,13 +119,6 @@ void phwangDebugWSI (int on_off_val, char const *func_name_val, char const *who_
 {
     if (phwang_debug_on_off_switch && on_off_val) {
         phwangLogitWSI(func_name_val, who_val, str1_val, int1_val);
-    }
-}
-
-void phwangDebugInt (int on_off_val, char const *func_name_val, char const *str1_val, int int1_val)
-{
-    if (phwang_debug_on_off_switch && on_off_val) {
-        phwangLogitInt(func_name_val, str1_val, int1_val);
     }
 }
 
@@ -179,13 +150,6 @@ void phwangDebugWSISI (int on_off_val, char const *func_name_val, char const *wh
     }
 }
 
-void phwangDebugInt2 (int on_off_val, char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val)
-{
-    if (phwang_debug_on_off_switch && on_off_val) {
-        phwangLogitInt2(func_name_val, str1_val, int1_val, str2_val, int2_val);
-    }
-}
-
 void phwangAbend (char const *func_name_val, char const *str1_val)
 {
     printf("*****ABEND******************************************\n");
@@ -208,15 +172,6 @@ void phwangAbendWS (char const *func_name_val, char const *who_val, char const *
 {
     printf("*****ABEND******************************************\n");
     printf("%s:%s() %s\n", func_name_val, who_val, str1_val);
-    printf("*****ABEND******************************************\n");
-    int *junk = 0;
-    *junk = 0;
-}
-
-void phwangAbend2 (char const *func_name_val, char const *str1_val, char const *str2_val)
-{
-    printf("*****ABEND******************************************\n");
-    printf("%s(), %s %s\n", func_name_val, str1_val, str2_val);
     printf("*****ABEND******************************************\n");
     int *junk = 0;
     *junk = 0;
