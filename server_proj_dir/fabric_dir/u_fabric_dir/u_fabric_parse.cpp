@@ -15,10 +15,10 @@
 #include "../session_class.h"
 #include "../group_class.h"
 
-void UFabricClass::exportedParseFunction(char *data_val)
+void UFabricClass::exportedParseFunction (char *data_val)
 {
     if (1) { /* debug */
-        this->logit("exportedParseFunction", data_val);
+        phwangLogitS("UFabricClass::exportedParseFunction", data_val);
     }
 
     if (*data_val == FABRIC_THEME_PROTOCOL_RESPOND_IS_SETUP_ROOM) {
@@ -31,12 +31,12 @@ void UFabricClass::exportedParseFunction(char *data_val)
         return;
     }
 
-    this->abend("exportedParseFunction", data_val);
+    phwangAbendS("UFabricClass::exportedParseFunction", data_val);
 }
 
-void UFabricClass::processSetupRoomResponse(char *data_val)
+void UFabricClass::processSetupRoomResponse (char *data_val)
 {
-    this->debug(true, "processSetupRoomResponse", data_val);
+    phwangDebugS(true, "UFabricClass::processSetupRoomResponse", data_val);
 
     char *group_id_index_val = data_val;
 
@@ -57,17 +57,17 @@ void UFabricClass::processSetupRoomResponse(char *data_val)
     }
 }
 
-void UFabricClass::processPutRoomDataResponse(char *data_val)
+void UFabricClass::processPutRoomDataResponse (char *data_val)
 {
     char *downlink_data;
     char *data_ptr;
     int session_array_size;
 
-    this->debug(true, "processPutRoomDataResponse", data_val);
+    phwangDebugS(true, "UFabricClass::processPutRoomDataResponse", data_val);
 
     GroupClass *group = this->theFabricObject->searchGroup(data_val);
     if (!group) {
-        this->abend("processPutRoomDataResponse", "null group");
+        phwangAbendS("UFabricClass::processPutRoomDataResponse", "null group");
         return;
     }
     data_val += GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE;
