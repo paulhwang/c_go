@@ -6,7 +6,6 @@
 
 #pragma once
 #include "../../phwang_dir/list_mgr_dir/list_entry_class.h"
-#include "../protocol_dir/base_mgr_protocol.h"
 #include "../protocol_dir/te_command_class.h"
 
 class SessionClass;

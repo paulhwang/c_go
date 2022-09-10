@@ -7,7 +7,6 @@
 #pragma once
 
 #include <pthread.h>
-#include "../../protocol_dir/base_mgr_protocol.h"
 
 #define GAME_DSERVER_RECEIVE_QUEUE_SIZE 100
 #define GAME_DSERVER_GROUP_ARRAY_SIZE 32

@@ -7,7 +7,7 @@
 #pragma once
 
 #include <pthread.h>
-#include "../protocol_dir/base_mgr_protocol.h"
+
 class RoomMgrClass;
 class RoomClass;
 class UThemeClass;

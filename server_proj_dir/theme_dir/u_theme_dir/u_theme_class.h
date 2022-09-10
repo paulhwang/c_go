@@ -7,7 +7,6 @@
 #pragma once
 
 #include <pthread.h>
-#include "../../protocol_dir/base_mgr_protocol.h"
 
 class ThemeClass;
 

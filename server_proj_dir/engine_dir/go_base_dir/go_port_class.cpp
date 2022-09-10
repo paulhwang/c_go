@@ -12,7 +12,6 @@
 #include "go_port_class.h"
 #include "../engine_class.h"
 #include "../d_engine_dir/d_engine_class.h"
-#include "../../protocol_dir/base_mgr_protocol.h"
 
 GoPortClass::GoPortClass (GoBaseClass *base_object_val):
     theBaseObject(base_object_val)
