@@ -17,9 +17,7 @@
 GoPortClass::GoPortClass (GoBaseClass *base_object_val):
     theBaseObject(base_object_val)
 {
-    if (1) { /* debug */
-        this->logit("GoPortClass", "init");
-    }
+    this->debug(false, "GoPortClass", "init");
 }
 
 void GoPortClass::transmitBoardData (void) {

@@ -19,7 +19,7 @@ GoConfigClass::GoConfigClass (GoBaseClass *base_object_val, char const *config_i
     this->theBoardSize = phwangDecodeNumber(config_info_val + 2, 2);
     this->theHandicapPoint = phwangDecodeNumber(config_info_val + 4, 2);
     this->theKomi = phwangDecodeNumber(config_info_val + 6, 2);
-    this->debug(true, "GoConfigClass", config_info_val);
+    this->debug(false, "GoConfigClass", config_info_val);
 }
 
 void GoConfigClass::logit (char const *str0_val, char const *str1_val) {

@@ -13,7 +13,7 @@ GoFightClass::GoFightClass (GoBaseClass* base_object_val):
     theAbendEngineOn(1)
 {
     this->resetEngineObjectData();
-    this->debug(true, "GoFightClass", "init");
+    this->debug(false, "GoFightClass", "init");
 }
 
 GoFightClass::~GoFightClass(void)

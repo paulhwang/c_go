@@ -571,6 +571,20 @@ void DFabricClass::processSetupSessionRequest (void *tp_transfer_object_val, cha
     this->transmitFunction(tp_transfer_object_val, downlink_data);
 }
 
+void DFabricClass::sendSetupSessionResponce (void *tp_transfer_object_val, char const *ajax_id_val, char const *link_id_index_val, char const *result_val)
+{
+    phwangDebugS(false, "DFabricClass::sendSetupSessionResponce", result_val);
+    /*
+    char *data_ptr;
+    char *downlink_data = data_ptr = (char *) phwangMalloc(ListMgrProtocolClass::LINK_MGR_DATA_BUFFER_SIZE + 4, MallocClass::SETUP_SESSION);
+    *data_ptr++ = FECommandClass::SETUP_SESSION_RESPONSE;
+    strcpy(data_ptr, ajax_id_val);
+    data_ptr += FECommandClass::AJAX_ID_SIZE;
+    strcpy(data_ptr, session->sessionIdIndex());
+    this->transmitFunction(tp_transfer_object_val, downlink_data);
+    */
+}
+
 void DFabricClass::errorProcessSetupSession (void *tp_transfer_object_val, char const *ajax_id_val, char const *err_msg_val)
 {
     phwangAbendS("DFabricClass::errorProcessSetupSession", err_msg_val);

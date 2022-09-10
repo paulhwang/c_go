@@ -18,7 +18,7 @@ GoBaseClass::GoBaseClass (void *list_mgr_object_val, EngineClass *engine_object_
     this->thePortObject = new GoPortClass(this);
     this->theGameObject = new GoGameClass(this);
 
-    phwangDebugSS(true, "GoBaseClass::GoBaseClass", "new_base:", this->goBaseIdIndex());
+    phwangDebugSS(true, "GoBaseClass::GoBaseClass", "new_go_base:", this->goBaseIdIndex());
 }
 
 GoBaseClass::~GoBaseClass (void)

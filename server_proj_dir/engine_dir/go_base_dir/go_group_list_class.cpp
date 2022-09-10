@@ -27,7 +27,7 @@ GoGroupListClass::GoGroupListClass (GoFightClass* fight_object_val,
         ? GO_EMPTY_STONE
         : GolbalGoGetOppositeColor(this->theMyColor);
 
-    this->debug(true, "GoGroupListClass", "init");
+    this->debug(false, "GoGroupListClass", "init");
 }
 
 GoGroupListClass::~GoGroupListClass(void)

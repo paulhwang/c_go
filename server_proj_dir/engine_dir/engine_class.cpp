@@ -29,7 +29,6 @@ EngineClass::~EngineClass (void)
 
 GoBaseClass *EngineClass::mallocGoBase (char const *config_info_val)
 {
-    phwangDebugS(true, "EngineClass::mallocGoBase", "");
     GoBaseClass *base_object = new GoBaseClass(this->theGoBaseListMgrObject, this, config_info_val);
     if (!base_object) {
         phwangAbendS("EngineClass::mallocGoBase", "fail_to_malloc_base_object");

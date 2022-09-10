@@ -13,7 +13,7 @@ GoGameClass::GoGameClass (GoBaseClass* base_object_val):
     theBaseObject(base_object_val)
 {
     this->resetGameObjectData();
-    this->debug(true, "GoGameClass", "init");
+    this->debug(false, "GoGameClass", "init");
 }
 
 GoGameClass::~GoGameClass(void)
