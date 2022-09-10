@@ -19,19 +19,19 @@ ThemeClass::ThemeClass (int debug_code_val)
     this->theDThemeObject = new DThemeClass(this);
     this->theRoomListMgrObject = phwangListMgrMalloc("ROOM", ROOM_MGR_PROTOCOL_ROOM_ID_SIZE, ROOM_MGR_PROTOCOL_ROOM_INDEX_SIZE, 700);
 
-    this->debug(false, "ThemeClass", "init");
+    phwangDebugS(false, "ThemeClass::ThemeClass", "init");
 }
 
 ThemeClass::~ThemeClass (void)
 {
     this->theDThemeObject->~DThemeClass();
     this->theUThemeObject->~UThemeClass();
-    this->debug(true, "~ThemeClass", "exit");
+    phwangDebugS(true, "ThemeClass::~ThemeClass", "exit");
 }
 
 RoomClass *ThemeClass::mallocRoom (char *room_id_index_val)
 {
-    this->debug(true, "mallocGroup", "");
+    phwangDebugS(true, "ThemeClass::mallocRoom", "");
     RoomClass *room = new RoomClass(this->theRoomListMgrObject, this, room_id_index_val);
     return room;
 }
@@ -46,7 +46,7 @@ void ThemeClass::insertRoom (RoomClass *group_object_val)
         }
         i++;
     }
-    this->abend("insertGroup", "table is full");
+    phwangAbendS("ThemeClass::insertRoom", "table is full");
 }
 
 void ThemeClass::removeRoom (RoomClass *group_object_val)
@@ -59,19 +59,5 @@ void ThemeClass::removeRoom (RoomClass *group_object_val)
         }
         i++;
     }
-    this->abend("removeGroup", "not found");
-}
-
-void ThemeClass::logit (char const* str0_val, char const* str1_val)
-{
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
-    phwangLogit(s, str1_val);
-}
-
-void ThemeClass::abend (char const* str0_val, char const* str1_val)
-{
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
-    phwangAbend(s, str1_val);
+    phwangAbendS("ThemeClass::removeRoom", "not found");
 }
