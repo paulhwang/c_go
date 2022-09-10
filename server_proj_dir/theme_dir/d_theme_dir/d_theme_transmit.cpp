@@ -9,12 +9,10 @@
 
 void DThemeClass::transmitFunction (char *data_val)
 {
-    if (1) { /* debug */
-        this->logit("transmitFunction", data_val);
-    }
+    phwangDebugS(true, "DThemeClass::transmitFunction", data_val);
 
     if (!this->theTpTransferObject) {
-        this->abend("transmitFunction", "null theTpTransferObject");
+        phwangAbendS("DThemeClass::transmitFunction", "null theTpTransferObject");
         return;
     }
 

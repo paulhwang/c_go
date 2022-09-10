@@ -16,9 +16,7 @@
 
 void DThemeClass::exportedParseFunction (char *data_val)
 {
-    if (1) { /* debug */
-        this->logit("exportedParseFunction", data_val);
-    }
+    phwangDebugS(true, "DThemeClass::exportedParseFunction", data_val);
 
     if (*data_val == FABRIC_THEME_PROTOCOL_COMMAND_IS_SETUP_ROOM) {
         this->processSetupRoom(data_val + 1);
@@ -30,12 +28,12 @@ void DThemeClass::exportedParseFunction (char *data_val)
         return;
     }
 
-    this->abend("exportedParseFunction", data_val);
+    phwangAbendS("DThemeClass::exportedParseFunction", data_val);
 }
 
 void DThemeClass::processSetupRoom (char *data_val)
 {
-    this->debug(true, "processSetupRoom", data_val);
+    phwangDebugS(true, "DThemeClass::processSetupRoom", data_val);
 
     char *group_id_index_val = data_val;
 
@@ -45,7 +43,7 @@ void DThemeClass::processSetupRoom (char *data_val)
 
     RoomClass *room = this->theThemeObject->mallocRoom(group_id_index_val);
     if (!room) {
-        this->abend("processSetupRoom", "null room");
+        phwangAbendS("DThemeClass::processSetupRoom", "null room");
         downlink_data = data_ptr = (char *) phwangMalloc(ROOM_MGR_DATA_BUFFER_SIZE + 4, MallocClass::DTHEME_SETUP_ROOM1);
         *data_ptr++ = FABRIC_THEME_PROTOCOL_RESPOND_IS_SETUP_ROOM;
         strcpy(data_ptr, "null room");
@@ -70,11 +68,11 @@ void DThemeClass::processPutRoomData (char *data_val)
     char *uplink_data;
     char *data_ptr;
 
-    this->debug(true, "processPutRoomData", data_val);
+    phwangDebugS(true, "DThemeClass::processPutRoomData", data_val);
 
     RoomClass *room = this->theThemeObject->searchRoom(data_val);
     if (!room) {
-        this->abend("processPutRoomData", "null room");
+        phwangAbendS("DThemeClass::processPutRoomData", "null room");
         downlink_data = data_ptr = (char *) phwangMalloc(ROOM_MGR_DATA_BUFFER_SIZE + 4, MallocClass::DTHEME_PUT_ROOM_DATA1);
         *data_ptr++ = FABRIC_THEME_PROTOCOL_RESPOND_IS_PUT_ROOM_DATA;
         strcpy(data_ptr, "null room");

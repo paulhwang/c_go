@@ -22,17 +22,6 @@ class DThemeClass {
     void processSetupRoom(char *data_al);
     void processPutRoomData(char *data_val);
 
-    void debug(int debug_on_val, char const *func_name_val, char const *str1_val);
-    void debug2(int debug_on_val, char const *func_name_val, char const *str1_val, char const *str2_val);
-    void debugInt(int debug_on_val, char const *func_name_val, char const *str1_val, int int1_val);
-    void debugInt2(int debug_on_val, char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val);
-    void logit(char const *func_name_val, char const *str1_val);
-    void logit2(char const *func_name_val, char const *str1_val, char const *str2_val);
-    void logitInt(char const *func_name_val, char const *str1_val, int int1_val);
-    void logitInt2(char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, int int2_val);
-    void abend(char const *func_name_val, char const *str1_val);
-    void abend2(char const *func_name_val, char const *str1_val, char const *str2_val);
-
 public:
     DThemeClass(ThemeClass *theme_object_val);
     ~DThemeClass(void);
