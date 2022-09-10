@@ -300,7 +300,6 @@ void DFabricClass::sendSignUpResponce (void *tp_transfer_object_val, char const 
     this->transmitFunction(tp_transfer_object_val, downlink_data);
 }
 
-#define D_FABRIC_CLASS_FAKE_LINK_ID_INDEX "99990000"
 void DFabricClass::processSetupLinkRequest (void *tp_transfer_object_val, char *data_val, char const *ajax_id_val)
 {
     phwangDebugS(false, "DFabricClass::processSetupLinkRequest", data_val);
@@ -332,7 +331,7 @@ void DFabricClass::processSetupLinkRequest (void *tp_transfer_object_val, char *
                 phwangAbendS("DFabricClass::processSetupLinkRequest", "check_password_result");
                 break;
         }
-        this->sendSetupLinkResponce(tp_transfer_object_val, ajax_id_val, D_FABRIC_CLASS_FAKE_LINK_ID_INDEX, result_str);
+        this->sendSetupLinkResponce(tp_transfer_object_val, ajax_id_val, FECommandClass::FAKE_LINK_ID_INDEX, result_str);
         phwangFree(my_name);
         phwangFree(password);
         return;
@@ -341,7 +340,7 @@ void DFabricClass::processSetupLinkRequest (void *tp_transfer_object_val, char *
     LinkClass *link = this->theFabricObject->mallocLink(my_name);
     if (!link) {
         phwangAbendS("DFabricClass::processSetupLinkRequest", "null link");
-        this->sendSetupLinkResponce(tp_transfer_object_val, ajax_id_val, D_FABRIC_CLASS_FAKE_LINK_ID_INDEX, "null link");
+        this->sendSetupLinkResponce(tp_transfer_object_val, ajax_id_val, FECommandClass::FAKE_LINK_ID_INDEX, "null link");
         phwangFree(my_name);
         phwangFree(password);
         return;
