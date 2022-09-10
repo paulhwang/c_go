@@ -5,6 +5,7 @@
 */
 
 #include "../../phwang_dir/phwang.h"
+#include "../protocol_dir/te_command_class.h"
 #include "../protocol_dir/base_mgr_protocol.h"
 #include "engine_class.h"
 #include "go_base_dir/go_base_class.h"
@@ -16,7 +17,7 @@ EngineClass::EngineClass (int debug_code_val)
     this->theDebugCode = debug_code_val;
     
     this->theDEngineObject = new DEngineClass(this);
-    this->theGoBaseListMgrObject = phwangListMgrMalloc("GO_BASE", BASE_MGR_PROTOCOL_BASE_ID_SIZE, BASE_MGR_PROTOCOL_BASE_INDEX_SIZE, 900);
+    this->theGoBaseListMgrObject = phwangListMgrMalloc("GO_BASE", TE_Command_Class::BASE_ID_SIZE, TE_Command_Class::BASE_INDEX_SIZE, 900);
 
     phwangDebugS(false, "EngineClass::EngineClass", "init");
 }

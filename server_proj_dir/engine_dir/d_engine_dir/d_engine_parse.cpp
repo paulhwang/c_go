@@ -52,8 +52,8 @@ void DEngineClass::processSetupBase (char const *data_val)
     memcpy(data_ptr, room_id_index_val, FT_Command_Class::ROOM_ID_INDEX_SIZE);
     data_ptr += FT_Command_Class::ROOM_ID_INDEX_SIZE;
 
-    memcpy(data_ptr, go_base_object->goBaseIdIndex(), BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE);
-    data_ptr += BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE;
+    memcpy(data_ptr, go_base_object->goBaseIdIndex(), TE_Command_Class::BASE_ID_INDEX_SIZE);
+    data_ptr += TE_Command_Class::BASE_ID_INDEX_SIZE;
     *data_ptr = 0;
 
     this->transmitFunction(downlink_data);

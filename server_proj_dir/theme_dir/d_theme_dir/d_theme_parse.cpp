@@ -83,8 +83,8 @@ void DThemeClass::processPutRoomData (char *data_val)
 
     uplink_data = data_ptr = (char *) phwangMalloc(FT_Command_Class::FT_DATA_BUFFER_SIZE + 4, MallocClass::DTHEME_PUT_ROOM_DATA2);
     *data_ptr++ = TE_Command_Class::PUT_BASE_DATA_COMMAND;
-    memcpy(data_ptr, room->baseIdIndex(), BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE);
-    data_ptr += BASE_MGR_PROTOCOL_BASE_ID_INDEX_SIZE;
+    memcpy(data_ptr, room->baseIdIndex(), TE_Command_Class::BASE_ID_INDEX_SIZE);
+    data_ptr += TE_Command_Class::BASE_ID_INDEX_SIZE;
     strcpy(data_ptr, data_val + FT_Command_Class::ROOM_ID_INDEX_SIZE);
     this->theThemeObject->uThemeObject()->transmitFunction(uplink_data);
 }
