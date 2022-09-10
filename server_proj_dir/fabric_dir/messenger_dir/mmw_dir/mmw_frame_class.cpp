@@ -10,7 +10,7 @@
 
 MmwFrameClass::MmwFrameClass (void)
 {
-    this->debug(false, "MmwFrameClass", "start");
+    phwangDebugS(false, "MmwFrameClass::MmwFrameClass", "start");
 
     memset(this, 0, sizeof(*this));
     this->theMaxArraySize = MMW_FRAME_CLASS_MAX_ARRAY_SIZE;
@@ -23,7 +23,7 @@ MmwFrameClass::MmwFrameClass (void)
 
 MmwFrameClass::~MmwFrameClass (void)
 {
-    this->debug(false, "~MmwFrameClass", "start");
+    phwangDebugS(false, "MmwFrameClass::~MmwFrameClass", "start");
     for (int i = 0; i < this->theArraySize; i++) {
         if (this->theLineArray[i]) {
             free(this->theLineArray[i]);
@@ -55,17 +55,17 @@ void MmwFrameClass::parseHeaderFrame (void)
 void MmwFrameClass::parseNormalFrame (void)
 {
     this->theFrameType = MMW_FRAME_CLASS_TYPE_NORMAL;
-    this->debug(false, "porcessNormalFrame", this->frameNumberStr());
+    phwangDebugS(false, "MmwFrameClass::parseNormalFrame", this->frameNumberStr());
 
     if (memcmp(this->pointeNumberStr(), " PointNumber: ", 14) != 0) {
-        this->abend("porcessNormalFrame", "ointeNumber not match");
+        phwangAbendS("MmwFrameClass::parseNormalFrame", "ointeNumber not match");
         return;
     }
 
     this->thePointNumberIndex = 14;
     this->thePointNumber = phwangDecodeNumber(this->pointeNumberStr(), strlen(this->pointeNumberStr()));
     //printf("thePointNumber=%i\n", this->thePointNumber);
-    this->debug(false, "porcessNormalFrame", this->pointeNumberStr());
+    phwangDebugS(false, "MmwFrameClass::parseNormalFrame", this->pointeNumberStr());
 
     //printf("targetStr=%s\n", this->targetStrArray()[0]);
     //printf("idleMappingStr=%s\n", this->idleMappingStr());
@@ -80,14 +80,14 @@ void MmwFrameClass::parseNormalFrame (void)
 
 void MmwFrameClass::parseIdleFrame (void)
 {
-    this->debug(true, "parseIdleFrame", this->frameNumberStr());
+    phwangDebugS(true, "MmwFrameClass::parseIdleFrame", this->frameNumberStr());
     //printf("idleMappingStr=%s\n", this->idleMappingStrArray()[0]);
 }
 
 void MmwFrameClass::parseActiveFrame (void)
 {
     this->theFrameType = MMW_FRAME_CLASS_TYPE_ACTIVE;
-    this->debug(true, "parseActiveFrame", this->frameNumberStr());
+    phwangDebugS(true, "MmwFrameClass::parseActiveFram", this->frameNumberStr());
     //printf("activeMappingStr=%s\n", this->activeMappingStr());
     for (int i = 0; i < 16; i++) {
         //printf("target=%s\n", this->targetStrArray()[i]);
@@ -146,18 +146,4 @@ char *MmwFrameClass::generateData (void)
     }
     
     return s;
-}
-
-void MmwFrameClass::logit (char const *str0_val, char const *str1_val)
-{
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
-    phwangLogit(s, str1_val);
-}
-
-void MmwFrameClass::abend (char const *str0_val, char const *str1_val)
-{
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
-    //phwangAbend(s, str1_val);
 }

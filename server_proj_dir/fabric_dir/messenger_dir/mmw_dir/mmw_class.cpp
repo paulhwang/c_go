@@ -11,7 +11,7 @@
 
 MmwClass::MmwClass (FabricClass *fabric_object_val)
 {
-    this->debug(true, "MmwClass", "start");
+    phwangDebugS(true, "MmwClass::MmwClass", "start");
     
     memset(this, 0, sizeof(*this));
     this->theFabricObject = fabric_object_val;
@@ -24,29 +24,15 @@ MmwClass::MmwClass (FabricClass *fabric_object_val)
 
 MmwClass::~MmwClass (void)
 {
-    this->debug(true, "~MmwClass", "exit");
+    phwangDebugS(true, "MmwClass::~MmwClass", "exit");
 }
 
 char *MmwClass::readInputData (void)
 {
     char *data = (char *) phwangDequeue(this->theInputQueue, "MmwClass");
     if (data) {
-        this->debug(false, "readInputData", "data");
+        phwangDebugS(false, "MmwClass::readInputData", "data");
     }
 
     return data;
-}
-
-void MmwClass::logit (char const *str0_val, char const *str1_val)
-{
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
-    phwangLogit(s, str1_val);
-}
-
-void MmwClass::abend (char const *str0_val, char const *str1_val)
-{
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
-    //phwangAbend(s, str1_val);
 }

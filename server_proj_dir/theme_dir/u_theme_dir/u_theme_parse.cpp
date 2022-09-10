@@ -31,7 +31,7 @@ void UThemeClass::exportedParseFunction (char *data_val)
         return;
     }
 
-    phwangAbend("UThemeClass::exportedParseFunction", data_val);
+    phwangAbendS("UThemeClass::exportedParseFunction", data_val);
 }
 
 void UThemeClass::processSetupBaseResponse (char *data_val)

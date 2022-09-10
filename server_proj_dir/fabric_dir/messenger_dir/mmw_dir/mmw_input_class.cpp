@@ -12,7 +12,7 @@
 
 MmwInputClass::MmwInputClass (MmwClass *mmw_object_val)
 {
-    this->debug(true, "MmwInputClass", "start");
+    phwangDebugS(true, "MmwInputClass::MmwInputClass", "start");
 
     memset(this, 0, sizeof(*this));
     this->theMmwObject = mmw_object_val;
@@ -20,7 +20,7 @@ MmwInputClass::MmwInputClass (MmwClass *mmw_object_val)
 
 MmwInputClass::~MmwInputClass (void)
 {
-    this->debug(true, "~MmwInputClass", "exit");
+    phwangDebugS(true, "MmwInputClass::~MmwInputClass", "exit");
 }
 
 MmwFrameClass *MmwInputClass::readFrame (int *eof_val) {
@@ -106,23 +106,9 @@ int MmwInputClass::openFile (char const *filename_val, char const *mode_val)
     this->theFpInput = fopen(filename_val, mode_val);
     if (this->theFpInput == 0) {
         printf("***errno=%d\n", errno);
-        this->logit("openFile", "cannot open file");
+        phwangLogitS("MmwInputClass::openFile", "cannot open file");
         return -1;
     }
 
     return 0;
-}
-
-void MmwInputClass::logit (char const *str0_val, char const *str1_val)
-{
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
-    phwangLogit(s, str1_val);
-}
-
-void MmwInputClass::abend (char const *str0_val, char const *str1_val)
-{
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
-    //phwangAbend(s, str1_val);
 }

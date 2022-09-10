@@ -17,22 +17,22 @@ void *MmwClassInputThreadFunction (void *fabric_object_val)
 
 void MmwClass::startInputThread (void)
 {
-    this->debug(false, "startInputThread", "");
+    phwangDebugS(false, "MmwClass::startInputThread", "");
 
     int r = pthread_create(&this->theInputThread, 0, MmwClassInputThreadFunction, this);
     if (r) {
-        this->logit("startInputThread", "fail");
+        phwangLogitS("MmwClass::startInputThread", "fail");
         return;
     }
 }
 
 void MmwClass::inputThreadFunction (void)
 {
-    this->debug(false, "inputThreadFunction", "");
+    phwangDebugS(false, "MmwClass::inputThreadFunction", "");
 
     int open_result = this->mmwInputObject()->openFile("../data_dir/mmw_data_dir/mmw_data.txt", "r");
     if (open_result == -1) {
-        this->logit("openFile", "cannot open file");
+        phwangLogitS("MmwClass::inputThreadFunction", "cannot open file");
         return;
     }
 

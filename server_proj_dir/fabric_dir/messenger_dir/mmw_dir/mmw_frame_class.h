@@ -17,7 +17,6 @@ class MmwFrameClass {
     char **theLineArray;
     int theFrameType;
 
-
     int theFrameNumberIndex;
     int theFrameNumber;
     char *frameNumberStr(void) { return this->theLineArray[0] + this->theFrameNumberIndex; }
@@ -33,10 +32,6 @@ class MmwFrameClass {
     void parseNormalFrame(void);
     void parseIdleFrame(void);
     void parseActiveFrame(void);
-
-    void debug(int on_off_val, char const *str0_val, char const *str1_val) { if (on_off_val) this->logit(str0_val, str1_val); };
-    void logit(char const *str0_val, char const *str1_val);
-    void abend(char const *str0_val, char const *str1_val);
 
   public:
     int arraySize(void) { return this->theArraySize; }

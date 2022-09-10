@@ -16,12 +16,12 @@ RoomClass::RoomClass (void *list_mgr_object_val, ThemeClass *theme_object_val, c
     this->theGroupArrayMgr = phwangArrayMgrMalloc(this->objectName(), 's', 10);
     this->insertGroup(group_id_index_val);
 
-    this->debug(true, "RoomClass", this->roomIdIndex());
+    phwangDebugS(true, "RoomClass::RoomClass", this->roomIdIndex());
 }
 
 RoomClass::~RoomClass (void)
 {
-    this->debug(true, "~MainClass", "exit");
+    phwangDebugS(true, "RoomClass::~RoomClass", "exit");
 }
 
 void RoomClass::insertGroup (char *group_id_index_val)
@@ -38,18 +38,4 @@ void RoomClass::removeGroup (char *group_id_index_val)
     memcpy(buf, group_id_index_val, GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE);
     buf[GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE] = 0;
     phwangArrayMgrRemoveElement(this->theGroupArrayMgr, buf);
-}
-
-void RoomClass::logit (char const* str0_val, char const* str1_val)
-{
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
-    phwangLogit(s, str1_val);
-}
-
-void RoomClass::abend (char const* str0_val, char const* str1_val)
-{
-    char s[LOGIT_BUF_SIZE];
-    sprintf(s, "%s::%s", this->objectName(), str0_val);
-    phwangAbend(s, str1_val);
 }
