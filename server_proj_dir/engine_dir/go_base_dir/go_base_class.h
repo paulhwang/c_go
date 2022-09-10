@@ -7,7 +7,7 @@
 #pragma once
 
 #include "../../../phwang_dir/phwang.h"
-#include "../../protocol_dir/room_mgr_protocol.h"
+#include "../../protocol_dir/ft_command_class.h"
 #include "../../../phwang_dir/list_mgr_dir/list_entry_class.h"
 #include "go_define.h"
 #include "go_board_class.h"
@@ -23,7 +23,7 @@ class EngineClass;
 
 class GoBaseClass : public ListEntryClass {
     EngineClass *theEngineObject;
-    char theRoomIdIndex[ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE + 4];
+    char theRoomIdIndex[FT_Command_Class::ROOM_ID_INDEX_SIZE + 4];
 
     GoFightClass *theFightObject;
     GoBoardClass *theBoardObject;
@@ -44,7 +44,7 @@ public:
     GoGameClass *gameObject(void) {return this->theGameObject;}
     char *roomIdIndex(void) {return this->theRoomIdIndex;}
     char *goBaseIdIndex(void) {return this->entryIdIndex();}
-    void setRoomIdIndex(char const *room_id_index_val) {memcpy(this->theRoomIdIndex, room_id_index_val, ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE); this->theRoomIdIndex[ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE] = 0;}
+    void setRoomIdIndex(char const *room_id_index_val) {memcpy(this->theRoomIdIndex, room_id_index_val, FT_Command_Class::ROOM_ID_INDEX_SIZE); this->theRoomIdIndex[FT_Command_Class::ROOM_ID_INDEX_SIZE] = 0;}
 
     void goBaseLogit(char const *str0_val, char const *str1_val) {phwangLogitS(str0_val, str1_val);}
     void goBaseAbend(char const *str0_val, char const *str1_val) {phwangAbendS(str0_val, str1_val);}

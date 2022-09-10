@@ -6,8 +6,8 @@
 
 #pragma once
 #include "../../phwang_dir/list_mgr_dir/list_entry_class.h"
+#include "../protocol_dir/ft_command_class.h"
 #include "../protocol_dir/group_mgr_protocol.h"
-#include "../protocol_dir/room_mgr_protocol.h"
 #include "../protocol_dir/session_mgr_protocol.h"
 
 class SessionClass;
@@ -16,7 +16,7 @@ class FabricClass;
 class GroupClass : public ListEntryClass {
 #define GROUP_CLASS_SESSION_ARRAY_SIZE 32
     FabricClass *theFabricObject;
-    char theRoomIdIndex[ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE + 4];
+    char theRoomIdIndex[FT_Command_Class::ROOM_ID_INDEX_SIZE + 4];
     void *theSessionArrayMgr;
     SessionClass **theSessionTableArray;
 
@@ -31,7 +31,7 @@ public:
     SessionClass *sessionTableArray(int index_val) {return this->theSessionTableArray[index_val];}
     void setSessionTableArray(SessionClass **val) {this->theSessionTableArray = val;}
 
-    void setRoomIdIndex(char *val) {memcpy(this->theRoomIdIndex, val, ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);}
+    void setRoomIdIndex(char *val) {memcpy(this->theRoomIdIndex, val, FT_Command_Class::ROOM_ID_INDEX_SIZE);}
     void insertSession(SessionClass *session_object_val) {phwangArrayMgrInsertElement(this->theSessionArrayMgr, session_object_val);}
     void removeSession(SessionClass *session_object_val) {phwangArrayMgrRemoveElement(this->theSessionArrayMgr, session_object_val);}
 };

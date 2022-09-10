@@ -10,7 +10,6 @@
 #include "../../protocol_dir/ft_command_class.h"
 #include "../../protocol_dir/session_mgr_protocol.h"
 #include "../../protocol_dir/group_mgr_protocol.h"
-#include "../../protocol_dir/room_mgr_protocol.h"
 #include "../../protocol_dir/fe_command_class.h"
 #include "d_fabric_class.h"
 #include "../fabric_class.h"
@@ -696,8 +695,8 @@ void DFabricClass::processPutSessionDataRequest (void *tp_transfer_object_val, c
     /* transfer data up */
     char *uplink_data = data_ptr = (char *) phwangMalloc(FECommandClass::DOWNLINK_DATA_BUFFER_SIZE, MallocClass::PUT_SESSION_DATA0);
     *data_ptr++ = FT_Command_Class::PUT_ROOM_DATA_COMMAND;
-    memcpy(data_ptr, room, ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);
-    data_ptr += ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE;
+    memcpy(data_ptr, room, FT_Command_Class::ROOM_ID_INDEX_SIZE);
+    data_ptr += FT_Command_Class::ROOM_ID_INDEX_SIZE;
     strcpy(data_ptr, data_val);
     this->theFabricObject->uFabricObject()->transmitFunction(uplink_data);
 

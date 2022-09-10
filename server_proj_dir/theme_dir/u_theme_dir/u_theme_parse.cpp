@@ -8,7 +8,6 @@
 #include "../../../phwang_dir/malloc_dir/malloc_class.h"
 #include "../../protocol_dir/te_command_class.h"
 #include "../../protocol_dir/ft_command_class.h"
-#include "../../protocol_dir/room_mgr_protocol.h"
 #include "../../protocol_dir/group_mgr_protocol.h"
 #include "u_theme_class.h"
 #include "../theme_class.h"
@@ -50,18 +49,18 @@ void UThemeClass::processSetupBaseResponse (char *data_val)
         return;
     }
 
-    data_val += ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE;
+    data_val += FT_Command_Class::ROOM_ID_INDEX_SIZE;
     room->setBaseIdIndex(data_val);
 
-    downlink_data = data_ptr = (char *) phwangMalloc(ROOM_MGR_DATA_BUFFER_SIZE + 4, MallocClass::UTHEME_BASE);
+    downlink_data = data_ptr = (char *) phwangMalloc(FT_Command_Class::FT_DATA_BUFFER_SIZE + 4, MallocClass::UTHEME_BASE);
     *data_ptr++ = FT_Command_Class::SETUP_ROOM_RESPONSE;
 
     room->setGroupTableArray((char **) phwangArrayMgrGetArrayTable(room->groupArrayMgr(), &group_array_size));
     memcpy(data_ptr, room->groupTableArray(0), GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE);
     data_ptr += GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE;
 
-    memcpy(data_ptr, room->roomIdIndex(), ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE);
-    data_ptr += ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE;
+    memcpy(data_ptr, room->roomIdIndex(), FT_Command_Class::ROOM_ID_INDEX_SIZE);
+    data_ptr += FT_Command_Class::ROOM_ID_INDEX_SIZE;
     *data_ptr = 0;
     this->theThemeObject->dThemeObject()->transmitFunction(downlink_data);
 }
@@ -79,12 +78,12 @@ void UThemeClass::processPutBaseDataResponse (char *data_val)
         phwangAbendS("UThemeClass::processPutBaseDataResponse", "null room");
         return;
     }
-    data_val += ROOM_MGR_PROTOCOL_ROOM_ID_INDEX_SIZE;
+    data_val += FT_Command_Class::ROOM_ID_INDEX_SIZE;
 
     room->setGroupTableArray((char **) phwangArrayMgrGetArrayTable(room->groupArrayMgr(), &group_array_size));
     for (int i = 0; i < group_array_size; i++) {
         if (room->groupTableArray(i)) {
-            downlink_data = data_ptr = (char *) phwangMalloc(ROOM_MGR_DATA_BUFFER_SIZE + 4, MallocClass::UTHEME_BASE_PUT_BASE_DATA);
+            downlink_data = data_ptr = (char *) phwangMalloc(FT_Command_Class::FT_DATA_BUFFER_SIZE + 4, MallocClass::UTHEME_BASE_PUT_BASE_DATA);
             *data_ptr++ = FT_Command_Class::PUT_ROOM_DATA_RESPONSE;
             memcpy(data_ptr, room->groupTableArray(i), GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE);
             data_ptr += GROUP_MGR_PROTOCOL_GROUP_ID_INDEX_SIZE;

@@ -5,6 +5,7 @@
 */
 
 #include "../../phwang_dir/phwang.h"
+#include "../protocol_dir/ft_command_class.h"
 #include "theme_class.h"
 #include "u_theme_dir/u_theme_class.h"
 #include "d_theme_dir/d_theme_class.h"
@@ -17,7 +18,7 @@ ThemeClass::ThemeClass (int debug_code_val)
     
     this->theUThemeObject = new UThemeClass(this);
     this->theDThemeObject = new DThemeClass(this);
-    this->theRoomListMgrObject = phwangListMgrMalloc("ROOM", ROOM_MGR_PROTOCOL_ROOM_ID_SIZE, ROOM_MGR_PROTOCOL_ROOM_INDEX_SIZE, 700);
+    this->theRoomListMgrObject = phwangListMgrMalloc("ROOM", FT_Command_Class::ROOM_ID_SIZE, FT_Command_Class::ROOM_INDEX_SIZE, 700);
 
     phwangDebugS(false, "ThemeClass::ThemeClass", "init");
 }
