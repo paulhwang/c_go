@@ -17,28 +17,26 @@
 
 void UThemeClass::exportedParseFunction (char *data_val)
 {
-    if (1) { /* debug */
-        phwangLogitS("UThemeClass::exportedParseFunction", data_val);
-    }
+    phwangDebugS(true, "UThemeClass::exportedParseFunction", data_val);
 
-    if (*data_val == TE_Command_Class::SETUP_BASE_RESPONSE) {
-        this->processSetupBaseResponse(data_val + 1);
-        return;
-    }
+    switch (*data_val) {
+        case TE_Command_Class::SETUP_BASE_RESPONSE:
+            this->processSetupBaseResponse(data_val + 1);
+            return;
 
-    if (*data_val == TE_Command_Class::PUT_BASE_DATA_RESPONSE) {
-        this->processPutBaseDataResponse(data_val + 1);
-        return;
-    }
+        case TE_Command_Class::PUT_BASE_DATA_RESPONSE:
+            this->processPutBaseDataResponse(data_val + 1);
+            return;
 
-    phwangAbendS("UThemeClass::exportedParseFunction", data_val);
+        default:
+            phwangAbendS("UThemeClass::exportedParseFunction", data_val);
+            return;
+    }
 }
 
 void UThemeClass::processSetupBaseResponse (char *data_val)
 {
-    if (1) { /* debug */
-        phwangLogitS("UThemeClass::processSetupBaseResponse", data_val);
-    }
+    phwangDebugS(true, "UThemeClass::processSetupBaseResponse", data_val);
 
     char *room_id_index_val = data_val;
 
@@ -74,9 +72,7 @@ void UThemeClass::processPutBaseDataResponse (char *data_val)
     char *data_ptr;
     int group_array_size;
 
-    if (0) { /* debug */
-        phwangLogitS("UThemeClass::processPutBaseDataResponse", data_val);
-    }
+    phwangDebugS(false, "UThemeClass::processPutBaseDataResponse", data_val);
 
     RoomClass *room = this->theThemeObject->searchRoom(data_val);
     if (!room) {

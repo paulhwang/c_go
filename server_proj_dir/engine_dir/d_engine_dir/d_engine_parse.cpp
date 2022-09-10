@@ -32,9 +32,7 @@ void DEngineClass::exportedParseFunction (char *data_val)
 
 void DEngineClass::processSetupBase (char const *data_val)
 {
-    if (1) { /* debug */
-        phwangLogitS("DEngineClass::processSetupBase", data_val);
-    }
+    phwangDebugS(true, "DEngineClass::processSetupBase", data_val);
 
     char const *room_id_index_val = data_val;
 
@@ -63,9 +61,7 @@ void DEngineClass::processSetupBase (char const *data_val)
 
 void DEngineClass::processPutBaseData (char const *data_val)
 {
-    if (1) { /* debug */
-        phwangLogitS("DEngineClass::processPutBaseData", data_val);
-    }
+    phwangDebugS(true, "DEngineClass::processPutBaseData", data_val);
 
     GoBaseClass *base_object = this->theEngineObject->searchGoBase(data_val);
     if (!base_object) {
