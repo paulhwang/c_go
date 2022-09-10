@@ -140,18 +140,36 @@ void phwangDebugWSISI (int on_off_val, char const *func_name_val, char const *wh
 
 void phwangAbendS (char const *func_name_val, char const *str1_val)
 {
-    printf("*****ABEND******************************************\n");
+    printf("*****ABEND********************************************************************\n");
     printf("%s() %s\n", func_name_val, str1_val);
-    printf("*****ABEND******************************************\n");
+    printf("*****ABEND********************************************************************\n");
     int *junk = 0;
     *junk = 0;
 }
 
 void phwangAbendWS (char const *func_name_val, char const *who_val, char const *str1_val)
 {
-    printf("*****ABEND******************************************\n");
+    printf("*****ABEND********************************************************************\n");
     printf("%s:%s() %s\n", func_name_val, who_val, str1_val);
-    printf("*****ABEND******************************************\n");
+    printf("*****ABEND********************************************************************\n");
+    int *junk = 0;
+    *junk = 0;
+}
+
+void phwangAbendSS (char const *func_name_val, char const *str1_val, char const *str2_val)
+{
+    printf("*****ABEND********************************************************************\n");
+    printf("%s() %s %s\n", func_name_val, str1_val, str2_val);
+    printf("*****ABEND********************************************************************\n");
+    int *junk = 0;
+    *junk = 0;
+}
+
+void phwangAbendWSS (char const *func_name_val, char const *who_val, char const *str1_val, char const *str2_val)
+{
+    printf("*****ABEND********************************************************************\n");
+    printf("%s:%s() %s %\n", func_name_val, who_val, str1_val, str2_val);
+    printf("*****ABEND********************************************************************\n");
     int *junk = 0;
     *junk = 0;
 }

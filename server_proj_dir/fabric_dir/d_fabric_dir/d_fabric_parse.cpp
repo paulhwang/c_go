@@ -510,6 +510,15 @@ void DFabricClass::processSetupSessionRequest (void *tp_transfer_object_val, cha
     phwangDebugS(true, "DFabricClass::processSetupSessionRequest", data_val);
 
     char *theme_info_val = data_val;
+
+    switch (*theme_info_val) {
+        case 'G':
+            break;
+
+        default:
+            phwangAbendSS("DFabricClass::processSetupSessionRequest", "theme not supported", theme_info_val);
+    }
+
     int theme_len = phwangDecodeNumber(theme_info_val + 1, 3);
     char *his_name_val = theme_info_val + theme_len;
 
