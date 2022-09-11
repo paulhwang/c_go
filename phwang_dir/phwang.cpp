@@ -196,6 +196,11 @@ void phwangTpTransmit (void *tp_transfer_object_val, char *data_val)
     thePhwangObject->netRootObject()->tpTransmit(tp_transfer_object_val, data_val);
 }
 
+int phwangGetPortObjectIndex (void *port_object_val)
+{
+    return thePhwangObject->netRootObject()->getPortObjectIndex(port_object_val);
+}
+
 int phwangReceiveThreadCount (void)
 {
     return thePhwangObject->netRootObject()->receiveThreadCount();

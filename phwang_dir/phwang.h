@@ -129,5 +129,6 @@ void *phwangTpConnect(
 void phwangFreeTcpServer(void *tcp_server_object_val);
 void phwangFreeTpTransfer(void *tp_transfer_object_val);
 void phwangTpTransmit(void *tp_transfer_object_val, char *data_val);
+int phwangGetPortObjectIndex(void *port_object_val);
 int  phwangReceiveThreadCount(void);
 void phwangIncrementReceiveThreadCount(void);

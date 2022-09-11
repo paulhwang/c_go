@@ -101,3 +101,13 @@ void NetRootClass::tpTransmit (void *tp_transfer_object_val, char *data_val)
 
     ((PortClass *) tp_transfer_object_val)->exportTransmitData(data_val);
 }
+
+int NetRootClass::getPortObjectIndex (void *port_object_val)
+{
+    if (!port_object_val) {
+        phwangAbendS("NetRootClass::getPortObjectIndex", "null port_object_val");
+        return 0;
+    }
+
+    return ((PortClass *) port_object_val)->index();
+}
