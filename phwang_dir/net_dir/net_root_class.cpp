@@ -79,12 +79,12 @@ void NetRootClass::freeTpTransfer (void *tp_transfer_object_val)
         return;
     }
 
-    if (strcmp(((TpTransferClass *) tp_transfer_object_val)->objectName(), "TpTransferClass")) {
+    if (strcmp(((PortClass *) tp_transfer_object_val)->objectName(), "TpTransferClass")) {
         phwangAbendS("phwangFreeTpTransfer", "wrong object");
         return;
     }
 
-    delete (TpTransferClass *) tp_transfer_object_val;
+    delete (PortClass *) tp_transfer_object_val;
 }
 
 void NetRootClass::tpTransmit (void *tp_transfer_object_val, char *data_val)
@@ -94,10 +94,10 @@ void NetRootClass::tpTransmit (void *tp_transfer_object_val, char *data_val)
         return;
     }
 
-    if (strcmp(((TpTransferClass *) tp_transfer_object_val)->objectName(), "TpTransferClass")) {
+    if (strcmp(((PortClass *) tp_transfer_object_val)->objectName(), "PortClass")) {
         phwangAbendS("NetRootClass::tpTransmit", "wrong object");
         return;
     }
 
-    ((TpTransferClass *) tp_transfer_object_val)->exportTransmitData(data_val);
+    ((PortClass *) tp_transfer_object_val)->exportTransmitData(data_val);
 }

@@ -1,7 +1,7 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: tp_transfer_transmit.cpp
+  File name: port_class_transmit.cpp
 */
 
 #include <stdio.h>
@@ -12,38 +12,38 @@
 #include "../../../phwang_dir/malloc_dir/malloc_class.h"
 #include "port_class.h"
 
-void TpTransferClass::exportTransmitData (void *data_val)
+void PortClass::exportTransmitData (void *data_val)
 {
     phwangEnqueue(this->theTransmitQueue, data_val);
 }
 
-void *TpTransferClass::transmitThreadFunction (int socket_val)
+void *PortClass::transmitThreadFunction (int socket_val)
 {
     while (1) {
-        char *data = (char *) phwangDequeue(this->theTransmitQueue, "TpTransferClass::transmitThreadFunction()");
+        char *data = (char *) phwangDequeue(this->theTransmitQueue, "PortClass::transmitThreadFunction()");
         if (data) {
-            phwangDebugWSS(false, "TpTransferClass::transmitThreadFunction", this->theWho, "data=", data);
+            phwangDebugWSS(false, "PortClass::transmitThreadFunction", this->theWho, "data=", data);
 
             int length = strlen(data);
             char *ptr;
-            char *buf = ptr = (char *) malloc(length + (1 + TpTransferClass::DATA_LENGTH_SIZE + 1 + 1) + 32);
+            char *buf = ptr = (char *) malloc(length + (1 + PortClass::DATA_LENGTH_SIZE + 1 + 1) + 32);
 
             if (length < 1400) {
                 *ptr++ = '{';
-                phwangEncodeNumber(ptr, length, TpTransferClass::DATA_LENGTH_SIZE);
-                ptr += TpTransferClass::DATA_LENGTH_SIZE;
+                phwangEncodeNumber(ptr, length, PortClass::DATA_LENGTH_SIZE);
+                ptr += PortClass::DATA_LENGTH_SIZE;
                 strcpy(ptr, data);
                 ptr += length;
                 *ptr++ = '}';
                 *ptr = 0;
 
-                phwangDebugWS(false, "TpTransferClass::transmitThreadFunction", this->theWho, buf);
+                phwangDebugWS(false, "PortClass::transmitThreadFunction", this->theWho, buf);
 
                 send(socket_val, buf , strlen(buf) , 0);
             }
             else {
-                phwangDebugWSI(true, "TpTransferClass::transmitThreadFunction", this->theWho, "length=", length);
-                phwangAbendWS("TpTransferClass::transmitThreadFunction", this->theWho, "*****LENGTH TOO BIG*****");
+                phwangDebugWSI(true, "PortClass::transmitThreadFunction", this->theWho, "length=", length);
+                phwangAbendWS("PortClass::transmitThreadFunction", this->theWho, "*****LENGTH TOO BIG*****");
             }
 
             phwangFree(data);
@@ -55,19 +55,19 @@ void *TpTransferClass::transmitThreadFunction (int socket_val)
 void *tpTransferTransmitThreadFunction (void *data_val)
 {
     int socket = ((tp_transfer_thread_parameter *) data_val)->socket;
-    TpTransferClass *tp_transfer_object = ((tp_transfer_thread_parameter *) data_val)->tp_transfer_object;
+    PortClass *tp_transfer_object = ((tp_transfer_thread_parameter *) data_val)->tp_transfer_object;
     phwangFree(data_val);
 
     return tp_transfer_object->transmitThreadFunction(socket);
 }
 
-void TpTransferClass::startTransmitThread (int socket_val)
+void PortClass::startTransmitThread (int socket_val)
 {
     tp_transfer_thread_parameter *data = (tp_transfer_thread_parameter *) phwangMalloc(sizeof(tp_transfer_thread_parameter), MallocClass::startTransmitThread);
     data->socket = socket_val;
     data->tp_transfer_object = this;
 
-    phwangDebugWS(false, "TpTransferClass::startTransmitThread", this->theWho, "");
+    phwangDebugWS(false, "PortClass::startTransmitThread", this->theWho, "");
 
     int r = phwangPthreadCreate(&this->theTransmitThread, 0, tpTransferTransmitThreadFunction, data);
     if (r) {

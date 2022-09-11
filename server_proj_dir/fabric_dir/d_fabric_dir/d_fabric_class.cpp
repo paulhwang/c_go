@@ -39,13 +39,13 @@ void dFabricTpServerAcceptFunction (void *d_fabric_object_val, void *tp_transfer
 
 void DFabricClass::exportedNetAcceptFunction (void *tp_transfer_object_val)
 {
-    send(((TpTransferClass *)tp_transfer_object_val)->socket(), this->timeStampString() , strlen(this->timeStampString()) , 0);
+    send(((PortClass *)tp_transfer_object_val)->socket(), this->timeStampString() , strlen(this->timeStampString()) , 0);
 }
 
 void dFabricTpReceiveDataFunction (void *tp_transfer_object_val, void *d_fabric_object_val, void *data_val) {
     char *data_str_val = (char *) data_val;
     if (data_str_val[1] != FE_CommandClass::GET_LINK_DATA_COMMAND) {
-        phwangDebugSISI(false,"Golbal::dFabricTpReceiveDataFunction", (char *) data_val, 99999, "index", ((TpTransferClass *) tp_transfer_object_val)->index());
+        phwangDebugSISI(false,"Golbal::dFabricTpReceiveDataFunction", (char *) data_val, 99999, "index", ((PortClass *) tp_transfer_object_val)->index());
     }
 
     ((DFabricClass *) d_fabric_object_val)->exportedParseFunction(tp_transfer_object_val, (char *) data_val);

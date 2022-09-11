@@ -1,7 +1,7 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: tp_transfer_class.h
+  File name: port_class.h
 */
 
 #pragma once
@@ -10,7 +10,7 @@
 
 #define TP_PHWANG_LOGO "phwang168"
 
-class TpTransferClass {
+class PortClass {
 public:
     const static int CLIENT_INDEX  = 0;
     const static int SERVER_INDEX  = 1;
@@ -38,7 +38,7 @@ private:
     void *theTransmitQueue;
     void *theReceiveQueue;
 
-    void setMaxDataSize(void) {this->theMaxDataSize = 1; for (int i = 0; i < TpTransferClass::DATA_LENGTH_SIZE; i++) this->theMaxDataSize *= 10; this->theMaxDataSize -= 1;}
+    void setMaxDataSize(void) {this->theMaxDataSize = 1; for (int i = 0; i < PortClass::DATA_LENGTH_SIZE; i++) this->theMaxDataSize *= 10; this->theMaxDataSize -= 1;}
     void startReceiveThread(int socket_val);
     void startReceiveThread2(void);
     void startTransmitThread(int socket_val);
@@ -46,9 +46,9 @@ private:
     int maxDataSize(void) {return this->theMaxDataSize;};
 
 public:
-    TpTransferClass(int socket_val, void (*receive_callback_val)(void *, void *, void *), void *receive_object_val, char const *who_val);
-    ~TpTransferClass(void);
-    char const *objectName(void) {return "TpTransferClass";}
+    PortClass(int socket_val, void (*receive_callback_val)(void *, void *, void *), void *receive_object_val, char const *who_val);
+    ~PortClass(void);
+    char const *objectName(void) {return "PortClass";}
     static int objectCount(void);
 
     /* callback */
@@ -66,7 +66,7 @@ public:
 };
 
 typedef struct {
-    TpTransferClass *tp_transfer_object;
+    PortClass *tp_transfer_object;
     int socket;
 } tp_transfer_thread_parameter;
 

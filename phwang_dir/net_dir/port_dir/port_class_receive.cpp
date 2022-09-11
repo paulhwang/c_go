@@ -1,7 +1,7 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: tp_transfer_receive.cpp
+  File name: port_class_receive.cpp
 */
 
 #include <stdlib.h>
@@ -14,26 +14,26 @@
 #include "../../../phwang_dir/malloc_dir/malloc_class.h"
 #include "port_class.h"
 
-void *TpTransferClass::receiveThreadFunction (int socket_val)
+void *PortClass::receiveThreadFunction (int socket_val)
 {
     phwangIncrementReceiveThreadCount();
 
     while (1) {
-        char *data = (char *) phwangMalloc(TpTransferClass::RECEIVE_BUFFER_SIZE + 32, MallocClass::receiveThreadFunction);
+        char *data = (char *) phwangMalloc(PortClass::RECEIVE_BUFFER_SIZE + 32, MallocClass::receiveThreadFunction);
 
-        int length = read(socket_val, data, TpTransferClass::RECEIVE_BUFFER_SIZE);
+        int length = read(socket_val, data, PortClass::RECEIVE_BUFFER_SIZE);
         if (length > 0) {
             data[length] = 0;
             
-            phwangDebugWSISS(false, "TpTransferClass::receiveThreadFunction", this->theWho, "len=", length, " data=", data);
+            phwangDebugWSISS(false, "PortClass::receiveThreadFunction", this->theWho, "len=", length, " data=", data);
 
             if ((*data != '{') && (*data != '[')) {
                 if (1) { /* debug */
                     char s[2000];
                     sprintf(s, "(%s) data=%s len=%d", this->theWho, data, length);
-                    phwangDebugWS(true, "TpTransferClass::receiveThreadFunction", this->theWho, s);
+                    phwangDebugWS(true, "PortClass::receiveThreadFunction", this->theWho, s);
                 }
-                phwangAbendS("TpTransferClass::receiveThreadFunction: wrong header", data);
+                phwangAbendS("PortClass::receiveThreadFunction: wrong header", data);
                 phwangFree(data);
                 continue;
             }
@@ -51,23 +51,23 @@ void *TpTransferClass::receiveThreadFunction (int socket_val)
 void *tpTranferReceiveThreadFunction (void *data_val)
 {
     int socket = ((tp_transfer_thread_parameter *) data_val)->socket;
-    TpTransferClass *tp_transfer_object = ((tp_transfer_thread_parameter *) data_val)->tp_transfer_object;
+    PortClass *tp_transfer_object = ((tp_transfer_thread_parameter *) data_val)->tp_transfer_object;
     phwangFree(data_val);
 
     return tp_transfer_object->receiveThreadFunction(socket);
 }
 
-void TpTransferClass::startReceiveThread (int socket_val)
+void PortClass::startReceiveThread (int socket_val)
 {
     tp_transfer_thread_parameter *data = (tp_transfer_thread_parameter *) phwangMalloc(sizeof(tp_transfer_thread_parameter), MallocClass::tpTranferReceiveThreadFunction);
     data->socket = socket_val;
     data->tp_transfer_object = this;
 
-    phwangDebugWS(false, "TpTransferClass::startReceiveThread", this->theWho, "");
+    phwangDebugWS(false, "PortClass::startReceiveThread", this->theWho, "");
 
     int r = pthread_create(&this->theReceiveThread, 0, tpTranferReceiveThreadFunction, data);
     if (r) {
-        printf("Error - TpTransferClass::startReceiveThread() return code: %d\n", r);
+        printf("Error - PortClass::startReceiveThread() return code: %d\n", r);
         return;
     }
 }

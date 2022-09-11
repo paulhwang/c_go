@@ -73,7 +73,7 @@ void *TcpConnectClass::tcpConnect (
 
     send(s, TP_PHWANG_LOGO , strlen(TP_PHWANG_LOGO) , 0);
 
-    TpTransferClass *tp_transfer_object = new TpTransferClass(s, receive_callback_val, receive_object_val, who_val);
-    tp_transfer_object->startThreads(TpTransferClass::CLIENT_INDEX);
+    PortClass *tp_transfer_object = new PortClass(s, receive_callback_val, receive_object_val, who_val);
+    tp_transfer_object->startThreads(PortClass::CLIENT_INDEX);
     return tp_transfer_object;
 }

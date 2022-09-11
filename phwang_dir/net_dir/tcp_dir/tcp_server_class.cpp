@@ -36,7 +36,7 @@ TcpServerClass::TcpServerClass (
     this->theAcceptCallbackParameter = accept_callback_parameter_val;
     this->theReceiveCallbackParameter = receive_callback_parameter_val;
     this->theWho = who_val;
-    this->theTpTransferObjectIndex = TpTransferClass::SERVER_INDEX;
+    this->theTpTransferObjectIndex = PortClass::SERVER_INDEX;
 
     phwangDebugWS(false, "TcpServerClass::TcpServerClass", this->theWho, "init");
 }
@@ -134,7 +134,7 @@ void *TcpServerClass::serverThreadFunction (void *data_val)
             continue;
         }
 
-        TpTransferClass *tp_transfer_object = new TpTransferClass(data_socket, this->theReceiveCallbackFunc, this->theCallerObject, this->theWho);
+        PortClass *tp_transfer_object = new PortClass(data_socket, this->theReceiveCallbackFunc, this->theCallerObject, this->theWho);
         tp_transfer_object->startThreads(this->theTpTransferObjectIndex);
         this->theTpTransferObjectIndex++;
         this->theAcceptCallbackFunc(this->theCallerObject, tp_transfer_object);
