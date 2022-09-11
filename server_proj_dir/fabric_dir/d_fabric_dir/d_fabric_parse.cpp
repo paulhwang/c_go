@@ -596,9 +596,9 @@ void DFabricClass::mallocRoom (GroupClass *group_val, char *theme_info_val)
 {
     char *data_ptr;
     char *uplink_data = data_ptr = (char *) phwangMalloc(FECommandClass::DOWNLINK_DATA_BUFFER_SIZE, MallocClass::MALLOC_ROOM);
-    *data_ptr++ = FT_Command_Class::SETUP_ROOM_COMMAND;
-    memcpy(data_ptr, group_val->groupIdIndex(), FT_Command_Class::GROUP_ID_INDEX_SIZE);
-    data_ptr += FT_Command_Class::GROUP_ID_INDEX_SIZE;
+    *data_ptr++ = FT_CommandClass::SETUP_ROOM_COMMAND;
+    memcpy(data_ptr, group_val->groupIdIndex(), FT_CommandClass::GROUP_ID_INDEX_SIZE);
+    data_ptr += FT_CommandClass::GROUP_ID_INDEX_SIZE;
     strcpy(data_ptr, theme_info_val);
     this->theFabricObject->uFabricObject()->transmitFunction(uplink_data);
 }
@@ -692,9 +692,9 @@ void DFabricClass::processPutSessionDataRequest (void *tp_transfer_object_val, c
 
     /* transfer data up */
     char *uplink_data = data_ptr = (char *) phwangMalloc(FECommandClass::DOWNLINK_DATA_BUFFER_SIZE, MallocClass::PUT_SESSION_DATA0);
-    *data_ptr++ = FT_Command_Class::PUT_ROOM_DATA_COMMAND;
-    memcpy(data_ptr, room, FT_Command_Class::ROOM_ID_INDEX_SIZE);
-    data_ptr += FT_Command_Class::ROOM_ID_INDEX_SIZE;
+    *data_ptr++ = FT_CommandClass::PUT_ROOM_DATA_COMMAND;
+    memcpy(data_ptr, room, FT_CommandClass::ROOM_ID_INDEX_SIZE);
+    data_ptr += FT_CommandClass::ROOM_ID_INDEX_SIZE;
     strcpy(data_ptr, data_val);
     this->theFabricObject->uFabricObject()->transmitFunction(uplink_data);
 

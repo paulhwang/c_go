@@ -26,7 +26,7 @@ FabricClass::FabricClass (int debug_code_val)
     this->theDFabricObject = new DFabricClass(this);
     this->theNameListObject = new NameListClass(this);
     this->theLinkListMgrObject = phwangListMgrMalloc("LINK", FECommandClass::LINK_ID_SIZE, FECommandClass::LINK_INDEX_SIZE, 100);
-    this->theGroupListMgrObject = phwangListMgrMalloc("GROUP", FT_Command_Class::GROUP_ID_SIZE, FT_Command_Class::GROUP_INDEX_SIZE, 500);
+    this->theGroupListMgrObject = phwangListMgrMalloc("GROUP", FT_CommandClass::GROUP_ID_SIZE, FT_CommandClass::GROUP_INDEX_SIZE, 500);
     this->startWatchDogThread();
 
     phwangDebugS(false, "FabricClass::FabricClass", "init");

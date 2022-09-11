@@ -19,11 +19,11 @@ void UFabricClass::exportedParseFunction (char *data_val)
     phwangDebugS(true, "UFabricClass::exportedParseFunction", data_val);
 
     switch (*data_val) {
-        case FT_Command_Class::SETUP_ROOM_RESPONSE:
+        case FT_CommandClass::SETUP_ROOM_RESPONSE:
             this->processSetupRoomResponse(data_val + 1);
             return;
 
-        case FT_Command_Class::PUT_ROOM_DATA_RESPONSE:
+        case FT_CommandClass::PUT_ROOM_DATA_RESPONSE:
             this->processPutRoomDataResponse(data_val + 1);
             return;
 
@@ -45,7 +45,7 @@ void UFabricClass::processSetupRoomResponse (char *data_val)
 
     GroupClass *group = this->theFabricObject->searchGroup(group_id_index_val);
     if (group) {
-        group->setRoomIdIndex(group_id_index_val + FT_Command_Class::GROUP_ID_INDEX_SIZE);
+        group->setRoomIdIndex(group_id_index_val + FT_CommandClass::GROUP_ID_INDEX_SIZE);
         group->setSessionTableArray((SessionClass **) phwangArrayMgrGetArrayTable(group->sessionArrayMgr(), &session_array_size));
         for (int i = 0; i < session_array_size; i++) {
             SessionClass *session = group->sessionTableArray(0);
@@ -67,7 +67,7 @@ void UFabricClass::processPutRoomDataResponse (char *data_val)
         phwangAbendS("UFabricClass::processPutRoomDataResponse", "null group");
         return;
     }
-    data_val += FT_Command_Class::GROUP_ID_INDEX_SIZE;
+    data_val += FT_CommandClass::GROUP_ID_INDEX_SIZE;
 
     group->setSessionTableArray((SessionClass **) phwangArrayMgrGetArrayTable(group->sessionArrayMgr(), &session_array_size));
     for (int i = 0; i < session_array_size; i++) {

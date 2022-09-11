@@ -6,7 +6,7 @@
 
 #pragma once
 
-class FT_Command_Class {
+class FT_CommandClass {
 public:
     int const static FT_DATA_BUFFER_SIZE = 512;
 
