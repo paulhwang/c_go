@@ -690,6 +690,10 @@ void DFabricClass::processPutSessionDataRequest (void *tp_transfer_object_val, c
     char *data_ptr;
 
     /* transfer data up */
+    if (strlen(data_val) > FT_CommandClass::FT_UL_DATA_BUF_SIZE) {
+        phwangAbendSI("DFabricClass::processPutSessionDataRequest", "buf_size", strlen(data_val));
+    }
+
     char *uplink_data = data_ptr = (char *) phwangMalloc(FT_CommandClass::FT_UL_DATA_BUF_SIZE, MallocClass::PUT_SESSION_DATA0);
     *data_ptr++ = FT_CommandClass::PUT_ROOM_DATA_COMMAND;
     memcpy(data_ptr, room, FT_CommandClass::ROOM_ID_INDEX_SIZE);

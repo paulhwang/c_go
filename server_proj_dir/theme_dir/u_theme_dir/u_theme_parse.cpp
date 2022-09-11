@@ -49,6 +49,10 @@ void UThemeClass::processSetupBaseResponse (char *data_val)
     }
 
     /* downlink */
+    if (strlen(data_val) > FT_CommandClass::FT_DL_DATA_BUF_SIZE) {
+        phwangAbendSI("UThemeClass::processSetupBaseResponse", "buf_size", strlen(data_val));
+    }
+
     data_val += FT_CommandClass::ROOM_ID_INDEX_SIZE;
     room->setBaseIdIndex(data_val);
 
@@ -81,6 +85,10 @@ void UThemeClass::processPutBaseDataResponse (char *data_val)
     data_val += FT_CommandClass::ROOM_ID_INDEX_SIZE;
 
     /* downlink */
+    if (strlen(data_val) > FT_CommandClass::FT_DL_DATA_BUF_SIZE) {
+        phwangAbendSI("UThemeClass::processPutBaseDataResponse", "buf_size", strlen(data_val));
+    }
+
     room->setGroupTableArray((char **) phwangArrayMgrGetArrayTable(room->groupArrayMgr(), &group_array_size));
     for (int i = 0; i < group_array_size; i++) {
         if (room->groupTableArray(i)) {
