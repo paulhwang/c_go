@@ -5,7 +5,6 @@
 */
 
 #include "../../phwang_dir/phwang.h"
-#include "../protocol_dir/net_port_protocol.h"
 #include "test_class.h"
 
 int theTestCase1NameIndex = 0;

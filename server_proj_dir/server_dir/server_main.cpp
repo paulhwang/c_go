@@ -6,7 +6,7 @@
 
 #include <unistd.h>
 #include "../../phwang_dir/phwang.h"
-#include "../protocol_dir/net_port_protocol.h"
+#include "../protocol_dir/tcp_port_class.h"
 #include "server_root_class.h"
 #include "../test_dir/test_class.h"
 

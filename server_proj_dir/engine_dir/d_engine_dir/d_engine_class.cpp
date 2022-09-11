@@ -6,7 +6,7 @@
 
 #include "../../../phwang_dir/phwang.h"
 #include "../../../phwang_dir/abend_dir/abend_class.h"
-#include "../../protocol_dir/net_port_protocol.h"
+#include "../../protocol_dir/tcp_port_class.h"
 #include "d_engine_class.h"
 
 DEngineClass::DEngineClass (EngineClass *engine_object_val)
