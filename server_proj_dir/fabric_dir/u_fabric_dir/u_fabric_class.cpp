@@ -29,7 +29,7 @@ void uFabricTpServerAcceptFunction (void *u_fabric_object_val, void *tp_transfer
 void UFabricClass::exportedNetAcceptFunction (void *tp_transfer_object_val)
 {
     if (!tp_transfer_object_val) {
-        phwangAbendS("exportedNetAcceptFunction", "null tp_transfer_object_val");
+        phwangAbendS("UFabricClass::exportedNetAcceptFunction", "null tp_transfer_object_val");
         return;
     }
     this->theTpTransferObject = tp_transfer_object_val;

@@ -39,6 +39,12 @@ void dFabricTpServerAcceptFunction (void *d_fabric_object_val, void *tp_transfer
 
 void DFabricClass::exportedNetAcceptFunction (void *tp_transfer_object_val)
 {
+    if (!tp_transfer_object_val) {
+        phwangAbendS("DFabricClass::exportedNetAcceptFunction", "null tp_transfer_object_val");
+        return;
+    }
+    this->theTpTransferObject = tp_transfer_object_val;
+
     send(((PortClass *)tp_transfer_object_val)->socket(), this->timeStampString() , strlen(this->timeStampString()) , 0);
 }
 

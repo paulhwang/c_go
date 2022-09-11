@@ -19,6 +19,7 @@ class DFabricClass {
 
     FabricClass *theFabricObject;
     void *theTpServerObject;
+    void *theTpTransferObject;
     char theTimeStampString[FABRIC_SERVER_TIME_STAMP_LENGTH_SIZE + 16];
 
     DbClass *dbObject(void) {return theFabricObject->dbObject();}
