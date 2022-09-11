@@ -8,7 +8,6 @@
 #include "phwang.h"
 #include "phwang_class.h"
 #include "malloc_dir/malloc_class.h"
-#include "queue_dir/queue_class.h"
 #include "queue_dir/queue_root_class.h"
 #include "net_dir/net_root_class.h"
 #include "thread_dir/thread_root_class.h"
@@ -71,11 +70,7 @@ void phwangFreeQueue (void *queue_val, char const *who_val)
 
 int phwangEnqueue (void *queue_val, void *data_val)
 {
-    int result = thePhwangObject->queueRootObject()->enqueue(queue_val, data_val);
-    if (result != QueueClass::ENQUEUE_SUCCEED) {
-        phwangLogitSI("phwangEnqueue", "***fail_code=", result);
-    }
-    return result;
+    return thePhwangObject->queueRootObject()->enqueue(queue_val, data_val);
 }
 
 void *phwangDequeue (void *queue_val, char const *who_val)

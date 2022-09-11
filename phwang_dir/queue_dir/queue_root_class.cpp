@@ -53,7 +53,13 @@ int QueueRootClass::enqueue (void *queue_val, void *data_val)
         return QueueClass::ENQUEUE_INVALID_CLASS;
     }
 
-    return ((QueueClass *) queue_val)->enqueueData(data_val);
+    int result = ((QueueClass *) queue_val)->enqueueData(data_val);
+
+    if (result != QueueClass::ENQUEUE_SUCCEED) {
+        phwangLogitSI("QueueRootClass::enqueue", "***fail_code=", result);
+    }
+
+    return result;
 }
 
 void *QueueRootClass::dequeue (void *queue_val)
