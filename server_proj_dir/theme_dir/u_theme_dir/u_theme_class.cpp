@@ -50,5 +50,5 @@ void uThemeTpReceiveDataFunction (void *tp_transfer_object_val, void *game_serve
 
 void UThemeClass::startNetServer (void)
 {
-    this->theTpServerObject = phwangMallocTpServer(this, THEME_ENGINE_PROTOCOL_TRANSPORT_PORT_NUMBER, uThemeTpServerAcceptFunction, this, uThemeTpReceiveDataFunction, this, this->objectName());
+    this->theTpServerObject = phwangMallocTpServer(this, TcpPortClass::THEME_ENGINE_PORT_NUMER, uThemeTpServerAcceptFunction, this, uThemeTpReceiveDataFunction, this, this->objectName());
 }

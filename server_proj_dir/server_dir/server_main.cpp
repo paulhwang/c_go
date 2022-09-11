@@ -18,7 +18,7 @@ int main (int argc, char** argv) {
     sleep(10);
     //TestClass *testObject = new TestClass();
     //testObject->startTestThreads();
-    phwangRegisterProgramProcess(&register_tag, argv[0], HTTP_FABRIC_PROTOCOL_TRANSPORT_PORT_NUMBER);
+    phwangRegisterProgramProcess(&register_tag, argv[0], TcpPortClass::FABRIC_NODEJS_PORT_NUMER);
     return 0;
 }
 

@@ -6,6 +6,9 @@
 
 #pragma once
 
-#define HTTP_FABRIC_PROTOCOL_TRANSPORT_PORT_NUMBER  8006
-#define FABRIC_THEME_PROTOCOL_TRANSPORT_PORT_NUMBER 8111
-#define THEME_ENGINE_PROTOCOL_TRANSPORT_PORT_NUMBER 8005
+class TcpPortClass {
+public:
+    unsigned short const static FABRIC_NODEJS_PORT_NUMER = 8006;
+    unsigned short const static FABRIC_THEME_PORT_NUMER  = 8007;
+    unsigned short const static THEME_ENGINE_PORT_NUMER  = 8008;
+};

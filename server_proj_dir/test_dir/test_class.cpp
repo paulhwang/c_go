@@ -27,7 +27,7 @@ void testObjectReceiveDataFromTransport (void *tp_transfer_object_val, void *tes
 
 void TestClass::startNetConnect (void)
 {
-    this->theTpTransferObject = phwangTpConnect(0, HTTP_FABRIC_PROTOCOL_TRANSPORT_PORT_NUMBER, testObjectReceiveDataFromTransport, this, this->objectName());
+    this->theTpTransferObject = phwangTpConnect(0, TcpPortClass::FABRIC_NODEJS_PORT_NUMER, testObjectReceiveDataFromTransport, this, this->objectName());
 }
 
 void TestClass::startTestThreads(void)

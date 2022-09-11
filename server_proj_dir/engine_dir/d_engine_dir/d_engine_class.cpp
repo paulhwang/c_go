@@ -34,5 +34,5 @@ void dEngineReceiveDataFromTransport (void *tp_transfer_object_val, void *game_d
 
 void DEngineClass::startNetConnect (void)
 {
-    this->theTpTransferObject = phwangTpConnect(0, THEME_ENGINE_PROTOCOL_TRANSPORT_PORT_NUMBER, dEngineReceiveDataFromTransport, this, this->objectName());
+    this->theTpTransferObject = phwangTpConnect(0, TcpPortClass::THEME_ENGINE_PORT_NUMER, dEngineReceiveDataFromTransport, this, this->objectName());
 }
