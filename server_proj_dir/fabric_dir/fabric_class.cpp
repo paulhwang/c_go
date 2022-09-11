@@ -25,7 +25,7 @@ FabricClass::FabricClass (int debug_code_val)
     this->theUFabricObject = new UFabricClass(this);
     this->theDFabricObject = new DFabricClass(this);
     this->theNameListObject = new NameListClass(this);
-    this->theLinkListMgrObject = phwangListMgrMalloc("LINK", FECommandClass::LINK_ID_SIZE, FECommandClass::LINK_INDEX_SIZE, 100);
+    this->theLinkListMgrObject = phwangListMgrMalloc("LINK", FE_CommandClass::LINK_ID_SIZE, FE_CommandClass::LINK_INDEX_SIZE, 100);
     this->theGroupListMgrObject = phwangListMgrMalloc("GROUP", FT_CommandClass::GROUP_ID_SIZE, FT_CommandClass::GROUP_INDEX_SIZE, 500);
     this->startWatchDogThread();
 
@@ -140,5 +140,5 @@ SessionClass *FabricClass::serachLinkAndSession (char *data_val)
         return 0;
     }
 
-    return link->searchSession(data_val + FECommandClass::LINK_ID_INDEX_SIZE);
+    return link->searchSession(data_val + FE_CommandClass::LINK_ID_INDEX_SIZE);
 }

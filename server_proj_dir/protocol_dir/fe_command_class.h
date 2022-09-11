@@ -6,7 +6,7 @@
 
 #pragma once
 
-class FECommandClass {
+class FE_CommandClass {
 public:
     int const static DOWNLINK_DATA_BUFFER_SIZE = 512 + 16;
 
