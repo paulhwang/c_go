@@ -38,16 +38,6 @@ void phwangLogitWSSS (char const *func_name_val, char const *who_val, char const
     printf("%s:%s() %s %s %s\n", func_name_val, who_val, str1_val, str2_val, str3_val);
 }
 
-void phwangLogitSI (char const *func_name_val, char const *str1_val, char const *str2_val)
-{
-    printf("%s() %s %s\n", func_name_val, str1_val, str2_val);
-}
-
-void phwangLogitWSI (char const *func_name_val, char const *who_val, char const *str1_val, char const *str2_val)
-{
-    printf("%s:%s() %s %s\n", func_name_val, who_val, str1_val, str2_val);
-}
-
 void phwangLogitSI (char const *func_name_val, char const *str1_val, int int1_val)
 {
     printf("%s() %s=%d\n", func_name_val, str1_val, int1_val);
@@ -56,6 +46,16 @@ void phwangLogitSI (char const *func_name_val, char const *str1_val, int int1_va
 void phwangLogitWSI (char const *func_name_val, char const *who_val, char const *str1_val, int int1_val)
 {
     printf("%s:%s() %s=%d\n", func_name_val, who_val, str1_val, int1_val);
+}
+
+void phwangLogitSSI (char const *func_name_val, char const *str1_val, char const *str2_val, int int1_val)
+{
+    printf("%s() %s %s=%d\n", func_name_val, str1_val, str2_val, int1_val);
+}
+
+void phwangLogitWSSI (char const *func_name_val, char const *who_val, char const *str1_val, char const *str2_val, int int1_val)
+{
+    printf("%s:%s() %s %s=%d\n", func_name_val, who_val, str2_val, str1_val, int1_val);
 }
 
 void phwangLogitSISS (char const *func_name_val, char const *str1_val, int int1_val, char const *str2_val, char const *str3_val)
@@ -131,6 +131,20 @@ void phwangDebugWSI (int on_off_val, char const *func_name_val, char const *who_
 {
     if (phwang_debug_on_off_switch && on_off_val) {
         phwangLogitWSI(func_name_val, who_val, str1_val, int1_val);
+    }
+}
+
+void phwangDebugSSI (int on_off_val, char const *func_name_val, char const *str1_val, char const *str2_val, int int1_val)
+{
+    if (phwang_debug_on_off_switch && on_off_val) {
+        phwangLogitSSI(func_name_val, str1_val, str2_val, int1_val);
+    }
+}
+
+void phwangDebugWSSI (int on_off_val, char const *func_name_val, char const *who_val, char const *str1_val, char const *str2_val, int int1_val)
+{
+    if (phwang_debug_on_off_switch && on_off_val) {
+        phwangLogitWSSI(func_name_val, who_val, str1_val, str2_val, int1_val);
     }
 }
 
