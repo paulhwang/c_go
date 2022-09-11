@@ -733,6 +733,10 @@ void DFabricClass::processGetSessionDataRequest (void *tp_transfer_object_val, c
 
     char *data = session_val->getPendingDownLinkData();
 
+    if (strlen(data) > FE_CommandClass::FE_DL_DATA_BUF_SIZE) {
+        phwangAbendSI("DFabricClass::processGetSessionDataRequest", "buf_size", strlen(data));
+    }
+
     char *data_ptr;
     char *downlink_data = data_ptr = (char *) phwangMalloc(FE_CommandClass::FE_DL_DATA_BUF_SIZE, MallocClass::GET_SESSION_DATA);
     *data_ptr++ = FE_CommandClass::GET_SESSION_DATA_RESPONSE;

@@ -24,9 +24,7 @@ DEngineClass::~DEngineClass (void)
 }
 
 void dEngineReceiveDataFromTransport (void *tp_transfer_object_val, void *game_d_server_object_val, void *data_val) {
-    if (0) { /* debug */
-        phwangLogitS("Golbal::dEngineReceiveDataFromTransport", (char *) data_val);
-    }
+    phwangDebugS(false, "Golbal::dEngineReceiveDataFromTransport", (char *) data_val);
 
     ((DEngineClass *) game_d_server_object_val)->exportedParseFunction((char *) data_val);
     phwangFree(data_val);
