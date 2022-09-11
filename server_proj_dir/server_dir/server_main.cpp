@@ -13,12 +13,17 @@
 int main (int argc, char** argv) {
     int debug_code = 255;
 
+    printf("%s start running\n", argv[0]);
+
     ServerRootClass* serverRootObject = new ServerRootClass(debug_code);
-    int register_tag;
+
     sleep(10);
     //TestClass *testObject = new TestClass();
     //testObject->startTestThreads();
-    phwangRegisterProgramProcess(&register_tag, argv[0], TcpPortClass::FABRIC_NODEJS_PORT_NUMER);
+
+    while (1) {
+        sleep(10);
+    }
     return 0;
 }
 

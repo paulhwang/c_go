@@ -205,9 +205,3 @@ void phwangIncrementReceiveThreadCount (void)
 {
     thePhwangObject->netRootObject()->incrementReceiveThreadCount();
 }
-
-/* register */
-void phwangRegisterProgramProcess (int *register_tag_ptr_val, char *program_name_val, unsigned short port_val)
-{
-    thePhwangObject->registerProgramProcess(register_tag_ptr_val, program_name_val, port_val);
-}

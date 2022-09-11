@@ -39,7 +39,4 @@ public:
     ThreadRootClass *threadRootObject(void) {return this->theThreadRootObject;}
     ListMgrRootClass *listMgrRootObject(void) {return this->theListMgrRootObject;}
     ArrayMgrRootClass *arrayMgrRootObject(void) {return this->theArrayMgrRootObject;}
-
-    /* register */
-    void registerProgramProcess(int *register_tag_ptr_val, char *program_name_val, unsigned short port_val);
 };
