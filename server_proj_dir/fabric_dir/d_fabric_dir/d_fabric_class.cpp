@@ -6,6 +6,7 @@
 
 #include <sys/socket.h>
 #include "../../../phwang_dir/phwang.h"
+#include "../../../phwang_dir/malloc_dir/malloc_class.h"
 #include "../../../phwang_dir/abend_dir/abend_class.h"
 #include "../../../phwang_dir/net_dir/port_dir/port_class.h"
 #include "../../protocol_dir/tcp_port_class.h"
@@ -45,7 +46,9 @@ void DFabricClass::exportedNetAcceptFunction (void *tp_transfer_object_val)
     }
     this->theTpTransferObject = tp_transfer_object_val;
 
-    send(((PortClass *)tp_transfer_object_val)->socket(), this->timeStampString() , strlen(this->timeStampString()) , 0);
+    char *buf = (char *) phwangMalloc(strlen(this->timeStampString()) + 1, MallocClass::TCP_ACCEPT_CALLBACK_FUNC);
+    strcpy(buf, this->timeStampString());
+    phwangTpTransmit(tp_transfer_object_val, buf);
 }
 
 void dFabricTpReceiveDataFunction (void *tp_transfer_object_val, void *d_fabric_object_val, void *data_val) {
