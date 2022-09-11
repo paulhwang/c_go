@@ -55,10 +55,6 @@ void DThemeClass::processSetupRoom (char *data_val)
     }
 
     /* uplink */
-    if (strlen(data_val) > TE_CommandClass::TE_UL_DATA_BUF_SIZE) {
-        phwangAbendSI("DThemeClass::processSetupRoom", "buf_size", strlen(data_val));
-    }
-
     data_val += FT_CommandClass::GROUP_ID_INDEX_SIZE;
 
     uplink_data = data_ptr = (char *) phwangMalloc(TE_CommandClass::TE_UL_DATA_BUF_SIZE + 4, MallocClass::DTHEME_SETUP_ROOM2);

@@ -49,10 +49,6 @@ void UThemeClass::processSetupBaseResponse (char *data_val)
     }
 
     /* downlink */
-    if (strlen(data_val) > FT_CommandClass::FT_DL_DATA_BUF_SIZE) {
-        phwangAbendSI("UThemeClass::processSetupBaseResponse", "buf_size", strlen(data_val));
-    }
-
     data_val += FT_CommandClass::ROOM_ID_INDEX_SIZE;
     room->setBaseIdIndex(data_val);
 
