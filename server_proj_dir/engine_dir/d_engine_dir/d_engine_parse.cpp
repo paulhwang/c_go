@@ -15,11 +15,11 @@ void DEngineClass::exportedParseFunction (char *data_val)
     phwangDebugS(true, "DEngineClass::exportedParseFunction", data_val);
 
     switch (*data_val) {
-        case TE_Command_Class::SETUP_BASE_COMMAND:
+        case TE_CommandClass::SETUP_BASE_COMMAND:
             this->processSetupBase(data_val + 1);
             return;
 
-        case TE_Command_Class::PUT_BASE_DATA_COMMAND:
+        case TE_CommandClass::PUT_BASE_DATA_COMMAND:
             this->processPutBaseData(data_val + 1);
             return;
 
@@ -45,14 +45,14 @@ void DEngineClass::processSetupBase (char const *data_val)
     }
     go_base_object->setRoomIdIndex(room_id_index_val);
 
-    downlink_data = data_ptr = (char *) phwangMalloc(TE_Command_Class::DL_DATA_BUF_SIZE + 4, MallocClass::DENGINE_SETUP_BASE);
-    *data_ptr++ = TE_Command_Class::SETUP_BASE_RESPONSE;
+    downlink_data = data_ptr = (char *) phwangMalloc(TE_CommandClass::DL_DATA_BUF_SIZE + 4, MallocClass::DENGINE_SETUP_BASE);
+    *data_ptr++ = TE_CommandClass::SETUP_BASE_RESPONSE;
 
     memcpy(data_ptr, room_id_index_val, FT_Command_Class::ROOM_ID_INDEX_SIZE);
     data_ptr += FT_Command_Class::ROOM_ID_INDEX_SIZE;
 
-    memcpy(data_ptr, go_base_object->goBaseIdIndex(), TE_Command_Class::BASE_ID_INDEX_SIZE);
-    data_ptr += TE_Command_Class::BASE_ID_INDEX_SIZE;
+    memcpy(data_ptr, go_base_object->goBaseIdIndex(), TE_CommandClass::BASE_ID_INDEX_SIZE);
+    data_ptr += TE_CommandClass::BASE_ID_INDEX_SIZE;
     *data_ptr = 0;
 
     this->transmitFunction(downlink_data);
@@ -79,8 +79,8 @@ void DEngineClass::processPutBaseDataResponse (GoBaseClass *base_object_val, cha
     char *downlink_data;
     char *data_ptr;
 
-    downlink_data = data_ptr = (char *) phwangMalloc(TE_Command_Class::DL_DATA_BUF_SIZE + 4, MallocClass::DENGINE_PUT_BASE_DATA);
-    *data_ptr++ = TE_Command_Class::PUT_BASE_DATA_RESPONSE;
+    downlink_data = data_ptr = (char *) phwangMalloc(TE_CommandClass::DL_DATA_BUF_SIZE + 4, MallocClass::DENGINE_PUT_BASE_DATA);
+    *data_ptr++ = TE_CommandClass::PUT_BASE_DATA_RESPONSE;
     memcpy(data_ptr, base_object_val->roomIdIndex(), FT_Command_Class::ROOM_ID_INDEX_SIZE);
     data_ptr += FT_Command_Class::ROOM_ID_INDEX_SIZE;
     strcpy(data_ptr, data_val);

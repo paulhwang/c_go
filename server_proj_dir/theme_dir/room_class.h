@@ -15,7 +15,7 @@ class ThemeClass;
 class RoomClass : public ListEntryClass {
 #define ROOM_CLASS_GROUP_ARRAY_SIZE 32
     ThemeClass *theThemeObject;
-    char theBaseIdIndex[TE_Command_Class::BASE_ID_INDEX_SIZE + 4];
+    char theBaseIdIndex[TE_CommandClass::BASE_ID_INDEX_SIZE + 4];
     char **theGroupTableArray;
     void *theGroupArrayMgr;
 
@@ -26,7 +26,7 @@ public:
 
     char *roomIdIndex(void) {return this->entryIdIndex();}
     char *baseIdIndex(void) {return this->theBaseIdIndex;}
-    void setBaseIdIndex(char *base_id_index_val) {memcpy(this->theBaseIdIndex, base_id_index_val, TE_Command_Class::BASE_ID_INDEX_SIZE); this->theBaseIdIndex[TE_Command_Class::BASE_ID_INDEX_SIZE] = 0;}
+    void setBaseIdIndex(char *base_id_index_val) {memcpy(this->theBaseIdIndex, base_id_index_val, TE_CommandClass::BASE_ID_INDEX_SIZE); this->theBaseIdIndex[TE_CommandClass::BASE_ID_INDEX_SIZE] = 0;}
     void *groupArrayMgr(void) {return this->theGroupArrayMgr;}
     char *groupTableArray(int index_val) {return this->theGroupTableArray[index_val];}
     void setGroupTableArray(char ** val) {this->theGroupTableArray = val;}

@@ -6,7 +6,7 @@
 
 #pragma once
 
-class TE_Command_Class {
+class TE_CommandClass {
 public:
     int const static DL_DATA_BUF_SIZE = 512;
     //int const static UL_DATA_BUF_SIZE = 512;
