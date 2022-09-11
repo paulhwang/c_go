@@ -5,7 +5,6 @@
 */
 
 #include "../phwang.h"
-#include "../net_dir/tp_dir/tp_transfer_class.h"
 #include "malloc_class.h"
 
 MallocClass::MallocClass (int debug_code_val)

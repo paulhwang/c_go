@@ -7,7 +7,7 @@
 #include <sys/socket.h>
 #include "../../../phwang_dir/phwang.h"
 #include "../../../phwang_dir/abend_dir/abend_class.h"
-#include "../../../phwang_dir/net_dir/tp_dir/tp_transfer_class.h"
+#include "../../../phwang_dir/net_dir/port_dir/port_class.h"
 #include "../../protocol_dir/tcp_port_class.h"
 #include "../../protocol_dir/fe_command_class.h"
 #include "d_fabric_class.h"

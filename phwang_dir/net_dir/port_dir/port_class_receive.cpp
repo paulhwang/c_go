@@ -12,7 +12,7 @@
 #include <pwd.h>
 #include "../../../phwang_dir/phwang.h"
 #include "../../../phwang_dir/malloc_dir/malloc_class.h"
-#include "tp_transfer_class.h"
+#include "port_class.h"
 
 void *TpTransferClass::receiveThreadFunction (int socket_val)
 {

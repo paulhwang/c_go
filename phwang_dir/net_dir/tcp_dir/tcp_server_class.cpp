@@ -13,7 +13,7 @@
 #include <pwd.h>
 #include "../../../phwang_dir/phwang.h"
 #include "tcp_server_class.h"
-#include "../tp_dir/tp_transfer_class.h"
+#include "../port_dir/port_class.h"
 
 #define MAXHOSTNAME 32
 #define BACKLOG 5
