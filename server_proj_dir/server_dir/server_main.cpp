@@ -13,7 +13,7 @@
 int main (int argc, char** argv) {
     int debug_code = 255;
 
-    printf("%s start running\n", argv[0]);
+    //printf("%s start running\n", argv[0]);
 
     ServerRootClass* serverRootObject = new ServerRootClass(debug_code);
 

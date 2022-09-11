@@ -8,7 +8,8 @@
 
 class FE_CommandClass {
 public:
-    int const static DOWNLINK_DATA_BUFFER_SIZE = 512 + 16;
+    int const static FE_DL_DATA_BUF_SIZE = 512;
+    int const static FE_UL_DATA_BUF_SIZE = 512;
 
     int const static NAME_LIST_TAG_SIZE = 3;
     int const static AJAX_ID_SIZE = 3;

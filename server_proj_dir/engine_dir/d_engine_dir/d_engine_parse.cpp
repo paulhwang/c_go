@@ -45,7 +45,8 @@ void DEngineClass::processSetupBase (char const *data_val)
     }
     go_base_object->setRoomIdIndex(room_id_index_val);
 
-    downlink_data = data_ptr = (char *) phwangMalloc(TE_CommandClass::DL_DATA_BUF_SIZE + 4, MallocClass::DENGINE_SETUP_BASE);
+    /* downlink */
+    downlink_data = data_ptr = (char *) phwangMalloc(TE_CommandClass::TE_DL_DATA_BUF_SIZE + 4, MallocClass::DENGINE_SETUP_BASE);
     *data_ptr++ = TE_CommandClass::SETUP_BASE_RESPONSE;
 
     memcpy(data_ptr, room_id_index_val, FT_CommandClass::ROOM_ID_INDEX_SIZE);
@@ -79,7 +80,8 @@ void DEngineClass::processPutBaseDataResponse (GoBaseClass *base_object_val, cha
     char *downlink_data;
     char *data_ptr;
 
-    downlink_data = data_ptr = (char *) phwangMalloc(TE_CommandClass::DL_DATA_BUF_SIZE + 4, MallocClass::DENGINE_PUT_BASE_DATA);
+    /* downlink */
+    downlink_data = data_ptr = (char *) phwangMalloc(TE_CommandClass::TE_DL_DATA_BUF_SIZE + 4, MallocClass::DENGINE_PUT_BASE_DATA);
     *data_ptr++ = TE_CommandClass::PUT_BASE_DATA_RESPONSE;
     memcpy(data_ptr, base_object_val->roomIdIndex(), FT_CommandClass::ROOM_ID_INDEX_SIZE);
     data_ptr += FT_CommandClass::ROOM_ID_INDEX_SIZE;

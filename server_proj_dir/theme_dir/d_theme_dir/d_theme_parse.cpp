@@ -45,15 +45,19 @@ void DThemeClass::processSetupRoom (char *data_val)
     RoomClass *room = this->theThemeObject->mallocRoom(group_id_index_val);
     if (!room) {
         phwangAbendS("DThemeClass::processSetupRoom", "null room");
-        downlink_data = data_ptr = (char *) phwangMalloc(FT_CommandClass::FT_DATA_BUFFER_SIZE + 4, MallocClass::DTHEME_SETUP_ROOM1);
+
+        /* downlink */
+        downlink_data = data_ptr = (char *) phwangMalloc(FT_CommandClass::FT_DL_DATA_BUF_SIZE + 4, MallocClass::DTHEME_SETUP_ROOM1);
         *data_ptr++ = FT_CommandClass::SETUP_ROOM_RESPONSE;
         strcpy(data_ptr, "null room");
         this->transmitFunction(downlink_data);
         return;
     }
+
+    /* uplink */
     data_val += FT_CommandClass::GROUP_ID_INDEX_SIZE;
 
-    uplink_data = data_ptr = (char *) phwangMalloc(FT_CommandClass::FT_DATA_BUFFER_SIZE + 4, MallocClass::DTHEME_SETUP_ROOM2);
+    uplink_data = data_ptr = (char *) phwangMalloc(TE_CommandClass::TE_UL_DATA_BUF_SIZE + 4, MallocClass::DTHEME_SETUP_ROOM2);
     *data_ptr++ = TE_CommandClass::SETUP_BASE_COMMAND;
 
     memcpy(data_ptr, room->roomIdIndex(), FT_CommandClass::ROOM_ID_INDEX_SIZE);
@@ -74,14 +78,17 @@ void DThemeClass::processPutRoomData (char *data_val)
     RoomClass *room = this->theThemeObject->searchRoom(data_val);
     if (!room) {
         phwangAbendS("DThemeClass::processPutRoomData", "null room");
-        downlink_data = data_ptr = (char *) phwangMalloc(FT_CommandClass::FT_DATA_BUFFER_SIZE + 4, MallocClass::DTHEME_PUT_ROOM_DATA1);
+
+        /* downlink */
+        downlink_data = data_ptr = (char *) phwangMalloc(FT_CommandClass::FT_DL_DATA_BUF_SIZE + 4, MallocClass::DTHEME_PUT_ROOM_DATA1);
         *data_ptr++ = FT_CommandClass::PUT_ROOM_DATA_RESPONSE;
         strcpy(data_ptr, "null room");
         this->transmitFunction(downlink_data);
         return;
     }
 
-    uplink_data = data_ptr = (char *) phwangMalloc(FT_CommandClass::FT_DATA_BUFFER_SIZE + 4, MallocClass::DTHEME_PUT_ROOM_DATA2);
+    /* uplink */
+    uplink_data = data_ptr = (char *) phwangMalloc(TE_CommandClass::TE_UL_DATA_BUF_SIZE + 4, MallocClass::DTHEME_PUT_ROOM_DATA2);
     *data_ptr++ = TE_CommandClass::PUT_BASE_DATA_COMMAND;
     memcpy(data_ptr, room->baseIdIndex(), TE_CommandClass::BASE_ID_INDEX_SIZE);
     data_ptr += TE_CommandClass::BASE_ID_INDEX_SIZE;
