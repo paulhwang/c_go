@@ -197,3 +197,21 @@ void phwangAbendWSS (char const *func_name_val, char const *who_val, char const 
     int *junk = 0;
     *junk = 0;
 }
+
+void phwangAbendSI (char const *func_name_val, char const *str1_val, int int1_val)
+{
+    printf("*****ABEND********************************************************************\n");
+    printf("%s() %s %d\n", func_name_val, str1_val, int1_val);
+    printf("*****ABEND********************************************************************\n");
+    int *junk = 0;
+    *junk = 0;
+}
+
+void phwangAbendWSI (char const *func_name_val, char const *who_val, char const *str1_val, int int1_val)
+{
+    printf("*****ABEND********************************************************************\n");
+    printf("%s:%s() %d %\n", func_name_val, who_val, str1_val, int1_val);
+    printf("*****ABEND********************************************************************\n");
+    int *junk = 0;
+    *junk = 0;
+}

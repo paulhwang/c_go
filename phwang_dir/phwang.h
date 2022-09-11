@@ -62,6 +62,9 @@ void phwangAbendWS(char const *func_name_val, char const *who_val, char const *s
 void phwangAbendSS(char const *func_name_val, char const *str1_val, char const *str2_val);
 void phwangAbendWSS(char const *func_name_val, char const *who_val, char const *str1_val, char const *str2_val);
 
+void phwangAbendSI (char const *func_name_val, char const *str1_val, int int1_val);
+void phwangAbendWSI (char const *func_name_val, char const *who_val, char const *str1_val, int int1_val);
+
 /* malloc and free */
 void *phwangMalloc(int size_val, int who_val);
 void  phwangFree(void *data_val);
