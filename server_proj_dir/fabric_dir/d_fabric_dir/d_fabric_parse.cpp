@@ -433,15 +433,15 @@ void DFabricClass::processGetLinkDataRequest (
 
     link_val->resetKeepAliveTime();
 
-    char *data_ptr;
-    char *downlink_data = data_ptr = (char *) phwangMalloc(FE_CommandClass::FE_DL_DATA_BUF_SIZE, MallocClass::GET_LINK_DATA);
-    *data_ptr++ = FE_CommandClass::GET_LINK_DATA_RESPONSE;
-    strcpy(data_ptr, ajax_id_val);
-    data_ptr += FE_CommandClass::AJAX_ID_SIZE;
-    *data_ptr++ = FE_CommandClass::RESPOND_IS_GET_LINK_DATA_NAME_LIST;
-    phwangEncodeNumber(data_ptr, this->theFabricObject->nameListObject()->nameListTag(), FE_CommandClass::NAME_LIST_TAG_SIZE);
-    data_ptr += FE_CommandClass::NAME_LIST_TAG_SIZE;
-    *data_ptr = 0;
+    char *current_ptr;
+    char *downlink_data = current_ptr = (char *) phwangMalloc(FE_CommandClass::FE_DL_DATA_BUF_SIZE, MallocClass::GET_LINK_DATA);
+    *current_ptr++ = FE_CommandClass::GET_LINK_DATA_RESPONSE;
+    strcpy(current_ptr, ajax_id_val);
+    current_ptr += FE_CommandClass::AJAX_ID_SIZE;
+    *current_ptr++ = FE_CommandClass::RESPOND_IS_GET_LINK_DATA_NAME_LIST;
+    phwangEncodeNumber(current_ptr, this->theFabricObject->nameListObject()->nameListTag(), FE_CommandClass::NAME_LIST_TAG_SIZE);
+    current_ptr += FE_CommandClass::NAME_LIST_TAG_SIZE;
+    *current_ptr = 0;
 
     int max_session_table_array_index = phwnagListMgrGetMaxIndex(link_val->sessionListMgrObject(), "DFabricClass::processGetLinkData()");
     SessionClass **session_table_array = (SessionClass **) phwangListMgrGetEntryTableArray(link_val->sessionListMgrObject());
@@ -450,12 +450,12 @@ void DFabricClass::processGetLinkDataRequest (
         if (session) {
             char *pending_downlink_data = session->getPendingDownLinkData();
             if (pending_downlink_data) {
-                *data_ptr++ = FE_CommandClass::RESPOND_IS_GET_LINK_DATA_PENDING_DATA;
+                *current_ptr++ = FE_CommandClass::RESPOND_IS_GET_LINK_DATA_PENDING_DATA;
                 session->enqueuePendingDownLinkData(pending_downlink_data);
-                strcpy(data_ptr, link_val->linkIdIndex());
-                data_ptr += FE_CommandClass::LINK_ID_INDEX_SIZE;
-                strcpy(data_ptr, session->sessionIdIndex());
-                data_ptr += FE_CommandClass::SESSION_ID_INDEX_SIZE;
+                strcpy(current_ptr, link_val->linkIdIndex());
+                current_ptr += FE_CommandClass::LINK_ID_INDEX_SIZE;
+                strcpy(current_ptr, session->sessionIdIndex());
+                current_ptr += FE_CommandClass::SESSION_ID_INDEX_SIZE;
 
                 if (1) { /* debug */
                     char s[128];
@@ -468,16 +468,18 @@ void DFabricClass::processGetLinkDataRequest (
 
     char *pending_session = link_val->getPendingSessionSetup();
     if (pending_session) {
-        *data_ptr++ = FE_CommandClass::RESPOND_IS_GET_LINK_DATA_PENDING_SESSION;
-        strcpy(data_ptr, pending_session);
+        *current_ptr++ = FE_CommandClass::RESPOND_IS_GET_LINK_DATA_PENDING_SESSION;
+        strcpy(current_ptr, pending_session);
         phwangDebugSS(true, "DFabricClass::processGetLinkDataRequest", "getPendingSessionSetup ", downlink_data);
+        phwangFree(pending_session);
     }
 
     char *pending_session3 = link_val->getPendingSessionSetup3();
     if (pending_session3) {
-        *data_ptr++ = FE_CommandClass::RESPOND_IS_GET_LINK_DATA_PENDING_SESSION3;
-        strcpy(data_ptr, pending_session3);
+        *current_ptr++ = FE_CommandClass::RESPOND_IS_GET_LINK_DATA_PENDING_SESSION3;
+        strcpy(current_ptr, pending_session3);
         phwangDebugSS(true, "DFabricClass::processGetLinkDataRequest", "getPendingSessionSetup3 ", downlink_data);
+        phwangFree(pending_session3);
     }
 
     this->transmitFunction(tp_transfer_object_val, downlink_data);
