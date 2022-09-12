@@ -593,7 +593,7 @@ void DFabricClass::processSetupSessionRequest (
         group->insertSession(his_session);
         his_session->bindGroup(group);
 
-        char *theme_data = (char *) malloc (32);
+        char *theme_data = (char *) phwangMalloc(FT_CommandClass::FT_THEME_DATA_BUF_SIZE, MallocClass::processSetupSessionRequest);
         memcpy(theme_data, theme_info_val, theme_len);
         theme_data[theme_len] = 0;
         his_link->setPendingSessionSetup(his_session->sessionIdIndex(), theme_data);
@@ -612,7 +612,7 @@ void DFabricClass::sendSetupSessionResponce (
     phwangDebugS(false, "DFabricClass::sendSetupSessionResponce", result_val);
 
     char *current_ptr;
-    char *downlink_data = current_ptr = (char *) phwangMalloc(FE_CommandClass::FE_DL_DATA_BUF_SIZE, MallocClass::SETUP_SESSION);
+    char *downlink_data = current_ptr = (char *) phwangMalloc(FE_CommandClass::FE_DL_DATA_BUF_SIZE, MallocClass::sendSetupSessionResponce);
     *current_ptr++ = FE_CommandClass::SETUP_SESSION_RESPONSE;
     strcpy(current_ptr, ajax_id_val);
     current_ptr += FE_CommandClass::AJAX_ID_SIZE;

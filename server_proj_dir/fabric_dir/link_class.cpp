@@ -5,13 +5,17 @@
 */
 
 #include "../../phwang_dir/phwang.h"
+#include "../../phwang_dir/malloc_dir/malloc_class.h"
 #include "link_class.h"
 #include "session_class.h"
 #include "fabric_class.h"
 #include "../protocol_dir/fe_command_class.h"
   
-LinkClass::LinkClass (void *list_mgr_object_val, FabricClass *fabric_object_val, char const* link_name_val):
-        ListEntryClass(list_mgr_object_val)
+LinkClass::LinkClass (
+    void *list_mgr_object_val,
+    FabricClass *fabric_object_val,
+    char const* link_name_val)
+        :ListEntryClass(list_mgr_object_val)
 {
     this->theFabricObject = fabric_object_val;
     this->theNameListChanged = 'D';
@@ -47,22 +51,26 @@ SessionClass *LinkClass::mallocSession (void)
     return session;
 }
 
-void LinkClass::setPendingSessionSetup (char *session_id_index_val, char *theme_data_val)
+void LinkClass::setPendingSessionSetup (
+    char *session_id_index_val,
+    char *theme_data_val)
 {
     char *buf, *data_ptr;
 
-    buf = data_ptr = (char *) malloc(FE_CommandClass::FE_DL_DATA_BUF_SIZE);
+    buf = data_ptr = (char *) phwangMalloc(FE_CommandClass::FE_DL_DATA_BUF_SIZE, MallocClass::setPendingSessionSetup);
     memcpy(data_ptr, session_id_index_val, FE_CommandClass::SESSION_ID_INDEX_SIZE);
     data_ptr += FE_CommandClass::SESSION_ID_INDEX_SIZE;
     strcpy(data_ptr, theme_data_val);
     phwangEnqueue(this->thePendingSessionSetupQueue, buf);
 }
 
-void LinkClass::setPendingSessionSetup3 (char *session_id_index_val, char const *theme_data_val)
+void LinkClass::setPendingSessionSetup3 (
+    char *session_id_index_val,
+    char const *theme_data_val)
 {
     char *buf, *data_ptr;
 
-    buf = data_ptr = (char *) malloc(FE_CommandClass::FE_DL_DATA_BUF_SIZE);
+    buf = data_ptr = (char *) phwangMalloc(FE_CommandClass::FE_DL_DATA_BUF_SIZE, MallocClass::setPendingSessionSetup3);
     memcpy(data_ptr, session_id_index_val, FE_CommandClass::SESSION_ID_INDEX_SIZE);
     data_ptr += FE_CommandClass::SESSION_ID_INDEX_SIZE;
     strcpy(data_ptr, theme_data_val);

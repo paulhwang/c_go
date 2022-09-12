@@ -43,7 +43,8 @@ public:
     int const static GET_LINK_DATA_ERROR = 5;
     int const static GET_NAME_LIST = 5;
     int const static GET_NAME_LIST_ERROR = 5;
-    int const static SETUP_SESSION = 5;
+    int const static processSetupSessionRequest = 5;
+    int const static sendSetupSessionResponce = 5;
     int const static SETUP_SESSION_ERROR = 5;
     int const static SETUP_SESSION2 = 5;
     int const static SETUP_SESSION2_ERROR = 5;
@@ -54,12 +55,14 @@ public:
     int const static GET_SESSION_DATA = 5;
     int const static GET_SESSION_DATA_ERROR = 5;
     int const static MALLOC_ROOM = 5;
-    int const static encodeNumberMalloc = 6;
-    int const static encodeStringMalloc = 7;
-    int const static decodeStringMalloc = 8;
-    int const static mallocConstStrBuf_ = 9;
-    int const static TEST_SETUP_LINK = 10;
-    int const static TCP_ACCEPT_CALLBACK_FUNC = 11;
+    int const static setPendingSessionSetup = 6;
+    int const static setPendingSessionSetup3 = 6;
+    int const static encodeNumberMalloc = 7;
+    int const static encodeStringMalloc = 8;
+    int const static decodeStringMalloc = 9;
+    int const static mallocConstStrBuf_ = 10;
+    int const static TEST_SETUP_LINK = 11;
+    int const static TCP_ACCEPT_CALLBACK_FUNC = 12;
 
     int const static MAX_INDEX = 20;
 
