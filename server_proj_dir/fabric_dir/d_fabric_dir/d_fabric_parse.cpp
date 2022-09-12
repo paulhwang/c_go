@@ -574,7 +574,7 @@ void DFabricClass::processSetupSessionRequest (
     session->bindGroup(group);
 
     if (!strcmp(his_name_val, session->linkObject()->linkName())) {
-        this->sendMallocRoomRequestToThemeServer(group, theme_info_val);
+        this->sendSetupRoomRequestToThemeServer(group, theme_info_val);
     }
     else {
         LinkClass *his_link = this->theFabricObject->searchLinkByName(his_name_val);
@@ -620,10 +620,10 @@ void DFabricClass::sendSetupSessionResponce (
     this->transmitFunction(tp_transfer_object_val, downlink_data);
 }
 
-void DFabricClass::sendMallocRoomRequestToThemeServer (GroupClass *group_val, char *theme_info_val)
+void DFabricClass::sendSetupRoomRequestToThemeServer (GroupClass *group_val, char *theme_info_val)
 {
     char *data_ptr;
-    char *uplink_data = data_ptr = (char *) phwangMalloc(FT_CommandClass::FT_UL_DATA_BUF_SIZE, MallocClass::MALLOC_ROOM);
+    char *uplink_data = data_ptr = (char *) phwangMalloc(FT_CommandClass::FT_UL_DATA_BUF_SIZE, MallocClass::sendSetupRoomRequestToThemeServer);
     *data_ptr++ = FT_CommandClass::SETUP_ROOM_COMMAND;
     memcpy(data_ptr, group_val->groupIdIndex(), FT_CommandClass::GROUP_ID_INDEX_SIZE);
     data_ptr += FT_CommandClass::GROUP_ID_INDEX_SIZE;
@@ -656,7 +656,7 @@ void DFabricClass::processSetupSession2Request (
     }
 
     GroupClass *group = session->groupObject();
-    this->sendMallocRoomRequestToThemeServer(group, theme_info_val);
+    this->sendSetupRoomRequestToThemeServer(group, theme_info_val);
 
     char *data_ptr;
     char *downlink_data = data_ptr = (char *) phwangMalloc(FE_CommandClass::FE_DL_DATA_BUF_SIZE, MallocClass::SETUP_SESSION2);
