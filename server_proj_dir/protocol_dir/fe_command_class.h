@@ -45,12 +45,11 @@ public:
     char const static RESPOND_IS_GET_LINK_DATA_NAME_LIST = 'N';
 
     char const static *FAKE_LINK_ID_INDEX;
-    char const static *FAKE_SESSION_ID_INDEX;
-
     int const static LINK_ID_SIZE = 4;
     int const static LINK_INDEX_SIZE = 4;
     int const static LINK_ID_INDEX_SIZE = LINK_ID_SIZE + LINK_INDEX_SIZE;
 
+    char const static *FAKE_SESSION_ID_INDEX;
     int const static SESSION_ID_SIZE = 4;
     int const static SESSION_INDEX_SIZE = 4;
     int const static SESSION_ID_INDEX_SIZE = SESSION_ID_SIZE + SESSION_INDEX_SIZE;

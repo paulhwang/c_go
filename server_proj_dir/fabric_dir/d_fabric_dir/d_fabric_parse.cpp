@@ -562,13 +562,13 @@ void DFabricClass::processSetupSessionRequest (
 
     SessionClass *session = link_val->mallocSession();
     if (!session) {
-        this->errorProcessSetupSession(tp_transfer_object_val, ajax_id_val, "malloc_session_fail");
+        this->sendSetupSessionResponce(tp_transfer_object_val, ajax_id_val, link_val->linkIdIndex(), FE_CommandClass::FAKE_SESSION_ID_INDEX, "malloc_session_fail");
         return;
     }
 
     GroupClass *group = this->theFabricObject->mallocGroup(theme_info_val);
     if (!group) {
-        this->errorProcessSetupSession(tp_transfer_object_val, ajax_id_val, "malloc_group_fail");
+        this->sendSetupSessionResponce(tp_transfer_object_val, ajax_id_val, link_val->linkIdIndex(), session->sessionIdIndex(), "malloc_group_fail");
         return;
     }
     group->insertSession(session);
@@ -580,13 +580,13 @@ void DFabricClass::processSetupSessionRequest (
     else {
         LinkClass *his_link = this->theFabricObject->searchLinkByName(his_name_val);
         if (!his_link) {
-            this->errorProcessSetupSession(tp_transfer_object_val, ajax_id_val, "his_link does not exist");
+            this->sendSetupSessionResponce(tp_transfer_object_val, ajax_id_val, link_val->linkIdIndex(), session->sessionIdIndex(), "his_link_does_not_exist");
             return;
         }
 
         SessionClass *his_session = his_link->mallocSession();
         if (!his_session) {
-            this->errorProcessSetupSession(tp_transfer_object_val, ajax_id_val, "null his_session");
+            this->sendSetupSessionResponce(tp_transfer_object_val, ajax_id_val, link_val->linkIdIndex(), session->sessionIdIndex(), "null_his_session");
             return;
         }
 
@@ -617,19 +617,6 @@ void DFabricClass::sendSetupSessionResponce (
     strcpy(current_ptr, ajax_id_val);
     current_ptr += FE_CommandClass::AJAX_ID_SIZE;
     strcpy(current_ptr, session_id_index_val);
-    this->transmitFunction(tp_transfer_object_val, downlink_data);
-}
-
-void DFabricClass::errorProcessSetupSession (void *tp_transfer_object_val, char const *ajax_id_val, char const *err_msg_val)
-{
-    phwangAbendS("DFabricClass::errorProcessSetupSession", err_msg_val);
-
-    char *data_ptr;
-    char *downlink_data = data_ptr = (char *) phwangMalloc(FE_CommandClass::FE_DL_DATA_BUF_SIZE, MallocClass::SETUP_SESSION_ERROR);
-    *data_ptr++ = FE_CommandClass::SETUP_SESSION_RESPONSE;
-    strcpy(data_ptr, ajax_id_val);
-    data_ptr += FE_CommandClass::AJAX_ID_SIZE;
-    strcpy(data_ptr, err_msg_val);
     this->transmitFunction(tp_transfer_object_val, downlink_data);
 }
 
