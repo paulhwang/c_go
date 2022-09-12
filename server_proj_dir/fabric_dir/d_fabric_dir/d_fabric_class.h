@@ -81,7 +81,9 @@ class DFabricClass {
         char const *ajax_id_val,
         LinkClass *link_val);
 
-    void mallocRoom(GroupClass *group_val, char *theme_info_val);
+    void sendMallocRoomRequestToThemeServer (
+        GroupClass *group_val,
+        char *theme_info_val);
 
     void sendSetupSessionResponce (
         void *tp_transfer_object_val,
