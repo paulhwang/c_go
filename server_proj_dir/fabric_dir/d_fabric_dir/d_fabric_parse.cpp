@@ -452,11 +452,7 @@ void DFabricClass::processGetLinkDataRequest (
                 strcpy(current_ptr, session->sessionIdIndex());
                 current_ptr += FE_CommandClass::SESSION_ID_INDEX_SIZE;
 
-                if (1) { /* debug */
-                    char s[128];
-                    sprintf(s, "Pending data exist: %s", downlink_data);
-                    phwangDebugS(true, "DFabricClass::processGetLinkDataRequest", s);
-                }
+                phwangDebugSS(true, "DFabricClass::processGetLinkDataRequest","Pending_data_exist:", downlink_data);
             }
         }
     }

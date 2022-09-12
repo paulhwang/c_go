@@ -35,7 +35,7 @@ public:
     char const static PUT_SESSION_DATA_COMMAND  = 'P';
     char const static PUT_SESSION_DATA_RESPONSE = 'p';
     char const static GET_SESSION_DATA_COMMAND  = 'G';
-    char const static GET_SESSION_DATA_RESPONSE = 'G';
+    char const static GET_SESSION_DATA_RESPONSE = 'g';
     char const static MESSAGE_COMMAND  = 'M';
     char const static MESSAGE_RESPONSE = 'm';
 
