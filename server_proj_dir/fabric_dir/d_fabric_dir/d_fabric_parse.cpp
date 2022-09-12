@@ -705,13 +705,17 @@ void DFabricClass::errorProcessFreeSession (void *tp_transfer_object_val, char c
 {
 }
 
-void DFabricClass::processPutSessionDataRequest (void *tp_transfer_object_val, char *data_val, char const *ajax_id_val, SessionClass *session_val)
+void DFabricClass::processPutSessionDataRequest (
+    void *tp_transfer_object_val,
+    char *data_val,
+    char const *ajax_id_val,
+    SessionClass *session_val)
 {
     phwangDebugS(true, "DFabricClass::processPutSessionDataRequest", data_val);
 
     char *room = session_val->groupObject()->roomIdIndex();
     if (!room) {
-        this->errorProcessPutSessionData(tp_transfer_object_val, ajax_id_val, "null room");
+        this->sendPutSessionDataResponce(tp_transfer_object_val, ajax_id_val, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex(), "null_room");
         return;
     }
 
@@ -729,17 +733,7 @@ void DFabricClass::processPutSessionDataRequest (void *tp_transfer_object_val, c
     strcpy(data_ptr, data_val);
     this->theFabricObject->uFabricObject()->transmitFunction(uplink_data);
 
-    /* send the response down */
-    char *downlink_data = data_ptr = (char *) phwangMalloc(FE_CommandClass::FE_DL_DATA_BUF_SIZE, MallocClass::PUT_SESSION_DATA1);
-    *data_ptr++ = FE_CommandClass::PUT_SESSION_DATA_RESPONSE;
-    strcpy(data_ptr, ajax_id_val);
-    data_ptr += FE_CommandClass::AJAX_ID_SIZE;
-    memcpy(data_ptr, session_val->linkObject()->linkIdIndex(), FE_CommandClass::LINK_ID_INDEX_SIZE);
-    data_ptr += FE_CommandClass::LINK_ID_INDEX_SIZE;
-    memcpy(data_ptr, session_val->sessionIdIndex(), FE_CommandClass::SESSION_ID_INDEX_SIZE);
-    data_ptr += FE_CommandClass::SESSION_ID_INDEX_SIZE;
-    strcpy(data_ptr, "job is done");
-    this->transmitFunction(tp_transfer_object_val, downlink_data);
+    this->sendPutSessionDataResponce(tp_transfer_object_val, ajax_id_val, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex(), "succeed");
 }
 
 void DFabricClass::sendPutSessionDataResponce (
@@ -751,19 +745,16 @@ void DFabricClass::sendPutSessionDataResponce (
 {
     phwangDebugS(false, "sendPutSessionDataResponce", result_val);
 
-}
-
-
-void DFabricClass::errorProcessPutSessionData (void *tp_transfer_object_val, char const *ajax_id_val, char const *err_msg_val)
-{
-    phwangAbendS("DFabricClass::errorProcessPutSessionData", err_msg_val);
-
-    char *data_ptr;
-    char *downlink_data = data_ptr = (char *) phwangMalloc(FE_CommandClass::FE_DL_DATA_BUF_SIZE, MallocClass::PUT_SESSION_DATA_ERROR);
-    *data_ptr++ = FE_CommandClass::PUT_SESSION_DATA_RESPONSE;
-    strcpy(data_ptr, ajax_id_val);
-    data_ptr += FE_CommandClass::AJAX_ID_SIZE;
-    strcpy(data_ptr, err_msg_val);
+    char *current_ptr;
+    char *downlink_data = current_ptr = (char *) phwangMalloc(FE_CommandClass::FE_DL_DATA_BUF_SIZE, MallocClass::PUT_SESSION_DATA1);
+    *current_ptr++ = FE_CommandClass::PUT_SESSION_DATA_RESPONSE;
+    strcpy(current_ptr, ajax_id_val);
+    current_ptr += FE_CommandClass::AJAX_ID_SIZE;
+    memcpy(current_ptr, link_id_index_val, FE_CommandClass::LINK_ID_INDEX_SIZE);
+    current_ptr += FE_CommandClass::LINK_ID_INDEX_SIZE;
+    memcpy(current_ptr, session_id_index_val, FE_CommandClass::SESSION_ID_INDEX_SIZE);
+    current_ptr += FE_CommandClass::SESSION_ID_INDEX_SIZE;
+    strcpy(current_ptr, "job is done");
     this->transmitFunction(tp_transfer_object_val, downlink_data);
 }
 

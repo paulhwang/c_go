@@ -50,7 +50,6 @@ class DFabricClass {
     void errorProcessSetupSession(void *tp_transfer_object_val, char const *ajax_id_val, char const *err_msg_val);
     void errorProcessSetupSession2(void *tp_transfer_object_val, char const *ajax_id_val, char const *err_msg_val);
     void errorProcessFreeSession(void *tp_transfer_object_val, char const *ajax_id_val, char const *err_msg_val);
-    void errorProcessPutSessionData(void *tp_transfer_object_val, char const *ajax_id_val, char const *err_msg_val);
     void sendSearchLinkFailResponse (char const command_val, void *tp_transfer_object_val, char const *ajax_id_val);
     void sendSearchLinkSessionFailResponse (char const command_val, void *tp_transfer_object_val, char const *ajax_id_val);
     void sendPutSessionDataResponce(void *tp_transfer_object_val, char const *ajax_id_val, char const *link_id_index_val, char const *session_id_index_val, char const *result_val);
