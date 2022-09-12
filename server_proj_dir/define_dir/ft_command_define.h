@@ -1,7 +1,7 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: fabric_theme_protocol.h
+  File name: ft_command_define.h
 */
 
 #pragma once

@@ -5,7 +5,7 @@
 */
 
 #include "../../phwang_dir/phwang.h"
-#include "../protocol_dir/ft_command_class.h"
+#include "../define_dir/ft_command_define.h"
 #include "theme_class.h"
 #include "u_theme_dir/u_theme_class.h"
 #include "d_theme_dir/d_theme_class.h"

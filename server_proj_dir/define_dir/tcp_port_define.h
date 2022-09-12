@@ -1,7 +1,7 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: tcp_port_class.h
+  File name: tcp_port_define.h
 */
 
 #pragma once

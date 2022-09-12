@@ -5,7 +5,7 @@
 */
 
 #include "../../phwang_dir/phwang.h"
-#include "../protocol_dir/te_command_class.h"
+#include "../define_dir/te_command_define.h"
 #include "engine_class.h"
 #include "go_base_dir/go_base_class.h"
 #include "d_engine_dir/d_engine_class.h"

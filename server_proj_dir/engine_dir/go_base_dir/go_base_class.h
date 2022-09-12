@@ -7,7 +7,7 @@
 #pragma once
 
 #include "../../../phwang_dir/phwang.h"
-#include "../../protocol_dir/ft_command_class.h"
+#include "../../define_dir/ft_command_define.h"
 #include "../../../phwang_dir/list_mgr_dir/list_entry_class.h"
 #include "go_define.h"
 #include "go_board_class.h"

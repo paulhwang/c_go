@@ -6,7 +6,7 @@
 
 #include "../../../phwang_dir/phwang.h"
 #include "../../../phwang_dir/malloc_dir/malloc_class.h"
-#include "../../protocol_dir/te_command_class.h"
+#include "../../define_dir/te_command_define.h"
 #include "d_engine_class.h"
 #include "../engine_class.h"
 

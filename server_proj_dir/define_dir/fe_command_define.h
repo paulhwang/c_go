@@ -1,7 +1,7 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: fe_command_class.h
+  File name: fe_command_define.h
 */
 
 #pragma once

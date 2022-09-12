@@ -6,8 +6,6 @@ include Makefile.inc
 SERVER_PROJ_DIR = server_proj_dir
 CLIENT_PROJ_DIR = client_proj_dir
 PHWANG_DIR        = phwang_dir
-INCLUDE_DIR       = include_dir
-PROTOCOL_DIR      = $(INCLUDE_DIR)/protocol_dir
 JSON_DIR          = $(PHWANG_DIR)/json_dir
 SUSPEND_DIR       = $(PHWANG_DIR)/suspend_dir
 LIST_MGR_DIR      = $(PHWANG_DIR)/list_mgr_dir
@@ -26,7 +24,7 @@ THREAD_DIR        = $(PHWANG_DIR)/thread_dir
 OBJECT_DIR        = $(PHWANG_DIR)/object_dir
 SERVER_DIR        = $(SERVER_PROJ_DIR)/server_dir
 DB_DIR            = $(SERVER_PROJ_DIR)/db_dir
-PROTOCOL_DIR      = $(SERVER_PROJ_DIR)/protocol_dir
+DEFINE_DIR        = $(SERVER_PROJ_DIR)/define_dir
 FABRIC_DIR        = $(SERVER_PROJ_DIR)/fabric_dir
 THEME_DIR         = $(SERVER_PROJ_DIR)/theme_dir
 ENGINE_DIR        = $(SERVER_PROJ_DIR)/engine_dir
@@ -63,7 +61,7 @@ OBJECT_OBJS = $(OBJECT_DIR)/object_class.o
 PHWANG_OBJS = $(PHWANG_DIR)/phwang.o $(PHWANG_DIR)/phwang1.o $(PHWANG_DIR)/phwang_class.o $(JSON_OBJS) $(SUSPEND_OBJS) $(LIST_MGR_OBJS) $(ARRAY_MGR_OBJS) $(ID_INDEX_LIST_OBJS) $(QUEUE_OBJS) $(NET_OBJS) $(SQL_OBJS) $(MALLOC_OBJS) $(ENCODE_OBJS) $(THREAD_OBJS) $(ABEND_OBJS) $(ATOMIC_OBJS)
 
 SERVER_OBJS = $(SERVER_DIR)/server_main.o $(SERVER_DIR)/server_root_class.o
-PROTOCOL_OBJS = $(PROTOCOL_DIR)/fe_command_class.o
+DEFINE_OBJS = $(DEFINE_DIR)/fe_command_define.o
 DB_OBJS = $(DB_DIR)/db_class.o $(DB_DIR)/db_account_class.o $(DB_DIR)/db_account_entry_class.o $(DB_DIR)/db_test_class.o
 MMW_OBJS = $(MMW_DIR)/mmw_frame_class.o $(MMW_DIR)/mmw_input_class.o $(MMW_DIR)/mmw_thread_class.o $(MMW_DIR)/mmw_class.o
 MESSENGER_OBJS = $(MMW_OBJS) $(MESSENGER_DIR)/messenger_class.o
@@ -77,7 +75,7 @@ GO_BASE_OBJS = $(GO_BASE_DIR)/go_base_class.o $(GO_BASE_DIR)/go_game_class.o $(G
 D_ENGINE_OBJS = $(D_ENGINE_DIR)/d_engine_class.o $(D_ENGINE_DIR)/d_engine_transmit.o $(D_ENGINE_DIR)/d_engine_parse.o 
 ENGINE_OBJS = $(D_ENGINE_OBJS) $(GO_BASE_OBJS) $(ENGINE_DIR)/engine_class.o 
 TEST_OBJS = $(TEST_DIR)/test_class.o $(TEST_DIR)/test_thread.o $(TEST_DIR)/test_transmit.o $(TEST_DIR)/test_parse.o $(TEST_DIR)/test_case1.o 
-SERVER_PROJ_OBJS = $(SERVER_OBJS) $(DB_OBJS) $(FABRIC_OBJS) $(THEME_OBJS) $(ENGINE_OBJS) $(TEST_OBJS) $(PROTOCOL_OBJS)
+SERVER_PROJ_OBJS = $(SERVER_OBJS) $(DB_OBJS) $(FABRIC_OBJS) $(THEME_OBJS) $(ENGINE_OBJS) $(TEST_OBJS) $(DEFINE_OBJS)
 
 CLIENT_OBJS = $(CLIENT_DIR)/go_client.o
 CLIENT_PROJ_OBJS = $(CLIENT_OBJS)

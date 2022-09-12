@@ -1,7 +1,7 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: te_command_class.h
+  File name: te_command_define.h
 */
 
 #pragma once

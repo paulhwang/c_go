@@ -5,7 +5,7 @@
 */
 
 #include "../../../phwang_dir/phwang.h"
-#include "../../protocol_dir/ft_command_class.h"
+#include "../../define_dir/ft_command_define.h"
 #include "u_fabric_class.h"
 #include "../fabric_class.h"
 #include "../d_fabric_dir/d_fabric_class.h"

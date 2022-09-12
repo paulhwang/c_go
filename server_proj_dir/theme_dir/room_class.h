@@ -6,7 +6,7 @@
 
 #pragma once
 #include "../../phwang_dir/list_mgr_dir/list_entry_class.h"
-#include "../protocol_dir/te_command_class.h"
+#include "../define_dir/te_command_define.h"
 
 class SessionClass;
 class IdIndexListClass;

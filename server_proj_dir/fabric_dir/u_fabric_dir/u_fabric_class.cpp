@@ -6,7 +6,7 @@
 
 #include "../../../phwang_dir/phwang.h"
 #include "../../../phwang_dir/abend_dir/abend_class.h"
-#include "../../protocol_dir/tcp_port_class.h"
+#include "../../define_dir/tcp_port_define.h"
 #include "u_fabric_class.h"
 
 UFabricClass::UFabricClass (FabricClass *fabric_object_val)

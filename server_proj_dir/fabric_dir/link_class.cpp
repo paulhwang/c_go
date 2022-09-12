@@ -9,7 +9,7 @@
 #include "link_class.h"
 #include "session_class.h"
 #include "fabric_class.h"
-#include "../protocol_dir/fe_command_class.h"
+#include "../define_dir/fe_command_define.h"
   
 LinkClass::LinkClass (
     void *list_mgr_object_val,

@@ -6,7 +6,6 @@
 
 #pragma once
 
-#include "../protocol_dir/fe_command_class.h"
 class FabricClass;
 
 class NameListClass {
