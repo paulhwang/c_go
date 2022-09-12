@@ -714,6 +714,18 @@ void DFabricClass::processPutSessionDataRequest (void *tp_transfer_object_val, c
     this->transmitFunction(tp_transfer_object_val, downlink_data);
 }
 
+void DFabricClass::sendPutSessionDataResponce (
+    void *tp_transfer_object_val,
+    char const *ajax_id_val,
+    char const *link_id_index_val,
+    char const *session_id_index_val,
+    char const *result_val)
+{
+    phwangDebugS(false, "sendPutSessionDataResponce", result_val);
+
+}
+
+
 void DFabricClass::errorProcessPutSessionData (void *tp_transfer_object_val, char const *ajax_id_val, char const *err_msg_val)
 {
     phwangAbendS("DFabricClass::errorProcessPutSessionData", err_msg_val);
@@ -737,6 +749,8 @@ void DFabricClass::processGetSessionDataRequest (void *tp_transfer_object_val, c
         phwangAbendSI("DFabricClass::processGetSessionDataRequest", "buf_size", strlen(data));
     }
 
+    //this->sendGetSessionDataResponce(tp_transfer_object_val, ajax_id_val, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex(), "succeed", data);
+
     char *data_ptr;
     char *downlink_data = data_ptr = (char *) phwangMalloc(FE_CommandClass::FE_DL_DATA_BUF_SIZE, MallocClass::GET_SESSION_DATA);
     *data_ptr++ = FE_CommandClass::GET_SESSION_DATA_RESPONSE;
@@ -750,15 +764,37 @@ void DFabricClass::processGetSessionDataRequest (void *tp_transfer_object_val, c
     this->transmitFunction(tp_transfer_object_val, downlink_data);
 }
 
-void DFabricClass::errorProcessGetSessionData (void *tp_transfer_object_val, char const *ajax_id_val, char const *err_msg_val)
+void DFabricClass::sendGetSessionDataResponce (
+    void *tp_transfer_object_val,
+    char const *ajax_id_val,
+    char const *link_id_index_val,
+    char const *session_id_index_val,
+    char const *result_val,
+    char const *data_val)
 {
-    phwangAbendS("DFabricClass::errorProcessGetSessionData", err_msg_val);
+    phwangDebugS(false, "sendGetSessionDataResponce", result_val);
 
+    char *current_ptr;
+    char *downlink_data = current_ptr = (char *) phwangMalloc(FE_CommandClass::FE_DL_DATA_BUF_SIZE, MallocClass::GET_SESSION_DATA);
+    *current_ptr++ = FE_CommandClass::GET_SESSION_DATA_RESPONSE;
+    strcpy(current_ptr, ajax_id_val);
+    current_ptr += FE_CommandClass::AJAX_ID_SIZE;
+    memcpy(current_ptr, link_id_index_val, FE_CommandClass::LINK_ID_INDEX_SIZE);
+    current_ptr += FE_CommandClass::LINK_ID_INDEX_SIZE;
+    memcpy(current_ptr, session_id_index_val, FE_CommandClass::SESSION_ID_INDEX_SIZE);
+    current_ptr += FE_CommandClass::SESSION_ID_INDEX_SIZE;
+    strcpy(current_ptr, data_val);
+    this->transmitFunction(tp_transfer_object_val, downlink_data);
+
+/*
     char *data_ptr;
-    char *downlink_data = data_ptr = (char *) phwangMalloc(FE_CommandClass::FE_DL_DATA_BUF_SIZE, MallocClass::GET_SESSION_DATA_ERROR);
-    *data_ptr++ = FE_CommandClass::GET_SESSION_DATA_RESPONSE;
+    char *downlink_data = data_ptr = (char *) phwangMalloc(FE_CommandClass::FE_DL_DATA_BUF_SIZE + strlen(result_val), MallocClass::SIGN_IN);
+    *data_ptr++ = FE_CommandClass::SETUP_LINK_RESPONSE;
     strcpy(data_ptr, ajax_id_val);
     data_ptr += FE_CommandClass::AJAX_ID_SIZE;
-    strcpy(data_ptr, err_msg_val);
+    strcpy(data_ptr, link_id_index_val);
+    data_ptr += FE_CommandClass::LINK_ID_INDEX_SIZE;
+    strcpy(data_ptr, result_val);
     this->transmitFunction(tp_transfer_object_val, downlink_data);
+*/
 }
