@@ -9,9 +9,12 @@
 #include "group_class.h"
 #include "fabric_class.h"
 
-GroupClass::GroupClass (void *list_mgr_object_val, FabricClass *fabric_object_val, char *theme_data_val):
-        ListEntryClass(list_mgr_object_val),
-        theFabricObject(fabric_object_val)
+GroupClass::GroupClass (
+    void *list_mgr_object_val,
+    FabricClass *fabric_object_val,
+    char *theme_data_val)
+    :ListEntryClass(list_mgr_object_val),
+     theFabricObject(fabric_object_val)
 {
     this->theSessionArrayMgr = phwangArrayMgrMalloc(this->objectName(), 'o', 10);
     this->theSessionTableArray = 0;

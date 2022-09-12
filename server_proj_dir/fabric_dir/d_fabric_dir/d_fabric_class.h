@@ -30,6 +30,16 @@ class DFabricClass {
     void setTimeStampString(void);
     void startNetServer(void);
 
+    void sendSearchLinkFailResponse (
+        char const command_val,
+        void *tp_transfer_object_val,
+        char const *ajax_id_val);
+
+    void sendSearchLinkSessionFailResponse (
+        char const command_val,
+        void *tp_transfer_object_val,
+        char const *ajax_id_val);
+
     void processMessageRequest (
         void *tp_transfer_object_val,
         char *data_val,
@@ -62,17 +72,40 @@ class DFabricClass {
         char const *link_id_index_val,
         char const *err_msg_val);
 
-    void processFreeLinkRequest(void *tp_transfer_object_val, char *data_val, char const *ajax_id_val, LinkClass *link_val);
-    void processGetLinkDataRequest(void *tp_transfer_object_val, char *data_val, char const *ajax_id_val, LinkClass *link_val);
-    void processGetNameListRequest(void *tp_transfer_object_val, char *data_val, char const *ajax_id_val, LinkClass *link_val);
+    void processFreeLinkRequest (
+        void *tp_transfer_object_val,
+        char *data_val,
+        char const *ajax_id_val,
+        LinkClass *link_val);
 
-    void errorProcessFreeLink(void *tp_transfer_object_val, char const *ajax_id_val, char const *err_msg_val);
+    void sendFreeLinkResponce (
+        void *tp_transfer_object_val,
+        char const *ajax_id_val,
+        char const *link_id_index_val,
+        char const *result_val);
+
+    void processGetLinkDataRequest (
+        void *tp_transfer_object_val,
+        char *data_val,
+        char const *ajax_id_val,
+        LinkClass *link_val);
+
+    void processGetNameListRequest (
+        void *tp_transfer_object_val,
+        char *data_val,
+        char const *ajax_id_val,
+        LinkClass *link_val);
+
     void errorProcessGetLinkData(void *tp_transfer_object_val, char const *ajax_id_val, char const *err_msg_val);
     void errorProcessGetNameList(void *tp_transfer_object_val, char const *ajax_id_val, char const *err_msg_val);
     void errorProcessSetupSession2(void *tp_transfer_object_val, char const *ajax_id_val, char const *err_msg_val);
-    void errorProcessFreeSession(void *tp_transfer_object_val, char const *ajax_id_val, char const *err_msg_val);
-    void sendSearchLinkFailResponse (char const command_val, void *tp_transfer_object_val, char const *ajax_id_val);
-    void sendSearchLinkSessionFailResponse (char const command_val, void *tp_transfer_object_val, char const *ajax_id_val);
+
+    void sendFreeSessionResponce (
+        void *tp_transfer_object_val,
+        char const *ajax_id_val,
+        char const *link_id_index_val,
+        char const *session_id_index_val,
+        char const *result_val);
 
     void processSetupSessionRequest (
         void *tp_transfer_object_val,
@@ -91,9 +124,30 @@ class DFabricClass {
         char const *session_id_index_val,
         char const *result_val);
 
-    void processSetupSession2Request (void *tp_transfer_object_val, char *data_val, char const *ajax_id_val, LinkClass *link_val);
-    void processSetupSession3Request (void *tp_transfer_object_val, char *data_val, char const *ajax_id_val, LinkClass *link_val);
-    void processFreeSessionRequest (void *tp_transfer_object_val, char *data_val, char const *ajax_id_val, SessionClass *session_val);
+    void processSetupSession2Request (
+        void *tp_transfer_object_val,
+        char *data_val,
+        char const *ajax_id_val,
+        LinkClass *link_val);
+
+    void processSetupSession3Request (
+        void *tp_transfer_object_val,
+        char *data_val,
+        char const *ajax_id_val,
+        LinkClass *link_val);
+
+    void sendSetupSession3Responce (
+        void *tp_transfer_object_val,
+        char const *ajax_id_val,
+        char const *link_id_index_val,
+        char const *session_id_index_val,
+        char const *result_val);
+
+    void processFreeSessionRequest (
+        void *tp_transfer_object_val,
+        char *data_val,
+        char const *ajax_id_val,
+        SessionClass *session_val);
 
     void processPutSessionDataRequest (
         void *tp_transfer_object_val,

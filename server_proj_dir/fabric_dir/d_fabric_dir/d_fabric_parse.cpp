@@ -410,17 +410,14 @@ void DFabricClass::processFreeLinkRequest (
     this->theFabricObject->freeLink(link_val);
 }
 
-void DFabricClass::errorProcessFreeLink (void *tp_transfer_object_val, char const *ajax_id_val, char const *err_msg_val)
+void DFabricClass::sendFreeLinkResponce (
+    void *tp_transfer_object_val,
+    char const *ajax_id_val,
+    char const *link_id_index_val,
+    char const *result_val)
 {
-    phwangAbendS("DFabricClass::errorProcessFreeLink", err_msg_val);
+    phwangDebugS(false, "DFabricClass::sendFreeLinkResponce", result_val);
 
-    char *data_ptr;
-    char *downlink_data = data_ptr = (char *) phwangMalloc(FE_CommandClass::FE_DL_DATA_BUF_SIZE, MallocClass::FREE_LINK_ERROR);
-    *data_ptr++ = FE_CommandClass::FREE_LINK_RESPONSE;
-    strcpy(data_ptr, ajax_id_val);
-    data_ptr += FE_CommandClass::AJAX_ID_SIZE;
-    strcpy(data_ptr, err_msg_val);
-    this->transmitFunction(tp_transfer_object_val, downlink_data);
 }
 
 void DFabricClass::processGetLinkDataRequest (
@@ -466,20 +463,20 @@ void DFabricClass::processGetLinkDataRequest (
         }
     }
 
-    char *pending_session = link_val->getPendingSessionSetup();
-    if (pending_session) {
+    char *pending_session_info = link_val->getPendingSessionSetup();
+    if (pending_session_info) {
         *current_ptr++ = FE_CommandClass::RESPOND_IS_GET_LINK_DATA_PENDING_SESSION;
-        strcpy(current_ptr, pending_session);
+        strcpy(current_ptr, pending_session_info);
         phwangDebugSS(true, "DFabricClass::processGetLinkDataRequest", "getPendingSessionSetup ", downlink_data);
-        phwangFree(pending_session);
+        phwangFree(pending_session_info);
     }
 
-    char *pending_session3 = link_val->getPendingSessionSetup3();
-    if (pending_session3) {
+    char *pending_session_info3 = link_val->getPendingSessionSetup3();
+    if (pending_session_info3) {
         *current_ptr++ = FE_CommandClass::RESPOND_IS_GET_LINK_DATA_PENDING_SESSION3;
-        strcpy(current_ptr, pending_session3);
+        strcpy(current_ptr, pending_session_info3);
         phwangDebugSS(true, "DFabricClass::processGetLinkDataRequest", "getPendingSessionSetup3 ", downlink_data);
-        phwangFree(pending_session3);
+        phwangFree(pending_session_info3);
     }
 
     this->transmitFunction(tp_transfer_object_val, downlink_data);
@@ -706,12 +703,35 @@ void DFabricClass::processSetupSession3Request (
     this->transmitFunction(tp_transfer_object_val, downlink_data);
 }
 
-void DFabricClass::processFreeSessionRequest (void *tp_transfer_object_val, char *data_val, char const *ajax_id_val, SessionClass *session_val)
+void DFabricClass::sendSetupSession3Responce (
+    void *tp_transfer_object_val,
+    char const *ajax_id_val,
+    char const *link_id_index_val,
+    char const *session_id_index_val,
+    char const *result_val)
 {
+    phwangDebugS(false, "sendSetupSession3Responce", result_val);
 }
 
-void DFabricClass::errorProcessFreeSession (void *tp_transfer_object_val, char const *ajax_id_val, char const *err_msg_val)
+/* free session */
+
+void DFabricClass::processFreeSessionRequest (
+    void *tp_transfer_object_val,
+    char *data_val,
+    char const *ajax_id_val,
+    SessionClass *session_val)
 {
+    phwangDebugS(true, "DFabricClass::processFreeSessionRequest", data_val);
+}
+
+void DFabricClass::sendFreeSessionResponce (
+    void *tp_transfer_object_val,
+    char const *ajax_id_val,
+    char const *link_id_index_val,
+    char const *session_id_index_val,
+    char const *result_val)
+{
+    phwangDebugS(false, "sendFreeSessionResponce", result_val);
 }
 
 /* put session data */
