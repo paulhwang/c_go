@@ -28,12 +28,8 @@ void *PortClass::receiveThreadFunction (int socket_val)
             phwangDebugWSISS(false, "PortClass::receiveThreadFunction", this->theWho, "len=", length, " data=", data);
 
             if ((*data != '{') && (*data != '[')) {
-                if (1) { /* debug */
-                    char s[2000];
-                    sprintf(s, "(%s) data=%s len=%d", this->theWho, data, length);
-                    phwangDebugWS(true, "PortClass::receiveThreadFunction", this->theWho, s);
-                }
-                phwangAbendS("PortClass::receiveThreadFunction: wrong header", data);
+                phwangDebugWSISS(true, "PortClass::receiveThreadFunction", this->theWho, "len", length, "data=", data);
+                phwangAbendWSS("PortClass::receiveThreadFunction", this->theWho, "wrong header", data);
                 phwangFree(data);
                 continue;
             }

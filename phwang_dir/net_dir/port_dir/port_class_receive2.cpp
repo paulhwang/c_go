@@ -24,19 +24,14 @@ void *PortClass::receiveThreadFunction2 (void)
             int length1;
             char *data;
 
-            if (0) { /* debug */
-                char s[128];
-                sprintf(s, "(%s) data=%s", this->theWho, raw_data);
-                phwangDebugWS(true, "PortClass::receiveThreadFunction2", this->theWho, s);
-            }
+            phwangDebugWS(false, "PortClass::receiveThreadFunction2", this->theWho, raw_data);
 
             if (raw_data[0] == '{') {
                 length = raw_length - (1 + PortClass::DATA_LENGTH_SIZE + 1);
                 length1 = phwangDecodeNumber(&raw_data[1], PortClass::DATA_LENGTH_SIZE);
                 if (length != length1) {
-                    char s[128];
-                    sprintf(s, "(%s) length not match!!! data=%s len=%d %d", this->theWho, raw_data, length, length1);
-                    phwangAbendWS("PortClass::receiveThreadFunction2", this->theWho, s);
+                    phwangDebugWSISI(true, "PortClass::receiveThreadFunction2", this->theWho, "length", length, "length1", length1);
+                    phwangAbendWSS("PortClass::receiveThreadFunction2", this->theWho, "length not match", raw_data);
                 }
 
                 data = (char *) phwangMalloc(length + 32, MallocClass::receiveThreadFunction2);
@@ -44,11 +39,7 @@ void *PortClass::receiveThreadFunction2 (void)
                 data[length] = 0;
              }
             else {
-                if (1) { /* debug */
-                    char s[2000];
-                    sprintf(s, "(%s) data=%s len=%lu", this->theWho, raw_data, strlen(raw_data));
-                    phwangDebugWS(true, "PortClass::receiveThreadFunction2", this->theWho, s);
-                }
+                phwangDebugWSISS(true, "PortClass::receiveThreadFunction2", this->theWho, "len", strlen(raw_data), "data", raw_data);
                 phwangAbendWS("PortClass::receiveThreadFunction2: wrong header", this->theWho, raw_data);
                 continue;
             }
