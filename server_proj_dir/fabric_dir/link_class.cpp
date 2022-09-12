@@ -51,6 +51,21 @@ SessionClass *LinkClass::mallocSession (void)
     return session;
 }
 
+SessionClass *LinkClass::searchSession (char *data_val)
+{
+    return (SessionClass *) phwangListMgrSearchEntry(this->theSessionListMgrObject, data_val, 0);
+}
+
+char *LinkClass::getPendingSessionSetup (void)
+{
+    return (char *) phwangDequeue(this->thePendingSessionSetupQueue, "LinkClass::getPendingSessionSetup()");
+}
+
+char *LinkClass::getPendingSessionSetup3 (void)
+{
+    return (char *) phwangDequeue(this->thePendingSessionSetupQueue3, "LinkClass::getPendingSessionSetup3()");
+}
+
 void LinkClass::setPendingSessionSetup (
     char *session_id_index_val,
     char *theme_data_val)
