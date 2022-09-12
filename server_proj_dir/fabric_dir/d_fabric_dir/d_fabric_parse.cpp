@@ -389,7 +389,11 @@ void DFabricClass::sendSetupLinkResponce (
     this->transmitFunction(tp_transfer_object_val, downlink_data);
 }
 
-void DFabricClass::processFreeLinkRequest (void *tp_transfer_object_val, char *data_val, char const *ajax_id_val, LinkClass *link_val)
+void DFabricClass::processFreeLinkRequest (
+    void *tp_transfer_object_val,
+    char *data_val,
+    char const *ajax_id_val,
+    LinkClass *link_val)
 {
     phwangDebugS(false, "DFabricClass::processFreeLinkRequest", data_val);
 
@@ -422,7 +426,11 @@ void DFabricClass::errorProcessFreeLink (void *tp_transfer_object_val, char cons
 #define D_FABRIC_CLASS_PROCESSS_GET_LINK_DATA_DOWN_LINK_PENDING_DATA_SIZE (1 + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + LINK_MGR_PROTOCOL_SESSION_ID_INDEX_SIZE)
 #define D_FABRIC_CLASS_PROCESSS_GET_LINK_DATA_DOWN_LINK_DATA_SIZE (1 + WEB_FABRIC_PROTOCOL_AJAX_ID_SIZE + LINK_MGR_PROTOCOL_LINK_ID_INDEX_SIZE + 1 + WEB_FABRIC_PROTOCOL_NAME_LIST_TAG_SIZE + 1)
 #define D_FABRIC_CLASS_PROCESSS_GET_LINK_DATA_DOWN_LINK_PENDING_SESSION_SIZE (1 + WEB_FABRIC_PROTOCOL_NAME_LIST_TAG_SIZE)
-void DFabricClass::processGetLinkDataRequest (void *tp_transfer_object_val, char *data_val, char const *ajax_id_val, LinkClass *link_val)
+void DFabricClass::processGetLinkDataRequest (
+    void *tp_transfer_object_val,
+    char *data_val,
+    char const *ajax_id_val,
+    LinkClass *link_val)
 {
     phwangDebugS(false, "DFabricClass::processGetLinkDataRequest", data_val);
 
@@ -491,7 +499,11 @@ void DFabricClass::errorProcessGetLinkData (void *tp_transfer_object_val, char c
     this->transmitFunction(tp_transfer_object_val, downlink_data);
 }
 
-void DFabricClass::processGetNameListRequest (void *tp_transfer_object_val, char *data_val, char const *ajax_id_val, LinkClass *link_val)
+void DFabricClass::processGetNameListRequest (
+    void *tp_transfer_object_val,
+    char *data_val,
+    char const *ajax_id_val,
+    LinkClass *link_val)
 {
     phwangDebugS(false, "DFabricClass::processGetNameListRequest", data_val);
 
@@ -526,7 +538,11 @@ void DFabricClass::errorProcessGetNameList (void *tp_transfer_object_val, char c
     this->transmitFunction(tp_transfer_object_val, downlink_data);
 }
 
-void DFabricClass::processSetupSessionRequest (void *tp_transfer_object_val, char *data_val, char const *ajax_id_val, LinkClass *link_val)
+void DFabricClass::processSetupSessionRequest (
+    void *tp_transfer_object_val,
+    char *data_val,
+    char const *ajax_id_val,
+    LinkClass *link_val)
 {
     phwangDebugS(true, "DFabricClass::processSetupSessionRequest", data_val);
 
@@ -592,7 +608,11 @@ void DFabricClass::processSetupSessionRequest (void *tp_transfer_object_val, cha
     this->transmitFunction(tp_transfer_object_val, downlink_data);
 }
 
-void DFabricClass::sendSetupSessionResponce (void *tp_transfer_object_val, char const *ajax_id_val, char const *link_id_index_val, char const *result_val)
+void DFabricClass::sendSetupSessionResponce (
+    void *tp_transfer_object_val,
+    char const *ajax_id_val,
+    char const *link_id_index_val,
+    char const *result_val)
 {
     phwangDebugS(false, "DFabricClass::sendSetupSessionResponce", result_val);
     /*
@@ -630,7 +650,11 @@ void DFabricClass::mallocRoom (GroupClass *group_val, char *theme_info_val)
     this->theFabricObject->uFabricObject()->transmitFunction(uplink_data);
 }
 
-void DFabricClass::processSetupSession2Request (void *tp_transfer_object_val, char *data_val, char const *ajax_id_val, LinkClass *link_val)
+void DFabricClass::processSetupSession2Request (
+    void *tp_transfer_object_val,
+    char *data_val,
+    char const *ajax_id_val,
+    LinkClass *link_val)
 {
     phwangDebugS(true, "DFabricClass::processSetupSession2Request", data_val);
 
@@ -679,7 +703,11 @@ void DFabricClass::errorProcessSetupSession2 (void *tp_transfer_object_val, char
     this->transmitFunction(tp_transfer_object_val, downlink_data);
 }
 
-void DFabricClass::processSetupSession3Request (void *tp_transfer_object_val, char *data_val, char const *ajax_id_val, LinkClass *link_val)
+void DFabricClass::processSetupSession3Request (
+    void *tp_transfer_object_val,
+    char *data_val,
+    char const *ajax_id_val,
+    LinkClass *link_val)
 {
     phwangDebugS(true, "DFabricClass::processSetupSession3Reques", data_val);
 
@@ -713,27 +741,33 @@ void DFabricClass::processPutSessionDataRequest (
 {
     phwangDebugS(true, "DFabricClass::processPutSessionDataRequest", data_val);
 
-    char *room = session_val->groupObject()->roomIdIndex();
-    if (!room) {
+    char *room_id = session_val->groupObject()->roomIdIndex();
+    if (!room_id) {
         this->sendPutSessionDataResponce(tp_transfer_object_val, ajax_id_val, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex(), "null_room");
         return;
     }
 
-    char *data_ptr;
+    this->sendPutSessionDataRequestToThemeServer(room_id, data_val);
+    this->sendPutSessionDataResponce(tp_transfer_object_val, ajax_id_val, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex(), "succeed");
+}
 
+void DFabricClass::sendPutSessionDataRequestToThemeServer (
+    char const *room_id_val,
+    char const *data_val)
+{
     /* transfer data up */
     if (strlen(data_val) > FT_CommandClass::FT_UL_DATA_BUF_SIZE) {
-        phwangAbendSI("DFabricClass::processPutSessionDataRequest", "buf_size", strlen(data_val));
+        phwangAbendSI("DFabricClass::sendPutSessionDataRequestToThemeServer", "buf_size", strlen(data_val));
+        return;
     }
 
+    char *data_ptr;
     char *uplink_data = data_ptr = (char *) phwangMalloc(FT_CommandClass::FT_UL_DATA_BUF_SIZE, MallocClass::PUT_SESSION_DATA0);
     *data_ptr++ = FT_CommandClass::PUT_ROOM_DATA_COMMAND;
-    memcpy(data_ptr, room, FT_CommandClass::ROOM_ID_INDEX_SIZE);
+    memcpy(data_ptr, room_id_val, FT_CommandClass::ROOM_ID_INDEX_SIZE);
     data_ptr += FT_CommandClass::ROOM_ID_INDEX_SIZE;
     strcpy(data_ptr, data_val);
     this->theFabricObject->uFabricObject()->transmitFunction(uplink_data);
-
-    this->sendPutSessionDataResponce(tp_transfer_object_val, ajax_id_val, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex(), "succeed");
 }
 
 void DFabricClass::sendPutSessionDataResponce (
