@@ -599,31 +599,25 @@ void DFabricClass::processSetupSessionRequest (
         his_link->setPendingSessionSetup(his_session->sessionIdIndex(), theme_data);
     }
 
-    char *data_ptr;
-    char *downlink_data = data_ptr = (char *) phwangMalloc(FE_CommandClass::FE_DL_DATA_BUF_SIZE, MallocClass::SETUP_SESSION);
-    *data_ptr++ = FE_CommandClass::SETUP_SESSION_RESPONSE;
-    strcpy(data_ptr, ajax_id_val);
-    data_ptr += FE_CommandClass::AJAX_ID_SIZE;
-    strcpy(data_ptr, session->sessionIdIndex());
-    this->transmitFunction(tp_transfer_object_val, downlink_data);
+    this->sendSetupSessionResponce(tp_transfer_object_val, ajax_id_val, link_val->linkIdIndex(), session->sessionIdIndex(), "succeed");
 }
 
 void DFabricClass::sendSetupSessionResponce (
     void *tp_transfer_object_val,
     char const *ajax_id_val,
     char const *link_id_index_val,
+    char const *session_id_index_val,
     char const *result_val)
 {
     phwangDebugS(false, "DFabricClass::sendSetupSessionResponce", result_val);
-    /*
-    char *data_ptr;
-    char *downlink_data = data_ptr = (char *) phwangMalloc(ListMgrProtocolClass::LINK_MGR_DATA_BUFFER_SIZE + 4, MallocClass::SETUP_SESSION);
-    *data_ptr++ = FE_CommandClass::SETUP_SESSION_RESPONSE;
-    strcpy(data_ptr, ajax_id_val);
-    data_ptr += FE_CommandClass::AJAX_ID_SIZE;
-    strcpy(data_ptr, session->sessionIdIndex());
+
+    char *current_ptr;
+    char *downlink_data = current_ptr = (char *) phwangMalloc(FE_CommandClass::FE_DL_DATA_BUF_SIZE, MallocClass::SETUP_SESSION);
+    *current_ptr++ = FE_CommandClass::SETUP_SESSION_RESPONSE;
+    strcpy(current_ptr, ajax_id_val);
+    current_ptr += FE_CommandClass::AJAX_ID_SIZE;
+    strcpy(current_ptr, session_id_index_val);
     this->transmitFunction(tp_transfer_object_val, downlink_data);
-    */
 }
 
 void DFabricClass::errorProcessSetupSession (void *tp_transfer_object_val, char const *ajax_id_val, char const *err_msg_val)
@@ -733,6 +727,8 @@ void DFabricClass::errorProcessFreeSession (void *tp_transfer_object_val, char c
 {
 }
 
+/* put session data */
+
 void DFabricClass::processPutSessionDataRequest (
     void *tp_transfer_object_val,
     char *data_val,
@@ -755,7 +751,6 @@ void DFabricClass::sendPutSessionDataRequestToThemeServer (
     char const *room_id_val,
     char const *data_val)
 {
-    /* transfer data up */
     if (strlen(data_val) > FT_CommandClass::FT_UL_DATA_BUF_SIZE) {
         phwangAbendSI("DFabricClass::sendPutSessionDataRequestToThemeServer", "buf_size", strlen(data_val));
         return;
@@ -791,6 +786,8 @@ void DFabricClass::sendPutSessionDataResponce (
     strcpy(current_ptr, "job is done");
     this->transmitFunction(tp_transfer_object_val, downlink_data);
 }
+
+/* get session data */
 
 void DFabricClass::processGetSessionDataRequest (void *tp_transfer_object_val, char *data_val, char const *ajax_id_val, SessionClass *session_val)
 {
