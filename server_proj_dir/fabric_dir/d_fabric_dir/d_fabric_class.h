@@ -96,10 +96,6 @@ class DFabricClass {
         char const *ajax_id_val,
         LinkClass *link_val);
 
-    void errorProcessGetLinkData(void *tp_transfer_object_val, char const *ajax_id_val, char const *err_msg_val);
-    void errorProcessGetNameList(void *tp_transfer_object_val, char const *ajax_id_val, char const *err_msg_val);
-    void errorProcessSetupSession2(void *tp_transfer_object_val, char const *ajax_id_val, char const *err_msg_val);
-
     void sendFreeSessionResponce (
         void *tp_transfer_object_val,
         char const *ajax_id_val,
@@ -129,6 +125,15 @@ class DFabricClass {
         char *data_val,
         char const *ajax_id_val,
         LinkClass *link_val);
+
+    void sendSetupSession2Responce (
+        void *tp_transfer_object_val,
+        char const *ajax_id_val,
+        char const *link_id_index_val,
+        char const *session_id_index_val,
+        char const *result_val);
+
+    void errorProcessSetupSession2(void *tp_transfer_object_val, char const *ajax_id_val, char const *err_msg_val);
 
     void processSetupSession3Request (
         void *tp_transfer_object_val,
