@@ -270,11 +270,13 @@ void DFabricClass::processSignUpRequest (
             case DbAccountClass::DB_ACCOUNT_NAME_EXIST:
                 result_str = FE_CommandClass::FE_RESULT_ACCOUNT_NAME_ALREADY_EXIST;
                 break;
+
             case DbAccountClass::DB_ACCOUNT_SELECT_FAIL:
-                result_str = "select fail";
+                result_str = FE_CommandClass::FE_RESULT_DB_SELECT_FAIL;
                 break;
+
             default:
-                phwangAbendS("DFabricClass::processSignUpRequest", "result_str");
+                phwangAbendS("DFabricClass::processSignUpRequest", "invalid_result");
                 break;
         }
         this->sendSignUpResponce(tp_transfer_object_val, ajax_id_val, result_str);
