@@ -28,6 +28,7 @@ void DFabricClass::exportedParseFunction (
 {
     LinkClass *link;
     SessionClass *session;
+    char *response_data;
 
     if (data_val[1] != FE_CommandClass::GET_LINK_DATA_COMMAND) {
         phwangDebugS(true, "DFabricClass::exportedParseFunction", data_val);
@@ -47,7 +48,8 @@ void DFabricClass::exportedParseFunction (
         case '0':
             switch (command) {
                 case FE_CommandClass::SIGN_UP_COMMAND:
-                    this->processSignUpRequest(tp_transfer_object_val, rest_data, ajax_id);
+                    response_data = this->processSignUpRequest(rest_data);
+                    this->transmitResponse(FE_CommandClass::SIGN_UP_RESPONSE, tp_transfer_object_val, response_data, ajax_id);
                     return;
 
                 case FE_CommandClass::SETUP_LINK_COMMAND:
@@ -135,6 +137,17 @@ void DFabricClass::exportedParseFunction (
             break;
     }
 
+}
+
+void DFabricClass::transmitResponse (
+    char command_val,
+    void *tp_transfer_object_val,
+    char *response_data_val,
+    char const *ajax_id_val)
+{
+    response_data_val[0] = command_val;
+    memcpy(&response_data_val[1], ajax_id_val, FE_CommandClass::AJAX_ID_SIZE);
+    this->transmitFunction(tp_transfer_object_val, response_data_val);
 }
 
 void DFabricClass::sendSearchLinkFailResponse (
@@ -242,11 +255,10 @@ void DFabricClass::sendMessageResponce (
     this->transmitFunction(tp_transfer_object_val, downlink_data);
 }
 
-void DFabricClass::processSignUpRequest (
-    void *tp_transfer_object_val,
-    char *data_val,
-    char const *ajax_id_val)
+char *DFabricClass::processSignUpRequest (
+    char *data_val)
 {
+    char *response_data;
     phwangDebugS(false, "DFabricClass::processSignUpRequest", data_val);
 
     char *encoded_account_name = data_val;
@@ -279,11 +291,11 @@ void DFabricClass::processSignUpRequest (
                 phwangAbendS("DFabricClass::processSignUpRequest", "invalid_result");
                 break;
         }
-        this->sendSignUpResponce(tp_transfer_object_val, ajax_id_val, result_str);
+        response_data = generateSignUpResponse(FE_CommandClass::FE_RESULT_SUCCEED);
         phwangFree(account_name);
         phwangFree(password);
         phwangFree(email);
-        return;
+        return response_data;
     }
 
     DbAccountEntryClass *account_entry = new DbAccountEntryClass();
@@ -292,7 +304,8 @@ void DFabricClass::processSignUpRequest (
     account_entry->setEmail(email);
     this->dbAccountObject()->insertAccountEntry(account_entry);
 
-    this->sendSignUpResponce(tp_transfer_object_val, ajax_id_val, FE_CommandClass::FE_RESULT_SUCCEED);
+    response_data = generateSignUpResponse(FE_CommandClass::FE_RESULT_SUCCEED);
+    return response_data;
 
     /***
     ---the buffers has been freed in the insertAccountEntry()---
@@ -302,20 +315,15 @@ void DFabricClass::processSignUpRequest (
     ***/
 }
 
-void DFabricClass::sendSignUpResponce (
-    void *tp_transfer_object_val,
-    char const *ajax_id_val,
-    char const *result_val)
+char *DFabricClass::generateSignUpResponse (char const *result_val)
 {
-    phwangDebugS(false, "DFabricClass::sendSignUpResponce", result_val);
+    phwangDebugS(false, "DFabricClass::generateSignUpResponse", result_val);
 
     char *data_ptr;
-    char *downlink_data = data_ptr = (char *) phwangMalloc(FE_CommandClass::SIGN_UP_DOWNLINK_DATA_SIZE + strlen(result_val), MallocClass::SIGN_UP);
-    *data_ptr++ = FE_CommandClass::SIGN_UP_RESPONSE;
-    memcpy(data_ptr, ajax_id_val, FE_CommandClass::AJAX_ID_SIZE);
-    data_ptr += FE_CommandClass::AJAX_ID_SIZE;
-    strcpy(data_ptr, result_val);
-    this->transmitFunction(tp_transfer_object_val, downlink_data);
+    char *response_data = (char *) phwangMalloc(FE_CommandClass::SIGN_UP_DOWNLINK_DATA_SIZE + strlen(result_val), MallocClass::SIGN_UP);
+    char *current_ptr = &response_data[4];
+    strcpy(current_ptr, result_val);
+    return response_data;
 }
 
 void DFabricClass::processSetupLinkRequest (

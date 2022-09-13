@@ -30,6 +30,12 @@ class DFabricClass {
     void setTimeStampString(void);
     void startNetServer(void);
 
+    void transmitResponse (
+        char command_val,
+        void *tp_transfer_object_val,
+        char *response_data_val,
+        char const *ajax_id_val);
+
     void sendSearchLinkFailResponse (
         char const command_val,
         void *tp_transfer_object_val,
@@ -51,15 +57,8 @@ class DFabricClass {
         char const *err_msg_val,
         char const *data_val);
 
-    void processSignUpRequest (
-        void *tp_transfer_object_val,
-        char *data_val,
-        char const *ajax_id_val);
-
-    void sendSignUpResponce (
-        void *tp_transfer_object_val,
-        char const *ajax_id_val,
-        char const *err_msg_val);
+    char *processSignUpRequest (char *data_val);
+    char *generateSignUpResponse (char const *result_val);
 
     void processSetupLinkRequest (
         void *tp_transfer_object_val,
