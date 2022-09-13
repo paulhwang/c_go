@@ -60,6 +60,7 @@ public:
     int const static FE_RESULT_SIZE = 2;
     char const static *FE_RESULT_SUCCEED;
     char const static *FE_RESULT_ACCOUNT_NAME_NOT_EXIST;
+    char const static *FE_RESULT_ACCOUNT_NAME_ALREADY_EXIST;
     char const static *FE_RESULT_PASSWORD_NOT_MATCH;
     char const static *FE_RESULT_LINK_NOT_EXIST;
     char const static *FE_RESULT_SESSION_NOT_EXIST;

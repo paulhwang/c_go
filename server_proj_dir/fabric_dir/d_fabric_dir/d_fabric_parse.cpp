@@ -268,7 +268,7 @@ void DFabricClass::processSignUpRequest (
         char const *result_str;
         switch (result) {
             case DbAccountClass::DB_ACCOUNT_NAME_EXIST:
-                result_str = "name exist";
+                result_str = FE_CommandClass::FE_RESULT_ACCOUNT_NAME_ALREADY_EXIST;
                 break;
             case DbAccountClass::DB_ACCOUNT_SELECT_FAIL:
                 result_str = "select fail";
