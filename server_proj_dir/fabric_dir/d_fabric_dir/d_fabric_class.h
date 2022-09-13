@@ -65,6 +65,10 @@ class DFabricClass {
         char *data_val,
         char const *ajax_id_val);
 
+    char *generateSignInResponse (
+        char const *link_id_index_val,
+        char const *result_val);
+
     void sendSetupLinkResponce (
         void *tp_transfer_object_val,
         char const *ajax_id_val,

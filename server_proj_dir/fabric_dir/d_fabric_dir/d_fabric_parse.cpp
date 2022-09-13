@@ -320,7 +320,7 @@ char *DFabricClass::generateSignUpResponse (char const *result_val)
     phwangDebugS(false, "DFabricClass::generateSignUpResponse", result_val);
 
     char *data_ptr;
-    char *response_data = (char *) phwangMalloc(FE_CommandClass::SIGN_UP_DOWNLINK_DATA_SIZE + strlen(result_val), MallocClass::SIGN_UP);
+    char *response_data = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_HEADER_SIZE + strlen(result_val), MallocClass::generateSignUpResponse);
     char *current_ptr = &response_data[4];
     strcpy(current_ptr, result_val);
     return response_data;
@@ -380,6 +380,21 @@ void DFabricClass::processSetupLinkRequest (
     phwangFree(password);
 }
 
+char *DFabricClass::generateSignInResponse (
+    char const *link_id_index_val,
+    char const *result_val)
+{
+    phwangDebugS(false, "DFabricClass::generateSignInResponse", result_val);
+
+    char *data_ptr;
+    char *response_data = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_HEADER_LINK_SIZE + strlen(result_val), MallocClass::generateSignInResponse);
+    char *current_ptr = &response_data[4];
+    strcpy(current_ptr, link_id_index_val);
+    current_ptr += FE_CommandClass::LINK_ID_INDEX_SIZE;
+    strcpy(current_ptr, result_val);
+    return response_data;
+}
+
 void DFabricClass::sendSetupLinkResponce (
     void *tp_transfer_object_val,
     char const *ajax_id_val,
@@ -389,7 +404,7 @@ void DFabricClass::sendSetupLinkResponce (
     phwangDebugS(false, "DFabricClass::sendSetupLinkResponce", result_val);
 
     char *data_ptr;
-    char *downlink_data = data_ptr = (char *) phwangMalloc(FE_CommandClass::FE_DL_DATA_BUF_SIZE + strlen(result_val), MallocClass::SIGN_IN);
+    char *downlink_data = data_ptr = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_HEADER_LINK_SIZE + strlen(result_val), MallocClass::generateSignInResponse);
     *data_ptr++ = FE_CommandClass::SETUP_LINK_RESPONSE;
     strcpy(data_ptr, ajax_id_val);
     data_ptr += FE_CommandClass::AJAX_ID_SIZE;

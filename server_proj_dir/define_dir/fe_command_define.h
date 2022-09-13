@@ -54,8 +54,10 @@ public:
     int const static NAME_LIST_TAG_SIZE = 3;
 
     int const static AJAX_ID_SIZE = 3;
-    int const static SIGN_UP_DOWNLINK_DATA_SIZE    = 1 + AJAX_ID_SIZE + LINK_ID_INDEX_SIZE + 1;
-    int const static SETUP_LINK_DOWNLINK_DATA_SIZE = 1 + AJAX_ID_SIZE + LINK_ID_INDEX_SIZE + 1;
+    int const static FE_RESPONSE_HEADER_SIZE = 1 + AJAX_ID_SIZE + 1;
+    int const static FE_RESPONSE_HEADER_LINK_SIZE = FE_RESPONSE_HEADER_SIZE + LINK_ID_INDEX_SIZE;
+    int const static FE_RESPONSE_HEADER_LINK_SESSION_SIZE = FE_RESPONSE_HEADER_LINK_SIZE + SESSION_ID_INDEX_SIZE;
+
 
     /* front end results */
     int const static FE_RESULT_SIZE = 2;

@@ -34,8 +34,8 @@ public:
     int const static DENGINE_PUT_BASE_DATA = 4;
     int const static BAD_LINK = 5;
     int const static BAD_SESSION = 5;
-    int const static SIGN_UP = 5;
-    int const static SIGN_IN = 5;
+    int const static generateSignUpResponse = 5;
+    int const static generateSignInResponse = 5;
     int const static DATAGRAM = 5;
     int const static FREE_LINK = 5;
     int const static FREE_LINK_ERROR = 5;
