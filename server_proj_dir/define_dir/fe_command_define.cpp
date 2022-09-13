@@ -10,8 +10,11 @@ char const *FE_CommandClass::FE_RESULT_SUCCEED                    = "00";
 char const *FE_CommandClass::FE_RESULT_ACCOUNT_NAME_NOT_EXIST     = "01";
 char const *FE_CommandClass::FE_RESULT_ACCOUNT_NAME_ALREADY_EXIST = "02";
 char const *FE_CommandClass::FE_RESULT_PASSWORD_NOT_MATCH         = "05";
-char const *FE_CommandClass::FE_RESULT_LINK_NOT_EXIST             = "11";
-char const *FE_CommandClass::FE_RESULT_SESSION_NOT_EXIST          = "12";
+
+char const *FE_CommandClass::FE_RESULT_DB_SELECT_FAIL             = "21";
+
+char const *FE_CommandClass::FE_RESULT_LINK_NOT_EXIST             = "51";
+char const *FE_CommandClass::FE_RESULT_SESSION_NOT_EXIST          = "52";
 
 
 char const *FE_CommandClass::FAKE_LINK_ID_INDEX    = "99990000";

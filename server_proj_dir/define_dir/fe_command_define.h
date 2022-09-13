@@ -57,11 +57,16 @@ public:
     int const static SIGN_UP_DOWNLINK_DATA_SIZE    = 1 + AJAX_ID_SIZE + LINK_ID_INDEX_SIZE + 1;
     int const static SETUP_LINK_DOWNLINK_DATA_SIZE = 1 + AJAX_ID_SIZE + LINK_ID_INDEX_SIZE + 1;
 
+    /* front end results */
     int const static FE_RESULT_SIZE = 2;
+
     char const static *FE_RESULT_SUCCEED;
     char const static *FE_RESULT_ACCOUNT_NAME_NOT_EXIST;
     char const static *FE_RESULT_ACCOUNT_NAME_ALREADY_EXIST;
     char const static *FE_RESULT_PASSWORD_NOT_MATCH;
+
+    char const static *FE_RESULT_DB_SELECT_FAIL;
+
     char const static *FE_RESULT_LINK_NOT_EXIST;
     char const static *FE_RESULT_SESSION_NOT_EXIST;
 };
