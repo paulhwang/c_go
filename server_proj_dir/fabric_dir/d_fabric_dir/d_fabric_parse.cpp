@@ -149,7 +149,7 @@ void DFabricClass::sendSearchLinkFailResponse (
     *data_ptr++ = command_val;
     strcpy(data_ptr, ajax_id_val);
     data_ptr += FE_CommandClass::AJAX_ID_SIZE;
-    strcpy(data_ptr, "link does not exist");
+    strcpy(data_ptr, FE_CommandClass::FE_RESULT_LINK_NOT_EXIST);
     this->transmitFunction(tp_transfer_object_val, downlink_data);
 }
 
@@ -165,7 +165,7 @@ void DFabricClass::sendSearchLinkSessionFailResponse (
     *data_ptr++ = command_val;
     strcpy(data_ptr, ajax_id_val);
     data_ptr += FE_CommandClass::AJAX_ID_SIZE;
-    strcpy(data_ptr, "link_session does not exist");
+    strcpy(data_ptr, FE_CommandClass::FE_RESULT_SESSION_NOT_EXIST);
     this->transmitFunction(tp_transfer_object_val, downlink_data);
 }
 
@@ -192,18 +192,18 @@ void DFabricClass::processMessageRequest (
     switch (act) {
         case 'I':
             this->messengerObject()->initMessenger();
-            this->sendMessageResponce(tp_transfer_object_val, ajax_id_val, "succeed", "I_data");
+            this->sendMessageResponce(tp_transfer_object_val, ajax_id_val, FE_CommandClass::FE_RESULT_SUCCEED, "I_data");
             break;
 
         case 'R':
             output_data = this->messengerObject()->getMessage();
             phwangDebugS(true, "DFabricClass::processMessageRequest", output_data);
-            this->sendMessageResponce(tp_transfer_object_val, ajax_id_val, "succeed", output_data);
+            this->sendMessageResponce(tp_transfer_object_val, ajax_id_val, FE_CommandClass::FE_RESULT_SUCCEED, output_data);
             break;
 
         case 'W':
             this->messengerObject()->putMessage(0);
-            this->sendMessageResponce(tp_transfer_object_val, ajax_id_val, "succeed", "W_data");
+            this->sendMessageResponce(tp_transfer_object_val, ajax_id_val, FE_CommandClass::FE_RESULT_SUCCEED, "W_data");
             break;
 
         default:
@@ -290,7 +290,7 @@ void DFabricClass::processSignUpRequest (
     account_entry->setEmail(email);
     this->dbAccountObject()->insertAccountEntry(account_entry);
 
-    this->sendSignUpResponce(tp_transfer_object_val, ajax_id_val, "succeed");
+    this->sendSignUpResponce(tp_transfer_object_val, ajax_id_val, FE_CommandClass::FE_RESULT_SUCCEED);
 
     /***
     ---the buffers has been freed in the insertAccountEntry()---
@@ -338,10 +338,10 @@ void DFabricClass::processSetupLinkRequest (
         char const*result_str;
         switch (result) {
             case DbAccountClass::DB_ACCOUNT_PASSWORD_NOT_MATCH:
-                result_str = "password not match";
+                result_str = FE_CommandClass::FE_RESULT_PASSWORD_NOT_MATCH;
                 break;
             case DbAccountClass::DB_ACCOUNT_NAME_NOT_EXIST:
-                result_str = "name not exist";
+                result_str = FE_CommandClass::FE_RESULT_ACCOUNT_NAME_NOT_EXIST;
                 break;
             case DbAccountClass::DB_ACCOUNT_SELECT_FAIL:
                 result_str = "select fail";
@@ -365,7 +365,7 @@ void DFabricClass::processSetupLinkRequest (
         return;
     }
 
-    this->sendSetupLinkResponce(tp_transfer_object_val, ajax_id_val, link->linkIdIndex(), "succeed");
+    this->sendSetupLinkResponce(tp_transfer_object_val, ajax_id_val, link->linkIdIndex(), FE_CommandClass::FE_RESULT_SUCCEED);
     phwangFree(my_name);
     phwangFree(password);
 }
@@ -398,7 +398,7 @@ void DFabricClass::processFreeLinkRequest (
     phwangDebugS(false, "DFabricClass::processFreeLinkRequest", data_val);
 
     this->theFabricObject->freeLink(link_val);
-    this->sendFreeLinkResponce(tp_transfer_object_val, ajax_id_val, link_val->linkIdIndex(), "succeed");
+    this->sendFreeLinkResponce(tp_transfer_object_val, ajax_id_val, link_val->linkIdIndex(), FE_CommandClass::FE_RESULT_SUCCEED);
 }
 
 void DFabricClass::sendFreeLinkResponce (
@@ -564,7 +564,7 @@ void DFabricClass::processSetupSessionRequest (
         phwangFree(theme_data_buf);
     }
 
-    this->sendSetupSessionResponce(tp_transfer_object_val, ajax_id_val, link_val->linkIdIndex(), session->sessionIdIndex(), "succeed");
+    this->sendSetupSessionResponce(tp_transfer_object_val, ajax_id_val, link_val->linkIdIndex(), session->sessionIdIndex(), FE_CommandClass::FE_RESULT_SUCCEED);
 }
 
 void DFabricClass::sendSetupSessionResponce (
@@ -616,7 +616,7 @@ void DFabricClass::processSetupSession2Request (
 
     GroupClass *group = session->groupObject();
     this->sendSetupRoomRequestToThemeServer(group, theme_info_val);
-    this->sendSetupSession2Responce(tp_transfer_object_val, ajax_id_val, link_val->linkIdIndex(), session->sessionIdIndex(), "succeed");
+    this->sendSetupSession2Responce(tp_transfer_object_val, ajax_id_val, link_val->linkIdIndex(), session->sessionIdIndex(), FE_CommandClass::FE_RESULT_SUCCEED);
 }
 
 void DFabricClass::sendSetupSession2Responce (
@@ -697,7 +697,7 @@ void DFabricClass::processFreeSessionRequest (
     phwangDebugS(true, "DFabricClass::processFreeSessionRequest", data_val);
 
     //session_val->linkObject()->freeSession(session_val);
-    this->sendFreeSessionResponce(tp_transfer_object_val, ajax_id_val, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex(), "succeed");
+    this->sendFreeSessionResponce(tp_transfer_object_val, ajax_id_val, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex(), FE_CommandClass::FE_RESULT_SUCCEED);
 }
 
 void DFabricClass::sendFreeSessionResponce (
@@ -727,7 +727,7 @@ void DFabricClass::processPutSessionDataRequest (
     }
 
     this->sendPutSessionDataRequestToThemeServer(room_id, data_val);
-    this->sendPutSessionDataResponce(tp_transfer_object_val, ajax_id_val, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex(), "succeed");
+    this->sendPutSessionDataResponce(tp_transfer_object_val, ajax_id_val, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex(), FE_CommandClass::FE_RESULT_SUCCEED);
 }
 
 void DFabricClass::sendPutSessionDataRequestToThemeServer (
@@ -782,7 +782,7 @@ void DFabricClass::processGetSessionDataRequest (void *tp_transfer_object_val, c
         phwangAbendSI("DFabricClass::processGetSessionDataRequest", "buf_size", strlen(data));
     }
 
-    this->sendGetSessionDataResponce(tp_transfer_object_val, ajax_id_val, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex(), "succeed", data);
+    this->sendGetSessionDataResponce(tp_transfer_object_val, ajax_id_val, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex(), FE_CommandClass::FE_RESULT_SUCCEED, data);
 }
 
 void DFabricClass::sendGetSessionDataResponce (

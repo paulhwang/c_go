@@ -11,9 +11,6 @@ public:
     int const static FE_DL_DATA_BUF_SIZE = 512;
     int const static FE_UL_DATA_BUF_SIZE = 512;
 
-    int const static NAME_LIST_TAG_SIZE = 3;
-    int const static AJAX_ID_SIZE = 3;
-
     char const static SIGN_UP_COMMAND  = 'U';
     char const static SIGN_UP_RESPONSE = 'u';
     char const static SETUP_LINK_COMMAND  = 'L';
@@ -54,6 +51,16 @@ public:
     int const static SESSION_INDEX_SIZE = 4;
     int const static SESSION_ID_INDEX_SIZE = SESSION_ID_SIZE + SESSION_INDEX_SIZE;
 
+    int const static NAME_LIST_TAG_SIZE = 3;
+
+    int const static AJAX_ID_SIZE = 3;
     int const static SIGN_UP_DOWNLINK_DATA_SIZE    = 1 + AJAX_ID_SIZE + LINK_ID_INDEX_SIZE + 1;
     int const static SETUP_LINK_DOWNLINK_DATA_SIZE = 1 + AJAX_ID_SIZE + LINK_ID_INDEX_SIZE + 1;
+
+    int const static FE_RESULT_SIZE = 2;
+    char const static *FE_RESULT_SUCCEED;
+    char const static *FE_RESULT_ACCOUNT_NAME_NOT_EXIST;
+    char const static *FE_RESULT_PASSWORD_NOT_MATCH;
+    char const static *FE_RESULT_LINK_NOT_EXIST;
+    char const static *FE_RESULT_SESSION_NOT_EXIST;
 };
