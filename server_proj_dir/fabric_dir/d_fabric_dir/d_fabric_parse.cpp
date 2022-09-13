@@ -53,7 +53,7 @@ void DFabricClass::exportedParseFunction (
                     return;
 
                 case FE_CommandClass::SETUP_LINK_COMMAND:
-                    response_data = this->processSignInRequest(tp_transfer_object_val, rest_data, ajax_id);
+                    response_data = this->processSignInRequest(rest_data);
                     this->transmitResponse(FE_CommandClass::SETUP_LINK_RESPONSE, tp_transfer_object_val, response_data, ajax_id);
                     return;
 
@@ -256,8 +256,7 @@ void DFabricClass::sendMessageResponce (
     this->transmitFunction(tp_transfer_object_val, downlink_data);
 }
 
-char *DFabricClass::processSignUpRequest (
-    char *data_val)
+char *DFabricClass::processSignUpRequest (char *data_val)
 {
     char *response_data;
     phwangDebugS(false, "DFabricClass::processSignUpRequest", data_val);
@@ -326,10 +325,7 @@ char *DFabricClass::generateSignUpResponse (char const *result_val)
     return response_data;
 }
 
-char *DFabricClass::processSignInRequest (
-    void *tp_transfer_object_val,
-    char *data_val,
-    char const *ajax_id_val)
+char *DFabricClass::processSignInRequest (char *data_val)
 {
     char *response_data;
     phwangDebugS(false, "DFabricClass::processSignInRequest", data_val);

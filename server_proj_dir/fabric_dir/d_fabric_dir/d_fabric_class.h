@@ -60,10 +60,7 @@ class DFabricClass {
     char *processSignUpRequest (char *data_val);
     char *generateSignUpResponse (char const *result_val);
 
-    char *processSignInRequest (
-        void *tp_transfer_object_val,
-        char *data_val,
-        char const *ajax_id_val);
+    char *processSignInRequest (char *data_val);
 
     char *generateSignInResponse (
         char const *result_val,
