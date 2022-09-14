@@ -51,7 +51,7 @@ public:
     int const static SETUP_SESSION3 = 5;
     int const static PUT_SESSION_DATA0 = 5;
     int const static PUT_SESSION_DATA1 = 5;
-    int const static PUT_SESSION_DATA_ERROR = 5;
+    int const static generatePutSessionDataResponse = 5;
     int const static generateGetSessionDataResponse = 5;
     int const static GET_SESSION_DATA_ERROR = 5;
     int const static sendSetupRoomRequestToThemeServer = 5;

@@ -120,12 +120,13 @@ void DFabricClass::exportedParseFunction (
                     return;
 
                 case FE_CommandClass::PUT_SESSION_DATA_COMMAND:
-                    this->processPutSessionDataRequest(tp_transfer_object_val, rest_data, ajax_id, session);
-                    return;
+                    response_data = this->processPutSessionDataRequest(tp_transfer_object_val, rest_data, ajax_id, session);
+                    response_data[0] = FE_CommandClass::PUT_SESSION_DATA_RESPONSE;
+                    break;
 
                 case FE_CommandClass::GET_SESSION_DATA_COMMAND:
                     response_data = this->processGetSessionDataRequest(tp_transfer_object_val, rest_data, ajax_id, session);
-                    response_data[0] = FE_CommandClass::GET_SESSION_DATA_COMMAND;
+                    response_data[0] = FE_CommandClass::GET_SESSION_DATA_RESPONSE;
                     break;
 
                 default:
@@ -706,7 +707,7 @@ void DFabricClass::sendFreeSessionResponce (
 
 /* put session data */
 
-void DFabricClass::processPutSessionDataRequest (
+char *DFabricClass::processPutSessionDataRequest (
     void *tp_transfer_object_val,
     char *data_val,
     char const *ajax_id_val,
@@ -717,11 +718,32 @@ void DFabricClass::processPutSessionDataRequest (
     char *room_id = session_val->groupObject()->roomIdIndex();
     if (!room_id) {
         this->sendPutSessionDataResponce(tp_transfer_object_val, ajax_id_val, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex(), "null_room");
-        return;
+        return 0;
     }
 
     this->sendPutSessionDataRequestToThemeServer(room_id, data_val);
-    this->sendPutSessionDataResponce(tp_transfer_object_val, ajax_id_val, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex(), FE_CommandClass::FE_RESULT_SUCCEED);
+    //this->sendPutSessionDataResponce(tp_transfer_object_val, ajax_id_val, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex(), FE_CommandClass::FE_RESULT_SUCCEED);
+    char *response_data = this->generatePutSessionDataResponse(FE_CommandClass::FE_RESULT_SUCCEED, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex());
+    return response_data;
+}
+
+char *DFabricClass::generatePutSessionDataResponse (
+    char const *result_val,
+    char const *link_id_index_val,
+    char const *session_id_index_val)
+{
+    phwangDebugS(false, "DFabricClass::generatePutSessionDataResponse", result_val);
+
+    char *response_data = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE, MallocClass::generatePutSessionDataResponse);
+    char *current_ptr = &response_data[FE_CommandClass::FE_RESPONSE_HEADER_SIZE];
+    memcpy(current_ptr, result_val, FE_CommandClass::FE_RESULT_SIZE);
+    current_ptr += FE_CommandClass::FE_RESULT_SIZE;
+    memcpy(current_ptr, link_id_index_val, FE_CommandClass::LINK_ID_INDEX_SIZE);
+    current_ptr += FE_CommandClass::LINK_ID_INDEX_SIZE;
+    memcpy(current_ptr, session_id_index_val, FE_CommandClass::SESSION_ID_INDEX_SIZE);
+    current_ptr += FE_CommandClass::SESSION_ID_INDEX_SIZE;
+    *current_ptr = 0;
+    return response_data;
 }
 
 void DFabricClass::sendPutSessionDataRequestToThemeServer (

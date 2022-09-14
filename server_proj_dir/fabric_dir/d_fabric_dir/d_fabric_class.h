@@ -142,15 +142,16 @@ class DFabricClass {
         char const *ajax_id_val,
         SessionClass *session_val);
 
-    void processPutSessionDataRequest (
+    char *processPutSessionDataRequest (
         void *tp_transfer_object_val,
         char *data_val,
         char const *ajax_id_val,
         SessionClass *session_val);
 
-    void sendPutSessionDataRequestToThemeServer (
-        char const *room_id_index_val,
-        char const *data_val);
+    char *generatePutSessionDataResponse (
+        char const *result_val,
+        char const *link_id_index_val,
+        char const *session_id_index_val);
 
     void sendPutSessionDataResponce (
         void *tp_transfer_object_val,
@@ -158,6 +159,10 @@ class DFabricClass {
         char const *link_id_index_val,
         char const *session_id_index_val,
         char const *result_val);
+
+    void sendPutSessionDataRequestToThemeServer (
+        char const *room_id_index_val,
+        char const *data_val);
 
     char *processGetSessionDataRequest (
         void *tp_transfer_object_val,
