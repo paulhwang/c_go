@@ -49,13 +49,13 @@ void DFabricClass::exportedParseFunction (
             switch (command) {
                 case FE_CommandClass::SIGN_UP_COMMAND:
                     response_data = this->processSignUpRequest(rest_data);
-                    this->transmitResponse(FE_CommandClass::SIGN_UP_RESPONSE, tp_transfer_object_val, response_data, ajax_id);
-                    return;
+                    response_data[0] = FE_CommandClass::SIGN_UP_RESPONSE;
+                    break;
 
                 case FE_CommandClass::SETUP_LINK_COMMAND:
                     response_data = this->processSignInRequest(rest_data);
-                    this->transmitResponse(FE_CommandClass::SETUP_LINK_RESPONSE, tp_transfer_object_val, response_data, ajax_id);
-                    return;
+                    response_data[0] = FE_CommandClass::SETUP_LINK_RESPONSE;
+                    break;
 
                 case FE_CommandClass::MESSAGE_COMMAND:
                     this->processMessageRequest(tp_transfer_object_val, rest_data, ajax_id);
@@ -129,26 +129,16 @@ void DFabricClass::exportedParseFunction (
 
                 default:
                     phwangAbendS("DFabricClass::dbAccountObject", data_val);
+                    return;
             }
-
             break;
 
         default:
             phwangAbendS("DFabricClass::dbAccountObject", "bad type");
-            break;
+            return;
     }
-
-}
-
-void DFabricClass::transmitResponse (
-    char command_val,
-    void *tp_transfer_object_val,
-    char *response_data_val,
-    char const *ajax_id_val)
-{
-    response_data_val[0] = command_val;
-    memcpy(&response_data_val[1], ajax_id_val, FE_CommandClass::AJAX_ID_SIZE);
-    this->transmitFunction(tp_transfer_object_val, response_data_val);
+    memcpy(&response_data[1], ajax_id, FE_CommandClass::AJAX_ID_SIZE);
+    this->transmitFunction(tp_transfer_object_val, response_data);
 }
 
 void DFabricClass::sendSearchLinkFailResponse (

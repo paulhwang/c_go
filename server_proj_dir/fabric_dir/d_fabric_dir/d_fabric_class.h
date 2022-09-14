@@ -30,12 +30,6 @@ class DFabricClass {
     void setTimeStampString(void);
     void startNetServer(void);
 
-    void transmitResponse (
-        char command_val,
-        void *tp_transfer_object_val,
-        char *response_data_val,
-        char const *ajax_id_val);
-
     void sendSearchLinkFailResponse (
         char const command_val,
         void *tp_transfer_object_val,
