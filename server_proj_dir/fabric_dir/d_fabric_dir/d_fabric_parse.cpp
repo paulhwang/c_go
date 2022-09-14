@@ -238,7 +238,7 @@ void DFabricClass::sendMessageResponce (
     int encoded_data_length = strlen(encoded_data);
 
     char *data_ptr;
-    char *downlink_data = data_ptr = (char *) phwangMalloc(D_FABRIC_CLASS_PROCESSS_MMW_READ_DATA_DOWN_LINK_DATA_SIZE + encoded_result_length + encoded_data_length, MallocClass::DATAGRAM);
+    char *downlink_data = data_ptr = (char *) phwangMalloc(D_FABRIC_CLASS_PROCESSS_MMW_READ_DATA_DOWN_LINK_DATA_SIZE + encoded_result_length + encoded_data_length, MallocClass::generateDatagramResponse);
     *data_ptr++ = FE_CommandClass::MESSAGE_RESPONSE;
     memcpy(data_ptr, ajax_id_val, FE_CommandClass::AJAX_ID_SIZE);
     data_ptr += FE_CommandClass::AJAX_ID_SIZE;
@@ -252,6 +252,21 @@ void DFabricClass::sendMessageResponce (
     phwangFree(encoded_data);
 
     this->transmitFunction(tp_transfer_object_val, downlink_data);
+}
+
+char *DFabricClass::generateDatagramResponse (
+    char const *result_val,
+    char const *data_val)
+{
+    phwangDebugS(false, "DFabricClass::generateDatagramResponse", result_val);
+
+    char *response_data = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_BUF_WITH_LINK_SIZE + strlen(data_val), MallocClass::generateDatagramResponse);
+    char *current_ptr = &response_data[FE_CommandClass::FE_RESPONSE_HEADER_SIZE];
+    memcpy(current_ptr, result_val, FE_CommandClass::FE_RESULT_SIZE);
+    current_ptr += FE_CommandClass::FE_RESULT_SIZE;
+    strcpy(current_ptr, data_val);
+    return response_data;
+
 }
 
 char *DFabricClass::processSignUpRequest (char *data_val)
@@ -317,7 +332,7 @@ char *DFabricClass::generateSignUpResponse (char const *result_val)
 {
     phwangDebugS(false, "DFabricClass::generateSignUpResponse", result_val);
 
-    char *response_data = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_BUFFER_SIZE + strlen(result_val), MallocClass::generateSignUpResponse);
+    char *response_data = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_BUFFER_SIZE, MallocClass::generateSignUpResponse);
     char *current_ptr = &response_data[FE_CommandClass::FE_RESPONSE_HEADER_SIZE];
     strcpy(current_ptr, result_val);
     return response_data;
@@ -382,7 +397,7 @@ char *DFabricClass::generateSignInResponse (
 {
     phwangDebugS(false, "DFabricClass::generateSignInResponse", result_val);
 
-    char *response_data = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_BUF_WITH_LINK_SIZE + strlen(result_val), MallocClass::generateSignInResponse);
+    char *response_data = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_BUF_WITH_LINK_SIZE, MallocClass::generateSignInResponse);
     char *current_ptr = &response_data[FE_CommandClass::FE_RESPONSE_HEADER_SIZE];
     memcpy(current_ptr, result_val, FE_CommandClass::FE_RESULT_SIZE);
     current_ptr += FE_CommandClass::FE_RESULT_SIZE;

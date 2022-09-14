@@ -37,7 +37,7 @@ public:
     int const static generateSignUpResponse = 5;
     int const static generateSignInResponse = 5;
     int const static generateSignOffResponse = 5;
-    int const static DATAGRAM = 5;
+    int const static generateDatagramResponse = 5;
     int const static FREE_LINK = 5;
     int const static FREE_LINK_ERROR = 5;
     int const static GET_LINK_DATA = 5;
