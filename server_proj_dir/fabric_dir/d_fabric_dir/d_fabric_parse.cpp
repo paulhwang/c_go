@@ -82,7 +82,7 @@ void DFabricClass::exportedParseFunction (
                     break;
 
                 case FE_CommandClass::GET_LINK_DATA_COMMAND:
-                    response_data = this->processGetLinkDataRequest(tp_transfer_object_val, current_data, ajax_id, link);
+                    response_data = this->processGetLinkDataRequest(link, current_data);
                     response_data[0] = FE_CommandClass::GET_LINK_DATA_RESPONSE;
                     break;
 
@@ -419,10 +419,8 @@ char *DFabricClass::generateSignOffResponse (
 }
 
 char *DFabricClass::processGetLinkDataRequest (
-    void *tp_transfer_object_val,
-    char *data_val,
-    char const *ajax_id_val,
-    LinkClass *link_val)
+    LinkClass *link_val,
+    char *data_val)
 {
     char *response_data;
     phwangDebugS(false, "DFabricClass::processGetLinkDataRequest", data_val);

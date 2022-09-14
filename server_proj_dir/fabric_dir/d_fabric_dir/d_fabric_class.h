@@ -66,10 +66,8 @@ class DFabricClass {
         char const *link_id_index_val);
 
     char *processGetLinkDataRequest (
-        void *tp_transfer_object_val,
-        char *data_val,
-        char const *ajax_id_val,
-        LinkClass *link_val);
+        LinkClass *link_val,
+        char *data_val);
     char *generateGetLinkDataResponse (
         char const *result_val,
         char const *link_id_index_val,
