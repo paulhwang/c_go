@@ -99,8 +99,9 @@ void DFabricClass::exportedParseFunction (
                     return;
 
                 case FE_CommandClass::SETUP_SESSION3_COMMAND:
-                    this->processSetupSession3Request(tp_transfer_object_val, current_data, ajax_id, link);
-                    return;
+                    response_data = this->processSetupSession3Request(tp_transfer_object_val, current_data, ajax_id, link);
+                    response_data[0] = FE_CommandClass::SETUP_SESSION3_RESPONSE;
+                    break;
 
                 default:
                     phwangAbendS("DFabricClass::dbAccountObject", data_val);
@@ -669,20 +670,21 @@ void DFabricClass::errorProcessSetupSession2 (void *tp_transfer_object_val, char
     this->transmitFunction(tp_transfer_object_val, downlink_data);
 }
 
-void DFabricClass::processSetupSession3Request (
+char *DFabricClass::processSetupSession3Request (
     void *tp_transfer_object_val,
     char *data_val,
     char const *ajax_id_val,
     LinkClass *link_val)
 {
     char *response_data;
-    phwangDebugSS(false, "DFabricClass::processSetupSession3Reques", "data_val=", data_val);
+    phwangDebugSS(true, "DFabricClass::processSetupSession3Reques", "data_val=", data_val);
 
     char session_id_buf[FE_CommandClass::SESSION_ID_INDEX_SIZE + 1];
     memcpy(session_id_buf, data_val, FE_CommandClass::SESSION_ID_INDEX_SIZE);
     session_id_buf[FE_CommandClass::SESSION_ID_INDEX_SIZE] = 0;
-    phwangDebugSS(false, "DFabricClass::processSetupSession3Reques", "session_id=", session_id_buf);
+    phwangDebugSS(true, "DFabricClass::processSetupSession3Reques", "session_id=", session_id_buf);
 
+/*
     char *link_and_session_id_index_val = data_val;
     char *end_val = link_and_session_id_index_val + FE_CommandClass::LINK_ID_INDEX_SIZE + FE_CommandClass::SESSION_ID_INDEX_SIZE;
 
@@ -695,9 +697,10 @@ void DFabricClass::processSetupSession3Request (
     data_ptr += FE_CommandClass::LINK_ID_INDEX_SIZE + FE_CommandClass::SESSION_ID_INDEX_SIZE;
     *data_ptr = 0;
     this->transmitFunction(tp_transfer_object_val, downlink_data);
+*/
 
     response_data = this->generateSetupSession3Response(FE_CommandClass::FE_RESULT_SUCCEED, link_val->linkIdIndex(), session_id_buf);
-    //return response_data;
+    return response_data;
 }
 
 char *DFabricClass::generateSetupSession3Response (
