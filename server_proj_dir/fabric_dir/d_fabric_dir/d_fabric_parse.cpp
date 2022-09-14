@@ -377,9 +377,9 @@ char *DFabricClass::generateSignInResponse (
 
     char *response_data = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_BUF_WITH_LINK_SIZE + strlen(result_val), MallocClass::generateSignInResponse);
     char *current_ptr = &response_data[FE_CommandClass::FE_RESPONSE_HEADER_SIZE];
+    memcpy(current_ptr, result_val, FE_CommandClass::FE_RESULT_SIZE);
+    current_ptr += FE_CommandClass::FE_RESULT_SIZE;
     strcpy(current_ptr, link_id_index_val);
-    current_ptr += FE_CommandClass::LINK_ID_INDEX_SIZE;
-    strcpy(current_ptr, result_val);
     return response_data;
 }
 
