@@ -433,6 +433,13 @@ void DFabricClass::processGetLinkDataRequest (
     *current_ptr++ = FE_CommandClass::GET_LINK_DATA_RESPONSE;
     strcpy(current_ptr, ajax_id_val);
     current_ptr += FE_CommandClass::AJAX_ID_SIZE;
+
+    memcpy(current_ptr, FE_CommandClass::FE_RESULT_SUCCEED, FE_CommandClass::FE_RESULT_SIZE);
+    current_ptr += FE_CommandClass::FE_RESULT_SIZE;
+
+    memcpy(current_ptr, link_val->linkIdIndex(), FE_CommandClass::LINK_ID_INDEX_SIZE);
+    current_ptr += FE_CommandClass::LINK_ID_INDEX_SIZE;
+
     *current_ptr++ = FE_CommandClass::RESPOND_IS_GET_LINK_DATA_NAME_LIST;
     phwangEncodeNumber(current_ptr, this->theFabricObject->nameListObject()->nameListTag(), FE_CommandClass::NAME_LIST_TAG_SIZE);
     current_ptr += FE_CommandClass::NAME_LIST_TAG_SIZE;
