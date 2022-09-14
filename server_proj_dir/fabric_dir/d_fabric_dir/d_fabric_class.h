@@ -134,10 +134,8 @@ class DFabricClass {
     void errorProcessSetupSession2(void *tp_transfer_object_val, char const *ajax_id_val, char const *err_msg_val);
 
     char *processSetupSession3Request (
-        void *tp_transfer_object_val,
-        char *data_val,
-        char const *ajax_id_val,
-        LinkClass *link_val);
+        LinkClass *link_val,
+        char *data_val);
 
     char *generateSetupSession3Response (
         char const *result_val,
