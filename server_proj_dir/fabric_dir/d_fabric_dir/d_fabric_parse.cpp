@@ -676,7 +676,12 @@ void DFabricClass::processSetupSession3Request (
     LinkClass *link_val)
 {
     char *response_data;
-    phwangDebugSS(true, "DFabricClass::processSetupSession3Reques", "session_id==============", data_val);
+    phwangDebugSS(false, "DFabricClass::processSetupSession3Reques", "data_val=", data_val);
+
+    char session_id_buf[FE_CommandClass::SESSION_ID_INDEX_SIZE + 1];
+    memcpy(session_id_buf, data_val, FE_CommandClass::SESSION_ID_INDEX_SIZE);
+    session_id_buf[FE_CommandClass::SESSION_ID_INDEX_SIZE] = 0;
+    phwangDebugSS(false, "DFabricClass::processSetupSession3Reques", "session_id=", session_id_buf);
 
     char *link_and_session_id_index_val = data_val;
     char *end_val = link_and_session_id_index_val + FE_CommandClass::LINK_ID_INDEX_SIZE + FE_CommandClass::SESSION_ID_INDEX_SIZE;
@@ -691,7 +696,7 @@ void DFabricClass::processSetupSession3Request (
     *data_ptr = 0;
     this->transmitFunction(tp_transfer_object_val, downlink_data);
 
-    //response_data = this->generatePutSession3DataResponse(FE_CommandClass::FE_RESULT_SUCCEED, link_val->linkIdIndex(), session->sessionIdIndex());
+    response_data = this->generateSetupSession3Response(FE_CommandClass::FE_RESULT_SUCCEED, link_val->linkIdIndex(), session_id_buf);
     //return response_data;
 }
 
