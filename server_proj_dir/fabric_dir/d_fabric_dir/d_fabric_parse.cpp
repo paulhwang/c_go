@@ -790,11 +790,12 @@ char *DFabricClass::generateGetSessionDataResponse (
 
     char *response_data = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE + strlen(data_val), MallocClass::generateGetSessionDataResponse);
     char *current_ptr = &response_data[FE_CommandClass::FE_RESPONSE_HEADER_SIZE];
+    memcpy(current_ptr, result_val, FE_CommandClass::FE_RESULT_SIZE);
+    current_ptr += FE_CommandClass::FE_RESULT_SIZE;
     memcpy(current_ptr, link_id_index_val, FE_CommandClass::LINK_ID_INDEX_SIZE);
     current_ptr += FE_CommandClass::LINK_ID_INDEX_SIZE;
     memcpy(current_ptr, session_id_index_val, FE_CommandClass::SESSION_ID_INDEX_SIZE);
     current_ptr += FE_CommandClass::SESSION_ID_INDEX_SIZE;
-    //strcpy(current_ptr, result_val);
     strcpy(current_ptr, data_val);
     return response_data;
 }
