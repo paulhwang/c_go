@@ -27,7 +27,7 @@ LinkClass::LinkClass (
         memcpy(this->theLinkName, link_name_val, LINK_CLASS_LINK_NAME_BUF_SIZE);
         this->theLinkName[LINK_CLASS_LINK_NAME_BUF_SIZE] = 0;
     }
-    this->theSessionListMgrObject = phwangListMgrMalloc("SESSION", FE_CommandClass::SESSION_ID_SIZE, FE_CommandClass::SESSION_INDEX_SIZE, 300);
+    this->theSessionListMgrObject = phwangListMgrMalloc("SESSION", FE_CommandClass::SESSION_ID_SIZE, FE_CommandClass::SESSION_INDEX_SIZE, FE_CommandClass::SESSION_ID_INITIAL_VALUE);
     this->resetKeepAliveTime();
     this->thePendingSessionSetupQueue = phwangMallocQueue(0, this->objectName());
     this->thePendingSessionSetupQueue3 = phwangMallocQueue(0, this->objectName());
