@@ -58,7 +58,7 @@ void DFabricClass::exportedParseFunction (
                     break;
 
                 case FE_CommandClass::MESSAGE_COMMAND:
-                    response_data = this->processMessageRequest(tp_transfer_object_val, current_data, ajax_id);
+                    response_data = this->processDatagramRequest(current_data);
                     response_data[0] = FE_CommandClass::MESSAGE_RESPONSE;
                     break;
 
@@ -182,10 +182,7 @@ void DFabricClass::sendSearchLinkSessionFailResponse (
     this->transmitFunction(tp_transfer_object_val, downlink_data);
 }
 
-char *DFabricClass::processMessageRequest (
-    void *tp_transfer_object_val,
-    char *input_data_val,
-    char const *ajax_id_val)
+char *DFabricClass::processDatagramRequest (char *input_data_val)
 {
     char *response_data;
     phwangDebugS(true, "DFabricClass::processMessageRequest", input_data_val);
@@ -223,44 +220,8 @@ char *DFabricClass::processMessageRequest (
         default:
             break;
     }
-    //this->sendMessageResponce(tp_transfer_object_val, ajax_id_val, FE_CommandClass::FE_RESULT_SUCCEED, output_data);
     response_data = generateDatagramResponse(FE_CommandClass::FE_RESULT_SUCCEED, FE_CommandClass::FE_RESULT_SUCCEED, output_data);
     return response_data;
-}
-
-#define D_FABRIC_CLASS_PROCESSS_MMW_READ_DATA_DOWN_LINK_DATA_SIZE (1 + FE_CommandClass::AJAX_ID_SIZE + FE_CommandClass::LINK_ID_INDEX_SIZE + 1)
-void DFabricClass::sendMessageResponce (
-    void *tp_transfer_object_val,
-    char const *ajax_id_val,
-    char const *result_val,
-    char const *data_val)
-{
-    char *response_data;
-    phwangDebugS(true, "DFabricClass::sendMessageResponce", result_val);
-
-    char *encoded_result = phwangEncodeStringMalloc(result_val);
-    int encoded_result_length = strlen(encoded_result);
-    char *encoded_data = phwangEncodeStringMalloc(data_val);
-    int encoded_data_length = strlen(encoded_data);
-
-    char *data_ptr;
-    char *downlink_data = data_ptr = (char *) phwangMalloc(D_FABRIC_CLASS_PROCESSS_MMW_READ_DATA_DOWN_LINK_DATA_SIZE + encoded_result_length + encoded_data_length, MallocClass::generateDatagramResponse);
-    *data_ptr++ = FE_CommandClass::MESSAGE_RESPONSE;
-    memcpy(data_ptr, ajax_id_val, FE_CommandClass::AJAX_ID_SIZE);
-    data_ptr += FE_CommandClass::AJAX_ID_SIZE;
-
-    memcpy(data_ptr, result_val, FE_CommandClass::FE_RESULT_SIZE);
-    data_ptr += FE_CommandClass::FE_RESULT_SIZE;
-
-    strcpy(data_ptr, encoded_result);
-    data_ptr += encoded_result_length;
-    phwangFree(encoded_result);
-
-    strcpy(data_ptr, encoded_data);
-    //data_ptr += encoded_data_length;
-    phwangFree(encoded_data);
-
-    this->transmitFunction(tp_transfer_object_val, downlink_data);
 }
 
 char *DFabricClass::generateDatagramResponse (

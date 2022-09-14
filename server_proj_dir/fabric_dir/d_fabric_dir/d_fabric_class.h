@@ -40,18 +40,10 @@ class DFabricClass {
         void *tp_transfer_object_val,
         char const *ajax_id_val);
 
-    char *processMessageRequest (
-        void *tp_transfer_object_val,
-        char *data_val,
-        char const *ajax_id_val);
+    char *processDatagramRequest (char *data_val);
     char *generateDatagramResponse (
         char const *result_val,
         char const *dg_result_val,
-        char const *data_val);
-    void sendMessageResponce (
-        void *tp_transfer_object_val,
-        char const *ajax_id_val,
-        char const *err_msg_val,
         char const *data_val);
 
     char *processSignUpRequest (char *data_val);
