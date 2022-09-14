@@ -82,8 +82,9 @@ void DFabricClass::exportedParseFunction (
                     break;
 
                 case FE_CommandClass::GET_LINK_DATA_COMMAND:
-                    this->processGetLinkDataRequest(tp_transfer_object_val, current_data, ajax_id, link);
-                    return;
+                    response_data = this->processGetLinkDataRequest(tp_transfer_object_val, current_data, ajax_id, link);
+                    response_data[0] = FE_CommandClass::GET_LINK_DATA_RESPONSE;
+                    break;
 
                 case FE_CommandClass::GET_NAME_LIST_COMMAND:
                     response_data = this->processGetNameListRequest(link, current_data);
@@ -417,7 +418,7 @@ char *DFabricClass::generateSignOffResponse (
     return response_data;
 }
 
-void DFabricClass::processGetLinkDataRequest (
+char *DFabricClass::processGetLinkDataRequest (
     void *tp_transfer_object_val,
     char *data_val,
     char const *ajax_id_val,
@@ -428,11 +429,8 @@ void DFabricClass::processGetLinkDataRequest (
 
     link_val->resetKeepAliveTime();
 
-    char *current_ptr;
-    char *downlink_data = current_ptr = (char *) phwangMalloc(FE_CommandClass::FE_DL_DATA_BUF_SIZE, MallocClass::GET_LINK_DATA);
-    *current_ptr++ = FE_CommandClass::GET_LINK_DATA_RESPONSE;
-    strcpy(current_ptr, ajax_id_val);
-    current_ptr += FE_CommandClass::AJAX_ID_SIZE;
+    char *downlink_data = (char *) phwangMalloc(FE_CommandClass::FE_DL_DATA_BUF_SIZE, MallocClass::GET_LINK_DATA);
+    char *current_ptr = &downlink_data[FE_CommandClass::FE_RESPONSE_HEADER_SIZE];
 
     memcpy(current_ptr, FE_CommandClass::FE_RESULT_SUCCEED, FE_CommandClass::FE_RESULT_SIZE);
     current_ptr += FE_CommandClass::FE_RESULT_SIZE;
@@ -480,9 +478,7 @@ void DFabricClass::processGetLinkDataRequest (
         phwangFree(pending_session_info3);
     }
 
-    this->transmitFunction(tp_transfer_object_val, downlink_data);
-    //response_data = generateGetLinkDataResponse(FE_CommandClass::FE_RESULT_SUCCEED, link_val->linkIdIndex(), downlink_data);
-    //return response_data;
+    return downlink_data;
 }
 
 char *DFabricClass::generateGetLinkDataResponse (
