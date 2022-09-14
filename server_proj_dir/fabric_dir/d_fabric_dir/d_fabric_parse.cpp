@@ -713,17 +713,17 @@ char *DFabricClass::processPutSessionDataRequest (
     char const *ajax_id_val,
     SessionClass *session_val)
 {
+    char *response_data;
     phwangDebugS(true, "DFabricClass::processPutSessionDataRequest", data_val);
 
     char *room_id = session_val->groupObject()->roomIdIndex();
     if (!room_id) {
-        this->sendPutSessionDataResponce(tp_transfer_object_val, ajax_id_val, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex(), "null_room");
-        return 0;
+        response_data = this->generatePutSessionDataResponse(FE_CommandClass::FE_RESULT_NULL_ROOM, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex());
+        return response_data;
     }
 
     this->sendPutSessionDataRequestToThemeServer(room_id, data_val);
-    //this->sendPutSessionDataResponce(tp_transfer_object_val, ajax_id_val, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex(), FE_CommandClass::FE_RESULT_SUCCEED);
-    char *response_data = this->generatePutSessionDataResponse(FE_CommandClass::FE_RESULT_SUCCEED, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex());
+    response_data = this->generatePutSessionDataResponse(FE_CommandClass::FE_RESULT_SUCCEED, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex());
     return response_data;
 }
 
@@ -762,28 +762,6 @@ void DFabricClass::sendPutSessionDataRequestToThemeServer (
     data_ptr += FT_CommandClass::ROOM_ID_INDEX_SIZE;
     strcpy(data_ptr, data_val);
     this->theFabricObject->uFabricObject()->transmitFunction(uplink_data);
-}
-
-void DFabricClass::sendPutSessionDataResponce (
-    void *tp_transfer_object_val,
-    char const *ajax_id_val,
-    char const *link_id_index_val,
-    char const *session_id_index_val,
-    char const *result_val)
-{
-    phwangDebugS(false, "sendPutSessionDataResponce", result_val);
-
-    char *current_ptr;
-    char *downlink_data = current_ptr = (char *) phwangMalloc(FE_CommandClass::FE_DL_DATA_BUF_SIZE, MallocClass::PUT_SESSION_DATA1);
-    *current_ptr++ = FE_CommandClass::PUT_SESSION_DATA_RESPONSE;
-    strcpy(current_ptr, ajax_id_val);
-    current_ptr += FE_CommandClass::AJAX_ID_SIZE;
-    memcpy(current_ptr, link_id_index_val, FE_CommandClass::LINK_ID_INDEX_SIZE);
-    current_ptr += FE_CommandClass::LINK_ID_INDEX_SIZE;
-    memcpy(current_ptr, session_id_index_val, FE_CommandClass::SESSION_ID_INDEX_SIZE);
-    current_ptr += FE_CommandClass::SESSION_ID_INDEX_SIZE;
-    strcpy(current_ptr, "job is done");
-    this->transmitFunction(tp_transfer_object_val, downlink_data);
 }
 
 /* get session data */

@@ -153,13 +153,6 @@ class DFabricClass {
         char const *link_id_index_val,
         char const *session_id_index_val);
 
-    void sendPutSessionDataResponce (
-        void *tp_transfer_object_val,
-        char const *ajax_id_val,
-        char const *link_id_index_val,
-        char const *session_id_index_val,
-        char const *result_val);
-
     void sendPutSessionDataRequestToThemeServer (
         char const *room_id_index_val,
         char const *data_val);

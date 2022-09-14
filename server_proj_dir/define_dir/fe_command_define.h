@@ -57,6 +57,7 @@ public:
     char const static *FE_RESULT_SESSION_NOT_EXIST;
     char const static *FE_RESULT_NULL_LINK;
     char const static *FE_RESULT_NULL_SESSION;
+    char const static *FE_RESULT_NULL_ROOM;
 
     /* sizes */
     char const static *FAKE_LINK_ID_INDEX;
