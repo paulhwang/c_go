@@ -58,8 +58,9 @@ void DFabricClass::exportedParseFunction (
                     break;
 
                 case FE_CommandClass::MESSAGE_COMMAND:
-                    this->processMessageRequest(tp_transfer_object_val, current_data, ajax_id);
-                    return;
+                    response_data = this->processMessageRequest(tp_transfer_object_val, current_data, ajax_id);
+                    response_data[0] = FE_CommandClass::MESSAGE_RESPONSE;
+                    break;
 
                 default:
                     phwangAbendS("DFabricClass::exportedParseFunction", data_val);
@@ -181,11 +182,12 @@ void DFabricClass::sendSearchLinkSessionFailResponse (
     this->transmitFunction(tp_transfer_object_val, downlink_data);
 }
 
-void DFabricClass::processMessageRequest (
+char *DFabricClass::processMessageRequest (
     void *tp_transfer_object_val,
     char *input_data_val,
     char const *ajax_id_val)
 {
+    char *response_data;
     phwangDebugS(true, "DFabricClass::processMessageRequest", input_data_val);
 
     char act = *input_data_val++;
@@ -221,7 +223,9 @@ void DFabricClass::processMessageRequest (
         default:
             break;
     }
-    this->sendMessageResponce(tp_transfer_object_val, ajax_id_val, FE_CommandClass::FE_RESULT_SUCCEED, output_data);
+    //this->sendMessageResponce(tp_transfer_object_val, ajax_id_val, FE_CommandClass::FE_RESULT_SUCCEED, output_data);
+    response_data = generateDatagramResponse(FE_CommandClass::FE_RESULT_SUCCEED, FE_CommandClass::FE_RESULT_SUCCEED, output_data);
+    return response_data;
 }
 
 #define D_FABRIC_CLASS_PROCESSS_MMW_READ_DATA_DOWN_LINK_DATA_SIZE (1 + FE_CommandClass::AJAX_ID_SIZE + FE_CommandClass::LINK_ID_INDEX_SIZE + 1)
@@ -257,11 +261,10 @@ void DFabricClass::sendMessageResponce (
     phwangFree(encoded_data);
 
     this->transmitFunction(tp_transfer_object_val, downlink_data);
-    //response_data = generateDatagramResponse(FE_CommandClass::FE_RESULT_SUCCEED);
-    //return response_data;
 }
 
 char *DFabricClass::generateDatagramResponse (
+    char const *result_val,
     char const *dg_result_val,
     char const *data_val)
 {
@@ -275,7 +278,7 @@ char *DFabricClass::generateDatagramResponse (
     char *response_data = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_BUF_WITH_LINK_SIZE + strlen(encoded_dg_result) + strlen(encoded_data), MallocClass::generateDatagramResponse);
     char *current_ptr = &response_data[FE_CommandClass::FE_RESPONSE_HEADER_SIZE];
 
-    memcpy(current_ptr, dg_result_val, FE_CommandClass::FE_RESULT_SIZE);
+    memcpy(current_ptr, result_val, FE_CommandClass::FE_RESULT_SIZE);
     current_ptr += FE_CommandClass::FE_RESULT_SIZE;
 
     strcpy(current_ptr, encoded_dg_result);
