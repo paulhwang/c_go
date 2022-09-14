@@ -36,6 +36,7 @@ public:
     int const static BAD_SESSION = 5;
     int const static generateSignUpResponse = 5;
     int const static generateSignInResponse = 5;
+    int const static generateSignOffResponse = 5;
     int const static DATAGRAM = 5;
     int const static FREE_LINK = 5;
     int const static FREE_LINK_ERROR = 5;
@@ -44,6 +45,12 @@ public:
     int const static GET_NAME_LIST = 5;
     int const static GET_NAME_LIST_ERROR = 5;
     int const static processSetupSessionRequest = 5;
+    int const static processSetupSession2Request = 5;
+    int const static processSetupSession3Request = 5;
+    int const static generateSetupSessionResponse = 5;
+    int const static generateSetupSession2Response = 5;
+    int const static generateSetupSession3Response = 5;
+    int const static generateFreeSessionResponse = 5;
     int const static sendSetupSessionResponce = 5;
     int const static SETUP_SESSION_ERROR = 5;
     int const static SETUP_SESSION2 = 5;

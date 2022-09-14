@@ -51,6 +51,11 @@ SessionClass *LinkClass::mallocSession (void)
     return session;
 }
 
+void LinkClass::freeSession(SessionClass *session_object_val)
+{
+    
+}
+
 SessionClass *LinkClass::searchSession (char *data_val)
 {
     return (SessionClass *) phwangListMgrSearchEntry(this->theSessionListMgrObject, data_val, 0);

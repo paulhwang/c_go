@@ -60,17 +60,12 @@ class DFabricClass {
         char const *result_val,
         char const *link_id_index_val);
 
-    void processFreeLinkRequest (
-        void *tp_transfer_object_val,
-        char *data_val,
-        char const *ajax_id_val,
+    char *processSignOffRequest (
         LinkClass *link_val);
 
-    void sendFreeLinkResponce (
-        void *tp_transfer_object_val,
-        char const *ajax_id_val,
-        char const *link_id_index_val,
-        char const *result_val);
+    char *generateSignOffResponse (
+        char const *result_val,
+        char const *link_id_index_val);
 
     void processGetLinkDataRequest (
         void *tp_transfer_object_val,
@@ -78,11 +73,21 @@ class DFabricClass {
         char const *ajax_id_val,
         LinkClass *link_val);
 
+    char *generateGetLinkDataResponse (
+        char const *result_val,
+        char const *link_id_index_val,
+        char const *data_val);
+
     void processGetNameListRequest (
         void *tp_transfer_object_val,
         char *data_val,
         char const *ajax_id_val,
         LinkClass *link_val);
+
+    char *generateGetNameListResponse (
+        char const *result_val,
+        char const *link_id_index_val,
+        char const *data_val);
 
     void sendFreeSessionResponce (
         void *tp_transfer_object_val,
@@ -134,6 +139,11 @@ class DFabricClass {
         char const *ajax_id_val,
         LinkClass *link_val);
 
+    char *generateSetupSession3Response (
+        char const *result_val,
+        char const *link_id_index_val,
+        char const *session_id_index_val);
+
     void sendSetupSession3Responce (
         void *tp_transfer_object_val,
         char const *ajax_id_val,
@@ -141,11 +151,14 @@ class DFabricClass {
         char const *session_id_index_val,
         char const *result_val);
 
-    void processFreeSessionRequest (
-        void *tp_transfer_object_val,
-        char *data_val,
-        char const *ajax_id_val,
+    char *processFreeSessionRequest (
+        LinkClass *link_val,
         SessionClass *session_val);
+
+    char *generateFreeSessionResponse (
+        char const *result_val,
+        char const *link_id_index_val,
+        char const *session_id_index_val);
 
     char *processPutSessionDataRequest (
         SessionClass *session_val,

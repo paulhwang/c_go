@@ -17,8 +17,8 @@ public:
     char const static SIGN_UP_RESPONSE = 'u';
     char const static SETUP_LINK_COMMAND  = 'L';
     char const static SETUP_LINK_RESPONSE = 'l';
-    char const static FREE_LINK_COMMAND  = 'F';
-    char const static FREE_LINK_RESPONSE = 'f';
+    char const static SIGN_OFF_COMMAND  = 'F';
+    char const static SIGN_OFF_RESPONSE = 'f';
     char const static GET_LINK_DATA_COMMAND  = 'D';
     char const static GET_LINK_DATA_RESPONSE = 'd';
     char const static GET_NAME_LIST_COMMAND  = 'N';
