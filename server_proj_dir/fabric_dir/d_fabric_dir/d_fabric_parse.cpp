@@ -42,23 +42,23 @@ void DFabricClass::exportedParseFunction (
     memcpy(ajax_id, &data_val[2], FE_CommandClass::AJAX_ID_SIZE);
     ajax_id[FE_CommandClass::AJAX_ID_SIZE] = 0;
 
-    char *rest_data = &data_val[2 + FE_CommandClass::AJAX_ID_SIZE];
+    char *current_data = &data_val[2 + FE_CommandClass::AJAX_ID_SIZE];
 
     switch (type) {
         case '0':
             switch (command) {
                 case FE_CommandClass::SIGN_UP_COMMAND:
-                    response_data = this->processSignUpRequest(rest_data);
+                    response_data = this->processSignUpRequest(current_data);
                     response_data[0] = FE_CommandClass::SIGN_UP_RESPONSE;
                     break;
 
                 case FE_CommandClass::SETUP_LINK_COMMAND:
-                    response_data = this->processSignInRequest(rest_data);
+                    response_data = this->processSignInRequest(current_data);
                     response_data[0] = FE_CommandClass::SETUP_LINK_RESPONSE;
                     break;
 
                 case FE_CommandClass::MESSAGE_COMMAND:
-                    this->processMessageRequest(tp_transfer_object_val, rest_data, ajax_id);
+                    this->processMessageRequest(tp_transfer_object_val, current_data, ajax_id);
                     return;
 
                 default:
@@ -68,37 +68,37 @@ void DFabricClass::exportedParseFunction (
             break;
 
         case '1':
-            link = this->theFabricObject->searchLink(rest_data, data_val);
+            link = this->theFabricObject->searchLink(current_data, data_val);
             if (!link) {
                 this->sendSearchLinkFailResponse(command, tp_transfer_object_val, ajax_id);
                 return;
             }
-            rest_data += FE_CommandClass::LINK_ID_INDEX_SIZE;
+            current_data += FE_CommandClass::LINK_ID_INDEX_SIZE;
 
             switch (command) {
                 case FE_CommandClass::FREE_LINK_COMMAND:
-                    this->processFreeLinkRequest(tp_transfer_object_val, rest_data, ajax_id, link);
+                    this->processFreeLinkRequest(tp_transfer_object_val, current_data, ajax_id, link);
                     return;
 
                 case FE_CommandClass::GET_LINK_DATA_COMMAND:
-                    this->processGetLinkDataRequest(tp_transfer_object_val, rest_data, ajax_id, link);
+                    this->processGetLinkDataRequest(tp_transfer_object_val, current_data, ajax_id, link);
                     return;
 
                 case FE_CommandClass::GET_NAME_LIST_COMMAND:
-                    this->processGetNameListRequest(tp_transfer_object_val, rest_data, ajax_id, link);
+                    this->processGetNameListRequest(tp_transfer_object_val, current_data, ajax_id, link);
                     return;
 
                 case FE_CommandClass::SETUP_SESSION_COMMAND:
-                    response_data = this->processSetupSessionRequest(tp_transfer_object_val, rest_data, ajax_id, link);
+                    response_data = this->processSetupSessionRequest(tp_transfer_object_val, current_data, ajax_id, link);
                     response_data[0] = FE_CommandClass::SETUP_SESSION_RESPONSE;
                     break;
 
                 case FE_CommandClass::SETUP_SESSION2_COMMAND:
-                    this->processSetupSession2Request(tp_transfer_object_val, rest_data, ajax_id, link);
+                    this->processSetupSession2Request(tp_transfer_object_val, current_data, ajax_id, link);
                     return;
 
                 case FE_CommandClass::SETUP_SESSION3_COMMAND:
-                    this->processSetupSession3Request(tp_transfer_object_val, rest_data, ajax_id, link);
+                    this->processSetupSession3Request(tp_transfer_object_val, current_data, ajax_id, link);
                     return;
 
                 default:
@@ -108,25 +108,25 @@ void DFabricClass::exportedParseFunction (
             break;
 
         case '2':
-            session = this->theFabricObject->serachLinkAndSession(rest_data);
+            session = this->theFabricObject->serachLinkAndSession(current_data);
             if (!session) {
                 this->sendSearchLinkSessionFailResponse(command, tp_transfer_object_val, ajax_id);
                 return;
             }
-            rest_data += FE_CommandClass::LINK_ID_INDEX_SIZE + FE_CommandClass::SESSION_ID_INDEX_SIZE;
+            current_data += FE_CommandClass::LINK_ID_INDEX_SIZE + FE_CommandClass::SESSION_ID_INDEX_SIZE;
 
             switch (command) {
                 case FE_CommandClass::FREE_SESSION_COMMAND:
-                    this->processFreeSessionRequest(tp_transfer_object_val, rest_data, ajax_id, session);
+                    this->processFreeSessionRequest(tp_transfer_object_val, current_data, ajax_id, session);
                     return;
 
                 case FE_CommandClass::PUT_SESSION_DATA_COMMAND:
-                    response_data = this->processPutSessionDataRequest(tp_transfer_object_val, rest_data, ajax_id, session);
+                    response_data = this->processPutSessionDataRequest(session, current_data);
                     response_data[0] = FE_CommandClass::PUT_SESSION_DATA_RESPONSE;
                     break;
 
                 case FE_CommandClass::GET_SESSION_DATA_COMMAND:
-                    response_data = this->processGetSessionDataRequest(tp_transfer_object_val, rest_data, ajax_id, session);
+                    response_data = this->processGetSessionDataRequest(session, current_data);
                     response_data[0] = FE_CommandClass::GET_SESSION_DATA_RESPONSE;
                     break;
 
@@ -731,10 +731,8 @@ void DFabricClass::sendFreeSessionResponce (
 /* put session data */
 
 char *DFabricClass::processPutSessionDataRequest (
-    void *tp_transfer_object_val,
-    char *data_val,
-    char const *ajax_id_val,
-    SessionClass *session_val)
+    SessionClass *session_val,
+    char *data_val)
 {
     char *response_data;
     phwangDebugS(true, "DFabricClass::processPutSessionDataRequest", data_val);
@@ -789,7 +787,9 @@ void DFabricClass::sendPutSessionDataRequestToThemeServer (
 
 /* get session data */
 
-char *DFabricClass::processGetSessionDataRequest (void *tp_transfer_object_val, char *data_val, char const *ajax_id_val, SessionClass *session_val)
+char *DFabricClass::processGetSessionDataRequest (
+    SessionClass *session_val,
+    char *data_val)
 {
     phwangDebugS(true, "DFabricClass::processGetSessionDataRequest", data_val);
 
