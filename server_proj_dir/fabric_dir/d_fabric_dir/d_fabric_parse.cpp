@@ -736,16 +736,6 @@ char *DFabricClass::generateSetupSession3Response (
     return response_data;
 }
 
-void DFabricClass::sendSetupSession3Responce (
-    void *tp_transfer_object_val,
-    char const *ajax_id_val,
-    char const *link_id_index_val,
-    char const *session_id_index_val,
-    char const *result_val)
-{
-    phwangDebugS(false, "sendSetupSession3Responce", result_val);
-}
-
 /* free session */
 
 char *DFabricClass::processFreeSessionRequest (
