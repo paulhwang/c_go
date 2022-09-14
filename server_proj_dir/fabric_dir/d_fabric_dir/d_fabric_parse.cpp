@@ -422,6 +422,7 @@ void DFabricClass::processGetLinkDataRequest (
     char const *ajax_id_val,
     LinkClass *link_val)
 {
+    char *response_data;
     phwangDebugS(false, "DFabricClass::processGetLinkDataRequest", data_val);
 
     link_val->resetKeepAliveTime();
@@ -472,6 +473,25 @@ void DFabricClass::processGetLinkDataRequest (
     }
 
     this->transmitFunction(tp_transfer_object_val, downlink_data);
+    //response_data = generateGetLinkDataResponse(FE_CommandClass::FE_RESULT_SUCCEED, link_val->linkIdIndex(), downlink_data);
+    //return response_data;
+}
+
+char *DFabricClass::generateGetLinkDataResponse (
+    char const *result_val,
+    char const *link_id_index_val,
+    char const *data_val)
+{
+    phwangDebugS(false, "DFabricClass::generateGetLinkDataResponse", result_val);
+
+    char *response_data = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE + strlen(data_val), MallocClass::generateGetLinkDataResponse);
+    char *current_ptr = &response_data[FE_CommandClass::FE_RESPONSE_HEADER_SIZE];
+    memcpy(current_ptr, result_val, FE_CommandClass::FE_RESULT_SIZE);
+    current_ptr += FE_CommandClass::FE_RESULT_SIZE;
+    memcpy(current_ptr, link_id_index_val, FE_CommandClass::LINK_ID_INDEX_SIZE);
+    current_ptr += FE_CommandClass::LINK_ID_INDEX_SIZE;
+    strcpy(current_ptr, data_val);
+    return response_data;
 }
 
 void DFabricClass::processGetNameListRequest (
@@ -480,6 +500,7 @@ void DFabricClass::processGetNameListRequest (
     char const *ajax_id_val,
     LinkClass *link_val)
 {
+    char *response_data;
     phwangDebugS(false, "DFabricClass::processGetNameListRequest", data_val);
 
     char *name_list_tag_val = data_val;
@@ -489,7 +510,7 @@ void DFabricClass::processGetNameListRequest (
     char *name_list = this->theFabricObject->nameListObject()->getNameList(name_list_tag);
 
     char *data_ptr;
-    char *downlink_data = data_ptr = (char *) phwangMalloc(strlen(name_list) + FE_CommandClass::FE_DL_DATA_BUF_SIZE, MallocClass::GET_NAME_LIST_ERROR);
+    char *downlink_data = data_ptr = (char *) phwangMalloc(strlen(name_list) + FE_CommandClass::FE_DL_DATA_BUF_SIZE, MallocClass::generateGetLinkDataResponse);
     *data_ptr++ = FE_CommandClass::GET_NAME_LIST_RESPONSE;
     strcpy(data_ptr, ajax_id_val);
     data_ptr += FE_CommandClass::AJAX_ID_SIZE;
@@ -498,6 +519,26 @@ void DFabricClass::processGetNameListRequest (
         strcpy(data_ptr, name_list);
     }
     this->transmitFunction(tp_transfer_object_val, downlink_data);
+
+    //response_data = generateGetNameListResponse(FE_CommandClass::FE_RESULT_SUCCEED, link_val->linkIdIndex(), name_list);
+    //return response_data;
+}
+
+char *DFabricClass::generateGetNameListResponse (
+    char const *result_val,
+    char const *link_id_index_val,
+    char const *data_val)
+{
+    phwangDebugS(false, "DFabricClass::generateGetNameListResponse", result_val);
+
+    char *response_data = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE + strlen(data_val), MallocClass::generateGetNameListResponse);
+    char *current_ptr = &response_data[FE_CommandClass::FE_RESPONSE_HEADER_SIZE];
+    memcpy(current_ptr, result_val, FE_CommandClass::FE_RESULT_SIZE);
+    current_ptr += FE_CommandClass::FE_RESULT_SIZE;
+    memcpy(current_ptr, link_id_index_val, FE_CommandClass::LINK_ID_INDEX_SIZE);
+    current_ptr += FE_CommandClass::LINK_ID_INDEX_SIZE;
+    strcpy(current_ptr, data_val);
+    return response_data;
 }
 
 char *DFabricClass::processSetupSessionRequest (

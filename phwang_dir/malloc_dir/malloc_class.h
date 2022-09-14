@@ -41,9 +41,9 @@ public:
     int const static FREE_LINK = 5;
     int const static FREE_LINK_ERROR = 5;
     int const static GET_LINK_DATA = 5;
-    int const static GET_LINK_DATA_ERROR = 5;
+    int const static generateGetLinkDataResponse = 5;
     int const static GET_NAME_LIST = 5;
-    int const static GET_NAME_LIST_ERROR = 5;
+    int const static generateGetNameListResponse = 5;
     int const static processSetupSessionRequest = 5;
     int const static processSetupSession2Request = 5;
     int const static processSetupSession3Request = 5;
