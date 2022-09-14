@@ -243,6 +243,9 @@ void DFabricClass::sendMessageResponce (
     memcpy(data_ptr, ajax_id_val, FE_CommandClass::AJAX_ID_SIZE);
     data_ptr += FE_CommandClass::AJAX_ID_SIZE;
 
+    memcpy(data_ptr, result_val, FE_CommandClass::FE_RESULT_SIZE);
+    data_ptr += FE_CommandClass::FE_RESULT_SIZE;
+
     strcpy(data_ptr, encoded_result);
     data_ptr += encoded_result_length;
     phwangFree(encoded_result);
@@ -260,11 +263,25 @@ char *DFabricClass::generateDatagramResponse (
 {
     phwangDebugS(false, "DFabricClass::generateDatagramResponse", result_val);
 
-    char *response_data = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_BUF_WITH_LINK_SIZE + strlen(data_val), MallocClass::generateDatagramResponse);
+    char *encoded_result = phwangEncodeStringMalloc(result_val);
+    int encoded_result_length = strlen(encoded_result);
+    char *encoded_data = phwangEncodeStringMalloc(data_val);
+    int encoded_data_length = strlen(encoded_data);
+
+    char *response_data = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_BUF_WITH_LINK_SIZE + strlen(encoded_result) + strlen(encoded_data), MallocClass::generateDatagramResponse);
     char *current_ptr = &response_data[FE_CommandClass::FE_RESPONSE_HEADER_SIZE];
+
     memcpy(current_ptr, result_val, FE_CommandClass::FE_RESULT_SIZE);
     current_ptr += FE_CommandClass::FE_RESULT_SIZE;
-    strcpy(current_ptr, data_val);
+
+    strcpy(current_ptr, encoded_result);
+    current_ptr += encoded_result_length;
+    phwangFree(encoded_result);
+
+    strcpy(current_ptr, encoded_data);
+    //current_ptr += encoded_data_length;
+    phwangFree(encoded_data);
+
     return response_data;
 
 }
