@@ -78,11 +78,9 @@ class DFabricClass {
         char const *link_id_index_val,
         char const *data_val);
 
-    void processGetNameListRequest (
-        void *tp_transfer_object_val,
-        char *data_val,
-        char const *ajax_id_val,
-        LinkClass *link_val);
+    char *processGetNameListRequest (
+        LinkClass *link_val,
+        char *data_val);
 
     char *generateGetNameListResponse (
         char const *result_val,
