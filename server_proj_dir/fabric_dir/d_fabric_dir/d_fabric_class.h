@@ -91,11 +91,16 @@ class DFabricClass {
         char const *session_id_index_val,
         char const *result_val);
 
-    void processSetupSessionRequest (
+    char *processSetupSessionRequest (
         void *tp_transfer_object_val,
         char *data_val,
         char const *ajax_id_val,
         LinkClass *link_val);
+
+    char *generateSetupSessionResponse (
+        char const *result_val,
+        char const *link_id_index_val,
+        char const *session_id_index_val);
 
     void sendSetupRoomRequestToThemeServer (
         GroupClass *group_val,

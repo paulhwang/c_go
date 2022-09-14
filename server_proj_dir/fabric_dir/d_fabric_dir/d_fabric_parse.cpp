@@ -89,8 +89,9 @@ void DFabricClass::exportedParseFunction (
                     return;
 
                 case FE_CommandClass::SETUP_SESSION_COMMAND:
-                    this->processSetupSessionRequest(tp_transfer_object_val, rest_data, ajax_id, link);
-                    return;
+                    response_data = this->processSetupSessionRequest(tp_transfer_object_val, rest_data, ajax_id, link);
+                    response_data[0] = FE_CommandClass::SETUP_SESSION_RESPONSE;
+                    break;
 
                 case FE_CommandClass::SETUP_SESSION2_COMMAND:
                     this->processSetupSession2Request(tp_transfer_object_val, rest_data, ajax_id, link);
@@ -497,12 +498,13 @@ void DFabricClass::processGetNameListRequest (
     this->transmitFunction(tp_transfer_object_val, downlink_data);
 }
 
-void DFabricClass::processSetupSessionRequest (
+char *DFabricClass::processSetupSessionRequest (
     void *tp_transfer_object_val,
     char *data_val,
     char const *ajax_id_val,
     LinkClass *link_val)
 {
+    char *response_data = 0;
     phwangDebugS(true, "DFabricClass::processSetupSessionRequest", data_val);
 
     char *theme_info_val = data_val;
@@ -522,13 +524,13 @@ void DFabricClass::processSetupSessionRequest (
     SessionClass *session = link_val->mallocSession();
     if (!session) {
         this->sendSetupSessionResponce(tp_transfer_object_val, ajax_id_val, link_val->linkIdIndex(), FE_CommandClass::FAKE_SESSION_ID_INDEX, "malloc_session_fail");
-        return;
+        return response_data;/////////////////////////////////
     }
 
     GroupClass *group = this->theFabricObject->mallocGroup(theme_info_val);
     if (!group) {
         this->sendSetupSessionResponce(tp_transfer_object_val, ajax_id_val, link_val->linkIdIndex(), session->sessionIdIndex(), "malloc_group_fail");
-        return;
+        return response_data;////////////////////////////////////
     }
     group->insertSession(session);
     session->bindGroup(group);
@@ -540,13 +542,13 @@ void DFabricClass::processSetupSessionRequest (
         LinkClass *his_link = this->theFabricObject->searchLinkByName(his_name_val);
         if (!his_link) {
             this->sendSetupSessionResponce(tp_transfer_object_val, ajax_id_val, link_val->linkIdIndex(), session->sessionIdIndex(), "his_link_does_not_exist");
-            return;
+            return response_data;//////////////////////////////
         }
 
         SessionClass *his_session = his_link->mallocSession();
         if (!his_session) {
             this->sendSetupSessionResponce(tp_transfer_object_val, ajax_id_val, link_val->linkIdIndex(), session->sessionIdIndex(), "null_his_session");
-            return;
+            return response_data;////////////////////////
         }
 
         group->insertSession(his_session);
@@ -559,7 +561,28 @@ void DFabricClass::processSetupSessionRequest (
         phwangFree(theme_data_buf);
     }
 
-    this->sendSetupSessionResponce(tp_transfer_object_val, ajax_id_val, link_val->linkIdIndex(), session->sessionIdIndex(), FE_CommandClass::FE_RESULT_SUCCEED);
+    //this->sendSetupSessionResponce(tp_transfer_object_val, ajax_id_val, link_val->linkIdIndex(), session->sessionIdIndex(), FE_CommandClass::FE_RESULT_SUCCEED);
+    response_data = this->generatePutSessionDataResponse(FE_CommandClass::FE_RESULT_SUCCEED, link_val->linkIdIndex(), session->sessionIdIndex());
+    return response_data;
+}
+
+char *DFabricClass::generateSetupSessionResponse (
+    char const *result_val,
+    char const *link_id_index_val,
+    char const *session_id_index_val)
+{
+    phwangDebugS(false, "DFabricClass::generateSetupSessionResponse", result_val);
+
+    char *response_data = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE, MallocClass::generatePutSessionDataResponse);
+    char *current_ptr = &response_data[FE_CommandClass::FE_RESPONSE_HEADER_SIZE];
+    memcpy(current_ptr, result_val, FE_CommandClass::FE_RESULT_SIZE);
+    current_ptr += FE_CommandClass::FE_RESULT_SIZE;
+    memcpy(current_ptr, link_id_index_val, FE_CommandClass::LINK_ID_INDEX_SIZE);
+    current_ptr += FE_CommandClass::LINK_ID_INDEX_SIZE;
+    memcpy(current_ptr, session_id_index_val, FE_CommandClass::SESSION_ID_INDEX_SIZE);
+    current_ptr += FE_CommandClass::SESSION_ID_INDEX_SIZE;
+    *current_ptr = 0;
+    return response_data;
 }
 
 void DFabricClass::sendSetupSessionResponce (
