@@ -201,26 +201,27 @@ void DFabricClass::processMessageRequest (
         phwangDebugS(true, "DFabricClass::processMessageRequest", buf);
     }
 
+
     switch (act) {
         case 'I':
             this->messengerObject()->initMessenger();
-            this->sendMessageResponce(tp_transfer_object_val, ajax_id_val, FE_CommandClass::FE_RESULT_SUCCEED, "I_data");
+            output_data = "I_data";
             break;
 
         case 'R':
             output_data = this->messengerObject()->getMessage();
             phwangDebugS(true, "DFabricClass::processMessageRequest", output_data);
-            this->sendMessageResponce(tp_transfer_object_val, ajax_id_val, FE_CommandClass::FE_RESULT_SUCCEED, output_data);
             break;
 
         case 'W':
+            output_data = "W_data";
             this->messengerObject()->putMessage(0);
-            this->sendMessageResponce(tp_transfer_object_val, ajax_id_val, FE_CommandClass::FE_RESULT_SUCCEED, "W_data");
             break;
 
         default:
             break;
     }
+    this->sendMessageResponce(tp_transfer_object_val, ajax_id_val, FE_CommandClass::FE_RESULT_SUCCEED, output_data);
 }
 
 #define D_FABRIC_CLASS_PROCESSS_MMW_READ_DATA_DOWN_LINK_DATA_SIZE (1 + FE_CommandClass::AJAX_ID_SIZE + FE_CommandClass::LINK_ID_INDEX_SIZE + 1)
@@ -230,6 +231,7 @@ void DFabricClass::sendMessageResponce (
     char const *result_val,
     char const *data_val)
 {
+    char *response_data;
     phwangDebugS(true, "DFabricClass::sendMessageResponce", result_val);
 
     char *encoded_result = phwangEncodeStringMalloc(result_val);
@@ -255,28 +257,30 @@ void DFabricClass::sendMessageResponce (
     phwangFree(encoded_data);
 
     this->transmitFunction(tp_transfer_object_val, downlink_data);
+    //response_data = generateDatagramResponse(FE_CommandClass::FE_RESULT_SUCCEED);
+    //return response_data;
 }
 
 char *DFabricClass::generateDatagramResponse (
-    char const *result_val,
+    char const *dg_result_val,
     char const *data_val)
 {
-    phwangDebugS(false, "DFabricClass::generateDatagramResponse", result_val);
+    phwangDebugS(false, "DFabricClass::generateDatagramResponse", dg_result_val);
 
-    char *encoded_result = phwangEncodeStringMalloc(result_val);
-    int encoded_result_length = strlen(encoded_result);
+    char *encoded_dg_result = phwangEncodeStringMalloc(dg_result_val);
+    int encoded_dg_result_length = strlen(encoded_dg_result);
     char *encoded_data = phwangEncodeStringMalloc(data_val);
     int encoded_data_length = strlen(encoded_data);
 
-    char *response_data = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_BUF_WITH_LINK_SIZE + strlen(encoded_result) + strlen(encoded_data), MallocClass::generateDatagramResponse);
+    char *response_data = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_BUF_WITH_LINK_SIZE + strlen(encoded_dg_result) + strlen(encoded_data), MallocClass::generateDatagramResponse);
     char *current_ptr = &response_data[FE_CommandClass::FE_RESPONSE_HEADER_SIZE];
 
-    memcpy(current_ptr, result_val, FE_CommandClass::FE_RESULT_SIZE);
+    memcpy(current_ptr, dg_result_val, FE_CommandClass::FE_RESULT_SIZE);
     current_ptr += FE_CommandClass::FE_RESULT_SIZE;
 
-    strcpy(current_ptr, encoded_result);
-    current_ptr += encoded_result_length;
-    phwangFree(encoded_result);
+    strcpy(current_ptr, encoded_dg_result);
+    current_ptr += encoded_dg_result_length;
+    phwangFree(encoded_dg_result);
 
     strcpy(current_ptr, encoded_data);
     //current_ptr += encoded_data_length;
