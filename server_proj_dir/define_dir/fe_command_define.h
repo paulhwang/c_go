@@ -11,6 +11,8 @@ public:
     int const static FE_DL_DATA_BUF_SIZE = 512;
     int const static FE_UL_DATA_BUF_SIZE = 512;
 
+    int const static FE_COMMAND_SIZE = 1;
+
     char const static SIGN_UP_COMMAND  = 'U';
     char const static SIGN_UP_RESPONSE = 'u';
     char const static SETUP_LINK_COMMAND  = 'L';
@@ -41,26 +43,7 @@ public:
     char const static RESPOND_IS_GET_LINK_DATA_PENDING_DATA = 'D';
     char const static RESPOND_IS_GET_LINK_DATA_NAME_LIST = 'N';
 
-    char const static *FAKE_LINK_ID_INDEX;
-    int const static LINK_ID_SIZE = 4;
-    int const static LINK_INDEX_SIZE = 4;
-    int const static LINK_ID_INDEX_SIZE = LINK_ID_SIZE + LINK_INDEX_SIZE;
-
-    char const static *FAKE_SESSION_ID_INDEX;
-    int const static SESSION_ID_SIZE = 4;
-    int const static SESSION_INDEX_SIZE = 4;
-    int const static SESSION_ID_INDEX_SIZE = SESSION_ID_SIZE + SESSION_INDEX_SIZE;
-
-    int const static NAME_LIST_TAG_SIZE = 3;
-
-    int const static AJAX_ID_SIZE = 3;
-    int const static FE_RESPONSE_HEADER_SIZE = 1 + AJAX_ID_SIZE;
-    int const static FE_RESPONSE_BUFFER_SIZE = FE_RESPONSE_HEADER_SIZE + 1;
-    int const static FE_RESPONSE_BUF_WITH_LINK_SIZE = FE_RESPONSE_BUFFER_SIZE + LINK_ID_INDEX_SIZE;
-    int const static FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE = FE_RESPONSE_BUF_WITH_LINK_SIZE + SESSION_ID_INDEX_SIZE;
-
-
-    /* front end results */
+    /* response results */
     int const static FE_RESULT_SIZE = 2;
 
     char const static *FE_RESULT_SUCCEED;
@@ -74,4 +57,23 @@ public:
     char const static *FE_RESULT_SESSION_NOT_EXIST;
     char const static *FE_RESULT_NULL_LINK;
     char const static *FE_RESULT_NULL_SESSION;
+
+    /* sizes */
+    char const static *FAKE_LINK_ID_INDEX;
+    int const static LINK_ID_SIZE = 4;
+    int const static LINK_INDEX_SIZE = 4;
+    int const static LINK_ID_INDEX_SIZE = LINK_ID_SIZE + LINK_INDEX_SIZE;
+
+    char const static *FAKE_SESSION_ID_INDEX;
+    int const static SESSION_ID_SIZE = 4;
+    int const static SESSION_INDEX_SIZE = 4;
+    int const static SESSION_ID_INDEX_SIZE = SESSION_ID_SIZE + SESSION_INDEX_SIZE;
+
+    int const static NAME_LIST_TAG_SIZE = 3;
+
+    int const static AJAX_ID_SIZE = 3;
+    int const static FE_RESPONSE_HEADER_SIZE = FE_COMMAND_SIZE + AJAX_ID_SIZE;
+    int const static FE_RESPONSE_BUFFER_SIZE = FE_RESPONSE_HEADER_SIZE + FE_RESULT_SIZE + 1;
+    int const static FE_RESPONSE_BUF_WITH_LINK_SIZE = FE_RESPONSE_BUFFER_SIZE + LINK_ID_INDEX_SIZE;
+    int const static FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE = FE_RESPONSE_BUF_WITH_LINK_SIZE + SESSION_ID_INDEX_SIZE;
 };

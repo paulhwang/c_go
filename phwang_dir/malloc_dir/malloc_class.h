@@ -52,7 +52,7 @@ public:
     int const static PUT_SESSION_DATA0 = 5;
     int const static PUT_SESSION_DATA1 = 5;
     int const static PUT_SESSION_DATA_ERROR = 5;
-    int const static GET_SESSION_DATA = 5;
+    int const static generateGetSessionDataResponse = 5;
     int const static GET_SESSION_DATA_ERROR = 5;
     int const static sendSetupRoomRequestToThemeServer = 5;
     int const static setPendingSessionSetup = 6;

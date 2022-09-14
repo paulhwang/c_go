@@ -159,18 +159,16 @@ class DFabricClass {
         char const *session_id_index_val,
         char const *result_val);
 
-    void processGetSessionDataRequest (
+    char *processGetSessionDataRequest (
         void *tp_transfer_object_val,
         char *data_val,
         char const *ajax_id_val,
         SessionClass *session_val);
 
-    void sendGetSessionDataResponce (
-        void *tp_transfer_object_val,
-        char const *ajax_id_val,
+    char *generateGetSessionDataResponse (
+        char const *result_val,
         char const *link_id_index_val,
         char const *session_id_index_val,
-        char const *result_val,
         char const *data_val);
    
 public:

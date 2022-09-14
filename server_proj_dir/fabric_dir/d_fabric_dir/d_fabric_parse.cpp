@@ -124,8 +124,9 @@ void DFabricClass::exportedParseFunction (
                     return;
 
                 case FE_CommandClass::GET_SESSION_DATA_COMMAND:
-                    this->processGetSessionDataRequest(tp_transfer_object_val, rest_data, ajax_id, session);
-                    return;
+                    response_data = this->processGetSessionDataRequest(tp_transfer_object_val, rest_data, ajax_id, session);
+                    response_data[0] = FE_CommandClass::GET_SESSION_DATA_COMMAND;
+                    break;
 
                 default:
                     phwangAbendS("DFabricClass::dbAccountObject", data_val);
@@ -765,7 +766,7 @@ void DFabricClass::sendPutSessionDataResponce (
 
 /* get session data */
 
-void DFabricClass::processGetSessionDataRequest (void *tp_transfer_object_val, char *data_val, char const *ajax_id_val, SessionClass *session_val)
+char *DFabricClass::processGetSessionDataRequest (void *tp_transfer_object_val, char *data_val, char const *ajax_id_val, SessionClass *session_val)
 {
     phwangDebugS(true, "DFabricClass::processGetSessionDataRequest", data_val);
 
@@ -775,28 +776,25 @@ void DFabricClass::processGetSessionDataRequest (void *tp_transfer_object_val, c
         phwangAbendSI("DFabricClass::processGetSessionDataRequest", "buf_size", strlen(data));
     }
 
-    this->sendGetSessionDataResponce(tp_transfer_object_val, ajax_id_val, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex(), FE_CommandClass::FE_RESULT_SUCCEED, data);
+    char *response_data = this->generateGetSessionDataResponse(FE_CommandClass::FE_RESULT_SUCCEED, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex(), data);
+    return response_data;
 }
 
-void DFabricClass::sendGetSessionDataResponce (
-    void *tp_transfer_object_val,
-    char const *ajax_id_val,
+char *DFabricClass::generateGetSessionDataResponse (
+    char const *result_val,
     char const *link_id_index_val,
     char const *session_id_index_val,
-    char const *result_val,
     char const *data_val)
 {
-    phwangDebugS(false, "sendGetSessionDataResponce", result_val);
+    phwangDebugS(false, "DFabricClass::generateGetSessionDataResponse", result_val);
 
-    char *current_ptr;
-    char *downlink_data = current_ptr = (char *) phwangMalloc(FE_CommandClass::FE_DL_DATA_BUF_SIZE, MallocClass::GET_SESSION_DATA);
-    *current_ptr++ = FE_CommandClass::GET_SESSION_DATA_RESPONSE;
-    strcpy(current_ptr, ajax_id_val);
-    current_ptr += FE_CommandClass::AJAX_ID_SIZE;
+    char *response_data = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE + strlen(data_val), MallocClass::generateGetSessionDataResponse);
+    char *current_ptr = &response_data[FE_CommandClass::FE_RESPONSE_HEADER_SIZE];
     memcpy(current_ptr, link_id_index_val, FE_CommandClass::LINK_ID_INDEX_SIZE);
     current_ptr += FE_CommandClass::LINK_ID_INDEX_SIZE;
     memcpy(current_ptr, session_id_index_val, FE_CommandClass::SESSION_ID_INDEX_SIZE);
     current_ptr += FE_CommandClass::SESSION_ID_INDEX_SIZE;
+    //strcpy(current_ptr, result_val);
     strcpy(current_ptr, data_val);
-    this->transmitFunction(tp_transfer_object_val, downlink_data);
+    return response_data;
 }
