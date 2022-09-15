@@ -9,7 +9,9 @@
 #include "link_class.h"
 #include "session_class.h"
 #include "fabric_class.h"
+#include "../define_dir/size_def.h"
 #include "../define_dir/fe_def.h"
+#include "../define_dir/fabric_def.h"
   
 LinkClass::LinkClass (
     void *list_mgr_object_val,
@@ -77,7 +79,7 @@ void LinkClass::setPendingSessionSetup (
 {
     char *buf, *data_ptr;
 
-    buf = data_ptr = (char *) phwangMalloc(FE_DEF::FE_PENDING_SESSIONS_SIZE, MallocClass::setPendingSessionSetup);
+    buf = data_ptr = (char *) phwangMalloc(FABRIC_DEF::FE_PENDING_SESSIONS_SIZE, MallocClass::setPendingSessionSetup);
     memcpy(data_ptr, session_id_index_val, SIZE_DEF::SESSION_ID_INDEX_SIZE);
     data_ptr += SIZE_DEF::SESSION_ID_INDEX_SIZE;
     strcpy(data_ptr, theme_data_val);
@@ -90,7 +92,7 @@ void LinkClass::setPendingSessionSetup3 (
 {
     char *buf, *data_ptr;
 
-    buf = data_ptr = (char *) phwangMalloc(FE_DEF::FE_PENDING_SESSIONS_SIZE, MallocClass::setPendingSessionSetup3);
+    buf = data_ptr = (char *) phwangMalloc(FABRIC_DEF::FE_PENDING_SESSIONS_SIZE, MallocClass::setPendingSessionSetup3);
     memcpy(data_ptr, session_id_index_val, SIZE_DEF::SESSION_ID_INDEX_SIZE);
     data_ptr += SIZE_DEF::SESSION_ID_INDEX_SIZE;
     strcpy(data_ptr, theme_data_val);

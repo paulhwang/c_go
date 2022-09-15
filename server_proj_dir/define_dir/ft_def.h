@@ -8,7 +8,7 @@
 
 class FT_DEF {
 public:
-    int  const static FT_COMMAND_SIZE = 1;
+    int  const static FT_COMMAND_SIZE           = 1;
     char const static FT_SETUP_ROOM_COMMAND     = 'R';
     char const static FT_SETUP_ROOM_RESPONSE    = 'r';
     char const static FT_PUT_ROOM_DATA_COMMAND  = 'D';

@@ -7,6 +7,7 @@
 #pragma once
 
 #include "size_def.h"
+#include "result_def.h"
 
 class THEME_DEF {
 public:

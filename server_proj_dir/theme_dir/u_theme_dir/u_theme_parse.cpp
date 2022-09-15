@@ -6,6 +6,7 @@
 
 #include "../../../phwang_dir/phwang.h"
 #include "../../../phwang_dir/malloc_dir/malloc_class.h"
+#include "../../define_dir/result_def.h"
 #include "../../define_dir/fe_def.h"
 #include "../../define_dir/te_def.h"
 #include "../../define_dir/ft_def.h"
