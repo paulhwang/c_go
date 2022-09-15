@@ -30,7 +30,7 @@ void DFabricClass::exportedParseFunction (
     SessionClass *session;
     char *response_data;
 
-    if (data_val[1] != FE_CommandClass::GET_LINK_DATA_COMMAND) {
+    if (data_val[1] != FE_DEF::GET_LINK_DATA_COMMAND) {
         phwangDebugS(true, "DFabricClass::exportedParseFunction", data_val);
     }
 
@@ -47,19 +47,19 @@ void DFabricClass::exportedParseFunction (
     switch (type) {
         case '0':
             switch (command) {
-                case FE_CommandClass::SIGN_UP_COMMAND:
+                case FE_DEF::SIGN_UP_COMMAND:
                     response_data = this->processSignUpRequest(current_data);
-                    response_data[0] = FE_CommandClass::SIGN_UP_RESPONSE;
+                    response_data[0] = FE_DEF::SIGN_UP_RESPONSE;
                     break;
 
-                case FE_CommandClass::SETUP_LINK_COMMAND:
+                case FE_DEF::SETUP_LINK_COMMAND:
                     response_data = this->processSignInRequest(current_data);
-                    response_data[0] = FE_CommandClass::SETUP_LINK_RESPONSE;
+                    response_data[0] = FE_DEF::SETUP_LINK_RESPONSE;
                     break;
 
-                case FE_CommandClass::MESSAGE_COMMAND:
+                case FE_DEF::MESSAGE_COMMAND:
                     response_data = this->processDatagramRequest(current_data);
-                    response_data[0] = FE_CommandClass::MESSAGE_RESPONSE;
+                    response_data[0] = FE_DEF::MESSAGE_RESPONSE;
                     break;
 
                 default:
@@ -77,34 +77,34 @@ void DFabricClass::exportedParseFunction (
             current_data += SIZE_DEF::LINK_ID_INDEX_SIZE;
 
             switch (command) {
-                case FE_CommandClass::SIGN_OFF_COMMAND:
+                case FE_DEF::SIGN_OFF_COMMAND:
                     response_data = this->processSignOffRequest(link);
-                    response_data[0] = FE_CommandClass::SIGN_OFF_RESPONSE;
+                    response_data[0] = FE_DEF::SIGN_OFF_RESPONSE;
                     break;
 
-                case FE_CommandClass::GET_LINK_DATA_COMMAND:
+                case FE_DEF::GET_LINK_DATA_COMMAND:
                     response_data = this->processGetLinkDataRequest(link, current_data);
-                    response_data[0] = FE_CommandClass::GET_LINK_DATA_RESPONSE;
+                    response_data[0] = FE_DEF::GET_LINK_DATA_RESPONSE;
                     break;
 
-                case FE_CommandClass::GET_NAME_LIST_COMMAND:
+                case FE_DEF::GET_NAME_LIST_COMMAND:
                     response_data = this->processGetNameListRequest(link, current_data);
-                    response_data[0] = FE_CommandClass::GET_NAME_LIST_RESPONSE;
+                    response_data[0] = FE_DEF::GET_NAME_LIST_RESPONSE;
                     break;
 
-                case FE_CommandClass::SETUP_SESSION_COMMAND:
+                case FE_DEF::SETUP_SESSION_COMMAND:
                     response_data = this->processSetupSessionRequest(link, current_data);
-                    response_data[0] = FE_CommandClass::SETUP_SESSION_RESPONSE;
+                    response_data[0] = FE_DEF::SETUP_SESSION_RESPONSE;
                     break;
 
-                case FE_CommandClass::SETUP_SESSION2_COMMAND:
+                case FE_DEF::SETUP_SESSION2_COMMAND:
                     response_data = this->processSetupSession2Request(link, current_data);
-                    response_data[0] = FE_CommandClass::SETUP_SESSION2_RESPONSE;
+                    response_data[0] = FE_DEF::SETUP_SESSION2_RESPONSE;
                     break;
 
-                case FE_CommandClass::SETUP_SESSION3_COMMAND:
+                case FE_DEF::SETUP_SESSION3_COMMAND:
                     response_data = this->processSetupSession3Request(link, current_data);
-                    response_data[0] = FE_CommandClass::SETUP_SESSION3_RESPONSE;
+                    response_data[0] = FE_DEF::SETUP_SESSION3_RESPONSE;
                     break;
 
                 default:
@@ -122,19 +122,19 @@ void DFabricClass::exportedParseFunction (
             current_data += SIZE_DEF::LINK_ID_INDEX_SIZE + SIZE_DEF::SESSION_ID_INDEX_SIZE;
 
             switch (command) {
-                case FE_CommandClass::FREE_SESSION_COMMAND:
+                case FE_DEF::FREE_SESSION_COMMAND:
                     this->processFreeSessionRequest(link, session);
-                    response_data[0] = FE_CommandClass::FREE_SESSION_RESPONSE;
+                    response_data[0] = FE_DEF::FREE_SESSION_RESPONSE;
                     break;
 
-                case FE_CommandClass::PUT_SESSION_DATA_COMMAND:
+                case FE_DEF::PUT_SESSION_DATA_COMMAND:
                     response_data = this->processPutSessionDataRequest(session, current_data);
-                    response_data[0] = FE_CommandClass::PUT_SESSION_DATA_RESPONSE;
+                    response_data[0] = FE_DEF::PUT_SESSION_DATA_RESPONSE;
                     break;
 
-                case FE_CommandClass::GET_SESSION_DATA_COMMAND:
+                case FE_DEF::GET_SESSION_DATA_COMMAND:
                     response_data = this->processGetSessionDataRequest(session, current_data);
-                    response_data[0] = FE_CommandClass::GET_SESSION_DATA_RESPONSE;
+                    response_data[0] = FE_DEF::GET_SESSION_DATA_RESPONSE;
                     break;
 
                 default:
@@ -159,7 +159,7 @@ void DFabricClass::sendSearchLinkFailResponse (
     phwangAbendS("DFabricClass::sendSearchLinkFailResponse", "");
 
     char *data_ptr;
-    char *downlink_data = data_ptr = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE, MallocClass::BAD_LINK);
+    char *downlink_data = data_ptr = (char *) phwangMalloc(FE_DEF::FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE, MallocClass::BAD_LINK);
     *data_ptr++ = command_val;
     strcpy(data_ptr, ajax_id_val);
     data_ptr += SIZE_DEF::AJAX_ID_SIZE;
@@ -175,7 +175,7 @@ void DFabricClass::sendSearchLinkSessionFailResponse (
     phwangAbendS("DFabricClass::sendSearchLinkSessionFailResponse", "");
 
     char *data_ptr;
-    char *downlink_data = data_ptr = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE, MallocClass::BAD_SESSION);
+    char *downlink_data = data_ptr = (char *) phwangMalloc(FE_DEF::FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE, MallocClass::BAD_SESSION);
     *data_ptr++ = command_val;
     strcpy(data_ptr, ajax_id_val);
     data_ptr += SIZE_DEF::AJAX_ID_SIZE;
@@ -234,8 +234,8 @@ char *DFabricClass::generateDatagramResponse (
     char *encoded_data = phwangEncodeStringMalloc(data_val);
     int encoded_data_length = strlen(encoded_data);
 
-    char *response_data = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_BUF_WITH_LINK_SIZE + strlen(encoded_data), MallocClass::generateDatagramResponse);
-    char *current_ptr = &response_data[FE_CommandClass::FE_RESPONSE_HEADER_SIZE];
+    char *response_data = (char *) phwangMalloc(FE_DEF::FE_RESPONSE_BUF_WITH_LINK_SIZE + strlen(encoded_data), MallocClass::generateDatagramResponse);
+    char *current_ptr = &response_data[FE_DEF::FE_RESPONSE_HEADER_SIZE];
 
     memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;
@@ -310,8 +310,8 @@ char *DFabricClass::generateSignUpResponse (char const *result_val)
 {
     phwangDebugS(false, "DFabricClass::generateSignUpResponse", result_val);
 
-    char *response_data = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_BUFFER_SIZE, MallocClass::generateSignUpResponse);
-    char *current_ptr = &response_data[FE_CommandClass::FE_RESPONSE_HEADER_SIZE];
+    char *response_data = (char *) phwangMalloc(FE_DEF::FE_RESPONSE_BUFFER_SIZE, MallocClass::generateSignUpResponse);
+    char *current_ptr = &response_data[FE_DEF::FE_RESPONSE_HEADER_SIZE];
     strcpy(current_ptr, result_val);
     return response_data;
 }
@@ -375,8 +375,8 @@ char *DFabricClass::generateSignInResponse (
 {
     phwangDebugS(false, "DFabricClass::generateSignInResponse", result_val);
 
-    char *response_data = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_BUF_WITH_LINK_SIZE, MallocClass::generateSignInResponse);
-    char *current_ptr = &response_data[FE_CommandClass::FE_RESPONSE_HEADER_SIZE];
+    char *response_data = (char *) phwangMalloc(FE_DEF::FE_RESPONSE_BUF_WITH_LINK_SIZE, MallocClass::generateSignInResponse);
+    char *current_ptr = &response_data[FE_DEF::FE_RESPONSE_HEADER_SIZE];
     memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;
     strcpy(current_ptr, link_id_index_val);
@@ -403,8 +403,8 @@ char *DFabricClass::generateSignOffResponse (
 {
     phwangDebugS(false, "DFabricClass::generateSignOffResponse", result_val);
 
-    char *response_data = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_BUF_WITH_LINK_SIZE + strlen(result_val), MallocClass::generateSignOffResponse);
-    char *current_ptr = &response_data[FE_CommandClass::FE_RESPONSE_HEADER_SIZE];
+    char *response_data = (char *) phwangMalloc(FE_DEF::FE_RESPONSE_BUF_WITH_LINK_SIZE + strlen(result_val), MallocClass::generateSignOffResponse);
+    char *current_ptr = &response_data[FE_DEF::FE_RESPONSE_HEADER_SIZE];
     memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;
     strcpy(current_ptr, link_id_index_val);
@@ -420,8 +420,8 @@ char *DFabricClass::processGetLinkDataRequest (
 
     link_val->resetKeepAliveTime();
 
-    char *downlink_data = (char *) phwangMalloc(FE_CommandClass::FE_GET_LINK_DATA_BUF_SIZE, MallocClass::GET_LINK_DATA);
-    char *current_ptr = &downlink_data[FE_CommandClass::FE_RESPONSE_HEADER_SIZE];
+    char *downlink_data = (char *) phwangMalloc(FE_DEF::FE_GET_LINK_DATA_BUF_SIZE, MallocClass::GET_LINK_DATA);
+    char *current_ptr = &downlink_data[FE_DEF::FE_RESPONSE_HEADER_SIZE];
 
     memcpy(current_ptr, RESULT_DEF::RESULT_SUCCEED, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;
@@ -429,7 +429,7 @@ char *DFabricClass::processGetLinkDataRequest (
     memcpy(current_ptr, link_val->linkIdIndex(), SIZE_DEF::LINK_ID_INDEX_SIZE);
     current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE;
 
-    *current_ptr++ = FE_CommandClass::RESPOND_IS_GET_LINK_DATA_NAME_LIST;
+    *current_ptr++ = FE_DEF::RESPOND_IS_GET_LINK_DATA_NAME_LIST;
     phwangEncodeNumber(current_ptr, this->theFabricObject->nameListObject()->nameListTag(), SIZE_DEF::NAME_LIST_TAG_SIZE);
     current_ptr += SIZE_DEF::NAME_LIST_TAG_SIZE;
     *current_ptr = 0;
@@ -441,7 +441,7 @@ char *DFabricClass::processGetLinkDataRequest (
         if (session) {
             char *pending_downlink_data = session->getPendingDownLinkData();
             if (pending_downlink_data) {
-                *current_ptr++ = FE_CommandClass::RESPOND_IS_GET_LINK_DATA_PENDING_DATA;
+                *current_ptr++ = FE_DEF::RESPOND_IS_GET_LINK_DATA_PENDING_DATA;
                 session->enqueuePendingDownLinkData(pending_downlink_data);
                 strcpy(current_ptr, link_val->linkIdIndex());
                 current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE;
@@ -455,7 +455,7 @@ char *DFabricClass::processGetLinkDataRequest (
 
     char *pending_session_info = link_val->getPendingSessionSetup();
     if (pending_session_info) {
-        *current_ptr++ = FE_CommandClass::RESPOND_IS_GET_LINK_DATA_PENDING_SESSION;
+        *current_ptr++ = FE_DEF::RESPOND_IS_GET_LINK_DATA_PENDING_SESSION;
         strcpy(current_ptr, pending_session_info);
         phwangDebugSS(true, "DFabricClass::processGetLinkDataRequest", "getPendingSessionSetup ", downlink_data);
         phwangFree(pending_session_info);
@@ -463,7 +463,7 @@ char *DFabricClass::processGetLinkDataRequest (
 
     char *pending_session_info3 = link_val->getPendingSessionSetup3();
     if (pending_session_info3) {
-        *current_ptr++ = FE_CommandClass::RESPOND_IS_GET_LINK_DATA_PENDING_SESSION3;
+        *current_ptr++ = FE_DEF::RESPOND_IS_GET_LINK_DATA_PENDING_SESSION3;
         strcpy(current_ptr, pending_session_info3);
         phwangDebugSS(true, "DFabricClass::processGetLinkDataRequest", "getPendingSessionSetup3 ", downlink_data);
         phwangFree(pending_session_info3);
@@ -479,8 +479,8 @@ char *DFabricClass::generateGetLinkDataResponse (
 {
     phwangDebugS(false, "DFabricClass::generateGetLinkDataResponse", result_val);
 
-    char *response_data = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE + strlen(data_val), MallocClass::generateGetLinkDataResponse);
-    char *current_ptr = &response_data[FE_CommandClass::FE_RESPONSE_HEADER_SIZE];
+    char *response_data = (char *) phwangMalloc(FE_DEF::FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE + strlen(data_val), MallocClass::generateGetLinkDataResponse);
+    char *current_ptr = &response_data[FE_DEF::FE_RESPONSE_HEADER_SIZE];
     memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;
     memcpy(current_ptr, link_id_index_val, SIZE_DEF::LINK_ID_INDEX_SIZE);
@@ -517,8 +517,8 @@ char *DFabricClass::generateGetNameListResponse (
 {
     phwangDebugS(false, "DFabricClass::generateGetNameListResponse", result_val);
 
-    char *response_data = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE + strlen(data_val), MallocClass::generateGetNameListResponse);
-    char *current_ptr = &response_data[FE_CommandClass::FE_RESPONSE_HEADER_SIZE];
+    char *response_data = (char *) phwangMalloc(FE_DEF::FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE + strlen(data_val), MallocClass::generateGetNameListResponse);
+    char *current_ptr = &response_data[FE_DEF::FE_RESPONSE_HEADER_SIZE];
     memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;
     memcpy(current_ptr, link_id_index_val, SIZE_DEF::LINK_ID_INDEX_SIZE);
@@ -598,8 +598,8 @@ char *DFabricClass::generateSetupSessionResponse (
 {
     phwangDebugS(false, "DFabricClass::generateSetupSessionResponse", result_val);
 
-    char *response_data = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE, MallocClass::generateSetupSessionResponse);
-    char *current_ptr = &response_data[FE_CommandClass::FE_RESPONSE_HEADER_SIZE];
+    char *response_data = (char *) phwangMalloc(FE_DEF::FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE, MallocClass::generateSetupSessionResponse);
+    char *current_ptr = &response_data[FE_DEF::FE_RESPONSE_HEADER_SIZE];
     memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;
     memcpy(current_ptr, link_id_index_val, SIZE_DEF::LINK_ID_INDEX_SIZE);
@@ -654,8 +654,8 @@ char *DFabricClass::generateSetupSession2Response (
 {
     phwangDebugS(false, "DFabricClass::generateSetupSession2Response", result_val);
 
-    char *response_data = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE, MallocClass::generateSetupSession2Response);
-    char *current_ptr = &response_data[FE_CommandClass::FE_RESPONSE_HEADER_SIZE];
+    char *response_data = (char *) phwangMalloc(FE_DEF::FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE, MallocClass::generateSetupSession2Response);
+    char *current_ptr = &response_data[FE_DEF::FE_RESPONSE_HEADER_SIZE];
     memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;
     memcpy(current_ptr, link_id_index_val, SIZE_DEF::LINK_ID_INDEX_SIZE);
@@ -687,8 +687,8 @@ char *DFabricClass::generateSetupSession3Response (
 {
     phwangDebugS(false, "DFabricClass::generateSetupSession3Response", result_val);
 
-    char *response_data = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE, MallocClass::generateSetupSession3Response);
-    char *current_ptr = &response_data[FE_CommandClass::FE_RESPONSE_HEADER_SIZE];
+    char *response_data = (char *) phwangMalloc(FE_DEF::FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE, MallocClass::generateSetupSession3Response);
+    char *current_ptr = &response_data[FE_DEF::FE_RESPONSE_HEADER_SIZE];
     memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;
     memcpy(current_ptr, link_id_index_val, SIZE_DEF::LINK_ID_INDEX_SIZE);
@@ -721,8 +721,8 @@ char *DFabricClass::generateFreeSessionResponse (
 {
     phwangDebugS(false, "DFabricClass::generateFreeSessionResponse", result_val);
 
-    char *response_data = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE, MallocClass::generateFreeSessionResponse);
-    char *current_ptr = &response_data[FE_CommandClass::FE_RESPONSE_HEADER_SIZE];
+    char *response_data = (char *) phwangMalloc(FE_DEF::FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE, MallocClass::generateFreeSessionResponse);
+    char *current_ptr = &response_data[FE_DEF::FE_RESPONSE_HEADER_SIZE];
     memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;
     memcpy(current_ptr, link_id_index_val, SIZE_DEF::LINK_ID_INDEX_SIZE);
@@ -758,8 +758,8 @@ char *DFabricClass::generatePutSessionDataResponse (
 {
     phwangDebugS(false, "DFabricClass::generatePutSessionDataResponse", result_val);
 
-    char *response_data = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE, MallocClass::generatePutSessionDataResponse);
-    char *current_ptr = &response_data[FE_CommandClass::FE_RESPONSE_HEADER_SIZE];
+    char *response_data = (char *) phwangMalloc(FE_DEF::FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE, MallocClass::generatePutSessionDataResponse);
+    char *current_ptr = &response_data[FE_DEF::FE_RESPONSE_HEADER_SIZE];
     memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;
     memcpy(current_ptr, link_id_index_val, SIZE_DEF::LINK_ID_INDEX_SIZE);
@@ -809,8 +809,8 @@ char *DFabricClass::generateGetSessionDataResponse (
 {
     phwangDebugS(false, "DFabricClass::generateGetSessionDataResponse", result_val);
 
-    char *response_data = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE + strlen(data_val), MallocClass::generateGetSessionDataResponse);
-    char *current_ptr = &response_data[FE_CommandClass::FE_RESPONSE_HEADER_SIZE];
+    char *response_data = (char *) phwangMalloc(FE_DEF::FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE + strlen(data_val), MallocClass::generateGetSessionDataResponse);
+    char *current_ptr = &response_data[FE_DEF::FE_RESPONSE_HEADER_SIZE];
     memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;
     memcpy(current_ptr, link_id_index_val, SIZE_DEF::LINK_ID_INDEX_SIZE);

@@ -9,7 +9,7 @@
 
 #pragma once
 
-class FE_CommandClass {
+class FE_DEF {
 public:
     int const static FE_COMMAND_SIZE = 1;
 

@@ -77,7 +77,7 @@ void LinkClass::setPendingSessionSetup (
 {
     char *buf, *data_ptr;
 
-    buf = data_ptr = (char *) phwangMalloc(FE_CommandClass::FE_PENDING_SESSIONS_SIZE, MallocClass::setPendingSessionSetup);
+    buf = data_ptr = (char *) phwangMalloc(FE_DEF::FE_PENDING_SESSIONS_SIZE, MallocClass::setPendingSessionSetup);
     memcpy(data_ptr, session_id_index_val, SIZE_DEF::SESSION_ID_INDEX_SIZE);
     data_ptr += SIZE_DEF::SESSION_ID_INDEX_SIZE;
     strcpy(data_ptr, theme_data_val);
@@ -90,7 +90,7 @@ void LinkClass::setPendingSessionSetup3 (
 {
     char *buf, *data_ptr;
 
-    buf = data_ptr = (char *) phwangMalloc(FE_CommandClass::FE_PENDING_SESSIONS_SIZE, MallocClass::setPendingSessionSetup3);
+    buf = data_ptr = (char *) phwangMalloc(FE_DEF::FE_PENDING_SESSIONS_SIZE, MallocClass::setPendingSessionSetup3);
     memcpy(data_ptr, session_id_index_val, SIZE_DEF::SESSION_ID_INDEX_SIZE);
     data_ptr += SIZE_DEF::SESSION_ID_INDEX_SIZE;
     strcpy(data_ptr, theme_data_val);
