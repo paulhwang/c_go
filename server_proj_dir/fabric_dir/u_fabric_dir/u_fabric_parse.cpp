@@ -41,7 +41,6 @@ void UFabricClass::processSetupRoomResponse (char *data_val)
     memcpy(result_buf, data_val, FE_CommandClass::FE_RESULT_SIZE);
     result_buf[FE_CommandClass::FE_RESULT_SIZE] = 0;
     current_ptr = data_val + FE_CommandClass::FE_RESULT_SIZE;
-    current_ptr = data_val;
 
     char *group_id_index = current_ptr;
     char group_id_buf[FT_CommandClass::GROUP_ID_INDEX_SIZE + 1];

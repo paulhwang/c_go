@@ -6,6 +6,7 @@
 
 #include "../../../phwang_dir/phwang.h"
 #include "../../../phwang_dir/malloc_dir/malloc_class.h"
+#include "../../define_dir/fe_command_define.h"
 #include "../../define_dir/te_command_define.h"
 #include "../../define_dir/ft_command_define.h"
 #include "u_theme_class.h"
@@ -51,11 +52,13 @@ void UThemeClass::processSetupBaseResponse (char *data_val)
     char *current_ptr;
     data_val += FT_CommandClass::ROOM_ID_INDEX_SIZE;
     room->setBaseIdIndex(data_val);
+    room->setGroupTableArray((char **) phwangArrayMgrGetArrayTable(room->groupArrayMgr(), &group_array_size));
 
     downlink_data = current_ptr = (char *) phwangMalloc(FT_CommandClass::FT_DL_BUF_WITH_GROUP_ROOM_SIZE, MallocClass::UTHEME_BASE);
     *current_ptr++ = FT_CommandClass::SETUP_ROOM_RESPONSE;
 
-    room->setGroupTableArray((char **) phwangArrayMgrGetArrayTable(room->groupArrayMgr(), &group_array_size));
+    memcpy(current_ptr, FE_CommandClass::FE_RESULT_SUCCEED, FE_CommandClass::FE_RESULT_SIZE);
+    current_ptr += FE_CommandClass::FE_RESULT_SIZE;
 
     memcpy(current_ptr, room->groupTableArray(0), FT_CommandClass::GROUP_ID_INDEX_SIZE);
     current_ptr += FT_CommandClass::GROUP_ID_INDEX_SIZE;
