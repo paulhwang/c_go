@@ -37,7 +37,7 @@ void NameListClass::updateNameList (void)
     LinkClass **link_entry_array = (LinkClass **) phwangListMgrGetEntryTableArray(link_list_mgr);
     char *ptr = this->theNameList;
     int name_len;
-    int name_list_size = FE_CommandClass::NAME_LIST_TAG_SIZE;
+    int name_list_size = SIZE_DEF::NAME_LIST_TAG_SIZE;
 
     this->theNameListTag++;
     if (this->theNameListTag > NAME_LIST_CLASS_MAX_NAME_LIST_TAG) {
@@ -47,8 +47,8 @@ void NameListClass::updateNameList (void)
     for (int i = max_index; i >= 0; i--) {
         if (link_entry_array[i]) {
             if (ptr == this->theNameList) {
-                phwangEncodeNumber(ptr, this->theNameListTag, FE_CommandClass::NAME_LIST_TAG_SIZE);
-                ptr += FE_CommandClass::NAME_LIST_TAG_SIZE;
+                phwangEncodeNumber(ptr, this->theNameListTag, SIZE_DEF::NAME_LIST_TAG_SIZE);
+                ptr += SIZE_DEF::NAME_LIST_TAG_SIZE;
             }
             else {
                 *ptr++ = ',';

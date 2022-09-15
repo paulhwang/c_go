@@ -38,10 +38,10 @@ void DFabricClass::exportedParseFunction (
 
     /* get ajax_id */
     char ajax_id[8];
-    memcpy(ajax_id, &data_val[2], FE_CommandClass::AJAX_ID_SIZE);
-    ajax_id[FE_CommandClass::AJAX_ID_SIZE] = 0;
+    memcpy(ajax_id, &data_val[2], SIZE_DEF::AJAX_ID_SIZE);
+    ajax_id[SIZE_DEF::AJAX_ID_SIZE] = 0;
 
-    char *current_data = &data_val[2 + FE_CommandClass::AJAX_ID_SIZE];
+    char *current_data = &data_val[2 + SIZE_DEF::AJAX_ID_SIZE];
 
     switch (type) {
         case '0':
@@ -146,7 +146,7 @@ void DFabricClass::exportedParseFunction (
             phwangAbendS("DFabricClass::dbAccountObject", "bad type");
             return;
     }
-    memcpy(&response_data[1], ajax_id, FE_CommandClass::AJAX_ID_SIZE);
+    memcpy(&response_data[1], ajax_id, SIZE_DEF::AJAX_ID_SIZE);
     this->transmitFunction(tp_transfer_object_val, response_data);
 }
 
@@ -161,7 +161,7 @@ void DFabricClass::sendSearchLinkFailResponse (
     char *downlink_data = data_ptr = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE, MallocClass::BAD_LINK);
     *data_ptr++ = command_val;
     strcpy(data_ptr, ajax_id_val);
-    data_ptr += FE_CommandClass::AJAX_ID_SIZE;
+    data_ptr += SIZE_DEF::AJAX_ID_SIZE;
     strcpy(data_ptr, RESULT_DEF::RESULT_LINK_NOT_EXIST);
     this->transmitFunction(tp_transfer_object_val, downlink_data);
 }
@@ -177,7 +177,7 @@ void DFabricClass::sendSearchLinkSessionFailResponse (
     char *downlink_data = data_ptr = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE, MallocClass::BAD_SESSION);
     *data_ptr++ = command_val;
     strcpy(data_ptr, ajax_id_val);
-    data_ptr += FE_CommandClass::AJAX_ID_SIZE;
+    data_ptr += SIZE_DEF::AJAX_ID_SIZE;
     strcpy(data_ptr, RESULT_DEF::RESULT_SESSION_NOT_EXIST);
     this->transmitFunction(tp_transfer_object_val, downlink_data);
 }
@@ -429,8 +429,8 @@ char *DFabricClass::processGetLinkDataRequest (
     current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE;
 
     *current_ptr++ = FE_CommandClass::RESPOND_IS_GET_LINK_DATA_NAME_LIST;
-    phwangEncodeNumber(current_ptr, this->theFabricObject->nameListObject()->nameListTag(), FE_CommandClass::NAME_LIST_TAG_SIZE);
-    current_ptr += FE_CommandClass::NAME_LIST_TAG_SIZE;
+    phwangEncodeNumber(current_ptr, this->theFabricObject->nameListObject()->nameListTag(), SIZE_DEF::NAME_LIST_TAG_SIZE);
+    current_ptr += SIZE_DEF::NAME_LIST_TAG_SIZE;
     *current_ptr = 0;
 
     int max_session_table_array_index = phwnagListMgrGetMaxIndex(link_val->sessionListMgrObject(), "DFabricClass::processGetLinkData()");
@@ -498,7 +498,7 @@ char *DFabricClass::processGetNameListRequest (
     char *name_list_tag_val = data_val;
     char *end_val = name_list_tag_val + 3;
 
-    int name_list_tag = phwangDecodeNumber(name_list_tag_val, FE_CommandClass::NAME_LIST_TAG_SIZE);
+    int name_list_tag = phwangDecodeNumber(name_list_tag_val, SIZE_DEF::NAME_LIST_TAG_SIZE);
     char *name_list = this->theFabricObject->nameListObject()->getNameList(name_list_tag);
 
     if (!name_list) {

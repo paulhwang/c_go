@@ -34,4 +34,8 @@ public:
     int const static BASE_ID_SIZE = 4;
     int const static BASE_INDEX_SIZE = 4;
     int const static BASE_ID_INDEX_SIZE = BASE_ID_SIZE + BASE_INDEX_SIZE;
+
+    int const static NAME_LIST_TAG_SIZE = 3;
+
+    int const static AJAX_ID_SIZE = 3;
 };
