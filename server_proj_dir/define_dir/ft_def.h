@@ -1,7 +1,7 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: ft_command_define.h
+  File name: ft_def.h
 */
 
 #pragma once
@@ -9,7 +9,7 @@
 #include "size_def.h"
 #include "result_def.h"
 
-class FT_CommandClass {
+class FT_DEF {
 public:
     int const static FT_DL_COMMAND_SIZE = 1;
     char const static SETUP_ROOM_COMMAND  = 'R';

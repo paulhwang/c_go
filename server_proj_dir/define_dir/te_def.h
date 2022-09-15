@@ -1,12 +1,12 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: te_command_define.h
+  File name: te_def.h
 */
 
 #pragma once
 
-class TE_CommandClass {
+class TE_DEF {
 public:
     int const static TE_DL_COMMAND_SIZE = 1;
     char const static SETUP_BASE_COMMAND  = 'B';

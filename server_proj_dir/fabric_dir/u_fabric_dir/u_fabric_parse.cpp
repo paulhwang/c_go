@@ -19,11 +19,11 @@ void UFabricClass::exportedParseFunction (char *data_val)
     phwangDebugS(true, "UFabricClass::exportedParseFunction", data_val);
 
     switch (*data_val) {
-        case FT_CommandClass::SETUP_ROOM_RESPONSE:
+        case FT_DEF::SETUP_ROOM_RESPONSE:
             this->processSetupRoomResponse(data_val + 1);
             return;
 
-        case FT_CommandClass::PUT_ROOM_DATA_RESPONSE:
+        case FT_DEF::PUT_ROOM_DATA_RESPONSE:
             this->processPutRoomDataResponse(data_val + 1);
             return;
 
