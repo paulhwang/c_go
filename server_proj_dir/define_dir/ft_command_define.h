@@ -35,6 +35,6 @@ public:
     /* uplink data buffer size */
     int const static FT_UL_BUFFER_SIZE = 1 + 1;
     int const static FT_UL_BUF_WITH_ROOM_SIZE  = FT_UL_BUFFER_SIZE + FT_CommandClass::ROOM_ID_INDEX_SIZE;
-    int const static FT_UL_BUF_WITH_BASE_SIZE  = FT_UL_BUFFER_SIZE + TE_CommandClass::BASE_ID_INDEX_SIZE;
+    int const static FT_UL_BUF_WITH_BASE_SIZE  = FT_UL_BUFFER_SIZE + 8;//////////////  TBD TE_CommandClass::BASE_ID_INDEX_SIZE;
 
 };
