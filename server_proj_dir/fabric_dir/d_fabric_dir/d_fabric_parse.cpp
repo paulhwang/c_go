@@ -220,31 +220,24 @@ char *DFabricClass::processDatagramRequest (char *input_data_val)
         default:
             break;
     }
-    response_data = generateDatagramResponse(FE_CommandClass::FE_RESULT_SUCCEED, FE_CommandClass::FE_RESULT_SUCCEED, output_data);
+    response_data = generateDatagramResponse(FE_CommandClass::FE_RESULT_SUCCEED, output_data);
     return response_data;
 }
 
 char *DFabricClass::generateDatagramResponse (
     char const *result_val,
-    char const *dg_result_val,
     char const *data_val)
 {
-    phwangDebugS(false, "DFabricClass::generateDatagramResponse", dg_result_val);
+    phwangDebugSS(false, "DFabricClass::generateDatagramResponse", "data_val=", data_val);
 
-    char *encoded_dg_result = phwangEncodeStringMalloc(dg_result_val);
-    int encoded_dg_result_length = strlen(encoded_dg_result);
     char *encoded_data = phwangEncodeStringMalloc(data_val);
     int encoded_data_length = strlen(encoded_data);
 
-    char *response_data = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_BUF_WITH_LINK_SIZE + strlen(encoded_dg_result) + strlen(encoded_data), MallocClass::generateDatagramResponse);
+    char *response_data = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_BUF_WITH_LINK_SIZE + strlen(encoded_data), MallocClass::generateDatagramResponse);
     char *current_ptr = &response_data[FE_CommandClass::FE_RESPONSE_HEADER_SIZE];
 
     memcpy(current_ptr, result_val, FE_CommandClass::FE_RESULT_SIZE);
     current_ptr += FE_CommandClass::FE_RESULT_SIZE;
-
-    strcpy(current_ptr, encoded_dg_result);
-    current_ptr += encoded_dg_result_length;
-    phwangFree(encoded_dg_result);
 
     strcpy(current_ptr, encoded_data);
     //current_ptr += encoded_data_length;

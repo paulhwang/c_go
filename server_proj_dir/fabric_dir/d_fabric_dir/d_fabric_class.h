@@ -43,7 +43,6 @@ class DFabricClass {
     char *processDatagramRequest (char *data_val);
     char *generateDatagramResponse (
         char const *result_val,
-        char const *dg_result_val,
         char const *data_val);
 
     char *processSignUpRequest (char *data_val);
