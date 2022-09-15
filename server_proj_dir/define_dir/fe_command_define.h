@@ -58,6 +58,10 @@ public:
     char const static *FE_RESULT_NULL_LINK;
     char const static *FE_RESULT_NULL_SESSION;
     char const static *FE_RESULT_NULL_ROOM;
+    char const static *FE_RESULT_MALLOC_SESSION_FAIL;
+    char const static *FE_RESULT_MALLOC_GROUP_FAIL;
+    char const static *FE_RESULT_HIS_LINK_NOT_EXIST;
+    char const static *FE_RESULT_NULL_HIS_SESSION;
 
     /* sizes */
     int const static LINK_ID_INITIAL_VALUE = 100;

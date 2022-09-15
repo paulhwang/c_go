@@ -244,7 +244,6 @@ char *DFabricClass::generateDatagramResponse (
     phwangFree(encoded_data);
 
     return response_data;
-
 }
 
 char *DFabricClass::processSignUpRequest (char *data_val)
@@ -552,13 +551,13 @@ char *DFabricClass::processSetupSessionRequest (
 
     SessionClass *session = link_val->mallocSession();
     if (!session) {
-        this->sendSetupSessionResponce(tp_transfer_object_val, ajax_id_val, link_val->linkIdIndex(), FE_CommandClass::FAKE_SESSION_ID_INDEX, "malloc_session_fail");
+        this->sendSetupSessionResponce(tp_transfer_object_val, ajax_id_val, link_val->linkIdIndex(), FE_CommandClass::FAKE_SESSION_ID_INDEX, FE_CommandClass::FE_RESULT_MALLOC_SESSION_FAIL);
         return response_data;/////////////////////////////////
     }
 
     GroupClass *group = this->theFabricObject->mallocGroup(theme_info_val);
     if (!group) {
-        this->sendSetupSessionResponce(tp_transfer_object_val, ajax_id_val, link_val->linkIdIndex(), session->sessionIdIndex(), "malloc_group_fail");
+        this->sendSetupSessionResponce(tp_transfer_object_val, ajax_id_val, link_val->linkIdIndex(), session->sessionIdIndex(), FE_CommandClass::FE_RESULT_MALLOC_GROUP_FAIL);
         return response_data;////////////////////////////////////
     }
     group->insertSession(session);
@@ -570,13 +569,13 @@ char *DFabricClass::processSetupSessionRequest (
     else {
         LinkClass *his_link = this->theFabricObject->searchLinkByName(his_name_val);
         if (!his_link) {
-            this->sendSetupSessionResponce(tp_transfer_object_val, ajax_id_val, link_val->linkIdIndex(), session->sessionIdIndex(), "his_link_does_not_exist");
+            this->sendSetupSessionResponce(tp_transfer_object_val, ajax_id_val, link_val->linkIdIndex(), session->sessionIdIndex(), FE_CommandClass::FE_RESULT_HIS_LINK_NOT_EXIST);
             return response_data;//////////////////////////////
         }
 
         SessionClass *his_session = his_link->mallocSession();
         if (!his_session) {
-            this->sendSetupSessionResponce(tp_transfer_object_val, ajax_id_val, link_val->linkIdIndex(), session->sessionIdIndex(), "null_his_session");
+            this->sendSetupSessionResponce(tp_transfer_object_val, ajax_id_val, link_val->linkIdIndex(), session->sessionIdIndex(), FE_CommandClass::FE_RESULT_NULL_HIS_SESSION);
             return response_data;////////////////////////
         }
 
