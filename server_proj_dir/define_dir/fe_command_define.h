@@ -61,6 +61,7 @@ public:
     char const static *FE_RESULT_MALLOC_GROUP_FAIL;
     char const static *FE_RESULT_HIS_LINK_NOT_EXIST;
     char const static *FE_RESULT_NULL_HIS_SESSION;
+    char const static *FE_RESULT_MALLOC_ROOM_FAIL;
 
     /* sizes */
     int const static LINK_ID_INITIAL_VALUE = 100;

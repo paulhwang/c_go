@@ -23,6 +23,8 @@ char const *FE_CommandClass::FE_RESULT_MALLOC_GROUP_FAIL          = "58";
 char const *FE_CommandClass::FE_RESULT_HIS_LINK_NOT_EXIST         = "59";
 char const *FE_CommandClass::FE_RESULT_NULL_HIS_SESSION           = "60";
 
+char const *FE_CommandClass::FE_RESULT_MALLOC_ROOM_FAIL           = "71";
+
 
 char const *FE_CommandClass::FAKE_LINK_ID_INDEX    = "99990000";
 char const *FE_CommandClass::FAKE_SESSION_ID_INDEX = "99980000";

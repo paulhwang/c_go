@@ -8,6 +8,7 @@
 #include "../../../phwang_dir/malloc_dir/malloc_class.h"
 #include "../../define_dir/ft_command_define.h"
 #include "../../define_dir/te_command_define.h"
+#include "../../define_dir/fe_command_define.h"
 #include "d_theme_class.h"
 #include "../theme_class.h"
 #include "../u_theme_dir/u_theme_class.h"
@@ -38,18 +39,17 @@ void DThemeClass::processSetupRoom (char *data_val)
 
     char *group_id_index_val = data_val;
 
-    char *downlink_data;
-    char *uplink_data;
-    char *data_ptr;
-
     RoomClass *room = this->theThemeObject->mallocRoom(group_id_index_val);
     if (!room) {
-        phwangAbendS("DThemeClass::processSetupRoom", "null room");
+        phwangAbendS("DThemeClass::processSetupRoom", "null_room");
 
         /* downlink */
-        downlink_data = data_ptr = (char *) phwangMalloc(FT_CommandClass::FT_DL_DATA_BUF_SIZE + 4, MallocClass::DTHEME_SETUP_ROOM1);
-        *data_ptr++ = FT_CommandClass::SETUP_ROOM_RESPONSE;
-        strcpy(data_ptr, "null room");
+        char *dl_current_ptr;
+        char *downlink_data = dl_current_ptr = (char *) phwangMalloc(FT_CommandClass::FT_DL_DATA_BUF_SIZE + 4, MallocClass::DTHEME_SETUP_ROOM1);
+        *dl_current_ptr++ = FT_CommandClass::SETUP_ROOM_RESPONSE;
+
+        strcpy(dl_current_ptr, FE_CommandClass::FE_RESULT_MALLOC_ROOM_FAIL);
+
         this->transmitFunction(downlink_data);
         return;
     }
@@ -57,13 +57,14 @@ void DThemeClass::processSetupRoom (char *data_val)
     /* uplink */
     data_val += FT_CommandClass::GROUP_ID_INDEX_SIZE;
 
-    uplink_data = data_ptr = (char *) phwangMalloc(TE_CommandClass::TE_UL_DATA_BUF_SIZE + 4, MallocClass::DTHEME_SETUP_ROOM2);
-    *data_ptr++ = TE_CommandClass::SETUP_BASE_COMMAND;
+    char *ul_current_ptr;
+    char *uplink_data = ul_current_ptr = (char *) phwangMalloc(TE_CommandClass::TE_UL_DATA_BUF_SIZE + 4, MallocClass::DTHEME_SETUP_ROOM2);
+    *ul_current_ptr++ = TE_CommandClass::SETUP_BASE_COMMAND;
 
-    memcpy(data_ptr, room->roomIdIndex(), FT_CommandClass::ROOM_ID_INDEX_SIZE);
-    data_ptr += FT_CommandClass::ROOM_ID_INDEX_SIZE;
+    memcpy(ul_current_ptr, room->roomIdIndex(), FT_CommandClass::ROOM_ID_INDEX_SIZE);
+    ul_current_ptr += FT_CommandClass::ROOM_ID_INDEX_SIZE;
 
-    strcpy(data_ptr, data_val);
+    strcpy(ul_current_ptr, data_val);
     this->theThemeObject->uThemeObject()->transmitFunction(uplink_data);
 }
 
