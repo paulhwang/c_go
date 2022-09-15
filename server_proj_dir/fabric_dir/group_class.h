@@ -6,7 +6,7 @@
 
 #pragma once
 #include "../../phwang_dir/list_mgr_dir/list_entry_class.h"
-#include "../define_dir/ft_def.h"
+#include "../define_dir/size_def.h"
 
 class SessionClass;
 class FabricClass;

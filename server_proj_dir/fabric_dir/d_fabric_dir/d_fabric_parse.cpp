@@ -8,6 +8,7 @@
 #include "../../../phwang_dir/malloc_dir/malloc_class.h"
 #include "../../define_dir/fabric_def.h"
 #include "../../define_dir/fe_def.h"
+#include "../../define_dir/ft_def.h"
 #include "d_fabric_class.h"
 #include "../fabric_class.h"
 #include "../u_fabric_dir/u_fabric_class.h"
@@ -613,7 +614,7 @@ void DFabricClass::sendSetupRoomRequestToThemeServer (GroupClass *group_val, cha
     char *current_ptr;
     char *uplink_data = current_ptr = (char *) phwangMalloc(FABRIC_DEF::FE_UL_BUF_WITH_GROUP_SIZE + strlen(theme_info_val), MallocClass::sendSetupRoomRequestToThemeServer);
 
-    *current_ptr++ = FT_DEF::SETUP_ROOM_COMMAND;
+    *current_ptr++ = FT_DEF::FT_SETUP_ROOM_COMMAND;
 
     memcpy(current_ptr, group_val->groupIdIndex(), SIZE_DEF::GROUP_ID_INDEX_SIZE);
     current_ptr += SIZE_DEF::GROUP_ID_INDEX_SIZE;
@@ -777,7 +778,7 @@ void DFabricClass::sendPutSessionDataRequestToThemeServer (
     char *current_ptr;
     char *uplink_data = current_ptr = (char *) phwangMalloc(FABRIC_DEF::FE_UL_BUF_WITH_ROOM_SIZE + strlen(data_val), MallocClass::PUT_SESSION_DATA0);
 
-    *current_ptr++ = FT_DEF::PUT_ROOM_DATA_COMMAND;
+    *current_ptr++ = FT_DEF::FT_PUT_ROOM_DATA_COMMAND;
 
     memcpy(current_ptr, room_id_val, SIZE_DEF::ROOM_ID_INDEX_SIZE);
     current_ptr += SIZE_DEF::ROOM_ID_INDEX_SIZE;

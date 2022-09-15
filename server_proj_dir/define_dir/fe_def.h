@@ -4,8 +4,8 @@
   File name: fe_def.h
 */
 
-#include "size_def.h"
 #include "result_def.h"
+#include "size_def.h"
 
 #pragma once
 

@@ -20,11 +20,11 @@ void DThemeClass::exportedParseFunction (char *data_val)
     phwangDebugS(true, "DThemeClass::exportedParseFunction", data_val);
 
     switch (*data_val) {
-        case FT_DEF::SETUP_ROOM_COMMAND:
+        case FT_DEF::FT_SETUP_ROOM_COMMAND:
             this->processSetupRoom(data_val + 1);
             return;
 
-        case FT_DEF::PUT_ROOM_DATA_COMMAND:
+        case FT_DEF::FT_PUT_ROOM_DATA_COMMAND:
             this->processPutRoomData(data_val + 1);
             return;
 
@@ -48,7 +48,7 @@ void DThemeClass::processSetupRoom (char *data_val)
         /* downlink */
         char *dl_current_ptr;
         char *downlink_data = dl_current_ptr = (char *) phwangMalloc(THEME_DEF::FT_DL_BUFFER_SIZE, MallocClass::DTHEME_SETUP_ROOM1);
-        *dl_current_ptr++ = FT_DEF::SETUP_ROOM_RESPONSE;
+        *dl_current_ptr++ = FT_DEF::FT_SETUP_ROOM_RESPONSE;
 
         strcpy(dl_current_ptr, RESULT_DEF::RESULT_MALLOC_ROOM_FAIL);
 
@@ -82,7 +82,7 @@ void DThemeClass::processPutRoomData (char *data_val)
         /* downlink */
         char *dl_current_ptr;
         char *downlink_data = dl_current_ptr = (char *) phwangMalloc(THEME_DEF::FT_DL_BUFFER_SIZE, MallocClass::DTHEME_PUT_ROOM_DATA1);
-        *dl_current_ptr++ = FT_DEF::PUT_ROOM_DATA_RESPONSE;
+        *dl_current_ptr++ = FT_DEF::FT_PUT_ROOM_DATA_RESPONSE;
 
         strcpy(dl_current_ptr, RESULT_DEF::RESULT_NULL_ROOM);
 

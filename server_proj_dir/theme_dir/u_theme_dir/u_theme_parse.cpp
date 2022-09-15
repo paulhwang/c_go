@@ -55,7 +55,7 @@ void UThemeClass::processSetupBaseResponse (char *data_val)
     room->setGroupTableArray((char **) phwangArrayMgrGetArrayTable(room->groupArrayMgr(), &group_array_size));
 
     char *downlink_data = current_ptr = (char *) phwangMalloc(THEME_DEF::FT_DL_BUF_WITH_GROUP_ROOM_SIZE, MallocClass::UTHEME_BASE);
-    *current_ptr++ = FT_DEF::SETUP_ROOM_RESPONSE;
+    *current_ptr++ = FT_DEF::FT_SETUP_ROOM_RESPONSE;
 
     memcpy(current_ptr, result_ptr, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;
@@ -93,7 +93,7 @@ void UThemeClass::processPutBaseDataResponse (char *data_val)
             char *current_ptr;
             char *downlink_data = current_ptr = (char *) phwangMalloc(THEME_DEF::FT_DL_BUF_WITH_GROUP_SIZE + strlen(rest_data_ptr), MallocClass::UTHEME_BASE_PUT_BASE_DATA);
 
-            *current_ptr++ = FT_DEF::PUT_ROOM_DATA_RESPONSE;
+            *current_ptr++ = FT_DEF::FT_PUT_ROOM_DATA_RESPONSE;
 
             memcpy(current_ptr, result_ptr, RESULT_DEF::RESULT_SIZE);
             current_ptr += RESULT_DEF::RESULT_SIZE;
