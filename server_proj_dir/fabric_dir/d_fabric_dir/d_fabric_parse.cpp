@@ -553,12 +553,16 @@ char *DFabricClass::processSetupSessionRequest (
     if (!session) {
         this->sendSetupSessionResponce(tp_transfer_object_val, ajax_id_val, link_val->linkIdIndex(), FE_CommandClass::FAKE_SESSION_ID_INDEX, FE_CommandClass::FE_RESULT_MALLOC_SESSION_FAIL);
         return response_data;/////////////////////////////////
+        //response_data = this->generateSetupSessionResponse(FE_CommandClass::FE_RESULT_MALLOC_SESSION_FAIL, link_val->linkIdIndex(), session->sessionIdIndex());
+        //return response_data;
     }
 
     GroupClass *group = this->theFabricObject->mallocGroup(theme_info_val);
     if (!group) {
         this->sendSetupSessionResponce(tp_transfer_object_val, ajax_id_val, link_val->linkIdIndex(), session->sessionIdIndex(), FE_CommandClass::FE_RESULT_MALLOC_GROUP_FAIL);
         return response_data;////////////////////////////////////
+        //response_data = this->generateSetupSessionResponse(FE_CommandClass::FE_RESULT_MALLOC_GROUP_FAIL, link_val->linkIdIndex(), session->sessionIdIndex());
+        //return response_data;
     }
     group->insertSession(session);
     session->bindGroup(group);
@@ -571,12 +575,16 @@ char *DFabricClass::processSetupSessionRequest (
         if (!his_link) {
             this->sendSetupSessionResponce(tp_transfer_object_val, ajax_id_val, link_val->linkIdIndex(), session->sessionIdIndex(), FE_CommandClass::FE_RESULT_HIS_LINK_NOT_EXIST);
             return response_data;//////////////////////////////
+            //response_data = this->generateSetupSessionResponse(FE_CommandClass::FE_RESULT_HIS_LINK_NOT_EXIST, link_val->linkIdIndex(), session->sessionIdIndex());
+            //return response_data;
         }
 
         SessionClass *his_session = his_link->mallocSession();
         if (!his_session) {
             this->sendSetupSessionResponce(tp_transfer_object_val, ajax_id_val, link_val->linkIdIndex(), session->sessionIdIndex(), FE_CommandClass::FE_RESULT_NULL_HIS_SESSION);
             return response_data;////////////////////////
+            //response_data = this->generateSetupSessionResponse(FE_CommandClass::FE_RESULT_NULL_HIS_SESSION, link_val->linkIdIndex(), session->sessionIdIndex());
+            //return response_data;
         }
 
         group->insertSession(his_session);
@@ -590,7 +598,7 @@ char *DFabricClass::processSetupSessionRequest (
     }
 
     //this->sendSetupSessionResponce(tp_transfer_object_val, ajax_id_val, link_val->linkIdIndex(), session->sessionIdIndex(), FE_CommandClass::FE_RESULT_SUCCEED);
-    response_data = this->generatePutSessionDataResponse(FE_CommandClass::FE_RESULT_SUCCEED, link_val->linkIdIndex(), session->sessionIdIndex());
+    response_data = this->generateSetupSessionResponse(FE_CommandClass::FE_RESULT_SUCCEED, link_val->linkIdIndex(), session->sessionIdIndex());
     return response_data;
 }
 
