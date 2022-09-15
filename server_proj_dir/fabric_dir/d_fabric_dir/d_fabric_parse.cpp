@@ -6,7 +6,6 @@
 
 #include "../../../phwang_dir/phwang.h"
 #include "../../../phwang_dir/malloc_dir/malloc_class.h"
-#include "../../define_dir/ft_command_define.h"
 #include "../../define_dir/fe_command_define.h"
 #include "d_fabric_class.h"
 #include "../fabric_class.h"
@@ -611,12 +610,16 @@ char *DFabricClass::generateSetupSessionResponse (
 
 void DFabricClass::sendSetupRoomRequestToThemeServer (GroupClass *group_val, char *theme_info_val)
 {
-    char *data_ptr;
-    char *uplink_data = data_ptr = (char *) phwangMalloc(FT_CommandClass::FT_UL_DATA_BUF_SIZE, MallocClass::sendSetupRoomRequestToThemeServer);
-    *data_ptr++ = FT_CommandClass::SETUP_ROOM_COMMAND;
-    memcpy(data_ptr, group_val->groupIdIndex(), FT_CommandClass::GROUP_ID_INDEX_SIZE);
-    data_ptr += FT_CommandClass::GROUP_ID_INDEX_SIZE;
-    strcpy(data_ptr, theme_info_val);
+    char *current_ptr;
+    char *uplink_data = current_ptr = (char *) phwangMalloc(FE_CommandClass::FE_UL_BUF_WITH_GROUP_SIZE + strlen(theme_info_val), MallocClass::sendSetupRoomRequestToThemeServer);
+
+    *current_ptr++ = FT_CommandClass::SETUP_ROOM_COMMAND;
+
+    memcpy(current_ptr, group_val->groupIdIndex(), FT_CommandClass::GROUP_ID_INDEX_SIZE);
+    current_ptr += FT_CommandClass::GROUP_ID_INDEX_SIZE;
+
+    strcpy(current_ptr, theme_info_val);
+
     this->theFabricObject->uFabricObject()->transmitFunction(uplink_data);
 }
 
@@ -771,13 +774,13 @@ void DFabricClass::sendPutSessionDataRequestToThemeServer (
     char const *room_id_val,
     char const *data_val)
 {
-    if (strlen(data_val) > FT_CommandClass::FT_UL_DATA_BUF_SIZE) {
+    if (strlen(data_val) > FE_CommandClass::FE_UL_DATA_BUF_SIZE) {
         phwangAbendSI("DFabricClass::sendPutSessionDataRequestToThemeServer", "buf_size", strlen(data_val));
         return;
     }
 
     char *data_ptr;
-    char *uplink_data = data_ptr = (char *) phwangMalloc(FT_CommandClass::FT_UL_DATA_BUF_SIZE, MallocClass::PUT_SESSION_DATA0);
+    char *uplink_data = data_ptr = (char *) phwangMalloc(FE_CommandClass::FE_UL_DATA_BUF_SIZE, MallocClass::PUT_SESSION_DATA0);
     *data_ptr++ = FT_CommandClass::PUT_ROOM_DATA_COMMAND;
     memcpy(data_ptr, room_id_val, FT_CommandClass::ROOM_ID_INDEX_SIZE);
     data_ptr += FT_CommandClass::ROOM_ID_INDEX_SIZE;
