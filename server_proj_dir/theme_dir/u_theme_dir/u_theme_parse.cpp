@@ -20,11 +20,11 @@ void UThemeClass::exportedParseFunction (char *data_val)
     phwangDebugS(true, "UThemeClass::exportedParseFunction", data_val);
 
     switch (*data_val) {
-        case TE_DEF::SETUP_BASE_RESPONSE:
+        case TE_DEF::TE_SETUP_BASE_RESPONSE:
             this->processSetupBaseResponse(data_val + 1);
             return;
 
-        case TE_DEF::PUT_BASE_DATA_RESPONSE:
+        case TE_DEF::TE_PUT_BASE_DATA_RESPONSE:
             this->processPutBaseDataResponse(data_val + 1);
             return;
 

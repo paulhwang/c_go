@@ -59,7 +59,7 @@ void DThemeClass::processSetupRoom (char *data_val)
     /* uplink */
     char *ul_current_ptr;
     char *uplink_data = ul_current_ptr = (char *) phwangMalloc(THEME_DEF::FT_UL_BUF_WITH_ROOM_SIZE + strlen(rest_data_ptr), MallocClass::DTHEME_SETUP_ROOM2);
-    *ul_current_ptr++ = TE_DEF::SETUP_BASE_COMMAND;
+    *ul_current_ptr++ = TE_DEF::TE_SETUP_BASE_COMMAND;
 
     memcpy(ul_current_ptr, room->roomIdIndex(), SIZE_DEF::ROOM_ID_INDEX_SIZE);
     ul_current_ptr += SIZE_DEF::ROOM_ID_INDEX_SIZE;
@@ -94,7 +94,7 @@ void DThemeClass::processPutRoomData (char *data_val)
     char *ul_current_ptr;
     char *uplink_data = ul_current_ptr = (char *) phwangMalloc(THEME_DEF::FT_UL_BUF_WITH_BASE_SIZE + strlen(rest_data_ptr), MallocClass::DTHEME_PUT_ROOM_DATA2);
 
-    *ul_current_ptr++ = TE_DEF::PUT_BASE_DATA_COMMAND;
+    *ul_current_ptr++ = TE_DEF::TE_PUT_BASE_DATA_COMMAND;
 
     memcpy(ul_current_ptr, room->baseIdIndex(), SIZE_DEF::BASE_ID_INDEX_SIZE);
     ul_current_ptr += SIZE_DEF::BASE_ID_INDEX_SIZE;

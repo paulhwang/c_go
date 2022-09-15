@@ -17,11 +17,11 @@ void DEngineClass::exportedParseFunction (char *data_val)
     phwangDebugS(true, "DEngineClass::exportedParseFunction", data_val);
 
     switch (*data_val) {
-        case TE_DEF::SETUP_BASE_COMMAND:
+        case TE_DEF::TE_SETUP_BASE_COMMAND:
             this->processSetupBase(data_val + 1);
             return;
 
-        case TE_DEF::PUT_BASE_DATA_COMMAND:
+        case TE_DEF::TE_PUT_BASE_DATA_COMMAND:
             this->processPutBaseData(data_val + 1);
             return;
 
@@ -48,7 +48,7 @@ void DEngineClass::processSetupBase (char *data_val)
     /* downlink */
     char *current_ptr;
     char *downlink_data = current_ptr = (char *) phwangMalloc(ENGINE_DEF::TE_DL_BUF_WITH_ROOM_BASE_SIZE, MallocClass::DENGINE_SETUP_BASE);
-    *current_ptr++ = TE_DEF::SETUP_BASE_RESPONSE;
+    *current_ptr++ = TE_DEF::TE_SETUP_BASE_RESPONSE;
 
     memcpy(current_ptr, RESULT_DEF::RESULT_SUCCEED, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;
@@ -84,7 +84,7 @@ void DEngineClass::processPutBaseDataResponse (GoBaseClass *base_object_val, cha
     char *current_ptr;
     char *downlink_data = current_ptr = (char *) phwangMalloc(ENGINE_DEF::TE_DL_BUF_WITH_ROOM_SIZE + strlen(data_val), MallocClass::DENGINE_PUT_BASE_DATA);
 
-    *current_ptr++ = TE_DEF::PUT_BASE_DATA_RESPONSE;
+    *current_ptr++ = TE_DEF::TE_PUT_BASE_DATA_RESPONSE;
 
     memcpy(current_ptr, RESULT_DEF::RESULT_SUCCEED, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;
