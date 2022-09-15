@@ -15,8 +15,8 @@ class DEngineClass {
     void *theTpTransferObject;
 
     void startNetConnect(void);
-    void processSetupBase(char const *data_al);
-    void processPutBaseData(char const *data_val);
+    void processSetupBase(char *data_al);
+    void processPutBaseData(char *data_val);
 
 public:
     DEngineClass(EngineClass *engine_object_val);
