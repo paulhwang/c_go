@@ -8,7 +8,6 @@
 #include "../../define_dir/ft_command_define.h"
 #include "u_fabric_class.h"
 #include "../fabric_class.h"
-#include "../d_fabric_dir/d_fabric_class.h"
 #include "../link_class.h"
 #include "../session_class.h"
 #include "../group_class.h"
@@ -36,43 +35,43 @@ void UFabricClass::processSetupRoomResponse (char *data_val)
 {
     phwangDebugS(true, "UFabricClass::processSetupRoomResponse", data_val);
 
-    char *group_id_index_val = data_val;
-    char *downlink_data;
-    char *data_ptr;
-	char *output_data;
-    int session_array_size;
+    char *group_id_index = data_val;
+    char *room_id_index = data_val + FT_CommandClass::GROUP_ID_INDEX_SIZE;
 
-    GroupClass *group = this->theFabricObject->searchGroup(group_id_index_val);
-    if (group) {
-        group->setRoomIdIndex(group_id_index_val + FT_CommandClass::GROUP_ID_INDEX_SIZE);
-        group->setSessionTableArray((SessionClass **) phwangArrayMgrGetArrayTable(group->sessionArrayMgr(), &session_array_size));
-        for (int i = 0; i < session_array_size; i++) {
-            SessionClass *session = group->sessionTableArray(0);
-            session->linkObject()->setPendingSessionSetup3(session->sessionIdIndex(), "");
-        }
+    GroupClass *group = this->theFabricObject->searchGroup(group_id_index);
+    if (!group) {
+        phwangAbendS("UFabricClass::processSetupRoomResponse", "null_group");
+        return;
+    }
+
+    int session_array_size;
+    group->setRoomIdIndex(room_id_index);
+    group->setSessionTableArray((SessionClass **) phwangArrayMgrGetArrayTable(group->sessionArrayMgr(), &session_array_size));
+    for (int i = 0; i < session_array_size; i++) {
+        SessionClass *session = group->sessionTableArray(0);
+        session->linkObject()->setPendingSessionSetup3(session->sessionIdIndex(), "");
     }
 }
 
 void UFabricClass::processPutRoomDataResponse (char *data_val)
 {
-    char *downlink_data;
-    char *data_ptr;
-    int session_array_size;
-
     phwangDebugS(true, "UFabricClass::processPutRoomDataResponse", data_val);
 
-    GroupClass *group = this->theFabricObject->searchGroup(data_val);
+    char *group_id_index = data_val;
+    char *rest_data = data_val + FT_CommandClass::GROUP_ID_INDEX_SIZE;
+
+    GroupClass *group = this->theFabricObject->searchGroup(group_id_index);
     if (!group) {
-        phwangAbendS("UFabricClass::processPutRoomDataResponse", "null group");
+        phwangAbendS("UFabricClass::processPutRoomDataResponse", "null_group");
         return;
     }
-    data_val += FT_CommandClass::GROUP_ID_INDEX_SIZE;
 
+    int session_array_size;
     group->setSessionTableArray((SessionClass **) phwangArrayMgrGetArrayTable(group->sessionArrayMgr(), &session_array_size));
     for (int i = 0; i < session_array_size; i++) {
         SessionClass *session = group->sessionTableArray(i);
         if (session) {
-            session->enqueuePendingDownLinkData(data_val);
+            session->enqueuePendingDownLinkData(rest_data);
         }
     }
 }
