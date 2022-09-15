@@ -73,7 +73,6 @@ void UFabricClass::processPutRoomDataResponse (char *data_val)
     memcpy(result_buf, data_val, FE_CommandClass::FE_RESULT_SIZE);
     result_buf[FE_CommandClass::FE_RESULT_SIZE] = 0;
     char *current_ptr = data_val + FE_CommandClass::FE_RESULT_SIZE;
-    current_ptr = data_val;//////////////////
 
     char *group_id_ptr = current_ptr;
     current_ptr += FT_CommandClass::GROUP_ID_INDEX_SIZE;

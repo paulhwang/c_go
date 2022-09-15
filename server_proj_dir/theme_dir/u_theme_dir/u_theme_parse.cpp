@@ -92,6 +92,9 @@ void UThemeClass::processPutBaseDataResponse (char *data_val)
 
             *current_ptr++ = FT_CommandClass::PUT_ROOM_DATA_RESPONSE;
 
+            memcpy(current_ptr, FE_CommandClass::FE_RESULT_SUCCEED, FE_CommandClass::FE_RESULT_SIZE);
+            current_ptr += FE_CommandClass::FE_RESULT_SIZE;
+
             memcpy(current_ptr, room->groupTableArray(i), FT_CommandClass::GROUP_ID_INDEX_SIZE);
             current_ptr += FT_CommandClass::GROUP_ID_INDEX_SIZE;
 
