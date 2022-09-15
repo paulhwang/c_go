@@ -31,7 +31,7 @@ void DFabricClass::exportedParseFunction (
     SessionClass *session;
     char *response_data;
 
-    if (data_val[1] != FE_DEF::GET_LINK_DATA_COMMAND) {
+    if (data_val[1] != FE_DEF::FE_GET_LINK_DATA_COMMAND) {
         phwangDebugS(true, "DFabricClass::exportedParseFunction", data_val);
     }
 
@@ -48,19 +48,19 @@ void DFabricClass::exportedParseFunction (
     switch (type) {
         case '0':
             switch (command) {
-                case FE_DEF::SIGN_UP_COMMAND:
+                case FE_DEF::FE_SIGN_UP_COMMAND:
                     response_data = this->processSignUpRequest(current_data);
-                    response_data[0] = FE_DEF::SIGN_UP_RESPONSE;
+                    response_data[0] = FE_DEF::FE_SIGN_UP_RESPONSE;
                     break;
 
-                case FE_DEF::SETUP_LINK_COMMAND:
+                case FE_DEF::FE_SETUP_LINK_COMMAND:
                     response_data = this->processSignInRequest(current_data);
-                    response_data[0] = FE_DEF::SETUP_LINK_RESPONSE;
+                    response_data[0] = FE_DEF::FE_SETUP_LINK_RESPONSE;
                     break;
 
-                case FE_DEF::MESSAGE_COMMAND:
+                case FE_DEF::FE_MESSAGE_COMMAND:
                     response_data = this->processDatagramRequest(current_data);
-                    response_data[0] = FE_DEF::MESSAGE_RESPONSE;
+                    response_data[0] = FE_DEF::FE_MESSAGE_RESPONSE;
                     break;
 
                 default:
@@ -78,34 +78,34 @@ void DFabricClass::exportedParseFunction (
             current_data += SIZE_DEF::LINK_ID_INDEX_SIZE;
 
             switch (command) {
-                case FE_DEF::SIGN_OFF_COMMAND:
+                case FE_DEF::FE_SIGN_OFF_COMMAND:
                     response_data = this->processSignOffRequest(link);
-                    response_data[0] = FE_DEF::SIGN_OFF_RESPONSE;
+                    response_data[0] = FE_DEF::FE_SIGN_OFF_RESPONSE;
                     break;
 
-                case FE_DEF::GET_LINK_DATA_COMMAND:
+                case FE_DEF::FE_GET_LINK_DATA_COMMAND:
                     response_data = this->processGetLinkDataRequest(link, current_data);
-                    response_data[0] = FE_DEF::GET_LINK_DATA_RESPONSE;
+                    response_data[0] = FE_DEF::FE_GET_LINK_DATA_RESPONSE;
                     break;
 
-                case FE_DEF::GET_NAME_LIST_COMMAND:
+                case FE_DEF::FE_GET_NAME_LIST_COMMAND:
                     response_data = this->processGetNameListRequest(link, current_data);
-                    response_data[0] = FE_DEF::GET_NAME_LIST_RESPONSE;
+                    response_data[0] = FE_DEF::FE_GET_NAME_LIST_RESPONSE;
                     break;
 
-                case FE_DEF::SETUP_SESSION_COMMAND:
+                case FE_DEF::FE_SETUP_SESSION_COMMAND:
                     response_data = this->processSetupSessionRequest(link, current_data);
-                    response_data[0] = FE_DEF::SETUP_SESSION_RESPONSE;
+                    response_data[0] = FE_DEF::FE_SETUP_SESSION_RESPONSE;
                     break;
 
-                case FE_DEF::SETUP_SESSION2_COMMAND:
+                case FE_DEF::FE_SETUP_SESSION2_COMMAND:
                     response_data = this->processSetupSession2Request(link, current_data);
-                    response_data[0] = FE_DEF::SETUP_SESSION2_RESPONSE;
+                    response_data[0] = FE_DEF::FE_SETUP_SESSION2_RESPONSE;
                     break;
 
-                case FE_DEF::SETUP_SESSION3_COMMAND:
+                case FE_DEF::FE_SETUP_SESSION3_COMMAND:
                     response_data = this->processSetupSession3Request(link, current_data);
-                    response_data[0] = FE_DEF::SETUP_SESSION3_RESPONSE;
+                    response_data[0] = FE_DEF::FE_SETUP_SESSION3_RESPONSE;
                     break;
 
                 default:
@@ -123,19 +123,19 @@ void DFabricClass::exportedParseFunction (
             current_data += SIZE_DEF::LINK_ID_INDEX_SIZE + SIZE_DEF::SESSION_ID_INDEX_SIZE;
 
             switch (command) {
-                case FE_DEF::FREE_SESSION_COMMAND:
+                case FE_DEF::FE_FREE_SESSION_COMMAND:
                     this->processFreeSessionRequest(link, session);
-                    response_data[0] = FE_DEF::FREE_SESSION_RESPONSE;
+                    response_data[0] = FE_DEF::FE_FREE_SESSION_RESPONSE;
                     break;
 
-                case FE_DEF::PUT_SESSION_DATA_COMMAND:
+                case FE_DEF::FE_PUT_SESSION_DATA_COMMAND:
                     response_data = this->processPutSessionDataRequest(session, current_data);
-                    response_data[0] = FE_DEF::PUT_SESSION_DATA_RESPONSE;
+                    response_data[0] = FE_DEF::FE_PUT_SESSION_DATA_RESPONSE;
                     break;
 
-                case FE_DEF::GET_SESSION_DATA_COMMAND:
+                case FE_DEF::FE_GET_SESSION_DATA_COMMAND:
                     response_data = this->processGetSessionDataRequest(session, current_data);
-                    response_data[0] = FE_DEF::GET_SESSION_DATA_RESPONSE;
+                    response_data[0] = FE_DEF::FE_GET_SESSION_DATA_RESPONSE;
                     break;
 
                 default:

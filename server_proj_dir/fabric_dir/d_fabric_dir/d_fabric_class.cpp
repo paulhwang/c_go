@@ -52,7 +52,7 @@ void DFabricClass::exportedNetAcceptFunction (void *tp_transfer_object_val)
 
 void dFabricTpReceiveDataFunction (void *tp_transfer_object_val, void *d_fabric_object_val, void *data_val) {
     char *data_str_val = (char *) data_val;
-    if (data_str_val[1] != FE_DEF::GET_LINK_DATA_COMMAND) {
+    if (data_str_val[1] != FE_DEF::FE_GET_LINK_DATA_COMMAND) {
         phwangDebugSSI(true, "Golbal::dFabricTpReceiveDataFunction", (char *) data_val, "index", phwangGetPortObjectIndex(tp_transfer_object_val));
     }
 
