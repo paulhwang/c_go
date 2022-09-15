@@ -10,8 +10,6 @@
 
 class FT_CommandClass {
 public:
-    int const static FT_DL_DATA_BUF_SIZE = 512;
-
     int const static FT_DL_COMMAND_SIZE = 1;
     char const static SETUP_ROOM_COMMAND  = 'R';
     char const static SETUP_ROOM_RESPONSE = 'r';
@@ -31,7 +29,8 @@ public:
     /* downlink data buffer size */
     int const static FT_DL_HEADER_SIZE = FT_DL_COMMAND_SIZE + 1;
     int const static FT_DL_BUFFER_SIZE = FT_DL_HEADER_SIZE + 2; ///////////////// TBD FE_CommandClass::FE_RESULT_SIZE;
-    int const static FT_DL_BUF_WITH_GROUP_SIZE  = FT_DL_BUFFER_SIZE + GROUP_ID_INDEX_SIZE;
+    int const static FT_DL_BUF_WITH_GROUP_SIZE = FT_DL_BUFFER_SIZE + GROUP_ID_INDEX_SIZE;
+    int const static FT_DL_BUF_WITH_GROUP_ROOM_SIZE = FT_DL_BUF_WITH_GROUP_SIZE + ROOM_ID_INDEX_SIZE;
 
     /* uplink data buffer size */
     int const static FT_UL_BUFFER_SIZE = 1 + 1;

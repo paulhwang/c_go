@@ -52,16 +52,18 @@ void UThemeClass::processSetupBaseResponse (char *data_val)
     data_val += FT_CommandClass::ROOM_ID_INDEX_SIZE;
     room->setBaseIdIndex(data_val);
 
-    downlink_data = current_ptr = (char *) phwangMalloc(FT_CommandClass::FT_DL_DATA_BUF_SIZE + 4, MallocClass::UTHEME_BASE);
+    downlink_data = current_ptr = (char *) phwangMalloc(FT_CommandClass::FT_DL_BUF_WITH_GROUP_ROOM_SIZE, MallocClass::UTHEME_BASE);
     *current_ptr++ = FT_CommandClass::SETUP_ROOM_RESPONSE;
 
     room->setGroupTableArray((char **) phwangArrayMgrGetArrayTable(room->groupArrayMgr(), &group_array_size));
+
     memcpy(current_ptr, room->groupTableArray(0), FT_CommandClass::GROUP_ID_INDEX_SIZE);
     current_ptr += FT_CommandClass::GROUP_ID_INDEX_SIZE;
 
     memcpy(current_ptr, room->roomIdIndex(), FT_CommandClass::ROOM_ID_INDEX_SIZE);
     current_ptr += FT_CommandClass::ROOM_ID_INDEX_SIZE;
     *current_ptr = 0;
+
     this->theThemeObject->dThemeObject()->transmitFunction(downlink_data);
 }
 
@@ -78,10 +80,6 @@ void UThemeClass::processPutBaseDataResponse (char *data_val)
     }
 
     /* downlink */
-    if (strlen(rest_data_ptr) > FT_CommandClass::FT_DL_DATA_BUF_SIZE) {
-        phwangAbendSI("UThemeClass::processPutBaseDataResponse", "buf_size", strlen(data_val));
-    }
-
     int group_array_size;
     room->setGroupTableArray((char **) phwangArrayMgrGetArrayTable(room->groupArrayMgr(), &group_array_size));
     for (int i = 0; i < group_array_size; i++) {
