@@ -69,10 +69,18 @@ void UFabricClass::processPutRoomDataResponse (char *data_val)
 {
     phwangDebugS(true, "UFabricClass::processPutRoomDataResponse", data_val);
 
-    char *group_id_index = data_val;
-    char *rest_data = data_val + FT_CommandClass::GROUP_ID_INDEX_SIZE;
+    char result_buf[FE_CommandClass::FE_RESULT_SIZE + 1];
+    memcpy(result_buf, data_val, FE_CommandClass::FE_RESULT_SIZE);
+    result_buf[FE_CommandClass::FE_RESULT_SIZE] = 0;
+    char *current_ptr = data_val + FE_CommandClass::FE_RESULT_SIZE;
+    current_ptr = data_val;//////////////////
 
-    GroupClass *group = this->theFabricObject->searchGroup(group_id_index);
+    char *group_id_ptr = current_ptr;
+    current_ptr += FT_CommandClass::GROUP_ID_INDEX_SIZE;
+
+    char *rest_data = current_ptr;
+
+    GroupClass *group = this->theFabricObject->searchGroup(group_id_ptr);
     if (!group) {
         phwangAbendS("UFabricClass::processPutRoomDataResponse", "null_group");
         return;
