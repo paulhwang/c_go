@@ -6,7 +6,7 @@
 
 #include "../../phwang_dir/phwang.h"
 #include "../../phwang_dir/id_index_list_dir/id_index_list_class.h"
-#include "../define_dir/ft_command_define.h"
+#include "../define_dir/ft_def.h"
 #include "room_class.h"
 #include "theme_class.h"
 

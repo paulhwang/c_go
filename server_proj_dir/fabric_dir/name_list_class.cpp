@@ -8,7 +8,7 @@
 #include "name_list_class.h"
 #include "fabric_class.h"
 #include "link_class.h"
-#include "../define_dir/fe_command_define.h"
+#include "../define_dir/fe_def.h"
 #include "../../phwang_dir/list_mgr_dir/list_mgr_class.h"
 
 NameListClass::NameListClass (FabricClass *fabric_object_val)

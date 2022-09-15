@@ -8,7 +8,7 @@
 #include "../../phwang_dir/list_mgr_dir/list_mgr_class.h"
 #include "fabric_class.h"
 #include "messenger_dir/messenger_class.h"
-#include "../define_dir/fe_command_define.h"
+#include "../define_dir/fe_def.h"
 #include "u_fabric_dir/u_fabric_class.h"
 #include "d_fabric_dir/d_fabric_class.h"
 #include "group_class.h"

@@ -7,7 +7,7 @@
 #include "../../../phwang_dir/phwang.h"
 #include "../../../phwang_dir/malloc_dir/malloc_class.h"
 #include "../../define_dir/fabric_def.h"
-#include "../../define_dir/fe_command_define.h"
+#include "../../define_dir/fe_def.h"
 #include "d_fabric_class.h"
 #include "../fabric_class.h"
 #include "../u_fabric_dir/u_fabric_class.h"

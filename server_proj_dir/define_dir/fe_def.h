@@ -1,7 +1,7 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: fe_command_define.h
+  File name: fe_def.h
 */
 
 #include "size_def.h"
