@@ -98,8 +98,9 @@ void DFabricClass::exportedParseFunction (
                     break;
 
                 case FE_CommandClass::SETUP_SESSION2_COMMAND:
-                    this->processSetupSession2Request(tp_transfer_object_val, current_data, ajax_id, link);
-                    return;
+                    response_data = this->processSetupSession2Request(link, current_data);
+                    response_data[0] = FE_CommandClass::SETUP_SESSION2_RESPONSE;
+                    break;
 
                 case FE_CommandClass::SETUP_SESSION3_COMMAND:
                     response_data = this->processSetupSession3Request(link, current_data);
@@ -619,12 +620,11 @@ void DFabricClass::sendSetupRoomRequestToThemeServer (GroupClass *group_val, cha
     this->theFabricObject->uFabricObject()->transmitFunction(uplink_data);
 }
 
-void DFabricClass::processSetupSession2Request (
-    void *tp_transfer_object_val,
-    char *data_val,
-    char const *ajax_id_val,
-    LinkClass *link_val)
+char *DFabricClass::processSetupSession2Request (
+    LinkClass *link_val,
+    char *data_val)
 {
+    char *response_data;
     phwangDebugS(true, "DFabricClass::processSetupSession2Request", data_val);
 
     char *link_id_index_val = data_val;
@@ -633,46 +633,32 @@ void DFabricClass::processSetupSession2Request (
 
     SessionClass *session = link_val->searchSession(session_id_index_val);
     if (!session) {
-        this->errorProcessSetupSession2(tp_transfer_object_val, ajax_id_val, "session does not exist");
-        return;
+        response_data = this->generateSetupSession2Response(FE_CommandClass::FE_RESULT_SESSION_NOT_EXIST, link_val->linkIdIndex(), session->sessionIdIndex());
+        return response_data;
     }
 
     GroupClass *group = session->groupObject();
     this->sendSetupRoomRequestToThemeServer(group, theme_info_val);
-    this->sendSetupSession2Responce(tp_transfer_object_val, ajax_id_val, link_val->linkIdIndex(), session->sessionIdIndex(), FE_CommandClass::FE_RESULT_SUCCEED);
+
+    response_data = this->generateSetupSession2Response(FE_CommandClass::FE_RESULT_SUCCEED, link_val->linkIdIndex(), session->sessionIdIndex());
+    return response_data;
 }
 
-void DFabricClass::sendSetupSession2Responce (
-    void *tp_transfer_object_val,
-    char const *ajax_id_val,
+char *DFabricClass::generateSetupSession2Response (
+    char const *result_val,
     char const *link_id_index_val,
-    char const *session_id_index_val,
-    char const *result_val)
+    char const *session_id_index_val)
 {
-    phwangDebugS(false, "DFabricClass::sendSetupSession2Responce", result_val);
+    phwangDebugS(false, "DFabricClass::generateSetupSession2Response", result_val);
 
-    char *current_ptr;
-    char *downlink_data = current_ptr = (char *) phwangMalloc(FE_CommandClass::FE_DL_DATA_BUF_SIZE, MallocClass::SETUP_SESSION2);
-    *current_ptr++ = FE_CommandClass::SETUP_SESSION2_RESPONSE;
-    strcpy(current_ptr, ajax_id_val);
-    current_ptr += FE_CommandClass::AJAX_ID_SIZE;
+    char *response_data = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE, MallocClass::generateSetupSession2Response);
+    char *current_ptr = &response_data[FE_CommandClass::FE_RESPONSE_HEADER_SIZE];
+    memcpy(current_ptr, result_val, FE_CommandClass::FE_RESULT_SIZE);
+    current_ptr += FE_CommandClass::FE_RESULT_SIZE;
     memcpy(current_ptr, link_id_index_val, FE_CommandClass::LINK_ID_INDEX_SIZE);
     current_ptr += FE_CommandClass::LINK_ID_INDEX_SIZE;
     strcpy(current_ptr, session_id_index_val);
-    this->transmitFunction(tp_transfer_object_val, downlink_data);
-}
-
-void DFabricClass::errorProcessSetupSession2 (void *tp_transfer_object_val, char const *ajax_id_val, char const *err_msg_val)
-{
-    phwangAbendS("DFabricClass::errorProcessSetupSession2", err_msg_val);
-
-    char *data_ptr;
-    char *downlink_data = data_ptr = (char *) phwangMalloc(FE_CommandClass::FE_DL_DATA_BUF_SIZE, MallocClass::SETUP_SESSION2_ERROR);
-    *data_ptr++ = FE_CommandClass::SETUP_SESSION2_RESPONSE;
-    strcpy(data_ptr, ajax_id_val);
-    data_ptr += FE_CommandClass::AJAX_ID_SIZE;
-    strcpy(data_ptr, err_msg_val);
-    this->transmitFunction(tp_transfer_object_val, downlink_data);
+    return response_data;
 }
 
 char *DFabricClass::processSetupSession3Request (
