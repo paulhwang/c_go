@@ -38,7 +38,7 @@ void UThemeClass::processSetupBaseResponse (char *data_val)
     phwangDebugS(true, "UThemeClass::processSetupBaseResponse", data_val);
 
     char *result_ptr = data_val;
-    char *room_id_ptr = result_ptr + FE_CommandClass::FE_RESULT_SIZE;
+    char *room_id_ptr = result_ptr + RESULT_DEF::RESULT_SIZE;
     char *base_id_ptr = room_id_ptr + SIZE_DEF::ROOM_ID_INDEX_SIZE;
 
     RoomClass *room = this->theThemeObject->searchRoom(room_id_ptr);
@@ -56,8 +56,8 @@ void UThemeClass::processSetupBaseResponse (char *data_val)
     char *downlink_data = current_ptr = (char *) phwangMalloc(FT_CommandClass::FT_DL_BUF_WITH_GROUP_ROOM_SIZE, MallocClass::UTHEME_BASE);
     *current_ptr++ = FT_CommandClass::SETUP_ROOM_RESPONSE;
 
-    memcpy(current_ptr, result_ptr, FE_CommandClass::FE_RESULT_SIZE);
-    current_ptr += FE_CommandClass::FE_RESULT_SIZE;
+    memcpy(current_ptr, result_ptr, RESULT_DEF::RESULT_SIZE);
+    current_ptr += RESULT_DEF::RESULT_SIZE;
 
     memcpy(current_ptr, room->groupTableArray(0), SIZE_DEF::GROUP_ID_INDEX_SIZE);
     current_ptr += SIZE_DEF::GROUP_ID_INDEX_SIZE;
@@ -74,7 +74,7 @@ void UThemeClass::processPutBaseDataResponse (char *data_val)
     phwangDebugS(false, "UThemeClass::processPutBaseDataResponse", data_val);
 
     char *result_ptr = data_val;
-    char *room_id_ptr = result_ptr + FE_CommandClass::FE_RESULT_SIZE;
+    char *room_id_ptr = result_ptr + RESULT_DEF::RESULT_SIZE;
     char *rest_data_ptr = room_id_ptr + SIZE_DEF::ROOM_ID_INDEX_SIZE;
 
     RoomClass *room = this->theThemeObject->searchRoom(room_id_ptr);
@@ -94,8 +94,8 @@ void UThemeClass::processPutBaseDataResponse (char *data_val)
 
             *current_ptr++ = FT_CommandClass::PUT_ROOM_DATA_RESPONSE;
 
-            memcpy(current_ptr, result_ptr, FE_CommandClass::FE_RESULT_SIZE);
-            current_ptr += FE_CommandClass::FE_RESULT_SIZE;
+            memcpy(current_ptr, result_ptr, RESULT_DEF::RESULT_SIZE);
+            current_ptr += RESULT_DEF::RESULT_SIZE;
 
             memcpy(current_ptr, room->groupTableArray(i), SIZE_DEF::GROUP_ID_INDEX_SIZE);
             current_ptr += SIZE_DEF::GROUP_ID_INDEX_SIZE;

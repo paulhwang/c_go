@@ -49,8 +49,8 @@ void DEngineClass::processSetupBase (char *data_val)
     char *downlink_data = current_ptr = (char *) phwangMalloc(TE_CommandClass::FT_DL_BUF_WITH_ROOM_BASE_SIZE, MallocClass::DENGINE_SETUP_BASE);
     *current_ptr++ = TE_CommandClass::SETUP_BASE_RESPONSE;
 
-    memcpy(current_ptr, FE_CommandClass::FE_RESULT_SUCCEED, FE_CommandClass::FE_RESULT_SIZE);
-    current_ptr += FE_CommandClass::FE_RESULT_SIZE;
+    memcpy(current_ptr, RESULT_DEF::RESULT_SUCCEED, RESULT_DEF::RESULT_SIZE);
+    current_ptr += RESULT_DEF::RESULT_SIZE;
 
     memcpy(current_ptr, room_id_ptr, SIZE_DEF::ROOM_ID_INDEX_SIZE);
     current_ptr += SIZE_DEF::ROOM_ID_INDEX_SIZE;
@@ -85,8 +85,8 @@ void DEngineClass::processPutBaseDataResponse (GoBaseClass *base_object_val, cha
 
     *current_ptr++ = TE_CommandClass::PUT_BASE_DATA_RESPONSE;
 
-    memcpy(current_ptr, FE_CommandClass::FE_RESULT_SUCCEED, FE_CommandClass::FE_RESULT_SIZE);
-    current_ptr += FE_CommandClass::FE_RESULT_SIZE;
+    memcpy(current_ptr, RESULT_DEF::RESULT_SUCCEED, RESULT_DEF::RESULT_SIZE);
+    current_ptr += RESULT_DEF::RESULT_SIZE;
 
     memcpy(current_ptr, base_object_val->roomIdIndex(), SIZE_DEF::ROOM_ID_INDEX_SIZE);
     current_ptr += SIZE_DEF::ROOM_ID_INDEX_SIZE;

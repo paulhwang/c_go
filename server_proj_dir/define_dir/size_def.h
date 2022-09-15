@@ -1,7 +1,7 @@
 /*
   Copyrights reserved
   Written by Paul Hwang
-  File name: fe_command_define.h
+  File name: size_def.h
 */
 
 #pragma once
@@ -18,15 +18,15 @@ public:
     int const static SESSION_INDEX_SIZE = 4;
     int const static SESSION_ID_INDEX_SIZE = SESSION_ID_SIZE + SESSION_INDEX_SIZE;
 
-    int const static ROOM_ID_INITIAL_VALUE = 700;
-    int const static ROOM_ID_SIZE = 4;
-    int const static ROOM_INDEX_SIZE = 4;
-    int const static ROOM_ID_INDEX_SIZE = ROOM_ID_SIZE + ROOM_INDEX_SIZE;
-
     int const static GROUP_ID_INITIAL_VALUE = 500;
     int const static GROUP_ID_SIZE = 4;
     int const static GROUP_INDEX_SIZE = 4;
     int const static GROUP_ID_INDEX_SIZE = GROUP_ID_SIZE + GROUP_INDEX_SIZE;
+
+    int const static ROOM_ID_INITIAL_VALUE = 700;
+    int const static ROOM_ID_SIZE = 4;
+    int const static ROOM_INDEX_SIZE = 4;
+    int const static ROOM_ID_INDEX_SIZE = ROOM_ID_SIZE + ROOM_INDEX_SIZE;
 
     int const static BASE_ID_INITIAL_VALUE = 900;
     int const static BASE_ID_SIZE = 4;

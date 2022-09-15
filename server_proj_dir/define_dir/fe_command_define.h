@@ -5,6 +5,7 @@
 */
 
 #include "size_def.h"
+#include "result_def.h"
 
 #pragma once
 
@@ -42,28 +43,6 @@ public:
     char const static RESPOND_IS_GET_LINK_DATA_PENDING_DATA = 'D';
     char const static RESPOND_IS_GET_LINK_DATA_NAME_LIST = 'N';
 
-    /* response results */
-    int const static FE_RESULT_SIZE = 2;
-
-    char const static *FE_RESULT_SUCCEED;
-    char const static *FE_RESULT_ACCOUNT_NAME_NOT_EXIST;
-    char const static *FE_RESULT_ACCOUNT_NAME_ALREADY_EXIST;
-    char const static *FE_RESULT_PASSWORD_NOT_MATCH;
-
-    char const static *FE_RESULT_DB_SELECT_FAIL;
-
-    char const static *FE_RESULT_LINK_NOT_EXIST;
-    char const static *FE_RESULT_SESSION_NOT_EXIST;
-    char const static *FE_RESULT_NULL_LINK;
-    char const static *FE_RESULT_NULL_SESSION;
-    char const static *FE_RESULT_NULL_ROOM;
-    char const static *FE_RESULT_MALLOC_SESSION_FAIL;
-    char const static *FE_RESULT_MALLOC_GROUP_FAIL;
-    char const static *FE_RESULT_HIS_LINK_NOT_EXIST;
-    char const static *FE_RESULT_NULL_HIS_SESSION;
-    char const static *FE_RESULT_MALLOC_ROOM_FAIL;
-
-    /* sizes */
     char const static *FAKE_LINK_ID_INDEX;
     char const static *FAKE_SESSION_ID_INDEX;
 
@@ -71,7 +50,7 @@ public:
 
     int const static AJAX_ID_SIZE = 3;
     int const static FE_RESPONSE_HEADER_SIZE = FE_COMMAND_SIZE + AJAX_ID_SIZE;
-    int const static FE_RESPONSE_BUFFER_SIZE = FE_RESPONSE_HEADER_SIZE + FE_RESULT_SIZE + 1;
+    int const static FE_RESPONSE_BUFFER_SIZE = FE_RESPONSE_HEADER_SIZE + RESULT_DEF::RESULT_SIZE + 1;
     int const static FE_RESPONSE_BUF_WITH_LINK_SIZE = FE_RESPONSE_BUFFER_SIZE + SIZE_DEF::LINK_ID_INDEX_SIZE;
     int const static FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE = FE_RESPONSE_BUF_WITH_LINK_SIZE + SIZE_DEF::SESSION_ID_INDEX_SIZE;
 

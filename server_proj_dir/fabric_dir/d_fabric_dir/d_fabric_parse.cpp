@@ -162,7 +162,7 @@ void DFabricClass::sendSearchLinkFailResponse (
     *data_ptr++ = command_val;
     strcpy(data_ptr, ajax_id_val);
     data_ptr += FE_CommandClass::AJAX_ID_SIZE;
-    strcpy(data_ptr, FE_CommandClass::FE_RESULT_LINK_NOT_EXIST);
+    strcpy(data_ptr, RESULT_DEF::RESULT_LINK_NOT_EXIST);
     this->transmitFunction(tp_transfer_object_val, downlink_data);
 }
 
@@ -178,7 +178,7 @@ void DFabricClass::sendSearchLinkSessionFailResponse (
     *data_ptr++ = command_val;
     strcpy(data_ptr, ajax_id_val);
     data_ptr += FE_CommandClass::AJAX_ID_SIZE;
-    strcpy(data_ptr, FE_CommandClass::FE_RESULT_SESSION_NOT_EXIST);
+    strcpy(data_ptr, RESULT_DEF::RESULT_SESSION_NOT_EXIST);
     this->transmitFunction(tp_transfer_object_val, downlink_data);
 }
 
@@ -220,7 +220,7 @@ char *DFabricClass::processDatagramRequest (char *input_data_val)
         default:
             break;
     }
-    response_data = generateDatagramResponse(FE_CommandClass::FE_RESULT_SUCCEED, output_data);
+    response_data = generateDatagramResponse(RESULT_DEF::RESULT_SUCCEED, output_data);
     return response_data;
 }
 
@@ -236,8 +236,8 @@ char *DFabricClass::generateDatagramResponse (
     char *response_data = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_BUF_WITH_LINK_SIZE + strlen(encoded_data), MallocClass::generateDatagramResponse);
     char *current_ptr = &response_data[FE_CommandClass::FE_RESPONSE_HEADER_SIZE];
 
-    memcpy(current_ptr, result_val, FE_CommandClass::FE_RESULT_SIZE);
-    current_ptr += FE_CommandClass::FE_RESULT_SIZE;
+    memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
+    current_ptr += RESULT_DEF::RESULT_SIZE;
 
     strcpy(current_ptr, encoded_data);
     //current_ptr += encoded_data_length;
@@ -270,18 +270,18 @@ char *DFabricClass::processSignUpRequest (char *data_val)
         char const *result_str;
         switch (result) {
             case DbAccountClass::DB_ACCOUNT_NAME_EXIST:
-                result_str = FE_CommandClass::FE_RESULT_ACCOUNT_NAME_ALREADY_EXIST;
+                result_str = RESULT_DEF::RESULT_ACCOUNT_NAME_ALREADY_EXIST;
                 break;
 
             case DbAccountClass::DB_ACCOUNT_SELECT_FAIL:
-                result_str = FE_CommandClass::FE_RESULT_DB_SELECT_FAIL;
+                result_str = RESULT_DEF::RESULT_DB_SELECT_FAIL;
                 break;
 
             default:
                 phwangAbendS("DFabricClass::processSignUpRequest", "invalid_result");
                 break;
         }
-        response_data = generateSignUpResponse(FE_CommandClass::FE_RESULT_SUCCEED);
+        response_data = generateSignUpResponse(RESULT_DEF::RESULT_SUCCEED);
         phwangFree(account_name);
         phwangFree(password);
         phwangFree(email);
@@ -294,7 +294,7 @@ char *DFabricClass::processSignUpRequest (char *data_val)
     account_entry->setEmail(email);
     this->dbAccountObject()->insertAccountEntry(account_entry);
 
-    response_data = generateSignUpResponse(FE_CommandClass::FE_RESULT_SUCCEED);
+    response_data = generateSignUpResponse(RESULT_DEF::RESULT_SUCCEED);
     return response_data;
 
     /***
@@ -335,10 +335,10 @@ char *DFabricClass::processSignInRequest (char *data_val)
         char const*result_str;
         switch (result) {
             case DbAccountClass::DB_ACCOUNT_PASSWORD_NOT_MATCH:
-                result_str = FE_CommandClass::FE_RESULT_PASSWORD_NOT_MATCH;
+                result_str = RESULT_DEF::RESULT_PASSWORD_NOT_MATCH;
                 break;
             case DbAccountClass::DB_ACCOUNT_NAME_NOT_EXIST:
-                result_str = FE_CommandClass::FE_RESULT_ACCOUNT_NAME_NOT_EXIST;
+                result_str = RESULT_DEF::RESULT_ACCOUNT_NAME_NOT_EXIST;
                 break;
             case DbAccountClass::DB_ACCOUNT_SELECT_FAIL:
                 result_str = "select fail";
@@ -358,13 +358,13 @@ char *DFabricClass::processSignInRequest (char *data_val)
         phwangAbendS("DFabricClass::processSignInRequest", "null link");
         phwangFree(my_name);
         phwangFree(password);
-        response_data = generateSignInResponse(FE_CommandClass::FE_RESULT_NULL_LINK, FE_CommandClass::FAKE_LINK_ID_INDEX);
+        response_data = generateSignInResponse(RESULT_DEF::RESULT_NULL_LINK, FE_CommandClass::FAKE_LINK_ID_INDEX);
         return response_data;
     }
 
     phwangFree(my_name);
     phwangFree(password);
-    response_data = generateSignInResponse(FE_CommandClass::FE_RESULT_SUCCEED, link->linkIdIndex());
+    response_data = generateSignInResponse(RESULT_DEF::RESULT_SUCCEED, link->linkIdIndex());
     return response_data;
 }
 
@@ -376,8 +376,8 @@ char *DFabricClass::generateSignInResponse (
 
     char *response_data = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_BUF_WITH_LINK_SIZE, MallocClass::generateSignInResponse);
     char *current_ptr = &response_data[FE_CommandClass::FE_RESPONSE_HEADER_SIZE];
-    memcpy(current_ptr, result_val, FE_CommandClass::FE_RESULT_SIZE);
-    current_ptr += FE_CommandClass::FE_RESULT_SIZE;
+    memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
+    current_ptr += RESULT_DEF::RESULT_SIZE;
     strcpy(current_ptr, link_id_index_val);
     return response_data;
 }
@@ -392,7 +392,7 @@ char *DFabricClass::processSignOffRequest (
     strcpy(link_id_buf, link_val->linkIdIndex());
     this->theFabricObject->freeLink(link_val);
 
-    response_data = generateSignInResponse(FE_CommandClass::FE_RESULT_SUCCEED, link_id_buf);
+    response_data = generateSignInResponse(RESULT_DEF::RESULT_SUCCEED, link_id_buf);
     return response_data;
 }
 
@@ -404,8 +404,8 @@ char *DFabricClass::generateSignOffResponse (
 
     char *response_data = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_BUF_WITH_LINK_SIZE + strlen(result_val), MallocClass::generateSignOffResponse);
     char *current_ptr = &response_data[FE_CommandClass::FE_RESPONSE_HEADER_SIZE];
-    memcpy(current_ptr, result_val, FE_CommandClass::FE_RESULT_SIZE);
-    current_ptr += FE_CommandClass::FE_RESULT_SIZE;
+    memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
+    current_ptr += RESULT_DEF::RESULT_SIZE;
     strcpy(current_ptr, link_id_index_val);
     return response_data;
 }
@@ -422,8 +422,8 @@ char *DFabricClass::processGetLinkDataRequest (
     char *downlink_data = (char *) phwangMalloc(FE_CommandClass::FE_GET_LINK_DATA_BUF_SIZE, MallocClass::GET_LINK_DATA);
     char *current_ptr = &downlink_data[FE_CommandClass::FE_RESPONSE_HEADER_SIZE];
 
-    memcpy(current_ptr, FE_CommandClass::FE_RESULT_SUCCEED, FE_CommandClass::FE_RESULT_SIZE);
-    current_ptr += FE_CommandClass::FE_RESULT_SIZE;
+    memcpy(current_ptr, RESULT_DEF::RESULT_SUCCEED, RESULT_DEF::RESULT_SIZE);
+    current_ptr += RESULT_DEF::RESULT_SIZE;
 
     memcpy(current_ptr, link_val->linkIdIndex(), SIZE_DEF::LINK_ID_INDEX_SIZE);
     current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE;
@@ -480,8 +480,8 @@ char *DFabricClass::generateGetLinkDataResponse (
 
     char *response_data = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE + strlen(data_val), MallocClass::generateGetLinkDataResponse);
     char *current_ptr = &response_data[FE_CommandClass::FE_RESPONSE_HEADER_SIZE];
-    memcpy(current_ptr, result_val, FE_CommandClass::FE_RESULT_SIZE);
-    current_ptr += FE_CommandClass::FE_RESULT_SIZE;
+    memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
+    current_ptr += RESULT_DEF::RESULT_SIZE;
     memcpy(current_ptr, link_id_index_val, SIZE_DEF::LINK_ID_INDEX_SIZE);
     current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE;
     strcpy(current_ptr, data_val);
@@ -505,7 +505,7 @@ char *DFabricClass::processGetNameListRequest (
         /////////////////////////////////TBD
     }
 
-    response_data = generateGetNameListResponse(FE_CommandClass::FE_RESULT_SUCCEED, link_val->linkIdIndex(), name_list);
+    response_data = generateGetNameListResponse(RESULT_DEF::RESULT_SUCCEED, link_val->linkIdIndex(), name_list);
     return response_data;
 }
 
@@ -518,8 +518,8 @@ char *DFabricClass::generateGetNameListResponse (
 
     char *response_data = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE + strlen(data_val), MallocClass::generateGetNameListResponse);
     char *current_ptr = &response_data[FE_CommandClass::FE_RESPONSE_HEADER_SIZE];
-    memcpy(current_ptr, result_val, FE_CommandClass::FE_RESULT_SIZE);
-    current_ptr += FE_CommandClass::FE_RESULT_SIZE;
+    memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
+    current_ptr += RESULT_DEF::RESULT_SIZE;
     memcpy(current_ptr, link_id_index_val, SIZE_DEF::LINK_ID_INDEX_SIZE);
     current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE;
     strcpy(current_ptr, data_val);
@@ -549,13 +549,12 @@ char *DFabricClass::processSetupSessionRequest (
 
     SessionClass *session = link_val->mallocSession();
     if (!session) {
-        response_data = this->generateSetupSessionResponse(FE_CommandClass::FE_RESULT_MALLOC_SESSION_FAIL, link_val->linkIdIndex(), session->sessionIdIndex());
+        response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_MALLOC_SESSION_FAIL, link_val->linkIdIndex(), session->sessionIdIndex());
         return response_data;
     }
-
     GroupClass *group = this->theFabricObject->mallocGroup(theme_info_val);
     if (!group) {
-        response_data = this->generateSetupSessionResponse(FE_CommandClass::FE_RESULT_MALLOC_GROUP_FAIL, link_val->linkIdIndex(), session->sessionIdIndex());
+        response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_MALLOC_GROUP_FAIL, link_val->linkIdIndex(), session->sessionIdIndex());
         return response_data;
     }
     group->insertSession(session);
@@ -567,13 +566,13 @@ char *DFabricClass::processSetupSessionRequest (
     else {
         LinkClass *his_link = this->theFabricObject->searchLinkByName(his_name_val);
         if (!his_link) {
-            response_data = this->generateSetupSessionResponse(FE_CommandClass::FE_RESULT_HIS_LINK_NOT_EXIST, link_val->linkIdIndex(), session->sessionIdIndex());
+            response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_HIS_LINK_NOT_EXIST, link_val->linkIdIndex(), session->sessionIdIndex());
             return response_data;
         }
 
         SessionClass *his_session = his_link->mallocSession();
         if (!his_session) {
-            response_data = this->generateSetupSessionResponse(FE_CommandClass::FE_RESULT_NULL_HIS_SESSION, link_val->linkIdIndex(), session->sessionIdIndex());
+            response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_NULL_HIS_SESSION, link_val->linkIdIndex(), session->sessionIdIndex());
             return response_data;
         }
 
@@ -587,7 +586,7 @@ char *DFabricClass::processSetupSessionRequest (
         phwangFree(theme_data_buf);
     }
 
-    response_data = this->generateSetupSessionResponse(FE_CommandClass::FE_RESULT_SUCCEED, link_val->linkIdIndex(), session->sessionIdIndex());
+    response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_SUCCEED, link_val->linkIdIndex(), session->sessionIdIndex());
     return response_data;
 }
 
@@ -600,8 +599,8 @@ char *DFabricClass::generateSetupSessionResponse (
 
     char *response_data = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE, MallocClass::generateSetupSessionResponse);
     char *current_ptr = &response_data[FE_CommandClass::FE_RESPONSE_HEADER_SIZE];
-    memcpy(current_ptr, result_val, FE_CommandClass::FE_RESULT_SIZE);
-    current_ptr += FE_CommandClass::FE_RESULT_SIZE;
+    memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
+    current_ptr += RESULT_DEF::RESULT_SIZE;
     memcpy(current_ptr, link_id_index_val, SIZE_DEF::LINK_ID_INDEX_SIZE);
     current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE;
     strcpy(current_ptr, session_id_index_val);
@@ -636,14 +635,14 @@ char *DFabricClass::processSetupSession2Request (
 
     SessionClass *session = link_val->searchSession(session_id_index_val);
     if (!session) {
-        response_data = this->generateSetupSession2Response(FE_CommandClass::FE_RESULT_SESSION_NOT_EXIST, link_val->linkIdIndex(), session->sessionIdIndex());
+        response_data = this->generateSetupSession2Response(RESULT_DEF::RESULT_SESSION_NOT_EXIST, link_val->linkIdIndex(), session->sessionIdIndex());
         return response_data;
     }
 
     GroupClass *group = session->groupObject();
     this->sendSetupRoomRequestToThemeServer(group, theme_info_val);
 
-    response_data = this->generateSetupSession2Response(FE_CommandClass::FE_RESULT_SUCCEED, link_val->linkIdIndex(), session->sessionIdIndex());
+    response_data = this->generateSetupSession2Response(RESULT_DEF::RESULT_SUCCEED, link_val->linkIdIndex(), session->sessionIdIndex());
     return response_data;
 }
 
@@ -656,8 +655,8 @@ char *DFabricClass::generateSetupSession2Response (
 
     char *response_data = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE, MallocClass::generateSetupSession2Response);
     char *current_ptr = &response_data[FE_CommandClass::FE_RESPONSE_HEADER_SIZE];
-    memcpy(current_ptr, result_val, FE_CommandClass::FE_RESULT_SIZE);
-    current_ptr += FE_CommandClass::FE_RESULT_SIZE;
+    memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
+    current_ptr += RESULT_DEF::RESULT_SIZE;
     memcpy(current_ptr, link_id_index_val, SIZE_DEF::LINK_ID_INDEX_SIZE);
     current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE;
     strcpy(current_ptr, session_id_index_val);
@@ -676,7 +675,7 @@ char *DFabricClass::processSetupSession3Request (
     session_id_buf[SIZE_DEF::SESSION_ID_INDEX_SIZE] = 0;
     phwangDebugSS(true, "DFabricClass::processSetupSession3Reques", "session_id=", session_id_buf);
 
-    response_data = this->generateSetupSession3Response(FE_CommandClass::FE_RESULT_SUCCEED, link_val->linkIdIndex(), session_id_buf);
+    response_data = this->generateSetupSession3Response(RESULT_DEF::RESULT_SUCCEED, link_val->linkIdIndex(), session_id_buf);
     return response_data;
 }
 
@@ -689,8 +688,8 @@ char *DFabricClass::generateSetupSession3Response (
 
     char *response_data = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE, MallocClass::generateSetupSession3Response);
     char *current_ptr = &response_data[FE_CommandClass::FE_RESPONSE_HEADER_SIZE];
-    memcpy(current_ptr, result_val, FE_CommandClass::FE_RESULT_SIZE);
-    current_ptr += FE_CommandClass::FE_RESULT_SIZE;
+    memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
+    current_ptr += RESULT_DEF::RESULT_SIZE;
     memcpy(current_ptr, link_id_index_val, SIZE_DEF::LINK_ID_INDEX_SIZE);
     current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE;
     strcpy(current_ptr, session_id_index_val);
@@ -710,7 +709,7 @@ char *DFabricClass::processFreeSessionRequest (
     strcpy(session_id_buf, session_val->sessionIdIndex());
     link_val->freeSession(session_val);
 
-    response_data = this->generateFreeSessionResponse(FE_CommandClass::FE_RESULT_SUCCEED, link_val->linkIdIndex(), session_id_buf);
+    response_data = this->generateFreeSessionResponse(RESULT_DEF::RESULT_SUCCEED, link_val->linkIdIndex(), session_id_buf);
     return response_data;
 }
 
@@ -723,8 +722,8 @@ char *DFabricClass::generateFreeSessionResponse (
 
     char *response_data = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE, MallocClass::generateFreeSessionResponse);
     char *current_ptr = &response_data[FE_CommandClass::FE_RESPONSE_HEADER_SIZE];
-    memcpy(current_ptr, result_val, FE_CommandClass::FE_RESULT_SIZE);
-    current_ptr += FE_CommandClass::FE_RESULT_SIZE;
+    memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
+    current_ptr += RESULT_DEF::RESULT_SIZE;
     memcpy(current_ptr, link_id_index_val, SIZE_DEF::LINK_ID_INDEX_SIZE);
     current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE;
     strcpy(current_ptr, session_id_index_val);
@@ -742,12 +741,12 @@ char *DFabricClass::processPutSessionDataRequest (
 
     char *room_id = session_val->groupObject()->roomIdIndex();
     if (!room_id) {
-        response_data = this->generatePutSessionDataResponse(FE_CommandClass::FE_RESULT_NULL_ROOM, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex());
+        response_data = this->generatePutSessionDataResponse(RESULT_DEF::RESULT_NULL_ROOM, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex());
         return response_data;
     }
 
     this->sendPutSessionDataRequestToThemeServer(room_id, data_val);
-    response_data = this->generatePutSessionDataResponse(FE_CommandClass::FE_RESULT_SUCCEED, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex());
+    response_data = this->generatePutSessionDataResponse(RESULT_DEF::RESULT_SUCCEED, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex());
     return response_data;
 }
 
@@ -760,8 +759,8 @@ char *DFabricClass::generatePutSessionDataResponse (
 
     char *response_data = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE, MallocClass::generatePutSessionDataResponse);
     char *current_ptr = &response_data[FE_CommandClass::FE_RESPONSE_HEADER_SIZE];
-    memcpy(current_ptr, result_val, FE_CommandClass::FE_RESULT_SIZE);
-    current_ptr += FE_CommandClass::FE_RESULT_SIZE;
+    memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
+    current_ptr += RESULT_DEF::RESULT_SIZE;
     memcpy(current_ptr, link_id_index_val, SIZE_DEF::LINK_ID_INDEX_SIZE);
     current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE;
     memcpy(current_ptr, session_id_index_val, SIZE_DEF::SESSION_ID_INDEX_SIZE);
@@ -797,7 +796,7 @@ char *DFabricClass::processGetSessionDataRequest (
 
     char *data = session_val->getPendingDownLinkData();
 
-    char *response_data = this->generateGetSessionDataResponse(FE_CommandClass::FE_RESULT_SUCCEED, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex(), data);
+    char *response_data = this->generateGetSessionDataResponse(RESULT_DEF::RESULT_SUCCEED, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex(), data);
     return response_data;
 }
 
@@ -811,8 +810,8 @@ char *DFabricClass::generateGetSessionDataResponse (
 
     char *response_data = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE + strlen(data_val), MallocClass::generateGetSessionDataResponse);
     char *current_ptr = &response_data[FE_CommandClass::FE_RESPONSE_HEADER_SIZE];
-    memcpy(current_ptr, result_val, FE_CommandClass::FE_RESULT_SIZE);
-    current_ptr += FE_CommandClass::FE_RESULT_SIZE;
+    memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
+    current_ptr += RESULT_DEF::RESULT_SIZE;
     memcpy(current_ptr, link_id_index_val, SIZE_DEF::LINK_ID_INDEX_SIZE);
     current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE;
     memcpy(current_ptr, session_id_index_val, SIZE_DEF::SESSION_ID_INDEX_SIZE);

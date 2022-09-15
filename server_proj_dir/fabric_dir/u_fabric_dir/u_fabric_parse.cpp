@@ -7,6 +7,7 @@
 #include "../../../phwang_dir/phwang.h"
 #include "../../define_dir/fe_command_define.h"
 #include "../../define_dir/ft_command_define.h"
+#include "../../define_dir/result_def.h"
 #include "u_fabric_class.h"
 #include "../fabric_class.h"
 #include "../link_class.h"
@@ -37,10 +38,10 @@ void UFabricClass::processSetupRoomResponse (char *data_val)
     phwangDebugS(true, "UFabricClass::processSetupRoomResponse", data_val);
 
     char *current_ptr;
-    char result_buf[FE_CommandClass::FE_RESULT_SIZE + 1];
-    memcpy(result_buf, data_val, FE_CommandClass::FE_RESULT_SIZE);
-    result_buf[FE_CommandClass::FE_RESULT_SIZE] = 0;
-    current_ptr = data_val + FE_CommandClass::FE_RESULT_SIZE;
+    char result_buf[RESULT_DEF::RESULT_SIZE + 1];
+    memcpy(result_buf, data_val, RESULT_DEF::RESULT_SIZE);
+    result_buf[RESULT_DEF::RESULT_SIZE] = 0;
+    current_ptr = data_val + RESULT_DEF::RESULT_SIZE;
 
     char *group_id_index = current_ptr;
     char group_id_buf[SIZE_DEF::GROUP_ID_INDEX_SIZE + 1];
@@ -69,10 +70,10 @@ void UFabricClass::processPutRoomDataResponse (char *data_val)
 {
     phwangDebugS(true, "UFabricClass::processPutRoomDataResponse", data_val);
 
-    char result_buf[FE_CommandClass::FE_RESULT_SIZE + 1];
-    memcpy(result_buf, data_val, FE_CommandClass::FE_RESULT_SIZE);
-    result_buf[FE_CommandClass::FE_RESULT_SIZE] = 0;
-    char *current_ptr = data_val + FE_CommandClass::FE_RESULT_SIZE;
+    char result_buf[RESULT_DEF::RESULT_SIZE + 1];
+    memcpy(result_buf, data_val, RESULT_DEF::RESULT_SIZE);
+    result_buf[RESULT_DEF::RESULT_SIZE] = 0;
+    char *current_ptr = data_val + RESULT_DEF::RESULT_SIZE;
 
     char *group_id_ptr = current_ptr;
     current_ptr += SIZE_DEF::GROUP_ID_INDEX_SIZE;
