@@ -85,6 +85,9 @@ void DEngineClass::processPutBaseDataResponse (GoBaseClass *base_object_val, cha
 
     *current_ptr++ = TE_CommandClass::PUT_BASE_DATA_RESPONSE;
 
+    memcpy(current_ptr, FE_CommandClass::FE_RESULT_SUCCEED, FE_CommandClass::FE_RESULT_SIZE);
+    current_ptr += FE_CommandClass::FE_RESULT_SIZE;
+
     memcpy(current_ptr, base_object_val->roomIdIndex(), FT_CommandClass::ROOM_ID_INDEX_SIZE);
     current_ptr += FT_CommandClass::ROOM_ID_INDEX_SIZE;
 

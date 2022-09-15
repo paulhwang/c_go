@@ -73,8 +73,11 @@ void UThemeClass::processPutBaseDataResponse (char *data_val)
 {
     phwangDebugS(false, "UThemeClass::processPutBaseDataResponse", data_val);
 
-    RoomClass *room = this->theThemeObject->searchRoom(data_val);
-    char *rest_data_ptr = data_val + FT_CommandClass::ROOM_ID_INDEX_SIZE;
+    char *result_ptr = data_val;
+    char *room_id_ptr = result_ptr + FE_CommandClass::FE_RESULT_SIZE;
+    char *rest_data_ptr = room_id_ptr + FT_CommandClass::ROOM_ID_INDEX_SIZE;
+
+    RoomClass *room = this->theThemeObject->searchRoom(room_id_ptr);
 
     if (!room) {
         phwangAbendS("UThemeClass::processPutBaseDataResponse", "null room");
@@ -91,7 +94,7 @@ void UThemeClass::processPutBaseDataResponse (char *data_val)
 
             *current_ptr++ = FT_CommandClass::PUT_ROOM_DATA_RESPONSE;
 
-            memcpy(current_ptr, FE_CommandClass::FE_RESULT_SUCCEED, FE_CommandClass::FE_RESULT_SIZE);
+            memcpy(current_ptr, result_ptr, FE_CommandClass::FE_RESULT_SIZE);
             current_ptr += FE_CommandClass::FE_RESULT_SIZE;
 
             memcpy(current_ptr, room->groupTableArray(i), FT_CommandClass::GROUP_ID_INDEX_SIZE);
