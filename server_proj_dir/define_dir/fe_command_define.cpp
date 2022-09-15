@@ -25,6 +25,3 @@ char const *RESULT_DEF::RESULT_NULL_HIS_SESSION           = "60";
 
 char const *RESULT_DEF::RESULT_MALLOC_ROOM_FAIL           = "71";
 
-
-char const *FE_CommandClass::FAKE_LINK_ID_INDEX    = "99990000";
-char const *FE_CommandClass::FAKE_SESSION_ID_INDEX = "99980000";

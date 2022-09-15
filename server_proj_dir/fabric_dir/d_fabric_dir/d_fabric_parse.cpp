@@ -349,7 +349,7 @@ char *DFabricClass::processSignInRequest (char *data_val)
         }
         phwangFree(my_name);
         phwangFree(password);
-        response_data = generateSignInResponse(result_str, FE_CommandClass::FAKE_LINK_ID_INDEX);
+        response_data = generateSignInResponse(result_str, SIZE_DEF::FAKE_LINK_ID_INDEX);
         return response_data;
     }
 
@@ -358,7 +358,7 @@ char *DFabricClass::processSignInRequest (char *data_val)
         phwangAbendS("DFabricClass::processSignInRequest", "null link");
         phwangFree(my_name);
         phwangFree(password);
-        response_data = generateSignInResponse(RESULT_DEF::RESULT_NULL_LINK, FE_CommandClass::FAKE_LINK_ID_INDEX);
+        response_data = generateSignInResponse(RESULT_DEF::RESULT_NULL_LINK, SIZE_DEF::FAKE_LINK_ID_INDEX);
         return response_data;
     }
 
