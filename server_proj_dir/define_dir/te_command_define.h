@@ -10,9 +10,6 @@
 
 class TE_CommandClass {
 public:
-    int const static TE_DL_DATA_BUF_SIZE = 512;
-    int const static TE_UL_DATA_BUF_SIZE = 512;
-
     int const static TE_DL_COMMAND_SIZE = 1;
     char const static SETUP_BASE_COMMAND  = 'B';
     char const static SETUP_BASE_RESPONSE = 'b';
