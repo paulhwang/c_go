@@ -8,6 +8,7 @@
 
 #include "size_def.h"
 #include "result_def.h"
+#include "te_def.h"
 
 class THEME_DEF {
 public:
@@ -18,7 +19,7 @@ public:
     int const static FT_DL_BUF_WITH_GROUP_ROOM_SIZE = FT_DL_BUF_WITH_GROUP_SIZE + SIZE_DEF::ROOM_ID_INDEX_SIZE;
 
     /* uplink data buffer size */
-    int const static FT_UL_BUFFER_SIZE = 1 + 1;
-    int const static FT_UL_BUF_WITH_ROOM_SIZE  = FT_UL_BUFFER_SIZE + SIZE_DEF::ROOM_ID_INDEX_SIZE;
-    int const static FT_UL_BUF_WITH_BASE_SIZE  = FT_UL_BUFFER_SIZE + SIZE_DEF::BASE_ID_INDEX_SIZE;
+    int const static TE_UL_BUFFER_SIZE = TE_DEF::TE_COMMAND_SIZE + 1;
+    int const static TE_UL_BUF_WITH_ROOM_SIZE  = TE_UL_BUFFER_SIZE + SIZE_DEF::ROOM_ID_INDEX_SIZE;
+    int const static TE_UL_BUF_WITH_BASE_SIZE  = TE_UL_BUFFER_SIZE + SIZE_DEF::BASE_ID_INDEX_SIZE;
 };
