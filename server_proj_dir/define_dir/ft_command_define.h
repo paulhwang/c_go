@@ -11,8 +11,6 @@
 class FT_CommandClass {
 public:
     int const static FT_DL_DATA_BUF_SIZE = 512;
-    int const static FT_UL_DATA_BUF_SIZE = 512;
-    int const static FT_THEME_DATA_BUF_SIZE = 64;
 
     int const static FT_DL_COMMAND_SIZE = 1;
     char const static SETUP_ROOM_COMMAND  = 'R';
