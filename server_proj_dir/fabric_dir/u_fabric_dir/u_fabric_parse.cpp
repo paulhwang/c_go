@@ -5,6 +5,7 @@
 */
 
 #include "../../../phwang_dir/phwang.h"
+#include "../../define_dir/fe_command_define.h"
 #include "../../define_dir/ft_command_define.h"
 #include "u_fabric_class.h"
 #include "../fabric_class.h"
@@ -35,8 +36,20 @@ void UFabricClass::processSetupRoomResponse (char *data_val)
 {
     phwangDebugS(true, "UFabricClass::processSetupRoomResponse", data_val);
 
-    char *group_id_index = data_val;
-    char *room_id_index = data_val + FT_CommandClass::GROUP_ID_INDEX_SIZE;
+    char *current_ptr;
+    char result_buf[FE_CommandClass::FE_RESULT_SIZE + 1];
+    memcpy(result_buf, data_val, FE_CommandClass::FE_RESULT_SIZE);
+    result_buf[FE_CommandClass::FE_RESULT_SIZE] = 0;
+    current_ptr = data_val + FE_CommandClass::FE_RESULT_SIZE;
+    current_ptr = data_val;
+
+    char *group_id_index = current_ptr;
+    char group_id_buf[FT_CommandClass::GROUP_ID_INDEX_SIZE + 1];
+    memcpy(group_id_buf, data_val, FT_CommandClass::GROUP_ID_INDEX_SIZE);
+    group_id_buf[FT_CommandClass::GROUP_ID_INDEX_SIZE] = 0;
+    current_ptr += FT_CommandClass::GROUP_ID_INDEX_SIZE;
+
+    char *room_id_ptr = current_ptr;
 
     GroupClass *group = this->theFabricObject->searchGroup(group_id_index);
     if (!group) {
@@ -45,7 +58,7 @@ void UFabricClass::processSetupRoomResponse (char *data_val)
     }
 
     int session_array_size;
-    group->setRoomIdIndex(room_id_index);
+    group->setRoomIdIndex(room_id_ptr);
     group->setSessionTableArray((SessionClass **) phwangArrayMgrGetArrayTable(group->sessionArrayMgr(), &session_array_size));
     for (int i = 0; i < session_array_size; i++) {
         SessionClass *session = group->sessionTableArray(0);
