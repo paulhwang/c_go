@@ -8,6 +8,7 @@
 #include "../../../phwang_dir/malloc_dir/malloc_class.h"
 #include "../../define_dir/te_command_define.h"
 #include "../../define_dir/fe_command_define.h"
+#include "../../define_dir/engine_def.h"
 #include "d_engine_class.h"
 #include "../engine_class.h"
 
@@ -46,7 +47,7 @@ void DEngineClass::processSetupBase (char *data_val)
 
     /* downlink */
     char *current_ptr;
-    char *downlink_data = current_ptr = (char *) phwangMalloc(TE_CommandClass::FT_DL_BUF_WITH_ROOM_BASE_SIZE, MallocClass::DENGINE_SETUP_BASE);
+    char *downlink_data = current_ptr = (char *) phwangMalloc(ENGINE_DEF::FT_DL_BUF_WITH_ROOM_BASE_SIZE, MallocClass::DENGINE_SETUP_BASE);
     *current_ptr++ = TE_CommandClass::SETUP_BASE_RESPONSE;
 
     memcpy(current_ptr, RESULT_DEF::RESULT_SUCCEED, RESULT_DEF::RESULT_SIZE);
@@ -81,7 +82,7 @@ void DEngineClass::processPutBaseData (char *data_val)
 void DEngineClass::processPutBaseDataResponse (GoBaseClass *base_object_val, char const *data_val)
 {
     char *current_ptr;
-    char *downlink_data = current_ptr = (char *) phwangMalloc(TE_CommandClass::FT_DL_BUF_WITH_ROOM_SIZE + strlen(data_val), MallocClass::DENGINE_PUT_BASE_DATA);
+    char *downlink_data = current_ptr = (char *) phwangMalloc(ENGINE_DEF::FT_DL_BUF_WITH_ROOM_SIZE + strlen(data_val), MallocClass::DENGINE_PUT_BASE_DATA);
 
     *current_ptr++ = TE_CommandClass::PUT_BASE_DATA_RESPONSE;
 

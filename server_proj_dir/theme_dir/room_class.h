@@ -7,6 +7,7 @@
 #pragma once
 #include "../../phwang_dir/list_mgr_dir/list_entry_class.h"
 #include "../define_dir/te_command_define.h"
+#include "../define_dir/size_def.h"
 
 class SessionClass;
 class IdIndexListClass;
