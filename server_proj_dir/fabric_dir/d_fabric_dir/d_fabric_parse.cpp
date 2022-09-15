@@ -161,7 +161,7 @@ void DFabricClass::sendSearchLinkFailResponse (
     phwangAbendS("DFabricClass::sendSearchLinkFailResponse", "");
 
     char *data_ptr;
-    char *downlink_data = data_ptr = (char *) phwangMalloc(FABRIC_DEF::FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE, MallocClass::BAD_LINK);
+    char *downlink_data = data_ptr = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUF_WITH_LINK_SESSION_SIZE, MallocClass::BAD_LINK);
     *data_ptr++ = command_val;
     strcpy(data_ptr, ajax_id_val);
     data_ptr += SIZE_DEF::AJAX_ID_SIZE;
@@ -177,7 +177,7 @@ void DFabricClass::sendSearchLinkSessionFailResponse (
     phwangAbendS("DFabricClass::sendSearchLinkSessionFailResponse", "");
 
     char *data_ptr;
-    char *downlink_data = data_ptr = (char *) phwangMalloc(FABRIC_DEF::FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE, MallocClass::BAD_SESSION);
+    char *downlink_data = data_ptr = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUF_WITH_LINK_SESSION_SIZE, MallocClass::BAD_SESSION);
     *data_ptr++ = command_val;
     strcpy(data_ptr, ajax_id_val);
     data_ptr += SIZE_DEF::AJAX_ID_SIZE;
@@ -236,8 +236,8 @@ char *DFabricClass::generateDatagramResponse (
     char *encoded_data = phwangEncodeStringMalloc(data_val);
     int encoded_data_length = strlen(encoded_data);
 
-    char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_RESPONSE_BUF_WITH_LINK_SIZE + strlen(encoded_data), MallocClass::generateDatagramResponse);
-    char *current_ptr = &response_data[FABRIC_DEF::FE_RESPONSE_HEADER_SIZE];
+    char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUF_WITH_LINK_SIZE + strlen(encoded_data), MallocClass::generateDatagramResponse);
+    char *current_ptr = &response_data[FABRIC_DEF::FE_DL_HEADER_SIZE];
 
     memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;
@@ -312,8 +312,8 @@ char *DFabricClass::generateSignUpResponse (char const *result_val)
 {
     phwangDebugS(false, "DFabricClass::generateSignUpResponse", result_val);
 
-    char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_RESPONSE_BUFFER_SIZE, MallocClass::generateSignUpResponse);
-    char *current_ptr = &response_data[FABRIC_DEF::FE_RESPONSE_HEADER_SIZE];
+    char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUFFER_SIZE, MallocClass::generateSignUpResponse);
+    char *current_ptr = &response_data[FABRIC_DEF::FE_DL_HEADER_SIZE];
     strcpy(current_ptr, result_val);
     return response_data;
 }
@@ -377,8 +377,8 @@ char *DFabricClass::generateSignInResponse (
 {
     phwangDebugS(false, "DFabricClass::generateSignInResponse", result_val);
 
-    char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_RESPONSE_BUF_WITH_LINK_SIZE, MallocClass::generateSignInResponse);
-    char *current_ptr = &response_data[FABRIC_DEF::FE_RESPONSE_HEADER_SIZE];
+    char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUF_WITH_LINK_SIZE, MallocClass::generateSignInResponse);
+    char *current_ptr = &response_data[FABRIC_DEF::FE_DL_HEADER_SIZE];
     memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;
     strcpy(current_ptr, link_id_index_val);
@@ -405,8 +405,8 @@ char *DFabricClass::generateSignOffResponse (
 {
     phwangDebugS(false, "DFabricClass::generateSignOffResponse", result_val);
 
-    char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_RESPONSE_BUF_WITH_LINK_SIZE + strlen(result_val), MallocClass::generateSignOffResponse);
-    char *current_ptr = &response_data[FABRIC_DEF::FE_RESPONSE_HEADER_SIZE];
+    char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUF_WITH_LINK_SIZE + strlen(result_val), MallocClass::generateSignOffResponse);
+    char *current_ptr = &response_data[FABRIC_DEF::FE_DL_HEADER_SIZE];
     memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;
     strcpy(current_ptr, link_id_index_val);
@@ -423,7 +423,7 @@ char *DFabricClass::processGetLinkDataRequest (
     link_val->resetKeepAliveTime();
 
     char *downlink_data = (char *) phwangMalloc(FABRIC_DEF::FE_GET_LINK_DATA_BUF_SIZE, MallocClass::GET_LINK_DATA);
-    char *current_ptr = &downlink_data[FABRIC_DEF::FE_RESPONSE_HEADER_SIZE];
+    char *current_ptr = &downlink_data[FABRIC_DEF::FE_DL_HEADER_SIZE];
 
     memcpy(current_ptr, RESULT_DEF::RESULT_SUCCEED, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;
@@ -481,8 +481,8 @@ char *DFabricClass::generateGetLinkDataResponse (
 {
     phwangDebugS(false, "DFabricClass::generateGetLinkDataResponse", result_val);
 
-    char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE + strlen(data_val), MallocClass::generateGetLinkDataResponse);
-    char *current_ptr = &response_data[FABRIC_DEF::FE_RESPONSE_HEADER_SIZE];
+    char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUF_WITH_LINK_SESSION_SIZE + strlen(data_val), MallocClass::generateGetLinkDataResponse);
+    char *current_ptr = &response_data[FABRIC_DEF::FE_DL_HEADER_SIZE];
     memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;
     memcpy(current_ptr, link_id_index_val, SIZE_DEF::LINK_ID_INDEX_SIZE);
@@ -519,8 +519,8 @@ char *DFabricClass::generateGetNameListResponse (
 {
     phwangDebugS(false, "DFabricClass::generateGetNameListResponse", result_val);
 
-    char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE + strlen(data_val), MallocClass::generateGetNameListResponse);
-    char *current_ptr = &response_data[FABRIC_DEF::FE_RESPONSE_HEADER_SIZE];
+    char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUF_WITH_LINK_SESSION_SIZE + strlen(data_val), MallocClass::generateGetNameListResponse);
+    char *current_ptr = &response_data[FABRIC_DEF::FE_DL_HEADER_SIZE];
     memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;
     memcpy(current_ptr, link_id_index_val, SIZE_DEF::LINK_ID_INDEX_SIZE);
@@ -600,8 +600,8 @@ char *DFabricClass::generateSetupSessionResponse (
 {
     phwangDebugS(false, "DFabricClass::generateSetupSessionResponse", result_val);
 
-    char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE, MallocClass::generateSetupSessionResponse);
-    char *current_ptr = &response_data[FABRIC_DEF::FE_RESPONSE_HEADER_SIZE];
+    char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUF_WITH_LINK_SESSION_SIZE, MallocClass::generateSetupSessionResponse);
+    char *current_ptr = &response_data[FABRIC_DEF::FE_DL_HEADER_SIZE];
     memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;
     memcpy(current_ptr, link_id_index_val, SIZE_DEF::LINK_ID_INDEX_SIZE);
@@ -656,8 +656,8 @@ char *DFabricClass::generateSetupSession2Response (
 {
     phwangDebugS(false, "DFabricClass::generateSetupSession2Response", result_val);
 
-    char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE, MallocClass::generateSetupSession2Response);
-    char *current_ptr = &response_data[FABRIC_DEF::FE_RESPONSE_HEADER_SIZE];
+    char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUF_WITH_LINK_SESSION_SIZE, MallocClass::generateSetupSession2Response);
+    char *current_ptr = &response_data[FABRIC_DEF::FE_DL_HEADER_SIZE];
     memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;
     memcpy(current_ptr, link_id_index_val, SIZE_DEF::LINK_ID_INDEX_SIZE);
@@ -689,8 +689,8 @@ char *DFabricClass::generateSetupSession3Response (
 {
     phwangDebugS(false, "DFabricClass::generateSetupSession3Response", result_val);
 
-    char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE, MallocClass::generateSetupSession3Response);
-    char *current_ptr = &response_data[FABRIC_DEF::FE_RESPONSE_HEADER_SIZE];
+    char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUF_WITH_LINK_SESSION_SIZE, MallocClass::generateSetupSession3Response);
+    char *current_ptr = &response_data[FABRIC_DEF::FE_DL_HEADER_SIZE];
     memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;
     memcpy(current_ptr, link_id_index_val, SIZE_DEF::LINK_ID_INDEX_SIZE);
@@ -723,8 +723,8 @@ char *DFabricClass::generateFreeSessionResponse (
 {
     phwangDebugS(false, "DFabricClass::generateFreeSessionResponse", result_val);
 
-    char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE, MallocClass::generateFreeSessionResponse);
-    char *current_ptr = &response_data[FABRIC_DEF::FE_RESPONSE_HEADER_SIZE];
+    char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUF_WITH_LINK_SESSION_SIZE, MallocClass::generateFreeSessionResponse);
+    char *current_ptr = &response_data[FABRIC_DEF::FE_DL_HEADER_SIZE];
     memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;
     memcpy(current_ptr, link_id_index_val, SIZE_DEF::LINK_ID_INDEX_SIZE);
@@ -760,8 +760,8 @@ char *DFabricClass::generatePutSessionDataResponse (
 {
     phwangDebugS(false, "DFabricClass::generatePutSessionDataResponse", result_val);
 
-    char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE, MallocClass::generatePutSessionDataResponse);
-    char *current_ptr = &response_data[FABRIC_DEF::FE_RESPONSE_HEADER_SIZE];
+    char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUF_WITH_LINK_SESSION_SIZE, MallocClass::generatePutSessionDataResponse);
+    char *current_ptr = &response_data[FABRIC_DEF::FE_DL_HEADER_SIZE];
     memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;
     memcpy(current_ptr, link_id_index_val, SIZE_DEF::LINK_ID_INDEX_SIZE);
@@ -811,8 +811,8 @@ char *DFabricClass::generateGetSessionDataResponse (
 {
     phwangDebugS(false, "DFabricClass::generateGetSessionDataResponse", result_val);
 
-    char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE + strlen(data_val), MallocClass::generateGetSessionDataResponse);
-    char *current_ptr = &response_data[FABRIC_DEF::FE_RESPONSE_HEADER_SIZE];
+    char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUF_WITH_LINK_SESSION_SIZE + strlen(data_val), MallocClass::generateGetSessionDataResponse);
+    char *current_ptr = &response_data[FABRIC_DEF::FE_DL_HEADER_SIZE];
     memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;
     memcpy(current_ptr, link_id_index_val, SIZE_DEF::LINK_ID_INDEX_SIZE);
