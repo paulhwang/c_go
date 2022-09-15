@@ -87,7 +87,7 @@ void UThemeClass::processPutBaseDataResponse (char *data_val)
     for (int i = 0; i < group_array_size; i++) {
         if (room->groupTableArray(i)) {
             char *current_ptr;
-            char *downlink_data = current_ptr = (char *) phwangMalloc(FT_CommandClass::FT_DL_DATA_BUF_SIZE + 4, MallocClass::UTHEME_BASE_PUT_BASE_DATA);
+            char *downlink_data = current_ptr = (char *) phwangMalloc(FT_CommandClass::FT_DL_BUF_WITH_GROUP_SIZE + strlen(rest_data_ptr), MallocClass::UTHEME_BASE_PUT_BASE_DATA);
 
             *current_ptr++ = FT_CommandClass::PUT_ROOM_DATA_RESPONSE;
 
