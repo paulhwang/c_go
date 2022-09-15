@@ -47,7 +47,7 @@ void DEngineClass::processSetupBase (char *data_val)
 
     /* downlink */
     char *current_ptr;
-    char *downlink_data = current_ptr = (char *) phwangMalloc(ENGINE_DEF::FT_DL_BUF_WITH_ROOM_BASE_SIZE, MallocClass::DENGINE_SETUP_BASE);
+    char *downlink_data = current_ptr = (char *) phwangMalloc(ENGINE_DEF::TE_DL_BUF_WITH_ROOM_BASE_SIZE, MallocClass::DENGINE_SETUP_BASE);
     *current_ptr++ = TE_DEF::SETUP_BASE_RESPONSE;
 
     memcpy(current_ptr, RESULT_DEF::RESULT_SUCCEED, RESULT_DEF::RESULT_SIZE);
@@ -82,7 +82,7 @@ void DEngineClass::processPutBaseData (char *data_val)
 void DEngineClass::processPutBaseDataResponse (GoBaseClass *base_object_val, char const *data_val)
 {
     char *current_ptr;
-    char *downlink_data = current_ptr = (char *) phwangMalloc(ENGINE_DEF::FT_DL_BUF_WITH_ROOM_SIZE + strlen(data_val), MallocClass::DENGINE_PUT_BASE_DATA);
+    char *downlink_data = current_ptr = (char *) phwangMalloc(ENGINE_DEF::TE_DL_BUF_WITH_ROOM_SIZE + strlen(data_val), MallocClass::DENGINE_PUT_BASE_DATA);
 
     *current_ptr++ = TE_DEF::PUT_BASE_DATA_RESPONSE;
 
