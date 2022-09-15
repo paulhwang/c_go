@@ -93,7 +93,7 @@ void DFabricClass::exportedParseFunction (
                     break;
 
                 case FE_CommandClass::SETUP_SESSION_COMMAND:
-                    response_data = this->processSetupSessionRequest(tp_transfer_object_val, current_data, ajax_id, link);
+                    response_data = this->processSetupSessionRequest(link, current_data);
                     response_data[0] = FE_CommandClass::SETUP_SESSION_RESPONSE;
                     break;
 
@@ -527,10 +527,8 @@ char *DFabricClass::generateGetNameListResponse (
 }
 
 char *DFabricClass::processSetupSessionRequest (
-    void *tp_transfer_object_val,
-    char *data_val,
-    char const *ajax_id_val,
-    LinkClass *link_val)
+    LinkClass *link_val,
+    char *data_val)
 {
     char *response_data = 0;
     phwangDebugS(true, "DFabricClass::processSetupSessionRequest", data_val);
@@ -551,18 +549,14 @@ char *DFabricClass::processSetupSessionRequest (
 
     SessionClass *session = link_val->mallocSession();
     if (!session) {
-        this->sendSetupSessionResponce(tp_transfer_object_val, ajax_id_val, link_val->linkIdIndex(), FE_CommandClass::FAKE_SESSION_ID_INDEX, FE_CommandClass::FE_RESULT_MALLOC_SESSION_FAIL);
-        return response_data;/////////////////////////////////
-        //response_data = this->generateSetupSessionResponse(FE_CommandClass::FE_RESULT_MALLOC_SESSION_FAIL, link_val->linkIdIndex(), session->sessionIdIndex());
-        //return response_data;
+        response_data = this->generateSetupSessionResponse(FE_CommandClass::FE_RESULT_MALLOC_SESSION_FAIL, link_val->linkIdIndex(), session->sessionIdIndex());
+        return response_data;
     }
 
     GroupClass *group = this->theFabricObject->mallocGroup(theme_info_val);
     if (!group) {
-        this->sendSetupSessionResponce(tp_transfer_object_val, ajax_id_val, link_val->linkIdIndex(), session->sessionIdIndex(), FE_CommandClass::FE_RESULT_MALLOC_GROUP_FAIL);
-        return response_data;////////////////////////////////////
-        //response_data = this->generateSetupSessionResponse(FE_CommandClass::FE_RESULT_MALLOC_GROUP_FAIL, link_val->linkIdIndex(), session->sessionIdIndex());
-        //return response_data;
+        response_data = this->generateSetupSessionResponse(FE_CommandClass::FE_RESULT_MALLOC_GROUP_FAIL, link_val->linkIdIndex(), session->sessionIdIndex());
+        return response_data;
     }
     group->insertSession(session);
     session->bindGroup(group);
@@ -573,18 +567,14 @@ char *DFabricClass::processSetupSessionRequest (
     else {
         LinkClass *his_link = this->theFabricObject->searchLinkByName(his_name_val);
         if (!his_link) {
-            this->sendSetupSessionResponce(tp_transfer_object_val, ajax_id_val, link_val->linkIdIndex(), session->sessionIdIndex(), FE_CommandClass::FE_RESULT_HIS_LINK_NOT_EXIST);
-            return response_data;//////////////////////////////
-            //response_data = this->generateSetupSessionResponse(FE_CommandClass::FE_RESULT_HIS_LINK_NOT_EXIST, link_val->linkIdIndex(), session->sessionIdIndex());
-            //return response_data;
+            response_data = this->generateSetupSessionResponse(FE_CommandClass::FE_RESULT_HIS_LINK_NOT_EXIST, link_val->linkIdIndex(), session->sessionIdIndex());
+            return response_data;
         }
 
         SessionClass *his_session = his_link->mallocSession();
         if (!his_session) {
-            this->sendSetupSessionResponce(tp_transfer_object_val, ajax_id_val, link_val->linkIdIndex(), session->sessionIdIndex(), FE_CommandClass::FE_RESULT_NULL_HIS_SESSION);
-            return response_data;////////////////////////
-            //response_data = this->generateSetupSessionResponse(FE_CommandClass::FE_RESULT_NULL_HIS_SESSION, link_val->linkIdIndex(), session->sessionIdIndex());
-            //return response_data;
+            response_data = this->generateSetupSessionResponse(FE_CommandClass::FE_RESULT_NULL_HIS_SESSION, link_val->linkIdIndex(), session->sessionIdIndex());
+            return response_data;
         }
 
         group->insertSession(his_session);
@@ -597,7 +587,6 @@ char *DFabricClass::processSetupSessionRequest (
         phwangFree(theme_data_buf);
     }
 
-    //this->sendSetupSessionResponce(tp_transfer_object_val, ajax_id_val, link_val->linkIdIndex(), session->sessionIdIndex(), FE_CommandClass::FE_RESULT_SUCCEED);
     response_data = this->generateSetupSessionResponse(FE_CommandClass::FE_RESULT_SUCCEED, link_val->linkIdIndex(), session->sessionIdIndex());
     return response_data;
 }
@@ -617,24 +606,6 @@ char *DFabricClass::generateSetupSessionResponse (
     current_ptr += FE_CommandClass::LINK_ID_INDEX_SIZE;
     strcpy(current_ptr, session_id_index_val);
     return response_data;
-}
-
-void DFabricClass::sendSetupSessionResponce (
-    void *tp_transfer_object_val,
-    char const *ajax_id_val,
-    char const *link_id_index_val,
-    char const *session_id_index_val,
-    char const *result_val)
-{
-    phwangDebugS(false, "DFabricClass::sendSetupSessionResponce", result_val);
-
-    char *current_ptr;
-    char *downlink_data = current_ptr = (char *) phwangMalloc(FE_CommandClass::FE_DL_DATA_BUF_SIZE, MallocClass::sendSetupSessionResponce);
-    *current_ptr++ = FE_CommandClass::SETUP_SESSION_RESPONSE;
-    strcpy(current_ptr, ajax_id_val);
-    current_ptr += FE_CommandClass::AJAX_ID_SIZE;
-    strcpy(current_ptr, session_id_index_val);
-    this->transmitFunction(tp_transfer_object_val, downlink_data);
 }
 
 void DFabricClass::sendSetupRoomRequestToThemeServer (GroupClass *group_val, char *theme_info_val)

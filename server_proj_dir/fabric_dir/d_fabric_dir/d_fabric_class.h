@@ -76,20 +76,12 @@ class DFabricClass {
         char const *data_val);
 
     char *processSetupSessionRequest (
-        void *tp_transfer_object_val,
-        char *data_val,
-        char const *ajax_id_val,
-        LinkClass *link_val);
+        LinkClass *link_val,
+        char *data_val);
     char *generateSetupSessionResponse (
         char const *result_val,
         char const *link_id_index_val,
         char const *session_id_index_val);
-    void sendSetupSessionResponce (
-        void *tp_transfer_object_val,
-        char const *ajax_id_val,
-        char const *link_id_index_val,
-        char const *session_id_index_val,
-        char const *result_val);
 
     void processSetupSession2Request (
         void *tp_transfer_object_val,
