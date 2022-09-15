@@ -87,7 +87,6 @@ public:
     int const static FE_GET_LINK_DATA_BUF_SIZE = FE_RESPONSE_BUF_WITH_LINK_SIZE + 1024;/********TBD*******************/
 
     /* uplink data buffer size */
-    int const static FE_UL_DATA_BUF_SIZE = 512;
     int const static FE_UL_BUFFER_SIZE = 1 + 1;
     int const static FE_UL_BUF_WITH_GROUP_SIZE = FE_UL_BUFFER_SIZE + FT_CommandClass::GROUP_ID_INDEX_SIZE;
     int const static FE_UL_BUF_WITH_ROOM_SIZE  = FE_UL_BUFFER_SIZE + FT_CommandClass::ROOM_ID_INDEX_SIZE;

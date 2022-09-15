@@ -774,17 +774,16 @@ void DFabricClass::sendPutSessionDataRequestToThemeServer (
     char const *room_id_val,
     char const *data_val)
 {
-    if (strlen(data_val) > FE_CommandClass::FE_UL_DATA_BUF_SIZE) {
-        phwangAbendSI("DFabricClass::sendPutSessionDataRequestToThemeServer", "buf_size", strlen(data_val));
-        return;
-    }
+    char *current_ptr;
+    char *uplink_data = current_ptr = (char *) phwangMalloc(FE_CommandClass::FE_UL_BUF_WITH_ROOM_SIZE + strlen(data_val), MallocClass::PUT_SESSION_DATA0);
 
-    char *data_ptr;
-    char *uplink_data = data_ptr = (char *) phwangMalloc(FE_CommandClass::FE_UL_DATA_BUF_SIZE, MallocClass::PUT_SESSION_DATA0);
-    *data_ptr++ = FT_CommandClass::PUT_ROOM_DATA_COMMAND;
-    memcpy(data_ptr, room_id_val, FT_CommandClass::ROOM_ID_INDEX_SIZE);
-    data_ptr += FT_CommandClass::ROOM_ID_INDEX_SIZE;
-    strcpy(data_ptr, data_val);
+    *current_ptr++ = FT_CommandClass::PUT_ROOM_DATA_COMMAND;
+
+    memcpy(current_ptr, room_id_val, FT_CommandClass::ROOM_ID_INDEX_SIZE);
+    current_ptr += FT_CommandClass::ROOM_ID_INDEX_SIZE;
+
+    strcpy(current_ptr, data_val);
+
     this->theFabricObject->uFabricObject()->transmitFunction(uplink_data);
 }
 
