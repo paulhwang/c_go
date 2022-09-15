@@ -613,7 +613,7 @@ char *DFabricClass::generateSetupSessionResponse (
 void DFabricClass::sendSetupRoomRequestToThemeServer (GroupClass *group_val, char *theme_info_val)
 {
     char *current_ptr;
-    char *uplink_data = current_ptr = (char *) phwangMalloc(FABRIC_DEF::FE_UL_BUF_WITH_GROUP_SIZE + strlen(theme_info_val), MallocClass::sendSetupRoomRequestToThemeServer);
+    char *uplink_data = current_ptr = (char *) phwangMalloc(FABRIC_DEF::FT_UL_BUF_WITH_GROUP_SIZE + strlen(theme_info_val), MallocClass::sendSetupRoomRequestToThemeServer);
 
     *current_ptr++ = FT_DEF::FT_SETUP_ROOM_COMMAND;
 
@@ -777,7 +777,7 @@ void DFabricClass::sendPutSessionDataRequestToThemeServer (
     char const *data_val)
 {
     char *current_ptr;
-    char *uplink_data = current_ptr = (char *) phwangMalloc(FABRIC_DEF::FE_UL_BUF_WITH_ROOM_SIZE + strlen(data_val), MallocClass::PUT_SESSION_DATA0);
+    char *uplink_data = current_ptr = (char *) phwangMalloc(FABRIC_DEF::FT_UL_BUF_WITH_ROOM_SIZE + strlen(data_val), MallocClass::PUT_SESSION_DATA0);
 
     *current_ptr++ = FT_DEF::FT_PUT_ROOM_DATA_COMMAND;
 
