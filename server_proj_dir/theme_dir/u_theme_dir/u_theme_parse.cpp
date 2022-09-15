@@ -9,6 +9,7 @@
 #include "../../define_dir/fe_command_define.h"
 #include "../../define_dir/te_command_define.h"
 #include "../../define_dir/ft_command_define.h"
+#include "../../define_dir/theme_def.h"
 #include "u_theme_class.h"
 #include "../theme_class.h"
 #include "../d_theme_dir/d_theme_class.h"
@@ -53,7 +54,7 @@ void UThemeClass::processSetupBaseResponse (char *data_val)
     room->setBaseIdIndex(base_id_ptr);
     room->setGroupTableArray((char **) phwangArrayMgrGetArrayTable(room->groupArrayMgr(), &group_array_size));
 
-    char *downlink_data = current_ptr = (char *) phwangMalloc(FT_CommandClass::FT_DL_BUF_WITH_GROUP_ROOM_SIZE, MallocClass::UTHEME_BASE);
+    char *downlink_data = current_ptr = (char *) phwangMalloc(THEME_DEF::FT_DL_BUF_WITH_GROUP_ROOM_SIZE, MallocClass::UTHEME_BASE);
     *current_ptr++ = FT_CommandClass::SETUP_ROOM_RESPONSE;
 
     memcpy(current_ptr, result_ptr, RESULT_DEF::RESULT_SIZE);
@@ -90,7 +91,7 @@ void UThemeClass::processPutBaseDataResponse (char *data_val)
     for (int i = 0; i < group_array_size; i++) {
         if (room->groupTableArray(i)) {
             char *current_ptr;
-            char *downlink_data = current_ptr = (char *) phwangMalloc(FT_CommandClass::FT_DL_BUF_WITH_GROUP_SIZE + strlen(rest_data_ptr), MallocClass::UTHEME_BASE_PUT_BASE_DATA);
+            char *downlink_data = current_ptr = (char *) phwangMalloc(THEME_DEF::FT_DL_BUF_WITH_GROUP_SIZE + strlen(rest_data_ptr), MallocClass::UTHEME_BASE_PUT_BASE_DATA);
 
             *current_ptr++ = FT_CommandClass::PUT_ROOM_DATA_RESPONSE;
 

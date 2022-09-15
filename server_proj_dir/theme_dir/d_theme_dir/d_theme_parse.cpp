@@ -9,6 +9,7 @@
 #include "../../define_dir/ft_command_define.h"
 #include "../../define_dir/te_command_define.h"
 #include "../../define_dir/fe_command_define.h"
+#include "../../define_dir/theme_def.h"
 #include "d_theme_class.h"
 #include "../theme_class.h"
 #include "../u_theme_dir/u_theme_class.h"
@@ -46,7 +47,7 @@ void DThemeClass::processSetupRoom (char *data_val)
 
         /* downlink */
         char *dl_current_ptr;
-        char *downlink_data = dl_current_ptr = (char *) phwangMalloc(FT_CommandClass::FT_DL_BUFFER_SIZE, MallocClass::DTHEME_SETUP_ROOM1);
+        char *downlink_data = dl_current_ptr = (char *) phwangMalloc(THEME_DEF::FT_DL_BUFFER_SIZE, MallocClass::DTHEME_SETUP_ROOM1);
         *dl_current_ptr++ = FT_CommandClass::SETUP_ROOM_RESPONSE;
 
         strcpy(dl_current_ptr, RESULT_DEF::RESULT_MALLOC_ROOM_FAIL);
@@ -57,7 +58,7 @@ void DThemeClass::processSetupRoom (char *data_val)
 
     /* uplink */
     char *ul_current_ptr;
-    char *uplink_data = ul_current_ptr = (char *) phwangMalloc(FT_CommandClass::FT_UL_BUF_WITH_ROOM_SIZE + strlen(rest_data_ptr), MallocClass::DTHEME_SETUP_ROOM2);
+    char *uplink_data = ul_current_ptr = (char *) phwangMalloc(THEME_DEF::FT_UL_BUF_WITH_ROOM_SIZE + strlen(rest_data_ptr), MallocClass::DTHEME_SETUP_ROOM2);
     *ul_current_ptr++ = TE_CommandClass::SETUP_BASE_COMMAND;
 
     memcpy(ul_current_ptr, room->roomIdIndex(), SIZE_DEF::ROOM_ID_INDEX_SIZE);
@@ -80,7 +81,7 @@ void DThemeClass::processPutRoomData (char *data_val)
 
         /* downlink */
         char *dl_current_ptr;
-        char *downlink_data = dl_current_ptr = (char *) phwangMalloc(FT_CommandClass::FT_DL_BUFFER_SIZE, MallocClass::DTHEME_PUT_ROOM_DATA1);
+        char *downlink_data = dl_current_ptr = (char *) phwangMalloc(THEME_DEF::FT_DL_BUFFER_SIZE, MallocClass::DTHEME_PUT_ROOM_DATA1);
         *dl_current_ptr++ = FT_CommandClass::PUT_ROOM_DATA_RESPONSE;
 
         strcpy(dl_current_ptr, RESULT_DEF::RESULT_NULL_ROOM);
@@ -91,7 +92,7 @@ void DThemeClass::processPutRoomData (char *data_val)
 
     /* uplink */
     char *ul_current_ptr;
-    char *uplink_data = ul_current_ptr = (char *) phwangMalloc(FT_CommandClass::FT_UL_BUF_WITH_BASE_SIZE + strlen(rest_data_ptr), MallocClass::DTHEME_PUT_ROOM_DATA2);
+    char *uplink_data = ul_current_ptr = (char *) phwangMalloc(THEME_DEF::FT_UL_BUF_WITH_BASE_SIZE + strlen(rest_data_ptr), MallocClass::DTHEME_PUT_ROOM_DATA2);
 
     *ul_current_ptr++ = TE_CommandClass::PUT_BASE_DATA_COMMAND;
 
