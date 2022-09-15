@@ -91,5 +91,4 @@ public:
     int const static FE_UL_BUFFER_SIZE = 1 + 1;
     int const static FE_UL_BUF_WITH_GROUP_SIZE = FE_UL_BUFFER_SIZE + FT_CommandClass::GROUP_ID_INDEX_SIZE;
     int const static FE_UL_BUF_WITH_ROOM_SIZE  = FE_UL_BUFFER_SIZE + FT_CommandClass::ROOM_ID_INDEX_SIZE;
-
 };

@@ -37,9 +37,10 @@ void DThemeClass::processSetupRoom (char *data_val)
 {
     phwangDebugS(true, "DThemeClass::processSetupRoom", data_val);
 
-    char *group_id_index_val = data_val;
+    char *group_id_ptr = data_val;
+    char *rest_data_ptr = data_val + FT_CommandClass::GROUP_ID_INDEX_SIZE;
 
-    RoomClass *room = this->theThemeObject->mallocRoom(group_id_index_val);
+    RoomClass *room = this->theThemeObject->mallocRoom(group_id_ptr);
     if (!room) {
         phwangAbendS("DThemeClass::processSetupRoom", "null_room");
 
@@ -55,8 +56,6 @@ void DThemeClass::processSetupRoom (char *data_val)
     }
 
     /* uplink */
-    data_val += FT_CommandClass::GROUP_ID_INDEX_SIZE;
-
     char *ul_current_ptr;
     char *uplink_data = ul_current_ptr = (char *) phwangMalloc(TE_CommandClass::TE_UL_DATA_BUF_SIZE + 4, MallocClass::DTHEME_SETUP_ROOM2);
     *ul_current_ptr++ = TE_CommandClass::SETUP_BASE_COMMAND;
@@ -64,26 +63,28 @@ void DThemeClass::processSetupRoom (char *data_val)
     memcpy(ul_current_ptr, room->roomIdIndex(), FT_CommandClass::ROOM_ID_INDEX_SIZE);
     ul_current_ptr += FT_CommandClass::ROOM_ID_INDEX_SIZE;
 
-    strcpy(ul_current_ptr, data_val);
+    strcpy(ul_current_ptr, rest_data_ptr);
     this->theThemeObject->uThemeObject()->transmitFunction(uplink_data);
 }
 
 void DThemeClass::processPutRoomData (char *data_val)
 {
-    char *downlink_data;
-    char *uplink_data;
-    char *data_ptr;
-
     phwangDebugS(true, "DThemeClass::processPutRoomData", data_val);
 
-    RoomClass *room = this->theThemeObject->searchRoom(data_val);
+    char *room_id_ptr = data_val;
+    char *rest_data_ptr = data_val + FT_CommandClass::ROOM_ID_INDEX_SIZE;
+
+    RoomClass *room = this->theThemeObject->searchRoom(room_id_ptr);
     if (!room) {
         phwangAbendS("DThemeClass::processPutRoomData", "null room");
 
         /* downlink */
-        downlink_data = data_ptr = (char *) phwangMalloc(FT_CommandClass::FT_DL_DATA_BUF_SIZE + 4, MallocClass::DTHEME_PUT_ROOM_DATA1);
-        *data_ptr++ = FT_CommandClass::PUT_ROOM_DATA_RESPONSE;
-        strcpy(data_ptr, "null room");
+        char *dl_current_ptr;
+        char *downlink_data = dl_current_ptr = (char *) phwangMalloc(FT_CommandClass::FT_DL_DATA_BUF_SIZE + 4, MallocClass::DTHEME_PUT_ROOM_DATA1);
+        *dl_current_ptr++ = FT_CommandClass::PUT_ROOM_DATA_RESPONSE;
+
+        strcpy(dl_current_ptr, FE_CommandClass::FE_RESULT_NULL_ROOM);
+
         this->transmitFunction(downlink_data);
         return;
     }
@@ -93,10 +94,15 @@ void DThemeClass::processPutRoomData (char *data_val)
         phwangAbendSI("DThemeClass::processPutRoomData", "buf_size", strlen(data_val));
     }
 
-    uplink_data = data_ptr = (char *) phwangMalloc(TE_CommandClass::TE_UL_DATA_BUF_SIZE + 4, MallocClass::DTHEME_PUT_ROOM_DATA2);
-    *data_ptr++ = TE_CommandClass::PUT_BASE_DATA_COMMAND;
-    memcpy(data_ptr, room->baseIdIndex(), TE_CommandClass::BASE_ID_INDEX_SIZE);
-    data_ptr += TE_CommandClass::BASE_ID_INDEX_SIZE;
-    strcpy(data_ptr, data_val + FT_CommandClass::ROOM_ID_INDEX_SIZE);
+    char *ul_current_ptr;
+    char *uplink_data = ul_current_ptr = (char *) phwangMalloc(TE_CommandClass::TE_UL_DATA_BUF_SIZE + 4, MallocClass::DTHEME_PUT_ROOM_DATA2);
+
+    *ul_current_ptr++ = TE_CommandClass::PUT_BASE_DATA_COMMAND;
+
+    memcpy(ul_current_ptr, room->baseIdIndex(), TE_CommandClass::BASE_ID_INDEX_SIZE);
+    ul_current_ptr += TE_CommandClass::BASE_ID_INDEX_SIZE;
+
+    strcpy(ul_current_ptr, rest_data_ptr);
+
     this->theThemeObject->uThemeObject()->transmitFunction(uplink_data);
 }

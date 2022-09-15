@@ -26,4 +26,9 @@ public:
     int const static GROUP_ID_SIZE = 4;
     int const static GROUP_INDEX_SIZE = 4;
     int const static GROUP_ID_INDEX_SIZE = GROUP_ID_SIZE + GROUP_INDEX_SIZE;
+
+    /* uplink data buffer size */
+    int const static FT_UL_BUFFER_SIZE = 1 + 1;
+    int const static FT_UL_BUF_WITH_ROOM_SIZE  = FT_UL_BUFFER_SIZE + FT_CommandClass::ROOM_ID_INDEX_SIZE;
+
 };
