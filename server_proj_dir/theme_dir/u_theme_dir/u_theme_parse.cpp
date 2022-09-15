@@ -37,27 +37,26 @@ void UThemeClass::processSetupBaseResponse (char *data_val)
 {
     phwangDebugS(true, "UThemeClass::processSetupBaseResponse", data_val);
 
-    char *room_id_index_val = data_val;
+    char *result_ptr = data_val;
+    char *room_id_ptr = result_ptr + FE_CommandClass::FE_RESULT_SIZE;
+    char *base_id_ptr = room_id_ptr + FT_CommandClass::ROOM_ID_INDEX_SIZE;
 
-    char *downlink_data;
-    int group_array_size;
-
-    RoomClass *room = this->theThemeObject->searchRoom(room_id_index_val);
+    RoomClass *room = this->theThemeObject->searchRoom(room_id_ptr);
     if (!room) {
-        phwangAbendS("UThemeClass::processSetupBaseResponse", "null room");
+        phwangAbendS("UThemeClass::processSetupBaseResponse", "null_room");
         return;
     }
 
     /* downlink */
+    int group_array_size;
     char *current_ptr;
-    data_val += FT_CommandClass::ROOM_ID_INDEX_SIZE;
-    room->setBaseIdIndex(data_val);
+    room->setBaseIdIndex(base_id_ptr);
     room->setGroupTableArray((char **) phwangArrayMgrGetArrayTable(room->groupArrayMgr(), &group_array_size));
 
-    downlink_data = current_ptr = (char *) phwangMalloc(FT_CommandClass::FT_DL_BUF_WITH_GROUP_ROOM_SIZE, MallocClass::UTHEME_BASE);
+    char *downlink_data = current_ptr = (char *) phwangMalloc(FT_CommandClass::FT_DL_BUF_WITH_GROUP_ROOM_SIZE, MallocClass::UTHEME_BASE);
     *current_ptr++ = FT_CommandClass::SETUP_ROOM_RESPONSE;
 
-    memcpy(current_ptr, FE_CommandClass::FE_RESULT_SUCCEED, FE_CommandClass::FE_RESULT_SIZE);
+    memcpy(current_ptr, result_ptr, FE_CommandClass::FE_RESULT_SIZE);
     current_ptr += FE_CommandClass::FE_RESULT_SIZE;
 
     memcpy(current_ptr, room->groupTableArray(0), FT_CommandClass::GROUP_ID_INDEX_SIZE);

@@ -7,6 +7,7 @@
 #include "../../../phwang_dir/phwang.h"
 #include "../../../phwang_dir/malloc_dir/malloc_class.h"
 #include "../../define_dir/te_command_define.h"
+#include "../../define_dir/fe_command_define.h"
 #include "d_engine_class.h"
 #include "../engine_class.h"
 
@@ -47,6 +48,9 @@ void DEngineClass::processSetupBase (char *data_val)
     char *current_ptr;
     char *downlink_data = current_ptr = (char *) phwangMalloc(TE_CommandClass::FT_DL_BUF_WITH_ROOM_BASE_SIZE, MallocClass::DENGINE_SETUP_BASE);
     *current_ptr++ = TE_CommandClass::SETUP_BASE_RESPONSE;
+
+    memcpy(current_ptr, FE_CommandClass::FE_RESULT_SUCCEED, FE_CommandClass::FE_RESULT_SIZE);
+    current_ptr += FE_CommandClass::FE_RESULT_SIZE;
 
     memcpy(current_ptr, room_id_ptr, FT_CommandClass::ROOM_ID_INDEX_SIZE);
     current_ptr += FT_CommandClass::ROOM_ID_INDEX_SIZE;
