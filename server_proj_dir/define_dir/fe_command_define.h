@@ -8,7 +8,6 @@
 
 class FE_CommandClass {
 public:
-    int const static FE_DL_DATA_BUF_SIZE = 512;
     int const static FE_UL_DATA_BUF_SIZE = 512;
 
     int const static FE_COMMAND_SIZE = 1;
@@ -83,4 +82,7 @@ public:
     int const static FE_RESPONSE_BUFFER_SIZE = FE_RESPONSE_HEADER_SIZE + FE_RESULT_SIZE + 1;
     int const static FE_RESPONSE_BUF_WITH_LINK_SIZE = FE_RESPONSE_BUFFER_SIZE + LINK_ID_INDEX_SIZE;
     int const static FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE = FE_RESPONSE_BUF_WITH_LINK_SIZE + SESSION_ID_INDEX_SIZE;
+
+    int const static FE_PENDING_SESSIONS_SIZE = 512;/********TBD*******************/
+    int const static FE_GET_LINK_DATA_BUF_SIZE = FE_RESPONSE_BUF_WITH_LINK_SIZE + 1024;/********TBD*******************/
 };

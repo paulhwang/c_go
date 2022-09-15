@@ -159,7 +159,7 @@ void DFabricClass::sendSearchLinkFailResponse (
     phwangAbendS("DFabricClass::sendSearchLinkFailResponse", "");
 
     char *data_ptr;
-    char *downlink_data = data_ptr = (char *) phwangMalloc(FE_CommandClass::FE_DL_DATA_BUF_SIZE, MallocClass::BAD_LINK);
+    char *downlink_data = data_ptr = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE, MallocClass::BAD_LINK);
     *data_ptr++ = command_val;
     strcpy(data_ptr, ajax_id_val);
     data_ptr += FE_CommandClass::AJAX_ID_SIZE;
@@ -175,7 +175,7 @@ void DFabricClass::sendSearchLinkSessionFailResponse (
     phwangAbendS("DFabricClass::sendSearchLinkSessionFailResponse", "");
 
     char *data_ptr;
-    char *downlink_data = data_ptr = (char *) phwangMalloc(FE_CommandClass::FE_DL_DATA_BUF_SIZE, MallocClass::BAD_SESSION);
+    char *downlink_data = data_ptr = (char *) phwangMalloc(FE_CommandClass::FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE, MallocClass::BAD_SESSION);
     *data_ptr++ = command_val;
     strcpy(data_ptr, ajax_id_val);
     data_ptr += FE_CommandClass::AJAX_ID_SIZE;
@@ -420,7 +420,7 @@ char *DFabricClass::processGetLinkDataRequest (
 
     link_val->resetKeepAliveTime();
 
-    char *downlink_data = (char *) phwangMalloc(FE_CommandClass::FE_DL_DATA_BUF_SIZE, MallocClass::GET_LINK_DATA);
+    char *downlink_data = (char *) phwangMalloc(FE_CommandClass::FE_GET_LINK_DATA_BUF_SIZE, MallocClass::GET_LINK_DATA);
     char *current_ptr = &downlink_data[FE_CommandClass::FE_RESPONSE_HEADER_SIZE];
 
     memcpy(current_ptr, FE_CommandClass::FE_RESULT_SUCCEED, FE_CommandClass::FE_RESULT_SIZE);
@@ -794,10 +794,6 @@ char *DFabricClass::processGetSessionDataRequest (
     phwangDebugS(true, "DFabricClass::processGetSessionDataRequest", data_val);
 
     char *data = session_val->getPendingDownLinkData();
-
-    if (strlen(data) > FE_CommandClass::FE_DL_DATA_BUF_SIZE) {
-        phwangAbendSI("DFabricClass::processGetSessionDataRequest", "buf_size", strlen(data));
-    }
 
     char *response_data = this->generateGetSessionDataResponse(FE_CommandClass::FE_RESULT_SUCCEED, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex(), data);
     return response_data;
