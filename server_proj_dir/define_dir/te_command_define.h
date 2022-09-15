@@ -7,7 +7,6 @@
 #pragma once
 
 #include "size_def.h"
-#include "ft_command_define.h"
 
 class TE_CommandClass {
 public:
@@ -20,6 +19,6 @@ public:
     /* downlink data buffer size */
     int const static TE_DL_HEADER_SIZE = TE_DL_COMMAND_SIZE + 1;
     int const static TE_DL_BUFFER_SIZE = TE_DL_HEADER_SIZE + 2; ///////////////// TBD FE_CommandClass::FE_RESULT_SIZE;
-    int const static FT_DL_BUF_WITH_ROOM_SIZE = TE_DL_BUFFER_SIZE + 8;///////////////////TBD FT_CommandClass::ROOM_ID_INDEX_SIZE;
+    int const static FT_DL_BUF_WITH_ROOM_SIZE = TE_DL_BUFFER_SIZE + SIZE_DEF::ROOM_ID_INDEX_SIZE;
     int const static FT_DL_BUF_WITH_ROOM_BASE_SIZE = FT_DL_BUF_WITH_ROOM_SIZE + SIZE_DEF::BASE_ID_INDEX_SIZE;
 };
