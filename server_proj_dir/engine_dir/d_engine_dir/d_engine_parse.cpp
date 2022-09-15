@@ -35,7 +35,7 @@ void DEngineClass::processSetupBase (char *data_val)
     phwangDebugS(true, "DEngineClass::processSetupBase", data_val);
 
     char *room_id_ptr = data_val;
-    char *base_id_ptr = room_id_ptr + FT_CommandClass::ROOM_ID_INDEX_SIZE;
+    char *base_id_ptr = room_id_ptr + SIZE_DEF::ROOM_ID_INDEX_SIZE;
 
     GoBaseClass *go_base_object = this->theEngineObject->mallocGoBase(base_id_ptr);
     if (!go_base_object) {
@@ -52,11 +52,11 @@ void DEngineClass::processSetupBase (char *data_val)
     memcpy(current_ptr, FE_CommandClass::FE_RESULT_SUCCEED, FE_CommandClass::FE_RESULT_SIZE);
     current_ptr += FE_CommandClass::FE_RESULT_SIZE;
 
-    memcpy(current_ptr, room_id_ptr, FT_CommandClass::ROOM_ID_INDEX_SIZE);
-    current_ptr += FT_CommandClass::ROOM_ID_INDEX_SIZE;
+    memcpy(current_ptr, room_id_ptr, SIZE_DEF::ROOM_ID_INDEX_SIZE);
+    current_ptr += SIZE_DEF::ROOM_ID_INDEX_SIZE;
 
-    memcpy(current_ptr, go_base_object->goBaseIdIndex(), TE_CommandClass::BASE_ID_INDEX_SIZE);
-    current_ptr += TE_CommandClass::BASE_ID_INDEX_SIZE;
+    memcpy(current_ptr, go_base_object->goBaseIdIndex(), SIZE_DEF::BASE_ID_INDEX_SIZE);
+    current_ptr += SIZE_DEF::BASE_ID_INDEX_SIZE;
     *current_ptr = 0;
 
     this->transmitFunction(downlink_data);
@@ -75,7 +75,7 @@ void DEngineClass::processPutBaseData (char *data_val)
 
     //this->debug(true, "processPutBaseData", base_object->goBaseIdIndex());
 
-    base_object->portObject()->receiveInputData(data_val + FT_CommandClass::ROOM_ID_INDEX_SIZE);
+    base_object->portObject()->receiveInputData(data_val + SIZE_DEF::ROOM_ID_INDEX_SIZE);
 }
 
 void DEngineClass::processPutBaseDataResponse (GoBaseClass *base_object_val, char const *data_val)
@@ -88,8 +88,8 @@ void DEngineClass::processPutBaseDataResponse (GoBaseClass *base_object_val, cha
     memcpy(current_ptr, FE_CommandClass::FE_RESULT_SUCCEED, FE_CommandClass::FE_RESULT_SIZE);
     current_ptr += FE_CommandClass::FE_RESULT_SIZE;
 
-    memcpy(current_ptr, base_object_val->roomIdIndex(), FT_CommandClass::ROOM_ID_INDEX_SIZE);
-    current_ptr += FT_CommandClass::ROOM_ID_INDEX_SIZE;
+    memcpy(current_ptr, base_object_val->roomIdIndex(), SIZE_DEF::ROOM_ID_INDEX_SIZE);
+    current_ptr += SIZE_DEF::ROOM_ID_INDEX_SIZE;
 
     strcpy(current_ptr, data_val);
 

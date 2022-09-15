@@ -23,7 +23,7 @@ class EngineClass;
 
 class GoBaseClass : public ListEntryClass {
     EngineClass *theEngineObject;
-    char theRoomIdIndex[FT_CommandClass::ROOM_ID_INDEX_SIZE + 4];
+    char theRoomIdIndex[SIZE_DEF::ROOM_ID_INDEX_SIZE + 4];
 
     GoFightClass *theFightObject;
     GoBoardClass *theBoardObject;
@@ -44,7 +44,7 @@ public:
     GoGameClass *gameObject(void) {return this->theGameObject;}
     char *roomIdIndex(void) {return this->theRoomIdIndex;}
     char *goBaseIdIndex(void) {return this->entryIdIndex();}
-    void setRoomIdIndex(char const *room_id_index_val) {memcpy(this->theRoomIdIndex, room_id_index_val, FT_CommandClass::ROOM_ID_INDEX_SIZE); this->theRoomIdIndex[FT_CommandClass::ROOM_ID_INDEX_SIZE] = 0;}
+    void setRoomIdIndex(char const *room_id_index_val) {memcpy(this->theRoomIdIndex, room_id_index_val, SIZE_DEF::ROOM_ID_INDEX_SIZE); this->theRoomIdIndex[SIZE_DEF::ROOM_ID_INDEX_SIZE] = 0;}
 
     void goBaseLogit(char const *str0_val, char const *str1_val) {phwangLogitS(str0_val, str1_val);}
     void goBaseAbend(char const *str0_val, char const *str1_val) {phwangAbendS(str0_val, str1_val);}

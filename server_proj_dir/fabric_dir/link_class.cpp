@@ -27,7 +27,7 @@ LinkClass::LinkClass (
         memcpy(this->theLinkName, link_name_val, LINK_CLASS_LINK_NAME_BUF_SIZE);
         this->theLinkName[LINK_CLASS_LINK_NAME_BUF_SIZE] = 0;
     }
-    this->theSessionListMgrObject = phwangListMgrMalloc("SESSION", FE_CommandClass::SESSION_ID_SIZE, FE_CommandClass::SESSION_INDEX_SIZE, FE_CommandClass::SESSION_ID_INITIAL_VALUE);
+    this->theSessionListMgrObject = phwangListMgrMalloc("SESSION", SIZE_DEF::SESSION_ID_SIZE, SIZE_DEF::SESSION_INDEX_SIZE, SIZE_DEF::SESSION_ID_INITIAL_VALUE);
     this->resetKeepAliveTime();
     this->thePendingSessionSetupQueue = phwangMallocQueue(0, this->objectName());
     this->thePendingSessionSetupQueue3 = phwangMallocQueue(0, this->objectName());
@@ -78,8 +78,8 @@ void LinkClass::setPendingSessionSetup (
     char *buf, *data_ptr;
 
     buf = data_ptr = (char *) phwangMalloc(FE_CommandClass::FE_PENDING_SESSIONS_SIZE, MallocClass::setPendingSessionSetup);
-    memcpy(data_ptr, session_id_index_val, FE_CommandClass::SESSION_ID_INDEX_SIZE);
-    data_ptr += FE_CommandClass::SESSION_ID_INDEX_SIZE;
+    memcpy(data_ptr, session_id_index_val, SIZE_DEF::SESSION_ID_INDEX_SIZE);
+    data_ptr += SIZE_DEF::SESSION_ID_INDEX_SIZE;
     strcpy(data_ptr, theme_data_val);
     phwangEnqueue(this->thePendingSessionSetupQueue, buf);
 }
@@ -91,8 +91,8 @@ void LinkClass::setPendingSessionSetup3 (
     char *buf, *data_ptr;
 
     buf = data_ptr = (char *) phwangMalloc(FE_CommandClass::FE_PENDING_SESSIONS_SIZE, MallocClass::setPendingSessionSetup3);
-    memcpy(data_ptr, session_id_index_val, FE_CommandClass::SESSION_ID_INDEX_SIZE);
-    data_ptr += FE_CommandClass::SESSION_ID_INDEX_SIZE;
+    memcpy(data_ptr, session_id_index_val, SIZE_DEF::SESSION_ID_INDEX_SIZE);
+    data_ptr += SIZE_DEF::SESSION_ID_INDEX_SIZE;
     strcpy(data_ptr, theme_data_val);
     phwangEnqueue(this->thePendingSessionSetupQueue3, buf);
 }

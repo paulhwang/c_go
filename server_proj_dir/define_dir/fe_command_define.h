@@ -4,7 +4,7 @@
   File name: fe_command_define.h
 */
 
-#include "ft_command_define.h"
+#include "size_def.h"
 
 #pragma once
 
@@ -64,31 +64,22 @@ public:
     char const static *FE_RESULT_MALLOC_ROOM_FAIL;
 
     /* sizes */
-    int const static LINK_ID_INITIAL_VALUE = 100;
     char const static *FAKE_LINK_ID_INDEX;
-    int const static LINK_ID_SIZE = 4;
-    int const static LINK_INDEX_SIZE = 4;
-    int const static LINK_ID_INDEX_SIZE = LINK_ID_SIZE + LINK_INDEX_SIZE;
-
-    int const static SESSION_ID_INITIAL_VALUE = 300;
     char const static *FAKE_SESSION_ID_INDEX;
-    int const static SESSION_ID_SIZE = 4;
-    int const static SESSION_INDEX_SIZE = 4;
-    int const static SESSION_ID_INDEX_SIZE = SESSION_ID_SIZE + SESSION_INDEX_SIZE;
 
     int const static NAME_LIST_TAG_SIZE = 3;
 
     int const static AJAX_ID_SIZE = 3;
     int const static FE_RESPONSE_HEADER_SIZE = FE_COMMAND_SIZE + AJAX_ID_SIZE;
     int const static FE_RESPONSE_BUFFER_SIZE = FE_RESPONSE_HEADER_SIZE + FE_RESULT_SIZE + 1;
-    int const static FE_RESPONSE_BUF_WITH_LINK_SIZE = FE_RESPONSE_BUFFER_SIZE + LINK_ID_INDEX_SIZE;
-    int const static FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE = FE_RESPONSE_BUF_WITH_LINK_SIZE + SESSION_ID_INDEX_SIZE;
+    int const static FE_RESPONSE_BUF_WITH_LINK_SIZE = FE_RESPONSE_BUFFER_SIZE + SIZE_DEF::LINK_ID_INDEX_SIZE;
+    int const static FE_RESPONSE_BUF_WITH_LINK_SESSION_SIZE = FE_RESPONSE_BUF_WITH_LINK_SIZE + SIZE_DEF::SESSION_ID_INDEX_SIZE;
 
     int const static FE_PENDING_SESSIONS_SIZE = 512;/********TBD*******************/
     int const static FE_GET_LINK_DATA_BUF_SIZE = FE_RESPONSE_BUF_WITH_LINK_SIZE + 1024;/********TBD*******************/
 
     /* uplink data buffer size */
     int const static FE_UL_BUFFER_SIZE = 1 + 1;
-    int const static FE_UL_BUF_WITH_GROUP_SIZE = FE_UL_BUFFER_SIZE + FT_CommandClass::GROUP_ID_INDEX_SIZE;
-    int const static FE_UL_BUF_WITH_ROOM_SIZE  = FE_UL_BUFFER_SIZE + FT_CommandClass::ROOM_ID_INDEX_SIZE;
+    int const static FE_UL_BUF_WITH_GROUP_SIZE = FE_UL_BUFFER_SIZE + SIZE_DEF::GROUP_ID_INDEX_SIZE;
+    int const static FE_UL_BUF_WITH_ROOM_SIZE  = FE_UL_BUFFER_SIZE + SIZE_DEF::ROOM_ID_INDEX_SIZE;
 };

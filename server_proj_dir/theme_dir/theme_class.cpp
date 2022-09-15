@@ -18,7 +18,7 @@ ThemeClass::ThemeClass (int debug_code_val)
     
     this->theUThemeObject = new UThemeClass(this);
     this->theDThemeObject = new DThemeClass(this);
-    this->theRoomListMgrObject = phwangListMgrMalloc("ROOM", FT_CommandClass::ROOM_ID_SIZE, FT_CommandClass::ROOM_INDEX_SIZE, FT_CommandClass::ROOM_ID_INITIAL_VALUE);
+    this->theRoomListMgrObject = phwangListMgrMalloc("ROOM", SIZE_DEF::ROOM_ID_SIZE, SIZE_DEF::ROOM_INDEX_SIZE, SIZE_DEF::ROOM_ID_INITIAL_VALUE);
 
     phwangDebugS(false, "ThemeClass::ThemeClass", "init");
 }
