@@ -40,7 +40,7 @@ void DFabricClass::exportedParseFunction (
     char command = data_val[1];
 
     /* get ajax_id */
-    char ajax_id[8];
+    char ajax_id[SIZE_DEF::AJAX_ID_SIZE + 1];
     memcpy(ajax_id, &data_val[2], SIZE_DEF::AJAX_ID_SIZE);
     ajax_id[SIZE_DEF::AJAX_ID_SIZE] = 0;
 
