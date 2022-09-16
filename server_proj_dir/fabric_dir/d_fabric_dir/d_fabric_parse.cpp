@@ -28,19 +28,20 @@ void DFabricClass::exportedParseFunction (
     void *tp_transfer_object_val,
     char *data_val)
 {
-    char from = data_val[0];
-    char type = data_val[1];
+    char device = data_val[0];
+    char depth = data_val[1];
     char command = data_val[2];
     char *current_ptr = &data_val[3];
 
     char ajax_id[SIZE_DEF::AJAX_ID_SIZE + 1];
-    switch (from) {
+    switch (device) {
         case 'N':
             memcpy(ajax_id, current_ptr, SIZE_DEF::AJAX_ID_SIZE);
             ajax_id[SIZE_DEF::AJAX_ID_SIZE] = 0;
             current_ptr += SIZE_DEF::AJAX_ID_SIZE;
             break;
         default:
+            phwangAbendS("DFabricClass::exportedParseFunction", "bad_device");
             break;
     }
 
@@ -51,7 +52,7 @@ void DFabricClass::exportedParseFunction (
     LinkClass *link;
     SessionClass *session;
     char *response_data;
-    switch (type) {
+    switch (depth) {
         case '0':
             switch (command) {
                 case FE_DEF::FE_SIGN_UP_COMMAND:
@@ -155,7 +156,7 @@ void DFabricClass::exportedParseFunction (
             return;
     }
 
-    switch (from) {
+    switch (device) {
         case 'N':
             memcpy(&response_data[1], ajax_id, SIZE_DEF::AJAX_ID_SIZE);
             break;

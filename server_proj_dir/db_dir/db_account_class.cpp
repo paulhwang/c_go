@@ -39,31 +39,6 @@ void DbAccountClass::developTest(void)
     this->checkPassword("phwang", "phwangpassword");
 }
 
-/************************DO NOT MODIFY IT*******************/
-int db_account_class_do_create_account_table_in_database = 1;
-/************************DO NOT MODIFY IT*******************/
-
-void DbAccountClass::createAccountTableInDatabase(void)
-{
-    if (!db_account_class_do_create_account_table_in_database) {
-        return;
-    }
-
-    int result = this->sqlObject()->dropTableIfExist(this->sqlConnect(), "accounts");
-    if (result == -1) {
-        return;
-    }
-
-    this->sqlObject()->createTable3(this->sqlConnect(), "accounts", "name VARCHAR(20)", "password VARCHAR(20)", "email VARCHAR(30)");
-
-    this->createAccount("admin", "admin_password", "admin@phwang.com");
-    this->createAccount("phwang", "a", "phwang@phwang.com");
-    this->createAccount("ikolre", "ikolre_password", "ikolre@phwang.com");
-    this->createAccount("guest", "guest_password", "guest@phwang.com");
-    this->createAccount("BigBrave", "a", "bigbrave@phwang.com");
-    this->createAccount("paul", "a", "paul@phwang.com");
-}
-
 void DbAccountClass::createAccount(char const *name_val, char const *psword_val, char const *email_val)
 {
     DbAccountEntryClass *entry = new DbAccountEntryClass();
