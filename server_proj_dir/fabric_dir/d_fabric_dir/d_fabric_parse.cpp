@@ -28,12 +28,13 @@ void DFabricClass::exportedParseFunction (
     void *tp_transfer_object_val,
     char *data_val)
 {
+    char from = data_val[0];
     char type = data_val[1];
     char command = data_val[2];
     char *current_ptr = &data_val[3];
 
     char ajax_id[SIZE_DEF::AJAX_ID_SIZE + 1];
-    switch (data_val[0]) {
+    switch (from) {
         case 'N':
             memcpy(ajax_id, current_ptr, SIZE_DEF::AJAX_ID_SIZE);
             ajax_id[SIZE_DEF::AJAX_ID_SIZE] = 0;
@@ -153,7 +154,14 @@ void DFabricClass::exportedParseFunction (
             phwangAbendS("DFabricClass::dbAccountObject", "bad type");
             return;
     }
-    memcpy(&response_data[1], ajax_id, SIZE_DEF::AJAX_ID_SIZE);
+
+    switch (from) {
+        case 'N':
+            memcpy(&response_data[1], ajax_id, SIZE_DEF::AJAX_ID_SIZE);
+            break;
+        default:
+            break;
+    }
     this->transmitFunction(tp_transfer_object_val, response_data);
 }
 
