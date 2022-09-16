@@ -32,19 +32,19 @@ void DFabricClass::exportedParseFunction (
     SessionClass *session;
     char *response_data;
 
-    if (data_val[1] != FE_DEF::FE_GET_LINK_DATA_COMMAND) {
+    if (data_val[2] != FE_DEF::FE_GET_LINK_DATA_COMMAND) {
         phwangDebugS(true, "DFabricClass::exportedParseFunction", data_val);
     }
 
-    char type = data_val[0];
-    char command = data_val[1];
+    char type = data_val[1];
+    char command = data_val[2];
 
     /* get ajax_id */
     char ajax_id[SIZE_DEF::AJAX_ID_SIZE + 1];
-    memcpy(ajax_id, &data_val[2], SIZE_DEF::AJAX_ID_SIZE);
+    memcpy(ajax_id, &data_val[3], SIZE_DEF::AJAX_ID_SIZE);
     ajax_id[SIZE_DEF::AJAX_ID_SIZE] = 0;
 
-    char *current_data = &data_val[2 + SIZE_DEF::AJAX_ID_SIZE];
+    char *current_data = &data_val[3 + SIZE_DEF::AJAX_ID_SIZE];
 
     switch (type) {
         case '0':
