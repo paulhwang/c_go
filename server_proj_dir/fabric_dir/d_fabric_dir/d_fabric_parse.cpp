@@ -31,52 +31,57 @@ void DFabricClass::exportedParseFunction (
     LinkClass *link;
     SessionClass *session;
     char *response_data;
-
-    if (data_val[2] != FE_DEF::FE_GET_LINK_DATA_COMMAND) {
-        phwangDebugS(true, "DFabricClass::exportedParseFunction", data_val);
-    }
+    char ajax_id[SIZE_DEF::AJAX_ID_SIZE + 1];
 
     char type = data_val[1];
     char command = data_val[2];
+    char *current_ptr = &data_val[3];
 
-    /* get ajax_id */
-    char ajax_id[SIZE_DEF::AJAX_ID_SIZE + 1];
-    memcpy(ajax_id, &data_val[3], SIZE_DEF::AJAX_ID_SIZE);
-    ajax_id[SIZE_DEF::AJAX_ID_SIZE] = 0;
+    switch (data_val[0]) {
+        case 'N':
+            memcpy(ajax_id, current_ptr, SIZE_DEF::AJAX_ID_SIZE);
+            ajax_id[SIZE_DEF::AJAX_ID_SIZE] = 0;
+            current_ptr += SIZE_DEF::AJAX_ID_SIZE;
+            break;
+        default:
+            break;
+    }
 
-    char *current_data = &data_val[3 + SIZE_DEF::AJAX_ID_SIZE];
+    if (command != FE_DEF::FE_GET_LINK_DATA_COMMAND) {
+        phwangDebugS(true, "DFabricClass::exportedParseFunction", data_val);
+    }
 
     switch (type) {
         case '0':
             switch (command) {
                 case FE_DEF::FE_SIGN_UP_COMMAND:
-                    response_data = this->processSignUpRequest(current_data);
+                    response_data = this->processSignUpRequest(current_ptr);
                     response_data[0] = FE_DEF::FE_SIGN_UP_RESPONSE;
                     break;
 
                 case FE_DEF::FE_SETUP_LINK_COMMAND:
-                    response_data = this->processSignInRequest(current_data);
+                    response_data = this->processSignInRequest(current_ptr);
                     response_data[0] = FE_DEF::FE_SETUP_LINK_RESPONSE;
                     break;
 
                 case FE_DEF::FE_MESSAGE_COMMAND:
-                    response_data = this->processDatagramRequest(current_data);
+                    response_data = this->processDatagramRequest(current_ptr);
                     response_data[0] = FE_DEF::FE_MESSAGE_RESPONSE;
                     break;
 
                 default:
-                    phwangAbendS("DFabricClass::exportedParseFunction", data_val);
+                    phwangAbendS("DFabricClass::exportedParseFunction", current_ptr);
                     return;
             }
             break;
 
         case '1':
-            link = this->theFabricObject->searchLink(current_data, data_val);
+            link = this->theFabricObject->searchLink(current_ptr, data_val);
             if (!link) {
                 this->sendSearchLinkFailResponse(command, tp_transfer_object_val, ajax_id);
                 return;
             }
-            current_data += SIZE_DEF::LINK_ID_INDEX_SIZE;
+            current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE;
 
             switch (command) {
                 case FE_DEF::FE_SIGN_OFF_COMMAND:
@@ -85,27 +90,27 @@ void DFabricClass::exportedParseFunction (
                     break;
 
                 case FE_DEF::FE_GET_LINK_DATA_COMMAND:
-                    response_data = this->processGetLinkDataRequest(link, current_data);
+                    response_data = this->processGetLinkDataRequest(link, current_ptr);
                     response_data[0] = FE_DEF::FE_GET_LINK_DATA_RESPONSE;
                     break;
 
                 case FE_DEF::FE_GET_NAME_LIST_COMMAND:
-                    response_data = this->processGetNameListRequest(link, current_data);
+                    response_data = this->processGetNameListRequest(link, current_ptr);
                     response_data[0] = FE_DEF::FE_GET_NAME_LIST_RESPONSE;
                     break;
 
                 case FE_DEF::FE_SETUP_SESSION_COMMAND:
-                    response_data = this->processSetupSessionRequest(link, current_data);
+                    response_data = this->processSetupSessionRequest(link, current_ptr);
                     response_data[0] = FE_DEF::FE_SETUP_SESSION_RESPONSE;
                     break;
 
                 case FE_DEF::FE_SETUP_SESSION2_COMMAND:
-                    response_data = this->processSetupSession2Request(link, current_data);
+                    response_data = this->processSetupSession2Request(link, current_ptr);
                     response_data[0] = FE_DEF::FE_SETUP_SESSION2_RESPONSE;
                     break;
 
                 case FE_DEF::FE_SETUP_SESSION3_COMMAND:
-                    response_data = this->processSetupSession3Request(link, current_data);
+                    response_data = this->processSetupSession3Request(link, current_ptr);
                     response_data[0] = FE_DEF::FE_SETUP_SESSION3_RESPONSE;
                     break;
 
@@ -116,12 +121,12 @@ void DFabricClass::exportedParseFunction (
             break;
 
         case '2':
-            session = this->theFabricObject->serachLinkAndSession(current_data);
+            session = this->theFabricObject->serachLinkAndSession(current_ptr);
             if (!session) {
                 this->sendSearchLinkSessionFailResponse(command, tp_transfer_object_val, ajax_id);
                 return;
             }
-            current_data += SIZE_DEF::LINK_ID_INDEX_SIZE + SIZE_DEF::SESSION_ID_INDEX_SIZE;
+            current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE + SIZE_DEF::SESSION_ID_INDEX_SIZE;
 
             switch (command) {
                 case FE_DEF::FE_FREE_SESSION_COMMAND:
@@ -130,12 +135,12 @@ void DFabricClass::exportedParseFunction (
                     break;
 
                 case FE_DEF::FE_PUT_SESSION_DATA_COMMAND:
-                    response_data = this->processPutSessionDataRequest(session, current_data);
+                    response_data = this->processPutSessionDataRequest(session, current_ptr);
                     response_data[0] = FE_DEF::FE_PUT_SESSION_DATA_RESPONSE;
                     break;
 
                 case FE_DEF::FE_GET_SESSION_DATA_COMMAND:
-                    response_data = this->processGetSessionDataRequest(session, current_data);
+                    response_data = this->processGetSessionDataRequest(session, current_ptr);
                     response_data[0] = FE_DEF::FE_GET_SESSION_DATA_RESPONSE;
                     break;
 
