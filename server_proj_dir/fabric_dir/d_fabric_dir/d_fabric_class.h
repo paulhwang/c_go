@@ -84,7 +84,7 @@ class DFabricClass {
         char const *session_id_index_val);
 
     char *processSetupSession2Request (
-        LinkClass *link_val,
+        SessionClass *session_val,
         char *data_val);
     char *generateSetupSession2Response (
         char const *result_val,
@@ -100,7 +100,6 @@ class DFabricClass {
         char const *session_id_index_val);
 
     char *processFreeSessionRequest (
-        LinkClass *link_val,
         SessionClass *session_val);
     char *generateFreeSessionResponse (
         char const *result_val,

@@ -105,11 +105,6 @@ void DFabricClass::exportedParseFunction (
                     response_data[0] = FE_DEF::FE_SETUP_SESSION_RESPONSE;
                     break;
 
-                case FE_DEF::FE_SETUP_SESSION2_COMMAND:
-                    response_data = this->processSetupSession2Request(link, current_ptr);
-                    response_data[0] = FE_DEF::FE_SETUP_SESSION2_RESPONSE;
-                    break;
-
                 case FE_DEF::FE_SETUP_SESSION3_COMMAND:
                     response_data = this->processSetupSession3Request(link, current_ptr);
                     response_data[0] = FE_DEF::FE_SETUP_SESSION3_RESPONSE;
@@ -130,8 +125,13 @@ void DFabricClass::exportedParseFunction (
             current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE + SIZE_DEF::SESSION_ID_INDEX_SIZE;
 
             switch (command) {
+                case FE_DEF::FE_SETUP_SESSION2_COMMAND:
+                    response_data = this->processSetupSession2Request(session, current_ptr);
+                    response_data[0] = FE_DEF::FE_SETUP_SESSION2_RESPONSE;
+                    break;
+
                 case FE_DEF::FE_FREE_SESSION_COMMAND:
-                    this->processFreeSessionRequest(link, session);
+                    this->processFreeSessionRequest(session);
                     response_data[0] = FE_DEF::FE_FREE_SESSION_RESPONSE;
                     break;
 
@@ -639,26 +639,19 @@ void DFabricClass::sendSetupRoomRequestToThemeServer (GroupClass *group_val, cha
 }
 
 char *DFabricClass::processSetupSession2Request (
-    LinkClass *link_val,
+    SessionClass *session_val,
     char *data_val)
 {
+    LinkClass *link = session_val->linkObject();
     char *response_data;
-    phwangDebugS(true, "DFabricClass::processSetupSession2Request", data_val);
+    phwangDebugS(false, "DFabricClass::processSetupSession2Request", data_val);
+    phwangDebugSSS(false, "DFabricClass::processSetupSession2Request", "id=", link->linkIdIndex(), session_val->sessionIdIndex());
 
-    char *link_id_index_val = data_val;
-    char *session_id_index_val = data_val;//link_id_index_val + SIZE_DEF::LINK_ID_INDEX_SIZE;
-    char *theme_info_val = session_id_index_val + SIZE_DEF::SESSION_ID_INDEX_SIZE;
-
-    SessionClass *session = link_val->searchSession(session_id_index_val);
-    if (!session) {
-        response_data = this->generateSetupSession2Response(RESULT_DEF::RESULT_SESSION_NOT_EXIST, link_val->linkIdIndex(), session->sessionIdIndex());
-        return response_data;
-    }
-
-    GroupClass *group = session->groupObject();
+    char *theme_info_val = data_val;
+    GroupClass *group = session_val->groupObject();
     this->sendSetupRoomRequestToThemeServer(group, theme_info_val);
 
-    response_data = this->generateSetupSession2Response(RESULT_DEF::RESULT_SUCCEED, link_val->linkIdIndex(), session->sessionIdIndex());
+    response_data = this->generateSetupSession2Response(RESULT_DEF::RESULT_SUCCEED, link->linkIdIndex(), session_val->sessionIdIndex());
     return response_data;
 }
 
@@ -715,17 +708,17 @@ char *DFabricClass::generateSetupSession3Response (
 /* free session */
 
 char *DFabricClass::processFreeSessionRequest (
-    LinkClass *link_val,
     SessionClass *session_val)
 {
+    LinkClass *link = session_val->linkObject();
     char *response_data;
-    phwangDebugSSS(true, "DFabricClass::processFreeSessionRequest", "id=", link_val->linkIdIndex(), session_val->sessionIdIndex());
+    phwangDebugSSS(true, "DFabricClass::processFreeSessionRequest", "id=", link->linkIdIndex(), session_val->sessionIdIndex());
 
     char session_id_buf[SIZE_DEF::SESSION_ID_INDEX_SIZE + 1];
     strcpy(session_id_buf, session_val->sessionIdIndex());
-    link_val->freeSession(session_val);
+    link->freeSession(session_val);
 
-    response_data = this->generateFreeSessionResponse(RESULT_DEF::RESULT_SUCCEED, link_val->linkIdIndex(), session_id_buf);
+    response_data = this->generateFreeSessionResponse(RESULT_DEF::RESULT_SUCCEED, link->linkIdIndex(), session_id_buf);
     return response_data;
 }
 
