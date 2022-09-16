@@ -646,7 +646,7 @@ char *DFabricClass::processSetupSession2Request (
     phwangDebugS(true, "DFabricClass::processSetupSession2Request", data_val);
 
     char *link_id_index_val = data_val;
-    char *session_id_index_val = link_id_index_val + SIZE_DEF::LINK_ID_INDEX_SIZE;
+    char *session_id_index_val = data_val;//link_id_index_val + SIZE_DEF::LINK_ID_INDEX_SIZE;
     char *theme_info_val = session_id_index_val + SIZE_DEF::SESSION_ID_INDEX_SIZE;
 
     SessionClass *session = link_val->searchSession(session_id_index_val);

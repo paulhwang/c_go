@@ -9,7 +9,6 @@
 #include "../../phwang_dir/sql_dir/sql_class.h"
 #include "db_class.h"
 #include "db_account_class.h"
-#include "db_account_entry_class.h"
 
 /************************DO NOT MODIFY IT*******************/
 int db_account_class_do_create_account_table_in_database = 1;
