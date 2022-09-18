@@ -360,7 +360,7 @@ char *DFabricClass::processSignInRequest (char *data_val)
     phwangDebugSS(false, "DFabricClass::processSignInRequest", my_name, password);
 
     char result_buf[RESULT_DEF::RESULT_SIZE + 1];
-    int result = this->dbObject()->dbAccountObject()->checkPassword(my_name, password, result_buf);
+    this->dbObject()->dbAccountObject()->checkPassword(my_name, password, result_buf);
     phwangFree(password);
 
     if (!strcmp(result_buf, RESULT_DEF::RESULT_PASSWORD_MATCH)) {

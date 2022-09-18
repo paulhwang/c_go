@@ -110,7 +110,7 @@ void DbAccountClass::checkAccountNameExist (char const *account_name_val, char *
     return;
 }
 
-int DbAccountClass::checkPassword (
+void DbAccountClass::checkPassword (
     char const *account_name_val,
     char const *password_val,
     char *result_ptr)
@@ -119,7 +119,7 @@ int DbAccountClass::checkPassword (
     res = this->sqlObject()->selectFrom(this->sqlConnect(), "name, password");
     if (!res) {
         strcpy(result_ptr, RESULT_DEF::RESULT_DB_SELECT_FAIL);
-        DB_ACCOUNT_SELECT_FAIL;
+        return;
     }
 
     int count = this->sqlObject()->getPQntuples(res);
@@ -134,13 +134,13 @@ int DbAccountClass::checkPassword (
                 this->sqlObject()->doPQclear(res);
                 phwangDebugS(false, "DbAccountClass::checkPassword", "match");
                 strcpy(result_ptr, RESULT_DEF::RESULT_PASSWORD_MATCH);
-                return DB_ACCOUNT_PASSWORD_MATCH;
+                return;
             }
             else {
                 this->sqlObject()->doPQclear(res);
                 phwangDebugS(false, "DbAccountClass::checkPassword", "not match");
                 strcpy(result_ptr, RESULT_DEF::RESULT_PASSWORD_NOT_MATCH);
-                return DB_ACCOUNT_PASSWORD_NOT_MATCH;
+                return;
             }
         }
     }
@@ -148,5 +148,5 @@ int DbAccountClass::checkPassword (
     this->sqlObject()->doPQclear(res);
     phwangDebugS(false, "DbAccountClass::checkPassword", "not found");
     strcpy(result_ptr, RESULT_DEF::RESULT_ACCOUNT_NAME_NOT_EXIST);
-    return DB_ACCOUNT_NAME_NOT_EXIST;
+    return;
 }
