@@ -46,7 +46,9 @@ class DFabricClass {
         char const *data_val);
 
     char *processSignUpRequest (char *data_val);
-    char *generateSignUpResponse (char const *result_val);
+    char *generateSignUpResponse (
+        char const *result_val,
+        char const *account_name_val);
 
     char *processSignInRequest (char *data_val);
     char *generateSignInResponse (

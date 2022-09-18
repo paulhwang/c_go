@@ -297,7 +297,7 @@ char *DFabricClass::processSignUpRequest (char *data_val)
                 phwangAbendS("DFabricClass::processSignUpRequest", "invalid_result");
                 break;
         }
-        response_data = generateSignUpResponse(RESULT_DEF::RESULT_SUCCEED);
+        response_data = generateSignUpResponse(RESULT_DEF::RESULT_SUCCEED, account_name);
         phwangFree(account_name);
         phwangFree(password);
         phwangFree(email);
@@ -310,7 +310,7 @@ char *DFabricClass::processSignUpRequest (char *data_val)
     account_entry->setEmail(email);
     this->dbAccountObject()->insertAccountEntry(account_entry);
 
-    response_data = generateSignUpResponse(RESULT_DEF::RESULT_SUCCEED);
+    response_data = generateSignUpResponse(RESULT_DEF::RESULT_SUCCEED, account_name);
     return response_data;
 
     /***
@@ -321,13 +321,18 @@ char *DFabricClass::processSignUpRequest (char *data_val)
     ***/
 }
 
-char *DFabricClass::generateSignUpResponse (char const *result_val)
+char *DFabricClass::generateSignUpResponse (
+    char const *result_val,
+    char const *account_name_val)
 {
     phwangDebugS(false, "DFabricClass::generateSignUpResponse", result_val);
 
-    char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUFFER_SIZE, MallocClass::generateSignUpResponse);
+    char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUFFER_SIZE + strlen(account_name_val), MallocClass::generateSignUpResponse);
     char *current_ptr = &response_data[FABRIC_DEF::FE_DL_HEADER_SIZE];
-    strcpy(current_ptr, result_val);
+    memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE );
+    current_ptr += RESULT_DEF::RESULT_SIZE;
+
+    strcpy(current_ptr, account_name_val);
     return response_data;
 }
 
