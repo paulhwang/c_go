@@ -7,6 +7,7 @@
 #include "../../phwang_dir/phwang.h"
 #include "../../phwang_dir/malloc_dir/malloc_class.h"
 #include "../../phwang_dir/sql_dir/sql_class.h"
+#include "../define_dir/result_def.h"
 #include "db_class.h"
 #include "db_account_class.h"
 #include "db_account_entry_class.h"
@@ -32,9 +33,11 @@ DbAccountClass::~DbAccountClass (void)
 
 void DbAccountClass::developTest(void)
 {
+    char result_buf[RESULT_DEF::RESULT_SIZE + 1];
+
     this->listAccount();
-    this->checkAccountNameExist("phwang");
-    this->checkAccountNameExist("phwangaaa");
+    this->checkAccountNameExist("phwang", result_buf);
+    this->checkAccountNameExist("phwangaaa", result_buf);
     this->checkPassword("phwang", "phwang");
     this->checkPassword("phwang", "phwangpassword");
 }
@@ -78,12 +81,13 @@ void DbAccountClass::insertAccountEntry(DbAccountEntryClass *entry_val)
     delete entry_val;
 }
 
-int DbAccountClass::checkAccountNameExist (char const *account_name_val)
+int DbAccountClass::checkAccountNameExist (char const *account_name_val, char *result_ptr)
 {
     void *res;
     res = this->sqlObject()->selectFrom(this->sqlConnect(), "name");
     if (!res) {
         DB_ACCOUNT_SELECT_FAIL;
+        strcpy(result_ptr, RESULT_DEF::RESULT_DB_SELECT_FAIL);
     }
 
     int count = this->sqlObject()->getPQntuples(res);
@@ -95,12 +99,14 @@ int DbAccountClass::checkAccountNameExist (char const *account_name_val)
         if (!strcmp(account_name, account_name_val)) {
             this->sqlObject()->doPQclear(res);
             phwangDebugS(false, "DbAccountClass::checkAccountNameExist", "found");
+            strcpy(result_ptr, RESULT_DEF::RESULT_ACCOUNT_NAME_ALREADY_EXIST);
             return DB_ACCOUNT_NAME_EXIST;
         }
     }
 
     this->sqlObject()->doPQclear(res);
     phwangDebugS(false, "DbAccountClass::checkAccountNameExist", "not found");
+    strcpy(result_ptr, RESULT_DEF::RESULT_ACCOUNT_NAME_NOT_EXIST);
     return DB_ACCOUNT_NAME_NOT_EXIST;
 }
 

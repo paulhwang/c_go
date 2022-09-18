@@ -34,8 +34,13 @@ public:
     char const *objectName(void) {return "DbAccountClass";}
 
     void insertAccountEntry(DbAccountEntryClass *entry_val);
-    int checkAccountNameExist (char const *account_name_val);
-    int checkPassword(char const *account_name_val, char const *password_val);
+
+    int checkAccountNameExist (
+        char const *account_name_val,
+        char *result_ptr);
+    int checkPassword(
+        char const *account_name_val,
+        char const *password_val);
 
     int const static DB_ACCOUNT_SUCCEED            = 0;
     int const static DB_ACCOUNT_SELECT_FAIL        = 1;

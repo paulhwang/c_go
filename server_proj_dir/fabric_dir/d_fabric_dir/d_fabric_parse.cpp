@@ -271,17 +271,50 @@ char *DFabricClass::processSignUpRequest (char *data_val)
     int account_name_size;
     char *account_name = phwangDecodeStringMalloc(encoded_account_name, &account_name_size);
 
-    char *encoded_password = encoded_account_name + account_name_size;
-    int password_size;
-    char *password = phwangDecodeStringMalloc(encoded_password, &password_size);
+    phwangDebugS(true, "DFabricClass::processSignUpRequest", account_name);
 
-    char *encoded_email = encoded_password + password_size;
-    int email_size;
-    char *email = phwangDecodeStringMalloc(encoded_email, &email_size);
+    char result_buf[RESULT_DEF::RESULT_SIZE + 1];
+    int result = this->dbAccountObject()->checkAccountNameExist(account_name, result_buf);
 
-    phwangDebugSS(false, "DFabricClass::processSignUpRequest", account_name, password);
+    if (!strcmp(result_buf, RESULT_DEF::RESULT_ACCOUNT_NAME_NOT_EXIST)) {
+        char *encoded_password = encoded_account_name + account_name_size;
+        int password_size;
+        char *password = phwangDecodeStringMalloc(encoded_password, &password_size);
 
-    int result = this->dbAccountObject()->checkAccountNameExist(account_name);
+        char *encoded_email = encoded_password + password_size;
+        int email_size;
+        char *email = phwangDecodeStringMalloc(encoded_email, &email_size);
+
+        DbAccountEntryClass *account_entry = new DbAccountEntryClass();
+        account_entry->setAccountName(account_name);
+        account_entry->setPassword(password);
+        account_entry->setEmail(email);
+        this->dbAccountObject()->insertAccountEntry(account_entry);
+
+        response_data = generateSignUpResponse(RESULT_DEF::RESULT_SUCCEED, account_name);
+        return response_data;
+    }
+
+    else if (!strcmp(result_buf, RESULT_DEF::RESULT_ACCOUNT_NAME_ALREADY_EXIST)) {
+        response_data = generateSignUpResponse(result_buf, account_name);
+        phwangFree(account_name);
+        return response_data;
+    }
+
+    else if (!strcmp(result_buf, RESULT_DEF::RESULT_DB_SELECT_FAIL)) {
+        response_data = generateSignUpResponse(result_buf, account_name);
+        phwangFree(account_name);
+        return response_data;
+   }
+
+    else {
+        phwangAbendSS("DFabricClass::processSignUpRequest", "unsupported_result", result_buf);
+        response_data = generateSignUpResponse(RESULT_DEF::RESULT_DB_ERROR, account_name);
+        phwangFree(account_name);
+        return response_data;
+    }
+
+/*
     if (result != DbAccountClass::DB_ACCOUNT_NAME_NOT_EXIST) {
         char const *result_str;
         switch (result) {
@@ -303,7 +336,9 @@ char *DFabricClass::processSignUpRequest (char *data_val)
         phwangFree(email);
         return response_data;
     }
+*/
 
+/*
     DbAccountEntryClass *account_entry = new DbAccountEntryClass();
     account_entry->setAccountName(account_name);
     account_entry->setPassword(password);
@@ -312,6 +347,7 @@ char *DFabricClass::processSignUpRequest (char *data_val)
 
     response_data = generateSignUpResponse(RESULT_DEF::RESULT_SUCCEED, account_name);
     return response_data;
+*/
 
     /***
     ---the buffers has been freed in the insertAccountEntry()---
