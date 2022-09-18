@@ -13,8 +13,8 @@ public:
     char const static FE_SIGN_UP_RESPONSE          = 'u';
     char const static FE_SETUP_LINK_COMMAND        = 'L';
     char const static FE_SETUP_LINK_RESPONSE       = 'l';
-    char const static FE_SIGN_OFF_COMMAND          = 'F';
-    char const static FE_SIGN_OFF_RESPONSE         = 'f';
+    char const static FE_SIGN_OFF_COMMAND          = 'O';
+    char const static FE_SIGN_OFF_RESPONSE         = 'o';
     char const static FE_GET_LINK_DATA_COMMAND     = 'D';
     char const static FE_GET_LINK_DATA_RESPONSE    = 'd';
     char const static FE_GET_NAME_LIST_COMMAND     = 'N';

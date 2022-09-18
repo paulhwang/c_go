@@ -86,7 +86,7 @@ void DFabricClass::exportedParseFunction (
 
             switch (command) {
                 case FE_DEF::FE_SIGN_OFF_COMMAND:
-                    response_data = this->processSignOffRequest(link);
+                    response_data = this->processSignOffRequest(link, current_ptr);
                     response_data[0] = FE_DEF::FE_SIGN_OFF_RESPONSE;
                     break;
 
@@ -410,30 +410,34 @@ char *DFabricClass::generateSignInResponse (
 }
 
 char *DFabricClass::processSignOffRequest (
-    LinkClass *link_val)
+    LinkClass *link_val,
+    char *data_val)
 {
     char *response_data;
     phwangDebugSS(false, "DFabricClass::processSignOffRequest", "link_id=", link_val->linkIdIndex());
 
-    char link_id_buf[SIZE_DEF::LINK_ID_INDEX_SIZE + 1];
-    strcpy(link_id_buf, link_val->linkIdIndex());
     this->theFabricObject->freeLink(link_val);
 
-    response_data = generateSignOffResponse(RESULT_DEF::RESULT_SUCCEED, link_id_buf);
+    response_data = generateSignOffResponse(RESULT_DEF::RESULT_SUCCEED, link_val->linkIdIndex(), data_val);
     return response_data;
 }
 
 char *DFabricClass::generateSignOffResponse (
     char const *result_val,
-    char const *link_id_index_val)
+    char const *link_id_index_val,
+    char const *data_val)
 {
     phwangDebugS(false, "DFabricClass::generateSignOffResponse", result_val);
 
-    char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUF_WITH_LINK_SIZE + strlen(result_val), MallocClass::generateSignOffResponse);
+    char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUF_WITH_LINK_SIZE + strlen(data_val), MallocClass::generateSignOffResponse);
     char *current_ptr = &response_data[FABRIC_DEF::FE_DL_HEADER_SIZE];
     memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;
-    strcpy(current_ptr, link_id_index_val);
+
+    memcpy(current_ptr, link_id_index_val, SIZE_DEF::LINK_ID_INDEX_SIZE);
+    current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE;
+
+    strcpy(current_ptr, data_val);
     return response_data;
 }
 
