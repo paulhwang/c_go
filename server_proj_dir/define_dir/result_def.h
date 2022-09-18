@@ -13,6 +13,7 @@ public:
     char const static *RESULT_SUCCEED;
     char const static *RESULT_ACCOUNT_NAME_NOT_EXIST;
     char const static *RESULT_ACCOUNT_NAME_ALREADY_EXIST;
+    char const static *RESULT_PASSWORD_MATCH;
     char const static *RESULT_PASSWORD_NOT_MATCH;
 
     char const static *RESULT_DB_SELECT_FAIL;

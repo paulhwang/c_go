@@ -40,7 +40,8 @@ public:
         char *result_ptr);
     int checkPassword(
         char const *account_name_val,
-        char const *password_val);
+        char const *password_val,
+        char *result_ptr);
 
     int const static DB_ACCOUNT_SUCCEED            = 0;
     int const static DB_ACCOUNT_SELECT_FAIL        = 1;

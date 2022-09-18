@@ -38,8 +38,8 @@ void DbAccountClass::developTest(void)
     this->listAccount();
     this->checkAccountNameExist("phwang", result_buf);
     this->checkAccountNameExist("phwangaaa", result_buf);
-    this->checkPassword("phwang", "phwang");
-    this->checkPassword("phwang", "phwangpassword");
+    this->checkPassword("phwang", "phwang", result_buf);
+    this->checkPassword("phwang", "phwangpassword", result_buf);
 }
 
 void DbAccountClass::createAccount(char const *name_val, char const *psword_val, char const *email_val)
@@ -110,11 +110,15 @@ void DbAccountClass::checkAccountNameExist (char const *account_name_val, char *
     return;
 }
 
-int DbAccountClass::checkPassword (char const *account_name_val, char const *password_val)
+int DbAccountClass::checkPassword (
+    char const *account_name_val,
+    char const *password_val,
+    char *result_ptr)
 {
     void *res;
     res = this->sqlObject()->selectFrom(this->sqlConnect(), "name, password");
     if (!res) {
+        strcpy(result_ptr, RESULT_DEF::RESULT_DB_SELECT_FAIL);
         DB_ACCOUNT_SELECT_FAIL;
     }
 
@@ -129,11 +133,13 @@ int DbAccountClass::checkPassword (char const *account_name_val, char const *pas
             if (!strcmp(password, password_val)) {
                 this->sqlObject()->doPQclear(res);
                 phwangDebugS(false, "DbAccountClass::checkPassword", "match");
+                strcpy(result_ptr, RESULT_DEF::RESULT_PASSWORD_MATCH);
                 return DB_ACCOUNT_PASSWORD_MATCH;
             }
             else {
                 this->sqlObject()->doPQclear(res);
                 phwangDebugS(false, "DbAccountClass::checkPassword", "not match");
+                strcpy(result_ptr, RESULT_DEF::RESULT_PASSWORD_NOT_MATCH);
                 return DB_ACCOUNT_PASSWORD_NOT_MATCH;
             }
         }
@@ -141,5 +147,6 @@ int DbAccountClass::checkPassword (char const *account_name_val, char const *pas
 
     this->sqlObject()->doPQclear(res);
     phwangDebugS(false, "DbAccountClass::checkPassword", "not found");
+    strcpy(result_ptr, RESULT_DEF::RESULT_ACCOUNT_NAME_NOT_EXIST);
     return DB_ACCOUNT_NAME_NOT_EXIST;
 }

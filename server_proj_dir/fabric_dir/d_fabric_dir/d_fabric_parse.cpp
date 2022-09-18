@@ -321,48 +321,6 @@ char *DFabricClass::processSignUpRequest (char *data_val)
         phwangFree(account_name);
         return response_data;
     }
-
-/*
-    if (result != DbAccountClass::DB_ACCOUNT_NAME_NOT_EXIST) {
-        char const *result_str;
-        switch (result) {
-            case DbAccountClass::DB_ACCOUNT_NAME_EXIST:
-                result_str = RESULT_DEF::RESULT_ACCOUNT_NAME_ALREADY_EXIST;
-                break;
-
-            case DbAccountClass::DB_ACCOUNT_SELECT_FAIL:
-                result_str = RESULT_DEF::RESULT_DB_SELECT_FAIL;
-                break;
-
-            default:
-                phwangAbendS("DFabricClass::processSignUpRequest", "invalid_result");
-                break;
-        }
-        response_data = generateSignUpResponse(RESULT_DEF::RESULT_SUCCEED, account_name);
-        phwangFree(account_name);
-        phwangFree(password);
-        phwangFree(email);
-        return response_data;
-    }
-*/
-
-/*
-    DbAccountEntryClass *account_entry = new DbAccountEntryClass();
-    account_entry->setAccountName(account_name);
-    account_entry->setPassword(password);
-    account_entry->setEmail(email);
-    this->dbAccountObject()->insertAccountEntry(account_entry);
-
-    response_data = generateSignUpResponse(RESULT_DEF::RESULT_SUCCEED, account_name);
-    return response_data;
-*/
-
-    /***
-    ---the buffers has been freed in the insertAccountEntry()---
-    free(account_name);
-    free(password);
-    free(email);
-    ***/
 }
 
 char *DFabricClass::generateSignUpResponse (
@@ -401,7 +359,40 @@ char *DFabricClass::processSignInRequest (char *data_val)
 
     phwangDebugSS(false, "DFabricClass::processSignInRequest", my_name, password);
 
-    int result = this->dbObject()->dbAccountObject()->checkPassword(my_name, password);
+    char result_buf[RESULT_DEF::RESULT_SIZE + 1];
+    int result = this->dbObject()->dbAccountObject()->checkPassword(my_name, password, result_buf);
+    phwangFree(password);
+
+    if (!strcmp(result_buf, RESULT_DEF::RESULT_PASSWORD_MATCH)) {
+        LinkClass *link = this->theFabricObject->mallocLink(my_name);
+        if (!link) {
+            phwangAbendS("DFabricClass::processSignInRequest", "null_link");
+            phwangFree(my_name);
+            response_data = generateSignInResponse(RESULT_DEF::RESULT_NULL_LINK, SIZE_DEF::FAKE_LINK_ID_INDEX, encoded_my_name_buf);
+            return response_data;
+        }
+
+        phwangFree(my_name);
+        response_data = generateSignInResponse(RESULT_DEF::RESULT_SUCCEED, link->linkIdIndex(), encoded_my_name_buf);
+        return response_data;
+    }
+
+    else if ((!strcmp(result_buf, RESULT_DEF::RESULT_PASSWORD_NOT_MATCH)) ||
+             (!strcmp(result_buf, RESULT_DEF::RESULT_ACCOUNT_NAME_NOT_EXIST)) ||
+             (!strcmp(result_buf, RESULT_DEF::RESULT_DB_SELECT_FAIL))) {
+        phwangFree(my_name);
+        response_data = generateSignInResponse(result_buf, SIZE_DEF::FAKE_LINK_ID_INDEX, encoded_my_name_buf);
+        return response_data;
+    }
+
+    else {
+        phwangAbendSS("DFabricClass::processSignInRequest", "unsupported_result", result_buf);
+        phwangFree(my_name);
+        response_data = generateSignInResponse(RESULT_DEF::RESULT_DB_ERROR, SIZE_DEF::FAKE_LINK_ID_INDEX, encoded_my_name_buf);
+        return response_data;
+    }
+
+/*
     if (result != DbAccountClass::DB_ACCOUNT_PASSWORD_MATCH) {
         char const*result_str;
         switch (result) {
@@ -437,6 +428,7 @@ char *DFabricClass::processSignInRequest (char *data_val)
     phwangFree(password);
     response_data = generateSignInResponse(RESULT_DEF::RESULT_SUCCEED, link->linkIdIndex(), encoded_my_name_buf);
     return response_data;
+    */
 }
 
 char *DFabricClass::generateSignInResponse (
