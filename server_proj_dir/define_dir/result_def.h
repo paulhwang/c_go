@@ -20,6 +20,7 @@ public:
     char const static *RESULT_DB_EMPTY_TABLE;
     char const static *RESULT_DB_ERROR;
 
+    char const static *RESULT_TIME_STAMP_NOT_MATCH;
     char const static *RESULT_LINK_NOT_EXIST;
     char const static *RESULT_SESSION_NOT_EXIST;
     char const static *RESULT_NULL_LINK;

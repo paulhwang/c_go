@@ -16,6 +16,7 @@ char const *RESULT_DEF::RESULT_DB_SELECT_FAIL             = "21";
 char const *RESULT_DEF::RESULT_DB_EMPTY_TABLE             = "22";
 char const *RESULT_DEF::RESULT_DB_ERROR                   = "23";
 
+char const *RESULT_DEF::RESULT_TIME_STAMP_NOT_MATCH       = "50";
 char const *RESULT_DEF::RESULT_LINK_NOT_EXIST             = "51";
 char const *RESULT_DEF::RESULT_SESSION_NOT_EXIST          = "52";
 char const *RESULT_DEF::RESULT_NULL_LINK                  = "53";
