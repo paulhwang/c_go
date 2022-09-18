@@ -81,13 +81,13 @@ void DbAccountClass::insertAccountEntry(DbAccountEntryClass *entry_val)
     delete entry_val;
 }
 
-int DbAccountClass::checkAccountNameExist (char const *account_name_val, char *result_ptr)
+void DbAccountClass::checkAccountNameExist (char const *account_name_val, char *result_ptr)
 {
     void *res;
     res = this->sqlObject()->selectFrom(this->sqlConnect(), "name");
     if (!res) {
-        DB_ACCOUNT_SELECT_FAIL;
         strcpy(result_ptr, RESULT_DEF::RESULT_DB_SELECT_FAIL);
+        return;
     }
 
     int count = this->sqlObject()->getPQntuples(res);
@@ -100,14 +100,14 @@ int DbAccountClass::checkAccountNameExist (char const *account_name_val, char *r
             this->sqlObject()->doPQclear(res);
             phwangDebugS(false, "DbAccountClass::checkAccountNameExist", "found");
             strcpy(result_ptr, RESULT_DEF::RESULT_ACCOUNT_NAME_ALREADY_EXIST);
-            return DB_ACCOUNT_NAME_EXIST;
+            return;
         }
     }
 
     this->sqlObject()->doPQclear(res);
     phwangDebugS(false, "DbAccountClass::checkAccountNameExist", "not found");
     strcpy(result_ptr, RESULT_DEF::RESULT_ACCOUNT_NAME_NOT_EXIST);
-    return DB_ACCOUNT_NAME_NOT_EXIST;
+    return;
 }
 
 int DbAccountClass::checkPassword (char const *account_name_val, char const *password_val)

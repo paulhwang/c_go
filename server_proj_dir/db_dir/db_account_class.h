@@ -35,7 +35,7 @@ public:
 
     void insertAccountEntry(DbAccountEntryClass *entry_val);
 
-    int checkAccountNameExist (
+    void checkAccountNameExist (
         char const *account_name_val,
         char *result_ptr);
     int checkPassword(

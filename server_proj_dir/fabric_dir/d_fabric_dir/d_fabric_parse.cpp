@@ -274,7 +274,7 @@ char *DFabricClass::processSignUpRequest (char *data_val)
     phwangDebugS(true, "DFabricClass::processSignUpRequest", account_name);
 
     char result_buf[RESULT_DEF::RESULT_SIZE + 1];
-    int result = this->dbAccountObject()->checkAccountNameExist(account_name, result_buf);
+    this->dbAccountObject()->checkAccountNameExist(account_name, result_buf);
 
     if (!strcmp(result_buf, RESULT_DEF::RESULT_ACCOUNT_NAME_NOT_EXIST)) {
         char *encoded_password = encoded_account_name + account_name_size;
@@ -289,11 +289,19 @@ char *DFabricClass::processSignUpRequest (char *data_val)
         account_entry->setAccountName(account_name);
         account_entry->setPassword(password);
         account_entry->setEmail(email);
-        this->dbAccountObject()->insertAccountEntry(account_entry);
 
         response_data = generateSignUpResponse(RESULT_DEF::RESULT_SUCCEED, account_name);
+
+        this->dbAccountObject()->insertAccountEntry(account_entry);
+        /***
+        ---the buffers has been freed in the insertAccountEntry()---
+        free(account_name);
+        free(password);
+        free(email);
+        ***/
+
         return response_data;
-    }
+        }
 
     else if (!strcmp(result_buf, RESULT_DEF::RESULT_ACCOUNT_NAME_ALREADY_EXIST)) {
         response_data = generateSignUpResponse(result_buf, account_name);
