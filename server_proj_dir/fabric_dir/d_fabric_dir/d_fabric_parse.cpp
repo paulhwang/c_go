@@ -340,6 +340,12 @@ char *DFabricClass::processSignInRequest (char *data_val)
     int my_name_size;
     char *my_name = phwangDecodeStringMalloc(encoded_my_name, &my_name_size);
 
+    char encoded_my_name_buf[128];
+    memcpy(encoded_my_name_buf, encoded_my_name, my_name_size);
+    encoded_my_name_buf[my_name_size] = 0;
+    phwangDebugSS(false, "DFabricClass::processSignInRequest", "my_name=", encoded_my_name_buf);
+
+
     char *encoded_password = encoded_my_name + my_name_size;
     int password_size;
     char *password = phwangDecodeStringMalloc(encoded_password, &password_size);
@@ -365,7 +371,7 @@ char *DFabricClass::processSignInRequest (char *data_val)
         }
         phwangFree(my_name);
         phwangFree(password);
-        response_data = generateSignInResponse(result_str, SIZE_DEF::FAKE_LINK_ID_INDEX);
+        response_data = generateSignInResponse(result_str, SIZE_DEF::FAKE_LINK_ID_INDEX, encoded_my_name_buf);
         return response_data;
     }
 
@@ -374,27 +380,32 @@ char *DFabricClass::processSignInRequest (char *data_val)
         phwangAbendS("DFabricClass::processSignInRequest", "null link");
         phwangFree(my_name);
         phwangFree(password);
-        response_data = generateSignInResponse(RESULT_DEF::RESULT_NULL_LINK, SIZE_DEF::FAKE_LINK_ID_INDEX);
+        response_data = generateSignInResponse(RESULT_DEF::RESULT_NULL_LINK, SIZE_DEF::FAKE_LINK_ID_INDEX, encoded_my_name_buf);
         return response_data;
     }
 
     phwangFree(my_name);
     phwangFree(password);
-    response_data = generateSignInResponse(RESULT_DEF::RESULT_SUCCEED, link->linkIdIndex());
+    response_data = generateSignInResponse(RESULT_DEF::RESULT_SUCCEED, link->linkIdIndex(), encoded_my_name_buf);
     return response_data;
 }
 
 char *DFabricClass::generateSignInResponse (
     char const *result_val,
-    char const *link_id_index_val)
+    char const *link_id_index_val,
+    char const *account_name_val)
 {
     phwangDebugS(false, "DFabricClass::generateSignInResponse", result_val);
 
-    char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUF_WITH_LINK_SIZE, MallocClass::generateSignInResponse);
+    char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUF_WITH_LINK_SIZE + strlen(account_name_val), MallocClass::generateSignInResponse);
     char *current_ptr = &response_data[FABRIC_DEF::FE_DL_HEADER_SIZE];
     memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;
-    strcpy(current_ptr, link_id_index_val);
+
+    memcpy(current_ptr, link_id_index_val, SIZE_DEF::LINK_ID_INDEX_SIZE);
+    current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE;
+
+    strcpy(current_ptr, account_name_val);
     return response_data;
 }
 
@@ -408,7 +419,7 @@ char *DFabricClass::processSignOffRequest (
     strcpy(link_id_buf, link_val->linkIdIndex());
     this->theFabricObject->freeLink(link_val);
 
-    response_data = generateSignInResponse(RESULT_DEF::RESULT_SUCCEED, link_id_buf);
+    response_data = generateSignOffResponse(RESULT_DEF::RESULT_SUCCEED, link_id_buf);
     return response_data;
 }
 

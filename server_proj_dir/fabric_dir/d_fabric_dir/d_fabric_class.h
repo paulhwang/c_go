@@ -51,7 +51,8 @@ class DFabricClass {
     char *processSignInRequest (char *data_val);
     char *generateSignInResponse (
         char const *result_val,
-        char const *link_id_index_val);
+        char const *link_id_index_val,
+        char const *account_name_val);
 
     char *processSignOffRequest (
         LinkClass *link_val);
