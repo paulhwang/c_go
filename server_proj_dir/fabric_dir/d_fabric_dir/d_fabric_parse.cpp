@@ -208,7 +208,7 @@ char *DFabricClass::processDatagramRequest (char *input_data_val)
     char *encoded_data = input_data_val;
     int data_size;
     char *data = phwangDecodeStringMalloc(encoded_data, &data_size);
-    char *output_data;
+    char const *output_data;
 
     if (1) { /* debug */
         char buf[256];

@@ -206,7 +206,7 @@ void phwangAbendSS (char const *func_name_val, char const *str1_val, char const 
 void phwangAbendWSS (char const *func_name_val, char const *who_val, char const *str1_val, char const *str2_val)
 {
     printf("*****ABEND********************************************************************\n");
-    printf("%s:%s() %s %\n", func_name_val, who_val, str1_val, str2_val);
+    printf("%s:%s() %s %s\n", func_name_val, who_val, str1_val, str2_val);
     printf("*****ABEND********************************************************************\n");
     int *junk = 0;
     *junk = 0;
@@ -224,7 +224,7 @@ void phwangAbendSI (char const *func_name_val, char const *str1_val, int int1_va
 void phwangAbendWSI (char const *func_name_val, char const *who_val, char const *str1_val, int int1_val)
 {
     printf("*****ABEND********************************************************************\n");
-    printf("%s:%s() %d %\n", func_name_val, who_val, str1_val, int1_val);
+    printf("%s:%s() %s %d\n", func_name_val, who_val, str1_val, int1_val);
     printf("*****ABEND********************************************************************\n");
     int *junk = 0;
     *junk = 0;

@@ -4,7 +4,6 @@
   File name: atomic.c
 */
 
-#pragma once
 #include "../phwang.h"
 
 void phwangIncrementAtomicCount (std::atomic<int> *count_val, char const *who_val, int max_count_val)

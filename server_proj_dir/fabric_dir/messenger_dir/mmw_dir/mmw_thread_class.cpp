@@ -12,6 +12,7 @@
 void *MmwClassInputThreadFunction (void *fabric_object_val)
 {
     ((MmwClass *) fabric_object_val)->inputThreadFunction();
+    return 0;//////////////for now
 }
 
 void MmwClass::startInputThread (void)
