@@ -98,8 +98,7 @@ ROBUST_DIR          = $(ROBUST_PROJ_DIR)/robust_dir
 ########## ROBUST OBJS
 ROBUST_OBJS = $(ROBUST_DIR)/robust_main.o $(ROBUST_DIR)/robust_root_class.o
 ROBUST_PROJ_OBJS = $(ROBUST_OBJS)
-#ALL_ROBUST_OBJS	= $(PHWANG_OBJS) $(ROBUST_PROJ_OBJS) 
-ALL_ROBUST_OBJS	= $(ROBUST_PROJ_OBJS) 
+ALL_ROBUST_OBJS	= $(PHWANG_OBJS) $(ROBUST_PROJ_OBJS) 
 
 ###########################################################################################
 DIRS = $(PHWANG_DIR) $(SERVER_PROJ_DIR) $(CLIENT_PROJ_DIR) $(ROBUST_PROJ_DIR)
@@ -117,7 +116,7 @@ $(CLIENT): $(ALL_CLIENT_OBJS)
 	$(CC) -o $(CLIENT) $(ALL_CLIENT_OBJS) -lstdc++ -pthread
 
 $(ROBUST): $(ALL_ROBUST_OBJS) 
-	$(CC) -o $(ROBUST) $(ALL_ROBUST_OBJS) -lstdc++ -pthread
+	$(CC) -o $(ROBUST) $(ALL_ROBUST_OBJS) -lstdc++ -pthread -L/usr/lib/postgresql/12/lib -lpq
 
 ##lib_utils.a:	force_look
 ##	$(ECHO) looking into utils_dir : $(MAKE) $(MFLAGS)
