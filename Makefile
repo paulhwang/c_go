@@ -32,14 +32,14 @@ QUEUE_OBJS = $(QUEUE_DIR)/queue_root_class.o $(QUEUE_DIR)/queue_class.o $(QUEUE_
 TCP_OBJS = $(TCP_DIR)/tcp_server_class.o $(TCP_DIR)/tcp_connect_class.o
 PORT_OBJS = $(PORT_DIR)/port_class.o $(PORT_DIR)/port_class_transmit.o $(PORT_DIR)/port_class_receive.o $(PORT_DIR)/port_class_receive2.o
 NET_OBJS = $(TCP_OBJS) $(PORT_OBJS) $(NET_DIR)/net_root_class.o
-SQL_OBJS = $(SQL_DIR)/sql_class.o
 ABEND_OBJS = $(ABEND_DIR)/abend.o
 ATOMIC_OBJS = $(ATOMIC_DIR)/atomic.o
 MALLOC_OBJS = $(MALLOC_DIR)/malloc_class.o
 ENCODE_OBJS = $(ENCODE_DIR)/encode.o
 THREAD_OBJS = $(THREAD_DIR)/thread_root_class.o 
 OBJECT_OBJS = $(OBJECT_DIR)/object_class.o
-PHWANG_OBJS = $(PHWANG_DIR)/phwang.o $(PHWANG_DIR)/phwang1.o $(PHWANG_DIR)/phwang_class.o $(JSON_OBJS) $(SUSPEND_OBJS) $(LIST_MGR_OBJS) $(ARRAY_MGR_OBJS) $(ID_INDEX_LIST_OBJS) $(QUEUE_OBJS) $(NET_OBJS) $(SQL_OBJS) $(MALLOC_OBJS) $(ENCODE_OBJS) $(THREAD_OBJS) $(ABEND_OBJS) $(ATOMIC_OBJS)
+PHWANG_OBJS = $(PHWANG_DIR)/phwang.o $(PHWANG_DIR)/phwang1.o $(PHWANG_DIR)/phwang_class.o $(JSON_OBJS) $(SUSPEND_OBJS) $(LIST_MGR_OBJS) $(ARRAY_MGR_OBJS) $(ID_INDEX_LIST_OBJS) $(QUEUE_OBJS) $(NET_OBJS) $(MALLOC_OBJS) $(ENCODE_OBJS) $(THREAD_OBJS) $(ABEND_OBJS) $(ATOMIC_OBJS)
+SQL_OBJS = $(SQL_DIR)/sql_class.o
 
 ###########################################################################################
 ########## SERVER DIRS
@@ -78,7 +78,7 @@ D_ENGINE_OBJS = $(D_ENGINE_DIR)/d_engine_class.o $(D_ENGINE_DIR)/d_engine_transm
 ENGINE_OBJS = $(D_ENGINE_OBJS) $(GO_BASE_OBJS) $(ENGINE_DIR)/engine_class.o 
 TEST_OBJS = $(TEST_DIR)/test_class.o $(TEST_DIR)/test_thread.o $(TEST_DIR)/test_transmit.o $(TEST_DIR)/test_parse.o $(TEST_DIR)/test_case1.o 
 SERVER_PROJ_OBJS = $(SERVER_OBJS) $(DB_OBJS) $(FABRIC_OBJS) $(THEME_OBJS) $(ENGINE_OBJS) $(TEST_OBJS) $(DEFINE_OBJS)
-ALL_SERVER_OBJS	= $(PHWANG_OBJS) $(SERVER_PROJ_OBJS)
+ALL_SERVER_OBJS	= $(PHWANG_OBJS) $(SERVER_PROJ_OBJS) $(SQL_OBJS)
 
 ###########################################################################################
 ########## CLIENT DIRS
@@ -116,7 +116,7 @@ $(CLIENT): $(ALL_CLIENT_OBJS)
 	$(CC) -o $(CLIENT) $(ALL_CLIENT_OBJS) -lstdc++ -pthread
 
 $(ROBUST): $(ALL_ROBUST_OBJS) 
-	$(CC) -o $(ROBUST) $(ALL_ROBUST_OBJS) -lstdc++ -pthread -L/usr/lib/postgresql/12/lib -lpq
+	$(CC) -o $(ROBUST) $(ALL_ROBUST_OBJS) -lstdc++ -pthread
 
 ##lib_utils.a:	force_look
 ##	$(ECHO) looking into utils_dir : $(MAKE) $(MFLAGS)
