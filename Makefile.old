@@ -3,19 +3,12 @@
 
 include Makefile.inc
 
-###########################################################################################
-########## PHWANG DIRS
+### libraries
 PHWANG_DIR        = phwang_dir
-SQL_DIR           = $(PHWANG_DIR)/sql_dir
-
-########## PHWANG OBJS
-
 PHWANG_STATIC_LIB = $(PHWANG_DIR)/libphwang.a
 PHWANG_DYNAMIC_LIB = $(PHWANG_DIR)/libphwang.so
-SQL_OBJS = $(SQL_DIR)/sql_class.o
 
-###########################################################################################
-########## SERVER DIRS
+### Directories
 SERVER_PROJ_DIR   = server_proj_dir
 SERVER_DIR        = $(SERVER_PROJ_DIR)/server_dir
 DB_DIR            = $(SERVER_PROJ_DIR)/db_dir
@@ -33,8 +26,9 @@ U_THEME_DIR       = $(THEME_DIR)/u_theme_dir
 D_ENGINE_DIR      = $(ENGINE_DIR)/d_engine_dir
 BASE_MGR_DIR      = $(ENGINE_DIR)/base_mgr_dir
 GO_BASE_DIR       = $(ENGINE_DIR)/go_base_dir
+SQL_DIR           = $(PHWANG_DIR)/sql_dir
 
-########## SERVER OBJS
+### Objects
 SERVER_OBJS = $(SERVER_DIR)/server_main.o $(SERVER_DIR)/server_root_class.o
 DEFINE_OBJS = $(DEFINE_DIR)/result_def.o $(DEFINE_DIR)/size_def.o
 DB_OBJS = $(DB_DIR)/db_class.o $(DB_DIR)/db_account_class.o $(DB_DIR)/db_account_default.o $(DB_DIR)/db_account_entry_class.o $(DB_DIR)/db_test_class.o
@@ -51,6 +45,7 @@ D_ENGINE_OBJS = $(D_ENGINE_DIR)/d_engine_class.o $(D_ENGINE_DIR)/d_engine_transm
 ENGINE_OBJS = $(D_ENGINE_OBJS) $(GO_BASE_OBJS) $(ENGINE_DIR)/engine_class.o 
 TEST_OBJS = $(TEST_DIR)/test_class.o $(TEST_DIR)/test_thread.o $(TEST_DIR)/test_transmit.o $(TEST_DIR)/test_parse.o $(TEST_DIR)/test_case1.o 
 SERVER_PROJ_OBJS = $(SERVER_OBJS) $(DB_OBJS) $(FABRIC_OBJS) $(THEME_OBJS) $(ENGINE_OBJS) $(TEST_OBJS) $(DEFINE_OBJS)
+SQL_OBJS = $(SQL_DIR)/sql_class.o
 ALL_SERVER_OBJS	= $(SERVER_PROJ_OBJS) $(SQL_OBJS)
 
 ###########################################################################################
@@ -66,6 +61,7 @@ ALL_CLIENT_OBJS	= $(PHWANG_OBJS) $(CLIENT_PROJ_OBJS)
 ###########################################################################################
 DIRS = $(PHWANG_DIR) $(SERVER_PROJ_DIR) $(CLIENT_PROJ_DIR)
 
+### Executable
 SERVER = server
 CLIENT = client 
 
