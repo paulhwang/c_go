@@ -43,11 +43,6 @@ PHWANG_STATIC_LIB = libphwang.a
 PHWANG_DYNAMIC_LIB = libphwang.so
 SQL_OBJS = $(SQL_DIR)/sql_class.o
 
-$(PHWANG_STATIC_LIB): $(PHWANG_OBJS)
-	$(CC) -c $(PHWANG_OBJS) 
-	$(AR) $(ARFLAGS) $(PHWANG_STATIC_LIB) $(PHWANG_OBJS)
-	$(RANLIB) $(PHWANG_STATIC_LIB)
-
 #$(PHWANG_DYNAMIC_LIB): $(PHWANG_OBJS)
 #	$(CC) -shared -o $(PHWANG_DYNAMIC_LIB) -fPIC $(PHWANG_OBJS) 
 
@@ -127,6 +122,11 @@ $(CLIENT): $(ALL_CLIENT_OBJS)
 
 $(ROBUST): $(ALL_ROBUST_OBJS) $(PHWANG_STATIC_LIB)
 	$(CC) -o $(ROBUST) $(ALL_ROBUST_OBJS) -lstdc++ -pthread -L. -lphwang
+
+$(PHWANG_STATIC_LIB): $(PHWANG_OBJS)
+	$(CC) -c $(PHWANG_OBJS) 
+	$(AR) $(ARFLAGS) $(PHWANG_STATIC_LIB) $(PHWANG_OBJS)
+	$(RANLIB) $(PHWANG_STATIC_LIB)
 
 ##lib_utils.a:	force_look
 ##	$(ECHO) looking into utils_dir : $(MAKE) $(MFLAGS)
