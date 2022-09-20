@@ -39,16 +39,17 @@ ENCODE_OBJS = $(ENCODE_DIR)/encode.o
 THREAD_OBJS = $(THREAD_DIR)/thread_root_class.o 
 OBJECT_OBJS = $(OBJECT_DIR)/object_class.o
 PHWANG_OBJS = $(PHWANG_DIR)/phwang.o $(PHWANG_DIR)/phwang1.o $(PHWANG_DIR)/phwang_class.o $(JSON_OBJS) $(SUSPEND_OBJS) $(LIST_MGR_OBJS) $(ARRAY_MGR_OBJS) $(ID_INDEX_LIST_OBJS) $(QUEUE_OBJS) $(NET_OBJS) $(MALLOC_OBJS) $(ENCODE_OBJS) $(THREAD_OBJS) $(ABEND_OBJS) $(ATOMIC_OBJS)
-##PHWANG_OBJ  = libphwang.o
 PHWANG_STATIC_LIB = libphwang.a
+PHWANG_DYNAMIC_LIB = libphwang.so
 SQL_OBJS = $(SQL_DIR)/sql_class.o
-
-##$(PHWANG_OBJ): $(PHWANG_OBJS)
-##	$(CC) -c $(PHWANG_OBJS) -o $(PHWANG_OBJ)
 
 $(PHWANG_STATIC_LIB): $(PHWANG_OBJS)
 	$(CC) -c $(PHWANG_OBJS) 
 	ar rcs $(PHWANG_STATIC_LIB) $(PHWANG_OBJS)
+	ranlib $(PHWANG_STATIC_LIB)
+
+$(PHWANG_DYNAMIC_LIB): $(PHWANG_OBJS)
+	$(CC) -shared -o $(PHWANG_DYNAMIC_LIB) -fPIC $(PHWANG_OBJS) 
 
 ###########################################################################################
 ########## SERVER DIRS
@@ -87,7 +88,7 @@ D_ENGINE_OBJS = $(D_ENGINE_DIR)/d_engine_class.o $(D_ENGINE_DIR)/d_engine_transm
 ENGINE_OBJS = $(D_ENGINE_OBJS) $(GO_BASE_OBJS) $(ENGINE_DIR)/engine_class.o 
 TEST_OBJS = $(TEST_DIR)/test_class.o $(TEST_DIR)/test_thread.o $(TEST_DIR)/test_transmit.o $(TEST_DIR)/test_parse.o $(TEST_DIR)/test_case1.o 
 SERVER_PROJ_OBJS = $(SERVER_OBJS) $(DB_OBJS) $(FABRIC_OBJS) $(THEME_OBJS) $(ENGINE_OBJS) $(TEST_OBJS) $(DEFINE_OBJS)
-ALL_SERVER_OBJS	= $(PHWANG_OBJS) $(SERVER_PROJ_OBJS) $(SQL_OBJS)
+ALL_SERVER_OBJS	= $(SERVER_PROJ_OBJS) $(SQL_OBJS)
 
 ###########################################################################################
 ########## CLIENT DIRS
@@ -107,7 +108,7 @@ ROBUST_DIR          = $(ROBUST_PROJ_DIR)/robust_dir
 ########## ROBUST OBJS
 ROBUST_OBJS = $(ROBUST_DIR)/robust_main.o $(ROBUST_DIR)/robust_root_class.o
 ROBUST_PROJ_OBJS = $(ROBUST_OBJS)
-ALL_ROBUST_OBJS	= $(PHWANG_OBJS) $(ROBUST_PROJ_OBJS) 
+ALL_ROBUST_OBJS	= $(ROBUST_PROJ_OBJS) 
 
 ###########################################################################################
 DIRS = $(PHWANG_DIR) $(SERVER_PROJ_DIR) $(CLIENT_PROJ_DIR) $(ROBUST_PROJ_DIR)
@@ -118,14 +119,14 @@ ROBUST = robust
 
 all:	$(SERVER) $(ROBUST)
 
-$(SERVER): $(ALL_SERVER_OBJS) 
-	$(CC) -o $(SERVER) $(ALL_SERVER_OBJS) -lstdc++ -pthread -L/usr/lib/postgresql/12/lib -lpq
+$(SERVER): $(ALL_SERVER_OBJS) $(PHWANG_STATIC_LIB)
+	$(CC) -o $(SERVER) $(ALL_SERVER_OBJS) -lstdc++ -pthread -L. -lphwang -L/usr/lib/postgresql/12/lib -lpq
 
 $(CLIENT): $(ALL_CLIENT_OBJS) 
 	$(CC) -o $(CLIENT) $(ALL_CLIENT_OBJS) -lstdc++ -pthread
 
-$(ROBUST): $(ALL_ROBUST_OBJS) 
-	$(CC) -o $(ROBUST) $(ALL_ROBUST_OBJS) -lstdc++ -pthread
+$(ROBUST): $(ALL_ROBUST_OBJS) $(PHWANG_STATIC_LIB)
+	$(CC) -o $(ROBUST) $(ALL_ROBUST_OBJS) -lstdc++ -pthread -L. -lphwang
 
 ##lib_utils.a:	force_look
 ##	$(ECHO) looking into utils_dir : $(MAKE) $(MFLAGS)
@@ -140,7 +141,7 @@ GO_ROOT_OBJLIBS	= lib_root.a lib_go_base.a lib_base_mgr.a
 
 clean:
 	$(ECHO) cleaning up in .
-	- $(RM) $(SERVER) $(CLIENT) $(ROBUST) $(ALL_SERVER_OBJS) $(ALL_CLIENT_OBJS) $(ALL_ROBUST_OBJS) $(UTILS_OBJLIBS) $(GO_ROOT_OBJLIBS)
+	- $(RM) $(PHWANG_STATIC_LIB) $(PHWANG_DYNAMIC_LIB) $(SERVER) $(CLIENT) $(ROBUST) $(ALL_SERVER_OBJS) $(ALL_CLIENT_OBJS) $(ALL_ROBUST_OBJS) 
 #	-for d in $(DIRS); do (cd $$d; $(MAKE) clean); done
 
 force_look:
