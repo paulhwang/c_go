@@ -5,7 +5,6 @@
 */
 
 #include "../../../phwang_dir/phwang.h"
-#include "../../../phwang_dir/abend_dir/abend_class.h"
 #include "../../define_dir/tcp_port_define.h"
 #include "../../define_dir/te_def.h"
 #include "u_theme_class.h"
