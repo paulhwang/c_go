@@ -48,8 +48,8 @@ $(PHWANG_STATIC_LIB): $(PHWANG_OBJS)
 	ar rcs $(PHWANG_STATIC_LIB) $(PHWANG_OBJS)
 	ranlib $(PHWANG_STATIC_LIB)
 
-$(PHWANG_DYNAMIC_LIB): $(PHWANG_OBJS)
-	$(CC) -shared -o $(PHWANG_DYNAMIC_LIB) -fPIC $(PHWANG_OBJS) 
+#$(PHWANG_DYNAMIC_LIB): $(PHWANG_OBJS)
+#	$(CC) -shared -o $(PHWANG_DYNAMIC_LIB) -fPIC $(PHWANG_OBJS) 
 
 ###########################################################################################
 ########## SERVER DIRS
@@ -141,7 +141,7 @@ GO_ROOT_OBJLIBS	= lib_root.a lib_go_base.a lib_base_mgr.a
 
 clean:
 	$(ECHO) cleaning up in .
-	- $(RM) $(PHWANG_STATIC_LIB) $(PHWANG_DYNAMIC_LIB) $(SERVER) $(CLIENT) $(ROBUST) $(ALL_SERVER_OBJS) $(ALL_CLIENT_OBJS) $(ALL_ROBUST_OBJS) 
+	- $(RM) $(PHWANG_STATIC_LIB) $(SERVER) $(CLIENT) $(ROBUST) $(ALL_SERVER_OBJS) $(ALL_CLIENT_OBJS) $(ALL_ROBUST_OBJS) 
 #	-for d in $(DIRS); do (cd $$d; $(MAKE) clean); done
 
 force_look:
