@@ -47,22 +47,11 @@ $(PHWANG_STATIC_LIB): $(PHWANG_OBJS)
 	$(RANLIB) $(PHWANG_STATIC_LIB)
 	#$(AR) t $(PHWANG_STATIC_LIB)
 
-#.PHONY: project_code
+$(PHWANG_DIR)/phwang.o: $(PHWANG_DIR)/phwang.cpp $(PHWANG_DIR)/phwang.h
+	$(CC) -c $(PHWANG_DIR)/phwang.cpp -o $(PHWANG_DIR)/phwang.o
 
-#$(QUEUE_OBJS):
-#	cd $(QUEUE_DIR) && make
-
-##	$(MAKE) -C $(QUEUE_DIR)
-
-##../lib_utils.a: $(OBJS)
-##	$(AR) $(ARFLAGS) rv ../lib_utils.a $?
-##	$(RANLIB) ../lib_utils.a
-
-phwang.o: phwang.cpp phwang.h
-	$(CC) -c phwang.cpp
-
-phwang_class.o: phwang_class.cpp phwang_class.h
-	$(CC) -c phwang_class.cpp
+$(PHWANG_DIR)/phwang_class.o: $(PHWANG_DIR)/phwang_class.cpp $(PHWANG_DIR)/phwang_class.h
+	$(CC) -c $(PHWANG_DIR)/phwang_class.cpp -o $(PHWANG_DIR)/phwang_class.o
 
 $(QUEUE_DIR)/queue_root_class.o: $(QUEUE_DIR)/queue_root_class.cpp $(QUEUE_DIR)/queue_root_class.h
 	$(CC) -c $(QUEUE_DIR)/queue_root_class.cpp -o $(QUEUE_DIR)/queue_root_class.o
@@ -75,6 +64,15 @@ $(QUEUE_DIR)/queue_entry_class.o: $(QUEUE_DIR)/queue_entry_class.cpp $(QUEUE_DIR
 
 $(ABEND_DIR)/abend.o: $(ABEND_DIR)/abend.cpp 
 	$(CC) -c $(ABEND_DIR)/abend.cpp -o $(ABEND_DIR)/abend.o
+
+$(ATOMIC_DIR)/atomic.o: $(ATOMIC_DIR)/atomic.cpp 
+	$(CC) -c $(ATOMIC_DIR)/atomic.cpp -o $(ATOMIC_DIR)/atomic.o
+
+$(ENCODE_DIR)/encode.o: $(ENCODE_DIR)/encode.cpp 
+	$(CC) -c $(ENCODE_DIR)/encode.cpp -o $(ENCODE_DIR)/encode.o
+
+$(MALLOC_DIR)/malloc_class.o: $(MALLOC_DIR)/malloc_class.cpp $(MALLOC_DIR)/malloc_class.h
+	$(CC) -c $(MALLOC_DIR)/malloc_class.cpp -o $(MALLOC_DIR)/malloc_class.o
 
 $(NET_DIR)/net_root_class.o: $(NET_DIR)/net_root_class.cpp $(NET_DIR)/net_root_class.h
 	$(CC) -c $(NET_DIR)/net_root_class.cpp -o $(NET_DIR)/net_root_class.o
@@ -97,9 +95,44 @@ $(PORT_DIR)/port_class_receive.o: $(PORT_DIR)/port_class_receive.cpp $(PORT_DIR)
 $(PORT_DIR)/port_class_receive2.o: $(PORT_DIR)/port_class_receive2.cpp $(PORT_DIR)/port_class.h
 	$(CC) -c $(PORT_DIR)/port_class_receive2.cpp -o $(PORT_DIR)/port_class_receive2.o
 
+$(LIST_MGR_DIR)/list_mgr_class.o: $(LIST_MGR_DIR)/list_mgr_class.cpp $(LIST_MGR_DIR)/list_mgr_class.h
+	$(CC) -c $(LIST_MGR_DIR)/list_mgr_class.cpp -o $(LIST_MGR_DIR)/list_mgr_class.o
+
+$(LIST_MGR_DIR)/list_entry_class.o: $(LIST_MGR_DIR)/list_entry_class.cpp $(LIST_MGR_DIR)/list_entry_class.h
+	$(CC) -c $(LIST_MGR_DIR)/list_entry_class.cpp -o $(LIST_MGR_DIR)/list_entry_class.o
+
+$(LIST_MGR_DIR)/list_mgr_root_class.o: $(LIST_MGR_DIR)/list_mgr_root_class.cpp $(LIST_MGR_DIR)/list_mgr_root_class.h
+	$(CC) -c $(LIST_MGR_DIR)/list_mgr_root_class.cpp -o $(LIST_MGR_DIR)/list_mgr_root_class.o
+
+$(ARRAY_MGR_DIR)/array_mgr_root_class.o: $(ARRAY_MGR_DIR)/array_mgr_root_class.cpp $(ARRAY_MGR_DIR)/array_mgr_root_class.h
+	$(CC) -c $(ARRAY_MGR_DIR)/array_mgr_root_class.cpp -o $(ARRAY_MGR_DIR)/array_mgr_root_class.o
+
+$(ARRAY_MGR_DIR)/array_mgr_class.o: $(ARRAY_MGR_DIR)/array_mgr_class.cpp $(ARRAY_MGR_DIR)/array_mgr_class.h
+	$(CC) -c $(ARRAY_MGR_DIR)/array_mgr_class.cpp -o $(ARRAY_MGR_DIR)/array_mgr_class.o
+
+$(THREAD_DIR)/thread_root_class.o: $(THREAD_DIR)/thread_root_class.cpp $(THREAD_DIR)/thread_root_class.h
+	$(CC) -c $(THREAD_DIR)/thread_root_class.cpp -o $(THREAD_DIR)/thread_root_class.o
+
+$(SUSPEND_DIR)/suspend_class.o: $(SUSPEND_DIR)/suspend_class.cpp $(SUSPEND_DIR)/suspend_class.h
+	$(CC) -c $(SUSPEND_DIR)/suspend_class.cpp -o $(SUSPEND_DIR)/suspend_class.o
+
+$(ID_INDEX_LIST_DIR)/id_index_list_class.o: $(ID_INDEX_LIST_DIR)/id_index_list_class.cpp $(ID_INDEX_LIST_DIR)/id_index_list_class.h
+	$(CC) -c $(ID_INDEX_LIST_DIR)/id_index_list_class.cpp -o $(ID_INDEX_LIST_DIR)/id_index_list_class.o
+
 clean:
 	-$(RM) -f $(PHWANG_STATIC_LIB) $(PHWANG_OBJS)
 
 force_look:
 	true
+
+#.PHONY: project_code
+
+#$(QUEUE_OBJS):
+#	cd $(QUEUE_DIR) && make
+
+##	$(MAKE) -C $(QUEUE_DIR)
+
+##../lib_utils.a: $(OBJS)
+##	$(AR) $(ARFLAGS) rv ../lib_utils.a $?
+##	$(RANLIB) ../lib_utils.a
 
