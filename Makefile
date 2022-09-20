@@ -64,21 +64,10 @@ CLIENT_PROJ_OBJS = $(CLIENT_OBJS)
 ALL_CLIENT_OBJS	= $(PHWANG_OBJS) $(CLIENT_PROJ_OBJS) 
 
 ###########################################################################################
-########## ROBUST DIRS
-ROBUST_PROJ_DIR     = robust_proj_dir
-ROBUST_DIR          = $(ROBUST_PROJ_DIR)/robust_dir
-
-########## ROBUST OBJS
-ROBUST_OBJS = $(ROBUST_DIR)/robust_main.o $(ROBUST_DIR)/robust_root_class.o
-ROBUST_PROJ_OBJS = $(ROBUST_OBJS)
-ALL_ROBUST_OBJS	= $(ROBUST_PROJ_OBJS) 
-
-###########################################################################################
-DIRS = $(PHWANG_DIR) $(SERVER_PROJ_DIR) $(CLIENT_PROJ_DIR) $(ROBUST_PROJ_DIR)
+DIRS = $(PHWANG_DIR) $(SERVER_PROJ_DIR) $(CLIENT_PROJ_DIR)
 
 SERVER = server
 CLIENT = client 
-ROBUST = robust 
 
 all:	$(SERVER) $(ROBUST)
 
@@ -87,15 +76,6 @@ $(SERVER): $(ALL_SERVER_OBJS) $(PHWANG_STATIC_LIB)
 
 $(CLIENT): $(ALL_CLIENT_OBJS) 
 	$(CC) -o $(CLIENT) $(ALL_CLIENT_OBJS) -lstdc++ -pthread
-
-$(ROBUST): $(ALL_ROBUST_OBJS) $(PHWANG_STATIC_LIB)
-	$(CC) -o $(ROBUST) $(ALL_ROBUST_OBJS) -lstdc++ -pthread -L$(PHWANG_DIR) -lphwang
-
-$(PHWANG_STATIC_LIB): $(PHWANG_OBJS)
-	$(CC) -c $(PHWANG_OBJS) 
-	$(AR) $(ARFLAGS) $(PHWANG_STATIC_LIB) $(PHWANG_OBJS)
-	$(RANLIB) $(PHWANG_STATIC_LIB)
-
 
 $(D_FABRIC_DIR)/d_fabric_class.o: $(D_FABRIC_DIR)/d_fabric_class.cpp $(D_FABRIC_DIR)/d_fabric_class.h
 	$(CC) -c $(D_FABRIC_DIR)/d_fabric_class.cpp -o $(D_FABRIC_DIR)/d_fabric_class.o
@@ -108,7 +88,7 @@ $(D_FABRIC_DIR)/d_fabric_class_transmit.o: $(D_FABRIC_DIR)/d_fabric_class_transm
 
 clean:
 	$(ECHO) cleaning up in .
-	- $(RM) $(PHWANG_STATIC_LIB) $(SERVER) $(ROBUST) $(ALL_SERVER_OBJS) $(ALL_ROBUST_OBJS) 
+	- $(RM) $(PHWANG_STATIC_LIB) $(SERVER) $(ALL_SERVER_OBJS)
 #	-for d in $(DIRS); do (cd $$d; $(MAKE) clean); done
 
 force_look:
