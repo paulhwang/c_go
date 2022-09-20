@@ -39,8 +39,9 @@ ENCODE_OBJS = $(ENCODE_DIR)/encode.o
 THREAD_OBJS = $(THREAD_DIR)/thread_root_class.o 
 OBJECT_OBJS = $(OBJECT_DIR)/object_class.o
 PHWANG_OBJS = $(PHWANG_DIR)/phwang.o $(PHWANG_DIR)/phwang_class.o $(JSON_OBJS) $(SUSPEND_OBJS) $(LIST_MGR_OBJS) $(ARRAY_MGR_OBJS) $(ID_INDEX_LIST_OBJS) $(QUEUE_OBJS) $(NET_OBJS) $(MALLOC_OBJS) $(ENCODE_OBJS) $(THREAD_OBJS) $(ABEND_OBJS) $(ATOMIC_OBJS)
-PHWANG_STATIC_LIB = libphwang.a
-PHWANG_DYNAMIC_LIB = libphwang.so
+
+PHWANG_STATIC_LIB = $(PHWANG_DIR)/libphwang.a
+PHWANG_DYNAMIC_LIB = $(PHWANG_DIR)/libphwang.so
 SQL_OBJS = $(SQL_DIR)/sql_class.o
 
 #$(PHWANG_DYNAMIC_LIB): $(PHWANG_OBJS)
@@ -115,13 +116,13 @@ ROBUST = robust
 all:	$(SERVER) $(ROBUST)
 
 $(SERVER): $(ALL_SERVER_OBJS) $(PHWANG_STATIC_LIB)
-	$(CC) -o $(SERVER) $(ALL_SERVER_OBJS) -lstdc++ -pthread -L. -lphwang -L/usr/lib/postgresql/12/lib -lpq
+	$(CC) -o $(SERVER) $(ALL_SERVER_OBJS) -lstdc++ -pthread -L$(PHWANG_DIR) -lphwang -L/usr/lib/postgresql/12/lib -lpq
 
 $(CLIENT): $(ALL_CLIENT_OBJS) 
 	$(CC) -o $(CLIENT) $(ALL_CLIENT_OBJS) -lstdc++ -pthread
 
 $(ROBUST): $(ALL_ROBUST_OBJS) $(PHWANG_STATIC_LIB)
-	$(CC) -o $(ROBUST) $(ALL_ROBUST_OBJS) -lstdc++ -pthread -L. -lphwang
+	$(CC) -o $(ROBUST) $(ALL_ROBUST_OBJS) -lstdc++ -pthread -L$(PHWANG_DIR) -lphwang
 
 $(PHWANG_STATIC_LIB): $(PHWANG_OBJS)
 	$(CC) -c $(PHWANG_OBJS) 
