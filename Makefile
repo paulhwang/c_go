@@ -14,9 +14,6 @@ PHWANG_STATIC_LIB = $(PHWANG_DIR)/libphwang.a
 PHWANG_DYNAMIC_LIB = $(PHWANG_DIR)/libphwang.so
 SQL_OBJS = $(SQL_DIR)/sql_class.o
 
-#$(PHWANG_DYNAMIC_LIB): $(PHWANG_OBJS)
-#	$(CC) -shared -o $(PHWANG_DYNAMIC_LIB) -fPIC $(PHWANG_OBJS) 
-
 ###########################################################################################
 ########## SERVER DIRS
 SERVER_PROJ_DIR   = server_proj_dir
@@ -43,7 +40,7 @@ DEFINE_OBJS = $(DEFINE_DIR)/result_def.o $(DEFINE_DIR)/size_def.o
 DB_OBJS = $(DB_DIR)/db_class.o $(DB_DIR)/db_account_class.o $(DB_DIR)/db_account_default.o $(DB_DIR)/db_account_entry_class.o $(DB_DIR)/db_test_class.o
 MMW_OBJS = $(MMW_DIR)/mmw_frame_class.o $(MMW_DIR)/mmw_input_class.o $(MMW_DIR)/mmw_thread_class.o $(MMW_DIR)/mmw_class.o
 MESSENGER_OBJS = $(MMW_OBJS) $(MESSENGER_DIR)/messenger_class.o
-D_FABRIC_OBJS = $(D_FABRIC_DIR)/d_fabric_class.o $(D_FABRIC_DIR)/d_fabric_transmit.o $(D_FABRIC_DIR)/d_fabric_parse.o
+D_FABRIC_OBJS = $(D_FABRIC_DIR)/d_fabric_class.o $(D_FABRIC_DIR)/d_fabric_class_transmit.o $(D_FABRIC_DIR)/d_fabric_class_parse.o
 U_FABRIC_OBJS = $(U_FABRIC_DIR)/u_fabric_class.o $(U_FABRIC_DIR)/u_fabric_transmit.o $(U_FABRIC_DIR)/u_fabric_parse.o 
 FABRIC_OBJS = $(MESSENGER_OBJS) $(U_FABRIC_OBJS) $(D_FABRIC_OBJS) $(FABRIC_DIR)/fabric_class.o $(FABRIC_DIR)/fabric_thread.o $(FABRIC_DIR)/link_class.o $(FABRIC_DIR)/session_class.o $(FABRIC_DIR)/group_class.o $(FABRIC_DIR)/name_list_class.o 
 D_THEME_OBJS = $(D_THEME_DIR)/d_theme_class.o $(D_THEME_DIR)/d_theme_transmit.o $(D_THEME_DIR)/d_theme_parse.o 
@@ -99,16 +96,15 @@ $(PHWANG_STATIC_LIB): $(PHWANG_OBJS)
 	$(AR) $(ARFLAGS) $(PHWANG_STATIC_LIB) $(PHWANG_OBJS)
 	$(RANLIB) $(PHWANG_STATIC_LIB)
 
-##lib_utils.a:	force_look
-##	$(ECHO) looking into utils_dir : $(MAKE) $(MFLAGS)
-##	cd utils_dir; $(MAKE) $(MFLAGS)
 
-##lib_root.a lib_base_mgr.a lib_go_base.a:	force_look
-##	$(ECHO) looking into root_dir : $(MAKE) $(MFLAGS)
-##	cd root_dir; $(MAKE) $(MFLAGS)
+$(D_FABRIC_DIR)/d_fabric_class.o: $(D_FABRIC_DIR)/d_fabric_class.cpp $(D_FABRIC_DIR)/d_fabric_class.h
+	$(CC) -c $(D_FABRIC_DIR)/d_fabric_class.cpp -o $(D_FABRIC_DIR)/d_fabric_class.o
 
-UTILS_OBJLIBS = lib_utils.a
-GO_ROOT_OBJLIBS	= lib_root.a lib_go_base.a lib_base_mgr.a
+$(D_FABRIC_DIR)/d_fabric_class_parse.o: $(D_FABRIC_DIR)/d_fabric_class_parse.cpp $(D_FABRIC_DIR)/d_fabric_class.h
+	$(CC) -c $(D_FABRIC_DIR)/d_fabric_class_parse.cpp -o $(D_FABRIC_DIR)/d_fabric_class_parse.o
+
+$(D_FABRIC_DIR)/d_fabric_class_transmit.o: $(D_FABRIC_DIR)/d_fabric_class_transmit.cpp $(D_FABRIC_DIR)/d_fabric_class.h
+	$(CC) -c $(D_FABRIC_DIR)/d_fabric_class_transmit.cpp -o $(D_FABRIC_DIR)/d_fabric_class_transmit.o
 
 clean:
 	$(ECHO) cleaning up in .
@@ -118,3 +114,17 @@ clean:
 force_look:
 	true
 
+
+UTILS_OBJLIBS = lib_utils.a
+GO_ROOT_OBJLIBS	= lib_root.a lib_go_base.a lib_base_mgr.a
+
+##lib_utils.a:	force_look
+##	$(ECHO) looking into utils_dir : $(MAKE) $(MFLAGS)
+##	cd utils_dir; $(MAKE) $(MFLAGS)
+
+##lib_root.a lib_base_mgr.a lib_go_base.a:	force_look
+##	$(ECHO) looking into root_dir : $(MAKE) $(MFLAGS)
+##	cd root_dir; $(MAKE) $(MFLAGS)
+
+#$(PHWANG_DYNAMIC_LIB): $(PHWANG_OBJS)
+#	$(CC) -shared -o $(PHWANG_DYNAMIC_LIB) -fPIC $(PHWANG_OBJS) 
