@@ -3,6 +3,40 @@
 
 include ../Makefile.inc
 
+PHWANG_DIR        = .
+JSON_DIR          = $(PHWANG_DIR)/json_dir
+SUSPEND_DIR       = $(PHWANG_DIR)/suspend_dir
+LIST_MGR_DIR      = $(PHWANG_DIR)/list_mgr_dir
+ARRAY_MGR_DIR     = $(PHWANG_DIR)/array_mgr_dir
+ID_INDEX_LIST_DIR = $(PHWANG_DIR)/id_index_list_dir
+QUEUE_DIR         = $(PHWANG_DIR)/queue_dir
+SQL_DIR           = $(PHWANG_DIR)/sql_dir
+ABEND_DIR         = $(PHWANG_DIR)/abend_dir
+ATOMIC_DIR        = $(PHWANG_DIR)/atomic_dir
+MALLOC_DIR        = $(PHWANG_DIR)/malloc_dir
+ENCODE_DIR        = $(PHWANG_DIR)/encode_dir
+THREAD_DIR        = $(PHWANG_DIR)/thread_dir
+NET_DIR           = $(PHWANG_DIR)/net_dir
+TCP_DIR           = $(NET_DIR)/tcp_dir
+PORT_DIR          = $(NET_DIR)/port_dir
+
+JSON_OBJS = $(JSON_DIR)/json_class.o 
+SUSPEND_OBJS = $(SUSPEND_DIR)/suspend_class.o 
+LIST_MGR_OBJS = $(LIST_MGR_DIR)/list_mgr_root_class.o $(LIST_MGR_DIR)/list_mgr_class.o $(LIST_MGR_DIR)/list_entry_class.o
+ARRAY_MGR_OBJS = $(ARRAY_MGR_DIR)/array_mgr_root_class.o $(ARRAY_MGR_DIR)/array_mgr_class.o
+ID_INDEX_LIST_OBJS = $(ID_INDEX_LIST_DIR)/id_index_list_class.o 
+QUEUE_OBJS = $(QUEUE_DIR)/queue_root_class.o $(QUEUE_DIR)/queue_class.o $(QUEUE_DIR)/queue_entry_class.o
+TCP_OBJS = $(TCP_DIR)/tcp_server_class.o $(TCP_DIR)/tcp_connect_class.o
+PORT_OBJS = $(PORT_DIR)/port_class.o $(PORT_DIR)/port_class_transmit.o $(PORT_DIR)/port_class_receive.o $(PORT_DIR)/port_class_receive2.o
+NET_OBJS = $(TCP_OBJS) $(PORT_OBJS) $(NET_DIR)/net_root_class.o
+ABEND_OBJS = $(ABEND_DIR)/abend.o
+ATOMIC_OBJS = $(ATOMIC_DIR)/atomic.o
+MALLOC_OBJS = $(MALLOC_DIR)/malloc_class.o
+ENCODE_OBJS = $(ENCODE_DIR)/encode.o
+THREAD_OBJS = $(THREAD_DIR)/thread_root_class.o 
+OBJECT_OBJS = $(OBJECT_DIR)/object_class.o
+PHWANG_OBJS = $(PHWANG_DIR)/phwang.o $(PHWANG_DIR)/phwang_class.o $(JSON_OBJS) $(SUSPEND_OBJS) $(LIST_MGR_OBJS) $(ARRAY_MGR_OBJS) $(ID_INDEX_LIST_OBJS) $(QUEUE_OBJS) $(NET_OBJS) $(MALLOC_OBJS) $(ENCODE_OBJS) $(THREAD_OBJS) $(ABEND_OBJS) $(ATOMIC_OBJS)
+
 LIB	= libphwang.a
 OBJS =	phwang.o phwang_class.o
 
@@ -11,6 +45,7 @@ all: $(LIB)
 $(LIB): $(OBJS)
 	$(AR) $(ARFLAGS) $(LIB) $?
 	$(RANLIB) $(LIB)
+
 
 ##../lib_utils.a: $(OBJS)
 ##	$(AR) $(ARFLAGS) rv ../lib_utils.a $?
