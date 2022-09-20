@@ -1,13 +1,16 @@
+# Copyrights reserved
+# Written by Paul Hwang
+
 include ../Makefile.inc
 
-OBJLIBS	= libphwang.a
+LIB	= libphwang.a
 OBJS =	phwang.o phwang_class.o
 
-all: $(OBJLIBS)
+all: $(LIB)
 
-lib_phwang.a: $(OBJS)
-	$(AR) $(ARFLAGS) rcs libphwang.a $?
-	$(RANLIB) libphwang.a
+$(LIB): $(OBJS)
+	$(AR) $(ARFLAGS) $(LIB) $?
+	$(RANLIB) $(LIB)
 
 ##../lib_utils.a: $(OBJS)
 ##	$(AR) $(ARFLAGS) rv ../lib_utils.a $?
@@ -20,7 +23,7 @@ phwang_class.o: phwang_class.cpp phwang_class.h
 	$(CC) -c phwang_class.cpp
 
 clean:
-	-$(RM) -f $(OBJS) $(OBJLIBS)
+	-$(RM) -f $(OBJS) $(LIB)
 
 force_look:
 	true
