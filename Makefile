@@ -39,7 +39,16 @@ ENCODE_OBJS = $(ENCODE_DIR)/encode.o
 THREAD_OBJS = $(THREAD_DIR)/thread_root_class.o 
 OBJECT_OBJS = $(OBJECT_DIR)/object_class.o
 PHWANG_OBJS = $(PHWANG_DIR)/phwang.o $(PHWANG_DIR)/phwang1.o $(PHWANG_DIR)/phwang_class.o $(JSON_OBJS) $(SUSPEND_OBJS) $(LIST_MGR_OBJS) $(ARRAY_MGR_OBJS) $(ID_INDEX_LIST_OBJS) $(QUEUE_OBJS) $(NET_OBJS) $(MALLOC_OBJS) $(ENCODE_OBJS) $(THREAD_OBJS) $(ABEND_OBJS) $(ATOMIC_OBJS)
+##PHWANG_OBJ  = libphwang.o
+PHWANG_STATIC_LIB = libphwang.a
 SQL_OBJS = $(SQL_DIR)/sql_class.o
+
+##$(PHWANG_OBJ): $(PHWANG_OBJS)
+##	$(CC) -c $(PHWANG_OBJS) -o $(PHWANG_OBJ)
+
+$(PHWANG_STATIC_LIB): $(PHWANG_OBJS)
+	$(CC) -c $(PHWANG_OBJS) 
+	ar rcs $(PHWANG_STATIC_LIB) $(PHWANG_OBJS)
 
 ###########################################################################################
 ########## SERVER DIRS
