@@ -36,16 +36,22 @@ ENCODE_OBJS = $(ENCODE_DIR)/encode.o
 THREAD_OBJS = $(THREAD_DIR)/thread_root_class.o 
 OBJECT_OBJS = $(OBJECT_DIR)/object_class.o
 PHWANG_OBJS = $(PHWANG_DIR)/phwang.o $(PHWANG_DIR)/phwang_class.o $(JSON_OBJS) $(SUSPEND_OBJS) $(LIST_MGR_OBJS) $(ARRAY_MGR_OBJS) $(ID_INDEX_LIST_OBJS) $(QUEUE_OBJS) $(NET_OBJS) $(MALLOC_OBJS) $(ENCODE_OBJS) $(THREAD_OBJS) $(ABEND_OBJS) $(ATOMIC_OBJS)
+PHWANG_STATIC_LIB = libphwang.a
+PHWANG_DYNAMIC_LIB = libphwang.so
 
-LIB	= libphwang.a
-OBJS =	phwang.o phwang_class.o
+all: $(PHWANG_STATIC_LIB)
 
-all: $(LIB)
+$(PHWANG_STATIC_LIB): $(PHWANG_OBJS)
+	$(AR) $(ARFLAGS) $(PHWANG_STATIC_LIB) $?
+	$(RANLIB) $(PHWANG_STATIC_LIB)
 
-$(LIB): $(OBJS)
-	$(AR) $(ARFLAGS) $(LIB) $?
-	$(RANLIB) $(LIB)
 
+#.PHONY: project_code
+
+#$(QUEUE_OBJS):
+#	cd $(QUEUE_DIR) && make
+
+##	$(MAKE) -C $(QUEUE_DIR)
 
 ##../lib_utils.a: $(OBJS)
 ##	$(AR) $(ARFLAGS) rv ../lib_utils.a $?
@@ -57,8 +63,17 @@ phwang.o: phwang.cpp phwang.h
 phwang_class.o: phwang_class.cpp phwang_class.h
 	$(CC) -c phwang_class.cpp
 
+$(QUEUE_DIR)/queue_root_class.o: $(QUEUE_DIR)/queue_root_class.cpp $(QUEUE_DIR)/queue_root_class.h
+	$(CC) -c $(QUEUE_DIR)/queue_root_class.cpp -o $(QUEUE_DIR)/queue_root_class.o
+
+$(QUEUE_DIR)/queue_class.o: $(QUEUE_DIR)/queue_class.cpp $(QUEUE_DIR)/queue_class.h
+	$(CC) -c $(QUEUE_DIR)/queue_class.cpp -o $(QUEUE_DIR)/queue_class.o
+
+$(QUEUE_DIR)/queue_entry_class.o: $(QUEUE_DIR)/queue_entry_class.cpp $(QUEUE_DIR)/queue_entry_class.h
+	$(CC) -c $(QUEUE_DIR)/queue_entry_class.cpp -o $(QUEUE_DIR)/queue_entry_class.o
+
 clean:
-	-$(RM) -f $(OBJS) $(LIB)
+	-$(RM) -f $(PHWANG_STATIC_LIB) $(PHWANG_OBJS)
 
 force_look:
 	true
