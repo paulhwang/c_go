@@ -45,7 +45,7 @@ all: $(PHWANG_STATIC_LIB)
 $(PHWANG_STATIC_LIB): $(PHWANG_OBJS)
 	$(AR) $(ARFLAGS) $(PHWANG_STATIC_LIB) $?
 	$(RANLIB) $(PHWANG_STATIC_LIB)
-
+	#$(AR) t $(PHWANG_STATIC_LIB)
 
 #.PHONY: project_code
 
@@ -72,6 +72,30 @@ $(QUEUE_DIR)/queue_class.o: $(QUEUE_DIR)/queue_class.cpp $(QUEUE_DIR)/queue_clas
 
 $(QUEUE_DIR)/queue_entry_class.o: $(QUEUE_DIR)/queue_entry_class.cpp $(QUEUE_DIR)/queue_entry_class.h
 	$(CC) -c $(QUEUE_DIR)/queue_entry_class.cpp -o $(QUEUE_DIR)/queue_entry_class.o
+
+$(ABEND_DIR)/abend.o: $(ABEND_DIR)/abend.cpp 
+	$(CC) -c $(ABEND_DIR)/abend.cpp -o $(ABEND_DIR)/abend.o
+
+$(NET_DIR)/net_root_class.o: $(NET_DIR)/net_root_class.cpp $(NET_DIR)/net_root_class.h
+	$(CC) -c $(NET_DIR)/net_root_class.cpp -o $(NET_DIR)/net_root_class.o
+
+$(TCP_DIR)/tcp_server_class.o: $(TCP_DIR)/tcp_server_class.cpp $(TCP_DIR)/tcp_server_class.h
+	$(CC) -c $(TCP_DIR)/tcp_server_class.cpp -o $(TCP_DIR)/tcp_server_class.o
+
+$(TCP_DIR)/tcp_connect_class.o: $(TCP_DIR)/tcp_connect_class.cpp $(TCP_DIR)/tcp_connect_class.h
+	$(CC) -c $(TCP_DIR)/tcp_connect_class.cpp -o $(TCP_DIR)/tcp_connect_class.o
+
+$(PORT_DIR)/port_class.o: $(PORT_DIR)/port_class.cpp $(PORT_DIR)/port_class.h
+	$(CC) -c $(PORT_DIR)/port_class.cpp -o $(PORT_DIR)/port_class.o
+
+$(PORT_DIR)/port_class_transmit.o: $(PORT_DIR)/port_class_transmit.cpp $(PORT_DIR)/port_class.h
+	$(CC) -c $(PORT_DIR)/port_class_transmit.cpp -o $(PORT_DIR)/port_class_transmit.o
+
+$(PORT_DIR)/port_class_receive.o: $(PORT_DIR)/port_class_receive.cpp $(PORT_DIR)/port_class.h
+	$(CC) -c $(PORT_DIR)/port_class_receive.cpp -o $(PORT_DIR)/port_class_receive.o
+
+$(PORT_DIR)/port_class_receive2.o: $(PORT_DIR)/port_class_receive2.cpp $(PORT_DIR)/port_class.h
+	$(CC) -c $(PORT_DIR)/port_class_receive2.cpp -o $(PORT_DIR)/port_class_receive2.o
 
 clean:
 	-$(RM) -f $(PHWANG_STATIC_LIB) $(PHWANG_OBJS)
