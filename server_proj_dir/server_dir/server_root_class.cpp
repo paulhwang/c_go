@@ -4,7 +4,7 @@
   File name: server_root_class.cpp
 */
 
-#include "../../phwang_dir/phwang.h"
+#include "../../include_dir/phwang.h"
 #include "../fabric_dir/fabric_class.h"
 #include "../engine_dir/engine_class.h"
 #include "../theme_dir/theme_class.h"

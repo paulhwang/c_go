@@ -1,6 +1,8 @@
+cd ../phwang_dir
 make clean
-cd phwang_dir
-make
-cd ..
+make all
+
+cd ../server_proj_dir
+make clean
 make all
 
