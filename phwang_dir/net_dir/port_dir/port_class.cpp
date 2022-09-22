@@ -18,7 +18,7 @@ PortClass::PortClass (int socket_val,
                                   char const *who_val)
 {
     memset(this, 0, sizeof(*this));
-    phwangIncrementAtomicCount(&PortClass::ObjectCount, this->objectName(), 5);
+    phwangIncrementAtomicCount(&PortClass::ObjectCount, this->objectName(), 6);
     this->theSocket = socket_val;
     this->theReceiveCallback = receive_callback_val;
     this->theReceiveObject = receive_object_val;
