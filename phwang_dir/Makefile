@@ -18,6 +18,7 @@ ENCODE_DIR        = $(PHWANG_DIR)/encode_dir
 THREAD_DIR        = $(PHWANG_DIR)/thread_dir
 NET_DIR           = $(PHWANG_DIR)/net_dir
 TCP_DIR           = $(NET_DIR)/tcp_dir
+IP_DIR            = $(NET_DIR)/ip_dir
 PORT_DIR          = $(NET_DIR)/port_dir
 
 JSON_OBJS = $(JSON_DIR)/json_class.o 
@@ -27,8 +28,9 @@ ARRAY_MGR_OBJS = $(ARRAY_MGR_DIR)/array_mgr_root_class.o $(ARRAY_MGR_DIR)/array_
 ID_INDEX_LIST_OBJS = $(ID_INDEX_LIST_DIR)/id_index_list_class.o 
 QUEUE_OBJS = $(QUEUE_DIR)/queue_root_class.o $(QUEUE_DIR)/queue_class.o $(QUEUE_DIR)/queue_entry_class.o
 TCP_OBJS = $(TCP_DIR)/tcp_server_class.o $(TCP_DIR)/tcp_connect_class.o
+IP_OBJS = $(IP_DIR)/ip_class.o 
 PORT_OBJS = $(PORT_DIR)/port_class.o $(PORT_DIR)/port_class_transmit.o $(PORT_DIR)/port_class_receive.o $(PORT_DIR)/port_class_receive2.o
-NET_OBJS = $(TCP_OBJS) $(PORT_OBJS) $(NET_DIR)/net_root_class.o
+NET_OBJS = $(TCP_OBJS) $(IP_OBJS) $(PORT_OBJS) $(NET_DIR)/net_root_class.o
 ABEND_OBJS = $(ABEND_DIR)/abend.o
 ATOMIC_OBJS = $(ATOMIC_DIR)/atomic.o
 MALLOC_OBJS = $(MALLOC_DIR)/malloc_class.o
@@ -82,6 +84,9 @@ $(TCP_DIR)/tcp_server_class.o: $(TCP_DIR)/tcp_server_class.cpp $(TCP_DIR)/tcp_se
 
 $(TCP_DIR)/tcp_connect_class.o: $(TCP_DIR)/tcp_connect_class.cpp $(TCP_DIR)/tcp_connect_class.h
 	$(CC) -c $(TCP_DIR)/tcp_connect_class.cpp -o $(TCP_DIR)/tcp_connect_class.o
+
+$(IP_DIR)/ip_class.o: $(IP_DIR)/ip_class.cpp $(IP_DIR)/ip_class.h
+	$(CC) -c $(IP_DIR)/ip_class.cpp -o $(IP_DIR)/ip_class.o
 
 $(PORT_DIR)/port_class.o: $(PORT_DIR)/port_class.cpp $(PORT_DIR)/port_class.h
 	$(CC) -c $(PORT_DIR)/port_class.cpp -o $(PORT_DIR)/port_class.o

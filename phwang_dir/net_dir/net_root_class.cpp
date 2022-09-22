@@ -9,10 +9,14 @@
 #include "port_dir/port_class.h"
 #include "tcp_dir/tcp_server_class.h"
 #include "tcp_dir/tcp_connect_class.h"
+#include "ip_dir/ip_class.h"
 
 NetRootClass::NetRootClass (int debug_code_val)
 {
     memset(this, 0, sizeof (*this));
+    this->theIpObject = new IpClass();
+    unsigned long ip_addr_ptr_val;
+    this->theIpObject->getIpAddr(&ip_addr_ptr_val);
     this->theDebugCode = debug_code_val;
 }
 

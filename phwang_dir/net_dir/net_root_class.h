@@ -6,9 +6,12 @@
 
 #pragma once
 
+class IpClass;
+
 class NetRootClass
 {
     char const *objectName(void) {return "NetRootClass";}
+    IpClass *theIpObject;
     int theDebugCode;
     int theReceiveThreadCount;
 
