@@ -98,12 +98,7 @@ void *TcpServerClass::serverThreadFunction (void *data_val)
     }
 
     while (1) {
-        if (0) { /* debug */
-            char s[128];
-            sprintf(s, "listening for (%s)", this->theWho);
-            phwangLogitWS("TcpServerClass::serverThreadFunction", this->theWho, s);
-        }
-
+        phwangDebugWS(false, "TcpServerClass::serverThreadFunction", this->theWho, "listening");
         listen(s, BACKLOG);
 
         phwangDebugWS(false, "TcpServerClass::serverThreadFunction", this->theWho, "accepting");
@@ -113,11 +108,7 @@ void *TcpServerClass::serverThreadFunction (void *data_val)
             return 0;
         }
 
-        if (1) { /* debug */
-            char s[128];
-            sprintf(s, "accepted port=%d", this->thePort);
-            phwangDebugWS(true, "TcpServerClass::serverThreadFunction", this->theWho, s);
-        }
+        phwangDebugWSI(true, "TcpServerClass::serverThreadFunction", this->theWho, "accepted port", this->thePort);
 
         char data[strlen(TP_PHWANG_LOGO) + 16];
         int length = read(data_socket, data, strlen(TP_PHWANG_LOGO) + 8);
@@ -125,13 +116,17 @@ void *TcpServerClass::serverThreadFunction (void *data_val)
             data[length] = 0;
         }
         if ((length != strlen(TP_PHWANG_LOGO)) || (strcmp(data, TP_PHWANG_LOGO))) {
-            if (1) { /* debug */
-                char s[128];
-                sprintf(s, "### Attack: (%s) port=%d data_length=%d data=%s", this->theWho, this->thePort, length, data);
-                phwangLogitWS("TcpServerClass::serverThreadFunction", this->theWho, s);
+            phwangLogitWSISI("TcpServerClass::serverThreadFunction", this->theWho, "***!!!Attacked!!!*** port=", this->thePort, " data_length", length);
+            for (int i = 0; (i < length) && (i < 30); i++) {
+                printf("%d ", data[i]);
             }
+            printf("\n");
+
             close(data_socket);
             continue;
+        }
+        else {
+            phwangDebugWS(true, "TcpServerClass::serverThreadFunction", this->theWho, "logo is good");
         }
 
         PortClass *tp_transfer_object = new PortClass(data_socket, this->theReceiveCallbackFunc, this->theCallerObject, this->theWho);
