@@ -6,7 +6,8 @@
 
 #include <sys/socket.h>
 #include <arpa/inet.h>
-#include "../../../phwang_dir/phwang.h"
+#include "../../phwang.h"
+#include "../../define_dir/logo_def.h"
 #include "tcp_connect_class.h"
 #include "../port_dir/port_class.h"
 
@@ -71,7 +72,7 @@ void *TcpConnectClass::tcpConnect (
 
     phwangDebugWS(true, "TcpConnectClass::tcpConnect", this->theWho, "connected");
 
-    send(s, TP_PHWANG_LOGO , strlen(TP_PHWANG_LOGO) , 0);
+    send(s, LOGO_DEF::PHWANG_LOGO , strlen(LOGO_DEF::PHWANG_LOGO) , 0);
 
     PortClass *tp_transfer_object = new PortClass(s, receive_callback_val, receive_object_val, who_val);
     tp_transfer_object->startThreads(PortClass::CLIENT_INDEX);

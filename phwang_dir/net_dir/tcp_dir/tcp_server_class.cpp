@@ -11,7 +11,8 @@
 #include <unistd.h>
 #include <netdb.h>
 #include <pwd.h>
-#include "../../../phwang_dir/phwang.h"
+#include "../../phwang.h"
+#include "../../define_dir/logo_def.h"
 #include "tcp_server_class.h"
 #include "../port_dir/port_class.h"
 
@@ -110,13 +111,13 @@ void *TcpServerClass::serverThreadFunction (void *data_val)
 
         phwangDebugWSI(true, "TcpServerClass::serverThreadFunction", this->theWho, "accepted port", this->thePort);
 
-        char data[strlen(TP_PHWANG_LOGO) + 16];
-        int length = read(data_socket, data, strlen(TP_PHWANG_LOGO) + 8);
+        char data[strlen(LOGO_DEF::PHWANG_LOGO) + 16];
+        int length = read(data_socket, data, strlen(LOGO_DEF::PHWANG_LOGO) + 8);
         if (length >= 0) {
             data[length] = 0;
         }
-        if (((length != strlen(TP_PHWANG_LOGO)) && (length != strlen(TP_PHWANG_LOGO_))) ||
-             (strcmp(data, TP_PHWANG_LOGO) && strcmp(data, TP_PHWANG_LOGO_))) {
+        if (((length != strlen(LOGO_DEF::PHWANG_LOGO)) && (length != strlen(TP_PHWANG_LOGO_))) ||
+             (strcmp(data, LOGO_DEF::PHWANG_LOGO) && strcmp(data, TP_PHWANG_LOGO_))) {
             phwangLogitWSISI("TcpServerClass::serverThreadFunction", this->theWho, "***!!!Attacked!!!*** port=", this->thePort, " data_length", length);
             for (int i = 0; (i < length) && (i < 30); i++) {
                 printf("%d ", data[i]);
