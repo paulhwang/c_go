@@ -115,7 +115,8 @@ void *TcpServerClass::serverThreadFunction (void *data_val)
         if (length >= 0) {
             data[length] = 0;
         }
-        if ((length != strlen(TP_PHWANG_LOGO)) || (strcmp(data, TP_PHWANG_LOGO))) {
+        if (((length != strlen(TP_PHWANG_LOGO)) && (length != strlen(TP_PHWANG_LOGO_))) ||
+             (strcmp(data, TP_PHWANG_LOGO) && strcmp(data, TP_PHWANG_LOGO_))) {
             phwangLogitWSISI("TcpServerClass::serverThreadFunction", this->theWho, "***!!!Attacked!!!*** port=", this->thePort, " data_length", length);
             for (int i = 0; (i < length) && (i < 30); i++) {
                 printf("%d ", data[i]);

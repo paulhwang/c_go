@@ -9,6 +9,7 @@
 #include <atomic>
 
 #define TP_PHWANG_LOGO "phwang168"
+#define TP_PHWANG_LOGO_ "{0009phwang168}"
 
 class PortClass {
 public:

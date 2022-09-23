@@ -27,13 +27,13 @@ void DbAccountClass::createAccountTableInDatabase(void)
 
     this->sqlObject()->createTable3(this->sqlConnect(), "accounts", "name VARCHAR(20)", "password VARCHAR(20)", "email VARCHAR(30)");
 
-    this->createAccount("admin", "admin_password", "admin@phwang.com");
-    this->createAccount("phwang", "", "phwang@phwang.com");
-    this->createAccount("ikolre", "ikolre_password", "ikolre@phwang.com");
-    this->createAccount("guest", "guest_password", "guest@phwang.com");
-    this->createAccount("BigBrave", "bigbrave_password", "bigbrave@phwang.com");
-    this->createAccount("paul", "", "paul@phwang.com");
-    this->createAccount("a", "", "a@phwang.com");
-    this->createAccount("b", "", "a@phwang.com");
-    this->createAccount("c", "", "a@phwang.com");
+    this->createAccount("admin",     "a", "admin@phwang.com");
+    this->createAccount("phwang",    "a", "phwang@phwang.com");
+    this->createAccount("ikolre",    "a", "ikolre@phwang.com");
+    this->createAccount("guest",     "a", "guest@phwang.com");
+    this->createAccount("BigBravea", "a", "bigbrave@phwang.com");
+    this->createAccount("paul",      "a", "paul@phwang.com");
+    this->createAccount("a",         "a", "a@phwang.com");
+    this->createAccount("b",         "a", "a@phwang.com");
+    this->createAccount("c",         "a", "a@phwang.com");
 }
