@@ -40,6 +40,10 @@ void DFabricClass::exportedParseFunction (
             ajax_id[SIZE_DEF::AJAX_ID_SIZE] = 0;
             current_ptr += SIZE_DEF::AJAX_ID_SIZE;
             break;
+
+        case 'A':
+            break;
+
         default:
             phwangAbendS("DFabricClass::exportedParseFunction", "bad_device");
             break;
@@ -159,6 +163,10 @@ void DFabricClass::exportedParseFunction (
     switch (device) {
         case 'N':
             memcpy(&response_data[1], ajax_id, SIZE_DEF::AJAX_ID_SIZE);
+            break;
+
+        case 'A':
+            memcpy(&response_data[1], "***", SIZE_DEF::AJAX_ID_SIZE);
             break;
         default:
             break;
