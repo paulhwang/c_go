@@ -16,6 +16,7 @@ ATOMIC_DIR        = $(PHWANG_DIR)/atomic_dir
 MALLOC_DIR        = $(PHWANG_DIR)/malloc_dir
 ENCODE_DIR        = $(PHWANG_DIR)/encode_dir
 THREAD_DIR        = $(PHWANG_DIR)/thread_dir
+DEFINE_DIR        = $(PHWANG_DIR)/define_dir
 NET_DIR           = $(PHWANG_DIR)/net_dir
 TCP_DIR           = $(NET_DIR)/tcp_dir
 IP_DIR            = $(NET_DIR)/ip_dir
@@ -30,6 +31,7 @@ QUEUE_OBJS = $(QUEUE_DIR)/queue_root_class.o $(QUEUE_DIR)/queue_class.o $(QUEUE_
 TCP_OBJS = $(TCP_DIR)/tcp_server_class.o $(TCP_DIR)/tcp_connect_class.o
 IP_OBJS = $(IP_DIR)/ip_class.o 
 PORT_OBJS = $(PORT_DIR)/port_class.o $(PORT_DIR)/port_class_transmit.o $(PORT_DIR)/port_class_receive.o $(PORT_DIR)/port_class_receive2.o
+DEFINE_OBJS = $(DEFINE_DIR)/logo_def.o
 NET_OBJS = $(TCP_OBJS) $(IP_OBJS) $(PORT_OBJS) $(NET_DIR)/net_root_class.o
 ABEND_OBJS = $(ABEND_DIR)/abend.o
 ATOMIC_OBJS = $(ATOMIC_DIR)/atomic.o
@@ -37,7 +39,7 @@ MALLOC_OBJS = $(MALLOC_DIR)/malloc_class.o
 ENCODE_OBJS = $(ENCODE_DIR)/encode.o
 THREAD_OBJS = $(THREAD_DIR)/thread_root_class.o 
 OBJECT_OBJS = $(OBJECT_DIR)/object_class.o
-PHWANG_OBJS = $(PHWANG_DIR)/phwang.o $(PHWANG_DIR)/phwang_class.o $(JSON_OBJS) $(SUSPEND_OBJS) $(LIST_MGR_OBJS) $(ARRAY_MGR_OBJS) $(ID_INDEX_LIST_OBJS) $(QUEUE_OBJS) $(NET_OBJS) $(MALLOC_OBJS) $(ENCODE_OBJS) $(THREAD_OBJS) $(ABEND_OBJS) $(ATOMIC_OBJS)
+PHWANG_OBJS = $(PHWANG_DIR)/phwang.o $(PHWANG_DIR)/phwang_class.o $(JSON_OBJS) $(SUSPEND_OBJS) $(LIST_MGR_OBJS) $(ARRAY_MGR_OBJS) $(ID_INDEX_LIST_OBJS) $(QUEUE_OBJS) $(NET_OBJS) $(MALLOC_OBJS) $(ENCODE_OBJS) $(THREAD_OBJS) $(ABEND_OBJS) $(ATOMIC_OBJS) $(DEFINE_OBJS)
 
 PHWANG_STATIC_LIB = libphwang.a
 PHWANG_DYNAMIC_LIB = libphwang.so
@@ -72,6 +74,9 @@ $(ATOMIC_DIR)/atomic.o: $(ATOMIC_DIR)/atomic.cpp
 
 $(ENCODE_DIR)/encode.o: $(ENCODE_DIR)/encode.cpp 
 	$(CC) -c $(ENCODE_DIR)/encode.cpp -o $(ENCODE_DIR)/encode.o
+
+$(DEFINE_DIR)/logo_def.o: $(DEFINE_DIR)/logo_def.cpp $(DEFINE_DIR)/logo_def.h
+	$(CC) -c $(DEFINE_DIR)/logo_def.cpp -o $(DEFINE_DIR)/logo_def.o
 
 $(MALLOC_DIR)/malloc_class.o: $(MALLOC_DIR)/malloc_class.cpp $(MALLOC_DIR)/malloc_class.h
 	$(CC) -c $(MALLOC_DIR)/malloc_class.cpp -o $(MALLOC_DIR)/malloc_class.o
