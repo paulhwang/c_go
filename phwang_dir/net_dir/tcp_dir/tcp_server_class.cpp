@@ -112,14 +112,13 @@ void *TcpServerClass::serverThreadFunction (void *data_val)
         phwangDebugWSI(true, "TcpServerClass::serverThreadFunction", this->theWho, "accepted port", this->thePort);
 
         char data[strlen(LOGO_DEF::PHWANG_LOGO) + 16];
-        int length = read(data_socket, data, strlen(LOGO_DEF::PHWANG_LOGO) + 8);
+        int length = read(data_socket, data, strlen(LOGO_DEF::PHWANG_LOGO) + 1);
         if (length >= 0) {
             data[length] = 0;
         }
-        if (((length != strlen(LOGO_DEF::PHWANG_LOGO)) && (length != strlen(TP_PHWANG_LOGO_))) ||
-             (strcmp(data, LOGO_DEF::PHWANG_LOGO) && strcmp(data, TP_PHWANG_LOGO_))) {
+        if ((length != strlen(LOGO_DEF::PHWANG_LOGO)) || (strcmp(data, LOGO_DEF::PHWANG_LOGO) != 0)) {
             phwangLogitWSISI("TcpServerClass::serverThreadFunction", this->theWho, "***!!!Attacked!!!*** port=", this->thePort, " data_length", length);
-            for (int i = 0; (i < length) && (i < 30); i++) {
+            for (int i = 0; (i < length) && (i < strlen(LOGO_DEF::PHWANG_LOGO)); i++) {
                 printf("%d ", data[i]);
             }
             printf("\n");
