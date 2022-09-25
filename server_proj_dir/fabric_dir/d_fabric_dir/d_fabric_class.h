@@ -80,10 +80,10 @@ class DFabricClass {
         char const *link_id_index_val,
         char const *data_val);
 
-    char *processSetupSessionRequest (
+    char *processSetupSession1Request (
         LinkClass *link_val,
         char *data_val);
-    char *generateSetupSessionResponse (
+    char *generateSetupSession1Response (
         char const *result_val,
         char const *link_id_index_val,
         char const *session_id_index_val);
