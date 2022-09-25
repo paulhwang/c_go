@@ -75,7 +75,7 @@ void DFabricClass::exportedParseFunction (
                     break;
 
                 default:
-                    phwangAbendS("DFabricClass::exportedParseFunction", current_ptr);
+                    phwangAbendS("DFabricClass::exportedParseFunction_0", current_ptr);
                     return;
             }
             break;
@@ -115,7 +115,7 @@ void DFabricClass::exportedParseFunction (
                     break;
 
                 default:
-                    phwangAbendS("DFabricClass::dbAccountObject", data_val);
+                    phwangAbendS("DFabricClass::exportedParseFunction_1", data_val);
                     return;
             }
             break;
@@ -150,13 +150,13 @@ void DFabricClass::exportedParseFunction (
                     break;
 
                 default:
-                    phwangAbendS("DFabricClass::dbAccountObject", data_val);
+                    phwangAbendS("DFabricClass::exportedParseFunction_2", data_val);
                     return;
             }
             break;
 
         default:
-            phwangAbendS("DFabricClass::dbAccountObject", "bad type");
+            phwangAbendS("DFabricClass::exportedParseFunction", "bad type");
             return;
     }
 

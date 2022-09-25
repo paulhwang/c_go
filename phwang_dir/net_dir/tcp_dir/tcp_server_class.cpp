@@ -111,12 +111,15 @@ void *TcpServerClass::serverThreadFunction (void *data_val)
 
         phwangDebugWSI(true, "TcpServerClass::serverThreadFunction", this->theWho, "accepted port", this->thePort);
 
-        char data[strlen(LOGO_DEF::PHWANG_LOGO) + 16];
-        int length = read(data_socket, data, strlen(LOGO_DEF::PHWANG_LOGO) + 1);
+        char data[strlen(LOGO_DEF::PHWANG_LOGO) + 1];
+        int length = read(data_socket, data, strlen(LOGO_DEF::PHWANG_LOGO));
         if (length >= 0) {
             data[length] = 0;
         }
-        if ((length != strlen(LOGO_DEF::PHWANG_LOGO)) || (strcmp(data, LOGO_DEF::PHWANG_LOGO) != 0)) {
+        if ((length == strlen(LOGO_DEF::PHWANG_LOGO)) && (strcmp(data, LOGO_DEF::PHWANG_LOGO) == 0)) {
+            phwangDebugWS(true, "TcpServerClass::serverThreadFunction", this->theWho, "logo is good");
+        }
+        else {
             phwangLogitWSISI("TcpServerClass::serverThreadFunction", this->theWho, "***!!!Attacked!!!*** port=", this->thePort, " data_length", length);
             for (int i = 0; (i < length) && (i < strlen(LOGO_DEF::PHWANG_LOGO)); i++) {
                 printf("%d ", data[i]);
@@ -125,9 +128,6 @@ void *TcpServerClass::serverThreadFunction (void *data_val)
 
             close(data_socket);
             continue;
-        }
-        else {
-            phwangDebugWS(true, "TcpServerClass::serverThreadFunction", this->theWho, "logo is good");
         }
 
         PortClass *tp_transfer_object = new PortClass(data_socket, this->theReceiveCallbackFunc, this->theCallerObject, this->theWho);
