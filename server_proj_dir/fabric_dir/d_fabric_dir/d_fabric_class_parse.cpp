@@ -104,6 +104,11 @@ void DFabricClass::exportedParseFunction (
                     response_data[0] = FE_DEF::FE_GET_NAME_LIST_RESPONSE;
                     break;
 
+                case FE_DEF::FE_SETUP_SESSION_COMMAND:
+                    response_data = this->processSetupSessionRequest(link, current_ptr);
+                    response_data[0] = FE_DEF::FE_SETUP_SESSION_RESPONSE;
+                    break;
+
                 case FE_DEF::FE_SETUP_SESSION1_COMMAND:
                     response_data = this->processSetupSession1Request(link, current_ptr);
                     response_data[0] = FE_DEF::FE_SETUP_SESSION1_RESPONSE;
@@ -603,6 +608,87 @@ char *DFabricClass::generateGetNameListResponse (
     memcpy(current_ptr, link_id_index_val, SIZE_DEF::LINK_ID_INDEX_SIZE);
     current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE;
     strcpy(current_ptr, data_val);
+    return response_data;
+}
+
+char *DFabricClass::processSetupSessionRequest (
+    LinkClass *link_val,
+    char *data_val)
+{
+    char *response_data = 0;
+    phwangDebugS(true, "DFabricClass::processSetupSessionRequest", data_val);
+
+    char *theme_info_val = data_val;
+
+    switch (*theme_info_val) {
+        case 'G':
+            break;
+
+        default:
+            phwangAbendSS("DFabricClass::processSetupSessionRequest", "theme not supported", theme_info_val);
+    }
+
+    int theme_len = phwangDecodeNumber(theme_info_val + 1, 3);
+    char *his_name_val = theme_info_val + theme_len;
+    phwangDebugSS(false, "DFabricClass::processSetupSessionRequest", "his_name_val=", his_name_val);
+
+    SessionClass *session = link_val->mallocSession();
+    if (!session) {
+        response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_MALLOC_SESSION_FAIL, link_val->linkIdIndex(), session->sessionIdIndex());
+        return response_data;
+    }
+    GroupClass *group = this->theFabricObject->mallocGroup(theme_info_val);
+    if (!group) {
+        response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_MALLOC_GROUP_FAIL, link_val->linkIdIndex(), session->sessionIdIndex());
+        return response_data;
+    }
+    group->insertSession(session);
+    session->bindGroup(group);
+
+    if (!strcmp(his_name_val, session->linkObject()->linkName())) {
+        this->sendSetupRoomRequestToThemeServer(group, theme_info_val);
+    }
+    else {
+        LinkClass *his_link = this->theFabricObject->searchLinkByName(his_name_val);
+        if (!his_link) {
+            response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_HIS_LINK_NOT_EXIST, link_val->linkIdIndex(), session->sessionIdIndex());
+            return response_data;
+        }
+
+        SessionClass *his_session = his_link->mallocSession();
+        if (!his_session) {
+            response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_NULL_HIS_SESSION, link_val->linkIdIndex(), session->sessionIdIndex());
+            return response_data;
+        }
+
+        group->insertSession(his_session);
+        his_session->bindGroup(group);
+
+        char *theme_data_buf = (char *) phwangMalloc(theme_len + 1, MallocClass::processSetupSessionRequest);
+        memcpy(theme_data_buf, theme_info_val, theme_len);
+        theme_data_buf[theme_len] = 0;
+        his_link->setPendingSessionSetup(his_session->sessionIdIndex(), theme_data_buf);
+        phwangFree(theme_data_buf);
+    }
+
+    response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_SUCCEED, link_val->linkIdIndex(), session->sessionIdIndex());
+    return response_data;
+}
+
+char *DFabricClass::generateSetupSessionResponse (
+    char const *result_val,
+    char const *link_id_index_val,
+    char const *session_id_index_val)
+{
+    phwangDebugS(false, "DFabricClass::generateSetupSessionResponse", result_val);
+
+    char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUF_WITH_LINK_SESSION_SIZE, MallocClass::generateSetupSessionResponse);
+    char *current_ptr = &response_data[FABRIC_DEF::FE_DL_HEADER_SIZE];
+    memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
+    current_ptr += RESULT_DEF::RESULT_SIZE;
+    memcpy(current_ptr, link_id_index_val, SIZE_DEF::LINK_ID_INDEX_SIZE);
+    current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE;
+    strcpy(current_ptr, session_id_index_val);
     return response_data;
 }
 

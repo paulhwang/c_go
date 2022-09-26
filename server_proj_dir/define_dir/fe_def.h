@@ -19,6 +19,8 @@ public:
     char const static FE_GET_LINK_DATA_RESPONSE    = 'd';
     char const static FE_GET_NAME_LIST_COMMAND     = 'N';
     char const static FE_GET_NAME_LIST_RESPONSE    = 'n';
+    char const static FE_SETUP_SESSION_COMMAND     = 'S';
+    char const static FE_SETUP_SESSION_RESPONSE    = 's';
     char const static FE_SETUP_SESSION1_COMMAND    = 'X';
     char const static FE_SETUP_SESSION1_RESPONSE   = 'x';
     char const static FE_SETUP_SESSION2_COMMAND    = 'Y';
