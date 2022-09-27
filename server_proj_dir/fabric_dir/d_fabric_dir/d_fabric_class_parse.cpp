@@ -923,8 +923,8 @@ char *DFabricClass::generateGetSessionSetupStatusResponse (
     memcpy(current_ptr, encoded_initiator_name, strlen(encoded_initiator_name));
     current_ptr += strlen(encoded_initiator_name);
 
-    memcpy(current_ptr, encoded_initiator_name, strlen(encoded_initiator_name));
-    current_ptr += strlen(encoded_initiator_name);
+    memcpy(current_ptr, encoded_peer_name, strlen(encoded_peer_name));
+    current_ptr += strlen(encoded_peer_name);
 
     *current_ptr = 0;
 
