@@ -628,7 +628,12 @@ char *DFabricClass::processSetupSessionRequest (
     char *theme_info = phwangDecodeStringMalloc(encoded_theme_info, &theme_info_size);
     phwangDebugSS(true, "DFabricClass::processSetupSessionRequest", "theme_info=", theme_info);
 
-    char *encoded_peer_name = encoded_theme_info + theme_info_size;
+    char *encoded_initiator_name = encoded_theme_info + theme_info_size;
+    int initiator_name_size;
+    char *initiator_name = phwangDecodeStringMalloc(encoded_initiator_name, &initiator_name_size);
+    phwangDebugSS(true, "DFabricClass::processSetupSessionRequest", "initiator_name=", initiator_name);
+
+    char *encoded_peer_name = encoded_initiator_name + initiator_name_size;
     int peer_name_size;
     char *peer_name = phwangDecodeStringMalloc(encoded_peer_name, &peer_name_size);
     phwangDebugSS(true, "DFabricClass::processSetupSessionRequest", "peer_name=", peer_name);
@@ -648,7 +653,7 @@ char *DFabricClass::processSetupSessionRequest (
         phwangFree(peer_name);
         return response_data;
     }
-    GroupClass *group = this->theFabricObject->mallocGroup(theme_info, "TBD", peer_name);
+    GroupClass *group = this->theFabricObject->mallocGroup(theme_info, initiator_name, peer_name);
     if (!group) {
         response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_MALLOC_GROUP_FAIL, link_val->linkIdIndex(), session->sessionIdIndex(), data_val);
         phwangFree(theme_info);
@@ -699,12 +704,17 @@ char *DFabricClass::processSetupSession1Request (
     char *encoded_theme_info = data_val;
     int theme_info_size;
     char *theme_info = phwangDecodeStringMalloc(encoded_theme_info, &theme_info_size);
-    phwangDebugSS(true, "DFabricClass::processSetupSession1Request", "theme_info=", theme_info);
+    phwangDebugSS(true, "DFabricClass::processSetupSessionRequest", "theme_info=", theme_info);
 
-    char *encoded_peer_name = encoded_theme_info + theme_info_size;
+    char *encoded_initiator_name = encoded_theme_info + theme_info_size;
+    int initiator_name_size;
+    char *initiator_name = phwangDecodeStringMalloc(encoded_initiator_name, &initiator_name_size);
+    phwangDebugSS(true, "DFabricClass::processSetupSessionRequest", "initiator_name=", initiator_name);
+
+    char *encoded_peer_name = encoded_initiator_name + initiator_name_size;
     int peer_name_size;
     char *peer_name = phwangDecodeStringMalloc(encoded_peer_name, &peer_name_size);
-    phwangDebugSS(true, "DFabricClass::processSetupSession1Request", "peer_name=", peer_name);
+    phwangDebugSS(true, "DFabricClass::processSetupSessionRequest", "peer_name=", peer_name);
 
     switch (*theme_info) {
         case 'G':
@@ -721,7 +731,7 @@ char *DFabricClass::processSetupSession1Request (
         phwangFree(peer_name);
         return response_data;
     }
-    GroupClass *group = this->theFabricObject->mallocGroup(theme_info, "TBD", peer_name);
+    GroupClass *group = this->theFabricObject->mallocGroup(theme_info, initiator_name, peer_name);
     if (!group) {
         response_data = this->generateSetupSession1Response(RESULT_DEF::RESULT_MALLOC_GROUP_FAIL, link_val->linkIdIndex(), session->sessionIdIndex());
         phwangFree(theme_info);
