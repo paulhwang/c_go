@@ -113,6 +113,19 @@ class DFabricClass {
         char const *link_id_index_val,
         char const *session_id_index_val);
 
+    char *processGetSessionSetupStatusRequest (
+        SessionClass *session_val,
+        char *data_val);
+    char *generateGetSessionSetupStatusResponse (
+        char const *result_val,
+        char const *link_id_index_val,
+        char const *session_id_index_val,
+        char session_status_val,
+        char session_type_val,
+        char *theme_info_val,
+        char *initiator_name_val,
+        char *peer_name_val);
+
     char *processFreeSessionRequest (
         SessionClass *session_val);
     char *generateFreeSessionResponse (

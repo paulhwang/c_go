@@ -109,6 +109,11 @@ void MallocClass::checkWhoTable (void)
             case MallocClass::receiveThreadFunction:
                 count -= phwangReceiveThreadCount();
                 break;
+
+            case MallocClass::GroupClass:
+                count -= 3; // 3 per group
+                break;
+
             default:
                 break;
         }

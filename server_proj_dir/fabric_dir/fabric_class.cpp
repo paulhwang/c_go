@@ -125,7 +125,7 @@ LinkClass *FabricClass::searchLinkByName (char *name_val)
 
 GroupClass *FabricClass::mallocGroup (char *theme_data_val)
 {
-    GroupClass *group = new GroupClass(this->theGroupListMgrObject, this, theme_data_val);
+    GroupClass *group = new GroupClass(this->theGroupListMgrObject, this, theme_data_val, "TBD", "tbd");
     if (!group) {
         phwangAbendS("FabricClass::mallocGroup", "fail_to_malloc_group");
         return 0;
