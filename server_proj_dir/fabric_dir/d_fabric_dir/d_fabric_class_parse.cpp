@@ -618,36 +618,44 @@ char *DFabricClass::processSetupSessionRequest (
     char *response_data = 0;
     phwangDebugS(true, "DFabricClass::processSetupSessionRequest", data_val);
 
-    char *theme_info_val = data_val;
+    char *encoded_theme_info = data_val;
+    int theme_info_size;
+    char *theme_info = phwangDecodeStringMalloc(encoded_theme_info, &theme_info_size);
+    phwangDebugSS(true, "DFabricClass::processSetupSessionRequest", "theme_info=", theme_info);
 
-    switch (*theme_info_val) {
+    char *encoded_his_name = encoded_theme_info + theme_info_size;
+    int his_name_size;
+    char *his_name = phwangDecodeStringMalloc(encoded_his_name, &his_name_size);
+    phwangDebugSS(true, "DFabricClass::processSetupSessionRequest", "his_name=", his_name);
+
+    switch (*theme_info) {
         case 'G':
             break;
 
         default:
-            phwangAbendSS("DFabricClass::processSetupSessionRequest", "theme not supported", theme_info_val);
+            phwangAbendSS("DFabricClass::processSetupSessionRequest", "theme not supported", theme_info);
     }
 
-    int theme_len = phwangDecodeNumber(theme_info_val + 1, 3);
-    char *his_name_val = theme_info_val + theme_len;
-    phwangDebugSS(false, "DFabricClass::processSetupSessionRequest", "his_name_val=", his_name_val);
+    //int theme_len = phwangDecodeNumber(theme_info + 1, 3);
+    //char *his_name_val = theme_info + theme_len;
+    //phwangDebugSS(false, "DFabricClass::processSetupSessionRequest", "his_name_val=", his_name_val);
 
     SessionClass *session = link_val->mallocSession();
     if (!session) {
-        response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_MALLOC_SESSION_FAIL, link_val->linkIdIndex(), session->sessionIdIndex(), theme_info_val);
+        response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_MALLOC_SESSION_FAIL, link_val->linkIdIndex(), session->sessionIdIndex(), data_val);
         return response_data;
     }
-    GroupClass *group = this->theFabricObject->mallocGroup(theme_info_val);
+    GroupClass *group = this->theFabricObject->mallocGroup(theme_info);
     if (!group) {
-        response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_MALLOC_GROUP_FAIL, link_val->linkIdIndex(), session->sessionIdIndex(), theme_info_val);
+        response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_MALLOC_GROUP_FAIL, link_val->linkIdIndex(), session->sessionIdIndex(), data_val);
         return response_data;
     }
     group->insertSession(session);
     session->bindGroup(group);
 
-    this->sendSetupRoomRequestToThemeServer(group, theme_info_val);
+    this->sendSetupRoomRequestToThemeServer(group, theme_info);
 
-    response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_SUCCEED, link_val->linkIdIndex(), session->sessionIdIndex(), theme_info_val);
+    response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_SUCCEED, link_val->linkIdIndex(), session->sessionIdIndex(), data_val);
     return response_data;
 }
 
@@ -655,11 +663,11 @@ char *DFabricClass::generateSetupSessionResponse (
     char const *result_val,
     char const *link_id_index_val,
     char const *session_id_index_val,
-    char const *theme_info_val)
+    char const *data_val)
 {
     phwangDebugS(false, "DFabricClass::generateSetupSessionResponse", result_val);
 
-    char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUF_WITH_LINK_SESSION_SIZE + strlen(theme_info_val), MallocClass::generateSetupSessionResponse);
+    char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUF_WITH_LINK_SESSION_SIZE + strlen(data_val), MallocClass::generateSetupSessionResponse);
     char *current_ptr = &response_data[FABRIC_DEF::FE_DL_HEADER_SIZE];
 
     memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
@@ -671,7 +679,7 @@ char *DFabricClass::generateSetupSessionResponse (
     memcpy(current_ptr, session_id_index_val, SIZE_DEF::SESSION_ID_INDEX_SIZE);
     current_ptr += SIZE_DEF::SESSION_ID_INDEX_SIZE;
 
-    strcpy(current_ptr, theme_info_val);
+    strcpy(current_ptr, data_val);
     return response_data;
 }
 
