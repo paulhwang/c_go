@@ -623,10 +623,10 @@ char *DFabricClass::processSetupSessionRequest (
     char *theme_info = phwangDecodeStringMalloc(encoded_theme_info, &theme_info_size);
     phwangDebugSS(true, "DFabricClass::processSetupSessionRequest", "theme_info=", theme_info);
 
-    char *encoded_his_name = encoded_theme_info + theme_info_size;
-    int his_name_size;
-    char *his_name = phwangDecodeStringMalloc(encoded_his_name, &his_name_size);
-    phwangDebugSS(true, "DFabricClass::processSetupSessionRequest", "his_name=", his_name);
+    char *encoded_peer_name = encoded_theme_info + theme_info_size;
+    int peer_name_size;
+    char *peer_name = phwangDecodeStringMalloc(encoded_peer_name, &peer_name_size);
+    phwangDebugSS(true, "DFabricClass::processSetupSessionRequest", "peer_name=", peer_name);
 
     switch (*theme_info) {
         case 'G':
@@ -640,14 +640,14 @@ char *DFabricClass::processSetupSessionRequest (
     if (!session) {
         response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_MALLOC_SESSION_FAIL, link_val->linkIdIndex(), session->sessionIdIndex(), data_val);
         phwangFree(theme_info);
-        phwangFree(his_name);
+        phwangFree(peer_name);
         return response_data;
     }
     GroupClass *group = this->theFabricObject->mallocGroup(theme_info);
     if (!group) {
         response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_MALLOC_GROUP_FAIL, link_val->linkIdIndex(), session->sessionIdIndex(), data_val);
         phwangFree(theme_info);
-        phwangFree(his_name);
+        phwangFree(peer_name);
         return response_data;
     }
     group->insertSession(session);
@@ -656,7 +656,7 @@ char *DFabricClass::processSetupSessionRequest (
     this->sendSetupRoomRequestToThemeServer(group, theme_info);
     response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_SUCCEED, link_val->linkIdIndex(), session->sessionIdIndex(), data_val);
     phwangFree(theme_info);
-    phwangFree(his_name);
+    phwangFree(peer_name);
     return response_data;
 }
 
