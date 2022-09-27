@@ -894,7 +894,7 @@ char *DFabricClass::generateGetSessionSetupStatusResponse (
     char *initiator_name_val,
     char *peer_name_val)
 {
-    phwangDebugS(false, "DFabricClass::generateGetSessionSetupStatusResponse", result_val);
+    phwangDebugSS(false, "DFabricClass::generateGetSessionSetupStatusResponse", "result=", result_val);
 
     char *encoded_theme_info     = phwangEncodeStringMalloc(theme_info_val);
     char *encoded_initiator_name = phwangEncodeStringMalloc(initiator_name_val);
@@ -930,7 +930,7 @@ char *DFabricClass::generateGetSessionSetupStatusResponse (
 
     phwangFree(encoded_theme_info);
     phwangFree(encoded_initiator_name);
-    phwangFree(encoded_initiator_name);
+    phwangFree(encoded_peer_name);
     return response_data;
 }
 
