@@ -648,7 +648,7 @@ char *DFabricClass::processSetupSessionRequest (
         phwangFree(peer_name);
         return response_data;
     }
-    GroupClass *group = this->theFabricObject->mallocGroup(theme_info);
+    GroupClass *group = this->theFabricObject->mallocGroup(theme_info, "TBD", peer_name);
     if (!group) {
         response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_MALLOC_GROUP_FAIL, link_val->linkIdIndex(), session->sessionIdIndex(), data_val);
         phwangFree(theme_info);
@@ -701,10 +701,10 @@ char *DFabricClass::processSetupSession1Request (
     char *theme_info = phwangDecodeStringMalloc(encoded_theme_info, &theme_info_size);
     phwangDebugSS(true, "DFabricClass::processSetupSession1Request", "theme_info=", theme_info);
 
-    char *encoded_his_name = encoded_theme_info + theme_info_size;
-    int his_name_size;
-    char *his_name = phwangDecodeStringMalloc(encoded_his_name, &his_name_size);
-    phwangDebugSS(true, "DFabricClass::processSetupSession1Request", "his_name=", his_name);
+    char *encoded_peer_name = encoded_theme_info + theme_info_size;
+    int peer_name_size;
+    char *peer_name = phwangDecodeStringMalloc(encoded_peer_name, &peer_name_size);
+    phwangDebugSS(true, "DFabricClass::processSetupSession1Request", "peer_name=", peer_name);
 
     switch (*theme_info) {
         case 'G':
@@ -718,28 +718,28 @@ char *DFabricClass::processSetupSession1Request (
     if (!session) {
         response_data = this->generateSetupSession1Response(RESULT_DEF::RESULT_MALLOC_SESSION_FAIL, link_val->linkIdIndex(), session->sessionIdIndex());
         phwangFree(theme_info);
-        phwangFree(his_name);
+        phwangFree(peer_name);
         return response_data;
     }
-    GroupClass *group = this->theFabricObject->mallocGroup(theme_info);
+    GroupClass *group = this->theFabricObject->mallocGroup(theme_info, "TBD", peer_name);
     if (!group) {
         response_data = this->generateSetupSession1Response(RESULT_DEF::RESULT_MALLOC_GROUP_FAIL, link_val->linkIdIndex(), session->sessionIdIndex());
         phwangFree(theme_info);
-        phwangFree(his_name);
+        phwangFree(peer_name);
         return response_data;
     }
     group->insertSession(session);
     session->bindGroup(group);
 
-    if (!strcmp(his_name, session->linkObject()->linkName())) {
+    if (!strcmp(peer_name, session->linkObject()->linkName())) {
         this->sendSetupRoomRequestToThemeServer(group, theme_info);
     }
     else {
-        LinkClass *his_link = this->theFabricObject->searchLinkByName(his_name);
+        LinkClass *his_link = this->theFabricObject->searchLinkByName(peer_name);
         if (!his_link) {
             response_data = this->generateSetupSession1Response(RESULT_DEF::RESULT_HIS_LINK_NOT_EXIST, link_val->linkIdIndex(), session->sessionIdIndex());
             phwangFree(theme_info);
-            phwangFree(his_name);
+            phwangFree(peer_name);
             return response_data;
         }
 
@@ -747,7 +747,7 @@ char *DFabricClass::processSetupSession1Request (
         if (!his_session) {
             response_data = this->generateSetupSession1Response(RESULT_DEF::RESULT_NULL_HIS_SESSION, link_val->linkIdIndex(), session->sessionIdIndex());
             phwangFree(theme_info);
-            phwangFree(his_name);
+            phwangFree(peer_name);
             return response_data;
         }
 
@@ -762,7 +762,7 @@ char *DFabricClass::processSetupSession1Request (
 
     response_data = this->generateSetupSession1Response(RESULT_DEF::RESULT_SUCCEED, link_val->linkIdIndex(), session->sessionIdIndex());
     phwangFree(theme_info);
-    phwangFree(his_name);
+    phwangFree(peer_name);
     return response_data;
 }
 

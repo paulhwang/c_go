@@ -49,8 +49,10 @@ public:
     void freeLink(LinkClass *link_object_val);
     LinkClass *searchLink(char *data_val, void *extra_data_val) {return (LinkClass *) phwangListMgrSearchEntry(this->theLinkListMgrObject, data_val, extra_data_val);}
     LinkClass *searchLinkByName(char *name_val);
-
-    GroupClass *mallocGroup(char *theme_data_val);
+    GroupClass *mallocGroup(
+        char const *theme_info_val,
+        char const *initiator_name_val,
+        char const *peer_name_val);
     void freeGroup(GroupClass *group_object_val);
     GroupClass *searchGroup(char *data_val) {return (GroupClass *) phwangListMgrSearchEntry(this->theGroupListMgrObject, data_val, 0);}
 
