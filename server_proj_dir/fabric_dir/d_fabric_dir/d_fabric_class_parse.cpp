@@ -636,26 +636,27 @@ char *DFabricClass::processSetupSessionRequest (
             phwangAbendSS("DFabricClass::processSetupSessionRequest", "theme not supported", theme_info);
     }
 
-    //int theme_len = phwangDecodeNumber(theme_info + 1, 3);
-    //char *his_name_val = theme_info + theme_len;
-    //phwangDebugSS(false, "DFabricClass::processSetupSessionRequest", "his_name_val=", his_name_val);
-
     SessionClass *session = link_val->mallocSession();
     if (!session) {
         response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_MALLOC_SESSION_FAIL, link_val->linkIdIndex(), session->sessionIdIndex(), data_val);
+        phwangFree(theme_info);
+        phwangFree(his_name);
         return response_data;
     }
     GroupClass *group = this->theFabricObject->mallocGroup(theme_info);
     if (!group) {
         response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_MALLOC_GROUP_FAIL, link_val->linkIdIndex(), session->sessionIdIndex(), data_val);
+        phwangFree(theme_info);
+        phwangFree(his_name);
         return response_data;
     }
     group->insertSession(session);
     session->bindGroup(group);
 
     this->sendSetupRoomRequestToThemeServer(group, theme_info);
-
     response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_SUCCEED, link_val->linkIdIndex(), session->sessionIdIndex(), data_val);
+    phwangFree(theme_info);
+    phwangFree(his_name);
     return response_data;
 }
 
@@ -690,60 +691,73 @@ char *DFabricClass::processSetupSession1Request (
     char *response_data = 0;
     phwangDebugS(true, "DFabricClass::processSetupSession1Request", data_val);
 
-    char *theme_info_val = data_val;
+    char *encoded_theme_info = data_val;
+    int theme_info_size;
+    char *theme_info = phwangDecodeStringMalloc(encoded_theme_info, &theme_info_size);
+    phwangDebugSS(true, "DFabricClass::processSetupSession1Request", "theme_info=", theme_info);
 
-    switch (*theme_info_val) {
+    char *encoded_his_name = encoded_theme_info + theme_info_size;
+    int his_name_size;
+    char *his_name = phwangDecodeStringMalloc(encoded_his_name, &his_name_size);
+    phwangDebugSS(true, "DFabricClass::processSetupSession1Request", "his_name=", his_name);
+
+    switch (*theme_info) {
         case 'G':
             break;
 
         default:
-            phwangAbendSS("DFabricClass::processSetupSession1Request", "theme not supported", theme_info_val);
+            phwangAbendSS("DFabricClass::processSetupSession1Request", "theme not supported", theme_info);
     }
-
-    int theme_len = phwangDecodeNumber(theme_info_val + 1, 3);
-    char *his_name_val = theme_info_val + theme_len;
-    phwangDebugSS(false, "DFabricClass::processSetupSession1Request", "his_name_val=", his_name_val);
 
     SessionClass *session = link_val->mallocSession();
     if (!session) {
         response_data = this->generateSetupSession1Response(RESULT_DEF::RESULT_MALLOC_SESSION_FAIL, link_val->linkIdIndex(), session->sessionIdIndex());
+        phwangFree(theme_info);
+        phwangFree(his_name);
         return response_data;
     }
-    GroupClass *group = this->theFabricObject->mallocGroup(theme_info_val);
+    GroupClass *group = this->theFabricObject->mallocGroup(theme_info);
     if (!group) {
         response_data = this->generateSetupSession1Response(RESULT_DEF::RESULT_MALLOC_GROUP_FAIL, link_val->linkIdIndex(), session->sessionIdIndex());
+        phwangFree(theme_info);
+        phwangFree(his_name);
         return response_data;
     }
     group->insertSession(session);
     session->bindGroup(group);
 
-    if (!strcmp(his_name_val, session->linkObject()->linkName())) {
-        this->sendSetupRoomRequestToThemeServer(group, theme_info_val);
+    if (!strcmp(his_name, session->linkObject()->linkName())) {
+        this->sendSetupRoomRequestToThemeServer(group, theme_info);
     }
     else {
-        LinkClass *his_link = this->theFabricObject->searchLinkByName(his_name_val);
+        LinkClass *his_link = this->theFabricObject->searchLinkByName(his_name);
         if (!his_link) {
             response_data = this->generateSetupSession1Response(RESULT_DEF::RESULT_HIS_LINK_NOT_EXIST, link_val->linkIdIndex(), session->sessionIdIndex());
+            phwangFree(theme_info);
+            phwangFree(his_name);
             return response_data;
         }
 
         SessionClass *his_session = his_link->mallocSession();
         if (!his_session) {
             response_data = this->generateSetupSession1Response(RESULT_DEF::RESULT_NULL_HIS_SESSION, link_val->linkIdIndex(), session->sessionIdIndex());
+            phwangFree(theme_info);
+            phwangFree(his_name);
             return response_data;
         }
 
         group->insertSession(his_session);
         his_session->bindGroup(group);
 
-        char *theme_data_buf = (char *) phwangMalloc(theme_len + 1, MallocClass::processSetupSessionRequest);
-        memcpy(theme_data_buf, theme_info_val, theme_len);
-        theme_data_buf[theme_len] = 0;
+        char *theme_data_buf = (char *) phwangMalloc(strlen(theme_info) + 1, MallocClass::processSetupSessionRequest);
+        strcpy(theme_data_buf, theme_info);
         his_link->setPendingSessionSetup(his_session->sessionIdIndex(), theme_data_buf);
         phwangFree(theme_data_buf);
     }
 
     response_data = this->generateSetupSession1Response(RESULT_DEF::RESULT_SUCCEED, link_val->linkIdIndex(), session->sessionIdIndex());
+    phwangFree(theme_info);
+    phwangFree(his_name);
     return response_data;
 }
 
