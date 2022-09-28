@@ -120,7 +120,7 @@ class DFabricClass {
         char const *result_val,
         char const *link_id_index_val,
         char const *session_id_index_val,
-        char session_status_val,
+        char room_status_val,
         char session_type_val,
         char *theme_info_val,
         char *initiator_name_val,

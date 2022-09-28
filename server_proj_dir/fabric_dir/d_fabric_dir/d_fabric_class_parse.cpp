@@ -886,7 +886,7 @@ char *DFabricClass::processGetSessionSetupStatusRequest (
                                     RESULT_DEF::RESULT_SUCCEED,
                                     session_val->linkObject()->linkIdIndex(),
                                     session_val->sessionIdIndex(),
-                                    session_val->status(),
+                                    group_object->roomStatus(),
                                     group_object->mode(),
                                     group_object->themeInfo(),
                                     group_object->initiatorName(),
@@ -898,7 +898,7 @@ char *DFabricClass::generateGetSessionSetupStatusResponse (
     char const *result_val,
     char const *link_id_index_val,
     char const *session_id_index_val,
-    char session_status_val,
+    char room_status_val,
     char group_mode_val,
     char *theme_info_val,
     char *initiator_name_val,
@@ -924,7 +924,7 @@ char *DFabricClass::generateGetSessionSetupStatusResponse (
     memcpy(current_ptr, session_id_index_val, SIZE_DEF::SESSION_ID_INDEX_SIZE);
     current_ptr += SIZE_DEF::SESSION_ID_INDEX_SIZE;
 
-    *current_ptr++ = session_status_val;
+    *current_ptr++ = room_status_val;
     *current_ptr++ = group_mode_val;
 
     memcpy(current_ptr, encoded_theme_info, strlen(encoded_theme_info));

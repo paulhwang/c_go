@@ -56,6 +56,7 @@ void UFabricClass::processSetupRoomResponse (char *data_val)
         phwangAbendS("UFabricClass::processSetupRoomResponse", "null_group");
         return;
     }
+    group->setRoomStatusToReady();
 
     int session_array_size;
     group->setRoomIdIndex(room_id_ptr);

@@ -5,7 +5,6 @@
 */
 
 #include "../../phwang_dir/phwang.h"
-#include "../define_dir/fe_def.h"
 #include "session_class.h"
 
 SessionClass::SessionClass (
@@ -15,7 +14,6 @@ SessionClass::SessionClass (
 {
     this->theLinkObject = link_object_val;
     this->theGroupObject =0;
-    this->theStatus = FE_DEF::FE_SESSION_STATUS_PREPARING;
     this->thePendingDownLinkDataQueue = phwangMallocQueue(0, this->objectName());
 
     phwangDebugSS(true, "SessionClass::SessionClass", "new_session:", this->sessionIdIndex());

@@ -18,6 +18,7 @@ class GroupClass : public ListEntryClass {
     char *theThemeInfo;
     char *theInitiatorName;
     char *thePeerName;
+    char theRoomStatus;
     char theRoomIdIndex[SIZE_DEF::ROOM_ID_INDEX_SIZE + 4];
     void *theSessionArrayMgr;
     SessionClass **theSessionTableArray;
@@ -33,6 +34,8 @@ public:
     char const* objectName(void) {return "GroupClass";}
 
     char mode(void) {return this->theMode;}
+    char roomStatus(void) {return this->theRoomStatus;}
+    void setRoomStatusToReady(void);
     char *themeInfo(void) {return this->theThemeInfo;}
     char *initiatorName(void) {return this->theInitiatorName;}
     char *peerName(void) {return this->thePeerName;}

@@ -42,8 +42,8 @@ public:
     char const static FE_GROUP_MODE_INDIVIDUAL = 'I';
     char const static FE_GROUP_MODE_SOCIAL     = 'S';
 
-    char const static FE_SESSION_STATUS_PREPARING = 'P';
-    char const static FE_SESSION_STATUS_READY     = 'R';
+    char const static FE_ROOM_STATUS_PREPARING = 'P';
+    char const static FE_ROOM_STATUS_READY     = 'R';
 
     char const static RESPOND_IS_GET_LINK_DATA_PENDING_SESSION  = 'S';
     char const static RESPOND_IS_GET_LINK_DATA_PENDING_SESSION3 = 'T';
