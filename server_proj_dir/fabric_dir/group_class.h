@@ -14,6 +14,7 @@ class FabricClass;
 class GroupClass : public ListEntryClass {
 #define GROUP_CLASS_SESSION_ARRAY_SIZE 32
     FabricClass *theFabricObject;
+    char theMode;
     char *theThemeInfo;
     char *theInitiatorName;
     char *thePeerName;
@@ -24,12 +25,14 @@ class GroupClass : public ListEntryClass {
 public:
     GroupClass(void *list_mgr_object_val,
                FabricClass *fabric_object_val,
+               char mode_val,
                char const *theme_info_val,
                char const *initiator_name_val,
                char const *peer_name_val);
     ~GroupClass(void);
     char const* objectName(void) {return "GroupClass";}
 
+    char mode(void) {return this->theMode;}
     char *themeInfo(void) {return this->theThemeInfo;}
     char *initiatorName(void) {return this->theInitiatorName;}
     char *peerName(void) {return this->thePeerName;}

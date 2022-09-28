@@ -50,6 +50,7 @@ public:
     LinkClass *searchLink(char *data_val, void *extra_data_val) {return (LinkClass *) phwangListMgrSearchEntry(this->theLinkListMgrObject, data_val, extra_data_val);}
     LinkClass *searchLinkByName(char *name_val);
     GroupClass *mallocGroup(
+        char mode_val,
         char const *theme_info_val,
         char const *initiator_name_val,
         char const *peer_name_val);

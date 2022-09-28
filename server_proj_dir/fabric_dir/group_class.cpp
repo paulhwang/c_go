@@ -13,12 +13,14 @@
 GroupClass::GroupClass (
     void *list_mgr_object_val,
     FabricClass *fabric_object_val,
+    char mode_val,
     char const *theme_info_val,
     char const *initiator_name_val,
     char const *peer_name_val)
-    :ListEntryClass(list_mgr_object_val)
+        :ListEntryClass(list_mgr_object_val)
 {
     this->theFabricObject = fabric_object_val;
+    this->theMode = mode_val;
     this->theThemeInfo =     (char *) phwangMalloc(strlen(theme_info_val) + 1,     MallocClass::GroupClass);
     this->theInitiatorName = (char *) phwangMalloc(strlen(initiator_name_val) + 1, MallocClass::GroupClass);
     this->thePeerName =      (char *) phwangMalloc(strlen(peer_name_val) + 1,      MallocClass::GroupClass);

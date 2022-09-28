@@ -623,6 +623,7 @@ char *DFabricClass::processSetupSessionRequest (
     char *response_data = 0;
     phwangDebugS(true, "DFabricClass::processSetupSessionRequest", data_val);
 
+    char group_mode = 'A';
     char *encoded_theme_info = data_val;
     int theme_info_size;
     char *theme_info = phwangDecodeStringMalloc(encoded_theme_info, &theme_info_size);
@@ -653,7 +654,7 @@ char *DFabricClass::processSetupSessionRequest (
         phwangFree(peer_name);
         return response_data;
     }
-    GroupClass *group = this->theFabricObject->mallocGroup(theme_info, initiator_name, peer_name);
+    GroupClass *group = this->theFabricObject->mallocGroup(group_mode, theme_info, initiator_name, peer_name);
     if (!group) {
         response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_MALLOC_GROUP_FAIL, link_val->linkIdIndex(), session->sessionIdIndex(), data_val);
         phwangFree(theme_info);
@@ -701,6 +702,7 @@ char *DFabricClass::processSetupSession1Request (
     char *response_data = 0;
     phwangDebugS(true, "DFabricClass::processSetupSession1Request", data_val);
 
+    char group_mode = 'A';
     char *encoded_theme_info = data_val;
     int theme_info_size;
     char *theme_info = phwangDecodeStringMalloc(encoded_theme_info, &theme_info_size);
@@ -731,7 +733,7 @@ char *DFabricClass::processSetupSession1Request (
         phwangFree(peer_name);
         return response_data;
     }
-    GroupClass *group = this->theFabricObject->mallocGroup(theme_info, initiator_name, peer_name);
+    GroupClass *group = this->theFabricObject->mallocGroup(group_mode, theme_info, initiator_name, peer_name);
     if (!group) {
         response_data = this->generateSetupSession1Response(RESULT_DEF::RESULT_MALLOC_GROUP_FAIL, link_val->linkIdIndex(), session->sessionIdIndex());
         phwangFree(theme_info);
@@ -886,8 +888,8 @@ char *DFabricClass::processGetSessionSetupStatusRequest (
                                     RESULT_DEF::RESULT_SUCCEED,
                                     session_val->linkObject()->linkIdIndex(),
                                     session_val->sessionIdIndex(),
-                                    FE_DEF::FE_SESSION_STATUS_READY,
-                                    FE_DEF::FE_SESSION_TYPE_SOLO,
+                                    session_val->status(),
+                                    group_object->mode(),
                                     group_object->themeInfo(),
                                     group_object->initiatorName(),
                                     group_object->peerName());

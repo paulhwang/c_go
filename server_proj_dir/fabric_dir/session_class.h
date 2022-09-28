@@ -14,6 +14,7 @@ class GroupClass;
 class SessionClass : public ListEntryClass {
     LinkClass *theLinkObject;
     GroupClass *theGroupObject;
+    char theStatus;
     void *thePendingDownLinkDataQueue;
 
 public:
@@ -24,7 +25,7 @@ public:
     char *sessionIdIndex(void) {return this->entryIdIndex();}
     LinkClass *linkObject(void) {return this->theLinkObject;}
     GroupClass *groupObject(void) {return this->theGroupObject;}
-
+    char status(void) {return this->theStatus;}
     void bindGroup(GroupClass *group_object_val) {this->theGroupObject = group_object_val;}
     char *getPendingDownLinkData(void) {return (char *) phwangDequeue(this->thePendingDownLinkDataQueue, "SessionClass::getPendingDownLinkData()");}
     void enqueuePendingDownLinkData(char *data_val);
