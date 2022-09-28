@@ -39,8 +39,8 @@ public:
     char const static FE_MESSAGE_COMMAND                   = 'M';
     char const static FE_MESSAGE_RESPONSE                  = 'm';
 
-    char const static FE_SESSION_TYPE_SOLO  = 'S';
-    char const static FE_SESSION_TYPE_GROUP = 'G';
+    char const static FE_GROUP_MODE_INDIVIDUAL = 'I';
+    char const static FE_GROUP_MODE_SOCIAL     = 'S';
 
     char const static FE_SESSION_STATUS_PREPARING = 'P';
     char const static FE_SESSION_STATUS_READY     = 'R';
