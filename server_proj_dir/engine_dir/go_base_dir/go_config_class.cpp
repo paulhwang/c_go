@@ -17,7 +17,7 @@ GoConfigClass::GoConfigClass (GoBaseClass *base_object_val, char *config_info_va
     }
     this->debug(true, "GoConfigClass", config_info_val);
 
-    char *current = config_info_val + 4;
+    char *current = config_info_val + 3;
     this->theBoardSize = phwangDecodeNumber(current, 2);
     current += 2;
 
