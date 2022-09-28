@@ -8,7 +8,7 @@
 #include "go_base_class.h"
 #include "../engine_class.h"
 
-GoBaseClass::GoBaseClass (void *list_mgr_object_val, EngineClass *engine_object_val, char const *config_info_val):
+GoBaseClass::GoBaseClass (void *list_mgr_object_val, EngineClass *engine_object_val, char *config_info_val):
     ListEntryClass(list_mgr_object_val),
     theEngineObject(engine_object_val)
 {

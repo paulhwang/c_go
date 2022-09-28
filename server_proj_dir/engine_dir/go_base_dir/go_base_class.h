@@ -32,7 +32,7 @@ class GoBaseClass : public ListEntryClass {
     GoGameClass *theGameObject;
 
 public:
-    GoBaseClass(void *list_mgr_object_val, EngineClass *engine_object_val, char const *config_info_val);
+    GoBaseClass(void *list_mgr_object_val, EngineClass *engine_object_val, char *config_info_val);
     ~GoBaseClass(void);
     char const *objectName(void) {return "GoBaseClass";}
 

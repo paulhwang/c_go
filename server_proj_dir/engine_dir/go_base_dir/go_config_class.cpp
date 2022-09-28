@@ -5,21 +5,26 @@
 */
 
 #include <stdio.h>
+#include "../../define_dir/fe_def.h"
 #include "go_base_class.h"
 #include "go_config_class.h"
 
-GoConfigClass::GoConfigClass (GoBaseClass *base_object_val, char const *config_info_val):
+GoConfigClass::GoConfigClass (GoBaseClass *base_object_val, char *config_info_val):
     theBaseObject(base_object_val)
 {
-    if (memcmp(config_info_val, "G", 1)) {
+    if (*config_info_val != FE_DEF::FE_APP_IS_GO_GAME) {
         this->abend("GoConfigClass", "not GO");
     }
+    this->debug(true, "GoConfigClass", config_info_val);
 
-    config_info_val += 2;
-    this->theBoardSize = phwangDecodeNumber(config_info_val + 2, 2);
-    this->theHandicapPoint = phwangDecodeNumber(config_info_val + 4, 2);
-    this->theKomi = phwangDecodeNumber(config_info_val + 6, 2);
-    this->debug(false, "GoConfigClass", config_info_val);
+    char *current = config_info_val + 4;
+    this->theBoardSize = phwangDecodeNumber(current, 2);
+    current += 2;
+
+    this->theHandicapPoint = phwangDecodeNumber(current, 2);
+    current += 2;
+
+    this->theKomi = phwangDecodeNumber(current, 2);
 }
 
 void GoConfigClass::logit (char const *str0_val, char const *str1_val) {

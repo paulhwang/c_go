@@ -717,7 +717,7 @@ char *DFabricClass::processSetupSession1Request (
     phwangDebugSS(true, "DFabricClass::processSetupSessionRequest", "peer_name=", peer_name);
 
     switch (*theme_info) {
-        case 'G':
+        case FE_DEF::FE_APP_IS_GO_GAME:
             break;
 
         default:
