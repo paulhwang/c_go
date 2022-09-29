@@ -26,6 +26,7 @@ char const *RESULT_DEF::RESULT_MALLOC_SESSION_FAIL        = "57";
 char const *RESULT_DEF::RESULT_MALLOC_GROUP_FAIL          = "58";
 char const *RESULT_DEF::RESULT_HIS_LINK_NOT_EXIST         = "59";
 char const *RESULT_DEF::RESULT_NULL_HIS_SESSION           = "60";
+char const *RESULT_DEF::RESULT_SESSION_DATA_NOT_AVAILABLE = "61";
 
 char const *RESULT_DEF::RESULT_MALLOC_ROOM_FAIL           = "71";
 

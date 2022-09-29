@@ -30,5 +30,7 @@ public:
     char const static *RESULT_MALLOC_GROUP_FAIL;
     char const static *RESULT_HIS_LINK_NOT_EXIST;
     char const static *RESULT_NULL_HIS_SESSION;
+    char const static *RESULT_SESSION_DATA_NOT_AVAILABLE;
+
     char const static *RESULT_MALLOC_ROOM_FAIL;
 };

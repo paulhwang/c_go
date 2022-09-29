@@ -1043,9 +1043,12 @@ char *DFabricClass::processGetSessionDataRequest (
     phwangDebugS(true, "DFabricClass::processGetSessionDataRequest", data_val);
 
     char *data = session_val->getPendingDownLinkData();
-
-    char *response_data = this->generateGetSessionDataResponse(RESULT_DEF::RESULT_SUCCEED, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex(), data);
-    return response_data;
+    if (data) {
+        return this->generateGetSessionDataResponse(RESULT_DEF::RESULT_SUCCEED, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex(), data);
+    }
+    else {
+        return this->generateGetSessionDataResponse(RESULT_DEF::RESULT_SESSION_DATA_NOT_AVAILABLE, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex(), "");
+    }
 }
 
 char *DFabricClass::generateGetSessionDataResponse (
