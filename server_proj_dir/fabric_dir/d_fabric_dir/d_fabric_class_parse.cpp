@@ -172,27 +172,19 @@ void DFabricClass::exportedParseFunction (
             phwangAbendS("DFabricClass::exportedParseFunction", "bad type");
             return;
     }
-    this->sendResponse(port_object_val, response_data, device_type, ajax_id);
-}
 
-void DFabricClass::sendResponse(
-    void *port_object_val,
-    char *response_data_val,
-    char device_type_val,
-    char const *ajax_id_val)
-{
-    switch (device_type_val) {
+    switch (device_type) {
         case 'N':
-            memcpy(&response_data_val[1], ajax_id_val, SIZE_DEF::AJAX_ID_SIZE);
+            memcpy(&response_data[1], ajax_id, SIZE_DEF::AJAX_ID_SIZE);
             break;
 
         case 'A':
-            memcpy(&response_data_val[1], "***", SIZE_DEF::AJAX_ID_SIZE);
+            memcpy(&response_data[1], "***", SIZE_DEF::AJAX_ID_SIZE);
             break;
         default:
             break;
     }
-    this->transmitFunction(port_object_val, response_data_val);
+    this->transmitFunction(port_object_val, response_data);
 }
 
 void DFabricClass::sendSearchLinkFailResponse (

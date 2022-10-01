@@ -66,16 +66,16 @@ void UFabricClass::processSetupRoomResponse (char *data_val)
     group->setSessionTableArray((SessionClass **) phwangArrayMgrGetArrayTable(group->sessionArrayMgr(), &session_array_size));
     for (int i = 0; i < session_array_size; i++) {
         SessionClass *session = group->sessionTableArray(0);
-        this->sendSetupSessioResponse(session, group, RESULT_DEF::RESULT_SUCCEED);
+        this->sendSetupSessioResponse(session, group, result_buf);
 
         session->linkObject()->setPendingSessionSetup3(session->sessionIdIndex(), "");
     }
 }
 
-char *UFabricClass::sendSetupSessioResponse (
-        SessionClass *session_val,
-        GroupClass *group_val,
-        char const *result_val)
+void UFabricClass::sendSetupSessioResponse (
+    SessionClass *session_val,
+    GroupClass *group_val,
+    char const *result_val)
 {
     phwangDebugSS(false, "DFabricClass::generateSetupSessioResponse", "result=", result_val);
     LinkClass *link = session_val->linkObject();
@@ -87,7 +87,20 @@ char *UFabricClass::sendSetupSessioResponse (
     char *response_data = (char *) phwangMalloc(
         FABRIC_DEF::FE_DL_BUF_WITH_LINK_SESSION_SIZE + 5 + strlen(encoded_theme_info) + strlen(encoded_initiator_name) + strlen(encoded_peer_name),
         MallocClass::generateSetupSessionSucceedResponse);
-    char *current_ptr = &response_data[FABRIC_DEF::FE_DL_COMMAND_AJAX_SIZE];
+    char *current_ptr = &response_data[FE_DEF::FE_COMMAND_SIZE];
+
+    switch (link->deviceType()) {
+        case 'N':
+            memcpy(&response_data[1], "000" /*ajax_id_val*/, SIZE_DEF::AJAX_ID_SIZE);
+            break;
+
+        case 'A':
+            memcpy(&response_data[1], "***", SIZE_DEF::AJAX_ID_SIZE);
+            break;
+        default:
+            break;
+    }
+    current_ptr += SIZE_DEF::AJAX_ID_SIZE;
 
     memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;
@@ -116,18 +129,6 @@ char *UFabricClass::sendSetupSessioResponse (
     phwangFree(encoded_initiator_name);
     phwangFree(encoded_peer_name);
 
-    return response_data;
-    switch (link->deviceType()) {
-        case 'N':
-            memcpy(&response_data[1], "000" /*ajax_id_val*/, SIZE_DEF::AJAX_ID_SIZE);
-            break;
-
-        case 'A':
-            memcpy(&response_data[1], "***", SIZE_DEF::AJAX_ID_SIZE);
-            break;
-        default:
-            break;
-    }
     //this->fabricObject()->dFabricObject()->transmitFunction(0 /*port_object_val*/, response_data);
 }
 

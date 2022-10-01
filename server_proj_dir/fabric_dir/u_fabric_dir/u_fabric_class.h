@@ -35,7 +35,7 @@ public:
     void exportedParseFunction(char *data_val);
     void exportedNetAcceptFunction(void *tp_transfer_object_val);
 
-    char *sendSetupSessioResponse (
+    void sendSetupSessioResponse (
         SessionClass *session_val,
         GroupClass *group_val,
         char const *result_val);
