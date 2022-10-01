@@ -29,6 +29,7 @@ public:
     char const* objectName(void) {return "SessionClass";}
     char *ajaxIdBuf(void) {return this->theAjaxIdBuf;}
     char *ajaxId(void) {return this->theAjaxId;}
+    void resetAjaxId(void) {this->theAjaxId = 0;}
     char *sessionIdIndex(void) {return this->entryIdIndex();}
     LinkClass *linkObject(void) {return this->theLinkObject;}
     GroupClass *groupObject(void) {return this->theGroupObject;}
