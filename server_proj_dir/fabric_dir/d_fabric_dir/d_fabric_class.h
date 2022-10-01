@@ -150,10 +150,7 @@ class DFabricClass {
         char const *session_id_index_val,
         char const *data_val);
 
-    void sendSetupRoomRequestToThemeServer (
-        GroupClass *group_val,
-        char *theme_info_val);
-
+    void sendSetupRoomRequestToThemeServer (GroupClass *group_val);
     void sendPutSessionDataRequestToThemeServer (
         char const *room_id_index_val,
         char const *data_val);

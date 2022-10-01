@@ -655,15 +655,17 @@ char *DFabricClass::processSetupSessionRequest (
     if (!group) {
         response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_MALLOC_GROUP_FAIL, link_val->linkIdIndex(), session->sessionIdIndex(), data_val);
         phwangFree(theme_info);
+        phwangFree(initiator_name);
         phwangFree(peer_name);
         return response_data;
     }
     group->insertSession(session);
     session->bindGroup(group);
 
-    this->sendSetupRoomRequestToThemeServer(group, theme_info);
+    this->sendSetupRoomRequestToThemeServer(group);
     response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_SUCCEED, link_val->linkIdIndex(), session->sessionIdIndex(), data_val);
     phwangFree(theme_info);
+    phwangFree(initiator_name);
     phwangFree(peer_name);
     return response_data;
 }
@@ -732,6 +734,7 @@ char *DFabricClass::processSetupSession1Request (
     if (!group) {
         response_data = this->generateSetupSession1Response(RESULT_DEF::RESULT_MALLOC_GROUP_FAIL, link_val->linkIdIndex(), session->sessionIdIndex());
         phwangFree(theme_info);
+        phwangFree(initiator_name);
         phwangFree(peer_name);
         return response_data;
     }
@@ -739,13 +742,14 @@ char *DFabricClass::processSetupSession1Request (
     session->bindGroup(group);
 
     if (!strcmp(peer_name, session->linkObject()->linkName())) {
-        this->sendSetupRoomRequestToThemeServer(group, theme_info);
+        this->sendSetupRoomRequestToThemeServer(group);
     }
     else {
         LinkClass *his_link = this->theFabricObject->searchLinkByName(peer_name);
         if (!his_link) {
             response_data = this->generateSetupSession1Response(RESULT_DEF::RESULT_HIS_LINK_NOT_EXIST, link_val->linkIdIndex(), session->sessionIdIndex());
             phwangFree(theme_info);
+            phwangFree(initiator_name);
             phwangFree(peer_name);
             return response_data;
         }
@@ -754,6 +758,7 @@ char *DFabricClass::processSetupSession1Request (
         if (!his_session) {
             response_data = this->generateSetupSession1Response(RESULT_DEF::RESULT_NULL_HIS_SESSION, link_val->linkIdIndex(), session->sessionIdIndex());
             phwangFree(theme_info);
+            phwangFree(initiator_name);
             phwangFree(peer_name);
             return response_data;
         }
@@ -769,6 +774,7 @@ char *DFabricClass::processSetupSession1Request (
 
     response_data = this->generateSetupSession1Response(RESULT_DEF::RESULT_SUCCEED, link_val->linkIdIndex(), session->sessionIdIndex());
     phwangFree(theme_info);
+    phwangFree(initiator_name);
     phwangFree(peer_name);
     return response_data;
 }
@@ -790,17 +796,17 @@ char *DFabricClass::generateSetupSession1Response (
     return response_data;
 }
 
-void DFabricClass::sendSetupRoomRequestToThemeServer (GroupClass *group_val, char *theme_info_val)
+void DFabricClass::sendSetupRoomRequestToThemeServer (GroupClass *group_val)
 {
     char *current_ptr;
-    char *uplink_data = current_ptr = (char *) phwangMalloc(FABRIC_DEF::FT_UL_BUF_WITH_GROUP_SIZE + strlen(theme_info_val), MallocClass::sendSetupRoomRequestToThemeServer);
+    char *uplink_data = current_ptr = (char *) phwangMalloc(FABRIC_DEF::FT_UL_BUF_WITH_GROUP_SIZE + strlen(group_val->themeInfo()), MallocClass::sendSetupRoomRequestToThemeServer);
 
     *current_ptr++ = FT_DEF::FT_SETUP_ROOM_COMMAND;
 
     memcpy(current_ptr, group_val->groupIdIndex(), SIZE_DEF::GROUP_ID_INDEX_SIZE);
     current_ptr += SIZE_DEF::GROUP_ID_INDEX_SIZE;
 
-    strcpy(current_ptr, theme_info_val);
+    strcpy(current_ptr, group_val->themeInfo());
 
     this->theFabricObject->uFabricObject()->transmitFunction(uplink_data);
 }
@@ -816,7 +822,7 @@ char *DFabricClass::processSetupSession2Request (
 
     char *theme_info_val = data_val;
     GroupClass *group = session_val->groupObject();
-    this->sendSetupRoomRequestToThemeServer(group, theme_info_val);
+    this->sendSetupRoomRequestToThemeServer(group);//////////////do it twice ???
 
     response_data = this->generateSetupSession2Response(RESULT_DEF::RESULT_SUCCEED, link->linkIdIndex(), session_val->sessionIdIndex());
     return response_data;
