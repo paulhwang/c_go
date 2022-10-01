@@ -45,7 +45,7 @@ public:
 
     void *watchDogThreadFunction(void);
 
-    LinkClass *mallocLink(char const *my_name_val);
+    LinkClass *mallocLink(char const *my_name_val, char device_type_val);
     void freeLink(LinkClass *link_object_val);
     LinkClass *searchLink(char *data_val, void *extra_data_val) {return (LinkClass *) phwangListMgrSearchEntry(this->theLinkListMgrObject, data_val, extra_data_val);}
     LinkClass *searchLinkByName(char *name_val);

@@ -50,7 +50,7 @@ class DFabricClass {
         char const *result_val,
         char const *account_name_val);
 
-    char *processSignInRequest (char *data_val);
+    char *processSignInRequest (char *data_val, char device_type_val);
     char *generateSignInResponse (
         char const *result_val,
         char const *link_id_index_val,

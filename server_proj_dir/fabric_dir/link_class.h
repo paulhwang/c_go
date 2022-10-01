@@ -16,6 +16,7 @@ class LinkClass : public ListEntryClass {
 #define LINK_CLASS_KEEP_ALIVE_TIMEOUT 60
 private:
     FabricClass *theFabricObject;
+    char theDeviceType;
     char theLinkName[LINK_CLASS_LINK_NAME_BUF_SIZE + 4];
     void *theSessionListMgrObject;
     void *thePendingSessionSetupQueue;
@@ -24,10 +25,11 @@ private:
     time_t theKeepAliveTime;
 
 public:
-    LinkClass(void *list_mgr_object_val, FabricClass *fabric_object_val, char const* link_name_val);
+    LinkClass(void *list_mgr_object_val, FabricClass *fabric_object_val, char const* link_name_val, char device_type_val);
     ~LinkClass(void);
     char const *objectName(void) {return "LinkClass";}
 
+    char deviceType(void) {return this->theDeviceType;}
     char *linkName(void) {return this->theLinkName;}
     char *linkIdIndex(void) {return this->entryIdIndex();}
     time_t keepAliveTime(void) {return this->theKeepAliveTime;}

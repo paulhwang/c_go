@@ -16,17 +16,19 @@
 LinkClass::LinkClass (
     void *list_mgr_object_val,
     FabricClass *fabric_object_val,
-    char const* link_name_val)
+    char const* my_name_val,
+    char device_type_val)
         :ListEntryClass(list_mgr_object_val)
 {
     this->theFabricObject = fabric_object_val;
+    this->theDeviceType = device_type_val;
     this->theNameListChanged = 'D';
 
-    if (strlen(link_name_val) <= LINK_CLASS_LINK_NAME_BUF_SIZE) {
-        strcpy(this->theLinkName, link_name_val);
+    if (strlen(my_name_val) <= LINK_CLASS_LINK_NAME_BUF_SIZE) {
+        strcpy(this->theLinkName, my_name_val);
     }
     else {
-        memcpy(this->theLinkName, link_name_val, LINK_CLASS_LINK_NAME_BUF_SIZE);
+        memcpy(this->theLinkName, my_name_val, LINK_CLASS_LINK_NAME_BUF_SIZE);
         this->theLinkName[LINK_CLASS_LINK_NAME_BUF_SIZE] = 0;
     }
     this->theSessionListMgrObject = phwangListMgrMalloc("SESSION", SIZE_DEF::SESSION_ID_SIZE, SIZE_DEF::SESSION_INDEX_SIZE, SIZE_DEF::SESSION_ID_INITIAL_VALUE);

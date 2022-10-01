@@ -28,13 +28,13 @@ void DFabricClass::exportedParseFunction (
     void *tp_transfer_object_val,
     char *data_val)
 {
-    char device = data_val[0];
+    char device_type = data_val[0];
     char depth = data_val[1];
     char command = data_val[2];
     char *current_ptr = &data_val[3];
 
     char ajax_id[SIZE_DEF::AJAX_ID_SIZE + 1];
-    switch (device) {
+    switch (device_type) {
         case 'N':
             memcpy(ajax_id, current_ptr, SIZE_DEF::AJAX_ID_SIZE);
             ajax_id[SIZE_DEF::AJAX_ID_SIZE] = 0;
@@ -65,7 +65,7 @@ void DFabricClass::exportedParseFunction (
                     break;
 
                 case FE_DEF::FE_SETUP_LINK_COMMAND:
-                    response_data = this->processSignInRequest(current_ptr);
+                    response_data = this->processSignInRequest(current_ptr, device_type);
                     response_data[0] = FE_DEF::FE_SETUP_LINK_RESPONSE;
                     break;
 
@@ -170,7 +170,7 @@ void DFabricClass::exportedParseFunction (
             return;
     }
 
-    switch (device) {
+    switch (device_type) {
         case 'N':
             memcpy(&response_data[1], ajax_id, SIZE_DEF::AJAX_ID_SIZE);
             break;
@@ -356,7 +356,7 @@ char *DFabricClass::generateSignUpResponse (
     return response_data;
 }
 
-char *DFabricClass::processSignInRequest (char *data_val)
+char *DFabricClass::processSignInRequest (char *data_val, char device_type_val)
 {
     char *response_data;
     phwangDebugS(false, "DFabricClass::processSignInRequest", data_val);
@@ -382,7 +382,7 @@ char *DFabricClass::processSignInRequest (char *data_val)
     phwangFree(password);
 
     if (!strcmp(result_buf, RESULT_DEF::RESULT_PASSWORD_MATCH)) {
-        LinkClass *link = this->theFabricObject->mallocLink(my_name);
+        LinkClass *link = this->theFabricObject->mallocLink(my_name, device_type_val);
         if (!link) {
             phwangAbendS("DFabricClass::processSignInRequest", "null_link");
             phwangFree(my_name);
@@ -652,11 +652,11 @@ char *DFabricClass::processSetupSessionRequest (
             phwangAbendSS("DFabricClass::processSetupSessionRequest", "theme not supported", theme_info);
     }
     GroupClass *group = this->theFabricObject->mallocGroup(FE_DEF::FE_GROUP_MODE_INDIVIDUAL, theme_info, initiator_name, peer_name);
+    phwangFree(theme_info);
+    phwangFree(initiator_name);
+    phwangFree(peer_name);
     if (!group) {
         response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_MALLOC_GROUP_FAIL, link_val->linkIdIndex(), session->sessionIdIndex(), data_val);
-        phwangFree(theme_info);
-        phwangFree(initiator_name);
-        phwangFree(peer_name);
         return response_data;
     }
     group->insertSession(session);
@@ -664,9 +664,6 @@ char *DFabricClass::processSetupSessionRequest (
 
     this->sendSetupRoomRequestToThemeServer(group);
     response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_SUCCEED, link_val->linkIdIndex(), session->sessionIdIndex(), data_val);
-    phwangFree(theme_info);
-    phwangFree(initiator_name);
-    phwangFree(peer_name);
     return response_data;
 }
 
