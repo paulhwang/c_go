@@ -16,19 +16,19 @@ GroupClass::GroupClass (
     FabricClass *fabric_object_val,
     char mode_val,
     char const *theme_info_val,
-    char const *initiator_name_val,
-    char const *peer_name_val)
+    char const *first_fiddle_val,
+    char const *second_fiddle_val)
         :ListEntryClass(list_mgr_object_val)
 {
     this->theFabricObject = fabric_object_val;
     this->theRoomStatus = FE_DEF::FE_ROOM_STATUS_PREPARING;
     this->theMode = mode_val;
-    this->theThemeInfo =     (char *) phwangMalloc(strlen(theme_info_val) + 1,     MallocClass::GroupClass);
-    this->theInitiatorName = (char *) phwangMalloc(strlen(initiator_name_val) + 1, MallocClass::GroupClass);
-    this->thePeerName =      (char *) phwangMalloc(strlen(peer_name_val) + 1,      MallocClass::GroupClass);
-    strcpy(this->theThemeInfo,     theme_info_val);
-    strcpy(this->theInitiatorName, initiator_name_val);
-    strcpy(this->thePeerName,      peer_name_val);
+    this->theThemeInfo =    (char *) phwangMalloc(strlen(theme_info_val) + 1,     MallocClass::GroupClass);
+    this->theFirstFiddle =  (char *) phwangMalloc(strlen(first_fiddle_val) + 1, MallocClass::GroupClass);
+    this->theSecondFiddle = (char *) phwangMalloc(strlen(second_fiddle_val) + 1,      MallocClass::GroupClass);
+    strcpy(this->theThemeInfo,    theme_info_val);
+    strcpy(this->theFirstFiddle,  first_fiddle_val);
+    strcpy(this->theSecondFiddle, second_fiddle_val);
 
     this->theSessionArrayMgr = phwangArrayMgrMalloc(this->objectName(), 'o', 10);
     this->theSessionTableArray = 0;
@@ -39,9 +39,9 @@ GroupClass::GroupClass (
 GroupClass::~GroupClass (void)
 {
     phwangArrayMgrFree(this->theSessionArrayMgr);
-    phwangFree(this->theThemeInfo);
-    phwangFree(this->theInitiatorName);
-    phwangFree(this->thePeerName);
+    phwangFree(this->themeInfo());
+    phwangFree(this->firstFiddle());
+    phwangFree(this->secondFiddle());
 }
 
 void GroupClass::setRoomStatusToReady(void)

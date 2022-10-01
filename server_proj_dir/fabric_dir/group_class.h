@@ -16,8 +16,8 @@ class GroupClass : public ListEntryClass {
     FabricClass *theFabricObject;
     char theMode;
     char *theThemeInfo;
-    char *theInitiatorName;
-    char *thePeerName;
+    char *theFirstFiddle;
+    char *theSecondFiddle;
     char theRoomStatus;
     char theRoomIdIndex[SIZE_DEF::ROOM_ID_INDEX_SIZE + 4];
     void *theSessionArrayMgr;
@@ -28,8 +28,8 @@ public:
                FabricClass *fabric_object_val,
                char mode_val,
                char const *theme_info_val,
-               char const *initiator_name_val,
-               char const *peer_name_val);
+               char const *first_fiddle_val,
+               char const *second_fiddle_val);
     ~GroupClass(void);
     char const* objectName(void) {return "GroupClass";}
 
@@ -37,8 +37,8 @@ public:
     char roomStatus(void) {return this->theRoomStatus;}
     void setRoomStatusToReady(void);
     char *themeInfo(void) {return this->theThemeInfo;}
-    char *initiatorName(void) {return this->theInitiatorName;}
-    char *peerName(void) {return this->thePeerName;}
+    char *firstFiddle(void) {return this->theFirstFiddle;}
+    char *secondFiddle(void) {return this->theSecondFiddle;}
 
     char *groupIdIndex(void) {return this->entryIdIndex();}
     char *roomIdIndex(void) {return this->theRoomIdIndex;}

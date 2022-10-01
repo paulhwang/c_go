@@ -68,7 +68,7 @@ void UFabricClass::processSetupRoomResponse (char *data_val)
         SessionClass *session = group->sessionTableArray(0);
         this->sendSetupSessioResponse(session, group, result_buf);
         if ((group->mode() == FE_DEF::FE_GROUP_MODE_SOLO) ||
-            ((group->mode() == FE_DEF::FE_GROUP_MODE_DUET) && (!strcmp(group->initiatorName(), group->peerName()))) ||
+            ((group->mode() == FE_DEF::FE_GROUP_MODE_DUET) && (!strcmp(group->firstFiddle(), group->secondFiddle()))) ||
             (group->mode() == FE_DEF::FE_GROUP_MODE_ENSEMBLE)) {
             phwangDebugS(true, "UFabricClass::processSetupRoomResponse", "match");
 
@@ -87,8 +87,8 @@ void UFabricClass::sendSetupSessioResponse (
     LinkClass *link = session_val->linkObject();
 
     char *encoded_theme_info     = phwangEncodeStringMalloc(group_val->themeInfo());
-    char *encoded_initiator_name = phwangEncodeStringMalloc(group_val->initiatorName());
-    char *encoded_peer_name      = phwangEncodeStringMalloc(group_val->peerName());
+    char *encoded_initiator_name = phwangEncodeStringMalloc(group_val->firstFiddle());
+    char *encoded_peer_name      = phwangEncodeStringMalloc(group_val->secondFiddle());
 
     char *response_data = (char *) phwangMalloc(
         FABRIC_DEF::FE_DL_BUF_WITH_LINK_SESSION_SIZE + 5 + strlen(encoded_theme_info) + strlen(encoded_initiator_name) + strlen(encoded_peer_name),

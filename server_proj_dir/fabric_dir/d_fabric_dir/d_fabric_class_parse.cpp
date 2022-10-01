@@ -978,8 +978,8 @@ char *DFabricClass::processGetSessionSetupStatusRequest (
                                     group_object->roomStatus(),
                                     group_object->mode(),
                                     group_object->themeInfo(),
-                                    group_object->initiatorName(),
-                                    group_object->peerName());
+                                    group_object->firstFiddle(),
+                                    group_object->secondFiddle());
     return response_data;
 }
 
