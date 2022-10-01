@@ -128,9 +128,24 @@ void UFabricClass::sendSetupSessioResponse (
     memcpy(current_ptr, encoded_first_fiddle, strlen(encoded_first_fiddle));
     current_ptr += strlen(encoded_first_fiddle);
 
-    if (group_val->mode() == FE_DEF::FE_GROUP_MODE_DUET) {
-        memcpy(current_ptr, encoded_second_fiddle, strlen(encoded_second_fiddle));
-        current_ptr += strlen(encoded_second_fiddle);
+    switch (group_val->mode()) {
+        case FE_DEF::FE_GROUP_MODE_SOLO:
+            *response_data = FE_DEF::FE_SETUP_SOLO_RESPONSE;
+            break;
+
+        case FE_DEF::FE_GROUP_MODE_DUET:
+            *response_data = FE_DEF::FE_SETUP_DUET1_RESPONSE;
+
+            memcpy(current_ptr, encoded_second_fiddle, strlen(encoded_second_fiddle));
+            current_ptr += strlen(encoded_second_fiddle);
+            break;
+
+        case FE_DEF::FE_GROUP_MODE_ENSEMBLE:
+            *response_data = FE_DEF::FE_SETUP_ENSEMBLE_RESPONSE;
+            break;
+
+        default:
+            break;
     }
 
     *current_ptr = 0;

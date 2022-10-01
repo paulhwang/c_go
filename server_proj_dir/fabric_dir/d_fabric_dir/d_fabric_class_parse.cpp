@@ -107,9 +107,9 @@ void DFabricClass::exportedParseFunction (
                     response_data[0] = FE_DEF::FE_GET_NAME_LIST_RESPONSE;
                     break;
 
-                case FE_DEF::FE_SETUP_SOLE_COMMAND:
+                case FE_DEF::FE_SETUP_SOLO_COMMAND:
                     response_data = this->processSetupSoloRequest(link, current_ptr, ajax_id);
-                    response_data[0] = FE_DEF::FE_SETUP_SOLE_RESPONSE;
+                    response_data[0] = FE_DEF::FE_SETUP_SOLO_RESPONSE;
                     break;
 
                 case FE_DEF::FE_SETUP_DUET1_COMMAND:
