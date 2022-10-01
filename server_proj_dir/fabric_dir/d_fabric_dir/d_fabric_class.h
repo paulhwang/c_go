@@ -164,4 +164,9 @@ public:
     /* exports */
     void exportedNetAcceptFunction(void *port_object_val);
     void exportedParseFunction(void *port_object_val, char *data_val);
+    void sendResponse(
+        void *port_object_val,
+        char *response_data_val,
+        char device_type_val,
+        char const *ajax_id_val);
 };
