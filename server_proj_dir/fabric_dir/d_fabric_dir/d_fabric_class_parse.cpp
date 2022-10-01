@@ -113,7 +113,7 @@ void DFabricClass::exportedParseFunction (
                     break;
 
                 case FE_DEF::FE_SETUP_DUET1_COMMAND:
-                    response_data = this->processSetupDuet1Request(link, current_ptr);
+                    response_data = this->processSetupDuet1Request(link, current_ptr, ajax_id);
                     response_data[0] = FE_DEF::FE_SETUP_DUET1_RESPONSE;
                     break;
 
@@ -635,7 +635,7 @@ char *DFabricClass::processSetupSoloRequest (
     char *response_data = 0;
     phwangDebugS(true, "DFabricClass::processSetupSoloRequest", data_val);
 
-    SessionClass *session = link_val->mallocSession();
+    SessionClass *session = link_val->mallocSession(ajax_id_val);
     if (!session) {
         response_data = this->generateSetupSoloResponse(RESULT_DEF::RESULT_MALLOC_SESSION_FAIL, link_val->linkIdIndex(), SIZE_DEF::FAKE_SESSION_ID_INDEX, data_val);
         return response_data;
@@ -705,12 +705,13 @@ char *DFabricClass::generateSetupSoloResponse (
 
 char *DFabricClass::processSetupDuet1Request (
     LinkClass *link_val,
-    char *data_val)
+    char *data_val,
+    char *ajax_id_val)
 {
     char *response_data = 0;
     phwangDebugS(true, "DFabricClass::processSetupDuet1Request", data_val);
 
-    SessionClass *session = link_val->mallocSession();
+    SessionClass *session = link_val->mallocSession(ajax_id_val);
     if (!session) {
         response_data = this->generateSetupDuet1Response(RESULT_DEF::RESULT_MALLOC_SESSION_FAIL, link_val->linkIdIndex(), SIZE_DEF::FAKE_SESSION_ID_INDEX);
         return response_data;
@@ -763,7 +764,7 @@ char *DFabricClass::processSetupDuet1Request (
             return response_data;
         }
 
-        SessionClass *his_session = his_link->mallocSession();
+        SessionClass *his_session = his_link->mallocSession(ajax_id_val);
         if (!his_session) {
             response_data = this->generateSetupDuet1Response(RESULT_DEF::RESULT_NULL_HIS_SESSION, link_val->linkIdIndex(), session->sessionIdIndex());
             phwangFree(theme_info);
@@ -895,7 +896,7 @@ char *DFabricClass::processSetupEnsembleRequest (
     char *response_data = 0;
     phwangDebugS(true, "DFabricClass::processSetupEnsembleRequest", data_val);
 
-    SessionClass *session = link_val->mallocSession();
+    SessionClass *session = link_val->mallocSession(ajax_id_val);
     if (!session) {
         response_data = this->generateSetupEnsembleResponse(RESULT_DEF::RESULT_MALLOC_SESSION_FAIL, link_val->linkIdIndex(), SIZE_DEF::FAKE_SESSION_ID_INDEX, data_val);
         return response_data;

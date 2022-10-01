@@ -41,7 +41,7 @@ public:
     char *linkIdIndex(void) {return this->entryIdIndex();}
     time_t keepAliveTime(void) {return this->theKeepAliveTime;}
 
-    SessionClass *mallocSession(void);
+    SessionClass *mallocSession(char *ajax_id_val);
     void freeSession(SessionClass *session_object_val);
     void *sessionListMgrObject(void) {return this->theSessionListMgrObject;}
     SessionClass *searchSession(char *data_val);

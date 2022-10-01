@@ -43,7 +43,7 @@ LinkClass::~LinkClass (void)
     phwangFree(this->theMyName);
 }
 
-SessionClass *LinkClass::mallocSession (void)
+SessionClass *LinkClass::mallocSession (char *ajax_id_val)
 {
     SessionClass *session = new SessionClass(this->theSessionListMgrObject, this);
     if (!session) {
