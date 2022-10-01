@@ -122,9 +122,9 @@ void DFabricClass::exportedParseFunction (
                     response_data[0] = FE_DEF::FE_SETUP_DUET3_RESPONSE;
                     break;
 
-                case FE_DEF::FE_SETUP_TRIO_COMMAND:
+                case FE_DEF::FE_SETUP_ENSEMBLE_COMMAND:
                     response_data = this->processSetupTrioRequest(link, current_ptr, ajax_id);
-                    response_data[0] = FE_DEF::FE_SETUP_TRIO_RESPONSE;
+                    response_data[0] = FE_DEF::FE_SETUP_ENSEMBLE_RESPONSE;
                     break;
 
                 default:
@@ -663,7 +663,7 @@ char *DFabricClass::processSetupSoloRequest (
         default:
             phwangAbendSS("DFabricClass::processSetupSoloRequest", "theme not supported", theme_info);
     }
-    GroupClass *group = this->theFabricObject->mallocGroup(FE_DEF::FE_GROUP_MODE_INDIVIDUAL, theme_info, initiator_name, peer_name);
+    GroupClass *group = this->theFabricObject->mallocGroup(FE_DEF::FE_GROUP_MODE_SOLO, theme_info, initiator_name, peer_name);
     phwangFree(theme_info);
     phwangFree(initiator_name);
     phwangFree(peer_name);
@@ -739,7 +739,7 @@ char *DFabricClass::processSetupDuet1Request (
             phwangAbendSS("DFabricClass::processSetupDuet1Request", "theme not supported", theme_info);
     }
 
-    GroupClass *group = this->theFabricObject->mallocGroup(FE_DEF::FE_GROUP_MODE_SOCIAL, theme_info, initiator_name, peer_name);
+    GroupClass *group = this->theFabricObject->mallocGroup(FE_DEF::FE_GROUP_MODE_DUET, theme_info, initiator_name, peer_name);
     if (!group) {
         response_data = this->generateSetupDuet1Response(RESULT_DEF::RESULT_MALLOC_GROUP_FAIL, link_val->linkIdIndex(), session->sessionIdIndex());
         phwangFree(theme_info);
@@ -923,7 +923,7 @@ char *DFabricClass::processSetupTrioRequest (
         default:
             phwangAbendSS("DFabricClass::processSetupTrioRequest", "theme not supported", theme_info);
     }
-    GroupClass *group = this->theFabricObject->mallocGroup(FE_DEF::FE_GROUP_MODE_INDIVIDUAL, theme_info, initiator_name, peer_name);
+    GroupClass *group = this->theFabricObject->mallocGroup(FE_DEF::FE_GROUP_MODE_ENSEMBLE, theme_info, initiator_name, peer_name);
     phwangFree(theme_info);
     phwangFree(initiator_name);
     phwangFree(peer_name);

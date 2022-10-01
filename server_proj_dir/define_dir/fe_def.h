@@ -28,8 +28,8 @@ public:
     char const static FE_SETUP_DUET2_RESPONSE              = 'y';
     char const static FE_SETUP_DUET3_COMMAND               = 'Z';
     char const static FE_SETUP_DUET3_RESPONSE              = 'z';
-    char const static FE_SETUP_TRIO_COMMAND                = 'H';
-    char const static FE_SETUP_TRIO_RESPONSE               = 'h';
+    char const static FE_SETUP_ENSEMBLE_COMMAND            = 'E';
+    char const static FE_SETUP_ENSEMBLE_RESPONSE           = 'e';
     char const static FE_GET_SESSION_SETUP_STATUS_COMMAND  = 'T';
     char const static FE_GET_SESSION_SETUP_STATUS_RESPONSE = 't';
     char const static FE_FREE_SESSION_COMMAND              = 'V';
@@ -41,8 +41,9 @@ public:
     char const static FE_MESSAGE_COMMAND                   = 'M';
     char const static FE_MESSAGE_RESPONSE                  = 'm';
 
-    char const static FE_GROUP_MODE_INDIVIDUAL = 'I';
-    char const static FE_GROUP_MODE_SOCIAL     = 'S';
+    char const static FE_GROUP_MODE_SOLO     = 'S';
+    char const static FE_GROUP_MODE_DUET     = 'D';
+    char const static FE_GROUP_MODE_ENSEMBLE = 'A';
 
     char const static FE_ROOM_STATUS_PREPARING = 'P';
     char const static FE_ROOM_STATUS_READY     = 'R';
