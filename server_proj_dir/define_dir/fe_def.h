@@ -28,8 +28,8 @@ public:
     char const static FE_SETUP_SESSION2_RESPONSE           = 'y';
     char const static FE_SETUP_SESSION3_COMMAND            = 'Z';
     char const static FE_SETUP_SESSION3_RESPONSE           = 'z';
-    //char const static FE_SETUP_MULTIPLE_SESSION_COMMAND    = 'M';
-    //char const static FE_SETUP_NULTIPLE_SESSION_RESPONSE   = 'm';
+    char const static FE_SETUP_GROUP_SESSION_COMMAND       = 'H';
+    char const static FE_SETUP_GROUP_SESSION_RESPONSE      = 'h';
     char const static FE_GET_SESSION_SETUP_STATUS_COMMAND  = 'T';
     char const static FE_GET_SESSION_SETUP_STATUS_RESPONSE = 't';
     char const static FE_FREE_SESSION_COMMAND              = 'V';

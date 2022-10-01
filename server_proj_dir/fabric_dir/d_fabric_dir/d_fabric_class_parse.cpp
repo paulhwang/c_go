@@ -60,7 +60,7 @@ void DFabricClass::exportedParseFunction (
         case '0':
             switch (command) {
                 case FE_DEF::FE_REGISTER_COMMAND:
-                    response_data = this->processSignUpRequest(current_ptr);
+                    response_data = this->processRegisterRequest(current_ptr);
                     response_data[0] = FE_DEF::FE_REGISTER_RESPONSE;
                     break;
 
@@ -93,7 +93,7 @@ void DFabricClass::exportedParseFunction (
 
             switch (command) {
                 case FE_DEF::FE_LOGOUT_COMMAND:
-                    response_data = this->processSignOffRequest(link, current_ptr);
+                    response_data = this->processLogoutRequest(link, current_ptr);
                     response_data[0] = FE_DEF::FE_LOGOUT_RESPONSE;
                     break;
 
@@ -120,6 +120,11 @@ void DFabricClass::exportedParseFunction (
                 case FE_DEF::FE_SETUP_SESSION3_COMMAND:
                     response_data = this->processSetupSession3Request(link, current_ptr);
                     response_data[0] = FE_DEF::FE_SETUP_SESSION3_RESPONSE;
+                    break;
+
+                case FE_DEF::FE_SETUP_GROUP_SESSION_COMMAND:
+                    response_data = this->processSetupSoleSessionRequest(link, current_ptr, ajax_id);
+                    response_data[0] = FE_DEF::FE_SETUP_GROUP_SESSION_RESPONSE;
                     break;
 
                 default:
@@ -283,16 +288,16 @@ char *DFabricClass::generateDatagramResponse (
     return response_data;
 }
 
-char *DFabricClass::processSignUpRequest (char *data_val)
+char *DFabricClass::processRegisterRequest (char *data_val)
 {
     char *response_data;
-    phwangDebugS(false, "DFabricClass::processSignUpRequest", data_val);
+    phwangDebugS(false, "DFabricClass::processRegisterRequest", data_val);
 
     char *encoded_account_name = data_val;
     int account_name_size;
     char *account_name = phwangDecodeStringMalloc(encoded_account_name, &account_name_size);
 
-    phwangDebugS(true, "DFabricClass::processSignUpRequest", account_name);
+    phwangDebugS(true, "DFabricClass::processRegisterRequest", account_name);
 
     char result_buf[RESULT_DEF::RESULT_SIZE + 1];
     this->dbAccountObject()->checkAccountNameExist(account_name, result_buf);
@@ -311,7 +316,7 @@ char *DFabricClass::processSignUpRequest (char *data_val)
         account_entry->setPassword(password);
         account_entry->setEmail(email);
 
-        response_data = generateSignUpResponse(RESULT_DEF::RESULT_SUCCEED, account_name);
+        response_data = generateRegisterResponse(RESULT_DEF::RESULT_SUCCEED, account_name);
 
         this->dbAccountObject()->insertAccountEntry(account_entry);
         /***
@@ -325,32 +330,32 @@ char *DFabricClass::processSignUpRequest (char *data_val)
         }
 
     else if (!strcmp(result_buf, RESULT_DEF::RESULT_ACCOUNT_NAME_ALREADY_EXIST)) {
-        response_data = generateSignUpResponse(result_buf, account_name);
+        response_data = generateRegisterResponse(result_buf, account_name);
         phwangFree(account_name);
         return response_data;
     }
 
     else if (!strcmp(result_buf, RESULT_DEF::RESULT_DB_SELECT_FAIL)) {
-        response_data = generateSignUpResponse(result_buf, account_name);
+        response_data = generateRegisterResponse(result_buf, account_name);
         phwangFree(account_name);
         return response_data;
    }
 
     else {
-        phwangAbendSS("DFabricClass::processSignUpRequest", "unsupported_result", result_buf);
-        response_data = generateSignUpResponse(RESULT_DEF::RESULT_DB_ERROR, account_name);
+        phwangAbendSS("DFabricClass::processRegisterRequest", "unsupported_result", result_buf);
+        response_data = generateRegisterResponse(RESULT_DEF::RESULT_DB_ERROR, account_name);
         phwangFree(account_name);
         return response_data;
     }
 }
 
-char *DFabricClass::generateSignUpResponse (
+char *DFabricClass::generateRegisterResponse (
     char const *result_val,
     char const *account_name_val)
 {
-    phwangDebugS(false, "DFabricClass::generateSignUpResponse", result_val);
+    phwangDebugS(false, "DFabricClass::generateRegisterResponse", result_val);
 
-    char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUFFER_SIZE + strlen(account_name_val), MallocClass::generateSignUpResponse);
+    char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUFFER_SIZE + strlen(account_name_val), MallocClass::generateRegisterResponse);
     char *current_ptr = &response_data[FABRIC_DEF::FE_DL_COMMAND_AJAX_SIZE];
     memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE );
     current_ptr += RESULT_DEF::RESULT_SIZE;
@@ -474,27 +479,27 @@ char *DFabricClass::generateLoginResponse (
     return response_data;
 }
 
-char *DFabricClass::processSignOffRequest (
+char *DFabricClass::processLogoutRequest (
     LinkClass *link_val,
     char *data_val)
 {
     char *response_data;
-    phwangDebugSS(false, "DFabricClass::processSignOffRequest", "link_id=", link_val->linkIdIndex());
+    phwangDebugSS(false, "DFabricClass::processLogoutRequest", "link_id=", link_val->linkIdIndex());
 
     this->theFabricObject->freeLink(link_val);
 
-    response_data = generateSignOffResponse(RESULT_DEF::RESULT_SUCCEED, link_val->linkIdIndex(), data_val);
+    response_data = generateLogoutResponse(RESULT_DEF::RESULT_SUCCEED, link_val->linkIdIndex(), data_val);
     return response_data;
 }
 
-char *DFabricClass::generateSignOffResponse (
+char *DFabricClass::generateLogoutResponse (
     char const *result_val,
     char const *link_id_index_val,
     char const *data_val)
 {
-    phwangDebugS(false, "DFabricClass::generateSignOffResponse", result_val);
+    phwangDebugS(false, "DFabricClass::generateLogoutResponse", result_val);
 
-    char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUF_WITH_LINK_SIZE + strlen(data_val), MallocClass::generateSignOffResponse);
+    char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUF_WITH_LINK_SIZE + strlen(data_val), MallocClass::generateLogoutResponse);
     char *current_ptr = &response_data[FABRIC_DEF::FE_DL_COMMAND_AJAX_SIZE];
     memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;

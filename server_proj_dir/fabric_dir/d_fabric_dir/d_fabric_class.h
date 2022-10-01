@@ -45,8 +45,8 @@ class DFabricClass {
         char const *result_val,
         char const *data_val);
 
-    char *processSignUpRequest (char *data_val);
-    char *generateSignUpResponse (
+    char *processRegisterRequest (char *data_val);
+    char *generateRegisterResponse (
         char const *result_val,
         char const *account_name_val);
 
@@ -59,10 +59,10 @@ class DFabricClass {
         char const *link_id_index_val,
         char const *account_name_val);
 
-    char *processSignOffRequest (
+    char *processLogoutRequest (
         LinkClass *link_val,
         char *data_val);
-    char *generateSignOffResponse (
+    char *generateLogoutResponse (
         char const *result_val,
         char const *link_id_index_val,
         char const *data_val);
