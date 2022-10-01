@@ -59,17 +59,17 @@ void DFabricClass::exportedParseFunction (
     switch (depth) {
         case '0':
             switch (command) {
-                case FE_DEF::FE_SIGN_UP_COMMAND:
+                case FE_DEF::FE_REGISTER_COMMAND:
                     response_data = this->processSignUpRequest(current_ptr);
-                    response_data[0] = FE_DEF::FE_SIGN_UP_RESPONSE;
+                    response_data[0] = FE_DEF::FE_REGISTER_RESPONSE;
                     break;
 
-                case FE_DEF::FE_SETUP_LINK_COMMAND:
+                case FE_DEF::FE_LOGIN_COMMAND:
                     response_data = this->processLoginRequest(current_ptr, device_type, port_object_val);
                     if (!response_data) {
 
                     }
-                    response_data[0] = FE_DEF::FE_SETUP_LINK_RESPONSE;
+                    response_data[0] = FE_DEF::FE_LOGIN_RESPONSE;
                     break;
 
                 case FE_DEF::FE_MESSAGE_COMMAND:
@@ -92,9 +92,9 @@ void DFabricClass::exportedParseFunction (
             current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE;
 
             switch (command) {
-                case FE_DEF::FE_SIGN_OFF_COMMAND:
+                case FE_DEF::FE_LOGOUT_COMMAND:
                     response_data = this->processSignOffRequest(link, current_ptr);
-                    response_data[0] = FE_DEF::FE_SIGN_OFF_RESPONSE;
+                    response_data[0] = FE_DEF::FE_LOGOUT_RESPONSE;
                     break;
 
                 case FE_DEF::FE_GET_LINK_DATA_COMMAND:
@@ -107,9 +107,9 @@ void DFabricClass::exportedParseFunction (
                     response_data[0] = FE_DEF::FE_GET_NAME_LIST_RESPONSE;
                     break;
 
-                case FE_DEF::FE_SETUP_SESSION_COMMAND:
+                case FE_DEF::FE_SETUP_SOLE_SESSION_COMMAND:
                     response_data = this->processSetupSoleSessionRequest(link, current_ptr, ajax_id);
-                    response_data[0] = FE_DEF::FE_SETUP_SESSION_RESPONSE;
+                    response_data[0] = FE_DEF::FE_SETUP_SOLE_SESSION_RESPONSE;
                     break;
 
                 case FE_DEF::FE_SETUP_SESSION1_COMMAND:
