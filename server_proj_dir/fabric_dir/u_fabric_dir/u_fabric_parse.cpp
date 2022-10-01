@@ -67,6 +67,12 @@ void UFabricClass::processSetupRoomResponse (char *data_val)
     for (int i = 0; i < session_array_size; i++) {
         SessionClass *session = group->sessionTableArray(0);
         this->sendSetupSessioResponse(session, group, result_buf);
+        if ((group->mode() == FE_DEF::FE_GROUP_MODE_SOLO) ||
+            ((group->mode() == FE_DEF::FE_GROUP_MODE_DUET) && (!strcmp(group->initiatorName(), group->peerName()))) ||
+            (group->mode() == FE_DEF::FE_GROUP_MODE_ENSEMBLE)) {
+            phwangDebugS(true, "UFabricClass::processSetupRoomResponse", "match");
+
+        }
 
         session->linkObject()->setPendingSessionSetup3(session->sessionIdIndex(), "");
     }
