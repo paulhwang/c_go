@@ -10,10 +10,10 @@ class FE_DEF {
 public:
     int  const static FE_COMMAND_SIZE = 1;
 
-    char const static FE_SIGN_UP_COMMAND                   = 'U';
-    char const static FE_SIGN_UP_RESPONSE                  = 'u';
-    char const static FE_SETUP_LINK_COMMAND                = 'L';
-    char const static FE_SETUP_LINK_RESPONSE               = 'l';
+    char const static FE_SIGN_UP_COMMAND                   = 'R';
+    char const static FE_SIGN_UP_RESPONSE                  = 'r';
+    char const static FE_SETUP_LINK_COMMAND                = 'I';
+    char const static FE_SETUP_LINK_RESPONSE               = 'i';
     char const static FE_SIGN_OFF_COMMAND                  = 'O';
     char const static FE_SIGN_OFF_RESPONSE                 = 'o';
     char const static FE_GET_LINK_DATA_COMMAND             = 'D';
