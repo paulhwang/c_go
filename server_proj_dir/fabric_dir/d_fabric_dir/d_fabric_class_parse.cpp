@@ -107,24 +107,24 @@ void DFabricClass::exportedParseFunction (
                     response_data[0] = FE_DEF::FE_GET_NAME_LIST_RESPONSE;
                     break;
 
-                case FE_DEF::FE_SETUP_SOLE_SESSION_COMMAND:
+                case FE_DEF::FE_SETUP_SOLE_COMMAND:
                     response_data = this->processSetupSoleSessionRequest(link, current_ptr, ajax_id);
-                    response_data[0] = FE_DEF::FE_SETUP_SOLE_SESSION_RESPONSE;
+                    response_data[0] = FE_DEF::FE_SETUP_SOLE_RESPONSE;
                     break;
 
-                case FE_DEF::FE_SETUP_SESSION1_COMMAND:
+                case FE_DEF::FE_SETUP_DUET1_COMMAND:
                     response_data = this->processSetupSession1Request(link, current_ptr);
-                    response_data[0] = FE_DEF::FE_SETUP_SESSION1_RESPONSE;
+                    response_data[0] = FE_DEF::FE_SETUP_DUET1_RESPONSE;
                     break;
 
-                case FE_DEF::FE_SETUP_SESSION3_COMMAND:
+                case FE_DEF::FE_SETUP_DUET3_COMMAND:
                     response_data = this->processSetupSession3Request(link, current_ptr);
-                    response_data[0] = FE_DEF::FE_SETUP_SESSION3_RESPONSE;
+                    response_data[0] = FE_DEF::FE_SETUP_DUET3_RESPONSE;
                     break;
 
-                case FE_DEF::FE_SETUP_GROUP_SESSION_COMMAND:
+                case FE_DEF::FE_SETUP_TRIO_COMMAND:
                     response_data = this->processSetupSoleSessionRequest(link, current_ptr, ajax_id);
-                    response_data[0] = FE_DEF::FE_SETUP_GROUP_SESSION_RESPONSE;
+                    response_data[0] = FE_DEF::FE_SETUP_TRIO_RESPONSE;
                     break;
 
                 default:
@@ -142,9 +142,9 @@ void DFabricClass::exportedParseFunction (
             current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE + SIZE_DEF::SESSION_ID_INDEX_SIZE;
 
             switch (command) {
-                case FE_DEF::FE_SETUP_SESSION2_COMMAND:
+                case FE_DEF::FE_SETUP_DUET2_COMMAND:
                     response_data = this->processSetupSession2Request(session, current_ptr);
-                    response_data[0] = FE_DEF::FE_SETUP_SESSION2_RESPONSE;
+                    response_data[0] = FE_DEF::FE_SETUP_DUET2_RESPONSE;
                     break;
 
                 case FE_DEF::FE_GET_SESSION_SETUP_STATUS_COMMAND:
