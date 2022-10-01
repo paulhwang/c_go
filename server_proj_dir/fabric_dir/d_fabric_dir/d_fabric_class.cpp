@@ -28,34 +28,34 @@ DFabricClass::~DFabricClass (void)
 {
 }
 
-void dFabricTpServerAcceptFunction (void *d_fabric_object_val, void *tp_transfer_object_val) {
-    if (!tp_transfer_object_val) {
-        phwangAbendS("Golbal::dFabricTpServerAcceptFunction", "null tp_transfer_object_val");
+void dFabricTpServerAcceptFunction (void *d_fabric_object_val, void *port_object_val) {
+    if (!port_object_val) {
+        phwangAbendS("Golbal::dFabricTpServerAcceptFunction", "null port_object_val");
     }
 
-    ((DFabricClass *) d_fabric_object_val)->exportedNetAcceptFunction(tp_transfer_object_val);
+    ((DFabricClass *) d_fabric_object_val)->exportedNetAcceptFunction(port_object_val);
 }
 
-void DFabricClass::exportedNetAcceptFunction (void *tp_transfer_object_val)
+void DFabricClass::exportedNetAcceptFunction (void *port_object_val)
 {
-    if (!tp_transfer_object_val) {
-        phwangAbendS("DFabricClass::exportedNetAcceptFunction", "null tp_transfer_object_val");
+    if (!port_object_val) {
+        phwangAbendS("DFabricClass::exportedNetAcceptFunction", "null port_object_val");
         return;
     }
-    this->theTpTransferObject = tp_transfer_object_val;
+    this->theTpTransferObject = port_object_val;
 
     char *buf = (char *) phwangMalloc(strlen(this->timeStampString()) + 1, MallocClass::TCP_ACCEPT_CALLBACK_FUNC);
     strcpy(buf, this->timeStampString());
-    phwangTpTransmit(tp_transfer_object_val, buf);
+    phwangTpTransmit(port_object_val, buf);
 }
 
-void dFabricTpReceiveDataFunction (void *tp_transfer_object_val, void *d_fabric_object_val, void *data_val) {
+void dFabricTpReceiveDataFunction (void *port_object_val, void *d_fabric_object_val, void *data_val) {
     char *data_str_val = (char *) data_val;
     if (data_str_val[2] != FE_DEF::FE_GET_LINK_DATA_COMMAND) {
-        phwangDebugSSI(true, "Golbal::dFabricTpReceiveDataFunction", (char *) data_val, "index", phwangGetPortObjectIndex(tp_transfer_object_val));
+        phwangDebugSSI(true, "Golbal::dFabricTpReceiveDataFunction", (char *) data_val, "index", phwangGetPortObjectIndex(port_object_val));
     }
 
-    ((DFabricClass *) d_fabric_object_val)->exportedParseFunction(tp_transfer_object_val, (char *) data_val);
+    ((DFabricClass *) d_fabric_object_val)->exportedParseFunction(port_object_val, (char *) data_val);
     phwangFree(data_val);
 }
 

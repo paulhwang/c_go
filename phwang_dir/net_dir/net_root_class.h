@@ -34,8 +34,8 @@ public:
             void *receive_object_val,
             char const *who_val);
     void freeTcpServer(void *tcp_server_object_val);
-    void freeTpTransfer(void *tp_transfer_object_val);
-    void tpTransmit(void *tp_transfer_object_val, char *data_val);
+    void freeTpTransfer(void *port_object_val);
+    void tpTransmit(void *port_object_val, char *data_val);
     int getPortObjectIndex(void *port_object_val);
     int receiveThreadCount(void) {return this->theReceiveThreadCount;}
     void incrementReceiveThreadCount(void) {this->theReceiveThreadCount++;}

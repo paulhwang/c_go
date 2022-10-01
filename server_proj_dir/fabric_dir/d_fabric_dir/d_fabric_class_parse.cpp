@@ -25,7 +25,7 @@
 DbAccountClass *DFabricClass::dbAccountObject(void) {return theFabricObject->dbObject()->dbAccountObject();}
 
 void DFabricClass::exportedParseFunction (
-    void *tp_transfer_object_val,
+    void *port_object_val,
     char *data_val)
 {
     char device_type = data_val[0];
@@ -83,7 +83,7 @@ void DFabricClass::exportedParseFunction (
         case '1':
             link = this->theFabricObject->searchLink(current_ptr, data_val);
             if (!link) {
-                this->sendSearchLinkFailResponse(command, tp_transfer_object_val, ajax_id);
+                this->sendSearchLinkFailResponse(command, port_object_val, ajax_id);
                 return;
             }
             current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE;
@@ -128,7 +128,7 @@ void DFabricClass::exportedParseFunction (
         case '2':
             session = this->theFabricObject->serachLinkAndSession(current_ptr);
             if (!session) {
-                this->sendSearchLinkSessionFailResponse(command, tp_transfer_object_val, ajax_id);
+                this->sendSearchLinkSessionFailResponse(command, port_object_val, ajax_id);
                 return;
             }
             current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE + SIZE_DEF::SESSION_ID_INDEX_SIZE;
@@ -181,12 +181,12 @@ void DFabricClass::exportedParseFunction (
         default:
             break;
     }
-    this->transmitFunction(tp_transfer_object_val, response_data);
+    this->transmitFunction(port_object_val, response_data);
 }
 
 void DFabricClass::sendSearchLinkFailResponse (
     char const command_val,
-    void *tp_transfer_object_val,
+    void *port_object_val,
     char const *ajax_id_val)
 {
     phwangAbendS("DFabricClass::sendSearchLinkFailResponse", "");
@@ -197,12 +197,12 @@ void DFabricClass::sendSearchLinkFailResponse (
     strcpy(data_ptr, ajax_id_val);
     data_ptr += SIZE_DEF::AJAX_ID_SIZE;
     strcpy(data_ptr, RESULT_DEF::RESULT_LINK_NOT_EXIST);
-    this->transmitFunction(tp_transfer_object_val, downlink_data);
+    this->transmitFunction(port_object_val, downlink_data);
 }
 
 void DFabricClass::sendSearchLinkSessionFailResponse (
     char const command_val,
-    void *tp_transfer_object_val,
+    void *port_object_val,
     char const *ajax_id_val)
 {
     phwangAbendS("DFabricClass::sendSearchLinkSessionFailResponse", "");
@@ -213,7 +213,7 @@ void DFabricClass::sendSearchLinkSessionFailResponse (
     strcpy(data_ptr, ajax_id_val);
     data_ptr += SIZE_DEF::AJAX_ID_SIZE;
     strcpy(data_ptr, RESULT_DEF::RESULT_SESSION_NOT_EXIST);
-    this->transmitFunction(tp_transfer_object_val, downlink_data);
+    this->transmitFunction(port_object_val, downlink_data);
 }
 
 char *DFabricClass::processDatagramRequest (char *input_data_val)

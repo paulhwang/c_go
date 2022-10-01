@@ -159,9 +159,9 @@ public:
     DFabricClass(FabricClass *fabric_object_val);
     ~DFabricClass(void);
 
-    void transmitFunction(void *tp_transfer_object_val, char *data_val);
+    void transmitFunction(void *port_object_val, char *data_val);
 
     /* exports */
-    void exportedNetAcceptFunction(void *tp_transfer_object_val);
-    void exportedParseFunction(void *tp_transfer_object_val, char *data_val);
+    void exportedNetAcceptFunction(void *port_object_val);
+    void exportedParseFunction(void *port_object_val, char *data_val);
 };

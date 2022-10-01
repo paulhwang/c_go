@@ -76,34 +76,34 @@ void NetRootClass::freeTcpServer (void *tcp_server_object_val)
     delete (TcpServerClass *) tcp_server_object_val;
 }
 
-void NetRootClass::freeTpTransfer (void *tp_transfer_object_val)
+void NetRootClass::freeTpTransfer (void *port_object_val)
 {
-    if (!tp_transfer_object_val) {
-        phwangAbendS("phwangFreeTpTransfer", "null tp_transfer_object_val");
+    if (!port_object_val) {
+        phwangAbendS("phwangFreeTpTransfer", "null port_object_val");
         return;
     }
 
-    if (strcmp(((PortClass *) tp_transfer_object_val)->objectName(), "TpTransferClass")) {
+    if (strcmp(((PortClass *) port_object_val)->objectName(), "TpTransferClass")) {
         phwangAbendS("phwangFreeTpTransfer", "wrong object");
         return;
     }
 
-    delete (PortClass *) tp_transfer_object_val;
+    delete (PortClass *) port_object_val;
 }
 
-void NetRootClass::tpTransmit (void *tp_transfer_object_val, char *data_val)
+void NetRootClass::tpTransmit (void *port_object_val, char *data_val)
 {
-    if (!tp_transfer_object_val) {
-        phwangAbendS("NetRootClass::tpTransmit", "null tp_transfer_object_val");
+    if (!port_object_val) {
+        phwangAbendS("NetRootClass::tpTransmit", "null port_object_val");
         return;
     }
 
-    if (strcmp(((PortClass *) tp_transfer_object_val)->objectName(), "PortClass")) {
+    if (strcmp(((PortClass *) port_object_val)->objectName(), "PortClass")) {
         phwangAbendS("NetRootClass::tpTransmit", "wrong object");
         return;
     }
 
-    ((PortClass *) tp_transfer_object_val)->exportTransmitData(data_val);
+    ((PortClass *) port_object_val)->exportTransmitData(data_val);
 }
 
 int NetRootClass::getPortObjectIndex (void *port_object_val)
