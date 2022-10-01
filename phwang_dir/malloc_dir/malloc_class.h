@@ -51,7 +51,7 @@ public:
     int const static generateSetupDuet1Response = 5;
     int const static generateSetupDuet2Response = 5;
     int const static generateSetupDuet3Response = 5;
-    int const static generateSetupTrioResponse = 5;
+    int const static generateSetupEnsembleResponse = 5;
     int const static generateFreeSessionResponse = 5;
     int const static PUT_SESSION_DATA0 = 5;
     int const static PUT_SESSION_DATA1 = 5;

@@ -117,11 +117,11 @@ class DFabricClass {
         char const *link_id_index_val,
         char const *session_id_index_val);
 
-    char *processSetupTrioRequest (
+    char *processSetupEnsembleRequest (
         LinkClass *link_val,
         char *data_val,
         char *ajax_id_val);
-    char *generateSetupTrioResponse (
+    char *generateSetupEnsembleResponse (
         char const *result_val,
         char const *link_id_index_val,
         char const *session_id_index_val,

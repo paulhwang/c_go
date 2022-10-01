@@ -43,7 +43,7 @@ public:
 
     char const static FE_GROUP_MODE_SOLO     = 'S';
     char const static FE_GROUP_MODE_DUET     = 'D';
-    char const static FE_GROUP_MODE_ENSEMBLE = 'A';
+    char const static FE_GROUP_MODE_ENSEMBLE = 'E';
 
     char const static FE_ROOM_STATUS_PREPARING = 'P';
     char const static FE_ROOM_STATUS_READY     = 'R';
