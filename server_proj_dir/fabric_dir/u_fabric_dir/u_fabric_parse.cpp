@@ -66,12 +66,11 @@ void UFabricClass::processSetupRoomResponse (char *data_val)
     group->setSessionTableArray((SessionClass **) phwangArrayMgrGetArrayTable(group->sessionArrayMgr(), &session_array_size));
     for (int i = 0; i < session_array_size; i++) {
         SessionClass *session = group->sessionTableArray(0);
-        this->sendSetupSessioResponse(session, group, result_buf);
         if ( (group->mode() == FE_DEF::FE_GROUP_MODE_SOLO) ||
             ((group->mode() == FE_DEF::FE_GROUP_MODE_DUET) && (!strcmp(group->firstFiddle(), group->secondFiddle()))) ||
              (group->mode() == FE_DEF::FE_GROUP_MODE_ENSEMBLE)) {
             phwangDebugS(true, "UFabricClass::processSetupRoomResponse", "match");
-
+            this->sendSetupSessioResponse(session, group, result_buf);
         }
 
         session->linkObject()->setPendingSessionSetup3(session->sessionIdIndex(), "");
@@ -83,25 +82,28 @@ void UFabricClass::sendSetupSessioResponse (
     GroupClass *group_val,
     char const *result_val)
 {
-    phwangDebugSS(false, "DFabricClass::generateSetupSessioResponse", "result=", result_val);
+    phwangDebugSS(false, "UFabricClass::sendSetupSessioResponse", "result=", result_val);
     LinkClass *link = session_val->linkObject();
 
-    char *encoded_theme_info     = phwangEncodeStringMalloc(group_val->themeInfo());
-    char *encoded_initiator_name = phwangEncodeStringMalloc(group_val->firstFiddle());
-    char *encoded_peer_name      = phwangEncodeStringMalloc(group_val->secondFiddle());
+    char *encoded_theme_info    = phwangEncodeStringMalloc(group_val->themeInfo());
+    char *encoded_first_fiddle  = phwangEncodeStringMalloc(group_val->firstFiddle());
+    char *encoded_second_fiddle = "";
+    if (group_val->mode() == FE_DEF::FE_GROUP_MODE_DUET) {
+        encoded_second_fiddle = phwangEncodeStringMalloc(group_val->secondFiddle());
+    }
 
     char *response_data = (char *) phwangMalloc(
-        FABRIC_DEF::FE_DL_BUF_WITH_LINK_SESSION_SIZE + 5 + strlen(encoded_theme_info) + strlen(encoded_initiator_name) + strlen(encoded_peer_name),
+        FABRIC_DEF::FE_DL_BUF_WITH_LINK_SESSION_SIZE + 5 + strlen(encoded_theme_info) + strlen(encoded_first_fiddle) + strlen(encoded_second_fiddle),
         MallocClass::generateSetupSessionSucceedResponse);
     char *current_ptr = &response_data[FE_DEF::FE_COMMAND_SIZE];
 
     switch (link->deviceType()) {
         case 'N':
-            memcpy(&response_data[1], "000" /*ajax_id_val*/, SIZE_DEF::AJAX_ID_SIZE);
+            memcpy(current_ptr, "+++" /*ajax_id_val*/, SIZE_DEF::AJAX_ID_SIZE);
             break;
 
         case 'A':
-            memcpy(&response_data[1], "***", SIZE_DEF::AJAX_ID_SIZE);
+            memcpy(current_ptr, "***", SIZE_DEF::AJAX_ID_SIZE);
             break;
         default:
             break;
@@ -123,17 +125,23 @@ void UFabricClass::sendSetupSessioResponse (
     memcpy(current_ptr, encoded_theme_info, strlen(encoded_theme_info));
     current_ptr += strlen(encoded_theme_info);
 
-    memcpy(current_ptr, encoded_initiator_name, strlen(encoded_initiator_name));
-    current_ptr += strlen(encoded_initiator_name);
+    memcpy(current_ptr, encoded_first_fiddle, strlen(encoded_first_fiddle));
+    current_ptr += strlen(encoded_first_fiddle);
 
-    memcpy(current_ptr, encoded_peer_name, strlen(encoded_peer_name));
-    current_ptr += strlen(encoded_peer_name);
+    if (group_val->mode() == FE_DEF::FE_GROUP_MODE_DUET) {
+        memcpy(current_ptr, encoded_second_fiddle, strlen(encoded_second_fiddle));
+        current_ptr += strlen(encoded_second_fiddle);
+    }
 
     *current_ptr = 0;
 
     phwangFree(encoded_theme_info);
-    phwangFree(encoded_initiator_name);
-    phwangFree(encoded_peer_name);
+    phwangFree(encoded_first_fiddle);
+    if (strlen(encoded_second_fiddle)) {
+        phwangFree(encoded_second_fiddle);
+    }
+
+    phwangDebugSS(true, "UFabricClass::sendSetupSessioResponse", "response_data=", response_data);
 
     //this->fabricObject()->dFabricObject()->transmitFunction(link->portObject(), response_data);
 }
