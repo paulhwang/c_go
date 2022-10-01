@@ -16,8 +16,8 @@ class LinkClass : public ListEntryClass {
 #define LINK_CLASS_KEEP_ALIVE_TIMEOUT 60
 private:
     FabricClass *theFabricObject;
+    char *theMyName;
     char theDeviceType;
-    char theLinkName[LINK_CLASS_LINK_NAME_BUF_SIZE + 4];
     void *theSessionListMgrObject;
     void *thePendingSessionSetupQueue;
     void *thePendingSessionSetupQueue3;
@@ -30,7 +30,7 @@ public:
     char const *objectName(void) {return "LinkClass";}
 
     char deviceType(void) {return this->theDeviceType;}
-    char *linkName(void) {return this->theLinkName;}
+    char *myName(void) {return this->theMyName;}
     char *linkIdIndex(void) {return this->entryIdIndex();}
     time_t keepAliveTime(void) {return this->theKeepAliveTime;}
 

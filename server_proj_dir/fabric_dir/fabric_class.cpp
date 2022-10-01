@@ -56,7 +56,7 @@ void FabricClass::linkKeepAliveExamine (void)
         if (link && link->keepAliveTime() && link->keepAliveTimerExpired()) {
             if (1) { /* debug */
                 char s[128];
-                sprintf(s, "(***link expired***) linkName=%s linkIdIndex=%s", link->linkName(), link->linkIdIndex());
+                sprintf(s, "(***link expired***) myName=%s linkIdIndex=%s", link->myName(), link->linkIdIndex());
                 phwangLogitS("FabricClass::linkKeepAliveExamine", s);
             }
             phwangListMgrRemoveEntry(this->theLinkListMgrObject, link);
@@ -115,7 +115,7 @@ LinkClass *FabricClass::searchLinkByName (char *name_val)
 
     for (int i = max_index ; i >= 0; i--) {
         if (link_entry_array[i]) {
-            if (!strcmp(link_entry_array[i]->linkName(), name_val)) {
+            if (!strcmp(link_entry_array[i]->myName(), name_val)) {
                 return link_entry_array[i];
             }
         }

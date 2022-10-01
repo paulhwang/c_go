@@ -738,7 +738,7 @@ char *DFabricClass::processSetupSession1Request (
     group->insertSession(session);
     session->bindGroup(group);
 
-    if (!strcmp(peer_name, session->linkObject()->linkName())) {
+    if (!strcmp(peer_name, session->linkObject()->myName())) {
         this->sendSetupRoomRequestToThemeServer(group);
     }
     else {

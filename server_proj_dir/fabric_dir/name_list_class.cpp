@@ -55,8 +55,8 @@ void NameListClass::updateNameList (void)
                 *ptr++ = ',';
             }
             *ptr++ = '"';
-            name_len = strlen(link_entry_array[i]->linkName());
-            memcpy(ptr, link_entry_array[i]->linkName(), name_len);
+            name_len = strlen(link_entry_array[i]->myName());
+            memcpy(ptr, link_entry_array[i]->myName(), name_len);
             ptr += name_len;
             *ptr++ = '"';
             name_list_size += (name_len + 3);

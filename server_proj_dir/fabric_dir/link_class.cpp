@@ -21,28 +21,24 @@ LinkClass::LinkClass (
         :ListEntryClass(list_mgr_object_val)
 {
     this->theFabricObject = fabric_object_val;
+    this->theMyName = (char *) phwangMalloc(strlen(my_name_val) + 1, MallocClass::LinkClass);
+    strcpy(this->theMyName, my_name_val);
     this->theDeviceType = device_type_val;
     this->theNameListChanged = 'D';
 
-    if (strlen(my_name_val) <= LINK_CLASS_LINK_NAME_BUF_SIZE) {
-        strcpy(this->theLinkName, my_name_val);
-    }
-    else {
-        memcpy(this->theLinkName, my_name_val, LINK_CLASS_LINK_NAME_BUF_SIZE);
-        this->theLinkName[LINK_CLASS_LINK_NAME_BUF_SIZE] = 0;
-    }
     this->theSessionListMgrObject = phwangListMgrMalloc("SESSION", SIZE_DEF::SESSION_ID_SIZE, SIZE_DEF::SESSION_INDEX_SIZE, SIZE_DEF::SESSION_ID_INITIAL_VALUE);
     this->resetKeepAliveTime();
     this->thePendingSessionSetupQueue = phwangMallocQueue(0, this->objectName());
     this->thePendingSessionSetupQueue3 = phwangMallocQueue(0, this->objectName());
 
-    phwangDebugSSS(true, "LinkClass::LinkClass", "new_link:", this->theLinkName, this->linkIdIndex());
+    phwangDebugSSS(true, "LinkClass::LinkClass", "myName=", this->myName(),this->linkIdIndex());
 }
 
 LinkClass::~LinkClass (void)
 {
     phwangFreeQueue(this->thePendingSessionSetupQueue, "LinkClass::~LinkClass(1)");
     phwangFreeQueue(this->thePendingSessionSetupQueue3, "LinkClass::~LinkClass(3)");
+    phwangFree(this->theMyName);
 }
 
 SessionClass *LinkClass::mallocSession (void)
