@@ -51,7 +51,7 @@ public:
     int const static generateSetupSession2Response = 5;
     int const static generateSetupSession3Response = 5;
     int const static generateFreeSessionResponse = 5;
-    int const static sendSetupSessionResponce = 5;
+    int const static generateSetupSoleSessionResponse = 5;
     int const static SETUP_SESSION_ERROR = 5;
     int const static SETUP_SESSION2 = 5;
     int const static SETUP_SESSION2_ERROR = 5;
