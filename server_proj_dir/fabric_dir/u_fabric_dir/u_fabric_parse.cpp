@@ -99,7 +99,7 @@ void UFabricClass::sendSetupSessioResponse (
 
     switch (link->deviceType()) {
         case 'N':
-            memcpy(current_ptr, "+++" /*ajax_id_val*/, SIZE_DEF::AJAX_ID_SIZE);
+            memcpy(current_ptr, session_val->ajaxId(), SIZE_DEF::AJAX_ID_SIZE);
             break;
 
         case 'A':

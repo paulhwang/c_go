@@ -45,7 +45,7 @@ LinkClass::~LinkClass (void)
 
 SessionClass *LinkClass::mallocSession (char *ajax_id_val)
 {
-    SessionClass *session = new SessionClass(this->theSessionListMgrObject, this);
+    SessionClass *session = new SessionClass(this->theSessionListMgrObject, this, ajax_id_val);
     if (!session) {
         phwangAbendS("LinkClass::mallocSession", "fail_to_malloc_session");
         return 0;

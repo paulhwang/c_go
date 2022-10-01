@@ -9,11 +9,15 @@
 
 SessionClass::SessionClass (
     void *list_mgr_object_val,
-    LinkClass *link_object_val)
+    LinkClass *link_object_val,
+    char *ajax_id_val)
         :ListEntryClass(list_mgr_object_val)
 {
     this->theLinkObject = link_object_val;
-    this->theGroupObject =0;
+    strcpy(this->ajaxIdBuf(), ajax_id_val);
+    this->theAjaxId = this->ajaxIdBuf();
+
+    this->theGroupObject = 0;
     this->thePendingDownLinkDataQueue = phwangMallocQueue(0, this->objectName());
 
     phwangDebugSS(true, "SessionClass::SessionClass", "new_session:", this->sessionIdIndex());

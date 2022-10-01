@@ -7,6 +7,7 @@
 #pragma once
 
 #include "../../phwang_dir/list_mgr_dir/list_entry_class.h"
+#include "../define_dir/size_def.h"
 
 class LinkClass;
 class GroupClass;
@@ -14,13 +15,20 @@ class GroupClass;
 class SessionClass : public ListEntryClass {
     LinkClass *theLinkObject;
     GroupClass *theGroupObject;
+    char theAjaxIdBuf[SIZE_DEF::AJAX_ID_SIZE + 1];
+    char *theAjaxId;
     void *thePendingDownLinkDataQueue;
 
 public:
-    SessionClass(void *list_mgr_object_val, LinkClass *link_object_val);
+    SessionClass(
+        void *list_mgr_object_val,
+        LinkClass *link_object_val,
+        char *ajax_id_val);
     ~SessionClass(void);
-    char const* objectName(void) {return "SessionClass";}
 
+    char const* objectName(void) {return "SessionClass";}
+    char *ajaxIdBuf(void) {return this->theAjaxIdBuf;}
+    char *ajaxId(void) {return this->theAjaxId;}
     char *sessionIdIndex(void) {return this->entryIdIndex();}
     LinkClass *linkObject(void) {return this->theLinkObject;}
     GroupClass *groupObject(void) {return this->theGroupObject;}
