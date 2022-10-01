@@ -11,6 +11,8 @@
 #define U_FABRIC_RECEIVE_QUEUE_SIZE 100
 
 class FabricClass;
+class SessionClass;
+class GroupClass;
 
 class UFabricClass {
     FabricClass *theFabricObject;
@@ -29,6 +31,12 @@ public:
     void transmitFunction(char *data_val);
 
     /* exports */
+    FabricClass *fabricObject(void) {return this->theFabricObject;}
     void exportedParseFunction(char *data_val);
     void exportedNetAcceptFunction(void *tp_transfer_object_val);
+
+    char *sendSetupSessioResponse (
+        SessionClass *session_val,
+        GroupClass *group_val,
+        char const *result_val);
 };

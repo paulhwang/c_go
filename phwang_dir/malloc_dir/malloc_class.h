@@ -58,6 +58,7 @@ public:
     int const static SETUP_SESSION3 = 5;
     int const static PUT_SESSION_DATA0 = 5;
     int const static PUT_SESSION_DATA1 = 5;
+    int const static generateGetSessionSetupStatusResponse = 5;
     int const static generatePutSessionDataResponse = 5;
     int const static generateGetSessionDataResponse = 5;
     int const static GET_SESSION_DATA_ERROR = 5;
@@ -72,6 +73,7 @@ public:
     int const static TCP_ACCEPT_CALLBACK_FUNC = 12;
     int const static GroupClass = 13;
     int const static LinkClass = 14;
+    int const static generateSetupSessionSucceedResponse = 15;
 
     int const static MAX_INDEX = 20;
 
