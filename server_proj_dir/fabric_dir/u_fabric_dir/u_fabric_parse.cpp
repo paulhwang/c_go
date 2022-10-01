@@ -129,7 +129,7 @@ void UFabricClass::sendSetupSessioResponse (
     phwangFree(encoded_initiator_name);
     phwangFree(encoded_peer_name);
 
-    //this->fabricObject()->dFabricObject()->transmitFunction(0 /*port_object_val*/, response_data);
+    //this->fabricObject()->dFabricObject()->transmitFunction(link->portObject(), response_data);
 }
 
 void UFabricClass::processPutRoomDataResponse (char *data_val)

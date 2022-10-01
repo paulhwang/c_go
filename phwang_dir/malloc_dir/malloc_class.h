@@ -35,7 +35,7 @@ public:
     int const static BAD_LINK = 5;
     int const static BAD_SESSION = 5;
     int const static generateSignUpResponse = 5;
-    int const static generateSignInResponse = 5;
+    int const static generateLoginResponse = 5;
     int const static generateSignOffResponse = 5;
     int const static generateDatagramResponse = 5;
     int const static FREE_LINK = 5;

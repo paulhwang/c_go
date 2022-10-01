@@ -17,13 +17,15 @@ LinkClass::LinkClass (
     void *list_mgr_object_val,
     FabricClass *fabric_object_val,
     char const* my_name_val,
-    char device_type_val)
+    char device_type_val,
+    void *port_object_val)
         :ListEntryClass(list_mgr_object_val)
 {
     this->theFabricObject = fabric_object_val;
     this->theMyName = (char *) phwangMalloc(strlen(my_name_val) + 1, MallocClass::LinkClass);
     strcpy(this->theMyName, my_name_val);
     this->theDeviceType = device_type_val;
+    this->thePortObject = port_object_val;
     this->theNameListChanged = 'D';
 
     this->theSessionListMgrObject = phwangListMgrMalloc("SESSION", SIZE_DEF::SESSION_ID_SIZE, SIZE_DEF::SESSION_INDEX_SIZE, SIZE_DEF::SESSION_ID_INITIAL_VALUE);

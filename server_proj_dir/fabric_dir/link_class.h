@@ -18,6 +18,7 @@ private:
     FabricClass *theFabricObject;
     char *theMyName;
     char theDeviceType;
+    void *thePortObject;
     void *theSessionListMgrObject;
     void *thePendingSessionSetupQueue;
     void *thePendingSessionSetupQueue3;
@@ -25,11 +26,17 @@ private:
     time_t theKeepAliveTime;
 
 public:
-    LinkClass(void *list_mgr_object_val, FabricClass *fabric_object_val, char const* link_name_val, char device_type_val);
+    LinkClass (
+        void *list_mgr_object_val,
+        FabricClass *fabric_object_val,
+        char const* link_name_val,
+        char device_type_val,
+        void *port_object_val);
     ~LinkClass(void);
     char const *objectName(void) {return "LinkClass";}
 
     char deviceType(void) {return this->theDeviceType;}
+    void *portObject(void) {return this->thePortObject;}
     char *myName(void) {return this->theMyName;}
     char *linkIdIndex(void) {return this->entryIdIndex();}
     time_t keepAliveTime(void) {return this->theKeepAliveTime;}

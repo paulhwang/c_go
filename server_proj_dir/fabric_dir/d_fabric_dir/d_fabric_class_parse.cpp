@@ -65,7 +65,7 @@ void DFabricClass::exportedParseFunction (
                     break;
 
                 case FE_DEF::FE_SETUP_LINK_COMMAND:
-                    response_data = this->processSignInRequest(current_ptr, device_type);
+                    response_data = this->processLoginRequest(current_ptr, device_type, port_object_val);
                     if (!response_data) {
 
                     }
@@ -359,10 +359,13 @@ char *DFabricClass::generateSignUpResponse (
     return response_data;
 }
 
-char *DFabricClass::processSignInRequest (char *data_val, char device_type_val)
+char *DFabricClass::processLoginRequest (
+    char *data_val,
+    char device_type_val,
+    void *port_object_val)
 {
     char *response_data;
-    phwangDebugS(false, "DFabricClass::processSignInRequest", data_val);
+    phwangDebugS(false, "DFabricClass::processLoginRequest", data_val);
 
     char *encoded_my_name = data_val;
     int my_name_size;
@@ -371,30 +374,30 @@ char *DFabricClass::processSignInRequest (char *data_val, char device_type_val)
     char encoded_my_name_buf[128];
     memcpy(encoded_my_name_buf, encoded_my_name, my_name_size);
     encoded_my_name_buf[my_name_size] = 0;
-    phwangDebugSS(false, "DFabricClass::processSignInRequest", "my_name=", encoded_my_name_buf);
+    phwangDebugSS(false, "DFabricClass::processLoginRequest", "my_name=", encoded_my_name_buf);
 
 
     char *encoded_password = encoded_my_name + my_name_size;
     int password_size;
     char *password = phwangDecodeStringMalloc(encoded_password, &password_size);
 
-    phwangDebugSS(false, "DFabricClass::processSignInRequest", my_name, password);
+    phwangDebugSS(false, "DFabricClass::processLoginRequest", my_name, password);
 
     char result_buf[RESULT_DEF::RESULT_SIZE + 1];
     this->dbObject()->dbAccountObject()->checkPassword(my_name, password, result_buf);
     phwangFree(password);
 
     if (!strcmp(result_buf, RESULT_DEF::RESULT_PASSWORD_MATCH)) {
-        LinkClass *link = this->theFabricObject->mallocLink(my_name, device_type_val);
+        LinkClass *link = this->theFabricObject->mallocLink(my_name, device_type_val, port_object_val);
         if (!link) {
-            phwangAbendS("DFabricClass::processSignInRequest", "null_link");
+            phwangAbendS("DFabricClass::processLoginRequest", "null_link");
             phwangFree(my_name);
-            response_data = generateSignInResponse(RESULT_DEF::RESULT_NULL_LINK, SIZE_DEF::FAKE_LINK_ID_INDEX, encoded_my_name_buf);
+            response_data = generateLoginResponse(RESULT_DEF::RESULT_NULL_LINK, SIZE_DEF::FAKE_LINK_ID_INDEX, encoded_my_name_buf);
             return response_data;
         }
 
         phwangFree(my_name);
-        response_data = generateSignInResponse(RESULT_DEF::RESULT_SUCCEED, link->linkIdIndex(), encoded_my_name_buf);
+        response_data = generateLoginResponse(RESULT_DEF::RESULT_SUCCEED, link->linkIdIndex(), encoded_my_name_buf);
         return response_data;
     }
 
@@ -402,14 +405,14 @@ char *DFabricClass::processSignInRequest (char *data_val, char device_type_val)
              (!strcmp(result_buf, RESULT_DEF::RESULT_ACCOUNT_NAME_NOT_EXIST)) ||
              (!strcmp(result_buf, RESULT_DEF::RESULT_DB_SELECT_FAIL))) {
         phwangFree(my_name);
-        response_data = generateSignInResponse(result_buf, SIZE_DEF::FAKE_LINK_ID_INDEX, encoded_my_name_buf);
+        response_data = generateLoginResponse(result_buf, SIZE_DEF::FAKE_LINK_ID_INDEX, encoded_my_name_buf);
         return response_data;
     }
 
     else {
-        phwangAbendSS("DFabricClass::processSignInRequest", "unsupported_result", result_buf);
+        phwangAbendSS("DFabricClass::processLoginRequest", "unsupported_result", result_buf);
         phwangFree(my_name);
-        response_data = generateSignInResponse(RESULT_DEF::RESULT_DB_ERROR, SIZE_DEF::FAKE_LINK_ID_INDEX, encoded_my_name_buf);
+        response_data = generateLoginResponse(RESULT_DEF::RESULT_DB_ERROR, SIZE_DEF::FAKE_LINK_ID_INDEX, encoded_my_name_buf);
         return response_data;
     }
 
@@ -452,14 +455,14 @@ char *DFabricClass::processSignInRequest (char *data_val, char device_type_val)
     */
 }
 
-char *DFabricClass::generateSignInResponse (
+char *DFabricClass::generateLoginResponse (
     char const *result_val,
     char const *link_id_index_val,
     char const *account_name_val)
 {
-    phwangDebugS(false, "DFabricClass::generateSignInResponse", result_val);
+    phwangDebugS(false, "DFabricClass::generateLoginResponse", result_val);
 
-    char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUF_WITH_LINK_SIZE + strlen(account_name_val), MallocClass::generateSignInResponse);
+    char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUF_WITH_LINK_SIZE + strlen(account_name_val), MallocClass::generateLoginResponse);
     char *current_ptr = &response_data[FABRIC_DEF::FE_DL_COMMAND_AJAX_SIZE];
     memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;

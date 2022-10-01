@@ -66,7 +66,10 @@ void FabricClass::linkKeepAliveExamine (void)
 
 }
 
-LinkClass *FabricClass::mallocLink (char const *my_name_val, char device_type_val)
+LinkClass *FabricClass::mallocLink (
+    char const *my_name_val,
+    char device_type_val,
+    void *port_object_val)
 {
     phwangDebugSS(false, "FabricClass::mallocLink", "my_name_val", my_name_val);
 
@@ -74,7 +77,7 @@ LinkClass *FabricClass::mallocLink (char const *my_name_val, char device_type_va
         phwangAbendS("abricClass::mallocLink", "bad name 000");
     }
 
-    LinkClass *link = new LinkClass(this->theLinkListMgrObject, this, my_name_val, device_type_val);
+    LinkClass *link = new LinkClass(this->theLinkListMgrObject, this, my_name_val, device_type_val, port_object_val);
     if (!link) {
         phwangAbendS("FabricClass::mallocLink", "fail_to_malloc_link");
         return 0;
