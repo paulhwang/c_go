@@ -83,39 +83,49 @@ class DFabricClass {
         char const *link_id_index_val,
         char const *data_val);
 
-    char *processSetupSoleSessionRequest (
+    char *processSetupSoloRequest (
         LinkClass *link_val,
         char *data_val,
         char *ajax_id_val);
-    char *generateSetupSoleSessionResponse (
+    char *generateSetupSoloResponse (
         char const *result_val,
         char const *link_id_index_val,
         char const *session_id_index_val,
         char const *theme_info_val);
 
-    char *processSetupSession1Request (
+    char *processSetupDuet1Request (
         LinkClass *link_val,
         char *data_val);
-    char *generateSetupSession1Response (
+    char *generateSetupDuet1Response (
         char const *result_val,
         char const *link_id_index_val,
         char const *session_id_index_val);
 
-    char *processSetupSession2Request (
+    char *processSetupDuet2Request (
         SessionClass *session_val,
         char *data_val);
-    char *generateSetupSession2Response (
+    char *generateSetupDuet2Response (
         char const *result_val,
         char const *link_id_index_val,
         char const *session_id_index_val);
 
-    char *processSetupSession3Request (
+    char *processSetupDuet3Request (
         LinkClass *link_val,
         char *data_val);
-    char *generateSetupSession3Response (
+    char *generateSetupDuet3Response (
         char const *result_val,
         char const *link_id_index_val,
         char const *session_id_index_val);
+
+    char *processSetupTrioRequest (
+        LinkClass *link_val,
+        char *data_val,
+        char *ajax_id_val);
+    char *generateSetupTrioResponse (
+        char const *result_val,
+        char const *link_id_index_val,
+        char const *session_id_index_val,
+        char const *theme_info_val);
 
     char *processGetSessionSetupStatusRequest (
         SessionClass *session_val,
