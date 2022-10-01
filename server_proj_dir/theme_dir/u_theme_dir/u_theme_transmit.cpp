@@ -16,5 +16,5 @@ void UThemeClass::transmitFunction (char *data_val)
         return;
     }
 
-    phwangTpTransmit(this->theTpTransferObject, data_val);
+    phwangPortTransmit(this->theTpTransferObject, data_val);
 }

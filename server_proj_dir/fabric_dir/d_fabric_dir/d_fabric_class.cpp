@@ -46,7 +46,7 @@ void DFabricClass::exportedNetAcceptFunction (void *port_object_val)
 
     char *buf = (char *) phwangMalloc(strlen(this->timeStampString()) + 1, MallocClass::TCP_ACCEPT_CALLBACK_FUNC);
     strcpy(buf, this->timeStampString());
-    phwangTpTransmit(port_object_val, buf);
+    phwangPortTransmit(port_object_val, buf);
 }
 
 void dFabricTpReceiveDataFunction (void *port_object_val, void *d_fabric_object_val, void *data_val) {

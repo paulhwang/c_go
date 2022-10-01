@@ -14,5 +14,5 @@ void DFabricClass::transmitFunction (void *port_object_val, char *data_val)
       phwangDebugS(true, "DFabricClass::transmitFunction", data_val);
     }
 
-    phwangTpTransmit(port_object_val, data_val);
+    phwangPortTransmit(port_object_val, data_val);
 }
