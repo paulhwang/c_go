@@ -11,10 +11,10 @@ void DThemeClass::transmitFunction (char *data_val)
 {
     phwangDebugS(true, "DThemeClass::transmitFunction", data_val);
 
-    if (!this->theTpTransferObject) {
-        phwangAbendS("DThemeClass::transmitFunction", "null theTpTransferObject");
+    if (!this->portObject()) {
+        phwangAbendS("DThemeClass::transmitFunction", "null portObject()");
         return;
     }
 
-    phwangPortTransmit(this->theTpTransferObject, data_val);
+    phwangPortTransmit(this->portObject(), data_val);
 }

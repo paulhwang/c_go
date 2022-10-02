@@ -22,7 +22,7 @@ DThemeClass::~DThemeClass (void)
 {
 }
 
-void dThemeReceiveDataFromTransport (void *tp_transfer_object_val, void *game_d_server_object_val, void *data_val) {
+void dThemeReceiveDataFromTransport (void *port_object_val, void *game_d_server_object_val, void *data_val) {
     if (0) { /* debug */
         phwangLogitS("Golbal::dThemeReceiveDataFromTransport", (char *) data_val);
     }
@@ -33,5 +33,5 @@ void dThemeReceiveDataFromTransport (void *tp_transfer_object_val, void *game_d_
 
 void DThemeClass::startNetConnect (void)
 {
-    this->theTpTransferObject = phwangTpConnect(0, TcpPortDefine::FABRIC_THEME_PORT_NUMER, dThemeReceiveDataFromTransport, this, this->objectName());
+    this->thePortObject = phwangTpConnect(0, TcpPortDefine::FABRIC_THEME_PORT_NUMER, dThemeReceiveDataFromTransport, this, this->objectName());
 }

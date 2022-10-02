@@ -12,7 +12,7 @@ class GoBaseClass;
 
 class DEngineClass {
     EngineClass *theEngineObject;
-    void *theTpTransferObject;
+    void *thePortObject;
 
     void startNetConnect(void);
     void processSetupBase(char *data_al);
@@ -23,6 +23,7 @@ public:
     ~DEngineClass(void);
     char const* objectName(void) {return "DEngineClass";}
 
+    void *portObject(void) {return this->thePortObject;}
     void transmitFunction(char *data_val);
     void processPutBaseDataResponse(GoBaseClass *base_object_val, char const *data_val);
 

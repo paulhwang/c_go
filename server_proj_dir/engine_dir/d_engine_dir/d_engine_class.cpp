@@ -22,7 +22,7 @@ DEngineClass::~DEngineClass (void)
 {
 }
 
-void dEngineReceiveDataFromTransport (void *tp_transfer_object_val, void *game_d_server_object_val, void *data_val) {
+void dEngineReceiveDataFromTransport (void *port_object_val, void *game_d_server_object_val, void *data_val) {
     phwangDebugS(false, "Golbal::dEngineReceiveDataFromTransport", (char *) data_val);
 
     ((DEngineClass *) game_d_server_object_val)->exportedParseFunction((char *) data_val);
@@ -31,5 +31,5 @@ void dEngineReceiveDataFromTransport (void *tp_transfer_object_val, void *game_d
 
 void DEngineClass::startNetConnect (void)
 {
-    this->theTpTransferObject = phwangTpConnect(0, TcpPortDefine::THEME_ENGINE_PORT_NUMER, dEngineReceiveDataFromTransport, this, this->objectName());
+    this->thePortObject = phwangTpConnect(0, TcpPortDefine::THEME_ENGINE_PORT_NUMER, dEngineReceiveDataFromTransport, this, this->objectName());
 }

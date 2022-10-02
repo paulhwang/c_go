@@ -15,7 +15,7 @@ class ThemeClass;
 
 class DThemeClass {
     ThemeClass *theThemeObject;
-    void *theTpTransferObject;
+    void *thePortObject;
 
     void startNetConnect(void);
     void processSetupRoom(char *data_al);
@@ -26,6 +26,7 @@ public:
     ~DThemeClass(void);
     char const* objectName(void) {return "DThemeClass";}
 
+    void *portObject(void) {return this->thePortObject;}
     void transmitFunction(char *data_val);
 
     /* exports */

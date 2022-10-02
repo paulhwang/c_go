@@ -11,10 +11,10 @@ void DEngineClass::transmitFunction (char *data_val)
 {
     phwangLogitS("DEngineClass::transmitFunction", data_val);
 
-    if (!this->theTpTransferObject) {
-        phwangAbendS("DEngineClass::transmitFunction", "null theTpTransferObject");
+    if (!this->portObject()) {
+        phwangAbendS("DEngineClass::transmitFunction", "null portObject()");
         return;
     }
 
-    phwangPortTransmit(this->theTpTransferObject, data_val);
+    phwangPortTransmit(this->portObject(), data_val);
 }
