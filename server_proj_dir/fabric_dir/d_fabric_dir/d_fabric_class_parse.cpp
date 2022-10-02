@@ -66,9 +66,6 @@ void DFabricClass::exportedParseFunction (
 
                 case FE_DEF::FE_LOGIN_COMMAND:
                     response_data = this->processLoginRequest(current_ptr, device_type, port_object_val);
-                    if (!response_data) {
-                        return;
-                    }
                     response_data[0] = FE_DEF::FE_LOGIN_RESPONSE;
                     break;
 
@@ -109,11 +106,17 @@ void DFabricClass::exportedParseFunction (
 
                 case FE_DEF::FE_SETUP_SOLO_COMMAND:
                     response_data = this->processSetupSoloRequest(link, current_ptr, ajax_id);
+                    if (!response_data) {
+                        return;
+                    }
                     response_data[0] = FE_DEF::FE_SETUP_SOLO_RESPONSE;
                     break;
 
                 case FE_DEF::FE_SETUP_DUET1_COMMAND:
                     response_data = this->processSetupDuet1Request(link, current_ptr, ajax_id);
+                    if (!response_data) {
+                        return;
+                    }
                     response_data[0] = FE_DEF::FE_SETUP_DUET1_RESPONSE;
                     break;
 
@@ -124,6 +127,9 @@ void DFabricClass::exportedParseFunction (
 
                 case FE_DEF::FE_SETUP_ENSEMBLE_COMMAND:
                     response_data = this->processSetupEnsembleRequest(link, current_ptr, ajax_id);
+                    if (!response_data) {
+                        return;
+                    }
                     response_data[0] = FE_DEF::FE_SETUP_ENSEMBLE_RESPONSE;
                     break;
 
