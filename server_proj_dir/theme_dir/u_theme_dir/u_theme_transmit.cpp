@@ -11,10 +11,10 @@ void UThemeClass::transmitFunction (char *data_val)
 {
     phwangLogitS("UThemeClass::transmitFunction", data_val);
 
-    if (!this->theTpTransferObject) {
-        phwangAbendS("UThemeClass::transmitFunction", "null theTpTransferObject!\n   The reason could be the connnection from ThemeServer has not been accepted");
+    if (!this->portObject()) {
+        phwangAbendS("UThemeClass::transmitFunction", "null portObject()! The reason could be the connection from ThemeServer has not been accepted");
         return;
     }
 
-    phwangPortTransmit(this->theTpTransferObject, data_val);
+    phwangPortTransmit(this->portObject(), data_val);
 }

@@ -11,10 +11,10 @@ void UFabricClass::transmitFunction (char *data_val)
 {
     phwangLogitS("UFabricClass::transmitFunction", data_val);
 
-    if (!this->theTpTransferObject) {
-        phwangAbendS("UFabricClass::transmitFunction", "null theTpTransferObject!\n   The reason could be the connnection from ThemeServer has not been accepted");
+    if (!this->portObject()) {
+        phwangAbendS("UFabricClass::transmitFunction", "null theTpTransferObject! The reason could be the connnection from ThemeServer has not been accepted");
         return;
     }
 
-    phwangPortTransmit(this->theTpTransferObject, data_val);
+    phwangPortTransmit(this->portObject(), data_val);
 }

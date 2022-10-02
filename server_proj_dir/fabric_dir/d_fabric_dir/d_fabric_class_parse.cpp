@@ -67,7 +67,7 @@ void DFabricClass::exportedParseFunction (
                 case FE_DEF::FE_LOGIN_COMMAND:
                     response_data = this->processLoginRequest(current_ptr, device_type, port_object_val);
                     if (!response_data) {
-
+                        return;
                     }
                     response_data[0] = FE_DEF::FE_LOGIN_RESPONSE;
                     break;

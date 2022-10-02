@@ -17,7 +17,7 @@ class GroupClass;
 class UFabricClass {
     FabricClass *theFabricObject;
     void *theTpServerObject;
-    void *theTpTransferObject;
+    void *thePortObject;
 
     void startNetServer(void);
     void processSetupRoomResponse(char *data_val);
@@ -28,6 +28,7 @@ public:
     ~UFabricClass(void);
     char const* objectName(void) {return "UFabricClass";}
 
+    void *portObject(void) {return this->thePortObject;}
     void transmitFunction(char *data_val);
 
     /* exports */

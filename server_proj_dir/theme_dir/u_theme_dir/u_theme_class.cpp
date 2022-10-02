@@ -29,17 +29,17 @@ void uThemeTpServerAcceptFunction (void *game_server_object_val, void *tp_transf
     ((UThemeClass *) game_server_object_val)->exportedNetAcceptFunction(tp_transfer_object_val);
 }
 
-void UThemeClass::exportedNetAcceptFunction (void *tp_transfer_object_val)
+void UThemeClass::exportedNetAcceptFunction (void *port_object_val)
 {
-    if (!tp_transfer_object_val) {
-        phwangAbendS("UThemeClass::exportedNetAcceptFunction", "null tp_transfer_object_val");
+    if (!port_object_val) {
+        phwangAbendS("UThemeClass::exportedNetAcceptFunction", "null port_object_val");
         return;
     }
 
-    this->theTpTransferObject = tp_transfer_object_val;
+    this->thePortObject = port_object_val;
 }
 
-void uThemeTpReceiveDataFunction (void *tp_transfer_object_val, void *game_server_object_val, void *data_val) {
+void uThemeTpReceiveDataFunction (void *port_object_val, void *game_server_object_val, void *data_val) {
     if (0) { /* debug */
         phwangLogitS("Golbal::uThemeTpReceiveDataFunction", (char *) data_val);
     }

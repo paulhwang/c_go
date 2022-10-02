@@ -15,7 +15,7 @@ class ThemeClass;
 class UThemeClass {
     ThemeClass *theThemeObject;
     void *theTpServerObject;
-    void *theTpTransferObject;
+    void *thePortObject;
 
     void startNetServer(void);
     void processSetupBaseResponse(char *data_al);
@@ -25,6 +25,7 @@ protected:
     friend class DThemeClass;
     friend class RoomMgrClass;
 
+    void *portObject(void) {return this->thePortObject;}
     void transmitFunction(char *data_val);
 
 public:
