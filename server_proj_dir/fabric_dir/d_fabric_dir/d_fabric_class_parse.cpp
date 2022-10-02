@@ -943,8 +943,10 @@ char *DFabricClass::processSetupEnsembleRequest (
     session->bindGroup(group);
 
     this->sendSetupRoomRequestToThemeServer(group);
-    response_data = this->generateSetupEnsembleResponse(RESULT_DEF::RESULT_SUCCEED, link_val->linkIdIndex(), session->sessionIdIndex(), data_val);
-    return response_data;
+
+    return 0;
+    //response_data = this->generateSetupEnsembleResponse(RESULT_DEF::RESULT_SUCCEED, link_val->linkIdIndex(), session->sessionIdIndex(), data_val);
+    //return response_data;
 }
 
 char *DFabricClass::generateSetupEnsembleResponse (
