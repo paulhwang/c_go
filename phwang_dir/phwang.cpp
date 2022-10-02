@@ -183,12 +183,12 @@ void phwangFreeTcpServer (void *tcp_server_object_val)
 
 void phwangFreePort (void *port_object_val)
 {
-    thePhwangObject->netRootObject()->freeTpTransfer(port_object_val);
+    thePhwangObject->netRootObject()->freePort(port_object_val);
 }
 
 void phwangPortTransmit (void *port_object_val, char *data_val)
 {
-    thePhwangObject->netRootObject()->tpTransmit(port_object_val, data_val);
+    thePhwangObject->netRootObject()->portTransmit(port_object_val, data_val);
 }
 
 int phwangGetPortObjectIndex (void *port_object_val)
