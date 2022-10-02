@@ -675,6 +675,7 @@ char *DFabricClass::processSetupSoloRequest (
     session->bindGroup(group);
 
     this->sendSetupRoomRequestToThemeServer(group);
+    //return 0;
     response_data = this->generateSetupSoloResponse(RESULT_DEF::RESULT_SUCCEED, link_val->linkIdIndex(), session->sessionIdIndex(), data_val);
     return response_data;
 }
