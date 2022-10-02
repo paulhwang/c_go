@@ -641,11 +641,12 @@ char *DFabricClass::processSetupSoloRequest (
     char *response_data = 0;
     phwangDebugS(true, "DFabricClass::processSetupSoloRequest", data_val);
 
-    SessionClass *session = link_val->mallocSession(ajax_id_val);
+    SessionClass *session = link_val->mallocSession();
     if (!session) {
         response_data = this->generateSetupSoloResponse(RESULT_DEF::RESULT_MALLOC_SESSION_FAIL, link_val->linkIdIndex(), SIZE_DEF::FAKE_SESSION_ID_INDEX, data_val);
         return response_data;
     }
+    session->setAjaxId(ajax_id_val);
 
     char *encoded_theme_info = data_val;
     int theme_info_size;
@@ -718,11 +719,12 @@ char *DFabricClass::processSetupDuet1Request (
     char *response_data = 0;
     phwangDebugS(true, "DFabricClass::processSetupDuet1Request", data_val);
 
-    SessionClass *session = link_val->mallocSession(ajax_id_val);
+    SessionClass *session = link_val->mallocSession();
     if (!session) {
         response_data = this->generateSetupDuet1Response(RESULT_DEF::RESULT_MALLOC_SESSION_FAIL, link_val->linkIdIndex(), SIZE_DEF::FAKE_SESSION_ID_INDEX);
         return response_data;
     }
+    session->setAjaxId(ajax_id_val);
 
     char *encoded_theme_info = data_val;
     int theme_info_size;
@@ -771,7 +773,7 @@ char *DFabricClass::processSetupDuet1Request (
             return response_data;
         }
 
-        SessionClass *his_session = his_link->mallocSession(ajax_id_val);
+        SessionClass *his_session = his_link->mallocSession();
         if (!his_session) {
             response_data = this->generateSetupDuet1Response(RESULT_DEF::RESULT_NULL_HIS_SESSION, link_val->linkIdIndex(), session->sessionIdIndex());
             phwangFree(theme_info);
@@ -779,6 +781,7 @@ char *DFabricClass::processSetupDuet1Request (
             phwangFree(peer_name);
             return response_data;
         }
+        //session->setAjaxId(ajax_id_val); //the ajax_id is mine not his
 
         group->insertSession(his_session);
         his_session->bindGroup(group);
@@ -903,11 +906,12 @@ char *DFabricClass::processSetupEnsembleRequest (
     char *response_data = 0;
     phwangDebugS(true, "DFabricClass::processSetupEnsembleRequest", data_val);
 
-    SessionClass *session = link_val->mallocSession(ajax_id_val);
+    SessionClass *session = link_val->mallocSession();
     if (!session) {
         response_data = this->generateSetupEnsembleResponse(RESULT_DEF::RESULT_MALLOC_SESSION_FAIL, link_val->linkIdIndex(), SIZE_DEF::FAKE_SESSION_ID_INDEX, data_val);
         return response_data;
     }
+    session->setAjaxId(ajax_id_val);
 
     char *encoded_theme_info = data_val;
     int theme_info_size;

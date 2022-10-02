@@ -20,15 +20,12 @@ class SessionClass : public ListEntryClass {
     void *thePendingDownLinkDataQueue;
 
 public:
-    SessionClass(
-        void *list_mgr_object_val,
-        LinkClass *link_object_val,
-        char *ajax_id_val);
+    SessionClass(void *list_mgr_object_val, LinkClass *link_object_val);
     ~SessionClass(void);
 
     char const* objectName(void) {return "SessionClass";}
-    char *ajaxIdBuf(void) {return this->theAjaxIdBuf;}
     char *ajaxId(void) {return this->theAjaxId;}
+    void setAjaxId(char const *ajax_id_val) {strcpy(this->theAjaxIdBuf, ajax_id_val); this->theAjaxId = this->theAjaxIdBuf;}
     void resetAjaxId(void) {this->theAjaxId = 0;}
     char *sessionIdIndex(void) {return this->entryIdIndex();}
     LinkClass *linkObject(void) {return this->theLinkObject;}
