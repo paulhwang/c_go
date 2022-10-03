@@ -655,15 +655,15 @@ char *DFabricClass::processSetupSoloRequest (
     char *theme_info = phwangDecodeStringMalloc(encoded_theme_info, &theme_info_size);
     phwangDebugSS(true, "DFabricClass::processSetupSoloRequest", "theme_info=", theme_info);
 
-    char *encoded_initiator_name = encoded_theme_info + theme_info_size;
-    int initiator_name_size;
-    char *initiator_name = phwangDecodeStringMalloc(encoded_initiator_name, &initiator_name_size);
-    phwangDebugSS(true, "DFabricClass::processSetupSoloRequest", "initiator_name=", initiator_name);
+    char *encoded_first_fiddle = encoded_theme_info + theme_info_size;
+    int first_fiddle_size;
+    char *first_fiddle = phwangDecodeStringMalloc(encoded_first_fiddle, &first_fiddle_size);
+    phwangDebugSS(true, "DFabricClass::processSetupSoloRequest", "first_fiddle=", first_fiddle);
 
-    char *encoded_peer_name = encoded_initiator_name + initiator_name_size;
-    int peer_name_size;
-    char *peer_name = phwangDecodeStringMalloc(encoded_peer_name, &peer_name_size);
-    phwangDebugSS(true, "DFabricClass::processSetupSoloRequest", "peer_name=", peer_name);
+    char *encoded_second_fiddle = encoded_first_fiddle + first_fiddle_size;
+    int second_fiddle_size;
+    char *second_fiddle = phwangDecodeStringMalloc(encoded_second_fiddle, &second_fiddle_size);
+    phwangDebugSS(true, "DFabricClass::processSetupSoloRequest", "second_fiddle=", second_fiddle);
 
     switch (*theme_info) {
         case 'G':
@@ -673,10 +673,10 @@ char *DFabricClass::processSetupSoloRequest (
             phwangAbendSS("DFabricClass::processSetupSoloRequest", "theme not supported", theme_info);
     }
 
-    GroupClass *group = this->theFabricObject->mallocGroup(group_mode, theme_info, initiator_name, peer_name);
+    GroupClass *group = this->theFabricObject->mallocGroup(group_mode, theme_info, first_fiddle, second_fiddle);
     phwangFree(theme_info);
-    phwangFree(initiator_name);
-    phwangFree(peer_name);
+    phwangFree(first_fiddle);
+    phwangFree(second_fiddle);
     if (!group) {
         response_data = this->generateSetupSoloResponse(RESULT_DEF::RESULT_MALLOC_GROUP_FAIL, link_val->linkIdIndex(), session->sessionIdIndex(), data_val);
         return response_data;

@@ -88,9 +88,9 @@ void UFabricClass::sendSetupSessioResponse (
     char *encoded_theme_info    = phwangEncodeStringMalloc(group_val->themeInfo());
     char *encoded_first_fiddle  = phwangEncodeStringMalloc(group_val->firstFiddle());
     char *encoded_second_fiddle = "";
-    if (group_val->mode() == FE_DEF::FE_GROUP_MODE_DUET) {
+    //if (group_val->mode() == FE_DEF::FE_GROUP_MODE_DUET) {
         encoded_second_fiddle = phwangEncodeStringMalloc(group_val->secondFiddle());
-    }
+    //}
 
     char *response_data = (char *) phwangMalloc(
         FABRIC_DEF::FE_DL_BUF_WITH_LINK_SESSION_SIZE + 5 + strlen(encoded_theme_info) + strlen(encoded_first_fiddle) + strlen(encoded_second_fiddle),
@@ -132,6 +132,8 @@ void UFabricClass::sendSetupSessioResponse (
     switch (group_val->mode()) {
         case FE_DEF::FE_GROUP_MODE_SOLO:
             *response_data = FE_DEF::FE_SETUP_SOLO_RESPONSE;
+            memcpy(current_ptr, encoded_second_fiddle, strlen(encoded_second_fiddle));
+            current_ptr += strlen(encoded_second_fiddle);
             break;
 
         case FE_DEF::FE_GROUP_MODE_DUET:
@@ -143,6 +145,8 @@ void UFabricClass::sendSetupSessioResponse (
 
         case FE_DEF::FE_GROUP_MODE_ENSEMBLE:
             *response_data = FE_DEF::FE_SETUP_ENSEMBLE_RESPONSE;
+            memcpy(current_ptr, encoded_second_fiddle, strlen(encoded_second_fiddle));
+            current_ptr += strlen(encoded_second_fiddle);
             break;
 
         default:
