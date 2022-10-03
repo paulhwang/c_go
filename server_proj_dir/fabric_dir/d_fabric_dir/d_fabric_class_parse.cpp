@@ -648,7 +648,9 @@ char *DFabricClass::processSetupSoloRequest (
     }
     session->setAjaxId(ajax_id_val);
 
-    char *encoded_theme_info = data_val;
+    char group_mode = *data_val;
+
+    char *encoded_theme_info = data_val + 1;
     int theme_info_size;
     char *theme_info = phwangDecodeStringMalloc(encoded_theme_info, &theme_info_size);
     phwangDebugSS(true, "DFabricClass::processSetupSoloRequest", "theme_info=", theme_info);
@@ -670,7 +672,8 @@ char *DFabricClass::processSetupSoloRequest (
         default:
             phwangAbendSS("DFabricClass::processSetupSoloRequest", "theme not supported", theme_info);
     }
-    GroupClass *group = this->theFabricObject->mallocGroup(FE_DEF::FE_GROUP_MODE_SOLO, theme_info, initiator_name, peer_name);
+
+    GroupClass *group = this->theFabricObject->mallocGroup(group_mode, theme_info, initiator_name, peer_name);
     phwangFree(theme_info);
     phwangFree(initiator_name);
     phwangFree(peer_name);
