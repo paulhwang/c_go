@@ -93,15 +93,6 @@ class DFabricClass {
         char const *session_id_index_val,
         char const *theme_info_val);
 
-    char *processSetupDuet1Request (
-        LinkClass *link_val,
-        char *data_val,
-        char *ajax_id_val);
-    char *generateSetupDuet1Response (
-        char const *result_val,
-        char const *link_id_index_val,
-        char const *session_id_index_val);
-
     char *processSetupDuet2Request (
         SessionClass *session_val,
         char *data_val);
@@ -117,16 +108,6 @@ class DFabricClass {
         char const *result_val,
         char const *link_id_index_val,
         char const *session_id_index_val);
-
-    char *processSetupEnsembleRequest (
-        LinkClass *link_val,
-        char *data_val,
-        char *ajax_id_val);
-    char *generateSetupEnsembleResponse (
-        char const *result_val,
-        char const *link_id_index_val,
-        char const *session_id_index_val,
-        char const *theme_info_val);
 
     char *processGetSessionSetupStatusRequest (
         SessionClass *session_val,

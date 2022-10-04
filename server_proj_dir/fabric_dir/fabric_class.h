@@ -54,6 +54,7 @@ public:
     LinkClass *searchLinkByName(char *name_val);
     GroupClass *mallocGroup(
         char mode_val,
+        char theme_type_val,
         char const *theme_info_val,
         char const *initiator_name_val,
         char const *peer_name_val);

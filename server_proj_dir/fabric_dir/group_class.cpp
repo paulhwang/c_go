@@ -15,6 +15,7 @@ GroupClass::GroupClass (
     void *list_mgr_object_val,
     FabricClass *fabric_object_val,
     char mode_val,
+    char theme_type_val,
     char const *theme_info_val,
     char const *first_fiddle_val,
     char const *second_fiddle_val)
@@ -23,6 +24,7 @@ GroupClass::GroupClass (
     this->theFabricObject = fabric_object_val;
     this->theRoomStatus = FE_DEF::FE_ROOM_STATUS_PREPARING;
     this->theMode = mode_val;
+    this->theThemeType = theme_type_val;
     this->theThemeInfo =    (char *) phwangMalloc(strlen(theme_info_val) + 1,     MallocClass::GroupClass);
     this->theFirstFiddle =  (char *) phwangMalloc(strlen(first_fiddle_val) + 1, MallocClass::GroupClass);
     this->theSecondFiddle = (char *) phwangMalloc(strlen(second_fiddle_val) + 1,      MallocClass::GroupClass);

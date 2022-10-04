@@ -89,7 +89,7 @@ void UFabricClass::sendSetupSessionResponse (
     char *encoded_second_fiddle = phwangEncodeStringMalloc(group_val->secondFiddle());
 
     char *response_data = (char *) phwangMalloc(
-        FABRIC_DEF::FE_DL_BUF_WITH_LINK_SESSION_SIZE + 5 + strlen(encoded_theme_info) + strlen(encoded_first_fiddle) + strlen(encoded_second_fiddle),
+        FABRIC_DEF::FE_DL_BUF_WITH_LINK_SESSION_SIZE + 6 + strlen(encoded_theme_info) + strlen(encoded_first_fiddle) + strlen(encoded_second_fiddle),
         MallocClass::generateSetupSessionSucceedResponse);
 
     *response_data = FE_DEF::FE_SETUP_SOLO_RESPONSE;
@@ -121,6 +121,7 @@ void UFabricClass::sendSetupSessionResponse (
 
     *current_ptr++ = group_val->roomStatus();
     *current_ptr++ = group_val->mode();
+    *current_ptr++ = group_val->themeType();
 
     memcpy(current_ptr, encoded_theme_info, strlen(encoded_theme_info));
     current_ptr += strlen(encoded_theme_info);

@@ -15,6 +15,7 @@ class GroupClass : public ListEntryClass {
 #define GROUP_CLASS_SESSION_ARRAY_SIZE 32
     FabricClass *theFabricObject;
     char theMode;
+    char theThemeType;
     char *theThemeInfo;
     char *theFirstFiddle;
     char *theSecondFiddle;
@@ -24,16 +25,19 @@ class GroupClass : public ListEntryClass {
     SessionClass **theSessionTableArray;
 
 public:
-    GroupClass(void *list_mgr_object_val,
-               FabricClass *fabric_object_val,
-               char mode_val,
-               char const *theme_info_val,
-               char const *first_fiddle_val,
-               char const *second_fiddle_val);
+    GroupClass(
+        void *list_mgr_object_val,
+        FabricClass *fabric_object_val,
+        char mode_val,
+        char theme_type_val,
+        char const *theme_info_val,
+        char const *first_fiddle_val,
+        char const *second_fiddle_val);
     ~GroupClass(void);
     char const* objectName(void) {return "GroupClass";}
 
     char mode(void) {return this->theMode;}
+    char themeType(void) {return this->theThemeType;}
     char roomStatus(void) {return this->theRoomStatus;}
     void setRoomStatusToReady(void);
     char *themeInfo(void) {return this->theThemeInfo;}
