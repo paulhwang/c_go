@@ -188,10 +188,8 @@ void UFabricClass::sendPutSessionDataResponse (
     phwangDebugSS(false, "UFabricClass::sendPutSessionDataResponse", "result=", result_val);
     LinkClass *link = session_val->linkObject();
 
-    char *encoded_result_data = phwangEncodeStringMalloc(result_data_val);
-
     char *response_data = (char *) phwangMalloc(
-        FABRIC_DEF::FE_DL_BUF_WITH_LINK_SESSION_SIZE + 1 + strlen(encoded_result_data),
+        FABRIC_DEF::FE_DL_BUF_WITH_LINK_SESSION_SIZE + 1 + strlen(result_data_val),
         MallocClass::sendPutSessionDataResponse);
 
     *response_data = FE_DEF::FE_PUT_SESSION_DATA_RESPONSE;
@@ -228,12 +226,7 @@ void UFabricClass::sendPutSessionDataResponse (
 
     *current_ptr++ = group_val->themeType();
 
-    memcpy(current_ptr, encoded_result_data, strlen(encoded_result_data));
-    current_ptr += strlen(encoded_result_data);
-
-    *current_ptr = 0;
-
-    phwangFree(encoded_result_data);
+    strcpy(current_ptr, result_data_val);
 
     phwangDebugSS(true, "UFabricClass::sendPutSessionDataResponse", "response_data=", response_data);
 
