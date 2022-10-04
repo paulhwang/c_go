@@ -137,11 +137,6 @@ void DFabricClass::exportedParseFunction (
                     response_data[0] = FE_DEF::FE_SETUP_DUET2_RESPONSE;
                     break;
 
-                case FE_DEF::FE_GET_SESSION_SETUP_STATUS_COMMAND:
-                    response_data = this->processGetSessionSetupStatusRequest(session, current_ptr);
-                    response_data[0] = FE_DEF::FE_GET_SESSION_SETUP_STATUS_RESPONSE;
-                    break;
-
                 case FE_DEF::FE_FREE_SESSION_COMMAND:
                     this->processFreeSessionRequest(session);
                     response_data[0] = FE_DEF::FE_FREE_SESSION_RESPONSE;
@@ -780,75 +775,6 @@ char *DFabricClass::generateSetupDuet3Response (
     memcpy(current_ptr, link_id_index_val, SIZE_DEF::LINK_ID_INDEX_SIZE);
     current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE;
     strcpy(current_ptr, session_id_index_val);
-    return response_data;
-}
-
-/* get session setup status */
-
-char *DFabricClass::processGetSessionSetupStatusRequest (
-    SessionClass *session_val,
-    char *data_val)
-{
-    GroupClass *group_object = session_val->groupObject();
-    char *response_data = this->generateGetSessionSetupStatusResponse(
-                                    RESULT_DEF::RESULT_SUCCEED,
-                                    session_val->linkObject()->linkIdIndex(),
-                                    session_val->sessionIdIndex(),
-                                    group_object->roomStatus(),
-                                    group_object->mode(),
-                                    group_object->themeInfo(),
-                                    group_object->firstFiddle(),
-                                    group_object->secondFiddle());
-    return response_data;
-}
-
-char *DFabricClass::generateGetSessionSetupStatusResponse (
-    char const *result_val,
-    char const *link_id_index_val,
-    char const *session_id_index_val,
-    char room_status_val,
-    char group_mode_val,
-    char *theme_info_val,
-    char *initiator_name_val,
-    char *peer_name_val)
-{
-    phwangDebugSS(false, "DFabricClass::generateGetSessionSetupStatusResponse", "result=", result_val);
-
-    char *encoded_theme_info     = phwangEncodeStringMalloc(theme_info_val);
-    char *encoded_initiator_name = phwangEncodeStringMalloc(initiator_name_val);
-    char *encoded_peer_name      = phwangEncodeStringMalloc(peer_name_val);
-
-    char *response_data = (char *) phwangMalloc(
-        FABRIC_DEF::FE_DL_BUF_WITH_LINK_SESSION_SIZE + 5 + strlen(encoded_theme_info) + strlen(encoded_initiator_name) + strlen(encoded_peer_name),
-        MallocClass::generateGetSessionSetupStatusResponse);
-    char *current_ptr = &response_data[FABRIC_DEF::FE_DL_COMMAND_AJAX_SIZE];
-
-    memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
-    current_ptr += RESULT_DEF::RESULT_SIZE;
-
-    memcpy(current_ptr, link_id_index_val, SIZE_DEF::LINK_ID_INDEX_SIZE);
-    current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE;
-
-    memcpy(current_ptr, session_id_index_val, SIZE_DEF::SESSION_ID_INDEX_SIZE);
-    current_ptr += SIZE_DEF::SESSION_ID_INDEX_SIZE;
-
-    *current_ptr++ = room_status_val;
-    *current_ptr++ = group_mode_val;
-
-    memcpy(current_ptr, encoded_theme_info, strlen(encoded_theme_info));
-    current_ptr += strlen(encoded_theme_info);
-
-    memcpy(current_ptr, encoded_initiator_name, strlen(encoded_initiator_name));
-    current_ptr += strlen(encoded_initiator_name);
-
-    memcpy(current_ptr, encoded_peer_name, strlen(encoded_peer_name));
-    current_ptr += strlen(encoded_peer_name);
-
-    *current_ptr = 0;
-
-    phwangFree(encoded_theme_info);
-    phwangFree(encoded_initiator_name);
-    phwangFree(encoded_peer_name);
     return response_data;
 }
 
