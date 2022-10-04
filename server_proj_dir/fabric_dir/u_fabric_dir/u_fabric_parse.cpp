@@ -230,5 +230,5 @@ void UFabricClass::sendPutSessionDataResponse (
 
     phwangDebugSS(true, "UFabricClass::sendPutSessionDataResponse", "response_data=", response_data);
 
-    //this->fabricObject()->dFabricObject()->transmitFunction(link->portObject(), response_data);
+    this->fabricObject()->dFabricObject()->transmitFunction(link->portObject(), response_data);
 }
