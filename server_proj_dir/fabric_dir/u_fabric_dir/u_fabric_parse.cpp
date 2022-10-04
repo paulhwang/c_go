@@ -90,7 +90,7 @@ void UFabricClass::sendSetupSessionResponse (
 
     char *response_data = (char *) phwangMalloc(
         FABRIC_DEF::FE_DL_BUF_WITH_LINK_SESSION_SIZE + 3 + strlen(encoded_theme_info) + strlen(encoded_first_fiddle) + strlen(encoded_second_fiddle),
-        MallocClass::generateSetupSessionSucceedResponse);
+        MallocClass::sendSetupSessionResponse);
 
     *response_data = FE_DEF::FE_SETUP_SOLO_RESPONSE;
 
@@ -186,11 +186,47 @@ void UFabricClass::sendPutSessionDataResponse (
     char *encoded_result_data = phwangEncodeStringMalloc(result_data_val);
 
     char *response_data = (char *) phwangMalloc(
-        FABRIC_DEF::FE_DL_BUF_WITH_LINK_SESSION_SIZE + 5 + strlen(encoded_result_data) + 1,
+        FABRIC_DEF::FE_DL_BUF_WITH_LINK_SESSION_SIZE + 1 + strlen(encoded_result_data),
         MallocClass::sendPutSessionDataResponse);
 
     *response_data = FE_DEF::FE_PUT_SESSION_DATA_RESPONSE;
 
     char *current_ptr = &response_data[FE_DEF::FE_COMMAND_SIZE];
 
+    switch (link->deviceType()) {
+        case 'N':
+            //memcpy(current_ptr, session_val->ajaxId(), SIZE_DEF::AJAX_ID_SIZE);
+            memcpy(current_ptr, "xxx", SIZE_DEF::AJAX_ID_SIZE);
+            session_val->resetAjaxId();
+            break;
+
+        case 'A':
+            memcpy(current_ptr, "***", SIZE_DEF::AJAX_ID_SIZE);
+            break;
+        default:
+            break;
+    }
+    current_ptr += SIZE_DEF::AJAX_ID_SIZE;
+
+    memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
+    current_ptr += RESULT_DEF::RESULT_SIZE;
+
+    memcpy(current_ptr, link->linkIdIndex(), SIZE_DEF::LINK_ID_INDEX_SIZE);
+    current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE;
+
+    memcpy(current_ptr, session_val->sessionIdIndex(), SIZE_DEF::SESSION_ID_INDEX_SIZE);
+    current_ptr += SIZE_DEF::SESSION_ID_INDEX_SIZE;
+
+    *current_ptr++ = group_val->themeType();
+
+    memcpy(current_ptr, encoded_result_data, strlen(encoded_result_data));
+    current_ptr += strlen(encoded_result_data);
+
+    *current_ptr = 0;
+
+    phwangFree(encoded_result_data);
+
+    phwangDebugSS(true, "UFabricClass::sendPutSessionDataResponse", "response_data=", response_data);
+
+    //this->fabricObject()->dFabricObject()->transmitFunction(link->portObject(), response_data);
 }

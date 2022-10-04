@@ -70,7 +70,7 @@ public:
     int const static TCP_ACCEPT_CALLBACK_FUNC = 12;
     int const static GroupClass = 13;
     int const static LinkClass = 14;
-    int const static generateSetupSessionSucceedResponse = 15;
+    int const static sendSetupSessionResponse = 15;
     int const static sendPutSessionDataResponse = 16;
 
     int const static MAX_INDEX = 20;
