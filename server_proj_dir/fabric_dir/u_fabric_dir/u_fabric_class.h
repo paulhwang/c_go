@@ -45,5 +45,5 @@ public:
         SessionClass *session_val,
         GroupClass *group_val,
         char const *result_val,
-        char const *data);
+        char const *result_data_val);
 };

@@ -71,6 +71,7 @@ public:
     int const static GroupClass = 13;
     int const static LinkClass = 14;
     int const static generateSetupSessionSucceedResponse = 15;
+    int const static sendPutSessionDataResponse = 16;
 
     int const static MAX_INDEX = 20;
 
