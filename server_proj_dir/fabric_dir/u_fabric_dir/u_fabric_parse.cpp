@@ -40,11 +40,10 @@ void UFabricClass::processSetupRoomResponse (char *data_val)
 {
     phwangDebugS(true, "UFabricClass::processSetupRoomResponse", data_val);
 
-    char *current_ptr;
     char result_buf[RESULT_DEF::RESULT_SIZE + 1];
     memcpy(result_buf, data_val, RESULT_DEF::RESULT_SIZE);
     result_buf[RESULT_DEF::RESULT_SIZE] = 0;
-    current_ptr = data_val + RESULT_DEF::RESULT_SIZE;
+    char *current_ptr = data_val + RESULT_DEF::RESULT_SIZE;
 
     char *group_id_index = current_ptr;
     char group_id_buf[SIZE_DEF::GROUP_ID_INDEX_SIZE + 1];
@@ -70,19 +69,19 @@ void UFabricClass::processSetupRoomResponse (char *data_val)
             ((group->mode() == FE_DEF::FE_GROUP_MODE_DUET) && (!strcmp(group->firstFiddle(), group->secondFiddle()))) ||
              (group->mode() == FE_DEF::FE_GROUP_MODE_ENSEMBLE)) {
             phwangDebugS(true, "UFabricClass::processSetupRoomResponse", "match");
-            this->sendSetupSessioResponse(session, group, result_buf);
+            this->sendSetupSessionResponse(session, group, result_buf);
         }
 
         session->linkObject()->setPendingSessionSetup3(session->sessionIdIndex(), "");
     }
 }
 
-void UFabricClass::sendSetupSessioResponse (
+void UFabricClass::sendSetupSessionResponse (
     SessionClass *session_val,
     GroupClass *group_val,
     char const *result_val)
 {
-    phwangDebugSS(false, "UFabricClass::sendSetupSessioResponse", "result=", result_val);
+    phwangDebugSS(false, "UFabricClass::sendSetupSessionResponse", "result=", result_val);
     LinkClass *link = session_val->linkObject();
 
     char *encoded_theme_info    = phwangEncodeStringMalloc(group_val->themeInfo());
@@ -138,7 +137,7 @@ void UFabricClass::sendSetupSessioResponse (
     phwangFree(encoded_first_fiddle);
     phwangFree(encoded_second_fiddle);
 
-    phwangDebugSS(true, "UFabricClass::sendSetupSessioResponse", "response_data=", response_data);
+    phwangDebugSS(true, "UFabricClass::sendSetupSessionResponse", "response_data=", response_data);
 
     this->fabricObject()->dFabricObject()->transmitFunction(link->portObject(), response_data);
 }
@@ -168,7 +167,17 @@ void UFabricClass::processPutRoomDataResponse (char *data_val)
     for (int i = 0; i < session_array_size; i++) {
         SessionClass *session = group->sessionTableArray(i);
         if (session) {
+            this->sendPutSessionDataResponse(session, group, result_buf, rest_data);
             session->enqueuePendingDownLinkData(rest_data);
         }
     }
+}
+
+void UFabricClass::sendPutSessionDataResponse (
+    SessionClass *session_val,
+    GroupClass *group_val,
+    char const *result_val,
+    char const *data)
+{
+
 }
