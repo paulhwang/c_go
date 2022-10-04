@@ -118,7 +118,8 @@ class DFabricClass {
 
     char *processPutSessionDataRequest (
         SessionClass *session_val,
-        char *data_val);
+        char *data_val,
+        char *ajax_id_val);
     char *generatePutSessionDataResponse (
         char const *result_val,
         char const *link_id_index_val,

@@ -98,6 +98,11 @@ void UFabricClass::sendSetupSessionResponse (
 
     switch (link->deviceType()) {
         case 'N':
+            if (!session_val->ajaxId()) {
+                phwangAbendS("UFabricClass::sendSetupSessionResponse", "null_ajaxId");
+                return;
+            }
+
             memcpy(current_ptr, session_val->ajaxId(), SIZE_DEF::AJAX_ID_SIZE);
             session_val->resetAjaxId();
             break;
@@ -195,8 +200,12 @@ void UFabricClass::sendPutSessionDataResponse (
 
     switch (link->deviceType()) {
         case 'N':
-            //memcpy(current_ptr, session_val->ajaxId(), SIZE_DEF::AJAX_ID_SIZE);
-            memcpy(current_ptr, "xxx", SIZE_DEF::AJAX_ID_SIZE);
+            if (!session_val->ajaxId()) {
+                phwangAbendS("UFabricClass::sendPutSessionDataResponse", "null_ajaxId");
+                return;
+            }
+
+            memcpy(current_ptr, session_val->ajaxId(), SIZE_DEF::AJAX_ID_SIZE);
             session_val->resetAjaxId();
             break;
 
