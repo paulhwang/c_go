@@ -87,14 +87,14 @@ void UFabricClass::sendSetupSessioResponse (
 
     char *encoded_theme_info    = phwangEncodeStringMalloc(group_val->themeInfo());
     char *encoded_first_fiddle  = phwangEncodeStringMalloc(group_val->firstFiddle());
-    char *encoded_second_fiddle = "";
-    //if (group_val->mode() == FE_DEF::FE_GROUP_MODE_DUET) {
-        encoded_second_fiddle = phwangEncodeStringMalloc(group_val->secondFiddle());
-    //}
+    char *encoded_second_fiddle = phwangEncodeStringMalloc(group_val->secondFiddle());
 
     char *response_data = (char *) phwangMalloc(
         FABRIC_DEF::FE_DL_BUF_WITH_LINK_SESSION_SIZE + 5 + strlen(encoded_theme_info) + strlen(encoded_first_fiddle) + strlen(encoded_second_fiddle),
         MallocClass::generateSetupSessionSucceedResponse);
+
+    *response_data = FE_DEF::FE_SETUP_SOLO_RESPONSE;
+
     char *current_ptr = &response_data[FE_DEF::FE_COMMAND_SIZE];
 
     switch (link->deviceType()) {
@@ -129,37 +129,14 @@ void UFabricClass::sendSetupSessioResponse (
     memcpy(current_ptr, encoded_first_fiddle, strlen(encoded_first_fiddle));
     current_ptr += strlen(encoded_first_fiddle);
 
-    switch (group_val->mode()) {
-        case FE_DEF::FE_GROUP_MODE_SOLO:
-            *response_data = FE_DEF::FE_SETUP_SOLO_RESPONSE;
-            memcpy(current_ptr, encoded_second_fiddle, strlen(encoded_second_fiddle));
-            current_ptr += strlen(encoded_second_fiddle);
-            break;
-
-        case FE_DEF::FE_GROUP_MODE_DUET:
-            *response_data = FE_DEF::FE_SETUP_DUET1_RESPONSE;
-
-            memcpy(current_ptr, encoded_second_fiddle, strlen(encoded_second_fiddle));
-            current_ptr += strlen(encoded_second_fiddle);
-            break;
-
-        case FE_DEF::FE_GROUP_MODE_ENSEMBLE:
-            *response_data = FE_DEF::FE_SETUP_ENSEMBLE_RESPONSE;
-            memcpy(current_ptr, encoded_second_fiddle, strlen(encoded_second_fiddle));
-            current_ptr += strlen(encoded_second_fiddle);
-            break;
-
-        default:
-            break;
-    }
+    memcpy(current_ptr, encoded_second_fiddle, strlen(encoded_second_fiddle));
+    current_ptr += strlen(encoded_second_fiddle);
 
     *current_ptr = 0;
 
     phwangFree(encoded_theme_info);
     phwangFree(encoded_first_fiddle);
-    if (strlen(encoded_second_fiddle)) {
-        phwangFree(encoded_second_fiddle);
-    }
+    phwangFree(encoded_second_fiddle);
 
     phwangDebugSS(true, "UFabricClass::sendSetupSessioResponse", "response_data=", response_data);
 
