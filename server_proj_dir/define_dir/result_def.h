@@ -31,6 +31,7 @@ public:
     char const static *RESULT_SECOND_LINK_NOT_EXIST;
     char const static *RESULT_NULL_SECOND_SESSION;
     char const static *RESULT_SESSION_DATA_NOT_AVAILABLE;
+    char const static *RESULT_MALLOC_SECOND_SESSION_FAIL;
 
     char const static *RESULT_MALLOC_ROOM_FAIL;
 };

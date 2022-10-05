@@ -75,14 +75,19 @@ char *LinkClass::getPendingSessionSetup3 (void)
 
 void LinkClass::setPendingSessionSetup (
     char *session_id_index_val,
+    char theme_type_val,
     char *theme_data_val)
 {
-    char *buf, *data_ptr;
+    char *buf = (char *) phwangMalloc(FABRIC_DEF::FE_PENDING_SESSIONS_SIZE, MallocClass::setPendingSessionSetup);
+    char *current_ptr = buf;
 
-    buf = data_ptr = (char *) phwangMalloc(FABRIC_DEF::FE_PENDING_SESSIONS_SIZE, MallocClass::setPendingSessionSetup);
-    memcpy(data_ptr, session_id_index_val, SIZE_DEF::SESSION_ID_INDEX_SIZE);
-    data_ptr += SIZE_DEF::SESSION_ID_INDEX_SIZE;
-    strcpy(data_ptr, theme_data_val);
+    memcpy(current_ptr, session_id_index_val, SIZE_DEF::SESSION_ID_INDEX_SIZE);
+    current_ptr += SIZE_DEF::SESSION_ID_INDEX_SIZE;
+
+    *current_ptr++ = theme_type_val;
+
+    strcpy(current_ptr, theme_data_val);
+
     phwangEnqueue(this->thePendingSessionSetupQueue, buf);
 }
 

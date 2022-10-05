@@ -47,7 +47,10 @@ public:
     SessionClass *searchSession(char *data_val);
     char *getPendingSessionSetup(void);
     char *getPendingSessionSetup3(void);
-    void setPendingSessionSetup(char *session_id_index_val, char *topic_data_val);
+    void setPendingSessionSetup(
+        char *session_id_index_val,
+        char theme_type_val,
+        char *topic_data_val);
     void setPendingSessionSetup3(char *session_id_index_val, char const *topic_data_val);
     void resetKeepAliveTime(void) {this->theKeepAliveTime = time((time_t *) 0);}
     int keepAliveTimerExpired(void) {return (time((time_t *) 0) - this->theKeepAliveTime) > LINK_CLASS_KEEP_ALIVE_TIMEOUT;}

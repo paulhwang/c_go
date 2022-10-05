@@ -667,19 +667,27 @@ char *DFabricClass::processSetupSessionRequest (
     group->insertSession(session);
     session->bindGroup(group);
 
-    if ( (group_mode == FE_DEF::FE_GROUP_MODE_SOLO) ||
-        ((group_mode == FE_DEF::FE_GROUP_MODE_DUET) && (!strcmp(first_fiddle, second_fiddle))) ||
-         (group_mode == FE_DEF::FE_GROUP_MODE_ENSEMBLE)) {
+    if ( (group->mode() == FE_DEF::FE_GROUP_MODE_SOLO) ||
+        ((group->mode() == FE_DEF::FE_GROUP_MODE_DUET) && (!strcmp(group->firstFiddle(), group->secondFiddle()))) ||
+         (group->mode() == FE_DEF::FE_GROUP_MODE_ENSEMBLE)) {
         this->sendSetupRoomRequestToThemeServer(group);
         return 0;
     }
 
-    LinkClass *second_link = this->theFabricObject->searchLinkByName(second_fiddle);
+    LinkClass *second_link = this->theFabricObject->searchLinkByName(group->secondFiddle());
     if (!second_link) {
         response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_SECOND_LINK_NOT_EXIST, link_val->linkIdIndex(), SIZE_DEF::FAKE_SESSION_ID_INDEX, data_val);
         return response_data;
     }
 
+    SessionClass *second_session = second_link->mallocSession();
+    if (!second_session) {
+        response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_MALLOC_SECOND_SESSION_FAIL, link_val->linkIdIndex(), SIZE_DEF::FAKE_SESSION_ID_INDEX, data_val);
+        return response_data;
+    }
+
+    second_link->setPendingSessionSetup(second_session->sessionIdIndex(), group->themeType(), group->themeInfo());
+    return 0;
     //response_data = this->generateSetupSoloResponse(RESULT_DEF::RESULT_SUCCEED, link_val->linkIdIndex(), session->sessionIdIndex(), data_val);
     //return response_data;
 }
