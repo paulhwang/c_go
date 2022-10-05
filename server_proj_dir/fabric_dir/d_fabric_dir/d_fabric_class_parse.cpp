@@ -35,13 +35,14 @@ void DFabricClass::exportedParseFunction (
 
     char ajax_id[SIZE_DEF::AJAX_ID_SIZE + 1];
     switch (device_type) {
-        case 'N':
+        case FE_DEF::FE_DEVICE_TYPE_NODEJS:
             memcpy(ajax_id, current_ptr, SIZE_DEF::AJAX_ID_SIZE);
             ajax_id[SIZE_DEF::AJAX_ID_SIZE] = 0;
             current_ptr += SIZE_DEF::AJAX_ID_SIZE;
             break;
 
-        case 'A':
+        case FE_DEF::FE_DEVICE_TYPE_IPHONE:
+        case FE_DEF::FE_DEVICE_TYPE_ANDROID:
             break;
 
         default:
@@ -167,11 +168,12 @@ void DFabricClass::exportedParseFunction (
     }
 
     switch (device_type) {
-        case 'N':
+        case FE_DEF::FE_DEVICE_TYPE_NODEJS:
             memcpy(&response_data[1], ajax_id, SIZE_DEF::AJAX_ID_SIZE);
             break;
 
-        case 'A':
+        case FE_DEF::FE_DEVICE_TYPE_IPHONE:
+        case FE_DEF::FE_DEVICE_TYPE_ANDROID:
             memcpy(&response_data[1], "***", SIZE_DEF::AJAX_ID_SIZE);
             break;
         default:
