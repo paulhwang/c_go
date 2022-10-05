@@ -92,7 +92,7 @@ void UFabricClass::sendSetupSessionResponse (
         FABRIC_DEF::FE_DL_BUF_WITH_LINK_SESSION_SIZE + 3 + strlen(encoded_theme_info) + strlen(encoded_first_fiddle) + strlen(encoded_second_fiddle),
         MallocClass::sendSetupSessionResponse);
 
-    *response_data = FE_DEF::FE_SETUP_SOLO_RESPONSE;
+    *response_data = FE_DEF::FE_SETUP_SESSION_RESPONSE;
 
     char *current_ptr = &response_data[FE_DEF::FE_COMMAND_SIZE];
 
