@@ -83,28 +83,28 @@ class DFabricClass {
         char const *link_id_index_val,
         char const *data_val);
 
-    char *processSetupSoloRequest (
+    char *processSetupSessionRequest (
         LinkClass *link_val,
         char *data_val,
         char *ajax_id_val);
-    char *generateSetupSoloResponse (
+    char *generateSetupSessionResponse (
         char const *result_val,
         char const *link_id_index_val,
         char const *session_id_index_val,
         char const *theme_info_val);
 
-    char *processSetupDuet2Request (
+    char *processSetupSession2Request (
         SessionClass *session_val,
         char *data_val);
-    char *generateSetupDuet2Response (
+    char *generateSetupSession2Response (
         char const *result_val,
         char const *link_id_index_val,
         char const *session_id_index_val);
 
-    char *processSetupDuet3Request (
+    char *processSetupSession3Request (
         LinkClass *link_val,
         char *data_val);
-    char *generateSetupDuet3Response (
+    char *generateSetupSession3Response (
         char const *result_val,
         char const *link_id_index_val,
         char const *session_id_index_val);

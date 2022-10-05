@@ -105,7 +105,7 @@ void DFabricClass::exportedParseFunction (
                     break;
 
                 case FE_DEF::FE_SETUP_SOLO_COMMAND:
-                    response_data = this->processSetupSoloRequest(link, current_ptr, ajax_id);
+                    response_data = this->processSetupSessionRequest(link, current_ptr, ajax_id);
                     if (!response_data) {
                         return;
                     }
@@ -113,7 +113,7 @@ void DFabricClass::exportedParseFunction (
                     break;
 
                 case FE_DEF::FE_SETUP_DUET3_COMMAND:
-                    response_data = this->processSetupDuet3Request(link, current_ptr);
+                    response_data = this->processSetupSession3Request(link, current_ptr);
                     response_data[0] = FE_DEF::FE_SETUP_DUET3_RESPONSE;
                     break;
 
@@ -133,7 +133,7 @@ void DFabricClass::exportedParseFunction (
 
             switch (command) {
                 case FE_DEF::FE_SETUP_DUET2_COMMAND:
-                    response_data = this->processSetupDuet2Request(session, current_ptr);
+                    response_data = this->processSetupSession2Request(session, current_ptr);
                     response_data[0] = FE_DEF::FE_SETUP_DUET2_RESPONSE;
                     break;
 
@@ -615,17 +615,17 @@ char *DFabricClass::generateGetNameListResponse (
     return response_data;
 }
 
-char *DFabricClass::processSetupSoloRequest (
+char *DFabricClass::processSetupSessionRequest (
     LinkClass *link_val,
     char *data_val,
     char *ajax_id_val)
 {
     char *response_data = 0;
-    phwangDebugSS(true, "DFabricClass::processSetupSoloRequest", "data_val=", data_val);
+    phwangDebugSS(true, "DFabricClass::processSetupSessionRequest", "data_val=", data_val);
 
     SessionClass *session = link_val->mallocSession();
     if (!session) {
-        response_data = this->generateSetupSoloResponse(RESULT_DEF::RESULT_MALLOC_SESSION_FAIL, link_val->linkIdIndex(), SIZE_DEF::FAKE_SESSION_ID_INDEX, data_val);
+        response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_MALLOC_SESSION_FAIL, link_val->linkIdIndex(), SIZE_DEF::FAKE_SESSION_ID_INDEX, data_val);
         return response_data;
     }
     session->setAjaxId(ajax_id_val);
@@ -636,24 +636,24 @@ char *DFabricClass::processSetupSoloRequest (
     char *encoded_theme_info = data_val + 2;
     int theme_info_size;
     char *theme_info = phwangDecodeStringMalloc(encoded_theme_info, &theme_info_size);
-    phwangDebugSS(true, "DFabricClass::processSetupSoloRequest", "theme_info=", theme_info);
+    phwangDebugSS(true, "DFabricClass::processSetupSessionRequest", "theme_info=", theme_info);
 
     char *encoded_first_fiddle = encoded_theme_info + theme_info_size;
     int first_fiddle_size;
     char *first_fiddle = phwangDecodeStringMalloc(encoded_first_fiddle, &first_fiddle_size);
-    phwangDebugSS(true, "DFabricClass::processSetupSoloRequest", "first_fiddle=", first_fiddle);
+    phwangDebugSS(true, "DFabricClass::processSetupSessionRequest", "first_fiddle=", first_fiddle);
 
     char *encoded_second_fiddle = encoded_first_fiddle + first_fiddle_size;
     int second_fiddle_size;
     char *second_fiddle = phwangDecodeStringMalloc(encoded_second_fiddle, &second_fiddle_size);
-    phwangDebugSS(true, "DFabricClass::processSetupSoloRequest", "second_fiddle=", second_fiddle);
+    phwangDebugSS(true, "DFabricClass::processSetupSessionRequest", "second_fiddle=", second_fiddle);
 
     switch (theme_type) {
         case 'G':
             break;
 
         default:
-            phwangAbendS("DFabricClass::processSetupSoloRequest", "theme_type not supported");
+            phwangAbendS("DFabricClass::processSetupSessionRequest", "theme_type not supported");
     }
 
     GroupClass *group = this->theFabricObject->mallocGroup(group_mode, theme_type, theme_info, first_fiddle, second_fiddle);
@@ -661,7 +661,7 @@ char *DFabricClass::processSetupSoloRequest (
     phwangFree(first_fiddle);
     phwangFree(second_fiddle);
     if (!group) {
-        response_data = this->generateSetupSoloResponse(RESULT_DEF::RESULT_MALLOC_GROUP_FAIL, link_val->linkIdIndex(), session->sessionIdIndex(), data_val);
+        response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_MALLOC_GROUP_FAIL, link_val->linkIdIndex(), session->sessionIdIndex(), data_val);
         return response_data;
     }
     group->insertSession(session);
@@ -673,13 +673,13 @@ char *DFabricClass::processSetupSoloRequest (
     //return response_data;
 }
 
-char *DFabricClass::generateSetupSoloResponse (
+char *DFabricClass::generateSetupSessionResponse (
     char const *result_val,
     char const *link_id_index_val,
     char const *session_id_index_val,
     char const *data_val)
 {
-    phwangDebugS(false, "DFabricClass::generateSetupSoloResponse", result_val);
+    phwangDebugS(false, "DFabricClass::generateSetupSessionResponse", result_val);
 
     char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUF_WITH_LINK_SESSION_SIZE + strlen(data_val), MallocClass::generateSetupDuet3Response);
     char *current_ptr = &response_data[FABRIC_DEF::FE_DL_COMMAND_AJAX_SIZE];
@@ -714,29 +714,29 @@ void DFabricClass::sendSetupRoomRequestToThemeServer (GroupClass *group_val)
     this->theFabricObject->uFabricObject()->transmitFunction(uplink_data);
 }
 
-char *DFabricClass::processSetupDuet2Request (
+char *DFabricClass::processSetupSession2Request (
     SessionClass *session_val,
     char *data_val)
 {
     LinkClass *link = session_val->linkObject();
     char *response_data;
-    phwangDebugS(false, "DFabricClass::processSetupDuet2Request", data_val);
-    phwangDebugSSS(false, "DFabricClass::processSetupDuet2Request", "id=", link->linkIdIndex(), session_val->sessionIdIndex());
+    phwangDebugS(false, "DFabricClass::processSetupSession2Request", data_val);
+    phwangDebugSSS(false, "DFabricClass::processSetupSession2Request", "id=", link->linkIdIndex(), session_val->sessionIdIndex());
 
     char *theme_info_val = data_val;
     GroupClass *group = session_val->groupObject();
     this->sendSetupRoomRequestToThemeServer(group);//////////////do it twice ???
 
-    response_data = this->generateSetupDuet2Response(RESULT_DEF::RESULT_SUCCEED, link->linkIdIndex(), session_val->sessionIdIndex());
+    response_data = this->generateSetupSession2Response(RESULT_DEF::RESULT_SUCCEED, link->linkIdIndex(), session_val->sessionIdIndex());
     return response_data;
 }
 
-char *DFabricClass::generateSetupDuet2Response (
+char *DFabricClass::generateSetupSession2Response (
     char const *result_val,
     char const *link_id_index_val,
     char const *session_id_index_val)
 {
-    phwangDebugS(false, "DFabricClass::generateSetupDuet2Response", result_val);
+    phwangDebugS(false, "DFabricClass::generateSetupSession2Response", result_val);
 
     char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUF_WITH_LINK_SESSION_SIZE, MallocClass::generateSetupDuet2Response);
     char *current_ptr = &response_data[FABRIC_DEF::FE_DL_COMMAND_AJAX_SIZE];
@@ -748,28 +748,28 @@ char *DFabricClass::generateSetupDuet2Response (
     return response_data;
 }
 
-char *DFabricClass::processSetupDuet3Request (
+char *DFabricClass::processSetupSession3Request (
     LinkClass *link_val,
     char *data_val)
 {
     char *response_data;
-    phwangDebugSS(true, "DFabricClass::processSetupDuet3Request", "data_val=", data_val);
+    phwangDebugSS(true, "DFabricClass::processSetupSession3Request", "data_val=", data_val);
 
     char session_id_buf[SIZE_DEF::SESSION_ID_INDEX_SIZE + 1];
     memcpy(session_id_buf, data_val, SIZE_DEF::SESSION_ID_INDEX_SIZE);
     session_id_buf[SIZE_DEF::SESSION_ID_INDEX_SIZE] = 0;
-    phwangDebugSS(true, "DFabricClass::processSetupDuet3Request", "session_id=", session_id_buf);
+    phwangDebugSS(true, "DFabricClass::processSetupSession3Request", "session_id=", session_id_buf);
 
-    response_data = this->generateSetupDuet3Response(RESULT_DEF::RESULT_SUCCEED, link_val->linkIdIndex(), session_id_buf);
+    response_data = this->generateSetupSession3Response(RESULT_DEF::RESULT_SUCCEED, link_val->linkIdIndex(), session_id_buf);
     return response_data;
 }
 
-char *DFabricClass::generateSetupDuet3Response (
+char *DFabricClass::generateSetupSession3Response (
     char const *result_val,
     char const *link_id_index_val,
     char const *session_id_index_val)
 {
-    phwangDebugS(false, "DFabricClass::generateSetupDuet3Response", result_val);
+    phwangDebugS(false, "DFabricClass::generateSetupSession3Response", result_val);
 
     char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUF_WITH_LINK_SESSION_SIZE, MallocClass::generateSetupDuet3Response);
     char *current_ptr = &response_data[FABRIC_DEF::FE_DL_COMMAND_AJAX_SIZE];
