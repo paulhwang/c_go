@@ -97,7 +97,7 @@ void UFabricClass::sendSetupSessionResponse (
     char *current_ptr = &response_data[FE_DEF::FE_COMMAND_SIZE];
 
     switch (link->deviceType()) {
-        case 'N':
+        case FE_DEF::FE_DEVICE_TYPE_NODEJS:
             if (!session_val->ajaxId()) {
                 phwangAbendS("UFabricClass::sendSetupSessionResponse", "null_ajaxId");
                 return;
@@ -107,7 +107,8 @@ void UFabricClass::sendSetupSessionResponse (
             session_val->resetAjaxId();
             break;
 
-        case 'A':
+        case FE_DEF::FE_DEVICE_TYPE_IPHONE:
+        case FE_DEF::FE_DEVICE_TYPE_ANDROID:
             memcpy(current_ptr, "***", SIZE_DEF::AJAX_ID_SIZE);
             break;
         default:
@@ -197,7 +198,7 @@ void UFabricClass::sendPutSessionDataResponse (
     char *current_ptr = &response_data[FE_DEF::FE_COMMAND_SIZE];
 
     switch (link->deviceType()) {
-        case 'N':
+        case FE_DEF::FE_DEVICE_TYPE_NODEJS:
             if (!session_val->ajaxId()) {
                 phwangAbendS("UFabricClass::sendPutSessionDataResponse", "null_ajaxId");
                 return;
@@ -207,7 +208,8 @@ void UFabricClass::sendPutSessionDataResponse (
             session_val->resetAjaxId();
             break;
 
-        case 'A':
+        case FE_DEF::FE_DEVICE_TYPE_IPHONE:
+        case FE_DEF::FE_DEVICE_TYPE_ANDROID:
             memcpy(current_ptr, "***", SIZE_DEF::AJAX_ID_SIZE);
             break;
         default:

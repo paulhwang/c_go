@@ -35,6 +35,10 @@ public:
     char const static FE_MESSAGE_COMMAND                   = 'M';
     char const static FE_MESSAGE_RESPONSE                  = 'm';
 
+    char const static FE_DEVICE_TYPE_NODEJS     = 'N';
+    char const static FE_DEVICE_TYPE_IPHONE     = 'I';
+    char const static FE_DEVICE_TYPE_ANDROID    = 'A';
+
     char const static FE_GROUP_MODE_SOLO     = 'S';
     char const static FE_GROUP_MODE_DUET     = 'D';
     char const static FE_GROUP_MODE_ENSEMBLE = 'E';

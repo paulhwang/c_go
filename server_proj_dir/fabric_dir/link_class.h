@@ -15,13 +15,14 @@ class LinkClass : public ListEntryClass {
 #define LINK_CLASS_LINK_NAME_BUF_SIZE 32
 #define LINK_CLASS_KEEP_ALIVE_TIMEOUT 60
 private:
-    FabricClass *theFabricObject;
+    FabricClass *fabricObject_;
     char *theMyName;
-    char theDeviceType;
+    char deviceType_;
     void *thePortObject;
     void *theSessionListMgrObject;
     void *thePendingSessionSetupQueue;
     void *thePendingSessionSetupQueue3;
+    void *ajaxIdQueue_;
     char theNameListChanged;
     time_t theKeepAliveTime;
 
@@ -35,7 +36,7 @@ public:
     ~LinkClass(void);
     char const *objectName(void) {return "LinkClass";}
 
-    char deviceType(void) {return this->theDeviceType;}
+    char deviceType(void) {return this->deviceType_;}
     void *portObject(void) {return this->thePortObject;}
     char *myName(void) {return this->theMyName;}
     char *linkIdIndex(void) {return this->entryIdIndex();}
@@ -45,6 +46,8 @@ public:
     void freeSession(SessionClass *session_object_val);
     void *sessionListMgrObject(void) {return this->theSessionListMgrObject;}
     SessionClass *searchSession(char *data_val);
+    char *getAjaxId(void);
+    void putAjaxId(char *ajax_id_val);
     char *getPendingSessionSetup(void);
     char *getPendingSessionSetup3(void);
     void setPendingSessionSetup(
