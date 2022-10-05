@@ -50,9 +50,9 @@ void DFabricClass::exportedParseFunction (
             break;
     }
 
-    if (command != FE_DEF::FE_GET_LINK_DATA_COMMAND) {
+    //if (command != FE_DEF::FE_GET_LINK_DATA_COMMAND) {
         phwangDebugS(true, "DFabricClass::exportedParseFunction", data_val);
-    }
+    //}
 
     LinkClass *link;
     SessionClass *session;
@@ -509,7 +509,7 @@ char *DFabricClass::processGetLinkDataRequest (
     char *ajax_id_val)
 {
     char *response_data;
-    phwangDebugS(true, "DFabricClass::processGetLinkDataRequest", ajax_id_val);
+    phwangDebugS(true, "*********DFabricClass::processGetLinkDataRequest", ajax_id_val);
 
     if (link_val->deviceType() == FE_DEF::FE_DEVICE_TYPE_NODEJS) {
         link_val->putAjaxId(ajax_id_val);

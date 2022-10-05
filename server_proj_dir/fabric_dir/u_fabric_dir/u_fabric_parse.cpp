@@ -89,7 +89,7 @@ void UFabricClass::sendSetupSessionResponse (
     char *encoded_second_fiddle = phwangEncodeStringMalloc(group_val->secondFiddle());
 
     char *response_data = (char *) phwangMalloc(
-        FABRIC_DEF::FE_DL_BUF_WITH_LINK_SESSION_SIZE + 3 + strlen(encoded_theme_info) + strlen(encoded_first_fiddle) + strlen(encoded_second_fiddle),
+        FABRIC_DEF::FE_DL_BUF_WITH_LINK_SESSION_SIZE + 4 + strlen(encoded_theme_info) + strlen(encoded_first_fiddle) + strlen(encoded_second_fiddle),
         MallocClass::sendSetupSessionResponse);
 
     *response_data = FE_DEF::FE_SETUP_SESSION_RESPONSE;
@@ -125,6 +125,7 @@ void UFabricClass::sendSetupSessionResponse (
     memcpy(current_ptr, session_val->sessionIdIndex(), SIZE_DEF::SESSION_ID_INDEX_SIZE);
     current_ptr += SIZE_DEF::SESSION_ID_INDEX_SIZE;
 
+    *current_ptr++ = FE_DEF::FE_GET_LINK_DATA_RESPONSE_YES;
     *current_ptr++ = group_val->roomStatus();
     *current_ptr++ = group_val->mode();
     *current_ptr++ = group_val->themeType();
@@ -190,7 +191,7 @@ void UFabricClass::sendPutSessionDataResponse (
     LinkClass *link = session_val->linkObject();
 
     char *response_data = (char *) phwangMalloc(
-        FABRIC_DEF::FE_DL_BUF_WITH_LINK_SESSION_SIZE + 1 + strlen(result_data_val),
+        FABRIC_DEF::FE_DL_BUF_WITH_LINK_SESSION_SIZE + 2 + strlen(result_data_val),
         MallocClass::sendPutSessionDataResponse);
 
     *response_data = FE_DEF::FE_PUT_SESSION_DATA_RESPONSE;
@@ -226,6 +227,7 @@ void UFabricClass::sendPutSessionDataResponse (
     memcpy(current_ptr, session_val->sessionIdIndex(), SIZE_DEF::SESSION_ID_INDEX_SIZE);
     current_ptr += SIZE_DEF::SESSION_ID_INDEX_SIZE;
 
+    *current_ptr++ = FE_DEF::FE_GET_LINK_DATA_RESPONSE_YES;
     *current_ptr++ = group_val->themeType();
 
     strcpy(current_ptr, result_data_val);
