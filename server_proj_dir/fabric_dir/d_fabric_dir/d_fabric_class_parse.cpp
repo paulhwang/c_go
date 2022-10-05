@@ -96,7 +96,10 @@ void DFabricClass::exportedParseFunction (
                     break;
 
                 case FE_DEF::FE_GET_LINK_DATA_COMMAND:
-                    response_data = this->processGetLinkDataRequest(link, current_ptr);
+                    response_data = this->processGetLinkDataRequest(link, ajax_id);
+                    if (!response_data) {
+                        return;
+                    }
                     response_data[0] = FE_DEF::FE_GET_LINK_DATA_RESPONSE;
                     break;
 
@@ -503,11 +506,20 @@ char *DFabricClass::generateLogoutResponse (
 
 char *DFabricClass::processGetLinkDataRequest (
     LinkClass *link_val,
-    char *data_val)
+    char *ajax_id_val)
 {
     char *response_data;
-    phwangDebugS(false, "DFabricClass::processGetLinkDataRequest", data_val);
+    phwangDebugS(true, "DFabricClass::processGetLinkDataRequest", ajax_id_val);
 
+    if (link_val->deviceType() == FE_DEF::FE_DEVICE_TYPE_NODEJS) {
+        link_val->putAjaxId(ajax_id_val);
+        return 0;
+    }
+    else {
+        return 0;
+    }
+
+    /*
     link_val->resetKeepAliveTime();
 
     char *downlink_data = (char *) phwangMalloc(FABRIC_DEF::FE_GET_LINK_DATA_BUF_SIZE, MallocClass::GET_LINK_DATA);
@@ -560,6 +572,7 @@ char *DFabricClass::processGetLinkDataRequest (
     }
 
     return downlink_data;
+    */
 }
 
 char *DFabricClass::generateGetLinkDataResponse (
