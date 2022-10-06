@@ -22,7 +22,9 @@
 #include "../../db_dir/db_account_class.h"
 #include "../../db_dir/db_account_entry_class.h"
 
-DbAccountClass *DFabricClass::dbAccountObject(void) {return theFabricObject->dbObject()->dbAccountObject();}
+DbAccountClass *DFabricClass::dbAccountObject(void) {
+    return fabricObject_->dbObject()->dbAccountObject();
+}
 
 void DFabricClass::exportedParseFunction (
     void *port_object_val,
@@ -82,7 +84,7 @@ void DFabricClass::exportedParseFunction (
             break;
 
         case '1':
-            link = this->theFabricObject->searchLink(current_ptr, data_val);
+            link = this->fabricObject_->searchLink(current_ptr, data_val);
             if (!link) {
                 this->sendSearchLinkFailResponse(command, port_object_val, ajax_id);
                 return;
@@ -123,7 +125,7 @@ void DFabricClass::exportedParseFunction (
             break;
 
         case '2':
-            session = this->theFabricObject->serachLinkAndSession(current_ptr);
+            session = this->fabricObject_->serachLinkAndSession(current_ptr);
             if (!session) {
                 this->sendSearchLinkSessionFailResponse(command, port_object_val, ajax_id);
                 return;
@@ -386,7 +388,7 @@ char *DFabricClass::processLoginRequest (
     phwangFree(password);
 
     if (!strcmp(result_buf, RESULT_DEF::RESULT_PASSWORD_MATCH)) {
-        LinkClass *link = this->theFabricObject->mallocLink(my_name, device_type_val, port_object_val);
+        LinkClass *link = this->fabricObject_->mallocLink(my_name, device_type_val, port_object_val);
         if (!link) {
             phwangAbendS("DFabricClass::processLoginRequest", "null_link");
             phwangFree(my_name);
@@ -479,7 +481,7 @@ char *DFabricClass::processLogoutRequest (
     char *response_data;
     phwangDebugSS(false, "DFabricClass::processLogoutRequest", "link_id=", link_val->linkIdIndex());
 
-    this->theFabricObject->freeLink(link_val);
+    this->fabricObject_->freeLink(link_val);
 
     response_data = generateLogoutResponse(RESULT_DEF::RESULT_SUCCEED, link_val->linkIdIndex(), data_val);
     return response_data;
@@ -603,7 +605,7 @@ char *DFabricClass::processGetNameListRequest (
     char *end_val = name_list_tag_val + 3;
 
     int name_list_tag = phwangDecodeNumber(name_list_tag_val, SIZE_DEF::NAME_LIST_TAG_SIZE);
-    char *name_list = this->theFabricObject->nameListObject()->getNameList(name_list_tag);
+    char *name_list = this->fabricObject_->nameListObject()->getNameList(name_list_tag);
 
     if (!name_list) {
         /////////////////////////////////TBD
@@ -671,7 +673,7 @@ char *DFabricClass::processSetupSessionRequest (
             phwangAbendS("DFabricClass::processSetupSessionRequest", "theme_type not supported");
     }
 
-    GroupClass *group = this->theFabricObject->mallocGroup(group_mode, theme_type, theme_info, first_fiddle, second_fiddle);
+    GroupClass *group = this->fabricObject_->mallocGroup(group_mode, theme_type, theme_info, first_fiddle, second_fiddle);
     phwangFree(theme_info);
     phwangFree(first_fiddle);
     phwangFree(second_fiddle);
@@ -692,7 +694,7 @@ char *DFabricClass::processSetupSessionRequest (
         return response_data;
     }
 
-    LinkClass *second_link = this->theFabricObject->searchLinkByName(group->secondFiddle());
+    LinkClass *second_link = this->fabricObject_->searchLinkByName(group->secondFiddle());
     if (!second_link) {
         response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_SECOND_LINK_NOT_EXIST, link_val->linkIdIndex(), SIZE_DEF::FAKE_SESSION_ID_INDEX, data_val);
         return response_data;
@@ -748,7 +750,7 @@ void DFabricClass::sendSetupRoomRequestToThemeServer (GroupClass *group_val)
 
     strcpy(current_ptr, group_val->themeInfo());
 
-    this->theFabricObject->uFabricObject()->transmitFunction(uplink_data);
+    this->fabricObject_->uFabricObject()->transmitFunction(uplink_data);
 }
 
 char *DFabricClass::processSetupSession2Request (
@@ -818,27 +820,6 @@ char *DFabricClass::generateSetupSession3Response (
 
     char *current_ptr = &response_data[FE_DEF::FE_COMMAND_SIZE];
 
-/*
-    switch (link->deviceType()) {
-        case FE_DEF::FE_DEVICE_TYPE_NODEJS:
-            if (!session_val->ajaxId()) {
-                phwangAbendS("DFabricClass::generateSetupSession3Response", "null_ajaxId");
-                return;
-            }
-
-            memcpy(current_ptr, session_val->ajaxId(), SIZE_DEF::AJAX_ID_SIZE);
-            session_val->resetAjaxId();
-            break;
-
-        case FE_DEF::FE_DEVICE_TYPE_IPHONE:
-        case FE_DEF::FE_DEVICE_TYPE_ANDROID:
-            memcpy(current_ptr, "***", SIZE_DEF::AJAX_ID_SIZE);
-            break;
-        default:
-            break;
-    }
-    */
-
     memcpy(current_ptr, "***", SIZE_DEF::AJAX_ID_SIZE);
     current_ptr += SIZE_DEF::AJAX_ID_SIZE;
 
@@ -873,19 +854,6 @@ char *DFabricClass::generateSetupSession3Response (
     phwangDebugSS(true, "DFabricClass::generateSetupSession3Response", "response_data=", response_data);
 
     return response_data;
-
-    /*
-    phwangDebugS(false, "DFabricClass::generateSetupSession3Response", result_val);
-
-    char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUF_WITH_LINK_SESSION_SIZE, MallocClass::generateSetupDuet3Response);
-    char *current_ptr = &response_data[FABRIC_DEF::FE_DL_COMMAND_AJAX_SIZE];
-    memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
-    current_ptr += RESULT_DEF::RESULT_SIZE;
-    memcpy(current_ptr, link_id_index_val, SIZE_DEF::LINK_ID_INDEX_SIZE);
-    current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE;
-    strcpy(current_ptr, session_id_index_val);
-    return response_data;
-    */
 }
 
 /* free session */
@@ -977,7 +945,7 @@ void DFabricClass::sendPutSessionDataRequestToThemeServer (
 
     strcpy(current_ptr, data_val);
 
-    this->theFabricObject->uFabricObject()->transmitFunction(uplink_data);
+    this->fabricObject_->uFabricObject()->transmitFunction(uplink_data);
 }
 
 /* get session data */

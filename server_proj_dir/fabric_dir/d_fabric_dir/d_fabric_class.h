@@ -17,14 +17,14 @@ class DbAccountClass;
 class DFabricClass {
     char const *objectName(void) {return "DFabricClass";}
 
-    FabricClass *theFabricObject;
-    void *theTpServerObject;
-    void *theTpTransferObject;
+    FabricClass *fabricObject_;
+    void *tcpServerObject_;
+    void *portObject_;
     char theTimeStampString[FABRIC_SERVER_TIME_STAMP_LENGTH_SIZE + 16];
 
-    DbClass *dbObject(void) {return theFabricObject->dbObject();}
+    DbClass *dbObject(void) {return fabricObject_->dbObject();}
     DbAccountClass *dbAccountObject(void);
-    MessengerClass *messengerObject(void) {return this->theFabricObject->messengerObject();}
+    MessengerClass *messengerObject(void) {return this->fabricObject_->messengerObject();}
 
     char *timeStampString(void) {return this->theTimeStampString;}
     void setTimeStampString(void);

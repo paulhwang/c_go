@@ -17,7 +17,7 @@ DFabricClass::DFabricClass (FabricClass *fabric_object_val)
 {
     memset(this, 0, sizeof(DFabricClass));
 
-    this->theFabricObject = fabric_object_val;
+    this->fabricObject_ = fabric_object_val;
     this->setTimeStampString();
     this->startNetServer();
 
@@ -42,7 +42,7 @@ void DFabricClass::exportedNetAcceptFunction (void *port_object_val)
         phwangAbendS("DFabricClass::exportedNetAcceptFunction", "null port_object_val");
         return;
     }
-    this->theTpTransferObject = port_object_val;
+    this->portObject_ = port_object_val;
 
     char *buf = (char *) phwangMalloc(strlen(this->timeStampString()) + 1, MallocClass::TCP_ACCEPT_CALLBACK_FUNC);
     strcpy(buf, this->timeStampString());
@@ -61,7 +61,7 @@ void dFabricTpReceiveDataFunction (void *port_object_val, void *d_fabric_object_
 
 void DFabricClass::startNetServer (void)
 {
-    this->theTpServerObject = phwangMallocTpServer(this, TcpPortDefine::FABRIC_NODEJS_PORT_NUMER, dFabricTpServerAcceptFunction, this, dFabricTpReceiveDataFunction, this, this->objectName());
+    this->tcpServerObject_ = phwangMallocTpServer(this, TcpPortDefine::FABRIC_NODEJS_PORT_NUMER, dFabricTpServerAcceptFunction, this, dFabricTpReceiveDataFunction, this, this->objectName());
 }
 
 void DFabricClass::setTimeStampString (void)
