@@ -684,11 +684,8 @@ char *DFabricClass::processSetupSessionRequest (
     group->insertSession(session);
     session->bindGroup(group);
 
-    if ( (group->mode() == FE_DEF::FE_GROUP_MODE_SOLO) ||
-        ((group->mode() == FE_DEF::FE_GROUP_MODE_DUET) && (!strcmp(group->firstFiddle(), group->secondFiddle()))) ||
-         (group->mode() == FE_DEF::FE_GROUP_MODE_ENSEMBLE)) {
+    if (group->isSoloGroup()) {
         this->sendSetupRoomRequestToThemeServer(group);
-        //return 0;
 
         response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_ALMOST_SUCCEED, link_val->linkIdIndex(), session->sessionIdIndex(), data_val);
         return response_data;

@@ -44,6 +44,7 @@ public:
     char *firstFiddle(void) {return this->theFirstFiddle;}
     char *secondFiddle(void) {return this->theSecondFiddle;}
 
+    int isSoloGroup(void);
     char *groupIdIndex(void) {return this->entryIdIndex();}
     char *roomIdIndex(void) {return this->theRoomIdIndex;}
     void *sessionArrayMgr(void) {return this->theSessionArrayMgr;}

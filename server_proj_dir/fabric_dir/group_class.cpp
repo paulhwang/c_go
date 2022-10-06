@@ -50,3 +50,22 @@ void GroupClass::setRoomStatusToReady(void)
 {
     this->theRoomStatus = FE_DEF::FE_ROOM_STATUS_READY;
 }
+
+int GroupClass::isSoloGroup(void)
+{
+    if (this->mode() == FE_DEF::FE_GROUP_MODE_SOLO) {
+        return 1;
+    }
+    else if (this->mode() == FE_DEF::FE_GROUP_MODE_ENSEMBLE) {
+        return 1;
+    }
+    else if ((this->mode() == FE_DEF::FE_GROUP_MODE_DUET) &&
+             (!strcmp(this->firstFiddle(), this->secondFiddle()))) {
+        return 1;
+    }
+    else {
+        return 0;
+    }
+
+}
+
