@@ -868,7 +868,11 @@ char *DFabricClass::processPutSessionDataRequest (
     session_val->setAjaxId(ajax_id_val);
     this->sendPutSessionDataRequestToThemeServer(room_id, data_val);
 
-    return 0;
+    response_data = this->generatePutSessionDataResponse(RESULT_DEF::RESULT_MALLOC_IN_PROGRESS, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex());
+    return response_data;
+
+    //return 0;
+
     //response_data = this->generatePutSessionDataResponse(RESULT_DEF::RESULT_SUCCEED, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex());
     //return response_data;
 }
@@ -936,12 +940,16 @@ char *DFabricClass::generateGetSessionDataResponse (
 
     char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUF_WITH_LINK_SESSION_SIZE + strlen(data_val), MallocClass::generateGetSessionDataResponse);
     char *current_ptr = &response_data[FABRIC_DEF::FE_DL_COMMAND_AJAX_SIZE];
+
     memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;
+
     memcpy(current_ptr, link_id_index_val, SIZE_DEF::LINK_ID_INDEX_SIZE);
     current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE;
+
     memcpy(current_ptr, session_id_index_val, SIZE_DEF::SESSION_ID_INDEX_SIZE);
     current_ptr += SIZE_DEF::SESSION_ID_INDEX_SIZE;
+
     strcpy(current_ptr, data_val);
     return response_data;
 }
