@@ -13,11 +13,11 @@ class LinkClass;
 class GroupClass;
 
 class SessionClass : public ListEntryClass {
-    LinkClass *theLinkObject;
-    GroupClass *theGroupObject;
+    LinkClass *linkObject_;
+    GroupClass *groupObject_;
     char theAjaxIdBuf[SIZE_DEF::AJAX_ID_SIZE + 1];
     char *theAjaxId;
-    void *thePendingDownLinkDataQueue;
+    void *pendingDownLinkDataQueue_;
 
 public:
     SessionClass(void *list_mgr_object_val, LinkClass *link_object_val);
@@ -28,9 +28,9 @@ public:
     void setAjaxId(char const *ajax_id_val) {strcpy(this->theAjaxIdBuf, ajax_id_val); this->theAjaxId = this->theAjaxIdBuf;}
     void resetAjaxId(void) {this->theAjaxId = 0;}
     char *sessionIdIndex(void) {return this->entryIdIndex();}
-    LinkClass *linkObject(void) {return this->theLinkObject;}
-    GroupClass *groupObject(void) {return this->theGroupObject;}
-    void bindGroup(GroupClass *group_object_val) {this->theGroupObject = group_object_val;}
-    char *getPendingDownLinkData(void) {return (char *) phwangDequeue(this->thePendingDownLinkDataQueue, "SessionClass::getPendingDownLinkData()");}
+    LinkClass *linkObject(void) {return this->linkObject_;}
+    GroupClass *groupObject(void) {return this->groupObject_;}
+    void bindGroup(GroupClass *group_object_val) {this->groupObject_ = group_object_val;}
+    char *getPendingDownLinkData(void);
     void enqueuePendingDownLinkData(char *data_val);
 };

@@ -865,16 +865,10 @@ char *DFabricClass::processPutSessionDataRequest (
         return response_data;
     }
 
-    session_val->setAjaxId(ajax_id_val);
     this->sendPutSessionDataRequestToThemeServer(room_id, data_val);
 
     response_data = this->generatePutSessionDataResponse(RESULT_DEF::RESULT_MALLOC_IN_PROGRESS, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex());
     return response_data;
-
-    //return 0;
-
-    //response_data = this->generatePutSessionDataResponse(RESULT_DEF::RESULT_SUCCEED, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex());
-    //return response_data;
 }
 
 char *DFabricClass::generatePutSessionDataResponse (
