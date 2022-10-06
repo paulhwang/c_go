@@ -52,9 +52,9 @@ void DFabricClass::exportedParseFunction (
             break;
     }
 
-    //if (command != FE_DEF::FE_GET_LINK_DATA_COMMAND) {
+    if (command != FE_DEF::FE_GET_LINK_DATA_COMMAND) {
         phwangDebugS(true, "DFabricClass::exportedParseFunction", data_val);
-    //}
+    }
 
     LinkClass *link;
     SessionClass *session;
@@ -510,18 +510,6 @@ char *DFabricClass::processGetLinkDataRequest (
     LinkClass *link_val,
     char *ajax_id_val)
 {
-    char *response_data;
-    phwangDebugS(true, "*********DFabricClass::processGetLinkDataRequest", ajax_id_val);
-
-    if (link_val->deviceType() == FE_DEF::FE_DEVICE_TYPE_NODEJS) {
-        link_val->putAjaxId(ajax_id_val);
-        return 0;
-    }
-    else {
-        return 0;
-    }
-
-    /*
     link_val->resetKeepAliveTime();
 
     char *downlink_data = (char *) phwangMalloc(FABRIC_DEF::FE_GET_LINK_DATA_BUF_SIZE, MallocClass::GET_LINK_DATA);
@@ -534,7 +522,7 @@ char *DFabricClass::processGetLinkDataRequest (
     current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE;
 
     *current_ptr++ = FE_DEF::RESPOND_IS_GET_LINK_DATA_NAME_LIST;
-    phwangEncodeNumber(current_ptr, this->theFabricObject->nameListObject()->nameListTag(), SIZE_DEF::NAME_LIST_TAG_SIZE);
+    phwangEncodeNumber(current_ptr, this->fabricObject_->nameListObject()->nameListTag(), SIZE_DEF::NAME_LIST_TAG_SIZE);
     current_ptr += SIZE_DEF::NAME_LIST_TAG_SIZE;
     *current_ptr = 0;
 
@@ -574,7 +562,6 @@ char *DFabricClass::processGetLinkDataRequest (
     }
 
     return downlink_data;
-    */
 }
 
 char *DFabricClass::generateGetLinkDataResponse (

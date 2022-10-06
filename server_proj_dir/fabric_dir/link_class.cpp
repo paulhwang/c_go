@@ -22,15 +22,14 @@ LinkClass::LinkClass (
         :ListEntryClass(list_mgr_object_val)
 {
     this->fabricObject_ = fabric_object_val;
-    this->theMyName = (char *) phwangMalloc(strlen(my_name_val) + 1, MallocClass::LinkClass);
-    strcpy(this->theMyName, my_name_val);
+    this->myName_ = (char *) phwangMalloc(strlen(my_name_val) + 1, MallocClass::LinkClass);
+    strcpy(this->myName_, my_name_val);
     this->deviceType_ = device_type_val;
-    this->thePortObject = port_object_val;
+    this->portObject_ = port_object_val;
     this->theNameListChanged = 'D';
 
-    this->theSessionListMgrObject = phwangListMgrMalloc("SESSION", SIZE_DEF::SESSION_ID_SIZE, SIZE_DEF::SESSION_INDEX_SIZE, SIZE_DEF::SESSION_ID_INITIAL_VALUE);
+    this->sessionListMgrObject_ = phwangListMgrMalloc("SESSION", SIZE_DEF::SESSION_ID_SIZE, SIZE_DEF::SESSION_INDEX_SIZE, SIZE_DEF::SESSION_ID_INITIAL_VALUE);
     this->resetKeepAliveTime();
-    this->ajaxIdQueue_ = phwangMallocQueue(0, this->objectName());
     this->thePendingSessionSetupQueue = phwangMallocQueue(0, this->objectName());
     this->thePendingSessionSetupQueue3 = phwangMallocQueue(0, this->objectName());
 
@@ -41,13 +40,12 @@ LinkClass::~LinkClass (void)
 {
     phwangFreeQueue(this->thePendingSessionSetupQueue, "LinkClass::~LinkClass(1)");
     phwangFreeQueue(this->thePendingSessionSetupQueue3, "LinkClass::~LinkClass(3)");
-    phwangFreeQueue(this->ajaxIdQueue_, "LinkClass::~LinkClass(1)");
-    phwangFree(this->theMyName);
+    phwangFree(this->myName_);
 }
 
 SessionClass *LinkClass::mallocSession (void)
 {
-    SessionClass *session = new SessionClass(this->theSessionListMgrObject, this);
+    SessionClass *session = new SessionClass(this->sessionListMgrObject_, this);
     if (!session) {
         phwangAbendS("LinkClass::mallocSession", "fail_to_malloc_session");
         return 0;
@@ -62,25 +60,7 @@ void LinkClass::freeSession(SessionClass *session_object_val)
 
 SessionClass *LinkClass::searchSession (char *data_val)
 {
-    return (SessionClass *) phwangListMgrSearchEntry(this->theSessionListMgrObject, data_val, 0);
-}
-
-char *LinkClass::getAjaxId(void)
-{
-    if (this->deviceType_ != FE_DEF::FE_DEVICE_TYPE_NODEJS) {
-        phwangAbendS("getAjaxId", "not nodejs");
-        return 0;
-    }
-    return (char *) phwangDequeue(this->ajaxIdQueue_, "LinkClass::getAjaxId()");
-}
-
-void LinkClass::putAjaxId(char *ajax_id_val)
-{
-    if (this->deviceType_ != FE_DEF::FE_DEVICE_TYPE_NODEJS) {
-        phwangAbendS("putAjaxId", "not nodejs");
-        return;
-    }
-    phwangEnqueue(this->ajaxIdQueue_, ajax_id_val);
+    return (SessionClass *) phwangListMgrSearchEntry(this->sessionListMgrObject_, data_val, 0);
 }
 
 char *LinkClass::getPendingSessionSetup (void)
