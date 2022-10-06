@@ -8,7 +8,6 @@
 #include "name_list_class.h"
 #include "fabric_class.h"
 #include "link_class.h"
-#include "../define_dir/size_def.h"
 #include "../define_dir/fe_def.h"
 #include "../../phwang_dir/list_mgr_dir/list_mgr_class.h"
 
@@ -17,17 +16,12 @@ NameListClass::NameListClass (FabricClass *fabric_object_val)
     memset(this, 0, sizeof(*this));
     this->fabricObject_ = fabric_object_val;
     this->nameListTag_ = 0;
-    strcpy(this->theObjectName, "NameListClass");
 
     phwangDebugS(false, "NameListClass::NameListClass", "init");
 }
 
 NameListClass::~NameListClass (void)
 {
-    if (strcmp(this->objectName(), "NameListClass")) {
-        phwangAbendS("NameListClass::~NameListClass", this->objectName());
-    }
-    strcpy(this->theObjectName, "NameListClassDummy");
 }
 
 void NameListClass::updateNameList (void)
@@ -64,7 +58,7 @@ void NameListClass::updateNameList (void)
     }
     *ptr = 0;
 
-    if (name_list_size > NAME_LIST_CLASS_NAME_LIST_BUFFER_SIZE) {
+    if (name_list_size > SIZE_DEF::NAME_LIST_BUFFER_SIZE) {
         printf("name_list_size=%d\n", name_list_size);
         phwangAbendS("NameListClass::updateNameList", "buffer too small");
     }

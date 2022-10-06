@@ -7,8 +7,6 @@
 #pragma once
 #include <pthread.h>
 
-#define TRANSPORT_TRANSMIT_QUEUE_SIZE 1000
-
 class QueueMgrClass;
 class TpTransferClass;
 
@@ -18,19 +16,19 @@ typedef struct {
 } StartServerOutputStruct;
 
 class TcpServerClass {
-    void *theCallerObject;
-    unsigned short thePort;
-    void (*theAcceptCallbackFunc)(void *, void *);
-    void (*theReceiveCallbackFunc)(void *, void *, void *);
-    void *theAcceptCallbackParameter;
-    void *theReceiveCallbackParameter;
+    void *callerObject_;
+    unsigned short tcpPort_;
+    void (*acceptCallbackFunc_)(void *, void *);
+    void (*receiveCallbackFunc_)(void *, void *, void *);
+    void *acceptCallbackParameter_;
+    void *receiveCallbackParameter_;
     char const *theWho;
-    pthread_t theServerThread;
-    int theTpTransferObjectIndex;
+    pthread_t serverThread_;
+    int portObjectIndex_;
 
 public:
     TcpServerClass(void *caller_object_val,
-            unsigned short port_val,
+            unsigned short tcp_port_val,
             void (*accept_callback_func_val)(void *, void *),
             void *accept_callback_parameter_val,
             void (*receive_callback_func_val)(void *, void *, void *),

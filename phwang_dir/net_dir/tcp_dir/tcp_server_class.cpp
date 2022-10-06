@@ -21,7 +21,7 @@
 
 TcpServerClass::TcpServerClass (
                     void *caller_object_val,
-                    unsigned short port_val,
+                    unsigned short tcp_port_val,
                     void (*accept_callback_func_val)(void *, void *),
                     void *accept_callback_parameter_val,
                     void (*receive_callback_func_val)(void *, void *, void *),
@@ -30,14 +30,14 @@ TcpServerClass::TcpServerClass (
 
 {
     memset(this, 0, sizeof(*this));
-    this->theCallerObject = caller_object_val;
-    this->thePort = port_val;
-    this->theAcceptCallbackFunc = accept_callback_func_val;
-    this->theReceiveCallbackFunc = receive_callback_func_val;
-    this->theAcceptCallbackParameter = accept_callback_parameter_val;
-    this->theReceiveCallbackParameter = receive_callback_parameter_val;
+    this->callerObject_ = caller_object_val;
+    this->tcpPort_ = tcp_port_val;
+    this->acceptCallbackFunc_ = accept_callback_func_val;
+    this->receiveCallbackFunc_ = receive_callback_func_val;
+    this->acceptCallbackParameter_ = accept_callback_parameter_val;
+    this->receiveCallbackParameter_ = receive_callback_parameter_val;
     this->theWho = who_val;
-    this->theTpTransferObjectIndex = PortClass::SERVER_INDEX;
+    this->portObjectIndex_ = PortClass::SERVER_INDEX;
 
     phwangDebugWS(false, "TcpServerClass::TcpServerClass", this->theWho, "init");
 }
@@ -55,7 +55,7 @@ void TcpServerClass::startServerThread (void)
 {
     phwangDebugWS(false, "TcpServerClass::startServerThread", this->theWho, "start");
 
-    int r = phwangPthreadCreate(&this->theServerThread, 0, transportServerThreadFunction, this);
+    int r = phwangPthreadCreate(&this->serverThread_, 0, transportServerThreadFunction, this);
     if (r) {
         printf("Error - startServerThread() return code: %d\n", r);
         return;
@@ -91,7 +91,7 @@ void *TcpServerClass::serverThreadFunction (void *data_val)
 
     address.sin_family = AF_INET;
     address.sin_addr.s_addr = INADDR_ANY;
-    address.sin_port = htons(this->thePort);
+    address.sin_port = htons(this->tcpPort_);
 
     if (bind(s, (struct sockaddr *)&address, sizeof(address)) < 0) {
         phwangLogitWS("TcpServerClass::serverThreadFunction", this->theWho, "bind error");
@@ -109,7 +109,7 @@ void *TcpServerClass::serverThreadFunction (void *data_val)
             return 0;
         }
 
-        phwangDebugWSI(true, "TcpServerClass::serverThreadFunction", this->theWho, "accepted port", this->thePort);
+        phwangDebugWSI(true, "TcpServerClass::serverThreadFunction", this->theWho, "accepted port", this->tcpPort_);
 
         char data[strlen(LOGO_DEF::PHWANG_LOGO) + 1];
         int length = read(data_socket, data, strlen(LOGO_DEF::PHWANG_LOGO));
@@ -120,7 +120,7 @@ void *TcpServerClass::serverThreadFunction (void *data_val)
             phwangDebugWS(true, "TcpServerClass::serverThreadFunction", this->theWho, "logo is good");
         }
         else {
-            phwangLogitWSISI("TcpServerClass::serverThreadFunction", this->theWho, "***!!!Attacked!!!*** port=", this->thePort, " data_length", length);
+            phwangLogitWSISI("TcpServerClass::serverThreadFunction", this->theWho, "***!!!Attacked!!!*** port=", this->tcpPort_, " data_length", length);
             for (int i = 0; (i < length) && (i < strlen(LOGO_DEF::PHWANG_LOGO)); i++) {
                 printf("%d ", data[i]);
             }
@@ -130,10 +130,10 @@ void *TcpServerClass::serverThreadFunction (void *data_val)
             continue;
         }
 
-        PortClass *tp_transfer_object = new PortClass(data_socket, this->theReceiveCallbackFunc, this->theCallerObject, this->theWho);
-        tp_transfer_object->startThreads(this->theTpTransferObjectIndex);
-        this->theTpTransferObjectIndex++;
-        this->theAcceptCallbackFunc(this->theCallerObject, tp_transfer_object);
+        PortClass *port_object = new PortClass(data_socket, this->receiveCallbackFunc_, this->callerObject_, this->theWho);
+        port_object->startThreads(this->portObjectIndex_);
+        this->portObjectIndex_++;
+        this->acceptCallbackFunc_(this->callerObject_, port_object);
     }
 
     //free(data_val);

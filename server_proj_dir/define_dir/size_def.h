@@ -6,6 +6,8 @@
 
 #pragma once
 
+#include "../../phwang_dir/net_dir/port_dir/port_class.h"
+
 class SIZE_DEF {
 public:
     char const static *FAKE_LINK_ID_INDEX;
@@ -37,6 +39,7 @@ public:
 
     int const static NAME_LIST_TAG_SIZE = 3;
     int const static NAME_LIST_TAG_MAX_VALUE = 999;
+    int const static NAME_LIST_BUFFER_SIZE = PortClass::RECEIVE_BUFFER_SIZE;
 
     int const static AJAX_ID_SIZE = 3;
 };
