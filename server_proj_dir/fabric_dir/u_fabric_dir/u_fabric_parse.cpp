@@ -53,7 +53,7 @@ void UFabricClass::processSetupRoomResponse (char *data_val)
 
     char *room_id_ptr = current_ptr;
 
-    GroupClass *group = this->theFabricObject->searchGroup(group_id_index);
+    GroupClass *group = this->fabricObject_->searchGroup(group_id_index);
     if (!group) {
         phwangAbendS("UFabricClass::processSetupRoomResponse", "null_group");
         return;
@@ -69,85 +69,11 @@ void UFabricClass::processSetupRoomResponse (char *data_val)
             ((group->mode() == FE_DEF::FE_GROUP_MODE_DUET) && (!strcmp(group->firstFiddle(), group->secondFiddle()))) ||
              (group->mode() == FE_DEF::FE_GROUP_MODE_ENSEMBLE)) {
             phwangDebugS(true, "UFabricClass::processSetupRoomResponse", "match");
-            //this->sendSetupSessionResponse(session, group, result_buf);
         }
-
-        session->linkObject()->setPendingSessionSetup3(session->sessionIdIndex(), "");
+        else {
+            session->linkObject()->setPendingSessionSetup3(session->sessionIdIndex(), "");
+        }
     }
-}
-
-void UFabricClass::sendSetupSessionResponse (
-    SessionClass *session_val,
-    GroupClass *group_val,
-    char const *result_val)
-{
-    phwangDebugSS(false, "UFabricClass::sendSetupSessionResponse", "result=", result_val);
-    LinkClass *link = session_val->linkObject();
-
-    char *encoded_theme_info    = phwangEncodeStringMalloc(group_val->themeInfo());
-    char *encoded_first_fiddle  = phwangEncodeStringMalloc(group_val->firstFiddle());
-    char *encoded_second_fiddle = phwangEncodeStringMalloc(group_val->secondFiddle());
-
-    char *response_data = (char *) phwangMalloc(
-        FABRIC_DEF::FE_DL_BUF_WITH_LINK_SESSION_SIZE + 4 + strlen(encoded_theme_info) + strlen(encoded_first_fiddle) + strlen(encoded_second_fiddle),
-        MallocClass::sendSetupSessionResponse);
-
-    *response_data = FE_DEF::FE_SETUP_SESSION_RESPONSE;
-
-    char *current_ptr = &response_data[FE_DEF::FE_COMMAND_SIZE];
-
-    switch (link->deviceType()) {
-        case FE_DEF::FE_DEVICE_TYPE_NODEJS:
-            if (!session_val->ajaxId()) {
-                phwangAbendS("UFabricClass::sendSetupSessionResponse", "null_ajaxId");
-                return;
-            }
-
-            memcpy(current_ptr, session_val->ajaxId(), SIZE_DEF::AJAX_ID_SIZE);
-            session_val->resetAjaxId();
-            break;
-
-        case FE_DEF::FE_DEVICE_TYPE_IPHONE:
-        case FE_DEF::FE_DEVICE_TYPE_ANDROID:
-            memcpy(current_ptr, "***", SIZE_DEF::AJAX_ID_SIZE);
-            break;
-        default:
-            break;
-    }
-    current_ptr += SIZE_DEF::AJAX_ID_SIZE;
-
-    memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
-    current_ptr += RESULT_DEF::RESULT_SIZE;
-
-    memcpy(current_ptr, link->linkIdIndex(), SIZE_DEF::LINK_ID_INDEX_SIZE);
-    current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE;
-
-    memcpy(current_ptr, session_val->sessionIdIndex(), SIZE_DEF::SESSION_ID_INDEX_SIZE);
-    current_ptr += SIZE_DEF::SESSION_ID_INDEX_SIZE;
-
-    *current_ptr++ = FE_DEF::FE_GET_LINK_DATA_RESPONSE_YES;
-    *current_ptr++ = group_val->roomStatus();
-    *current_ptr++ = group_val->mode();
-    *current_ptr++ = group_val->themeType();
-
-    memcpy(current_ptr, encoded_theme_info, strlen(encoded_theme_info));
-    current_ptr += strlen(encoded_theme_info);
-
-    memcpy(current_ptr, encoded_first_fiddle, strlen(encoded_first_fiddle));
-    current_ptr += strlen(encoded_first_fiddle);
-
-    memcpy(current_ptr, encoded_second_fiddle, strlen(encoded_second_fiddle));
-    current_ptr += strlen(encoded_second_fiddle);
-
-    *current_ptr = 0;
-
-    phwangFree(encoded_theme_info);
-    phwangFree(encoded_first_fiddle);
-    phwangFree(encoded_second_fiddle);
-
-    phwangDebugSS(true, "UFabricClass::sendSetupSessionResponse", "response_data=", response_data);
-
-    this->fabricObject()->dFabricObject()->transmitFunction(link->portObject(), response_data);
 }
 
 void UFabricClass::processPutRoomDataResponse (char *data_val)
@@ -164,7 +90,7 @@ void UFabricClass::processPutRoomDataResponse (char *data_val)
 
     char *rest_data = current_ptr;
 
-    GroupClass *group = this->theFabricObject->searchGroup(group_id_ptr);
+    GroupClass *group = this->fabricObject_->searchGroup(group_id_ptr);
     if (!group) {
         phwangAbendS("UFabricClass::processPutRoomDataResponse", "null_group");
         return;
@@ -175,64 +101,7 @@ void UFabricClass::processPutRoomDataResponse (char *data_val)
     for (int i = 0; i < session_array_size; i++) {
         SessionClass *session = group->sessionTableArray(i);
         if (session) {
-            //this->sendPutSessionDataResponse(session, group, result_buf, rest_data);
             session->enqueuePendingDownLinkData(rest_data);
         }
     }
-}
-
-void UFabricClass::sendPutSessionDataResponse (
-    SessionClass *session_val,
-    GroupClass *group_val,
-    char const *result_val,
-    char const *result_data_val)
-{
-    phwangDebugSS(false, "UFabricClass::sendPutSessionDataResponse", "result=", result_val);
-    LinkClass *link = session_val->linkObject();
-
-    char *response_data = (char *) phwangMalloc(
-        FABRIC_DEF::FE_DL_BUF_WITH_LINK_SESSION_SIZE + 2 + strlen(result_data_val),
-        MallocClass::sendPutSessionDataResponse);
-
-    *response_data = FE_DEF::FE_PUT_SESSION_DATA_RESPONSE;
-
-    char *current_ptr = &response_data[FE_DEF::FE_COMMAND_SIZE];
-
-    switch (link->deviceType()) {
-        case FE_DEF::FE_DEVICE_TYPE_NODEJS:
-            if (!session_val->ajaxId()) {
-                phwangAbendS("UFabricClass::sendPutSessionDataResponse", "null_ajaxId");
-                return;
-            }
-
-            memcpy(current_ptr, session_val->ajaxId(), SIZE_DEF::AJAX_ID_SIZE);
-            session_val->resetAjaxId();
-            break;
-
-        case FE_DEF::FE_DEVICE_TYPE_IPHONE:
-        case FE_DEF::FE_DEVICE_TYPE_ANDROID:
-            memcpy(current_ptr, "***", SIZE_DEF::AJAX_ID_SIZE);
-            break;
-        default:
-            break;
-    }
-    current_ptr += SIZE_DEF::AJAX_ID_SIZE;
-
-    memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
-    current_ptr += RESULT_DEF::RESULT_SIZE;
-
-    memcpy(current_ptr, link->linkIdIndex(), SIZE_DEF::LINK_ID_INDEX_SIZE);
-    current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE;
-
-    memcpy(current_ptr, session_val->sessionIdIndex(), SIZE_DEF::SESSION_ID_INDEX_SIZE);
-    current_ptr += SIZE_DEF::SESSION_ID_INDEX_SIZE;
-
-    *current_ptr++ = FE_DEF::FE_GET_LINK_DATA_RESPONSE_YES;
-    *current_ptr++ = group_val->themeType();
-
-    strcpy(current_ptr, result_data_val);
-
-    phwangDebugSS(true, "UFabricClass::sendPutSessionDataResponse", "response_data=", response_data);
-
-    this->fabricObject()->dFabricObject()->transmitFunction(link->portObject(), response_data);
 }

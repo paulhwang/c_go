@@ -11,7 +11,7 @@
 UFabricClass::UFabricClass (FabricClass *fabric_object_val)
 {
     memset(this, 0, sizeof(UFabricClass));
-    this->theFabricObject = fabric_object_val;
+    this->fabricObject_ = fabric_object_val;
     this->startNetServer();
 
     phwangDebugS(false, "UFabricClass::UFabricClass", "init");
@@ -31,7 +31,7 @@ void UFabricClass::exportedNetAcceptFunction (void *port_object_val)
         phwangAbendS("UFabricClass::exportedNetAcceptFunction", "null port_object_val");
         return;
     }
-    this->thePortObject = port_object_val;
+    this->portObject_ = port_object_val;
 }
 
 void uFabricTpReceiveDataFunction (void *port_object_val, void *u_fabric_object_val, void *data_val) {
@@ -45,5 +45,5 @@ void uFabricTpReceiveDataFunction (void *port_object_val, void *u_fabric_object_
 
 void UFabricClass::startNetServer (void)
 {
-    this->theTpServerObject = phwangMallocTpServer(this, TcpPortDefine::FABRIC_THEME_PORT_NUMER, uFabricTpServerAcceptFunction, this, uFabricTpReceiveDataFunction, this, this->objectName());
+    this->tcpServerObject_ = phwangMallocTpServer(this, TcpPortDefine::FABRIC_THEME_PORT_NUMER, uFabricTpServerAcceptFunction, this, uFabricTpReceiveDataFunction, this, this->objectName());
 }

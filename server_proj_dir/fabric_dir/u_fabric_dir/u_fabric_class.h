@@ -15,9 +15,9 @@ class SessionClass;
 class GroupClass;
 
 class UFabricClass {
-    FabricClass *theFabricObject;
-    void *theTpServerObject;
-    void *thePortObject;
+    FabricClass *fabricObject_;
+    void *tcpServerObject_;
+    void *portObject_;
 
     void startNetServer(void);
     void processSetupRoomResponse(char *data_val);
@@ -28,22 +28,11 @@ public:
     ~UFabricClass(void);
     char const* objectName(void) {return "UFabricClass";}
 
-    void *portObject(void) {return this->thePortObject;}
+    void *portObject(void) {return this->portObject_;}
     void transmitFunction(char *data_val);
 
     /* exports */
-    FabricClass *fabricObject(void) {return this->theFabricObject;}
+    FabricClass *fabricObject(void) {return this->fabricObject_;}
     void exportedParseFunction(char *data_val);
     void exportedNetAcceptFunction(void *tp_transfer_object_val);
-
-    void sendSetupSessionResponse (
-        SessionClass *session_val,
-        GroupClass *group_val,
-        char const *result_val);
-
-    void sendPutSessionDataResponse (
-        SessionClass *session_val,
-        GroupClass *group_val,
-        char const *result_val,
-        char const *result_data_val);
 };
