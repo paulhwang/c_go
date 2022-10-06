@@ -15,8 +15,8 @@
 NameListClass::NameListClass (FabricClass *fabric_object_val)
 {
     memset(this, 0, sizeof(*this));
-    this->theFabricObject = fabric_object_val;
-    this->theNameListTag = 0;
+    this->fabricObject_ = fabric_object_val;
+    this->nameListTag_ = 0;
     strcpy(this->theObjectName, "NameListClass");
 
     phwangDebugS(false, "NameListClass::NameListClass", "init");
@@ -32,23 +32,23 @@ NameListClass::~NameListClass (void)
 
 void NameListClass::updateNameList (void)
 {
-    void *link_list_mgr = this->theFabricObject->linkListMgrObject();
+    void *link_list_mgr = this->fabricObject_->linkListMgrObject();
 
     int max_index = phwnagListMgrGetMaxIndex(link_list_mgr, "NameListClass::updateNameList()");
     LinkClass **link_entry_array = (LinkClass **) phwangListMgrGetEntryTableArray(link_list_mgr);
-    char *ptr = this->theNameList;
+    char *ptr = this->nameList_;
     int name_len;
     int name_list_size = SIZE_DEF::NAME_LIST_TAG_SIZE;
 
-    this->theNameListTag++;
-    if (this->theNameListTag > NAME_LIST_CLASS_MAX_NAME_LIST_TAG) {
-        this->theNameListTag = 1;
+    this->nameListTag_++;
+    if (this->nameListTag_ > SIZE_DEF::NAME_LIST_TAG_MAX_VALUE) {
+        this->nameListTag_ = 1;
     }
 
     for (int i = max_index; i >= 0; i--) {
         if (link_entry_array[i]) {
-            if (ptr == this->theNameList) {
-                phwangEncodeNumber(ptr, this->theNameListTag, SIZE_DEF::NAME_LIST_TAG_SIZE);
+            if (ptr == this->nameList_) {
+                phwangEncodeNumber(ptr, this->nameListTag_, SIZE_DEF::NAME_LIST_TAG_SIZE);
                 ptr += SIZE_DEF::NAME_LIST_TAG_SIZE;
             }
             else {
@@ -69,13 +69,13 @@ void NameListClass::updateNameList (void)
         phwangAbendS("NameListClass::updateNameList", "buffer too small");
     }
 
-    phwangDebugS(true, "NameListClass::updateNameList", this->theNameList);
+    phwangDebugS(true, "NameListClass::updateNameList", this->nameList_);
 }
 
 char *NameListClass::getNameList (int tag_val)
 {
-	if (this->theNameListTag == tag_val) {
+	if (this->nameListTag_ == tag_val) {
 		return 0;
 	}
-	return this->theNameList;
+	return this->nameList_;
 }
