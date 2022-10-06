@@ -69,7 +69,7 @@ void UFabricClass::processSetupRoomResponse (char *data_val)
             ((group->mode() == FE_DEF::FE_GROUP_MODE_DUET) && (!strcmp(group->firstFiddle(), group->secondFiddle()))) ||
              (group->mode() == FE_DEF::FE_GROUP_MODE_ENSEMBLE)) {
             phwangDebugS(true, "UFabricClass::processSetupRoomResponse", "match");
-            this->sendSetupSessionResponse(session, group, result_buf);
+            //this->sendSetupSessionResponse(session, group, result_buf);
         }
 
         session->linkObject()->setPendingSessionSetup3(session->sessionIdIndex(), "");

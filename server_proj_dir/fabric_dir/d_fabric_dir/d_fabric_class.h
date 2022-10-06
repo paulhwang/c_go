@@ -102,12 +102,11 @@ class DFabricClass {
         char const *session_id_index_val);
 
     char *processSetupSession3Request (
-        LinkClass *link_val,
+        SessionClass *session_val,
         char *data_val);
     char *generateSetupSession3Response (
         char const *result_val,
-        char const *link_id_index_val,
-        char const *session_id_index_val);
+        SessionClass *session_val);
 
     char *processFreeSessionRequest (
         SessionClass *session_val);

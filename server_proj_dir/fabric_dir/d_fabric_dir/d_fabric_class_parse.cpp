@@ -116,11 +116,6 @@ void DFabricClass::exportedParseFunction (
                     response_data[0] = FE_DEF::FE_SETUP_SESSION_RESPONSE;
                     break;
 
-                case FE_DEF::FE_SETUP_SESSION3_COMMAND:
-                    response_data = this->processSetupSession3Request(link, current_ptr);
-                    response_data[0] = FE_DEF::FE_SETUP_SESSION3_RESPONSE;
-                    break;
-
                 default:
                     phwangAbendS("DFabricClass::exportedParseFunction_1", data_val);
                     return;
@@ -139,6 +134,11 @@ void DFabricClass::exportedParseFunction (
                 case FE_DEF::FE_SETUP_SESSION2_COMMAND:
                     response_data = this->processSetupSession2Request(session, current_ptr);
                     response_data[0] = FE_DEF::FE_SETUP_SESSION2_RESPONSE;
+                    break;
+
+                case FE_DEF::FE_SETUP_SESSION3_COMMAND:
+                    response_data = this->processSetupSession3Request(session, current_ptr);
+                    response_data[0] = FE_DEF::FE_SETUP_SESSION3_RESPONSE;
                     break;
 
                 case FE_DEF::FE_FREE_SESSION_COMMAND:
@@ -686,7 +686,10 @@ char *DFabricClass::processSetupSessionRequest (
         ((group->mode() == FE_DEF::FE_GROUP_MODE_DUET) && (!strcmp(group->firstFiddle(), group->secondFiddle()))) ||
          (group->mode() == FE_DEF::FE_GROUP_MODE_ENSEMBLE)) {
         this->sendSetupRoomRequestToThemeServer(group);
-        return 0;
+        //return 0;
+
+        response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_ALMOST_SUCCEED, link_val->linkIdIndex(), session->sessionIdIndex(), data_val);
+        return response_data;
     }
 
     LinkClass *second_link = this->theFabricObject->searchLinkByName(group->secondFiddle());
@@ -783,26 +786,95 @@ char *DFabricClass::generateSetupSession2Response (
 }
 
 char *DFabricClass::processSetupSession3Request (
-    LinkClass *link_val,
+    SessionClass *session_val,
     char *data_val)
 {
     char *response_data;
+
+    phwangDebugSS(true, "DFabricClass::processSetupSession3Request", "session_id=", session_val->sessionIdIndex());
     phwangDebugSS(true, "DFabricClass::processSetupSession3Request", "data_val=", data_val);
 
-    char session_id_buf[SIZE_DEF::SESSION_ID_INDEX_SIZE + 1];
-    memcpy(session_id_buf, data_val, SIZE_DEF::SESSION_ID_INDEX_SIZE);
-    session_id_buf[SIZE_DEF::SESSION_ID_INDEX_SIZE] = 0;
-    phwangDebugSS(true, "DFabricClass::processSetupSession3Request", "session_id=", session_id_buf);
-
-    response_data = this->generateSetupSession3Response(RESULT_DEF::RESULT_SUCCEED, link_val->linkIdIndex(), session_id_buf);
+    response_data = this->generateSetupSession3Response(RESULT_DEF::RESULT_SUCCEED, session_val);
     return response_data;
 }
 
 char *DFabricClass::generateSetupSession3Response (
     char const *result_val,
-    char const *link_id_index_val,
-    char const *session_id_index_val)
+    SessionClass *session_val)
 {
+    phwangDebugSS(false, "DFabricClass::generateSetupSession3Response", "result=", result_val);
+    LinkClass *link = session_val->linkObject();
+    GroupClass *group = session_val->groupObject();
+
+    char *encoded_theme_info    = phwangEncodeStringMalloc(group->themeInfo());
+    char *encoded_first_fiddle  = phwangEncodeStringMalloc(group->firstFiddle());
+    char *encoded_second_fiddle = phwangEncodeStringMalloc(group->secondFiddle());
+
+    char *response_data = (char *) phwangMalloc(
+        FABRIC_DEF::FE_DL_BUF_WITH_LINK_SESSION_SIZE + 4 + strlen(encoded_theme_info) + strlen(encoded_first_fiddle) + strlen(encoded_second_fiddle),
+        MallocClass::sendSetupSessionResponse);
+
+    *response_data = FE_DEF::FE_SETUP_SESSION_RESPONSE;
+
+    char *current_ptr = &response_data[FE_DEF::FE_COMMAND_SIZE];
+
+/*
+    switch (link->deviceType()) {
+        case FE_DEF::FE_DEVICE_TYPE_NODEJS:
+            if (!session_val->ajaxId()) {
+                phwangAbendS("DFabricClass::generateSetupSession3Response", "null_ajaxId");
+                return;
+            }
+
+            memcpy(current_ptr, session_val->ajaxId(), SIZE_DEF::AJAX_ID_SIZE);
+            session_val->resetAjaxId();
+            break;
+
+        case FE_DEF::FE_DEVICE_TYPE_IPHONE:
+        case FE_DEF::FE_DEVICE_TYPE_ANDROID:
+            memcpy(current_ptr, "***", SIZE_DEF::AJAX_ID_SIZE);
+            break;
+        default:
+            break;
+    }
+    */
+
+    memcpy(current_ptr, "***", SIZE_DEF::AJAX_ID_SIZE);
+    current_ptr += SIZE_DEF::AJAX_ID_SIZE;
+
+    memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
+    current_ptr += RESULT_DEF::RESULT_SIZE;
+
+    memcpy(current_ptr, link->linkIdIndex(), SIZE_DEF::LINK_ID_INDEX_SIZE);
+    current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE;
+
+    memcpy(current_ptr, session_val->sessionIdIndex(), SIZE_DEF::SESSION_ID_INDEX_SIZE);
+    current_ptr += SIZE_DEF::SESSION_ID_INDEX_SIZE;
+
+    *current_ptr++ = group->roomStatus();
+    *current_ptr++ = group->mode();
+    *current_ptr++ = group->themeType();
+
+    memcpy(current_ptr, encoded_theme_info, strlen(encoded_theme_info));
+    current_ptr += strlen(encoded_theme_info);
+
+    memcpy(current_ptr, encoded_first_fiddle, strlen(encoded_first_fiddle));
+    current_ptr += strlen(encoded_first_fiddle);
+
+    memcpy(current_ptr, encoded_second_fiddle, strlen(encoded_second_fiddle));
+    current_ptr += strlen(encoded_second_fiddle);
+
+    *current_ptr = 0;
+
+    phwangFree(encoded_theme_info);
+    phwangFree(encoded_first_fiddle);
+    phwangFree(encoded_second_fiddle);
+
+    phwangDebugSS(true, "DFabricClass::generateSetupSession3Response", "response_data=", response_data);
+
+    return response_data;
+
+    /*
     phwangDebugS(false, "DFabricClass::generateSetupSession3Response", result_val);
 
     char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUF_WITH_LINK_SESSION_SIZE, MallocClass::generateSetupDuet3Response);
@@ -813,6 +885,7 @@ char *DFabricClass::generateSetupSession3Response (
     current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE;
     strcpy(current_ptr, session_id_index_val);
     return response_data;
+    */
 }
 
 /* free session */
