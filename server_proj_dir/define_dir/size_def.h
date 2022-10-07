@@ -38,6 +38,7 @@ public:
     int const static BASE_ID_INDEX_SIZE = BASE_ID_SIZE + BASE_INDEX_SIZE;
 
     int const static NAME_LIST_TAG_SIZE = 3;
+    int const static NAME_LIST_TAG_SIZE_WITH_TYPE = 1 + NAME_LIST_TAG_SIZE;
     int const static NAME_LIST_TAG_MAX_VALUE = 999;
     int const static NAME_LIST_BUFFER_SIZE = PortClass::RECEIVE_BUFFER_SIZE;
 

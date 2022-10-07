@@ -521,7 +521,7 @@ char *DFabricClass::processGetLinkDataRequest (
     memcpy(current_ptr, link_val->linkIdIndex(), SIZE_DEF::LINK_ID_INDEX_SIZE);
     current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE;
 
-    *current_ptr++ = FE_DEF::RESPOND_IS_GET_LINK_DATA_NAME_LIST;
+    *current_ptr++ = FE_DEF::FE_GET_LINK_DATA_TYPE_NAME_LIST;
     phwangEncodeNumber(current_ptr, this->fabricObject_->nameListObject()->nameListTag(), SIZE_DEF::NAME_LIST_TAG_SIZE);
     current_ptr += SIZE_DEF::NAME_LIST_TAG_SIZE;
     *current_ptr = 0;
@@ -533,7 +533,7 @@ char *DFabricClass::processGetLinkDataRequest (
         if (session) {
             char *pending_downlink_data = session->getPendingDownLinkData();
             if (pending_downlink_data) {
-                *current_ptr++ = FE_DEF::RESPOND_IS_GET_LINK_DATA_PENDING_DATA;
+                *current_ptr++ = FE_DEF::FE_GET_LINK_DATA_TYPE_PENDING_DATA;
                 session->enqueuePendingDownLinkData(pending_downlink_data);
                 strcpy(current_ptr, link_val->linkIdIndex());
                 current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE;
@@ -547,7 +547,7 @@ char *DFabricClass::processGetLinkDataRequest (
 
     char *pending_session_info = link_val->getPendingSessionSetup();
     if (pending_session_info) {
-        *current_ptr++ = FE_DEF::RESPOND_IS_GET_LINK_DATA_PENDING_SESSION;
+        *current_ptr++ = FE_DEF::FE_GET_LINK_DATA_TYPE_PENDING_SESSION;
         strcpy(current_ptr, pending_session_info);
         phwangDebugSS(true, "DFabricClass::processGetLinkDataRequest", "getPendingSessionSetup ", downlink_data);
         phwangFree(pending_session_info);
@@ -555,7 +555,7 @@ char *DFabricClass::processGetLinkDataRequest (
 
     char *pending_session_info3 = link_val->getPendingSessionSetup3();
     if (pending_session_info3) {
-        *current_ptr++ = FE_DEF::RESPOND_IS_GET_LINK_DATA_PENDING_SESSION3;
+        *current_ptr++ = FE_DEF::FE_GET_LINK_DATA_TYPE_PENDING_SESSION3;
         strcpy(current_ptr, pending_session_info3);
         phwangDebugSS(true, "DFabricClass::processGetLinkDataRequest", "getPendingSessionSetup3 ", downlink_data);
         phwangFree(pending_session_info3);

@@ -10,9 +10,9 @@
 
 void DFabricClass::transmitFunction (void *port_object_val, char *data_val)
 {
-  if (*data_val != FE_DEF::FE_GET_LINK_DATA_RESPONSE) {
+    //if (*data_val != FE_DEF::FE_GET_LINK_DATA_RESPONSE) {
       phwangDebugS(true, "DFabricClass::transmitFunction", data_val);
-    }
+    //}
 
     phwangPortTransmit(port_object_val, data_val);
 }
