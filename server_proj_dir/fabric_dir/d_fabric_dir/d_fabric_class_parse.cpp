@@ -595,7 +595,7 @@ char *DFabricClass::processGetNameListRequest (
     char *name_list = this->fabricObject_->nameListObject()->getNameList(name_list_tag);
 
     if (!name_list) {
-        /////////////////////////////////TBD
+        phwangAbendS("DFabricClass::processGetNameListRequest", data_val);
     }
 
     response_data = generateGetNameListResponse(RESULT_DEF::RESULT_SUCCEED, link_val->linkIdIndex(), name_list);
