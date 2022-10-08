@@ -18,7 +18,6 @@ public:
     int const static FE_DL_BUF_WITH_LINK_SIZE = FE_DL_BUFFER_SIZE + SIZE_DEF::LINK_ID_INDEX_SIZE;
     int const static FE_DL_BUF_WITH_LINK_SESSION_SIZE = FE_DL_BUF_WITH_LINK_SIZE + SIZE_DEF::SESSION_ID_INDEX_SIZE;
 
-    int const static FE_PENDING_SESSIONS_SIZE = 512;/********TBD*******************/
     int const static FE_GET_LINK_DATA_BUF_SIZE = FE_DL_BUF_WITH_LINK_SIZE + 1024;/********TBD*******************/
 
     /* uplink data buffer size */

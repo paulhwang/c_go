@@ -691,6 +691,7 @@ char *DFabricClass::processSetupSessionRequest (
     }
 
     second_link->setPendingSessionSetup(second_session->sessionIdIndex(), group->themeType(), group->themeInfo());
+
     response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_WAITING_FOR_ANSWER, link_val->linkIdIndex(), session->sessionIdIndex(), data_val);
     return response_data;
 }
