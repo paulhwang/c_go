@@ -51,8 +51,8 @@ public:
 
     char const static FE_APP_IS_GO_GAME     = 'G';
 
-    char const static FE_GET_LINK_DATA_TYPE_PENDING_SESSION2 = 'S';
-    char const static FE_GET_LINK_DATA_TYPE_PENDING_SESSION3 = 'T';
+    char const static FE_GET_LINK_DATA_TYPE_PENDING_SESSION2 = 'Y';
+    char const static FE_GET_LINK_DATA_TYPE_PENDING_SESSION3 = 'Z';
     char const static FE_GET_LINK_DATA_TYPE_PENDING_DATA     = 'D';
     char const static FE_GET_LINK_DATA_TYPE_NAME_LIST        = 'N';
 };
