@@ -8,6 +8,9 @@
 
 class RESULT_DEF {
 public:
+    char const static ANSWER_YES = 'Y';
+    char const static ANSWER_NO  = 'N';
+
     int const static RESULT_SIZE = 2;
 
     char const static *RESULT_SUCCEED;

@@ -521,10 +521,12 @@ char *DFabricClass::processGetLinkDataRequest (
     char *pending_session_info3 = link_val->getPendingSessionSetup3();
     int pending_session_info3_length = 0;
     if (pending_session_info3) {
-        pending_session_info3_length = strlen(pending_session_info2);
+        pending_session_info3_length = strlen(pending_session_info3);
     }
 
-    int downlink_data_size = RESULT_DEF::RESULT_SIZE + SIZE_DEF::LINK_ID_INDEX_SIZE + 
+    int downlink_data_size = FABRIC_DEF::FE_DL_COMMAND_AJAX_SIZE + 
+                             RESULT_DEF::RESULT_SIZE +
+                             SIZE_DEF::LINK_ID_INDEX_SIZE + 
                              1 + SIZE_DEF::NAME_LIST_TAG_SIZE +
                              1 + FE_DEF::FE_GET_LINK_DATA_PENDING_SESSION_DATA_SIZE + pending_session_info2_length +
                              1 + FE_DEF::FE_GET_LINK_DATA_PENDING_SESSION_DATA_SIZE + pending_session_info3_length + 1;
