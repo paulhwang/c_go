@@ -653,7 +653,7 @@ char *DFabricClass::processSetupSessionRequest (
     phwangDebugSS(true, "DFabricClass::processSetupSessionRequest", "second_fiddle=", second_fiddle);
 
     switch (theme_type) {
-        case 'G':
+        case FE_DEF::FE_APP_IS_GO_GAME:
             break;
 
         default:
@@ -671,7 +671,7 @@ char *DFabricClass::processSetupSessionRequest (
     group->insertSession(session);
     session->bindGroup(group);
 
-    if (group->isSoloGroup()) {
+    if (group->isDominatedGroup()) {
         this->sendSetupRoomRequestToThemeServer(group);
 
         response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_ALMOST_SUCCEED, link_val->linkIdIndex(), session->sessionIdIndex(), data_val);
