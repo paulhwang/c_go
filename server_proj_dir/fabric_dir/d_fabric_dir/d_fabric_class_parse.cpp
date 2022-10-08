@@ -513,9 +513,16 @@ char *DFabricClass::processGetLinkDataRequest (
     link_val->resetKeepAliveTime();
 
     char *pending_session_info2 = link_val->getPendingSessionSetup2();
+    int pending_session_info2_length = 0;
+    if (pending_session_info2) {
+        pending_session_info2_length = strlen(pending_session_info2);
+    }
+
     char *pending_session_info3 = link_val->getPendingSessionSetup3();
-    int pending_session_info2_length = strlen(pending_session_info2);
-    int pending_session_info3_length = strlen(pending_session_info3);
+    int pending_session_info3_length = 0;
+    if (pending_session_info3) {
+        pending_session_info3_length = strlen(pending_session_info2);
+    }
 
     int downlink_data_size = RESULT_DEF::RESULT_SIZE + SIZE_DEF::LINK_ID_INDEX_SIZE + 
                              1 + SIZE_DEF::NAME_LIST_TAG_SIZE +
@@ -537,6 +544,7 @@ char *DFabricClass::processGetLinkDataRequest (
     current_ptr += SIZE_DEF::NAME_LIST_TAG_SIZE;
     *current_ptr = 0;
 
+    /*
     int max_session_table_array_index = phwnagListMgrGetMaxIndex(link_val->sessionListMgrObject(), "DFabricClass::processGetLinkData()");
     SessionClass **session_table_array = (SessionClass **) phwangListMgrGetEntryTableArray(link_val->sessionListMgrObject());
     for (int i = 0; i <= max_session_table_array_index; i++) {
@@ -555,6 +563,7 @@ char *DFabricClass::processGetLinkDataRequest (
             }
         }
     }
+    */
 
     if (pending_session_info2) {
         *current_ptr++ = FE_DEF::FE_GET_LINK_DATA_TYPE_PENDING_SESSION2;
