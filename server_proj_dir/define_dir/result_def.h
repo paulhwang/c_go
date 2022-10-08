@@ -33,6 +33,7 @@ public:
     char const static *RESULT_SESSION_DATA_NOT_AVAILABLE;
     char const static *RESULT_MALLOC_SECOND_SESSION_FAIL;
     char const static *RESULT_ALMOST_SUCCEED;
+    char const static *RESULT_WAITING_FOR_ANSWER;
 
     char const static *RESULT_MALLOC_ROOM_FAIL;
 };
