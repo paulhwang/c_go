@@ -20,8 +20,8 @@ private:
     char deviceType_;
     void *portObject_;
     void *sessionListMgrObject_;
-    void *thePendingSessionSetupQueue;
-    void *thePendingSessionSetupQueue3;
+    void *pendingSessionSetupQueue2_;
+    void *pendingSessionSetupQueue3_;
     char theNameListChanged;
     time_t theKeepAliveTime;
 
@@ -45,9 +45,9 @@ public:
     void freeSession(SessionClass *session_object_val);
     void *sessionListMgrObject(void) {return this->sessionListMgrObject_;}
     SessionClass *searchSession(char *data_val);
-    char *getPendingSessionSetup(void);
+    char *getPendingSessionSetup2(void);
     char *getPendingSessionSetup3(void);
-    void setPendingSessionSetup(
+    void setPendingSessionSetup2(
         char *session_id_index_val,
         char theme_type_val,
         char *topic_data_val);

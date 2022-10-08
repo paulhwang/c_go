@@ -545,12 +545,12 @@ char *DFabricClass::processGetLinkDataRequest (
         }
     }
 
-    char *pending_session_info = link_val->getPendingSessionSetup();
-    if (pending_session_info) {
-        *current_ptr++ = FE_DEF::FE_GET_LINK_DATA_TYPE_PENDING_SESSION;
-        strcpy(current_ptr, pending_session_info);
-        phwangDebugSS(true, "DFabricClass::processGetLinkDataRequest", "getPendingSessionSetup ", downlink_data);
-        phwangFree(pending_session_info);
+    char *pending_session_info2 = link_val->getPendingSessionSetup2();
+    if (pending_session_info2) {
+        *current_ptr++ = FE_DEF::FE_GET_LINK_DATA_TYPE_PENDING_SESSION2;
+        strcpy(current_ptr, pending_session_info2);
+        phwangDebugSS(true, "DFabricClass::processGetLinkDataRequest", "getPendingSessionSetup2 ", downlink_data);
+        phwangFree(pending_session_info2);
     }
 
     char *pending_session_info3 = link_val->getPendingSessionSetup3();
@@ -690,7 +690,7 @@ char *DFabricClass::processSetupSessionRequest (
         return response_data;
     }
 
-    second_link->setPendingSessionSetup(second_session->sessionIdIndex(), group->themeType(), group->themeInfo());
+    second_link->setPendingSessionSetup2(second_session->sessionIdIndex(), group->themeType(), group->themeInfo());
 
     response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_WAITING_FOR_ANSWER, link_val->linkIdIndex(), session->sessionIdIndex(), data_val);
     return response_data;

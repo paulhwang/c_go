@@ -60,7 +60,7 @@ public:
     int const static generateGetSessionDataResponse = 5;
     int const static GET_SESSION_DATA_ERROR = 5;
     int const static sendSetupRoomRequestToThemeServer = 5;
-    int const static setPendingSessionSetup = 6;
+    int const static setPendingSessionSetup2 = 6;
     int const static setPendingSessionSetup3 = 6;
     int const static encodeNumberMalloc = 7;
     int const static encodeStringMalloc = 8;
