@@ -94,7 +94,8 @@ void LinkClass::setPendingSessionSetup2 (
 
 void LinkClass::setPendingSessionSetup3 (
     char *session_id_index_val,
-    char const *theme_data_val)
+    char theme_type_val,
+    char *theme_data_val)
 {
     int buf_size = SIZE_DEF::SESSION_ID_INDEX_SIZE + strlen(theme_data_val) + 1;
 
@@ -103,6 +104,8 @@ void LinkClass::setPendingSessionSetup3 (
 
     memcpy(current_ptr, session_id_index_val, SIZE_DEF::SESSION_ID_INDEX_SIZE);
     current_ptr += SIZE_DEF::SESSION_ID_INDEX_SIZE;
+
+    *current_ptr++ = theme_type_val;
 
     strcpy(current_ptr, theme_data_val);
 
