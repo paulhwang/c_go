@@ -45,6 +45,7 @@ void DFabricClass::exportedParseFunction (
 
         case FE_DEF::FE_DEVICE_TYPE_IPHONE:
         case FE_DEF::FE_DEVICE_TYPE_ANDROID:
+            strcpy(ajax_id, "***");
             break;
 
         default:
@@ -528,12 +529,17 @@ char *DFabricClass::processGetLinkDataRequest (
                              RESULT_DEF::RESULT_SIZE +
                              SIZE_DEF::LINK_ID_INDEX_SIZE + 
                              1 + SIZE_DEF::NAME_LIST_TAG_SIZE +
-                             1 + FE_DEF::FE_GET_LINK_DATA_PENDING_SESSION_DATA_SIZE + pending_session_info2_length +
-                             1 + FE_DEF::FE_GET_LINK_DATA_PENDING_SESSION_DATA_SIZE + pending_session_info3_length + 1;
+                             1 + FE_DEF::FE_GET_LINK_DATA_PENDING_SESSION_LENGTH_SIZE + pending_session_info2_length +
+                             1 + FE_DEF::FE_GET_LINK_DATA_PENDING_SESSION_LENGTH_SIZE + pending_session_info3_length + 1;
 
 
     char *downlink_data = (char *) phwangMalloc(downlink_data_size, MallocClass::GET_LINK_DATA);
-    char *current_ptr = &downlink_data[FABRIC_DEF::FE_DL_COMMAND_AJAX_SIZE];
+    char *current_ptr = downlink_data;
+
+    *current_ptr++ = FE_DEF::FE_GET_LINK_DATA_RESPONSE;
+
+    memcpy(current_ptr, ajax_id_val, SIZE_DEF::AJAX_ID_SIZE);
+    current_ptr += SIZE_DEF::AJAX_ID_SIZE;
 
     memcpy(current_ptr, RESULT_DEF::RESULT_SUCCEED, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;
@@ -570,11 +576,11 @@ char *DFabricClass::processGetLinkDataRequest (
     if (pending_session_info2) {
         *current_ptr++ = FE_DEF::FE_GET_LINK_DATA_TYPE_PENDING_SESSION2;
 
-        char length2_buf[FE_DEF::FE_GET_LINK_DATA_PENDING_SESSION_DATA_SIZE + 1];
-        phwangEncodeNumber(length2_buf, pending_session_info2_length, FE_DEF::FE_GET_LINK_DATA_PENDING_SESSION_DATA_SIZE);
+        char length2_buf[FE_DEF::FE_GET_LINK_DATA_PENDING_SESSION_LENGTH_SIZE + 1];
+        phwangEncodeNumber(length2_buf, pending_session_info2_length, FE_DEF::FE_GET_LINK_DATA_PENDING_SESSION_LENGTH_SIZE);
 
-        memcpy(current_ptr, length2_buf, FE_DEF::FE_GET_LINK_DATA_PENDING_SESSION_DATA_SIZE);
-        current_ptr += FE_DEF::FE_GET_LINK_DATA_PENDING_SESSION_DATA_SIZE;
+        memcpy(current_ptr, length2_buf, FE_DEF::FE_GET_LINK_DATA_PENDING_SESSION_LENGTH_SIZE);
+        current_ptr += FE_DEF::FE_GET_LINK_DATA_PENDING_SESSION_LENGTH_SIZE;
 
         memcpy(current_ptr, pending_session_info2, pending_session_info2_length);
         current_ptr += pending_session_info2_length;
@@ -588,11 +594,11 @@ char *DFabricClass::processGetLinkDataRequest (
     if (pending_session_info3) {
         *current_ptr++ = FE_DEF::FE_GET_LINK_DATA_TYPE_PENDING_SESSION3;
 
-        char length3_buf[FE_DEF::FE_GET_LINK_DATA_PENDING_SESSION_DATA_SIZE + 1];
-        phwangEncodeNumber(length3_buf, pending_session_info3_length, FE_DEF::FE_GET_LINK_DATA_PENDING_SESSION_DATA_SIZE);
+        char length3_buf[FE_DEF::FE_GET_LINK_DATA_PENDING_SESSION_LENGTH_SIZE + 1];
+        phwangEncodeNumber(length3_buf, pending_session_info3_length, FE_DEF::FE_GET_LINK_DATA_PENDING_SESSION_LENGTH_SIZE);
 
-        memcpy(current_ptr, length3_buf, FE_DEF::FE_GET_LINK_DATA_PENDING_SESSION_DATA_SIZE);
-        current_ptr += FE_DEF::FE_GET_LINK_DATA_PENDING_SESSION_DATA_SIZE;
+        memcpy(current_ptr, length3_buf, FE_DEF::FE_GET_LINK_DATA_PENDING_SESSION_LENGTH_SIZE);
+        current_ptr += FE_DEF::FE_GET_LINK_DATA_PENDING_SESSION_LENGTH_SIZE;
 
         memcpy(current_ptr, pending_session_info3, pending_session_info3_length);
         current_ptr += pending_session_info3_length;
@@ -717,7 +723,7 @@ char *DFabricClass::processSetupSessionRequest (
     if (group->isDominatedGroup()) {
         this->sendSetupRoomRequestToThemeServer(group);
 
-        response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_ALMOST_SUCCEED, link_val->linkIdIndex(), session->sessionIdIndex(), data_val);
+        response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_SUCCEED, link_val->linkIdIndex(), session->sessionIdIndex(), data_val);
         return response_data;
     }
 

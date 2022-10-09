@@ -97,7 +97,7 @@ void LinkClass::setPendingSessionSetup3 (
     char theme_type_val,
     char *theme_data_val)
 {
-    int buf_size = SIZE_DEF::SESSION_ID_INDEX_SIZE + strlen(theme_data_val) + 1;
+    int buf_size = SIZE_DEF::SESSION_ID_INDEX_SIZE + 1 + strlen(theme_data_val) + 1;
 
     char *buf = (char *) phwangMalloc(buf_size, MallocClass::setPendingSessionSetup3);
     char *current_ptr = buf;

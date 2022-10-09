@@ -65,9 +65,9 @@ void UFabricClass::processSetupRoomResponse (char *data_val)
     group->setSessionTableArray((SessionClass **) phwangArrayMgrGetArrayTable(group->sessionArrayMgr(), &session_array_size));
     for (int i = 0; i < session_array_size; i++) {
         SessionClass *session = group->sessionTableArray(i);
-        if (!group->isDominatedGroup()) {
+        //if (!group->isDominatedGroup()) {
             session->linkObject()->setPendingSessionSetup3(session->sessionIdIndex(), group->themeType(), group->themeInfo());
-        }
+        //}
     }
 }
 
