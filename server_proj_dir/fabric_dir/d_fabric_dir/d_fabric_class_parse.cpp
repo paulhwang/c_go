@@ -552,26 +552,26 @@ char *DFabricClass::processGetLinkDataRequest (
     current_ptr += SIZE_DEF::NAME_LIST_TAG_SIZE;
     *current_ptr = 0;
 
-    /*
     int max_session_table_array_index = phwnagListMgrGetMaxIndex(link_val->sessionListMgrObject(), "DFabricClass::processGetLinkData()");
     SessionClass **session_table_array = (SessionClass **) phwangListMgrGetEntryTableArray(link_val->sessionListMgrObject());
     for (int i = 0; i <= max_session_table_array_index; i++) {
         SessionClass *session = session_table_array[i];
         if (session) {
-            char *pending_downlink_data = session->getPendingDownLinkData();
+            char *pending_downlink_data = session->dequeuePendingData();
             if (pending_downlink_data) {
                 *current_ptr++ = FE_DEF::FE_GET_LINK_DATA_TYPE_PENDING_DATA;
-                session->enqueuePendingDownLinkData(pending_downlink_data);
+                session->enqueuePendingData(pending_downlink_data);
+
                 strcpy(current_ptr, link_val->linkIdIndex());
                 current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE;
+
                 strcpy(current_ptr, session->sessionIdIndex());
                 current_ptr += SIZE_DEF::SESSION_ID_INDEX_SIZE;
 
-                phwangDebugSS(true, "DFabricClass::processGetLinkDataRequest","Pending_data_exist:", downlink_data);
+                phwangDebugSS(true, "DFabricClass::processGetLinkDataRequest","Pending_downlink_exist=", downlink_data);
             }
         }
     }
-    */
 
     if (pending_session_info2) {
         *current_ptr++ = FE_DEF::FE_GET_LINK_DATA_TYPE_PENDING_SESSION2;
@@ -681,7 +681,7 @@ char *DFabricClass::processSetupSessionRequest (
         response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_MALLOC_SESSION_FAIL, link_val->linkIdIndex(), SIZE_DEF::FAKE_SESSION_ID_INDEX, data_val);
         return response_data;
     }
-    session->setAjaxId(ajax_id_val);
+    //session->setAjaxId(ajax_id_val);
 
     char group_mode = *data_val;
     char theme_type = *(data_val + 1);
@@ -1015,7 +1015,7 @@ char *DFabricClass::processGetSessionDataRequest (
 {
     phwangDebugS(true, "DFabricClass::processGetSessionDataRequest", data_val);
 
-    char *data = session_val->getPendingDownLinkData();
+    char *data = session_val->dequeuePendingData();
     if (data) {
         return this->generateGetSessionDataResponse(RESULT_DEF::RESULT_SUCCEED, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex(), data);
     }

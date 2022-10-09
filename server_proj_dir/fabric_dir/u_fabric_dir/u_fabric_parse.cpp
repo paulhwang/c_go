@@ -94,7 +94,7 @@ void UFabricClass::processPutRoomDataResponse (char *data_val)
     for (int i = 0; i < session_array_size; i++) {
         SessionClass *session = group->sessionTableArray(i);
         if (session) {
-            session->enqueuePendingDownLinkData(rest_data);
+            session->enqueuePendingData(rest_data);
         }
     }
 }

@@ -8,30 +8,30 @@
 #include "session_class.h"
 
 SessionClass::SessionClass (
-    void *list_mgr_object_val,
-    LinkClass *link_object_val)
-        :ListEntryClass(list_mgr_object_val)
+    void *list_mgr_obj_val,
+    LinkClass *link_obj_val)
+        :ListEntryClass(list_mgr_obj_val)
 {
-    this->linkObject_ = link_object_val;
-    this->groupObject_ = 0;
-    this->pendingDownLinkDataQueue_ = phwangMallocQueue(0, this->objectName());
+    this->linkObj_ = link_obj_val;
+    this->groupObj_ = 0;
+    this->pendingDataQueue_ = phwangMallocQueue(0, this->objectName());
 
     phwangDebugSS(true, "SessionClass::SessionClass", "new_session:", this->sessionIdIndex());
 }
 
 SessionClass::~SessionClass (void)
 {
-    phwangFreeQueue(this->pendingDownLinkDataQueue_, "SessionClass::~SessionClass()");
+    phwangFreeQueue(this->pendingDataQueue_, "SessionClass::~SessionClass()");
 }
 
-void SessionClass::enqueuePendingDownLinkData (char *data_val)
+void SessionClass::enqueuePendingData (char *data_val)
 {
     char *buf = (char *) malloc(strlen(data_val) + 4);
     strcpy(buf, data_val);
-    phwangEnqueue(this->pendingDownLinkDataQueue_, buf);
+    phwangEnqueue(this->pendingDataQueue_, buf);
 }
 
-char *SessionClass::getPendingDownLinkData (void)
+char *SessionClass::dequeuePendingData (void)
 {
-    return (char *) phwangDequeue(this->pendingDownLinkDataQueue_, "SessionClass::getPendingDownLinkData()");
+    return (char *) phwangDequeue(this->pendingDataQueue_, "SessionClass::getPendingDownLinkData()");
 }

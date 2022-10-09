@@ -13,24 +13,24 @@ class LinkClass;
 class GroupClass;
 
 class SessionClass : public ListEntryClass {
-    LinkClass *linkObject_;
-    GroupClass *groupObject_;
-    char theAjaxIdBuf[SIZE_DEF::AJAX_ID_SIZE + 1];
-    char *theAjaxId;
-    void *pendingDownLinkDataQueue_;
+    LinkClass *linkObj_;
+    GroupClass *groupObj_;
+    //char theAjaxIdBuf[SIZE_DEF::AJAX_ID_SIZE + 1];
+    //char *theAjaxId;
+    void *pendingDataQueue_;
 
 public:
-    SessionClass(void *list_mgr_object_val, LinkClass *link_object_val);
+    SessionClass(void *list_mgr_obj_val, LinkClass *link_obj_val);
     ~SessionClass(void);
 
     char const* objectName(void) {return "SessionClass";}
-    char *ajaxId(void) {return this->theAjaxId;}
-    void setAjaxId(char const *ajax_id_val) {strcpy(this->theAjaxIdBuf, ajax_id_val); this->theAjaxId = this->theAjaxIdBuf;}
-    void resetAjaxId(void) {this->theAjaxId = 0;}
+    //char *ajaxId(void) {return this->theAjaxId;}
+    //void setAjaxId(char const *ajax_id_val) {strcpy(this->theAjaxIdBuf, ajax_id_val); this->theAjaxId = this->theAjaxIdBuf;}
+    //void resetAjaxId(void) {this->theAjaxId = 0;}
     char *sessionIdIndex(void) {return this->entryIdIndex();}
-    LinkClass *linkObject(void) {return this->linkObject_;}
-    GroupClass *groupObject(void) {return this->groupObject_;}
-    void bindGroup(GroupClass *group_object_val) {this->groupObject_ = group_object_val;}
-    char *getPendingDownLinkData(void);
-    void enqueuePendingDownLinkData(char *data_val);
+    LinkClass *linkObject(void) {return this->linkObj_;}
+    GroupClass *groupObject(void) {return this->groupObj_;}
+    void bindGroup(GroupClass *group_obj_val) {this->groupObj_ = group_obj_val;}
+    char *dequeuePendingData(void);
+    void enqueuePendingData(char *data_val);
 };
