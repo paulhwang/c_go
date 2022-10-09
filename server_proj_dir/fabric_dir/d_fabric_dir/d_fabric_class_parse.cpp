@@ -580,6 +580,8 @@ char *DFabricClass::processGetLinkDataRequest (
         current_ptr += pending_session_info2_length;
         *current_ptr = 0;
 
+        phwangDebugSS(true, "DFabricClass::processGetLinkDataRequest", "downlink_data2=", downlink_data);
+
         phwangFree(pending_session_info2);
     }
 
@@ -596,10 +598,12 @@ char *DFabricClass::processGetLinkDataRequest (
         current_ptr += pending_session_info3_length;
         *current_ptr = 0;
 
+        phwangDebugSS(true, "DFabricClass::processGetLinkDataRequest", "downlink_data3=", downlink_data);
+
         phwangFree(pending_session_info3);
     }
 
-    phwangDebugSS(true, "DFabricClass::processGetLinkDataRequest", "getPendingSessionSetup2 ", downlink_data);
+    phwangDebugSS(false, "DFabricClass::processGetLinkDataRequest", "downlink_data=", downlink_data);
     return downlink_data;
 }
 
@@ -794,10 +798,9 @@ char *DFabricClass::processSetupSession2Request (
     if (!group) {
         printf("null group\n");
     }
-    //this->sendSetupRoomRequestToThemeServer(group);//////////////do it twice ???
 
     if (answer == 'Y') {
-
+        this->sendSetupRoomRequestToThemeServer(group);
     }
     else {
 
