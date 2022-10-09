@@ -99,7 +99,9 @@ class DFabricClass {
     char *generateSetupSession2Response (
         char const *result_val,
         char const *link_id_index_val,
-        char const *session_id_index_val);
+        char const *session_id_index_val,
+        char theme_type_val,
+        char const *theme_data_val);
 
     char *processSetupSession3Request (
         SessionClass *session_val,
