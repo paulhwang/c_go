@@ -51,10 +51,7 @@ public:
         char *session_id_index_val,
         char theme_type_val,
         char *theme_data_val);
-    void setPendingSessionSetup3(
-        char *session_id_index_val,
-        char theme_type_val,
-        char *theme_data_val);
+    void setPendingSessionSetup3(char *session_id_index_val);
     void resetKeepAliveTime(void) {this->theKeepAliveTime = time((time_t *) 0);}
     int keepAliveTimerExpired(void) {return (time((time_t *) 0) - this->theKeepAliveTime) > LINK_CLASS_KEEP_ALIVE_TIMEOUT;}
 };

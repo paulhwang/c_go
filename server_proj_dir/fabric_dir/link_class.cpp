@@ -92,22 +92,9 @@ void LinkClass::setPendingSessionSetup2 (
     phwangEnqueue(this->pendingSessionSetupQueue2_, buf);
 }
 
-void LinkClass::setPendingSessionSetup3 (
-    char *session_id_index_val,
-    char theme_type_val,
-    char *theme_data_val)
+void LinkClass::setPendingSessionSetup3 (char *session_id_index_val)
 {
-    int buf_size = SIZE_DEF::SESSION_ID_INDEX_SIZE + 1 + strlen(theme_data_val) + 1;
-
-    char *buf = (char *) phwangMalloc(buf_size, MallocClass::setPendingSessionSetup3);
-    char *current_ptr = buf;
-
-    memcpy(current_ptr, session_id_index_val, SIZE_DEF::SESSION_ID_INDEX_SIZE);
-    current_ptr += SIZE_DEF::SESSION_ID_INDEX_SIZE;
-
-    *current_ptr++ = theme_type_val;
-
-    strcpy(current_ptr, theme_data_val);
-
+    char *buf = (char *) phwangMalloc(SIZE_DEF::SESSION_ID_INDEX_SIZE + 1, MallocClass::setPendingSessionSetup3);
+    strcpy(buf, session_id_index_val);
     phwangEnqueue(this->pendingSessionSetupQueue3_, buf);
 }
