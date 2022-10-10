@@ -618,23 +618,6 @@ char *DFabricClass::processGetLinkDataRequest (
     return downlink_data;
 }
 
-char *DFabricClass::generateGetLinkDataResponse (
-    char const *result_val,
-    char const *link_id_index_val,
-    char const *data_val)
-{
-    phwangDebugS(false, "DFabricClass::generateGetLinkDataResponse", result_val);
-
-    char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUF_WITH_LINK_SESSION_SIZE + strlen(data_val), MallocClass::generateGetLinkDataResponse);
-    char *current_ptr = &response_data[FABRIC_DEF::FE_DL_COMMAND_AJAX_SIZE];
-    memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
-    current_ptr += RESULT_DEF::RESULT_SIZE;
-    memcpy(current_ptr, link_id_index_val, SIZE_DEF::LINK_ID_INDEX_SIZE);
-    current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE;
-    strcpy(current_ptr, data_val);
-    return response_data;
-}
-
 char *DFabricClass::processGetNameListRequest (
     LinkClass *link_val,
     char *ajax_id_val,
@@ -653,12 +636,13 @@ char *DFabricClass::processGetNameListRequest (
         phwangAbendS("DFabricClass::processGetNameListRequest", data_val);
     }
 
-    response_data = generateGetNameListResponse(RESULT_DEF::RESULT_SUCCEED, link_val->linkIdIndex(), name_list);
+    response_data = generateGetNameListResponse(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, link_val->linkIdIndex(), name_list);
     return response_data;
 }
 
 char *DFabricClass::generateGetNameListResponse (
     char const *result_val,
+    char *ajax_id_val,
     char const *link_id_index_val,
     char const *data_val)
 {
@@ -684,7 +668,7 @@ char *DFabricClass::processSetupSessionRequest (
 
     SessionClass *session = link_val->mallocSession();
     if (!session) {
-        response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_MALLOC_SESSION_FAIL, link_val->linkIdIndex(), SIZE_DEF::FAKE_SESSION_ID_INDEX, data_val);
+        response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_MALLOC_SESSION_FAIL, ajax_id_val, link_val->linkIdIndex(), SIZE_DEF::FAKE_SESSION_ID_INDEX, data_val);
         return response_data;
     }
 
@@ -719,7 +703,7 @@ char *DFabricClass::processSetupSessionRequest (
     phwangFree(first_fiddle);
     phwangFree(second_fiddle);
     if (!group) {
-        response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_MALLOC_GROUP_FAIL, link_val->linkIdIndex(), session->sessionIdIndex(), data_val);
+        response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_MALLOC_GROUP_FAIL, ajax_id_val, link_val->linkIdIndex(), session->sessionIdIndex(), data_val);
         return response_data;
     }
     group->insertSession(session);
@@ -728,19 +712,19 @@ char *DFabricClass::processSetupSessionRequest (
     if (group->isDominatedGroup()) {
         this->sendSetupRoomRequestToThemeServer(group);
 
-        response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_SUCCEED, link_val->linkIdIndex(), session->sessionIdIndex(), data_val);
+        response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, link_val->linkIdIndex(), session->sessionIdIndex(), data_val);
         return response_data;
     }
 
     LinkClass *second_link = this->fabricObject_->searchLinkByName(group->secondFiddle());
     if (!second_link) {
-        response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_SECOND_LINK_NOT_EXIST, link_val->linkIdIndex(), SIZE_DEF::FAKE_SESSION_ID_INDEX, data_val);
+        response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_SECOND_LINK_NOT_EXIST, ajax_id_val, link_val->linkIdIndex(), SIZE_DEF::FAKE_SESSION_ID_INDEX, data_val);
         return response_data;
     }
 
     SessionClass *second_session = second_link->mallocSession();
     if (!second_session) {
-        response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_MALLOC_SECOND_SESSION_FAIL, link_val->linkIdIndex(), SIZE_DEF::FAKE_SESSION_ID_INDEX, data_val);
+        response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_MALLOC_SECOND_SESSION_FAIL, ajax_id_val, link_val->linkIdIndex(), SIZE_DEF::FAKE_SESSION_ID_INDEX, data_val);
         return response_data;
     }
 
@@ -749,12 +733,13 @@ char *DFabricClass::processSetupSessionRequest (
 
     second_link->setPendingSessionSetup2(second_session->sessionIdIndex(), group->themeType(), group->themeInfo());
 
-    response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_WAITING_FOR_ANSWER, link_val->linkIdIndex(), session->sessionIdIndex(), data_val);
+    response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_WAITING_FOR_ANSWER, ajax_id_val, link_val->linkIdIndex(), session->sessionIdIndex(), data_val);
     return response_data;
 }
 
 char *DFabricClass::generateSetupSessionResponse (
     char const *result_val,
+    char *ajax_id_val,
     char const *link_id_index_val,
     char const *session_id_index_val,
     char const *data_val)
@@ -818,12 +803,13 @@ char *DFabricClass::processSetupSession2Request (
 
     }
 
-    response_data = this->generateSetupSession2Response(RESULT_DEF::RESULT_SUCCEED, link->linkIdIndex(), session_val->sessionIdIndex(), group->themeType(), group->themeInfo());
+    response_data = this->generateSetupSession2Response(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, link->linkIdIndex(), session_val->sessionIdIndex(), group->themeType(), group->themeInfo());
     return response_data;
 }
 
 char *DFabricClass::generateSetupSession2Response (
     char const *result_val,
+    char *ajax_id_val,
     char const *link_id_index_val,
     char const *session_id_index_val,
     char theme_type_val,
@@ -862,12 +848,13 @@ char *DFabricClass::processSetupSession3Request (
     phwangDebugSS(true, "DFabricClass::processSetupSession3Request", "session_id=", session_val->sessionIdIndex());
     phwangDebugSS(true, "DFabricClass::processSetupSession3Request", "data_val=", data_val);
 
-    response_data = this->generateSetupSession3Response(RESULT_DEF::RESULT_SUCCEED, session_val);
+    response_data = this->generateSetupSession3Response(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, session_val);
     return response_data;
 }
 
 char *DFabricClass::generateSetupSession3Response (
     char const *result_val,
+    char *ajax_id_val,
     SessionClass *session_val)
 {
     phwangDebugSS(false, "DFabricClass::generateSetupSession3Response", "result=", result_val);
@@ -936,12 +923,13 @@ char *DFabricClass::processFreeSessionRequest (
     strcpy(session_id_buf, session_val->sessionIdIndex());
     link->freeSession(session_val);
 
-    response_data = this->generateFreeSessionResponse(RESULT_DEF::RESULT_SUCCEED, link->linkIdIndex(), session_id_buf);
+    response_data = this->generateFreeSessionResponse(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, link->linkIdIndex(), session_id_buf);
     return response_data;
 }
 
 char *DFabricClass::generateFreeSessionResponse (
     char const *result_val,
+    char *ajax_id_val,
     char const *link_id_index_val,
     char const *session_id_index_val)
 {
@@ -969,18 +957,19 @@ char *DFabricClass::processPutSessionDataRequest (
 
     char *room_id = session_val->groupObject()->roomIdIndex();
     if (!room_id) {
-        response_data = this->generatePutSessionDataResponse(RESULT_DEF::RESULT_NULL_ROOM, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex());
+        response_data = this->generatePutSessionDataResponse(RESULT_DEF::RESULT_NULL_ROOM, ajax_id_val, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex());
         return response_data;
     }
 
     this->sendPutSessionDataRequestToThemeServer(room_id, data_val);
 
-    response_data = this->generatePutSessionDataResponse(RESULT_DEF::RESULT_ALMOST_SUCCEED, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex());
+    response_data = this->generatePutSessionDataResponse(RESULT_DEF::RESULT_ALMOST_SUCCEED, ajax_id_val, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex());
     return response_data;
 }
 
 char *DFabricClass::generatePutSessionDataResponse (
     char const *result_val,
+    char *ajax_id_val,
     char const *link_id_index_val,
     char const *session_id_index_val)
 {
@@ -1031,15 +1020,16 @@ char *DFabricClass::processGetSessionDataRequest (
 
     char *data = session_val->dequeuePendingData();
     if (data) {
-        return this->generateGetSessionDataResponse(RESULT_DEF::RESULT_SUCCEED, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex(), data);
+        return this->generateGetSessionDataResponse(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex(), data);
     }
     else {
-        return this->generateGetSessionDataResponse(RESULT_DEF::RESULT_SESSION_DATA_NOT_AVAILABLE, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex(), "");
+        return this->generateGetSessionDataResponse(RESULT_DEF::RESULT_SESSION_DATA_NOT_AVAILABLE, ajax_id_val, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex(), "");
     }
 }
 
 char *DFabricClass::generateGetSessionDataResponse (
     char const *result_val,
+    char *ajax_id_val,
     char const *link_id_index_val,
     char const *session_id_index_val,
     char const *data_val)
