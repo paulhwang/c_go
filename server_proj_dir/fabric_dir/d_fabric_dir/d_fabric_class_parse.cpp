@@ -36,22 +36,9 @@ void DFabricClass::exportedParseFunction (
     char *current_ptr = &data_val[3];
 
     char ajax_id[SIZE_DEF::AJAX_ID_SIZE + 1];
-    switch (device_type) {
-        case FE_DEF::FE_DEVICE_TYPE_NODEJS:
-            memcpy(ajax_id, current_ptr, SIZE_DEF::AJAX_ID_SIZE);
-            ajax_id[SIZE_DEF::AJAX_ID_SIZE] = 0;
-            current_ptr += SIZE_DEF::AJAX_ID_SIZE;
-            break;
-
-        case FE_DEF::FE_DEVICE_TYPE_IPHONE:
-        case FE_DEF::FE_DEVICE_TYPE_ANDROID:
-            strcpy(ajax_id, "***");
-            break;
-
-        default:
-            phwangAbendS("DFabricClass::exportedParseFunction", "bad_device");
-            break;
-    }
+    memcpy(ajax_id, current_ptr, SIZE_DEF::AJAX_ID_SIZE);
+    ajax_id[SIZE_DEF::AJAX_ID_SIZE] = 0;
+    current_ptr += SIZE_DEF::AJAX_ID_SIZE;
 
     if (command != FE_DEF::FE_GET_LINK_DATA_COMMAND) {
         phwangDebugS(true, "DFabricClass::exportedParseFunction", data_val);
