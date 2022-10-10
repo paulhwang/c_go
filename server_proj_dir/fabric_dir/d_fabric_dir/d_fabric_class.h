@@ -45,15 +45,20 @@ class DFabricClass {
         char const *result_val,
         char const *data_val);
 
-    char *processRegisterRequest (char *data_val);
+    char *processRegisterRequest (
+        char *ajax_id_val,
+        char *data_val);
+
     char *generateRegisterResponse (
         char const *result_val,
         char const *account_name_val);
 
     char *processLoginRequest (
+        char *ajax_id_val,
         char *data_val,
         char device_type_val,
         void *port_object_val);
+
     char *generateLoginResponse (
         char const *result_val,
         char const *link_id_index_val,
@@ -61,7 +66,9 @@ class DFabricClass {
 
     char *processLogoutRequest (
         LinkClass *link_val,
+        char *ajax_id_val,
         char *data_val);
+
     char *generateLogoutResponse (
         char const *result_val,
         char const *link_id_index_val,
@@ -77,7 +84,9 @@ class DFabricClass {
 
     char *processGetNameListRequest (
         LinkClass *link_val,
+        char *ajax_id_val,
         char *data_val);
+
     char *generateGetNameListResponse (
         char const *result_val,
         char const *link_id_index_val,
@@ -85,8 +94,9 @@ class DFabricClass {
 
     char *processSetupSessionRequest (
         LinkClass *link_val,
-        char *data_val,
-        char *ajax_id_val);
+        char *ajax_id_val,
+        char *data_val);
+
     char *generateSetupSessionResponse (
         char const *result_val,
         char const *link_id_index_val,
@@ -95,7 +105,9 @@ class DFabricClass {
 
     char *processSetupSession2Request (
         SessionClass *session_val,
+        char *ajax_id_val,
         char *data_val);
+
     char *generateSetupSession2Response (
         char const *result_val,
         char const *link_id_index_val,
@@ -105,13 +117,17 @@ class DFabricClass {
 
     char *processSetupSession3Request (
         SessionClass *session_val,
+        char *ajax_id_val,
         char *data_val);
+
     char *generateSetupSession3Response (
         char const *result_val,
         SessionClass *session_val);
 
     char *processFreeSessionRequest (
-        SessionClass *session_val);
+        SessionClass *session_val,
+        char *ajax_id_val);
+
     char *generateFreeSessionResponse (
         char const *result_val,
         char const *link_id_index_val,
@@ -119,8 +135,9 @@ class DFabricClass {
 
     char *processPutSessionDataRequest (
         SessionClass *session_val,
-        char *data_val,
-        char *ajax_id_val);
+        char *ajax_id_val,
+        char *data_val);
+
     char *generatePutSessionDataResponse (
         char const *result_val,
         char const *link_id_index_val,
@@ -128,7 +145,9 @@ class DFabricClass {
 
     char *processGetSessionDataRequest (
         SessionClass *session_val,
+        char *ajax_id_val,
         char *data_val);
+
     char *generateGetSessionDataResponse (
         char const *result_val,
         char const *link_id_index_val,

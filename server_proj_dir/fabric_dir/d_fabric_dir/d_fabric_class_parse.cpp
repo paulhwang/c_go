@@ -64,12 +64,12 @@ void DFabricClass::exportedParseFunction (
         case '0':
             switch (command) {
                 case FE_DEF::FE_REGISTER_COMMAND:
-                    response_data = this->processRegisterRequest(current_ptr);
+                    response_data = this->processRegisterRequest(ajax_id, current_ptr);
                     response_data[0] = FE_DEF::FE_REGISTER_RESPONSE;
                     break;
 
                 case FE_DEF::FE_LOGIN_COMMAND:
-                    response_data = this->processLoginRequest(current_ptr, device_type, port_object_val);
+                    response_data = this->processLoginRequest(ajax_id, current_ptr, device_type, port_object_val);
                     response_data[0] = FE_DEF::FE_LOGIN_RESPONSE;
                     break;
 
@@ -94,7 +94,7 @@ void DFabricClass::exportedParseFunction (
 
             switch (command) {
                 case FE_DEF::FE_LOGOUT_COMMAND:
-                    response_data = this->processLogoutRequest(link, current_ptr);
+                    response_data = this->processLogoutRequest(link, ajax_id, current_ptr);
                     response_data[0] = FE_DEF::FE_LOGOUT_RESPONSE;
                     break;
 
@@ -107,12 +107,12 @@ void DFabricClass::exportedParseFunction (
                     break;
 
                 case FE_DEF::FE_GET_NAME_LIST_COMMAND:
-                    response_data = this->processGetNameListRequest(link, current_ptr);
+                    response_data = this->processGetNameListRequest(link, ajax_id, current_ptr);
                     response_data[0] = FE_DEF::FE_GET_NAME_LIST_RESPONSE;
                     break;
 
                 case FE_DEF::FE_SETUP_SESSION_COMMAND:
-                    response_data = this->processSetupSessionRequest(link, current_ptr, ajax_id);
+                    response_data = this->processSetupSessionRequest(link, ajax_id, current_ptr);
                     if (!response_data) {
                         return;
                     }
@@ -135,22 +135,22 @@ void DFabricClass::exportedParseFunction (
 
             switch (command) {
                 case FE_DEF::FE_SETUP_SESSION2_COMMAND:
-                    response_data = this->processSetupSession2Request(session, current_ptr);
+                    response_data = this->processSetupSession2Request(session, ajax_id, current_ptr);
                     response_data[0] = FE_DEF::FE_SETUP_SESSION2_RESPONSE;
                     break;
 
                 case FE_DEF::FE_SETUP_SESSION3_COMMAND:
-                    response_data = this->processSetupSession3Request(session, current_ptr);
+                    response_data = this->processSetupSession3Request(session, ajax_id, current_ptr);
                     response_data[0] = FE_DEF::FE_SETUP_SESSION3_RESPONSE;
                     break;
 
                 case FE_DEF::FE_FREE_SESSION_COMMAND:
-                    this->processFreeSessionRequest(session);
+                    this->processFreeSessionRequest(session, ajax_id);
                     response_data[0] = FE_DEF::FE_FREE_SESSION_RESPONSE;
                     break;
 
                 case FE_DEF::FE_PUT_SESSION_DATA_COMMAND:
-                    response_data = this->processPutSessionDataRequest(session, current_ptr, ajax_id);
+                    response_data = this->processPutSessionDataRequest(session, ajax_id, current_ptr);
                     if (!response_data) {
                         return;
                     }
@@ -158,7 +158,7 @@ void DFabricClass::exportedParseFunction (
                     break;
 
                 case FE_DEF::FE_GET_SESSION_DATA_COMMAND:
-                    response_data = this->processGetSessionDataRequest(session, current_ptr);
+                    response_data = this->processGetSessionDataRequest(session, ajax_id, current_ptr);
                     response_data[0] = FE_DEF::FE_GET_SESSION_DATA_RESPONSE;
                     break;
 
@@ -284,7 +284,9 @@ char *DFabricClass::generateDatagramResponse (
     return response_data;
 }
 
-char *DFabricClass::processRegisterRequest (char *data_val)
+char *DFabricClass::processRegisterRequest (
+    char *ajax_id_val,
+    char *data_val)
 {
     char *response_data;
     phwangDebugS(false, "DFabricClass::processRegisterRequest", data_val);
@@ -361,6 +363,7 @@ char *DFabricClass::generateRegisterResponse (
 }
 
 char *DFabricClass::processLoginRequest (
+    char *ajax_id_val,
     char *data_val,
     char device_type_val,
     void *port_object_val)
@@ -477,6 +480,7 @@ char *DFabricClass::generateLoginResponse (
 
 char *DFabricClass::processLogoutRequest (
     LinkClass *link_val,
+    char *ajax_id_val,
     char *data_val)
 {
     char *response_data;
@@ -630,6 +634,7 @@ char *DFabricClass::generateGetLinkDataResponse (
 
 char *DFabricClass::processGetNameListRequest (
     LinkClass *link_val,
+    char *ajax_id_val,
     char *data_val)
 {
     char *response_data;
@@ -668,8 +673,8 @@ char *DFabricClass::generateGetNameListResponse (
 
 char *DFabricClass::processSetupSessionRequest (
     LinkClass *link_val,
-    char *data_val,
-    char *ajax_id_val)
+    char *ajax_id_val,
+    char *data_val)
 {
     char *response_data = 0;
     phwangDebugSS(true, "DFabricClass::processSetupSessionRequest", "data_val=", data_val);
@@ -789,6 +794,7 @@ void DFabricClass::sendSetupRoomRequestToThemeServer (GroupClass *group_val)
 
 char *DFabricClass::processSetupSession2Request (
     SessionClass *session_val,
+    char *ajax_id_val,
     char *data_val)
 {
     LinkClass *link = session_val->linkObject();
@@ -846,6 +852,7 @@ char *DFabricClass::generateSetupSession2Response (
 
 char *DFabricClass::processSetupSession3Request (
     SessionClass *session_val,
+    char *ajax_id_val,
     char *data_val)
 {
     char *response_data;
@@ -916,7 +923,8 @@ char *DFabricClass::generateSetupSession3Response (
 /* free session */
 
 char *DFabricClass::processFreeSessionRequest (
-    SessionClass *session_val)
+    SessionClass *session_val,
+    char *ajax_id_val)
 {
     LinkClass *link = session_val->linkObject();
     char *response_data;
@@ -951,8 +959,8 @@ char *DFabricClass::generateFreeSessionResponse (
 
 char *DFabricClass::processPutSessionDataRequest (
     SessionClass *session_val,
-    char *data_val,
-    char *ajax_id_val)
+    char *ajax_id_val,
+    char *data_val)
 {
     char *response_data;
     phwangDebugS(true, "DFabricClass::processPutSessionDataRequest", data_val);
@@ -1014,6 +1022,7 @@ void DFabricClass::sendPutSessionDataRequestToThemeServer (
 
 char *DFabricClass::processGetSessionDataRequest (
     SessionClass *session_val,
+    char *ajax_id_val,
     char *data_val)
 {
     phwangDebugS(true, "DFabricClass::processGetSessionDataRequest", data_val);
