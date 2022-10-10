@@ -51,6 +51,7 @@ class DFabricClass {
 
     char *generateRegisterResponse (
         char const *result_val,
+        char *ajax_id_val,
         char const *account_name_val);
 
     char *processLoginRequest (
@@ -61,6 +62,7 @@ class DFabricClass {
 
     char *generateLoginResponse (
         char const *result_val,
+        char *ajax_id_val,
         char const *link_id_index_val,
         char const *account_name_val);
 
@@ -71,12 +73,14 @@ class DFabricClass {
 
     char *generateLogoutResponse (
         char const *result_val,
+        char *ajax_id_val,
         char const *link_id_index_val,
         char const *data_val);
 
     char *processGetLinkDataRequest (
         LinkClass *link_val,
         char *ajax_id_val);
+
     char *generateGetLinkDataResponse (
         char const *result_val,
         char const *link_id_index_val,

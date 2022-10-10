@@ -314,7 +314,7 @@ char *DFabricClass::processRegisterRequest (
         account_entry->setPassword(password);
         account_entry->setEmail(email);
 
-        response_data = generateRegisterResponse(RESULT_DEF::RESULT_SUCCEED, account_name);
+        response_data = generateRegisterResponse(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, account_name);
 
         this->dbAccountObject()->insertAccountEntry(account_entry);
         /***
@@ -328,20 +328,20 @@ char *DFabricClass::processRegisterRequest (
         }
 
     else if (!strcmp(result_buf, RESULT_DEF::RESULT_ACCOUNT_NAME_ALREADY_EXIST)) {
-        response_data = generateRegisterResponse(result_buf, account_name);
+        response_data = generateRegisterResponse(result_buf, ajax_id_val, account_name);
         phwangFree(account_name);
         return response_data;
     }
 
     else if (!strcmp(result_buf, RESULT_DEF::RESULT_DB_SELECT_FAIL)) {
-        response_data = generateRegisterResponse(result_buf, account_name);
+        response_data = generateRegisterResponse(result_buf, ajax_id_val, account_name);
         phwangFree(account_name);
         return response_data;
    }
 
     else {
         phwangAbendSS("DFabricClass::processRegisterRequest", "unsupported_result", result_buf);
-        response_data = generateRegisterResponse(RESULT_DEF::RESULT_DB_ERROR, account_name);
+        response_data = generateRegisterResponse(RESULT_DEF::RESULT_DB_ERROR, ajax_id_val, account_name);
         phwangFree(account_name);
         return response_data;
     }
@@ -349,6 +349,7 @@ char *DFabricClass::processRegisterRequest (
 
 char *DFabricClass::generateRegisterResponse (
     char const *result_val,
+    char *ajax_id_val,
     char const *account_name_val)
 {
     phwangDebugS(false, "DFabricClass::generateRegisterResponse", result_val);
@@ -396,12 +397,12 @@ char *DFabricClass::processLoginRequest (
         if (!link) {
             phwangAbendS("DFabricClass::processLoginRequest", "null_link");
             phwangFree(my_name);
-            response_data = generateLoginResponse(RESULT_DEF::RESULT_NULL_LINK, SIZE_DEF::FAKE_LINK_ID_INDEX, encoded_my_name_buf);
+            response_data = generateLoginResponse(RESULT_DEF::RESULT_NULL_LINK, ajax_id_val, SIZE_DEF::FAKE_LINK_ID_INDEX, encoded_my_name_buf);
             return response_data;
         }
 
         phwangFree(my_name);
-        response_data = generateLoginResponse(RESULT_DEF::RESULT_SUCCEED, link->linkIdIndex(), encoded_my_name_buf);
+        response_data = generateLoginResponse(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, link->linkIdIndex(), encoded_my_name_buf);
         return response_data;
     }
 
@@ -409,14 +410,14 @@ char *DFabricClass::processLoginRequest (
              (!strcmp(result_buf, RESULT_DEF::RESULT_ACCOUNT_NAME_NOT_EXIST)) ||
              (!strcmp(result_buf, RESULT_DEF::RESULT_DB_SELECT_FAIL))) {
         phwangFree(my_name);
-        response_data = generateLoginResponse(result_buf, SIZE_DEF::FAKE_LINK_ID_INDEX, encoded_my_name_buf);
+        response_data = generateLoginResponse(result_buf, ajax_id_val, SIZE_DEF::FAKE_LINK_ID_INDEX, encoded_my_name_buf);
         return response_data;
     }
 
     else {
         phwangAbendSS("DFabricClass::processLoginRequest", "unsupported_result", result_buf);
         phwangFree(my_name);
-        response_data = generateLoginResponse(RESULT_DEF::RESULT_DB_ERROR, SIZE_DEF::FAKE_LINK_ID_INDEX, encoded_my_name_buf);
+        response_data = generateLoginResponse(RESULT_DEF::RESULT_DB_ERROR, ajax_id_val, SIZE_DEF::FAKE_LINK_ID_INDEX, encoded_my_name_buf);
         return response_data;
     }
 
@@ -461,6 +462,7 @@ char *DFabricClass::processLoginRequest (
 
 char *DFabricClass::generateLoginResponse (
     char const *result_val,
+    char *ajax_id_val,
     char const *link_id_index_val,
     char const *account_name_val)
 {
@@ -488,12 +490,13 @@ char *DFabricClass::processLogoutRequest (
 
     this->fabricObject_->freeLink(link_val);
 
-    response_data = generateLogoutResponse(RESULT_DEF::RESULT_SUCCEED, link_val->linkIdIndex(), data_val);
+    response_data = generateLogoutResponse(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, link_val->linkIdIndex(), data_val);
     return response_data;
 }
 
 char *DFabricClass::generateLogoutResponse (
     char const *result_val,
+    char *ajax_id_val,
     char const *link_id_index_val,
     char const *data_val)
 {
@@ -684,7 +687,6 @@ char *DFabricClass::processSetupSessionRequest (
         response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_MALLOC_SESSION_FAIL, link_val->linkIdIndex(), SIZE_DEF::FAKE_SESSION_ID_INDEX, data_val);
         return response_data;
     }
-    //session->setAjaxId(ajax_id_val);
 
     char group_mode = *data_val;
     char theme_type = *(data_val + 1);
