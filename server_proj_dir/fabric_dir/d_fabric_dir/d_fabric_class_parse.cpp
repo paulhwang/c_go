@@ -529,8 +529,9 @@ char *DFabricClass::processGetLinkDataRequest (
                              RESULT_DEF::RESULT_SIZE +
                              SIZE_DEF::LINK_ID_INDEX_SIZE + 
                              1 + SIZE_DEF::NAME_LIST_TAG_SIZE +
-                             1 + FE_DEF::FE_GET_LINK_DATA_PENDING_SESSION_LENGTH_SIZE + pending_session_info2_length +
-                             1 + FE_DEF::FE_GET_LINK_DATA_PENDING_SESSION_LENGTH_SIZE + pending_session_info3_length + 1;
+                             1 + FE_DEF::FE_GET_LINK_DATA_LENGTH_SIZE + pending_session_info2_length +
+                             1 + FE_DEF::FE_GET_LINK_DATA_LENGTH_SIZE + pending_session_info3_length +
+                             1 + SIZE_DEF::SESSION_ID_INDEX_SIZE + 1;
 
 
     char *downlink_data = (char *) phwangMalloc(downlink_data_size, MallocClass::GET_LINK_DATA);
@@ -562,13 +563,10 @@ char *DFabricClass::processGetLinkDataRequest (
                 *current_ptr++ = FE_DEF::FE_GET_LINK_DATA_TYPE_PENDING_DATA;
                 session->enqueuePendingData(pending_downlink_data);
 
-                strcpy(current_ptr, link_val->linkIdIndex());
-                current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE;
-
                 strcpy(current_ptr, session->sessionIdIndex());
                 current_ptr += SIZE_DEF::SESSION_ID_INDEX_SIZE;
 
-                phwangDebugSS(true, "DFabricClass::processGetLinkDataRequest","Pending_downlink_exist=", downlink_data);
+                phwangDebugSS(true, "DFabricClass::processGetLinkDataRequest","Pending_data=", downlink_data);
             }
         }
     }
@@ -576,17 +574,17 @@ char *DFabricClass::processGetLinkDataRequest (
     if (pending_session_info2) {
         *current_ptr++ = FE_DEF::FE_GET_LINK_DATA_TYPE_PENDING_SESSION2;
 
-        char length2_buf[FE_DEF::FE_GET_LINK_DATA_PENDING_SESSION_LENGTH_SIZE + 1];
-        phwangEncodeNumber(length2_buf, pending_session_info2_length, FE_DEF::FE_GET_LINK_DATA_PENDING_SESSION_LENGTH_SIZE);
+        char length2_buf[FE_DEF::FE_GET_LINK_DATA_LENGTH_SIZE + 1];
+        phwangEncodeNumber(length2_buf, pending_session_info2_length, FE_DEF::FE_GET_LINK_DATA_LENGTH_SIZE);
 
-        memcpy(current_ptr, length2_buf, FE_DEF::FE_GET_LINK_DATA_PENDING_SESSION_LENGTH_SIZE);
-        current_ptr += FE_DEF::FE_GET_LINK_DATA_PENDING_SESSION_LENGTH_SIZE;
+        memcpy(current_ptr, length2_buf, FE_DEF::FE_GET_LINK_DATA_LENGTH_SIZE);
+        current_ptr += FE_DEF::FE_GET_LINK_DATA_LENGTH_SIZE;
 
         memcpy(current_ptr, pending_session_info2, pending_session_info2_length);
         current_ptr += pending_session_info2_length;
         *current_ptr = 0;
 
-        phwangDebugSS(true, "DFabricClass::processGetLinkDataRequest", "downlink_data2=", downlink_data);
+        phwangDebugSS(true, "DFabricClass::processGetLinkDataRequest", "pending_session3=", downlink_data);
 
         phwangFree(pending_session_info2);
     }
@@ -594,17 +592,17 @@ char *DFabricClass::processGetLinkDataRequest (
     if (pending_session_info3) {
         *current_ptr++ = FE_DEF::FE_GET_LINK_DATA_TYPE_PENDING_SESSION3;
 
-        char length3_buf[FE_DEF::FE_GET_LINK_DATA_PENDING_SESSION_LENGTH_SIZE + 1];
-        phwangEncodeNumber(length3_buf, pending_session_info3_length, FE_DEF::FE_GET_LINK_DATA_PENDING_SESSION_LENGTH_SIZE);
+        char length3_buf[FE_DEF::FE_GET_LINK_DATA_LENGTH_SIZE + 1];
+        phwangEncodeNumber(length3_buf, pending_session_info3_length, FE_DEF::FE_GET_LINK_DATA_LENGTH_SIZE);
 
-        memcpy(current_ptr, length3_buf, FE_DEF::FE_GET_LINK_DATA_PENDING_SESSION_LENGTH_SIZE);
-        current_ptr += FE_DEF::FE_GET_LINK_DATA_PENDING_SESSION_LENGTH_SIZE;
+        memcpy(current_ptr, length3_buf, FE_DEF::FE_GET_LINK_DATA_LENGTH_SIZE);
+        current_ptr += FE_DEF::FE_GET_LINK_DATA_LENGTH_SIZE;
 
         memcpy(current_ptr, pending_session_info3, pending_session_info3_length);
         current_ptr += pending_session_info3_length;
         *current_ptr = 0;
 
-        phwangDebugSS(true, "DFabricClass::processGetLinkDataRequest", "downlink_data3=", downlink_data);
+        phwangDebugSS(true, "DFabricClass::processGetLinkDataRequest", "pending_session3=", downlink_data);
 
         phwangFree(pending_session_info3);
     }
@@ -980,13 +978,18 @@ char *DFabricClass::generatePutSessionDataResponse (
 
     char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUF_WITH_LINK_SESSION_SIZE, MallocClass::generatePutSessionDataResponse);
     char *current_ptr = &response_data[FABRIC_DEF::FE_DL_COMMAND_AJAX_SIZE];
+
     memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;
+
     memcpy(current_ptr, link_id_index_val, SIZE_DEF::LINK_ID_INDEX_SIZE);
     current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE;
+
     memcpy(current_ptr, session_id_index_val, SIZE_DEF::SESSION_ID_INDEX_SIZE);
     current_ptr += SIZE_DEF::SESSION_ID_INDEX_SIZE;
+
     *current_ptr = 0;
+
     return response_data;
 }
 
