@@ -65,12 +65,10 @@ void DFabricClass::exportedParseFunction (
             switch (command) {
                 case FE_DEF::FE_REGISTER_COMMAND:
                     response_data = this->processRegisterRequest(ajax_id, current_ptr);
-                    response_data[0] = FE_DEF::FE_REGISTER_RESPONSE;
                     break;
 
                 case FE_DEF::FE_LOGIN_COMMAND:
                     response_data = this->processLoginRequest(ajax_id, current_ptr, device_type, port_object_val);
-                    response_data[0] = FE_DEF::FE_LOGIN_RESPONSE;
                     break;
 
                 case FE_DEF::FE_MESSAGE_COMMAND:
@@ -95,20 +93,14 @@ void DFabricClass::exportedParseFunction (
             switch (command) {
                 case FE_DEF::FE_LOGOUT_COMMAND:
                     response_data = this->processLogoutRequest(link, ajax_id, current_ptr);
-                    response_data[0] = FE_DEF::FE_LOGOUT_RESPONSE;
                     break;
 
                 case FE_DEF::FE_GET_LINK_DATA_COMMAND:
                     response_data = this->processGetLinkDataRequest(link, ajax_id);
-                    if (!response_data) {
-                        return;
-                    }
-                    response_data[0] = FE_DEF::FE_GET_LINK_DATA_RESPONSE;
                     break;
 
                 case FE_DEF::FE_GET_NAME_LIST_COMMAND:
                     response_data = this->processGetNameListRequest(link, ajax_id, current_ptr);
-                    response_data[0] = FE_DEF::FE_GET_NAME_LIST_RESPONSE;
                     break;
 
                 case FE_DEF::FE_SETUP_SESSION_COMMAND:
@@ -355,7 +347,13 @@ char *DFabricClass::generateRegisterResponse (
     phwangDebugS(false, "DFabricClass::generateRegisterResponse", result_val);
 
     char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUFFER_SIZE + strlen(account_name_val), MallocClass::generateRegisterResponse);
-    char *current_ptr = &response_data[FABRIC_DEF::FE_DL_COMMAND_AJAX_SIZE];
+    char *current_ptr = response_data;
+
+    *current_ptr++ = FE_DEF::FE_REGISTER_RESPONSE;
+
+    memcpy(current_ptr, ajax_id_val, SIZE_DEF::AJAX_ID_SIZE);
+    current_ptr += SIZE_DEF::AJAX_ID_SIZE;
+
     memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE );
     current_ptr += RESULT_DEF::RESULT_SIZE;
 
@@ -469,7 +467,13 @@ char *DFabricClass::generateLoginResponse (
     phwangDebugS(false, "DFabricClass::generateLoginResponse", result_val);
 
     char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUF_WITH_LINK_SIZE + strlen(account_name_val), MallocClass::generateLoginResponse);
-    char *current_ptr = &response_data[FABRIC_DEF::FE_DL_COMMAND_AJAX_SIZE];
+    char *current_ptr = response_data;
+
+    *current_ptr++ = FE_DEF::FE_LOGIN_RESPONSE;
+
+    memcpy(current_ptr, ajax_id_val, SIZE_DEF::AJAX_ID_SIZE);
+    current_ptr += SIZE_DEF::AJAX_ID_SIZE;
+
     memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;
 
@@ -503,7 +507,13 @@ char *DFabricClass::generateLogoutResponse (
     phwangDebugS(false, "DFabricClass::generateLogoutResponse", result_val);
 
     char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUF_WITH_LINK_SIZE + strlen(data_val), MallocClass::generateLogoutResponse);
-    char *current_ptr = &response_data[FABRIC_DEF::FE_DL_COMMAND_AJAX_SIZE];
+    char *current_ptr = response_data;
+
+    *current_ptr++ = FE_DEF::FE_LOGOUT_RESPONSE;
+
+    memcpy(current_ptr, ajax_id_val, SIZE_DEF::AJAX_ID_SIZE);
+    current_ptr += SIZE_DEF::AJAX_ID_SIZE;
+
     memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;
 
@@ -649,12 +659,21 @@ char *DFabricClass::generateGetNameListResponse (
     phwangDebugS(false, "DFabricClass::generateGetNameListResponse", result_val);
 
     char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUF_WITH_LINK_SESSION_SIZE + strlen(data_val), MallocClass::generateGetNameListResponse);
-    char *current_ptr = &response_data[FABRIC_DEF::FE_DL_COMMAND_AJAX_SIZE];
+    char *current_ptr = response_data;
+
+    *current_ptr++ = FE_DEF::FE_GET_NAME_LIST_RESPONSE;
+
+    memcpy(current_ptr, ajax_id_val, SIZE_DEF::AJAX_ID_SIZE);
+    current_ptr += SIZE_DEF::AJAX_ID_SIZE;
+
     memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;
+
     memcpy(current_ptr, link_id_index_val, SIZE_DEF::LINK_ID_INDEX_SIZE);
     current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE;
+
     strcpy(current_ptr, data_val);
+
     return response_data;
 }
 
