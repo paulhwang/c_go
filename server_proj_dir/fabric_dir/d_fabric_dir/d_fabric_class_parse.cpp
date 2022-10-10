@@ -153,18 +153,6 @@ void DFabricClass::exportedParseFunction (
             return;
     }
 
-    switch (device_type) {
-        case FE_DEF::FE_DEVICE_TYPE_NODEJS:
-            memcpy(&response_data[1], ajax_id, SIZE_DEF::AJAX_ID_SIZE);
-            break;
-
-        case FE_DEF::FE_DEVICE_TYPE_IPHONE:
-        case FE_DEF::FE_DEVICE_TYPE_ANDROID:
-            memcpy(&response_data[1], "***", SIZE_DEF::AJAX_ID_SIZE);
-            break;
-        default:
-            break;
-    }
     this->transmitFunction(port_object_val, response_data);
 }
 
