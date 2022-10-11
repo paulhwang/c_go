@@ -59,7 +59,7 @@ class DFabricClass {
         char const *result_val,
         char *ajax_id_val,
         char const *link_id_index_val,
-        char const *account_name_val);
+        char const *encoded_my_name_val);
 
     char *processLogoutRequest (
         LinkClass *link_val,
