@@ -60,7 +60,6 @@ void DFabricClass::exportedParseFunction (
 
                 case FE_DEF::FE_MESSAGE_COMMAND:
                     response_data = this->processDatagramRequest(ajax_id, current_ptr);
-                    response_data[0] = FE_DEF::FE_MESSAGE_RESPONSE;
                     break;
 
                 default:
@@ -1043,7 +1042,7 @@ char *DFabricClass::generateDatagramResponse (
     char *ajax_id_val,
     char const *data_val)
 {
-    phwangDebugSS(false, "DFabricClass::generateDatagramResponse", "data_val=", data_val);
+    phwangDebugSS(true, "DFabricClass::generateDatagramResponse", "data_val=", data_val);
 
     char *encoded_data = phwangEncodeStringMalloc(data_val);
     int encoded_data_length = strlen(encoded_data);
