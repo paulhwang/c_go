@@ -40,11 +40,6 @@ class DFabricClass {
         void *tp_transfer_object_val,
         char const *ajax_id_val);
 
-    char *processDatagramRequest (char *data_val);
-    char *generateDatagramResponse (
-        char const *result_val,
-        char const *data_val);
-
     char *processRegisterRequest (
         char *ajax_id_val,
         char *data_val);
@@ -158,6 +153,15 @@ class DFabricClass {
         char *ajax_id_val,
         char const *link_id_index_val,
         char const *session_id_index_val,
+        char const *data_val);
+
+    char *processDatagramRequest (
+        char *ajax_id_val,
+        char *data_val);
+
+    char *generateDatagramResponse (
+        char const *result_val,
+        char *ajax_id_val,
         char const *data_val);
 
     void sendSetupRoomRequestToThemeServer (GroupClass *group_val);

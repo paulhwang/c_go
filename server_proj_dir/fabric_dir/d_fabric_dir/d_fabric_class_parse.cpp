@@ -59,7 +59,7 @@ void DFabricClass::exportedParseFunction (
                     break;
 
                 case FE_DEF::FE_MESSAGE_COMMAND:
-                    response_data = this->processDatagramRequest(current_ptr);
+                    response_data = this->processDatagramRequest(ajax_id, current_ptr);
                     response_data[0] = FE_DEF::FE_MESSAGE_RESPONSE;
                     break;
 
@@ -175,7 +175,9 @@ void DFabricClass::sendSearchLinkSessionFailResponse (
     this->transmitFunction(port_object_val, downlink_data);
 }
 
-char *DFabricClass::processDatagramRequest (char *input_data_val)
+char *DFabricClass::processDatagramRequest (
+    char *ajax_id_val,
+    char *input_data_val)
 {
     char *response_data;
     phwangDebugS(true, "DFabricClass::processMessageRequest", input_data_val);
@@ -213,12 +215,13 @@ char *DFabricClass::processDatagramRequest (char *input_data_val)
         default:
             break;
     }
-    response_data = generateDatagramResponse(RESULT_DEF::RESULT_SUCCEED, output_data);
+    response_data = generateDatagramResponse(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, output_data);
     return response_data;
 }
 
 char *DFabricClass::generateDatagramResponse (
     char const *result_val,
+    char *ajax_id_val,
     char const *data_val)
 {
     phwangDebugSS(false, "DFabricClass::generateDatagramResponse", "data_val=", data_val);
@@ -227,13 +230,19 @@ char *DFabricClass::generateDatagramResponse (
     int encoded_data_length = strlen(encoded_data);
 
     char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUF_WITH_LINK_SIZE + strlen(encoded_data), MallocClass::generateDatagramResponse);
-    char *current_ptr = &response_data[FABRIC_DEF::FE_DL_COMMAND_AJAX_SIZE];
+    char *current_ptr = response_data;
+
+    *current_ptr++ = FE_DEF::FE_MESSAGE_RESPONSE;
+
+    memcpy(current_ptr, ajax_id_val, SIZE_DEF::AJAX_ID_SIZE);
+    current_ptr += SIZE_DEF::AJAX_ID_SIZE;
 
     memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;
 
     strcpy(current_ptr, encoded_data);
     //current_ptr += encoded_data_length;
+
     phwangFree(encoded_data);
 
     return response_data;
