@@ -33,12 +33,14 @@ class DFabricClass {
     void sendSearchLinkFailResponse (
         char const command_val,
         void *tp_transfer_object_val,
-        char const *ajax_id_val);
+        char const *ajax_id_val,
+        char *data_val);
 
     void sendSearchLinkSessionFailResponse (
         char const command_val,
         void *tp_transfer_object_val,
-        char const *ajax_id_val);
+        char const *ajax_id_val,
+        char *data_val);
 
     char *processRegisterRequest (
         char *ajax_id_val,

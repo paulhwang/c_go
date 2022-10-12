@@ -27,4 +27,5 @@ ListEntryClass::ListEntryClass (void *list_mgr_object)
 
 ListEntryClass::~ListEntryClass (void)
 {
+    this->theListMgrObject->removeEntry(this);
 }

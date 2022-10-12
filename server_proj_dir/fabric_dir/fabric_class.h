@@ -50,7 +50,11 @@ public:
         char device_type_val,
         void *port_object_val);
     void freeLink(LinkClass *link_object_val);
-    LinkClass *searchLink(char *data_val, void *extra_data_val) {return (LinkClass *) phwangListMgrSearchEntry(this->theLinkListMgrObject, data_val, extra_data_val);}
+
+    LinkClass *searchLink(char *data_val, void *extra_data_val) {
+        return (LinkClass *) phwangListMgrSearchEntry(this->theLinkListMgrObject, data_val, extra_data_val);
+    }
+
     LinkClass *searchLinkByName(char *name_val);
     GroupClass *mallocGroup(
         char mode_val,

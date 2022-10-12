@@ -71,7 +71,7 @@ void DFabricClass::exportedParseFunction (
         case '1':
             link = this->fabricObject_->searchLink(current_ptr, data_val);
             if (!link) {
-                this->sendSearchLinkFailResponse(command, port_object_val, ajax_id);
+                this->sendSearchLinkFailResponse(command, port_object_val, ajax_id, current_ptr);
                 return;
             }
             current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE;
@@ -102,7 +102,7 @@ void DFabricClass::exportedParseFunction (
         case '2':
             session = this->fabricObject_->serachLinkAndSession(current_ptr);
             if (!session) {
-                this->sendSearchLinkSessionFailResponse(command, port_object_val, ajax_id);
+                this->sendSearchLinkSessionFailResponse(command, port_object_val, ajax_id, current_ptr);
                 return;
             }
             current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE + SIZE_DEF::SESSION_ID_INDEX_SIZE;
@@ -145,33 +145,45 @@ void DFabricClass::exportedParseFunction (
 void DFabricClass::sendSearchLinkFailResponse (
     char const command_val,
     void *port_object_val,
-    char const *ajax_id_val)
+    char const *ajax_id_val,
+    char *data_val)
 {
-    phwangAbendS("DFabricClass::sendSearchLinkFailResponse", "");
+    phwangDebugS(true, "DFabricClass::sendSearchLinkFailResponse", data_val);
+    phwangAbendS("DFabricClass::sendSearchLinkFailResponse", data_val);
 
-    char *data_ptr;
-    char *downlink_data = data_ptr = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUF_WITH_LINK_SESSION_SIZE, MallocClass::BAD_LINK);
-    *data_ptr++ = command_val;
-    strcpy(data_ptr, ajax_id_val);
-    data_ptr += SIZE_DEF::AJAX_ID_SIZE;
-    strcpy(data_ptr, RESULT_DEF::RESULT_LINK_NOT_EXIST);
-    this->transmitFunction(port_object_val, downlink_data);
+    char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUF_WITH_LINK_SESSION_SIZE, MallocClass::BAD_LINK);
+    char *current_ptr = response_data;
+
+    *current_ptr++ = command_val;
+
+    strcpy(current_ptr, ajax_id_val);
+    current_ptr += SIZE_DEF::AJAX_ID_SIZE;
+
+    strcpy(current_ptr, RESULT_DEF::RESULT_LINK_NOT_EXIST);
+
+    this->transmitFunction(port_object_val, response_data);
 }
 
 void DFabricClass::sendSearchLinkSessionFailResponse (
     char const command_val,
     void *port_object_val,
-    char const *ajax_id_val)
+    char const *ajax_id_val,
+    char *data_val)
 {
-    phwangAbendS("DFabricClass::sendSearchLinkSessionFailResponse", "");
+    phwangDebugS(true, "DFabricClass::sendSearchLinkSessionFailResponse", data_val);
+    phwangAbendS("DFabricClass::sendSearchLinkSessionFailResponse", data_val);
 
-    char *data_ptr;
-    char *downlink_data = data_ptr = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUF_WITH_LINK_SESSION_SIZE, MallocClass::BAD_SESSION);
-    *data_ptr++ = command_val;
-    strcpy(data_ptr, ajax_id_val);
-    data_ptr += SIZE_DEF::AJAX_ID_SIZE;
-    strcpy(data_ptr, RESULT_DEF::RESULT_SESSION_NOT_EXIST);
-    this->transmitFunction(port_object_val, downlink_data);
+    char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUF_WITH_LINK_SESSION_SIZE, MallocClass::BAD_SESSION);
+    char *current_ptr = response_data;
+
+    strcpy(current_ptr, ajax_id_val);
+    current_ptr += SIZE_DEF::AJAX_ID_SIZE;
+
+    *current_ptr++ = command_val;
+
+    strcpy(current_ptr, RESULT_DEF::RESULT_SESSION_NOT_EXIST);
+
+    this->transmitFunction(port_object_val, response_data);
 }
 
 char *DFabricClass::processRegisterRequest (
