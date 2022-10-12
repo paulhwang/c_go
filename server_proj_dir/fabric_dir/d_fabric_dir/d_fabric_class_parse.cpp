@@ -154,7 +154,7 @@ void DFabricClass::sendSearchLinkFailResponse (
     char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUF_WITH_LINK_SESSION_SIZE, MallocClass::BAD_LINK);
     char *current_ptr = response_data;
 
-    *current_ptr++ = command_val;
+    *current_ptr++ = command_val + 32;
 
     strcpy(current_ptr, ajax_id_val);
     current_ptr += SIZE_DEF::AJAX_ID_SIZE;
@@ -179,7 +179,7 @@ void DFabricClass::sendSearchLinkSessionFailResponse (
     strcpy(current_ptr, ajax_id_val);
     current_ptr += SIZE_DEF::AJAX_ID_SIZE;
 
-    *current_ptr++ = command_val;
+    *current_ptr++ = command_val + 32;
 
     strcpy(current_ptr, RESULT_DEF::RESULT_SESSION_NOT_EXIST);
 
