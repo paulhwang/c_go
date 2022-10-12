@@ -30,15 +30,14 @@ void DFabricClass::exportedParseFunction (
     void *port_object_val,
     char *data_val)
 {
-    char device_type = data_val[0];
-    char depth = data_val[1];
-    char command = data_val[2];
-    char *current_ptr = &data_val[3];
-
     char ajax_id[SIZE_DEF::AJAX_ID_SIZE + 1];
-    memcpy(ajax_id, current_ptr, SIZE_DEF::AJAX_ID_SIZE);
+    memcpy(ajax_id, data_val, SIZE_DEF::AJAX_ID_SIZE);
     ajax_id[SIZE_DEF::AJAX_ID_SIZE] = 0;
-    current_ptr += SIZE_DEF::AJAX_ID_SIZE;
+
+    char *current_ptr = data_val + SIZE_DEF::AJAX_ID_SIZE;
+    char depth = current_ptr[0];
+    char command = current_ptr[1];
+    current_ptr += 2;
 
     if (command != FE_DEF::FE_GET_LINK_DATA_COMMAND) {
         phwangDebugS(true, "DFabricClass::exportedParseFunction", data_val);
@@ -55,7 +54,7 @@ void DFabricClass::exportedParseFunction (
                     break;
 
                 case FE_DEF::FE_LOGIN_COMMAND:
-                    response_data = this->processLoginRequest(ajax_id, current_ptr, device_type, port_object_val);
+                    response_data = this->processLoginRequest(ajax_id, current_ptr, 'N', port_object_val);
                     break;
 
                 case FE_DEF::FE_MESSAGE_COMMAND:
