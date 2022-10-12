@@ -389,9 +389,13 @@ char *DFabricClass::processLogoutRequest (
     char *response_data;
     phwangDebugSS(false, "DFabricClass::processLogoutRequest", "link_id=", link_val->linkIdIndex());
 
-    this->fabricObject_->freeLink(link_val);
+    char link_id_index_buf[SIZE_DEF::LINK_ID_INDEX_SIZE + 1];
+    strcpy(link_id_index_buf, link_val->linkIdIndex());
 
-    response_data = generateLogoutResponse(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, link_val->linkIdIndex());
+    this->fabricObject_->freeLink(link_val);
+    link_val = 0;
+
+    response_data = generateLogoutResponse(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, link_id_index_buf);
     return response_data;
 }
 
@@ -424,6 +428,11 @@ char *DFabricClass::processGetLinkDataRequest (
     LinkClass *link_val,
     char *ajax_id_val)
 {
+    phwangDebugS(false, "DFabricClass::processGetLinkDataRequest", "");
+    if (!link_val) {
+        phwangAbendS("DFabricClass::processGetLinkDataRequest", "null link");
+    }
+
     link_val->resetKeepAliveTime();
 
     char *pending_session_info2 = link_val->getPendingSessionSetup2();
