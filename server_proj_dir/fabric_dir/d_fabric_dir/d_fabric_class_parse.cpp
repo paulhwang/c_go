@@ -391,19 +391,18 @@ char *DFabricClass::processLogoutRequest (
 
     this->fabricObject_->freeLink(link_val);
 
-    response_data = generateLogoutResponse(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, link_val->linkIdIndex(), data_val);
+    response_data = generateLogoutResponse(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, link_val->linkIdIndex());
     return response_data;
 }
 
 char *DFabricClass::generateLogoutResponse (
     char const *result_val,
     char *ajax_id_val,
-    char const *link_id_index_val,
-    char const *data_val)
+    char const *link_id_index_val)
 {
     phwangDebugS(false, "DFabricClass::generateLogoutResponse", result_val);
 
-    char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUF_WITH_LINK_SIZE + strlen(data_val), MallocClass::generateLogoutResponse);
+    char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUF_WITH_LINK_SIZE, MallocClass::generateLogoutResponse);
     char *current_ptr = response_data;
 
     memcpy(current_ptr, ajax_id_val, SIZE_DEF::AJAX_ID_SIZE);
@@ -417,7 +416,7 @@ char *DFabricClass::generateLogoutResponse (
     memcpy(current_ptr, link_id_index_val, SIZE_DEF::LINK_ID_INDEX_SIZE);
     current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE;
 
-    strcpy(current_ptr, data_val);
+    *current_ptr = 0;
     return response_data;
 }
 

@@ -69,8 +69,7 @@ class DFabricClass {
     char *generateLogoutResponse (
         char const *result_val,
         char *ajax_id_val,
-        char const *link_id_index_val,
-        char const *data_val);
+        char const *link_id_index_val);
 
     char *processGetLinkDataRequest (
         LinkClass *link_val,
