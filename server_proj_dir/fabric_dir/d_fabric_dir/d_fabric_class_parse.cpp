@@ -33,8 +33,17 @@ void DFabricClass::exportedParseFunction (
     char ajax_id[SIZE_DEF::AJAX_ID_SIZE + 1];
     memcpy(ajax_id, data_val, SIZE_DEF::AJAX_ID_SIZE);
     ajax_id[SIZE_DEF::AJAX_ID_SIZE] = 0;
-
     char *current_ptr = data_val + SIZE_DEF::AJAX_ID_SIZE;
+
+    if (*current_ptr == '{') {
+        if (memcmp(current_ptr, this->timeStampString_, SIZE_DEF::FABRIC_TIME_STAMP_SIZE)) {
+            phwangDebugSS(true, "DFabricClass::exportedParseFunction", " ***time_stamp not match: data=", data_val);
+            phwangAbendSS("DFabricClass::exportedParseFunction", " ***time_stamp not match: data=", data_val);
+            return;
+        }
+        current_ptr += SIZE_DEF::FABRIC_TIME_STAMP_SIZE;
+    }
+
     char depth = current_ptr[0];
     char command = current_ptr[1];
     current_ptr += 2;
