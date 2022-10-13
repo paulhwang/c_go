@@ -72,7 +72,7 @@ public:
     int const static LinkClass = 14;
     int const static sendSetupSessionResponse = 15;
     int const static sendPutSessionDataResponse = 16;
-
+    int const static exportedNetAcceptFunction = 17;
     int const static MAX_INDEX = 20;
 
     void *phwangMalloc(int size_val, int who_val);
