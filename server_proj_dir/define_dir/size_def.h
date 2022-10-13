@@ -10,7 +10,7 @@
 
 class SIZE_DEF {
 public:
-    int const static FABRIC_TIME_STAMP_SIZE = 8;
+    int const static FABRIC_TIME_STAMP_SIZE = 10;
 
     int const static AJAX_ID_SIZE = 3;
 

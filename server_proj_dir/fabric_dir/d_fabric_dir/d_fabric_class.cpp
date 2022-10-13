@@ -67,7 +67,11 @@ void DFabricClass::startNetServer (void)
 void DFabricClass::setTimeStampString (void)
 {
     time_t seconds = time(NULL);
-    int time_stamp = (int) ((seconds - 1642858200) / 60);
-    phwangEncodeNumber(this->timeStampString_, time_stamp, SIZE_DEF::FABRIC_TIME_STAMP_SIZE);
-    phwangDebugS(false, "DFabricClass::setTimeStampString", this->timeStampString());
+    int time_stamp = (int) ((seconds - 1665633362) / 60);
+    this->timeStampString_[0] = '{';
+    phwangEncodeNumber(&this->timeStampString_[1], time_stamp, SIZE_DEF::FABRIC_TIME_STAMP_SIZE - 2);
+    this->timeStampString_[SIZE_DEF::FABRIC_TIME_STAMP_SIZE - 1] = '}';
+    this->timeStampString_[SIZE_DEF::FABRIC_TIME_STAMP_SIZE] = 0;
+
+    phwangDebugS(true, "DFabricClass::setTimeStampString", this->timeStampString());
 }
