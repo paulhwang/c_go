@@ -374,7 +374,7 @@ char *DFabricClass::generateLoginResponse (
 {
     phwangDebugS(false, "DFabricClass::generateLoginResponse", result_val);
 
-    char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUF_WITH_LINK_SIZE + strlen(encoded_my_name_val), MallocClass::generateLoginResponse);
+    char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUF_WITH_LINK_SIZE + SIZE_DEF::FABRIC_TIME_STAMP_SIZE + strlen(encoded_my_name_val), MallocClass::generateLoginResponse);
     char *current_ptr = response_data;
 
     memcpy(current_ptr, ajax_id_val, SIZE_DEF::AJAX_ID_SIZE);
@@ -387,6 +387,9 @@ char *DFabricClass::generateLoginResponse (
 
     memcpy(current_ptr, link_id_index_val, SIZE_DEF::LINK_ID_INDEX_SIZE);
     current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE;
+
+    memcpy(current_ptr, this->timeStampString_, SIZE_DEF::FABRIC_TIME_STAMP_SIZE);
+    current_ptr += SIZE_DEF::FABRIC_TIME_STAMP_SIZE;
 
     strcpy(current_ptr, encoded_my_name_val);
     return response_data;
