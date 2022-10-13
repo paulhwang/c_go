@@ -7,26 +7,25 @@
 #pragma once
 
 #include <pthread.h>
+#include "../../define_dir/size_def.h"
 #include "../fabric_class.h"
 
 class FabricClass;
 class DbAccountClass;
 
-#define FABRIC_SERVER_TIME_STAMP_LENGTH_SIZE 8
-
 class DFabricClass {
     char const *objectName(void) {return "DFabricClass";}
 
-    FabricClass *fabricObject_;
-    void *tcpServerObject_;
-    void *portObject_;
-    char theTimeStampString[FABRIC_SERVER_TIME_STAMP_LENGTH_SIZE + 16];
+    FabricClass *fabricObj_;
+    void *tcpServerObj_;
+    void *portObj_;
+    char timeStampString_[SIZE_DEF::FABRIC_TIME_STAMP_SIZE + 1];
 
-    DbClass *dbObject(void) {return fabricObject_->dbObject();}
+    DbClass *dbObject(void) {return fabricObj_->dbObject();}
     DbAccountClass *dbAccountObject(void);
-    MessengerClass *messengerObject(void) {return this->fabricObject_->messengerObject();}
+    MessengerClass *messengerObject(void) {return this->fabricObj_->messengerObject();}
 
-    char *timeStampString(void) {return this->theTimeStampString;}
+    char *timeStampString(void) {return this->timeStampString_;}
     void setTimeStampString(void);
     void startNetServer(void);
 

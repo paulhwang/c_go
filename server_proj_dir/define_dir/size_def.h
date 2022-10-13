@@ -10,6 +10,14 @@
 
 class SIZE_DEF {
 public:
+    int const static FABRIC_TIME_STAMP_SIZE = 8;
+
+    int const static AJAX_ID_SIZE = 3;
+
+    int const static NAME_LIST_TAG_SIZE = 3;
+    int const static NAME_LIST_TAG_MAX_VALUE = 999;
+    int const static NAME_LIST_BUFFER_SIZE = PortClass::RECEIVE_BUFFER_SIZE;
+
     char const static *FAKE_LINK_ID_INDEX;
     int const static LINK_ID_INITIAL_VALUE = 1000;
     int const static LINK_ID_SIZE = 4;
@@ -36,10 +44,4 @@ public:
     int const static BASE_ID_SIZE = 4;
     int const static BASE_INDEX_SIZE = 4;
     int const static BASE_ID_INDEX_SIZE = BASE_ID_SIZE + BASE_INDEX_SIZE;
-
-    int const static NAME_LIST_TAG_SIZE = 3;
-    int const static NAME_LIST_TAG_MAX_VALUE = 999;
-    int const static NAME_LIST_BUFFER_SIZE = PortClass::RECEIVE_BUFFER_SIZE;
-
-    int const static AJAX_ID_SIZE = 3;
 };
