@@ -102,7 +102,8 @@ void FabricClass::freeLink (LinkClass *link_object_val)
         phwangAbendS("FabricClass::freeLink", "bad name 000");
     }
 
-    link_object_val->~LinkClass();
+    delete link_object_val;
+    //link_object_val->~LinkClass();
 
     if (strcmp(((ListMgrClass *) this->linkListMgrObject())->objectName(), "ListMgrClass")) {
         phwangAbendS("FabricClass::freeLink", "bad name 111");
