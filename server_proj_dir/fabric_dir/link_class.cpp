@@ -38,6 +38,8 @@ LinkClass::LinkClass (
 
 LinkClass::~LinkClass (void)
 {
+    phwangDebugSS(false, "LinkClass::~LinkClass", "linkIdIndex=", this->linkIdIndex());
+
     phwangFreeQueue(this->pendingSessionSetupQueue2_, "LinkClass::~LinkClass(2)");
     phwangFreeQueue(this->pendingSessionSetupQueue3_, "LinkClass::~LinkClass(3)");
     phwangFree(this->myName_);

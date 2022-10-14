@@ -27,5 +27,6 @@ ListEntryClass::ListEntryClass (void *list_mgr_object)
 
 ListEntryClass::~ListEntryClass (void)
 {
+    phwangDebugS(false, "ListEntryClass::~ListEntryClass", "before");
     this->theListMgrObject->removeEntry(this);
 }
