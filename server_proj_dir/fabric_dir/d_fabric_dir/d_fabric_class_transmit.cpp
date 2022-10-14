@@ -9,11 +9,11 @@
 #include "../../define_dir/size_def.h"
 #include "d_fabric_class.h"
 
-void DFabricClass::transmitFunction (void *port_object_val, char *data_val)
+void DFabricClass::transmitData (void *port_obj_val, char *data_val)
 {
     if ((data_val[SIZE_DEF::AJAX_ID_SIZE] != FE_DEF::FE_GET_LINK_DATA_RESPONSE) || (strlen(data_val) > 18)) {
-      phwangDebugS(true, "DFabricClass::transmitFunction", data_val);
+      phwangDebugS(true, "DFabricClass::transmitData", data_val);
     }
 
-    phwangPortTransmit(port_object_val, data_val);
+    phwangPortTransmit(port_obj_val, data_val);
 }

@@ -28,18 +28,18 @@ DFabricClass::~DFabricClass (void)
 {
 }
 
-void dFabricTpServerAcceptFunction (void *d_fabric_object_val, void *port_object_val) {
+void dFabricTcoAcceptFunc (void *d_fabric_object_val, void *port_object_val) {
     if (!port_object_val) {
-        phwangAbendS("Golbal::dFabricTpServerAcceptFunction", "null port_object_val");
+        phwangAbendS("Golbal::dFabricTcoAcceptFunc", "null port_object_val");
     }
 
-    ((DFabricClass *) d_fabric_object_val)->exportedNetAcceptFunction(port_object_val);
+    ((DFabricClass *) d_fabric_object_val)->tcpAccept(port_object_val);
 }
 
-void DFabricClass::exportedNetAcceptFunction (void *port_obj_val)
+void DFabricClass::tcpAccept (void *port_obj_val)
 {
     if (!port_obj_val) {
-        phwangAbendS("DFabricClass::exportedNetAcceptFunction", "null port_obj_val");
+        phwangAbendS("DFabricClass::tcpAccept", "null port_obj_val");
         return;
     }
     this->portObj_ = port_obj_val;
@@ -55,13 +55,13 @@ void dFabricTpReceiveDataFunction (void *port_obj_val, void *d_fabric_obj_val, v
     //    phwangDebugSSI(true, "Golbal::dFabricTpReceiveDataFunction", (char *) data_val, "index", phwangGetPortObjectIndex(port_obj_val));
     //}
 
-    ((DFabricClass *) d_fabric_obj_val)->exportedParseFunction(port_obj_val, (char *) data_val);
+    ((DFabricClass *) d_fabric_obj_val)->parseInput(port_obj_val, (char *) data_val);
     phwangFree(data_val);
 }
 
 void DFabricClass::startNetServer (void)
 {
-    this->tcpServerObj_ = phwangMallocTpServer(this, TcpPortDefine::FABRIC_NODEJS_PORT_NUMER, dFabricTpServerAcceptFunction, this, dFabricTpReceiveDataFunction, this, this->objectName());
+    this->tcpServerObj_ = phwangMallocTpServer(this, TcpPortDefine::FABRIC_NODEJS_PORT_NUMER, dFabricTcoAcceptFunc, this, dFabricTpReceiveDataFunction, this, this->objectName());
 }
 
 void DFabricClass::setTimeStampString (void)

@@ -26,8 +26,8 @@ DbAccountClass *DFabricClass::dbAccountObject(void) {
     return fabricObj_->dbObject()->dbAccountObject();
 }
 
-void DFabricClass::exportedParseFunction (
-    void *port_object_val,
+void DFabricClass::parseInput (
+    void *port_obj_val,
     char *data_val)
 {
     char ajax_id[SIZE_DEF::AJAX_ID_SIZE + 1];
@@ -37,8 +37,8 @@ void DFabricClass::exportedParseFunction (
 
     if (*current_ptr == '{') {
         if (memcmp(current_ptr, this->timeStampString_, SIZE_DEF::FABRIC_TIME_STAMP_SIZE)) {
-            phwangDebugSS(true, "DFabricClass::exportedParseFunction", " ***time_stamp not match: data=", data_val);
-            phwangAbendSS("DFabricClass::exportedParseFunction", " ***time_stamp not match: data=", data_val);
+            phwangDebugSS(true, "DFabricClass::parseInput", " ***time_stamp not match: data=", data_val);
+            phwangAbendSS("DFabricClass::parseInput", " ***time_stamp not match: data=", data_val);
             return;
         }
         current_ptr += SIZE_DEF::FABRIC_TIME_STAMP_SIZE;
@@ -49,7 +49,7 @@ void DFabricClass::exportedParseFunction (
     current_ptr += 2;
 
     if (command != FE_DEF::FE_GET_LINK_DATA_COMMAND) {
-        phwangDebugS(true, "DFabricClass::exportedParseFunction", data_val);
+        phwangDebugS(true, "DFabricClass::parseInput", data_val);
     }
 
     LinkClass *link;
@@ -63,7 +63,7 @@ void DFabricClass::exportedParseFunction (
                     break;
 
                 case FE_DEF::FE_LOGIN_COMMAND:
-                    response_data = this->processLoginRequest(ajax_id, current_ptr, 'N', port_object_val);
+                    response_data = this->processLoginRequest(ajax_id, current_ptr, 'N', port_obj_val);
                     break;
 
                 case FE_DEF::FE_MESSAGE_COMMAND:
@@ -71,7 +71,8 @@ void DFabricClass::exportedParseFunction (
                     break;
 
                 default:
-                    phwangAbendS("DFabricClass::exportedParseFunction_0", current_ptr);
+                    printf("comand=%c\n", command);
+                    phwangAbendS("DFabricClass::parseInput_0", current_ptr);
                     return;
             }
             break;
@@ -79,7 +80,7 @@ void DFabricClass::exportedParseFunction (
         case '1':
             link = this->fabricObj_->searchLink(current_ptr, data_val);
             if (!link) {
-                this->sendSearchLinkFailResponse(command, port_object_val, ajax_id, current_ptr);
+                this->sendSearchLinkFailResponse(command, port_obj_val, ajax_id, current_ptr);
                 return;
             }
             current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE;
@@ -102,7 +103,7 @@ void DFabricClass::exportedParseFunction (
                     break;
 
                 default:
-                    phwangAbendS("DFabricClass::exportedParseFunction_1", data_val);
+                    phwangAbendS("DFabricClass::parseInput_1", data_val);
                     return;
             }
             break;
@@ -110,7 +111,7 @@ void DFabricClass::exportedParseFunction (
         case '2':
             session = this->fabricObj_->serachLinkAndSession(current_ptr);
             if (!session) {
-                this->sendSearchLinkSessionFailResponse(command, port_object_val, ajax_id, current_ptr);
+                this->sendSearchLinkSessionFailResponse(command, port_obj_val, ajax_id, current_ptr);
                 return;
             }
             current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE + SIZE_DEF::SESSION_ID_INDEX_SIZE;
@@ -137,17 +138,17 @@ void DFabricClass::exportedParseFunction (
                     break;
 
                 default:
-                    phwangAbendS("DFabricClass::exportedParseFunction_2", data_val);
+                    phwangAbendS("DFabricClass::parseInput_2", data_val);
                     return;
             }
             break;
 
         default:
-            phwangAbendS("DFabricClass::exportedParseFunction", "bad type");
+            phwangAbendS("DFabricClass::parseInput", "bad type");
             return;
     }
 
-    this->transmitFunction(port_object_val, response_data);
+    this->transmitData(port_obj_val, response_data);
 }
 
 void DFabricClass::sendSearchLinkFailResponse (
@@ -169,7 +170,7 @@ void DFabricClass::sendSearchLinkFailResponse (
 
     strcpy(current_ptr, RESULT_DEF::RESULT_LINK_NOT_EXIST);
 
-    this->transmitFunction(port_object_val, response_data);
+    this->transmitData(port_object_val, response_data);
 }
 
 void DFabricClass::sendSearchLinkSessionFailResponse (
@@ -191,7 +192,7 @@ void DFabricClass::sendSearchLinkSessionFailResponse (
 
     strcpy(current_ptr, RESULT_DEF::RESULT_SESSION_NOT_EXIST);
 
-    this->transmitFunction(port_object_val, response_data);
+    this->transmitData(port_object_val, response_data);
 }
 
 char *DFabricClass::processRegisterRequest (

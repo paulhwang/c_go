@@ -168,14 +168,13 @@ class DFabricClass {
     void sendPutSessionDataRequestToThemeServer (
         char const *room_id_index_val,
         char const *data_val);
-   
+
+    void transmitData(void *port_obj_val, char *data_val);
+
 public:
-    DFabricClass(FabricClass *fabric_object_val);
+    DFabricClass(FabricClass *port_obj_val);
     ~DFabricClass(void);
 
-    void transmitFunction(void *port_object_val, char *data_val);
-
-    /* exports */
-    void exportedNetAcceptFunction(void *port_object_val);
-    void exportedParseFunction(void *port_object_val, char *data_val);
+    void tcpAccept(void *port_obj_val);
+    void parseInput(void *port_obj_val, char *data_val);
 };
