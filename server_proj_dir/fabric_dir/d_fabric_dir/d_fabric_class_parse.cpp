@@ -48,7 +48,7 @@ void DFabricClass::parseInput (
     char command = current_ptr[1];
     current_ptr += 2;
 
-    if (command != FE_DEF::FE_GET_LINK_DATA_COMMAND) {
+    if (command != FE_DEF::GET_LINK_DATA_COMMAND) {
         phwangDebugS(true, "DFabricClass::parseInput", data_val);
     }
 
@@ -58,15 +58,15 @@ void DFabricClass::parseInput (
     switch (depth) {
         case '0':
             switch (command) {
-                case FE_DEF::FE_REGISTER_COMMAND:
+                case FE_DEF::REGISTER_COMMAND:
                     response_data = this->processRegisterRequest(ajax_id, current_ptr);
                     break;
 
-                case FE_DEF::FE_LOGIN_COMMAND:
+                case FE_DEF::LOGIN_COMMAND:
                     response_data = this->processLoginRequest(ajax_id, current_ptr, 'N', port_obj_val);
                     break;
 
-                case FE_DEF::FE_MESSAGE_COMMAND:
+                case FE_DEF::MESSAGE_COMMAND:
                     response_data = this->processDatagramRequest(ajax_id, current_ptr);
                     break;
 
@@ -86,19 +86,19 @@ void DFabricClass::parseInput (
             current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE;
 
             switch (command) {
-                case FE_DEF::FE_LOGOUT_COMMAND:
+                case FE_DEF::LOGOUT_COMMAND:
                     response_data = this->processLogoutRequest(link, ajax_id, current_ptr);
                     break;
 
-                case FE_DEF::FE_GET_LINK_DATA_COMMAND:
+                case FE_DEF::GET_LINK_DATA_COMMAND:
                     response_data = this->processGetLinkDataRequest(link, ajax_id);
                     break;
 
-                case FE_DEF::FE_GET_NAME_LIST_COMMAND:
+                case FE_DEF::GET_NAME_LIST_COMMAND:
                     response_data = this->processGetNameListRequest(link, ajax_id, current_ptr);
                     break;
 
-                case FE_DEF::FE_SETUP_SESSION_COMMAND:
+                case FE_DEF::SETUP_SESSION_COMMAND:
                     response_data = this->processSetupSessionRequest(link, ajax_id, current_ptr);
                     break;
 
@@ -117,23 +117,23 @@ void DFabricClass::parseInput (
             current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE + SIZE_DEF::SESSION_ID_INDEX_SIZE;
 
             switch (command) {
-                case FE_DEF::FE_SETUP_SESSION2_COMMAND:
+                case FE_DEF::SETUP_SESSION2_COMMAND:
                     response_data = this->processSetupSession2Request(session, ajax_id, current_ptr);
                     break;
 
-                case FE_DEF::FE_SETUP_SESSION3_COMMAND:
+                case FE_DEF::SETUP_SESSION3_COMMAND:
                     response_data = this->processSetupSession3Request(session, ajax_id, current_ptr);
                     break;
 
-                case FE_DEF::FE_FREE_SESSION_COMMAND:
+                case FE_DEF::FREE_SESSION_COMMAND:
                     response_data = this->processFreeSessionRequest(session, ajax_id);
                     break;
 
-                case FE_DEF::FE_PUT_SESSION_DATA_COMMAND:
+                case FE_DEF::PUT_SESSION_DATA_COMMAND:
                     response_data = this->processPutSessionDataRequest(session, ajax_id, current_ptr);
                     break;
 
-                case FE_DEF::FE_GET_SESSION_DATA_COMMAND:
+                case FE_DEF::GET_SESSION_DATA_COMMAND:
                     response_data = this->processGetSessionDataRequest(session, ajax_id, current_ptr);
                     break;
 
@@ -271,7 +271,7 @@ char *DFabricClass::generateRegisterResponse (
     memcpy(current_ptr, ajax_id_val, SIZE_DEF::AJAX_ID_SIZE);
     current_ptr += SIZE_DEF::AJAX_ID_SIZE;
 
-    *current_ptr++ = FE_DEF::FE_REGISTER_RESPONSE;
+    *current_ptr++ = FE_DEF::REGISTER_RESPONSE;
 
     memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE );
     current_ptr += RESULT_DEF::RESULT_SIZE;
@@ -390,7 +390,7 @@ char *DFabricClass::generateLoginResponse (
     memcpy(current_ptr, ajax_id_val, SIZE_DEF::AJAX_ID_SIZE);
     current_ptr += SIZE_DEF::AJAX_ID_SIZE;
 
-    *current_ptr++ = FE_DEF::FE_LOGIN_RESPONSE;
+    *current_ptr++ = FE_DEF::LOGIN_RESPONSE;
 
     memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;
@@ -436,7 +436,7 @@ char *DFabricClass::generateLogoutResponse (
     memcpy(current_ptr, ajax_id_val, SIZE_DEF::AJAX_ID_SIZE);
     current_ptr += SIZE_DEF::AJAX_ID_SIZE;
 
-    *current_ptr++ = FE_DEF::FE_LOGOUT_RESPONSE;
+    *current_ptr++ = FE_DEF::LOGOUT_RESPONSE;
 
     memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;
@@ -485,7 +485,7 @@ char *DFabricClass::processGetLinkDataRequest (
     memcpy(current_ptr, ajax_id_val, SIZE_DEF::AJAX_ID_SIZE);
     current_ptr += SIZE_DEF::AJAX_ID_SIZE;
 
-    *current_ptr++ = FE_DEF::FE_GET_LINK_DATA_RESPONSE;
+    *current_ptr++ = FE_DEF::GET_LINK_DATA_RESPONSE;
 
     memcpy(current_ptr, RESULT_DEF::RESULT_SUCCEED, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;
@@ -591,7 +591,7 @@ char *DFabricClass::generateGetNameListResponse (
     memcpy(current_ptr, ajax_id_val, SIZE_DEF::AJAX_ID_SIZE);
     current_ptr += SIZE_DEF::AJAX_ID_SIZE;
 
-    *current_ptr++ = FE_DEF::FE_GET_NAME_LIST_RESPONSE;
+    *current_ptr++ = FE_DEF::GET_NAME_LIST_RESPONSE;
 
     memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;
@@ -698,7 +698,7 @@ char *DFabricClass::generateSetupSessionResponse (
     memcpy(current_ptr, ajax_id_val, SIZE_DEF::AJAX_ID_SIZE);
     current_ptr += SIZE_DEF::AJAX_ID_SIZE;
 
-    *current_ptr++ = FE_DEF::FE_SETUP_SESSION_RESPONSE;
+    *current_ptr++ = FE_DEF::SETUP_SESSION_RESPONSE;
 
     memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;
@@ -774,7 +774,7 @@ char *DFabricClass::generateSetupSession2Response (
     memcpy(current_ptr, ajax_id_val, SIZE_DEF::AJAX_ID_SIZE);
     current_ptr += SIZE_DEF::AJAX_ID_SIZE;
 
-    *current_ptr++ = FE_DEF::FE_SETUP_SESSION2_RESPONSE;
+    *current_ptr++ = FE_DEF::SETUP_SESSION2_RESPONSE;
 
     memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;
@@ -828,7 +828,7 @@ char *DFabricClass::generateSetupSession3Response (
     memcpy(current_ptr, ajax_id_val, SIZE_DEF::AJAX_ID_SIZE);
     current_ptr += SIZE_DEF::AJAX_ID_SIZE;
 
-    *current_ptr++ = FE_DEF::FE_SETUP_SESSION3_RESPONSE;
+    *current_ptr++ = FE_DEF::SETUP_SESSION3_RESPONSE;
 
     memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;
@@ -895,7 +895,7 @@ char *DFabricClass::generateFreeSessionResponse (
     memcpy(current_ptr, ajax_id_val, SIZE_DEF::AJAX_ID_SIZE);
     current_ptr += SIZE_DEF::AJAX_ID_SIZE;
 
-    *current_ptr++ = FE_DEF::FE_FREE_SESSION_RESPONSE;
+    *current_ptr++ = FE_DEF::FREE_SESSION_RESPONSE;
 
     memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;
@@ -944,7 +944,7 @@ char *DFabricClass::generatePutSessionDataResponse (
     memcpy(current_ptr, ajax_id_val, SIZE_DEF::AJAX_ID_SIZE);
     current_ptr += SIZE_DEF::AJAX_ID_SIZE;
 
-    *current_ptr++ = FE_DEF::FE_PUT_SESSION_DATA_RESPONSE;
+    *current_ptr++ = FE_DEF::PUT_SESSION_DATA_RESPONSE;
 
     memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;
@@ -1010,7 +1010,7 @@ char *DFabricClass::generateGetSessionDataResponse (
     memcpy(current_ptr, ajax_id_val, SIZE_DEF::AJAX_ID_SIZE);
     current_ptr += SIZE_DEF::AJAX_ID_SIZE;
 
-    *current_ptr++ = FE_DEF::FE_GET_SESSION_DATA_RESPONSE;
+    *current_ptr++ = FE_DEF::GET_SESSION_DATA_RESPONSE;
 
     memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;
@@ -1085,7 +1085,7 @@ char *DFabricClass::generateDatagramResponse (
     memcpy(current_ptr, ajax_id_val, SIZE_DEF::AJAX_ID_SIZE);
     current_ptr += SIZE_DEF::AJAX_ID_SIZE;
 
-    *current_ptr++ = FE_DEF::FE_MESSAGE_RESPONSE;
+    *current_ptr++ = FE_DEF::MESSAGE_RESPONSE;
 
     memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;

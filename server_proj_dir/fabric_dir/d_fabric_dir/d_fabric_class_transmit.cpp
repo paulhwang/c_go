@@ -11,7 +11,7 @@
 
 void DFabricClass::transmitData (void *port_obj_val, char *data_val)
 {
-    if ((data_val[SIZE_DEF::AJAX_ID_SIZE] != FE_DEF::FE_GET_LINK_DATA_RESPONSE) || (strlen(data_val) > 18)) {
+    if ((data_val[SIZE_DEF::AJAX_ID_SIZE] != FE_DEF::GET_LINK_DATA_RESPONSE) || (strlen(data_val) > 18)) {
       phwangDebugS(true, "DFabricClass::transmitData", data_val);
     }
 
