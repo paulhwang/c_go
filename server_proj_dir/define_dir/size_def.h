@@ -24,7 +24,7 @@ public:
     int const static LINK_INDEX_SIZE = 4;
     int const static LINK_II_SIZE = LINK_ID_SIZE + LINK_INDEX_SIZE;
 
-    char const static *FAKE_SESSION_ID_INDEX;
+    char const static *FAKE_SESSION_II;
     int const static SESSION_ID_INITIAL_VALUE = 3000;
     int const static SESSION_ID_SIZE = 4;
     int const static SESSION_INDEX_SIZE = 4;
