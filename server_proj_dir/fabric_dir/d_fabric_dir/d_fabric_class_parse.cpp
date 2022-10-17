@@ -130,7 +130,7 @@ void DFabricClass::parseInput (
                 this->sendSearchLinkSessionFailResponse(command, port_obj_val, ajax_id, current_ptr);
                 return;
             }
-            current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE + SIZE_DEF::SESSION_ID_INDEX_SIZE;
+            current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE + SIZE_DEF::SESSION_II_SIZE;
 
             switch (command) {
                 case FE_DEF::SETUP_SESSION2_COMMAND:
@@ -493,7 +493,7 @@ char *DFabricClass::processGetLinkDataRequest (
                              1 + SIZE_DEF::NAME_LIST_TAG_SIZE +
                              1 + FE_DEF::FE_GET_LINK_DATA_LENGTH_SIZE + pending_session_info2_length +
                              1 + FE_DEF::FE_GET_LINK_DATA_LENGTH_SIZE + pending_session_info3_length +
-                             1 + SIZE_DEF::SESSION_ID_INDEX_SIZE + 1;
+                             1 + SIZE_DEF::SESSION_II_SIZE + 1;
 
     char *response_data = (char *) phwangMalloc(response_data_size, MallocClass::GET_LINK_DATA);
     char *current_ptr = response_data;
@@ -525,7 +525,7 @@ char *DFabricClass::processGetLinkDataRequest (
                 session->enqueuePendingData(pending_downlink_data);
 
                 strcpy(current_ptr, session->sessionIdIndex());
-                current_ptr += SIZE_DEF::SESSION_ID_INDEX_SIZE;
+                current_ptr += SIZE_DEF::SESSION_II_SIZE;
 
                 phwangDebugSS(true, "DFabricClass::processGetLinkDataRequest","Pending_data=", response_data);
             }
@@ -722,8 +722,8 @@ char *DFabricClass::generateSetupSessionResponse (
     memcpy(current_ptr, link_id_index_val, SIZE_DEF::LINK_ID_INDEX_SIZE);
     current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE;
 
-    memcpy(current_ptr, session_id_index_val, SIZE_DEF::SESSION_ID_INDEX_SIZE);
-    current_ptr += SIZE_DEF::SESSION_ID_INDEX_SIZE;
+    memcpy(current_ptr, session_id_index_val, SIZE_DEF::SESSION_II_SIZE);
+    current_ptr += SIZE_DEF::SESSION_II_SIZE;
 
     strcpy(current_ptr, data_val);
     return response_data;
@@ -798,8 +798,8 @@ char *DFabricClass::generateSetupSession2Response (
     memcpy(current_ptr, link_id_index_val, SIZE_DEF::LINK_ID_INDEX_SIZE);
     current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE;
 
-    memcpy(current_ptr, session_id_index_val, SIZE_DEF::SESSION_ID_INDEX_SIZE);
-    current_ptr += SIZE_DEF::SESSION_ID_INDEX_SIZE;
+    memcpy(current_ptr, session_id_index_val, SIZE_DEF::SESSION_II_SIZE);
+    current_ptr += SIZE_DEF::SESSION_II_SIZE;
 
     *current_ptr = theme_type_val;
     current_ptr++;
@@ -852,8 +852,8 @@ char *DFabricClass::generateSetupSession3Response (
     memcpy(current_ptr, link->linkIdIndex(), SIZE_DEF::LINK_ID_INDEX_SIZE);
     current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE;
 
-    memcpy(current_ptr, session_val->sessionIdIndex(), SIZE_DEF::SESSION_ID_INDEX_SIZE);
-    current_ptr += SIZE_DEF::SESSION_ID_INDEX_SIZE;
+    memcpy(current_ptr, session_val->sessionIdIndex(), SIZE_DEF::SESSION_II_SIZE);
+    current_ptr += SIZE_DEF::SESSION_II_SIZE;
 
     *current_ptr++ = group->roomStatus();
     *current_ptr++ = group->mode();
@@ -889,7 +889,7 @@ char *DFabricClass::processFreeSessionRequest (
     char *response_data;
     phwangDebugSSS(true, "DFabricClass::processFreeSessionRequest", "id=", link->linkIdIndex(), session_val->sessionIdIndex());
 
-    char session_id_buf[SIZE_DEF::SESSION_ID_INDEX_SIZE + 1];
+    char session_id_buf[SIZE_DEF::SESSION_II_SIZE + 1];
     strcpy(session_id_buf, session_val->sessionIdIndex());
     link->freeSession(session_val);
 
@@ -968,8 +968,8 @@ char *DFabricClass::generatePutSessionDataResponse (
     memcpy(current_ptr, link_id_index_val, SIZE_DEF::LINK_ID_INDEX_SIZE);
     current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE;
 
-    memcpy(current_ptr, session_id_index_val, SIZE_DEF::SESSION_ID_INDEX_SIZE);
-    current_ptr += SIZE_DEF::SESSION_ID_INDEX_SIZE;
+    memcpy(current_ptr, session_id_index_val, SIZE_DEF::SESSION_II_SIZE);
+    current_ptr += SIZE_DEF::SESSION_II_SIZE;
 
     *current_ptr = 0;
 
@@ -1034,8 +1034,8 @@ char *DFabricClass::generateGetSessionDataResponse (
     memcpy(current_ptr, link_id_index_val, SIZE_DEF::LINK_ID_INDEX_SIZE);
     current_ptr += SIZE_DEF::LINK_ID_INDEX_SIZE;
 
-    memcpy(current_ptr, session_id_index_val, SIZE_DEF::SESSION_ID_INDEX_SIZE);
-    current_ptr += SIZE_DEF::SESSION_ID_INDEX_SIZE;
+    memcpy(current_ptr, session_id_index_val, SIZE_DEF::SESSION_II_SIZE);
+    current_ptr += SIZE_DEF::SESSION_II_SIZE;
 
     strcpy(current_ptr, data_val);
     return response_data;

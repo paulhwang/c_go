@@ -28,7 +28,7 @@ public:
     int const static SESSION_ID_INITIAL_VALUE = 3000;
     int const static SESSION_ID_SIZE = 4;
     int const static SESSION_INDEX_SIZE = 4;
-    int const static SESSION_ID_INDEX_SIZE = SESSION_ID_SIZE + SESSION_INDEX_SIZE;
+    int const static SESSION_II_SIZE = SESSION_ID_SIZE + SESSION_INDEX_SIZE;
 
     int const static GROUP_ID_INITIAL_VALUE = 5000;
     int const static GROUP_ID_SIZE = 4;
