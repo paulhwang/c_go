@@ -150,5 +150,5 @@ SessionClass *FabricClass::serachLinkAndSession (char *data_val)
         return 0;
     }
 
-    return link->searchSession(data_val + SIZE_DEF::LINK_ID_INDEX_SIZE);
+    return link->searchSession(data_val + SIZE_DEF::LINK_II_SIZE);
 }

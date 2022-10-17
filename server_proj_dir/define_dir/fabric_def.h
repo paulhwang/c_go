@@ -15,7 +15,7 @@ public:
     /* downlink data buffer size */
     int const static DL_AJAX_COMMAND_SIZE = SIZE_DEF::AJAX_ID_SIZE + FE_DEF::FE_COMMAND_SIZE;
     int const static DL_ACR_BUF_SIZE = DL_AJAX_COMMAND_SIZE + RESULT_DEF::RESULT_SIZE + 1;
-    int const static DL_ACRL_BUF_SIZE = DL_ACR_BUF_SIZE + SIZE_DEF::LINK_ID_INDEX_SIZE;
+    int const static DL_ACRL_BUF_SIZE = DL_ACR_BUF_SIZE + SIZE_DEF::LINK_II_SIZE;
     int const static DL_ACRLS_BUF_SIZE = DL_ACRL_BUF_SIZE + SIZE_DEF::SESSION_II_SIZE;
 
     /* uplink data buffer size */
