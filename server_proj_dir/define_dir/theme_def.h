@@ -19,7 +19,7 @@ public:
     int const static DL_CRGM_BUF_SIZE = DL_CRG_BUF_SIZE + SIZE_DEF::ROOM_II_SIZE;
 
     /* uplink data buffer size */
-    int const static TE_UL_BUFFER_SIZE = TE_DEF::TE_COMMAND_SIZE + 1;
-    int const static TE_UL_BUF_WITH_ROOM_SIZE  = TE_UL_BUFFER_SIZE + SIZE_DEF::ROOM_II_SIZE;
-    int const static TE_UL_BUF_WITH_BASE_SIZE  = TE_UL_BUFFER_SIZE + SIZE_DEF::BASE_II_SIZE;
+    int const static UL_C_BUF_SIZE = TE_DEF::TE_COMMAND_SIZE + 1;
+    int const static UL_CR_BUF_SIZE  = UL_C_BUF_SIZE + SIZE_DEF::ROOM_II_SIZE;
+    int const static UL_CB_BUF_SIZE  = UL_C_BUF_SIZE + SIZE_DEF::BASE_II_SIZE;
 };
