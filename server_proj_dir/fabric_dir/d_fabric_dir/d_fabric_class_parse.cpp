@@ -329,7 +329,7 @@ char *DFabricClass::processLoginRequest (
         if (!link) {
             phwangAbendS("DFabricClass::processLoginRequest", "null_link");
             phwangFree(my_name);
-            response_data = generateLoginResponse(RESULT_DEF::RESULT_NULL_LINK, ajax_id_val, SIZE_DEF::FAKE_LINK_ID_INDEX, encoded_my_name_buf);
+            response_data = generateLoginResponse(RESULT_DEF::RESULT_NULL_LINK, ajax_id_val, SIZE_DEF::FAKE_LINK_II, encoded_my_name_buf);
             return response_data;
         }
 
@@ -342,14 +342,14 @@ char *DFabricClass::processLoginRequest (
              (!strcmp(result_buf, RESULT_DEF::RESULT_ACCOUNT_NAME_NOT_EXIST)) ||
              (!strcmp(result_buf, RESULT_DEF::RESULT_DB_SELECT_FAIL))) {
         phwangFree(my_name);
-        response_data = generateLoginResponse(result_buf, ajax_id_val, SIZE_DEF::FAKE_LINK_ID_INDEX, encoded_my_name_buf);
+        response_data = generateLoginResponse(result_buf, ajax_id_val, SIZE_DEF::FAKE_LINK_II, encoded_my_name_buf);
         return response_data;
     }
 
     else {
         phwangAbendSS("DFabricClass::processLoginRequest", "unsupported_result", result_buf);
         phwangFree(my_name);
-        response_data = generateLoginResponse(RESULT_DEF::RESULT_DB_ERROR, ajax_id_val, SIZE_DEF::FAKE_LINK_ID_INDEX, encoded_my_name_buf);
+        response_data = generateLoginResponse(RESULT_DEF::RESULT_DB_ERROR, ajax_id_val, SIZE_DEF::FAKE_LINK_II, encoded_my_name_buf);
         return response_data;
     }
 

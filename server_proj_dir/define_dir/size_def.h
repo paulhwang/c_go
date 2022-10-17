@@ -18,7 +18,7 @@ public:
     int const static NAME_LIST_TAG_MAX_VALUE = 999;
     int const static NAME_LIST_BUFFER_SIZE = PortClass::RECEIVE_BUFFER_SIZE;
 
-    char const static *FAKE_LINK_ID_INDEX;
+    char const static *FAKE_LINK_II;
     int const static LINK_ID_INITIAL_VALUE = 1000;
     int const static LINK_ID_SIZE = 4;
     int const static LINK_INDEX_SIZE = 4;
