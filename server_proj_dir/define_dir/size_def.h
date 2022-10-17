@@ -43,5 +43,5 @@ public:
     int const static BASE_ID_INITIAL_VALUE = 9000;
     int const static BASE_ID_SIZE = 4;
     int const static BASE_INDEX_SIZE = 4;
-    int const static BASE_ID_INDEX_SIZE = BASE_ID_SIZE + BASE_INDEX_SIZE;
+    int const static BASE_II_SIZE = BASE_ID_SIZE + BASE_INDEX_SIZE;
 };

@@ -21,5 +21,5 @@ public:
     /* uplink data buffer size */
     int const static TE_UL_BUFFER_SIZE = TE_DEF::TE_COMMAND_SIZE + 1;
     int const static TE_UL_BUF_WITH_ROOM_SIZE  = TE_UL_BUFFER_SIZE + SIZE_DEF::ROOM_II_SIZE;
-    int const static TE_UL_BUF_WITH_BASE_SIZE  = TE_UL_BUFFER_SIZE + SIZE_DEF::BASE_ID_INDEX_SIZE;
+    int const static TE_UL_BUF_WITH_BASE_SIZE  = TE_UL_BUFFER_SIZE + SIZE_DEF::BASE_II_SIZE;
 };

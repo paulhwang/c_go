@@ -57,8 +57,8 @@ void DEngineClass::processSetupBase (char *data_val)
     memcpy(current_ptr, room_id_ptr, SIZE_DEF::ROOM_II_SIZE);
     current_ptr += SIZE_DEF::ROOM_II_SIZE;
 
-    memcpy(current_ptr, go_base_object->goBaseIdIndex(), SIZE_DEF::BASE_ID_INDEX_SIZE);
-    current_ptr += SIZE_DEF::BASE_ID_INDEX_SIZE;
+    memcpy(current_ptr, go_base_object->goBaseIdIndex(), SIZE_DEF::BASE_II_SIZE);
+    current_ptr += SIZE_DEF::BASE_II_SIZE;
     *current_ptr = 0;
 
     this->transmitFunction(downlink_data);

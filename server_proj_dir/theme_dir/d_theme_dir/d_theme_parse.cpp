@@ -96,8 +96,8 @@ void DThemeClass::processPutRoomData (char *data_val)
 
     *ul_current_ptr++ = TE_DEF::TE_PUT_BASE_DATA_COMMAND;
 
-    memcpy(ul_current_ptr, room->baseIdIndex(), SIZE_DEF::BASE_ID_INDEX_SIZE);
-    ul_current_ptr += SIZE_DEF::BASE_ID_INDEX_SIZE;
+    memcpy(ul_current_ptr, room->baseIdIndex(), SIZE_DEF::BASE_II_SIZE);
+    ul_current_ptr += SIZE_DEF::BASE_II_SIZE;
 
     strcpy(ul_current_ptr, rest_data_ptr);
 
