@@ -41,7 +41,7 @@ void UThemeClass::processSetupBaseResponse (char *data_val)
 
     char *result_ptr = data_val;
     char *room_id_ptr = result_ptr + RESULT_DEF::RESULT_SIZE;
-    char *base_id_ptr = room_id_ptr + SIZE_DEF::ROOM_ID_INDEX_SIZE;
+    char *base_id_ptr = room_id_ptr + SIZE_DEF::ROOM_II_SIZE;
 
     RoomClass *room = this->theThemeObject->searchRoom(room_id_ptr);
     if (!room) {
@@ -64,8 +64,8 @@ void UThemeClass::processSetupBaseResponse (char *data_val)
     memcpy(current_ptr, room->groupTableArray(0), SIZE_DEF::GROUP_II_SIZE);
     current_ptr += SIZE_DEF::GROUP_II_SIZE;
 
-    memcpy(current_ptr, room->roomIdIndex(), SIZE_DEF::ROOM_ID_INDEX_SIZE);
-    current_ptr += SIZE_DEF::ROOM_ID_INDEX_SIZE;
+    memcpy(current_ptr, room->roomIdIndex(), SIZE_DEF::ROOM_II_SIZE);
+    current_ptr += SIZE_DEF::ROOM_II_SIZE;
     *current_ptr = 0;
 
     this->theThemeObject->dThemeObject()->transmitFunction(downlink_data);
@@ -77,7 +77,7 @@ void UThemeClass::processPutBaseDataResponse (char *data_val)
 
     char *result_ptr = data_val;
     char *room_id_ptr = result_ptr + RESULT_DEF::RESULT_SIZE;
-    char *rest_data_ptr = room_id_ptr + SIZE_DEF::ROOM_ID_INDEX_SIZE;
+    char *rest_data_ptr = room_id_ptr + SIZE_DEF::ROOM_II_SIZE;
 
     RoomClass *room = this->theThemeObject->searchRoom(room_id_ptr);
 

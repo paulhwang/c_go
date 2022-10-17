@@ -985,8 +985,8 @@ void DFabricClass::sendPutSessionDataRequestToThemeServer (
 
     *current_ptr++ = FT_DEF::FT_PUT_ROOM_DATA_COMMAND;
 
-    memcpy(current_ptr, room_id_val, SIZE_DEF::ROOM_ID_INDEX_SIZE);
-    current_ptr += SIZE_DEF::ROOM_ID_INDEX_SIZE;
+    memcpy(current_ptr, room_id_val, SIZE_DEF::ROOM_II_SIZE);
+    current_ptr += SIZE_DEF::ROOM_II_SIZE;
 
     strcpy(current_ptr, data_val);
 

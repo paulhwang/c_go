@@ -20,7 +20,7 @@ class GroupClass : public ListEntryClass {
     char *theFirstFiddle;
     char *theSecondFiddle;
     char theRoomStatus;
-    char theRoomIdIndex[SIZE_DEF::ROOM_ID_INDEX_SIZE + 4];
+    char theRoomIdIndex[SIZE_DEF::ROOM_II_SIZE + 4];
     void *theSessionArrayMgr;
     SessionClass **theSessionTableArray;
 
@@ -51,7 +51,7 @@ public:
     SessionClass *sessionTableArray(int index_val) {return this->theSessionTableArray[index_val];}
     void setSessionTableArray(SessionClass **val) {this->theSessionTableArray = val;}
 
-    void setRoomIdIndex(char *val) {memcpy(this->theRoomIdIndex, val, SIZE_DEF::ROOM_ID_INDEX_SIZE);}
+    void setRoomIdIndex(char *val) {memcpy(this->theRoomIdIndex, val, SIZE_DEF::ROOM_II_SIZE);}
     void insertSession(SessionClass *session_object_val) {phwangArrayMgrInsertElement(this->theSessionArrayMgr, session_object_val);}
     void removeSession(SessionClass *session_object_val) {phwangArrayMgrRemoveElement(this->theSessionArrayMgr, session_object_val);}
 };
