@@ -19,7 +19,7 @@ public:
     int const static DL_ACRLS_BUF_SIZE = DL_ACRL_BUF_SIZE + SIZE_DEF::SESSION_ID_INDEX_SIZE;
 
     /* uplink data buffer size */
-    int const static FT_UL_BUFFER_SIZE = FT_DEF::FT_COMMAND_SIZE + 1;
-    int const static FT_UL_BUF_WITH_GROUP_SIZE = FT_UL_BUFFER_SIZE + SIZE_DEF::GROUP_ID_INDEX_SIZE;
-    int const static FT_UL_BUF_WITH_ROOM_SIZE  = FT_UL_BUFFER_SIZE + SIZE_DEF::ROOM_ID_INDEX_SIZE;
+    int const static UL_C_BUF_SIZE = FT_DEF::FT_COMMAND_SIZE + 1;
+    int const static UL_CG_BUF_SIZE = UL_C_BUF_SIZE + SIZE_DEF::GROUP_ID_INDEX_SIZE;
+    int const static UL_CR_BUF_SIZE = UL_C_BUF_SIZE + SIZE_DEF::ROOM_ID_INDEX_SIZE;
 };
