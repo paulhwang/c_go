@@ -736,8 +736,8 @@ void DFabricClass::sendSetupRoomRequestToThemeServer (GroupClass *group_val)
 
     *current_ptr++ = FT_DEF::FT_SETUP_ROOM_COMMAND;
 
-    memcpy(current_ptr, group_val->groupIdIndex(), SIZE_DEF::GROUP_ID_INDEX_SIZE);
-    current_ptr += SIZE_DEF::GROUP_ID_INDEX_SIZE;
+    memcpy(current_ptr, group_val->groupIdIndex(), SIZE_DEF::GROUP_II_SIZE);
+    current_ptr += SIZE_DEF::GROUP_II_SIZE;
 
     *current_ptr++ = group_val->themeType();
 

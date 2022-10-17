@@ -27,16 +27,16 @@ RoomClass::~RoomClass (void)
 
 void RoomClass::insertGroup (char *group_id_index_val)
 {
-    char buf[SIZE_DEF::GROUP_ID_INDEX_SIZE + 4];
-    memcpy(buf, group_id_index_val, SIZE_DEF::GROUP_ID_INDEX_SIZE);
-    buf[SIZE_DEF::GROUP_ID_INDEX_SIZE] = 0;
+    char buf[SIZE_DEF::GROUP_II_SIZE + 4];
+    memcpy(buf, group_id_index_val, SIZE_DEF::GROUP_II_SIZE);
+    buf[SIZE_DEF::GROUP_II_SIZE] = 0;
     phwangArrayMgrInsertElement(this->theGroupArrayMgr, buf);
 }
 
 void RoomClass::removeGroup (char *group_id_index_val)
 {
-    char buf[SIZE_DEF::GROUP_ID_INDEX_SIZE + 4];
-    memcpy(buf, group_id_index_val, SIZE_DEF::GROUP_ID_INDEX_SIZE);
-    buf[SIZE_DEF::GROUP_ID_INDEX_SIZE] = 0;
+    char buf[SIZE_DEF::GROUP_II_SIZE + 4];
+    memcpy(buf, group_id_index_val, SIZE_DEF::GROUP_II_SIZE);
+    buf[SIZE_DEF::GROUP_II_SIZE] = 0;
     phwangArrayMgrRemoveElement(this->theGroupArrayMgr, buf);
 }

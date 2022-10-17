@@ -39,7 +39,7 @@ void DThemeClass::processSetupRoom (char *data_val)
     phwangDebugS(true, "DThemeClass::processSetupRoom", data_val);
 
     char *group_id_ptr = data_val;
-    char *rest_data_ptr = data_val + SIZE_DEF::GROUP_ID_INDEX_SIZE;
+    char *rest_data_ptr = data_val + SIZE_DEF::GROUP_II_SIZE;
 
     RoomClass *room = this->theThemeObject->mallocRoom(group_id_ptr);
     if (!room) {

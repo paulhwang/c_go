@@ -20,6 +20,6 @@ public:
 
     /* uplink data buffer size */
     int const static UL_C_BUF_SIZE = FT_DEF::FT_COMMAND_SIZE + 1;
-    int const static UL_CG_BUF_SIZE = UL_C_BUF_SIZE + SIZE_DEF::GROUP_ID_INDEX_SIZE;
+    int const static UL_CG_BUF_SIZE = UL_C_BUF_SIZE + SIZE_DEF::GROUP_II_SIZE;
     int const static UL_CR_BUF_SIZE = UL_C_BUF_SIZE + SIZE_DEF::ROOM_ID_INDEX_SIZE;
 };

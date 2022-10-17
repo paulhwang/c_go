@@ -61,8 +61,8 @@ void UThemeClass::processSetupBaseResponse (char *data_val)
     memcpy(current_ptr, result_ptr, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;
 
-    memcpy(current_ptr, room->groupTableArray(0), SIZE_DEF::GROUP_ID_INDEX_SIZE);
-    current_ptr += SIZE_DEF::GROUP_ID_INDEX_SIZE;
+    memcpy(current_ptr, room->groupTableArray(0), SIZE_DEF::GROUP_II_SIZE);
+    current_ptr += SIZE_DEF::GROUP_II_SIZE;
 
     memcpy(current_ptr, room->roomIdIndex(), SIZE_DEF::ROOM_ID_INDEX_SIZE);
     current_ptr += SIZE_DEF::ROOM_ID_INDEX_SIZE;
@@ -99,8 +99,8 @@ void UThemeClass::processPutBaseDataResponse (char *data_val)
             memcpy(current_ptr, result_ptr, RESULT_DEF::RESULT_SIZE);
             current_ptr += RESULT_DEF::RESULT_SIZE;
 
-            memcpy(current_ptr, room->groupTableArray(i), SIZE_DEF::GROUP_ID_INDEX_SIZE);
-            current_ptr += SIZE_DEF::GROUP_ID_INDEX_SIZE;
+            memcpy(current_ptr, room->groupTableArray(i), SIZE_DEF::GROUP_II_SIZE);
+            current_ptr += SIZE_DEF::GROUP_II_SIZE;
 
             strcpy(current_ptr, rest_data_ptr);
 

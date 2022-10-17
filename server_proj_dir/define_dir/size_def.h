@@ -33,7 +33,7 @@ public:
     int const static GROUP_ID_INITIAL_VALUE = 5000;
     int const static GROUP_ID_SIZE = 4;
     int const static GROUP_INDEX_SIZE = 4;
-    int const static GROUP_ID_INDEX_SIZE = GROUP_ID_SIZE + GROUP_INDEX_SIZE;
+    int const static GROUP_II_SIZE = GROUP_ID_SIZE + GROUP_INDEX_SIZE;
 
     int const static ROOM_ID_INITIAL_VALUE = 7000;
     int const static ROOM_ID_SIZE = 4;
