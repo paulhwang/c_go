@@ -1095,16 +1095,42 @@ char *DFabricClass::processReadFileRequest (
         char *ajax_id_val,
         char *data_val)
 {
+    char *response_data;
     phwangDebugS(true, "DFabricClass::processReadFileRequest", data_val);
 
+    char *encoded_file_name = &data_val[1];
+    int file_name_size;
+    char *file_name = phwangDecodeStringMalloc(encoded_file_name, &file_name_size);
+
+    char *result_data = "TBD";
+    response_data = this->generateReadFileResponse(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, 'N', result_data);
+    return response_data;
 }
 
 char *DFabricClass::generateReadFileResponse (
     char const *result_val,
     char *ajax_id_val,
     char more_data_exist_val,
-    char const *data_val)
+    char const *result_data_val)
 {
+    phwangDebugS(false, "DFabricClass::generateReadFileResponse", result_val);
+
+    char *response_data = (char *) phwangMalloc(FABRIC_DEF::FE_DL_BUF_WITH_LINK_SESSION_SIZE, MallocClass::generateReadFileResponse);
+    char *current_ptr = response_data;
+
+    memcpy(current_ptr, ajax_id_val, SIZE_DEF::AJAX_ID_SIZE);
+    current_ptr += SIZE_DEF::AJAX_ID_SIZE;
+
+    *current_ptr++ = FE_DEF::READ_FILE_RESPONSE;
+
+    memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
+    current_ptr += RESULT_DEF::RESULT_SIZE;
+
+    *current_ptr++ = more_data_exist_val;
+
+    strcpy(current_ptr, result_data_val);
+
+    return response_data;
 }
 
 char *DFabricClass::processWriteFileRequest (
