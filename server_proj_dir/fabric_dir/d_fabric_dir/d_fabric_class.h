@@ -155,6 +155,22 @@ class DFabricClass {
         char const *session_id_index_val,
         char const *data_val);
 
+    char *processOpenFileRequest (
+        char *ajax_id_val,
+        char *data_val);
+
+    char *processCloseFileRequest (
+        char *ajax_id_val,
+        char *data_val);
+
+    char *processReadFileRequest (
+        char *ajax_id_val,
+        char *data_val);
+
+    char *processWriteFileRequest (
+        char *ajax_id_val,
+        char *data_val);
+
     char *processDatagramRequest (
         char *ajax_id_val,
         char *data_val);

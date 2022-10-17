@@ -66,6 +66,22 @@ void DFabricClass::parseInput (
                     response_data = this->processLoginRequest(ajax_id, current_ptr, 'N', port_obj_val);
                     break;
 
+                case FE_DEF::OPEN_FILE_COMMAND:
+                    response_data = this->processOpenFileRequest(ajax_id, current_ptr);
+                    break;
+
+                case FE_DEF::CLOSE_FILE_COMMAND:
+                    response_data = this->processCloseFileRequest(ajax_id, current_ptr);
+                    break;
+
+                case FE_DEF::READ_FILE_COMMAND:
+                    response_data = this->processReadFileRequest(ajax_id, current_ptr);
+                    break;
+
+                case FE_DEF::WRITE_FILE_COMMAND:
+                    response_data = this->processWriteFileRequest(ajax_id, current_ptr);
+                    break;
+
                 case FE_DEF::MESSAGE_COMMAND:
                     response_data = this->processDatagramRequest(ajax_id, current_ptr);
                     break;
@@ -1023,6 +1039,38 @@ char *DFabricClass::generateGetSessionDataResponse (
 
     strcpy(current_ptr, data_val);
     return response_data;
+}
+
+char *DFabricClass::processOpenFileRequest (
+        char *ajax_id_val,
+        char *data_val)
+{
+    phwangDebugS(true, "DFabricClass::processOpenFileRequest", data_val);
+
+}
+
+char *DFabricClass::processCloseFileRequest (
+        char *ajax_id_val,
+        char *data_val)
+{
+    phwangDebugS(true, "DFabricClass::processCloseFileRequest", data_val);
+
+}
+
+char *DFabricClass::processReadFileRequest (
+        char *ajax_id_val,
+        char *data_val)
+{
+    phwangDebugS(true, "DFabricClass::processReadFileRequest", data_val);
+
+}
+
+char *DFabricClass::processWriteFileRequest (
+        char *ajax_id_val,
+        char *data_val)
+{
+    phwangDebugS(true, "DFabricClass::processWriteFileRequest", data_val);
+
 }
 
 char *DFabricClass::processDatagramRequest (
