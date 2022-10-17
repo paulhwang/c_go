@@ -47,7 +47,8 @@ void DThemeClass::processSetupRoom (char *data_val)
 
         /* downlink */
         char *dl_current_ptr;
-        char *downlink_data = dl_current_ptr = (char *) phwangMalloc(THEME_DEF::FT_DL_BUFFER_SIZE, MallocClass::DTHEME_SETUP_ROOM1);
+        char *downlink_data = dl_current_ptr = (char *) phwangMalloc(THEME_DEF::DL_CR_BUF_SIZE, MallocClass::DTHEME_SETUP_ROOM1);
+
         *dl_current_ptr++ = FT_DEF::FT_SETUP_ROOM_RESPONSE;
 
         strcpy(dl_current_ptr, RESULT_DEF::RESULT_MALLOC_ROOM_FAIL);
@@ -81,7 +82,8 @@ void DThemeClass::processPutRoomData (char *data_val)
 
         /* downlink */
         char *dl_current_ptr;
-        char *downlink_data = dl_current_ptr = (char *) phwangMalloc(THEME_DEF::FT_DL_BUFFER_SIZE, MallocClass::DTHEME_PUT_ROOM_DATA1);
+        char *downlink_data = dl_current_ptr = (char *) phwangMalloc(THEME_DEF::DL_CR_BUF_SIZE, MallocClass::DTHEME_PUT_ROOM_DATA1);
+
         *dl_current_ptr++ = FT_DEF::FT_PUT_ROOM_DATA_RESPONSE;
 
         strcpy(dl_current_ptr, RESULT_DEF::RESULT_NULL_ROOM);
