@@ -58,6 +58,10 @@ public:
     int const static generateGetSessionSetupStatusResponse = 5;
     int const static generatePutSessionDataResponse = 5;
     int const static generateGetSessionDataResponse = 5;
+    int const static generateOpenFileResponse = 5;
+    int const static generateCloseFileResponse = 5;
+    int const static generateReadFileResponse = 5;
+    int const static generateWriteFileResponse = 5;
     int const static GET_SESSION_DATA_ERROR = 5;
     int const static sendSetupRoomRequestToThemeServer = 5;
     int const static setPendingSessionSetup2 = 6;

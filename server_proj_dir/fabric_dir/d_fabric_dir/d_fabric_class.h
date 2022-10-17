@@ -159,17 +159,33 @@ class DFabricClass {
         char *ajax_id_val,
         char *data_val);
 
+    char *generateOpenFileResponse (
+        char const *result_val,
+        char *ajax_id_val);
+
     char *processCloseFileRequest (
         char *ajax_id_val,
         char *data_val);
+
+    char *generateCloseFileResponse (
+        char const *result_val,
+        char *ajax_id_val);
 
     char *processReadFileRequest (
         char *ajax_id_val,
         char *data_val);
 
+    char *generateReadFileResponse (
+        char const *result_val,
+        char *ajax_id_val);
+
     char *processWriteFileRequest (
         char *ajax_id_val,
         char *data_val);
+
+    char *generateWriteFileResponse (
+        char const *result_val,
+        char *ajax_id_val);
 
     char *processDatagramRequest (
         char *ajax_id_val,
