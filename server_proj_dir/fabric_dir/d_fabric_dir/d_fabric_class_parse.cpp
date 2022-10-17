@@ -176,13 +176,13 @@ void DFabricClass::sendSearchLinkFailResponse (
     phwangDebugS(true, "DFabricClass::sendSearchLinkFailResponse", data_val);
     phwangAbendS("DFabricClass::sendSearchLinkFailResponse", data_val);
 
-    char *response_data = (char *) phwangMalloc(FABRIC_DEF::DL_ACRLS_BUF_SIZE, MallocClass::BAD_LINK);
+    char *response_data = (char *) phwangMalloc(FABRIC_DEF::DL_ACR_BUF_SIZE, MallocClass::BAD_LINK);
     char *current_ptr = response_data;
-
-    *current_ptr++ = command_val + 32;
 
     strcpy(current_ptr, ajax_id_val);
     current_ptr += SIZE_DEF::AJAX_ID_SIZE;
+
+    *current_ptr++ = command_val + 32;
 
     strcpy(current_ptr, RESULT_DEF::RESULT_LINK_NOT_EXIST);
 
@@ -198,7 +198,7 @@ void DFabricClass::sendSearchLinkSessionFailResponse (
     phwangDebugS(true, "DFabricClass::sendSearchLinkSessionFailResponse", data_val);
     phwangAbendS("DFabricClass::sendSearchLinkSessionFailResponse", data_val);
 
-    char *response_data = (char *) phwangMalloc(FABRIC_DEF::DL_ACRLS_BUF_SIZE, MallocClass::BAD_SESSION);
+    char *response_data = (char *) phwangMalloc(FABRIC_DEF::DL_ACR_BUF_SIZE, MallocClass::BAD_SESSION);
     char *current_ptr = response_data;
 
     strcpy(current_ptr, ajax_id_val);
@@ -601,7 +601,7 @@ char *DFabricClass::generateGetNameListResponse (
 {
     phwangDebugS(false, "DFabricClass::generateGetNameListResponse", result_val);
 
-    char *response_data = (char *) phwangMalloc(FABRIC_DEF::DL_ACRLS_BUF_SIZE + strlen(data_val), MallocClass::generateGetNameListResponse);
+    char *response_data = (char *) phwangMalloc(FABRIC_DEF::DL_ACRL_BUF_SIZE + strlen(data_val), MallocClass::generateGetNameListResponse);
     char *current_ptr = response_data;
 
     memcpy(current_ptr, ajax_id_val, SIZE_DEF::AJAX_ID_SIZE);
