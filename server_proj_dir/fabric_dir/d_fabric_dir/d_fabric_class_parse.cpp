@@ -943,7 +943,7 @@ char *DFabricClass::processPutSessionDataRequest (
 
     this->sendPutSessionDataRequestToThemeServer(room_id, data_val);
 
-    response_data = this->generatePutSessionDataResponse(RESULT_DEF::RESULT_ALMOST_SUCCEED, ajax_id_val, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex());
+    response_data = this->generatePutSessionDataResponse(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex());
     return response_data;
 }
 
