@@ -1159,7 +1159,7 @@ char *DFabricClass::generateWriteFileResponse (
     memcpy(current_ptr, ajax_id_val, SIZE_DEF::AJAX_ID_SIZE);
     current_ptr += SIZE_DEF::AJAX_ID_SIZE;
 
-    *current_ptr++ = FE_DEF::READ_FILE_RESPONSE;
+    *current_ptr++ = FE_DEF::WRITE_FILE_RESPONSE;
 
     memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;
