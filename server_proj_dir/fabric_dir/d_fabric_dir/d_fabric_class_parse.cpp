@@ -49,7 +49,8 @@ void DFabricClass::parseInput (
     current_ptr += 2;
 
     if (command != FE_DEF::GET_LINK_DATA_COMMAND) {
-        phwangDebugS(true, "DFabricClass::parseInput", data_val);
+        phwangDebugSS(true, "DFabricClass::parseInput", "data_val=", data_val);
+        phwangDebugSS(true, "DFabricClass::parseInput", "current_ptr=", current_ptr);
     }
 
     LinkClass *link;
@@ -76,10 +77,6 @@ void DFabricClass::parseInput (
 
                 case FE_DEF::READ_FILE_COMMAND:
                     response_data = this->processReadFileRequest(ajax_id, current_ptr);
-                    break;
-
-                case FE_DEF::WRITE_FILE_COMMAND:
-                    response_data = this->processWriteFileRequest(ajax_id, current_ptr);
                     break;
 
                 case FE_DEF::MESSAGE_COMMAND:
@@ -116,6 +113,10 @@ void DFabricClass::parseInput (
 
                 case FE_DEF::SETUP_SESSION_COMMAND:
                     response_data = this->processSetupSessionRequest(link, ajax_id, current_ptr);
+                    break;
+
+                case FE_DEF::WRITE_FILE_COMMAND:
+                    response_data = this->processWriteFileRequest(ajax_id, current_ptr);
                     break;
 
                 default:
@@ -1137,14 +1138,35 @@ char *DFabricClass::processWriteFileRequest (
         char *ajax_id_val,
         char *data_val)
 {
+    char *response_data;
     phwangDebugS(true, "DFabricClass::processWriteFileRequest", data_val);
 
+    char *encoded_file_name = &data_val[1];
+    int file_name_size;
+    char *file_name = phwangDecodeStringMalloc(encoded_file_name, &file_name_size);
+
+    response_data = this->generateWriteFileResponse(RESULT_DEF::RESULT_SUCCEED, ajax_id_val);
+    return response_data;
 }
 
 char *DFabricClass::generateWriteFileResponse (
     char const *result_val,
     char *ajax_id_val)
 {
+    char *response_data = (char *) phwangMalloc(FABRIC_DEF::DL_ACRLS_BUF_SIZE, MallocClass::generateWriteFileResponse);
+    char *current_ptr = response_data;
+
+    memcpy(current_ptr, ajax_id_val, SIZE_DEF::AJAX_ID_SIZE);
+    current_ptr += SIZE_DEF::AJAX_ID_SIZE;
+
+    *current_ptr++ = FE_DEF::READ_FILE_RESPONSE;
+
+    memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
+    current_ptr += RESULT_DEF::RESULT_SIZE;
+
+    *current_ptr = 0;
+
+    return response_data;
 }
 
 char *DFabricClass::processDatagramRequest (
