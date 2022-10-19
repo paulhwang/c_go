@@ -14,8 +14,8 @@ class PortClass {
 public:
     const static int CLIENT_INDEX  = 0;
     const static int SERVER_INDEX  = 1;
-    const static int DATA_LENGTH_SIZE = TCP_IP_DEF::RECEIVE_DATA_LENGTH_SIZE;
-    const static int RECEIVE_BUFFER_SIZE = TCP_IP_DEF::RECEIVE_DATA_SIZE;
+    const static int DATA_LENGTH_SIZE = TCP_IP_DEF::MAX_DATA_LENGTH_SIZE;
+    const static int RECEIVE_BUFFER_SIZE = TCP_IP_DEF::MAX_DATA_SIZE;
 
 private:
     const static int TRANSMIT_QUEUE_SIZE = 1024;
