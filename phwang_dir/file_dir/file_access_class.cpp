@@ -6,7 +6,7 @@
 
 #include <errno.h>
 #include "../../phwang_dir/phwang.h"
-#include "file_read_class.h"
+#include "file_access_class.h"
 
 FileAccessClass::FileAccessClass (void)
 {

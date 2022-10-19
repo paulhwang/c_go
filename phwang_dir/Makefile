@@ -39,7 +39,7 @@ ATOMIC_OBJS = $(ATOMIC_DIR)/atomic.o
 MALLOC_OBJS = $(MALLOC_DIR)/malloc_class.o
 ENCODE_OBJS = $(ENCODE_DIR)/encode.o
 THREAD_OBJS = $(THREAD_DIR)/thread_root_class.o 
-FILE_OBJS = $(FILE_DIR)/file_read_class.o $(FILE_DIR)/file_write_class.o 
+FILE_OBJS = $(FILE_DIR)/file_access_class.o $(FILE_DIR)/file_mgr_class.o 
 OBJECT_OBJS = $(OBJECT_DIR)/object_class.o
 PHWANG_OBJS = $(PHWANG_DIR)/phwang.o $(PHWANG_DIR)/phwang_class.o $(JSON_OBJS) $(SUSPEND_OBJS) $(LIST_MGR_OBJS) $(ARRAY_MGR_OBJS) $(ID_INDEX_LIST_OBJS) $(FILE_OBJS) $(QUEUE_OBJS) $(NET_OBJS) $(MALLOC_OBJS) $(ENCODE_OBJS) $(THREAD_OBJS) $(ABEND_OBJS) $(ATOMIC_OBJS) $(DEFINE_OBJS)
 

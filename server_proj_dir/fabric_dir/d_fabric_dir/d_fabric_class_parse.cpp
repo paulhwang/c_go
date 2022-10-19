@@ -7,7 +7,8 @@
 #include <errno.h>
 #include "../../../phwang_dir/phwang.h"
 #include "../../../phwang_dir/malloc_dir/malloc_class.h"
-#include "../../../phwang_dir/file_dir/file_read_class.h"
+#include "../../../phwang_dir/file_dir/file_access_class.h"
+#include "../../../phwang_dir/file_dir/file_mgr_class.h"
 #include "../../define_dir/result_def.h"
 #include "../../define_dir/file_def.h"
 #include "../../define_dir/fe_def.h"
@@ -1113,7 +1114,7 @@ char *DFabricClass::processReadFileRequest (
     strcat(file_name_, file_name);
     phwangDebugSS(true, "DFabricClass::processReadFileRequest", "file_name_=", file_name_);
 
-    FileReadClass *file_class = new FileReadClass();
+    FileAccessClass *file_class = new FileAccessClass();
     int open_result = file_class->openFile(file_name_, "r");
     if (open_result == -1) {
         phwangLogitS("DFabricClass::processReadFileRequest", "cannot open file");
