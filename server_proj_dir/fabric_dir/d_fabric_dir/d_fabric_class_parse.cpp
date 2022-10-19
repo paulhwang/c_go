@@ -1114,27 +1114,15 @@ char *DFabricClass::processReadFileRequest (
     strcat(file_name_, file_name);
     phwangDebugSS(true, "DFabricClass::processReadFileRequest", "file_name_=", file_name_);
 
-    FileAccessClass *file_class = new FileAccessClass();
-    int open_result = file_class->openFile(file_name_, "r");
-    if (open_result == -1) {
-        phwangLogitS("DFabricClass::processReadFileRequest", "cannot open file");
-        phwangAbendS("DFabricClass::processReadFileRequest", "cannot open file");
-    }
-
     char data_buf[1000 + 1];
     int eof;
-    int length = file_class->readBytes(data_buf, 1000, &eof);
-    printf("length=%d\n", length);
-    phwangDebugSS(true, "DFabricClass::processReadFileRequest", "data_buf=", data_buf);
-
-    length = this->fileMgrObj()->readBytes('R', file_name_, data_buf, 1000, &eof);
+    int length = this->fileMgrObj()->readBytes('R', file_name_, data_buf, 1000, &eof);
     printf("length=%d\n", length);
     phwangDebugSS(true, "DFabricClass::processReadFileRequest", "data_buf=", data_buf);
 
     char more;
     if (eof) {
         more = 'N';
-        delete file_class;
     }
     else {
         more = 'Y';
