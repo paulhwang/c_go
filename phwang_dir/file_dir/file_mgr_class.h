@@ -7,7 +7,8 @@
 #pragma once
 
 class FileMgrClass {
-    int readBytes_ (FILE *fp_val, char *buf_val, int buf_size_val, int *eof_val);
+    int readBytesFOpen_ (FILE *fp_val, char *buf_val, int buf_size_val, int *eof_val);
+    int readBytesOpen_ (int fd_val, char *buf_val, int buf_size_val, int *eof_val);
 
 public:
     int const static MAX_BUF_SIZE = 1024;
@@ -20,5 +21,6 @@ public:
     FileMgrClass(void);
     ~FileMgrClass(void);
 
-    int readBytes(char type, char const *file_name_val, char *buf_val, int buf_size_val, int *eof_val);
+    int readBytesOpen(char type, char const *file_name_val, char *buf_val, int buf_size_val, int *eof_val);
+    int readBytesFOpen(char type, char const *file_name_val, char *buf_val, int buf_size_val, int *eof_val);
 };

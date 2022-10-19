@@ -1120,7 +1120,7 @@ char *DFabricClass::processReadFileRequest (
 
     char data_buf[FileMgrClass::MAX_BUF_SIZE + 1];
     int eof;
-    int length = this->fileMgrObj()->readBytes(FileMgrClass::FIRST_READ, file_name_buf, data_buf, FileMgrClass::MAX_BUF_SIZE, &eof);
+    int length = this->fileMgrObj()->readBytesFOpen(FileMgrClass::FIRST_READ, file_name_buf, data_buf, FileMgrClass::MAX_BUF_SIZE, &eof);
     printf("length=%d\n", length);
     phwangDebugSS(true, "DFabricClass::processReadFileRequest", "data_buf=", data_buf);
 

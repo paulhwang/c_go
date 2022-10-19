@@ -21,7 +21,7 @@ FileMgrClass::~FileMgrClass (void)
     phwangDebugS(true, "FileMgrClass::~FileMgrClass", "exit");
 }
 
-int FileMgrClass::readBytes (char type, char const *file_name_val, char *buf_val, int buf_size_val, int *eof_val)
+int FileMgrClass::readBytesFOpen (char type, char const *file_name_val, char *buf_val, int buf_size_val, int *eof_val)
 {
     if (type == FileMgrClass::FIRST_READ) {
         FILE *fp = fopen(file_name_val, "r");
@@ -31,7 +31,7 @@ int FileMgrClass::readBytes (char type, char const *file_name_val, char *buf_val
             phwangAbendS("FileMgrClass::readBytes", "cannot open file");
             return -1;
         }
-        return this->readBytes_(fp, buf_val, buf_size_val, eof_val);
+        return this->readBytesFOpen_(fp, buf_val, buf_size_val, eof_val);
     }
     else if (type == FileMgrClass::FIRST_WRITE) {
         FILE *fp = fopen(file_name_val, "w");
@@ -55,7 +55,7 @@ int FileMgrClass::readBytes (char type, char const *file_name_val, char *buf_val
     }
 }
 
-int FileMgrClass::readBytes_ (FILE *fp_val, char *buf_val, int buf_size_val, int *eof_val)
+int FileMgrClass::readBytesFOpen_ (FILE *fp_val, char *buf_val, int buf_size_val, int *eof_val)
 {
     int index = 0;
 
