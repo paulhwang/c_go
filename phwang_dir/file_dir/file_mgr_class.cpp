@@ -21,15 +21,18 @@ FileMgrClass::~FileMgrClass (void)
     phwangDebugS(true, "FileMgrClass::~FileMgrClass", "exit");
 }
 
-void FileMgrClass::readLine (char *buf_val, int *eof_val)
+int FileMgrClass::readBytes (char type, char *buf_val, int buf_size_val, int *eof_val)
 {
-}
+    if (type == FileMgrClass::FIRST_READ) {
 
-int FileMgrClass::readBytes (char *buf_val, int buf_size_val, int *eof_val)
-{
-}
-
-int FileMgrClass::openFile (char const *file_name_val, char const *mode_val)
-{
-    return 0;
+    }
+    if (type == FileMgrClass::FIRST_WRITE) {
+        
+    }
+    if (type == FileMgrClass::MORE_READ) {
+        
+    }
+    if (type == FileMgrClass::MORE_WRITE) {
+        
+    }
 }
