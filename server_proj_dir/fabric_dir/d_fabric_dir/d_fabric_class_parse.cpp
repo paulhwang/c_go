@@ -1099,9 +1099,11 @@ char *DFabricClass::processReadFileRequest (
     char *response_data;
     phwangDebugS(true, "DFabricClass::processReadFileRequest", data_val);
 
-    char *encoded_file_name = &data_val[1];
+    char *current_ptr = data_val;
     int file_name_size;
-    char *file_name = phwangDecodeStringMalloc(encoded_file_name, &file_name_size);
+    char *file_name = phwangDecodeStringMalloc(current_ptr, &file_name_size);
+    //current_ptr += file_name_size;
+    phwangDebugSS(true, "DFabricClass::processReadFileRequest", "file_name=", file_name);
 
     char *result_data = "TBD";
     response_data = this->generateReadFileResponse(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, 'N', result_data);
@@ -1141,9 +1143,14 @@ char *DFabricClass::processWriteFileRequest (
     char *response_data;
     phwangDebugS(true, "DFabricClass::processWriteFileRequest", data_val);
 
-    char *encoded_file_name = &data_val[1];
+    char *current_ptr = data_val;
     int file_name_size;
-    char *file_name = phwangDecodeStringMalloc(encoded_file_name, &file_name_size);
+    char *file_name = phwangDecodeStringMalloc(current_ptr, &file_name_size);
+    current_ptr += file_name_size;
+    phwangDebugSS(true, "DFabricClass::processWriteFileRequest", "file_name=", file_name);
+
+    char *data = current_ptr;
+    phwangDebugSS(true, "DFabricClass::processWriteFileRequest", "data=", data);
 
     response_data = this->generateWriteFileResponse(RESULT_DEF::RESULT_SUCCEED, ajax_id_val);
     return response_data;
