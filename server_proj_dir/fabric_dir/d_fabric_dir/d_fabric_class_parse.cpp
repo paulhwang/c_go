@@ -1146,7 +1146,7 @@ char *DFabricClass::generateReadFileResponse (
 {
     phwangDebugS(false, "DFabricClass::generateReadFileResponse", result_val);
 
-    char *response_data = (char *) phwangMalloc(FABRIC_DEF::DL_ACRLS_BUF_SIZE, MallocClass::generateReadFileResponse);
+    char *response_data = (char *) phwangMalloc(FABRIC_DEF::DL_ACR_BUF_SIZE + 1 + strlen(result_data_val), MallocClass::generateReadFileResponse);
     char *current_ptr = response_data;
 
     memcpy(current_ptr, ajax_id_val, SIZE_DEF::AJAX_ID_SIZE);
