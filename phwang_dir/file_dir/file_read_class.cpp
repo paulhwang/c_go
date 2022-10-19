@@ -66,7 +66,7 @@ int FileReadClass::readBytes (char *buf_val, int buf_size_val, int *eof_val)
             break;
         }
         */
-        
+
         buf_val[index++] = c;
     }
 

@@ -1120,9 +1120,10 @@ char *DFabricClass::processReadFileRequest (
         phwangAbendS("DFabricClass::processReadFileRequest", "cannot open file");
     }
 
-    char data_buf[1000];
+    char data_buf[1000 + 1];
     int eof;
-    file_class->readLine(data_buf, &eof);
+    int length = file_class->readBytes(data_buf, 1000, &eof);
+    printf("length=%d\n", length);
     phwangDebugSS(true, "DFabricClass::processReadFileRequest", "data_buf=", data_buf);
 
     char more;
