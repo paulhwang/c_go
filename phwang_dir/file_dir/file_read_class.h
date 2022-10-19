@@ -17,4 +17,5 @@ class FileReadClass {
 
     int openFile(char const *filename_val, char const *mode_val);
     void readLine(char *buf_val, int *eof_val);
+    int readBytes(char *buf_val, int buf_size_val, int *eof_val);
 };

@@ -1109,7 +1109,6 @@ char *DFabricClass::processReadFileRequest (
     phwangDebugSS(true, "DFabricClass::processReadFileRequest", "file_name=", file_name);
 
     char file_name_[100];
-    //strcpy(file_name_, "../data_dir/customer_data_dir/dtf_dir/");
     strcpy(file_name_, FILE_DEF::DTF_DIR);
     strcat(file_name_, file_name);
     phwangDebugSS(true, "DFabricClass::processReadFileRequest", "file_name_=", file_name_);

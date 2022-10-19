@@ -20,7 +20,7 @@ FileReadClass::~FileReadClass (void)
     phwangDebugS(true, "FileReadClass::~FileReadClass", "exit");
 }
 
-void FileReadClass::readLine (char *line_buf_val, int *eof_val) {
+void FileReadClass::readLine (char *buf_val, int *eof_val) {
     int index = 0;
 
     while (1) {
@@ -28,23 +28,51 @@ void FileReadClass::readLine (char *line_buf_val, int *eof_val) {
 
         if (c == EOF) {
             *eof_val = 1;
-            line_buf_val[index] = 0;
+            buf_val[index] = 0;
             return;
         }
-
-        if (c == 13) {
+        else if (c == 13) {
             continue;
         }
-
-        if (c == 10) {
-            line_buf_val[index] = 0;
+        else if (c == 10) {
+            buf_val[index] = 0;
             break;
         }
 
-        line_buf_val[index++] = c;
-     }
+        buf_val[index++] = c;
+    }
 
-     *eof_val = 0;
+    *eof_val = 0;
+}
+
+int FileReadClass::readBytes (char *buf_val, int buf_size_val, int *eof_val)
+{
+    int index = 0;
+
+    while (index < buf_size_val) {
+        int c = getc(this->fp_);
+
+        if (c == EOF) {
+            *eof_val = 1;
+            buf_val[index] = 0;
+            return index;
+        }
+        /*
+        else if (c == 13) {
+            continue;
+        }
+        else if (c == 10) {
+            buf_val[index] = 0;
+            break;
+        }
+        */
+        
+        buf_val[index++] = c;
+    }
+
+    *eof_val = 0;
+    buf_val[index] = 0;
+    return index;
 }
 
 int FileReadClass::openFile (char const *file_name_val, char const *mode_val)
