@@ -16,6 +16,7 @@ ATOMIC_DIR        = $(PHWANG_DIR)/atomic_dir
 MALLOC_DIR        = $(PHWANG_DIR)/malloc_dir
 ENCODE_DIR        = $(PHWANG_DIR)/encode_dir
 THREAD_DIR        = $(PHWANG_DIR)/thread_dir
+FILE_DIR          = $(PHWANG_DIR)/file_dir
 DEFINE_DIR        = $(PHWANG_DIR)/define_dir
 NET_DIR           = $(PHWANG_DIR)/net_dir
 TCP_DIR           = $(NET_DIR)/tcp_dir
@@ -38,8 +39,9 @@ ATOMIC_OBJS = $(ATOMIC_DIR)/atomic.o
 MALLOC_OBJS = $(MALLOC_DIR)/malloc_class.o
 ENCODE_OBJS = $(ENCODE_DIR)/encode.o
 THREAD_OBJS = $(THREAD_DIR)/thread_root_class.o 
+FILE_OBJS = $(FILE_DIR)/file_read_class.o $(FILE_DIR)/file_write_class.o 
 OBJECT_OBJS = $(OBJECT_DIR)/object_class.o
-PHWANG_OBJS = $(PHWANG_DIR)/phwang.o $(PHWANG_DIR)/phwang_class.o $(JSON_OBJS) $(SUSPEND_OBJS) $(LIST_MGR_OBJS) $(ARRAY_MGR_OBJS) $(ID_INDEX_LIST_OBJS) $(QUEUE_OBJS) $(NET_OBJS) $(MALLOC_OBJS) $(ENCODE_OBJS) $(THREAD_OBJS) $(ABEND_OBJS) $(ATOMIC_OBJS) $(DEFINE_OBJS)
+PHWANG_OBJS = $(PHWANG_DIR)/phwang.o $(PHWANG_DIR)/phwang_class.o $(JSON_OBJS) $(SUSPEND_OBJS) $(LIST_MGR_OBJS) $(ARRAY_MGR_OBJS) $(ID_INDEX_LIST_OBJS) $(FILE_OBJS) $(QUEUE_OBJS) $(NET_OBJS) $(MALLOC_OBJS) $(ENCODE_OBJS) $(THREAD_OBJS) $(ABEND_OBJS) $(ATOMIC_OBJS) $(DEFINE_OBJS)
 
 PHWANG_STATIC_LIB = libphwang.a
 PHWANG_DYNAMIC_LIB = libphwang.so
@@ -122,6 +124,12 @@ $(ARRAY_MGR_DIR)/array_mgr_class.o: $(ARRAY_MGR_DIR)/array_mgr_class.cpp $(ARRAY
 
 $(THREAD_DIR)/thread_root_class.o: $(THREAD_DIR)/thread_root_class.cpp $(THREAD_DIR)/thread_root_class.h
 	$(CC) -c $(THREAD_DIR)/thread_root_class.cpp -o $(THREAD_DIR)/thread_root_class.o
+
+$(FILE_DIR)/file_read_class.o: $(FILE_DIR)/file_read_class.cpp $(FILE_DIR)/file_read_class.h
+	$(CC) -c $(FILE_DIR)/file_read_class.cpp -o $(FILE_DIR)/file_read_class.o
+
+$(FILE_DIR)/file_write_class.o: $(FILE_DIR)/file_write_class.cpp $(FILE_DIR)/file_write_class.h
+	$(CC) -c $(FILE_DIR)/file_write_class.cpp -o $(FILE_DIR)/file_write_class.o
 
 $(SUSPEND_DIR)/suspend_class.o: $(SUSPEND_DIR)/suspend_class.cpp $(SUSPEND_DIR)/suspend_class.h
 	$(CC) -c $(SUSPEND_DIR)/suspend_class.cpp -o $(SUSPEND_DIR)/suspend_class.o

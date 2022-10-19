@@ -7,6 +7,7 @@
 #include <errno.h>
 #include "../../../phwang_dir/phwang.h"
 #include "../../../phwang_dir/malloc_dir/malloc_class.h"
+#include "../../../phwang_dir/file_dir/file_read_class.h"
 #include "../../define_dir/result_def.h"
 #include "../../define_dir/fe_def.h"
 #include "../../define_dir/ft_def.h"
@@ -1093,35 +1094,6 @@ char *DFabricClass::generateCloseFileResponse (
 {
 }
 
-void readLine (FILE *fp_val, char *line_buf_val, int *eof_val) {
-    int index = 0;
-
-    while (1) {
-        int c = getc(fp_val);
-
-        if (c == EOF) {
-            *eof_val = 1;
-            line_buf_val[index] = 0;
-            return;
-        }
-
-        if (c == 13) {
-            continue;
-        }
-
-        if (c == 10) {
-            line_buf_val[index] = 0;
-            break;
-        }
-
-        line_buf_val[index++] = c;
-    }
-
-    line_buf_val[index] = 0;
-
-    *eof_val = 0;
-}
-
 char *DFabricClass::processReadFileRequest (
         char *ajax_id_val,
         char *data_val)
@@ -1139,19 +1111,32 @@ char *DFabricClass::processReadFileRequest (
     strcpy(file_name_, "../data_dir/customer_data_dir/dtf_dir/");
     strcat(file_name_, file_name);
     phwangDebugSS(true, "DFabricClass::processReadFileRequest", "file_name_=", file_name_);
-    FILE *fp = fopen(file_name_, "r");
-    if (fp == 0) {
-        printf("***errno=%d\n", errno);
+
+    FileReadClass *file_class = new FileReadClass();
+    int open_result = file_class->openFile(file_name_, "r");
+    if (open_result == -1) {
         phwangLogitS("DFabricClass::processReadFileRequest", "cannot open file");
+        phwangAbendS("DFabricClass::processReadFileRequest", "cannot open file");
     }
 
     char data_buf[1000];
     int eof;
-    readLine(fp, data_buf, &eof);
+    file_class->readLine(data_buf, &eof);
     phwangDebugSS(true, "DFabricClass::processReadFileRequest", "data_buf=", data_buf);
 
+    char more;
+    if (eof) {
+        more = 'N';
+        delete file_class;
+
+    }
+    else {
+        more = 'Y';
+        /////tbd;
+    }
+
     char *result_data = data_buf;
-    response_data = this->generateReadFileResponse(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, 'N', result_data);
+    response_data = this->generateReadFileResponse(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, more, result_data);
     return response_data;
 }
 
