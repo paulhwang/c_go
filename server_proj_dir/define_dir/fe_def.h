@@ -10,8 +10,8 @@ class FE_DEF {
 public:
     int  const static FE_COMMAND_SIZE = 1;
 
-    char const static REGISTER_COMMAND                  = 'R';
-    char const static REGISTER_RESPONSE                 = 'r';
+    char const static REGISTER_COMMAND                  = 'U';
+    char const static REGISTER_RESPONSE                 = 'u';
     char const static LOGIN_COMMAND                     = 'I';
     char const static LOGIN_RESPONSE                    = 'i';
     char const static LOGOUT_COMMAND                    = 'O';
@@ -36,8 +36,8 @@ public:
     char const static OPEN_FILE_RESPONSE                = 'b';
     char const static CLOSE_FILE_COMMAND                = 'C';
     char const static CLOSE_FILE_RESPONSE               = 'c';
-    char const static READ_FILE_COMMAND                 = 'V';
-    char const static READ_FILE_RESPONSE                = 'v';
+    char const static READ_FILE_COMMAND                 = 'R';
+    char const static READ_FILE_RESPONSE                = 'r';
     char const static WRITE_FILE_COMMAND                = 'W';
     char const static WRITE_FILE_RESPONSE               = 'w';
     char const static MESSAGE_COMMAND                   = 'M';

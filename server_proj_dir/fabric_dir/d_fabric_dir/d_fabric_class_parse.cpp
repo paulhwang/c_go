@@ -1130,7 +1130,6 @@ char *DFabricClass::processReadFileRequest (
     if (eof) {
         more = 'N';
         delete file_class;
-
     }
     else {
         more = 'Y';
