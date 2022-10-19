@@ -21,6 +21,14 @@ FileMgrClass::~FileMgrClass (void)
     phwangDebugS(true, "FileMgrClass::~FileMgrClass", "exit");
 }
 
+int FileMgrClass::readBytesOpen (char type, char const *file_name_val, char *buf_val, int buf_size_val, int *eof_val)
+{
+    int length = 6;
+    strcpy(buf_val, "phwang");
+    *eof_val = 1;
+    return length;
+}
+
 int FileMgrClass::readBytesFOpen (char type, char const *file_name_val, char *buf_val, int buf_size_val, int *eof_val)
 {
     if (type == FileMgrClass::FIRST_READ) {
