@@ -21,6 +21,7 @@ class DFabricClass {
     void *portObj_;
     char timeStampString_[SIZE_DEF::FABRIC_TIME_STAMP_SIZE + 1];
 
+    FileMgrClass *fileMgrObj(void) {return fabricObj_->fileMgrObj();}
     DbClass *dbObject(void) {return fabricObj_->dbObject();}
     DbAccountClass *dbAccountObject(void);
     MessengerClass *messengerObject(void) {return this->fabricObj_->messengerObject();}

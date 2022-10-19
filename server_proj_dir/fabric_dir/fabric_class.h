@@ -15,11 +15,13 @@ class LinkClass;
 class GroupClass;
 class SessionClass;
 class NameListClass;
+class FileMgrClass;
 
 class FabricClass {
     char const *objectName(void) {return "FabricClass";}
     int theDebugCode;
     
+    FileMgrClass *fileMgrObj_;
     DbClass *theDbObject;
     MessengerClass *theMessengerObject;
     UFabricClass *theUFabricObject;
@@ -36,6 +38,7 @@ public:
     FabricClass(int debug_code_val);
     ~FabricClass(void);
 
+    FileMgrClass *fileMgrObj(void) {return this->fileMgrObj_;}
     DbClass *dbObject(void) {return this->theDbObject;}
     MessengerClass *messengerObject(void) {return this->theMessengerObject;}
     UFabricClass *uFabricObject(void) {return this->theUFabricObject;}

@@ -6,6 +6,7 @@
 
 #include "../../phwang_dir/phwang.h"
 #include "../../phwang_dir/list_mgr_dir/list_mgr_class.h"
+#include "../../phwang_dir/file_dir/file_mgr_class.h"
 #include "fabric_class.h"
 #include "messenger_dir/messenger_class.h"
 #include "../define_dir/fe_def.h"
@@ -21,6 +22,7 @@ FabricClass::FabricClass (int debug_code_val)
     memset(this, 0, sizeof(*this));
     this->theDebugCode = debug_code_val;
     
+    this->fileMgrObj_ = new FileMgrClass();
     this->theDbObject = new DbClass(this);
     this->theMessengerObject = new MessengerClass(this);
     this->theUFabricObject = new UFabricClass(this);
