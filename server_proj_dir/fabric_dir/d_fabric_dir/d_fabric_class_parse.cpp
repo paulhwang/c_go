@@ -7,7 +7,6 @@
 #include <errno.h>
 #include "../../../phwang_dir/phwang.h"
 #include "../../../phwang_dir/malloc_dir/malloc_class.h"
-#include "../../../phwang_dir/file_dir/file_access_class.h"
 #include "../../../phwang_dir/file_dir/file_mgr_class.h"
 #include "../../define_dir/result_def.h"
 #include "../../define_dir/file_def.h"
@@ -1109,14 +1108,19 @@ char *DFabricClass::processReadFileRequest (
     //current_ptr += file_name_size;
     phwangDebugSS(true, "DFabricClass::processReadFileRequest", "file_name=", file_name);
 
-    char file_name_[100];
-    strcpy(file_name_, FILE_DEF::DTF_DIR);
-    strcat(file_name_, file_name);
-    phwangDebugSS(true, "DFabricClass::processReadFileRequest", "file_name_=", file_name_);
+    char file_name_buf[FileMgrClass::MAX_FILE_NAME_SIZE + 1];
+    if (strlen(FILE_DEF::DTF_DIR) + strlen(file_name) <= FileMgrClass::MAX_FILE_NAME_SIZE) {
+        strcpy(file_name_buf, FILE_DEF::DTF_DIR);
+        strcat(file_name_buf, file_name);
+        phwangDebugSS(true, "DFabricClass::processReadFileRequest", "file_name_buf=", file_name_buf);
+    }
+    else {
+        phwangAbendSS("DFabricClass::processReadFileRequest", "file_name too long", file_name);
+    }
 
-    char data_buf[1000 + 1];
+    char data_buf[FileMgrClass::MAX_BUF_SIZE + 1];
     int eof;
-    int length = this->fileMgrObj()->readBytes('R', file_name_, data_buf, 1000, &eof);
+    int length = this->fileMgrObj()->readBytes(FileMgrClass::FIRST_READ, file_name_buf, data_buf, FileMgrClass::MAX_BUF_SIZE, &eof);
     printf("length=%d\n", length);
     phwangDebugSS(true, "DFabricClass::processReadFileRequest", "data_buf=", data_buf);
 
