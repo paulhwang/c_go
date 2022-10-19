@@ -9,6 +9,7 @@
 #include "../../../phwang_dir/malloc_dir/malloc_class.h"
 #include "../../../phwang_dir/file_dir/file_read_class.h"
 #include "../../define_dir/result_def.h"
+#include "../../define_dir/file_def.h"
 #include "../../define_dir/fe_def.h"
 #include "../../define_dir/ft_def.h"
 #include "../../define_dir/fabric_def.h"
@@ -1108,7 +1109,8 @@ char *DFabricClass::processReadFileRequest (
     phwangDebugSS(true, "DFabricClass::processReadFileRequest", "file_name=", file_name);
 
     char file_name_[100];
-    strcpy(file_name_, "../data_dir/customer_data_dir/dtf_dir/");
+    //strcpy(file_name_, "../data_dir/customer_data_dir/dtf_dir/");
+    strcpy(file_name_, FILE_DEF::DTF_DIR);
     strcat(file_name_, file_name);
     phwangDebugSS(true, "DFabricClass::processReadFileRequest", "file_name_=", file_name_);
 

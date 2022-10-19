@@ -30,7 +30,7 @@ SQL_DIR           = $(PHWANG_DIR)/sql_dir
 
 ### Objects
 SERVER_OBJS = $(SERVER_DIR)/server_main.o $(SERVER_DIR)/server_root_class.o
-DEFINE_OBJS = $(DEFINE_DIR)/result_def.o $(DEFINE_DIR)/size_def.o
+DEFINE_OBJS = $(DEFINE_DIR)/result_def.o $(DEFINE_DIR)/size_def.o $(DEFINE_DIR)/file_def.o
 DB_OBJS = $(DB_DIR)/db_class.o $(DB_DIR)/db_account_class.o $(DB_DIR)/db_account_default.o $(DB_DIR)/db_account_entry_class.o $(DB_DIR)/db_test_class.o
 MMW_OBJS = $(MMW_DIR)/mmw_frame_class.o $(MMW_DIR)/mmw_input_class.o $(MMW_DIR)/mmw_thread_class.o $(MMW_DIR)/mmw_class.o
 MESSENGER_OBJS = $(MMW_OBJS) $(MESSENGER_DIR)/messenger_class.o
