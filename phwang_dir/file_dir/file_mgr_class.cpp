@@ -21,18 +21,66 @@ FileMgrClass::~FileMgrClass (void)
     phwangDebugS(true, "FileMgrClass::~FileMgrClass", "exit");
 }
 
-int FileMgrClass::readBytes (char type, char *buf_val, int buf_size_val, int *eof_val)
+int FileMgrClass::readBytes (char type, char const *file_name_val, char *buf_val, int buf_size_val, int *eof_val)
 {
     if (type == FileMgrClass::FIRST_READ) {
+        FILE *fp = fopen(file_name_val, "r");
+        if (fp == 0) {
+            printf("***errno=%d\n", errno);
+            phwangLogitS("FileMgrClass::readBytes", "cannot open file");
+            phwangAbendS("FileMgrClass::readBytes", "cannot open file");
+            return -1;
+        }
+        return this->readBytes_(fp, buf_val, buf_size_val, eof_val);
+    }
+    else if (type == FileMgrClass::FIRST_WRITE) {
+        FILE *fp = fopen(file_name_val, "w");
+        if (fp == 0) {
+            printf("***errno=%d\n", errno);
+            phwangLogitS("FileMgrClass::readBytes", "cannot open file");
+            phwangAbendS("FileMgrClass::readBytes", "cannot open file");
+            return -1;
+        }
+    }
+    else if (type == FileMgrClass::MORE_READ) {
+        
+    }
 
-    }
-    if (type == FileMgrClass::FIRST_WRITE) {
+    else if (type == FileMgrClass::MORE_WRITE) {
         
     }
-    if (type == FileMgrClass::MORE_READ) {
-        
+
+    else {
+        phwangAbendS("FileMgrClass::readBytes", "bad type");
     }
-    if (type == FileMgrClass::MORE_WRITE) {
-        
+}
+
+int FileMgrClass::readBytes_ (FILE *fp_val, char *buf_val, int buf_size_val, int *eof_val)
+{
+    int index = 0;
+
+    while (index < buf_size_val) {
+        int c = getc(fp_val);
+
+        if (c == EOF) {
+            *eof_val = 1;
+            buf_val[index] = 0;
+            return index;
+        }
+        /*
+        else if (c == 13) {
+            continue;
+        }
+        else if (c == 10) {
+            buf_val[index] = 0;
+            break;
+        }
+        */
+
+        buf_val[index++] = c;
     }
+
+    *eof_val = 0;
+    buf_val[index] = 0;
+    return index;
 }

@@ -7,7 +7,9 @@
 #pragma once
 
 class FileMgrClass {
-  public:
+    int readBytes_ (FILE *fp_val, char *buf_val, int buf_size_val, int *eof_val);
+
+public:
     char const static FIRST_READ  = 'R';
     char const static MORE_READ   = 'r';
     char const static FIRST_WRITE = 'W';
@@ -16,5 +18,5 @@ class FileMgrClass {
     FileMgrClass(void);
     ~FileMgrClass(void);
 
-    int readBytes(char type, char *buf_val, int buf_size_val, int *eof_val);
+    int readBytes(char type, char const *file_name_val, char *buf_val, int buf_size_val, int *eof_val);
 };

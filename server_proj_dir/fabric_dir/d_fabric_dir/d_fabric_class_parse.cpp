@@ -1127,6 +1127,10 @@ char *DFabricClass::processReadFileRequest (
     printf("length=%d\n", length);
     phwangDebugSS(true, "DFabricClass::processReadFileRequest", "data_buf=", data_buf);
 
+    length = this->fileMgrObj()->readBytes('R', file_name_, data_buf, 1000, &eof);
+    printf("length=%d\n", length);
+    phwangDebugSS(true, "DFabricClass::processReadFileRequest", "data_buf=", data_buf);
+
     char more;
     if (eof) {
         more = 'N';
