@@ -28,7 +28,7 @@ void *PortClass::transmitThreadFunction (int socket_val)
             char *ptr;
             char *buf = ptr = (char *) malloc(1 + TCP_IP_DEF::MAX_DATA_LENGTH_SIZE + length + 1 + 1);
 
-            if (length < 1400) {
+            if (length <= TCP_IP_DEF::MAX_DATA_SIZE - (1 + TCP_IP_DEF::MAX_DATA_LENGTH_SIZE + 1)) {
                 *ptr++ = '{';
 
                 phwangEncodeNumber(ptr, length, TCP_IP_DEF::MAX_DATA_LENGTH_SIZE);
