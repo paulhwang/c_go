@@ -8,7 +8,7 @@
 
 class TCP_IP_DEF {
 public:
-    int const static MTU_SIZE = 1500;
+    int const static ETHERNET_MTU_SIZE = 1500;
 
     int const static     TCP_HEADER_SIZE = 20;
     int const static MAX_TCP_HEADER_SIZE = 60;
@@ -19,6 +19,6 @@ public:
     int const static     TCP_IP_HEADER_SIZE =     TCP_HEADER_SIZE +     IP_HEADER_SIZE;
     int const static MAX_TCP_IP_HEADER_SIZE = MAX_TCP_HEADER_SIZE + MAX_IP_HEADER_SIZE;
 
-    int const static MAX_DATA_SIZE = MTU_SIZE - TCP_HEADER_SIZE - 40;
+    int const static MAX_DATA_SIZE = ETHERNET_MTU_SIZE - MAX_TCP_IP_HEADER_SIZE;
     int const static MAX_DATA_LENGTH_SIZE = 4;
 };
