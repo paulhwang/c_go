@@ -1139,6 +1139,8 @@ char *DFabricClass::processReadFileRequest (
         /////tbd;
     }
 
+    printf("strcmp=%d\n", strcmp(data_buf, data_buf1));
+
     char *result_data = data_buf;
     response_data = this->generateReadFileResponse(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, more, result_data);
     return response_data;
