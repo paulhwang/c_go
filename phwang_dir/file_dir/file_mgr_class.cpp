@@ -5,6 +5,7 @@
 */
 
 #include <errno.h>
+#include <fcntl.h>
 #include "../../phwang_dir/phwang.h"
 #include "file_mgr_class.h"
 #include "file_access_class.h"
@@ -23,6 +24,31 @@ FileMgrClass::~FileMgrClass (void)
 
 int FileMgrClass::readBytesOpen (char type, char const *file_name_val, char *buf_val, int buf_size_val, int *eof_val)
 {
+    if (type == FileMgrClass::FIRST_READ) {
+        int fd = open(file_name_val, O_RDONLY, 0);
+        if (fd == -1) {
+            printf("***errno=%d\n", errno);
+            phwangLogitS("FileMgrClass::readBytesOpen", "cannot open file");
+            phwangAbendS("FileMgrClass::readBytesOpen", "cannot open file");
+            return -1;
+        }
+        printf("fd=%d\n", fd);
+        phwangLogitS("FileMgrClass::readBytesOpen", "open file succeed");
+        //return this->readBytesFOpen_(fp, buf_val, buf_size_val, eof_val);
+    }
+    else if (type == FileMgrClass::FIRST_WRITE) {
+    }
+    else if (type == FileMgrClass::MORE_READ) {
+        
+    }
+
+    else if (type == FileMgrClass::MORE_WRITE) {
+        
+    }
+
+    else {
+        phwangAbendS("FileMgrClass::readBytesOpen", "bad type");
+    }
     int length = 6;
     strcpy(buf_val, "phwang");
     *eof_val = 1;
@@ -35,8 +61,8 @@ int FileMgrClass::readBytesFOpen (char type, char const *file_name_val, char *bu
         FILE *fp = fopen(file_name_val, "r");
         if (fp == 0) {
             printf("***errno=%d\n", errno);
-            phwangLogitS("FileMgrClass::readBytes", "cannot open file");
-            phwangAbendS("FileMgrClass::readBytes", "cannot open file");
+            phwangLogitS("FileMgrClass::readBytesFOpen", "cannot open file");
+            phwangAbendS("FileMgrClass::readBytesFOpen", "cannot open file");
             return -1;
         }
         return this->readBytesFOpen_(fp, buf_val, buf_size_val, eof_val);
@@ -45,8 +71,8 @@ int FileMgrClass::readBytesFOpen (char type, char const *file_name_val, char *bu
         FILE *fp = fopen(file_name_val, "w");
         if (fp == 0) {
             printf("***errno=%d\n", errno);
-            phwangLogitS("FileMgrClass::readBytes", "cannot open file");
-            phwangAbendS("FileMgrClass::readBytes", "cannot open file");
+            phwangLogitS("FileMgrClass::readBytesFOpen", "cannot open file");
+            phwangAbendS("FileMgrClass::readBytesFOpen", "cannot open file");
             return -1;
         }
     }
@@ -59,7 +85,7 @@ int FileMgrClass::readBytesFOpen (char type, char const *file_name_val, char *bu
     }
 
     else {
-        phwangAbendS("FileMgrClass::readBytes", "bad type");
+        phwangAbendS("FileMgrClass::readBytesFOpen", "bad type");
     }
 }
 
