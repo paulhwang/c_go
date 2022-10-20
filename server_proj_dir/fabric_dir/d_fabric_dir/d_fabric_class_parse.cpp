@@ -1120,12 +1120,11 @@ char *DFabricClass::processReadMoreFileRequest (
     phwangDebugS(true, "DFabricClass::processReadMoreFileRequest", data_val);
 
     char *current_ptr = data_val;
-    int file_name_size;
-    char fd_str[FileMgrClass::FD_LEN_SIZE + 1];
-    memcpy(fd_str, current_ptr, FileMgrClass::FD_LEN_SIZE);
+
+    int fd = phwangDecodeNumber(current_ptr, FileMgrClass::FD_LEN_SIZE);
     current_ptr += FileMgrClass::FD_LEN_SIZE;
 
-    phwangDebugSS(true, "DFabricClass::processReadMoreFileRequest", "fd=", fd_str);
+    printf("DFabricClass::processReadMoreFileRequest() fd=%d\n", fd);
 
     response_data = this->generateReadMoreFileResponse(RESULT_DEF::RESULT_SUCCEED, ajax_id_val);
     return response_data;
@@ -1135,7 +1134,7 @@ char *DFabricClass::generateReadMoreFileResponse (
     char const *result_val,
     char *ajax_id_val)
 {
-    phwangDebugS(true, "DFabricClass::generateReadMoreFileResponse", result_val);
+    phwangDebugS(false, "DFabricClass::generateReadMoreFileResponse", result_val);
 
     char *response_data = (char *) phwangMalloc(FABRIC_DEF::DL_ACR_BUF_SIZE, MallocClass::generateOpenFileResponse);
     char *current_ptr = response_data;
@@ -1147,7 +1146,7 @@ char *DFabricClass::generateReadMoreFileResponse (
 
     strcpy(current_ptr, result_val);
 
-    phwangDebugSS(true, "DFabricClass::generateReadMoreFileResponse", "response_data=", response_data);
+    phwangDebugSS(false, "DFabricClass::generateReadMoreFileResponse", "response_data=", response_data);
 
     return response_data;
 }
