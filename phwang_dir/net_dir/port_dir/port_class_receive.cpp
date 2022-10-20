@@ -19,9 +19,9 @@ void *PortClass::receiveThreadFunction (int socket_val)
     phwangIncrementReceiveThreadCount();
 
     while (1) {
-        char *data = (char *) phwangMalloc(TCP_IP_DEF::MAX_DATA_SIZE + 1, MallocClass::receiveThreadFunction);
+        char *data = (char *) phwangMalloc(TCP_IP_DEF::MAX_TCP_DATA_SIZE + 1, MallocClass::receiveThreadFunction);
 
-        int length = read(socket_val, data, TCP_IP_DEF::MAX_DATA_SIZE);
+        int length = read(socket_val, data, TCP_IP_DEF::MAX_TCP_DATA_SIZE);
         if (length > 0) {
             data[length] = 0;
             

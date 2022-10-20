@@ -26,13 +26,13 @@ void *PortClass::transmitThreadFunction (int socket_val)
 
             int length = strlen(data);
             char *ptr;
-            char *buf = ptr = (char *) malloc(1 + TCP_IP_DEF::MAX_DATA_LENGTH_SIZE + length + 1 + 1);
+            char *buf = ptr = (char *) malloc(1 + TCP_IP_DEF::MAX_TCP_DATA_LEN_SIZE + length + 1 + 1);
 
-            if (length <= TCP_IP_DEF::MAX_DATA_SIZE - (1 + TCP_IP_DEF::MAX_DATA_LENGTH_SIZE + 1)) {
+            if (length <= TCP_IP_DEF::MAX_TCP_DATA_SIZE - (1 + TCP_IP_DEF::MAX_TCP_DATA_LEN_SIZE + 1)) {
                 *ptr++ = '{';
 
-                phwangEncodeNumber(ptr, length, TCP_IP_DEF::MAX_DATA_LENGTH_SIZE);
-                ptr += TCP_IP_DEF::MAX_DATA_LENGTH_SIZE;
+                phwangEncodeNumber(ptr, length, TCP_IP_DEF::MAX_TCP_DATA_LEN_SIZE);
+                ptr += TCP_IP_DEF::MAX_TCP_DATA_LEN_SIZE;
 
                 strcpy(ptr, data);
                 ptr += length;

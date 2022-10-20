@@ -19,6 +19,6 @@ public:
     int const static     TCP_IP_HEADER_SIZE =     TCP_HEADER_SIZE +     IP_HEADER_SIZE;
     int const static MAX_TCP_IP_HEADER_SIZE = MAX_TCP_HEADER_SIZE + MAX_IP_HEADER_SIZE;
 
-    int const static MAX_DATA_SIZE = ETHERNET_MTU_SIZE - MAX_TCP_IP_HEADER_SIZE;
-    int const static MAX_DATA_LENGTH_SIZE = 4;
+    int const static MAX_TCP_DATA_SIZE = ETHERNET_MTU_SIZE - MAX_TCP_IP_HEADER_SIZE;
+    int const static MAX_TCP_DATA_LEN_SIZE = 4;
 };
