@@ -23,44 +23,50 @@ FileMgrClass::~FileMgrClass (void)
 }
 
 int FileMgrClass::readBytesOpen (
-    char type,
     char const *file_name_val,
     char *buf_val,
     int buf_size_val,
     int *eof_ptr_val,
     int *fd_ptr_val)
 {
-    if (type == FileMgrClass::FIRST_READ) {
-        int fd = open(file_name_val, O_RDONLY, 0);
-        if (fd == -1) {
-            printf("***errno=%d\n", errno);
-            phwangLogitS("FileMgrClass::readBytesOpen", "cannot open file");
-            phwangAbendS("FileMgrClass::readBytesOpen", "cannot open file");
-            return -1;
-        }
-        printf("fd=%d\n", fd);
-        phwangLogitS("FileMgrClass::readBytesOpen", "open file succeed");
-        int length = read(fd, buf_val, buf_size_val);
-        buf_val[length] = 0;
-        if (length < buf_size_val) {
-            *eof_ptr_val = 1;
-            close(fd);
-        }
-        else {
-            *eof_ptr_val = 0;
-        }
-        *fd_ptr_val = fd;
-        return length;
+    int fd = open(file_name_val, O_RDONLY, 0);
+    if (fd == -1) {
+        printf("***errno=%d\n", errno);
+        phwangLogitS("FileMgrClass::readBytesOpen", "cannot open file");
+        phwangAbendS("FileMgrClass::readBytesOpen", "cannot open file");
+        return -1;
     }
-    else if (type == FileMgrClass::FIRST_WRITE) {
-    }
-    else if (type == FileMgrClass::MORE_READ) {
-    }
-    else if (type == FileMgrClass::MORE_WRITE) {
+    printf("fd=%d\n", fd);
+    phwangLogitS("FileMgrClass::readBytesOpen", "open file succeed");
+    int length = read(fd, buf_val, buf_size_val);
+    buf_val[length] = 0;
+    if (length < buf_size_val) {
+        *eof_ptr_val = 1;
+        close(fd);
     }
     else {
-        phwangAbendS("FileMgrClass::readBytesOpen", "bad type");
+        *eof_ptr_val = 0;
     }
+    *fd_ptr_val = fd;
+    return length;
+}
+
+int FileMgrClass::readBytesMore (
+    int fd_val,
+    char *buf_val,
+    int buf_size_val,
+    int *eof_ptr_val)
+{
+    int length = read(fd_val, buf_val, buf_size_val);
+    buf_val[length] = 0;
+    if (length < buf_size_val) {
+        *eof_ptr_val = 1;
+        close(fd_val);
+    }
+    else {
+        *eof_ptr_val = 0;
+    }
+    return length;
 }
 
 int FileMgrClass::readBytesFOpen (char type, char const *file_name_val, char *buf_val, int buf_size_val, int *eof_val)

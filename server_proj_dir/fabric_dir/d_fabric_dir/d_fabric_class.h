@@ -173,7 +173,10 @@ class DFabricClass {
 
     char *generateReadMoreFileResponse (
         char const *result_val,
-        char *ajax_id_val);
+        char *ajax_id_val,
+        char more_data_exist_val,
+        int fd_val,
+        char const *result_data_val);
 
     char *processWriteFileRequest (
         char *ajax_id_val,

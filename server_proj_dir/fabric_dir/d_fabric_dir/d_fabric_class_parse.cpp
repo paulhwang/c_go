@@ -1071,7 +1071,7 @@ char *DFabricClass::processReadFileRequest (
     char data_buf[FileMgrClass::MAX_BUF_SIZE + 1];
     int eof;
     int fd;
-    int length = this->fileMgrObj()->readBytesOpen(FileMgrClass::FIRST_READ, file_name_buf, data_buf, FileMgrClass::MAX_BUF_SIZE, &eof, &fd);
+    int length = this->fileMgrObj()->readBytesOpen(file_name_buf, data_buf, FileMgrClass::MAX_BUF_SIZE, &eof, &fd);
     printf("length=%d %d \n", length, strlen(data_buf));
     phwangDebugSS(true, "DFabricClass::processReadFileRequest", "data_buf=", data_buf);
 
@@ -1126,17 +1126,25 @@ char *DFabricClass::processReadMoreFileRequest (
 
     printf("DFabricClass::processReadMoreFileRequest() fd=%d\n", fd);
 
-    response_data = this->generateReadMoreFileResponse(RESULT_DEF::RESULT_SUCCEED, ajax_id_val);
+    char data_buf[FileMgrClass::MAX_BUF_SIZE + 1];
+    int eof;
+    int length = this->fileMgrObj()->readBytesMore(fd, data_buf, FileMgrClass::MAX_BUF_SIZE, &eof);
+
+    char *result_data = data_buf;
+    response_data = this->generateReadMoreFileResponse(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, eof ? 'N' : 'Y', fd, result_data);
     return response_data;
 }
 
 char *DFabricClass::generateReadMoreFileResponse (
     char const *result_val,
-    char *ajax_id_val)
+    char *ajax_id_val,
+    char more_data_exist_val,
+    int fd_val,
+    char const *result_data_val)
 {
     phwangDebugS(false, "DFabricClass::generateReadMoreFileResponse", result_val);
 
-    char *response_data = (char *) phwangMalloc(FABRIC_DEF::DL_ACR_BUF_SIZE, MallocClass::generateOpenFileResponse);
+    char *response_data = (char *) phwangMalloc(FABRIC_DEF::DL_ACR_BUF_SIZE + 1 + FileMgrClass::FD_LEN_SIZE + strlen(result_data_val), MallocClass::generateReadMoreFileResponse);
     char *current_ptr = response_data;
 
     memcpy(current_ptr, ajax_id_val, SIZE_DEF::AJAX_ID_SIZE);
@@ -1144,7 +1152,17 @@ char *DFabricClass::generateReadMoreFileResponse (
 
     *current_ptr++ = FE_DEF::READ_MORE_FILE_RESPONSE;
 
-    strcpy(current_ptr, result_val);
+    memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
+    current_ptr += RESULT_DEF::RESULT_SIZE;
+
+    *current_ptr++ = more_data_exist_val;
+
+    if (more_data_exist_val == 'Y') {
+        phwangEncodeNumber(current_ptr, fd_val, FileMgrClass::FD_LEN_SIZE);
+        current_ptr += FileMgrClass::FD_LEN_SIZE;
+    }
+
+    strcpy(current_ptr, result_data_val);
 
     phwangDebugSS(false, "DFabricClass::generateReadMoreFileResponse", "response_data=", response_data);
 

@@ -22,11 +22,20 @@ public:
     ~FileMgrClass(void);
 
     int readBytesOpen(
-        char type,
         char const *file_name_val,
         char *buf_val,
         int buf_size_val,
         int *eof_ptr_val,
         int *fd_ptr_val);
+
+    int readBytesMore(
+        int fd_val,
+        char *buf_val,
+        int buf_size_val,
+        int *eof_ptr_val);
+
+
+
+
     int readBytesFOpen(char type, char const *file_name_val, char *buf_val, int buf_size_val, int *eof_val);
 };
