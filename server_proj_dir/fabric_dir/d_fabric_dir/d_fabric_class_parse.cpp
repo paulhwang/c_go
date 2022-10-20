@@ -70,16 +70,12 @@ void DFabricClass::parseInput (
                     response_data = this->processLoginRequest(ajax_id, current_ptr, 'N', port_obj_val);
                     break;
 
-                case FE_DEF::OPEN_FILE_COMMAND:
-                    response_data = this->processOpenFileRequest(ajax_id, current_ptr);
-                    break;
-
-                case FE_DEF::CLOSE_FILE_COMMAND:
-                    response_data = this->processCloseFileRequest(ajax_id, current_ptr);
-                    break;
-
                 case FE_DEF::READ_FILE_COMMAND:
                     response_data = this->processReadFileRequest(ajax_id, current_ptr);
+                    break;
+
+                case FE_DEF::READ_MORE_FILE_COMMAND:
+                    response_data = this->processReadMoreFileRequest(ajax_id, current_ptr);
                     break;
 
                 case FE_DEF::MESSAGE_COMMAND:
@@ -120,6 +116,10 @@ void DFabricClass::parseInput (
 
                 case FE_DEF::WRITE_FILE_COMMAND:
                     response_data = this->processWriteFileRequest(ajax_id, current_ptr);
+                    break;
+
+                case FE_DEF::WRITE_MORE_FILE_COMMAND:
+                    response_data = this->processWriteMoreFileRequest(ajax_id, current_ptr);
                     break;
 
                 default:
@@ -1045,56 +1045,6 @@ char *DFabricClass::generateGetSessionDataResponse (
     return response_data;
 }
 
-char *DFabricClass::processOpenFileRequest (
-        char *ajax_id_val,
-        char *data_val)
-{
-    char *response_data;
-    phwangDebugS(true, "DFabricClass::processOpenFileRequest", data_val);
-
-    char mode = data_val[0];
-
-    char *encoded_file_name = &data_val[1];
-    int file_name_size;
-    char *file_name = phwangDecodeStringMalloc(encoded_file_name, &file_name_size);
-
-    response_data = this->generateOpenFileResponse(RESULT_DEF::RESULT_SUCCEED, ajax_id_val);
-    return response_data;
-}
-
-char *DFabricClass::generateOpenFileResponse (
-    char const *result_val,
-    char *ajax_id_val)
-{
-    phwangDebugS(false, "DFabricClass::generateOpenFileResponse", result_val);
-
-    char *response_data = (char *) phwangMalloc(FABRIC_DEF::DL_ACRLS_BUF_SIZE, MallocClass::generateOpenFileResponse);
-    char *current_ptr = response_data;
-
-    memcpy(current_ptr, ajax_id_val, SIZE_DEF::AJAX_ID_SIZE);
-    current_ptr += SIZE_DEF::AJAX_ID_SIZE;
-
-    *current_ptr++ = FE_DEF::OPEN_FILE_RESPONSE;
-
-    strcpy(current_ptr, result_val);
-
-    return response_data;
-}
-
-char *DFabricClass::processCloseFileRequest (
-        char *ajax_id_val,
-        char *data_val)
-{
-    phwangDebugS(true, "DFabricClass::processCloseFileRequest", data_val);
-
-}
-
-char *DFabricClass::generateCloseFileResponse (
-    char const *result_val,
-    char *ajax_id_val)
-{
-}
-
 char *DFabricClass::processReadFileRequest (
         char *ajax_id_val,
         char *data_val)
@@ -1162,6 +1112,46 @@ char *DFabricClass::generateReadFileResponse (
     return response_data;
 }
 
+char *DFabricClass::processReadMoreFileRequest (
+        char *ajax_id_val,
+        char *data_val)
+{
+    char *response_data;
+    phwangDebugS(true, "DFabricClass::processReadMoreFileRequest", data_val);
+
+    char *current_ptr = data_val;
+    int file_name_size;
+    char fd_str[FileMgrClass::FD_LEN_SIZE + 1];
+    memcpy(fd_str, current_ptr, FileMgrClass::FD_LEN_SIZE);
+    current_ptr += FileMgrClass::FD_LEN_SIZE;
+
+    phwangDebugSS(true, "DFabricClass::processReadMoreFileRequest", "fd=", fd_str);
+
+    response_data = this->generateReadMoreFileResponse(RESULT_DEF::RESULT_SUCCEED, ajax_id_val);
+    return response_data;
+}
+
+char *DFabricClass::generateReadMoreFileResponse (
+    char const *result_val,
+    char *ajax_id_val)
+{
+    phwangDebugS(true, "DFabricClass::generateReadMoreFileResponse", result_val);
+
+    char *response_data = (char *) phwangMalloc(FABRIC_DEF::DL_ACR_BUF_SIZE, MallocClass::generateOpenFileResponse);
+    char *current_ptr = response_data;
+
+    memcpy(current_ptr, ajax_id_val, SIZE_DEF::AJAX_ID_SIZE);
+    current_ptr += SIZE_DEF::AJAX_ID_SIZE;
+
+    *current_ptr++ = FE_DEF::READ_MORE_FILE_RESPONSE;
+
+    strcpy(current_ptr, result_val);
+
+    phwangDebugSS(true, "DFabricClass::generateReadMoreFileResponse", "response_data=", response_data);
+
+    return response_data;
+}
+
 char *DFabricClass::processWriteFileRequest (
         char *ajax_id_val,
         char *data_val)
@@ -1200,6 +1190,20 @@ char *DFabricClass::generateWriteFileResponse (
     *current_ptr = 0;
 
     return response_data;
+}
+
+char *DFabricClass::processWriteMoreFileRequest (
+        char *ajax_id_val,
+        char *data_val)
+{
+    phwangDebugS(true, "DFabricClass::processWriteMoreFileRequest", data_val);
+
+}
+
+char *DFabricClass::generateWriteMoreFileResponse (
+    char const *result_val,
+    char *ajax_id_val)
+{
 }
 
 char *DFabricClass::processDatagramRequest (

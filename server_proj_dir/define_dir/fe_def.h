@@ -32,14 +32,14 @@ public:
     char const static PUT_SESSION_DATA_RESPONSE         = 'p';
     char const static GET_SESSION_DATA_COMMAND          = 'G';
     char const static GET_SESSION_DATA_RESPONSE         = 'g';
-    char const static OPEN_FILE_COMMAND                 = 'B';
-    char const static OPEN_FILE_RESPONSE                = 'b';
-    char const static CLOSE_FILE_COMMAND                = 'C';
-    char const static CLOSE_FILE_RESPONSE               = 'c';
     char const static READ_FILE_COMMAND                 = 'R';
     char const static READ_FILE_RESPONSE                = 'r';
+    char const static READ_MORE_FILE_COMMAND            = 'B';
+    char const static READ_MORE_FILE_RESPONSE           = 'b';
     char const static WRITE_FILE_COMMAND                = 'W';
     char const static WRITE_FILE_RESPONSE               = 'w';
+    char const static WRITE_MORE_FILE_COMMAND           = 'C';
+    char const static WRITE_MORE_FILE_RESPONSE          = 'c';
     char const static MESSAGE_COMMAND                   = 'M';
     char const static MESSAGE_RESPONSE                  = 'm';
 

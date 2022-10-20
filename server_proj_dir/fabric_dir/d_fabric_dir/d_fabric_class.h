@@ -156,22 +156,6 @@ class DFabricClass {
         char const *session_id_index_val,
         char const *data_val);
 
-    char *processOpenFileRequest (
-        char *ajax_id_val,
-        char *data_val);
-
-    char *generateOpenFileResponse (
-        char const *result_val,
-        char *ajax_id_val);
-
-    char *processCloseFileRequest (
-        char *ajax_id_val,
-        char *data_val);
-
-    char *generateCloseFileResponse (
-        char const *result_val,
-        char *ajax_id_val);
-
     char *processReadFileRequest (
         char *ajax_id_val,
         char *data_val);
@@ -183,11 +167,27 @@ class DFabricClass {
         int fd_val,
         char const *result_data_val);
 
+    char *processReadMoreFileRequest (
+        char *ajax_id_val,
+        char *data_val);
+
+    char *generateReadMoreFileResponse (
+        char const *result_val,
+        char *ajax_id_val);
+
     char *processWriteFileRequest (
         char *ajax_id_val,
         char *data_val);
 
     char *generateWriteFileResponse (
+        char const *result_val,
+        char *ajax_id_val);
+
+    char *processWriteMoreFileRequest (
+        char *ajax_id_val,
+        char *data_val);
+
+    char *generateWriteMoreFileResponse (
         char const *result_val,
         char *ajax_id_val);
 
