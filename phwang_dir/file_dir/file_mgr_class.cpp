@@ -36,12 +36,7 @@ int FileMgrClass::readBytesOpen (char type, char const *file_name_val, char *buf
         phwangLogitS("FileMgrClass::readBytesOpen", "open file succeed");
         int length = read(fd, buf_val, buf_size_val);
         buf_val[length] = 0;
-        if (length < buf_size_val) {
-            *eof_val = 1;
-        }
-        else {
-            *eof_val = 0;
-        }
+        *eof = (length < buf_size_val) ? 1 : 0;
         return length;
     }
     else if (type == FileMgrClass::FIRST_WRITE) {
