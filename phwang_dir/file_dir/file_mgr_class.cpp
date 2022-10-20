@@ -42,7 +42,13 @@ int FileMgrClass::readBytesOpen (
         phwangLogitS("FileMgrClass::readBytesOpen", "open file succeed");
         int length = read(fd, buf_val, buf_size_val);
         buf_val[length] = 0;
-        *eof_ptr_val = (length < buf_size_val) ? 1 : 0;
+        if (length < buf_size_val) {
+            *eof_ptr_val = 1;
+            close(fd);
+        }
+        else {
+            *eof_ptr_val = 0;
+        }
         *fd_ptr_val = fd;
         return length;
     }
