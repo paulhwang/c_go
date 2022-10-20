@@ -1120,12 +1120,13 @@ char *DFabricClass::processReadFileRequest (
 
     char data_buf[FileMgrClass::MAX_BUF_SIZE + 1];
     int eof;
-    int length = this->fileMgrObj()->readBytesOpen(FileMgrClass::FIRST_READ, file_name_buf, data_buf, FileMgrClass::MAX_BUF_SIZE, &eof);
+    int fd;
+    int length = this->fileMgrObj()->readBytesOpen(FileMgrClass::FIRST_READ, file_name_buf, data_buf, FileMgrClass::MAX_BUF_SIZE, &eof, &fd);
     printf("length=%d %d \n", length, strlen(data_buf));
     phwangDebugSS(true, "DFabricClass::processReadFileRequest", "data_buf=", data_buf);
 
     char *result_data = data_buf;
-    response_data = this->generateReadFileResponse(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, eof ? 'N' : 'Y', result_data);
+    response_data = this->generateReadFileResponse(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, eof ? 'N' : 'Y', fd, result_data);
     return response_data;
 }
 
@@ -1133,6 +1134,7 @@ char *DFabricClass::generateReadFileResponse (
     char const *result_val,
     char *ajax_id_val,
     char more_data_exist_val,
+    int fd_val,
     char const *result_data_val)
 {
     phwangDebugS(false, "DFabricClass::generateReadFileResponse", result_val);
@@ -1149,6 +1151,10 @@ char *DFabricClass::generateReadFileResponse (
     current_ptr += RESULT_DEF::RESULT_SIZE;
 
     *current_ptr++ = more_data_exist_val;
+
+    if (more_data_exist_val == 'Y') {
+
+    }
 
     strcpy(current_ptr, result_data_val);
 

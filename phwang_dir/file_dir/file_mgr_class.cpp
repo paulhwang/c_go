@@ -22,7 +22,13 @@ FileMgrClass::~FileMgrClass (void)
     phwangDebugS(true, "FileMgrClass::~FileMgrClass", "exit");
 }
 
-int FileMgrClass::readBytesOpen (char type, char const *file_name_val, char *buf_val, int buf_size_val, int *eof_val)
+int FileMgrClass::readBytesOpen (
+    char type,
+    char const *file_name_val,
+    char *buf_val,
+    int buf_size_val,
+    int *eof_ptr_val,
+    int *fd_ptr_val)
 {
     if (type == FileMgrClass::FIRST_READ) {
         int fd = open(file_name_val, O_RDONLY, 0);
@@ -36,7 +42,8 @@ int FileMgrClass::readBytesOpen (char type, char const *file_name_val, char *buf
         phwangLogitS("FileMgrClass::readBytesOpen", "open file succeed");
         int length = read(fd, buf_val, buf_size_val);
         buf_val[length] = 0;
-        *eof = (length < buf_size_val) ? 1 : 0;
+        *eof_ptr_val = (length < buf_size_val) ? 1 : 0;
+        *fd_ptr_val = fd;
         return length;
     }
     else if (type == FileMgrClass::FIRST_WRITE) {
