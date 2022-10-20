@@ -23,7 +23,6 @@ PortClass::PortClass (int socket_val,
     this->theReceiveCallback = receive_callback_val;
     this->theReceiveObject = receive_object_val;
     this->theWho = who_val;
-    this->setMaxDataSize();
 
     strcpy(this->theWhoForReceiveQueue, this->objectName());
     strcat(this->theWhoForReceiveQueue, ":");

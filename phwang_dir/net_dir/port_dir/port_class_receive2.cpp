@@ -27,15 +27,15 @@ void *PortClass::receiveThreadFunction2 (void)
             phwangDebugWS(false, "PortClass::receiveThreadFunction2", this->theWho, raw_data);
 
             if (raw_data[0] == '{') {
-                length = raw_length - (1 + PortClass::DATA_LENGTH_SIZE + 1);
-                length1 = phwangDecodeNumber(&raw_data[1], PortClass::DATA_LENGTH_SIZE);
+                length = raw_length - (1 + TCP_IP_DEF::MAX_DATA_LENGTH_SIZE + 1);
+                length1 = phwangDecodeNumber(&raw_data[1], TCP_IP_DEF::MAX_DATA_LENGTH_SIZE);
                 if (length != length1) {
                     phwangDebugWSISI(true, "PortClass::receiveThreadFunction2", this->theWho, "length", length, "length1", length1);
                     phwangAbendWSS("PortClass::receiveThreadFunction2", this->theWho, "length not match", raw_data);
                 }
 
-                data = (char *) phwangMalloc(length + 32, MallocClass::receiveThreadFunction2);
-                memcpy(data, &raw_data[1 + PortClass::DATA_LENGTH_SIZE], length);
+                data = (char *) phwangMalloc(length + 1, MallocClass::receiveThreadFunction2);
+                memcpy(data, &raw_data[1 + TCP_IP_DEF::MAX_DATA_LENGTH_SIZE], length);
                 data[length] = 0;
              }
             else {

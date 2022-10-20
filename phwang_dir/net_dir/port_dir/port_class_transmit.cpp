@@ -26,15 +26,19 @@ void *PortClass::transmitThreadFunction (int socket_val)
 
             int length = strlen(data);
             char *ptr;
-            char *buf = ptr = (char *) malloc(length + (1 + PortClass::DATA_LENGTH_SIZE + 1 + 1) + 32);
+            char *buf = ptr = (char *) malloc(1 + TCP_IP_DEF::MAX_DATA_LENGTH_SIZE + length + 1 + 1);
 
             if (length < 1400) {
                 *ptr++ = '{';
-                phwangEncodeNumber(ptr, length, PortClass::DATA_LENGTH_SIZE);
-                ptr += PortClass::DATA_LENGTH_SIZE;
+
+                phwangEncodeNumber(ptr, length, TCP_IP_DEF::MAX_DATA_LENGTH_SIZE);
+                ptr += TCP_IP_DEF::MAX_DATA_LENGTH_SIZE;
+
                 strcpy(ptr, data);
                 ptr += length;
+
                 *ptr++ = '}';
+
                 *ptr = 0;
 
                 phwangDebugWS(false, "PortClass::transmitThreadFunction", this->theWho, buf);

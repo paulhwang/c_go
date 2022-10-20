@@ -14,8 +14,7 @@ class PortClass {
 public:
     const static int CLIENT_INDEX  = 0;
     const static int SERVER_INDEX  = 1;
-    const static int DATA_LENGTH_SIZE = TCP_IP_DEF::MAX_DATA_LENGTH_SIZE;
-    const static int RECEIVE_BUFFER_SIZE = TCP_IP_DEF::MAX_DATA_SIZE;
+    //const static int DATA_LENGTH_SIZE = TCP_IP_DEF::MAX_DATA_LENGTH_SIZE;
 
 private:
     const static int TRANSMIT_QUEUE_SIZE = 1024;
@@ -38,12 +37,9 @@ private:
     void *theTransmitQueue;
     void *theReceiveQueue;
 
-    void setMaxDataSize(void) {this->theMaxDataSize = 1; for (int i = 0; i < PortClass::DATA_LENGTH_SIZE; i++) this->theMaxDataSize *= 10; this->theMaxDataSize -= 1;}
     void startReceiveThread(int socket_val);
     void startReceiveThread2(void);
     void startTransmitThread(int socket_val);
-
-    int maxDataSize(void) {return this->theMaxDataSize;};
 
 public:
     PortClass(int socket_val, void (*receive_callback_val)(void *, void *, void *), void *receive_object_val, char const *who_val);
