@@ -12,6 +12,7 @@ class FileMgrClass {
 public:
     int const static MAX_BUF_SIZE = 1024;
     int const static MAX_FILE_NAME_SIZE = 127;
+    int const static FD_LEN_SIZE = 5;
     char const static FIRST_READ  = 'R';
     char const static MORE_READ   = 'r';
     char const static FIRST_WRITE = 'W';
