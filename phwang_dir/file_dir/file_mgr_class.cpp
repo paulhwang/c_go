@@ -34,25 +34,25 @@ int FileMgrClass::readBytesOpen (char type, char const *file_name_val, char *buf
         }
         printf("fd=%d\n", fd);
         phwangLogitS("FileMgrClass::readBytesOpen", "open file succeed");
-        //return this->readBytesFOpen_(fp, buf_val, buf_size_val, eof_val);
+        int length = read(fd, buf_val, buf_size_val);
+        buf_val[length] = 0;
+        if (length < buf_size_val) {
+            *eof_val = 1;
+        }
+        else {
+            *eof_val = 0;
+        }
+        return length;
     }
     else if (type == FileMgrClass::FIRST_WRITE) {
     }
     else if (type == FileMgrClass::MORE_READ) {
-        
     }
-
     else if (type == FileMgrClass::MORE_WRITE) {
-        
     }
-
     else {
         phwangAbendS("FileMgrClass::readBytesOpen", "bad type");
     }
-    int length = 6;
-    strcpy(buf_val, "phwang");
-    *eof_val = 1;
-    return length;
 }
 
 int FileMgrClass::readBytesFOpen (char type, char const *file_name_val, char *buf_val, int buf_size_val, int *eof_val)

@@ -8,7 +8,7 @@
 
 class FileMgrClass {
     int readBytesFOpen_ (FILE *fp_val, char *buf_val, int buf_size_val, int *eof_val);
-    int readBytesOpen_ (int fd_val, char *buf_val, int buf_size_val, int *eof_val);
+    int readBytesOpen_ (int fd_val, char *buf_val, int buf_size_val);
 
 public:
     int const static MAX_BUF_SIZE = 1024;

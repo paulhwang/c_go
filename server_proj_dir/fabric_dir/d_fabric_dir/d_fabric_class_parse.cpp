@@ -1121,13 +1121,13 @@ char *DFabricClass::processReadFileRequest (
     char data_buf[FileMgrClass::MAX_BUF_SIZE + 1];
     int eof;
     int length = this->fileMgrObj()->readBytesFOpen(FileMgrClass::FIRST_READ, file_name_buf, data_buf, FileMgrClass::MAX_BUF_SIZE, &eof);
-    printf("length=%d\n", length);
+    printf("length=%d %d\n", length, strlen(data_buf));
     phwangDebugSS(true, "DFabricClass::processReadFileRequest", "data_buf=", data_buf);
 
     char data_buf1[FileMgrClass::MAX_BUF_SIZE + 1];
     int eof1;
     int length1 = this->fileMgrObj()->readBytesOpen(FileMgrClass::FIRST_READ, file_name_buf, data_buf1, FileMgrClass::MAX_BUF_SIZE, &eof1);
-    printf("length1=%d\n", length1);
+    printf("length1=%d %d \n", length1, strlen(data_buf1));
     phwangDebugSS(true, "DFabricClass::processReadFileRequest", "data_buf1=", data_buf1);
 
     char more;
