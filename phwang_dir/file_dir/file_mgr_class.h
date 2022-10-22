@@ -10,7 +10,7 @@ class FileMgrClass {
     int readBytesFOpen_ (FILE *fp_val, char *buf_val, int buf_size_val, int *eof_val);
 
 public:
-    int const static MAX_BUF_SIZE = 1024;
+    int const static MAX_FILE_IO_BUF_SIZE = 1024;
     int const static MAX_FILE_NAME_SIZE = 127;
     int const static FD_LEN_SIZE = 5;
     char const static FIRST_READ  = 'R';

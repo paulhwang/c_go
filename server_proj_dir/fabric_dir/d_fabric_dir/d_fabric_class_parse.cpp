@@ -1068,10 +1068,10 @@ char *DFabricClass::processReadFileRequest (
         phwangAbendSS("DFabricClass::processReadFileRequest", "file_name too long", file_name);
     }
 
-    char data_buf[FileMgrClass::MAX_BUF_SIZE + 1];
+    char data_buf[FileMgrClass::MAX_FILE_IO_BUF_SIZE + 1];
     int eof;
     int fd;
-    int length = this->fileMgrObj()->readBytesOpen(file_name_buf, data_buf, FileMgrClass::MAX_BUF_SIZE, &eof, &fd);
+    int length = this->fileMgrObj()->readBytesOpen(file_name_buf, data_buf, FileMgrClass::MAX_FILE_IO_BUF_SIZE, &eof, &fd);
     printf("length=%d %d \n", length, strlen(data_buf));
     phwangDebugSS(true, "DFabricClass::processReadFileRequest", "data_buf=", data_buf);
 
@@ -1126,9 +1126,9 @@ char *DFabricClass::processReadMoreFileRequest (
 
     printf("DFabricClass::processReadMoreFileRequest() fd=%d\n", fd);
 
-    char data_buf[FileMgrClass::MAX_BUF_SIZE + 1];
+    char data_buf[FileMgrClass::MAX_FILE_IO_BUF_SIZE + 1];
     int eof;
-    int length = this->fileMgrObj()->readBytesMore(fd, data_buf, FileMgrClass::MAX_BUF_SIZE, &eof);
+    int length = this->fileMgrObj()->readBytesMore(fd, data_buf, FileMgrClass::MAX_FILE_IO_BUF_SIZE, &eof);
 
     char *result_data = data_buf;
     response_data = this->generateReadMoreFileResponse(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, eof ? 'N' : 'Y', fd, result_data);
