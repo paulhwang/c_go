@@ -69,6 +69,36 @@ int FileMgrClass::readBytesMore (
     return length;
 }
 
+int FileMgrClass::writeBytesOpen(
+    char const *file_name_val,
+    char *data_val,
+    int *fd_ptr_val)
+{
+    int fd = creat(file_name_val, 0666);
+    if (fd == -1) {
+        printf("***errno=%d\n", errno);
+        phwangLogitS("FileMgrClass::writeBytesOpen", "cannot create file");
+        phwangAbendS("FileMgrClass::writeBytesOpen", "cannot create file");
+        return -1;
+    }
+    printf("fd=%d\n", fd);
+    phwangLogitS("FileMgrClass::writeBytesOpen", "create file succeed");
+    write(fd, data_val, strlen(data_val));
+    if (0) {
+        close(fd);
+    }
+    else {
+    }
+    *fd_ptr_val = fd;
+}
+
+int FileMgrClass::readBytesMore(
+    int fd_val,
+    char *data_val)
+{
+
+}
+
 int FileMgrClass::readBytesFOpen (char type, char const *file_name_val, char *buf_val, int buf_size_val, int *eof_val)
 {
     if (type == FileMgrClass::FIRST_READ) {

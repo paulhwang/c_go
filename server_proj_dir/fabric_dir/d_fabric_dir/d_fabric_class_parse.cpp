@@ -1182,8 +1182,22 @@ char *DFabricClass::processWriteFileRequest (
     current_ptr += file_name_size;
     phwangDebugSS(true, "DFabricClass::processWriteFileRequest", "file_name=", file_name);
 
+    char file_name_buf[FileMgrClass::MAX_FILE_NAME_SIZE + 1];
+    if (strlen(FILE_DEF::DTF_DIR) + strlen(file_name) <= FileMgrClass::MAX_FILE_NAME_SIZE) {
+        strcpy(file_name_buf, FILE_DEF::DTF_DIR);
+        strcat(file_name_buf, file_name);
+        phwangDebugSS(true, "DFabricClass::processWriteFileRequest", "file_name_buf=", file_name_buf);
+    }
+    else {
+        phwangAbendSS("DFabricClass::processWriteFileRequest", "file_name too long", file_name);
+    }
+
     char *data = current_ptr;
     phwangDebugSS(true, "DFabricClass::processWriteFileRequest", "data=", data);
+
+    int fd;
+    this->fileMgrObj()->writeBytesOpen(file_name_buf, data, &fd);
+
 
     response_data = this->generateWriteFileResponse(RESULT_DEF::RESULT_SUCCEED, ajax_id_val);
     return response_data;
