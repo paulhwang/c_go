@@ -1067,7 +1067,8 @@ char *DFabricClass::parseReadFile (
     int file_name_size;
     char *file_name = phwangDecodeStringMalloc(current_ptr, &file_name_size);
     //current_ptr += file_name_size;
-    phwangDebugSS(true, "DFabricClass::parseReadFile", "file_name=", file_name);
+
+    //phwangDebugSS(true, "DFabricClass::parseReadFile", "file_name=", file_name);
 
     char file_name_buf[FileMgrClass::MAX_FILE_NAME_SIZE + 1];
     if (strlen(FILE_DEF::DTF_DIR) + strlen(file_name) <= FileMgrClass::MAX_FILE_NAME_SIZE) {
@@ -1131,14 +1132,14 @@ char *DFabricClass::parseReadMoreFile (
         char *data_val)
 {
     char *response_data;
-    phwangDebugS(true, "DFabricClass::parseReadMoreFile", data_val);
+    //phwangDebugS(true, "DFabricClass::parseReadMoreFile", data_val);
 
     char *current_ptr = data_val;
 
     int fd = phwangDecodeNumber(current_ptr, FileMgrClass::FD_LEN_SIZE);
     current_ptr += FileMgrClass::FD_LEN_SIZE;
 
-    printf("DFabricClass::parseReadMoreFile() fd=%d\n", fd);
+    //printf("DFabricClass::parseReadMoreFile() fd=%d\n", fd);
 
     char data_buf[FileMgrClass::MAX_FILE_IO_BUF_SIZE + 1];
     int eof;
@@ -1196,7 +1197,6 @@ char *DFabricClass::parseWriteFile (
     int file_name_size;
     char *file_name = phwangDecodeStringMalloc(current_ptr, &file_name_size);
     current_ptr += file_name_size;
-    phwangDebugSS(true, "DFabricClass::parseWriteFile", "file_name=", file_name);
 
     char file_name_buf[FileMgrClass::MAX_FILE_NAME_SIZE + 1];
     if (strlen(FILE_DEF::DTF_DIR) + strlen(file_name) <= FileMgrClass::MAX_FILE_NAME_SIZE) {
@@ -1266,7 +1266,7 @@ char *DFabricClass::parseWriteMoreFile (
 
     char *data = current_ptr;
 
-    if (true && this->debugOn()) {
+    if (false && this->debugOn()) {
         printf("DFabricClass::parseWriteMoreFile() fd=%d eof=%c\n", fd, eof);
     }
 

@@ -36,8 +36,11 @@ int FileMgrClass::readBytesOpen (
         phwangAbendS("FileMgrClass::readBytesOpen", "cannot open file");
         return -1;
     }
-    printf("fd=%d\n", fd);
-    phwangLogitS("FileMgrClass::readBytesOpen", "open file succeed");
+
+    if (false && this->debugOn()) {
+        printf("FileMgrClass::readBytesOpen() open file succeed. fd=%d\n", fd);
+    }
+
     int length = read(fd, buf_val, buf_size_val);
     buf_val[length] = 0;
     if (length < buf_size_val) {
@@ -83,7 +86,8 @@ int FileMgrClass::writeBytesOpen(
         fd = 0;
         return -1;
     }
-    if (true && this->debugOn()) {
+
+    if (false && this->debugOn()) {
         printf("FileMgrClass::writeBytesOpen() create succeed fd=%d eof=%c\n", fd, eof_val);
     }
 
@@ -113,7 +117,7 @@ int FileMgrClass::writeBytesMore(
         return -1;
     }
 
-    if (true && this->debugOn()) {
+    if (false && this->debugOn()) {
         printf("FileMgrClass::writeBytesMore() fd=%d length=%d eof=%c\n", fd_val, length, eof_val);
     }
 
