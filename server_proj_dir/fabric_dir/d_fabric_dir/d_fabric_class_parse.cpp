@@ -53,8 +53,16 @@ void DFabricClass::parseData (
 
     if (command != FE_DEF::GET_LINK_DATA_COMMAND) {
         if (true && this->debugOn()) {
-            printf("DFabricClass::parseData() \n", data_val);
-            //printf("DFabricClass::parseData() current_ptr=%s\n", current_ptr);
+            int len = 50;
+            if (strlen(data_val) <= len) {
+                printf("DFabricClass::parseData(*) %s\n", data_val);
+            }
+            else {
+                char data_buf[len + 1];
+                memcpy(data_buf, data_val, len);
+                data_buf[len] = 0;
+                printf("DFabricClass::parseData(*) %s\n", data_buf);
+            }
         }
     }
 
@@ -1065,7 +1073,7 @@ char *DFabricClass::parseReadFile (
     if (strlen(FILE_DEF::DTF_DIR) + strlen(file_name) <= FileMgrClass::MAX_FILE_NAME_SIZE) {
         strcpy(file_name_buf, FILE_DEF::DTF_DIR);
         strcat(file_name_buf, file_name);
-        phwangDebugSS(true, "DFabricClass::parseReadFile", "file_name_buf=", file_name_buf);
+        //phwangDebugSS(true, "DFabricClass::parseReadFile", "file_name_buf=", file_name_buf);
     }
     else {
         phwangAbendSS("DFabricClass::parseReadFile", "file_name too long", file_name);
@@ -1194,7 +1202,7 @@ char *DFabricClass::parseWriteFile (
     if (strlen(FILE_DEF::DTF_DIR) + strlen(file_name) <= FileMgrClass::MAX_FILE_NAME_SIZE) {
         strcpy(file_name_buf, FILE_DEF::DTF_DIR);
         strcat(file_name_buf, file_name);
-        phwangDebugSS(true, "DFabricClass::parseWriteFile", "file_name_buf=", file_name_buf);
+        //phwangDebugSS(true, "DFabricClass::parseWriteFile", "file_name_buf=", file_name_buf);
     }
     else {
         phwangAbendSS("DFabricClass::parseWriteFile", "file_name too long", file_name);
