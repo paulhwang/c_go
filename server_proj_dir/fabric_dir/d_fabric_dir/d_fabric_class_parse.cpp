@@ -1050,7 +1050,10 @@ char *DFabricClass::parseReadFile (
         char *data_val)
 {
     char *response_data;
-    phwangDebugS(true, "DFabricClass::parseReadFile", data_val);
+
+    if (false && this->debugOn()) {
+        printf("DFabricClass::parseReadFile() data=%s\n", data_val);
+    }
 
     char *current_ptr = data_val;
     int file_name_size;
@@ -1067,13 +1070,16 @@ char *DFabricClass::parseReadFile (
     else {
         phwangAbendSS("DFabricClass::parseReadFile", "file_name too long", file_name);
     }
+    phwangFree(file_name);
 
     char data_buf[FileMgrClass::MAX_FILE_IO_BUF_SIZE + 1];
     int eof;
     int fd;
     int length = this->fileMgrObj()->readBytesOpen(file_name_buf, data_buf, FileMgrClass::MAX_FILE_IO_BUF_SIZE, &eof, &fd);
-    printf("length=%d %d \n", length, strlen(data_buf));
-    phwangDebugSS(true, "DFabricClass::parseReadFile", "data_buf=", data_buf);
+
+    if (false && this->debugOn()) {
+        printf("DFabricClass::parseReadFile() length=%d %d data=%s\n", length, strlen(data_buf), data_buf);
+    }
 
     char *result_data = data_buf;
     response_data = this->parseReadFile_(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, eof ? 'N' : 'Y', fd, result_data);
@@ -1174,7 +1180,9 @@ char *DFabricClass::parseWriteFile (
         char *data_val)
 {
     char *response_data;
-    phwangDebugS(true, "DFabricClass::parseWriteFile", data_val);
+    if (false && this->debugOn()) {
+        printf("DFabricClass::parseWriteFile() data=%s\n", data_val);
+    }
 
     char *current_ptr = data_val;
     int file_name_size;
@@ -1191,13 +1199,14 @@ char *DFabricClass::parseWriteFile (
     else {
         phwangAbendSS("DFabricClass::parseWriteFile", "file_name too long", file_name);
     }
+    phwangFree(file_name);
 
     char eof = *current_ptr++;
 
     char *data = current_ptr;
 
-    if (true && this->debugOn()) {
-        printf("DFabricClass::processWriteFileRequest() eof=%c data=%s\n", eof, data);
+    if (false && this->debugOn()) {
+        printf("DFabricClass::parseWriteFile() eof=%c data=%s\n", eof, data);
     }
 
     int fd;
@@ -1236,7 +1245,7 @@ char *DFabricClass::parseWriteMoreFile (
         char *data_val)
 {
     char *response_data;
-    if (true && this->debugOn()) {
+    if (false && this->debugOn()) {
         printf("DFabricClass::parseWriteMoreFile() data=%s\n", data_val);
     }
 
