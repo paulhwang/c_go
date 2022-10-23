@@ -1203,14 +1203,14 @@ char *DFabricClass::processWriteFileRequest (
     int fd;
     this->fileMgrObj()->writeBytesOpen(file_name_buf, eof, data, &fd);
 
-
-    response_data = this->generateWriteFileResponse(RESULT_DEF::RESULT_SUCCEED, ajax_id_val);
+    response_data = this->generateWriteFileResponse(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, fd);
     return response_data;
 }
 
 char *DFabricClass::generateWriteFileResponse (
     char const *result_val,
-    char *ajax_id_val)
+    char *ajax_id_val,
+    int fd_val)
 {
     char *response_data = (char *) phwangMalloc(FABRIC_DEF::DL_ACRLS_BUF_SIZE, MallocClass::generateWriteFileResponse);
     char *current_ptr = response_data;
@@ -1222,6 +1222,9 @@ char *DFabricClass::generateWriteFileResponse (
 
     memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
     current_ptr += RESULT_DEF::RESULT_SIZE;
+
+    phwangEncodeNumber(current_ptr, fd_val, FileMgrClass::FD_LEN_SIZE);
+    current_ptr += FileMgrClass::FD_LEN_SIZE;
 
     *current_ptr = 0;
 

@@ -80,6 +80,7 @@ int FileMgrClass::writeBytesOpen(
         printf("***errno=%d\n", errno);
         phwangLogitS("FileMgrClass::writeBytesOpen", "cannot create file");
         phwangAbendS("FileMgrClass::writeBytesOpen", "cannot create file");
+        fd = 0;
         return -1;
     }
     if (true && this->debugOn()) {
