@@ -15,6 +15,7 @@ class DbAccountClass;
 
 class DFabricClass {
     char const *objectName(void) {return "DFabricClass";}
+    int debugOn(void) {return true;}
 
     FabricClass *fabricObj_;
     void *tcpServerObj_;

@@ -7,6 +7,7 @@
 #pragma once
 
 class FileMgrClass {
+    int debugOn(void) {return true;}
     int readBytesFOpen_ (FILE *fp_val, char *buf_val, int buf_size_val, int *eof_val);
 
 public:
@@ -36,11 +37,13 @@ public:
 
     int writeBytesOpen(
         char const *file_name_val,
+        char eof_val,
         char *data_val,
         int *fd_ptr_val);
 
     int readBytesMore(
         int fd_val,
+        char eof_val,
         char *data_val);
 
     int readBytesFOpen(char type, char const *file_name_val, char *buf_val, int buf_size_val, int *eof_val);

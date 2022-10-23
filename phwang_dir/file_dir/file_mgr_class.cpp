@@ -71,6 +71,7 @@ int FileMgrClass::readBytesMore (
 
 int FileMgrClass::writeBytesOpen(
     char const *file_name_val,
+    char eof_val,
     char *data_val,
     int *fd_ptr_val)
 {
@@ -81,19 +82,22 @@ int FileMgrClass::writeBytesOpen(
         phwangAbendS("FileMgrClass::writeBytesOpen", "cannot create file");
         return -1;
     }
-    printf("fd=%d\n", fd);
-    phwangLogitS("FileMgrClass::writeBytesOpen", "create file succeed");
+    if (true && this->debugOn()) {
+        printf("FileMgrClass::writeBytesOpen() create succeed fd=%d\n", fd);
+    }
+
     write(fd, data_val, strlen(data_val));
-    if (0) {
+
+    if (eof_val) {
         close(fd);
     }
-    else {
-    }
+
     *fd_ptr_val = fd;
 }
 
 int FileMgrClass::readBytesMore(
     int fd_val,
+    char eof_val,
     char *data_val)
 {
 

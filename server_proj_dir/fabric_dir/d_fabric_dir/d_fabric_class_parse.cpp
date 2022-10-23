@@ -1192,11 +1192,16 @@ char *DFabricClass::processWriteFileRequest (
         phwangAbendSS("DFabricClass::processWriteFileRequest", "file_name too long", file_name);
     }
 
+    char eof = *current_ptr++;
+
     char *data = current_ptr;
-    phwangDebugSS(true, "DFabricClass::processWriteFileRequest", "data=", data);
+
+    if (true && this->debugOn()) {
+        printf("DFabricClass::processWriteFileRequest() eof=%c data=%s\n", eof, data);
+    }
 
     int fd;
-    this->fileMgrObj()->writeBytesOpen(file_name_buf, data, &fd);
+    this->fileMgrObj()->writeBytesOpen(file_name_buf, eof, data, &fd);
 
 
     response_data = this->generateWriteFileResponse(RESULT_DEF::RESULT_SUCCEED, ajax_id_val);
