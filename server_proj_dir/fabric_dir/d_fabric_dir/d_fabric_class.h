@@ -47,7 +47,7 @@ class DFabricClass {
         char *ajax_id_val,
         char *data_val);
 
-    char *generateRegisterResponse (
+    char *parseRegister_ (
         char const *result_val,
         char *ajax_id_val,
         char const *account_name_val);
@@ -58,7 +58,7 @@ class DFabricClass {
         char device_type_val,
         void *port_object_val);
 
-    char *generateLoginResponse (
+    char *parseLogin_ (
         char const *result_val,
         char *ajax_id_val,
         char const *link_id_index_val,
@@ -69,7 +69,7 @@ class DFabricClass {
         char *ajax_id_val,
         char *data_val);
 
-    char *generateLogoutResponse (
+    char *parseLogout_ (
         char const *result_val,
         char *ajax_id_val,
         char const *link_id_index_val);
@@ -83,7 +83,7 @@ class DFabricClass {
         char *ajax_id_val,
         char *data_val);
 
-    char *generateGetNameListResponse (
+    char *parseGetNameList_ (
         char const *result_val,
         char *ajax_id_val,
         char const *link_id_index_val,
@@ -94,7 +94,7 @@ class DFabricClass {
         char *ajax_id_val,
         char *data_val);
 
-    char *generateSetupSessionResponse (
+    char *parseSetupSession_ (
         char const *result_val,
         char *ajax_id_val,
         char const *link_id_index_val,
@@ -106,7 +106,7 @@ class DFabricClass {
         char *ajax_id_val,
         char *data_val);
 
-    char *generateSetupSession2Response (
+    char *parseSetupSession2_ (
         char const *result_val,
         char *ajax_id_val,
         char const *link_id_index_val,
@@ -119,7 +119,7 @@ class DFabricClass {
         char *ajax_id_val,
         char *data_val);
 
-    char *generateSetupSession3Response (
+    char *parseSetupSession3_ (
         char const *result_val,
         char *ajax_id_val,
         SessionClass *session_val);
@@ -128,7 +128,7 @@ class DFabricClass {
         SessionClass *session_val,
         char *ajax_id_val);
 
-    char *generateFreeSessionResponse (
+    char *parseFreeSession_ (
         char const *result_val,
         char *ajax_id_val,
         char const *link_id_index_val,
@@ -139,7 +139,7 @@ class DFabricClass {
         char *ajax_id_val,
         char *data_val);
 
-    char *generatePutSessionDataResponse (
+    char *parsePutSessionData_ (
         char const *result_val,
         char *ajax_id_val,
         char const *link_id_index_val,
@@ -150,7 +150,7 @@ class DFabricClass {
         char *ajax_id_val,
         char *data_val);
 
-    char *generateGetSessionDataResponse (
+    char *parseGetSessionData_ (
         char const *result_val,
         char *ajax_id_val,
         char const *link_id_index_val,
@@ -161,7 +161,7 @@ class DFabricClass {
         char *ajax_id_val,
         char *data_val);
 
-    char *generateReadFileResponse (
+    char *parseReadFile_ (
         char const *result_val,
         char *ajax_id_val,
         char more_data_exist_val,
@@ -172,7 +172,7 @@ class DFabricClass {
         char *ajax_id_val,
         char *data_val);
 
-    char *generateReadMoreFileResponse (
+    char *parseReadMoreFile_ (
         char const *result_val,
         char *ajax_id_val,
         char more_data_exist_val,
@@ -183,7 +183,7 @@ class DFabricClass {
         char *ajax_id_val,
         char *data_val);
 
-    char *generateWriteFileResponse (
+    char *parseWriteFile_ (
         char const *result_val,
         char *ajax_id_val,
         int fd_val);
@@ -192,7 +192,7 @@ class DFabricClass {
         char *ajax_id_val,
         char *data_val);
 
-    char *generateWriteMoreFileResponse (
+    char *parseWriteMoreFile_ (
         char const *result_val,
         char *ajax_id_val,
         int fd_val);
@@ -201,7 +201,7 @@ class DFabricClass {
         char *ajax_id_val,
         char *data_val);
 
-    char *generateDatagramResponse (
+    char *parseDatagram_ (
         char const *result_val,
         char *ajax_id_val,
         char const *data_val);

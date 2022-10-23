@@ -53,7 +53,7 @@ void DFabricClass::parseData (
 
     if (command != FE_DEF::GET_LINK_DATA_COMMAND) {
         if (true && this->debugOn()) {
-            printf("DFabricClass::parseData() data_val=%s\n", data_val);
+            printf("DFabricClass::parseData() \n", data_val);
             //printf("DFabricClass::parseData() current_ptr=%s\n", current_ptr);
         }
     }
@@ -247,7 +247,7 @@ char *DFabricClass::parseRegister (
         account_entry->setPassword(password);
         account_entry->setEmail(email);
 
-        response_data = generateRegisterResponse(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, account_name);
+        response_data = parseRegister_(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, account_name);
 
         this->dbAccountObject()->insertAccountEntry(account_entry);
         /***
@@ -261,31 +261,31 @@ char *DFabricClass::parseRegister (
         }
 
     else if (!strcmp(result_buf, RESULT_DEF::RESULT_ACCOUNT_NAME_ALREADY_EXIST)) {
-        response_data = generateRegisterResponse(result_buf, ajax_id_val, account_name);
+        response_data = parseRegister_(result_buf, ajax_id_val, account_name);
         phwangFree(account_name);
         return response_data;
     }
 
     else if (!strcmp(result_buf, RESULT_DEF::RESULT_DB_SELECT_FAIL)) {
-        response_data = generateRegisterResponse(result_buf, ajax_id_val, account_name);
+        response_data = parseRegister_(result_buf, ajax_id_val, account_name);
         phwangFree(account_name);
         return response_data;
    }
 
     else {
         phwangAbendSS("DFabricClass::parseRegister", "unsupported_result", result_buf);
-        response_data = generateRegisterResponse(RESULT_DEF::RESULT_DB_ERROR, ajax_id_val, account_name);
+        response_data = parseRegister_(RESULT_DEF::RESULT_DB_ERROR, ajax_id_val, account_name);
         phwangFree(account_name);
         return response_data;
     }
 }
 
-char *DFabricClass::generateRegisterResponse (
+char *DFabricClass::parseRegister_ (
     char const *result_val,
     char *ajax_id_val,
     char const *account_name_val)
 {
-    phwangDebugS(false, "DFabricClass::generateRegisterResponse", result_val);
+    phwangDebugS(false, "DFabricClass::parseRegister_", result_val);
 
     char *response_data = (char *) phwangMalloc(FABRIC_DEF::DL_ACR_BUF_SIZE + strlen(account_name_val), MallocClass::generateRegisterResponse);
     char *current_ptr = response_data;
@@ -335,12 +335,12 @@ char *DFabricClass::parseLogin (
         if (!link) {
             phwangAbendS("DFabricClass::parseLogin", "null_link");
             phwangFree(my_name);
-            response_data = generateLoginResponse(RESULT_DEF::RESULT_NULL_LINK, ajax_id_val, SIZE_DEF::FAKE_LINK_II, encoded_my_name_buf);
+            response_data = parseLogin_(RESULT_DEF::RESULT_NULL_LINK, ajax_id_val, SIZE_DEF::FAKE_LINK_II, encoded_my_name_buf);
             return response_data;
         }
 
         phwangFree(my_name);
-        response_data = generateLoginResponse(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, link->linkIdIndex(), encoded_my_name_buf);
+        response_data = parseLogin_(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, link->linkIdIndex(), encoded_my_name_buf);
         return response_data;
     }
 
@@ -348,14 +348,14 @@ char *DFabricClass::parseLogin (
              (!strcmp(result_buf, RESULT_DEF::RESULT_ACCOUNT_NAME_NOT_EXIST)) ||
              (!strcmp(result_buf, RESULT_DEF::RESULT_DB_SELECT_FAIL))) {
         phwangFree(my_name);
-        response_data = generateLoginResponse(result_buf, ajax_id_val, SIZE_DEF::FAKE_LINK_II, encoded_my_name_buf);
+        response_data = parseLogin_(result_buf, ajax_id_val, SIZE_DEF::FAKE_LINK_II, encoded_my_name_buf);
         return response_data;
     }
 
     else {
         phwangAbendSS("DFabricClass::parseLogin", "unsupported_result", result_buf);
         phwangFree(my_name);
-        response_data = generateLoginResponse(RESULT_DEF::RESULT_DB_ERROR, ajax_id_val, SIZE_DEF::FAKE_LINK_II, encoded_my_name_buf);
+        response_data = parseLogin_(RESULT_DEF::RESULT_DB_ERROR, ajax_id_val, SIZE_DEF::FAKE_LINK_II, encoded_my_name_buf);
         return response_data;
     }
 
@@ -398,13 +398,13 @@ char *DFabricClass::parseLogin (
     */
 }
 
-char *DFabricClass::generateLoginResponse (
+char *DFabricClass::parseLogin_ (
     char const *result_val,
     char *ajax_id_val,
     char const *link_id_index_val,
     char const *encoded_my_name_val)
 {
-    phwangDebugS(false, "DFabricClass::generateLoginResponse", result_val);
+    phwangDebugS(false, "DFabricClass::parseLogin_", result_val);
 
     char *response_data = (char *) phwangMalloc(FABRIC_DEF::DL_ACRL_BUF_SIZE + SIZE_DEF::FABRIC_TIME_STAMP_SIZE + strlen(encoded_my_name_val), MallocClass::generateLoginResponse);
     char *current_ptr = response_data;
@@ -441,16 +441,16 @@ char *DFabricClass::parseLogout (
     this->fabricObj_->freeLink(link_val);
     link_val = 0;
 
-    response_data = generateLogoutResponse(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, link_id_index_buf);
+    response_data = parseLogout_(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, link_id_index_buf);
     return response_data;
 }
 
-char *DFabricClass::generateLogoutResponse (
+char *DFabricClass::parseLogout_ (
     char const *result_val,
     char *ajax_id_val,
     char const *link_id_index_val)
 {
-    phwangDebugS(false, "DFabricClass::generateLogoutResponse", result_val);
+    phwangDebugS(false, "DFabricClass::parseLogout_", result_val);
 
     char *response_data = (char *) phwangMalloc(FABRIC_DEF::DL_ACRL_BUF_SIZE, MallocClass::generateLogoutResponse);
     char *current_ptr = response_data;
@@ -533,7 +533,7 @@ char *DFabricClass::parseGetLinkData (
                 strcpy(current_ptr, session->sessionIdIndex());
                 current_ptr += SIZE_DEF::SESSION_II_SIZE;
 
-                phwangDebugSS(true, "DFabricClass::parseGetLinkData","Pending_data=", response_data);
+                phwangDebugSS(true, "DFabricClass::parseGetLinkData","p_data=", response_data);
             }
         }
     }
@@ -551,7 +551,7 @@ char *DFabricClass::parseGetLinkData (
         current_ptr += pending_session_info2_length;
         *current_ptr = 0;
 
-        phwangDebugSS(true, "DFabricClass::parseGetLinkData", "pending_session3=", response_data);
+        phwangDebugSS(true, "DFabricClass::parseGetLinkData", "p_session3=", response_data);
 
         phwangFree(pending_session_info2);
     }
@@ -569,7 +569,7 @@ char *DFabricClass::parseGetLinkData (
         current_ptr += pending_session_info3_length;
         *current_ptr = 0;
 
-        phwangDebugSS(true, "DFabricClass::parseGetLinkData", "pending_session3=", response_data);
+        phwangDebugSS(true, "DFabricClass::parseGetLinkData", "p_session3=", response_data);
 
         phwangFree(pending_session_info3);
     }
@@ -595,17 +595,17 @@ char *DFabricClass::parseGetNameList (
         phwangAbendS("DFabricClass::parseGetNameList", data_val);
     }
 
-    response_data = generateGetNameListResponse(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, link_val->linkIdIndex(), name_list);
+    response_data = parseGetNameList_(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, link_val->linkIdIndex(), name_list);
     return response_data;
 }
 
-char *DFabricClass::generateGetNameListResponse (
+char *DFabricClass::parseGetNameList_ (
     char const *result_val,
     char *ajax_id_val,
     char const *link_id_index_val,
     char const *data_val)
 {
-    phwangDebugS(false, "DFabricClass::generateGetNameListResponse", result_val);
+    phwangDebugS(false, "DFabricClass::parseGetNameList_", result_val);
 
     char *response_data = (char *) phwangMalloc(FABRIC_DEF::DL_ACRL_BUF_SIZE + strlen(data_val), MallocClass::generateGetNameListResponse);
     char *current_ptr = response_data;
@@ -636,7 +636,7 @@ char *DFabricClass::parseSetupSession (
 
     SessionClass *session = link_val->mallocSession();
     if (!session) {
-        response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_MALLOC_SESSION_FAIL, ajax_id_val, link_val->linkIdIndex(), SIZE_DEF::FAKE_SESSION_II, data_val);
+        response_data = this->parseSetupSession_(RESULT_DEF::RESULT_MALLOC_SESSION_FAIL, ajax_id_val, link_val->linkIdIndex(), SIZE_DEF::FAKE_SESSION_II, data_val);
         return response_data;
     }
 
@@ -671,7 +671,7 @@ char *DFabricClass::parseSetupSession (
     phwangFree(first_fiddle);
     phwangFree(second_fiddle);
     if (!group) {
-        response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_MALLOC_GROUP_FAIL, ajax_id_val, link_val->linkIdIndex(), session->sessionIdIndex(), data_val);
+        response_data = this->parseSetupSession_(RESULT_DEF::RESULT_MALLOC_GROUP_FAIL, ajax_id_val, link_val->linkIdIndex(), session->sessionIdIndex(), data_val);
         return response_data;
     }
     group->insertSession(session);
@@ -680,19 +680,19 @@ char *DFabricClass::parseSetupSession (
     if (group->isDominatedGroup()) {
         this->sendSetupRoomRequestToThemeServer(group);
 
-        response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, link_val->linkIdIndex(), session->sessionIdIndex(), data_val);
+        response_data = this->parseSetupSession_(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, link_val->linkIdIndex(), session->sessionIdIndex(), data_val);
         return response_data;
     }
 
     LinkClass *second_link = this->fabricObj_->searchLinkByName(group->secondFiddle());
     if (!second_link) {
-        response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_SECOND_LINK_NOT_EXIST, ajax_id_val, link_val->linkIdIndex(), SIZE_DEF::FAKE_SESSION_II, data_val);
+        response_data = this->parseSetupSession_(RESULT_DEF::RESULT_SECOND_LINK_NOT_EXIST, ajax_id_val, link_val->linkIdIndex(), SIZE_DEF::FAKE_SESSION_II, data_val);
         return response_data;
     }
 
     SessionClass *second_session = second_link->mallocSession();
     if (!second_session) {
-        response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_MALLOC_SECOND_SESSION_FAIL, ajax_id_val, link_val->linkIdIndex(), SIZE_DEF::FAKE_SESSION_II, data_val);
+        response_data = this->parseSetupSession_(RESULT_DEF::RESULT_MALLOC_SECOND_SESSION_FAIL, ajax_id_val, link_val->linkIdIndex(), SIZE_DEF::FAKE_SESSION_II, data_val);
         return response_data;
     }
 
@@ -701,18 +701,18 @@ char *DFabricClass::parseSetupSession (
 
     second_link->setPendingSessionSetup2(second_session->sessionIdIndex(), group->themeType(), group->themeInfo());
 
-    response_data = this->generateSetupSessionResponse(RESULT_DEF::RESULT_WAITING_FOR_ANSWER, ajax_id_val, link_val->linkIdIndex(), session->sessionIdIndex(), data_val);
+    response_data = this->parseSetupSession_(RESULT_DEF::RESULT_WAITING_FOR_ANSWER, ajax_id_val, link_val->linkIdIndex(), session->sessionIdIndex(), data_val);
     return response_data;
 }
 
-char *DFabricClass::generateSetupSessionResponse (
+char *DFabricClass::parseSetupSession_ (
     char const *result_val,
     char *ajax_id_val,
     char const *link_id_index_val,
     char const *session_id_index_val,
     char const *data_val)
 {
-    phwangDebugS(false, "DFabricClass::generateSetupSessionResponse", result_val);
+    phwangDebugS(false, "DFabricClass::parseSetupSession_", result_val);
 
     char *response_data = (char *) phwangMalloc(FABRIC_DEF::DL_ACRLS_BUF_SIZE + strlen(data_val), MallocClass::generateSetupDuet3Response);
     char *current_ptr = response_data;
@@ -776,11 +776,11 @@ char *DFabricClass::parseSetupSession2 (
 
     }
 
-    response_data = this->generateSetupSession2Response(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, link->linkIdIndex(), session_val->sessionIdIndex(), group->themeType(), group->themeInfo());
+    response_data = this->parseSetupSession2_(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, link->linkIdIndex(), session_val->sessionIdIndex(), group->themeType(), group->themeInfo());
     return response_data;
 }
 
-char *DFabricClass::generateSetupSession2Response (
+char *DFabricClass::parseSetupSession2_ (
     char const *result_val,
     char *ajax_id_val,
     char const *link_id_index_val,
@@ -788,7 +788,7 @@ char *DFabricClass::generateSetupSession2Response (
     char theme_type_val,
     char const *theme_info_val)
 {
-    phwangDebugS(false, "DFabricClass::generateSetupSession2Response", result_val);
+    phwangDebugS(false, "DFabricClass::parseSetupSession2_", result_val);
 
     char *response_data = (char *) phwangMalloc(FABRIC_DEF::DL_ACRLS_BUF_SIZE + 1 + strlen(theme_info_val), MallocClass::generateSetupDuet2Response);
     char *current_ptr = response_data;
@@ -825,16 +825,16 @@ char *DFabricClass::parseSetupSession3 (
     phwangDebugSS(true, "DFabricClass::parseSetupSession3", "session_id=", session_val->sessionIdIndex());
     phwangDebugSS(true, "DFabricClass::parseSetupSession3", "data_val=", data_val);
 
-    response_data = this->generateSetupSession3Response(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, session_val);
+    response_data = this->parseSetupSession3_(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, session_val);
     return response_data;
 }
 
-char *DFabricClass::generateSetupSession3Response (
+char *DFabricClass::parseSetupSession3_ (
     char const *result_val,
     char *ajax_id_val,
     SessionClass *session_val)
 {
-    phwangDebugSS(false, "DFabricClass::generateSetupSession3Response", "result=", result_val);
+    phwangDebugSS(false, "DFabricClass::parseSetupSession3_", "result=", result_val);
     LinkClass *link = session_val->linkObject();
     GroupClass *group = session_val->groupObject();
 
@@ -880,7 +880,7 @@ char *DFabricClass::generateSetupSession3Response (
     phwangFree(encoded_first_fiddle);
     phwangFree(encoded_second_fiddle);
 
-    phwangDebugSS(true, "DFabricClass::generateSetupSession3Response", "response_data=", response_data);
+    phwangDebugSS(true, "DFabricClass::parseSetupSession3_", "response_data=", response_data);
 
     return response_data;
 }
@@ -899,17 +899,17 @@ char *DFabricClass::parseFreeSession (
     strcpy(session_id_buf, session_val->sessionIdIndex());
     link->freeSession(session_val);
 
-    response_data = this->generateFreeSessionResponse(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, link->linkIdIndex(), session_id_buf);
+    response_data = this->parseFreeSession_(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, link->linkIdIndex(), session_id_buf);
     return response_data;
 }
 
-char *DFabricClass::generateFreeSessionResponse (
+char *DFabricClass::parseFreeSession_ (
     char const *result_val,
     char *ajax_id_val,
     char const *link_id_index_val,
     char const *session_id_index_val)
 {
-    phwangDebugS(false, "DFabricClass::generateFreeSessionResponse", result_val);
+    phwangDebugS(false, "DFabricClass::parseFreeSession_", result_val);
 
     char *response_data = (char *) phwangMalloc(FABRIC_DEF::DL_ACRLS_BUF_SIZE, MallocClass::generateFreeSessionResponse);
     char *current_ptr = response_data;
@@ -942,23 +942,23 @@ char *DFabricClass::parsePutSessionData (
 
     char *room_id = session_val->groupObject()->roomIdIndex();
     if (!room_id) {
-        response_data = this->generatePutSessionDataResponse(RESULT_DEF::RESULT_NULL_ROOM, ajax_id_val, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex());
+        response_data = this->parsePutSessionData_(RESULT_DEF::RESULT_NULL_ROOM, ajax_id_val, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex());
         return response_data;
     }
 
     this->sendPutSessionDataRequestToThemeServer(room_id, data_val);
 
-    response_data = this->generatePutSessionDataResponse(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex());
+    response_data = this->parsePutSessionData_(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex());
     return response_data;
 }
 
-char *DFabricClass::generatePutSessionDataResponse (
+char *DFabricClass::parsePutSessionData_ (
     char const *result_val,
     char *ajax_id_val,
     char const *link_id_index_val,
     char const *session_id_index_val)
 {
-    phwangDebugS(false, "DFabricClass::generatePutSessionDataResponse", result_val);
+    phwangDebugS(false, "DFabricClass::parsePutSessionData_", result_val);
 
     char *response_data = (char *) phwangMalloc(FABRIC_DEF::DL_ACRLS_BUF_SIZE, MallocClass::generatePutSessionDataResponse);
     char *current_ptr = response_data;
@@ -1006,25 +1006,23 @@ char *DFabricClass::parseGetSessionData (
     char *ajax_id_val,
     char *data_val)
 {
-    phwangDebugS(true, "DFabricClass::parseGetSessionData", data_val);
-
     char *data = session_val->dequeuePendingData();
     if (data) {
-        return this->generateGetSessionDataResponse(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex(), data);
+        return this->parseGetSessionData_(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex(), data);
     }
     else {
-        return this->generateGetSessionDataResponse(RESULT_DEF::RESULT_SESSION_DATA_NOT_AVAILABLE, ajax_id_val, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex(), "");
+        return this->parseGetSessionData_(RESULT_DEF::RESULT_SESSION_DATA_NOT_AVAILABLE, ajax_id_val, session_val->linkObject()->linkIdIndex(), session_val->sessionIdIndex(), "");
     }
 }
 
-char *DFabricClass::generateGetSessionDataResponse (
+char *DFabricClass::parseGetSessionData_ (
     char const *result_val,
     char *ajax_id_val,
     char const *link_id_index_val,
     char const *session_id_index_val,
     char const *data_val)
 {
-    phwangDebugS(false, "DFabricClass::generateGetSessionDataResponse", result_val);
+    phwangDebugS(false, "DFabricClass::parseGetSessionData_", result_val);
 
     char *response_data = (char *) phwangMalloc(FABRIC_DEF::DL_ACRLS_BUF_SIZE + strlen(data_val), MallocClass::generateGetSessionDataResponse);
     char *current_ptr = response_data;
@@ -1078,18 +1076,18 @@ char *DFabricClass::parseReadFile (
     phwangDebugSS(true, "DFabricClass::parseReadFile", "data_buf=", data_buf);
 
     char *result_data = data_buf;
-    response_data = this->generateReadFileResponse(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, eof ? 'N' : 'Y', fd, result_data);
+    response_data = this->parseReadFile_(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, eof ? 'N' : 'Y', fd, result_data);
     return response_data;
 }
 
-char *DFabricClass::generateReadFileResponse (
+char *DFabricClass::parseReadFile_ (
     char const *result_val,
     char *ajax_id_val,
     char more_data_exist_val,
     int fd_val,
     char const *result_data_val)
 {
-    phwangDebugS(false, "DFabricClass::generateReadFileResponse", result_val);
+    phwangDebugS(false, "DFabricClass::parseReadFile_", result_val);
 
     char *response_data = (char *) phwangMalloc(FABRIC_DEF::DL_ACR_BUF_SIZE + 1 + FileMgrClass::FD_LEN_SIZE + strlen(result_data_val), MallocClass::generateReadFileResponse);
     char *current_ptr = response_data;
@@ -1133,18 +1131,18 @@ char *DFabricClass::parseReadMoreFile (
     int length = this->fileMgrObj()->readBytesMore(fd, data_buf, FileMgrClass::MAX_FILE_IO_BUF_SIZE, &eof);
 
     char *result_data = data_buf;
-    response_data = this->generateReadMoreFileResponse(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, eof ? 'N' : 'Y', fd, result_data);
+    response_data = this->parseReadMoreFile_(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, eof ? 'N' : 'Y', fd, result_data);
     return response_data;
 }
 
-char *DFabricClass::generateReadMoreFileResponse (
+char *DFabricClass::parseReadMoreFile_ (
     char const *result_val,
     char *ajax_id_val,
     char more_data_exist_val,
     int fd_val,
     char const *result_data_val)
 {
-    phwangDebugS(false, "DFabricClass::generateReadMoreFileResponse", result_val);
+    phwangDebugS(false, "DFabricClass::parseReadMoreFile_", result_val);
 
     char *response_data = (char *) phwangMalloc(FABRIC_DEF::DL_ACR_BUF_SIZE + 1 + FileMgrClass::FD_LEN_SIZE + strlen(result_data_val), MallocClass::generateReadMoreFileResponse);
     char *current_ptr = response_data;
@@ -1166,7 +1164,7 @@ char *DFabricClass::generateReadMoreFileResponse (
 
     strcpy(current_ptr, result_data_val);
 
-    phwangDebugSS(false, "DFabricClass::generateReadMoreFileResponse", "response_data=", response_data);
+    phwangDebugSS(false, "DFabricClass::parseReadMoreFile_", "response_data=", response_data);
 
     return response_data;
 }
@@ -1205,11 +1203,11 @@ char *DFabricClass::parseWriteFile (
     int fd;
     this->fileMgrObj()->writeBytesOpen(file_name_buf, eof, data, &fd);
 
-    response_data = this->generateWriteFileResponse(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, fd);
+    response_data = this->parseWriteFile_(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, fd);
     return response_data;
 }
 
-char *DFabricClass::generateWriteFileResponse (
+char *DFabricClass::parseWriteFile_ (
     char const *result_val,
     char *ajax_id_val,
     int fd_val)
@@ -1257,11 +1255,11 @@ char *DFabricClass::parseWriteMoreFile (
 
     this->fileMgrObj()->writeBytesMore(fd, eof, data);
 
-    response_data = this->generateWriteMoreFileResponse(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, fd);
+    response_data = this->parseWriteMoreFile_(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, fd);
     return response_data;
 }
 
-char *DFabricClass::generateWriteMoreFileResponse (
+char *DFabricClass::parseWriteMoreFile_ (
     char const *result_val,
     char *ajax_id_val,
     int fd_val)
@@ -1325,16 +1323,16 @@ char *DFabricClass::parseDatagram (
         default:
             break;
     }
-    response_data = generateDatagramResponse(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, output_data);
+    response_data = parseDatagram_(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, output_data);
     return response_data;
 }
 
-char *DFabricClass::generateDatagramResponse (
+char *DFabricClass::parseDatagram_ (
     char const *result_val,
     char *ajax_id_val,
     char const *data_val)
 {
-    phwangDebugSS(true, "DFabricClass::generateDatagramResponse", "data_val=", data_val);
+    phwangDebugSS(true, "DFabricClass::parseDatagram_", "data_val=", data_val);
 
     char *encoded_data = phwangEncodeStringMalloc(data_val);
     int encoded_data_length = strlen(encoded_data);
