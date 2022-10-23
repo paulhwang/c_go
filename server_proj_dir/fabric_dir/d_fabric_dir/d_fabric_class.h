@@ -194,7 +194,8 @@ class DFabricClass {
 
     char *generateWriteMoreFileResponse (
         char const *result_val,
-        char *ajax_id_val);
+        char *ajax_id_val,
+        int fd_val);
 
     char *processDatagramRequest (
         char *ajax_id_val,

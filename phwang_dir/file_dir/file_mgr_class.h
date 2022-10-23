@@ -41,7 +41,7 @@ public:
         char *data_val,
         int *fd_ptr_val);
 
-    int readBytesMore(
+    int writeBytesMore(
         int fd_val,
         char eof_val,
         char *data_val);

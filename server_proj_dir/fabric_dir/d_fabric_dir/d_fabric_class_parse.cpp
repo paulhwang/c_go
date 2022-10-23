@@ -1235,14 +1235,52 @@ char *DFabricClass::processWriteMoreFileRequest (
         char *ajax_id_val,
         char *data_val)
 {
-    phwangDebugS(true, "DFabricClass::processWriteMoreFileRequest", data_val);
+    char *response_data;
+    if (true && this->debugOn()) {
+        printf("DFabricClass::processWriteMoreFileRequest() data=%s\n", data_val);
+    }
 
+    char *current_ptr = data_val;
+
+    int fd = phwangDecodeNumber(current_ptr, FileMgrClass::FD_LEN_SIZE);
+    current_ptr += FileMgrClass::FD_LEN_SIZE;
+
+    char eof = *current_ptr++;
+
+    char *data = current_ptr;
+
+    if (true && this->debugOn()) {
+        printf("DFabricClass::processWriteMoreFileRequest() fd=%d eof=%c\n", fd, eof);
+    }
+
+    this->fileMgrObj()->writeBytesMore(fd, eof, data);
+
+    response_data = this->generateWriteMoreFileResponse(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, fd);
+    return response_data;
 }
 
 char *DFabricClass::generateWriteMoreFileResponse (
     char const *result_val,
-    char *ajax_id_val)
+    char *ajax_id_val,
+    int fd_val)
 {
+    char *response_data = (char *) phwangMalloc(FABRIC_DEF::DL_ACRLS_BUF_SIZE, MallocClass::generateWriteMoreFileResponse);
+    char *current_ptr = response_data;
+
+    memcpy(current_ptr, ajax_id_val, SIZE_DEF::AJAX_ID_SIZE);
+    current_ptr += SIZE_DEF::AJAX_ID_SIZE;
+
+    *current_ptr++ = FE_DEF::WRITE_MORE_FILE_RESPONSE;
+
+    memcpy(current_ptr, result_val, RESULT_DEF::RESULT_SIZE);
+    current_ptr += RESULT_DEF::RESULT_SIZE;
+
+    phwangEncodeNumber(current_ptr, fd_val, FileMgrClass::FD_LEN_SIZE);
+    current_ptr += FileMgrClass::FD_LEN_SIZE;
+
+    *current_ptr = 0;
+
+    return response_data;
 }
 
 char *DFabricClass::processDatagramRequest (

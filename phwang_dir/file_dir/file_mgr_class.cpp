@@ -84,24 +84,42 @@ int FileMgrClass::writeBytesOpen(
         return -1;
     }
     if (true && this->debugOn()) {
-        printf("FileMgrClass::writeBytesOpen() create succeed fd=%d\n", fd);
+        printf("FileMgrClass::writeBytesOpen() create succeed fd=%d eof=%c\n", fd, eof_val);
     }
 
-    write(fd, data_val, strlen(data_val));
+    int length = write(fd, data_val, strlen(data_val));
+    if (length == -1) {
+        printf("FileMgrClass::writeBytesOpen() cannot write file  ***errno=%d\n", errno);
+        phwangAbendS("FileMgrClass::writeBytesOpen", "cannot write file");
+        return -1;
+    }
 
-    if (eof_val) {
+    if (eof_val == 'Y') {
         close(fd);
     }
 
     *fd_ptr_val = fd;
 }
 
-int FileMgrClass::readBytesMore(
+int FileMgrClass::writeBytesMore(
     int fd_val,
     char eof_val,
     char *data_val)
 {
+    int length = write(fd_val, data_val, strlen(data_val));
+    if (length == -1) {
+        printf("FileMgrClass::writeBytesMore() cannot write file. fd=%d  ***errno=%d\n", fd_val, errno);
+        phwangAbendS("FileMgrClass::writeBytesMore", "cannot write file");
+        return -1;
+    }
 
+    if (true && this->debugOn()) {
+        printf("FileMgrClass::writeBytesMore() fd=%d length=%d eof=%c\n", fd_val, length, eof_val);
+    }
+
+    if (eof_val == 'Y') {
+        close(fd_val);
+    }
 }
 
 int FileMgrClass::readBytesFOpen (char type, char const *file_name_val, char *buf_val, int buf_size_val, int *eof_val)
