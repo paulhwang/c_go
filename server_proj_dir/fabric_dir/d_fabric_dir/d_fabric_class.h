@@ -211,7 +211,7 @@ class DFabricClass {
         char const *room_id_index_val,
         char const *data_val);
 
-    void transmitData(void *port_obj_val, char *data_val);
+    void xmtData(void *port_obj_val, char *data_val);
 
 public:
     DFabricClass(FabricClass *port_obj_val);

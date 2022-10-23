@@ -9,19 +9,19 @@
 #include "../../define_dir/size_def.h"
 #include "d_fabric_class.h"
 
-void DFabricClass::transmitData (void *port_obj_val, char *data_val)
+void DFabricClass::xmtData (void *port_obj_val, char *data_val)
 {
     if (data_val[SIZE_DEF::AJAX_ID_SIZE] != FE_DEF::GET_LINK_DATA_RESPONSE) {
         if (true && this->debugOn()) {
             int len = 50;
             if (strlen(data_val) <= len) {
-                printf("DFabricClass::transmitData() %s\n", data_val);
+                printf("DFabricClass::xmtData() %s\n", data_val);
             }
             else {
                 char data_buf[len + 1];
                 memcpy(data_buf, data_val, len);
                 data_buf[len] = 0;
-                printf("DFabricClass::transmitData() %s\n", data_buf);
+                printf("DFabricClass::xmtData() %s\n", data_buf);
             }
         }
     }

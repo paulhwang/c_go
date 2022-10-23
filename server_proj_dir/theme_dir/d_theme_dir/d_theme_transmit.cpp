@@ -7,12 +7,24 @@
 #include "../../../phwang_dir/phwang.h"
 #include "d_theme_class.h"
 
-void DThemeClass::transmitFunction (char *data_val)
+void DThemeClass::xmtData (char *data_val)
 {
-    phwangDebugS(true, "DThemeClass::transmitFunction", data_val);
+    if (true && this->debugOn()) {
+        int len = 50;
+        if (strlen(data_val) <= len) {
+            printf("DThemeClass::xmtData() %s\n", data_val);
+        }
+        else {
+            char data_buf[len + 1];
+            memcpy(data_buf, data_val, len);
+            data_buf[len] = 0;
+            printf("DThemeClass::xmtData() %s\n", data_buf);
+        }
+    }
+
 
     if (!this->portObject()) {
-        phwangAbendS("DThemeClass::transmitFunction", "null portObject()");
+        phwangAbendS("DThemeClass::xmtData", "null portObject()");
         return;
     }
 

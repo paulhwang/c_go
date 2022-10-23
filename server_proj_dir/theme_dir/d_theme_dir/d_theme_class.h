@@ -7,6 +7,7 @@
 #pragma once
 
 #include <pthread.h>
+#include "../theme_class.h"
 
 #define GAME_DSERVER_RECEIVE_QUEUE_SIZE 100
 #define GAME_DSERVER_GROUP_ARRAY_SIZE 32
@@ -14,7 +15,8 @@
 class ThemeClass;
 
 class DThemeClass {
-    ThemeClass *theThemeObject;
+    int debugOn(void) {return true && this->themeObj_->debugOn();}
+    ThemeClass *themeObj_;
     void *thePortObject;
 
     void startNetConnect(void);
@@ -27,7 +29,7 @@ public:
     char const* objectName(void) {return "DThemeClass";}
 
     void *portObject(void) {return this->thePortObject;}
-    void transmitFunction(char *data_val);
+    void xmtData(char *data_val);
 
     /* exports */
     void exportedParseFunction(char *data_val);

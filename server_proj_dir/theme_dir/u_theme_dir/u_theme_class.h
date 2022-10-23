@@ -26,7 +26,7 @@ protected:
     friend class RoomMgrClass;
 
     void *portObject(void) {return this->thePortObject;}
-    void transmitFunction(char *data_val);
+    void xmtData(char *data_val);
 
 public:
     UThemeClass(ThemeClass *theme_object_val);

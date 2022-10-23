@@ -11,7 +11,7 @@
 DThemeClass::DThemeClass (ThemeClass *theme_object_val)
 {
     memset(this, 0, sizeof(DThemeClass));
-    this->theThemeObject = theme_object_val;
+    this->themeObj_ = theme_object_val;
 
     this->startNetConnect();
 

@@ -170,7 +170,7 @@ void DFabricClass::parseInput (
             return;
     }
 
-    this->transmitData(port_obj_val, response_data);
+    this->xmtData(port_obj_val, response_data);
 }
 
 void DFabricClass::sendSearchLinkFailResponse (
@@ -192,7 +192,7 @@ void DFabricClass::sendSearchLinkFailResponse (
 
     strcpy(current_ptr, RESULT_DEF::RESULT_LINK_NOT_EXIST);
 
-    this->transmitData(port_object_val, response_data);
+    this->xmtData(port_object_val, response_data);
 }
 
 void DFabricClass::sendSearchLinkSessionFailResponse (
@@ -214,7 +214,7 @@ void DFabricClass::sendSearchLinkSessionFailResponse (
 
     strcpy(current_ptr, RESULT_DEF::RESULT_SESSION_NOT_EXIST);
 
-    this->transmitData(port_object_val, response_data);
+    this->xmtData(port_object_val, response_data);
 }
 
 char *DFabricClass::processRegisterRequest (

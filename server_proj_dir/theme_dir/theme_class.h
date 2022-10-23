@@ -15,6 +15,10 @@ class DThemeClass;
 
 class ThemeClass {
 #define GAME_SERVER_ROOM_ARRAY_SIZE 32
+public:
+    int debugOn(void) {return true;}
+
+private:
     char const* objectName(void) {return "ThemeClass";}
     int theDebugCode;
 

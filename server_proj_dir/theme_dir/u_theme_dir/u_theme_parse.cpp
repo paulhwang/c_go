@@ -70,7 +70,7 @@ void UThemeClass::processSetupBaseResponse (char *data_val)
 
     *current_ptr = 0;
 
-    this->theThemeObject->dThemeObject()->transmitFunction(downlink_data);
+    this->theThemeObject->dThemeObject()->xmtData(downlink_data);
 }
 
 void UThemeClass::processPutBaseDataResponse (char *data_val)
@@ -106,7 +106,7 @@ void UThemeClass::processPutBaseDataResponse (char *data_val)
 
             strcpy(current_ptr, rest_data_ptr);
 
-            this->theThemeObject->dThemeObject()->transmitFunction(downlink_data);
+            this->theThemeObject->dThemeObject()->xmtData(downlink_data);
         }
     }
 }
