@@ -14,7 +14,7 @@
 NameListClass::NameListClass (FabricClass *fabric_object_val)
 {
     memset(this, 0, sizeof(*this));
-    this->fabricObject_ = fabric_object_val;
+    this->fabricObj_ = fabric_object_val;
     this->nameListTag_ = 0;
 
     phwangDebugS(false, "NameListClass::NameListClass", "init");
@@ -26,7 +26,7 @@ NameListClass::~NameListClass (void)
 
 void NameListClass::updateNameList (void)
 {
-    void *link_list_mgr = this->fabricObject_->linkListMgrObject();
+    void *link_list_mgr = this->fabricObj_->linkListMgrObject();
 
     int max_index = phwnagListMgrGetMaxIndex(link_list_mgr, "NameListClass::updateNameList()");
     LinkClass **link_entry_array = (LinkClass **) phwangListMgrGetEntryTableArray(link_list_mgr);
@@ -63,7 +63,9 @@ void NameListClass::updateNameList (void)
         phwangAbendS("NameListClass::updateNameList", "buffer too small");
     }
 
-    phwangDebugS(true, "NameListClass::updateNameList", this->nameList_);
+    if (true && this->debugOn()) {
+        printf("NameListClass::updateNameList() %s\n", this->nameList_);
+    }
 }
 
 char *NameListClass::getNameList (int tag_val)

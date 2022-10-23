@@ -52,8 +52,10 @@ void DFabricClass::parseInput (
     current_ptr += 2;
 
     if (command != FE_DEF::GET_LINK_DATA_COMMAND) {
-        phwangDebugSS(true, "DFabricClass::parseInput", "data_val=", data_val);
-        phwangDebugSS(true, "DFabricClass::parseInput", "current_ptr=", current_ptr);
+        if (true && this->debugOn()) {
+            printf("DFabricClass::parseInput() data_val=%s\n", data_val);
+            //printf("DFabricClass::parseInput() current_ptr=%s\n", current_ptr);
+        }
     }
 
     LinkClass *link;

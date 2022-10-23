@@ -7,11 +7,13 @@
 #pragma once
 
 #include "../define_dir/size_def.h"
+#include "fabric_class.h"
 
 class FabricClass;
 
 class NameListClass {
-    FabricClass *fabricObject_;
+    int debugOn(void) {return true && this->fabricObj_->debugOn();}
+    FabricClass *fabricObj_;
     int nameListTag_;
     char nameList_[SIZE_DEF::NAME_LIST_BUFFER_SIZE + 4];
 

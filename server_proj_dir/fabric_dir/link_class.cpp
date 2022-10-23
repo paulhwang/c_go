@@ -21,7 +21,7 @@ LinkClass::LinkClass (
     void *port_object_val)
         :ListEntryClass(list_mgr_object_val)
 {
-    this->fabricObject_ = fabric_object_val;
+    this->fabricObj_ = fabric_object_val;
     this->myName_ = (char *) phwangMalloc(strlen(my_name_val) + 1, MallocClass::LinkClass);
     strcpy(this->myName_, my_name_val);
     this->deviceType_ = device_type_val;
@@ -33,7 +33,9 @@ LinkClass::LinkClass (
     this->pendingSessionSetupQueue2_ = phwangMallocQueue(0, this->objectName());
     this->pendingSessionSetupQueue3_ = phwangMallocQueue(0, this->objectName());
 
-    phwangDebugSSS(true, "LinkClass::LinkClass", "myName=", this->myName(),this->linkIdIndex());
+    if (true && this->debugOn()) {
+        printf("LinkClass::LinkClass() myName=%s id=%s\n", this->myName(),this->linkIdIndex());
+    }
 }
 
 LinkClass::~LinkClass (void)

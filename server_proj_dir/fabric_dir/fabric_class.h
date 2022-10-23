@@ -18,6 +18,10 @@ class NameListClass;
 class FileMgrClass;
 
 class FabricClass {
+public:
+    int debugOn(void) {return true;}
+
+private:
     char const *objectName(void) {return "FabricClass";}
     int theDebugCode;
     

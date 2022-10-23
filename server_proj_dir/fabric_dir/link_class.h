@@ -7,6 +7,7 @@
 #pragma once
 #include <time.h>
 #include "../../phwang_dir/list_mgr_dir/list_entry_class.h"
+#include "fabric_class.h"
 
 class SessionClass;
 class FabricClass;
@@ -15,7 +16,8 @@ class LinkClass : public ListEntryClass {
 #define LINK_CLASS_LINK_NAME_BUF_SIZE 32
 #define LINK_CLASS_KEEP_ALIVE_TIMEOUT 60
 private:
-    FabricClass *fabricObject_;
+    int debugOn(void) {return true && this->fabricObj_->debugOn();}
+    FabricClass *fabricObj_;
     char *myName_;
     char deviceType_;
     void *portObject_;
