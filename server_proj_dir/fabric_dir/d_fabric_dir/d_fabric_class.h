@@ -43,7 +43,7 @@ class DFabricClass {
         char const *ajax_id_val,
         char *data_val);
 
-    char *processRegisterRequest (
+    char *parseRegister (
         char *ajax_id_val,
         char *data_val);
 
@@ -52,7 +52,7 @@ class DFabricClass {
         char *ajax_id_val,
         char const *account_name_val);
 
-    char *processLoginRequest (
+    char *parseLogin (
         char *ajax_id_val,
         char *data_val,
         char device_type_val,
@@ -64,7 +64,7 @@ class DFabricClass {
         char const *link_id_index_val,
         char const *encoded_my_name_val);
 
-    char *processLogoutRequest (
+    char *parseLogout (
         LinkClass *link_val,
         char *ajax_id_val,
         char *data_val);
@@ -74,11 +74,11 @@ class DFabricClass {
         char *ajax_id_val,
         char const *link_id_index_val);
 
-    char *processGetLinkDataRequest (
+    char *parseGetLinkData (
         LinkClass *link_val,
         char *ajax_id_val);
 
-    char *processGetNameListRequest (
+    char *parseGetNameList (
         LinkClass *link_val,
         char *ajax_id_val,
         char *data_val);
@@ -89,7 +89,7 @@ class DFabricClass {
         char const *link_id_index_val,
         char const *data_val);
 
-    char *processSetupSessionRequest (
+    char *parseSetupSession (
         LinkClass *link_val,
         char *ajax_id_val,
         char *data_val);
@@ -101,7 +101,7 @@ class DFabricClass {
         char const *session_id_index_val,
         char const *theme_info_val);
 
-    char *processSetupSession2Request (
+    char *parseSetupSession2 (
         SessionClass *session_val,
         char *ajax_id_val,
         char *data_val);
@@ -114,7 +114,7 @@ class DFabricClass {
         char theme_type_val,
         char const *theme_data_val);
 
-    char *processSetupSession3Request (
+    char *parseSetupSession3 (
         SessionClass *session_val,
         char *ajax_id_val,
         char *data_val);
@@ -124,7 +124,7 @@ class DFabricClass {
         char *ajax_id_val,
         SessionClass *session_val);
 
-    char *processFreeSessionRequest (
+    char *parseFreeSession (
         SessionClass *session_val,
         char *ajax_id_val);
 
@@ -134,7 +134,7 @@ class DFabricClass {
         char const *link_id_index_val,
         char const *session_id_index_val);
 
-    char *processPutSessionDataRequest (
+    char *parsePutSessionData (
         SessionClass *session_val,
         char *ajax_id_val,
         char *data_val);
@@ -145,7 +145,7 @@ class DFabricClass {
         char const *link_id_index_val,
         char const *session_id_index_val);
 
-    char *processGetSessionDataRequest (
+    char *parseGetSessionData (
         SessionClass *session_val,
         char *ajax_id_val,
         char *data_val);
@@ -157,7 +157,7 @@ class DFabricClass {
         char const *session_id_index_val,
         char const *data_val);
 
-    char *processReadFileRequest (
+    char *parseReadFile (
         char *ajax_id_val,
         char *data_val);
 
@@ -168,7 +168,7 @@ class DFabricClass {
         int fd_val,
         char const *result_data_val);
 
-    char *processReadMoreFileRequest (
+    char *parseReadMoreFile (
         char *ajax_id_val,
         char *data_val);
 
@@ -179,7 +179,7 @@ class DFabricClass {
         int fd_val,
         char const *result_data_val);
 
-    char *processWriteFileRequest (
+    char *parseWriteFile (
         char *ajax_id_val,
         char *data_val);
 
@@ -188,7 +188,7 @@ class DFabricClass {
         char *ajax_id_val,
         int fd_val);
 
-    char *processWriteMoreFileRequest (
+    char *parseWriteMoreFile (
         char *ajax_id_val,
         char *data_val);
 
@@ -197,7 +197,7 @@ class DFabricClass {
         char *ajax_id_val,
         int fd_val);
 
-    char *processDatagramRequest (
+    char *parseDatagram (
         char *ajax_id_val,
         char *data_val);
 

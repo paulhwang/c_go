@@ -65,23 +65,23 @@ void DFabricClass::parseData (
         case '0':
             switch (command) {
                 case FE_DEF::REGISTER_COMMAND:
-                    response_data = this->processRegisterRequest(ajax_id, current_ptr);
+                    response_data = this->parseRegister(ajax_id, current_ptr);
                     break;
 
                 case FE_DEF::LOGIN_COMMAND:
-                    response_data = this->processLoginRequest(ajax_id, current_ptr, 'N', port_obj_val);
+                    response_data = this->parseLogin(ajax_id, current_ptr, 'N', port_obj_val);
                     break;
 
                 case FE_DEF::READ_FILE_COMMAND:
-                    response_data = this->processReadFileRequest(ajax_id, current_ptr);
+                    response_data = this->parseReadFile(ajax_id, current_ptr);
                     break;
 
                 case FE_DEF::READ_MORE_FILE_COMMAND:
-                    response_data = this->processReadMoreFileRequest(ajax_id, current_ptr);
+                    response_data = this->parseReadMoreFile(ajax_id, current_ptr);
                     break;
 
                 case FE_DEF::MESSAGE_COMMAND:
-                    response_data = this->processDatagramRequest(ajax_id, current_ptr);
+                    response_data = this->parseDatagram(ajax_id, current_ptr);
                     break;
 
                 default:
@@ -101,27 +101,27 @@ void DFabricClass::parseData (
 
             switch (command) {
                 case FE_DEF::LOGOUT_COMMAND:
-                    response_data = this->processLogoutRequest(link, ajax_id, current_ptr);
+                    response_data = this->parseLogout(link, ajax_id, current_ptr);
                     break;
 
                 case FE_DEF::GET_LINK_DATA_COMMAND:
-                    response_data = this->processGetLinkDataRequest(link, ajax_id);
+                    response_data = this->parseGetLinkData(link, ajax_id);
                     break;
 
                 case FE_DEF::GET_NAME_LIST_COMMAND:
-                    response_data = this->processGetNameListRequest(link, ajax_id, current_ptr);
+                    response_data = this->parseGetNameList(link, ajax_id, current_ptr);
                     break;
 
                 case FE_DEF::SETUP_SESSION_COMMAND:
-                    response_data = this->processSetupSessionRequest(link, ajax_id, current_ptr);
+                    response_data = this->parseSetupSession(link, ajax_id, current_ptr);
                     break;
 
                 case FE_DEF::WRITE_FILE_COMMAND:
-                    response_data = this->processWriteFileRequest(ajax_id, current_ptr);
+                    response_data = this->parseWriteFile(ajax_id, current_ptr);
                     break;
 
                 case FE_DEF::WRITE_MORE_FILE_COMMAND:
-                    response_data = this->processWriteMoreFileRequest(ajax_id, current_ptr);
+                    response_data = this->parseWriteMoreFile(ajax_id, current_ptr);
                     break;
 
                 default:
@@ -140,23 +140,23 @@ void DFabricClass::parseData (
 
             switch (command) {
                 case FE_DEF::SETUP_SESSION2_COMMAND:
-                    response_data = this->processSetupSession2Request(session, ajax_id, current_ptr);
+                    response_data = this->parseSetupSession2(session, ajax_id, current_ptr);
                     break;
 
                 case FE_DEF::SETUP_SESSION3_COMMAND:
-                    response_data = this->processSetupSession3Request(session, ajax_id, current_ptr);
+                    response_data = this->parseSetupSession3(session, ajax_id, current_ptr);
                     break;
 
                 case FE_DEF::FREE_SESSION_COMMAND:
-                    response_data = this->processFreeSessionRequest(session, ajax_id);
+                    response_data = this->parseFreeSession(session, ajax_id);
                     break;
 
                 case FE_DEF::PUT_SESSION_DATA_COMMAND:
-                    response_data = this->processPutSessionDataRequest(session, ajax_id, current_ptr);
+                    response_data = this->parsePutSessionData(session, ajax_id, current_ptr);
                     break;
 
                 case FE_DEF::GET_SESSION_DATA_COMMAND:
-                    response_data = this->processGetSessionDataRequest(session, ajax_id, current_ptr);
+                    response_data = this->parseGetSessionData(session, ajax_id, current_ptr);
                     break;
 
                 default:
@@ -217,18 +217,18 @@ void DFabricClass::sendSearchLinkSessionFailResponse (
     this->xmtData(port_object_val, response_data);
 }
 
-char *DFabricClass::processRegisterRequest (
+char *DFabricClass::parseRegister (
     char *ajax_id_val,
     char *data_val)
 {
     char *response_data;
-    phwangDebugS(false, "DFabricClass::processRegisterRequest", data_val);
+    phwangDebugS(false, "DFabricClass::parseRegister", data_val);
 
     char *encoded_account_name = data_val;
     int account_name_size;
     char *account_name = phwangDecodeStringMalloc(encoded_account_name, &account_name_size);
 
-    phwangDebugS(true, "DFabricClass::processRegisterRequest", account_name);
+    phwangDebugS(true, "DFabricClass::parseRegister", account_name);
 
     char result_buf[RESULT_DEF::RESULT_SIZE + 1];
     this->dbAccountObject()->checkAccountNameExist(account_name, result_buf);
@@ -273,7 +273,7 @@ char *DFabricClass::processRegisterRequest (
    }
 
     else {
-        phwangAbendSS("DFabricClass::processRegisterRequest", "unsupported_result", result_buf);
+        phwangAbendSS("DFabricClass::parseRegister", "unsupported_result", result_buf);
         response_data = generateRegisterResponse(RESULT_DEF::RESULT_DB_ERROR, ajax_id_val, account_name);
         phwangFree(account_name);
         return response_data;
@@ -302,14 +302,14 @@ char *DFabricClass::generateRegisterResponse (
     return response_data;
 }
 
-char *DFabricClass::processLoginRequest (
+char *DFabricClass::parseLogin (
     char *ajax_id_val,
     char *data_val,
     char device_type_val,
     void *port_object_val)
 {
     char *response_data;
-    phwangDebugS(false, "DFabricClass::processLoginRequest", data_val);
+    phwangDebugS(false, "DFabricClass::parseLogin", data_val);
 
     char *encoded_my_name = data_val;
     int my_name_size;
@@ -318,13 +318,13 @@ char *DFabricClass::processLoginRequest (
     char encoded_my_name_buf[128];
     memcpy(encoded_my_name_buf, encoded_my_name, my_name_size);
     encoded_my_name_buf[my_name_size] = 0;
-    phwangDebugSS(false, "DFabricClass::processLoginRequest", "my_name=", encoded_my_name_buf);
+    phwangDebugSS(false, "DFabricClass::parseLogin", "my_name=", encoded_my_name_buf);
 
     char *encoded_password = encoded_my_name + my_name_size;
     int password_size;
     char *password = phwangDecodeStringMalloc(encoded_password, &password_size);
 
-    phwangDebugSS(false, "DFabricClass::processLoginRequest", my_name, password);
+    phwangDebugSS(false, "DFabricClass::parseLogin", my_name, password);
 
     char result_buf[RESULT_DEF::RESULT_SIZE + 1];
     this->dbObject()->dbAccountObject()->checkPassword(my_name, password, result_buf);
@@ -333,7 +333,7 @@ char *DFabricClass::processLoginRequest (
     if (!strcmp(result_buf, RESULT_DEF::RESULT_PASSWORD_MATCH)) {
         LinkClass *link = this->fabricObj_->mallocLink(my_name, device_type_val, port_object_val);
         if (!link) {
-            phwangAbendS("DFabricClass::processLoginRequest", "null_link");
+            phwangAbendS("DFabricClass::parseLogin", "null_link");
             phwangFree(my_name);
             response_data = generateLoginResponse(RESULT_DEF::RESULT_NULL_LINK, ajax_id_val, SIZE_DEF::FAKE_LINK_II, encoded_my_name_buf);
             return response_data;
@@ -353,7 +353,7 @@ char *DFabricClass::processLoginRequest (
     }
 
     else {
-        phwangAbendSS("DFabricClass::processLoginRequest", "unsupported_result", result_buf);
+        phwangAbendSS("DFabricClass::parseLogin", "unsupported_result", result_buf);
         phwangFree(my_name);
         response_data = generateLoginResponse(RESULT_DEF::RESULT_DB_ERROR, ajax_id_val, SIZE_DEF::FAKE_LINK_II, encoded_my_name_buf);
         return response_data;
@@ -427,13 +427,13 @@ char *DFabricClass::generateLoginResponse (
     return response_data;
 }
 
-char *DFabricClass::processLogoutRequest (
+char *DFabricClass::parseLogout (
     LinkClass *link_val,
     char *ajax_id_val,
     char *data_val)
 {
     char *response_data;
-    phwangDebugSS(false, "DFabricClass::processLogoutRequest", "link_id=", link_val->linkIdIndex());
+    phwangDebugSS(false, "DFabricClass::parseLogout", "link_id=", link_val->linkIdIndex());
 
     char link_id_index_buf[SIZE_DEF::LINK_II_SIZE + 1];
     strcpy(link_id_index_buf, link_val->linkIdIndex());
@@ -470,13 +470,13 @@ char *DFabricClass::generateLogoutResponse (
     return response_data;
 }
 
-char *DFabricClass::processGetLinkDataRequest (
+char *DFabricClass::parseGetLinkData (
     LinkClass *link_val,
     char *ajax_id_val)
 {
-    phwangDebugS(false, "DFabricClass::processGetLinkDataRequest", "");
+    phwangDebugS(false, "DFabricClass::parseGetLinkData", "");
     if (!link_val) {
-        phwangAbendS("DFabricClass::processGetLinkDataRequest", "null link");
+        phwangAbendS("DFabricClass::parseGetLinkData", "null link");
     }
 
     link_val->resetKeepAliveTime();
@@ -533,7 +533,7 @@ char *DFabricClass::processGetLinkDataRequest (
                 strcpy(current_ptr, session->sessionIdIndex());
                 current_ptr += SIZE_DEF::SESSION_II_SIZE;
 
-                phwangDebugSS(true, "DFabricClass::processGetLinkDataRequest","Pending_data=", response_data);
+                phwangDebugSS(true, "DFabricClass::parseGetLinkData","Pending_data=", response_data);
             }
         }
     }
@@ -551,7 +551,7 @@ char *DFabricClass::processGetLinkDataRequest (
         current_ptr += pending_session_info2_length;
         *current_ptr = 0;
 
-        phwangDebugSS(true, "DFabricClass::processGetLinkDataRequest", "pending_session3=", response_data);
+        phwangDebugSS(true, "DFabricClass::parseGetLinkData", "pending_session3=", response_data);
 
         phwangFree(pending_session_info2);
     }
@@ -569,7 +569,7 @@ char *DFabricClass::processGetLinkDataRequest (
         current_ptr += pending_session_info3_length;
         *current_ptr = 0;
 
-        phwangDebugSS(true, "DFabricClass::processGetLinkDataRequest", "pending_session3=", response_data);
+        phwangDebugSS(true, "DFabricClass::parseGetLinkData", "pending_session3=", response_data);
 
         phwangFree(pending_session_info3);
     }
@@ -577,13 +577,13 @@ char *DFabricClass::processGetLinkDataRequest (
     return response_data;
 }
 
-char *DFabricClass::processGetNameListRequest (
+char *DFabricClass::parseGetNameList (
     LinkClass *link_val,
     char *ajax_id_val,
     char *data_val)
 {
     char *response_data;
-    phwangDebugS(true, "DFabricClass::processGetNameListRequest", data_val);
+    phwangDebugS(true, "DFabricClass::parseGetNameList", data_val);
 
     char *name_list_tag_val = data_val;
     char *end_val = name_list_tag_val + 3;
@@ -592,7 +592,7 @@ char *DFabricClass::processGetNameListRequest (
     char *name_list = this->fabricObj_->nameListObject()->getNameList(name_list_tag);
 
     if (!name_list) {
-        phwangAbendS("DFabricClass::processGetNameListRequest", data_val);
+        phwangAbendS("DFabricClass::parseGetNameList", data_val);
     }
 
     response_data = generateGetNameListResponse(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, link_val->linkIdIndex(), name_list);
@@ -626,13 +626,13 @@ char *DFabricClass::generateGetNameListResponse (
     return response_data;
 }
 
-char *DFabricClass::processSetupSessionRequest (
+char *DFabricClass::parseSetupSession (
     LinkClass *link_val,
     char *ajax_id_val,
     char *data_val)
 {
     char *response_data = 0;
-    phwangDebugSS(true, "DFabricClass::processSetupSessionRequest", "data_val=", data_val);
+    phwangDebugSS(true, "DFabricClass::parseSetupSession", "data_val=", data_val);
 
     SessionClass *session = link_val->mallocSession();
     if (!session) {
@@ -646,24 +646,24 @@ char *DFabricClass::processSetupSessionRequest (
     char *encoded_theme_info = data_val + 2;
     int theme_info_size;
     char *theme_info = phwangDecodeStringMalloc(encoded_theme_info, &theme_info_size);
-    phwangDebugSS(true, "DFabricClass::processSetupSessionRequest", "theme_info=", theme_info);
+    phwangDebugSS(true, "DFabricClass::parseSetupSession", "theme_info=", theme_info);
 
     char *encoded_first_fiddle = encoded_theme_info + theme_info_size;
     int first_fiddle_size;
     char *first_fiddle = phwangDecodeStringMalloc(encoded_first_fiddle, &first_fiddle_size);
-    phwangDebugSS(true, "DFabricClass::processSetupSessionRequest", "first_fiddle=", first_fiddle);
+    phwangDebugSS(true, "DFabricClass::parseSetupSession", "first_fiddle=", first_fiddle);
 
     char *encoded_second_fiddle = encoded_first_fiddle + first_fiddle_size;
     int second_fiddle_size;
     char *second_fiddle = phwangDecodeStringMalloc(encoded_second_fiddle, &second_fiddle_size);
-    phwangDebugSS(true, "DFabricClass::processSetupSessionRequest", "second_fiddle=", second_fiddle);
+    phwangDebugSS(true, "DFabricClass::parseSetupSession", "second_fiddle=", second_fiddle);
 
     switch (theme_type) {
         case FE_DEF::FE_APP_IS_GO_GAME:
             break;
 
         default:
-            phwangAbendS("DFabricClass::processSetupSessionRequest", "theme_type not supported");
+            phwangAbendS("DFabricClass::parseSetupSession", "theme_type not supported");
     }
 
     GroupClass *group = this->fabricObj_->mallocGroup(group_mode, theme_type, theme_info, first_fiddle, second_fiddle);
@@ -752,15 +752,15 @@ void DFabricClass::sendSetupRoomRequestToThemeServer (GroupClass *group_val)
     this->fabricObj_->uFabricObject()->xmtData(uplink_data);
 }
 
-char *DFabricClass::processSetupSession2Request (
+char *DFabricClass::parseSetupSession2 (
     SessionClass *session_val,
     char *ajax_id_val,
     char *data_val)
 {
     LinkClass *link = session_val->linkObject();
     char *response_data;
-    phwangDebugSS(true, "DFabricClass::processSetupSession2Request", "data_val=", data_val);
-    phwangDebugSSS(true, "DFabricClass::processSetupSession2Request", "id=", link->linkIdIndex(), session_val->sessionIdIndex());
+    phwangDebugSS(true, "DFabricClass::parseSetupSession2", "data_val=", data_val);
+    phwangDebugSSS(true, "DFabricClass::parseSetupSession2", "id=", link->linkIdIndex(), session_val->sessionIdIndex());
 
     char answer = *data_val;
     //char *theme_info_val = data_val;
@@ -815,15 +815,15 @@ char *DFabricClass::generateSetupSession2Response (
     return response_data;
 }
 
-char *DFabricClass::processSetupSession3Request (
+char *DFabricClass::parseSetupSession3 (
     SessionClass *session_val,
     char *ajax_id_val,
     char *data_val)
 {
     char *response_data;
 
-    phwangDebugSS(true, "DFabricClass::processSetupSession3Request", "session_id=", session_val->sessionIdIndex());
-    phwangDebugSS(true, "DFabricClass::processSetupSession3Request", "data_val=", data_val);
+    phwangDebugSS(true, "DFabricClass::parseSetupSession3", "session_id=", session_val->sessionIdIndex());
+    phwangDebugSS(true, "DFabricClass::parseSetupSession3", "data_val=", data_val);
 
     response_data = this->generateSetupSession3Response(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, session_val);
     return response_data;
@@ -887,13 +887,13 @@ char *DFabricClass::generateSetupSession3Response (
 
 /* free session */
 
-char *DFabricClass::processFreeSessionRequest (
+char *DFabricClass::parseFreeSession (
     SessionClass *session_val,
     char *ajax_id_val)
 {
     LinkClass *link = session_val->linkObject();
     char *response_data;
-    phwangDebugSSS(true, "DFabricClass::processFreeSessionRequest", "id=", link->linkIdIndex(), session_val->sessionIdIndex());
+    phwangDebugSSS(true, "DFabricClass::parseFreeSession", "id=", link->linkIdIndex(), session_val->sessionIdIndex());
 
     char session_id_buf[SIZE_DEF::SESSION_II_SIZE + 1];
     strcpy(session_id_buf, session_val->sessionIdIndex());
@@ -932,13 +932,13 @@ char *DFabricClass::generateFreeSessionResponse (
 
 /* put session data */
 
-char *DFabricClass::processPutSessionDataRequest (
+char *DFabricClass::parsePutSessionData (
     SessionClass *session_val,
     char *ajax_id_val,
     char *data_val)
 {
     char *response_data;
-    phwangDebugS(true, "DFabricClass::processPutSessionDataRequest", data_val);
+    phwangDebugS(true, "DFabricClass::parsePutSessionData", data_val);
 
     char *room_id = session_val->groupObject()->roomIdIndex();
     if (!room_id) {
@@ -1001,12 +1001,12 @@ void DFabricClass::sendPutSessionDataRequestToThemeServer (
 
 /* get session data */
 
-char *DFabricClass::processGetSessionDataRequest (
+char *DFabricClass::parseGetSessionData (
     SessionClass *session_val,
     char *ajax_id_val,
     char *data_val)
 {
-    phwangDebugS(true, "DFabricClass::processGetSessionDataRequest", data_val);
+    phwangDebugS(true, "DFabricClass::parseGetSessionData", data_val);
 
     char *data = session_val->dequeuePendingData();
     if (data) {
@@ -1047,27 +1047,27 @@ char *DFabricClass::generateGetSessionDataResponse (
     return response_data;
 }
 
-char *DFabricClass::processReadFileRequest (
+char *DFabricClass::parseReadFile (
         char *ajax_id_val,
         char *data_val)
 {
     char *response_data;
-    phwangDebugS(true, "DFabricClass::processReadFileRequest", data_val);
+    phwangDebugS(true, "DFabricClass::parseReadFile", data_val);
 
     char *current_ptr = data_val;
     int file_name_size;
     char *file_name = phwangDecodeStringMalloc(current_ptr, &file_name_size);
     //current_ptr += file_name_size;
-    phwangDebugSS(true, "DFabricClass::processReadFileRequest", "file_name=", file_name);
+    phwangDebugSS(true, "DFabricClass::parseReadFile", "file_name=", file_name);
 
     char file_name_buf[FileMgrClass::MAX_FILE_NAME_SIZE + 1];
     if (strlen(FILE_DEF::DTF_DIR) + strlen(file_name) <= FileMgrClass::MAX_FILE_NAME_SIZE) {
         strcpy(file_name_buf, FILE_DEF::DTF_DIR);
         strcat(file_name_buf, file_name);
-        phwangDebugSS(true, "DFabricClass::processReadFileRequest", "file_name_buf=", file_name_buf);
+        phwangDebugSS(true, "DFabricClass::parseReadFile", "file_name_buf=", file_name_buf);
     }
     else {
-        phwangAbendSS("DFabricClass::processReadFileRequest", "file_name too long", file_name);
+        phwangAbendSS("DFabricClass::parseReadFile", "file_name too long", file_name);
     }
 
     char data_buf[FileMgrClass::MAX_FILE_IO_BUF_SIZE + 1];
@@ -1075,7 +1075,7 @@ char *DFabricClass::processReadFileRequest (
     int fd;
     int length = this->fileMgrObj()->readBytesOpen(file_name_buf, data_buf, FileMgrClass::MAX_FILE_IO_BUF_SIZE, &eof, &fd);
     printf("length=%d %d \n", length, strlen(data_buf));
-    phwangDebugSS(true, "DFabricClass::processReadFileRequest", "data_buf=", data_buf);
+    phwangDebugSS(true, "DFabricClass::parseReadFile", "data_buf=", data_buf);
 
     char *result_data = data_buf;
     response_data = this->generateReadFileResponse(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, eof ? 'N' : 'Y', fd, result_data);
@@ -1114,19 +1114,19 @@ char *DFabricClass::generateReadFileResponse (
     return response_data;
 }
 
-char *DFabricClass::processReadMoreFileRequest (
+char *DFabricClass::parseReadMoreFile (
         char *ajax_id_val,
         char *data_val)
 {
     char *response_data;
-    phwangDebugS(true, "DFabricClass::processReadMoreFileRequest", data_val);
+    phwangDebugS(true, "DFabricClass::parseReadMoreFile", data_val);
 
     char *current_ptr = data_val;
 
     int fd = phwangDecodeNumber(current_ptr, FileMgrClass::FD_LEN_SIZE);
     current_ptr += FileMgrClass::FD_LEN_SIZE;
 
-    printf("DFabricClass::processReadMoreFileRequest() fd=%d\n", fd);
+    printf("DFabricClass::parseReadMoreFile() fd=%d\n", fd);
 
     char data_buf[FileMgrClass::MAX_FILE_IO_BUF_SIZE + 1];
     int eof;
@@ -1171,27 +1171,27 @@ char *DFabricClass::generateReadMoreFileResponse (
     return response_data;
 }
 
-char *DFabricClass::processWriteFileRequest (
+char *DFabricClass::parseWriteFile (
         char *ajax_id_val,
         char *data_val)
 {
     char *response_data;
-    phwangDebugS(true, "DFabricClass::processWriteFileRequest", data_val);
+    phwangDebugS(true, "DFabricClass::parseWriteFile", data_val);
 
     char *current_ptr = data_val;
     int file_name_size;
     char *file_name = phwangDecodeStringMalloc(current_ptr, &file_name_size);
     current_ptr += file_name_size;
-    phwangDebugSS(true, "DFabricClass::processWriteFileRequest", "file_name=", file_name);
+    phwangDebugSS(true, "DFabricClass::parseWriteFile", "file_name=", file_name);
 
     char file_name_buf[FileMgrClass::MAX_FILE_NAME_SIZE + 1];
     if (strlen(FILE_DEF::DTF_DIR) + strlen(file_name) <= FileMgrClass::MAX_FILE_NAME_SIZE) {
         strcpy(file_name_buf, FILE_DEF::DTF_DIR);
         strcat(file_name_buf, file_name);
-        phwangDebugSS(true, "DFabricClass::processWriteFileRequest", "file_name_buf=", file_name_buf);
+        phwangDebugSS(true, "DFabricClass::parseWriteFile", "file_name_buf=", file_name_buf);
     }
     else {
-        phwangAbendSS("DFabricClass::processWriteFileRequest", "file_name too long", file_name);
+        phwangAbendSS("DFabricClass::parseWriteFile", "file_name too long", file_name);
     }
 
     char eof = *current_ptr++;
@@ -1233,13 +1233,13 @@ char *DFabricClass::generateWriteFileResponse (
     return response_data;
 }
 
-char *DFabricClass::processWriteMoreFileRequest (
+char *DFabricClass::parseWriteMoreFile (
         char *ajax_id_val,
         char *data_val)
 {
     char *response_data;
     if (true && this->debugOn()) {
-        printf("DFabricClass::processWriteMoreFileRequest() data=%s\n", data_val);
+        printf("DFabricClass::parseWriteMoreFile() data=%s\n", data_val);
     }
 
     char *current_ptr = data_val;
@@ -1252,7 +1252,7 @@ char *DFabricClass::processWriteMoreFileRequest (
     char *data = current_ptr;
 
     if (true && this->debugOn()) {
-        printf("DFabricClass::processWriteMoreFileRequest() fd=%d eof=%c\n", fd, eof);
+        printf("DFabricClass::parseWriteMoreFile() fd=%d eof=%c\n", fd, eof);
     }
 
     this->fileMgrObj()->writeBytesMore(fd, eof, data);
@@ -1285,12 +1285,12 @@ char *DFabricClass::generateWriteMoreFileResponse (
     return response_data;
 }
 
-char *DFabricClass::processDatagramRequest (
+char *DFabricClass::parseDatagram (
     char *ajax_id_val,
     char *input_data_val)
 {
     char *response_data;
-    phwangDebugS(true, "DFabricClass::processMessageRequest", input_data_val);
+    phwangDebugS(true, "DFabricClass::parseDatagram", input_data_val);
 
     char act = *input_data_val++;
 
@@ -1302,7 +1302,7 @@ char *DFabricClass::processDatagramRequest (
     if (1) { /* debug */
         char buf[256];
         sprintf(buf, "act=%c data=%s\n", act, data);
-        phwangDebugS(true, "DFabricClass::processMessageRequest", buf);
+        phwangDebugS(true, "DFabricClass::parseDatagram", buf);
     }
 
 
@@ -1314,7 +1314,7 @@ char *DFabricClass::processDatagramRequest (
 
         case 'R':
             output_data = this->messengerObject()->getMessage();
-            phwangDebugS(true, "DFabricClass::processMessageRequest", output_data);
+            phwangDebugS(true, "DFabricClass::parseDatagram", output_data);
             break;
 
         case 'W':
