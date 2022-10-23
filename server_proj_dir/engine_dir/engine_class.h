@@ -11,6 +11,10 @@ class BaseMgrClass;
 class GoBaseClass;
 
 class EngineClass {
+public:
+    int debugOn(void) {return true;}
+
+private:
     char const *objectName(void) {return "EngineClass";}
     int theDebugCode;
     

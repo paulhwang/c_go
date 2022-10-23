@@ -13,9 +13,20 @@
 #include "d_engine_class.h"
 #include "../engine_class.h"
 
-void DEngineClass::exportedParseFunction (char *data_val)
+void DEngineClass::parseData (char *data_val)
 {
-    phwangDebugS(true, "DEngineClass::exportedParseFunction", data_val);
+    if (true && this->debugOn()) {
+        int len = 50;
+        if (strlen(data_val) <= len) {
+            printf("DEngineClass::parseData() %s\n", data_val);
+        }
+        else {
+            char data_buf[len + 1];
+            memcpy(data_buf, data_val, len);
+            data_buf[len] = 0;
+            printf("DEngineClass::parseData() %s\n", data_buf);
+        }
+    }
 
     switch (*data_val) {
         case TE_DEF::TE_SETUP_BASE_COMMAND:
@@ -39,7 +50,7 @@ void DEngineClass::processSetupBase (char *data_val)
     char *room_id_ptr = data_val;
     char *base_id_ptr = room_id_ptr + SIZE_DEF::ROOM_II_SIZE;
 
-    GoBaseClass *go_base_object = this->theEngineObject->mallocGoBase(base_id_ptr);
+    GoBaseClass *go_base_object = this->engineObj_->mallocGoBase(base_id_ptr);
     if (!go_base_object) {
         phwangAbendS("DEngineClass::processSetupBase", "null go_base");
         return;
@@ -63,14 +74,14 @@ void DEngineClass::processSetupBase (char *data_val)
 
     *current_ptr = 0;
 
-    this->transmitFunction(downlink_data);
+    this->xmtData(downlink_data);
 }
 
 void DEngineClass::processPutBaseData (char *data_val)
 {
     phwangDebugS(true, "DEngineClass::processPutBaseData", data_val);
 
-    GoBaseClass *base_object = this->theEngineObject->searchGoBase(data_val);
+    GoBaseClass *base_object = this->engineObj_->searchGoBase(data_val);
     if (!base_object) {
         phwangAbendS("DEngineClass::processPutBaseData", "null base_object");
         /* TBD */
@@ -97,5 +108,5 @@ void DEngineClass::processPutBaseDataResponse (GoBaseClass *base_object_val, cha
 
     strcpy(current_ptr, data_val);
 
-    this->transmitFunction(downlink_data);
+    this->xmtData(downlink_data);
 }

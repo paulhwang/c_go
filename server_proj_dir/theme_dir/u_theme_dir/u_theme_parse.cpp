@@ -16,9 +16,20 @@
 #include "../d_theme_dir/d_theme_class.h"
 #include "../room_class.h"
 
-void UThemeClass::exportedParseFunction (char *data_val)
+void UThemeClass::parseData (char *data_val)
 {
-    phwangDebugS(true, "UThemeClass::exportedParseFunction", data_val);
+    if (true && this->debugOn()) {
+        int len = 50;
+        if (strlen(data_val) <= len) {
+            printf("UThemeClass::parseData() %s\n", data_val);
+        }
+        else {
+            char data_buf[len + 1];
+            memcpy(data_buf, data_val, len);
+            data_buf[len] = 0;
+            printf("UThemeClass::parseData() %s\n", data_buf);
+        }
+    }
 
     switch (*data_val) {
         case TE_DEF::TE_SETUP_BASE_RESPONSE:
@@ -30,7 +41,7 @@ void UThemeClass::exportedParseFunction (char *data_val)
             return;
 
         default:
-            phwangAbendS("UThemeClass::exportedParseFunction", data_val);
+            phwangAbendS("UThemeClass::parseData", data_val);
             return;
     }
 }
@@ -43,7 +54,7 @@ void UThemeClass::processSetupBaseResponse (char *data_val)
     char *room_id_ptr = result_ptr + RESULT_DEF::RESULT_SIZE;
     char *base_id_ptr = room_id_ptr + SIZE_DEF::ROOM_II_SIZE;
 
-    RoomClass *room = this->theThemeObject->searchRoom(room_id_ptr);
+    RoomClass *room = this->themeObj_->searchRoom(room_id_ptr);
     if (!room) {
         phwangAbendS("UThemeClass::processSetupBaseResponse", "null_room");
         return;
@@ -70,7 +81,7 @@ void UThemeClass::processSetupBaseResponse (char *data_val)
 
     *current_ptr = 0;
 
-    this->theThemeObject->dThemeObject()->xmtData(downlink_data);
+    this->themeObj_->dThemeObject()->xmtData(downlink_data);
 }
 
 void UThemeClass::processPutBaseDataResponse (char *data_val)
@@ -81,7 +92,7 @@ void UThemeClass::processPutBaseDataResponse (char *data_val)
     char *room_id_ptr = result_ptr + RESULT_DEF::RESULT_SIZE;
     char *rest_data_ptr = room_id_ptr + SIZE_DEF::ROOM_II_SIZE;
 
-    RoomClass *room = this->theThemeObject->searchRoom(room_id_ptr);
+    RoomClass *room = this->themeObj_->searchRoom(room_id_ptr);
 
     if (!room) {
         phwangAbendS("UThemeClass::processPutBaseDataResponse", "null room");
@@ -106,7 +117,7 @@ void UThemeClass::processPutBaseDataResponse (char *data_val)
 
             strcpy(current_ptr, rest_data_ptr);
 
-            this->theThemeObject->dThemeObject()->xmtData(downlink_data);
+            this->themeObj_->dThemeObject()->xmtData(downlink_data);
         }
     }
 }

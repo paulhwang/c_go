@@ -17,9 +17,20 @@
 #include "../session_class.h"
 #include "../group_class.h"
 
-void UFabricClass::exportedParseFunction (char *data_val)
+void UFabricClass::parseData (char *data_val)
 {
-    phwangDebugS(true, "UFabricClass::exportedParseFunction", data_val);
+    if (true && this->debugOn()) {
+        int len = 50;
+        if (strlen(data_val) <= len) {
+            printf("UFabricClass::parseData() %s\n", data_val);
+        }
+        else {
+            char data_buf[len + 1];
+            memcpy(data_buf, data_val, len);
+            data_buf[len] = 0;
+            printf("UFabricClass::parseData() %s\n", data_buf);
+        }
+    }
 
     switch (*data_val) {
         case FT_DEF::FT_SETUP_ROOM_RESPONSE:
@@ -31,7 +42,7 @@ void UFabricClass::exportedParseFunction (char *data_val)
             return;
 
         default:
-            phwangAbendS("UFabricClass::exportedParseFunction", data_val);
+            phwangAbendS("UFabricClass::parseData", data_val);
             return;
     }
 }
@@ -53,7 +64,7 @@ void UFabricClass::processSetupRoomResponse (char *data_val)
 
     char *room_id_ptr = current_ptr;
 
-    GroupClass *group = this->fabricObject_->searchGroup(group_id_index);
+    GroupClass *group = this->fabricObj_->searchGroup(group_id_index);
     if (!group) {
         phwangAbendS("UFabricClass::processSetupRoomResponse", "null_group");
         return;
@@ -71,7 +82,18 @@ void UFabricClass::processSetupRoomResponse (char *data_val)
 
 void UFabricClass::processPutRoomDataResponse (char *data_val)
 {
-    phwangDebugS(true, "UFabricClass::processPutRoomDataResponse", data_val);
+    if (false && this->debugOn()) {
+        int len = 50;
+        if (strlen(data_val) <= len) {
+            printf("UFabricClass::processPutRoomDataResponse() %s\n", data_val);
+        }
+        else {
+            char data_buf[len + 1];
+            memcpy(data_buf, data_val, len);
+            data_buf[len] = 0;
+            printf("UFabricClass::processPutRoomDataResponse() %s\n", data_buf);
+        }
+    }
 
     char result_buf[RESULT_DEF::RESULT_SIZE + 1];
     memcpy(result_buf, data_val, RESULT_DEF::RESULT_SIZE);
@@ -83,7 +105,7 @@ void UFabricClass::processPutRoomDataResponse (char *data_val)
 
     char *rest_data = current_ptr;
 
-    GroupClass *group = this->fabricObject_->searchGroup(group_id_ptr);
+    GroupClass *group = this->fabricObj_->searchGroup(group_id_ptr);
     if (!group) {
         phwangAbendS("UFabricClass::processPutRoomDataResponse", "null_group");
         return;

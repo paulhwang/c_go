@@ -29,7 +29,7 @@ DbAccountClass *DFabricClass::dbAccountObject(void) {
     return fabricObj_->dbObject()->dbAccountObject();
 }
 
-void DFabricClass::parseInput (
+void DFabricClass::parseData (
     void *port_obj_val,
     char *data_val)
 {
@@ -40,8 +40,8 @@ void DFabricClass::parseInput (
 
     if (*current_ptr == '{') {
         if (memcmp(current_ptr, this->timeStampString_, SIZE_DEF::FABRIC_TIME_STAMP_SIZE)) {
-            phwangDebugSS(true, "DFabricClass::parseInput", " ***time_stamp not match: data=", data_val);
-            phwangAbendSS("DFabricClass::parseInput", " ***time_stamp not match: data=", data_val);
+            phwangDebugSS(true, "DFabricClass::parseData", " ***time_stamp not match: data=", data_val);
+            phwangAbendSS("DFabricClass::parseData", " ***time_stamp not match: data=", data_val);
             return;
         }
         current_ptr += SIZE_DEF::FABRIC_TIME_STAMP_SIZE;
@@ -53,8 +53,8 @@ void DFabricClass::parseInput (
 
     if (command != FE_DEF::GET_LINK_DATA_COMMAND) {
         if (true && this->debugOn()) {
-            printf("DFabricClass::parseInput() data_val=%s\n", data_val);
-            //printf("DFabricClass::parseInput() current_ptr=%s\n", current_ptr);
+            printf("DFabricClass::parseData() data_val=%s\n", data_val);
+            //printf("DFabricClass::parseData() current_ptr=%s\n", current_ptr);
         }
     }
 
@@ -86,7 +86,7 @@ void DFabricClass::parseInput (
 
                 default:
                     printf("comand=%c\n", command);
-                    phwangAbendS("DFabricClass::parseInput_0", current_ptr);
+                    phwangAbendS("DFabricClass::parseData_0", current_ptr);
                     return;
             }
             break;
@@ -125,7 +125,7 @@ void DFabricClass::parseInput (
                     break;
 
                 default:
-                    phwangAbendS("DFabricClass::parseInput_1", data_val);
+                    phwangAbendS("DFabricClass::parseData_1", data_val);
                     return;
             }
             break;
@@ -160,13 +160,13 @@ void DFabricClass::parseInput (
                     break;
 
                 default:
-                    phwangAbendS("DFabricClass::parseInput_2", data_val);
+                    phwangAbendS("DFabricClass::parseData_2", data_val);
                     return;
             }
             break;
 
         default:
-            phwangAbendS("DFabricClass::parseInput", "bad type");
+            phwangAbendS("DFabricClass::parseData", "bad type");
             return;
     }
 
@@ -749,7 +749,7 @@ void DFabricClass::sendSetupRoomRequestToThemeServer (GroupClass *group_val)
 
     strcpy(current_ptr, group_val->themeInfo());
 
-    this->fabricObj_->uFabricObject()->transmitFunction(uplink_data);
+    this->fabricObj_->uFabricObject()->xmtData(uplink_data);
 }
 
 char *DFabricClass::processSetupSession2Request (
@@ -996,7 +996,7 @@ void DFabricClass::sendPutSessionDataRequestToThemeServer (
 
     strcpy(current_ptr, data_val);
 
-    this->fabricObj_->uFabricObject()->transmitFunction(uplink_data);
+    this->fabricObj_->uFabricObject()->xmtData(uplink_data);
 }
 
 /* get session data */

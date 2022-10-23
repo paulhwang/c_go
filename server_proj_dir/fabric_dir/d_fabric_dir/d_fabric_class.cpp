@@ -55,7 +55,7 @@ void dFabricTpReceiveDataFunction (void *port_obj_val, void *d_fabric_obj_val, v
     //    phwangDebugSSI(true, "Golbal::dFabricTpReceiveDataFunction", (char *) data_val, "index", phwangGetPortObjectIndex(port_obj_val));
     //}
 
-    ((DFabricClass *) d_fabric_obj_val)->parseInput(port_obj_val, (char *) data_val);
+    ((DFabricClass *) d_fabric_obj_val)->parseData(port_obj_val, (char *) data_val);
     phwangFree(data_val);
 }
 

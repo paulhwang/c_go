@@ -15,7 +15,7 @@
 UThemeClass::UThemeClass (ThemeClass *theme_object_val)
 {
     memset(this, 0, sizeof(UThemeClass));
-    this->theThemeObject = theme_object_val;
+    this->themeObj_ = theme_object_val;
     this->startNetServer();
 
     phwangDebugS(false, "UThemeClass::UThemeClass", "init");
@@ -44,7 +44,7 @@ void uThemeTpReceiveDataFunction (void *port_object_val, void *game_server_objec
         phwangLogitS("Golbal::uThemeTpReceiveDataFunction", (char *) data_val);
     }
 
-    ((UThemeClass *) game_server_object_val)->exportedParseFunction((char *) data_val);
+    ((UThemeClass *) game_server_object_val)->parseData((char *) data_val);
     phwangFree(data_val);
 }
 

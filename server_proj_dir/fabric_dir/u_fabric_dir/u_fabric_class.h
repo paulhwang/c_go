@@ -7,6 +7,7 @@
 #pragma once
 
 #include <pthread.h>
+#include "../fabric_class.h"
 
 #define U_FABRIC_RECEIVE_QUEUE_SIZE 100
 
@@ -15,7 +16,8 @@ class SessionClass;
 class GroupClass;
 
 class UFabricClass {
-    FabricClass *fabricObject_;
+    int debugOn(void) {return true && this->fabricObj_->debugOn();}
+    FabricClass *fabricObj_;
     void *tcpServerObject_;
     void *portObject_;
 
@@ -24,15 +26,14 @@ class UFabricClass {
     void processPutRoomDataResponse(char *data_val);
 
 public:
-    UFabricClass(FabricClass *fabric_object_val);
+    UFabricClass(FabricClass *fabric_obj_val);
     ~UFabricClass(void);
     char const* objectName(void) {return "UFabricClass";}
 
     void *portObject(void) {return this->portObject_;}
-    void transmitFunction(char *data_val);
+    void xmtData(char *data_val);
 
     /* exports */
-    FabricClass *fabricObject(void) {return this->fabricObject_;}
-    void exportedParseFunction(char *data_val);
+    void parseData(char *data_val);
     void exportedNetAcceptFunction(void *tp_transfer_object_val);
 };

@@ -8,10 +8,10 @@
 #include "../../define_dir/tcp_port_define.h"
 #include "u_fabric_class.h"
 
-UFabricClass::UFabricClass (FabricClass *fabric_object_val)
+UFabricClass::UFabricClass (FabricClass *fabric_obj_val)
 {
     memset(this, 0, sizeof(UFabricClass));
-    this->fabricObject_ = fabric_object_val;
+    this->fabricObj_ = fabric_obj_val;
     this->startNetServer();
 
     phwangDebugS(false, "UFabricClass::UFabricClass", "init");
@@ -39,7 +39,7 @@ void uFabricTpReceiveDataFunction (void *port_object_val, void *u_fabric_object_
         phwangLogitS("Golbal::uFabricTpReceiveDataFunction", (char *) data_val);
     }
 
-    ((UFabricClass *) u_fabric_object_val)->exportedParseFunction((char *) data_val);
+    ((UFabricClass *) u_fabric_object_val)->parseData((char *) data_val);
     phwangFree(data_val);
 }
 

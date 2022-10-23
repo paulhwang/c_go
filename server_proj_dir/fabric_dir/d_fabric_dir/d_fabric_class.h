@@ -218,5 +218,5 @@ public:
     ~DFabricClass(void);
 
     void tcpAccept(void *port_obj_val);
-    void parseInput(void *port_obj_val, char *data_val);
+    void parseData(void *port_obj_val, char *data_val);
 };

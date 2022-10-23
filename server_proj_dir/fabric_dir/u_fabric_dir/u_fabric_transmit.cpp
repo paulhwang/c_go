@@ -7,12 +7,23 @@
 #include "../../../phwang_dir/phwang.h"
 #include "u_fabric_class.h"
 
-void UFabricClass::transmitFunction (char *data_val)
+void UFabricClass::xmtData (char *data_val)
 {
-    phwangLogitS("UFabricClass::transmitFunction", data_val);
+    if (true && this->debugOn()) {
+        int len = 50;
+        if (strlen(data_val) <= len) {
+            printf("UFabricClass::xmtData() %s\n", data_val);
+        }
+        else {
+            char data_buf[len + 1];
+            memcpy(data_buf, data_val, len);
+            data_buf[len] = 0;
+            printf("UFabricClass::xmtData() %s\n", data_buf);
+        }
+    }
 
     if (!this->portObject()) {
-        phwangAbendS("UFabricClass::transmitFunction", "null theTpTransferObject! The reason could be the connnection from ThemeServer has not been accepted");
+        phwangAbendS("UFabricClass::xmtData", "null theTpTransferObject! The reason could be the connnection from ThemeServer has not been accepted");
         return;
     }
 

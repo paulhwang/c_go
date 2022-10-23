@@ -8,10 +8,10 @@
 #include "../../define_dir/tcp_port_define.h"
 #include "d_engine_class.h"
 
-DEngineClass::DEngineClass (EngineClass *engine_object_val)
+DEngineClass::DEngineClass (EngineClass *engine_obj_val)
 {
     memset(this, 0, sizeof(DEngineClass));
-    this->theEngineObject = engine_object_val;
+    this->engineObj_ = engine_obj_val;
 
     this->startNetConnect();
 
@@ -25,7 +25,7 @@ DEngineClass::~DEngineClass (void)
 void dEngineReceiveDataFromTransport (void *port_object_val, void *game_d_server_object_val, void *data_val) {
     phwangDebugS(false, "Golbal::dEngineReceiveDataFromTransport", (char *) data_val);
 
-    ((DEngineClass *) game_d_server_object_val)->exportedParseFunction((char *) data_val);
+    ((DEngineClass *) game_d_server_object_val)->parseData((char *) data_val);
     phwangFree(data_val);
 }
 

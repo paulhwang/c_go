@@ -7,13 +7,15 @@
 #pragma once
 
 #include <pthread.h>
+#include "../theme_class.h"
 
 class ThemeClass;
 
 #define GAME_USERVER_RECEIVE_QUEUE_SIZE 100
 
 class UThemeClass {
-    ThemeClass *theThemeObject;
+    int debugOn(void) {return true && this->themeObj_->debugOn();}
+    ThemeClass *themeObj_;
     void *theTpServerObject;
     void *thePortObject;
 
@@ -35,5 +37,5 @@ public:
 
     /* exports */
     void exportedNetAcceptFunction(void *tp_transfer_object_val);
-    void exportedParseFunction(char *data_val);
+    void parseData(char *data_val);
 };
