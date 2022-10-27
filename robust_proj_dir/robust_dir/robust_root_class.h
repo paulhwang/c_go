@@ -9,8 +9,6 @@
 class ThreadRootClass;
 
 class RobustRootClass {
-    int  const static TEST_THREAD_COUNT = 3;
-
     int debugOn_;
     void startTestThreads(void);
 

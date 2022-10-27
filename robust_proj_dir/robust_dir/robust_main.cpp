@@ -10,11 +10,12 @@
 #include "robust_root_class.h"
 
 int main (int argc, char** argv) {
-    int debug_code = 255;
+    int debug_on = 1;
 
     printf("%s start running\n", argv[0]);
-
-    RobustRootClass* robustRootObject = new RobustRootClass(1);
+    
+    phwangPhwangPhwang(debug_on);
+    RobustRootClass* robustRootObject = new RobustRootClass(debug_on);
 
     sleep(10);
 

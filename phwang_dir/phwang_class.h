@@ -16,6 +16,10 @@ class ListMgrRootClass;
 class ArrayMgrRootClass;
 
 class PhwangClass {
+public:
+    int  const static ROBUST_THREAD_COUNT = 3;
+
+private:
     char const *objectName(void) {return "PhwangClass";}
     int theDebugCode;
 

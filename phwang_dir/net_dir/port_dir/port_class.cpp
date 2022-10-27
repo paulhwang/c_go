@@ -4,8 +4,9 @@
   File name: port_class.cpp
 */
 
-#include "../../../phwang_dir/phwang.h"
-#include "../../../phwang_dir/malloc_dir/malloc_class.h"
+#include "../../phwang.h"
+#include "../../phwang_class.h"
+#include "../../malloc_dir/malloc_class.h"
 #include "port_class.h"
 
 std::atomic<int> PortClass::ObjectCount(0);
@@ -18,7 +19,7 @@ PortClass::PortClass (int socket_val,
                                   char const *who_val)
 {
     memset(this, 0, sizeof(*this));
-    phwangIncrementAtomicCount(&PortClass::ObjectCount, this->objectName(), 6);
+    phwangIncrementAtomicCount(&PortClass::ObjectCount, this->objectName(), 6 + PhwangClass::ROBUST_THREAD_COUNT);
     this->theSocket = socket_val;
     this->theReceiveCallback = receive_callback_val;
     this->theReceiveObject = receive_object_val;
