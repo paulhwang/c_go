@@ -12,6 +12,6 @@ class RobustRootClass {
   void startTest(void);
 
   public:
-    RobustRootClass(int test_on_val, int debug_on_val);
+    RobustRootClass(int debug_on_val);
     ~RobustRootClass(void);
 };

@@ -14,7 +14,7 @@ int main (int argc, char** argv) {
 
     printf("%s start running\n", argv[0]);
 
-    RobustRootClass* robustRootObject = new RobustRootClass(1, 1);
+    RobustRootClass* robustRootObject = new RobustRootClass(1);
 
     sleep(10);
 
