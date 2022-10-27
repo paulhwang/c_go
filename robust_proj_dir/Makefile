@@ -13,7 +13,7 @@ ROBUST_PROJ_DIR     = .
 ROBUST_DIR          = $(ROBUST_PROJ_DIR)/robust_dir
 
 ### Objects
-ROBUST_OBJS = $(ROBUST_DIR)/robust_main.o $(ROBUST_DIR)/robust_root_class.o
+ROBUST_OBJS = $(ROBUST_DIR)/robust_main.o $(ROBUST_DIR)/robust_root_class.o $(ROBUST_DIR)/robust_class.o
 ROBUST_PROJ_OBJS = $(ROBUST_OBJS)
 
 ### Executable
