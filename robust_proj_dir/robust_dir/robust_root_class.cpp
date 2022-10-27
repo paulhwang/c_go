@@ -7,13 +7,23 @@
 #include "../../phwang_dir/phwang.h"
 #include "robust_root_class.h"
 
-RobustRootClass::RobustRootClass (int debug_code_val)
+RobustRootClass::RobustRootClass (int test_on_val, int debug_on_val)
 {
-    printf("RobustRootClass::RobustRootClass()\n");
-    //phwangPhwangPhwang(debug_code_val);
+    this->debugOn_ = debug_on_val;
+    if (this->debugOn_) {
+        printf("RobustRootClass::RobustRootClass() Robust test is on\n");
+    }
+
+    if (test_on_val) {
+       this->startTest(); 
+    }
 }
 
 RobustRootClass::~RobustRootClass (void)
 {
-    //phwangDebugS(true, "RobustRootClass::~RobustRootClass", "exit");
+}
+
+void RobustRootClass::startTest(void)
+{
+
 }

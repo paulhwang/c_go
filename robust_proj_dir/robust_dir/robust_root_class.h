@@ -7,9 +7,11 @@
 #pragma once
 
 class RobustRootClass {
+  int debugOn_;
+  int debugOn(void) {return this->debugOn_;}
+  void startTest(void);
 
   public:
-    RobustRootClass(int debug_code_val);
+    RobustRootClass(int test_on_val, int debug_on_val);
     ~RobustRootClass(void);
-    char const *objectName(void) {return "RobustRootClass";}
 };
