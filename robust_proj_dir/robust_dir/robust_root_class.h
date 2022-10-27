@@ -6,12 +6,21 @@
 
 #pragma once
 
-class RobustRootClass {
-  int debugOn_;
-  int debugOn(void) {return this->debugOn_;}
-  void startTest(void);
+#include <pthread.h>
 
-  public:
+class ThreadRootClass;
+
+class RobustRootClass {
+    int  const static TEST_THREAD_COUNT = 3;
+
+    int debugOn_;
+    ThreadRootClass *threadRoodObj_;
+    pthread_t testThreads[TEST_THREAD_COUNT];
+
+    int debugOn(void) {return this->debugOn_;}
+    void startTestThreads(int thread_count_val);
+
+public:
     RobustRootClass(int debug_on_val);
     ~RobustRootClass(void);
 };
