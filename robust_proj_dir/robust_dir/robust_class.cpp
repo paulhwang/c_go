@@ -13,11 +13,20 @@ RobustClass::RobustClass (int index_val, int debug_on_val)
 {
     this->myIndex_ = index_val;
     this->debugOn_ = debug_on_val;
+    this->setObjetName("robust", 2);
     this->startThread();
 }
 
 RobustClass::~RobustClass (void)
 {
+}
+
+void RobustClass::setObjetName (char const *name_val, int index_size_val)
+{
+    int len = strlen(name_val);
+    memcpy(this->objectName_, "robust", len);
+    phwangEncodeNumber(&this->objectName_[len], this->myIndex_, index_size_val);
+    this->objectName_[len + index_size_val] = 0;
 }
 
 void *globalTestThreadFunc (void *robust_obj_val)
@@ -34,9 +43,10 @@ void RobustClass::startThread(void)
 
 void *RobustClass::testThreadFunc (void)
 {
-    if (this->debugOn_) {
+    if (false && this->debugOn_) {
         printf("RobustClass::testThreadFunc() myIndex_=%d\n", this->myIndex_);
     }
+
     this->startNetConnect();
     return 0;
 }
@@ -56,5 +66,5 @@ void RobustClass::rcvFunc (char *data_val)
 
 void RobustClass::startNetConnect (void)
 {
-    this->portObj_ = phwangTpConnect(0, TcpPortDefine::FABRIC_TEST_PORT_NUMER, globalRcvFunc, this, "this->objectName()");
+    this->portObj_ = phwangTpConnect(0, TcpPortDefine::FABRIC_TEST_PORT_NUMER, globalRcvFunc, this, this->objectName());
 }

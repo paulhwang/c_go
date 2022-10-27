@@ -13,7 +13,10 @@ class RobustClass {
     int debugOn_;
     pthread_t testThread;
     void *portObj_;
+    char objectName_[16];
 
+    char *objectName(void) {return this->objectName_;}
+    void setObjetName(char const *name_val, int index_size_val);
     void startThread(void);
     void startNetConnect(void);
 
