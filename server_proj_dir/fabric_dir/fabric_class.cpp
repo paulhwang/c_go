@@ -96,7 +96,10 @@ LinkClass *FabricClass::mallocLink (
 
 void FabricClass::freeLink (LinkClass *link_object_val)
 {
-    phwangDebugS(true, "FabricClass::freeLink", link_object_val->linkIdIndex());
+    if (true && this->debugOn_) {
+        printf("FabricClass::freeLink() id=%s\n", link_object_val->linkIdIndex());
+    }
+
     if (!link_object_val) {
         return;
     }

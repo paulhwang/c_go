@@ -236,7 +236,9 @@ char *DFabricClass::parseRegister (
     int account_name_size;
     char *account_name = phwangDecodeStringMalloc(encoded_account_name, &account_name_size);
 
-    phwangDebugS(true, "DFabricClass::parseRegister", account_name);
+    if (true && this->debugOn_) {
+        printf("DFabricClass::parseRegister() name=%s\n", account_name);
+    }
 
     char result_buf[RESULT_DEF::RESULT_SIZE + 1];
     this->dbAccountObject()->checkAccountNameExist(account_name, result_buf);
