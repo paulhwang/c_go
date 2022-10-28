@@ -21,7 +21,7 @@ class RobustClass {
     void startNetConnect(void);
 
 public:
-    RobustClass(int index_val, int debug_on_val);
+    RobustClass(int debug_on_val, int index_val);
     ~RobustClass(void);
 
     void *testThreadFunc(void);

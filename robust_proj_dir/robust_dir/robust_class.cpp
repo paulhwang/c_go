@@ -9,10 +9,11 @@
 #include "../../server_proj_dir/define_dir/tcp_port_define.h"
 #include "robust_class.h"
 
-RobustClass::RobustClass (int index_val, int debug_on_val)
+RobustClass::RobustClass (int debug_on_val, int index_val)
 {
+    memset(this, 0, sizeof(*this));
+    this->debugOn_ = true && debug_on_val;
     this->myIndex_ = index_val;
-    this->debugOn_ = debug_on_val;
     this->setObjetName("robust", 2);
     this->startThread();
 }

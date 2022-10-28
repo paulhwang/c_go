@@ -11,7 +11,8 @@
 
 RobustRootClass::RobustRootClass (int debug_on_val)
 {
-    this->debugOn_ = debug_on_val;
+    memset(this, 0, sizeof(*this));
+    this->debugOn_ = true && debug_on_val;
     this->startTestThreads(); 
 }
 
@@ -22,6 +23,6 @@ RobustRootClass::~RobustRootClass (void)
 void RobustRootClass::startTestThreads(void)
 {
     for (int i = 0; i < PhwangClass::ROBUST_THREAD_COUNT; i++) {
-        new RobustClass(i, this->debugOn_);
+        new RobustClass(this->debugOn_, i);
     }
 }
