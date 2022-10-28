@@ -12,6 +12,7 @@ class ListEntryClass;
 class ListMgrClass {
 #define LIST_MGR_ID_INDEX_ARRAY_SIZE 1000
 #define LIST_MGR_MAX_GLOBAL_LIST_ID 9999
+    int debugOn_;
     char theObjectName[64];
     char const *theWho;
     int theIdSize;

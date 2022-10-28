@@ -11,6 +11,7 @@
 ListMgrClass::ListMgrClass (char const *who_val, int id_size_val, int index_size_val, int global_entry_id_val)
 {
     memset(this, 0, sizeof(ListMgrClass));
+    this->debugOn_ = true;
     this->theWho = who_val;
     this->theIdSize = id_size_val;
     this->theIndexSize = index_size_val;
@@ -131,12 +132,18 @@ ListEntryClass *ListMgrClass::searchEntry (char const *data_val, void *extra_dat
 
 ListEntryClass *ListMgrClass::getEntryByIdIndex (int entry_id_val, int link_index_val, void *extra_data_val)
 {
+    if (true && this->debugOn_) {
+        printf("ListMgrClass::getEntryByIdIndex(%s) id=%d index=%d\n", this->theWho, entry_id_val, link_index_val);
+    }
+
     if (entry_id_val > LIST_MGR_MAX_GLOBAL_LIST_ID) {
+        printf("ListMgrClass::getEntryByIdIndex(%s) id=%d index=%d\n", this->theWho, entry_id_val, link_index_val);
         phwangAbendWS("ListMgrClass::getEntryByIdIndex", this->theWho, "entry_id_val too big");
         return 0;
     }
 
     if (link_index_val >= LIST_MGR_MAX_GLOBAL_LIST_ID) {
+        printf("ListMgrClass::getEntryByIdIndex(%s) id=%d index=%d\n", this->theWho, entry_id_val, link_index_val);
         phwangAbendWS("ListMgrClass::getEntryByIdIndex", this->theWho, "link_index_val too big");
         return 0;
     }
