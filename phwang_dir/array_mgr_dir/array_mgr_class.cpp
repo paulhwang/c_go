@@ -10,6 +10,7 @@
 ArrayMgrClass::ArrayMgrClass(char const *who_val, char array_type_val, int max_array_size_val)
 {
     memset(this, 0, sizeof(ArrayMgrClass));
+    this->debugOn_ = true;;
     this->theWho = who_val;
     this->theArrayType = array_type_val;
     this->theMaxArraySize = max_array_size_val;
@@ -81,10 +82,9 @@ void ArrayMgrClass::insertPointerElement (void *element_val)
     void *data;
 
     if (this->theArrayType == 's') {
-        int len = strlen((char *) element_val);
-        data = malloc(len + 4);
-        strcpy((char *) data, (char *) element_val);
-        phwangLogitWS("ArrayMgrClass::insertPointerElement", this->theWho, (char *) data);
+        if (true && this->debugOn_) {
+            printf("ArrayMgrClass::insertPointerElement(%s) %s\n", this->theWho, (char *) element_val);
+        }
     }
     else {
         data = element_val;

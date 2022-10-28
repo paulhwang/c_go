@@ -7,6 +7,7 @@
 #pragma once
 
 class ArrayMgrClass {
+    int debugOn_;
     char const *theWho;
     char theArrayType;
     int theMaxArraySize;
