@@ -52,7 +52,7 @@ void DFabricClass::parseData (
     current_ptr += 2;
 
     if (command != FE_DEF::GET_LINK_DATA_COMMAND) {
-        if (true && this->debugOn()) {
+        if (true && this->debugOn_) {
             int len = 50;
             if (strlen(data_val) <= len) {
                 printf("DFabricClass::parseData(*) %s\n", data_val);
@@ -1059,7 +1059,7 @@ char *DFabricClass::parseReadFile (
 {
     char *response_data;
 
-    if (false && this->debugOn()) {
+    if (false && this->debugOn_) {
         printf("DFabricClass::parseReadFile() data=%s\n", data_val);
     }
 
@@ -1086,7 +1086,7 @@ char *DFabricClass::parseReadFile (
     int fd;
     int length = this->fileMgrObj()->readBytesOpen(file_name_buf, data_buf, FileMgrClass::MAX_FILE_IO_BUF_SIZE, &eof, &fd);
 
-    if (false && this->debugOn()) {
+    if (false && this->debugOn_) {
         printf("DFabricClass::parseReadFile() length=%d %d data=%s\n", length, strlen(data_buf), data_buf);
     }
 
@@ -1189,7 +1189,7 @@ char *DFabricClass::parseWriteFile (
         char *data_val)
 {
     char *response_data;
-    if (false && this->debugOn()) {
+    if (false && this->debugOn_) {
         printf("DFabricClass::parseWriteFile() data=%s\n", data_val);
     }
 
@@ -1213,7 +1213,7 @@ char *DFabricClass::parseWriteFile (
 
     char *data = current_ptr;
 
-    if (false && this->debugOn()) {
+    if (false && this->debugOn_) {
         printf("DFabricClass::parseWriteFile() eof=%c data=%s\n", eof, data);
     }
 
@@ -1253,7 +1253,7 @@ char *DFabricClass::parseWriteMoreFile (
         char *data_val)
 {
     char *response_data;
-    if (false && this->debugOn()) {
+    if (false && this->debugOn_) {
         printf("DFabricClass::parseWriteMoreFile() data=%s\n", data_val);
     }
 
@@ -1266,7 +1266,7 @@ char *DFabricClass::parseWriteMoreFile (
 
     char *data = current_ptr;
 
-    if (false && this->debugOn()) {
+    if (false && this->debugOn_) {
         printf("DFabricClass::parseWriteMoreFile() fd=%d eof=%c\n", fd, eof);
     }
 

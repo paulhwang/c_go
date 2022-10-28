@@ -16,7 +16,7 @@ class LinkClass : public ListEntryClass {
 #define LINK_CLASS_LINK_NAME_BUF_SIZE 32
 #define LINK_CLASS_KEEP_ALIVE_TIMEOUT 60
 private:
-    int debugOn(void) {return true && this->fabricObj_->debugOn();}
+    int debugOn_;
     FabricClass *fabricObj_;
     char *myName_;
     char deviceType_;
@@ -29,6 +29,7 @@ private:
 
 public:
     LinkClass (
+        int debug_on_val,
         void *list_mgr_object_val,
         FabricClass *fabric_object_val,
         char const* my_name_val,

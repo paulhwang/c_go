@@ -12,13 +12,13 @@
 class FabricClass;
 
 class NameListClass {
-    int debugOn(void) {return true && this->fabricObj_->debugOn();}
+    int debugOn_;
     FabricClass *fabricObj_;
     int nameListTag_;
     char nameList_[SIZE_DEF::NAME_LIST_BUFFER_SIZE + 4];
 
 public:
-    NameListClass(FabricClass *fabric_object_val);
+    NameListClass(int debug_on_val, FabricClass *fabric_object_val);
     ~NameListClass(void);
     char *objectName(void) {return "NameListClass";}
 

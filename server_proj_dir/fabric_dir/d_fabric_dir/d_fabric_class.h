@@ -14,7 +14,7 @@ class FabricClass;
 class DbAccountClass;
 
 class DFabricClass {
-    int debugOn(void) {return true && this->fabricObj_->debugOn();}
+    int debugOn_;
     char const *objectName(void) {return "DFabricClass";}
 
     FabricClass *fabricObj_;
@@ -214,7 +214,7 @@ class DFabricClass {
     void xmtData(void *port_obj_val, char *data_val);
 
 public:
-    DFabricClass(FabricClass *port_obj_val);
+    DFabricClass(int debug_on_val, FabricClass *port_obj_val);
     ~DFabricClass(void);
 
     void tcpAccept(void *port_obj_val);

@@ -11,9 +11,10 @@
 #include "../define_dir/fe_def.h"
 #include "../../phwang_dir/list_mgr_dir/list_mgr_class.h"
 
-NameListClass::NameListClass (FabricClass *fabric_object_val)
+NameListClass::NameListClass (int debug_on_val, FabricClass *fabric_object_val)
 {
     memset(this, 0, sizeof(*this));
+    this->debugOn_ = true && debug_on_val;
     this->fabricObj_ = fabric_object_val;
     this->nameListTag_ = 0;
 
@@ -63,7 +64,7 @@ void NameListClass::updateNameList (void)
         phwangAbendS("NameListClass::updateNameList", "buffer too small");
     }
 
-    if (true && this->debugOn()) {
+    if (true && this->debugOn_) {
         printf("NameListClass::updateNameList() %s\n", this->nameList_);
     }
 }

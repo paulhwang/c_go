@@ -16,7 +16,7 @@ class SessionClass;
 class GroupClass;
 
 class UFabricClass {
-    int debugOn(void) {return true && this->fabricObj_->debugOn();}
+    int debugOn_;
     FabricClass *fabricObj_;
     void *tcpServerObject_;
     void *portObject_;
@@ -26,7 +26,7 @@ class UFabricClass {
     void processPutRoomDataResponse(char *data_val);
 
 public:
-    UFabricClass(FabricClass *fabric_obj_val);
+    UFabricClass(int debug_on_val, FabricClass *fabric_obj_val);
     ~UFabricClass(void);
     char const* objectName(void) {return "UFabricClass";}
 

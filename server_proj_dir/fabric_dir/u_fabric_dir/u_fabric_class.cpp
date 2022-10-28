@@ -8,9 +8,10 @@
 #include "../../define_dir/tcp_port_define.h"
 #include "u_fabric_class.h"
 
-UFabricClass::UFabricClass (FabricClass *fabric_obj_val)
+UFabricClass::UFabricClass (int debug_on_val, FabricClass *fabric_obj_val)
 {
     memset(this, 0, sizeof(UFabricClass));
+    this->debugOn_ = true && debug_on_val;
     this->fabricObj_ = fabric_obj_val;
     this->startNetServer();
 

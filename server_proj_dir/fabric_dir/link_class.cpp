@@ -14,6 +14,7 @@
 #include "../define_dir/fabric_def.h"
   
 LinkClass::LinkClass (
+    int debug_on_val,
     void *list_mgr_object_val,
     FabricClass *fabric_object_val,
     char const* my_name_val,
@@ -21,6 +22,7 @@ LinkClass::LinkClass (
     void *port_object_val)
         :ListEntryClass(list_mgr_object_val)
 {
+    this->debugOn_ = true && debug_on_val;
     this->fabricObj_ = fabric_object_val;
     this->myName_ = (char *) phwangMalloc(strlen(my_name_val) + 1, MallocClass::LinkClass);
     strcpy(this->myName_, my_name_val);
@@ -33,7 +35,7 @@ LinkClass::LinkClass (
     this->pendingSessionSetupQueue2_ = phwangMallocQueue(0, this->objectName());
     this->pendingSessionSetupQueue3_ = phwangMallocQueue(0, this->objectName());
 
-    if (true && this->debugOn()) {
+    if (true && this->debugOn_) {
         printf("LinkClass::LinkClass() myName=%s id=%s\n", this->myName(),this->linkIdIndex());
     }
 }

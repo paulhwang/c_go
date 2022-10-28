@@ -20,14 +20,15 @@
 FabricClass::FabricClass (int debug_code_val)
 {
     memset(this, 0, sizeof(*this));
+    this->debugOn_ = true && debug_code_val;
     this->theDebugCode = debug_code_val;
     
     this->fileMgrObj_ = new FileMgrClass();
     this->theDbObject = new DbClass(this);
     this->theMessengerObject = new MessengerClass(this);
-    this->theUFabricObject = new UFabricClass(this);
-    this->theDFabricObject = new DFabricClass(this);
-    this->theNameListObject = new NameListClass(this);
+    this->theUFabricObject = new UFabricClass(this->debugOn_, this);
+    this->theDFabricObject = new DFabricClass(this->debugOn_, this);
+    this->theNameListObject = new NameListClass(this->debugOn_, this);
     this->theLinkListMgrObject = phwangListMgrMalloc("LINK", SIZE_DEF::LINK_ID_SIZE, SIZE_DEF::LINK_INDEX_SIZE, SIZE_DEF::LINK_ID_INITIAL_VALUE);
     this->theGroupListMgrObject = phwangListMgrMalloc("GROUP", SIZE_DEF::GROUP_ID_SIZE, SIZE_DEF::GROUP_INDEX_SIZE, SIZE_DEF::GROUP_ID_INITIAL_VALUE);
     this->startWatchDogThread();
@@ -79,7 +80,7 @@ LinkClass *FabricClass::mallocLink (
         phwangAbendS("abricClass::mallocLink", "bad name 000");
     }
 
-    LinkClass *link = new LinkClass(this->theLinkListMgrObject, this, my_name_val, device_type_val, port_object_val);
+    LinkClass *link = new LinkClass(this->debugOn_, this->theLinkListMgrObject, this, my_name_val, device_type_val, port_object_val);
     if (!link) {
         phwangAbendS("FabricClass::mallocLink", "fail_to_malloc_link");
         return 0;

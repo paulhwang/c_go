@@ -13,9 +13,10 @@
 #include "../fabric_class.h"
 #include "../u_fabric_dir/u_fabric_class.h"
 
-DFabricClass::DFabricClass (FabricClass *fabric_obj_val)
+DFabricClass::DFabricClass (int debug_on_val, FabricClass *fabric_obj_val)
 {
     memset(this, 0, sizeof(DFabricClass));
+    this->debugOn_ = true && debug_on_val;
 
     this->fabricObj_ = fabric_obj_val;
     this->setTimeStampString();

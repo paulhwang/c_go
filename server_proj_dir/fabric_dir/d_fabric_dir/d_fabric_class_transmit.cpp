@@ -12,7 +12,7 @@
 void DFabricClass::xmtData (void *port_obj_val, char *data_val)
 {
     if (data_val[SIZE_DEF::AJAX_ID_SIZE] != FE_DEF::GET_LINK_DATA_RESPONSE) {
-        if (true && this->debugOn()) {
+        if (true && this->debugOn_) {
             int len = 50;
             if (strlen(data_val) <= len) {
                 printf("DFabricClass::xmtData() %s\n", data_val);

@@ -19,7 +19,7 @@
 
 void UFabricClass::parseData (char *data_val)
 {
-    if (true && this->debugOn()) {
+    if (true && this->debugOn_) {
         int len = 50;
         if (strlen(data_val) <= len) {
             printf("UFabricClass::parseData() %s\n", data_val);
@@ -82,7 +82,7 @@ void UFabricClass::processSetupRoomResponse (char *data_val)
 
 void UFabricClass::processPutRoomDataResponse (char *data_val)
 {
-    if (false && this->debugOn()) {
+    if (false && this->debugOn_) {
         int len = 50;
         if (strlen(data_val) <= len) {
             printf("UFabricClass::processPutRoomDataResponse() %s\n", data_val);

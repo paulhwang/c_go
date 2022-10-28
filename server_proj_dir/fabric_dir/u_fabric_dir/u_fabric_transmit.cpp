@@ -9,7 +9,7 @@
 
 void UFabricClass::xmtData (char *data_val)
 {
-    if (true && this->debugOn()) {
+    if (true && this->debugOn_) {
         int len = 50;
         if (strlen(data_val) <= len) {
             printf("UFabricClass::xmtData() %s\n", data_val);
