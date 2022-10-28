@@ -15,9 +15,11 @@ public:
     TcpConnectClass(char const *who_val);
     ~TcpConnectClass(void);
 
-    void *tcpConnect(unsigned long ip_addr_val, 
-                     unsigned short port_val, 
-                     void (*receive_callback_val)(void *, void *, void *), 
-                     void *receive_object_val,
-                     char const *who_val);
+    void *tcpConnect(
+        int debug_on_val,
+        unsigned long ip_addr_val, 
+        unsigned short port_val, 
+        void (*receive_callback_val)(void *, void *, void *), 
+        void *receive_object_val,
+        char const *who_val);
 };

@@ -27,11 +27,12 @@ TcpConnectClass::~TcpConnectClass (void)
 #define PHWANG_TP_CONNECT_RETRY_MAX_COUNT 30
 
 void *TcpConnectClass::tcpConnect (
-                    unsigned long ip_addr_val, 
-                    unsigned short port_val, 
-                    void (*receive_callback_val)(void *, void *, void *), 
-                    void *receive_object_val,
-                    char const *who_val)
+        int debug_on_val,
+        unsigned long ip_addr_val, 
+        unsigned short port_val, 
+        void (*receive_callback_val)(void *, void *, void *), 
+        void *receive_object_val,
+        char const *who_val)
 {
     int s;
     struct sockaddr_in serv_addr;

@@ -12,6 +12,7 @@
 TestClass::TestClass (void)
 {
     memset(this, 0, sizeof(*this));
+
     this->startNetConnect();
     phwangDebugS(true, "TestClass::TestClass", "init");
 }
@@ -27,7 +28,7 @@ void testObjectReceiveDataFromTransport (void *tp_transfer_object_val, void *tes
 
 void TestClass::startNetConnect (void)
 {
-    this->theTpTransferObject = phwangTpConnect(0, TcpPortDefine::FABRIC_NODEJS_PORT_NUMER, testObjectReceiveDataFromTransport, this, this->objectName());
+    this->theTpTransferObject = phwangTpConnect(1, 0, TcpPortDefine::FABRIC_NODEJS_PORT_NUMER, testObjectReceiveDataFromTransport, this, this->objectName());
 }
 
 void TestClass::startTestThreads(void)

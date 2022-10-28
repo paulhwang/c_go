@@ -62,7 +62,7 @@ void dFabricTpReceiveDataFunction (void *port_obj_val, void *d_fabric_obj_val, v
 
 void DFabricClass::startNetServer (void)
 {
-    this->tcpServerObj_ = phwangMallocTpServer(this, TcpPortDefine::FABRIC_NODEJS_PORT_NUMER, dFabricTcoAcceptFunc, this, dFabricTpReceiveDataFunction, this, this->objectName());
+    this->tcpServerObj_ = phwangMallocTpServer(this->debugOn_, this, TcpPortDefine::FABRIC_NODEJS_PORT_NUMER, dFabricTcoAcceptFunc, this, dFabricTpReceiveDataFunction, this, this->objectName());
 }
 
 void DFabricClass::setTimeStampString (void)

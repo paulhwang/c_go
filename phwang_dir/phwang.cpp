@@ -143,37 +143,41 @@ void *phwangArrayMgrGetArrayTable (void *array_mgr_val, int *array_size_ptr)
 
 /* tp */
 void *phwangMallocTpServer (
-                void *caller_object_val,
-                unsigned short port_val,
-                void (*accept_callback_func_val)(void *, void *),
-                void *accept_callback_parameter_val,
-                void (*receive_callback_func_val)(void *, void *, void *),
-                void *receive_callback_parameter_val,
-                char const *who_val)
+        int debug_on_val,
+        void *caller_object_val,
+        unsigned short port_val,
+        void (*accept_callback_func_val)(void *, void *),
+        void *accept_callback_parameter_val,
+        void (*receive_callback_func_val)(void *, void *, void *),
+        void *receive_callback_parameter_val,
+        char const *who_val)
 {
     return thePhwangObject->netRootObject()->mallocTpServer (
-                caller_object_val,
-                port_val,
-                accept_callback_func_val,
-                accept_callback_parameter_val,
-                receive_callback_func_val,
-                receive_callback_parameter_val,
-                who_val);
+        debug_on_val,
+        caller_object_val,
+        port_val,
+        accept_callback_func_val,
+        accept_callback_parameter_val,
+        receive_callback_func_val,
+        receive_callback_parameter_val,
+        who_val);
 }
 
 void *phwangTpConnect (
-                unsigned long ip_addr_val,
-                unsigned short port_val,
-                void (*receive_callback_val)(void *, void *, void *),
-                void *receive_object_val,
-                char const *who_val)
+        int debug_on_val,
+        unsigned long ip_addr_val,
+        unsigned short port_val,
+        void (*receive_callback_val)(void *, void *, void *),
+        void *receive_object_val,
+        char const *who_val)
 {
     return thePhwangObject->netRootObject()->tpConnect (
-                ip_addr_val, 
-                port_val, 
-                receive_callback_val, 
-                receive_object_val,
-                who_val);
+        debug_on_val,
+        ip_addr_val, 
+        port_val, 
+        receive_callback_val, 
+        receive_object_val,
+        who_val);
 }
 
 void phwangFreeTcpServer (void *tcp_server_object_val)

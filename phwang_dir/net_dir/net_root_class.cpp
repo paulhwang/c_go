@@ -26,22 +26,24 @@ NetRootClass::~NetRootClass(void)
 }
 
 void *NetRootClass::mallocTpServer (
-                        void *caller_object_val,
-                        unsigned short port_val,
-                        void (*accept_callback_func_val)(void *, void *),
-                        void *accept_callback_parameter_val,
-                        void (*receive_callback_func_val)(void *, void *, void *),
-                        void *receive_callback_parameter_val,
-                        char const *who_val)
+        int debug_on_val,
+        void *caller_object_val,
+        unsigned short port_val,
+        void (*accept_callback_func_val)(void *, void *),
+        void *accept_callback_parameter_val,
+        void (*receive_callback_func_val)(void *, void *, void *),
+        void *receive_callback_parameter_val,
+        char const *who_val)
 {
     TcpServerClass *tp_server_object = new TcpServerClass(
-                    caller_object_val,
-                    port_val,
-                    accept_callback_func_val,
-                    accept_callback_parameter_val,
-                    receive_callback_func_val,
-                    receive_callback_parameter_val,
-                    who_val);
+        debug_on_val,
+        caller_object_val,
+        port_val,
+        accept_callback_func_val,
+        accept_callback_parameter_val,
+        receive_callback_func_val,
+        receive_callback_parameter_val,
+        who_val);
 
     if (tp_server_object) {
         tp_server_object->startServerThread();
@@ -50,14 +52,21 @@ void *NetRootClass::mallocTpServer (
 }
 
 void *NetRootClass::tpConnect (
-                    unsigned long ip_addr_val, 
-                    unsigned short port_val, 
-                    void (*receive_callback_val)(void *, void *, void *), 
-                    void *receive_object_val,
-                    char const *who_val)
+        int debug_on_val,
+        unsigned long ip_addr_val, 
+        unsigned short port_val, 
+        void (*receive_callback_val)(void *, void *, void *), 
+        void *receive_object_val,
+        char const *who_val)
 {
     TcpConnectClass *connect = new TcpConnectClass(who_val);
-    void *result = connect->tcpConnect(ip_addr_val, port_val, receive_callback_val, receive_object_val, who_val);
+    void *result = connect->tcpConnect(
+        debug_on_val,
+        ip_addr_val,
+        port_val, 
+        receive_callback_val,
+        receive_object_val,
+        who_val);
     delete connect;
     return result;
 }

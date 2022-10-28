@@ -46,5 +46,5 @@ void uFabricTpReceiveDataFunction (void *port_object_val, void *u_fabric_object_
 
 void UFabricClass::startNetServer (void)
 {
-    this->tcpServerObject_ = phwangMallocTpServer(this, TcpPortDefine::FABRIC_THEME_PORT_NUMER, uFabricTpServerAcceptFunction, this, uFabricTpReceiveDataFunction, this, this->objectName());
+    this->tcpServerObject_ = phwangMallocTpServer(this->debugOn_, this, TcpPortDefine::FABRIC_THEME_PORT_NUMER, uFabricTpServerAcceptFunction, this, uFabricTpReceiveDataFunction, this, this->objectName());
 }
