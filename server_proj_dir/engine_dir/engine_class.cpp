@@ -10,11 +10,11 @@
 #include "go_base_dir/go_base_class.h"
 #include "d_engine_dir/d_engine_class.h"
 
-EngineClass::EngineClass (int debug_code_val)
+EngineClass::EngineClass (int debug_on_val)
 {
     memset(this, 0, sizeof(EngineClass));
-    this->debugOn_ = true && debug_code_val;
-    this->theDebugCode = debug_code_val;
+    this->debugOn_ = true && debug_on_val;
+    this->theDebugCode = debug_on_val;
     
     this->theDEngineObject = new DEngineClass(this->debugOn_, this);
     this->theGoBaseListMgrObject = phwangListMgrMalloc("GO_BASE", SIZE_DEF::BASE_ID_SIZE, SIZE_DEF::BASE_INDEX_SIZE, SIZE_DEF::BASE_ID_INITIAL_VALUE);

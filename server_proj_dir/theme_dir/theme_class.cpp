@@ -11,11 +11,11 @@
 #include "d_theme_dir/d_theme_class.h"
 #include "room_class.h"
 
-ThemeClass::ThemeClass (int debug_code_val)
+ThemeClass::ThemeClass (int debug_on_val)
 {
     memset(this, 0, sizeof(ThemeClass));
-    this->debugOn_ = true && debug_code_val;
-    this->theDebugCode = debug_code_val;
+    this->debugOn_ = true && debug_on_val;
+    this->theDebugCode = debug_on_val;
     
     this->theUThemeObject = new UThemeClass(this->debugOn_, this);
     this->theDThemeObject = new DThemeClass(this->debugOn_, this);

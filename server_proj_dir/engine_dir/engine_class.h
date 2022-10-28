@@ -24,7 +24,7 @@ private:
     void *theGoBaseListMgrObject;
 
 public:
-    EngineClass(int debug_code_val);
+    EngineClass(int debug_on_val);
     ~EngineClass(void);
 
     DEngineClass *dEngineObject(void) {return this->theDEngineObject;}

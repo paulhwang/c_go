@@ -18,7 +18,7 @@ class ServerRootClass {
     TestClass *theTestObject;
 
   public:
-    ServerRootClass(int debug_code_val);
+    ServerRootClass(int debug_on_val);
     ~ServerRootClass(void);
     char const *objectName(void) {return "ServerRootClass";}
 };

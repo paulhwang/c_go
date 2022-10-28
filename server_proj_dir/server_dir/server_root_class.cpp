@@ -10,14 +10,14 @@
 #include "../theme_dir/theme_class.h"
 #include "server_root_class.h"
 
-ServerRootClass::ServerRootClass (int debug_code_val)
+ServerRootClass::ServerRootClass (int debug_on_val)
 {
-    phwangPhwangPhwang(debug_code_val);
-    this->theFabricObject = new FabricClass(debug_code_val);
+    phwangPhwangPhwang(debug_on_val);
+    this->theFabricObject = new FabricClass(debug_on_val);
     sleep(1);
-    this->theGoThemeObject = new ThemeClass(debug_code_val);
+    this->theGoThemeObject = new ThemeClass(debug_on_val);
     sleep(1);
-    this->theEngineObject = new EngineClass(debug_code_val);
+    this->theEngineObject = new EngineClass(debug_on_val);
 }
 
 ServerRootClass::~ServerRootClass (void)

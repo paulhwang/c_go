@@ -10,11 +10,11 @@
 #include "../test_dir/test_class.h"
 
 int main (int argc, char** argv) {
-    int debug_code = 255;
+    int debug_on = false;
 
     //printf("%s start running\n", argv[0]);
 
-    ServerRootClass* serverRootObject = new ServerRootClass(debug_code);
+    ServerRootClass* serverRootObject = new ServerRootClass(debug_on);
 
     sleep(10);
     //TestClass *testObject = new TestClass();

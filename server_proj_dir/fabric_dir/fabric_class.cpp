@@ -17,11 +17,11 @@
 #include "name_list_class.h"
 #include "../db_dir/db_class.h"
 
-FabricClass::FabricClass (int debug_code_val)
+FabricClass::FabricClass (int debug_on_val)
 {
     memset(this, 0, sizeof(*this));
-    this->debugOn_ = true && debug_code_val;
-    this->theDebugCode = debug_code_val;
+    this->debugOn_ = true && debug_on_val;
+    this->theDebugCode = debug_on_val;
     
     this->fileMgrObj_ = new FileMgrClass();
     this->theDbObject = new DbClass(this);

@@ -28,7 +28,7 @@ class ThemeClass {
     RoomClass *theRoomTableArray[GAME_SERVER_ROOM_ARRAY_SIZE];
 
 public:
-    ThemeClass(int debug_code_val);
+    ThemeClass(int debug_on_val);
     ~ThemeClass(void);
 
     UThemeClass *uThemeObject(void) {return this->theUThemeObject;}

@@ -38,7 +38,7 @@ private:
     void linkKeepAliveExamine(void);
 
 public:
-    FabricClass(int debug_code_val);
+    FabricClass(int debug_on_val);
     ~FabricClass(void);
 
     FileMgrClass *fileMgrObj(void) {return this->fileMgrObj_;}
