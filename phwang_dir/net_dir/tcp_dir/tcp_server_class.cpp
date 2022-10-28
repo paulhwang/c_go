@@ -30,6 +30,7 @@ TcpServerClass::TcpServerClass (
 
 {
     memset(this, 0, sizeof(*this));
+    this->debugOn_ = true;
     this->callerObject_ = caller_object_val;
     this->tcpPort_ = tcp_port_val;
     this->acceptCallbackFunc_ = accept_callback_func_val;
@@ -48,7 +49,7 @@ TcpServerClass::~TcpServerClass (void)
 
 void *transportServerThreadFunction (void *tp_server_object_val)
 {
-    return ((TcpServerClass *) tp_server_object_val)->serverThreadFunction(0);
+    return ((TcpServerClass *) tp_server_object_val)->serverThreadFunc(0);
 }
 
 void TcpServerClass::startServerThread (void)
@@ -62,7 +63,7 @@ void TcpServerClass::startServerThread (void)
     }
 }
 
-void *TcpServerClass::serverThreadFunction (void *data_val)
+void *TcpServerClass::serverThreadFunc (void *data_val)
 {
     char localhost[MAXHOSTNAME + 1];
     struct servent *sp;
@@ -76,16 +77,16 @@ void *TcpServerClass::serverThreadFunction (void *data_val)
     if (0) { /* debug */
         char s[128];
         sprintf(s, "starts for (%s)", this->theWho);
-        phwangLogitWS("TcpServerClass::serverThreadFunction", this->theWho, s);
+        phwangLogitWS("TcpServerClass::serverThreadFunc", this->theWho, s);
     }
 
     if ((s = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
-        phwangLogitWS("TcpServerClass::serverThreadFunction", this->theWho, "open socket error");
+        phwangLogitWS("TcpServerClass::serverThreadFunc", this->theWho, "open socket error");
         return 0;
     }
 
     if (setsockopt(s, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &opt, sizeof(opt))) {
-        phwangLogitWS("TcpServerClass::serverThreadFunction", this->theWho, "setsockopt error");
+        phwangLogitWS("TcpServerClass::serverThreadFunc", this->theWho, "setsockopt error");
         return 0;
     }
 
@@ -94,22 +95,24 @@ void *TcpServerClass::serverThreadFunction (void *data_val)
     address.sin_port = htons(this->tcpPort_);
 
     if (bind(s, (struct sockaddr *)&address, sizeof(address)) < 0) {
-        phwangLogitWS("TcpServerClass::serverThreadFunction", this->theWho, "bind error");
+        phwangLogitWS("TcpServerClass::serverThreadFunc", this->theWho, "bind error");
         return 0;
     }
 
     while (1) {
-        phwangDebugWS(false, "TcpServerClass::serverThreadFunction", this->theWho, "listening");
+        phwangDebugWS(false, "TcpServerClass::serverThreadFunc", this->theWho, "listening");
         listen(s, BACKLOG);
 
-        phwangDebugWS(false, "TcpServerClass::serverThreadFunction", this->theWho, "accepting");
+        phwangDebugWS(false, "TcpServerClass::serverThreadFunc", this->theWho, "accepting");
 
         if ((data_socket = accept(s, (struct sockaddr *)&address, (socklen_t*)&addrlen)) < 0) {
-            phwangLogitWS("TcpServerClass::serverThreadFunction", this->theWho, "accept error");
+            phwangLogitWS("TcpServerClass::serverThreadFunc", this->theWho, "accept error");
             return 0;
         }
 
-        phwangDebugWSI(true, "TcpServerClass::serverThreadFunction", this->theWho, "accepted port", this->tcpPort_);
+        if (true && this->debugOn_) {
+            printf("TcpServerClass::serverThreadFunc(%s) accepted! port=%d\n", this->theWho, this->tcpPort_);
+        }
 
         char data[strlen(LOGO_DEF::PHWANG_LOGO) + 1];
         int length = read(data_socket, data, strlen(LOGO_DEF::PHWANG_LOGO));
@@ -117,14 +120,18 @@ void *TcpServerClass::serverThreadFunction (void *data_val)
             data[length] = 0;
         }
         if ((length == strlen(LOGO_DEF::PHWANG_LOGO)) && (strcmp(data, LOGO_DEF::PHWANG_LOGO) == 0)) {
-            phwangDebugWS(true, "TcpServerClass::serverThreadFunction", this->theWho, "logo is good");
+            if (true && this->debugOn_) {
+                printf("TcpServerClass::serverThreadFunc(%s) logo is good\n", this->theWho);
+            } 
         }
         else {
-            phwangLogitWSISI("TcpServerClass::serverThreadFunction", this->theWho, "***!!!Attacked!!!*** port=", this->tcpPort_, " data_length", length);
-            for (int i = 0; (i < length) && (i < strlen(LOGO_DEF::PHWANG_LOGO)); i++) {
-                printf("%d ", data[i]);
+            if (true && this->debugOn_) {
+                printf("TcpServerClass::serverThreadFunc(%s) ***!!!Attacked!!!*** port=%d length=%d\n", this->theWho, this->tcpPort_, length);
+                for (int i = 0; (i < length) && (i < strlen(LOGO_DEF::PHWANG_LOGO)); i++) {
+                    printf("%d ", data[i]);
+                }
+                printf("\n");
             }
-            printf("\n");
 
             close(data_socket);
             continue;

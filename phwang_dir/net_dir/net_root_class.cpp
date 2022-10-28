@@ -14,6 +14,7 @@
 NetRootClass::NetRootClass (int debug_code_val)
 {
     memset(this, 0, sizeof (*this));
+    this->debugOn_ = false;
     this->theIpObject = new IpClass();
     unsigned long ip_addr_ptr_val;
     this->theIpObject->getIpAddr(&ip_addr_ptr_val);

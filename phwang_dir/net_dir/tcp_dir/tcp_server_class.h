@@ -16,6 +16,7 @@ typedef struct {
 } StartServerOutputStruct;
 
 class TcpServerClass {
+    int debugOn_;
     void *callerObject_;
     unsigned short tcpPort_;
     void (*acceptCallbackFunc_)(void *, void *);
@@ -37,6 +38,6 @@ public:
     ~TcpServerClass(void);
     char const *objectName(void) {return "TcpServerClass";}
 
-    void *serverThreadFunction(void *data_val);
+    void *serverThreadFunc(void *data_val);
     void startServerThread(void);
 };

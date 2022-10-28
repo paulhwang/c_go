@@ -20,6 +20,7 @@ PortClass::PortClass (int socket_val,
 {
     memset(this, 0, sizeof(*this));
     phwangIncrementAtomicCount(&PortClass::ObjectCount, this->objectName(), 6 + PhwangClass::ROBUST_THREAD_COUNT);
+    this->debugOn_ = true;
     this->theSocket = socket_val;
     this->theReceiveCallback = receive_callback_val;
     this->theReceiveObject = receive_object_val;
@@ -47,7 +48,9 @@ PortClass::~PortClass (void)
 
 void PortClass::startThreads (int index_val)
 {
-    phwangDebugWSI(true, "PortClass::startThreads", this->theWho, "index", index_val);
+    if (true && this->debugOn_) {
+        printf("PortClass::startThreads(%s) index=%d\n", this->theWho, index_val);
+    }
 
     this->theIndex = index_val;
     this->startReceiveThread2();

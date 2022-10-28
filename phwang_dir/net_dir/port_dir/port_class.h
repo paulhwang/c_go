@@ -21,6 +21,7 @@ private:
 
     static std::atomic<int> ObjectCount;
 
+    int debugOn_;
     void (*theReceiveCallback)(void *, void *, void *);
     void *theReceiveObject;
     int theSocket;

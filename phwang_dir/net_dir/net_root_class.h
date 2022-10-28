@@ -10,6 +10,7 @@ class IpClass;
 
 class NetRootClass
 {
+    int debugOn_;
     char const *objectName(void) {return "NetRootClass";}
     IpClass *theIpObject;
     int theDebugCode;

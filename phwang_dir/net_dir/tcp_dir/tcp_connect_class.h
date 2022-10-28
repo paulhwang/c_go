@@ -7,6 +7,7 @@
 #pragma once
 
 class TcpConnectClass {
+    int debugOn_;
     char const *objectName(void) {return "TcpConnectClass";}
     char const *theWho;
 

@@ -14,6 +14,7 @@
 TcpConnectClass::TcpConnectClass (char const *who_val)
 {
     memset(this, 0, sizeof(*this));
+    this->debugOn_ = true;
     this->theWho = who_val;
     phwangDebugWS(false, "TcpConnectClass::TcpConnectClass", this->theWho, "init");
 }
@@ -70,7 +71,9 @@ void *TcpConnectClass::tcpConnect (
         }
     }
 
-    phwangDebugWS(true, "TcpConnectClass::tcpConnect", this->theWho, "connected");
+    if (true && this->debugOn_) {
+        printf("TcpConnectClass::tcpConnect(%s) connected!\n", this->theWho);
+    }
 
     send(s, LOGO_DEF::PHWANG_LOGO , strlen(LOGO_DEF::PHWANG_LOGO) , 0);
 
