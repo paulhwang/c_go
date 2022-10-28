@@ -23,7 +23,7 @@ FabricClass::FabricClass (int debug_on_val)
     this->debugOn_ = true && debug_on_val;
     this->theDebugCode = debug_on_val;
     
-    this->fileMgrObj_ = new FileMgrClass();
+    this->fileMgrObj_ = new FileMgrClass(this->debugOn_);
     this->theDbObject = new DbClass(this);
     this->theMessengerObject = new MessengerClass(this);
     this->theUFabricObject = new UFabricClass(this->debugOn_, this);

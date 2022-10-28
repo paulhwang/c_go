@@ -10,16 +10,23 @@
 #include "file_mgr_class.h"
 #include "file_access_class.h"
 
-FileMgrClass::FileMgrClass (void)
+FileMgrClass::FileMgrClass (int debug_on_val)
 {
-    phwangDebugS(true, "FileMgrClass::FileMgrClass", "start");
+    memset(this, 0, sizeof(*this));
+    this->debugOn_ = true && debug_on_val;
+
+    if (true && this->debugOn_) {
+        printf("FileMgrClass::FileMgrClass() starts");
+    }
 
     memset(this, 0, sizeof(*this));
 }
 
 FileMgrClass::~FileMgrClass (void)
 {
-    phwangDebugS(true, "FileMgrClass::~FileMgrClass", "exit");
+    if (true && this->debugOn_) {
+        printf("FileMgrClass::~FileMgrClass() exits");
+    }
 }
 
 int FileMgrClass::readBytesOpen (
@@ -37,7 +44,7 @@ int FileMgrClass::readBytesOpen (
         return -1;
     }
 
-    if (false && this->debugOn()) {
+    if (false && this->debugOn_) {
         printf("FileMgrClass::readBytesOpen() open file succeed. fd=%d\n", fd);
     }
 
@@ -87,7 +94,7 @@ int FileMgrClass::writeBytesOpen(
         return -1;
     }
 
-    if (false && this->debugOn()) {
+    if (false && this->debugOn_) {
         printf("FileMgrClass::writeBytesOpen() create succeed fd=%d eof=%c\n", fd, eof_val);
     }
 
@@ -117,7 +124,7 @@ int FileMgrClass::writeBytesMore(
         return -1;
     }
 
-    if (false && this->debugOn()) {
+    if (false && this->debugOn_) {
         printf("FileMgrClass::writeBytesMore() fd=%d length=%d eof=%c\n", fd_val, length, eof_val);
     }
 

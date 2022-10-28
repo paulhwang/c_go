@@ -7,7 +7,7 @@
 #pragma once
 
 class FileMgrClass {
-    int debugOn(void) {return true;}
+    int debugOn_;
     int readBytesFOpen_ (FILE *fp_val, char *buf_val, int buf_size_val, int *eof_val);
 
 public:
@@ -19,7 +19,7 @@ public:
     char const static FIRST_WRITE = 'W';
     char const static MORE_WRITE  = 'w';
 
-    FileMgrClass(void);
+    FileMgrClass(int debug_on_val);
     ~FileMgrClass(void);
 
     int readBytesOpen(
