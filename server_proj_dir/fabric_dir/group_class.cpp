@@ -12,6 +12,7 @@
 #include "fabric_class.h"
 
 GroupClass::GroupClass (
+    int debug_on_val,
     void *list_mgr_object_val,
     FabricClass *fabric_object_val,
     char mode_val,
@@ -21,6 +22,7 @@ GroupClass::GroupClass (
     char const *second_fiddle_val)
         :ListEntryClass(list_mgr_object_val)
 {
+    this->debugOn_ = true && debug_on_val;
     this->theFabricObject = fabric_object_val;
     this->theRoomStatus = FE_DEF::FE_ROOM_STATUS_PREPARING;
     this->theMode = mode_val;
@@ -35,7 +37,9 @@ GroupClass::GroupClass (
     this->theSessionArrayMgr = phwangArrayMgrMalloc(this->objectName(), 'o', 10);
     this->theSessionTableArray = 0;
 
-    phwangDebugSS(true, "GroupClass::GroupClass", "new_group:", this->groupIdIndex());
+    if (true && this->debugOn_) {
+        printf("GroupClass::GroupClass() new_group=%s\n", this->groupIdIndex());
+    }
 }
 
 GroupClass::~GroupClass (void)

@@ -137,7 +137,7 @@ GroupClass *FabricClass::mallocGroup (
     char const *initiator_name_val,
     char const *peer_name_val)
 {
-    GroupClass *group = new GroupClass(this->theGroupListMgrObject, this, mode_val, theme_type_val, theme_info_val, initiator_name_val, peer_name_val);
+    GroupClass *group = new GroupClass(this->debugOn_, this->theGroupListMgrObject, this, mode_val, theme_type_val, theme_info_val, initiator_name_val, peer_name_val);
     if (!group) {
         phwangAbendS("FabricClass::mallocGroup", "fail_to_malloc_group");
         return 0;

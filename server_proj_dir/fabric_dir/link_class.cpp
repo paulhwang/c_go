@@ -51,7 +51,7 @@ LinkClass::~LinkClass (void)
 
 SessionClass *LinkClass::mallocSession (void)
 {
-    SessionClass *session = new SessionClass(this->sessionListMgrObject_, this);
+    SessionClass *session = new SessionClass(this->debugOn_, this->sessionListMgrObject_, this);
     if (!session) {
         phwangAbendS("LinkClass::mallocSession", "fail_to_malloc_session");
         return 0;

@@ -13,6 +13,7 @@ class LinkClass;
 class GroupClass;
 
 class SessionClass : public ListEntryClass {
+    int debugOn_;
     LinkClass *linkObj_;
     GroupClass *groupObj_;
     //char theAjaxIdBuf[SIZE_DEF::AJAX_ID_SIZE + 1];
@@ -20,7 +21,10 @@ class SessionClass : public ListEntryClass {
     void *pendingDataQueue_;
 
 public:
-    SessionClass(void *list_mgr_obj_val, LinkClass *link_obj_val);
+    SessionClass(
+        int debug_on_val,
+        void *list_mgr_obj_val,
+        LinkClass *link_obj_val);
     ~SessionClass(void);
 
     char const* objectName(void) {return "SessionClass";}

@@ -13,6 +13,8 @@ class FabricClass;
 
 class GroupClass : public ListEntryClass {
 #define GROUP_CLASS_SESSION_ARRAY_SIZE 32
+
+    int debugOn_;
     FabricClass *theFabricObject;
     char theMode;
     char theThemeType;
@@ -26,6 +28,7 @@ class GroupClass : public ListEntryClass {
 
 public:
     GroupClass(
+        int debug_on_val,
         void *list_mgr_object_val,
         FabricClass *fabric_object_val,
         char mode_val,

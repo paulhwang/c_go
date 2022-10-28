@@ -8,15 +8,19 @@
 #include "session_class.h"
 
 SessionClass::SessionClass (
+    int debug_on_val,
     void *list_mgr_obj_val,
     LinkClass *link_obj_val)
         :ListEntryClass(list_mgr_obj_val)
 {
+    this->debugOn_ = true && debug_on_val;
     this->linkObj_ = link_obj_val;
     this->groupObj_ = 0;
     this->pendingDataQueue_ = phwangMallocQueue(0, this->objectName());
 
-    phwangDebugSS(true, "SessionClass::SessionClass", "new_session:", this->sessionIdIndex());
+    if (true && this->debugOn_) {
+        printf("SessionClass::SessionClass() new_session=%s\n", this->sessionIdIndex());
+    }
 }
 
 SessionClass::~SessionClass (void)
