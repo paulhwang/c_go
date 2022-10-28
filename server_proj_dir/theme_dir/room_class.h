@@ -15,13 +15,14 @@ class ThemeClass;
 
 class RoomClass : public ListEntryClass {
 #define ROOM_CLASS_GROUP_ARRAY_SIZE 32
+    int debugOn_;
     ThemeClass *theThemeObject;
     char theBaseIdIndex[SIZE_DEF::BASE_II_SIZE + 4];
     char **theGroupTableArray;
     void *theGroupArrayMgr;
 
 public:
-    RoomClass(void *list_mgr_object_val, ThemeClass *theme_object_val, char *group_id_index_val);
+    RoomClass(int debug_on_val, void *list_mgr_object_val, ThemeClass *theme_object_val, char *group_id_index_val);
     ~RoomClass(void);
     char const* objectName(void) {return "RoomClass";}
 

@@ -24,7 +24,9 @@ DThemeClass::~DThemeClass (void)
 }
 
 void dThemeReceiveDataFromTransport (void *port_object_val, void *game_d_server_object_val, void *data_val) {
-    phwangDebugS(true, "Golbal::dThemeReceiveDataFromTransport", (char *) data_val);
+    if (false) {
+        printf("Golbal::dThemeReceiveDataFromTransport() %s\n", (char *) data_val);
+    }
 
     ((DThemeClass *) game_d_server_object_val)->parseData((char *) data_val);
     phwangFree(data_val);

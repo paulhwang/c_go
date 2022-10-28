@@ -10,14 +10,21 @@
 #include "room_class.h"
 #include "theme_class.h"
 
-RoomClass::RoomClass (void *list_mgr_object_val, ThemeClass *theme_object_val, char *group_id_index_val):
+RoomClass::RoomClass (
+    int debug_on_val,
+    void *list_mgr_object_val,
+    ThemeClass *theme_object_val,
+    char *group_id_index_val):
         ListEntryClass(list_mgr_object_val),
         theThemeObject(theme_object_val)
 {
+    this->debugOn_ = true && debug_on_val;
     this->theGroupArrayMgr = phwangArrayMgrMalloc(this->objectName(), 's', 10);
     this->insertGroup(group_id_index_val);
 
-    phwangDebugSS(true, "RoomClass::RoomClass", "new_room:", this->roomIdIndex());
+    if (true && this->debugOn_) {
+        printf("RoomClass::RoomClass() new_room=%s\n", this->roomIdIndex());
+    }
 }
 
 RoomClass::~RoomClass (void)
