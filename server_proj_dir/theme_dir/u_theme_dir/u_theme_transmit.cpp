@@ -9,7 +9,9 @@
 
 void UThemeClass::xmtData (char *data_val)
 {
-    phwangLogitS("UThemeClass::xmtData", data_val);
+    if (true && this->debugOn_) {
+        printf("UThemeClass::xmtData() %s\n", data_val);
+    }
 
     if (!this->portObject()) {
         phwangAbendS("UThemeClass::xmtData", "null portObject()! The reason could be the connection from ThemeServer has not been accepted");

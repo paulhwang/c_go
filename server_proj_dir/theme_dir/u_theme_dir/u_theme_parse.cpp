@@ -18,7 +18,7 @@
 
 void UThemeClass::parseData (char *data_val)
 {
-    if (true && this->debugOn()) {
+    if (true && this->debugOn_) {
         int len = 50;
         if (strlen(data_val) <= len) {
             printf("UThemeClass::parseData() %s\n", data_val);
@@ -48,7 +48,9 @@ void UThemeClass::parseData (char *data_val)
 
 void UThemeClass::processSetupBaseResponse (char *data_val)
 {
-    phwangDebugS(true, "UThemeClass::processSetupBaseResponse", data_val);
+    if (true && this->debugOn_) {
+        printf("UThemeClass::processSetupBaseResponse() %s\n", data_val);
+    }
 
     char *result_ptr = data_val;
     char *room_id_ptr = result_ptr + RESULT_DEF::RESULT_SIZE;
@@ -86,7 +88,9 @@ void UThemeClass::processSetupBaseResponse (char *data_val)
 
 void UThemeClass::processPutBaseDataResponse (char *data_val)
 {
-    phwangDebugS(false, "UThemeClass::processPutBaseDataResponse", data_val);
+    if (true && this->debugOn_) {
+        printf("UThemeClass::processPutBaseDataResponse() %s\n", data_val);
+    }
 
     char *result_ptr = data_val;
     char *room_id_ptr = result_ptr + RESULT_DEF::RESULT_SIZE;

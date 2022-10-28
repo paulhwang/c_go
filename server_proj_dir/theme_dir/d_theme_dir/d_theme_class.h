@@ -15,7 +15,7 @@
 class ThemeClass;
 
 class DThemeClass {
-    int debugOn(void) {return true && this->themeObj_->debugOn();}
+    int debugOn_;
     ThemeClass *themeObj_;
     void *thePortObject;
 
@@ -24,7 +24,7 @@ class DThemeClass {
     void processPutRoomData(char *data_val);
 
 public:
-    DThemeClass(ThemeClass *theme_object_val);
+    DThemeClass(int debug_on_val, ThemeClass *theme_object_val);
     ~DThemeClass(void);
     char const* objectName(void) {return "DThemeClass";}
 
@@ -32,5 +32,5 @@ public:
     void xmtData(char *data_val);
 
     /* exports */
-    void exportedParseFunction(char *data_val);
+    void parseData(char *data_val);
 };

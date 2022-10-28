@@ -14,7 +14,7 @@ class ThemeClass;
 #define GAME_USERVER_RECEIVE_QUEUE_SIZE 100
 
 class UThemeClass {
-    int debugOn(void) {return true && this->themeObj_->debugOn();}
+    int debugOn_;
     ThemeClass *themeObj_;
     void *theTpServerObject;
     void *thePortObject;
@@ -31,7 +31,7 @@ protected:
     void xmtData(char *data_val);
 
 public:
-    UThemeClass(ThemeClass *theme_object_val);
+    UThemeClass(int debug_on_val, ThemeClass *theme_object_val);
     ~UThemeClass(void);
     char const* objectName(void) {return "UThemeClass";}
 

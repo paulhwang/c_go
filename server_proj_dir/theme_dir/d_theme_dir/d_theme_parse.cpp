@@ -15,9 +15,11 @@
 #include "../u_theme_dir/u_theme_class.h"
 #include "../room_class.h"
 
-void DThemeClass::exportedParseFunction (char *data_val)
+void DThemeClass::parseData (char *data_val)
 {
-    phwangDebugS(true, "DThemeClass::exportedParseFunction", data_val);
+    if (true && this->debugOn_) {
+        printf("DThemeClass::parseData() %s\n", data_val);
+    }
 
     switch (*data_val) {
         case FT_DEF::FT_SETUP_ROOM_COMMAND:
@@ -29,14 +31,16 @@ void DThemeClass::exportedParseFunction (char *data_val)
             return;
 
         default:
-            phwangAbendS("DThemeClass::exportedParseFunction", data_val);
+            phwangAbendS("DThemeClass::parseData", data_val);
             return;
     }
 }
 
 void DThemeClass::processSetupRoom (char *data_val)
 {
-    phwangDebugS(true, "DThemeClass::processSetupRoom", data_val);
+    if (true && this->debugOn_) {
+        printf("DThemeClass::processSetupRoom() %s\n", data_val);
+    }
 
     char *group_id_ptr = data_val;
     char *rest_data_ptr = data_val + SIZE_DEF::GROUP_II_SIZE;
@@ -71,7 +75,9 @@ void DThemeClass::processSetupRoom (char *data_val)
 
 void DThemeClass::processPutRoomData (char *data_val)
 {
-    phwangDebugS(true, "DThemeClass::processPutRoomData", data_val);
+    if (true && this->debugOn_) {
+        printf("DThemeClass::processPutRoomData() %s\n", data_val);
+    }
 
     char *room_id_ptr = data_val;
     char *rest_data_ptr = data_val + SIZE_DEF::ROOM_II_SIZE;

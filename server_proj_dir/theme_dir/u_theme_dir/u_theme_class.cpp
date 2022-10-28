@@ -12,9 +12,10 @@
 #include "../d_theme_dir/d_theme_class.h"
 #include "../room_class.h"
 
-UThemeClass::UThemeClass (ThemeClass *theme_object_val)
+UThemeClass::UThemeClass (int debug_on_val, ThemeClass *theme_object_val)
 {
     memset(this, 0, sizeof(UThemeClass));
+    this->debugOn_ = true && debug_on_val;
     this->themeObj_ = theme_object_val;
     this->startNetServer();
 
