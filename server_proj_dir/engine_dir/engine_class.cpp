@@ -13,7 +13,7 @@
 EngineClass::EngineClass (int debug_code_val)
 {
     memset(this, 0, sizeof(EngineClass));
-    this->debugOn_ = false && debug_code_val;
+    this->debugOn_ = true && debug_code_val;
     this->theDebugCode = debug_code_val;
     
     this->theDEngineObject = new DEngineClass(this->debugOn_, this);

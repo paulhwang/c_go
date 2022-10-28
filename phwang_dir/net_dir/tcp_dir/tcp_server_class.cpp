@@ -31,7 +31,7 @@ TcpServerClass::TcpServerClass (
 
 {
     memset(this, 0, sizeof(*this));
-    this->debugOn_ = true;
+    this->debugOn_ = true && debug_on_val;
     this->callerObject_ = caller_object_val;
     this->tcpPort_ = tcp_port_val;
     this->acceptCallbackFunc_ = accept_callback_func_val;
@@ -138,7 +138,7 @@ void *TcpServerClass::serverThreadFunc (void *data_val)
             continue;
         }
 
-        PortClass *port_object = new PortClass(data_socket, this->receiveCallbackFunc_, this->callerObject_, this->theWho);
+        PortClass *port_object = new PortClass(this->debugOn_, data_socket, this->receiveCallbackFunc_, this->callerObject_, this->theWho);
         port_object->startThreads(this->portObjectIndex_);
         this->portObjectIndex_++;
         this->acceptCallbackFunc_(this->callerObject_, port_object);

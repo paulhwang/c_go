@@ -14,7 +14,7 @@
 ThemeClass::ThemeClass (int debug_code_val)
 {
     memset(this, 0, sizeof(ThemeClass));
-    this->debugOn_ = false && debug_code_val;
+    this->debugOn_ = true && debug_code_val;
     this->theDebugCode = debug_code_val;
     
     this->theUThemeObject = new UThemeClass(this->debugOn_, this);

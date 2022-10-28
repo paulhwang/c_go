@@ -13,14 +13,16 @@ std::atomic<int> PortClass::ObjectCount(0);
 
 int PortClass::objectCount(void) {return PortClass::ObjectCount;}
 
-PortClass::PortClass (int socket_val,
-                                  void (*receive_callback_val)(void *, void *, void *),
-                                  void *receive_object_val,
-                                  char const *who_val)
+PortClass::PortClass (
+    int debug_on_val,
+    int socket_val,
+    void (*receive_callback_val)(void *, void *, void *),
+    void *receive_object_val,
+    char const *who_val)
 {
     memset(this, 0, sizeof(*this));
     phwangIncrementAtomicCount(&PortClass::ObjectCount, this->objectName(), 6 + PhwangClass::ROBUST_THREAD_COUNT);
-    this->debugOn_ = true;
+    this->debugOn_ = true && debug_on_val;
     this->theSocket = socket_val;
     this->theReceiveCallback = receive_callback_val;
     this->theReceiveObject = receive_object_val;

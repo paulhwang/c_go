@@ -42,7 +42,12 @@ private:
     void startTransmitThread(int socket_val);
 
 public:
-    PortClass(int socket_val, void (*receive_callback_val)(void *, void *, void *), void *receive_object_val, char const *who_val);
+    PortClass(
+        int debug_on_val,
+        int socket_val,
+        void (*receive_callback_val)(void *, void *, void *),
+        void *receive_object_val,
+        char const *who_val);
     ~PortClass(void);
     char const *objectName(void) {return "PortClass";}
     static int objectCount(void);

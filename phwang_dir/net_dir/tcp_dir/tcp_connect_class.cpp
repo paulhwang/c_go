@@ -14,7 +14,6 @@
 TcpConnectClass::TcpConnectClass (char const *who_val)
 {
     memset(this, 0, sizeof(*this));
-    this->debugOn_ = true;
     this->theWho = who_val;
     phwangDebugWS(false, "TcpConnectClass::TcpConnectClass", this->theWho, "init");
 }
@@ -38,6 +37,7 @@ void *TcpConnectClass::tcpConnect (
     struct sockaddr_in serv_addr;
     char buffer[1024] = {0};
 
+    this->debugOn_ = true && debug_on_val;
     if ((s = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
         phwangLogitWS("TcpConnectClass::tcpConnect", this->theWho, "open socket error");
         return 0;
@@ -78,7 +78,7 @@ void *TcpConnectClass::tcpConnect (
 
     send(s, LOGO_DEF::PHWANG_LOGO , strlen(LOGO_DEF::PHWANG_LOGO) , 0);
 
-    PortClass *tp_transfer_object = new PortClass(s, receive_callback_val, receive_object_val, who_val);
+    PortClass *tp_transfer_object = new PortClass(this->debugOn_, s, receive_callback_val, receive_object_val, who_val);
     tp_transfer_object->startThreads(PortClass::CLIENT_INDEX);
     return tp_transfer_object;
 }
