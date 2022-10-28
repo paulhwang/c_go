@@ -20,7 +20,7 @@
 FabricClass::FabricClass (int debug_code_val)
 {
     memset(this, 0, sizeof(*this));
-    this->debugOn_ = true && debug_code_val;
+    this->debugOn_ = false && debug_code_val;
     this->theDebugCode = debug_code_val;
     
     this->fileMgrObj_ = new FileMgrClass();

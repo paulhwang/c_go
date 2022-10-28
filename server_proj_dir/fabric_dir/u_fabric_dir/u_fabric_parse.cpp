@@ -49,7 +49,9 @@ void UFabricClass::parseData (char *data_val)
 
 void UFabricClass::processSetupRoomResponse (char *data_val)
 {
-    phwangDebugS(true, "UFabricClass::processSetupRoomResponse", data_val);
+    if (true && this->debugOn_) {
+        printf("UFabricClass::processSetupRoomResponse() %s\n", data_val);
+    }
 
     char result_buf[RESULT_DEF::RESULT_SIZE + 1];
     memcpy(result_buf, data_val, RESULT_DEF::RESULT_SIZE);

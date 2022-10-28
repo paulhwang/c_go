@@ -74,5 +74,7 @@ void DFabricClass::setTimeStampString (void)
     this->timeStampString_[SIZE_DEF::FABRIC_TIME_STAMP_SIZE - 1] = '}';
     this->timeStampString_[SIZE_DEF::FABRIC_TIME_STAMP_SIZE] = 0;
 
-    phwangDebugS(true, "DFabricClass::setTimeStampString", this->timeStampString());
+    if (true && this->debugOn_) {
+        printf("DFabricClass::setTimeStampString() %s\n", this->timeStampString());
+    }
 }

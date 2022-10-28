@@ -541,7 +541,9 @@ char *DFabricClass::parseGetLinkData (
                 strcpy(current_ptr, session->sessionIdIndex());
                 current_ptr += SIZE_DEF::SESSION_II_SIZE;
 
-                phwangDebugSS(true, "DFabricClass::parseGetLinkData","p_data=", response_data);
+                if (true && this->debugOn_) {
+                    printf("DFabricClass::parseGetLinkData() p_data=%s\n", response_data);
+                }
             }
         }
     }
@@ -559,7 +561,9 @@ char *DFabricClass::parseGetLinkData (
         current_ptr += pending_session_info2_length;
         *current_ptr = 0;
 
-        phwangDebugSS(true, "DFabricClass::parseGetLinkData", "p_session3=", response_data);
+        if (true && this->debugOn_) {
+            printf("DFabricClass::parseGetLinkData() p_session2=%s\n", response_data);
+        }
 
         phwangFree(pending_session_info2);
     }
@@ -577,7 +581,9 @@ char *DFabricClass::parseGetLinkData (
         current_ptr += pending_session_info3_length;
         *current_ptr = 0;
 
-        phwangDebugSS(true, "DFabricClass::parseGetLinkData", "p_session3=", response_data);
+        if (true && this->debugOn_) {
+            printf("DFabricClass::parseGetLinkData() p_session3=%s\n", response_data);
+        }
 
         phwangFree(pending_session_info3);
     }
@@ -591,7 +597,10 @@ char *DFabricClass::parseGetNameList (
     char *data_val)
 {
     char *response_data;
-    phwangDebugS(true, "DFabricClass::parseGetNameList", data_val);
+
+    if (true && this->debugOn_) {
+        printf("DFabricClass::parseGetNameList() %s\n", data_val);
+    }
 
     char *name_list_tag_val = data_val;
     char *end_val = name_list_tag_val + 3;
@@ -640,7 +649,10 @@ char *DFabricClass::parseSetupSession (
     char *data_val)
 {
     char *response_data = 0;
-    phwangDebugSS(true, "DFabricClass::parseSetupSession", "data_val=", data_val);
+
+    if (true && this->debugOn_) {
+        printf("DFabricClass::parseSetupSession() data_val=%s\n", data_val);
+    }
 
     SessionClass *session = link_val->mallocSession();
     if (!session) {
@@ -654,17 +666,26 @@ char *DFabricClass::parseSetupSession (
     char *encoded_theme_info = data_val + 2;
     int theme_info_size;
     char *theme_info = phwangDecodeStringMalloc(encoded_theme_info, &theme_info_size);
-    phwangDebugSS(true, "DFabricClass::parseSetupSession", "theme_info=", theme_info);
+
+    if (true && this->debugOn_) {
+        printf("DFabricClass::parseSetupSession() theme_info=%s\n", theme_info);
+    }
 
     char *encoded_first_fiddle = encoded_theme_info + theme_info_size;
     int first_fiddle_size;
     char *first_fiddle = phwangDecodeStringMalloc(encoded_first_fiddle, &first_fiddle_size);
-    phwangDebugSS(true, "DFabricClass::parseSetupSession", "first_fiddle=", first_fiddle);
+
+    if (true && this->debugOn_) {
+        printf("DFabricClass::parseSetupSession() first_fiddle=%s\n", first_fiddle);
+    }
 
     char *encoded_second_fiddle = encoded_first_fiddle + first_fiddle_size;
     int second_fiddle_size;
     char *second_fiddle = phwangDecodeStringMalloc(encoded_second_fiddle, &second_fiddle_size);
-    phwangDebugSS(true, "DFabricClass::parseSetupSession", "second_fiddle=", second_fiddle);
+
+    if (true && this->debugOn_) {
+        printf("DFabricClass::parseSetupSession() second_fiddle=%S\n", second_fiddle);
+    }
 
     switch (theme_type) {
         case FE_DEF::FE_APP_IS_GO_GAME:
@@ -830,8 +851,9 @@ char *DFabricClass::parseSetupSession3 (
 {
     char *response_data;
 
-    phwangDebugSS(true, "DFabricClass::parseSetupSession3", "session_id=", session_val->sessionIdIndex());
-    phwangDebugSS(true, "DFabricClass::parseSetupSession3", "data_val=", data_val);
+    if (true && this->debugOn_) {
+        printf("DFabricClass::parseSetupSession3() session_id=%s\n", session_val->sessionIdIndex());
+    }
 
     response_data = this->parseSetupSession3_(RESULT_DEF::RESULT_SUCCEED, ajax_id_val, session_val);
     return response_data;
@@ -888,7 +910,9 @@ char *DFabricClass::parseSetupSession3_ (
     phwangFree(encoded_first_fiddle);
     phwangFree(encoded_second_fiddle);
 
-    phwangDebugSS(true, "DFabricClass::parseSetupSession3_", "response_data=", response_data);
+    if (true && this->debugOn_) {
+        printf("DFabricClass::parseSetupSession3_() response_data=%s\n", response_data);
+    }
 
     return response_data;
 }
@@ -946,7 +970,10 @@ char *DFabricClass::parsePutSessionData (
     char *data_val)
 {
     char *response_data;
-    phwangDebugS(true, "DFabricClass::parsePutSessionData", data_val);
+
+    if (true && this->debugOn_) {
+        printf("DFabricClass::parsePutSessionData() %s\n", data_val);
+    }
 
     char *room_id = session_val->groupObject()->roomIdIndex();
     if (!room_id) {
