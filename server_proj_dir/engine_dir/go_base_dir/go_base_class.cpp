@@ -8,17 +8,24 @@
 #include "go_base_class.h"
 #include "../engine_class.h"
 
-GoBaseClass::GoBaseClass (void *list_mgr_object_val, EngineClass *engine_object_val, char *config_info_val):
+GoBaseClass::GoBaseClass (
+    int debug_on_val,
+    void *list_mgr_object_val,
+    EngineClass *engine_object_val,
+    char *config_info_val):
     ListEntryClass(list_mgr_object_val),
     theEngineObject(engine_object_val)
 {
-    this->theConfigObject = new GoConfigClass(this, config_info_val);
-    this->theBoardObject = new GoBoardClass(this);
-    this->theFightObject = new GoFightClass(this);
-    this->thePortObject = new GoPortClass(this);
-    this->theGameObject = new GoGameClass(this);
+    this->debugOn_ = true && debug_on_val;
+    this->theConfigObject = new GoConfigClass(this->debugOn_, this, config_info_val);
+    this->theBoardObject = new GoBoardClass(this->debugOn_, this);
+    this->theFightObject = new GoFightClass(this->debugOn_, this);
+    this->thePortObject = new GoPortClass(this->debugOn_, this);
+    this->theGameObject = new GoGameClass(this->debugOn_, this);
 
-    phwangDebugSS(true, "GoBaseClass::GoBaseClass", "new_go_base:", this->goBaseIdIndex());
+    if (true && this->debugOn_) {
+        printf("GoBaseClass::GoBaseClass() new_go_base=%s\n", this->goBaseIdIndex());
+    }
 }
 
 GoBaseClass::~GoBaseClass (void)

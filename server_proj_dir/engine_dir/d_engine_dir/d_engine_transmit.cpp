@@ -9,7 +9,7 @@
 
 void DEngineClass::xmtData (char *data_val)
 {
-    if (true && this->debugOn()) {
+    if (true && this->debugOn_) {
         int len = 50;
         if (strlen(data_val) <= len) {
             printf("DEngineClass::xmtData() %s\n", data_val);

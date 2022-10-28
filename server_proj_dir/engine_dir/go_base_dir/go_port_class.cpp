@@ -13,9 +13,10 @@
 #include "../engine_class.h"
 #include "../d_engine_dir/d_engine_class.h"
 
-GoPortClass::GoPortClass (GoBaseClass *base_object_val):
+GoPortClass::GoPortClass (int debug_on_val, GoBaseClass *base_object_val):
     theBaseObject(base_object_val)
 {
+    this->debugOn_ = true && debug_on_val;
     this->debug(false, "GoPortClass", "init");
 }
 
@@ -34,8 +35,8 @@ void GoPortClass::transmitOutputData (char const *data_val) {
 }
 
 void GoPortClass::receiveInputData (char const *str_val) {
-    if (1) { /* debug */
-        this->logit("receiveInputData", str_val);
+    if (true && this->debugOn_) {
+        printf("GoPortClass::receiveInputData() %s\n", str_val);
     }
 
     switch (*str_val) {

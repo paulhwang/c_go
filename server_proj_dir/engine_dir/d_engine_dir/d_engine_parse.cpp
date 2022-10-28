@@ -15,7 +15,7 @@
 
 void DEngineClass::parseData (char *data_val)
 {
-    if (true && this->debugOn()) {
+    if (true && this->debugOn_) {
         int len = 50;
         if (strlen(data_val) <= len) {
             printf("DEngineClass::parseData() %s\n", data_val);
@@ -45,7 +45,9 @@ void DEngineClass::parseData (char *data_val)
 
 void DEngineClass::processSetupBase (char *data_val)
 {
-    phwangDebugS(true, "DEngineClass::processSetupBase", data_val);
+    if (true && this->debugOn_) {
+        printf("DEngineClass::processSetupBase() %s\n", data_val);
+    }
 
     char *room_id_ptr = data_val;
     char *base_id_ptr = room_id_ptr + SIZE_DEF::ROOM_II_SIZE;
@@ -79,7 +81,9 @@ void DEngineClass::processSetupBase (char *data_val)
 
 void DEngineClass::processPutBaseData (char *data_val)
 {
-    phwangDebugS(true, "DEngineClass::processPutBaseData", data_val);
+    if (true && this->debugOn_) {
+        printf("DEngineClass::processPutBaseData() %s\n", data_val);
+    }
 
     GoBaseClass *base_object = this->engineObj_->searchGoBase(data_val);
     if (!base_object) {

@@ -12,6 +12,7 @@ class GoBaseClass;
 class GoGameClass
 {
 #define GO_GAME_CLASS_MAX_MOVES_ARRAY_SIZE 1024
+    int debugOn_;
     GoBaseClass *theBaseObject;
     GoMoveClass *theMovesArray[GO_GAME_CLASS_MAX_MOVES_ARRAY_SIZE];
     int theTotalMoves;
@@ -31,7 +32,7 @@ class GoGameClass
     void abend(char const *str0_val, char const *str1_val);
 
 public:
-    GoGameClass(GoBaseClass *the_base_object);
+    GoGameClass(int debug_on_val, GoBaseClass *the_base_object);
     ~GoGameClass(void);
     char const *objectName(void) {return "GoGameClass";}
 

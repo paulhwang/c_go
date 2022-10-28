@@ -13,9 +13,10 @@
 EngineClass::EngineClass (int debug_code_val)
 {
     memset(this, 0, sizeof(EngineClass));
+    this->debugOn_ = false && debug_code_val;
     this->theDebugCode = debug_code_val;
     
-    this->theDEngineObject = new DEngineClass(this);
+    this->theDEngineObject = new DEngineClass(this->debugOn_, this);
     this->theGoBaseListMgrObject = phwangListMgrMalloc("GO_BASE", SIZE_DEF::BASE_ID_SIZE, SIZE_DEF::BASE_INDEX_SIZE, SIZE_DEF::BASE_ID_INITIAL_VALUE);
 
     phwangDebugS(false, "EngineClass::EngineClass", "init");
@@ -29,7 +30,7 @@ EngineClass::~EngineClass (void)
 
 GoBaseClass *EngineClass::mallocGoBase (char *config_info_val)
 {
-    GoBaseClass *base_object = new GoBaseClass(this->theGoBaseListMgrObject, this, config_info_val);
+    GoBaseClass *base_object = new GoBaseClass(this->debugOn_, this->theGoBaseListMgrObject, this, config_info_val);
     if (!base_object) {
         phwangAbendS("EngineClass::mallocGoBase", "fail_to_malloc_base_object");
         return 0;

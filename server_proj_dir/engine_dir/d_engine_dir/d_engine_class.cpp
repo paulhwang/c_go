@@ -8,9 +8,10 @@
 #include "../../define_dir/tcp_port_define.h"
 #include "d_engine_class.h"
 
-DEngineClass::DEngineClass (EngineClass *engine_obj_val)
+DEngineClass::DEngineClass (int debug_on_val, EngineClass *engine_obj_val)
 {
     memset(this, 0, sizeof(DEngineClass));
+    this->debugOn_ = true && debug_on_val;
     this->engineObj_ = engine_obj_val;
 
     this->startNetConnect();

@@ -13,6 +13,7 @@ class GoMoveClass;
 
 class GoFightClass {
 #define GO_FIGHT_CLASS_GROUP_LIST_ARRAY_SIZE 7
+    int debugOn_;
     GoBaseClass *theBaseObject;
     int theAbendEngineOn;
     GoGroupListClass *theGroupListArray[GO_FIGHT_CLASS_GROUP_LIST_ARRAY_SIZE];
@@ -42,7 +43,7 @@ class GoFightClass {
     void abend(char const *str0_val, char const *str1_val);
 
 public:
-    GoFightClass(GoBaseClass *base_object_val);
+    GoFightClass(int debug_on_val, GoBaseClass *base_object_val);
     ~GoFightClass(void);
     char const *objectName(void) {return "GoFightClass";}
 

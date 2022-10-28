@@ -12,7 +12,7 @@ class EngineClass;
 class GoBaseClass;
 
 class DEngineClass {
-    int debugOn(void) {return true && this->engineObj_->debugOn();}
+    int debugOn_;
     EngineClass *engineObj_;
     void *thePortObject;
 
@@ -21,7 +21,7 @@ class DEngineClass {
     void processPutBaseData(char *data_val);
 
 public:
-    DEngineClass(EngineClass *engine_obj_val);
+    DEngineClass(int debug_on_val, EngineClass *engine_obj_val);
     ~DEngineClass(void);
     char const* objectName(void) {return "DEngineClass";}
 

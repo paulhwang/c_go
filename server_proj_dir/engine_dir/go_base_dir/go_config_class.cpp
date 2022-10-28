@@ -9,13 +9,17 @@
 #include "go_base_class.h"
 #include "go_config_class.h"
 
-GoConfigClass::GoConfigClass (GoBaseClass *base_object_val, char *config_info_val):
+GoConfigClass::GoConfigClass (int debug_on_val, GoBaseClass *base_object_val, char *config_info_val):
     theBaseObject(base_object_val)
 {
+    this->debugOn_ = true && debug_on_val;
     if (*config_info_val != FE_DEF::FE_APP_IS_GO_GAME) {
         this->abend("GoConfigClass", "not GO");
     }
-    this->debug(true, "GoConfigClass", config_info_val);
+
+    if (true && this->debugOn_) {
+        printf("GoConfigClass::GoConfigClass() %s\n", config_info_val);
+    }
 
     char *current = config_info_val + 1;
     this->theBoardSize = phwangDecodeNumber(current, 2);

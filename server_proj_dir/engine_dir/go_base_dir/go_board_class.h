@@ -9,6 +9,7 @@
 class GoBaseClass;
 
 class GoBoardClass {
+    int debugOn_;
     GoBaseClass *theBaseObject;
     int theBoardArray[19][19];
     int theMarkedBoardArray[19][19];
@@ -25,7 +26,7 @@ class GoBoardClass {
     void abend(char const *str0_val, char const *str1_val);
 
 public:
-    GoBoardClass(GoBaseClass *the_base_object);
+    GoBoardClass(int debug_on_val, GoBaseClass *the_base_object);
     ~GoBoardClass(void) {}
     char const *objectName(void) {return "GoBoardClass";}
 

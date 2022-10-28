@@ -9,16 +9,20 @@
 #include "go_group_list_class.h"
 #include "go_group_class.h"
 
-GoGroupClass::GoGroupClass (GoGroupListClass *group_list_object_val):
+GoGroupClass::GoGroupClass (int debug_on_val, GoGroupListClass *group_list_object_val):
     theGroupListObject(group_list_object_val),
     theIndexNumber(theGroupListObject->groupCount()),
     theMyColor(theGroupListObject->myColor()),
     theStoneCount(0)
 {
+    this->debugOn_ = true && debug_on_val;
     this->theHisColor = (this->theMyColor == GO_EMPTY_STONE)
         ? GO_EMPTY_STONE
         : GolbalGoGetOppositeColor(this->theMyColor);
-    this->debug(true, "GoGroupClass", "init");
+
+    if (true && this->debugOn_) {
+        printf("GoGroupClass::GoGroupClass() init\n");
+    }
 }
 
 void GoGroupClass::insertStoneToGroup (int x_val, int y_val, int dead_val)

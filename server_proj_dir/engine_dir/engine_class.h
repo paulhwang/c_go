@@ -15,6 +15,7 @@ public:
     int debugOn(void) {return true;}
 
 private:
+    int debugOn_;
     char const *objectName(void) {return "EngineClass";}
     int theDebugCode;
     

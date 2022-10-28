@@ -9,6 +9,7 @@
 class GoGroupListClass;
 
 class GoGroupClass {
+    int debugOn_;
     GoGroupListClass *theGroupListObject;
     int theMaxX;
     int theMinX;
@@ -28,7 +29,7 @@ class GoGroupClass {
     void abend(char const *str0_val, char const *str1_val);
 
 public:
-    GoGroupClass(GoGroupListClass *group_list_object_val);
+    GoGroupClass(int debug_on_val, GoGroupListClass *group_list_object_val);
     ~GoGroupClass() {}
     char const *objectName() {return "GoGroupClass";}
 

@@ -8,10 +8,11 @@
 #include "go_base_class.h"
 #include "go_fight_class.h"
 
-GoFightClass::GoFightClass (GoBaseClass* base_object_val):
+GoFightClass::GoFightClass (int debug_on_val, GoBaseClass* base_object_val):
     theBaseObject(base_object_val),
     theAbendEngineOn(1)
 {
+    this->debugOn_ = true && debug_on_val;
     this->resetEngineObjectData();
     this->debug(false, "GoFightClass", "init");
 }
@@ -28,7 +29,9 @@ GoFightClass::~GoFightClass(void)
 
 void GoFightClass::enterBattle (GoMoveClass* move_val)
 {
-    this->debug(true, "enterBattle", move_val->moveInfo());
+    if (true && this->debugOn_) {
+        printf("GoFightClass::enterBattle() %s\n", move_val->moveInfo());
+    }
 
     this->theBaseObject->boardObject()->addStoneToBoard(move_val->xX(), move_val->yY(), move_val->myColor());
     GoGroupClass *my_group = this->insertStoneToGroupList(move_val);
@@ -71,7 +74,7 @@ GoGroupClass* GoFightClass::insertStoneToGroupList (GoMoveClass* move_val)
 
     GoGroupClass *group = g_list->findCandidateGroup(move_val->xX(), move_val->yY());
     if (!group) {
-        group = new GoGroupClass(g_list);
+        group = new GoGroupClass(this->debugOn_, g_list);
         group->insertStoneToGroup(move_val->xX(), move_val->yY(), false);
         g_list->insertGroupToGroupList(group);
         return group;

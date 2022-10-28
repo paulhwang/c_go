@@ -9,9 +9,10 @@
 #include "go_game_class.h"
 //#include "go_move_class.h"
 
-GoGameClass::GoGameClass (GoBaseClass* base_object_val):
+GoGameClass::GoGameClass (int debug_on_val, GoBaseClass* base_object_val):
     theBaseObject(base_object_val)
 {
+    this->debugOn_ = true && debug_on_val;
     this->resetGameObjectData();
     this->debug(false, "GoGameClass", "init");
 }

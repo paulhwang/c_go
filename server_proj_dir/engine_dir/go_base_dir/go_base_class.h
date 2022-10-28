@@ -22,6 +22,7 @@
 class EngineClass;
 
 class GoBaseClass : public ListEntryClass {
+    int debugOn_;
     EngineClass *theEngineObject;
     char theRoomIdIndex[SIZE_DEF::ROOM_II_SIZE + 4];
 
@@ -32,7 +33,11 @@ class GoBaseClass : public ListEntryClass {
     GoGameClass *theGameObject;
 
 public:
-    GoBaseClass(void *list_mgr_object_val, EngineClass *engine_object_val, char *config_info_val);
+    GoBaseClass(
+        int debug_on_val,
+        void *list_mgr_object_val,
+        EngineClass *engine_object_val,
+        char *config_info_val);
     ~GoBaseClass(void);
     char const *objectName(void) {return "GoBaseClass";}
 

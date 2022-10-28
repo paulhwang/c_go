@@ -9,9 +9,10 @@
 #include "go_base_class.h"
 #include "go_board_class.h"
 
-GoBoardClass::GoBoardClass (GoBaseClass *base_object_val):
+GoBoardClass::GoBoardClass (int debug_on_val, GoBaseClass *base_object_val):
     theBaseObject(base_object_val)
 {
+    this->debugOn_ = true && debug_on_val;
     this->resetBoardObjectData();
     this->debug(false, "GoBoardClass", "init");
 }

@@ -9,6 +9,7 @@
 class GoBaseClass;
 
 class GoPortClass {
+    int debugOn_;
     GoBaseClass *theBaseObject;
 
     void parseGameData(char const *str_val);
@@ -19,7 +20,7 @@ class GoPortClass {
     void abend(char const *str0_val, char const *str1_val);
 
 public:
-    GoPortClass(GoBaseClass *base_object_val);
+    GoPortClass(int debug_on_val, GoBaseClass *base_object_val);
     ~GoPortClass(void) {}
     char const *objectName(void) {return "GoPortClass";}
 

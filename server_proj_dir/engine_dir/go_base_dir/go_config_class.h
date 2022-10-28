@@ -9,6 +9,7 @@
 class GoBaseClass;
 
 class GoConfigClass {
+    int debugOn_;
     GoBaseClass *theBaseObject;
     int theBoardSize;
     int theHandicapPoint;
@@ -21,7 +22,7 @@ class GoConfigClass {
     void abend(char const *str0_val, char const *str1_val);
 
 public:
-    GoConfigClass(GoBaseClass *the_base_object, char *config_info_val);
+    GoConfigClass(int debug_on_val, GoBaseClass *the_base_object, char *config_info_val);
     ~GoConfigClass(void) {}
     char const *objectName(void) {return "GoConfigClass";}
 
