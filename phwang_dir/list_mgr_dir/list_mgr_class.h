@@ -31,7 +31,12 @@ class ListMgrClass {
     void abendListMgrClass(char const *msg_val);
 
 public:
-    ListMgrClass(char const *caller_name_val, int id_size_val, int index_size_val, int global_entry_id_val);
+    ListMgrClass(
+        int debug_on_val,
+        char const *caller_name_val,
+        int id_size_val,
+        int index_size_val,
+        int global_entry_id_val);
     ~ListMgrClass(void);
 
     char *objectName(void) {return this->theObjectName;}

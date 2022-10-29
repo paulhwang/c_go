@@ -30,7 +30,7 @@ LinkClass::LinkClass (
     this->portObject_ = port_object_val;
     this->theNameListChanged = 'D';
 
-    this->sessionListMgrObject_ = phwangListMgrMalloc("SESSION", SIZE_DEF::SESSION_ID_SIZE, SIZE_DEF::SESSION_INDEX_SIZE, SIZE_DEF::SESSION_ID_INITIAL_VALUE);
+    this->sessionListMgrObject_ = phwangListMgrMalloc(this->debugOn_, "SESSION", SIZE_DEF::SESSION_ID_SIZE, SIZE_DEF::SESSION_INDEX_SIZE, SIZE_DEF::SESSION_ID_INITIAL_VALUE);
     this->resetKeepAliveTime();
     this->pendingSessionSetupQueue2_ = phwangMallocQueue(0, this->objectName());
     this->pendingSessionSetupQueue3_ = phwangMallocQueue(0, this->objectName());

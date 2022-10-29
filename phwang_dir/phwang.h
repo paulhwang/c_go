@@ -103,7 +103,12 @@ int   phwangEnqueue(void *queue_val, void *data_val);
 void *phwangDequeue(void *queue_val, char const *who_val);
 
 /* list_mgr */
-void *phwangListMgrMalloc(char const *who_val, int id_size_val, int index_size_val, int global_entry_id_val);
+void *phwangListMgrMalloc(
+        int debug_on_val,
+        char const *who_val,
+        int id_size_val,
+        int index_size_val,
+        int global_entry_id_val);
 void  phwangListMgrFree(void *list_mgr_val);
 void  phwangListMgrRemoveEntry(void *list_mgr_val, void *entry_val);
 void *phwangListMgrSearchEntry(void *list_mgr_val, char const *data_val, void *extra_data_val);

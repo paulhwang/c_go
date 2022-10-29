@@ -8,10 +8,15 @@
 #include "list_mgr_class.h"
 #include "list_entry_class.h"
 
-ListMgrClass::ListMgrClass (char const *who_val, int id_size_val, int index_size_val, int global_entry_id_val)
+ListMgrClass::ListMgrClass (
+    int debug_on_val,
+    char const *who_val,
+    int id_size_val,
+    int index_size_val,
+    int global_entry_id_val)
 {
     memset(this, 0, sizeof(ListMgrClass));
-    this->debugOn_ = true;
+    this->debugOn_ = true && debug_on_val;
     this->theWho = who_val;
     this->theIdSize = id_size_val;
     this->theIndexSize = index_size_val;

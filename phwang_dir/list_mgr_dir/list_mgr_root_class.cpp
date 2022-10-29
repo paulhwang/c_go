@@ -8,19 +8,25 @@
 #include "list_mgr_root_class.h"
 #include "list_mgr_class.h"
 
-ListMgrRootClass::ListMgrRootClass (int debug_code_val)
+ListMgrRootClass::ListMgrRootClass (int debug_on_val)
 {
     memset(this, 0, sizeof (*this));
-    this->theDebugCode = debug_code_val;
+    this->debugOn_ = true && debug_on_val;
+    this->theDebugCode = debug_on_val;
 }
 
 ListMgrRootClass::~ListMgrRootClass(void)
 {
 }
 
-void *ListMgrRootClass::listMgrMalloc (char const *who_val, int id_size_val, int index_size_val, int global_entry_id_val)
+void *ListMgrRootClass::listMgrMalloc (
+    int debug_on_val,
+    char const *who_val,
+    int id_size_val,
+    int index_size_val,
+    int global_entry_id_val)
 {
-    ListMgrClass *list_mgr = new ListMgrClass(who_val, id_size_val, index_size_val, global_entry_id_val);
+    ListMgrClass *list_mgr = new ListMgrClass(debug_on_val, who_val, id_size_val, index_size_val, global_entry_id_val);
     return list_mgr;
 }
 
