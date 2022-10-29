@@ -37,7 +37,7 @@ public:
 
     RoomClass *mallocRoom(char *group_id_index_val);
     void freeRoom(RoomClass *group_object_val);
-    RoomClass *searchRoom(char *data_val) {return (RoomClass *) phwangListMgrSearchEntry(this->theRoomListMgrObject, data_val, 0);}
+    RoomClass *searchRoom(char *data_val);
     void insertRoom(RoomClass *room_object_val);
     void removeRoom(RoomClass *room_object_val);
 

@@ -54,6 +54,11 @@ void ThemeClass::insertRoom (RoomClass *group_object_val)
     phwangAbendS("ThemeClass::insertRoom", "table is full");
 }
 
+RoomClass *ThemeClass::searchRoom(char *data_val)
+{
+    return (RoomClass *) phwangListMgrSearchEntry(this->theRoomListMgrObject, data_val, 0);
+}
+
 void ThemeClass::removeRoom (RoomClass *group_object_val)
 {
     int i = 0;
