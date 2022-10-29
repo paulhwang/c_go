@@ -14,6 +14,7 @@
 QueueClass::QueueClass (int do_suspend_val, int max_size_val, char const *who_val)
 {
     memset(this, 0, sizeof (*this));
+    this->debugOn_ = true;
     this->theWho = who_val;
     this->theMaxQueueSize = max_size_val;
 
@@ -32,7 +33,9 @@ QueueClass::QueueClass (int do_suspend_val, int max_size_val, char const *who_va
         phwangAbendWS("QueueClass::QueueClass", this->theWho, "pthread_mutex_init fail");
     }
 
-    phwangDebugWS(false, "QueueClass::QueueClass", this->theWho, "init");
+    if (true && this->debugOn_) {
+        printf("QueueClass::QueueClass(%s) init\n", this->theWho);
+    }
 }
 
 QueueClass::~QueueClass (void)
@@ -42,7 +45,9 @@ QueueClass::~QueueClass (void)
 
 int QueueClass::enqueueData (void *data_val)
 {
-    phwangDebugWS(false, "QueueClass::enqueueData", this->theWho, (char *) data_val);
+    if (false && this->debugOn_) {
+        printf("QueueClass::enqueueData(%s) %s\n", this->theWho, (char *) data_val);
+    }
 
     /* queue is too big */
     if (this->theMaxQueueSize && (this->theQueueSize > this->theMaxQueueSize)) {
@@ -93,7 +98,9 @@ void *QueueClass::dequeueData (void)
                 void *data = entry->data;
                 delete entry;
 
-                phwangDebugWS(false, "QueueClass::dequeueData", this->theWho, (char *) data);
+                if (false && this->debugOn_) {
+                    printf("QueueClass::dequeueData(%s) %s\n", this->theWho, (char *) data);
+                }
                 return data;
             }
         }

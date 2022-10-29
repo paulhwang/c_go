@@ -21,6 +21,7 @@ public:
     static const int ENQUEUE_NEW_ENTRY_FAIL = 4;
 
 private:
+    int debugOn_;
     char const *theWho;
     SuspendClass *theSuspendObject;
     int theQueueSize;
