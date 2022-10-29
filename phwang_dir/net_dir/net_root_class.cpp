@@ -14,15 +14,19 @@
 NetRootClass::NetRootClass (int debug_code_val)
 {
     memset(this, 0, sizeof (*this));
-    this->debugOn_ = false;
-    this->theIpObject = new IpClass();
-    unsigned long ip_addr_ptr_val;
-    this->theIpObject->getIpAddr(&ip_addr_ptr_val);
     this->theDebugCode = debug_code_val;
+    this->getIpAddr(true);
 }
 
 NetRootClass::~NetRootClass(void)
 {
+}
+
+void NetRootClass::getIpAddr(int debug_on_val)
+{
+    this->theIpObject = new IpClass(debug_on_val);
+    unsigned long ip_addr_ptr_val;
+    this->theIpObject->getIpAddr(&ip_addr_ptr_val);
 }
 
 void *NetRootClass::mallocTpServer (

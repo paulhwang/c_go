@@ -10,9 +10,10 @@
 #include "ip_class.h"
 #include <ifaddrs.h>
 
-IpClass::IpClass (void)
+IpClass::IpClass (int debug_on_val)
 {
     memset(this, 0, sizeof(*this));
+    this->debugOn_ = true && debug_on_val;
     phwangDebugS(false, "IpClass::IpClass", "init");
 }
 
@@ -38,13 +39,19 @@ void IpClass::getIpAddr(unsigned long *ip_addr_ptr_val)
             tmpAddrPtr=&((struct sockaddr_in *)ifa->ifa_addr)->sin_addr;
             char addressBuffer[INET_ADDRSTRLEN];
             inet_ntop(AF_INET, tmpAddrPtr, addressBuffer, INET_ADDRSTRLEN);
-            printf("%s IP Address %s\n", ifa->ifa_name, addressBuffer); 
+
+            if (true && this->debugOn_) {
+                printf("IpClass::getIpAddr() %s IP Address: %s\n", ifa->ifa_name, addressBuffer);
+            }
         } else if (ifa->ifa_addr->sa_family == AF_INET6) { // check it is IP6
             // is a valid IP6 Address
             tmpAddrPtr=&((struct sockaddr_in6 *)ifa->ifa_addr)->sin6_addr;
             char addressBuffer[INET6_ADDRSTRLEN];
             inet_ntop(AF_INET6, tmpAddrPtr, addressBuffer, INET6_ADDRSTRLEN);
-            printf("%s IPv6 Address() %s\n", ifa->ifa_name, addressBuffer); 
+
+            if (false && this->debugOn_) {
+                printf("IpClass::getIpAddr() %s IPv6 Address: %s\n", ifa->ifa_name, addressBuffer);
+            }
         } 
     }
     if (ifAddrStruct!=NULL) freeifaddrs(ifAddrStruct);

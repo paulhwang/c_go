@@ -37,7 +37,7 @@ QueueClass::QueueClass (
         phwangAbendWS("QueueClass::QueueClass", this->theWho, "pthread_mutex_init fail");
     }
 
-    if (true && this->debugOn_) {
+    if (false && this->debugOn_) {
         printf("QueueClass::QueueClass(%s) init\n", this->theWho);
     }
 }

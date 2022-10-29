@@ -20,6 +20,8 @@ public:
     NetRootClass(int debug_code_val);
     ~NetRootClass(void);
     
+    void getIpAddr(int debug_on_val);
+
     void *mallocTpServer (
         int debug_on_val,
         void *caller_object_val,
