@@ -137,7 +137,7 @@ ListEntryClass *ListMgrClass::searchEntry (char const *data_val, void *extra_dat
 
 ListEntryClass *ListMgrClass::getEntryByIdIndex (int entry_id_val, int link_index_val, void *extra_data_val)
 {
-    if (true && this->debugOn_) {
+    if (false && this->debugOn_) {
         printf("ListMgrClass::getEntryByIdIndex(%s) id=%d index=%d\n", this->theWho, entry_id_val, link_index_val);
     }
 

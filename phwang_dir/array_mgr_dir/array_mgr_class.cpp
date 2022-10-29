@@ -82,8 +82,12 @@ void ArrayMgrClass::insertPointerElement (void *element_val)
     void *data;
 
     if (this->theArrayType == 's') {
+        int len = strlen((char *) element_val);
+        data = malloc(len + 1);
+        strcpy((char *) data, (char *) element_val);
+
         if (true && this->debugOn_) {
-            printf("ArrayMgrClass::insertPointerElement(%s) %s\n", this->theWho, (char *) element_val);
+            printf("ArrayMgrClass::insertPointerElement(%s) %s\n", this->theWho, (char *) data);
         }
     }
     else {
