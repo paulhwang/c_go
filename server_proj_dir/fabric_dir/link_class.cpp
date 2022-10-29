@@ -32,8 +32,8 @@ LinkClass::LinkClass (
 
     this->sessionListMgrObject_ = phwangListMgrMalloc(this->debugOn_, "SESSION", SIZE_DEF::SESSION_ID_SIZE, SIZE_DEF::SESSION_INDEX_SIZE, SIZE_DEF::SESSION_ID_INITIAL_VALUE);
     this->resetKeepAliveTime();
-    this->pendingSessionSetupQueue2_ = phwangMallocQueue(0, this->objectName());
-    this->pendingSessionSetupQueue3_ = phwangMallocQueue(0, this->objectName());
+    this->pendingSessionSetupQueue2_ = phwangMallocQueue(this->debugOn_, 0, this->objectName());
+    this->pendingSessionSetupQueue3_ = phwangMallocQueue(this->debugOn_, 0, this->objectName());
 
     if (true && this->debugOn_) {
         printf("LinkClass::LinkClass() myName=%s id=%s\n", this->myName(),this->linkIdIndex());

@@ -47,14 +47,20 @@ char *phwangMallocConstStrBuf (char const * str_val)
 }
 
 /* queue */
-void *phwangMallocSuspendedQueue (int size_val, char const *who_val)
+void *phwangMallocSuspendedQueue (
+    int debug_on_val,
+    int size_val,
+    char const *who_val)
 {
-    return thePhwangObject->queueRootObject()->mallocQueue(true, size_val, who_val);
+    return thePhwangObject->queueRootObject()->mallocQueue(debug_on_val, true, size_val, who_val);
 }
 
-void *phwangMallocQueue (int size_val, char const *who_val)
+void *phwangMallocQueue (
+    int debug_on_val,
+    int size_val,
+    char const *who_val)
 {
-    return thePhwangObject->queueRootObject()->mallocQueue(false, size_val, who_val);
+    return thePhwangObject->queueRootObject()->mallocQueue(debug_on_val, false, size_val, who_val);
 }
 
 void phwangFreeQueue (void *queue_val, char const *who_val)

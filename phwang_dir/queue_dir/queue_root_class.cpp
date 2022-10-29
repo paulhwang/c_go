@@ -18,9 +18,13 @@ QueueRootClass::~QueueRootClass(void)
 {
 }
 
-void *QueueRootClass::mallocQueue (int do_suspend_val, int max_size_val, char const *who_val)
+void *QueueRootClass::mallocQueue (
+    int debug_on_val,
+    int do_suspend_val,
+    int max_size_val,
+    char const *who_val)
 {
-    QueueClass *queue = new QueueClass(do_suspend_val, max_size_val, who_val);
+    QueueClass *queue = new QueueClass(debug_on_val, do_suspend_val, max_size_val, who_val);
     this->theNumberOfQueue++;
     return queue;
 }

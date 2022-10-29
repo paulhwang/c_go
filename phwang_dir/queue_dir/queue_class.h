@@ -38,7 +38,11 @@ private:
     void flushQueue(void);
 
 public:
-    QueueClass(int do_suspend_val, int max_size_val, char const *who_val);
+    QueueClass(
+        int debug_on_val,
+        int do_suspend_val,
+        int max_size_val,
+        char const *who_val);
     ~QueueClass(void);
     char const *objectName(void) {return "QueueClass";}
     

@@ -17,7 +17,11 @@ public:
     ~QueueRootClass(void);
 
     int numberOfQueueb(void) {return this->theNumberOfQueue;}
-    void *mallocQueue(int do_suspend_val, int max_size_val, char const *who_val);
+    void *mallocQueue(
+        int debug_on_val,
+        int do_suspend_val,
+        int max_size_val,
+        char const *who_val);
     void freeQueue(void *queue_val);
     int enqueue(void *queue_val, void *data_val);
     void *dequeue(void *queue_val);

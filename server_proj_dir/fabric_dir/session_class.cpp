@@ -16,7 +16,7 @@ SessionClass::SessionClass (
     this->debugOn_ = true && debug_on_val;
     this->linkObj_ = link_obj_val;
     this->groupObj_ = 0;
-    this->pendingDataQueue_ = phwangMallocQueue(0, this->objectName());
+    this->pendingDataQueue_ = phwangMallocQueue(this->debugOn_, 0, this->objectName());
 
     if (true && this->debugOn_) {
         printf("SessionClass::SessionClass() new_session=%s\n", this->sessionIdIndex());

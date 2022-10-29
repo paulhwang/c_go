@@ -11,10 +11,14 @@
 #include "queue_entry_class.h"
 #include "../suspend_dir/suspend_class.h"
 
-QueueClass::QueueClass (int do_suspend_val, int max_size_val, char const *who_val)
+QueueClass::QueueClass (
+    int debug_on_val,
+    int do_suspend_val,
+    int max_size_val,
+    char const *who_val)
 {
     memset(this, 0, sizeof (*this));
-    this->debugOn_ = true;
+    this->debugOn_ = true && debug_on_val;
     this->theWho = who_val;
     this->theMaxQueueSize = max_size_val;
 

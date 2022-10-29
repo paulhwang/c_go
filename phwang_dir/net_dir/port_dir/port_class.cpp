@@ -32,13 +32,13 @@ PortClass::PortClass (
     strcat(this->theWhoForReceiveQueue, ":");
     strcat(this->theWhoForReceiveQueue, this->theWho);
     strcat(this->theWhoForReceiveQueue, ":Transmit");
-    this->theReceiveQueue = phwangMallocSuspendedQueue(PortClass::RECEIVE_QUEUE_SIZE, this->theWhoForReceiveQueue);
+    this->theReceiveQueue = phwangMallocSuspendedQueue(this->debugOn_, PortClass::RECEIVE_QUEUE_SIZE, this->theWhoForReceiveQueue);
 
     strcpy(this->theWhoForTransmitQueue, this->objectName());
     strcat(this->theWhoForTransmitQueue, ":");
     strcat(this->theWhoForTransmitQueue, this->theWho);
     strcat(this->theWhoForTransmitQueue, ":Receive");
-    this->theTransmitQueue = phwangMallocSuspendedQueue(PortClass::TRANSMIT_QUEUE_SIZE, this->theWhoForTransmitQueue);
+    this->theTransmitQueue = phwangMallocSuspendedQueue(this->debugOn_, PortClass::TRANSMIT_QUEUE_SIZE, this->theWhoForTransmitQueue);
 
     phwangDebugWS(false, "PortClass::PortClass", this->theWho, "init");
 }
