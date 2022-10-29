@@ -116,7 +116,11 @@ int   phwnagListMgrGetMaxIndex(void *list_mgr_val, char const *who_val);
 void *phwangListMgrGetEntryTableArray(void *list_mgr_val);
 
 /* array_mgr */
-void *phwangArrayMgrMalloc(char const *who_val, char array_type_val, int array_size_val);
+void *phwangArrayMgrMalloc(
+        int debug_on_val,
+        char const *who_val,
+        char array_type_val,
+        int array_size_val);
 void  phwangArrayMgrFree(void *array_mgr_val);
 void  phwangArrayMgrInsertElement(void *array_mgr_val, void *element_val);
 void  phwangArrayMgrRemoveElement(void *array_mgr_val, void *element_val);

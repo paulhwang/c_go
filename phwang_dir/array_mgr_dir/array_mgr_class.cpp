@@ -7,10 +7,14 @@
 #include "../../phwang_dir/phwang.h"
 #include "array_mgr_class.h"
 
-ArrayMgrClass::ArrayMgrClass(char const *who_val, char array_type_val, int max_array_size_val)
+ArrayMgrClass::ArrayMgrClass(
+    int debug_on_val,
+    char const *who_val,
+    char array_type_val,
+    int max_array_size_val)
 {
     memset(this, 0, sizeof(ArrayMgrClass));
-    this->debugOn_ = true;;
+    this->debugOn_ = true && debug_on_val;
     this->theWho = who_val;
     this->theArrayType = array_type_val;
     this->theMaxArraySize = max_array_size_val;

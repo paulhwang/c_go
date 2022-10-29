@@ -19,7 +19,7 @@ RoomClass::RoomClass (
         theThemeObject(theme_object_val)
 {
     this->debugOn_ = true && debug_on_val;
-    this->theGroupArrayMgr = phwangArrayMgrMalloc(this->objectName(), 's', 10);
+    this->theGroupArrayMgr = phwangArrayMgrMalloc(this->debugOn_, this->objectName(), 's', 10);
     this->insertGroup(group_id_index_val);
 
     if (true && this->debugOn_) {

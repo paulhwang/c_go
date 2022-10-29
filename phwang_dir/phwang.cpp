@@ -121,9 +121,13 @@ void phwangListMgrRemoveEntry (void *list_mgr_val, void *entry_val)
 }
 
 /* array_mgr */
-void *phwangArrayMgrMalloc(char const *who_val, char array_type_val, int max_array_size_val)
+void *phwangArrayMgrMalloc(
+    int debug_on_val,
+    char const *who_val,
+    char array_type_val,
+    int max_array_size_val)
 {
-    return thePhwangObject->arrayMgrRootObject()->arrayMgrMalloc(who_val, array_type_val, max_array_size_val);
+    return thePhwangObject->arrayMgrRootObject()->arrayMgrMalloc(debug_on_val, who_val, array_type_val, max_array_size_val);
 }
 
 void phwangArrayMgrFree (void *array_mgr_val)

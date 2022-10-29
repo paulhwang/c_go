@@ -19,7 +19,11 @@ class ArrayMgrClass {
     void removePointerElement(void *element_val);
 
 public:
-    ArrayMgrClass(char const *who_val, char array_type_val, int max_array_size_val);
+    ArrayMgrClass(
+        int debug_on_val,
+        char const *who_val,
+        char array_type_val,
+        int max_array_size_val);
     ~ArrayMgrClass(void);
     char const* objectName(void) {return "ArrayMgrClass";}
 

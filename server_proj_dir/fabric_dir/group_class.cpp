@@ -34,7 +34,7 @@ GroupClass::GroupClass (
     strcpy(this->theFirstFiddle,  first_fiddle_val);
     strcpy(this->theSecondFiddle, second_fiddle_val);
 
-    this->theSessionArrayMgr = phwangArrayMgrMalloc(this->objectName(), 'o', 10);
+    this->theSessionArrayMgr = phwangArrayMgrMalloc(this->debugOn_, this->objectName(), 'o', 10);
     this->theSessionTableArray = 0;
 
     if (true && this->debugOn_) {

@@ -10,7 +10,7 @@
 #include "../test_dir/test_class.h"
 
 int main (int argc, char** argv) {
-    int debug_on = true;
+    int debug_on = false;
 
     //printf("%s start running\n", argv[0]);
 
